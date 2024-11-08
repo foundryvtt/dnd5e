@@ -17,9 +17,11 @@ Clicking the plus button brings up the Create Activity dialog with a list of act
 
 There are a variety of activity types offered by the DnD5e system, and modules can contribute their own custom types. More details on each type can be found on their own pages:
 - [Attack](Activity-Type-Attack.md): Make an attack roll and roll damage
+- [Cast](Activity-Type-Cast.md): Cast a spell through an item
 - [Check](Activity-Type-Check.md): Perform an ability check
 - [Damage](Activity-Type-Damage.md): Damage a creature without a check
 - [Enchant](Activity-Type-Enchant.md): Apply an enchantment to an item
+- [Forward](Activity-Type-Forward.md): Trigger another activity with different consumption & scaling
 - [Heal](Activity-Type-Heal.md): Heal a creature
 - [Save](Activity-Type-Save.md): Impose a saving throw roll and roll damage
 - [Summon](Activity-Type-Summon.md): Summon a new creature to the scene

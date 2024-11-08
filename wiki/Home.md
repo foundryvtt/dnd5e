@@ -4,9 +4,11 @@
 - [Activities Overview](Activities.md)
   - Activity Types
     - [Activity Type: Attack](Activity-Type-Attack.md)
+    - [Activity Type: Cast](Activity-Type-Cast.md)
     - [Activity Type: Check](Activity-Type-Check.md)
     - [Activity Type: Damage](Activity-Type-Damage.md)
     - [Activity Type: Enchant](Activity-Type-Enchant.md)
+    - [Activity Type: Forward](Activity-Type-Forward.md)
     - [Activity Type: Heal](Activity-Type-Heal.md)
     - [Activity Type: Save](Activity-Type-Save.md)
     - [Activity Type: Summon](Activity-Type-Summon.md)
