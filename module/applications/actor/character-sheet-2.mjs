@@ -787,13 +787,13 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     // TODO: Consider batching compendium lookups. Most occupants are likely to all be from the same compendium.
     for ( const facility of Object.values(this.actor.itemTypes.facility) ) {
       const { id, img, labels, name, system } = facility;
-      const { building, craft, defenders, free, hirelings, progress, size, trade, type } = system;
+      const { building, craft, defenders, disabled, free, hirelings, progress, size, trade, type } = system;
       const subtitle = [
         building.built ? CONFIG.DND5E.facilities.sizes[size].label : game.i18n.localize("DND5E.FACILITY.Build.Unbuilt")
       ];
       if ( trade.stock.max ) subtitle.push(`${trade.stock.value ?? 0} &sol; ${trade.stock.max}`);
       const context = {
-        id, labels, name, building, free, progress,
+        id, labels, name, building, disabled, free, progress,
         craft: craft.item ? await fromUuid(craft.item) : null,
         creatures: await this._prepareFacilityOccupants(trade.creatures),
         defenders: await this._prepareFacilityOccupants(defenders),
