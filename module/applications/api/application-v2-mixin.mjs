@@ -36,7 +36,7 @@ export default Base => class extends HandlebarsApplicationMixin(Base) {
     const applicationOptions = super._initializeApplicationOptions(options);
     // Fix focus bug caused by the use of UUIDs in application IDs
     // TODO: Remove once https://github.com/foundryvtt/foundryvtt/issues/11742 is fixed
-    applicationOptions.uniqueId = CSS.escape(applicationOptions.uniqueId);
+    applicationOptions.uniqueId = applicationOptions.uniqueId.replace(/\./g, "-");
     return applicationOptions;
   }
 
