@@ -1,4 +1,4 @@
-![Up to date as of 4.0.0](https://img.shields.io/static/v1?label=dnd5e&message=4.0.0&color=informational)
+![Up to date as of 4.1.0](https://img.shields.io/static/v1?label=dnd5e&message=4.1.0&color=informational)
 
 The compendium browser is a new application for finding content from across multiple compendiums using searching and filtering. The browser can be accessed using the "Open Compendium Browser" button at the top of the Compendium Packs sidebar tab.
 
@@ -15,6 +15,12 @@ In advanced mode (seen below), the tabs are split into actor and item lists and 
 The browser can also be activated from elsewhere in the system in locked mode. In this case the browser will be locked to a specific item type and potentially additional filters could be automatically applied. This mode is used for places where a specific choice must be made, such as choosing a class for your character or selecting a creature to summon.
 
 ![Compendium Browser - Class Selection](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/compendium-browser/class-selection.jpg)
+
+## Source Configuration
+
+GMs have the option to modify what sources appear in the compendium browser, customizing which specific compendiums are offered by different modules. These options are available using the "Configure Sources" button in the system settings or the gear on the top right of the compendium browser itself.
+
+![Compendium Browser - Configure Sources](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/compendium-browser/configure-sources.jpg)
 
 ## Module Support
 
