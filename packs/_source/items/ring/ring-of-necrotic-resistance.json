@@ -132,7 +132,51 @@
     "attuned": false,
     "identifier": "ring-of-necrotic-resistance"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Necrotic Resistance",
+      "img": "icons/equipment/finger/ring-band-engraved-scrolls-silver.webp",
+      "_id": "Hz85SIRCXkqWzWL3",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "necrotic",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.1.0",
+        "createdTime": 1731017792498,
+        "modifiedTime": 1731017887981,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!items.effects!qMGkmzfLHfXd7DiJ.Hz85SIRCXkqWzWL3"
+    }
+  ],
   "folder": "5jrDZJ1U23Q9jDqB",
   "sort": 0,
   "ownership": {

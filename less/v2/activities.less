@@ -267,5 +267,45 @@
   .order-description {
     padding: 8px;
     text-align: center;
+
+    + .order-description { margin-top: -.5em; }
+  }
+
+  .bastion-card {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .order-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    font-size: var(--font-size-12);
+  }
+
+  .item-summary {
+    display: flex;
+    gap: 4px;
+
+    li {
+      flex: 0 0 32px;
+      width: 32px;
+      height: 32px;
+      border: var(--dnd5e-border-gold);
+      border-radius: 3px;
+      overflow: hidden;
+      cursor: pointer;
+
+      > img {
+        pointer-events: none;
+        border: none;
+        width: 100%;
+        height: 100%;
+        max-width: unset;
+        object-fit: cover;
+        background: var(--dnd5e-color-iron-gray);
+      }
+    }
   }
 }

@@ -1,15 +1,18 @@
-<div class="dnd5e2 chat-card order-card">
+<div class="dnd5e2 chat-card bastion-card">
 
     {{!-- Description --}}
     <p class="order-description">{{{ description }}}</p>
 
-    {{!-- Supplements --}}
-    {{#each supplements}}
-    <p class="supplement">{{{ this }}}</p>
-    {{/each}}
+    {{!-- Damaged --}}
+    {{#if damaged}}
+    <p class="order-description">{{{ damaged }}}</p>
+    {{/if}}
+
+    {{!-- Roll --}}
+    {{{ roll }}}
 
     {{!-- Buttons --}}
-    {{#if buttons}}
+    {{#if buttons.length}}
     <div class="card-buttons">
         {{#each buttons}}
         <button type="button" {{ dnd5e-dataset dataset }}>
@@ -18,4 +21,5 @@
         {{/each}}
     </div>
     {{/if}}
+
 </div>

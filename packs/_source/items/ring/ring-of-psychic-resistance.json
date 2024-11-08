@@ -132,7 +132,51 @@
     "attuned": false,
     "identifier": "ring-of-psychic-resistance"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Psychic Resistance",
+      "img": "icons/equipment/finger/ring-cabochon-notched-gold-green.webp",
+      "_id": "euYYPfyCFWqOW1Qx",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "psychic",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.1.0",
+        "createdTime": 1731017767691,
+        "modifiedTime": 1731017873101,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!items.effects!Q7E6MgPzVkwBeZ6l.euYYPfyCFWqOW1Qx"
+    }
+  ],
   "folder": "5jrDZJ1U23Q9jDqB",
   "sort": 0,
   "ownership": {

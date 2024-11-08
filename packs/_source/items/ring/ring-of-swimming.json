@@ -132,7 +132,51 @@
     "attuned": false,
     "identifier": "ring-of-swimming"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Swimming",
+      "img": "icons/equipment/finger/ring-cabochon-notched-gold-green.webp",
+      "_id": "Shw1dARwswVkzUYD",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.attributes.movement.swim",
+          "mode": 5,
+          "value": "40",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.1.0",
+        "createdTime": 1731017580350,
+        "modifiedTime": 1731017635652,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!items.effects!aA7MbjnpHYoYvmuW.Shw1dARwswVkzUYD"
+    }
+  ],
   "folder": "5jrDZJ1U23Q9jDqB",
   "sort": 0,
   "ownership": {

@@ -105,7 +105,12 @@
           "special": "",
           "override": false
         },
-        "effects": [],
+        "effects": [
+          {
+            "_id": "lgD1h0ioOsqz6jK8",
+            "onSave": false
+          }
+        ],
         "range": {
           "value": "60",
           "units": "ft",
@@ -147,192 +152,71 @@
           "recovery": []
         },
         "sort": 0
-      },
-      "dnd5eactivity200": {
-        "_id": "dnd5eactivity200",
-        "type": "damage",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
-        },
-        "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "1",
-          "units": "minute",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "value": "60",
-          "units": "ft",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "1",
-            "type": "creature",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "damage": {
-          "critical": {
-            "allow": false,
-            "bonus": ""
-          },
-          "parts": [
-            {
-              "number": 1,
-              "denomination": 4,
-              "bonus": "1",
-              "types": [],
-              "custom": {
-                "enabled": false,
-                "formula": ""
-              },
-              "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
-              }
-            }
-          ]
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
-      },
-      "dnd5eactivity300": {
-        "_id": "dnd5eactivity300",
-        "type": "utility",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
-        },
-        "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "1",
-          "units": "minute",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "value": "60",
-          "units": "ft",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "1",
-            "type": "creature",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "1d6 +1",
-          "name": "",
-          "prompt": false,
-          "visible": false
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
       }
     },
     "attuned": false,
     "identifier": "wand-of-paralysis"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Paralysis",
+      "img": "icons/weapons/wands/wand-gem-violet.webp",
+      "origin": "Compendium.dnd5e.items.Item.GcpXNc4dKUNw0Tk6",
+      "transfer": false,
+      "_id": "lgD1h0ioOsqz6jK8",
+      "type": "base",
+      "system": {},
+      "changes": [],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "tint": "#ffffff",
+      "statuses": [
+        "paralyzed"
+      ],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.1.0",
+        "createdTime": 1731015925049,
+        "modifiedTime": 1731015930528,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!items.effects!GcpXNc4dKUNw0Tk6.lgD1h0ioOsqz6jK8"
+    }
+  ],
   "folder": "1aDgsGVwDbPdxG2V",
   "sort": 0,
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.1.0",
     "createdTime": 1725037147741,
-    "modifiedTime": 1730323656408,
+    "modifiedTime": 1731015947250,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!GcpXNc4dKUNw0Tk6"

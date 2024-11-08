@@ -116,7 +116,7 @@
           ]
         },
         "_id": "YYSStWx9ygrl41hI",
-        "sort": 0,
+        "sort": 100000,
         "activation": {
           "type": "action",
           "value": null,
@@ -183,7 +183,7 @@
           ]
         },
         "_id": "daXCQjAPpv1uGjw4",
-        "sort": 0,
+        "sort": 300000,
         "activation": {
           "type": "action",
           "value": null,
@@ -237,7 +237,7 @@
         "type": "utility",
         "name": "Insect Cloud",
         "_id": "330BsWHVJ4uVFg90",
-        "sort": 0,
+        "sort": 400000,
         "activation": {
           "type": "action",
           "value": null,
@@ -302,6 +302,60 @@
         },
         "img": "",
         "appliedEffects": []
+      },
+      "McIzoYjcpMDRnr7n": {
+        "type": "attack",
+        "_id": "McIzoYjcpMDRnr7n",
+        "sort": 0,
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
+          "targets": []
+        },
+        "description": {},
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "attack": {
+          "critical": {
+            "threshold": null
+          },
+          "flat": false,
+          "type": {}
+        },
+        "damage": {
+          "critical": {},
+          "includeBase": true,
+          "parts": []
+        }
       }
     },
     "attuned": false,
@@ -329,7 +383,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.1.0",
     "createdTime": 1725037228686,
-    "modifiedTime": 1729013865279,
+    "modifiedTime": 1731019487934,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!bod1dKzbAkAm21Ho"

@@ -64,71 +64,6 @@
       "mgc"
     ],
     "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
-        "type": "utility",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "Target object cannot be currently worn or carried.",
-          "override": false
-        },
-        "consumption": {
-          "targets": [],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "10",
-          "units": "minute",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "value": "60",
-          "units": "ft",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "1",
-            "type": "object",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "",
-          "name": "",
-          "prompt": false,
-          "visible": false
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
-      },
       "yhJYyZZLiK862s7T": {
         "type": "cast",
         "spell": {
@@ -217,7 +152,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.1.0",
     "createdTime": 1725037258445,
-    "modifiedTime": 1729015725449,
+    "modifiedTime": 1731017469461,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!hxfOtvFrY1PXHQN1"

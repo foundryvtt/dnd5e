@@ -100,80 +100,6 @@
     "crewed": false,
     "magicalBonus": null,
     "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
-        "type": "utility",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
-        },
-        "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "units": "",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "1d20",
-          "name": "",
-          "prompt": false,
-          "visible": false
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
-      },
       "AcACbFOCPB59VKfz": {
         "type": "cast",
         "spell": {
@@ -191,7 +117,7 @@
           ]
         },
         "_id": "AcACbFOCPB59VKfz",
-        "sort": 0,
+        "sort": 300000,
         "activation": {
           "type": "action",
           "value": null,
@@ -261,7 +187,7 @@
           ]
         },
         "_id": "nn4geEXkhCgdAySL",
-        "sort": 0,
+        "sort": 400000,
         "activation": {
           "type": "action",
           "value": null,
@@ -328,7 +254,7 @@
           ]
         },
         "_id": "r4S7IfUpK5ccLGpa",
-        "sort": 0,
+        "sort": 500000,
         "activation": {
           "type": "action",
           "value": null,
@@ -377,6 +303,60 @@
         },
         "name": "",
         "img": ""
+      },
+      "HySVJaepP2wG5nCg": {
+        "type": "attack",
+        "_id": "HySVJaepP2wG5nCg",
+        "sort": 200000,
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
+          "targets": []
+        },
+        "description": {},
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "override": false
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft"
+          },
+          "affects": {
+            "choice": false
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": []
+        },
+        "attack": {
+          "critical": {
+            "threshold": null
+          },
+          "flat": false,
+          "type": {}
+        },
+        "damage": {
+          "critical": {},
+          "includeBase": true,
+          "parts": []
+        }
       }
     },
     "attuned": false,
@@ -404,7 +384,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.1.0",
     "createdTime": 1725037204182,
-    "modifiedTime": 1729013424260,
+    "modifiedTime": 1731019528554,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!WLVQJVpCWiPkCAtZ"

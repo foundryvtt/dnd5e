@@ -132,7 +132,51 @@
     "attuned": false,
     "identifier": "ring-of-poison-resistance"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Poison Resistance",
+      "img": "icons/equipment/finger/ring-faceted-gold-purple.webp",
+      "_id": "3tapgRkSFBeqcTH0",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "poison",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.1.0",
+        "createdTime": 1731017778496,
+        "modifiedTime": 1731017879860,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!items.effects!5SorTMl8NKDO9Yge.3tapgRkSFBeqcTH0"
+    }
+  ],
   "folder": "5jrDZJ1U23Q9jDqB",
   "sort": 0,
   "ownership": {

@@ -132,7 +132,51 @@
     "attuned": false,
     "identifier": "ring-of-lightning-resistance"
   },
-  "effects": [],
+  "effects": [
+    {
+      "name": "Lightning Resistance",
+      "img": "icons/equipment/finger/ring-cabochon-gold-orange.webp",
+      "_id": "1IBWPMloNPjXPnTo",
+      "type": "base",
+      "system": {},
+      "changes": [
+        {
+          "key": "system.traits.dr.value",
+          "mode": 2,
+          "value": "lightning",
+          "priority": null
+        }
+      ],
+      "disabled": false,
+      "duration": {
+        "startTime": null,
+        "seconds": null,
+        "combat": null,
+        "rounds": null,
+        "turns": null,
+        "startRound": null,
+        "startTurn": null
+      },
+      "description": "",
+      "origin": null,
+      "tint": "#ffffff",
+      "transfer": true,
+      "statuses": [],
+      "sort": 0,
+      "flags": {},
+      "_stats": {
+        "compendiumSource": null,
+        "duplicateSource": null,
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.1.0",
+        "createdTime": 1731017801708,
+        "modifiedTime": 1731017885808,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!items.effects!XJ8CG4UvLELCmOi2.1IBWPMloNPjXPnTo"
+    }
+  ],
   "folder": "5jrDZJ1U23Q9jDqB",
   "sort": 0,
   "ownership": {

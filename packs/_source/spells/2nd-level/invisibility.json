@@ -30,15 +30,18 @@
       "affects": {
         "type": "creature",
         "count": "1",
-        "choice": false
+        "choice": false,
+        "special": ""
       },
       "template": {
         "units": "",
-        "contiguous": false
+        "contiguous": false,
+        "type": ""
       }
     },
     "range": {
-      "units": "touch"
+      "units": "touch",
+      "special": ""
     },
     "uses": {
       "max": "",
@@ -170,9 +173,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037345708,
-    "modifiedTime": 1725992716495,
+    "modifiedTime": 1731016443164,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!1N8dDMMgZ1h1YJ3B"

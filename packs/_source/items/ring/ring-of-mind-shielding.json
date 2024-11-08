@@ -87,7 +87,7 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
@@ -124,9 +124,13 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "Conceal Ring",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
@@ -138,14 +142,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037233243,
-    "modifiedTime": 1725992528396,
+    "modifiedTime": 1731017978357,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!dGnkwePemh7ovuDv"

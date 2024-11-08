@@ -571,11 +571,35 @@
 "DND5E.BackgroundName": "Background Name",
 
 "DND5E.Bastion": {
+  "Action": {
+    "BastionTurn": "Advance Bastion Turn"
+  },
+  "Attack": {
+    "Automatic": "Resolve Automatically",
+    "Formula": "Attack Formula",
+    "NoActorWarning": "No character selected as target of the attack. Either select a token, or open their character sheet.",
+    "Resolve": "Resolve Attack",
+    "Result": {
+      "Damaged": "{link} damaged in the attack.",
+      "Deaths": {
+        "one": "<strong>{deaths}</strong> defender was slain in an attack on their bastion!",
+        "other": "<strong>{deaths}</strong> defenders were slain in an attack on their bastion!"
+      },
+      "NoDeaths": "Fended off an attack on their bastion with no casualties!",
+      "Undefended": "Undefended bastion attacked!"
+    },
+    "Title": "Bastion Attack"
+  },
+  "Button": {
+    "Label": "Show Bastion Turn Button",
+    "Hint": "Display a button for advancing bastion turns in the main game interface."
+  },
   "Configuration": {
     "Name": "Bastions",
     "Label": "Configure Bastions",
     "Hint": "Various configuration options for the Bastion system as presented in the DMG 2024."
   },
+  "Confirm": "Advance one bastion turn?",
   "Duration": {
     "Label": "Bastion Turn Duration (days)"
   },
@@ -583,7 +607,17 @@
     "Label": "Enable Bastion Functionality",
     "Hint": "When enabled, player characters will have access to a new Bastion tab on their character sheets when reaching level 5, and will be able to build facilities and issue orders to them."
   },
-  "Label": "Bastion"
+  "Gold": {
+    "Claim": "Claim Income",
+    "Claimed": "claimed",
+    "Unclaimed": "unclaimed"
+  },
+  "Label": "Bastion",
+  "Summary": {
+    "Gold": "{value} ({claimed})",
+    "NoOrders": "No orders issued to special facilities this turn.",
+    "Order": "{link} completed the <strong>{order}</strong> order."
+  }
 },
 
 "DND5E.Biography": "Biography",
@@ -654,7 +688,7 @@
   },
   "SECTIONS": {
     "Spell": "Spell",
-    "Spellbook": "Item Spells"
+    "Spellbook": "Additional Spells"
   },
   "Action": {
     "RemoveSpell": "Remove Spell"
@@ -1627,6 +1661,10 @@
         "label": "Defenders"
       }
     },
+    "disabled": {
+      "hint": "Disabled facilities cannot be issued orders and are repaired at the beginning of the next turn.",
+      "label": "Disabled"
+    },
     "enlargeable": {
       "hint": "Certain special facilities may have their size categories increased for a cost.",
       "label": "Can Be Enlarged"
@@ -1704,6 +1742,10 @@
       "inf": "Build",
       "present": "Building"
     },
+    "change": {
+      "inf": "Change",
+      "present": "Changing"
+    },
     "craft": {
       "inf": "Craft",
       "present": "Crafting"
@@ -1727,6 +1769,10 @@
     "recruit": {
       "inf": "Recruit",
       "present": "Recruiting"
+    },
+    "repair": {
+      "inf": "Repair",
+      "present": "Repairing"
     },
     "research": {
       "inf": "Research",

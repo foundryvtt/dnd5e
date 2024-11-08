@@ -94,70 +94,148 @@
     "crewed": false,
     "magicalBonus": null,
     "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
-        "type": "utility",
+      "FDe3XZW8D06mxf3q": {
+        "type": "summon",
+        "_id": "FDe3XZW8D06mxf3q",
+        "sort": 200000,
         "activation": {
           "type": "action",
-          "value": 1,
-          "condition": "Command word.",
-          "override": false
+          "value": null,
+          "override": false,
+          "condition": "Command word."
         },
         "consumption": {
-          "targets": [],
           "scaling": {
-            "allowed": false,
-            "max": ""
+            "allowed": false
           },
-          "spellSlot": true
+          "spellSlot": true,
+          "targets": []
         },
         "description": {
           "chatFlavor": ""
         },
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
           "override": false
         },
         "effects": [],
         "range": {
-          "value": "10",
+          "override": true,
           "units": "ft",
           "special": "",
+          "value": "10"
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "count": "",
+            "type": ""
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "bonuses": {
+          "ac": "",
+          "hd": "",
+          "hp": "",
+          "attackDamage": "",
+          "saveDamage": "",
+          "healing": ""
+        },
+        "creatureSizes": [],
+        "creatureTypes": [],
+        "match": {
+          "attacks": false,
+          "proficiency": false,
+          "saves": false,
+          "ability": ""
+        },
+        "profiles": [
+          {
+            "count": "",
+            "name": "",
+            "_id": "deszxA0Rg213RXlx",
+            "uuid": "Compendium.dnd5e.monsters.Actor.NpvwE1feOHyEqAbP",
+            "level": {
+              "min": null,
+              "max": null
+            },
+            "types": []
+          }
+        ],
+        "summon": {
+          "prompt": true,
+          "mode": "",
+          "identifier": ""
+        },
+        "name": "Transform",
+        "img": "",
+        "appliedEffects": []
+      },
+      "tJYJnIP5Zu0tGRsx": {
+        "type": "attack",
+        "_id": "tJYJnIP5Zu0tGRsx",
+        "sort": 100000,
+        "activation": {
+          "type": "action",
+          "value": null,
+          "override": false
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
+          "targets": []
+        },
+        "description": {},
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [],
+        "range": {
           "override": false
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
+            "units": "ft"
           },
           "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
+            "choice": false
           },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "",
-          "name": "",
-          "prompt": false,
-          "visible": false
+          "override": false,
+          "prompt": true
         },
         "uses": {
           "spent": 0,
           "recovery": []
         },
-        "sort": 0
+        "attack": {
+          "critical": {
+            "threshold": null
+          },
+          "flat": false,
+          "type": {}
+        },
+        "damage": {
+          "critical": {},
+          "includeBase": true,
+          "parts": []
+        }
       }
     },
     "attuned": false,
@@ -171,14 +249,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
     "systemVersion": "4.1.0",
     "createdTime": 1725037170767,
-    "modifiedTime": 1729014169610,
+    "modifiedTime": 1731019471000,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!MOeFq5MLAQzVQC7z"

@@ -118,7 +118,8 @@ export default class BasicRoll extends Roll {
 
     /**
      * A hook event that fires before a roll is performed. Multiple hooks may be called depending on the rolling
-     * method (e.g. `dnd5e.preRollSkillV2`, `dnd5e.preRollAbilityCheckV2`, `dnd5e.preRollV2`).
+     * method (e.g. `dnd5e.preRollSkillV2`, `dnd5e.preRollAbilityCheckV2`, `dnd5e.preRollV2`). Exact contents of the
+     * configuration object will also change based on the roll type, but the same objects will always be present.
      * @function dnd5e.preRollV2
      * @memberof hookEvents
      * @param {BasicRollProcessConfiguration} config   Configuration data for the pending roll.
@@ -141,8 +142,14 @@ export default class BasicRoll extends Roll {
 
     /**
      * A hook event that fires after roll configuration is complete, but before the roll is evaluated.
+<<<<<<< Updated upstream
      * Multiple hooks may be called depending on the rolling method (e.g. `postSkillCheckRollConfiguration`,
-     * `postAbilityTestRollConfiguration`, and `postRollConfiguration` for skill checks).
+     * `postAbilityTestRollConfiguration`, and `postRollConfiguration` for skill checks). Exact contents of the
+     * configuration object will also change based on the roll type, but the same objects will always be present.
+=======
+     * Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.postSkillCheckRollConfiguration`,
+     * `dnd5e.postAbilityTestRollConfiguration`, and `dnd5e.postRollConfiguration` for skill checks).
+>>>>>>> Stashed changes
      * @function dnd5e.postRollConfiguration
      * @memberof hookEvents
      * @param {BasicRoll[]} rolls                      Rolls that have been constructed but not evaluated.
