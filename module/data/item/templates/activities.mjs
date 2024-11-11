@@ -82,7 +82,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasLimitedUses() {
-    return !!this._source.uses?.max;
+    return !!this.uses.max;
   }
 
   /* -------------------------------------------- */
