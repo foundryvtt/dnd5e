@@ -7,7 +7,7 @@
             {{#if @root.isNPC}}
             {{#if (and @root.editable noSpellcaster)}}
             <select name="system.attributes.spellcasting">
-                {{ selectOptions @root.abilities selected=ability.ability labelAttr="label" nameAttr="key"
+                {{ selectOptions @root.abilities selected=ability.ability labelAttr="label" valueAttr="key"
                                  valueAttr="key" }}
             </select>
             {{else}}
