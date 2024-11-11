@@ -20,17 +20,31 @@ export default class D20RollConfigurationDialog extends RollConfigurationDialog 
 
   /** @override */
   async _prepareButtonsContext(context, options) {
+    let defaultButton = this.options.defaultButton;
+    if ( !defaultButton ) {
+      let advantage = false;
+      let disadvantage = false;
+      for ( const roll of this.config.rolls ) {
+        if ( !roll.options ) continue;
+        if ( roll.options.advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE ) advantage = true;
+        else if ( roll.options.advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE ) disadvantage = true;
+        else if ( roll.options.advantage && !roll.options.disadvantage ) advantage = true;
+        else if ( !roll.options.advantage && roll.options.disadvantage ) disadvantage = true;
+      }
+      if ( advantage && !disadvantage ) defaultButton = "advantage";
+      else if ( !advantage && disadvantage ) defaultButton = "disadvantage";
+    }
     context.buttons = {
       advantage: {
-        default: this.options.defaultButton === "advantage",
+        default: defaultButton === "advantage",
         label: game.i18n.localize("DND5E.Advantage")
       },
       normal: {
-        default: !["advantage", "disadvantage"].includes(this.options.defaultButton),
+        default: !["advantage", "disadvantage"].includes(defaultButton),
         label: game.i18n.localize("DND5E.Normal")
       },
       disadvantage: {
-        default: this.options.defaultButton === "disadvantage",
+        default: defaultButton === "disadvantage",
         label: game.i18n.localize("DND5E.Disadvantage")
       }
     };
