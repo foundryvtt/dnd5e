@@ -591,16 +591,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     init.mod = ability.mod ?? 0;
 
     // Initiative proficiency
+    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
     const prof = this.system.attributes.prof ?? 0;
-    const joat = flags.jackOfAllTrades && (game.settings.get("dnd5e", "rulesVersion") === "legacy");
+    const joat = flags.jackOfAllTrades && isLegacy;
     const ra = this._isRemarkableAthlete(abilityId);
-    init.prof = new Proficiency(prof, (joat || ra) ? 0.5 : 0, !ra);
+    const alert = flags.initiativeAlert && !isLegacy;
+    init.prof = new Proficiency(prof, alert ? 1 : (joat || ra) ? 0.5 : 0, !ra);
 
     // Total initiative includes all numeric terms
     const initBonus = simplifyBonus(init.bonus, bonusData);
     const abilityBonus = simplifyBonus(ability.bonuses?.check, bonusData);
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
-      + (flags.initiativeAlert ? 5 : 0)
+      + (flags.initiativeAlert && isLegacy ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
   }
 
