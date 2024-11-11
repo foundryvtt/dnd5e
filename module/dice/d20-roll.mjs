@@ -246,15 +246,6 @@ export default class D20Roll extends BasicRoll {
   /*  Roll Configuration                          */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  clone() {
-    const roll = super.clone();
-    roll.configureModifiers();
-    return roll;
-  }
-
-  /* -------------------------------------------- */
-
   /**
    * Apply optional modifiers which customize the behavior of the d20term
    * @private
@@ -299,7 +290,8 @@ export default class D20Roll extends BasicRoll {
   #createD20Die() {
     if ( this.terms[0] instanceof CONFIG.Dice.D20Die ) return;
     if ( !(this.terms[0] instanceof foundry.dice.terms.Die) ) return;
-    this.terms[0] = new CONFIG.Dice.D20Die({ ...this.terms[0] });
+    const { number, faces, ...data } = this.terms[0];
+    this.terms[0] = new CONFIG.Dice.D20Die({ ...data, number, faces });
   }
 
   /* -------------------------------------------- */
