@@ -54,11 +54,11 @@ export default class ShortRestDialog extends Dialog {
 
       const dice = Object.entries(context.availableHD);
       context.denomination = (context.availableHD[this._denom] > 0) ? this._denom : dice.find(([k, v]) => v > 0)?.[0];
-    }
 
-    context.hdOptions = Object.entries(context.availableHD).map(([value, number]) => ({
-      value, label: `${value} (${number} ${game.i18n.localize("DND5E.available")})`
-    }));
+      context.hdOptions = Object.entries(context.availableHD).map(([value, number]) => ({
+        value, label: `${value} (${number} ${game.i18n.localize("DND5E.available")})`
+      }));
+    }
 
     // Determine rest type
     const variant = game.settings.get("dnd5e", "restVariant");
