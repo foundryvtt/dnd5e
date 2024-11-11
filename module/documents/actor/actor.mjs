@@ -584,6 +584,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _prepareInitiative(bonusData, globalCheckBonus=0) {
     const init = this.system.attributes.init ??= {};
     const flags = this.flags.dnd5e || {};
+    const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
 
     // Compute initiative modifier
     const abilityId = init.ability || CONFIG.DND5E.defaultAbilities.initiative;
@@ -592,15 +593,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Initiative proficiency
     const prof = this.system.attributes.prof ?? 0;
-    const joat = flags.jackOfAllTrades && (game.settings.get("dnd5e", "rulesVersion") === "legacy");
+    const alert = flags.initiativeAlert && modernRules;
+    const joat = flags.jackOfAllTrades && !modernRules;
     const ra = this._isRemarkableAthlete(abilityId);
-    init.prof = new Proficiency(prof, (joat || ra) ? 0.5 : 0, !ra);
+    init.prof = new Proficiency(prof, alert ? 1 : (joat || ra) ? 0.5 : 0, !ra);
 
     // Total initiative includes all numeric terms
     const initBonus = simplifyBonus(init.bonus, bonusData);
     const abilityBonus = simplifyBonus(ability.bonuses?.check, bonusData);
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
-      + (flags.initiativeAlert ? 5 : 0)
+      + (flags.initiativeAlert && !modernRules ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
   }
 
