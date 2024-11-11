@@ -2032,12 +2032,24 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {D20Roll|null}                          The constructed but unevaluated D20Roll.
    */
   getInitiativeRoll(options={}) {
-
     // Use a temporarily cached initiative roll
     if ( this._cachedInitiativeRoll ) return this._cachedInitiativeRoll.clone();
+    const config = this.getInitiativeRollConfig(options);
+    if ( !config ) return null;
+    const formula = ["1d20"].concat(config.parts).join(" + ");
+    return new CONFIG.Dice.D20Roll(formula, config.data, config.options);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get an un-evaluated D20Roll instance used to roll initiative for this Actor.
+   * @param {Partial<InitiativeRollOptions>} options  Configuration information for the roll.
+   * @returns {D20RollConfiguration|null}             Roll configuration.
+   */
+  getInitiativeRollConfig(options={}) {
     const init = this.system.attributes?.init;
     const flags = this.flags.dnd5e ?? {};
-
     const abilityId = init?.ability || CONFIG.DND5E.defaultAbilities.initiative;
     const ability = this.system.abilities?.[abilityId];
 
@@ -2052,7 +2064,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }, rollData);
 
     const remarkableAthlete = flags.remarkableAthlete && (game.settings.get("dnd5e", "rulesVersion") === "modern");
-    if ( flags.initiativeAdv || remarkableAthlete ) options.advantageMode ??= dnd5e.dice.D20Roll.ADV_MODE.ADVANTAGE;
+    if ( flags.initiativeAdv || remarkableAthlete ) options.advantage ??= true;
 
     // Add exhaustion reduction
     this.addRollExhaustion(parts, data);
@@ -2079,9 +2091,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     Hooks.callAll("dnd5e.preConfigureInitiative", this, rollConfig);
 
-    // Create the d20 roll
-    const formula = ["1d20"].concat(parts).join(" + ");
-    return new CONFIG.Dice.D20Roll(formula, data, options);
+    return rollConfig;
   }
 
   /* -------------------------------------------- */
@@ -2092,16 +2102,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor
    */
   async rollInitiativeDialog(rollOptions={}) {
-    // Create and configure the Initiative roll
-    const roll = this.getInitiativeRoll(rollOptions);
-
     const config = {
       evaluate: false,
       event: rollOptions.event,
       hookNames: ["initiativeDialog", "abilityCheck", "d20Test"],
-      rolls: [{ parts: [roll.formula.replace(roll.d20.formula, "")], options: { ...roll.options, configured: false } }],
+      rolls: [this.getInitiativeRollConfig(rollOptions)],
       subject: this
     };
+    if ( !config.rolls[0] ) return;
     const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
     const message = { rollMode: game.settings.get("core", "rollMode") };
     const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, message);
