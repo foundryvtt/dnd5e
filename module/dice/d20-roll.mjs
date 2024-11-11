@@ -26,8 +26,9 @@ import BasicRoll from "./basic-roll.mjs";
  * Options that describe a d20 roll.
  *
  * @typedef {BasicRollOptions} D20RollOptions
- * @property {boolean} [advantage]       Is the roll granted advantage?
- * @property {boolean} [disadvantage]    Is the roll granted disadvantage?
+ * @property {boolean} [advantage]       Does this roll potentially have advantage?
+ * @property {boolean} [disadvantage]    Does this roll potentially have disadvantage?
+ * @property {D20Roll.ADV_MODE} [advantageMode]  Final advantage mode.
  * @property {number} [criticalSuccess]  The value of the d20 die to be considered a critical success.
  * @property {number} [criticalFailure]  The value of the d20 die to be considered a critical failure.
  * @property {boolean} [elvenAccuracy]   Use three dice when rolling with advantage.
@@ -245,12 +246,28 @@ export default class D20Roll extends BasicRoll {
   /*  Roll Configuration                          */
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  clone() {
+    const roll = super.clone();
+    roll.configureModifiers();
+    return roll;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Apply optional modifiers which customize the behavior of the d20term
    * @private
    */
   configureModifiers() {
     if ( !this.validD20Roll ) return;
+
+    if ( this.options.advantageMode === undefined ) {
+      const { advantage, disadvantage } = this.options;
+      if ( advantage && !disadvantage ) this.options.advantageMode = this.constructor.ADV_MODE.ADVANTAGE;
+      else if ( !advantage && disadvantage ) this.options.advantageMode = this.constructor.ADV_MODE.DISADVANTAGE;
+      else this.options.advantageMode = this.constructor.ADV_MODE.NORMAL;
+    }
 
     // Determine minimum, taking reliable talent into account
     let minimum = this.options.minimum;
@@ -259,7 +276,7 @@ export default class D20Roll extends BasicRoll {
     // Directly modify the d20
     this.d20.applyFlag("elvenAccuracy", this.options.elvenAccuracy === true);
     this.d20.applyFlag("halflingLucky", this.options.halflingLucky === true);
-    this.d20.applyAdvantage(this.options.advantageMode ?? this.constructor.ADV_MODE.NORMAL);
+    this.d20.applyAdvantage(this.options.advantageMode);
     this.d20.applyRange({ minimum, maximum: this.options.maximum });
 
     // Assign critical and fumble thresholds
