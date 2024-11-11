@@ -1410,29 +1410,47 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
-    const buildConfig = this._buildSkillToolConfig.bind(this, type, config.rolls?.shift());
+    const abilityId = config.ability ?? relevant?.ability
+      ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
+    const ability = this.system.abilities?.[abilityId];
+    const rollData = this.getRollData();
+    const prof = this.system.calculateAbilityCheckProficiency(relevant.effectValue, abilityId);
+    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+      mod: ability?.mod,
+      prof: prof?.hasProficiency ? prof.term : null,
+      [`${config[type]}Bonus`]: relevant?.bonuses?.check,
+      extraBonus: config?.bonus,
+      [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
+      [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
+      abilityCheckBonus: this.system.bonuses?.abilities?.check
+    }, rollData);
+    data.abilityId = abilityId;
+    const options = {
+      advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+      disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+      maximum: relevant?.roll.max,
+      minimum: relevant?.roll.min
+    };
+
+    const initialRoll = config.rolls?.pop();
+    if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
+    if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
+    if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
 
     const rollConfig = foundry.utils.mergeObject({
-      ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability),
+      ability: abilityId,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
-    rollConfig.rolls = [{
-      options: {
-        advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-        disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
-        maximum: relevant?.roll.max,
-        minimum: relevant?.roll.min
-      }
-    }].concat(config.rolls ?? []);
+    rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
+    rollConfig.rolls.forEach((r, index) => this.addRollExhaustion(parts, data));
     rollConfig.subject = this;
-    rollConfig.rolls.forEach((r, index) => buildConfig(rollConfig, r, null, index));
 
     const dialogConfig = foundry.utils.mergeObject({
       applicationClass: SkillToolRollConfigurationDialog,
       options: {
-        buildConfig,
+        buildConfig: this._buildSkillToolConfig.bind(this, type),
         chooseAbility: true
       }
     }, dialog);
@@ -1498,44 +1516,26 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Configure a roll config for each roll performed as part of the skill or tool check process. Will be called once
    * per roll in the process each time an option is changed in the roll configuration interface.
    * @param {"skill"|"tool"} type                          Type of roll.
-   * @param {Partial<D20RollConfiguration>} [initialRoll]  Initial roll passed to the rolling method.
    * @param {D20RollProcessConfiguration} process          Configuration for the entire rolling process.
    * @param {D20RollConfiguration} config                  Configuration for a specific roll.
    * @param {FormDataExtended} [formData]                  Any data entered into the rolling prompt.
    * @param {number} index                                 Index of the roll within all rolls being prepared.
    */
-  _buildSkillToolConfig(type, initialRoll, process, config, formData, index) {
-    const relevant = type === "skill" ? this.system.skills?.[process.skill] : this.system.tools?.[process.tool];
-    const rollData = this.getRollData();
+  _buildSkillToolConfig(type, process, config, formData, index) {
     const abilityId = formData?.get("ability") ?? process.ability;
-    const ability = this.system.abilities?.[abilityId];
-    const prof = this.system.calculateAbilityCheckProficiency(relevant.effectValue, abilityId);
+    if ( abilityId !== config.data._abilityId ) {
+      const ability = this.system.abilities?.[abilityId];
+      const relevant = type === "skill" ? this.system.skills?.[process.skill] : this.system.tools?.[process.tool];
+      const prof = this.system.calculateAbilityCheckProficiency(relevant.effectValue, abilityId);
 
-    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
-      mod: ability?.mod,
-      prof: prof?.hasProficiency ? prof.term : null,
-      [`${config[type]}Bonus`]: relevant?.bonuses?.check,
-      extraBonus: process.bonus,
-      [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
-      [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
-      abilityCheckBonus: this.system.bonuses?.abilities?.check,
-      situational: config.data?.situational
-    }, { ...rollData });
-    const options = config.options ?? {};
+      CONFIG.Dice.BasicRoll.swapParts(config, [
+        { key: "prof", value: prof?.hasProficiency ? prof.term : null, position: "beginning" },
+        { key: "mod", value: ability?.mod, position: "beginning" },
+        { key: `${config.data.abilityId}checkBonus`, value: ability?.bonuses?.check, newKey: `${abilityId}CheckBonus` }
+      ]);
 
-    if ( index === 0 ) {
-      if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
-      if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
-      if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
+      config.data.abilityId = abilityId;
     }
-
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
-
-    config.parts = parts;
-    config.data = data;
-    config.data.abilityId = abilityId;
-    config.options = options;
   }
 
   /* -------------------------------------------- */

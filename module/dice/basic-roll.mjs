@@ -107,6 +107,41 @@ export default class BasicRoll extends Roll {
   /* -------------------------------------------- */
 
   /**
+   * @typedef {object} RollPartSwapData
+   * @property {string} key                          Name of the roll part to replace.
+   * @property {any} value                           Value to insert in place of the current value.
+   * @property {string} [newKey]                     Change the key name when replacing the data.
+   * @property {"beginning"|"end"} [position="end"]  Where new parts should be inserted into the parts list.
+   */
+
+  /**
+   * Swap a roll part for a new value, swapping in-place if the key already exists in the roll parts, otherwise
+   * inserting at the beginning or end of the parts array.
+   * @param {BasicRollConfiguration} config  Roll configuration to modify.
+   * @param {RollPartSwapData[]} swaps
+   */
+  static swapParts(config, swaps) {
+    for ( const { key, value, newKey, position } of swaps ) {
+      const part = `@${key}`;
+      if ( value ) {
+        const newPart = `@${newKey ?? key}`;
+        if ( config.parts.includes(part) && newKey ) {
+          config.parts.findSplice(k => k === part, newPart);
+        } else if ( !config.parts.includes(part) ) {
+          if ( position === "end" ) config.parts.push(newPart);
+          else config.parts.unshift(newPart);
+        }
+        config.data[key] = value;
+      } else {
+        config.parts.findSplice(k => k === `@${key}`);
+        delete config.data[key];
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Construct and perform a roll through the standard workflow.
    * @param {BasicRollProcessConfiguration} [config={}]   Configuration for the rolls.
    * @param {BasicRollDialogConfiguration} [dialog={}]    Configuration for roll prompt.
