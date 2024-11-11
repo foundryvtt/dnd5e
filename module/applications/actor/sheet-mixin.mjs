@@ -41,7 +41,7 @@ export default Base => class extends Base {
   _onDropStackConsumables(itemData, { container=null }={}) {
     const droppedSourceId = itemData._stats?.compendiumSource ?? itemData.flags.core?.sourceId;
     if ( itemData.type !== "consumable" || !droppedSourceId ) return null;
-    const similarItem = this.actor.sourcedItems.get("Compendium.dnd5e.items.Item.ytlsBjYsZ7OBSEBs", { legacy: false })
+    const similarItem = this.actor.sourcedItems.get(droppedSourceId, { legacy: false })
       ?.filter(i => (i.system.container === container) && (i.name === itemData.name))?.first();
     if ( !similarItem ) return null;
     return similarItem.update({
