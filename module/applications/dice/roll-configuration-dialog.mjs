@@ -360,6 +360,7 @@ export default class RollConfigurationDialog extends Dialog5e {
    * @param {FormDataExtended} formData  Data from the dialog.
    */
   static async #handleFormSubmission(event, form, formData) {
+    if ( formData.has("rollMode") ) this.message.rollMode = formData.get("rollMode");
     this.#rolls = this._finalizeRolls(event.submitter?.dataset?.action);
     await this.close({ dnd5e: { submitted: true } });
   }
