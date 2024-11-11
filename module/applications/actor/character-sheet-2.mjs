@@ -498,8 +498,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
    */
   async _onAddFacility(event) {
     const { type } = event.target.closest("[data-type]").dataset;
+    const otherType = type === "basic" ? "special" : "basic";
     const result = await CompendiumBrowser.selectOne({
-      filters: { locked: { types: new Set(["facility"]), additional: { type: { [type]: 1 } } } }
+      filters: { locked: {
+        types: new Set(["facility"]),
+        additional: { type: { [type]: 1, [otherType]: -1 }, level: { max: this.actor.system.details.level } }
+      } }
     });
     if ( result ) this._onDropItemCreate(await fromUuid(result));
   }
