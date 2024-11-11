@@ -639,7 +639,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   async _onDropActivity(event, data) {
     if ( !event.target.closest(".favorites") ) return;
     const activity = await fromUuid(data.uuid);
-    if ( !activity ) return;
+    if ( !activity || (activity.actor !== this.actor) ) return;
     const uuid = `${activity.item.getRelativeUUID(this.actor)}.Activity.${activity.id}`;
     return this._onDropFavorite(event, { type: "activity", id: uuid });
   }
