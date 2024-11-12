@@ -186,13 +186,14 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
   async _updateObject(event, formData) {
 
     // Format NPC Challenge Rating
-    const crs = {"1/8": 0.125, "⅛": 0.125, "1/4": 0.25, "¼": 0.25, "1/2": 0.5, "½": 0.5};
+    const crs = { "1/8": 0.125, "⅛": 0.125, "1/4": 0.25, "¼": 0.25, "1/2": 0.5, "½": 0.5 };
     let crv = "system.details.cr";
     let cr = formData[crv];
-    if ( cr === "" ) formData[crv] = null;
+    if ( (cr === "") || (cr === "—") ) formData[crv] = null;
     else {
       cr = crs[cr] || parseFloat(cr);
-      if ( !Number.isNaN(cr) ) formData[crv] = cr < 1 ? cr : parseInt(cr);
+      if ( Number.isNaN(cr) ) cr = null;
+      else formData[crv] = cr < 1 ? cr : parseInt(cr);
     }
 
     // Parent ActorSheet update steps
