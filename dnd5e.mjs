@@ -440,6 +440,7 @@ Hooks.once("i18nInit", () => {
         racePl: game.i18n.localize("TYPES.Item.raceLegacyPl")
       },
       DND5E: {
+        FlagsAlertHint: game.i18n.localize("DND5E.FlagsAlertHintLegacy"),
         LanguagesExotic: game.i18n.localize("DND5E.LanguagesExoticLegacy"),
         LongRestHint: game.i18n.localize("DND5E.LongRestHintLegacy"),
         LongRestHintGroup: game.i18n.localize("DND5E.LongRestHintGroupLegacy"),

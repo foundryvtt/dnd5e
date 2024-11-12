@@ -257,7 +257,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const context = await super.getCardData(enrichmentOptions);
     context.isSpell = true;
     context.subtitle = [this.parent.labels.level, CONFIG.DND5E.spellSchools[this.school]?.label].filterJoin(" &bull; ");
-    context.properties = [];
+    const { activation, components, duration, range, target } = this.parent.labels;
+    context.properties = [components?.vsm, activation, duration, range, target].filter(_ => _);
     if ( !this.properties.has("material") ) delete context.materials;
     return context;
   }

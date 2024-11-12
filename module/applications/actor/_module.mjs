@@ -16,6 +16,7 @@ export {default as ActorSheetMixin} from "./sheet-mixin.mjs";
 export {default as ActorSheetV2Mixin} from "./sheet-v2-mixin.mjs";
 
 export {default as AbilityConfig} from "./config/ability-config.mjs";
+export {default as ArmorClassConfig} from "./config/armor-class-config.mjs";
 export {default as BaseProficiencyConfig} from "./config/base-proficiency-config.mjs";
 export {default as ConcentrationConfig} from "./config/concentration-config.mjs";
 export {default as DamagesConfig} from "./config/damages-config.mjs";

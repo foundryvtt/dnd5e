@@ -4,7 +4,7 @@
                placeholder="{{ localize 'Name' }}">
         {{#if hasFolders}}
         <select class="unselect" name="folder" form="document-create">
-            {{ selectOptions folders selected=folder labelAttr="name" nameAttr="id"
+            {{ selectOptions folders selected=folder labelAttr="name" valueAttr="id"
                              blank=(localize "DOCUMENT.Folder") }}
         </select>
         {{/if}}

@@ -82,7 +82,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
    * @type {boolean}
    */
   get hasLimitedUses() {
-    return !!this._source.uses?.max;
+    return !!this.uses.max;
   }
 
   /* -------------------------------------------- */
@@ -169,7 +169,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     // Remove any old ternary operators from uses to prevent errors
     if ( source.uses?.max?.includes(" ? ") ) source.uses.max = "";
     for ( const activity of Object.values(source.activities ?? {}) ) {
-      if ( activity.uses?.max?.includes(" ? ") ) activity.uses.max = "";
+      if ( activity?.uses?.max?.includes(" ? ") ) activity.uses.max = "";
     }
 
     if ( Array.isArray(source.uses?.recovery) ) return;

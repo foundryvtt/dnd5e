@@ -4,7 +4,7 @@ import BaseConfigSheet from "../api/base-config-sheet.mjs";
 /**
  * Configuration application for armor class calculation.
  */
-export default class ActorArmorConfig extends BaseConfigSheet {
+export default class ArmorClassConfig extends BaseConfigSheet {
   /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["armor-class"],
