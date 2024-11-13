@@ -314,8 +314,10 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
    * @protected
    */
   _prepareBuildData(submitData) {
-    const { days, value: gold } = CONFIG.DND5E.facilities.sizes[submitData.building.size];
-    Object.assign(submitData.costs, { days, gold });
+    if ( (this.config.building?.size ?? "cramped") !== submitData.building?.size ) {
+      const { days, value: gold } = CONFIG.DND5E.facilities.sizes[submitData.building.size];
+      Object.assign(submitData.costs, { days, gold });
+    }
   }
 
   /* -------------------------------------------- */
