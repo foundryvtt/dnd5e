@@ -89,7 +89,11 @@ export default class MappingField extends foundry.data.fields.ObjectField {
   _validateType(value, options={}) {
     if ( foundry.utils.getType(value) !== "Object" ) throw new Error("must be an Object");
     const errors = this._validateValues(value, options);
-    if ( !foundry.utils.isEmpty(errors) ) throw new foundry.data.validation.DataModelValidationError(errors);
+    if ( !foundry.utils.isEmpty(errors) ) {
+      const failure = new foundry.data.validation.DataModelValidationFailure();
+      failure.elements = Object.entries(errors).map(([id, failure]) => ({ id, failure }));
+      throw failure.asError();
+    }
   }
 
   /* -------------------------------------------- */
@@ -98,7 +102,7 @@ export default class MappingField extends foundry.data.fields.ObjectField {
    * Validate each value of the object.
    * @param {object} value     The object to validate.
    * @param {object} options   Validation options.
-   * @returns {Object<Error>}  An object of value-specific errors by key.
+   * @returns {Record<string, Error>}  An object of value-specific errors by key.
    */
   _validateValues(value, options) {
     const errors = {};
