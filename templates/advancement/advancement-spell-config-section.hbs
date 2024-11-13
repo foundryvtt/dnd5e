@@ -1,0 +1,28 @@
+<section>
+    {{~#if showSpellConfig}}
+    <fieldset>
+        <legend>{{ localize "DND5E.ADVANCEMENT.SPELLCONFIG.FIELDS.spell.label" }}</legend>
+        {{#with configuration.fields.spell.fields as |fields|}}
+        {{ formGroup fields.ability name="configuration.spell.ability" value=../configuration.data.spell.ability
+                     options=../abilityOptions rootId=../partId }}
+        {{ formGroup fields.preparation name="configuration.spell.preparation"
+                     value=../configuration.data.spell.preparation choices=../CONFIG.spellPreparationModes
+                     labelAttr="label" blank="" rootId=../partId }}
+        <div class="form-group split-group">
+            <label>{{ localize "DND5E.LimitedUses" }}</label>
+            <div class="form-fields">
+                {{ formGroup fields.uses.fields.max name="configuration.spell.uses.max" classes="label-top"
+                             value=../configuration.data.spell.uses.max rootId=../partId }}
+                {{ formGroup fields.uses.fields.per name="configuration.spell.uses.per" classes="label-top"
+                             value=../configuration.data.spell.uses.per choices=../CONFIG.limitedUsePeriods
+                             labelAttr="label" blank="" rootId=../partId }}
+            </div>
+        </div>
+        {{#if showRequireSpellSlot}}
+        {{ formGroup fields.uses.fields.requireSlot  name="configuration.spell.uses.requireSlot"
+                     value=../configuration.data.spell.uses.requireSlot rootId=../partId }}
+        {{/if}}
+        {{/with}}
+    </fieldset>
+    {{/if~}}
+</section>
