@@ -453,7 +453,7 @@ export default function ActorSheetV2Mixin(Base) {
       uses.isOnCooldown = uses.hasRecharge && (uses.value < 1);
 
       return {
-        _id, labels, name, range, save, uses,
+        _id, labels, name, range, uses,
         activation: activationAbbr
           ? `${activation.value ?? ""}${game.i18n.localize(activationAbbr)}`
           : labels.activation,
@@ -462,6 +462,14 @@ export default function ActorSheetV2Mixin(Base) {
           svg: img.endsWith(".svg")
         },
         isSpell: activity.item.type === "spell",
+        save: save ? {
+          ...save,
+          ability: save.ability?.size
+            ? save.ability.size === 1
+              ? CONFIG.DND5E.abilities[save.ability.first()]?.abbreviation
+              : game.i18n.localize("DND5E.AbbreviationDC")
+            : null
+        } : null,
         toHit: isNaN(toHit) ? null : toHit
       };
     }
