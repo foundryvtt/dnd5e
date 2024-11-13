@@ -147,7 +147,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       concentration.effects.add(effect);
       if ( data ) {
         let item = this.items.get(data.id);
-        if ( !item && data.data ) item = new Item.implementation(data.data, { keepId: true, parent: this });
+        if ( !item && (foundry.utils.getType(data.data) === "Object") ) {
+          item = new Item.implementation(data.data, { keepId: true, parent: this });
+        }
         if ( item ) concentration.items.add(item);
       }
     }
