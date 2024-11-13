@@ -1453,7 +1453,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           : game.i18n.format("DND5E.ToolPromptTitle", { tool: Trait.keyLabel(config.tool, { trait: "tool" }) ?? "" }),
         speaker: ChatMessage.getSpeaker({ actor: this })
       }
-    });
+    }, message);
 
     if ( `dnd5e.preRoll${name}` in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
