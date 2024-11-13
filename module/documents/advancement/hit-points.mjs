@@ -30,6 +30,16 @@ export default class HitPointsAdvancement extends Advancement {
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
+  /**
+   * The amount gained if the average is taken.
+   * @type {number}
+   */
+  get average() {
+    return (this.hitDieValue / 2) + 1;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   get levels() {
     return Array.fromRange(CONFIG.DND5E.maxLevel + 1).slice(1);

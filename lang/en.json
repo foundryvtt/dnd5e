@@ -1,6 +1,7 @@
 {
 "DOCUMENT.DND5E": {
   "Activity": "Activity",
+  "Advancement": "Advancement",
   "Warning": {
     "SelectType": "{name} type must be selected for creation."
   }
@@ -277,6 +278,13 @@
       "Level": "Must be at least level {level} to take this feat.",
       "Type": "Only features with the \"feat\" type can be selected."
     }
+  },
+  "Config": {
+    "Details": "Advancement Details"
+  },
+  "HITPOINTS": {
+    "Average": "Average",
+    "Starting": "Hit Points at 1st Level"
   },
   "SPELLCONFIG": {
     "FIELDS": {

@@ -6,6 +6,10 @@ import { formatNumber, getTargetDescriptors } from "../../utils.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
+ * @import { PseudoDocumentsMetadata } from "../mixins/pseudo-document.mjs";
+ */
+
+/**
  * Mixin used to provide base logic to all activities.
  * @template {BaseActivityData} T
  * @param {typeof T} Base  The base activity data class to wrap.
@@ -34,6 +38,7 @@ export default function ActivityMixin(Base) {
      */
     static metadata = Object.freeze({
       name: "Activity",
+      label: "DOCUMENT.DND5E.Activity",
       sheetClass: ActivitySheet,
       usage: {
         actions: {},
