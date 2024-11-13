@@ -1182,7 +1182,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   async #onChatAction(event, target, message) {
     const scaling = message.getFlag("dnd5e", "scaling") ?? 0;
     const item = scaling ? this.item.clone({ "flags.dnd5e.scaling": scaling }, { keepId: true }) : this.item;
-    const activity = item.system.activities.get(this.id);
+    const activity = item.system.activities.get(this.id) ?? this;
 
     const action = target.dataset.action;
     const handler = this.metadata.usage?.actions?.[action];
