@@ -70,6 +70,7 @@ export default class LootData extends ItemDataModel.mixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.prepareIdentifiable();
     this.preparePhysicalData();
     this.type.label = CONFIG.DND5E.lootTypes[this.type.value]?.label ?? game.i18n.localize(CONFIG.Item.typeLabels.loot);
   }
@@ -106,5 +107,15 @@ export default class LootData extends ItemDataModel.mixin(
   /** @override */
   static get itemCategories() {
     return CONFIG.DND5E.lootTypes;
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    await this.preUpdateIdentifiable(changed, options, user);
   }
 }

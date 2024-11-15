@@ -107,6 +107,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.prepareIdentifiable();
     this.preparePhysicalData();
   }
 
@@ -290,6 +291,14 @@ export default class ContainerData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    await this.preUpdateIdentifiable(changed, options, user);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */

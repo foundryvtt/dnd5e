@@ -170,6 +170,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.prepareIdentifiable();
     this.preparePhysicalData();
     this.armor.base = this._source.armor.value ?? 0;
     this.armor.value = this.armor.base + (this.magicAvailable ? (this.armor.magicalBonus ?? 0) : 0);
@@ -303,5 +304,13 @@ export default class EquipmentData extends ItemDataModel.mixin(
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     await this.preCreateEquipped(data, options, user);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    await this.preUpdateIdentifiable(changed, options, user);
   }
 }

@@ -52,8 +52,10 @@ export default class IdentifiableTemplate extends SystemDataModel {
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  prepareDerivedData() {
+  /**
+   * Prepare the unidentified name for the item.
+   */
+  prepareIdentifiable() {
     if ( !this.identified && this.unidentified.name ) {
       this.parent.name = this.unidentified.name;
     }
@@ -73,7 +75,7 @@ export default class IdentifiableTemplate extends SystemDataModel {
    * @see {Document#_preUpdate}
    * @protected
    */
-  async _preUpdate(changed, options, user) {
+  async preUpdateIdentifiable(changed, options, user) {
     if ( !foundry.utils.hasProperty(changed, "system.identified") || changed.system.identified ) return;
 
     const fetchName = !foundry.utils.getProperty(changed, "system.unidentified.name") && !this.unidentified.name;

@@ -110,6 +110,7 @@ export default class ToolData extends ItemDataModel.mixin(
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.prepareIdentifiable();
     this.preparePhysicalData();
     this.type.label = CONFIG.DND5E.toolTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.tool);
     this.type.identifier = CONFIG.DND5E.toolIds[this.type.baseItem];
@@ -210,5 +211,13 @@ export default class ToolData extends ItemDataModel.mixin(
 
     const activityData = new CONFIG.DND5E.activityTypes.check.documentClass({}, { parent: this.parent }).toObject();
     this.parent.updateSource({ [`system.activities.${activityData._id}`]: activityData });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    await this.preUpdateIdentifiable(changed, options, user);
   }
 }
