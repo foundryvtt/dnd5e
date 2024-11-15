@@ -367,6 +367,7 @@ export default class ActivitySheet extends Application5e {
         const part = {
           data,
           fields: this.activity.schema.fields.damage.fields.parts.element.fields,
+          index: index + indexOffset,
           prefix: `damage.parts.${index + indexOffset}.`,
           source: context.source.damage.parts[index + indexOffset] ?? data,
           canScale: this.activity.canScaleDamage,
