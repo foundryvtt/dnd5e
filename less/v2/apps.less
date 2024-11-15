@@ -989,9 +989,6 @@
     padding-block-start: 8px;
     padding-block-end: 14px;
     padding-inline: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
     overflow-y: auto;
 
     > section > .note {
@@ -1029,6 +1026,11 @@
       }
     }
     > section:empty { display: none; }
+  }
+  .window-content, .window-content > .column-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   /* Tabs */

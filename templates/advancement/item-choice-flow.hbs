@@ -10,7 +10,7 @@
         {{#if replaceable}}
         <div class="item-name">
             <label class="flexrow">
-                <h4>{{ localize "DND5E.AdvancementItemChoiceReplacementNone" }}</h4>
+                <h4>{{ localize "DND5E.ADVANCEMENT.ItemChoice.Replacement.None" }}</h4>
                 <input type="radio" name="replace" value="" {{ checked noReplacement }}>
             </label>
         </div>
@@ -41,7 +41,7 @@
         {{/each}}
 
         <h4 class="form-header">
-            {{ localize "DND5E.AdvancementItemChoiceChosen" current=choices.current max=choices.max }}
+            {{ localize "DND5E.ADVANCEMENT.ItemChoice.Chosen" current=choices.current max=choices.max }}
         </h4>
 
         {{#each items}}

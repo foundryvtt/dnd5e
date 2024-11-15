@@ -58,6 +58,28 @@ export default function ApplicationV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
+    _onFirstRender(context, options) {
+      super._onFirstRender(context, options);
+      const containers = {};
+      for ( const [part, config] of Object.entries(this.constructor.PARTS) ) {
+        if ( !config.containerClasses ) continue;
+        const element = this.element.querySelector(`[data-application-part="${part}"]`);
+        if ( !element ) continue;
+        const className = config.containerClasses.join(" ");
+        if ( !containers[className] ) {
+          const div = document.createElement("div");
+          div.classList.add(...config.containerClasses);
+          containers[className] = div;
+          element.replaceWith(div);
+          div.append(element);
+        }
+        containers[className].append(element);
+      }
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
     async _prepareContext(options) {
       const context = await super._prepareContext(options);
       context.CONFIG = CONFIG.DND5E;
