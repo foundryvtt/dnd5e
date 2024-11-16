@@ -308,8 +308,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         { key: "action", label: "DND5E.Action" },
         { key: "bonus", label: "DND5E.BonusAction" },
         { key: "reaction", label: "DND5E.Reaction" },
-        { key: "sr", label: "DND5E.ShortRest" },
-        { key: "lr", label: "DND5E.LongRest" },
+        { key: "sr", label: "DND5E.REST.Short.Label" },
+        { key: "lr", label: "DND5E.REST.Long.Label" },
         { key: "concentration", label: "DND5E.Concentration" },
         { key: "mgc", label: "DND5E.Item.Property.Magical" }
       ]

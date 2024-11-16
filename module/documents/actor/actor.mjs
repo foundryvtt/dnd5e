@@ -1,5 +1,5 @@
-import ShortRestDialog from "../../applications/actor/short-rest.mjs";
-import LongRestDialog from "../../applications/actor/long-rest.mjs";
+import ShortRestDialog from "../../applications/actor/rest/short-rest-dialog.mjs";
+import LongRestDialog from "../../applications/actor/rest/long-rest-dialog.mjs";
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
@@ -2515,7 +2515,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Display a Dialog for rolling hit dice
     if ( config.dialog ) {
       try {
-        foundry.utils.mergeObject(config, await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0}));
+        foundry.utils.mergeObject(config, await ShortRestDialog.configure(this, config));
       } catch(err) { return; }
     }
 
@@ -2530,7 +2530,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.shortRest", this, config) === false ) return;
 
     // Automatically spend hit dice
-    if ( !config.dialog && config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
+    if ( config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
 
     // Return the rest result
     const dhd = foundry.utils.getProperty(this, "system.attributes.hd.value") - hd0;
@@ -2565,7 +2565,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( config.dialog ) {
       try {
-        foundry.utils.mergeObject(config, await LongRestDialog.longRestDialog({actor: this}));
+        foundry.utils.mergeObject(config, await LongRestDialog.configure(this, config));
       } catch(err) { return; }
     }
 
@@ -2675,22 +2675,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let restFlavor;
     switch (game.settings.get("dnd5e", "restVariant")) {
       case "normal":
-        restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`;
+        restFlavor = (longRest && newDay) ? "DND5E.REST.Long.Type.Overnight" : `DND5E.REST.${length}.Type.Normal`;
         break;
       case "gritty":
-        restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`;
+        restFlavor = (!longRest && newDay) ? "DND5E.REST.Short.Type.Overnight" : `DND5E.REST.${length}.Type.Gritty`;
         break;
       case "epic":
-        restFlavor = `DND5E.${length}RestEpic`;
+        restFlavor = `DND5E.REST.${length}.Type.Epic`;
         break;
     }
 
     // Determine the chat message to display
     let message;
-    if ( diceRestored && healthRestored ) message = `DND5E.${length}RestResult`;
-    else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.LongRestResultHitPoints";
-    else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.LongRestResultHitDice";
-    else message = `DND5E.${length}RestResultShort`;
+    if ( diceRestored && healthRestored ) message = `DND5E.REST.${length}.Result.Full`;
+    else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.REST.Long.Result.HitPoints";
+    else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.REST.Long.Result.HitDice";
+    else message = `DND5E.REST.${length}.Result.Short`;
 
     // Create a chat message
     let chatData = {
