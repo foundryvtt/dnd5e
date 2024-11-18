@@ -842,7 +842,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /** @override */
   async _onDropActor(event, data) {
     const canPolymorph = game.user.isGM || (this.actor.isOwner && game.settings.get("dnd5e", "allowPolymorphing"));
-    if ( !canPolymorph ) return false;
+    if ( !canPolymorph || (this._tabs[0].active === "bastion") ) return false;
 
     // Get the target actor
     const cls = getDocumentClass("Actor");
