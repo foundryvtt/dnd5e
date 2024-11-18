@@ -49,6 +49,19 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
   }, { inplace: false }));
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  get canUse() {
+    return super.canUse
+      // Don't allow usage if facility is already executing the same order
+      && (this.parent.progress.order !== this.order)
+      // Enlarge order cannot be executed if facility is already maximum size
+      && ((this.order !== "enlarge") || (this.parent.size !== "vast"));
+  }
+
+  /* -------------------------------------------- */
   /*  Activation                                  */
   /* -------------------------------------------- */
 

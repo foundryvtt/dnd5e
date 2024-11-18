@@ -74,6 +74,16 @@ export default Base => class extends PseudoDocumentMixin(Base) {
   /* -------------------------------------------- */
 
   /**
+   * Should this activity be able to be used?
+   * @type {boolean}
+   */
+  get canUse() {
+    return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Description used in chat message flavor for messages created with `rollDamage`.
    * @type {string}
    */
@@ -188,6 +198,10 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     if ( !this.item.isEmbedded || this.item.pack ) return;
     if ( !this.item.isOwner ) {
       ui.notifications.error("DND5E.DocumentUseWarn", { localize: true });
+      return;
+    }
+    if ( !this.canUse ) {
+      ui.notifications.error("DND5E.ACTIVITY.Warning.UsageNotAllowed", { localize: true });
       return;
     }
 
