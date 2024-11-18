@@ -2202,7 +2202,7 @@ preLocalize("damageScalingModes", { key: "label" });
  * @property {string} icon           Icon representing this type.
  * @property {boolean} [isPhysical]  Is this a type that can be bypassed by magical or silvered weapons?
  * @property {string} [reference]    Reference to a rule page describing this damage type.
- * @property {Color} Color           Visual color of the damage type.
+ * @property {Color} [color]         Visual color of the damage type.
  */
 
 /**

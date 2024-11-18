@@ -83,7 +83,7 @@ export default class AttackActivityData extends BaseActivityData {
   /** @inheritDoc */
   get activationLabels() {
     const labels = super.activationLabels;
-    if ( (this.item.type === "weapon") && this.item.labels?.range && !this.range.override ) {
+    if ( labels && (this.item.type === "weapon") && this.item.labels?.range && !this.range.override ) {
       labels.range = this.item.labels.range;
     }
     return labels;
