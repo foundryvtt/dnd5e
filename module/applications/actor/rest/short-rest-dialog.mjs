@@ -38,15 +38,6 @@ export default class ShortRestDialog extends BaseRestDialog {
   #denom;
 
   /* -------------------------------------------- */
-
-  /** @override */
-  get promptNewDay() {
-    // It's never a new day when resting 1 minute
-    // TODO: Adjust based on actual variant duration, rather than hard-coding
-    return context.variant !== "epic";
-  }
-
-  /* -------------------------------------------- */
   /*  Rendering                                   */
   /* -------------------------------------------- */
 

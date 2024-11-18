@@ -103,6 +103,34 @@ export function formatText(value) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * A helper function that formats a time in a human-readable format.
+ * @param {number} value         Time to display.
+ * @param {string} unit          Units as defined in `CONFIG.DND5E.timeUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatTime(value, unit, options={}) {
+  options.maximumFractionDigits ??= 0;
+  options.unitDisplay ??= "long";
+  const config = CONFIG.DND5E.timeUnits[unit];
+  if ( config?.counted ) {
+    if ( (options.unitDisplay === "narrow") && game.i18n.has(`${config.counted}.narrow`) ) {
+      return game.i18n.format(`${config.counted}.narrow`, { number: formatNumber(value, options) });
+    } else {
+      const pr = new Intl.PluralRules(game.i18n.lang);
+      return game.i18n.format(`${config.counted}.${pr.select(value)}`, { number: formatNumber(value, options) });
+    }
+  }
+  try {
+    return formatNumber(value, { ...options, style: "unit", unit });
+  } catch(err) {
+    return formatNumber(value, options);
+  }
+}
+
+/* -------------------------------------------- */
 /*  Formulas                                    */
 /* -------------------------------------------- */
 
@@ -427,9 +455,43 @@ export function getSceneTargets() {
 /* -------------------------------------------- */
 
 /**
+ * Convert the provided time value to another unit. If not final unit is provided, then will convert it to the largest
+ * unit that can still represent the value as a whole number.
+ * @param {number} value                    The time being converted.
+ * @param {string} from                     The initial unit as defined in `CONFIG.DND5E.timeUnits`.
+ * @param {object} [options={}]
+ * @param {boolean} [options.combat=false]  Use combat units when auto-selecting units, rather than normal units.
+ * @param {string} [options.to]             The final units, is explicitly provided.
+ * @returns {{ value: number, unit: string }}
+ */
+export function convertTime(value, from, { combat=false, to }={}) {
+  if ( from === to ) return { value, unit: from };
+  const message = unit => `Time unit ${unit} not defined in CONFIG.DND5E.timeUnits`;
+  if ( !CONFIG.DND5E.timeUnits[from] ) throw new Error(message(from));
+  if ( to && !CONFIG.DND5E.timeUnits[to] ) throw new Error(message(to));
+
+  const base = value * CONFIG.DND5E.timeUnits[from].conversion;
+  if ( !to ) {
+    // Find unit with largest conversion value that can still display the value
+    const unitOptions = Object.entries(CONFIG.DND5E.timeUnits)
+      .reduce((arr, [key, v]) => {
+        if ( ((v.combat ?? false) === combat) && ((base % v.conversion === 0) || (base >= v.conversion * 2)) ) {
+          arr.push({ key, conversion: v.conversion });
+        }
+        return arr;
+      }, [])
+      .sort((lhs, rhs) => rhs.conversion - lhs.conversion);
+    to = unitOptions[0]?.key ?? from;
+  }
+  return { value: base / CONFIG.DND5E.timeUnits[to].conversion, unit: to };
+}
+
+/* -------------------------------------------- */
+
+/**
  * Convert the provided weight to another unit.
  * @param {number} value  The weight being converted.
- * @param {string} from   The initial units.
+ * @param {string} from   The initial unit as defined in `CONFIG.DND5E.weightUnits`.
  * @param {string} to     The final units.
  * @returns {number}      Weight in the specified units.
  */
