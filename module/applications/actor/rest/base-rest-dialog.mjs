@@ -63,7 +63,10 @@ export default class BaseRestDialog extends Dialog5e {
    * @type {boolean}
    */
   get promptNewDay() {
-    return false;
+    const duration = CONFIG.DND5E.restTypes[this.config.type]
+      ?.duration?.[game.settings.get("dnd5e", "restVariant")] ?? 0;
+    // Only prompt if rest is longer than 10 minutes and less than 24 hours
+    return (duration > 10) && (duration < 1440);
   }
 
   /* -------------------------------------------- */

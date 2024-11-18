@@ -2279,6 +2279,14 @@
 "DND5E.HealingRoll": "Healing Roll",
 "DND5E.HealingTemp": "Healing (Temporary)",
 "DND5E.Height": "Height",
+
+"DND5E.HITPOINTS": {
+  "Counted": {
+    "one": "{number} hit point",
+    "other": "{number} hit points"
+  }
+},
+
 "DND5E.HitPoints": "Hit Points",
 "DND5E.HitPointsBonusLevel": "Per Level Bonus",
 "DND5E.HitPointsBonusOverall": "Overall Bonus",
@@ -2305,7 +2313,11 @@
     "Increase": "Increase"
   },
   "Available": "{number} available",
-  "Config": "Adjust Hit Dice"
+  "Config": "Adjust Hit Dice",
+  "Counted": {
+    "one": "{number} hit die",
+    "other": "{number} hit dice"
+  }
 },
 
 "DND5E.HitDie": "Hit Die",
@@ -2751,16 +2763,10 @@
     "LabelShort": "L. Rest",
     "Recovery": "Recovers after Long Rest",
     "Result": {
-      "Full": "{name} takes a long rest and recovers {health} Hit Points and {dice} Hit Dice.",
-      "HitDice": "{name} takes a long rest and recovers {dice} Hit Dice.",
-      "HitPoints": "{name} takes a long rest and recovers {health} Hit Points.",
+      "Full": "{name} takes a long rest and recovers {health} and {dice}.",
+      "HitDice": "{name} takes a long rest and recovers {dice}.",
+      "HitPoints": "{name} takes a long rest and recovers {health}.",
       "Short": "{name} takes a long rest."
-    },
-    "Type": {
-      "Epic": "Long Rest (1 hour)",
-      "Gritty": "Long Rest (7 days)",
-      "Normal": "Long Rest (8 hours)",
-      "Overnight": "Long Rest (New Day)"
     }
   },
   "NewDay": {
@@ -2777,14 +2783,8 @@
     "LabelShort": "S. Rest",
     "Recovery": "Recovers after Short Rest",
     "Result": {
-      "Full": "{name} takes a short rest spending {dice} Hit Dice to recover {health} Hit Points.",
+      "Full": "{name} takes a short rest spending {dice} to recover {health}.",
       "Short": "{name} takes a short rest."
-    },
-    "Type": {
-      "Epic": "Short Rest (5 minutes)",
-      "Gritty": "Short Rest (8 hours)",
-      "Normal": "Short Rest (1 hour)",
-      "Overnight": "Short Rest (New Day)"
     }
   }
 },
@@ -3716,6 +3716,46 @@
     "Mile": {
       "Label": "Miles",
       "Abbreviation": "mi"
+    }
+  },
+  "TIME": {
+    "Day": {
+      "Label": "Day"
+    },
+    "Hour": {
+      "Label": "Hour"
+    },
+    "Minute": {
+      "Label": "Minute"
+    },
+    "Month": {
+      "Label": "Month"
+    },
+    "Round": {
+      "Label": "Round",
+      "Counted": {
+        "narrow": "{number}r",
+        "one": "{number} round",
+        "other": "{number} rounds"
+      }
+    },
+    "Second": {
+      "Label": "Second"
+    },
+    "Turn": {
+      "Label": "Turn",
+      "Abbreviation": "t",
+      "Counted": {
+        "narrow": "{number}t",
+        "one": "{number} turn",
+        "other": "{number} turns"
+      }
+    },
+    "Week": {
+      "Label": "Week"
+    },
+    "Year": {
+      "Label": "Year"
     }
   },
   "VOLUME": {

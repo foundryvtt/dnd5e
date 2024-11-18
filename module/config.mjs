@@ -845,21 +845,95 @@ DND5E.toolIds = new Proxy(DND5E.tools, {
 });
 
 /* -------------------------------------------- */
+/*  Time                                        */
+/* -------------------------------------------- */
+
+/**
+ * @typedef {object} TimeUnitConfiguration
+ * @property {string} label            Localized label for this unit.
+ * @property {string} [counted]        Localization path for counted plural forms. Only necessary if non-supported unit
+ *                                     or using non-standard name for a supported unit. List of supported units can be
+ *                                     found here: https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers
+ * @property {number} conversion       Conversion multiplier used to converting between units.
+ * @property {boolean} [combat=false]  Is this a combat-specific time unit?
+ * @property {boolean} [option=true]   Should this be available when users can select from a list of units?
+ */
+
+/**
+ * Configuration for time units available to the system.
+ * @enum {TimeUnitConfiguration}
+ */
+DND5E.timeUnits = {
+  turn: {
+    label: "DND5E.UNITS.TIME.Turn.Label",
+    counted: "DND5E.UNITS.TIME.Turn.Counted",
+    conversion: .1,
+    combat: true
+  },
+  round: {
+    label: "DND5E.UNITS.TIME.Round.Label",
+    counted: "DND5E.UNITS.TIME.Round.Counted",
+    conversion: .1,
+    combat: true
+  },
+  second: {
+    label: "DND5E.UNITS.TIME.Second.Label",
+    conversion: 1 / 60,
+    option: false
+  },
+  minute: {
+    label: "DND5E.UNITS.TIME.Minute.Label",
+    conversion: 1
+  },
+  hour: {
+    label: "DND5E.UNITS.TIME.Hour.Label",
+    conversion: 60
+  },
+  day: {
+    label: "DND5E.UNITS.TIME.Day.Label",
+    conversion: 1_440
+  },
+  week: {
+    label: "DND5E.UNITS.TIME.Week.Label",
+    conversion: 10_080,
+    option: false
+  },
+  month: {
+    label: "DND5E.UNITS.TIME.Month.Label",
+    conversion: 43_200
+  },
+  year: {
+    label: "DND5E.UNITS.TIME.Year.Label",
+    conversion: 525_600
+  }
+};
+preLocalize("timeUnits", { key: "label" });
+
+/* -------------------------------------------- */
 
 /**
  * Time periods that accept a numeric value.
  * @enum {string}
  */
-DND5E.scalarTimePeriods = {
-  turn: "DND5E.TimeTurn",
-  round: "DND5E.TimeRound",
-  minute: "DND5E.TimeMinute",
-  hour: "DND5E.TimeHour",
-  day: "DND5E.TimeDay",
-  month: "DND5E.TimeMonth",
-  year: "DND5E.TimeYear"
-};
-preLocalize("scalarTimePeriods");
+DND5E.scalarTimePeriods = new Proxy(DND5E.timeUnits, {
+  get(target, prop) {
+    return target[prop]?.label;
+  },
+  has(target, key) {
+    return target[key] && target[key].option !== false;
+  },
+  set(target, prop, value) {
+    foundry.utils.logCompatibilityWarning(
+      "Appending to CONFIG.DND5E.scalarTimePeriods is deprecated, use CONFIG.DND5E.timeUnits instead.",
+      { since: "DnD5e 4.2", until: "DnD5e 4.4", once: true }
+    );
+    target[prop] ??= {};
+    target[prop].label = value;
+  },
+  ownKeys(target) {
+    return Object.keys(target).filter(k => target[k]?.option !== false);
+  }
+});
 
 /* -------------------------------------------- */
 
@@ -2789,13 +2863,14 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
  * Configuration data for rest types.
  *
  * @typedef {object} RestConfiguration
- * @property {Record<string, number>} duration    Duration of different rest variants in minutes.
- * @property {boolean} recoverHitDice             Should hit dice be recovered during this rest?
- * @property {boolean} recoverHitPoints           Should hit points be recovered during this rest?
- * @property {string[]} recoverPeriods            What recovery periods should be applied when this rest is taken. The
- *                                                ordering of the periods determines which is applied if more than one
- *                                                recovery profile is found.
- * @property {Set<string>} recoverSpellSlotTypes  Types of spellcasting slots to recover during this rest.
+ * @property {Record<string, number>} duration      Duration of different rest variants in minutes.
+ * @property {string} label                         Localized label for the rest type.
+ * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
+ * @property {boolean} [recoverHitPoints]           Should hit points be recovered during this rest?
+ * @property {string[]} [recoverPeriods]            What recovery periods should be applied when this rest is taken. The
+ *                                                  ordering of the periods determines which is applied if more than one
+ *                                                  recovery profile is found.
+ * @property {Set<string>} [recoverSpellSlotTypes]  Types of spellcasting slots to recover during this rest.
  */
 
 /**
@@ -2809,21 +2884,24 @@ DND5E.restTypes = {
       gritty: 480,
       epic: 1
     },
+    label: "DND5E.REST.Short.Label",
     recoverPeriods: ["sr"],
     recoverSpellSlotTypes: new Set(["pact"])
   },
   long: {
     duration: {
       normal: 480,
-      gritty: 10080,
+      gritty: 10_080,
       epic: 60
     },
+    label: "DND5E.REST.Long.Label",
     recoverHitDice: true,
     recoverHitPoints: true,
     recoverPeriods: ["lr", "sr"],
     recoverSpellSlotTypes: new Set(["leveled", "pact"])
   }
 };
+preLocalize("restTypes", { key: "label" });
 
 /* -------------------------------------------- */
 

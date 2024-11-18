@@ -123,6 +123,34 @@ export function formatText(value) {
 /* -------------------------------------------- */
 
 /**
+ * A helper function that formats a time in a human-readable format.
+ * @param {number} value         Time to display.
+ * @param {string} unit          Units as defined in `CONFIG.DND5E.timeUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatTime(value, unit, options={}) {
+  options.maximumFractionDigits ??= 0;
+  options.unitDisplay ??= "long";
+  const config = CONFIG.DND5E.timeUnits[unit];
+  if ( config?.counted ) {
+    if ( (options.unitDisplay === "narrow") && game.i18n.has(`${config.counted}.narrow`) ) {
+      return game.i18n.format(`${config.counted}.narrow`, { number: formatNumber(value, options) });
+    } else {
+      const pr = new Intl.PluralRules(game.i18n.lang);
+      return game.i18n.format(`${config.counted}.${pr.select(value)}`, { number: formatNumber(value, options) });
+    }
+  }
+  try {
+    return formatNumber(value, { ...options, style: "unit", unit });
+  } catch(err) {
+    return formatNumber(value, options);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
  * Form a number using the provided volume unit.
  * @param {number} value         The volume to format.
  * @param {string} unit          Volume unit as defined in `CONFIG.DND5E.volumeUnits`.
@@ -531,9 +559,41 @@ export function convertLength(value, from, to, { strict=true }={}) {
 /* -------------------------------------------- */
 
 /**
+ * Convert the provided time value to another unit. If no final unit is provided, then will convert it to the largest
+ * unit that can still represent the value as a whole number.
+ * @param {number} value                    The time being converted.
+ * @param {string} from                     The initial unit as defined in `CONFIG.DND5E.timeUnits`.
+ * @param {object} [options={}]
+ * @param {boolean} [options.combat=false]  Use combat units when auto-selecting units, rather than normal units.
+ * @param {boolean} [options.strict=true]   Throw an error if from unit isn't found.
+ * @param {string} [options.to]             The final units, if explicitly provided.
+ * @returns {{ value: number, unit: string }}
+ */
+export function convertTime(value, from, { combat=false, strict=true, to }={}) {
+  const base = value * (CONFIG.DND5E.timeUnits[from]?.conversion ?? 1);
+  if ( !to ) {
+    // Find unit with largest conversion value that can still display the value
+    const unitOptions = Object.entries(CONFIG.DND5E.timeUnits)
+      .reduce((arr, [key, v]) => {
+        if ( ((v.combat ?? false) === combat) && ((base % v.conversion === 0) || (base >= v.conversion * 2)) ) {
+          arr.push({ key, conversion: v.conversion });
+        }
+        return arr;
+      }, [])
+      .sort((lhs, rhs) => rhs.conversion - lhs.conversion);
+    to = unitOptions[0]?.key ?? from;
+  }
+
+  const message = unit => `Time unit ${unit} not defined in CONFIG.DND5E.timeUnits`;
+  return { value: _convertSystemUnits(value, from, to, CONFIG.DND5E.timeUnits, { message, strict }), unit: to };
+}
+
+/* -------------------------------------------- */
+
+/**
  * Convert the provided weight to another unit.
  * @param {number} value                   The weight being converted.
- * @param {string} from                    The initial units.
+ * @param {string} from                    The initial unit as defined in `CONFIG.DND5E.weightUnits`.
  * @param {string} to                      The final units.
  * @param {object} [options={}]
  * @param {boolean} [options.strict=true]  Throw an error if either unit isn't found.
@@ -559,8 +619,8 @@ export function convertWeight(value, from, to, { strict=true }={}) {
  */
 function _convertSystemUnits(value, from, to, config, { message, strict }) {
   if ( from === to ) return value;
-  if ( strict && !config[from] ) throw new Error(errorMessage(from));
-  if ( strict && !config[to] ) throw new Error(errorMessage(to));
+  if ( strict && !config[from] ) throw new Error(message(from));
+  if ( strict && !config[to] ) throw new Error(message(to));
   return value * (config[from].conversion ?? 1) / (config[to].conversion ?? 1);
 }
 

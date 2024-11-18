@@ -4,7 +4,7 @@ import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
-import { defaultUnits, replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
+import { convertTime, defaultUnits, formatNumber, formatTime, replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
@@ -2639,7 +2639,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
 
     // Display a Chat Message summarizing the rest effects
-    if ( config.chat ) await this._displayRestResultMessage(result, result.longRest);
+    if ( config.chat ) await this._displayRestResultMessage(config, result);
 
     /**
      * A hook event that fires when the rest process is completed for an actor.
@@ -2660,30 +2660,24 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Display a chat message with the result of a rest.
    *
+   * @param {RestConfiguration} config  Rest configuration.
    * @param {RestResult} result         Result of the rest operation.
-   * @param {boolean} [longRest=false]  Is this a long rest?
    * @returns {Promise<ChatMessage>}    Chat message that was created.
    * @protected
    */
-  async _displayRestResultMessage(result, longRest=false) {
-    const { dhd, dhp, newDay } = result;
+  async _displayRestResultMessage(config, result) {
+    let { dhd, dhp, newDay } = result;
+    if ( config.type === "short" ) dhd *= -1;
     const diceRestored = dhd !== 0;
     const healthRestored = dhp !== 0;
+    const longRest = config.type === "long";
     const length = longRest ? "Long" : "Short";
 
-    // Summarize the rest duration
-    let restFlavor;
-    switch (game.settings.get("dnd5e", "restVariant")) {
-      case "normal":
-        restFlavor = (longRest && newDay) ? "DND5E.REST.Long.Type.Overnight" : `DND5E.REST.${length}.Type.Normal`;
-        break;
-      case "gritty":
-        restFlavor = (!longRest && newDay) ? "DND5E.REST.Short.Type.Overnight" : `DND5E.REST.${length}.Type.Gritty`;
-        break;
-      case "epic":
-        restFlavor = `DND5E.REST.${length}.Type.Epic`;
-        break;
-    }
+    const duration = convertTime(config.duration, "minute");
+    const parts = [formatTime(duration.value, duration.unit)];
+    if ( newDay ) parts.push(game.i18n.localize("DND5E.REST.NewDay.Label").toLowerCase());
+    const restFlavor = `${CONFIG.DND5E.restTypes[config.type].label} (${
+      game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
 
     // Determine the chat message to display
     let message;
@@ -2693,6 +2687,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else message = `DND5E.REST.${length}.Result.Short`;
 
     // Create a chat message
+    const pr = new Intl.PluralRules(game.i18n.lang);
     let chatData = {
       user: game.user.id,
       speaker: {actor: this, alias: this.name},
@@ -2700,10 +2695,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       rolls: result.rolls,
       content: game.i18n.format(message, {
         name: this.name,
-        dice: longRest ? dhd : -dhd,
-        health: dhp
+        dice: game.i18n.format(`DND5E.HITDICE.Counted.${pr.select(dhd)}`, { number: formatNumber(dhd) }),
+        health: game.i18n.format(`DND5E.HITPOINTS.Counted.${pr.select(dhp)}`, { number: formatNumber(dhp) })
       }),
-      "flags.dnd5e.rest": { type: longRest ? "long" : "short" }
+      "flags.dnd5e.rest": { type: config.type }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);
