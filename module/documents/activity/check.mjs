@@ -92,6 +92,7 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
    */
   static async #rollCheck(event, target, message) {
     const targets = getSceneTargets();
+    if ( !targets.length && game.user.character ) targets.push(game.user.character);
     if ( !targets.length ) ui.notifications.warn("DND5E.ActionWarningNoToken", { localize: true });
     let { ability, dc, skill, tool } = target.dataset;
     dc = parseInt(dc);
@@ -99,8 +100,10 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
     if ( ability in CONFIG.DND5E.abilities ) rollData.ability = ability;
 
     for ( const token of targets ) {
-      const messageData = { data: { speaker: ChatMessage.getSpeaker({ scene: canvas.scene, token: token.document }) } };
-      if ( skill ) await token.actor.rollSkill({ ...rollData, skill }, {}, messageData);
+      const actor = token instanceof Actor ? token : token.actor;
+      const speaker = ChatMessage.getSpeaker({ actor, scene: canvas.scene, token: token.document });
+      const messageData = { data: { speaker } };
+      if ( skill ) await actor.rollSkill({ ...rollData, skill }, {}, messageData);
       else if ( tool ) {
         rollData.tool = tool;
         if ( (this.item.type === "tool") && !this.check.associated.size ) {
@@ -108,9 +111,9 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
           rollData.prof = this.item.system.prof;
           rollData.item = this.item;
         }
-        await token.actor.rollToolCheck(rollData, {}, messageData);
+        await actor.rollToolCheck(rollData, {}, messageData);
       }
-      else await token.actor.rollAbilityCheck(rollData, {}, messageData);
+      else await actor.rollAbilityCheck(rollData, {}, messageData);
     }
   }
 }

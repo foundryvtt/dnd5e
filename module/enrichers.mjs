@@ -1,6 +1,5 @@
 import { formatNumber, getSceneTargets, getTargetDescriptors, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
-import { damageRoll } from "./dice/_module.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import { rollItem } from "./documents/macro.mjs";
 
@@ -814,14 +813,14 @@ async function rollAction(event) {
         case "item": return await useItem(target.dataset);
       }
 
-      const tokens = getSceneTargets();
-      if ( !tokens.length ) {
+      const actors = getSceneTargets().map(t => t.actor);
+      if ( !actors.length && game.user.character ) actors.push(game.user.character);
+      if ( !actors.length ) {
         ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActor", { localize: true });
         return;
       }
 
-      for ( const token of tokens ) {
-        const actor = token.actor;
+      for ( const actor of actors ) {
         switch ( type ) {
           case "check":
             await actor.rollAbilityCheck(options);
