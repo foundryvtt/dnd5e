@@ -45,6 +45,10 @@ export default class ShortRestDialog extends Dialog {
       context.availableHD = { [`d${hd.denomination}`]: hd.value };
       context.canRoll = hd.value > 0;
       context.denomination = `d${hd.denomination}`;
+      context.hdOptions = [{
+        value: context.denomination,
+        label: `${context.denomination} (${hd.value} ${game.i18n.localize("DND5E.available")})`
+      }];
     }
 
     else if ( foundry.utils.hasProperty(this.actor, "system.attributes.hd") ) {
