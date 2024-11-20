@@ -169,6 +169,7 @@ export default class UsesField extends SchemaField {
     const recharge = uses?.recovery.find(({ period }) => period === "recharge");
     if ( !recharge ) return;
 
+    const hookNames = [...(config.hookNames ?? []), "recharge"];
     const rollConfig = foundry.utils.mergeObject({
       rolls: [{
         parts: ["1d6"],
@@ -178,18 +179,18 @@ export default class UsesField extends SchemaField {
         }
       }]
     }, config);
-    rollConfig.hookNames = [...(config.hookNames ?? []), "recharge"];
+    rollConfig.hookNames = [];
     rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({ configure: false }, dialog);
 
-    const messageConfig = foundry.utils.mergeObject(({
+    const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
         speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token })
       },
       rollMode: game.settings.get("core", "rollMode")
-    }));
+    }, message);
 
     if ( "dnd5e.preRollRecharge" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -207,6 +208,12 @@ export default class UsesField extends SchemaField {
       messageConfig.create = hookData.chatMessage;
     }
 
+    for ( const hookName of hookNames ) {
+      if ( Hooks.call(`dnd5e.preRoll${hookName.capitalize()}V2`, rollConfig, dialogConfig, messageConfig) === false ) {
+        return;
+      }
+    }
+
     const createMessage = messageConfig.create !== false;
     messageConfig.create = false;
     const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
@@ -216,6 +223,8 @@ export default class UsesField extends SchemaField {
         name: this.name,
         result: game.i18n.localize(`DND5E.ItemRecharge${rolls[0].isSuccess ? "Success" : "Failure"}`)
       });
+      // TODO - Refactor ChatMessage5e#_highlightCriticalSuccessFailure to just _highlightSuccessFailure and allow it
+      // to work on any roll with a target, rather than just d20 rolls.
       await CONFIG.Dice.BasicRoll.toMessage(rolls, messageConfig.data, { rollMode: messageConfig.rollMode });
     }
 
