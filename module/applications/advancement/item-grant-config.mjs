@@ -53,7 +53,7 @@ export default class ItemGrantConfig extends AdvancementConfig {
   /*  Form Handling                               */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /** @override */
   async prepareConfigurationUpdate(configuration) {
     if ( configuration.spell ) configuration.spell.ability ??= [];
     return configuration;
@@ -63,7 +63,7 @@ export default class ItemGrantConfig extends AdvancementConfig {
   /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /** @override */
   _validateDroppedItem(event, item) {
     this.advancement._validateItemType(item);
   }

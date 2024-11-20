@@ -93,6 +93,66 @@
 }
 
 /* ----------------------------------------- */
+/*  Ability Score Improvement                */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.ability-score-improvement {
+  .ability-scores {
+    contain: layout;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+
+    li {
+      display: grid;
+      grid-template:
+        "label label label label"
+        "minus value value plus"
+        "minus delta delta plus";
+      &.hint {
+        display: block;
+        grid-column: 2 / 4;
+        align-self: center;
+        text-align: start;
+      }
+      > label:first-child {
+        grid-area: label;
+        font-size: var(--font-size-18);
+      }
+      > button {
+        padding: 0.5em;
+        font-size: var(--font-size-16);
+        &.minus { grid-area: minus; }
+        &.plus { grid-area: plus; }
+      }
+      > input {
+        grid-area: value;
+        height: 1.5em;
+        border: none;
+        background: none;
+        font-size: var(--font-size-28);
+      }
+      > .locked {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        font-size: var(--font-size-12);
+        > dnd5e-checkbox {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+    &.disabled li {
+      opacity: 60%;
+    }
+  }
+}
+
+/* ----------------------------------------- */
 /*  Choose Items Advancement                 */
 /* ----------------------------------------- */
 
