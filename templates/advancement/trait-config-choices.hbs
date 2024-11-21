@@ -1,0 +1,31 @@
+<fieldset class="selected-trait">
+    <legend>
+        {{ localize "DND5E.ADVANCEMENT.Trait.FIELDS.choices.label" }}
+        <a data-action="addChoice" data-tooltip="DND5E.ADVANCEMENT.Trait.Action.AddChoice"
+           aria-label="{{ localize 'DND5E.ADVANCEMENT.Trait.Action.AddChoice' }}">
+            <i class="fas fa-plus" inert></i>
+        </a>
+    </legend>
+    <div class="form-group">
+        <p class="hint">{{ localize "DND5E.ADVANCEMENT.Trait.FIELDS.choices.hint" }}</p>
+    </div>
+    <ul class="unlist">
+        {{#each choices}}
+        <li>
+            <label {{~#if selected}} class="selected"{{/if}}>
+                <input type="radio" name="selectedIndex" value="{{ @index }}" {{ checked selected }}>
+                {{#if selected}}
+                <i class="fa-solid fa-arrow-right-long"></i>
+                {{else}}
+                <i class="fa-solid fa-gear"></i>
+                {{/if}}
+                <span>{{ label }}</span>
+            </label>
+            <a data-action="removeChoice" data-tooltip="DND5E.ADVANCEMENT.Trait.Action.RemoveChoice"
+               aria-label="{{ localize 'DND5E.ADVANCEMENT.Trait.Action.RemoveChoice' }}">
+                <i class="fa-solid fa-trash" inert></i>
+            </a>
+        </li>
+        {{/each}}
+    </ul>
+</fieldset>

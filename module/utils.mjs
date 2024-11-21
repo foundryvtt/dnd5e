@@ -1121,6 +1121,18 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
 /* -------------------------------------------- */
 
 /**
+ * Perform pre-localization on the contents of a SchemaField. Necessary because the `localizeSchema` method
+ * on `Localization` is private.
+ * @param {SchemaField} schema
+ * @param {string[]} prefixes
+ */
+export function localizeSchema(schema, prefixes) {
+  Localization.localizeDataModel({ schema }, { prefixes });
+}
+
+/* -------------------------------------------- */
+
+/**
  * Split a semi-colon-separated list and clean out any empty entries.
  * @param {string} input
  * @returns {string[]}
