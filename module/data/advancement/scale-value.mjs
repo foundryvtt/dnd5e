@@ -1,8 +1,9 @@
 import { formatLength } from "../../utils.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
+import { createCheckboxInput } from "../../applications/fields.mjs";
 
-const { SchemaField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data model for the Scale Value advancement type.
@@ -14,18 +15,28 @@ const { SchemaField, StringField } = foundry.data.fields;
  * @property {Object<string, *>} scale  Scale values for each level. Value format is determined by type.
  */
 export class ScaleValueConfigurationData extends foundry.abstract.DataModel {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.ADVANCEMENT.ScaleValue"];
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
     return {
-      identifier: new IdentifierField({ required: true, label: "DND5E.Identifier" }),
-      type: new StringField({
-        required: true, initial: "string", choices: TYPES, label: "DND5E.AdvancementScaleValueTypeLabel"
-      }),
-      distance: new SchemaField({ units: new StringField({required: true, label: "DND5E.MovementUnits"}) }),
+      identifier: new IdentifierField({ required: true }),
+      type: new StringField({ required: true, initial: "string", choices: TYPES }),
+      distance: new SchemaField({ units: new StringField({ required: true }) }),
       scale: new MappingField(new ScaleValueEntryField(), { required: true })
     };
   }
 
+  /* -------------------------------------------- */
+  /*  Data Migrations                             */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -76,6 +87,16 @@ export class ScaleValueEntryField extends foundry.data.fields.ObjectField {
  * @property {string} value  String value.
  */
 export class ScaleValueType extends foundry.abstract.DataModel {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.ADVANCEMENT.ScaleValue.Type.String"];
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
     return {
@@ -91,6 +112,7 @@ export class ScaleValueType extends foundry.abstract.DataModel {
    * @typedef {object} ScaleValueTypeMetadata
    * @property {string} label       Name of this type.
    * @property {string} hint        Hint for this type shown in the scale value configuration.
+   * @property {string} identifier  Hint for the identifier for this type.
    * @property {boolean} isNumeric  When using the default editing interface, should numeric inputs be used?
    */
 
@@ -100,8 +122,9 @@ export class ScaleValueType extends foundry.abstract.DataModel {
    */
   static get metadata() {
     return {
-      label: "DND5E.AdvancementScaleValueTypeString",
-      hint: "DND5E.AdvancementScaleValueTypeHintString",
+      label: "DND5E.ADVANCEMENT.ScaleValue.Type.String.Label",
+      hint: "DND5E.ADVANCEMENT.ScaleValue.Type.String.Hint",
+      identifier: "DND5E.ADVANCEMENT.ScaleValue.Type.String.Identifier",
       isNumeric: false
     };
   }
@@ -115,9 +138,11 @@ export class ScaleValueType extends foundry.abstract.DataModel {
    * @returns {ScaleValueType|null}
    */
   static convertFrom(original, options) {
-    return new this({value: original.formula}, options);
+    return new this({ value: original.formula }, options);
   }
 
+  /* -------------------------------------------- */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
@@ -143,6 +168,44 @@ export class ScaleValueType extends foundry.abstract.DataModel {
   toString() {
     return this.formula;
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve field data with associated values.
+   * @param {number} level                Level for which this data is being prepared.
+   * @param {ScaleValueType} [value]      Value for the field at this level.
+   * @param {ScaleValueType} [lastValue]  Previous value used to generate placeholders.
+   * @returns {Record<string, object>}
+   */
+  static getFields(level, value, lastValue) {
+    const fields = {};
+    for ( const [name, field] of Object.entries(this.schema.fields) ) {
+      if ( field.options.hidden ) continue;
+      fields[name] = {
+        field,
+        input: field instanceof BooleanField ? createCheckboxInput : null,
+        name: `configuration.scale.${level}.${name}`,
+        placeholder: this.getPlaceholder(name, lastValue),
+        value: value?.[name]
+      };
+    }
+    return fields;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a placeholder value for the provided field.
+   * @param {string} name                 Name of the field.
+   * @param {ScaleValueType} [lastValue]  Scale value from a lower level.
+   * @returns {string}
+   */
+  static getPlaceholder(name, lastValue) {
+    return lastValue?.[name] ?? "";
+  }
 }
 
 
@@ -152,10 +215,15 @@ export class ScaleValueType extends foundry.abstract.DataModel {
  * @property {number} value  Numeric value.
  */
 export class ScaleValueTypeNumber extends ScaleValueType {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
     return {
-      value: new foundry.data.fields.NumberField({required: true})
+      value: new NumberField({ required: true })
     };
   }
 
@@ -164,8 +232,8 @@ export class ScaleValueTypeNumber extends ScaleValueType {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      label: "DND5E.AdvancementScaleValueTypeNumber",
-      hint: "DND5E.AdvancementScaleValueTypeHintNumber",
+      label: "DND5E.ADVANCEMENT.ScaleValue.Type.Number.Label",
+      hint: "DND5E.ADVANCEMENT.ScaleValue.Type.Number.Hint",
       isNumeric: true
     });
   }
@@ -187,10 +255,20 @@ export class ScaleValueTypeNumber extends ScaleValueType {
  * @property {number} value  CR value.
  */
 export class ScaleValueTypeCR extends ScaleValueTypeNumber {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.ADVANCEMENT.ScaleValue.Type.CR"];
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
     return {
-      value: new foundry.data.fields.NumberField({required: true, min: 0})
+      value: new NumberField({ required: true, min: 0 })
       // TODO: Add CR validator
     };
   }
@@ -200,11 +278,13 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      label: "DND5E.AdvancementScaleValueTypeCR",
-      hint: "DND5E.AdvancementScaleValueTypeHintCR"
+      label: "DND5E.ADVANCEMENT.ScaleValue.Type.CR.Label",
+      hint: "DND5E.ADVANCEMENT.ScaleValue.Type.CR.Hint"
     });
   }
 
+  /* -------------------------------------------- */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -226,13 +306,22 @@ export class ScaleValueTypeCR extends ScaleValueTypeNumber {
  * @property {number} faces   Die faces.
  */
 export class ScaleValueTypeDice extends ScaleValueType {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.ADVANCEMENT.ScaleValue.Type.Dice"];
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
-    const fields = foundry.data.fields;
     return {
-      number: new fields.NumberField({nullable: true, integer: true, positive: true}),
-      faces: new fields.NumberField({required: true, integer: true, positive: true}),
-      modifiers: new fields.SetField(new fields.StringField({required: true}))
+      number: new NumberField({ nullable: true, integer: true }),
+      faces: new NumberField({ required: true, integer: true }),
+      modifiers: new SetField(new StringField({ required: true }), { hidden: true })
     };
   }
 
@@ -241,8 +330,9 @@ export class ScaleValueTypeDice extends ScaleValueType {
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      label: "DND5E.AdvancementScaleValueTypeDice",
-      hint: "DND5E.AdvancementScaleValueTypeHintDice"
+      label: "DND5E.ADVANCEMENT.ScaleValue.Type.Dice.Label",
+      hint: "DND5E.ADVANCEMENT.ScaleValue.Type.Dice.Hint",
+      identifier: "DND5E.ADVANCEMENT.ScaleValue.Type.Dice.Identifier"
     });
   }
 
@@ -263,6 +353,8 @@ export class ScaleValueTypeDice extends ScaleValueType {
     return new this({number: Number(number) || null, faces: Number(faces)}, options);
   }
 
+  /* -------------------------------------------- */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -313,6 +405,29 @@ export class ScaleValueTypeDice extends ScaleValueType {
     if ( source.n ) source.number = source.n;
     if ( source.die ) source.faces = source.die;
   }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static getFields(level, value, lastValue) {
+    const fields = super.getFields(level, value, lastValue);
+    fields.faces.options = [
+      { value: "", label: fields.faces.placeholder },
+      { rule: true },
+      ...this.FACES.map(value => ({ value, label: `d${value}` }))
+    ];
+    return fields;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static getPlaceholder(name, lastValue) {
+    if ( (name === "faces") && lastValue?.faces ) return `d${lastValue.faces}`;
+    return super.getPlaceholder(name, lastValue);
+  }
 }
 
 
@@ -322,14 +437,21 @@ export class ScaleValueTypeDice extends ScaleValueType {
  * @property {number} value  Numeric value.
  */
 export class ScaleValueTypeDistance extends ScaleValueTypeNumber {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static get metadata() {
     return foundry.utils.mergeObject(super.metadata, {
-      label: "DND5E.AdvancementScaleValueTypeDistance",
-      hint: "DND5E.AdvancementScaleValueTypeHintDistance"
+      label: "DND5E.ADVANCEMENT.ScaleValue.Type.Distance.Label",
+      hint: "DND5E.ADVANCEMENT.ScaleValue.Type.Distance.Hint"
     });
   }
 
+  /* -------------------------------------------- */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
