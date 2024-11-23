@@ -1,0 +1,10 @@
+<fieldset class="">
+    <legend>{{ localize "DND5E.ADVANCEMENT.Size.FIELDS.sizes.label" }}</legend>
+    <ol class="unlist trait-list">
+        {{#each sizes}}
+        <li>
+            {{ formField field name=(concat "configuration.sizes." @key) value=value input=input rootId=@root.partId }}
+        </li>
+        {{/each}}
+    </ol>
+</fieldset>
