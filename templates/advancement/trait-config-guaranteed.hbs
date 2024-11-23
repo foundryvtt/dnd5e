@@ -1,0 +1,19 @@
+<fieldset class="selected-trait">
+    <legend>{{ localize "DND5E.ADVANCEMENT.Trait.FIELDS.grants.label" }}</legend>
+    <div class="form-group">
+        <p class="hint">{{ localize "DND5E.ADVANCEMENT.Trait.FIELDS.grants.hint" }}</p>
+    </div>
+    <ul class="unlist">
+        <li>
+            <label {{~#if grants.selected}} class="selected"{{/if}}>
+                <input type="radio" name="selectedIndex" value="-1" {{ checked grants.selected }}>
+                {{#if grants.selected}}
+                <i class="fa-solid fa-arrow-right-long"></i>
+                {{else}}
+                <i class="fa-solid fa-gear"></i>
+                {{/if}}
+                <span>{{ grants.label }}</span>
+            </label>
+        </li>
+    </ul>
+</fieldset>

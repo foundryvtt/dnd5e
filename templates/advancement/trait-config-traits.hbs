@@ -1,0 +1,18 @@
+<fieldset class="card traits">
+    <legend>{{ localize "DND5E.ADVANCEMENT.Trait.FIELDS.choices.FIELDS.pool.label" }}</legend>
+    {{#if count}}
+    {{ formField count.field name="configuration.count" value=count.value rootId=partId }}
+    {{/if}}
+
+    <div class="form-group">
+        <label>{{ localize "DND5E.ADVANCEMENT.Trait.TraitType" }}</label>
+        <div class="form-fields">
+            <select name="selectedTrait">
+                {{ selectOptions validTraitTypes selected=trait.selected localize=true }}
+            </select>
+        </div>
+    </div>
+
+    {{> "dnd5e.traits-list" choices=trait.options keyPath="configuration.checked." topLevel=true
+                            field=trait.field input=trait.input }}
+</fieldset>
