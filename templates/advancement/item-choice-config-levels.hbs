@@ -15,8 +15,8 @@
     </div>
     <ol class="levels-list unlist">
         {{#each choices}}
-        <li class="level flexrow" data-item-uuid="{{ data.uuid }}">
-            <div class="level-number">{{ label }}</div>
+        <li class="level">
+            <div class="level-level">{{ label }}</div>
             <div class="level-count">
                 <input type="number" name="configuration.choices.{{ @key }}.count" value="{{ count }}" placeholder="0"
                        min="1" step="1" aria-labelledby="{{ @root.partId }}-choices">

@@ -46,8 +46,8 @@
   .card.levels {
     grid-template-columns: [level] max-content [count] 1fr;
     gap: 4px 6px;
-    .level-number { grid-column: level; }
-    .level-count { grid-column: count; }
+    .level-header, .level-level { grid-column: level; }
+    .count-header, .level-count { grid-column: count; }
   }
 
   .centered { text-align: center; }
@@ -123,12 +123,12 @@
 
 .dnd5e2.advancement.item-choice.sheet {
   --grid-column-left-size: 1fr;
-  --grid-column-center-size: 0.7fr;
-  --grid-column-right-size: 0.5fr;
+  --grid-column-center-size: .7fr;
+  --grid-column-right-size: .5fr;
 
   .card.levels {
     grid-template-columns: [level] max-content [count] 1fr [replacement] max-content;
-    .level-replacement { grid-column: replacement; }
+    .replacement-header, .level-replacement { grid-column: replacement; }
   }
 }
 
@@ -139,6 +139,38 @@
 .dnd5e2.advancement.item-grant.sheet {
   .card.items {
     grid-template-columns: [optional] 1fr [name] 3fr [controls] 20px;
-    .item-optional { grid-column: optional; }
+    .optional-header, .item-optional { grid-column: optional; }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Scale Value Advancement                  */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.scale-value.sheet {
+  --grid-column-right-size: .6fr;
+  .identifier-hint {
+    code {
+      display: inline;
+      margin: 0;
+      padding: 0;
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: inherit;
+    }
+    copyable-text { font-weight: bold; }
+  }
+  [data-application-part="levels"] {
+    grid-template-columns: [level] max-content [value] 1fr;
+    .value-header, .level-value { grid-column: value; }
+
+    &[data-type="dice"] {
+      grid-template-columns: [level] max-content [number] 1fr [faces] 1fr;
+      .number-header, .level-number { grid-column: number; }
+      .faces-header, .level-faces { grid-column: faces; }
+    }
+    select option[value=""] { color: var(--color-text-light-6); }
+    .new-scale-value select { font-weight: bold; }
   }
 }
