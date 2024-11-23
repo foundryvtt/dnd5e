@@ -100,6 +100,25 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _onFirstRender(context, options) {
+    super._onFirstRender(context, options);
+    let columns = [];
+    if ( this.options.classes.includes("two-column") ) columns = ["left", "right"];
+    else if ( this.options.classes.includes("three-column") ) columns = ["left", "center", "right"];
+    const created = [];
+    const content = this.element.querySelector(".window-content");
+    for ( const column of columns ) {
+      const div = document.createElement("div");
+      div.classList.add("column-container", `column-${column}`);
+      div.replaceChildren(...content.querySelectorAll(`& > .${column}-column`));
+      if ( div.children.length ) created.push(div);
+    }
+    created.forEach(c => content.insertAdjacentElement("beforeend", c));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     if ( !game.user.isGM ) return;

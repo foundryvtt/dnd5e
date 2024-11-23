@@ -1,0 +1,17 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ADVANCEMENT.ItemChoice.Details" }}</legend>
+    {{ formGroup configuration.fields.allowDrops name="configuration.allowDrops" value=configuration.data.allowDrops
+                 input=inputs.createCheckboxInput rootId=partId }}
+    {{ formGroup configuration.fields.type name="configuration.type" value=configuration.data.type
+                 options=typeOptions rootId=partId }}
+    {{#if typeRestriction}}
+    {{#with configuration.fields.restriction.fields as |fields|}}
+    {{ formGroup fields.type name="configuration.restriction.type" value=../configuration.data.restriction.type
+                 options=../typeRestriction.typeOptions rootId=../partId }}
+    {{#if ../typeRestriction.subtypeOptions}}
+    {{ formGroup fields.subtype name="configuration.restriction.subtype" value=../configuration.data.restriction.subtype
+                 options=../typeRestriction.subtypeOptions rootId=../partId }}
+    {{/if}}
+    {{/with}}
+    {{/if}}
+</fieldset>

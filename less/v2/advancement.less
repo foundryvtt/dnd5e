@@ -1,10 +1,31 @@
 .dnd5e2.advancement.sheet {
-  .items.card {
+  &.two-column, &.three-column {
+    --grid-column-left-size: 1fr;
+    --grid-column-center-size: 1fr;
+    --grid-column-right-size: 1fr;
+
+    .window-content {
+      display: grid;
+      gap: 8px;
+
+      > .column-left { grid-area: left; }
+      > .column-center { grid-area: center; }
+      > .column-right { grid-area: right; }
+    }
+  }
+  &.two-column .window-content {
+    grid-template-columns: [left] var(--grid-column-left-size) [right] var(--grid-column-right-size);
+  }
+  &.three-column .window-content {
+    grid-template-columns:
+      [left] var(--grid-column-left-size) [center] var(--grid-column-center-size) [right] var(--grid-column-right-size);
+  }
+
+  .card:is(.items, .levels) {
     display: grid;
-    grid-template-columns: [name] 1fr [controls] 20px;
 
     > * { grid-column: 1 / -1; }
-    .header, .items-list, .items-list > li {
+    .header, .items-list, .items-list > li, .levels-list, .levels-list > li {
       display: grid;
       grid-column: 1 / -1;
       grid-template-columns: subgrid;
@@ -15,11 +36,18 @@
       padding-inline: 10px;
       border-radius: 0;
     }
-    .items-list {
-      container-type: normal;
-    }
+  }
+  .card.items {
+    grid-template-columns: [name] 1fr [controls] 20px;
+    .items-list { container-type: normal; }
     .item-name { grid-column: name; }
     .item-controls { grid-column: controls; }
+  }
+  .card.levels {
+    grid-template-columns: [level] max-content [count] 1fr;
+    gap: 4px 6px;
+    .level-number { grid-column: level; }
+    .level-count { grid-column: count; }
   }
 
   .centered { text-align: center; }
@@ -30,11 +58,26 @@
 }
 
 /* ----------------------------------------- */
+/*  Choose Items Advancement                 */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.item-choice.sheet {
+  --grid-column-left-size: 1fr;
+  --grid-column-center-size: 0.7fr;
+  --grid-column-right-size: 0.5fr;
+
+  .card.levels {
+    grid-template-columns: [level] max-content [count] 1fr [replacement] max-content;
+    .level-replacement { grid-column: replacement; }
+  }
+}
+
+/* ----------------------------------------- */
 /*  Grant Items Advancement                  */
 /* ----------------------------------------- */
 
 .dnd5e2.advancement.item-grant.sheet {
-  .items.card {
+  .card.items {
     grid-template-columns: [optional] 1fr [name] 3fr [controls] 20px;
     .item-optional { grid-column: optional; }
   }
