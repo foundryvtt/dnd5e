@@ -1,26 +1,32 @@
-import AdvancementFlow from "./advancement-flow.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
+import AdvancementFlow from "./advancement-flow-v2.mjs";
+
+const { StringField } = foundry.data.fields;
 
 /**
  * Inline application that presents the player with a trait choices.
  */
 export default class TraitFlow extends AdvancementFlow {
 
-  /**
-   * Array of trait keys currently chosen.
-   * @type {Set<string>}
-   */
-  chosen;
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    actions: {
+      removeTrait: TraitFlow.#removeTrait
+    }
+  };
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
+  /** @override */
+  static PARTS = {
+    ...super.PARTS,
+    content: {
       template: "systems/dnd5e/templates/advancement/trait-flow.hbs"
-    });
-  }
+    }
+  };
 
+  /* -------------------------------------------- */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
@@ -32,79 +38,32 @@ export default class TraitFlow extends AdvancementFlow {
   }
 
   /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getData() {
-    this.chosen ??= await this.prepareInitialValue();
-    const available = await this.advancement.availableChoices(this.chosen);
-    return foundry.utils.mergeObject(super.getData(), {
-      hint: this.advancement.hint ? this.advancement.hint : Trait.localizedList({
-        grants: this.advancement.configuration.grants, choices: this.advancement.configuration.choices
-      }),
-      slots: this.prepareTraitSlots(available),
-      available
+  async _prepareContentContext(context, options) {
+    const available = await this.advancement.availableChoices();
+    if ( available ) context.added = {
+      field: new StringField({ required: true, blank: false }),
+      options: [
+        { value: "", label: available.label },
+        ...available.choices.asOptions()
+      ]
+    };
+    context.slots = this.#prepareTraitSlots(available);
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareHeaderContext(context, options) {
+    context = await super._prepareHeaderContext(context, options);
+    context.hint = this.advancement.hint ? this.advancement.hint : Trait.localizedList({
+      grants: this.advancement.configuration.grants, choices: this.advancement.configuration.choices
     });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(html) {
-    this.form.querySelectorAll("select").forEach(s => s.addEventListener("change", this._onSelectTrait.bind(this)));
-    this.form.querySelectorAll(".remove").forEach(s => s.addEventListener("click", this._onRemoveTrait.bind(this)));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Add a trait to the value when one is selected.
-   * @param {Event} event  Triggering change to a select input.
-   */
-  _onSelectTrait(event) {
-    const addedTrait = event.target.value;
-    if ( addedTrait === "" ) return;
-    this.chosen.add(addedTrait);
-    this.render();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Remove a trait for the value when the remove button is clicked.
-   * @param {Event} event  Triggering click.
-   */
-  _onRemoveTrait(event) {
-    const tag = event.target.closest(".trait-slot");
-    this.chosen.delete(tag.dataset.key);
-    this.render();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _updateObject(event, formData) {
-    if ( formData.chosen && !Array.isArray(formData.chosen) ) formData.chosen = [formData.chosen];
-    super._updateObject(event, formData);
-  }
-
-  /* -------------------------------------------- */
-  /*  Data Preparation Methods                    */
-  /* -------------------------------------------- */
-
-  /**
-   * When only a single choice is available, automatically select that choice provided value is empty.
-   * @returns {Set<string>}
-   */
-  async prepareInitialValue() {
-    const existingChosen = this.retainedData?.chosen ?? this.advancement.value.chosen;
-    if ( existingChosen?.size ) return new Set(existingChosen);
-    const { available } = await this.advancement.unfulfilledChoices();
-    const chosen = new Set();
-    for ( const { choices } of available ) {
-      const set = choices.asSet();
-      if ( set.size === 1 ) chosen.add(set.first());
-    }
-    return chosen;
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -114,10 +73,10 @@ export default class TraitFlow extends AdvancementFlow {
    * @param {object} available  Trait availability returned by `prepareAvailableTraits`.
    * @returns {object[]}
    */
-  prepareTraitSlots(available) {
+  #prepareTraitSlots(available) {
     const config = this.advancement.configuration;
     const count = config.choices.reduce((count, c) => count + c.count, config.grants.size);
-    const chosen = Array.from(this.chosen);
+    const chosen = Array.from(this.advancement.value.chosen ?? []);
     let selectorShown = false;
     const slots = [];
     for ( let i = 1; i <= count; i++ ) {
@@ -127,10 +86,36 @@ export default class TraitFlow extends AdvancementFlow {
       slots.push({
         key,
         label: key ? Trait.keyLabel(key, { type: config.type }) : null,
+        icon: key ? Trait.keyIcon(key, { type: config.type }) : null,
         showDelete: !this.advancement.configuration.grants.has(key),
         showSelector: !key
       });
     }
     return slots;
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle removing a previous trait choice.
+   * @this {TraitFlow}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #removeTrait(event, target) {
+    const tag = target.closest(".trait-slot");
+    await this.advancement.reverse(this.level, { key: tag.dataset.key });
+    this.render();
+  }
+
+  /* -------------------------------------------- */
+  /*  Form Handling                               */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _handleForm(event, form, formData) {
+    if ( formData.object.added ) await this.advancement.apply(this.level, { key: formData.object.added });
   }
 }

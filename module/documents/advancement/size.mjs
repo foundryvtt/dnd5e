@@ -86,7 +86,7 @@ export default class SizeAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @override */
-  automaticApplicationValue(level) {
+  async automaticApplicationValue(level) {
     if ( this.configuration.sizes > 1 ) return false;
     return this.configuration.sizes.first() ?? "med";
   }

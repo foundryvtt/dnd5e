@@ -122,9 +122,9 @@ export default class AdvancementFlow extends FormApplication {
 
   /**
    * Retrieve automatic application data from the advancement, if supported.
-   * @returns {object|false}  Data to pass to the apply method, or `false` if advancement requirers user intervention.
+   * @returns {Promise<object|false>}  Data to pass to the apply method, or `false` if user intervention required.
    */
-  getAutomaticApplicationValue() {
+  async getAutomaticApplicationValue() {
     return this.advancement.automaticApplicationValue(this.level);
   }
 

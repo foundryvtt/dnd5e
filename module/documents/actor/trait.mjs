@@ -358,6 +358,37 @@ export function traitLabel(trait, count) {
 /* -------------------------------------------- */
 
 /**
+ * Retrieve the representative icon for a specific trait.
+ * @param {string} key             Key for which to generate the icon.
+ * @param {object} [config={}]
+ * @param {string} [config.trait]  Trait as defined in `CONFIG.DND5E.traits` if not using a prefixed key.
+ * @returns {string|null}
+ */
+export function keyIcon(key, { trait }={}) {
+  let parts = key.split(":");
+  if ( !trait ) trait = parts.shift();
+
+  // For simple traits, retrieve from config directly
+  const traitConfig = CONFIG.DND5E.traits[trait];
+  const traitIcon = CONFIG.DND5E[traitConfig?.configKey ?? trait]?.[parts[0]]?.icon;
+  if ( traitIcon ) return traitIcon;
+
+  // For other traits, try to find base item
+  const lastKey = parts.pop();
+  for ( const idsKey of traitConfig?.subtypes?.ids ?? [] ) {
+    let baseItemId = CONFIG.DND5E[idsKey]?.[lastKey];
+    if ( !baseItemId ) continue;
+    if ( foundry.utils.getType(baseItemId) === "Object" ) baseItemId = baseItemId.id;
+    const index = getBaseItem(baseItemId, { indexOnly: true });
+    if ( index ) return index.img;
+  }
+
+  return traitConfig?.icon ?? null;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Retrieve the proper display label for the provided key. Will return a promise unless a categories
  * object is provided in config.
  * @param {string} key              Key for which to generate the label.

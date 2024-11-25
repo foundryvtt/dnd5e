@@ -42,6 +42,33 @@ export default class SelectChoices {
   /* -------------------------------------------- */
 
   /**
+   * Create a list of form options for this object.
+   * @param {object} [options={}]
+   * @param {string} [options.parentLabel]  Category label prefix.
+   * @returns {FormSelectOptions[]}
+   */
+  asOptions({ parentLabel }={}) {
+    const options = [];
+    for ( const [value, data] of Object.entries(this) ) {
+      const option = {
+        value,
+        label: data.label,
+        group: parentLabel,
+        selected: data.chosen,
+        disabled: data.disabled ?? false
+      };
+      if ( data.children ) {
+        const newParentLabel = parentLabel ? `${parentLabel} - ${data.label}` : data.label;
+        options.push(...data.children.asOptions({ parentLabel: newParentLabel }));
+      }
+      else options.push(option);
+    }
+    return options;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Create a set of available choice keys.
    * @param {Set<string>} [set]  Existing set to which the values will be added.
    * @returns {Set<string>}
@@ -119,6 +146,8 @@ export default class SelectChoices {
   }
 
   /* -------------------------------------------- */
+  /*  Sorting                                     */
+  /* -------------------------------------------- */
 
   /**
    * Internal sorting method.
@@ -162,6 +191,8 @@ export default class SelectChoices {
     }
   }
 
+  /* -------------------------------------------- */
+  /*  Filtering                                   */
   /* -------------------------------------------- */
 
   /**

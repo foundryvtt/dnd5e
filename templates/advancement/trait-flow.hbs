@@ -1,25 +1,25 @@
-<form id="{{appId}}" data-level="{{level}}" data-id="{{advancement.id}}" data-type="{{type}}">
-    <h3>{{{title}}}</h3>
-
-    <p>{{hint}}</p>
-
-    <ol class="trait-slots">
-        {{#each slots}}
-        <li class="trait-slot flexrow" data-key="{{this.key}}">
-            {{#if this.key}}
-            <label class="flexrow">
-                {{this.label}}
-                <input type="hidden" name="chosen" value="{{this.key}}">
-            </label>
-            {{#if this.showDelete}}
-            <a class="remove"><i class="fas fa-trash"></i></a>
-            {{/if}}
-            {{else if (and this.showSelector @root.available.choices)}}
-            <select name="added">
-                {{dnd5e-groupedSelectOptions @root.available.choices blank=@root.available.label}}
-            </select>
-            {{/if}}
-        </li>
-        {{/each}}
-    </ol>
-</form>
+<ul class="separated-list flexcol unlist">
+    {{#each slots}}
+    <li class="trait-slot flexrow" data-key="{{ key }}">
+        {{#if key}}
+        <div class="details flexrow">
+            {{ dnd5e-icon icon classes="gold-icon" }}
+            <div class="name-stacked">
+                <div class="title">{{ label }}</div>
+            </div>
+        </div>
+        {{#if showDelete}}
+        <div class="list-controls">
+            <button type="button" class="unbutton control-button item-control" data-action="removeTrait"
+                    data-tooltip aria-label="{{ localize 'DND5E.ADVANCEMENT.Trait.Action.RemoveTrait' }}">
+                <i class="fa-solid fa-trash" inert></i>
+            </button>
+        </div>
+        {{/if}}
+        {{else if (and showSelector @root.added)}}
+        {{ formInput @root.added.field name="added" options=@root.added.options }}
+        {{/if}}
+        <input type="hidden" name="chosen" value="{{ key }}">
+    </li>
+    {{/each}}
+</ul>
