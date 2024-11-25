@@ -1077,7 +1077,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
       if ( roll.options.type ) obj[index] = roll.options.type;
       return obj;
     }, {});
-    if ( !foundry.utils.isEmpty(lastDamageTypes) ) {
+    if ( !foundry.utils.isEmpty(lastDamageTypes) && this.actor.items.has(this.item.id) ) {
       await this.item.setFlag("dnd5e", `last.${this.id}.damageType`, lastDamageTypes);
     }
 

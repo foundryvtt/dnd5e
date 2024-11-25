@@ -211,7 +211,9 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     if ( rolls[0].options.attackMode ) flags.attackMode = rolls[0].options.attackMode;
     else if ( rollConfig.attackMode ) rolls[0].options.attackMode = rollConfig.attackMode;
     if ( rolls[0].options.mastery ) flags.mastery = rolls[0].options.mastery;
-    if ( !foundry.utils.isEmpty(flags) ) await this.item.setFlag("dnd5e", `last.${this.id}`, flags);
+    if ( !foundry.utils.isEmpty(flags) && this.actor.items.has(this.item.id) ) {
+      await this.item.setFlag("dnd5e", `last.${this.id}`, flags);
+    }
 
     /**
      * A hook event that fires after an attack has been rolled but before any ammunition is consumed.
