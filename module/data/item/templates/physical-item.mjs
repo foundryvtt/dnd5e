@@ -218,7 +218,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     // Render the actor sheet, compendium, or sidebar
     if ( this.parent.isEmbedded ) this.parent.actor.sheet?.render(false, rendering);
     else if ( this.parent.pack ) game.packs.get(this.parent.pack).apps.forEach(a => a.render(false, rendering));
-    else ui.sidebar.tabs.items.render(false, rendering);
+    else ui.items.render(false, rendering);
 
     // Render former container if it was moved between containers
     if ( formerContainer ) {
@@ -243,7 +243,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /** @inheritDoc */
   _onCreate(data, options, userId) {
     super._onCreate(data, options, userId);
-    this._renderContainers();
+    if ( options.render !== false ) this._renderContainers();
   }
 
   /* -------------------------------------------- */
@@ -251,7 +251,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
     super._onUpdate(changed, options, userId);
-    this._renderContainers({ formerContainer: options.formerContainer });
+    if ( options.render !== false ) this._renderContainers({ formerContainer: options.formerContainer });
   }
 
   /* -------------------------------------------- */
@@ -259,7 +259,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /** @inheritDoc */
   _onDelete(options, userId) {
     super._onDelete(options, userId);
-    this._renderContainers();
+    if ( options.render !== false ) this._renderContainers();
   }
 
   /* -------------------------------------------- */
