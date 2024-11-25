@@ -19,7 +19,7 @@
             {{ formInput ../field name=(concat ../keyPath @key) value=chosen disabled=disabled input=../input }}
         </div>
         {{#if children}}
-        {{> "dnd5e.traits-list" choices=children topLevel=false field=../field input=../input }}
+        {{> "dnd5e.traits-list" choices=children topLevel=false keyPath=../keyPath field=../field input=../input }}
         {{/if}}
     </li>
     {{/each}}
