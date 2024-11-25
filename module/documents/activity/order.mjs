@@ -56,9 +56,23 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
   get canUse() {
     return super.canUse
       // Don't allow usage if facility is already executing the same order
-      && (this.parent.progress.order !== this.order)
+      && !this.inProgress
       // Enlarge order cannot be executed if facility is already maximum size
       && ((this.order !== "enlarge") || (this.parent.size !== "vast"));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this order currently in the process of being executed by its facility?
+   * @type {boolean}
+   */
+  get inProgress() {
+    if ( this.parent.progress.order !== this.order ) return false;
+    // TODO: Ideally this would also check to see if the order has already been paid,
+    // but that information is only part of the chat message and there isn't a clean
+    // way to retrieve it at the moment
+    return this.parent.progress.value > 0;
   }
 
   /* -------------------------------------------- */
