@@ -209,6 +209,8 @@ export default function PseudoDocumentMixin(Base) {
      * @returns {PseudoDocument}  This PseudoDocument after updates have been applied.
      */
     updateSource(updates) {
+      const doc = this.item.getEmbeddedDocument(this.documentName, this.id);
+      if ( doc !== this ) return doc.updateSource(updates);
       super.updateSource(updates);
       return this;
     }
