@@ -210,6 +210,8 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
           else if (act.type === "reaction") features.reactions.items.push(item);
           else features.actions.items.push(item);
           break;
+        case "spell":
+          break;
         default:
           cargo.cargo.items.push(item);
       }
