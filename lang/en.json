@@ -159,6 +159,18 @@
     "Time": "Time",
     "Monster": "Monster",
     "Vehicle": "Vehicle"
+  },
+  "Type": {
+    "Legendary": {
+      "Counted": {
+        "one": "{number} legendary action",
+        "other": "{number} legendary actions"
+      }
+    }
+  },
+  "Warning": {
+    "NoActions": "No {type} are available, but activating this requires at least {required}.",
+    "NotEnoughActions": "Not enough {type} to activate, {required} required but only {available} available."
   }
 },
 
@@ -1066,6 +1078,10 @@
     "ThisItem": "This Item"
   },
   "Type": {
+    "Action": {
+      "Prompt": "Consume {type}?",
+      "PromptHint": "Spend {cost} ({available} available)."
+    },
     "ActivityUses": {
       "Label": "Activity Uses",
       "PromptDecrease": "Consume Activity Use?",
