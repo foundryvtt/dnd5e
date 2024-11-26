@@ -6,6 +6,7 @@ export default class Combat5e extends Combat {
   /** @inheritDoc */
   async startCombat() {
     await super.startCombat();
+    this._recoverUses({ encounter: true });
     this.combatant?.refreshDynamicRing();
     return this;
   }
@@ -16,6 +17,7 @@ export default class Combat5e extends Combat {
   async nextTurn() {
     const previous = this.combatant;
     await super.nextTurn();
+    this._recoverUses({ turnEnd: previous, turnStart: this.combatant });
     if ( previous && (previous !== this.combatant) ) previous.refreshDynamicRing();
     this.combatant?.refreshDynamicRing();
     return this;
@@ -41,5 +43,21 @@ export default class Combat5e extends Combat {
     previous?.refreshDynamicRing();
     return this;
   }
-}
 
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Reset combat specific uses.
+   * @param {object} types  Which types of recovery to handle, and whether they should be performed on all combatants
+   *                        or only the combatant specified.
+   * @protected
+   */
+  async _recoverUses(types) {
+    for ( const combatant of this.combatants ) {
+      const periods = Object.entries(types).filter(([, v]) => (v === true) || (v === combatant)).map(([k]) => k);
+      if ( periods.length ) await combatant.recoverCombatUses(new Set(periods));
+    }
+  }
+}
