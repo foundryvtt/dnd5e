@@ -10,6 +10,7 @@ const { SchemaField, SetField, StringField } = foundry.data.fields;
  * @property {object} check
  * @property {string} check.ability          Ability used with the check.
  * @property {Set<string>} check.associated  Skills or tools that can contribute to the check.
+ * @property {string} check.bonus            Bonus added to all checks made through this activity.
  * @property {object} check.dc
  * @property {string} check.dc.calculation   Method or ability used to calculate the difficulty class of the check.
  * @property {string} check.dc.formula       Custom DC formula or flat value.
@@ -22,6 +23,7 @@ export default class CheckActivityData extends BaseActivityData {
       check: new SchemaField({
         ability: new StringField(),
         associated: new SetField(new StringField()),
+        bonus: new FormulaField(),
         dc: new SchemaField({
           calculation: new StringField(),
           formula: new FormulaField({ deterministic: true })
