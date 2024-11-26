@@ -2,6 +2,7 @@
     <legend>{{ localize "DND5E.CHECK.FIELDS.check.label" }}</legend>
     {{ formField fields.check.fields.associated value=source.check.associated options=associatedOptions rootId=partId }}
     {{ formField fields.check.fields.ability value=source.check.ability options=abilityOptions rootId=partId }}
+    {{ formField fields.check.fields.bonus value=source.check.bonus rootId=partId }}
     {{#with fields.check.fields.dc.fields as |fields|}}
     {{ formField fields.calculation value=../activity.check.dc.calculation options=../calculationOptions
                  rootId=@root.partId }}

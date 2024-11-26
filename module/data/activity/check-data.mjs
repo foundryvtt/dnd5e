@@ -21,6 +21,7 @@ export default class BaseCheckActivityData extends BaseActivityData {
       check: new SchemaField({
         ability: new StringField(),
         associated: new SetField(new StringField()),
+        bonus: new FormulaField(),
         dc: new SchemaField({
           calculation: new StringField(),
           formula: new FormulaField({ deterministic: true })

@@ -29,6 +29,7 @@ export default class BaseSaveActivityData extends BaseActivityData {
       })),
       save: new SchemaField({
         ability: new SetField(new StringField()),
+        bonus: new FormulaField(),
         dc: new SchemaField({
           calculation: new StringField({ initial: "initial" }),
           formula: new FormulaField({ deterministic: true })
