@@ -507,7 +507,7 @@ export default class ChatMessage5e extends ChatMessage {
       html.querySelector(".chat-card, .message-content")?.appendChild(p);
     }
 
-    if ( game.user.isGM ) {
+    if ( game.user.isGM || game.settings.get("dnd5e", "allowPlayerDamageTray") ) {
       const damageApplication = document.createElement("damage-application");
       damageApplication.classList.add("dnd5e2");
       damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({

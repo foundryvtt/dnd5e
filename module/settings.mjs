@@ -81,6 +81,15 @@ export function registerSystemSettings() {
     }
   });
 
+  game.settings.register("dnd5e", "allowPlayerDamageTray", {
+    name: "SETTINGS.DND5E.ALLOWDAMAGETRAY.Name",
+    hint: "SETTINGS.DND5E.ALLOWDAMAGETRAY.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
   // Encumbrance tracking
   game.settings.register("dnd5e", "encumbrance", {
     name: "SETTINGS.5eEncumbrance.Name",
