@@ -255,7 +255,9 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     const mod = spellAbility?.mod ?? 0;
     const attackBonus = msak === rsak ? msak : 0;
     context.spellcasting.push({
-      label: game.i18n.format("DND5E.SpellcastingClass", { class: spellcaster?.name ?? game.i18n.format("DND5E.NPC") }),
+      label: game.i18n.format("DND5E.SpellcastingClass", {
+        class: spellcaster?.name ?? game.i18n.format("DND5E.NPC.Label")
+      }),
       level: spellcaster?.system.levels ?? details.spellLevel,
       ability: {
         ability, mod,

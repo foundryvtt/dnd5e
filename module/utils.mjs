@@ -4,12 +4,15 @@
 
 /**
  * Format a Challenge Rating using the proper fractional symbols.
- * @param {number} value  CR value for format.
+ * @param {number} value                   CR value to format.
+ * @param {object} [options={}]
+ * @param {boolean} [options.narrow=true]  Use narrow fractions (e.g. ⅛) rather than wide ones (e.g. 1/8).
  * @returns {string}
  */
-export function formatCR(value) {
+export function formatCR(value, { narrow=true }={}) {
   if ( value === null ) return "—";
-  return { 0.125: "⅛", 0.25: "¼", 0.5: "½" }[value] ?? formatNumber(value);
+  const fractions = narrow ? { 0.125: "⅛", 0.25: "¼", 0.5: "½" } : { 0.125: "1/8", 0.25: "1/4", 0.5: "1/2" };
+  return fractions[value] ?? formatNumber(value);
 }
 
 /* -------------------------------------------- */

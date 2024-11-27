@@ -99,6 +99,7 @@
 "DND5E.AbilityScoreMax": "Maximum Ability Score",
 "DND5E.AbilityScoreMaxShort": "Maximum",
 "DND5E.AbilityModifier": "Ability Modifier",
+"DND5E.AbilityModifierShort": "Mod",
 "DND5E.AbilityPromptText": "What type of {ability} check?",
 "DND5E.AbilityPromptTitle": "{ability} Ability Check",
 "DND5E.AbilityUseChargesLabel": "{value} Charges",
@@ -1198,6 +1199,7 @@
 "DND5E.CreatureSwarm": "Swarm",
 "DND5E.CreatureSwarmSize": "Swarm Size",
 "DND5E.CreatureSwarmPhrase": "Swarm of {size} {type}",
+"DND5E.CreatureTag": "{size} {type}, {alignment}",
 "DND5E.CreatureTypeConfig": "Configure Creature Type",
 "DND5E.CreatureTypeSelectorCustom": "Custom Type",
 "DND5E.CreatureTypeSelectorSubtype": "Subtype",
@@ -2056,6 +2058,7 @@
 "DND5E.Formula": "Formula",
 "DND5E.FormulaMalformedError": "Problem preparing the {property} formula within {name}.",
 "DND5E.FormulaMissingReferenceWarn": "The {property} formula within {name} has references to missing data: {references}",
+"DND5E.Gear": "Gear",
 "DND5E.Gender": "Gender",
 "DND5E.GlobalBonus": "Global Bonus",
 "DND5E.GrantedAbilities": "Granted Abilities",
@@ -2421,7 +2424,18 @@
 "DND5E.Normal": "Normal",
 "DND5E.NotProficient": "Not Proficient",
 "DND5E.Notes": "Notes",
-"DND5E.NPC": "NPC",
+
+"DND5E.NPC": {
+  "Label": "NPC",
+  "SECTIONS": {
+    "Actions": "Actions",
+    "BonusActions": "Bonus Actions",
+    "LegendaryActions": "Legendary Actions",
+    "Reactions": "Reactions",
+    "Traits": "Traits"
+  }
+},
+
 "DND5E.Number": "Number",
 "DND5E.OtherFormula": "Other Formula",
 "DND5E.PactMagic": "Pact Magic",
@@ -2482,6 +2496,7 @@
 "DND5E.Price": "Price",
 "DND5E.Proficiency": "Proficiency",
 "DND5E.ProficiencyBonus": "Proficiency Bonus",
+"DND5E.ProficiencyBonusAbbr": "PB",
 "DND5E.ProficiencyConfigurationHint": "Configure proficiency and bonuses.",
 "DND5E.ProficiencyConfigureTitle": "Configure {label}",
 "DND5E.ProficiencyLevel": "Proficiency Level",
@@ -2696,6 +2711,7 @@
 "DND5E.SavingThrow": "Saving Throw",
 "DND5E.SavingThrowDC": "DC {dc} {ability} Saving Throw",
 "DND5E.SavingThrowRoll": "Roll {ability} Saving Throw",
+"DND5E.SavingThrowShort": "Save",
 "DND5E.SaveDC": "DC {dc} {ability}",
 "DND5E.SavePromptTitle": "{ability} Saving Throw",
 "DND5E.ScalingFormula": "Scaling Formula",
