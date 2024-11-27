@@ -231,6 +231,19 @@ async function enrichCheck(config, label, options) {
   }
   if ( abilityConfig?.key ) config.ability = abilityConfig.key;
 
+  if (options.relativeTo) foundry.utils.mergeObject(options, {
+    rollData: {
+      document: {
+        name: options.relativeTo.name,
+        flags: options.relativeTo.flags,
+        parent: options.relativeTo?.parent ? {
+          name: options.relativeTo.parent.name,
+          flags: options.relativeTo.parent.flags
+        } : undefined
+      }
+    }
+  });
+
   if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData);
 
   if ( invalid ) return null;
@@ -290,6 +303,19 @@ async function enrichSave(config, label, options) {
     return null;
   }
   if ( abilityConfig?.key ) config.ability = abilityConfig.key;
+
+  if (options.relativeTo) foundry.utils.mergeObject(options, {
+    rollData: {
+      document: {
+        name: options.relativeTo.name,
+        flags: options.relativeTo.flags,
+        parent: options.relativeTo?.parent ? {
+          name: options.relativeTo.parent.name,
+          flags: options.relativeTo.parent.flags
+        } : undefined
+      }
+    }
+  });
 
   if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData);
 
@@ -355,6 +381,20 @@ async function enrichDamage(config, label, options) {
     else if ( value === "temp" ) config.type = "temphp";
     else formulaParts.push(value);
   }
+
+  if (options.relativeTo) foundry.utils.mergeObject(options, {
+    rollData: {
+      document: {
+        name: options.relativeTo.name,
+        flags: options.relativeTo.flags,
+        parent: options.relativeTo?.parent ? {
+          name: options.relativeTo.parent.name,
+          flags: options.relativeTo.parent.flags
+        } : undefined
+      }
+    }
+  });
+
   config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
   if ( !config.formula ) return null;
   config.damageType = config.type ?? (config._isHealing ? "healing" : null);
