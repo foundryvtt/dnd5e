@@ -81,7 +81,7 @@
                 <select name="system.type.value">
                     <option value=""></option>
                     <optgroup label="{{ localize "DND5E.Armor" }}">
-                        {{selectOptions config.armorTypes selected=system.type.value}}
+                        {{selectOptions config.armorTypes selected=system.type.value labelAttr="label"}}
                     </optgroup>
                     {{selectOptions config.miscEquipmentTypes selected=system.type.value}}
                 </select>

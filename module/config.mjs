@@ -1451,16 +1451,31 @@ preLocalize("enchantmentPeriods", { key: "label" });
 
 /**
  * Specific equipment types that modify base AC.
- * @enum {string}
+ * @enum {{ label: string, [maxAbility]: (number|null) }}
  */
 DND5E.armorTypes = {
-  light: "DND5E.EquipmentLight",
-  medium: "DND5E.EquipmentMedium",
-  heavy: "DND5E.EquipmentHeavy",
-  natural: "DND5E.EquipmentNatural",
-  shield: "DND5E.EquipmentShield"
+  light: {
+    label: "DND5E.EquipmentLight",
+    maxAbility: null
+  },
+  medium: {
+    label: "DND5E.EquipmentMedium",
+    maxAbility: 2
+  },
+  heavy: {
+    label: "DND5E.EquipmentHeavy",
+    maxAbility: 0
+  },
+  natural: {
+    label: "DND5E.EquipmentNatural",
+    maxAbility: null
+  },
+  shield: {
+    label: "DND5E.EquipmentShield"
+  }
 };
-preLocalize("armorTypes");
+preLocalize("armorTypes", { keys: ["label"] });
+patchConfig("armorTypes", "label", { since: "DnD5e 4.1", until: "DnD5e 4.4" });
 
 /* -------------------------------------------- */
 
@@ -1487,7 +1502,7 @@ preLocalize("miscEquipmentTypes", { sort: true });
  */
 DND5E.equipmentTypes = {
   ...DND5E.miscEquipmentTypes,
-  ...DND5E.armorTypes
+  ...Object.values(DND5E.armorTypes).map(t => t.label)
 };
 preLocalize("equipmentTypes", { sort: true });
 
@@ -1898,6 +1913,9 @@ DND5E.itemProperties = {
   },
   two: {
     label: "DND5E.Item.Property.TwoHanded"
+  },
+  uncappedAbility: {
+    label: "DND5E.Item.Property.UncappedAbility"
   },
   ver: {
     label: "DND5E.Item.Property.Versatile"

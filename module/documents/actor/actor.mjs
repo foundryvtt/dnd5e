@@ -533,9 +533,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
             message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
           });
           const armorData = armors[0].system.armor;
-          const isHeavy = armors[0].system.type.value === "heavy";
+          const armorType = armors[0].system.type.value;
+          const currMaxDex = armorData.dex ?? CONFIG.DND5E.armorTypes[armorType]?.maxAbility ?? Infinity;
+          const maxDexBonus = simplifyBonus(this.system.attributes.ac.ability[armorType]);
+          const newMaxDex = armors[0].system.properties.has("uncappedAbility") ? Infinity : currMaxDex + maxDexBonus;
           ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.system.abilities.dex?.mod ?? 0);
+          ac.dex = Math.min(newMaxDex, this.system.abilities.dex?.mod ?? 0);
           ac.equippedArmor = armors[0];
         }
         else ac.dex = this.system.abilities.dex?.mod ?? 0;
@@ -568,10 +571,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Compute cover.
     ac.cover = Math.max(ac.cover, this.coverBonus);
 
+    // Computer armored/unarmored bonuses
+    ac.bonuses.armored = armors[0] ? simplifyBonus(ac.bonuses.armored, rollData) : 0;
+    ac.bonuses.unarmored = armors[0] ? 0 : simplifyBonus(ac.bonuses.unarmored, rollData);
+
     // Compute total AC and return
     ac.min = simplifyBonus(ac.min, rollData);
     ac.bonus = simplifyBonus(ac.bonus, rollData);
-    ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
+    ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover + ac.bonuses.armored + ac.bonuses.unarmored);
   }
 
   /* -------------------------------------------- */
@@ -2961,6 +2968,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Bonus
     if ( ac.bonus !== 0 ) attribution.push(...this._prepareActiveEffectAttributions("system.attributes.ac.bonus"));
+    if ( ac.bonuses.armored !== 0) attribution.push(...this._prepareActiveEffectAttributions("system.attributes.ac.bonuses.armored"));
+    if ( ac.bonuses.unarmored !== 0) attribution.push(...this._prepareActiveEffectAttributions("system.attributes.ac.bonuses.unarmored"));
 
     // Cover
     if ( ac.cover !== 0 ) attribution.push({
