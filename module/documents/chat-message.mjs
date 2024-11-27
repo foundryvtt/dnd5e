@@ -260,11 +260,16 @@ export default class ChatMessage5e extends ChatMessage {
     const avatar = document.createElement("a");
     avatar.classList.add("avatar");
     if ( actor ) avatar.dataset.uuid = actor.uuid;
-    avatar.innerHTML = `<img src="${img}" alt="${nameText}">`;
+    const avatarImg = document.createElement("img");
+    Object.assign(avatarImg, { src: img, alt: nameText });
+    avatar.append(avatarImg);
 
     const name = document.createElement("span");
     name.classList.add("name-stacked");
-    name.innerHTML = `<span class="title">${nameText}</span>`;
+    const title = document.createElement("span");
+    title.classList.add("title");
+    title.append(nameText);
+    name.append(title);
 
     const subtitle = document.createElement("span");
     subtitle.classList.add("subtitle");
@@ -311,14 +316,19 @@ export default class ChatMessage5e extends ChatMessage {
       flavor.innerHTML = `
         <section class="card-header description ${isCritical ? "critical" : ""}">
           <header class="summary">
-            <img class="gold-icon" src="${item.img}" alt="${item.name}">
             <div class="name-stacked">
-              <span class="title">${item.name}</span>
               <span class="subtitle">${subtitle}</span>
             </div>
           </header>
         </section>
       `;
+      const icon = document.createElement("img");
+      Object.assign(icon, { className: "gold-icon", src: item.img, alt: item.name });
+      flavor.querySelector("header").insertAdjacentElement("afterbegin", icon);
+      const title = document.createElement("span");
+      title.classList.add("title");
+      title.append(item.name);
+      flavor.querySelector(".name-stacked").insertAdjacentElement("afterbegin", title);
       html.querySelector(".message-header .flavor-text").remove();
       html.querySelector(".message-content").insertAdjacentElement("afterbegin", flavor);
     }
@@ -415,22 +425,30 @@ export default class ChatMessage5e extends ChatMessage {
       </div>
     `;
     const evaluation = tray.querySelector("ul");
-    evaluation.innerHTML = targets.map(({ name, ac, uuid }) => {
+    const rows = targets.map(({ name, ac, uuid }) => {
       if ( !game.user.isGM && (visibility !== "all") ) ac = "";
       const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
-      return [`
-        <li data-uuid="${uuid}" class="target ${isMiss ? "miss" : "hit"}">
-          <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
-          <div class="name">${name}</div>
-          ${(ac !== "") ? `
-          <div class="ac">
-            <i class="fas fa-shield-halved"></i>
-            <span>${(ac === null) ? "&infin;" : ac}</span>
-          </div>
-          ` : ""}
-        </li>
-      `, isMiss];
-    }).sort((a, b) => (a[1] === b[1]) ? 0 : a[1] ? 1 : -1).reduce((str, [li]) => str + li, "");
+      const li = document.createElement("li");
+      Object.assign(li.dataset, { uuid, miss: isMiss });
+      li.className = `target ${isMiss ? "miss" : "hit"}`;
+      li.innerHTML = `
+        <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
+        <div class="name"></div>
+        ${(ac !== "") ? `
+        <div class="ac">
+          <i class="fas fa-shield-halved"></i>
+          <span>${(ac === null) ? "&infin;" : ac}</span>
+        </div>
+        ` : ""}
+      `;
+      li.querySelector(".name").append(name);
+      return li;
+    }).sort((a, b) => {
+      const missA = Boolean(a.dataset.miss);
+      const missB = Boolean(b.dataset.miss);
+      return missA === missB ? 0 : missA ? 1 : -1;
+    });
+    evaluation.append(...rows);
     evaluation.querySelectorAll("li.target").forEach(target => {
       target.addEventListener("click", this._onTargetMouseDown.bind(this));
       target.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
