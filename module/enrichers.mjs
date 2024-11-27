@@ -1,5 +1,6 @@
 import { formatNumber, getSceneTargets, getTargetDescriptors, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
+import AttackRollConfigurationDialog from "./applications/dice/attack-configuration-dialog.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import { rollItem } from "./documents/macro.mjs";
 
@@ -9,7 +10,9 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  * Set up custom text enrichers.
  */
 export function registerCustomEnrichers() {
-  const stringNames = ["award", "check", "concentration", "damage", "healing", "item", "save", "skill", "tool"];
+  const stringNames = [
+    "attack", "award", "check", "concentration", "damage", "healing", "item", "save", "skill", "tool"
+  ];
   CONFIG.TextEditor.enrichers.push({
     pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")}) (?<config>[^\\]]+)]](?:{(?<label>[^}]+)})?`, "gi"),
     enricher: enrichString
@@ -42,6 +45,7 @@ async function enrichString(match, options) {
   config = parseConfig(config);
   config._input = match[0];
   switch ( type.toLowerCase() ) {
+    case "attack": return enrichAttack(config, label, options);
     case "award": return enrichAward(config, label, options);
     case "healing": config._isHealing = true;
     case "damage": return enrichDamage(config, label, options);
@@ -76,6 +80,43 @@ function parseConfig(match) {
     else config[key] = value.replace(/(^"|"$)/g, "");
   }
   return config;
+}
+
+/* -------------------------------------------- */
+/*  Attack Enricher                             */
+/* -------------------------------------------- */
+
+/**
+ * Enrich an attack link using a pre-set to hit value.
+ * @param {object} config              Configuration data.
+ * @param {string} [label]             Optional label to replace default text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         An HTML link if the save could be built, otherwise null.}
+ *
+ * @example Create an attack link using a fixed to hit:
+ * ```[[/attack +5]]``` or ```[[/attack formula=5]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-roll-action="attack" data-formula="+5">
+ *   <i class="fa-solid fa-dice-d20" inert></i> +5
+ * </a>
+ * ```
+ */
+async function enrichAttack(config, label, options) {
+  const formulaParts = [];
+  if ( config.formula ) formulaParts.push(config.formula);
+  for ( const value of config.values ) formulaParts.push(value);
+  config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+  if ( !config.formula.startsWith("+") && !config.formula.startsWith("-") ) config.formula = `+${config.formula}`;
+  config.type = "attack";
+
+  if ( label ) return createRollLink(label, config);
+
+  const span = document.createElement("span");
+  span.innerHTML = game.i18n.format(`EDITOR.DND5E.Inline.Attack${config.format === "long" ? "Long" : "Short"}`, {
+    formula: createRollLink(config.formula, config).outerHTML
+  });
+  return span;
 }
 
 /* -------------------------------------------- */
@@ -736,7 +777,7 @@ function createRollLink(label, dataset) {
   span.insertAdjacentElement("afterbegin", link);
 
   // Add chat request link for GMs
-  if ( game.user.isGM && (dataset.type !== "damage") && (dataset.type !== "item") ) {
+  if ( game.user.isGM && !["attack", "damage", "item"].includes(dataset.type) ) {
     const gmLink = document.createElement("a");
     gmLink.classList.add("enricher-action");
     gmLink.dataset.action = "request";
@@ -810,6 +851,7 @@ async function rollAction(event) {
     target.disabled = true;
     try {
       switch ( type ) {
+        case "attack": return await rollAttack(event);
         case "damage": return await rollDamage(event);
         case "item": return await useItem(target.dataset);
       }
@@ -859,6 +901,53 @@ async function rollAction(event) {
       speaker: MessageClass.getSpeaker({user: game.user})
     };
     return MessageClass.create(chatData);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Perform an attack roll.
+ * @param {Event} event     The click event triggering the action.
+ * @returns {Promise|void}
+ */
+async function rollAttack(event) {
+  const target = event.target.closest(".roll-link");
+  const { formula } = target.dataset;
+
+  const targets = getTargetDescriptors();
+  const rollConfig = {
+    event,
+    hookNames: ["attack", "d20Test"],
+    rolls: [{
+      parts: [formula.replace(/^\s*\+\s*/, "")],
+      options: {
+        target: targets.length === 1 ? targets[0].ac : undefined
+      }
+    }]
+  };
+
+  const dialogConfig = {
+    applicationClass: AttackRollConfigurationDialog
+  };
+
+  const messageConfig = {
+    data: {
+      flags: {
+        dnd5e: {
+          messageType: "roll",
+          roll: { type: "attack" }
+        }
+      },
+      flavor: game.i18n.localize("DND5E.AttackRoll"),
+      speaker: ChatMessage.implementation.getSpeaker()
+    }
+  };
+
+  const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
+  if ( rolls?.length ) {
+    Hooks.callAll("dnd5e.rollAttackV2", rolls, { subject: null, ammoUpdate: null });
+    Hooks.callAll("dnd5e.postRollAttack", rolls, { subject: null });
   }
 }
 
