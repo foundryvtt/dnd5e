@@ -658,6 +658,15 @@ export default class ActiveEffect5e extends ActiveEffect {
       disabled: !context.editable
     });
     html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")?.after(element);
+    html = html instanceof HTMLElement ? html : html[0];
+    const helpIconElement = document.createElement("i");
+    helpIconElement.classList.add("fa-solid", "fa-circle-question");
+    const tooltipText = game.i18n.localize("DND5E.ActiveEffectAttributeKeyTooltip");
+    helpIconElement.setAttribute("data-tooltip", tooltipText);
+    helpIconElement.setAttribute("data-tooltip-direction", "RIGHT");
+    helpIconElement.setAttribute("data-locked", true);
+    const targetElement = html.querySelector("section[data-tab='effects'] .key");
+    if (targetElement) targetElement.insertAdjacentElement("beforeend", helpIconElement);
   }
 
   /* -------------------------------------------- */
