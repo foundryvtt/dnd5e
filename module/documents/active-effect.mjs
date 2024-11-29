@@ -666,7 +666,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     helpIconElement.setAttribute("data-tooltip-direction", "RIGHT");
     helpIconElement.setAttribute("data-locked", true);
     const targetElement = html.querySelector("section[data-tab='effects'] .key");
-    if (targetElement) targetElement.insertAdjacentElement("beforeend", helpIconElement);
+    if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
   }
 
   /* -------------------------------------------- */
