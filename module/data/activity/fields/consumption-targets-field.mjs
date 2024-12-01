@@ -169,7 +169,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
     if ( !denom ) validClasses.sort((lhs, rhs) => {
       const sort = lhs.system.hd.denomination.localeCompare(rhs.system.hd.denomination, "en", { numeric: true });
-      return ( this.target === "smallest" ) ? sort : sort * -1;
+      return (this.target === "smallest") ? sort : sort * -1;
     });
 
     let warningMessage;
@@ -416,8 +416,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   static consumptionLabelsHitDice(config, { consumed }={}) {
     const { cost, simplifiedCost, increaseKey, pluralRule } = this._resolveHintCost(config);
     let denomination;
-    if ( this.target === "smallest" ) denomination = game.i18n.localize("DND5E.ConsumeHitDiceSmallest");
-    else if ( this.target === "largest" ) denomination = game.i18n.localize("DND5E.ConsumeHitDiceLargest");
+    if (this.target === "smallest") denomination = game.i18n.localize("DND5E.ConsumeHitDiceSmallest");
+    else if (this.target === "largest") denomination = game.i18n.localize("DND5E.ConsumeHitDiceLargest");
     else denomination = this.target;
     const available = (["smallest", "largest"].includes(this.target)
       ? this.actor.system.attributes?.hd?.value : this.actor.system.attributes?.hd?.bySize?.[this.target]) ?? 0;

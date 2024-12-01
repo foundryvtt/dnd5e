@@ -2217,7 +2217,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       // Otherwise, locate a class (if any) which has an available hit die of the requested denomination
       else cls = this.system.attributes.hd.classes.find(i => {
-        return (i.system.hd.denomination === config.denomination) && (i.system.hd.value);
+        return (i.system.hd.denomination === config.denomination) && i.system.hd.value;
       });
 
       // If no class is available, display an error notification

@@ -30,7 +30,7 @@ export default class HitDice {
    * @type {number}
    */
   get value() {
-    if ( this.#value ) return this.#value;
+    if ( this.#value !== undefined ) return this.#value;
     this.#value = this.classes.reduce((acc, cls) => acc + cls.system.hd.value, 0);
     return this.#value;
   }
@@ -44,7 +44,7 @@ export default class HitDice {
    * @type {number}
    */
   get max() {
-    if ( this.#max ) return this.#max;
+    if ( this.#max !== undefined ) return this.#max;
     this.#max = this.classes.reduce((acc, cls) => acc + cls.system.hd.max, 0);
     return this.#max;
   }

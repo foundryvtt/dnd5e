@@ -100,8 +100,8 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
     const rollData = this.parent.getRollData({ deterministic: true });
     SpellcastingField.prepareData.call(this, rollData);
     this.hd.additional = this.hd.additional ? Roll.create(this.hd.additional, rollData).evaluateSync().total : 0;
-    this.hd.max = this.levels + this.hd.additional;
-    this.hd.value = this.hd.max - this.hd.spent;
+    this.hd.max = Math.max(this.levels + this.hd.additional, 0);
+    this.hd.value = Math.max(this.hd.max - this.hd.spent, 0);
   }
 
   /* -------------------------------------------- */
@@ -131,16 +131,9 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  static migrateData(source) {
-    super.migrateData(source);
-    ClassData.#migrateHitDice(source);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    ClassData.#migrateHitDice(source);
     ClassData.#migrateLevels(source);
     ClassData.#migrateSpellcastingData(source);
   }
