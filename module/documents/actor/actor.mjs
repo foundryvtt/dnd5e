@@ -2210,14 +2210,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else {
       // If no denomination was provided, choose the first available
       if ( !config.denomination ) {
-        cls = this.system.attributes.hd.classes.find(c => c.system.hitDiceUsed < c.system.levels);
+        cls = this.system.attributes.hd.classes.find(c => c.system.hd.value);
         if ( !cls ) return null;
-        config.denomination = cls.system.hitDice;
+        config.denomination = cls.system.hd.denomination;
       }
 
       // Otherwise, locate a class (if any) which has an available hit die of the requested denomination
       else cls = this.system.attributes.hd.classes.find(i => {
-        return (i.system.hitDice === config.denomination) && (i.system.hitDiceUsed < i.system.levels);
+        return (i.system.hd.denomination === config.denomination) && i.system.hd.value;
       });
 
       // If no class is available, display an error notification
@@ -2270,7 +2270,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const updates = { actor: {}, class: {} };
     if ( rollConfig.modifyHitDice !== false ) {
-      if ( cls ) updates.class["system.hitDiceUsed"] = cls.system.hitDiceUsed + 1;
+      if ( cls ) updates.class["system.hd.spent"] = cls.system.hd.spent + 1;
       else updates.actor["system.attributes.hd.spent"] = this.system.attributes.hd.spent + 1;
     }
     const hp = this.system.attributes.hp;
@@ -2331,7 +2331,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async rollClassHitPoints(item, { chatMessage=true }={}) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
     const rollData = {
-      formula: `1${item.system.hitDice}`,
+      formula: `1${item.system.hd.denomination}`,
       data: item.getRollData(),
       chatMessage
     };
