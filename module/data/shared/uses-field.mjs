@@ -207,17 +207,14 @@ export default class UsesField extends SchemaField {
       messageConfig.create = hookData.chatMessage;
     }
 
-    const createMessage = messageConfig.create !== false;
-    messageConfig.create = false;
-    const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
+    const rolls = await CONFIG.Dice.BasicRoll.buildConfigure(rollConfig, dialogConfig, messageConfig);
+    await CONFIG.Dice.BasicRoll.buildEvaluate(rolls, rollConfig, messageConfig);
     if ( !rolls.length ) return;
-    if ( createMessage ) {
-      messageConfig.data.flavor = game.i18n.format("DND5E.ItemRechargeCheck", {
-        name: this.name,
-        result: game.i18n.localize(`DND5E.ItemRecharge${rolls[0].isSuccess ? "Success" : "Failure"}`)
-      });
-      await CONFIG.Dice.BasicRoll.toMessage(rolls, messageConfig.data, { rollMode: messageConfig.rollMode });
-    }
+    messageConfig.data.flavor = game.i18n.format("DND5E.ItemRechargeCheck", {
+      name: this.name,
+      result: game.i18n.localize(`DND5E.ItemRecharge${rolls[0].isSuccess ? "Success" : "Failure"}`)
+    });
+    await CONFIG.Dice.BasicRoll.buildPost(rolls, rollConfig, messageConfig);
 
     const updates = {};
     if ( rolls[0].isSuccess ) {
