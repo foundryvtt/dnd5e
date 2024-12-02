@@ -844,8 +844,11 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Wait to apply appropriate element heights until after the chat log has completed its initial batch render.
+   * @param {HTMLElement|jQuery} html
    */
-  static onRenderChatLog() {
+  static onRenderChatLog(html) {
+    if ( game.release.generation < 13 ) [html] = html;
+    if ( game.user.isGM ) html.dataset.gmUser = "";
     if ( !game.settings.get("dnd5e", "autoCollapseItemCards") ) {
       requestAnimationFrame(() => {
         // FIXME: Allow time for transitions to complete. Adding a transitionend listener does not appear to work, so
