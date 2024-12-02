@@ -2,7 +2,7 @@ import { simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
 
-const { SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data model for a check activity.
@@ -13,6 +13,7 @@ const { SchemaField, SetField, StringField } = foundry.data.fields;
  * @property {object} check.dc
  * @property {string} check.dc.calculation   Method or ability used to calculate the difficulty class of the check.
  * @property {string} check.dc.formula       Custom DC formula or flat value.
+ * @property {boolean} check.visible         Should this check be displayed to all players?
  */
 export default class CheckActivityData extends BaseActivityData {
   /** @inheritDoc */
@@ -25,7 +26,8 @@ export default class CheckActivityData extends BaseActivityData {
         dc: new SchemaField({
           calculation: new StringField(),
           formula: new FormulaField({ deterministic: true })
-        })
+        }),
+        visible: new BooleanField({ initial: true })
       })
     };
   }

@@ -19,10 +19,6 @@ export default class SummonSheet extends ActivitySheet {
   /** @inheritDoc */
   static PARTS = {
     ...super.PARTS,
-    identity: {
-      template: "systems/dnd5e/templates/activity/summon-identity.hbs",
-      templates: super.PARTS.identity.templates
-    },
     effect: {
       template: "systems/dnd5e/templates/activity/summon-effect.hbs",
       templates: [
@@ -86,6 +82,19 @@ export default class SummonSheet extends ActivitySheet {
       (lhs.name || lhs.document?.name || "").localeCompare(rhs.name || rhs.document?.name || "", game.i18n.lang)
     );
 
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareIdentityContext(context) {
+    context = await super._prepareIdentityContext(context);
+    context.behaviorFields.push({
+      field: context.fields.summon.fields.prompt,
+      value: context.source.summon.prompt,
+      input: context.inputs.createCheckboxInput
+    });
     return context;
   }
 
