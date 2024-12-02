@@ -28,7 +28,9 @@
         </div>
     </div>
 
+    {{#if source.hd.additional}}
     {{ formGroup fields.hd.fields.additional value=source.hd.additional localize=true }}
+    {{/if}}
 </fieldset>
 
 <fieldset>
