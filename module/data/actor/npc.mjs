@@ -221,9 +221,12 @@ export default class NPCData extends CreatureTemplate {
     let custom;
     if ( ("details" in source) && ("source" in source.details) ) {
       if ( foundry.utils.getType(source.details?.source) === "string" ) custom = source.details.source;
-      else source.source = source.details.source;
+      else source.source = { ...(source.source ?? {}), ...source.details.source };
     }
-    if ( custom ) source.source = { custom };
+    if ( custom ) {
+      source.source ??= {};
+      source.source.custom = custom;
+    }
   }
 
   /* -------------------------------------------- */
