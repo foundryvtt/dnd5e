@@ -391,6 +391,15 @@ export class ActorDataModel extends SystemDataModel {
     data.prof.deterministic = deterministic;
     return data;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reset combat-related uses.
+   * @param {Set<string>} periods              Which recovery periods should be considered.
+   * @param {{ actor: {}, item: [] }} updates  Updates to perform on the actor and containing items.
+   */
+  async recoverCombatUses(periods, updates) {}
 }
 
 /* -------------------------------------------- */
