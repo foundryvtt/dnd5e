@@ -357,8 +357,8 @@ export default class Advancement extends BaseAdvancement {
     if ( !source ) return null;
     const { _stats } = game.items.fromCompendium(source);
     return source.clone({
+      _stats,
       _id: id ?? foundry.utils.randomID(),
-      _stats: _stats,
       "flags.dnd5e.sourceId": uuid,
       "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
     }, {keepId: true}).toObject();
