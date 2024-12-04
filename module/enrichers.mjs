@@ -118,8 +118,10 @@ async function enrichAttack(config, label, options) {
   if ( label ) return createRollLink(label, config);
 
   const span = document.createElement("span");
+  span.className = "roll-link-group";
+  _addDataset(span, config);
   span.innerHTML = game.i18n.format(`EDITOR.DND5E.Inline.Attack${config.format === "long" ? "Long" : "Short"}`, {
-    formula: createRollLink(simplifyRollFormula(config.formula), config).outerHTML
+    formula: createRollLink(simplifyRollFormula(config.formula)).outerHTML
   });
   return span;
 }
@@ -985,7 +987,7 @@ async function rollAction(event) {
  * @returns {Promise|void}
  */
 async function rollAttack(event) {
-  const target = event.target.closest(".roll-link");
+  const target = event.target.closest(".roll-link-group");
   const { formula } = target.dataset;
 
   const targets = getTargetDescriptors();
