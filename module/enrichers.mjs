@@ -15,7 +15,7 @@ export function registerCustomEnrichers() {
     "attack", "award", "check", "concentration", "damage", "healing", "item", "save", "skill", "tool"
   ];
   CONFIG.TextEditor.enrichers.push({
-    pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")}) (?<config>[^\\]]+)]](?:{(?<label>[^}]+)})?`, "gi"),
+    pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> [^\\]]+)?]](?:{(?<label>[^}]+)})?`, "gi"),
     enricher: enrichString
   },
   {
@@ -72,10 +72,10 @@ async function enrichString(match, options) {
  *                                            If set to `true` then an array of configs will be returned.
  * @returns {object|object[]}
  */
-function parseConfig(match, { multiple=false }={}) {
+function parseConfig(match="", { multiple=false }={}) {
   if ( multiple ) return match.split("&").map(s => parseConfig(s));
   const config = { _config: match, values: [] };
-  for ( const part of match.match(/(?:[^\s"]+|"[^"]*")+/g) ) {
+  for ( const part of match.match(/(?:[^\s"]+|"[^"]*")+/g) ?? [] ) {
     if ( !part ) continue;
     const [key, value] = part.split("=");
     const valueLower = value?.toLowerCase();
@@ -106,12 +106,56 @@ function parseConfig(match, { multiple=false }={}) {
  *   <i class="fa-solid fa-dice-d20" inert></i> +5
  * </a>
  * ```
+ *
+ * @example Create an attack link using a specific attack mode:
+ * ```[[/attack +5]]``` or ```[[/attack formula=5 attackMode=thrown]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="attack" data-formula="+5" data-attack-mode="thrown">
+ *   <i class="fa-solid fa-dice-d20" inert></i> +5
+ * </a>
+ * ```
+ *
+ * @example Link an enricher to an attack activity, either explicitly or automatically
+ * ```[[/attack activity=RLQlsLo5InKHZadn]]``` or ```[[/attack]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="attack" data-formula="+8" data-activity-uuid="...uuid...">
+ *   <i class="fa-solid fa-dice-d20" inert"></i> +8
+ * </a>
+ * ```
  */
 async function enrichAttack(config, label, options) {
+  if ( config.activity && config.formula ) {
+    console.warn(`Activity ID and formula found while enriching ${config._input}, only one is supported.`);
+    return null;
+  }
+
   const formulaParts = [];
   if ( config.formula ) formulaParts.push(config.formula);
-  for ( const value of config.values ) formulaParts.push(value);
+  for ( const value of config.values ) {
+    if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
+    else formulaParts.push(value);
+  }
   config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+
+  const activity = config.activity ? options.relativeTo?.system.activities?.get(config.activity)
+    : !config.formula ? options.relativeTo?.system.activities?.getByType("attack")[0] : null;
+
+  if ( activity ) {
+    config.activityUuid = activity.uuid;
+    const attackConfig = activity.getAttackData({ attackMode: config.attackMode });
+    config.formula = simplifyRollFormula(
+      Roll.defaultImplementation.replaceFormulaData(attackConfig.parts.join(" + "), attackConfig.data)
+    );
+    delete config.activity;
+  }
+
+  if ( !config.activityUuid && !config.formula ) {
+    console.warn(`No formula or linked activity found while enriching ${config._input}.`);
+    return null;
+  }
+
   if ( !config.formula.startsWith("+") && !config.formula.startsWith("-") ) config.formula = `+${config.formula}`;
   config.type = "attack";
 
@@ -411,6 +455,17 @@ async function enrichSave(config, label, options) {
  *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 1d6</span> cold
  * </a>
  * ```
+ *
+ * @example Link an enricher to an damage activity, either explicitly or automatically
+ * ```[[/damage activity=RLQlsLo5InKHZadn]]``` or ```[[/damage]]```
+ * becomes
+ * ```html
+ * <a class="roll-link-group" data-type="damage" data-formulas="1d6&1d6" data-damage-types="fire&cold"
+ *    data-activity-uuid="...">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 1d6</span> fire and
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 1d6</span> cold
+ * </a>
+ * ```
  */
 async function enrichDamage(configs, label, options) {
   const config = { type: "damage", formulas: [], damageTypes: [], rollType: configs._isHealing ? "healing" : "damage" };
@@ -421,6 +476,7 @@ async function enrichDamage(configs, label, options) {
     for ( const value of c.values ) {
       if ( value in CONFIG.DND5E.damageTypes ) c.type = value;
       else if ( value in CONFIG.DND5E.healingTypes ) c.type = value;
+      else if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
       else if ( value === "average" ) config.average = true;
       else if ( value === "temp" ) c.type = "temphp";
       else formulaParts.push(value);
@@ -433,6 +489,39 @@ async function enrichDamage(configs, label, options) {
     }
   }
   config.damageTypes = config.damageTypes.map(t => t.replace("/", "|"));
+
+  if ( config.activity && config.formulas?.length ) {
+    console.warn(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`);
+    return null;
+  }
+
+  let activity = options.relativeTo?.system.activities?.get(config.activity);
+  if ( !activity && !config.formula ) {
+    for ( const a of options.relativeTo?.system.activities?.getByTypes("attack", "damage", "save") ?? [] ) {
+      if ( a.damage.parts.length ) {
+        activity = a;
+        break;
+      }
+    }
+  }
+
+  if ( activity ) {
+    config.activityUuid = activity.uuid;
+    const damageConfig = activity.getDamageConfig({ attackMode: config.attackMode });
+    for ( const roll of damageConfig.rolls ) {
+      config.formulas.push(simplifyRollFormula(
+        Roll.defaultImplementation.replaceFormulaData(roll.parts.join(" + "), roll.data)
+      ));
+      config.damageTypes.push(roll.options.types?.join("|") ?? roll.options.type);
+    }
+    delete config.activity;
+  }
+
+  if ( !config.activityUuid && !config.formula ) {
+    console.warn(`No formula or linked activity found while enriching ${config._input}.`);
+    return null;
+  }
+
   const formulas = config.formulas.join("&");
   const damageTypes = config.damageTypes.join("&");
 
@@ -988,11 +1077,16 @@ async function rollAction(event) {
  */
 async function rollAttack(event) {
   const target = event.target.closest(".roll-link-group");
-  const { formula } = target.dataset;
+  const { activityUuid, attackMode, formula } = target.dataset;
+
+  if ( activityUuid ) {
+    const activity = await fromUuid(activityUuid);
+    if ( activity ) return activity.rollAttack({ attackMode, event });
+  }
 
   const targets = getTargetDescriptors();
   const rollConfig = {
-    event,
+    attackMode, event,
     hookNames: ["attack", "d20Test"],
     rolls: [{
       parts: [formula.replace(/^\s*\+\s*/, "")],
@@ -1035,12 +1129,18 @@ async function rollAttack(event) {
  */
 async function rollDamage(event) {
   const target = event.target.closest(".roll-link-group");
-  let { formulas, damageTypes, rollType } = target.dataset;
+  let { activityUuid, attackMode, formulas, damageTypes, rollType } = target.dataset;
+
+  if ( activityUuid ) {
+    const activity = await fromUuid(activityUuid);
+    if ( activity ) return activity.rollDamage({ attackMode, event });
+  }
+
   formulas = formulas.split("&");
   damageTypes = damageTypes.split("&");
 
   const rollConfig = {
-    event,
+    attackMode, event,
     hookNames: ["damage"],
     rolls: formulas.map((formula, idx) => {
       const types = damageTypes[idx]?.split("|") ?? [];
