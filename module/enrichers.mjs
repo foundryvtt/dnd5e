@@ -1,6 +1,7 @@
 import { formatNumber, getSceneTargets, getTargetDescriptors, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
 import AttackRollConfigurationDialog from "./applications/dice/attack-configuration-dialog.mjs";
+import simplifyRollFormula from "./dice/simplify-roll-formula.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import { rollItem } from "./documents/macro.mjs";
 
@@ -91,13 +92,13 @@ function parseConfig(match) {
  * @param {object} config              Configuration data.
  * @param {string} [label]             Optional label to replace default text.
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
- * @returns {HTMLElement|null}         An HTML link if the save could be built, otherwise null.}
+ * @returns {HTMLElement|null}         An HTML link if the attack could be built, otherwise null.
  *
  * @example Create an attack link using a fixed to hit:
  * ```[[/attack +5]]``` or ```[[/attack formula=5]]```
  * becomes
  * ```html
- * <a class="roll-action" data-roll-action="attack" data-formula="+5">
+ * <a class="roll-action" data-type="attack" data-formula="+5">
  *   <i class="fa-solid fa-dice-d20" inert></i> +5
  * </a>
  * ```
@@ -114,7 +115,7 @@ async function enrichAttack(config, label, options) {
 
   const span = document.createElement("span");
   span.innerHTML = game.i18n.format(`EDITOR.DND5E.Inline.Attack${config.format === "long" ? "Long" : "Short"}`, {
-    formula: createRollLink(config.formula, config).outerHTML
+    formula: createRollLink(simplifyRollFormula(config.formula), config).outerHTML
   });
   return span;
 }
