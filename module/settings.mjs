@@ -210,6 +210,21 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  // Use initiative scores for NPCs
+  game.settings.register("dnd5e", "initiativeScore", {
+    name: "SETTINGS.DND5E.INITIATIVESCORE.Name",
+    hint: "SETTINGS.DND5E.INITIATIVESCORE.Hint",
+    scope: "world",
+    config: true,
+    default: "none",
+    type: String,
+    choices: {
+      none: "SETTINGS.DND5E.INITIATIVESCORE.None",
+      npcs: "SETTINGS.DND5E.INITIATIVESCORE.NPCs",
+      all: "SETTINGS.DND5E.INITIATIVESCORE.All"
+    }
+  });
+
   // Record Currency Weight
   game.settings.register("dnd5e", "currencyWeight", {
     name: "SETTINGS.5eCurWtN",

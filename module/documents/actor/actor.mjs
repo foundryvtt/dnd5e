@@ -606,6 +606,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
       + (flags.initiativeAlert && isLegacy ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
+    init.score = 10 + init.total;
   }
 
   /* -------------------------------------------- */
@@ -2024,8 +2025,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * @typedef {D20RollOptions} InitiativeRollOptions
-   * @param {D20Roll.ADV_MODE} [advantageMode]  A specific advantage mode to apply.
-   * @property {string} [flavor]                Special flavor text to apply to the created message.
+   * @property {D20Roll.ADV_MODE} [advantageMode]  A specific advantage mode to apply.
+   * @property {number} [fixed]                    Fixed initiative value to use rather than rolling.
+   * @property {string} [flavor]                   Special flavor text to apply to the created message.
    */
 
   /**
@@ -2038,8 +2040,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this._cachedInitiativeRoll ) return this._cachedInitiativeRoll.clone();
     const config = this.getInitiativeRollConfig(options);
     if ( !config ) return null;
-    const formula = ["1d20"].concat(config.parts).join(" + ");
-    return new CONFIG.Dice.D20Roll(formula, config.data, config.options);
+
+    // Create a normal D20 roll
+    if ( config.options?.fixed === undefined ) {
+      const formula = ["1d20"].concat(config.parts).join(" + ");
+      return new CONFIG.Dice.D20Roll(formula, config.data, config.options);
+    }
+
+    // Create a basic roll with the fixed score
+    return new CONFIG.Dice.BasicRoll(String(config.options.fixed), config.data, config.options);
   }
 
   /* -------------------------------------------- */
@@ -2075,7 +2084,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
     if ( tiebreaker && Number.isNumeric(ability?.value) ) parts.push(String(ability.value / 100));
 
+    // Fixed initiative score
+    const scoreMode = game.settings.get("dnd5e", "initiativeScore");
+    const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && (this.type === "npc"));
+
     options = foundry.utils.mergeObject({
+      fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? game.i18n.localize("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
       maximum: init.roll.max,
@@ -2101,7 +2115,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Roll initiative for this Actor with a dialog that provides an opportunity to elect advantage or other bonuses.
    * @param {Partial<InitiativeRollOptions>} [rollOptions={}]  Options forwarded to the Actor#getInitiativeRoll method.
-   * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor
+   * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor.
    */
   async rollInitiativeDialog(rollOptions={}) {
     const config = {
@@ -2112,13 +2126,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       subject: this
     };
     if ( !config.rolls[0] ) return;
-    const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
-    const message = { rollMode: game.settings.get("core", "rollMode") };
-    const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, message);
-    if ( !rolls.length ) return;
 
-    // Temporarily cache the configured roll and use it to roll initiative for the Actor
-    this._cachedInitiativeRoll = rolls[0];
+    // Display the roll configuration dialog
+    if ( config.rolls[0].options?.fixed === undefined ) {
+      const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
+      const message = { rollMode: game.settings.get("core", "rollMode") };
+      const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, message);
+      if ( !rolls.length ) return;
+      this._cachedInitiativeRoll = rolls[0];
+    }
+
+    // Just create a basic roll with the fixed score
+    else {
+      const { data, options } = config.rolls[0];
+      this._cachedInitiativeRoll = new CONFIG.Dice.BasicRoll(String(options.fixed), data, options);
+    }
+
     await this.rollInitiative({ createCombatants: true });
   }
 
