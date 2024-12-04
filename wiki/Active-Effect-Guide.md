@@ -93,7 +93,7 @@ E.g. an Item or potion that sets an ability score to a set value, if the value d
 
 | Attribute Key                    | Change Mode | Effect Value | Roll Data? |
 | -------------------------------- | ----------- | ------------ | ---------- |
-| `system.bonuses.abilities.skill` | Add         | `[formula]`  | Yes        |
+| `system.bonuses.abilities.check` | Add         | `[formula]`  | Yes        |
 
 ### Bonus to All Saving Throws
 
@@ -296,12 +296,12 @@ system.bonuses.msak.attack
 > <details>
 > <summary>Attack Roll Types</summary>
 >
-> | Movement Type        | Value  |
+> | Attack Roll Type     | Value  |
 > | -------------------- | ------ |
-> | Melee Spell attack   | `msak` |
 > | Melee Weapon attack  | `mwak` |
-> | Ranged Spell attack  | `rsak` |
 > | Ranged Weapon attack | `rwak` |
+> | Melee Spell attack   | `msak` |
+> | Ranged Spell attack  | `rsak` |
 >
 > Source: `CONFIG.DND5E.itemActionTypes`
 > </details>
@@ -335,12 +335,12 @@ system.bonuses.msak.damage
 > <details>
 > <summary>Attack Roll Types</summary>
 >
-> | Movement Type        | Value  |
+> | Attack Roll Type     | Value  |
 > | -------------------- | ------ |
-> | Melee Spell attack   | `msak` |
 > | Melee Weapon attack  | `mwak` |
-> | Ranged Spell attack  | `rsak` |
 > | Ranged Weapon attack | `rwak` |
+> | Melee Spell attack   | `msak` |
+> | Ranged Spell attack  | `rsak` |
 >
 > Source: `CONFIG.DND5E.itemActionTypes`
 > </details>
