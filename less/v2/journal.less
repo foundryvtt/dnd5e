@@ -251,7 +251,7 @@
     }
   }
 
-  a:is(.content-link, .inline-roll), :is(.roll-link, .reference-link) a {
+  a:is(.content-link, .inline-roll), a.roll-link-group .roll-link, :is(.roll-link-group, .reference-link) a {
     background: transparent;
     border: none;
     text-decoration: underline currentcolor;
@@ -277,6 +277,7 @@
 
     &:focus-visible { text-shadow: 0 0 8px var(--color-shadow-primary); }
   }
+  a.roll-link-group:hover { text-shadow: none; }
 
   a.enricher-action {
     text-decoration: none;
@@ -291,7 +292,7 @@
     }
   }
 
-  .roll-link a > i.fa-dice-d20, a.inline-roll > i.fa-dice-d20 {
+  .roll-link > i.fa-dice-d20, a.inline-roll > i.fa-dice-d20 {
     display: inline-block;
     width: 1em;
     height: 1em;
