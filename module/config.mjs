@@ -2720,6 +2720,31 @@ preLocalize("attackClassifications", { key: "label" });
 /* -------------------------------------------- */
 
 /**
+ * Attack modes available for weapons.
+ * @enum {string}
+ */
+DND5E.attackModes = Object.seal({
+  oneHanded: {
+    label: "DND5E.ATTACK.Mode.OneHanded"
+  },
+  twoHanded: {
+    label: "DND5E.ATTACK.Mode.TwoHanded"
+  },
+  offhand: {
+    label: "DND5E.ATTACK.Mode.Offhand"
+  },
+  thrown: {
+    label: "DND5E.ATTACK.Mode.Thrown"
+  },
+  "thrown-offhand": {
+    label: "DND5E.ATTACK.Mode.ThrownOffhand"
+  }
+});
+preLocalize("attackModes", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
  * Types of attacks based on range.
  * @enum {{ label: string }}
  */
