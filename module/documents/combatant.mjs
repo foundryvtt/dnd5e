@@ -19,12 +19,11 @@ export default class Combatant5e extends Combatant {
      * A hook event that fires before combat-related recovery changes.
      * @function dnd5e.preCombatRecovery
      * @memberof hookEvents
-     * @param {Combatant5e} combatant     Combatant that is being recovered.
-     * @param {object} data
-     * @param {Set<string>} data.periods  Periods to be recovered.
-     * @returns {boolean}                 Explicitly return `false` to prevent recovery from being performed.
+     * @param {Combatant5e} combatant  Combatant that is being recovered.
+     * @param {Set<string>} periods    Periods to be recovered.
+     * @returns {boolean}              Explicitly return `false` to prevent recovery from being performed.
      */
-    if ( Hooks.call("dnd5e.preCombatRecovery", this, { periods }) === false ) return;
+    if ( Hooks.call("dnd5e.preCombatRecovery", this, periods) === false ) return;
 
     const updates = { actor: {}, item: [] };
     await this.actor?.system.recoverCombatUses?.(periods, updates);
@@ -37,13 +36,12 @@ export default class Combatant5e extends Combatant {
      * applied to the actor.
      * @function dnd5e.combatRecovery
      * @memberof hookEvents
-     * @param {Combatant5e} combatant              Combatant that is being recovered.
-     * @param {object} data
-     * @param {Set<string>} data.periods           Periods that were recovered.
-     * @param {{ actor: object, item: object[] }}  Update that will be applied to the actor and their items.
-     * @returns {boolean}                          Explicitly return `false` to prevent updates from being performed.
+     * @param {Combatant5e} combatant                      Combatant that is being recovered.
+     * @param {Set<string>} periods                        Periods that were recovered.
+     * @param {{ actor: object, item: object[] }} updates  Update that will be applied to the actor and its items.
+     * @returns {boolean}  Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.combatRecovery", this, { periods, updates }) === false ) return;
+    if ( Hooks.call("dnd5e.combatRecovery", this, periods, updates) === false ) return;
 
     if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);
     if ( updates.item.length ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
@@ -55,11 +53,10 @@ export default class Combatant5e extends Combatant {
      * A hook event that fires after combat-related recovery changes have been applied.
      * @function dnd5e.postCombatRecovery
      * @memberof hookEvents
-     * @param {Combatant5e} combatant     Combatant that is being recovered.
-     * @param {object} data
-     * @param {Set<string>} data.periods  Periods that were recovered.
+     * @param {Combatant5e} combatant  Combatant that is being recovered.
+     * @param {Set<string>} periods    Periods that were recovered.
      */
-    Hooks.callAll("dnd5e.postCombatRecovery", this, { periods });
+    Hooks.callAll("dnd5e.postCombatRecovery", this, periods);
   }
 
   /* -------------------------------------------- */
