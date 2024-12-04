@@ -1,4 +1,4 @@
-import { filteredKeys, simplifyBonus } from "../../utils.mjs";
+import { filteredKeys, formatNumber, simplifyBonus } from "../../utils.mjs";
 import Dialog5e from "../api/dialog.mjs";
 
 const { BooleanField, NumberField, StringField } = foundry.data.fields;
@@ -239,15 +239,44 @@ export default class ActivityUsageDialog extends Dialog5e {
     context.fields = [];
     context.notes = [];
 
+    const containsLegendaryConsumption = this.activity.consumption.targets
+      .find(t => (t.type === "attribute") && (t.target === "resources.legact.value"));
+    if ( (this.activity.activation.type === "legendary") && this.actor.system.resources?.legact
+      && this._shouldDisplay("consume.action") && !containsLegendaryConsumption ) {
+      const pr = new Intl.PluralRules(game.i18n.lang);
+      const value = (this.config.consume !== false) && (this.config.consume?.action !== false);
+      const warn = (this.actor.system.resources.legact.value < this.activity.activation.value) && value;
+      context.fields.push({
+        field: new BooleanField({
+          label: game.i18n.format("DND5E.CONSUMPTION.Type.Action.Prompt", {
+            type: game.i18n.localize("DND5E.LegAct")
+          }),
+          hint: game.i18n.format("DND5E.CONSUMPTION.Type.Action.PromptHint", {
+            available: game.i18n.format(
+              `DND5E.ACTIVATION.Type.Legendary.Counted.${pr.select(this.actor.system.resources.legact.value)}`,
+              { number: `<strong>${formatNumber(this.actor.system.resources.legact.value)}</strong>` }
+            ),
+            cost: game.i18n.format(
+              `DND5E.ACTIVATION.Type.Legendary.Counted.${pr.select(this.activity.activation.value)}`,
+              { number: `<strong>${formatNumber(this.activity.activation.value)}</strong>` }
+            )
+          })
+        }),
+        input: context.inputs.createCheckboxInput,
+        name: "consume.action",
+        value, warn
+      });
+    }
+
     if ( this.activity.requiresSpellSlot && this.activity.consumption.spellSlot
-      && this._shouldDisplay("consume.spellSlot") && !this.config.cause ) context.spellSlot = {
+      && this._shouldDisplay("consume.spellSlot") && !this.config.cause ) context.fields.push({
       field: new BooleanField({ label: game.i18n.localize("DND5E.SpellCastConsume") }),
+      input: context.inputs.createCheckboxInput,
       name: "consume.spellSlot",
       value: this.config.consume?.spellSlot
-    };
+    });
 
     if ( this._shouldDisplay("consume.resources") ) {
-      context.resources = [];
       const addResources = (targets, keyPath) => {
         const consume = foundry.utils.getProperty(this.config, keyPath);
         const isArray = foundry.utils.getType(consume) === "Array";
@@ -256,7 +285,7 @@ export default class ActivityUsageDialog extends Dialog5e {
             || (!isArray && (consume !== false) && (this.config.consume !== false));
           const { label, hint, notes, warn } = target.getConsumptionLabels(this.config, value);
           if ( notes?.length ) context.notes.push(...notes);
-          context.resources.push({
+          context.fields.push({
             field: new BooleanField({ label, hint }),
             input: context.inputs.createCheckboxInput,
             name: `${keyPath}.${index}`,
@@ -269,7 +298,7 @@ export default class ActivityUsageDialog extends Dialog5e {
       if ( context.linkedActivity ) addResources(context.linkedActivity.consumption.targets, "cause.resources");
     }
 
-    context.hasConsumption = context.spellSlot || context.resources;
+    context.hasConsumption = context.fields.length > 0;
 
     return context;
   }

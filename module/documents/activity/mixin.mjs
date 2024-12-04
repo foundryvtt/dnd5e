@@ -2,7 +2,7 @@ import ActivitySheet from "../../applications/activity/activity-sheet.mjs";
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
-import { getTargetDescriptors } from "../../utils.mjs";
+import { formatNumber, getTargetDescriptors } from "../../utils.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
@@ -141,6 +141,8 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    * @property {boolean} concentration.begin         Should this usage initiate concentration?
    * @property {string|null} concentration.end       ID of an active effect to end concentration on.
    * @property {object|false} consume
+   * @property {boolean} consume.action              Should action economy be tracked? Currently only handles
+   *                                                 legendary actions.
    * @property {boolean|number[]} consume.resources  Set to `true` or `false` to enable or disable all resource
    *                                                 consumption or provide a list of consumption target indexes
    *                                                 to only enable those targets.
@@ -608,13 +610,16 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     }
 
     if ( config.consume !== false ) {
+      const hasActionConsumption = this.activation.type === "legendary";
       const hasResourceConsumption = this.consumption.targets.length > 0;
       const hasLinkedConsumption = linked?.consumption.targets.length > 0;
       const hasSpellSlotConsumption = this.requiresSpellSlot && this.consumption.spellSlot;
       config.consume ??= {};
+      config.consume.action ??= hasActionConsumption;
       config.consume.resources ??= hasResourceConsumption;
       config.consume.spellSlot ??= !linked && hasSpellSlotConsumption;
-      config.hasConsumption = hasResourceConsumption || hasLinkedConsumption || (!linked && hasSpellSlotConsumption);
+      config.hasConsumption = hasActionConsumption || hasResourceConsumption || hasLinkedConsumption
+        || (!linked && hasSpellSlotConsumption);
     }
 
     const levelingFlag = this.item.getFlag("dnd5e", "spellLevel");
@@ -714,6 +719,29 @@ export default Base => class extends PseudoDocumentMixin(Base) {
     const updates = { activity: {}, actor: {}, create: [], delete: [], item: [], rolls: [] };
     if ( config.consume === false ) return updates;
     const errors = [];
+
+    // Handle action economy
+    if ( ((config.consume === true) || config.consume.action) && (this.activation.type === "legendary") ) {
+      const containsLegendaryConsumption = this.consumption.targets
+        .find(t => (t.type === "attribute") && (t.target === "resources.legact.value"));
+      const count = this.activation.value ?? 1;
+      const legendary = this.actor.system.resources?.legact;
+      if ( legendary && !containsLegendaryConsumption ) {
+        let message;
+        if ( legendary.value === 0 ) message = "DND5E.ACTIVATION.Warning.NoActions";
+        else if ( count > legendary.value ) message = "DND5E.ACTIVATION.Warning.NotEnoughActions";
+        if ( message ) {
+          const err = new ConsumptionError(game.i18n.format(message, {
+            type: game.i18n.localize("DND5E.LegAct"),
+            required: formatNumber(count),
+            available: formatNumber(legendary.value)
+          }));
+          errors.push(err);
+        } else {
+          updates.actor["system.resources.legact.value"] = legendary.value - count;
+        }
+      }
+    }
 
     // Handle consumption targets
     if ( (config.consume === true) || config.consume.resources ) {
