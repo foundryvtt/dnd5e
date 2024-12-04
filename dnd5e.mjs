@@ -120,6 +120,9 @@ Hooks.once("init", function() {
     delete DND5E.languages.exotic.children.cant;
     DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
     delete DND5E.languages.exotic.children.druidic;
+
+    // Stunned stops movement in legacy.
+    DND5E.conditionEffects.noMovement.add("stunned");
   }
 
   // Register Roll Extensions
