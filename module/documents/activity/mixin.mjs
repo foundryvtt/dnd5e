@@ -730,15 +730,15 @@ export default Base => class extends PseudoDocumentMixin(Base) {
         let message;
         if ( legendary.value === 0 ) message = "DND5E.ACTIVATION.Warning.NoActions";
         else if ( count > legendary.value ) message = "DND5E.ACTIVATION.Warning.NotEnoughActions";
-        if ( !message ) {
-          updates.actor["system.resources.legact.value"] = legendary.value - count;
-        } else {
+        if ( message ) {
           const err = new ConsumptionError(game.i18n.format(message, {
             type: game.i18n.localize("DND5E.LegAct"),
             required: formatNumber(count),
             available: formatNumber(legendary.value)
           }));
           errors.push(err);
+        } else {
+          updates.actor["system.resources.legact.value"] = legendary.value - count;
         }
       }
     }
