@@ -1501,7 +1501,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       let newItemData = transformAll ? await transformAll(item, o) : item;
       if ( transformFirst && (depth === 0) ) newItemData = await transformFirst(newItemData, o);
       if ( !newItemData ) return;
-      if ( newItemData instanceof Item ) newItemData = newItemData.toObject();
+      if ( newItemData instanceof Item ) newItemData = game.items.fromCompendium(newItemData, {
+        clearSort: false, keepId: true, clearOwnership: false
+      });
       foundry.utils.mergeObject(newItemData, {"system.container": containerId} );
       if ( !keepId ) newItemData._id = foundry.utils.randomID();
 
