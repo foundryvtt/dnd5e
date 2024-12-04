@@ -539,6 +539,10 @@
     "Unarmed": "Unarmed",
     "Weapon": "Weapon"
   },
+  "Formatted": {
+    "2014": "{type} {classification} Attack",
+    "2024": "{type} Attack Roll"
+  },
   "Mode": {
     "Label": "Attack Mode",
     "Offhand": "Offhand",
@@ -2540,6 +2544,10 @@
         "hint": "Value of the range in the specified units, if applicable."
       }
     }
+  },
+  "Formatted": {
+    "Range": "range {range}",
+    "Reach": "reach {reach}"
   }
 },
 
@@ -3569,11 +3577,13 @@
 
 "EDITOR.DND5E.Inline": {
   "ApplyStatus": "Apply Status to Selected Tokens",
+  "AttackExtended": "<em>{type}</em>: {parts}",
   "AttackLong": "{formula} to hit",
   "AttackShort": "{formula}",
   "AwardEach": "{award} each",
   "CheckShort": "{check}",
   "CheckLong": "{check} check",
+  "DamageExtended": "<em>Hit:</em> {damage} damage",
   "DamageDouble": "{first} plus {second}",
   "DamageShort": "{formula} {type}",
   "DamageLong": "{average} ({formula}) {type}",
