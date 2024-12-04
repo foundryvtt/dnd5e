@@ -455,7 +455,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( spell.getFlag("dnd5e", "cachedFor") ) {
         s = "item";
         if ( !spell.system.linkedActivity?.displayInSpellbook ) return;
-        if ( !spellbook[s] ) registerSection(null, s, game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook"));
+        if ( !spellbook[s] ) {
+          registerSection(null, s, game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook"));
+          spellbook[s].order = 1000;
+        }
       }
 
       // Specialized spellcasting modes (if they exist)
