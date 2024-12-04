@@ -359,17 +359,17 @@ async function enrichSave(config, label, options) {
  * ```[[/damage 2d6 type=bludgeoning]]``
  * becomes
  * ```html
- * <a class="roll-action" data-type="damage" data-formula="2d6" data-damage-type="bludgeoning">
- *   <i class="fa-solid fa-dice-d20"></i> 2d6
- * </a> bludgeoning
+ * <a class="roll-link-group" data-type="damage" data-formulas="2d6" data-damage-types="bludgeoning">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 2d6</span> bludgeoning
+ * </a>
  * ````
  *
  * @example Display the average:
  * ```[[/damage 2d6 type=bludgeoning average=true]]``
  * becomes
  * ```html
- * 7 (<a class="roll-action" data-type="damage" data-formula="2d6" data-damage-type="bludgeoning">
- *   <i class="fa-solid fa-dice-d20"></i> 2d6
+ * 7 (<a class="roll-link-group" data-type="damage" data-formulas="2d6" data-damage-types="bludgeoning">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 2d6</span>
  * </a>) bludgeoning
  * ````
  *
@@ -377,8 +377,8 @@ async function enrichSave(config, label, options) {
  * ```[[/damage 8d4dl force average=666]]``
  * becomes
  * ```html
- * 666 (<a class="roll-action" data-type="damage" data-formula="8d4dl" data-damage-type="force">
- *   <i class="fa-solid fa-dice-d20"></i> 8d4dl
+ * 666 (<a class="roll-link-group" data-type="damage" data-formulas="8d4dl" data-damage-types="force">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 8d4dl</span>
  * </a> force
  * ````
  *
@@ -386,9 +386,28 @@ async function enrichSave(config, label, options) {
  * ```[[/healing 2d6]]``` or ```[[/damage 2d6 healing]]```
  * becomes
  * ```html
- * <a class="roll-action" data-type="damage" data-formula="2d6" data-damage-type="healing">
- *   <i class="fa-solid fa-dice-d20"></i> 2d6
+ * <a class="roll-link-group" data-type="damage" data-formulas="2d6" data-damage-types="healing">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 2d6</span>
  * </a> healing
+ * ```
+ *
+ * @example Specify variable damage types:
+ * ```[[/damage 2d6 type=fire|cold]]``` or ```[[/damage 2d6 type=fire/cold]]```
+ * becomes
+ * ```html
+ * <a class="roll-link-group" data-type="damage" data-formulas="2d6" data-damage-types="fire|cold">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 2d6</span>
+ * </a> fire or cold
+ * ```
+ *
+ * @example Add multiple damage parts
+ * ```[[/damage 1d6 fire & 1d6 cold]]```
+ * becomes
+ * ```html
+ * <a class="roll-link-group" data-type="damage" data-formulas="1d6&1d6" data-damage-types="fire&cold">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 1d6</span> fire and
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 1d6</span> cold
+ * </a>
  * ```
  */
 async function enrichDamage(configs, label, options) {
@@ -411,6 +430,7 @@ async function enrichDamage(configs, label, options) {
       config.damageTypes.push(c.type);
     }
   }
+  config.damageTypes = config.damageTypes.map(t => t.replace("/", "|"));
   const formulas = config.formulas.join("&");
   const damageTypes = config.damageTypes.join("&");
 
@@ -448,7 +468,7 @@ async function enrichDamage(configs, label, options) {
   const link = document.createElement("a");
   link.className = "roll-link-group";
   _addDataset(link, { ...config, formulas, damageTypes });
-  if ( config.average && parts.length === 2 ) {
+  if ( config.average && (parts.length === 2) ) {
     link.innerHTML = game.i18n.format("EDITOR.DND5E.Inline.DamageDouble", { first: parts[0], second: parts[1] });
   } else {
     link.innerHTML = game.i18n.getListFormatter().format(parts);
@@ -806,8 +826,8 @@ function createRequestLink(label, dataset) {
   const span = document.createElement("span");
   span.classList.add("roll-link-group");
   _addDataset(span, dataset);
-  if (label instanceof HTMLElement) span.insertAdjacentElement("afterbegin", label);
-  else span.insertAdjacentHTML("afterbegin", label);
+  if ( label instanceof HTMLElement ) span.insertAdjacentElement("afterbegin", label);
+  else span.append(label);
 
   // Add chat request link for GMs
   if ( game.user.isGM ) {
@@ -816,7 +836,7 @@ function createRequestLink(label, dataset) {
     gmLink.dataset.action = "request";
     gmLink.dataset.tooltip = "EDITOR.DND5E.Inline.RequestRoll";
     gmLink.setAttribute("aria-label", game.i18n.localize(gmLink.dataset.tooltip));
-    gmLink.innerHTML = '<i class="fa-solid fa-comment-dots"></i>';
+    gmLink.insertAdjacentHTML("afterbegin", '<i class="fa-solid fa-comment-dots"></i>');
     span.insertAdjacentElement("beforeend", gmLink);
   }
 
@@ -837,7 +857,8 @@ function createRequestLink(label, dataset) {
 function createRollLink(label, dataset={}, { classes="roll-link", tag="a" }={}) {
   const link = document.createElement(tag);
   link.className = classes;
-  link.innerHTML = `<i class="fa-solid fa-dice-d20" inert></i>${label}`;
+  link.insertAdjacentHTML("afterbegin", '<i class="fa-solid fa-dice-d20" inert></i>');
+  link.append(label);
   _addDataset(link, dataset);
   return link;
 }
