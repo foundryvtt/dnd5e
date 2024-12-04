@@ -469,7 +469,7 @@ export default class NPCData extends CreatureTemplate {
 
         // Initiative (e.g. `+0 (10)`)
         initiative: `${formatNumber(this.attributes.init.mod, { signDisplay: "always" })} (${
-          formatNumber(this.attributes.init.mod + 10)})`, // TODO: Prepare passive initiative during data prep
+          formatNumber(this.attributes.init.score)})`,
 
         // Languages (e.g. `Common, Draconic`)
         languages: prepareTrait(this.traits.languages, "languages") || game.i18n.localize("None"),
@@ -483,7 +483,7 @@ export default class NPCData extends CreatureTemplate {
             ...splitSemicolons(this.attributes.senses.special)
           ].sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang))),
           `${game.i18n.localize("DND5E.PassivePerception")} ${formatNumber(this.skills.prc.passive)}`
-        ].filter(_ => _).join("; "),
+        ].filterJoin("; "),
 
         // Skills (e.g. `Perception +17, Stealth +7`)
         skills: formatter.format(
@@ -551,7 +551,7 @@ export default class NPCData extends CreatureTemplate {
       if ( category in context.actionSections ) {
         const description = (await TextEditor.enrichHTML(item.system.description.value, {
           secrets: false, rollData: item.getRollData(), relativeTo: item
-        })).replace(/^\s*<p>/, "").replace(/<\/p>\s*$/, "");
+        })).replace(/^\s*<p>/g, "").replace(/<\/p>\s*$/g, "");
         // TODO: Add standard uses to item names (e.g. `Recharge 5-6`, `1/day`, etc.)
         context.actionSections[category].actions.push({ name: item.name, description });
       }
