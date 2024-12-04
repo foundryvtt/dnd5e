@@ -221,7 +221,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
      * @memberof hookEvents
      * @param {D20Roll[]} rolls                        The resulting rolls.
      * @param {object} data
-     * @param {AttackActivity} data.subject            The Activity that performed the attack.
+     * @param {AttackActivity|null} data.subject       The Activity that performed the attack.
      * @param {AmmunitionUpdate|null} data.ammoUpdate  Any updates related to ammo consumption for this attack.
      */
     Hooks.callAll("dnd5e.rollAttackV2", rolls, { subject: this, ammoUpdate });
@@ -257,9 +257,9 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
      * A hook event that fires after an attack has been rolled and ammunition has been consumed.
      * @function dnd5e.postRollAttack
      * @memberof hookEvents
-     * @param {D20Roll[]} rolls              The resulting rolls.
+     * @param {D20Roll[]} rolls                   The resulting rolls.
      * @param {object} data
-     * @param {AttackActivity} data.subject  The activity that performed the attack.
+     * @param {AttackActivity|null} data.subject  The activity that performed the attack.
      */
     Hooks.callAll("dnd5e.postRollAttack", rolls, { subject: this });
 
