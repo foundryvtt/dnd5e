@@ -262,17 +262,18 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the base weapons and tools based on the selected type.
+   * @param {object} [context]        Sheet preparation context.
    * @returns {Promise<object|null>}  Object with base items for this type formatted for selectOptions.
    * @protected
    */
-  async _getItemBaseTypes() {
+  async _getItemBaseTypes(context) {
     const baseIds = this.item.type === "equipment" ? {
       ...CONFIG.DND5E.armorIds,
       ...CONFIG.DND5E.shieldIds
     } : CONFIG.DND5E[`${this.item.type}Ids`];
     if ( baseIds === undefined ) return null;
 
-    const baseType = this.item.system.type.value;
+    const baseType = context?.source.type.value ?? this.item.system.type.value;
 
     const items = {};
     for ( const [name, id] of Object.entries(baseIds) ) {
