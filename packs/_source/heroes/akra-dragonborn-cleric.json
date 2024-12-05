@@ -133,7 +133,7 @@
     },
     "details": {
       "biography": {
-        "value": "<p>A devout follower of her deity and of her society's customs, Akra feels somewhat out of place adventuring in foreign lands. But she feels bound to do everything in her power to bring peace to the region.</p><p><em>Token artwork by </em><a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\"><em>Forgotten Adventures</em></a><em>.</em></p><p><em>Token artwork by </em><a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\"><em>Forgotten Adventures</em></a><em>.</em></p><p>\n        <em>\n          Token artwork by\n          <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a>.\n        </em>      \n      </p>",
+        "value": "<p>A devout follower of her deity and of her society's customs, Akra feels somewhat out of place adventuring in foreign lands. But she feels bound to do everything in her power to bring peace to the region.</p>",
         "public": ""
       },
       "alignment": "Lawful Good",
@@ -600,18 +600,18 @@
       },
       {
         "type": "item",
-        "id": ".Item.VzRjr9MANyWjqydG",
-        "sort": 893750
-      },
-      {
-        "type": "item",
         "id": ".Item.hutWJTfurJjNbSpG",
-        "sort": 896875
+        "sort": 1450000
       },
       {
         "type": "item",
         "id": ".Item.b4NGPmLUcMECcA3O",
-        "sort": 898438
+        "sort": 1500000
+      },
+      {
+        "type": "item",
+        "id": ".Item.iLKpfoGF7rGpvNWD",
+        "sort": 1400000
       }
     ],
     "bastion": {
@@ -3264,207 +3264,6 @@
       "_key": "!actors.items!kfzBL0q1Y7LgGs2x.7LkXyfHK37OCjMp2"
     },
     {
-      "name": "Mace",
-      "type": "weapon",
-      "img": "icons/weapons/maces/mace-flanged-steel.webp",
-      "system": {
-        "description": {
-          "value": "<p>A heavy metal head mounted to the end of a sturdy haft meant to deliver powerful, crushing blows capable of shattering armor and bone alike.</p>",
-          "chat": ""
-        },
-        "source": {
-          "custom": "",
-          "book": "SRD 5.1",
-          "page": "",
-          "license": "CC-BY-4.0",
-          "rules": "2014",
-          "revision": 1
-        },
-        "quantity": 1,
-        "weight": {
-          "value": 4,
-          "units": "lb"
-        },
-        "price": {
-          "value": 5,
-          "denomination": "gp"
-        },
-        "attunement": "",
-        "equipped": true,
-        "rarity": "",
-        "identified": true,
-        "cover": null,
-        "range": {
-          "value": null,
-          "long": null,
-          "units": "ft",
-          "reach": null
-        },
-        "uses": {
-          "max": "",
-          "recovery": [],
-          "spent": 0
-        },
-        "damage": {
-          "versatile": {
-            "number": null,
-            "denomination": null,
-            "bonus": "",
-            "types": [],
-            "custom": {
-              "enabled": false,
-              "formula": ""
-            },
-            "scaling": {
-              "mode": "",
-              "number": null,
-              "formula": ""
-            }
-          },
-          "base": {
-            "number": 1,
-            "denomination": 6,
-            "bonus": "",
-            "types": [
-              "bludgeoning"
-            ],
-            "custom": {
-              "enabled": false,
-              "formula": ""
-            },
-            "scaling": {
-              "mode": "",
-              "number": null,
-              "formula": ""
-            }
-          }
-        },
-        "armor": {
-          "value": 10
-        },
-        "hp": {
-          "value": 0,
-          "max": 0,
-          "dt": null,
-          "conditions": ""
-        },
-        "properties": [],
-        "proficient": null,
-        "type": {
-          "value": "simpleM",
-          "baseItem": "mace"
-        },
-        "unidentified": {
-          "description": ""
-        },
-        "container": null,
-        "crewed": false,
-        "magicalBonus": null,
-        "activities": {
-          "dnd5eactivity000": {
-            "_id": "dnd5eactivity000",
-            "type": "attack",
-            "activation": {
-              "type": "action",
-              "value": 1,
-              "condition": "",
-              "override": false
-            },
-            "consumption": {
-              "targets": [],
-              "scaling": {
-                "allowed": false,
-                "max": ""
-              },
-              "spellSlot": true
-            },
-            "description": {
-              "chatFlavor": ""
-            },
-            "duration": {
-              "concentration": false,
-              "value": "",
-              "units": "",
-              "special": "",
-              "override": false
-            },
-            "effects": [],
-            "range": {
-              "value": "5",
-              "units": "ft",
-              "special": "",
-              "override": false
-            },
-            "target": {
-              "template": {
-                "count": "",
-                "contiguous": false,
-                "type": "",
-                "size": "",
-                "width": "",
-                "height": "",
-                "units": ""
-              },
-              "affects": {
-                "count": "",
-                "type": "",
-                "choice": false,
-                "special": ""
-              },
-              "prompt": true,
-              "override": false
-            },
-            "attack": {
-              "ability": "",
-              "bonus": "",
-              "critical": {
-                "threshold": null
-              },
-              "flat": false,
-              "type": {
-                "value": "melee",
-                "classification": "weapon"
-              }
-            },
-            "damage": {
-              "critical": {
-                "bonus": ""
-              },
-              "includeBase": true,
-              "parts": []
-            },
-            "uses": {
-              "spent": 0,
-              "recovery": []
-            },
-            "sort": 0
-          }
-        },
-        "attuned": false,
-        "ammunition": {},
-        "identifier": "mace"
-      },
-      "effects": [],
-      "folder": "MLMTCAvKsuFE3vYA",
-      "ownership": {
-        "default": 0
-      },
-      "flags": {},
-      "_stats": {
-        "duplicateSource": null,
-        "compendiumSource": "Compendium.dnd5e.items.Item.Ajyq6nGwF7FtLhDQ",
-        "coreVersion": "12.331",
-        "systemId": "dnd5e",
-        "systemVersion": "4.1.0",
-        "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
-      },
-      "_id": "VzRjr9MANyWjqydG",
-      "sort": 0,
-      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.VzRjr9MANyWjqydG"
-    },
-    {
       "name": "Bedroll",
       "type": "loot",
       "img": "icons/sundries/survival/bedroll-grey.webp",
@@ -4200,7 +3999,7 @@
         "lastModifiedBy": null
       },
       "_id": "hutWJTfurJjNbSpG",
-      "sort": 0,
+      "sort": 300000,
       "_key": "!actors.items!kfzBL0q1Y7LgGs2x.hutWJTfurJjNbSpG"
     },
     {
@@ -7320,6 +7119,207 @@
       "_id": "4u9a0tOYl5CJYyZI",
       "sort": 0,
       "_key": "!actors.items!kfzBL0q1Y7LgGs2x.4u9a0tOYl5CJYyZI"
+    },
+    {
+      "_id": "iLKpfoGF7rGpvNWD",
+      "name": "Mace",
+      "type": "weapon",
+      "img": "icons/weapons/maces/mace-flanged-steel.webp",
+      "system": {
+        "description": {
+          "value": "<p>A heavy metal head mounted to the end of a sturdy haft meant to deliver powerful, crushing blows capable of shattering armor and bone alike.</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 4,
+          "units": "lb"
+        },
+        "price": {
+          "value": 5,
+          "denomination": "gp"
+        },
+        "attunement": "",
+        "rarity": "",
+        "identified": true,
+        "cover": null,
+        "range": {
+          "value": null,
+          "long": null,
+          "units": "ft",
+          "reach": null
+        },
+        "uses": {
+          "max": "",
+          "recovery": [],
+          "spent": 0
+        },
+        "damage": {
+          "versatile": {
+            "number": null,
+            "denomination": null,
+            "bonus": "",
+            "types": [],
+            "custom": {
+              "enabled": false,
+              "formula": ""
+            },
+            "scaling": {
+              "mode": "",
+              "number": null,
+              "formula": ""
+            }
+          },
+          "base": {
+            "number": 1,
+            "denomination": 6,
+            "bonus": "",
+            "types": [
+              "bludgeoning"
+            ],
+            "custom": {
+              "enabled": false,
+              "formula": ""
+            },
+            "scaling": {
+              "mode": "",
+              "number": null,
+              "formula": ""
+            }
+          }
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [],
+        "proficient": null,
+        "type": {
+          "value": "simpleM",
+          "baseItem": "mace"
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "crewed": false,
+        "magicalBonus": null,
+        "activities": {
+          "dnd5eactivity000": {
+            "_id": "dnd5eactivity000",
+            "type": "attack",
+            "activation": {
+              "type": "action",
+              "value": 1,
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scaling": {
+                "allowed": false,
+                "max": ""
+              },
+              "spellSlot": true
+            },
+            "description": {
+              "chatFlavor": ""
+            },
+            "duration": {
+              "concentration": false,
+              "value": "",
+              "units": "",
+              "special": "",
+              "override": false
+            },
+            "effects": [],
+            "range": {
+              "value": "5",
+              "units": "ft",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": "",
+                "contiguous": false,
+                "type": "",
+                "size": "",
+                "width": "",
+                "height": "",
+                "units": ""
+              },
+              "affects": {
+                "count": "",
+                "type": "",
+                "choice": false,
+                "special": ""
+              },
+              "prompt": true,
+              "override": false
+            },
+            "attack": {
+              "ability": "",
+              "bonus": "",
+              "critical": {
+                "threshold": null
+              },
+              "flat": false,
+              "type": {
+                "value": "melee",
+                "classification": "weapon"
+              }
+            },
+            "damage": {
+              "critical": {
+                "bonus": ""
+              },
+              "includeBase": true,
+              "parts": []
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": []
+            },
+            "sort": 0
+          }
+        },
+        "ammunition": {},
+        "identifier": "mace",
+        "attuned": false,
+        "equipped": true
+      },
+      "effects": [],
+      "folder": "MLMTCAvKsuFE3vYA",
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {},
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.dnd5e.items.Item.Ajyq6nGwF7FtLhDQ",
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.1.0",
+        "createdTime": null,
+        "modifiedTime": null,
+        "lastModifiedBy": null
+      },
+      "_key": "!actors.items!kfzBL0q1Y7LgGs2x.iLKpfoGF7rGpvNWD"
     }
   ],
   "effects": [],
@@ -7339,7 +7339,7 @@
     "systemId": "dnd5e",
     "systemVersion": "4.1.0",
     "createdTime": 1725036842807,
-    "modifiedTime": 1731306544995,
+    "modifiedTime": 1733416372014,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!kfzBL0q1Y7LgGs2x"
