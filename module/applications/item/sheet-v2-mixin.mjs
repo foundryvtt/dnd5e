@@ -111,7 +111,6 @@ export default function ItemSheetV2Mixin(Base) {
         user: game.user,
 
         // Physical items
-        baseItems: await this._getItemBaseTypes(),
         isPhysical: "quantity" in this.item.system,
 
         // Identified state
@@ -135,6 +134,9 @@ export default function ItemSheetV2Mixin(Base) {
       const { description, identified, schema, unidentified, validProperties } = this.item.system;
       context.fields = schema.fields;
       if ( !context.editable ) context.source = context.system;
+
+      // Physical items
+      context.baseItems = await this._getItemBaseTypes(context);
 
       // Set some default collapsed states on first open.
       if ( foundry.utils.isEmpty(this._collapsed) ) Object.assign(this._collapsed, {
