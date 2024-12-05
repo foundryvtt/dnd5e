@@ -45,6 +45,7 @@ async function enrichString(match, options) {
   let { type, config, label } = match.groups;
   config = parseConfig(config, { multiple: ["damage", "healing"].includes(type) });
   config._input = match[0];
+  config._rules = _getRulesVersion(options);
   switch ( type.toLowerCase() ) {
     case "attack": return enrichAttack(config, label, options);
     case "award": return enrichAward(config, label, options);
@@ -88,6 +89,20 @@ function parseConfig(match="", { multiple=false }={}) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Determine the appropriate rules version based on the provided document or system setting.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {string}
+ */
+function _getRulesVersion(options) {
+  // Select from actor data first, then item data, and then fall back to system setting
+  return options.relativeTo?.parent?.system?.source?.rules
+    || options.relativeTo?.system?.source?.rules
+    || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014");
+}
+
+/* -------------------------------------------- */
 /*  Attack Enricher                             */
 /* -------------------------------------------- */
 
@@ -116,13 +131,25 @@ function parseConfig(match="", { multiple=false }={}) {
  * </a>
  * ```
  *
- * @example Link an enricher to an attack activity, either explicitly or automatically
+ * @example Link an enricher to an attack activity, either explicitly or automatically:
  * ```[[/attack activity=RLQlsLo5InKHZadn]]``` or ```[[/attack]]```
  * becomes
  * ```html
  * <a class="roll-action" data-type="attack" data-formula="+8" data-activity-uuid="...uuid...">
  *   <i class="fa-solid fa-dice-d20" inert"></i> +8
  * </a>
+ * ```
+ *
+ * @example Display the full attack section:
+ * ```[[/attack format=extended]]``` or ```[[/attack extended]]```
+ * becomes
+ * ```html
+ * <span class="attack-extended">
+ *   <em>Melee Attack Roll</em>:
+ *   <span class="roll-link-group" data-type="attack" data-formula="+16" data-activity-uuid="...uuid...">
+ *     <a class="roll-link"><i class="fa-solid fa-dice-d20" inert"></i> +16</a>
+ *   </span>, reach 15 ft
+ * </span>
  * ```
  */
 async function enrichAttack(config, label, options) {
@@ -135,6 +162,7 @@ async function enrichAttack(config, label, options) {
   if ( config.formula ) formulaParts.push(config.formula);
   for ( const value of config.values ) {
     if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
+    else if ( value === "extended" ) config.format = "extended";
     else formulaParts.push(value);
   }
   config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
@@ -156,17 +184,38 @@ async function enrichAttack(config, label, options) {
     return null;
   }
 
-  if ( !config.formula.startsWith("+") && !config.formula.startsWith("-") ) config.formula = `+${config.formula}`;
   config.type = "attack";
-
   if ( label ) return createRollLink(label, config);
+
+  let displayFormula = simplifyRollFormula(config.formula);
+  if ( !displayFormula.startsWith("+") && !displayFormula.startsWith("-") ) displayFormula = `+${displayFormula}`;
 
   const span = document.createElement("span");
   span.className = "roll-link-group";
   _addDataset(span, config);
-  span.innerHTML = game.i18n.format(`EDITOR.DND5E.Inline.Attack${config.format === "long" ? "Long" : "Short"}`, {
-    formula: createRollLink(simplifyRollFormula(config.formula)).outerHTML
+  span.innerHTML = game.i18n.format(`EDITOR.DND5E.Inline.Attack${config._rules === "2014" ? "Long" : "Short"}`, {
+    formula: createRollLink(displayFormula).outerHTML
   });
+
+  if ( config.format === "extended" ) {
+    const type = game.i18n.format(`DND5E.ATTACK.Formatted.${config._rules}`, {
+      type: game.i18n.getListFormatter({ type: "disjunction" }).format(
+        Array.from(activity?.validAttackTypes ?? []).map(t => CONFIG.DND5E.attackTypes[t]?.label)
+      ),
+      classification: CONFIG.DND5E.attackClassifications[activity?.attack.type.classification]?.label ?? ""
+    }).trim();
+    const parts = [span.outerHTML, activity?.getRangeLabel(config.attackMode)];
+
+    // TODO: Add targeting information (e.g. "one target") according to 2014 rules
+
+    const full = document.createElement("span");
+    full.className = "attack-extended";
+    full.innerHTML = game.i18n.format("EDITOR.DND5E.Inline.AttackExtended", {
+      type, parts: game.i18n.getListFormatter({ type: "unit" }).format(parts.filter(_ => _))
+    });
+    return full;
+  }
+
   return span;
 }
 
@@ -466,18 +515,33 @@ async function enrichSave(config, label, options) {
  *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 1d6</span> cold
  * </a>
  * ```
+ *
+ * @example Displaying the full hit section:
+ * ```[[/damage extended]]``
+ * becomes
+ * ```html
+ * <span class="damage-extended">
+ *   <em>Hit:</em>
+ *   <a class="roll-link-group" data-type="damage" data-formulas="2d6" data-damage-types="bludgeoning"
+ *      data-activity-uuid="...">
+ *     7 (<span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 2d6</span></a>) Bludgeoning damage
+ *   </a>
+ * </span>
+ * ````
  */
 async function enrichDamage(configs, label, options) {
   const config = { type: "damage", formulas: [], damageTypes: [], rollType: configs._isHealing ? "healing" : "damage" };
   for ( const c of configs ) {
     const formulaParts = [];
     if ( c.average ) config.average = c.average;
+    if ( c.format ) config.format = c.format;
     if ( c.formula ) formulaParts.push(c.formula);
     for ( const value of c.values ) {
       if ( value in CONFIG.DND5E.damageTypes ) c.type = value;
       else if ( value in CONFIG.DND5E.healingTypes ) c.type = value;
       else if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
       else if ( value === "average" ) config.average = true;
+      else if ( value === "extended" ) config.format = "extended";
       else if ( value === "temp" ) c.type = "temphp";
       else formulaParts.push(value);
     }
@@ -488,9 +552,10 @@ async function enrichDamage(configs, label, options) {
       config.damageTypes.push(c.type);
     }
   }
-  config.damageTypes = config.damageTypes.map(t => t.replace("/", "|"));
+  config.damageTypes = config.damageTypes.map(t => t?.replace("/", "|"));
+  if ( config.format === "extended" ) config.average ??= true;
 
-  if ( config.activity && config.formulas?.length ) {
+  if ( config.activity && config.formulas.length ) {
     console.warn(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`);
     return null;
   }
@@ -517,7 +582,7 @@ async function enrichDamage(configs, label, options) {
     delete config.activity;
   }
 
-  if ( !config.activityUuid && !config.formula ) {
+  if ( !config.activityUuid && !config.formulas.length ) {
     console.warn(`No formula or linked activity found while enriching ${config._input}.`);
     return null;
   }
@@ -536,8 +601,9 @@ async function enrichDamage(configs, label, options) {
       .filter(_ => _);
     const localizationData = {
       formula: createRollLink(formula, {}, { tag: "span" }).outerHTML,
-      type: game.i18n.getListFormatter({ type: "disjunction" }).format(types).toLowerCase()
+      type: game.i18n.getListFormatter({ type: "disjunction" }).format(types)
     };
+    if ( configs._rules === "2014" ) localizationData.type = localizationData.type.toLowerCase();
 
     let localizationType = "Short";
     if ( config.average ) {
@@ -564,6 +630,14 @@ async function enrichDamage(configs, label, options) {
   } else {
     link.innerHTML = game.i18n.getListFormatter().format(parts);
   }
+
+  if ( config.format === "extended" ) {
+    const span = document.createElement("span");
+    span.className = "damage-extended";
+    span.innerHTML = game.i18n.format("EDITOR.DND5E.Inline.DamageExtended", { damage: link.outerHTML });
+    return span;
+  }
+
   return link;
 }
 
@@ -1136,8 +1210,8 @@ async function rollDamage(event) {
     if ( activity ) return activity.rollDamage({ attackMode, event });
   }
 
-  formulas = formulas.split("&");
-  damageTypes = damageTypes.split("&");
+  formulas = formulas?.split("&") ?? [];
+  damageTypes = damageTypes?.split("&") ?? [];
 
   const rollConfig = {
     attackMode, event,
