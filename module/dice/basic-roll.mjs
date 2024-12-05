@@ -49,9 +49,10 @@ const { DiceTerm, NumericTerm } = foundry.dice.terms;
  * Configuration data for creating a roll message.
  *
  * @typedef {object} BasicRollMessageConfiguration
- * @property {boolean} [create=true]  Create a message when the rolling is complete.
- * @property {string} [rollMode]      The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
- * @property {object} [data={}]       Additional data used when creating the message.
+ * @property {boolean} [create=true]     Create a message when the rolling is complete.
+ * @property {ChatMessage5e} [document]  Final created chat message document once process is completed.
+ * @property {string} [rollMode]         The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
+ * @property {object} [data={}]          Additional data used when creating the message.
  */
 
 /* -------------------------------------------- */
@@ -114,7 +115,23 @@ export default class BasicRoll extends Roll {
    * @returns {BasicRoll[]}
    */
   static async build(config={}, dialog={}, message={}) {
-    const hookNames = [...(config.hookNames ?? []), ""];
+    const rolls = await this.buildConfigure(config, dialog, message);
+    await this.buildEvaluate(rolls, config, message);
+    await this.buildPost(rolls, config, message);
+    return rolls;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Stage one of the standard rolling workflow, configuring the roll.
+   * @param {BasicRollProcessConfiguration} [config={}]   Configuration for the rolls.
+   * @param {BasicRollDialogConfiguration} [dialog={}]    Configuration for roll prompt.
+   * @param {BasicRollMessageConfiguration} [message={}]  Configuration for message creation.
+   * @returns {BasicRoll[]}
+   */
+  static async buildConfigure(config={}, dialog={}, message={}) {
+    config.hookNames = [...(config.hookNames ?? []), ""];
 
     /**
      * A hook event that fires before a roll is performed. Multiple hooks may be called depending on the rolling
@@ -127,7 +144,7 @@ export default class BasicRoll extends Roll {
      * @param {BasicRollMessageConfiguration} message  Configuration data for the roll's message.
      * @returns {boolean}                              Explicitly return `false` to prevent the roll.
      */
-    for ( const hookName of hookNames ) {
+    for ( const hookName of config.hookNames ) {
       if ( Hooks.call(`dnd5e.preRoll${hookName.capitalize()}V2`, config, dialog, message) === false ) return [];
     }
 
@@ -153,23 +170,47 @@ export default class BasicRoll extends Roll {
      * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
      * @returns {boolean}                              Explicitly return `false` to prevent rolls.
      */
-    for ( const hookName of hookNames ) {
+    for ( const hookName of config.hookNames ) {
       const name = `dnd5e.post${hookName.capitalize()}RollConfiguration`;
       if ( Hooks.call(name, rolls, config, dialog, message) === false ) return [];
     }
 
-    if ( config.evaluate === false ) return rolls;
-    for ( const roll of rolls ) await roll.evaluate();
+    return rolls;
+  }
 
+  /* -------------------------------------------- */
+
+  /**
+   * Stage two of the standard rolling workflow, evaluating the rolls.
+   * @param {BasicRoll[]} rolls                           Rolls to evaluate.
+   * @param {BasicRollProcessConfiguration} [config={}]   Configuration for the rolls.
+   * @param {BasicRollMessageConfiguration} [message={}]  Configuration for message creation.
+   */
+  static async buildEvaluate(rolls, config={}, message={}) {
+    if ( config.evaluate !== false ) {
+      for ( const roll of rolls ) await roll.evaluate();
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Stage three of the standard rolling workflow, posting a message to chat.
+   * @param {BasicRoll[]} rolls                      Rolls to evaluate.
+   * @param {BasicRollProcessConfiguration} config   Configuration for the rolls.
+   * @param {BasicRollMessageConfiguration} message  Configuration for message creation.
+   * @returns {ChatMessage5e|void}
+   */
+  static async buildPost(rolls, config, message) {
     message.data = foundry.utils.expandObject(message.data ?? {});
     const messageId = config.event?.target.closest("[data-message-id]")?.dataset.messageId;
     if ( messageId ) foundry.utils.setProperty(message.data, "flags.dnd5e.originatingMessage", messageId);
 
-    if ( rolls?.length && (message.create !== false) ) {
-      await this.toMessage(rolls, message.data, { rollMode: message.rollMode });
+    if ( rolls?.length && (config.evaluate !== false) && (message.create !== false) ) {
+      message.document = await this.toMessage(rolls, message.data, { rollMode: message.rollMode });
     }
 
-    return rolls;
+    return message.document;
   }
 
   /* -------------------------------------------- */
