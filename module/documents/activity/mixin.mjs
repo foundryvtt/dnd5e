@@ -31,6 +31,7 @@ export default Base => class extends PseudoDocumentMixin(Base) {
    */
   static metadata = Object.freeze({
     name: "Activity",
+    label: "DOCUMENT.DND5E.Activity",
     sheetClass: ActivitySheet,
     usage: {
       actions: {},

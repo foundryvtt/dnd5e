@@ -1,6 +1,7 @@
-import AdvancementConfig from "../../applications/advancement/advancement-config.mjs";
+import AdvancementConfig from "../../applications/advancement/advancement-config-v2.mjs";
 import AdvancementFlow from "../../applications/advancement/advancement-flow.mjs";
 import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
+import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
  * Error that can be thrown during the advancement update preparation process.
@@ -19,7 +20,7 @@ class AdvancementError extends Error {
  * @param {object} [options={}]  Options which affect DataModel construction.
  * @abstract
  */
-export default class Advancement extends BaseAdvancement {
+export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
   constructor(data, {parent=null, ...options}={}) {
     if ( parent instanceof Item ) parent = parent.system;
     super(data, {parent, ...options});
@@ -77,6 +78,8 @@ export default class Advancement extends BaseAdvancement {
    */
   static get metadata() {
     return {
+      name: "Advancement",
+      label: "DOCUMENT.DND5E.Advancement",
       order: 100,
       icon: "icons/svg/upgrade.svg",
       typeIcon: "icons/svg/upgrade.svg",
@@ -91,56 +94,8 @@ export default class Advancement extends BaseAdvancement {
     };
   }
 
-  /**
-   * Configuration information for this advancement type.
-   * @type {AdvancementMetadata}
-   */
-  get metadata() {
-    return this.constructor.metadata;
-  }
-
   /* -------------------------------------------- */
   /*  Instance Properties                         */
-  /* -------------------------------------------- */
-
-  /**
-   * Unique identifier for this advancement within its item.
-   * @type {string}
-   */
-  get id() {
-    return this._id;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Globally unique identifier for this advancement.
-   * @type {string}
-   */
-  get uuid() {
-    return `${this.item.uuid}.Advancement.${this.id}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Item to which this advancement belongs.
-   * @type {Item5e}
-   */
-  get item() {
-    return this.parent.parent;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Actor to which this advancement's item belongs, if the item is embedded.
-   * @type {Actor5e|null}
-   */
-  get actor() {
-    return this.item.parent ?? null;
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -251,42 +206,7 @@ export default class Advancement extends BaseAdvancement {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Render all of the Application instances which are connected to this advancement.
-   * @param {boolean} [force=false]     Force rendering
-   * @param {object} [context={}]       Optional context
-   */
-  render(force=false, context={}) {
-    for ( const app of Object.values(this.apps) ) app.render(force, context);
-  }
-
-  /* -------------------------------------------- */
   /*  Editing Methods                             */
-  /* -------------------------------------------- */
-
-  /**
-   * Update this advancement.
-   * @param {object} updates          Updates to apply to this advancement.
-   * @returns {Promise<Advancement>}  This advancement after updates have been applied.
-   */
-  async update(updates) {
-    await this.item.updateAdvancement(this.id, updates);
-    return this;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Update this advancement's data on the item without performing a database commit.
-   * @param {object} updates  Updates to apply to this advancement.
-   * @returns {Advancement}   This advancement after updates have been applied.
-   */
-  updateSource(updates) {
-    super.updateSource(updates);
-    return this;
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -296,19 +216,6 @@ export default class Advancement extends BaseAdvancement {
    */
   static availableForItem(item) {
     return true;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Serialize salient information for this Advancement when dragging it.
-   * @returns {object}  An object of drag data.
-   */
-  toDragData() {
-    const dragData = { type: "Advancement" };
-    if ( this.id ) dragData.uuid = this.uuid;
-    else dragData.data = this.toObject();
-    return dragData;
   }
 
   /* -------------------------------------------- */

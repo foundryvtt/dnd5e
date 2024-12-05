@@ -36,6 +36,7 @@ export default Base => class extends Base {
    *
    * @typedef {object} PseudoDocumentsMetadata
    * @property {string} name        Base type name of this PseudoDocument (e.g. "Activity", "Advancement").
+   * @property {string} label       Localized name for this PseudoDocument type.
    */
 
   /**
@@ -246,6 +247,7 @@ export default Base => class extends Base {
   toDragData() {
     const dragData = { type: this.documentName, data: this.toObject() };
     if ( this.id ) dragData.uuid = this.uuid;
+    else dragData.data = this.toObject();
     return dragData;
   }
 
