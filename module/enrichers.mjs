@@ -552,10 +552,10 @@ async function enrichDamage(configs, label, options) {
       config.damageTypes.push(c.type);
     }
   }
-  config.damageTypes = config.damageTypes.map(t => t.replace("/", "|"));
+  config.damageTypes = config.damageTypes.map(t => t?.replace("/", "|"));
   if ( config.format === "extended" ) config.average ??= true;
 
-  if ( config.activity && config.formulas?.length ) {
+  if ( config.activity && config.formulas.length ) {
     console.warn(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`);
     return null;
   }
@@ -582,7 +582,7 @@ async function enrichDamage(configs, label, options) {
     delete config.activity;
   }
 
-  if ( !config.activityUuid && !config.formula ) {
+  if ( !config.activityUuid && !config.formulas.length ) {
     console.warn(`No formula or linked activity found while enriching ${config._input}.`);
     return null;
   }
@@ -1210,8 +1210,8 @@ async function rollDamage(event) {
     if ( activity ) return activity.rollDamage({ attackMode, event });
   }
 
-  formulas = formulas.split("&");
-  damageTypes = damageTypes.split("&");
+  formulas = formulas?.split("&") ?? [];
+  damageTypes = damageTypes?.split("&") ?? [];
 
   const rollConfig = {
     attackMode, event,

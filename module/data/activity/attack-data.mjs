@@ -371,7 +371,7 @@ export default class AttackActivityData extends BaseActivityData {
       if ( this.range.override ) range = `${this.range.value} ${this.range.units ?? ""}`;
       else {
         const { value, long, units } = this.item.system.range;
-        if ( value !== long ) range = `${value}/${long} ${units}`;
+        if ( long && (value !== long) ) range = `${value}/${long} ${units}`;
         else range = `${value} ${units}`;
       }
       parts.push(game.i18n.format("DND5E.RANGE.Formatted.Range", { range }));
