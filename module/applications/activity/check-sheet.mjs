@@ -67,4 +67,19 @@ export default class CheckSheet extends ActivitySheet {
 
     return context;
   }
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareIdentityContext(context) {
+    context = await super._prepareIdentityContext(context);
+    context.behaviorFields.push({
+      field: context.fields.check.fields.visible,
+      value: context.source.check.visible,
+      input: context.inputs.createCheckboxInput
+    });
+    return context;
+  }
 }

@@ -53,7 +53,7 @@ export default class SaveActivity extends ActivityMixin(SaveActivityData) {
           dc,
           ability: abilityId,
           action: "rollSave",
-          visibility: "all"
+          visibility: this.save.visible ? "all" : undefined
         }
       });
     }
