@@ -2,6 +2,7 @@ import * as Trait from "../../documents/actor/trait.mjs";
 import { formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
 import Tabs5e from "../tabs.mjs";
 import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
+import ItemSheet5e2 from "../item/item-sheet-2.mjs";
 
 /**
  * Adds common V2 Actor sheet functionality.
@@ -593,8 +594,9 @@ export default function ActorSheetV2Mixin(Base) {
       const item = this.actor.items.get(itemId);
 
       switch ( action ) {
-        case "edit": item?.sheet.render(true); break;
         case "delete": item?.deleteDialog(); break;
+        case "edit": item?.sheet.render(true, { mode: ItemSheet5e2.MODES.EDIT }); break;
+        case "view": item?.sheet.render(true, { mode: ItemSheet5e2.MODES.PLAY }); break;
       }
     }
 

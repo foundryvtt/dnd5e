@@ -46,7 +46,7 @@
         <ul class="containers unlist">
             {{#each containers}}
             <li class="container" data-item-id="{{ id }}">
-                <a class="item-action" data-action="edit" data-tooltip="{{ name }}" aria-label="{{ name }}">
+                <a class="item-action" data-action="view" data-tooltip="{{ name }}" aria-label="{{ name }}">
                     {{#dnd5e-itemContext this as |ctx|}}
                     {{#with ctx.capacity}}
                     <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
@@ -147,7 +147,7 @@
 
                         {{!-- Item Name --}}
                         <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
-                             data-action="{{#if (eq item.type "container")}}edit{{else}}use{{/if}}"
+                             data-action="{{#if (eq item.type "container")}}view{{else}}use{{/if}}"
                              aria-label="{{ item.name }}">
                             {{#if ctx.concentration}}
                             <i class="concentration fas fa-arrow-rotate-left fa-spin fa-spin-reverse"

@@ -134,6 +134,7 @@ export default function ItemSheetV2Mixin(Base) {
       context.inputs = { ...foundry.applications.fields, ...dnd5e.applications.fields };
       const { description, identified, schema, unidentified, validProperties } = this.item.system;
       context.fields = schema.fields;
+      if ( !context.editable ) context.source = context.system;
 
       // Set some default collapsed states on first open.
       if ( foundry.utils.isEmpty(this._collapsed) ) Object.assign(this._collapsed, {
@@ -148,7 +149,7 @@ export default function ItemSheetV2Mixin(Base) {
       context.tabs = this.constructor.TABS.reduce((tabs, { tab, label, condition }) => {
         if ( !condition || condition(this.item) ) tabs.push({
           tab, label,
-          classes: ["item", activeTab === tab ? "active" : null].filterJoin(" ")
+          classes: ["item", "interface-only", activeTab === tab ? "active" : null].filterJoin(" ")
         });
         return tabs;
       }, []);
@@ -174,7 +175,11 @@ export default function ItemSheetV2Mixin(Base) {
         object: Object.fromEntries((context.system.properties ?? []).map(p => [p, true])),
         options: (validProperties ?? []).reduce((arr, k) => {
           const { label } = CONFIG.DND5E.itemProperties[k];
-          arr.push({ label, value: k, selected: this.item._source.system.properties?.includes(k) });
+          arr.push({
+            label,
+            value: k,
+            selected: context.source.properties?.includes?.(k) ?? context.source.properties?.has?.(k)
+          });
           return arr;
         }, [])
       };
@@ -242,6 +247,24 @@ export default function ItemSheetV2Mixin(Base) {
       // Play mode only.
       if ( this._mode === this.constructor.MODES.PLAY ) {
         html.find(".sheet-header .item-image").on("click", this._onShowIcon.bind(this));
+        this._disableFields(this.form);
+      }
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Disable form fields that aren't marked with the `interface-only` class.
+     * @param {HTMLElement} form  The form element whose fields are being disabled.
+     */
+    _disableFields(form) {
+      const selector = `:is(${[
+        "INPUT", "SELECT", "TEXTAREA", "BUTTON", "DND5E-CHECKBOX", "COLOR-PICKER", "DOCUMENT-TAGS",
+        "FILE-PICKER", "HUE-SLIDER", "MULTI-SELECT", "PROSE-MIRROR", "RANGE-PICKER", "STRING-TAGS"
+      ].join(", ")}):not(.interface-only)`;
+      for ( const element of form.querySelectorAll(selector) ) {
+        if ( element.tagName === "TEXTAREA" ) element.readOnly = true;
+        else element.disabled = true;
       }
     }
 

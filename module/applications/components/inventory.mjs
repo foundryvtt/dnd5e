@@ -2,6 +2,7 @@ import Item5e from "../../documents/item.mjs";
 import {parseInputDelta} from "../../utils.mjs";
 import CurrencyManager from "../currency-manager.mjs";
 import ContextMenu5e from "../context-menu.mjs";
+import ItemSheet5e2 from "../item/item-sheet-2.mjs";
 
 /**
  * Custom element that handles displaying actor & container inventories.
@@ -424,8 +425,9 @@ export default class InventoryElement extends HTMLElement {
       case "duplicate":
         return item.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: item.name})}, {save: true});
       case "edit":
+        return item.sheet.render(true, { mode: ItemSheet5e2.MODES.EDIT });
       case "view":
-        return item.sheet.render(true);
+        return item.sheet.render(true, { mode: ItemSheet5e2.MODES.PLAY });
       case "equip":
         return item.update({"system.equipped": !item.system.equipped});
       case "expand":

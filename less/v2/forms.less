@@ -168,6 +168,7 @@
     align-items: center;
     gap: 4px;
 
+    &:has(input[type=checkbox]:disabled, dnd5e-checkbox[disabled]) { cursor: default; }
     > span { line-height: calc(var(--form-field-height) + 1px); }
   }
 
@@ -408,7 +409,7 @@
 
   select {
     height: var(--form-field-height);
-    cursor: pointer;
+    &:not(:disabled) { cursor: pointer; }
   }
 
   :is(document-tags, multi-select) .tags.input-element-tags .tag {
@@ -418,6 +419,12 @@
     background: var(--dnd5e-background-card);
     border-radius: 3px;
     &:hover a { text-shadow: 0 0 6px var(--color-shadow-primary); }
+  }
+
+  :is(document-tags, multi-select):has(select:disabled) .tags.input-element-tags .tag {
+    cursor: default;
+    a { cursor: default; }
+    &:hover a { text-shadow: none; }
   }
 
   multi-select.hidden-tags .tags.input-element-tags { display: none; }
@@ -474,7 +481,7 @@
   dnd5e-checkbox {
     &[disabled]:not([checked]) {
       --checkbox-border-color: var(--color-text-light-6);
-      --checkbox-empty-color: var(--color-text-light-6);
+      --checkbox-empty-color: transparent;
     }
   }
 
