@@ -187,7 +187,7 @@ export default class BasicRoll extends Roll {
    * @param {BasicRollMessageConfiguration} [message={}]  Configuration for message creation.
    */
   static async buildEvaluate(rolls, config={}, message={}) {
-    if ( (config.evaluate !== false) ) {
+    if ( config.evaluate !== false ) {
       for ( const roll of rolls ) await roll.evaluate();
     }
   }
@@ -207,10 +207,10 @@ export default class BasicRoll extends Roll {
     if ( messageId ) foundry.utils.setProperty(message.data, "flags.dnd5e.originatingMessage", messageId);
 
     if ( rolls?.length && (config.evaluate !== false) && (message.create !== false) ) {
-      message.created = await this.toMessage(rolls, message.data, { rollMode: message.rollMode });
+      message.document = await this.toMessage(rolls, message.data, { rollMode: message.rollMode });
     }
 
-    return message.created;
+    return message.document;
   }
 
   /* -------------------------------------------- */

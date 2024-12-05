@@ -179,16 +179,14 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
     }
 
-    const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
+    const rolls = await CONFIG.Dice.D20Roll.buildConfigure(rollConfig, dialogConfig, messageConfig);
+    await CONFIG.Dice.D20Roll.buildEvaluate(rolls, rollConfig, messageConfig);
     if ( !rolls.length ) return null;
-    if ( messageConfig.document ) {
-      const flags = {};
-      for ( const key of ["ammunition", "attackMode", "mastery"] ) {
-        if ( !rolls[0].options[key] ) continue;
-        foundry.utils.setProperty(flags, `dnd5e.roll.${key}`, rolls[0].options[key]);
-      }
-      if ( !foundry.utils.isEmpty(flags) ) messageConfig.document.update(flags);
+    for ( const key of ["ammunition", "attackMode", "mastery"] ) {
+      if ( !rolls[0].options[key] ) continue;
+      foundry.utils.setProperty(messageConfig.data, `flags.dnd5e.roll.${key}`, rolls[0].options[key]);
     }
+    await CONFIG.Dice.D20Roll.buildPost(rolls, rollConfig, messageConfig);
 
     const flags = {};
     let ammoUpdate = null;
