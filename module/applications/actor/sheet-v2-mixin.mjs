@@ -7,6 +7,7 @@ import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
  * Adds common V2 Actor sheet functionality.
  * @param {typeof ActorSheet5e} Base  The base class being mixed.
  * @returns {typeof ActorSheetV2}
+ * @mixin
  */
 export default function ActorSheetV2Mixin(Base) {
   return class ActorSheetV2 extends DocumentSheetV2Mixin(Base) {
