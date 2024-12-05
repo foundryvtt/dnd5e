@@ -446,6 +446,11 @@
   }
 }
 
+.chat-sidebar:not([data-gm-user]) .card-header[data-concealed] {
+  .summary { cursor: inherit; }
+  .fa-chevron-down, .details { display: none; }
+}
+
 .message {
   p.supplement {
     margin: 0;

@@ -884,7 +884,7 @@ export default function ActivityMixin(Base) {
         item: this.item,
         token: this.item.actor?.token,
         buttons: buttons.length ? buttons : null,
-        description: data.description.chat,
+        description: data.description,
         properties: properties.length ? properties : null,
         subtitle: this.description.chatFlavor || data.subtitle,
         supplements

@@ -535,7 +535,8 @@ export class ItemDataModel extends SystemDataModel {
         }),
         chat: await TextEditor.enrichHTML(chat ?? "", {
           rollData, relativeTo: this.parent, ...enrichmentOptions
-        })
+        }),
+        concealed: game.user.isGM && game.settings.get("dnd5e", "concealItemDescriptions") && !description.chat
       }
     };
 

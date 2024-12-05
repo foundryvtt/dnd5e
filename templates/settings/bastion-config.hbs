@@ -1,0 +1,15 @@
+<fieldset>
+    <legend>{{ localize "SETUP.Configuration" }}</legend>
+
+    {{!-- Enabled --}}
+    {{ formField fields.enabled name="bastionConfiguration.enabled" value=source.enabled
+                 input=inputs.createCheckboxInput localize=true rootId=partId }}
+
+    {{!-- Button --}}
+    {{ formField fields.button name="bastionConfiguration.button" value=source.button input=inputs.createCheckboxInput
+                 localize=true rootId=partId }}
+
+    {{!-- Duration --}}
+    {{ formField fields.duration name="bastionConfiguration.duration" value=source.duration localize=true
+                 rootId=partId }}
+</fieldset>
