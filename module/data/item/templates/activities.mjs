@@ -7,6 +7,7 @@ import UsesField from "../../shared/uses-field.mjs";
  * Data model template for items with activities.
  *
  * @property {ActivityCollection} activities  Activities on this item.
+ * @property {UsesData} uses                  Item's limited uses & recovery.
  * @mixin
  */
 export default class ActivitiesTemplate extends SystemDataModel {

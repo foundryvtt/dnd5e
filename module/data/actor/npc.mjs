@@ -576,13 +576,15 @@ export default class NPCData extends CreatureTemplate {
 
     for ( const item of this.parent.items ) {
       if ( !["feat", "weapon"].includes(item.type) ) continue;
-      const category = item.system.activities.contents[0]?.activation.type ?? "trait";
+      const category = item.system.activities?.contents[0]?.activation.type ?? "trait";
       if ( category in context.actionSections ) {
         const description = (await TextEditor.enrichHTML(item.system.description.value, {
           secrets: false, rollData: item.getRollData(), relativeTo: item
         })).replace(/^\s*<p>/g, "").replace(/<\/p>\s*$/g, "");
-        // TODO: Add standard uses to item names (e.g. `Recharge 5-6`, `1/day`, etc.)
-        context.actionSections[category].actions.push({ name: item.name, description, sort: item.sort });
+        const uses = item.system.uses.label || item.system.activities?.contents[0]?.uses.label;
+        context.actionSections[category].actions.push({
+          name: uses ? `${item.name} (${uses})` : item.name, description, sort: item.sort
+        });
       }
     }
     for ( const key of Object.keys(context.actionSections) ) {

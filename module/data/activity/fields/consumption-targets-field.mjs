@@ -315,7 +315,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Calculate updates to activity or item uses.
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
    * @param {object} options
-   * @param {UsesField} options.uses           Uses data to consume.
+   * @param {UsesData} options.uses            Uses data to consume.
    * @param {string} options.type              Type label to be used in warning messages.
    * @param {BasicRoll[]} options.rolls        Rolls performed as part of the usages.
    * @returns {{ spent: number, quantity: number }|null}
