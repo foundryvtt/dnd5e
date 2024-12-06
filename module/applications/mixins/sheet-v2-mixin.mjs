@@ -43,6 +43,11 @@ export default function DocumentSheetV2Mixin(Base) {
     _mode = this.constructor.MODES.PLAY;
 
     /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    static _customElements = super._customElements.concat(["dnd5e-checkbox", "proficiency-cycle", "slide-toggle"]);
+
+    /* -------------------------------------------- */
     /*  Rendering                                   */
     /* -------------------------------------------- */
 
