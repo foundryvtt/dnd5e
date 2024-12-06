@@ -74,15 +74,16 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
 
     // Targets
     context.targetTypes = [
-      ...Object.entries(CONFIG.DND5E.individualTargetTypes).map(([value, label]) => {
+      ...Object.entries(CONFIG.DND5E.individualTargetTypes).map(([value, { label }]) => {
         return { value, label, group: "DND5E.TargetTypeIndividual" };
       }),
       ...Object.entries(CONFIG.DND5E.areaTargetTypes).map(([value, { label }]) => {
         return { value, label, group: "DND5E.TargetTypeArea" };
       })
     ];
-    context.scalarTarget = !["", "self", "any"].includes(target?.affects?.type);
-    context.affectsPlaceholder = game.i18n.localize(`DND5E.Target${target?.template?.type ? "Every" : "Any"}`);
+    context.scalarTarget = target?.affects?.type
+      && (CONFIG.DND5E.individualTargetTypes[target.affects.type]?.scalar !== false);
+    context.affectsPlaceholder = game.i18n.localize(`DND5E.TARGET.Count.${target?.template?.type ? "Every" : "Any"}`);
 
     // Range
     context.rangeTypes = [

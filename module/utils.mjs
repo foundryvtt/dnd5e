@@ -33,10 +33,12 @@ export function formatModifier(mod) {
  * A helper for using Intl.NumberFormat within handlebars.
  * @param {number} value    The value to format.
  * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
+ * @param {boolean} [options.spellOut]  Spell out number as full word, if possible.
  * @param {boolean} [options.numerals]  Format the number as roman numerals.
  * @returns {string}
  */
-export function formatNumber(value, { numerals, ...options }={}) {
+export function formatNumber(value, { spellOut, numerals, ...options }={}) {
+  if ( spellOut && game.i18n.has(`DND5E.NUMBER.${value}`, false) ) return game.i18n.localize(`DND5E.NUMBER.${value}`);
   if ( numerals ) return _formatNumberAsNumerals(value);
   const formatter = new Intl.NumberFormat(game.i18n.lang, options);
   return formatter.format(value);
@@ -103,6 +105,25 @@ export function formatRange(min, max, options) {
  */
 export function formatText(value) {
   return new Handlebars.SafeString(value?.replaceAll("\n", "<br>") ?? "");
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Cached store of Intl.PluralRules instances.
+ * @type {Record<string, Intl.PluralRules>}
+ */
+const _pluralRules = {};
+
+/**
+ * Get a PluralRules object, fetching from cache if possible.
+ * @param {object} [options={}]
+ * @param {string} [options.type=cardinal]
+ * @returns {Intl.PluralRules}
+ */
+export function getPluralRules({ type="cardinal" }={}) {
+  _pluralRules[type] ??= new Intl.PluralRules(game.i18n.lang, { type });
+  return _pluralRules[type];
 }
 
 /* -------------------------------------------- */
