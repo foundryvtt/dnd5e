@@ -2548,21 +2548,56 @@ preLocalize("encumbrance.effects", { key: "name" });
 /* -------------------------------------------- */
 
 /**
+ * @typedef {object} IndividualTargetDefinition
+ * @property {string} label           Localized label for this type.
+ * @property {string} [counted]       Localization path for counted plural forms. Only necessary for scalar types.
+ * @property {boolean} [scalar=true]  Can this target take an associated numeric value?
+ */
+
+/**
  * Targeting types that apply to one or more distinct targets.
- * @enum {string}
+ * @enum {IndividualTargetDefinition}
  */
 DND5E.individualTargetTypes = {
-  self: "DND5E.TargetSelf",
-  ally: "DND5E.TargetAlly",
-  enemy: "DND5E.TargetEnemy",
-  creature: "DND5E.TargetCreature",
-  object: "DND5E.TargetObject",
-  space: "DND5E.TargetSpace",
-  creatureOrObject: "DND5E.TargetCreatureOrObject",
-  any: "DND5E.TargetAny",
-  willing: "DND5E.TargetWilling"
+  self: {
+    label: "DND5E.TARGET.Type.Self.Label",
+    scalar: false
+  },
+  ally: {
+    label: "DND5E.TARGET.Type.Ally.Label",
+    counted: "DND5E.TARGET.Type.Ally.Counted"
+  },
+  enemy: {
+    label: "DND5E.TARGET.Type.Enemy.Label",
+    counted: "DND5E.TARGET.Type.Enemy.Counted"
+  },
+  creature: {
+    label: "DND5E.TARGET.Type.Creature.Label",
+    counted: "DND5E.TARGET.Type.Creature.Counted"
+  },
+  object: {
+    label: "DND5E.TARGET.Type.Object.Label",
+    counted: "DND5E.TARGET.Type.Object.Counted"
+  },
+  space: {
+    label: "DND5E.TARGET.Type.Space.Label",
+    counted: "DND5E.TARGET.Type.Space.Counted"
+  },
+  creatureOrObject: {
+    label: "DND5E.TARGET.Type.CreatureOrObject.Label",
+    counted: "DND5E.TARGET.Type.CreatureOrObject.Counted"
+  },
+  any: {
+    label: "DND5E.TARGET.Type.Any.Label",
+    scalar: false
+  },
+  willing: {
+    label: "DND5E.TARGET.Type.WillingCreature.Label",
+    counted: "DND5E.TARGET.Type.WillingCreature.Counted"
+  }
 };
-preLocalize("individualTargetTypes");
+patchConfig("individualTargetTypes", "label", { from: "DnD5e 4.2", until: "DnD5e 4.4" });
+preLocalize("individualTargetTypes", { key: "label" });
 
 /* -------------------------------------------- */
 
@@ -2571,6 +2606,7 @@ preLocalize("individualTargetTypes");
  *
  * @typedef {object} AreaTargetDefinition
  * @property {string} label        Localized label for this type.
+ * @property {string} counted      Localization path for counted plural forms.
  * @property {string} template     Type of `MeasuredTemplate` create for this target type.
  * @property {string} [reference]  Reference to a rule page describing this area of effect.
  * @property {string[]} [sizes]    List of available sizes for this template. Options are chosen from the list:
@@ -2585,57 +2621,66 @@ preLocalize("individualTargetTypes");
  */
 DND5E.areaTargetTypes = {
   circle: {
-    label: "DND5E.TargetCircle",
+    label: "DND5E.TARGET.Type.Circle.Label",
+    counted: "DND5E.TARGET.Type.Circle.Counted",
     template: "circle",
     sizes: ["radius"]
   },
   cone: {
-    label: "DND5E.TargetCone",
+    label: "DND5E.TARGET.Type.Cone.Label",
+    counted: "DND5E.TARGET.Type.Cone.Counted",
     template: "cone",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.DqqAOr5JnX71OCOw",
     sizes: ["length"],
     standard: true
   },
   cube: {
-    label: "DND5E.TargetCube",
+    label: "DND5E.TARGET.Type.Cube.Label",
+    counted: "DND5E.TARGET.Type.Cube.Counted",
     template: "rect",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.dRfDIwuaHmUQ06uA",
     sizes: ["width"],
     standard: true
   },
   cylinder: {
-    label: "DND5E.TargetCylinder",
+    label: "DND5E.TARGET.Type.Cylinder.Label",
+    counted: "DND5E.TARGET.Type.Cylinder.Counted",
     template: "circle",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.jZFp4R7tXsIqkiG3",
     sizes: ["radius", "height"],
     standard: true
   },
   line: {
-    label: "DND5E.TargetLine",
+    label: "DND5E.TARGET.Type.Line.Label",
+    counted: "DND5E.TARGET.Type.Line.Counted",
     template: "ray",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6DOoBgg7okm9gBc6",
     sizes: ["length", "width"],
     standard: true
   },
   radius: {
-    label: "DND5E.TargetRadius",
+    label: "DND5E.TARGET.Type.Emanation.Label",
+    counted: "DND5E.TARGET.Type.Emanation.Counted",
     template: "circle",
     standard: true
   },
   sphere: {
-    label: "DND5E.TargetSphere",
+    label: "DND5E.TARGET.Type.Sphere.Label",
+    counted: "DND5E.TARGET.Type.Sphere.Counted",
     template: "circle",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.npdEWb2egUPnB5Fa",
     sizes: ["radius"],
     standard: true
   },
   square: {
-    label: "DND5E.TargetSquare",
+    label: "DND5E.TARGET.Type.Square.Label",
+    counted: "DND5E.TARGET.Type.Square.Counted",
     template: "rect",
     sizes: ["width"]
   },
   wall: {
-    label: "DND5E.TargetWall",
+    label: "DND5E.TARGET.Type.Wall.Label",
+    counted: "DND5E.TARGET.Type.Wall.Counted",
     template: "ray",
     sizes: ["length", "thickness", "height"]
   }
@@ -2661,7 +2706,7 @@ Object.defineProperty(DND5E, "areaTargetOptions", {
  * @enum {string}
  */
 DND5E.targetTypes = {
-  ...DND5E.individualTargetTypes,
+  ...Object.fromEntries(Object.entries(DND5E.individualTargetTypes).map(([k, v]) => [k, v.label])),
   ...Object.fromEntries(Object.entries(DND5E.areaTargetTypes).map(([k, v]) => [k, v.label]))
 };
 preLocalize("targetTypes", { sort: true });
