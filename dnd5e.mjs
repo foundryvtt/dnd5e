@@ -581,6 +581,8 @@ Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOpt
 
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
 
+Hooks.on("renderActiveEffectConfig", (app, html, data) => documents.ActiveEffect5e.onRenderActiveEffectConfig(html));
+
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
 // TODO: Generalize this logic and make it available in the re-designed transform application.
