@@ -157,6 +157,7 @@ export default function ActivityMixin(Base) {
      *                                                 scaling is not allowed.
      * @property {object} spell
      * @property {number} spell.slot                   The spell slot to consume.
+     * @property {boolean} [triggerSubsequentActions]  If explicitly false, subsequent actions will not be triggered.
      * @property {object} [cause]
      * @property {string} [cause.activity]             Relative UUID to the activity that caused this one to be used.
      *                                                 Activity must be on the same actor as this one.
@@ -321,7 +322,9 @@ export default function ActivityMixin(Base) {
       }
 
       // Trigger any primary action provided by this activity
-      activity._triggerSubsequentActions(usageConfig, results);
+      if ( usageConfig.triggerSubsequentActions !== false ) {
+        activity._triggerSubsequentActions(usageConfig, results);
+      }
 
       return results;
     }
