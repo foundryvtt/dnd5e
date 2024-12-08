@@ -25,6 +25,7 @@ import {default as registry} from "./module/registry.mjs";
 import * as utils from "./module/utils.mjs";
 import {ModuleArt} from "./module/module-art.mjs";
 import registerModuleData from "./module/module-registration.mjs";
+import Sockets5e from "./module/sockets.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
 
 /* -------------------------------------------- */
@@ -88,6 +89,9 @@ Hooks.once("init", function() {
 
   // Configure bastions
   game.dnd5e.bastion = new documents.Bastion();
+
+  // Configure sockets
+  game.dnd5e.sockets = new Sockets5e();
 
   // Configure tooltips
   game.dnd5e.tooltips = new Tooltips5e();
