@@ -10,6 +10,7 @@ const { DiceTerm, FunctionTerm, NumericTerm, OperatorTerm, ParentheticalTerm, St
  * @typedef {BasicRollProcessConfiguration} DamageRollProcessConfiguration
  * @property {DamageRollConfiguration[]} rolls         Configuration data for individual rolls.
  * @property {CriticalDamageConfiguration} [critical]  Critical configuration for all rolls.
+ * @property {boolean} [isCritical]                    Treat each roll as a critical unless otherwise specified.
  * @property {number} [scaling=0]                      Scale increase above base damage.
  */
 
@@ -107,7 +108,7 @@ export default class DamageRoll extends BasicRoll {
     // Determine critical mode
     for ( const roll of config.rolls ) {
       roll.options ??= {};
-      roll.options.isCritical ??= keys.critical;
+      roll.options.isCritical ??= config.isCritical ?? keys.critical;
     }
   }
 
