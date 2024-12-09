@@ -1,34 +1,27 @@
-import sockets from "./sockets/_module.mjs";
-
-/**
- * @typedef {object} SocketEventConfig
- * @property {string} event           The unique socket event name.
- * @property {Function} initiate      A function used to initiate the socket event.
- * @property {Function} finalize      A function that finalizes the socket event as the valid user(s).
- */
+import configs from "./_module.mjs";
 
 export default class Sockets5e {
   constructor() {
     game.socket.on("system.dnd5e", this.#handleSocket.bind(this));
-    for (const config of sockets) this.#register(config);
+    for (const config of configs) this.#register(config);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Store event configurations.
-   * @type {Map<string, SocketEventConfig>}
+   * @type {Map<string, SocketEvent>}
    */
   #events = new Map();
 
   /* -------------------------------------------- */
 
   /**
-   * Register a sovket event config.
-   * @param {SocketEventConfig} config
+   * Register a socket event config.
+   * @param {SocketEvent} config
    */
   #register(config) {
-    this.#events.set(config.event, config);
+    this.#events.set(config.eventName, config);
   }
 
   /* -------------------------------------------- */
@@ -42,7 +35,7 @@ export default class Sockets5e {
   #handleSocket({ _emit, ...data }) {
     if ( !data.userIds.includes(game.user.id) ) {
       if (!_emit) game.socket.emit("system.dnd5e", { ...data, _emit: true });
-      else return;
+      return;
     }
 
     const config = this.#events.get(data.event);
