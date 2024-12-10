@@ -1,87 +1,28 @@
+import CheckboxElement from "./checkbox.mjs";
+
 /**
  * A custom HTML element that represents a checkbox-like input that is displayed as a slide toggle.
  * @fires change
  */
-export default class SlideToggleElement extends HTMLElement {
-  /** @override */
-  static formAssociated = true;
-
+export default class SlideToggleElement extends CheckboxElement {
   /** @inheritDoc */
   constructor() {
     super();
-    this.#internals = this.attachInternals();
-    this.#internals.role = "switch";
-    this.#internals.ariaChecked = this.hasAttribute("checked") ? "true" : "false";
-  }
-
-  /**
-   * The custom element's form and accessibility internals.
-   * @type {ElementInternals}
-   */
-  #internals;
-
-  /**
-   * The form this element belongs to, if any.
-   * @type {HTMLFormElement}
-   */
-  get form() {
-    return this.#internals.form;
+    this._internals.role = "switch";
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * The name of the toggle.
-   * @type {string}
-   */
-  get name() {
-    return this.getAttribute("name");
-  }
-
-  set name(value) {
-    this.setAttribute("name", value);
-  }
+  /** @override */
+  static tagName = "slide-toggle";
 
   /* -------------------------------------------- */
 
-  /**
-   * Whether the slide toggle is toggled on.
-   * @type {boolean}
-   */
-  get checked() {
-    return this.hasAttribute("checked");
-  }
-
-  set checked(value) {
-    if ( typeof value !== "boolean" ) throw new Error("Slide toggle checked state must be a boolean.");
-    this.toggleAttribute("checked", value);
-    this.#internals.ariaChecked = `${value}`;
-  }
+  /** @override */
+  static useShadowRoot = false;
 
   /* -------------------------------------------- */
-
-  /**
-   * The value of the input as it appears in form data.
-   * @type {string}
-   */
-  get value() {
-    return this.getAttribute("value") || "on";
-  }
-
-  set value(value) {
-    this.setAttribute("value", value);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Masquerade as a checkbox input.
-   * @type {string}
-   */
-  get type() {
-    return "checkbox";
-  }
-
+  /*  Element Lifecycle                           */
   /* -------------------------------------------- */
 
   /**
@@ -89,8 +30,8 @@ export default class SlideToggleElement extends HTMLElement {
    * @inheritDoc
    */
   connectedCallback() {
-    this.replaceChildren();
-    this.append(...this._buildElements());
+    this.replaceChildren(...this._buildElements());
+    this._refresh();
     this._activateListeners();
   }
 
@@ -108,35 +49,5 @@ export default class SlideToggleElement extends HTMLElement {
     thumb.classList.add("slide-toggle-thumb");
     track.append(thumb);
     return [track];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Guard against adding event listeners more than once.
-   * @type {boolean}
-   */
-  #listenersAdded = false;
-
-  /**
-   * Activate event listeners.
-   * @protected
-   */
-  _activateListeners() {
-    if ( this.#listenersAdded ) return;
-    this.addEventListener("click", this._onToggle.bind(this));
-    this.#listenersAdded = true;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle toggling the control.
-   * @param {PointerEvent} event  The triggering event.
-   * @protected
-   */
-  _onToggle(event) {
-    this.checked = !this.checked;
-    this.dispatchEvent(new Event("change"));
   }
 }

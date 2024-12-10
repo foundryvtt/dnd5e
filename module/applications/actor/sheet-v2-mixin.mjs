@@ -492,7 +492,6 @@ export default function ActorSheetV2Mixin(Base) {
     activateListeners(html) {
       super.activateListeners(html);
       html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
-      html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
       html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
       html.find(".sidebar-collapser").on("click", this._onToggleSidebar.bind(this));
       html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
