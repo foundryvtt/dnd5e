@@ -410,6 +410,18 @@ export default class NPCData extends CreatureTemplate {
     const context = await this._prepareEmbedContext();
     const section = document.createElement("section");
     section.innerHTML = await renderTemplate("systems/dnd5e/templates/actors/embeds/npc-embed.hbs", context);
+
+    /**
+     * A hook event that fires after an embedded NPC stat block rendered.
+     * @function dnd5e.renderNPCStatBlock
+     * @memberof hookEvents
+     * @param {Actor5e} actor                   NPC being embedded.
+     * @param {HTMLCollection} contents         HTML elements to be inserted.
+     * @param {DocumentHTMLEmbedConfig} config  Configuration for embedding behavior.
+     * @param {EnrichmentOptions} options       Original enrichment options.
+     */
+    Hooks.call("dnd5e.renderNPCStatBlock", this.parent, section.children, config, options);
+
     return section.children;
   }
 
