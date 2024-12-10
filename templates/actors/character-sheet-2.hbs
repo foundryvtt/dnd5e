@@ -310,11 +310,19 @@
                             </div>
 
                             {{!-- Roll Death Save --}}
+                            {{#if editable}}
+                            <button type="button" data-action="death" data-tooltip="DND5E.DeathSaveConfigure"
+                                    aria-label="{{ localize "DND5E.DeathSaveConfigure" }}"
+                                    class="death-save config-button unbutton">
+                              <i class="fas fa-cog" inert></i>
+                            </button>
+                            {{else}}
                             <button type="button" data-action="rollDeathSave" data-tooltip="DND5E.DeathSaveRoll"
                                     aria-label="{{ localize "DND5E.DeathSaveRoll" }}"
                                     class="{{ rollableClass }} death-save unbutton">
                                 <dnd5e-icon src="systems/dnd5e/icons/svg/statuses/dead.svg"></dnd5e-icon>
                             </button>
+                            {{/if}}
 
                             {{!-- Failures --}}
                             <div class="pips" data-prop="system.attributes.death.failure">
