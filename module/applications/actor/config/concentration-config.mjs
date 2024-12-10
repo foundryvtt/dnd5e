@@ -47,11 +47,6 @@ export default class ConcentrationConfig extends BaseConfigSheet {
       { rule: true },
       ...Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }))
     ];
-    context.advantageModeOptions = [
-      { value: -1, label: game.i18n.localize("DND5E.Disadvantage") },
-      { value: 0, label: game.i18n.localize("DND5E.Normal") },
-      { value: 1, label: game.i18n.localize("DND5E.Advantage") }
-    ];
 
     if ( this.document.system.bonuses?.abilities ) context.global = {
       data: source.bonuses?.abilities ?? {},

@@ -310,8 +310,10 @@
 
                             {{!-- Roll Death Save --}}
                             {{#if editable}}
-                            <button type="button" class="death-save config-button unbutton" data-action="death">
-                              <i class="fas fa-cog"></i>
+                            <button type="button" data-action="death" data-tooltip="DND5E.DeathSaveConfigure"
+                                    aria-label="{{ localize "DND5E.DeathSaveConfigure" }}"
+                                    class="death-save config-button unbutton">
+                              <i class="fas fa-cog" inert></i>
                             </button>
                             {{else}}
                             <button type="button" data-action="rollDeathSave" data-tooltip="DND5E.DeathSaveRoll"

@@ -27,7 +27,7 @@ export default class DeathConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.format("DND5E.ABILITY.Configure.Title", { ability: game.i18n.localize("DND5E.DeathSavingThrow") });
+    return game.i18n.localize("DND5E.DeathSaveConfigure");
   }
 
   /* -------------------------------------------- */
@@ -41,11 +41,6 @@ export default class DeathConfig extends BaseConfigSheet {
 
     context.data = source.attributes?.death ?? {};
     context.fields = this.document.system.schema.getField("attributes.death").fields;
-    context.advantageModeOptions = [
-      { value: -1, label: game.i18n.localize("DND5E.Disadvantage") },
-      { value: 0, label: game.i18n.localize("DND5E.Normal") },
-      { value: 1, label: game.i18n.localize("DND5E.Advantage") }
-    ];
 
     if ( this.document.system.bonuses?.abilities ) context.global = {
       data: source.bonuses?.abilities ?? {},
