@@ -1,3 +1,5 @@
+import { ConsumptionTargetData } from "../../data/activity/fields/consumption-targets-field.mjs";
+import { formatNumber, formatRange } from "../../utils.mjs";
 import Application5e from "../api/application.mjs";
 
 /**
@@ -241,9 +243,10 @@ export default class ActivitySheet extends Application5e {
       value,
       label: CONFIG.DND5E.activityConsumptionTypes[value].label
     }));
-    context.consumptionTargets = context.activity.consumption.targets.map((data, index) => {
+    context.consumptionTargets = context.source.consumption.targets.map((data, index) => {
       const typeConfig = CONFIG.DND5E.activityConsumptionTypes[data.type] ?? {};
       const showTextTarget = typeConfig.targetRequiresEmbedded && !this.item.isEmbedded;
+      const target = new ConsumptionTargetData(data, { parent: this.activity });
       return {
         data,
         fields: this.activity.schema.fields.consumption.fields.targets.element.fields,
@@ -257,7 +260,7 @@ export default class ActivitySheet extends Application5e {
         ] : null,
         showTargets: "validTargets" in typeConfig,
         targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : null,
-        validTargets: showTextTarget ? null : data.validTargets
+        validTargets: showTextTarget ? null : target.validTargets
       };
     });
     context.showConsumeSpellSlot = this.activity.isSpell && (this.item.system.level !== 0);
@@ -277,12 +280,17 @@ export default class ActivitySheet extends Application5e {
       { value: "loseAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.LoseAll") },
       { value: "formula", label: game.i18n.localize("DND5E.USES.Recovery.Type.Formula") }
     ];
-    context.usesRecovery = context.activity.uses.recovery.map((data, index) => ({
+    context.usesRecovery = context.source.uses.recovery.map((data, index) => ({
       data,
       fields: this.activity.schema.fields.uses.fields.recovery.element.fields,
       prefix: `uses.recovery.${index}.`,
       source: context.source.uses.recovery[index] ?? data,
-      formulaOptions: data.period === "recharge" ? data.recharge?.options : null
+      formulaOptions: data.period === "recharge" ? Array.fromRange(5, 2).reverse().map(min => ({
+        value: min,
+        label: game.i18n.format("DND5E.USES.Recovery.Recharge.Range", {
+          range: min === 6 ? formatNumber(6) : formatRange(min, 6)
+        })
+      })) : null
     }));
 
     // Template dimensions
