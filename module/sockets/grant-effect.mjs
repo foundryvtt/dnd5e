@@ -26,9 +26,9 @@ export default class GrantEffectEvent extends SocketEvent {
 
   /**
    * Initiate the socket event.
-   * @param {Actor5e} actor                 The actor to receive the effect.
-   * @param {ActiveEffecet5e} effect        The effect to be duplicated onto the actor.
-   * @returns {GrantEffectData|void}      The event data.
+   * @param {Actor5e} actor             The actor to receive the effect.
+   * @param {ActiveEffect5e} effect     The effect to be duplicated onto the actor.
+   * @returns {GrantEffectData|void}    The event data.
    */
   static initiate(actor, effect) {
     if ( (actor?.documentName !== "Actor") || (effect?.documentName !== "ActiveEffect") ) {
