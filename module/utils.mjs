@@ -18,6 +18,19 @@ export function formatCR(value, { narrow=true }={}) {
 /* -------------------------------------------- */
 
 /**
+ * Form a number using the provided distance unit.
+ * @param {number} value         The distance to format.
+ * @param {string} unit          Distance unit as defined in `CONFIG.DND5E.movementUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatDistance(value, unit, options={}) {
+  return _formatSystemUnits(value, unit, CONFIG.DND5E.movementUnits[unit], options);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Format a modifier for display with its sign separate.
  * @param {number} mod  The modifier.
  * @returns {Handlebars.SafeString}
@@ -103,6 +116,60 @@ export function formatRange(min, max, options) {
  */
 export function formatText(value) {
   return new Handlebars.SafeString(value?.replaceAll("\n", "<br>") ?? "");
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Form a number using the provided weight unit.
+ * @param {number} value         The weight to format.
+ * @param {string} unit          Weight unit as defined in `CONFIG.DND5E.weightUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatWeight(value, unit, options={}) {
+  return _formatSystemUnits(value, unit, CONFIG.DND5E.weightUnits[unit], options);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Format a number using one of core's built-in unit types.
+ * @param {number} value                   Value to display.
+ * @param {string} unit                    Name of the unit to use.
+ * @param {UnitConfiguration} config       Configuration data for the unit.
+ * @param {object} [options={}]            Formatting options passed to `formatNumber`.
+ * @param {boolean} [options.parts=false]  Format to parts.
+ * @returns {string}
+ */
+function _formatSystemUnits(value, unit, config, { parts=false, ...options }={}) {
+  options.unitDisplay ??= "short";
+  if ( config?.counted ) {
+    const localizationKey = `${config.counted}.${options.unitDisplay}.${getPluralRules().select(value)}`;
+    return game.i18n.format(localizationKey, { number: formatNumber(value, options) });
+  }
+  return (parts ? formatNumberParts : formatNumber)(value, {
+    style: "unit", unit: config?.formattingUnit ?? unit, ...options
+  });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Cached store of Intl.PluralRules instances.
+ * @type {Record<string, Intl.PluralRules>}
+ */
+const _pluralRules = {};
+
+/**
+ * Get a PluralRules object, fetching from cache if possible.
+ * @param {object} [options={}]
+ * @param {string} [options.type=cardinal]
+ * @returns {Intl.PluralRules}
+ */
+export function getPluralRules({ type="cardinal" }={}) {
+  _pluralRules[type] ??= new Intl.PluralRules(game.i18n.lang, { type });
+  return _pluralRules[type];
 }
 
 /* -------------------------------------------- */

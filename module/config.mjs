@@ -2345,17 +2345,56 @@ preLocalize("movementTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * @typedef {object} UnitConfiguration
+ * @property {string} label             Localized label for the unit.
+ * @property {string} abbreviation      Localized abbreviation for the unit.
+ * @property {number} conversion        Multiplier used to convert between various units.
+ * @property {string} [counted]         Localization path for counted plural forms in various unit display modes.
+ *                                      Only necessary if non-supported unit or using a non-standard name for a
+ *                                      supported unit.
+ * @property {string} [formattingUnit]  Unit formatting value as supported by javascript's internationalization system:
+ *                                      https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers. Only
+ *                                      required if the formatting name doesn't match the unit key.
+ * @property {string} type              Whether this is an "imperial" or "metric" unit.
+ */
+
+/**
  * The valid units of measure for movement distances in the game system.
  * By default this uses the imperial units of feet and miles.
  * @enum {string}
  */
 DND5E.movementUnits = {
-  ft: "DND5E.DistFt",
-  mi: "DND5E.DistMi",
-  m: "DND5E.DistM",
-  km: "DND5E.DistKm"
+  ft: {
+    label: "DND5E.UNITS.DISTANCE.Foot.Label",
+    abbreviation: "DND5E.UNITS.DISTANCE.Foot.Abbreviation",
+    conversion: 1,
+    formattingUnit: "foot",
+    type: "imperial"
+  },
+  mi: {
+    label: "DND5E.UNITS.DISTANCE.Mile.Label",
+    abbreviation: "DND5E.UNITS.DISTANCE.Mile.Abbreviation",
+    conversion: 5_280,
+    formattingUnit: "mile",
+    type: "imperial"
+  },
+  m: {
+    label: "DND5E.UNITS.DISTANCE.Meter.Label",
+    abbreviation: "DND5E.UNITS.DISTANCE.Meter.Abbreviation",
+    conversion: 3.281,
+    formattingUnit: "meter",
+    type: "metric"
+  },
+  km: {
+    label: "DND5E.UNITS.DISTANCE.Kilometer.Label",
+    abbreviation: "DND5E.UNITS.DISTANCE.Kilometer.Abbreviation",
+    conversion: 3_281,
+    formattingUnit: "kilometer",
+    type: "metric"
+  }
 };
-preLocalize("movementUnits");
+patchConfig("movementUnits", "label", { since: "DnD5e 4.2", until: "DnD5e 4.4" });
+preLocalize("movementUnits", { keys: ["label", "abbreviation"] });
 
 /* -------------------------------------------- */
 
@@ -2379,7 +2418,7 @@ preLocalize("rangeTypes");
  * @enum {string}
  */
 DND5E.distanceUnits = {
-  ...DND5E.movementUnits,
+  ...Object.fromEntries(Object.entries(DND5E.movementUnits).map(([k, { label }]) => [k, label])),
   ...DND5E.rangeTypes
 };
 preLocalize("distanceUnits");
@@ -2387,41 +2426,35 @@ preLocalize("distanceUnits");
 /* -------------------------------------------- */
 
 /**
- * Configuration data for a weight unit.
- *
- * @typedef {object} WeightUnitConfiguration
- * @property {string} label         Localized label for the unit.
- * @property {string} abbreviation  Localized abbreviation for the unit.
- * @property {number} conversion    Number that by which this unit should be multiplied to arrive at a standard value.
- * @property {string} type          Whether this is an "imperial" or "metric" unit.
- */
-
-/**
  * The valid units for measurement of weight.
- * @enum {WeightUnitConfiguration}
+ * @enum {UnitConfiguration}
  */
 DND5E.weightUnits = {
   lb: {
-    label: "DND5E.WeightUnit.Pounds.Label",
-    abbreviation: "DND5E.WeightUnit.Pounds.Abbreviation",
+    label: "DND5E.UNITS.WEIGHT.Pound.Label",
+    abbreviation: "DND5E.UNITS.WEIGHT.Pound.Abbreviation",
     conversion: 1,
+    formattingUnit: "pound",
     type: "imperial"
   },
   tn: {
-    label: "DND5E.WeightUnit.Tons.Label",
-    abbreviation: "DND5E.WeightUnit.Tons.Abbreviation",
+    label: "DND5E.UNITS.WEIGHT.Ton.Label",
+    abbreviation: "DND5E.UNITS.WEIGHT.Ton.Abbreviation",
+    counted: "DND5E.UNITS.WEIGHT.Ton.Counted",
     conversion: 2000,
     type: "imperial"
   },
   kg: {
-    label: "DND5E.WeightUnit.Kilograms.Label",
-    abbreviation: "DND5E.WeightUnit.Kilograms.Abbreviation",
+    label: "DND5E.UNITS.WEIGHT.Kilogram.Label",
+    abbreviation: "DND5E.UNITS.WEIGHT.Kilogram.Abbreviation",
     conversion: 2.5,
+    formattingUnit: "kilogram",
     type: "metric"
   },
   Mg: {
-    label: "DND5E.WeightUnit.Megagrams.Label",
-    abbreviation: "DND5E.WeightUnit.Megagrams.Abbreviation",
+    label: "DND5E.UNITS.WEIGHT.Megagram.Label",
+    abbreviation: "DND5E.UNITS.WEIGHT.Megagram.Abbreviation",
+    counted: "DND5E.UNITS.WEIGHT.Megagram.Counted",
     conversion: 2500,
     type: "metric"
   }

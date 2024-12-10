@@ -32,7 +32,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Weight"
         }),
         units: new StringField({
-          required: true, label: "DND5E.WeightUnit.Label",
+          required: true, label: "DND5E.UNITS.WEIGHT.Label",
           initial: () => game.settings.get("dnd5e", "metricWeightUnits") ? "kg" : "lb"
         })
       }, {label: "DND5E.Weight"}),

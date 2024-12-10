@@ -1,4 +1,4 @@
-import { prepareFormulaValue } from "../../utils.mjs";
+import { formatDistance, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { BooleanField, SchemaField, StringField } = foundry.data.fields;
@@ -81,9 +81,10 @@ export default class TargetField extends SchemaField {
 
       if ( this.target.template.type ) {
         if ( this.target.template.count > 1 ) parts.push(`${this.target.template.count} ×`);
-        parts.push(this.target.template.size);
         if ( this.target.template.units in CONFIG.DND5E.movementUnits ) {
-          parts.push(game.i18n.localize(`DND5E.Dist${this.target.template.units.capitalize()}Abbr`));
+          parts.push(formatDistance(this.target.template.size, this.target.template.units));
+        } else {
+          parts.push(this.target.template.size);
         }
         parts.push(CONFIG.DND5E.areaTargetTypes[this.target.template.type]?.label);
       }

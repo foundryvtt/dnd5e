@@ -1,5 +1,5 @@
 import * as Trait from "../../documents/actor/trait.mjs";
-import { formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
+import { formatDistance, formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
 import Tabs5e from "../tabs.mjs";
 import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
 
@@ -337,7 +337,8 @@ export default function ActorSheetV2Mixin(Base) {
             ctx.range = {
               distance: true,
               value: system.range.value,
-              unit: game.i18n.localize(`DND5E.Dist${units.capitalize()}Abbr`)
+              unit: CONFIG.DND5E.movementUnits[units].abbreviation,
+              parts: formatDistance(system.range.value, units, { parts: true })
             };
           }
           else ctx.range = { distance: false };

@@ -116,7 +116,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
       const target = [this.target.value];
       if ( this.hasAreaTarget ) {
         if ( this.target.units in CONFIG.DND5E.movementUnits ) {
-          target.push(game.i18n.localize(`DND5E.Dist${this.target.units.capitalize()}Abbr`));
+          target.push(CONFIG.DND5E.movementUnits[this.target.units].abbreviation);
         }
         else target.push(CONFIG.DND5E.distanceUnits[this.target.units]);
       }
@@ -127,7 +127,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     if ( this.isActive && this.range.units ) {
       const range = [this.range.value, this.range.long ? `/ ${this.range.long}` : null];
       if ( this.range.units in CONFIG.DND5E.movementUnits ) {
-        range.push(game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`));
+        range.push(CONFIG.DND5E.movementUnits[this.range.units].abbreviation);
       }
       else range.push(CONFIG.DND5E.distanceUnits[this.range.units]);
       this.parent.labels.range = range.filterJoin(" ");

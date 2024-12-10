@@ -1,4 +1,4 @@
-import { prepareFormulaValue } from "../../utils.mjs";
+import { formatDistance, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
@@ -38,17 +38,12 @@ export default class RangeField extends SchemaField {
     } else this.range.value = null;
 
     if ( labels && this.range.units ) {
-      const parts = [];
       if ( this.range.scalar && this.range.value ) {
-        parts.push(
-          this.range.value,
-          this.range.units in CONFIG.DND5E.movementUnits
-            ? game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`) : null
-        );
+        labels.range = formatDistance(this.range.value, this.range.units);
+        labels.rangeParts = formatDistance(this.range.value, this.range.units, { parts: true });
       } else if ( !this.range.scalar ) {
-        parts.push(CONFIG.DND5E.distanceUnits[this.range.units]);
+        labels.range = CONFIG.DND5E.distanceUnits[this.range.units];
       }
-      labels.range = parts.filterJoin(" ");
     } else if ( labels ) labels.range = game.i18n.localize("DND5E.DistSelf");
   }
 }

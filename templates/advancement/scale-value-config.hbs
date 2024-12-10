@@ -9,7 +9,7 @@
                 </select>
                 {{#if (eq configuration.type "distance")}}
                 <select name="configuration.distance.units">
-                    {{selectOptions movementUnits selected=configuration.distance.units}}
+                    {{selectOptions movementUnits selected=configuration.distance.units labelAttr="label"}}
                 </select>
                 {{/if}}
             </div>
