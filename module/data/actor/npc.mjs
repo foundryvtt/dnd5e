@@ -375,6 +375,23 @@ export default class NPCData extends CreatureTemplate {
   }
 
   /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    for ( const key of ["legact", "legres"] ) {
+      const max = foundry.utils.getProperty(changed, `system.resources.${key}.max`);
+      if ( (max !== undefined) && !foundry.utils.hasProperty(changed, `system.resources.${key}.value`) ) {
+        const delta = max - foundry.utils.getProperty(this, `resources.${key}.max`);
+        const value = foundry.utils.getProperty(this, `resources.${key}.value`);
+        foundry.utils.setProperty(changed, `system.resources.${key}.value`, value + delta);
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
