@@ -6,6 +6,7 @@ import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
 import SourceField from "../shared/source-field.mjs";
+import UsesField from "../shared/uses-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
@@ -547,13 +548,15 @@ export default class NPCData extends CreatureTemplate {
 
     for ( const item of this.parent.items ) {
       if ( !["feat", "weapon"].includes(item.type) ) continue;
-      const category = item.system.activities.contents[0]?.activation.type ?? "trait";
+      const category = item.system.activities?.contents[0]?.activation.type ?? "trait";
       if ( category in context.actionSections ) {
         const description = (await TextEditor.enrichHTML(item.system.description.value, {
           secrets: false, rollData: item.getRollData(), relativeTo: item
         })).replace(/^\s*<p>/g, "").replace(/<\/p>\s*$/g, "");
-        // TODO: Add standard uses to item names (e.g. `Recharge 5-6`, `1/day`, etc.)
-        context.actionSections[category].actions.push({ name: item.name, description });
+        const uses = item.system.uses.label || item.system.activities?.contents[0]?.uses.label;
+        context.actionSections[category].actions.push({
+          name: uses ? `${item.name} (${uses})` : item.name, description
+        });
       }
     }
     for ( const key of Object.keys(context.actionSections) ) {
