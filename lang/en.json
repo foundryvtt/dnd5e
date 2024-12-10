@@ -675,6 +675,10 @@
   "FIELDS": {
     "spell": {
       "label": "Casting Details",
+      "ability": {
+        "label": "Casting Ability",
+        "hint": "Ability to override the creature's normal spellcasting ability."
+      },
       "challenge": {
         "attack": {
           "label": "Attack Bonus",

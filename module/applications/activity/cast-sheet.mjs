@@ -56,6 +56,11 @@ export default class CastSheet extends ActivitySheet {
         .map(([value, label]) => ({ value, label }));
     }
 
+    context.abilityOptions = [
+      { value: "", label: game.i18n.localize("DND5E.Spellcasting") },
+      { rule: true },
+      ...Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }))
+    ];
     context.propertyOptions = Array.from(CONFIG.DND5E.validProperties.spell).map(value => ({
       value, label: CONFIG.DND5E.itemProperties[value]?.label ?? ""
     }));
