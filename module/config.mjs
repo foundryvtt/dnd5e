@@ -1624,6 +1624,7 @@ DND5E.consumableTypes = {
     subtypes: {
       arrow: "DND5E.CONSUMABLE.Type.Ammunition.Arrow",
       crossbowBolt: "DND5E.CONSUMABLE.Type.Ammunition.Bolt",
+      energyCell: "DND5E.CONSUMABLE.Type.Ammunition.EnergyCell",
       firearmBullet: "DND5E.CONSUMABLE.Type.Ammunition.BulletFirearm",
       slingBullet: "DND5E.CONSUMABLE.Type.Ammunition.BulletSling",
       blowgunNeedle: "DND5E.CONSUMABLE.Type.Ammunition.Needle"
