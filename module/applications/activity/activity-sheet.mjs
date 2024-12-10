@@ -230,7 +230,7 @@ export default class ActivitySheet extends Application5e {
     ];
     context.rangeUnits = [
       ...Object.entries(CONFIG.DND5E.rangeTypes).map(([value, label]) => ({ value, label })),
-      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, label]) => ({
+      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({
         value, label, group: game.i18n.localize("DND5E.RangeDistance")
       }))
     ];

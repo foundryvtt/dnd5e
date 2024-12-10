@@ -87,7 +87,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     // Range
     context.rangeTypes = [
       ...Object.entries(CONFIG.DND5E.rangeTypes).map(([value, label]) => ({ value, label })),
-      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, label]) => {
+      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => {
         return { value, label, group: "DND5E.RangeDistance" };
       })
     ];
