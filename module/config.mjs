@@ -1403,9 +1403,10 @@ preLocalize("itemRarity");
  * Configuration data for limited use periods.
  *
  * @typedef {object} LimitedUsePeriodConfiguration
- * @property {string} label           Localized label.
- * @property {string} abbreviation    Shorthand form of the label.
- * @property {boolean} [formula]      Whether this limited use period restores charges via formula.
+ * @property {string} label                Localized label.
+ * @property {string}  abbreviation        Shorthand form of the label.
+ * @property {"combat"|"special"} [group]  Grouping if outside the normal "time" group.
+ * @property {boolean} [formula]           Whether this limited use period restores charges via formula.
  */
 
 /**
@@ -1414,17 +1415,18 @@ preLocalize("itemRarity");
  */
 DND5E.limitedUsePeriods = {
   lr: {
-    label: "DND5E.UsesPeriods.Lr",
-    abbreviation: "DND5E.UsesPeriods.LrAbbreviation"
+    label: "DND5E.USES.Recovery.Period.LongRest.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.LongRest.Abbreviation"
   },
   sr: {
-    label: "DND5E.UsesPeriods.Sr",
-    abbreviation: "DND5E.UsesPeriods.SrAbbreviation"
+    label: "DND5E.USES.Recovery.Period.ShortRest.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.ShortRest.Abbreviation"
   },
   day: {
-    label: "DND5E.UsesPeriods.Day",
-    abbreviation: "DND5E.UsesPeriods.DayAbbreviation"
+    label: "DND5E.USES.Recovery.Period.Day.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.Day.Label"
   },
+  // TODO: Remove with DnD5e 4.4
   charges: {
     label: "DND5E.UsesPeriods.Charges",
     abbreviation: "DND5E.UsesPeriods.ChargesAbbreviation",
@@ -1432,17 +1434,55 @@ DND5E.limitedUsePeriods = {
     deprecated: true
   },
   dawn: {
-    label: "DND5E.UsesPeriods.Dawn",
-    abbreviation: "DND5E.UsesPeriods.DawnAbbreviation",
+    label: "DND5E.USES.Recovery.Period.Dawn.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.Dawn.Label",
     formula: true
   },
   dusk: {
-    label: "DND5E.UsesPeriods.Dusk",
-    abbreviation: "DND5E.UsesPeriods.DuskAbbreviation",
+    label: "DND5E.USES.Recovery.Period.Dusk.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.Dusk.Label",
     formula: true
+  },
+  initiative: {
+    label: "DND5E.USES.Recovery.Period.Initiative.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.Initiative.Label",
+    type: "special"
+  },
+  encounter: {
+    label: "DND5E.USES.Recovery.Period.Encounter.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.Encounter.Label",
+    type: "combat"
+  },
+  turnStart: {
+    label: "DND5E.USES.Recovery.Period.TurnStart.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.TurnStart.Abbreviation",
+    type: "combat"
+  },
+  turnEnd: {
+    label: "DND5E.USES.Recovery.Period.TurnEnd.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.TurnEnd.Abbreviation",
+    type: "combat"
+  },
+  turn: {
+    label: "DND5E.USES.Recovery.Period.Turn.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.Turn.Label",
+    type: "combat"
   }
 };
 preLocalize("limitedUsePeriods", { keys: ["label", "abbreviation"] });
+
+Object.defineProperty(DND5E.limitedUsePeriods, "recoveryOptions", {
+  get() {
+    return [
+      ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
+        .filter(([, config]) => !config.deprecated)
+        .map(([value, { label, type }]) => ({
+          value, label, group: game.i18n.localize(`DND5E.USES.Recovery.${type?.capitalize() ?? "Time"}`)
+        })),
+      { value: "recharge", label: game.i18n.localize("DND5E.USES.Recovery.Recharge.Label") }
+    ];
+  }
+});
 
 /* -------------------------------------------- */
 
@@ -1452,13 +1492,13 @@ preLocalize("limitedUsePeriods", { keys: ["label", "abbreviation"] });
  */
 DND5E.enchantmentPeriods = {
   sr: {
-    label: "DND5E.UsesPeriods.Sr"
+    label: "DND5E.ENCHANTMENT.Period.ShortRest"
   },
   lr: {
-    label: "DND5E.UsesPeriods.Lr"
+    label: "DND5E.ENCHANTMENT.Period.LongRest"
   },
   atwill: {
-    label: "DND5E.UsesPeriods.AtWill"
+    label: "DND5E.ENCHANTMENT.Period.AtWill"
   }
 };
 preLocalize("enchantmentPeriods", { key: "label" });

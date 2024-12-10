@@ -267,14 +267,7 @@ export default class ActivitySheet extends Application5e {
     context.showScaling = !this.activity.isSpell;
 
     // Uses recovery
-    context.recoveryPeriods = [
-      ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
-        .filter(([, config]) => !config.deprecated)
-        .map(([value, config]) => ({
-          value, label: config.label, group: game.i18n.localize("DND5E.DurationTime")
-        })),
-      { value: "recharge", label: game.i18n.localize("DND5E.USES.Recovery.Recharge.Label") }
-    ];
+    context.recoveryPeriods = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
     context.recoveryTypes = [
       { value: "recoverAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.RecoverAll") },
       { value: "loseAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.LoseAll") },
