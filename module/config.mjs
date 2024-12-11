@@ -2346,16 +2346,16 @@ preLocalize("movementTypes", { sort: true });
 
 /**
  * @typedef {object} UnitConfiguration
- * @property {string} label             Localized label for the unit.
- * @property {string} abbreviation      Localized abbreviation for the unit.
- * @property {number} conversion        Multiplier used to convert between various units.
- * @property {string} [counted]         Localization path for counted plural forms in various unit display modes.
- *                                      Only necessary if non-supported unit or using a non-standard name for a
- *                                      supported unit.
- * @property {string} [formattingUnit]  Unit formatting value as supported by javascript's internationalization system:
- *                                      https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers. Only
- *                                      required if the formatting name doesn't match the unit key.
- * @property {string} type              Whether this is an "imperial" or "metric" unit.
+ * @property {string} label              Localized label for the unit.
+ * @property {string} abbreviation       Localized abbreviation for the unit.
+ * @property {number} conversion         Multiplier used to convert between various units.
+ * @property {string} [counted]          Localization path for counted plural forms in various unit display modes.
+ *                                       Only necessary if non-supported unit or using a non-standard name for a
+ *                                       supported unit.
+ * @property {string} [formattingUnit]   Unit formatting value as supported by javascript's internationalization system:
+ *                                       https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers. Only
+ *                                       required if the formatting name doesn't match the unit key.
+ * @property {"imperial"|"metric"} type  Whether this is an "imperial" or "metric" unit.
  */
 
 /**
@@ -2381,14 +2381,14 @@ DND5E.movementUnits = {
   m: {
     label: "DND5E.UNITS.DISTANCE.Meter.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Meter.Abbreviation",
-    conversion: 3.281,
+    conversion: 10 / 3, // D&D uses a simplified 5ft -> 1.5m conversion.
     formattingUnit: "meter",
     type: "metric"
   },
   km: {
     label: "DND5E.UNITS.DISTANCE.Kilometer.Label",
     abbreviation: "DND5E.UNITS.DISTANCE.Kilometer.Abbreviation",
-    conversion: 3_281,
+    conversion: 10_000 / 3, // Matching simplified conversion
     formattingUnit: "kilometer",
     type: "metric"
   }
