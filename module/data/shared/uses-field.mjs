@@ -4,6 +4,13 @@ import FormulaField from "../fields/formula-field.mjs";
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @typedef {object} UsesData
+ * @property {number} spent                 Number of uses that have been spent.
+ * @property {string} max                   Formula for the maximum number of uses.
+ * @property {UsesRecoveryData[]} recovery  Recovery profiles for this activity's uses.
+ */
+
+/**
  * Data for a recovery profile for an activity's uses.
  *
  * @typedef {object} UsesRecoveryData
@@ -14,10 +21,6 @@ const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.field
 
 /**
  * Field for storing uses data.
- *
- * @property {number} spent                 Number of uses that have been spent.
- * @property {string} max                   Formula for the maximum number of uses.
- * @property {UsesRecoveryData[]} recovery  Recovery profiles for this activity's uses.
  */
 export default class UsesField extends SchemaField {
   constructor(fields={}, options={}) {
@@ -72,10 +75,41 @@ export default class UsesField extends SchemaField {
     }
     if ( labels ) labels.recovery = game.i18n.getListFormatter({ style: "narrow" }).format(periods);
 
+    this.uses.label = UsesField.getStatblockLabel.call(this);
+
     Object.defineProperty(this.uses, "rollRecharge", {
       value: UsesField.rollRecharge.bind(this.parent?.system ? this.parent : this),
       configurable: true
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a label for uses data that matches the style seen on NPC stat blocks. Complex recovery data might result
+   * in no label being generated if it doesn't represent recovery that can be normally found on a NPC.
+   * @this {ItemDataModel|BaseActivityData}
+   * @returns {string}
+   */
+  static getStatblockLabel() {
+    if ( !this.uses.max || (this.uses.recovery.length !== 1) ) return "";
+    const recovery = this.uses.recovery[0];
+
+    // Recharge X–Y
+    if ( recovery.period === "recharge" ) {
+      const value = parseInt(recovery.formula);
+      return `${game.i18n.localize("DND5E.Recharge")} ${value === 6 ? "6" : `${value}–6`}`;
+    }
+
+    // Recharge after a Short or Long Rest
+    if ( ["lr", "sr"].includes(recovery.period) && (this.uses.max === 1) ) {
+      return game.i18n.localize(`DND5E.Recharge${recovery.period === "sr" ? "Short" : "Long"}`);
+    }
+
+    // X/Day
+    const period = CONFIG.DND5E.limitedUsePeriods[recovery.period === "sr" ? "sr" : "day"]?.label ?? "";
+    if ( !period ) return "";
+    return `${this.uses.max}/${period}`;
   }
 
   /* -------------------------------------------- */
