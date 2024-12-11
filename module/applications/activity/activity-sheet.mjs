@@ -218,7 +218,7 @@ export default class ActivitySheet extends Application5e {
       { value: "", label: game.i18n.localize("DND5E.NoneActionLabel") }
     ];
     context.affectsPlaceholder = game.i18n.localize(
-      `DND5E.Target${context.data.target?.template?.type ? "Every" : "Any"}`
+      `DND5E.TARGET.Count.${context.data.target?.template?.type ? "Every" : "Any"}`
     );
     context.durationUnits = [
       { value: "inst", label: game.i18n.localize("DND5E.TimeInst") },

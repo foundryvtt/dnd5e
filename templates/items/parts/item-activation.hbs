@@ -49,7 +49,7 @@
             {{#select system.target.type}}
                  <option value="">{{localize "DND5E.None"}}</option>
                  <optgroup label="{{localize 'DND5E.TargetTypeIndividual'}}">
-                     {{selectOptions config.individualTargetTypes}}
+                     {{selectOptions config.individualTargetTypes labelAttr="label"}}
                  </optgroup>
                  <optgroup label="{{localize 'DND5E.TargetTypeArea'}}">
                      {{selectOptions config.areaTargetTypes labelAttr="label"}}
