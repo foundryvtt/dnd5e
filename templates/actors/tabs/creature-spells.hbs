@@ -189,8 +189,7 @@
                         <div class="item-detail item-range {{#unless ctx.range}}empty{{/unless}}">
                             {{#if ctx.range}}
                             {{#if ctx.range.distance}}
-                            <span class="value">{{ ctx.range.value }}</span>
-                            <span class="unit">{{ ctx.range.unit }}</span>
+                            {{{ ctx.range.parts }}}
                             {{else}}
                             <span class="condensed">{{ item.labels.range }}</span>
                             {{/if}}

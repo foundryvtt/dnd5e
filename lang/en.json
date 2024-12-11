@@ -3365,6 +3365,76 @@
 "DND5E.Unidentified.Notice": "You must identify this item to learn its details.",
 "DND5E.Unidentified.Title": "Unidentified",
 "DND5E.Unidentified.Value": "???",
+
+"DND5E.UNITS": {
+  "DISTANCE": {
+    "Label": "Distance Units",
+    "Foot": {
+      "Label": "Feet",
+      "Abbreviation": "ft"
+    },
+    "Kilometer": {
+      "Label": "Kilometers",
+      "Abbreviation": "km"
+    },
+    "Meter": {
+      "Label": "Meters",
+      "Abbreviation": "m"
+    },
+    "Mile": {
+      "Label": "Miles",
+      "Abbreviation": "mi"
+    }
+  },
+  "WEIGHT": {
+    "Label": "Weight Units",
+    "Kilogram": {
+      "Label": "Kilogram",
+      "Abbreviation": "kg"
+    },
+    "Megagram": {
+      "Label": "Tonnes",
+      "Abbreviation": "t",
+      "Counted": {
+        "narrow": {
+          "one": "{number}t",
+          "other": "{number}t"
+        },
+        "short": {
+          "one": "{number} t",
+          "other": "{number} t"
+        },
+        "long": {
+          "one": "{number} tonne",
+          "other": "{number} tonnes"
+        }
+      }
+    },
+    "Pound": {
+      "Label": "Pounds",
+      "Abbreviation": "lb"
+    },
+    "Ton": {
+      "Label": "Tons",
+      "Abbreviation": "tn",
+      "Counted": {
+        "narrow": {
+          "one": "{number}tn",
+          "other": "{number}tn"
+        },
+        "short": {
+          "one": "{number} tn",
+          "other": "{number} tn"
+        },
+        "long": {
+          "one": "{number} ton",
+          "other": "{number} tons"
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Unknown": "Unknown",
 "DND5E.Unlimited": "Unlimited",
 
@@ -3553,25 +3623,6 @@
 "DND5E.WeaponSimpleProficiency": "Simple",
 "DND5E.WeaponSimpleR": "Simple Ranged",
 "DND5E.Weight": "Weight",
-"DND5E.WeightUnit": {
-  "Label": "Weight Units",
-  "Kilograms": {
-    "Label": "Kilograms",
-    "Abbreviation": "kg"
-  },
-  "Megagrams": {
-    "Label": "Tonnes",
-    "Abbreviation": "t"
-  },
-  "Pounds": {
-    "Label": "Pounds",
-    "Abbreviation": "lb"
-  },
-  "Tons": {
-    "Label": "Tons",
-    "Abbreviation": "tn"
-  }
-},
 "DND5E.WhisperedTo": "Whispered to",
 "DND5E.Wiki": "Wiki",
 "DND5E.available": "available",

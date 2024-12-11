@@ -1,6 +1,6 @@
 import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
-import { splitSemicolons } from "../../utils.mjs";
+import { formatDistance, splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
@@ -253,12 +253,13 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Filter and sort speeds on their values
     speeds = speeds.filter(s => s[0]).sort((a, b) => b[0] - a[0]);
+    const units = movement.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
 
     // Case 1: Largest as primary
     if ( largestPrimary ) {
       let primary = speeds.shift();
       return {
-        primary: `${primary ? primary[1] : "0"} ${movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]}`,
+        primary: formatDistance(primary?.[1], units),
         special: speeds.map(s => s[1]).join(", ")
       };
     }
@@ -266,7 +267,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Case 2: Walk as primary
     else {
       return {
-        primary: `${movement.walk || 0} ${movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]}`,
+        primary: formatDistance(movement.walk ?? 0, units),
         special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
       };
     }
@@ -283,10 +284,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _getSenses(systemData) {
     const senses = systemData.attributes.senses ?? {};
     const tags = {};
+    const units = senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses[k] ?? 0;
       if ( v === 0 ) continue;
-      tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0]}`;
+      tags[k] = `${game.i18n.localize(label)} ${formatDistance(v, units)}`;
     }
     if ( senses.special ) splitSemicolons(senses.special).forEach((c, i) => tags[`custom${i + 1}`] = c);
     return tags;

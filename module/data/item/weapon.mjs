@@ -1,4 +1,4 @@
-import { filteredKeys } from "../../utils.mjs";
+import { filteredKeys, formatDistance } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
 import DamageField from "../shared/damage-field.mjs";
@@ -219,13 +219,10 @@ export default class WeaponData extends ItemDataModel.mixin(
 
     const labels = this.parent.labels ??= {};
     if ( this.hasRange ) {
-      const parts = [
-        this.range.value,
-        this.range.long ? `/ ${this.range.long}` : null,
-        (this.range.units in CONFIG.DND5E.movementUnits)
-          ? game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`) : null
-      ];
-      labels.range = parts.filterJoin(" ");
+      const units = this.range.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
+      const parts = [this.range.value, this.range.long !== this.range.value ? this.range.long : null].filter(_ => _);
+      parts.push(formatDistance(parts.pop(), units));
+      labels.range = parts.filterJoin("/");
     } else labels.range = game.i18n.localize("DND5E.None");
   }
 
