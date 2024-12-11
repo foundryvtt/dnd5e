@@ -106,7 +106,7 @@ export default class TargetField extends SchemaField {
       ).trim().capitalize() : (affectsConfig?.label ?? ""),
       statblock: game.i18n.format(
         `${affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${pr.select(this.target.affects.count || 1)}`,
-        { number: formatNumber(this.target.affects.count || 1, { spellOut: true }) }
+        { number: formatNumber(this.target.affects.count || 1, { words: true }) }
       )
     };
 

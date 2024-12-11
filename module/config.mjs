@@ -2589,7 +2589,7 @@ DND5E.individualTargetTypes = {
   },
   any: {
     label: "DND5E.TARGET.Type.Any.Label",
-    scalar: false
+    counted: "DND5E.TARGET.Type.Target.Counted"
   },
   willing: {
     label: "DND5E.TARGET.Type.WillingCreature.Label",
