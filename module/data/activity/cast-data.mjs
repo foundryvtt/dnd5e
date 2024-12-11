@@ -6,6 +6,7 @@ const { BooleanField, DocumentUUIDField, NumberField, SchemaField, SetField, Str
  * Data model for a Cast activity.
  *
  * @property {object} spell
+ * @property {string} spell.ability              Ability to override default spellcasting ability.
  * @property {object} spell.challenge
  * @property {number} spell.challenge.attack     Flat to hit bonus in place of the spell's normal attack bonus.
  * @property {number} spell.challenge.save       Flat DC to use in place of the spell's normal save DC.
@@ -23,6 +24,7 @@ export default class CastActivityData extends BaseActivityData {
     return {
       ...schema,
       spell: new SchemaField({
+        ability: new StringField(),
         challenge: new SchemaField({
           attack: new NumberField(),
           save: new NumberField(),

@@ -150,6 +150,11 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
       changes.push({ key: `system.${type}`, mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: JSON.stringify(data) });
     }
 
+    // Set the casting ability
+    if ( this.spell.ability ) changes.push({
+      key: "system.ability", mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE, value: this.spell.ability
+    });
+
     // Remove ignored properties
     for ( const property of this.spell.properties ) {
       changes.push({ key: "system.properties", mode: CONST.ACTIVE_EFFECT_MODES.ADD, value: `-${property}` });
