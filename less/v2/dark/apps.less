@@ -118,13 +118,26 @@
 /*  Context Menus                     */
 /* ---------------------------------- */
 
-#context-menu.dnd5e-theme-dark.dnd5e2 {
+#context-menu.dnd5e2:is(.dnd5e-theme-dark, .theme-dark) {
   /* TODO: These will be handled by the general app dark mode styles once they are no longer scoped to .sheet */
   --color-text-dark-primary: var(--dnd5e-color-blue-white);
   --dnd5e-background-card: var(--dnd5e-color-blue-gray-2);
   --color-text-dark-5: var(--color-text-light-6);
   --color-border-light-1: var(--dnd5e-color-blue-gray-3);
   .context-item:hover { background-color: var(--dnd5e-color-blue-gray-3); }
+}
+
+/* ---------------------------------- */
+/*  ProseMirror                       */
+/* ---------------------------------- */
+
+#prosemirror-dropdown.theme-dark {
+  --dropdown-background: var(--dnd5e-color-blue-gray-2);
+  --dropdown-border: transparent;
+  --color-control-hover: var(--dnd5e-color-blue-gray-3);
+  color: var(--color-text-light-6);
+
+  li.divider { border-color: var(--dnd5e-color-blue-gray-3); }
 }
 
 /* ---------------------------------- */

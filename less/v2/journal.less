@@ -433,6 +433,8 @@
   }
 
   .prosemirror menu {
+    --color-hover-bg: var(--dnd5e-background-card);
+
     .pm-dropdown {
       background: none;
       &:hover { background: var(--color-hover-bg); }
@@ -445,7 +447,18 @@
       font-family: var(--font-primary);
       font-size: var(--font-size-14);
       font-weight: normal;
-      line-height: 28px;
+      height: var(--menu-height);
+      line-height: var(--menu-height);
+      background: transparent;
+      border: none;
+      padding: 0 5px;
+      margin: 0;
+
+      &:hover, &.active {
+        box-shadow: none;
+        background: var(--color-hover-bg);
+        color: var(--color-form-label-hover);
+      }
     }
   }
 }
