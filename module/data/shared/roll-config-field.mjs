@@ -1,3 +1,5 @@
+import AdvantageModeField from "../fields/advantage-mode-field.mjs";
+
 const { StringField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
@@ -20,7 +22,7 @@ export default class RollConfigField extends foundry.data.fields.SchemaField {
       roll: new SchemaField({
         min: new NumberField({...opts, label: "DND5E.ROLL.Range.Minimum"}),
         max: new NumberField({...opts, label: "DND5E.ROLL.Range.Maximum"}),
-        mode: new NumberField({choices: [-1, 0, 1], initial: 0, label: "DND5E.AdvantageMode"}),
+        mode: new AdvantageModeField(),
         ...roll
       }),
       ...fields
