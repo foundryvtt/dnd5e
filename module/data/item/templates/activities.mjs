@@ -167,8 +167,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
    */
   static #migrateUses(source) {
     // Remove any old ternary operators from uses to prevent errors
-    let hasSourceUses = source.uses;
-    let maxIncludesIsAFunction = hasSourceUses && typeof (source.uses?.max?.includes) === "function";
+    let maxIncludesIsAFunction = source?.uses && typeof (source?.uses?.max?.includes) === "function";
 
     for ( const activity of Object.values(source.activities ?? {}) ) {
       if (maxIncludesIsAFunction && activity?.uses?.max?.includes(" ? ") )
@@ -177,48 +176,48 @@ export default class ActivitiesTemplate extends SystemDataModel {
       }
     }
 
-    if ( Array.isArray(source.uses?.recovery) )
+    if ( Array.isArray(source?.uses?.recovery) )
     {
       return;
     }
 
     const charged = source.recharge?.charged;
 
-    if (hasSourceUses && (source.recharge?.value !== null) && (charged !== undefined) && !source.uses?.max ) {
+    if (  (source.recharge?.value !== null) && (charged !== undefined) && !source.uses?.max ) {
       source.uses ??= {};
       source.uses.spent = charged ? 0 : 1;
       source.uses.max = "1";
     }
 
-    if ( hasSourceUses && foundry.utils.getType(source.uses?.recovery) !== "string" )
+    if (  foundry.utils.getType(source?.uses?.recovery) !== "string" )
     {
       return;
     }
 
     // If period is charges, set the recovery type to formula
-    if (hasSourceUses && source.uses.per === "charges" ) {
-      if ( hasSourceUses && source.uses.recovery ) {
+    if (source?.uses?.per === "charges" ) {
+      if ( source.uses.recovery ) {
         source.uses.recovery = [{ period: "lr", type: "formula", formula: source.uses.recovery }];
       } else if (hasSourceUses) {
         delete source.uses.recovery;
       }
     }
     // If period is not blank, set an appropriate recovery type
-    else if (hasSourceUses && source.uses.per ) {
-      if ( CONFIG.DND5E.limitedUsePeriods[source.uses.per]?.formula && source.uses.recovery ) {
-        source.uses.recovery = [{ period: source.uses.per, type: "formula", formula: source.uses.recovery }];
+    else if (source?.uses?.per ) {
+      if ( CONFIG.DND5E.limitedUsePeriods[source?.uses?.per]?.formula && source?.uses?.recovery ) {
+        source?.uses?.recovery = [{ period: source?.uses?.per, type: "formula", formula: source?.uses?.recovery }];
       }
       else {
-        source.uses.recovery = [{ period: source.uses.per, type: "recoverAll" }];
+        source?.uses?.recovery = [{ period: source?.uses?.per, type: "recoverAll" }];
       }
     }
     // Otherwise, check to see if recharge is set
-    else if (hasSourceUses && source.recharge?.value ) {
-      source.uses.recovery = [{ period: "recharge", formula: source.recharge.value }];
+    else if ( source.recharge?.value ) {
+      source?.uses?.recovery = [{ period: "recharge", formula: source.recharge.value }];
     }
     // Prevent a string value for uses recovery from being cleaned into a default recovery entry
-    else if (hasSourceUses && source.uses?.recovery === "" ) {
-      delete source.uses.recovery;
+    else if (source?.uses?.recovery === "" ) {
+      delete source?.uses.recovery;
     }
   }
 
