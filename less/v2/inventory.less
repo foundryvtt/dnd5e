@@ -183,6 +183,11 @@
         box-shadow: none;
         filter: drop-shadow(0 0 1px var(--dnd5e-color-black));
 
+        &.tmp.filled { 
+          --icon-fill: var(--dnd5e-color-blue);
+          --icon-stroke: var(--dnd5e-color-blue)
+        }
+        &.tmp:hover { filter: drop-shadow(0 0 2px var(--dnd5e-color-blue)); }
         &.filled { --icon-fill: var(--dnd5e-color-gold); }
         &:hover { filter: drop-shadow(0 0 2px var(--dnd5e-color-gold)); }
       }
