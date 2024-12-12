@@ -52,6 +52,20 @@ export default function DocumentSheetV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
+    async _render(force, { mode, ...options }={}) {
+      if ( mode && (mode !== this._mode) ) {
+        this._mode = mode;
+        if ( this.rendered ) {
+          const toggle = this.element[0].querySelector(".window-header .mode-slider");
+          toggle.checked = this._mode === this.constructor.MODES.EDIT;
+        }
+      }
+      return super._render(force, options);
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
     async _renderOuter() {
       const html = await super._renderOuter();
       const header = html[0].querySelector(".window-header");

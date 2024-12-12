@@ -1,4 +1,5 @@
 import Item5e from "../../documents/item.mjs";
+import ItemSheet5e2 from "./item-sheet-2.mjs";
 
 /**
  * Compendium with added support for item containers.
@@ -45,5 +46,14 @@ export default class ItemCompendium5e extends Compendium {
 
     // Let parent method perform sorting
     super._handleDroppedEntry(target, item.toDragData());
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _onClickEntryName(event) {
+    const { entryId } = event.target.closest("[data-entry-id]")?.dataset ?? {};
+    const item = await this.collection.getDocument?.(entryId);
+    item?.sheet.render(true, { mode: this.collection.locked ? ItemSheet5e2.MODES.PLAY : ItemSheet5e2.MODES.EDIT });
   }
 }
