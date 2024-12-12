@@ -1,36 +1,39 @@
+import { defaultUnits } from "../../../utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
+import DamageTraitField from "../fields/damage-trait-field.mjs";
+import SimpleTraitField from "../fields/simple-trait-field.mjs";
 
-const { SchemaField, SetField, StringField } = foundry.data.fields;
+const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+
+/**
+ * @typedef {import("../fields/damage-trait.mjs").DamageTraitData} DamageTraitData
+ * @typedef {import("../fields/simple-trait.mjs").SimpleTraitData} SimpleTraitData
+ */
+
+/**
+ * Data structure for a damage actor trait.
+ *
+ * @typedef {object} DamageModificationData
+ * @property {Record<string, string>} amount  Damage boost or reduction by damage type.
+ * @property {Set<string>} bypasses           Keys for physical properties that cause modification to be bypassed.
+ */
+
+/**
+ * @typedef {SimpleTraitData} LanguageTraitData
+ * @property {Record<string, CommunicationData>} communication  Measured communication ranges (e.g. telepathy).
+ */
+
+/**
+ * @typedef {object} LanguageCommunicationData
+ * @property {string} units  Units used to measure range.
+ * @property {number} value  Range to which this ability can be used.
+ */
 
 /**
  * Shared contents of the traits schema between various actor types.
  */
 export default class TraitsField {
-  /**
-   * Data structure for a standard actor trait.
-   *
-   * @typedef {object} SimpleTraitData
-   * @property {Set<string>} value  Keys for currently selected traits.
-   * @property {string} custom      Semicolon-separated list of custom traits.
-   */
-
-  /**
-   * Data structure for a damage actor trait.
-   *
-   * @typedef {object} DamageTraitData
-   * @property {Set<string>} value     Keys for currently selected traits.
-   * @property {Set<string>} bypasses  Keys for physical weapon properties that cause resistances to be bypassed.
-   * @property {string} custom         Semicolon-separated list of custom traits.
-   */
-
-  /**
-   * Data structure for a damage actor trait.
-   *
-   * @typedef {object} DamageModificationData
-   * @property {{[key: string]: string}} amount  Damage boost or reduction by damage type.
-   * @property {Set<string>} bypasses            Keys for physical properties that cause modification to be bypassed.
-   */
 
   /* -------------------------------------------- */
 
@@ -47,17 +50,17 @@ export default class TraitsField {
    */
   static get common() {
     return {
-      size: new StringField({required: true, initial: "med", label: "DND5E.Size"}),
-      di: this.makeDamageTrait({label: "DND5E.DamImm"}),
-      dr: this.makeDamageTrait({label: "DND5E.DamRes"}),
-      dv: this.makeDamageTrait({label: "DND5E.DamVuln"}),
+      size: new StringField({ required: true, initial: "med", label: "DND5E.Size" }),
+      di: new DamageTraitField({}, { label: "DND5E.DamImm" }),
+      dr: new DamageTraitField({}, { label: "DND5E.DamRes" }),
+      dv: new DamageTraitField({}, { label: "DND5E.DamVuln" }),
       dm: new SchemaField({
-        amount: new MappingField(new FormulaField({deterministic: true}), {label: "DND5E.DamMod"}),
+        amount: new MappingField(new FormulaField({ deterministic: true }), { label: "DND5E.DamMod" }),
         bypasses: new SetField(new StringField(), {
           label: "DND5E.DamagePhysicalBypass", hint: "DND5E.DamagePhysicalBypassHint"
         })
       }),
-      ci: this.makeSimpleTrait({label: "DND5E.ConImm"})
+      ci: new SimpleTraitField({}, { label: "DND5E.ConImm" })
     };
   }
 
@@ -71,7 +74,12 @@ export default class TraitsField {
    */
   static get creature() {
     return {
-      languages: this.makeSimpleTrait({label: "DND5E.Languages"})
+      languages: new SimpleTraitField({
+        communication: new MappingField(new SchemaField({
+          units: new StringField({ initial: () => defaultUnits("length") }),
+          value: new NumberField({ min: 0 })
+        }))
+      }, { label: "DND5E.Languages" })
     };
   }
 
@@ -83,16 +91,14 @@ export default class TraitsField {
    * @param {object} [options={}]
    * @param {string[]} [options.initial={}]      The initial value for the value set.
    * @param {object} [options.extraFields={}]    Additional fields added to schema.
-   * @returns {SchemaField}
+   * @returns {SimpleTraitField}
    */
   static makeSimpleTrait(schemaOptions={}, {initial=[], extraFields={}}={}) {
-    return new SchemaField({
-      ...extraFields,
-      value: new SetField(
-        new StringField(), {label: "DND5E.TraitsChosen", initial}
-      ),
-      custom: new StringField({required: true, label: "DND5E.Special"})
-    }, schemaOptions);
+    foundry.utils.logCompatibilityWarning(
+      "The `makeSimpleTrait` method on `TraitsField` has been deprecated and replaced with `SimpleTraitField`.",
+      { since: "DnD5e 4.2", until: "DnD5e 4.4" }
+    );
+    return new SimpleTraitField(extraFields, { initialValue: initial, ...schemaOptions });
   }
 
   /* -------------------------------------------- */
@@ -103,15 +109,14 @@ export default class TraitsField {
    * @param {object} [options={}]
    * @param {string[]} [options.initial={}]      The initial value for the value set.
    * @param {object} [options.extraFields={}]    Additional fields added to schema.
-   * @returns {SchemaField}
+   * @returns {DamageTraitField}
    */
   static makeDamageTrait(schemaOptions={}, {initial=[], initialBypasses=[], extraFields={}}={}) {
-    return this.makeSimpleTrait(schemaOptions, {initial, extraFields: {
-      ...extraFields,
-      bypasses: new SetField(new StringField(), {
-        label: "DND5E.DamagePhysicalBypass", hint: "DND5E.DamagePhysicalBypassHint", initial: initialBypasses
-      })
-    }});
+    foundry.utils.logCompatibilityWarning(
+      "The `makeDamageTrait` method on `TraitsField` has been deprecated and replaced with `DamageTraitField`.",
+      { since: "DnD5e 4.2", until: "DnD5e 4.4" }
+    );
+    return new DamageTraitField(extraFields, { initialValue: initial, initialBypasses, ...schemaOptions });
   }
 
   /* -------------------------------------------- */
