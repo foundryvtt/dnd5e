@@ -80,12 +80,12 @@ export default class MovementSensesConfig extends BaseConfigSheet {
     context.types = this.types.map(key => ({
       field: context.fields[key],
       value: context.data[key],
-      placeholder: placeholderData?.[key]
+      placeholder: placeholderData?.[key] ?? ""
     }));
 
     const automaticUnit = CONFIG.DND5E.movementUnits[
       placeholderData?.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0]
-    ].toLowerCase();
+    ]?.label?.toLowerCase();
     context.unitsOptions = [
       { value: "", label: game.i18n.format("DND5E.AutomaticValue", { value: automaticUnit }) },
       { rule: true },
