@@ -296,13 +296,18 @@ export default function ActorSheetV2Mixin(Base) {
         if ( !section.usesSlots ) return;
         const spells = foundry.utils.getProperty(this.actor.system.spells, section.prop);
         const max = spells.override ?? spells.max ?? 0;
-        section.pips = Array.fromRange(max, 1).map(n => {
+        const value = spells.value ?? 0;
+        section.pips = Array.fromRange(Math.max(max, value), 1).map(n => {
           const filled = spells.value >= n;
-          const label = filled
-            ? game.i18n.format(`DND5E.SpellSlotN.${plurals.select(n)}`, { n })
-            : game.i18n.localize("DND5E.SpellSlotExpended");
+          const temp = n > max;
+          const label = temp
+            ? game.i18n.localize("DND5E.SpellSlotTemporary")
+            : filled
+              ? game.i18n.format(`DND5E.SpellSlotN.${plurals.select(n)}`, { n })
+              : game.i18n.localize("DND5E.SpellSlotExpended");
           const classes = ["pip"];
           if ( filled ) classes.push("filled");
+          if ( temp ) classes.push("tmp");
           return { n, label, filled, tooltip: label, classes: classes.join(" ") };
         });
       });
