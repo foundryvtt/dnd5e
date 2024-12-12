@@ -84,12 +84,14 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       placeholder: placeholderData?.[key] ?? ""
     }));
 
-    const automaticUnit = CONFIG.DND5E.movementUnits[placeholderData?.units ?? defaultUnits("length")]?.label ?? "";
-    context.unitsOptions = [
-      { value: "", label: game.i18n.format("DND5E.AutomaticValue", { value: automaticUnit.toLowerCase() }) },
-      { rule: true },
-      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }))
-    ];
+    context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
+    if ( this.document instanceof Actor ) {
+      const automaticUnit = CONFIG.DND5E.movementUnits[placeholderData?.units ?? defaultUnits("length")]?.label ?? "";
+      context.unitsOptions.unshift(
+        { value: "", label: game.i18n.format("DND5E.AutomaticValue", { value: automaticUnit.toLowerCase() }) },
+        { rule: true }
+      );
+    }
 
     return context;
   }

@@ -31,8 +31,8 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
-      movement: new MovementField(),
-      senses: new SensesField(),
+      movement: new MovementField({}, { initialUnits: defaultUnits("length") }),
+      senses: new SensesField({}, { initialUnits: defaultUnits("length") }),
       type: new CreatureTypeField({ swarm: false }, { initial: { value: "humanoid" } })
     });
   }
