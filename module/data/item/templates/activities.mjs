@@ -187,8 +187,8 @@ export default class ActivitiesTemplate extends SystemDataModel {
 
     if ( foundry.utils.getType(source?.uses?.recovery) !== "string" ) return;
 
-    // If period is charges, set the recovery type to formula
-    if (source?.uses?.per === "charges" ) {
+    // If period is charges, set the recovery type to `formula`
+    if ( source.uses?.per === "charges" ) {
       if ( source.uses.recovery ) {
         source.uses.recovery = [{ period: "lr", type: "formula", formula: source.uses.recovery }];
       } else if (hasSourceUses) {
