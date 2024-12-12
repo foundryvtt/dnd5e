@@ -30,8 +30,10 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {number} attributes.hp.tempmax      Temporary change to the maximum HP.
  * @property {string} attributes.hp.formula      Formula used to determine hit points.
  * @property {object} attributes.death
- * @property {number} attributes.death.success   Number of successful death saves.
- * @property {number} attributes.death.failure   Number of failed death saves.
+ * @property {object} attributes.death.bonuses
+ * @property {string} attributes.death.bonuses.save   Numeric or dice bonus to death saving throws.
+ * @property {number} attributes.death.success        Number of successful death saves.
+ * @property {number} attributes.death.failure        Number of failed death saves.
  * @property {object} details
  * @property {TypeData} details.type             Creature type of this NPC.
  * @property {string} details.type.value         NPC's type as defined in the system configuration.

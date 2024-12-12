@@ -39,6 +39,8 @@ const {
  * @property {string} attributes.hp.bonuses.level         Bonus formula applied for each class level.
  * @property {string} attributes.hp.bonuses.overall       Bonus formula applied to total HP.
  * @property {object} attributes.death
+ * @property {object} attributes.death.bonuses
+ * @property {string} attributes.death.bonuses.save       Numeric or dice bonus to death saving throws.
  * @property {number} attributes.death.success            Number of successful death saves.
  * @property {number} attributes.death.failure            Number of failed death saves.
  * @property {number} attributes.exhaustion               Number of levels of exhaustion.
