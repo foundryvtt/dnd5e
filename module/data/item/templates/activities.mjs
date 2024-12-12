@@ -213,7 +213,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       source?.uses?.recovery = [{ period: "recharge", formula: source.recharge.value }];
     }
     // Prevent a string value for uses recovery from being cleaned into a default recovery entry
-    else if (source?.uses?.recovery === "" ) {
+    else if ( source.uses?.recovery === "" ) {
       delete source.uses.recovery;
     }
   }
