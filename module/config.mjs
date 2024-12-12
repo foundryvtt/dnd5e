@@ -1897,6 +1897,9 @@ DND5E.itemProperties = {
   thr: {
     label: "DND5E.Item.Property.Thrown"
   },
+  trait: {
+    label: "DND5E.Item.Property.Trait"
+  },
   two: {
     label: "DND5E.Item.Property.TwoHanded"
   },
@@ -1935,7 +1938,8 @@ DND5E.validProperties = {
     "stealthDisadvantage"
   ]),
   feat: new Set([
-    "mgc"
+    "mgc",
+    "trait"
   ]),
   loot: new Set([
     "mgc"

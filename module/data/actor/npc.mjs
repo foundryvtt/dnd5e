@@ -576,7 +576,8 @@ export default class NPCData extends CreatureTemplate {
 
     for ( const item of this.parent.items ) {
       if ( !["feat", "weapon"].includes(item.type) ) continue;
-      const category = item.system.activities?.contents[0]?.activation.type ?? "trait";
+      const category = item.system.properties.has("trait") ? "trait"
+        : (item.system.activities?.contents[0]?.activation?.type ?? "trait");
       if ( category in context.actionSections ) {
         const description = (await TextEditor.enrichHTML(item.system.description.value, {
           secrets: false, rollData: item.getRollData(), relativeTo: item
