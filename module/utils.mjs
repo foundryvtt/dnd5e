@@ -150,9 +150,12 @@ function _formatSystemUnits(value, unit, config, { parts=false, ...options }={})
     const localizationKey = `${config.counted}.${options.unitDisplay}.${getPluralRules().select(value)}`;
     return game.i18n.format(localizationKey, { number: formatNumber(value, options) });
   }
-  return (parts ? formatNumberParts : formatNumber)(value, {
-    style: "unit", unit: config?.formattingUnit ?? unit, ...options
-  });
+  unit = config?.formattingUnit ?? unit;
+  if ( isValidUnit(unit) ) {
+    options.style ??= "unit";
+    options.unit ??= unit;
+  }
+  return (parts ? formatNumberParts : formatNumber)(value, options);
 }
 
 /* -------------------------------------------- */
@@ -531,6 +534,18 @@ function isValidIdentifier(identifier) {
 export const validators = {
   isValidIdentifier: isValidIdentifier
 };
+
+/* -------------------------------------------- */
+
+/**
+ * Determine whether the provided unit is usable within `Intl.NumberFormat`.
+ * @param {string} unit
+ * @returns {boolean}
+ */
+export function isValidUnit(unit) {
+  if ( unit?.includes("-per-") ) return unit.split("-per-").every(u => isValidUnit(u));
+  return Intl.supportedValuesOf("unit").includes(unit);
+}
 
 /* -------------------------------------------- */
 /*  Handlebars Template Helpers                 */
