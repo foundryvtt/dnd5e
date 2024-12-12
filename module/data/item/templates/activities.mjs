@@ -185,10 +185,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       source.uses.max = "1";
     }
 
-    if (  foundry.utils.getType(source?.uses?.recovery) !== "string" )
-    {
-      return;
-    }
+    if ( foundry.utils.getType(source?.uses?.recovery) !== "string" ) return;
 
     // If period is charges, set the recovery type to formula
     if (source?.uses?.per === "charges" ) {
