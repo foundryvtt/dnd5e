@@ -172,10 +172,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if (maxIncludesIsAFunction && source?.uses?.max?.includes(" ? ") ) source.uses.max = "";
 
     for ( const activity of Object.values(source.activities ?? {}) ) {
-      if (maxIncludesIsAFunction && activity?.uses?.max?.includes(" ? ") )
-      {
-        activity.uses.max = "";
-      }
+      if ( activity?.uses?.max?.includes?.(" ? ") ) activity.uses.max = "";
     }
 
     if ( Array.isArray(source?.uses?.recovery) ) return;
