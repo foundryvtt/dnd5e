@@ -118,6 +118,9 @@ export default class CharacterData extends CreatureTemplate {
           }),
           failure: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
+          }),
+          bonuses: new SchemaField({
+            save: new FormulaField({ required: true, label: "DND5E.DeathSaveBonus" })
           })
         }, { label: "DND5E.DeathSave" }),
         inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" })
