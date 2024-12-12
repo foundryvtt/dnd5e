@@ -208,7 +208,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     }
     // Otherwise, check to see if recharge is set
     else if ( source.recharge?.value ) {
-      source?.uses?.recovery = [{ period: "recharge", formula: source.recharge.value }];
+      source.uses.recovery = [{ period: "recharge", formula: source.recharge.value }];
     }
     // Prevent a string value for uses recovery from being cleaned into a default recovery entry
     else if ( source.uses?.recovery === "" ) {
