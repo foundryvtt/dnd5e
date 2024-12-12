@@ -178,10 +178,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       }
     }
 
-    if ( Array.isArray(source?.uses?.recovery) )
-    {
-      return;
-    }
+    if ( Array.isArray(source?.uses?.recovery) ) return;
 
     const charged = source.recharge?.charged;
 
