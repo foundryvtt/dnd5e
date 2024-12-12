@@ -47,9 +47,11 @@ export function formatModifier(mod) {
  * @param {number} value    The value to format.
  * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
  * @param {boolean} [options.numerals]  Format the number as roman numerals.
+ * @param {boolean} [options.words]     Write out number as full word, if possible.
  * @returns {string}
  */
-export function formatNumber(value, { numerals, ...options }={}) {
+export function formatNumber(value, { numerals, words, ...options }={}) {
+  if ( words && game.i18n.has(`DND5E.NUMBER.${value}`, false) ) return game.i18n.localize(`DND5E.NUMBER.${value}`);
   if ( numerals ) return _formatNumberAsNumerals(value);
   const formatter = new Intl.NumberFormat(game.i18n.lang, options);
   return formatter.format(value);

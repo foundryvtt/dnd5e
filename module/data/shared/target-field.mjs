@@ -1,11 +1,10 @@
-import { formatDistance, prepareFormulaValue } from "../../utils.mjs";
+import { formatDistance, formatNumber, getPluralRules, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { BooleanField, SchemaField, StringField } = foundry.data.fields;
 
 /**
- * Field for storing target data.
- *
+ * @typedef {object} TargetData
  * @property {object} template
  * @property {string} template.count        Number of templates created.
  * @property {boolean} template.contiguous  Must all created areas be connected to one another?
@@ -19,6 +18,10 @@ const { BooleanField, SchemaField, StringField } = foundry.data.fields;
  * @property {string} affects.type          Type of targets that can be affected (e.g. creatures, objects, spaces).
  * @property {boolean} affects.choice       When targeting an area, can the user choose who it affects?
  * @property {string} affects.special       Description of special targeting.
+ */
+
+/**
+ * Field for storing target data.
  */
 export default class TargetField extends SchemaField {
   constructor(fields={}, options={}) {
@@ -54,7 +57,8 @@ export default class TargetField extends SchemaField {
    * @param {object} [labels]  Object in which to insert generated labels.
    */
   static prepareData(rollData, labels) {
-    this.target.affects.scalar = !["", "self", "any"].includes(this.target.affects.type);
+    this.target.affects.scalar = this.target.affects.type
+      && (CONFIG.DND5E.individualTargetTypes[this.target.affects.type]?.scalar !== false);
     if ( this.target.affects.scalar ) {
       prepareFormulaValue(this, "target.affects.count", "DND5E.TARGET.FIELDS.target.affects.count.label", rollData);
     } else this.target.affects.count = null;
@@ -76,26 +80,37 @@ export default class TargetField extends SchemaField {
       this.target.template.height = null;
     }
 
-    if ( labels ) {
+    const pr = getPluralRules();
+
+    // Generate the template label
+    const templateConfig = CONFIG.DND5E.areaTargetTypes[this.target.template.type];
+    if ( templateConfig ) {
       const parts = [];
+      if ( this.target.template.count > 1 ) parts.push(`${this.target.template.count} ×`);
+      if ( this.target.template.units in CONFIG.DND5E.movementUnits ) {
+        parts.push(formatDistance(this.target.template.size, this.target.template.units));
+      }
+      this.target.template.label = game.i18n.format(
+        `${templateConfig.counted}.${pr.select(this.target.template.count || 1)}`, { number: parts.filterJoin(" ") }
+      ).trim().capitalize();
+    } else this.target.template.label = "";
 
-      if ( this.target.template.type ) {
-        if ( this.target.template.count > 1 ) parts.push(`${this.target.template.count} ×`);
-        if ( this.target.template.units in CONFIG.DND5E.movementUnits ) {
-          parts.push(formatDistance(this.target.template.size, this.target.template.units));
-        } else {
-          parts.push(this.target.template.size);
+    // Generate the affects label
+    const affectsConfig = CONFIG.DND5E.individualTargetTypes[this.target.affects.type];
+    this.target.affects.labels = {
+      sheet: affectsConfig?.counted ? game.i18n.format(
+        `${affectsConfig.counted}.${this.target.affects.count ? pr.select(this.target.affects.count) : "other"}`, {
+          number: this.target.affects.count ? formatNumber(this.target.affects.count)
+            : game.i18n.localize(`DND5E.TARGET.Count.${this.target.template.type ? "Every" : "Any"}`)
         }
-        parts.push(CONFIG.DND5E.areaTargetTypes[this.target.template.type]?.label);
-      }
+      ).trim().capitalize() : (affectsConfig?.label ?? ""),
+      statblock: game.i18n.format(
+        `${affectsConfig?.counted ?? "DND5E.TARGET.Type.Target.Counted"}.${pr.select(this.target.affects.count || 1)}`,
+        { number: formatNumber(this.target.affects.count || 1, { words: true }) }
+      )
+    };
 
-      else if ( this.target.affects.type ) {
-        if ( this.target.affects.scalar ) parts.push(this.target.affects.count);
-        parts.push(CONFIG.DND5E.individualTargetTypes[this.target.affects.type]);
-      }
-
-      labels.target = parts.filterJoin(" ");
-    }
+    if ( labels ) labels.target = this.target.template.label || this.target.affects.labels.sheet;
   }
 
   /* -------------------------------------------- */

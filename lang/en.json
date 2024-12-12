@@ -2445,6 +2445,18 @@
   }
 },
 
+"DND5E.NUMBER": {
+  "1": "one",
+  "2": "two",
+  "3": "three",
+  "4": "four",
+  "5": "five",
+  "6": "six",
+  "7": "seven",
+  "8": "eight",
+  "9": "nine"
+},
+
 "DND5E.Number": "Number",
 "DND5E.OtherFormula": "Other Formula",
 "DND5E.PactMagic": "Pact Magic",
@@ -3146,6 +3158,13 @@
 "DND5E.Suppressed": "Suppressed",
 
 "DND5E.TARGET": {
+  "Action": {
+    "PlaceTemplate": "Place Measured Template"
+  },
+  "Count": {
+    "Any": "Any",
+    "Every": "Every"
+  },
   "FIELDS": {
     "target": {
       "label": "Targeting",
@@ -3209,8 +3228,156 @@
       }
     }
   },
-  "Action": {
-    "PlaceTemplate": "Place Measured Template"
+  "Formatted": "{count} {type}",
+  "Type": {
+    "Ally": {
+      "Label": "Ally",
+      "Counted": {
+        "any": "any allies",
+        "every": "every ally",
+        "one": "{number} ally",
+        "other": "{number} allies"
+      }
+    },
+    "Any": {
+      "Label": "Any"
+    },
+    "Circle": {
+      "Label": "Circle",
+      "Counted": {
+        "one": "{number} circle",
+        "other": "{number} circles"
+      }
+    },
+    "Cone": {
+      "Label": "Cone",
+      "Counted": {
+        "one": "{number} cone",
+        "other": "{number} cones"
+      }
+    },
+    "Creature": {
+      "Label": "Creature",
+      "Counted": {
+        "any": "any creatures",
+        "every": "every creature",
+        "one": "{number} creature",
+        "other": "{number} creatures"
+      }
+    },
+    "CreatureOrObject": {
+      "Label": "Creature or Object",
+      "Counted": {
+        "any": "any creatures or objects",
+        "every": "every creature or object",
+        "one": "{number} creature or object",
+        "other": "{number} creatures or objects"
+      }
+    },
+    "Cube": {
+      "Label": "Cube",
+      "Counted": {
+        "one": "{number} cube",
+        "other": "{number} cubes"
+      }
+    },
+    "Cylinder": {
+      "Label": "Cylinder",
+      "Counted": {
+        "one": "{number} cylinder",
+        "other": "{number} cylinders"
+      }
+    },
+    "Emanation": {
+      "Label": "Emanation",
+      "Counted": {
+        "one": "{number} emanation",
+        "other": "{number} emanations"
+      }
+    },
+    "Enemy": {
+      "Label": "Enemy",
+      "Counted": {
+        "any": "any enemies",
+        "every": "every enemy",
+        "one": "{number} enemy",
+        "other": "{number} enemies"
+      }
+    },
+    "Line": {
+      "Label": "Line",
+      "Counted": {
+        "one": "{number} line",
+        "other": "{number} lines"
+      }
+    },
+    "Object": {
+      "Label": "Object",
+      "Counted": {
+        "any": "any objects",
+        "every": "every object",
+        "one": "{number} object",
+        "other": "{number} objects"
+      }
+    },
+    "Radius": {
+      "Label": "Radius",
+      "Counted": {
+        "one": "{number} radius",
+        "other": "{number} radii"
+      }
+    },
+    "Self": {
+      "Label": "Self"
+    },
+    "Sphere": {
+      "Label": "Sphere",
+      "Counted": {
+        "one": "{number} sphere",
+        "other": "{number} spheres"
+      }
+    },
+    "Space": {
+      "Label": "Space",
+      "Counted": {
+        "any": "any spaces",
+        "every": "every space",
+        "one": "{number} space",
+        "other": "{number} spaces"
+      }
+    },
+    "Square": {
+      "Label": "Square",
+      "Counted": {
+        "one": "{number} square",
+        "other": "{number} squares"
+      }
+    },
+    "Target": {
+      "Label": "Target",
+      "Counted": {
+        "any": "any targets",
+        "every": "every target",
+        "one": "{number} target",
+        "other": "{number} targets"
+      }
+    },
+    "Wall": {
+      "Label": "Wall",
+      "Counted": {
+        "one": "{number} wall",
+        "other": "{number} walls"
+      }
+    },
+    "WillingCreature": {
+      "Label": "Willing Creature",
+      "Counted": {
+        "any": "any willing creatures",
+        "every": "every willing creature",
+        "one": "{number} willing creature",
+        "other": "{number} willing creatures"
+      }
+    }
   },
   "Warning": {
     "PlaceTemplate": "Failed to place measured template."
@@ -3219,32 +3386,12 @@
 
 "DND5E.Target": "Target",
 "DND5E.TargetPl": "Targets",
-"DND5E.TargetAlly": "Ally",
-"DND5E.TargetAny": "Any",
-"DND5E.TargetCircle": "Circle",
-"DND5E.TargetCone": "Cone",
-"DND5E.TargetCreature": "Creature",
-"DND5E.TargetCreatureOrObject": "Creature or Object",
-"DND5E.TargetCube": "Cube",
-"DND5E.TargetCylinder": "Cylinder",
-"DND5E.TargetEnemy": "Enemy",
-"DND5E.TargetEvery": "Every",
-"DND5E.TargetLine": "Line",
-"DND5E.TargetObject": "Object",
-"DND5E.TargetRadius": "Emanation",
-"DND5E.TargetRadiusLegacy": "Radius",
-"DND5E.TargetSelf": "Self",
-"DND5E.TargetSpace": "Space",
-"DND5E.TargetSphere": "Sphere",
-"DND5E.TargetSquare": "Square",
 "DND5E.TargetType": "Target Type",
 "DND5E.TargetTypeArea": "Area",
 "DND5E.TargetTypeIndividual": "Individual",
 "DND5E.TargetUnits": "Area of Effect Units",
 "DND5E.TargetValue": "Target Length or Count",
-"DND5E.TargetWall": "Wall",
 "DND5E.TargetWidth": "Line Width",
-"DND5E.TargetWilling": "Willing Creature",
 "DND5E.TemplatePrompt": "Template Prompt",
 "DND5E.TemplatePromptTooltip": "If unchecked, the prompt for placing a Measured Template will be suppressed.",
 "DND5E.Temp": "Temp",

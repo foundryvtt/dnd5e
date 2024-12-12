@@ -205,8 +205,7 @@ async function enrichAttack(config, label, options) {
       classification: CONFIG.DND5E.attackClassifications[activity?.attack.type.classification]?.label ?? ""
     }).trim();
     const parts = [span.outerHTML, activity?.getRangeLabel(config.attackMode)];
-
-    // TODO: Add targeting information (e.g. "one target") according to 2014 rules
+    if ( config._rules === "2014" ) parts.push(activity?.target?.affects.labels?.statblock);
 
     const full = document.createElement("span");
     full.className = "attack-extended";
