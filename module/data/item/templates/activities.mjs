@@ -169,6 +169,8 @@ export default class ActivitiesTemplate extends SystemDataModel {
     // Remove any old ternary operators from uses to prevent errors
     let maxIncludesIsAFunction = source?.uses && typeof (source?.uses?.max?.includes) === "function";
 
+    if (maxIncludesIsAFunction source?.uses?.max?.includes(" ? ") ) source.uses.max = "";
+
     for ( const activity of Object.values(source.activities ?? {}) ) {
       if (maxIncludesIsAFunction && activity?.uses?.max?.includes(" ? ") )
       {
