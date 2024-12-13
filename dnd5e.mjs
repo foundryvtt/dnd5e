@@ -587,6 +587,21 @@ Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJ
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
+Hooks.on("preCreateScene", (doc, createData, options, userId) => {
+  // Set default grid units based on metric length setting
+  const units = utils.defaultUnits("length");
+  if ( (units !== dnd5e.grid.units) && !foundry.utils.getProperty(createData, "grid.distance")
+    && !foundry.utils.getProperty(createData, "grid.units") ) {
+    const C = CONFIG.DND5E.movementUnits;
+    doc.updateSource({
+      grid: {
+        // TODO: Replace with `convertLength` method once added
+        distance: dnd5e.grid.distance * (C[dnd5e.grid.units]?.conversion ?? 1) / (C[units]?.conversion ?? 1), units
+      }
+    });
+  }
+});
+
 // TODO: Generalize this logic and make it available in the re-designed transform application.
 Hooks.on("dnd5e.transformActor", (subject, target, d, options) => {
   const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";

@@ -2350,6 +2350,23 @@ preLocalize("movementTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Default units used for imperial & metric settings.
+ * @enum {{ imperial: string, metric: string }}
+ */
+DND5E.defaultUnits = {
+  length: {
+    imperial: "ft",
+    metric: "m"
+  },
+  weight: {
+    imperial: "lb",
+    metric: "kg"
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
  * @typedef {object} UnitConfiguration
  * @property {string} label              Localized label for the unit.
  * @property {string} abbreviation       Localized abbreviation for the unit.

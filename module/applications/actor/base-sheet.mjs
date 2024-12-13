@@ -1,6 +1,6 @@
 import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
-import { formatDistance, splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, formatDistance, splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
@@ -253,7 +253,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Filter and sort speeds on their values
     speeds = speeds.filter(s => s[0]).sort((a, b) => b[0] - a[0]);
-    const units = movement.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
+    const units = movement.units ?? defaultUnits("length");
 
     // Case 1: Largest as primary
     if ( largestPrimary ) {
@@ -284,7 +284,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _getSenses(systemData) {
     const senses = systemData.attributes.senses ?? {};
     const tags = {};
-    const units = senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
+    const units = senses.units ?? defaultUnits("length");
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses[k] ?? 0;
       if ( v === 0 ) continue;

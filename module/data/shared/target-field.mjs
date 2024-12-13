@@ -1,4 +1,4 @@
-import { formatDistance, formatNumber, getPluralRules, prepareFormulaValue } from "../../utils.mjs";
+import { defaultUnits, formatDistance, formatNumber, getPluralRules, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { BooleanField, SchemaField, StringField } = foundry.data.fields;
@@ -33,7 +33,7 @@ export default class TargetField extends SchemaField {
         size: new FormulaField({ deterministic: true }),
         width: new FormulaField({ deterministic: true }),
         height: new FormulaField({ deterministic: true }),
-        units: new StringField({ initial: "ft" })
+        units: new StringField({ initial: () => defaultUnits("length") })
       }),
       affects: new SchemaField({
         count: new FormulaField({ deterministic: true }),
