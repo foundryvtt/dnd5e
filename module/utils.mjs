@@ -921,6 +921,8 @@ const _attributeLabelCache = new Map();
  * @returns {string|void}
  */
 export function getHumanReadableAttributeLabel(attr, { actor }={}) {
+  if ( attr.startsWith("system.") ) attr = attr.slice(7);
+
   // Check any actor-specific names first.
   if ( attr.startsWith("resources.") && actor ) {
     const key = attr.replace(/\.value$/, "");
