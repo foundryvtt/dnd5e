@@ -1,10 +1,12 @@
+import DragDropApplicationMixin from "./drag-drop-mixin.mjs";
+
 /**
  * Adds common V2 sheet functionality.
  * @param {typeof DocumentSheet} Base  The base class being mixed.
  * @returns {typeof DocumentSheetV2}
  */
 export default function DocumentSheetV2Mixin(Base) {
-  return class DocumentSheetV2 extends Base {
+  return class DocumentSheetV2 extends DragDropApplicationMixin(Base) {
     /**
      * @typedef {object} SheetTabDescriptor5e
      * @property {string} tab                       The tab key.
@@ -276,13 +278,51 @@ export default function DocumentSheetV2Mixin(Base) {
         const content = await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", context);
         summary.querySelectorAll(".item-summary").forEach(el => el.remove());
         summary.insertAdjacentHTML("beforeend", content);
-        await new Promise(resolve => requestAnimationFrame(resolve));
+        await new Promise(resolve => { requestAnimationFrame(resolve); });
         this._expanded.add(item.id);
       }
 
       row.classList.toggle("collapsed", expanded);
       icon.classList.toggle("fa-compress", !expanded);
       icon.classList.toggle("fa-expand", expanded);
+    }
+
+    /* -------------------------------------------- */
+    /*  Drag & Drop                                 */
+    /* -------------------------------------------- */
+
+    /** @override */
+    _allowedDropBehaviors(event, data) {
+      if ( !data.uuid ) return new Set(["copy", "link"]);
+      const allowed = new Set(["copy", "move", "link"]);
+      const s = foundry.utils.parseUuid(data.uuid);
+      const t = foundry.utils.parseUuid(this.document.uuid);
+      const sCompendium = s.collection instanceof CompendiumCollection;
+      const tCompendium = t.collection instanceof CompendiumCollection;
+
+      // If either source or target are within a compendium, but not inside the same compendium, move not allowed
+      if ( (sCompendium || tCompendium) && (s.collection !== t.collection) ) allowed.delete("move");
+
+      return allowed;
+    }
+
+    /* -------------------------------------------- */
+
+    /** @override */
+    _defaultDropBehavior(event, data) {
+      if ( !data.uuid ) return "copy";
+      const d = foundry.utils.parseUuid(data.uuid);
+      const t = foundry.utils.parseUuid(this.document.uuid);
+      return (d.collection === t.collection) && (d.documentId === t.documentId) && (d.documentType === t.documentType)
+        ? "move" : "copy";
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    async _onDragStart(event) {
+      await super._onDragStart(event);
+      if ( !this.document.isOwner || this.document.compendium?.locked ) event.dataTransfer.effectAllowed = "copyLink";
     }
   };
 }

@@ -447,6 +447,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( type === "slots" ) dragData.dnd5e.id = (preparationMode === "prepared") ? `spell${level}` : preparationMode;
     else dragData.dnd5e.id = key;
     event.dataTransfer.setData("application/json", JSON.stringify(dragData));
+    event.dataTransfer.effectAllowed = "link";
   }
 
   /* -------------------------------------------- */
@@ -616,6 +617,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
   /* -------------------------------------------- */
   /*  Favorites                                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _defaultDropBehavior(event, data) {
+    if ( data.dnd5e?.action === "favorite" || (["Activity", "Item"].includes(data.type)
+      && event.target.closest(".favorites")) ) return "link";
+    return super._defaultDropBehavior(event, data);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
