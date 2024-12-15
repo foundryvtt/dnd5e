@@ -1039,12 +1039,18 @@ export default function ActivityMixin(Base) {
       rollConfig.hookNames = [...(config.hookNames ?? []), "damage"];
       rollConfig.subject = this;
 
+      const titleFlavor = game.i18n.localize(`DND5E.${this.type === "heal" ? "Healing" : "Damage"}Roll`);
       const dialogConfig = foundry.utils.mergeObject({
         options: {
           position: {
             width: 400,
             top: config.event ? config.event.clientY - 80 : null,
             left: window.innerWidth - 710
+          },
+          window: {
+            title: `${this.item.name} - ${titleFlavor}`,
+            subtitle: "DND5E.RollConfiguration.Title",
+            icon: this.item.img
           }
         }
       }, dialog);
