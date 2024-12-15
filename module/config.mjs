@@ -4462,6 +4462,10 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
       addFullKeys("abilities");
       addFullKeys("skills");
       addFullKeys("spellSchools");
+
+      _enrichmentLookup.abilities.spellcasting = {
+        label: game.i18n.localize("DND5E.Spellcasting")
+      };
     }
     return _enrichmentLookup;
   },
