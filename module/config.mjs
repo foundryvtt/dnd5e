@@ -3388,7 +3388,9 @@ DND5E.consumableResources = [
  *                                 but acts as a status effect?
  * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
  * @property {{ rolls: number, speed: number }} [reduction]  Amount D20 Tests & Speed are reduced per exhaustion level
- *                                                           when using the modern rules.
+ *                                                           when using the modern rules. Speed reduction is measured
+ *                                                           in the default imperial units and converted to metric
+ *                                                           if necessary.
  */
 
 /**
