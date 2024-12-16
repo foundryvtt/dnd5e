@@ -741,7 +741,7 @@ export default function ActivityMixin(Base) {
           else if ( count > legendary.value ) message = "DND5E.ACTIVATION.Warning.NotEnoughActions";
           if ( message ) {
             const err = new ConsumptionError(game.i18n.format(message, {
-              type: game.i18n.localize("DND5E.LegAct"),
+              type: game.i18n.localize("DND5E.LegendaryAction.Label"),
               required: formatNumber(count),
               available: formatNumber(legendary.value)
             }));
