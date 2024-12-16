@@ -37,50 +37,11 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
 
   /* -------------------------------------------- */
 
-  /**
-   * Have sources of advantage been nullified?
-   * @type {boolean}
-   */
-  #nullAdvantage;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Have sources of disadvantage been nullified?
-   * @type {boolean}
-   */
-  #nullDisadvantage;
-
-  /* -------------------------------------------- */
-
-  /**
-   * A forced value due to an override.
-   * @type {-1|0|1|void}
-   */
-  #override;
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   initialize(value, model, options={}) {
     this.#advantage = Number(value === 1);
     this.#disadvantage = Number(value === -1);
-    this.#nullAdvantage = this.#nullDisadvantage = false;
-    this.#override = null;
     return value;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Calculate the current advantage mode.
-   * @returns {-1|0|1}
-   */
-  #calculateAdvantageMode() {
-    if ( AdvantageModeField.#values.includes(this.#override) ) return this.#override;
-    const advantage = this.#nullAdvantage ? 0 : Math.sign(this.#advantage);
-    const disadvantage = this.#nullDisadvantage ? 0 : Math.sign(this.#disadvantage);
-    return advantage - disadvantage;
   }
 
   /* -------------------------------------------- */
@@ -97,37 +58,34 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
         this.#disadvantage++;
         break;
     }
-    return this.#calculateAdvantageMode();
+    return Math.sign(this.#advantage) - Math.sign(this.#disadvantage);
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   _applyChangeDowngrade(value, delta, model, change) {
-    if ( [-1, 0].includes(delta) ) this.#nullAdvantage = true;
-    return this.#calculateAdvantageMode();
+    return value;
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   _applyChangeMultiply(value, delta, model, change) {
-    return this.#calculateAdvantageMode();
+    return value;
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   _applyChangeOverride(value, delta, model, change) {
-    if ( AdvantageModeField.#values.includes(delta) ) this.#override = delta;
-    return this.#calculateAdvantageMode();
+    return value;
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   _applyChangeUpgrade(value, delta, model, change) {
-    if ( [0, 1].includes(delta) ) this.#nullDisadvantage = true;
-    return this.#calculateAdvantageMode();
+    return value;
   }
 }
