@@ -5,7 +5,7 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   /** @inheritDoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
-      choices: [-1, 0, 1],
+      choices: AdvantageModeField.#values,
       initial: 0,
       label: "DND5E.AdvantageMode"
     });
@@ -14,7 +14,15 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   /* -------------------------------------------- */
 
   /**
-   * Number of advantage modifications.
+   * Allowed advantage mode values.
+   * @type {number[]}
+   */
+  static #values = [-1, 0, 1];
+
+  /* -------------------------------------------- */
+
+  /**
+   * Number of advantage sources.
    * @type {number}
    */
   #advantage;
@@ -22,10 +30,34 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   /* -------------------------------------------- */
 
   /**
-   * Number of disadvantage modifications.
+   * Number of disadvantage sources.
    * @type {number}
    */
   #disadvantage;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Have sources of advantage been nullified?
+   * @type {boolean}
+   */
+  #nullAdvantage;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Have sources of disadvantage been nullified?
+   * @type {boolean}
+   */
+  #nullDisadvantage;
+
+  /* -------------------------------------------- */
+
+  /**
+   * A forced value due to an override.
+   * @type {-1|0|1|void}
+   */
+  #override;
 
   /* -------------------------------------------- */
 
@@ -33,7 +65,22 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   initialize(value, model, options={}) {
     this.#advantage = Number(value === 1);
     this.#disadvantage = Number(value === -1);
+    this.#nullAdvantage = this.#nullDisadvantage = false;
+    this.#override = null;
     return value;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate the current advantage mode.
+   * @returns {-1|0|1}
+   */
+  #calculateAdvantageMode() {
+    if ( AdvantageModeField.#values.includes(this.#override) ) return this.#override;
+    const advantage = this.#nullAdvantage ? 0 : Math.sign(this.#advantage);
+    const disadvantage = this.#nullDisadvantage ? 0 : Math.sign(this.#disadvantage);
+    return advantage - disadvantage;
   }
 
   /* -------------------------------------------- */
@@ -41,12 +88,8 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   /* -------------------------------------------- */
 
   /** @override */
-  applyChange(value, model, change) {
-    const delta = this._castChangeDelta(change.value);
-    if ( change.mode === CONST.ACTIVE_EFFECT_MODES.CUSTOM ) {
-      return this._applyChangeCustom(value, delta, model, change);
-    }
-    switch (delta) {
+  _applyChangeAdd(value, delta, model, change) {
+    switch ( delta ) {
       case 1:
         this.#advantage++;
         break;
@@ -54,6 +97,37 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
         this.#disadvantage++;
         break;
     }
-    return Math.sign(this.#advantage) - Math.sign(this.#disadvantage);
+    return this.#calculateAdvantageMode();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeDowngrade(value, delta, model, change) {
+    if ( [-1, 0].includes(delta) ) this.#nullAdvantage = true;
+    return this.#calculateAdvantageMode();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeMultiply(value, delta, model, change) {
+    return this.#calculateAdvantageMode();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeOverride(value, delta, model, change) {
+    if ( AdvantageModeField.#values.includes(delta) ) this.#override = delta;
+    return this.#calculateAdvantageMode();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeUpgrade(value, delta, model, change) {
+    if ( [0, 1].includes(delta) ) this.#nullDisadvantage = true;
+    return this.#calculateAdvantageMode();
   }
 }
