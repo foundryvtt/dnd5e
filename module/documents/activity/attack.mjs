@@ -152,8 +152,8 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
           left: window.innerWidth - 710
         },
         window: {
-          title: `${this.item.name} - ${game.i18n.localize("DND5E.AttackRoll")}`,
-          subtitle: "DND5E.RollConfiguration.Title",
+          title: game.i18n.localize("DND5E.AttackRoll"),
+          subtitle: this.item.name,
           icon: this.item.img
         }
       }

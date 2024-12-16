@@ -1351,8 +1351,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const dialogConfig = foundry.utils.mergeObject({
       options: {
         window: {
-          title: `${game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel })}: ${this.name}`,
-          subtitle: "DND5E.RollConfiguration.Title"
+          title: game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel }),
+          subtitle: this.name
         }
       }
     }, dialog);
@@ -1373,8 +1373,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const dialogConfig = foundry.utils.mergeObject({
       options: {
         window: {
-          title: `${game.i18n.format("DND5E.ToolPromptTitle", { tool: toolLabel })}: ${this.name}`,
-          subtitle: "DND5E.RollConfiguration.Title"
+          title: game.i18n.format("DND5E.ToolPromptTitle", { tool: toolLabel }),
+          subtitle: this.name
         }
       }
     }, dialog);
@@ -1606,8 +1606,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const dialogConfig = foundry.utils.mergeObject({
       options: {
         window: {
-          title: `${game.i18n.format("DND5E.AbilityPromptTitle", { ability: abilityLabel })}: ${this.name}`,
-          subtitle: "DND5E.RollConfiguration.Title"
+          title: game.i18n.format("DND5E.AbilityPromptTitle", { ability: abilityLabel }),
+          subtitle: this.name
         }
       }
     }, dialog);
@@ -1643,8 +1643,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const dialogConfig = foundry.utils.mergeObject({
       options: {
         window: {
-          title: `${game.i18n.format("DND5E.SavePromptTitle", { ability: abilityLabel })}: ${this.name}`,
-          subtitle: "DND5E.RollConfiguration.Title"
+          title: game.i18n.format("DND5E.SavePromptTitle", { ability: abilityLabel }),
+          subtitle: this.name
         }
       }
     }, dialog);
