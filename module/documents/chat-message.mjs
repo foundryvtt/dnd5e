@@ -187,6 +187,7 @@ export default class ChatMessage5e extends ChatMessage {
     const originatingMessage = this.getOriginatingMessage();
     const displayChallenge = originatingMessage?.shouldDisplayChallenge;
     const displayAttackResult = game.user.isGM || (game.settings.get("dnd5e", "attackRollVisibility") !== "none");
+    const forceSuccess = this.flags.dnd5e?.roll?.forceSuccess === true;
 
     /**
      * Create an icon to indicate success or failure.
@@ -220,11 +221,11 @@ export default class ChatMessage5e extends ChatMessage {
       const isAttack = this.getFlag("dnd5e", "roll.type") === "attack";
       const showResult = isAttack ? displayAttackResult : displayChallenge;
       if ( d.options.target && showResult ) {
-        if ( d20Roll.total >= d.options.target ) total.classList.add("success");
+        if ( d20Roll.isSuccess || forceSuccess ) total.classList.add("success");
         else total.classList.add("failure");
       }
       if ( canCrit && d20Roll.isCritical ) total.classList.add("critical");
-      if ( canCrit && d20Roll.isFumble ) total.classList.add("fumble");
+      if ( canCrit && d20Roll.isFumble && !forceSuccess ) total.classList.add("fumble");
 
       const icons = document.createElement("div");
       icons.classList.add("icons");
@@ -342,6 +343,7 @@ export default class ChatMessage5e extends ChatMessage {
         if ( !(roll instanceof DamageRoll) && this.rolls[i] ) this._enrichRollTooltip(this.rolls[i], el);
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
+      this._enrichSaveTooltip(html);
       this._enrichEnchantmentTooltip(html);
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     } else {
@@ -591,6 +593,48 @@ export default class ChatMessage5e extends ChatMessage {
     const afterElement = html.querySelector(".card-footer");
     if ( afterElement ) afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
     else html.querySelector(".chat-card")?.append(enchantmentApplication);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display option to resist a failed save using a legendary resistance.
+   * @param {HTMLLIElement} html  The chat card.
+   * @protected
+   */
+  _enrichSaveTooltip(html) {
+    const actor = this.getAssociatedActor();
+    const roll = this.getFlag("dnd5e", "roll");
+    if ( (actor?.type !== "npc") || (roll?.type !== "save") || this.rolls.some(r => r.isSuccess) ) return;
+
+    const content = document.createElement("div");
+    content.classList.add("dnd5e2", "chat-card");
+
+    // If message has the `forceSuccess` flag, mark it as resisted
+    if ( roll.forceSuccess ) content.insertAdjacentHTML("beforeend", `
+      <p class="supplement">
+        <strong>${game.i18n.localize("DND5E.ROLL.Status")}</strong>
+        ${game.i18n.localize("DND5E.LegendaryResistance.Resisted")}
+      </p>
+    `);
+
+    // Otherwise if actor has legendary resistances remaining, display resist button
+    else if ( (actor.system.resources.legres.value > 0) && actor.isOwner ) {
+      content.insertAdjacentHTML("beforeend", `
+        <div class="card-buttons">
+          <button type="button">
+            <i class="fa-solid fa-dragon" inert></i>
+            ${game.i18n.localize("DND5E.LegendaryResistance.Action.Resist")}
+          </button>
+        </div>
+      `);
+      const button = content.querySelector("button");
+      button.addEventListener("click", () => actor.system.resistSave(this));
+    }
+
+    else return;
+
+    html.querySelector(".message-content").append(content);
   }
 
   /* -------------------------------------------- */

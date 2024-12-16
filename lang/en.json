@@ -2358,21 +2358,35 @@
 "DND5E.LanguagesTerran": "Terran",
 "DND5E.LanguagesThievesCant": "Thieves' Cant",
 "DND5E.LanguagesUndercommon": "Undercommon",
-"DND5E.LegAct": "Legendary Actions",
-"DND5E.LegActN.one": "1st Legendary Action",
-"DND5E.LegActN.two": "2nd Legendary Action",
-"DND5E.LegActN.few": "3rd Legendary Action",
-"DND5E.LegActN.other": "{n}th Legendary Action",
-"DND5E.LegActMax": "Maximum Legendary Actions",
-"DND5E.LegActRemaining": "Remaining Legendary Actions",
-"DND5E.LegendaryActionLabel": "Legendary Action",
-"DND5E.LegRes": "Legendary Resistance",
-"DND5E.LegResN.one": "1st Legendary Resistance",
-"DND5E.LegResN.two": "2nd Legendary Resistance",
-"DND5E.LegResN.few": "3rd Legendary Resistance",
-"DND5E.LegResN.other": "{n}th Legendary Resistance",
-"DND5E.LegResMax": "Maximum Legendary Resistances",
-"DND5E.LegResRemaining": "Remaining Legendary Resistances",
+
+"DND5E.LegendaryAction": {
+  "Label": "Legendary Action",
+  "Max": "Maximum Legendary Actions",
+  "Ordinal": {
+    "one": "{n}st Legendary Action",
+    "two": "{n}nd Legendary Action",
+    "few": "{n}rd Legendary Action",
+    "other": "{n}th Legendary Action"
+  },
+  "Remaining": "Remaining Legendary Actions"
+},
+
+"DND5E.LegendaryResistance": {
+  "Action": {
+    "Resist": "Resist"
+  },
+  "Label": "Legendary Resistance",
+  "Max": "Maximum Legendary Resistances",
+  "Ordinal": {
+    "one": "{n}st Legendary Resistance",
+    "two": "{n}nd Legendary Resistance",
+    "few": "{n}rd Legendary Resistance",
+    "other": "{n}th Legendary Resistance"
+  },
+  "Remaining": "Remaining Legendary Resistances",
+  "Resisted": "Resisted"
+},
+
 "DND5E.Level": "Level",
 "DND5E.LevelPl": "Levels",
 "DND5E.LevelActionDecrease": "Level Down",
@@ -2605,7 +2619,8 @@
     "Maximum": "Maximum Roll",
     "Minimum": "Minimum Roll"
   },
-  "Section": "{label} Rolls"
+  "Section": "{label} Rolls",
+  "Status": "Status"
 },
 
 "DND5E.Roll": "Roll",

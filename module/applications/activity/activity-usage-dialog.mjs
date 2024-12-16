@@ -249,7 +249,7 @@ export default class ActivityUsageDialog extends Dialog5e {
       context.fields.push({
         field: new BooleanField({
           label: game.i18n.format("DND5E.CONSUMPTION.Type.Action.Prompt", {
-            type: game.i18n.localize("DND5E.LegAct")
+            type: game.i18n.localize("DND5E.LegendaryAction.Label")
           }),
           hint: game.i18n.format("DND5E.CONSUMPTION.Type.Action.PromptHint", {
             available: game.i18n.format(
