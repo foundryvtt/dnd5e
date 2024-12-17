@@ -561,6 +561,8 @@ Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJ
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
+Hooks.on("renderCombatTracker", (app, html, data) => app.renderGroups(html instanceof HTMLElement ? html : html[0]));
+
 Hooks.on("preCreateScene", (doc, createData, options, userId) => {
   // Set default grid units based on metric length setting
   const units = utils.defaultUnits("length");
