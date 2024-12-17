@@ -395,49 +395,96 @@ async function enrichCheck(config, label, options) {
  * ```[[/save ability=dex]]```
  * becomes
  * ```html
- * <a class="roll-action" data-type="save" data-key="dex">
- *   <i class="fa-solid fa-dice-d20"></i> Dexterity
- * </a>
+ * <span class="roll-link-group" data-type="save" data-ability="dex">
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20"></i> Dexterity</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
  * ```
  *
  * @example Add a DC to the save:
  * ```[[/save ability=dex dc=20]]```
  * becomes
  * ```html
- * <a class="roll-action" data-type="save" data-key="dex" data-dc="20">
- *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity
- * </a>
+ * <span class="roll-link-group" data-type="save" data-ability="dex" data-dc="20">
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
+ * ```
+ *
+ * @example Specify multiple abilities:
+ * ```[[/save ability=str/dex dc=20]]```
+ * ```[[/save strength dexterity dc=20]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-type="save" data-ability="str|dex" data-dc="20">
+ *   DC 20
+ *   <a class="roll-action" data-ability="str"><i class="fa-solid fa-dice-d20"></i> Strength</a> or
+ *   <a class="roll-action" data-ability="dex"><i class="fa-solid fa-dice-d20"></i> Dexterity</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
  * ```
  *
  * @example Create a concentration check:
  * ```[[/concentration 10]]```
  * becomes
  * ```html
- * <a class="roll-action" data-type="concentration" data-dc="10">
- *   <i class="fa-solid fa-dice-d20"></i> DC 10 concentration
- * </a>
+ * <span class="roll-link-group" data-type="concentration" data-dc=10>
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20"></i> DC 10 concentration</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
  * ```
  */
 async function enrichSave(config, label, options) {
+  config.ability = config.ability?.replace("/", "|").split("|") ?? [];
   for ( let value of config.values ) {
     const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
     if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = slug;
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
     else config[value] = true;
   }
+  config.ability = config.ability
+    .filter(a => a in CONFIG.DND5E.enrichmentLookup.abilities)
+    .map(a => CONFIG.DND5E.enrichmentLookup.abilities[a].key ?? a);
 
-  const abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
-  if ( !abilityConfig && !config._isConcentration ) {
-    console.warn(`Ability ${config.ability} not found while enriching ${config._input}.`);
+  if ( !config.ability.length && !config._isConcentration ) {
+    console.warn(`No ability found while enriching ${config._input}.`);
     return null;
   }
-  if ( abilityConfig?.key ) config.ability = abilityConfig.key;
 
   if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData);
 
+  if ( config.ability.length > 1 && label ) {
+    console.warn(`Multiple abilities and custom label found while enriching ${config._input}, which aren't supported together.`);
+    return null;
+  }
+
   config = { type: config._isConcentration ? "concentration" : "save", ...config };
-  if ( !label ) label = createRollLabel(config);
-  return createRequestLink(createRollLink(label), config);
+  if ( label ) label = createRollLink(label);
+  else if ( config.ability.length <= 1 ) label = createRollLink(createRollLabel(config));
+  else {
+    label = game.i18n.getListFormatter({ type: "disjunction" }).format(config.ability.map(ability =>
+      createRollLink(createRollLabel({ type: "save", ability }), { ability }).outerHTML
+    ));
+    if ( config.dc && !config.hideDC ) {
+      label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+    }
+    label = game.i18n.format(`EDITOR.DND5E.Inline.Save${config.format === "long" ? "Long" : "Short"}`, { save: label });
+    const template = document.createElement("template");
+    template.innerHTML = label;
+    label = template;
+  }
+  return createRequestLink(label, { ...config, ability: config.ability.join("|") });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Create the buttons for a save requested in chat.
+ * @param {object} dataset
+ * @returns {object[]}
+ */
+function createSaveRequestButtons(dataset) {
+  return (dataset.ability?.split("|") ?? []).map(ability => createRequestButton({ ...dataset, ability }));
 }
 
 /* -------------------------------------------- */
@@ -1010,7 +1057,7 @@ function createRequestLink(label, dataset) {
   const span = document.createElement("span");
   span.classList.add("roll-link-group");
   _addDataset(span, dataset);
-  if ( label instanceof HTMLElement ) span.insertAdjacentElement("afterbegin", label);
+  if ( label instanceof HTMLTemplateElement ) span.append(label.content);
   else span.append(label);
 
   // Add chat request link for GMs
@@ -1096,21 +1143,26 @@ async function rollAction(event) {
   if ( !target ) return;
   event.stopPropagation();
 
-  const { type, ability, skill, tool, dc } = target.dataset;
+  const dataset = {
+    ...((event.target.closest(".roll-link-group") ?? target)?.dataset ?? {}),
+    ...(event.target.closest(".roll-link")?.dataset ?? {})
+  };
+  const { type, ability, skill, tool, dc } = dataset;
   const options = { event };
   if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
-  if ( dc ) options.target = dc;
+  if ( dc ) options.target = Number(dc);
 
   const action = event.target.closest("a")?.dataset.action ?? "roll";
+  const link = event.target.closest("a") ?? event.target;
 
   // Direct roll
   if ( (action === "roll") || !game.user.isGM ) {
-    target.disabled = true;
+    link.disabled = true;
     try {
       switch ( type ) {
         case "attack": return await rollAttack(event);
         case "damage": return await rollDamage(event);
-        case "item": return await useItem(target.dataset);
+        case "item": return await useItem(dataset);
       }
 
       const actors = getSceneTargets().map(t => t.actor);
@@ -1140,25 +1192,41 @@ async function rollAction(event) {
         }
       }
     } finally {
-      target.disabled = false;
+      link.disabled = false;
     }
   }
 
   // Roll request
   else {
     const MessageClass = getDocumentClass("ChatMessage");
+
+    let buttons;
+    if ( dataset.type === "save" ) buttons = createSaveRequestButtons(dataset);
+    else buttons = [createRequestButton(dataset)];
+
     const chatData = {
       user: game.user.id,
-      content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
-        buttonLabel: createRollLabel({ ...target.dataset, format: "short", icon: true }),
-        hiddenLabel: createRollLabel({ ...target.dataset, format: "short", icon: true, hideDC: true }),
-        dataset: { ...target.dataset, action: "rollRequest", visibility: "all" }
-      }),
+      content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", { buttons }),
       flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),
       speaker: MessageClass.getSpeaker({user: game.user})
     };
     return MessageClass.create(chatData);
   }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Create a button for a chat request.
+ * @param {object} dataset
+ * @returns {object}
+ */
+function createRequestButton(dataset) {
+  return {
+    buttonLabel: createRollLabel({ ...dataset, format: "short", icon: true }),
+    hiddenLabel: createRollLabel({ ...dataset, format: "short", icon: true, hideDC: true }),
+    dataset: { ...dataset, action: "rollRequest", visibility: "all" }
+  };
 }
 
 /* -------------------------------------------- */
