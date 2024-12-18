@@ -20,6 +20,7 @@ import DamagesConfig from "./config/damages-config.mjs";
 import HitDiceConfig from "./config/hit-dice-config.mjs";
 import HitPointsConfig from "./config/hit-points-config.mjs";
 import InitiativeConfig from "./config/initiative-config.mjs";
+import LanguagesConfig from "./config/languages-config.mjs";
 import SkillToolConfig from "./config/skill-tool-config.mjs";
 import SkillsConfig from "./config/skills-config.mjs";
 import SpellSlotsConfig from "./config/spell-slots-config.mjs";
@@ -1239,10 +1240,16 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     event.preventDefault();
     const trait = event.currentTarget.dataset.trait;
     const options = { document: this.actor, trait };
-    if ( trait === "tool" ) return new ToolsConfig(options).render({ force: true });
-    else if ( ["dr", "di", "dv", "dm"].includes(trait) ) return new DamagesConfig(options).render({ force: true });
-    else if ( trait === "weapon" ) return new WeaponsConfig(options).render({ force: true });
-    return new TraitsConfig(options).render({ force: true });
+    switch ( trait ) {
+      case "di":
+      case "dm":
+      case "dr":
+      case "dv": return new DamagesConfig(options).render({ force: true });
+      case "languages": return new LanguagesConfig(options).render({ force: true });
+      case "tool": return new ToolsConfig(options).render({ force: true });
+      case "weapon": return new WeaponsConfig(options).render({ force: true });
+      default: return new TraitsConfig(options).render({ force: true });
+    }
   }
 
   /* -------------------------------------------- */

@@ -1,0 +1,26 @@
+<section>
+    {{#each choices}}
+    <fieldset class="traits card">
+        <legend>{{ label }}</legend>
+        {{> "dnd5e.traits-list" choices=children keyPath=(concat @root.keyPath ".value.") topLevel=true
+            field=@root.checkbox input=@root.inputs.createCheckboxInput }}
+    </fieldset>
+    {{/each}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.Language.Communication.Label" }}</legend>
+        {{#each communication}}
+        <div class="form-group split-group">
+            <label>{{ label }}</label>
+            <div class="form-fields">
+                {{ formInput fields.value name=(concat keyPath ".value") value=data.value }}
+                {{ formInput fields.units name=(concat keyPath ".units") value=data.units options=unitOptions }}
+            </div>
+        </div>
+        {{/each}}
+    </fieldset>
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.Special" }}</legend>
+        {{ formInput fields.custom value=data.custom }}
+        <p class="hint">{{ localize "DND5E.SpecialHint" }}</p>
+    </fieldset>
+</section>
