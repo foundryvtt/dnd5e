@@ -216,12 +216,17 @@
                         </div>
 
                         {{!-- Spell Uses --}}
-                        <div class="item-detail item-uses spell-uses {{#unless ctx.hasUses}}empty{{/unless}}">
+                        <div class="item-detail item-uses spell-uses
+                             {{#unless (or ctx.hasUses ctx.linkedUses)}}empty{{/unless}}">
                             {{#if ctx.hasUses}}
                             <input type="text" value="{{ item.system.uses.value }}" placeholder="0" data-dtype="Number"
                                    data-name="system.uses.value" inputmode="numeric" pattern="[+=\-]?\d*">
                             <span class="separator">&sol;</span>
                             <span class="max">{{ item.system.uses.max }}</span>
+                            {{else if ctx.linkedUses}}
+                            <span class="value">{{ ctx.linkedUses.value }}</span>
+                            <span class="separator">&sol;</span>
+                            <span class="max">{{ ctx.linkedUses.max }}</span>
                             {{/if}}
                         </div>
 
