@@ -18,6 +18,10 @@
 "TYPES.ActiveEffect.enchantment": "Enchantment",
 "TYPES.ActiveEffect.enchantmentPl": "Enchantments",
 
+"TYPES.ChatMessage": {
+  "turn": "Combat Turn Message"
+},
+
 "TYPES.Item.background": "Background",
 "TYPES.Item.backgroundPl": "Backgrounds",
 "TYPES.Item.container": "Container",
@@ -745,6 +749,13 @@
 "DND5E.ChatContextSelectHit": "Select Hit Targets",
 "DND5E.ChatContextSelectMiss": "Select Missed Targets",
 "DND5E.ChatFlavor": "Chat Message Flavor",
+
+"DND5E.CHATMESSAGE": {
+  "TURN": {
+    "NoCombat": "Combat has ended!",
+    "Recovery": "Recovery"
+  }
+},
 
 "DND5E.CHECK": {
   "Title": "Check",

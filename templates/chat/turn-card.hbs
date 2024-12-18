@@ -1,0 +1,26 @@
+<div class="dnd5e2 chat-card turn-card">
+    {{#if actor}}
+
+    {{!-- Deltas --}}
+    {{#if deltas.length}}
+    <section class="deltas">
+        <h5 class="roboto-condensed-upper">{{ localize "DND5E.CHATMESSAGE.TURN.Recovery" }}</h5>
+        <ul class="unlist">
+            {{#each deltas}}
+            <li class="delta-{{ type }}">
+                <span class="label">{{ label }}</span>
+                <span class="value">{{ delta }}</span>
+            </li>
+            {{/each}}
+        </ul>
+        <!-- TODO: Add button to revert changes -->
+    </section>
+    {{/if}}
+
+    {{!-- Actions --}}
+    <!-- TODO: Add actions when implementing https://github.com/foundryvtt/dnd5e/issues/4861 -->
+
+    {{else}}
+    <p>{{ localize "DND5E.CHATMESSAGE.TURN.NoCombat" }}</p>
+    {{/if}}
+</div>

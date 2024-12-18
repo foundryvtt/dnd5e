@@ -41,6 +41,7 @@ export default class ChatMessage5e extends ChatMessage {
 
   /** @inheritDoc */
   get isRoll() {
+    if ( (this.system?.isRoll !== undefined) ) return this.system.isRoll;
     return super.isRoll && !this.flags.dnd5e?.rest;
   }
 
@@ -100,8 +101,14 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getHTML(...args) {
+  async getHTML() {
     const html = await super.getHTML();
+    const element = (html instanceof HTMLElement) ? html : html[0];
+
+    if ( foundry.utils.getType(this.system?.getHTML) === "function" ) {
+      await this.system.getHTML(element);
+      return html;
+    }
 
     this._displayChatActionButtons(html);
     this._highlightCriticalSuccessFailure(html);
@@ -109,10 +116,10 @@ export default class ChatMessage5e extends ChatMessage {
       html.find(".description.collapsible").each((i, el) => el.classList.add("collapsed"));
     }
 
-    this._enrichChatCard(html[0]);
-    this._collapseTrays(html[0]);
-    this._activateActivityListeners(html[0]);
-    dnd5e.bastion._activateChatListeners(this, html[0]);
+    this._enrichChatCard(element);
+    this._collapseTrays(element);
+    this._activateActivityListeners(element);
+    dnd5e.bastion._activateChatListeners(this, element);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
@@ -121,7 +128,7 @@ export default class ChatMessage5e extends ChatMessage {
      * @param {ChatMessage5e} message  Chat message being rendered.
      * @param {HTMLElement} html       HTML contents of the message.
      */
-    Hooks.callAll("dnd5e.renderChatMessage", this, html[0]);
+    Hooks.callAll("dnd5e.renderChatMessage", this, element);
 
     return html;
   }
