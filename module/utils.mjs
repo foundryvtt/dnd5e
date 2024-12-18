@@ -502,20 +502,53 @@ export function getSceneTargets() {
 /* -------------------------------------------- */
 
 /**
+ * Convert the provided length to another unit.
+ * @param {number} value                   The length being converted.
+ * @param {string} from                    The initial units.
+ * @param {string} to                      The final units.
+ * @param {object} [options={}]
+ * @param {boolean} [options.strict=true]  Throw an error if either unit isn't found.
+ * @returns {number}
+ */
+export function convertLength(value, from, to, { strict=true }={}) {
+  const message = unit => `Length unit ${unit} not defined in CONFIG.DND5E.movementUnits`;
+  return _convertSystemUnits(value, from, to, CONFIG.DND5E.movementUnits, { message, strict });
+}
+
+/* -------------------------------------------- */
+
+/**
  * Convert the provided weight to another unit.
- * @param {number} value  The weight being converted.
- * @param {string} from   The initial units.
- * @param {string} to     The final units.
+ * @param {number} value                   The weight being converted.
+ * @param {string} from                    The initial units.
+ * @param {string} to                      The final units.
+ * @param {object} [options={}]
+ * @param {boolean} [options.strict=true]  Throw an error if either unit isn't found.
  * @returns {number}      Weight in the specified units.
  */
-export function convertWeight(value, from, to) {
-  if ( from === to ) return value;
+export function convertWeight(value, from, to, { strict=true }={}) {
   const message = unit => `Weight unit ${unit} not defined in CONFIG.DND5E.weightUnits`;
-  if ( !CONFIG.DND5E.weightUnits[from] ) throw new Error(message(from));
-  if ( !CONFIG.DND5E.weightUnits[to] ) throw new Error(message(to));
-  return value
-    * CONFIG.DND5E.weightUnits[from].conversion
-    / CONFIG.DND5E.weightUnits[to].conversion;
+  return _convertSystemUnits(value, from, to, CONFIG.DND5E.weightUnits, { message, strict });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Convert from one unit to another using one of core's built-in unit types.
+ * @param {number} value                                Value to display.
+ * @param {string} from                                 The initial unit.
+ * @param {string} to                                   The final unit.
+ * @param {UnitConfiguration} config                    Configuration data for the unit.
+ * @param {object} options
+ * @param {function(string): string} [options.message]  Method used to produce the error message if unit not found.
+ * @param {boolean} [options.strict]                    Throw an error if either unit isn't found.
+ * @returns {string}
+ */
+function _convertSystemUnits(value, from, to, config, { message, strict }) {
+  if ( from === to ) return value;
+  if ( strict && !config[from] ) throw new Error(errorMessage(from));
+  if ( strict && !config[to] ) throw new Error(errorMessage(to));
+  return value * (config[from].conversion ?? 1) / (config[to].conversion ?? 1);
 }
 
 /* -------------------------------------------- */
