@@ -940,8 +940,8 @@ function createPassiveTag(label, dataset) {
  * @returns {string}
  */
 export function createRollLabel(config) {
-  const { label: ability, abbreviation } = CONFIG.DND5E.abilities[config.ability] ?? {};
-  const skill = CONFIG.DND5E.skills[config.skill]?.label;
+  const { label: ability, abbreviation } = CONFIG.DND5E.enrichmentLookup.abilities[config.ability] ?? {};
+  const skill = CONFIG.DND5E.enrichmentLookup.skills[config.skill]?.label;
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
   const tool = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true })?.name : null;
   const longSuffix = config.format === "long" ? "Long" : "Short";
@@ -1094,7 +1094,7 @@ async function rollAction(event) {
 
   const { type, ability, skill, tool, dc } = target.dataset;
   const options = { event };
-  if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
+  if ( ability in CONFIG.DND5E.abilities || (ability === "spellcasting") ) options.ability = ability;
   if ( dc ) options.target = dc;
 
   const action = event.target.closest("a")?.dataset.action ?? "roll";

@@ -1415,6 +1415,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
     const buildConfig = this._buildSkillToolConfig.bind(this, type, config.rolls?.shift());
 
+    if ( config.ability === "spellcasting" ) {
+      config = { ...config };
+      config.ability = this.system.attributes?.spellcasting;
+    }
+
     const rollConfig = foundry.utils.mergeObject({
       ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability),
       advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
@@ -1661,6 +1666,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       config = { ability: config };
       dialog = {};
       _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
+    }
+
+    if ( config.ability === "spellcasting" ) {
+      config = { ...config };
+      config.ability = this.system.attributes?.spellcasting;
     }
 
     const ability = this.system.abilities?.[config.ability];
@@ -1968,7 +1978,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
 
     const rollConfig = foundry.utils.mergeObject({
-      ability: (conc.ability in CONFIG.DND5E.abilities) ? conc.ability : CONFIG.DND5E.defaultAbilities.concentration,
+      ability: (conc.ability in CONFIG.DND5E.abilities)
+        ? conc.ability
+        : conc.ability === "spellcasting"
+          ? this.system.attributes?.spellcasting
+          : CONFIG.DND5E.defaultAbilities.concentration,
       isConcentration: true,
       target: 10
     }, config);
