@@ -12,7 +12,7 @@ const slugify = value => value?.slugify().replaceAll("-", "");
  */
 export function registerCustomEnrichers() {
   const stringNames = [
-    "attack", "award", "check", "concentration", "damage", "healing", "item", "save", "skill", "tool"
+    "attack", "award", "check", "concentration", "damage", "heal", "healing", "item", "save", "skill", "tool"
   ];
   CONFIG.TextEditor.enrichers.push({
     pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> [^\\]]+)?]](?:{(?<label>[^}]+)})?`, "gi"),
@@ -43,12 +43,13 @@ export function registerCustomEnrichers() {
  */
 async function enrichString(match, options) {
   let { type, config, label } = match.groups;
-  config = parseConfig(config, { multiple: ["damage", "healing"].includes(type) });
+  config = parseConfig(config, { multiple: ["damage", "heal", "healing"].includes(type) });
   config._input = match[0];
   config._rules = _getRulesVersion(options);
   switch ( type.toLowerCase() ) {
     case "attack": return enrichAttack(config, label, options);
     case "award": return enrichAward(config, label, options);
+    case "heal":
     case "healing": config._isHealing = true;
     case "damage": return enrichDamage(config, label, options);
     case "check":
@@ -477,7 +478,7 @@ async function enrichSave(config, label, options) {
  * ````
  *
  * @example Create a healing link:
- * ```[[/healing 2d6]]``` or ```[[/damage 2d6 healing]]```
+ * ```[[/heal 2d6]]``` or ```[[/damage 2d6 healing]]```
  * becomes
  * ```html
  * <a class="roll-link-group" data-type="damage" data-formulas="2d6" data-damage-types="healing">
@@ -532,6 +533,7 @@ async function enrichDamage(configs, label, options) {
   const config = { type: "damage", formulas: [], damageTypes: [], rollType: configs._isHealing ? "healing" : "damage" };
   for ( const c of configs ) {
     const formulaParts = [];
+    if ( c.activity ) config.activity = c.activity;
     if ( c.average ) config.average = c.average;
     if ( c.format ) config.format = c.format;
     if ( c.formula ) formulaParts.push(c.formula);
@@ -561,8 +563,9 @@ async function enrichDamage(configs, label, options) {
 
   let activity = options.relativeTo?.system.activities?.get(config.activity);
   if ( !activity && !config.formula ) {
-    for ( const a of options.relativeTo?.system.activities?.getByTypes("attack", "damage", "save") ?? [] ) {
-      if ( a.damage.parts.length ) {
+    const types = configs._isHealing ? ["heal"] : ["attack", "damage", "save"];
+    for ( const a of options.relativeTo?.system.activities?.getByTypes(...types) ?? [] ) {
+      if ( a.damage?.parts.length || a.healing?.formula ) {
         activity = a;
         break;
       }
