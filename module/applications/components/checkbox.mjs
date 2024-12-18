@@ -40,6 +40,8 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
       aspect-ratio: 1;
     }
 
+    :host(:disabled) { cursor: default; }
+
     :host > div {
       width: 100%;
       height: 100%;
