@@ -63,13 +63,14 @@ export default class ArmorClassConfig extends BaseConfigSheet {
       for ( const key of ["armor", "shield"] ) {
         const item = context.data[`equipped${key.capitalize()}`];
         if ( !item ) continue;
+        const val = item.system.armor.value - (item.system.magicAvailable ? (item.system.armor.magicalBonus ?? 0) : 0);
         context.calculations.push({
           anchor: item.toAnchor().outerHTML,
           img: item.img,
           magicalBonus: item.system.properties.has("mgc")
             ? formatNumber(item.system.armor.magicalBonus, { signDisplay: "always" }) : "—",
           name: item.name,
-          value: formatNumber(item.system.armor.base, { signDisplay: key === "shield" ? "always" : "auto" })
+          value: formatNumber(val, { signDisplay: key === "shield" ? "always" : "auto" })
         });
       }
     }
