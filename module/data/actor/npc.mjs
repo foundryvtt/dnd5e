@@ -497,7 +497,7 @@ export default class NPCData extends CreatureTemplate {
         gear: "",
 
         // Initiative (e.g. `+0 (10)`)
-        initiative: `${formatNumber(this.attributes.init.mod, { signDisplay: "always" })} (${
+        initiative: `${formatNumber(this.attributes.init.total, { signDisplay: "always" })} (${
           formatNumber(this.attributes.init.score)})`,
 
         // Languages (e.g. `Common, Draconic`)
