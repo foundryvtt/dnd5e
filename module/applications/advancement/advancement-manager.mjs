@@ -1,4 +1,5 @@
 import Advancement from "../../documents/advancement/advancement.mjs";
+import Application5e from "../api/application.mjs";
 
 /**
  * Internal type used to manage each step within the advancement process.
@@ -19,66 +20,92 @@ import Advancement from "../../documents/advancement/advancement.mjs";
  * @param {Actor5e} actor        Actor on which this advancement is being performed.
  * @param {object} [options={}]  Additional application options.
  */
-export default class AdvancementManager extends Application {
+export default class AdvancementManager extends Application5e {
   constructor(actor, options={}) {
     super(options);
-
-    /**
-     * The original actor to which changes will be applied when the process is complete.
-     * @type {Actor5e}
-     */
     this.actor = actor;
-
-    /**
-     * A clone of the original actor to which the changes can be applied during the advancement process.
-     * @type {Actor5e}
-     */
     this.clone = actor.clone();
-
-    /**
-     * Individual steps that will be applied in order.
-     * @type {object}
-     */
-    this.steps = [];
-
-    /**
-     * Step being currently displayed.
-     * @type {number|null}
-     * @private
-     */
-    this._stepIndex = null;
-
-    /**
-     * Is the prompt currently advancing through un-rendered steps?
-     * @type {boolean}
-     * @private
-     */
-    this._advancing = false;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement", "flow"],
-      template: "systems/dnd5e/templates/advancement/advancement-manager.hbs",
-      width: 460,
-      height: "auto"
-    });
-  }
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["advancement", "manager"],
+    window: {
+      icon: "fa-solid fa-forward",
+      title: "DND5E.ADVANCEMENT.Manager.Title.Default"
+    },
+    actions: {
+      complete: AdvancementManager.#process,
+      next: AdvancementManager.#process,
+      previous: AdvancementManager.#process,
+      restart: AdvancementManager.#process
+    },
+    position: {
+      width: 460
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    manager: {
+      template: "systems/dnd5e/templates/advancement/advancement-manager.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * The original actor to which changes will be applied when the process is complete.
+   * @type {Actor5e}
+   */
+  actor;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is the prompt currently advancing through un-rendered steps?
+   * @type {boolean}
+   */
+  #advancing = false;
+
+  /* -------------------------------------------- */
+
+  /**
+   * A clone of the original actor to which the changes can be applied during the advancement process.
+   * @type {Actor5e}
+   */
+  clone;
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  get title() {
+  get subtitle() {
+    const parts = [];
+
+    // Item Name
+    const item = this.step.flow.item;
+    parts.push(item.name);
+
+    // Class/Subclass level
+    let level = this.step.flow.level;
+    if ( this.step.class && ["class", "subclass"].includes(item.type) ) level = this.step.class.level;
+    if ( level ) parts.push(game.i18n.format("DND5E.AdvancementLevelHeader", { level }));
+
+    // Step Count
     const visibleSteps = this.steps.filter(s => !s.automatic);
     const visibleIndex = visibleSteps.indexOf(this.step);
-    const step = visibleIndex < 0 ? "" : game.i18n.format("DND5E.AdvancementManagerSteps", {
+    if ( visibleIndex >= 0 ) parts.push(game.i18n.format("DND5E.ADVANCEMENT.Manager.Steps", {
       current: visibleIndex + 1,
       total: visibleSteps.length
-    });
-    return `${game.i18n.localize("DND5E.AdvancementManagerTitle")} ${step}`;
+    }));
+
+    return parts.join(" • ");
   }
 
   /* -------------------------------------------- */
@@ -95,8 +122,24 @@ export default class AdvancementManager extends Application {
    * @type {object|null}
    */
   get step() {
-    return this.steps[this._stepIndex] ?? null;
+    return this.steps[this.#stepIndex] ?? null;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Step being currently displayed.
+   * @type {number|null}
+   */
+  #stepIndex = null;
+
+  /* -------------------------------------------- */
+
+  /**
+   * Individual steps that will be applied in order.
+   * @type {AdvancementStep[]}
+   */
+  steps = [];
 
   /* -------------------------------------------- */
 
@@ -105,7 +148,7 @@ export default class AdvancementManager extends Application {
    * @type {object|null}
    */
   get previousStep() {
-    return this.steps[this._stepIndex - 1] ?? null;
+    return this.steps[this.#stepIndex - 1] ?? null;
   }
 
   /* -------------------------------------------- */
@@ -115,7 +158,7 @@ export default class AdvancementManager extends Application {
    * @type {object|null}
    */
   get nextStep() {
-    const nextIndex = this._stepIndex === null ? 0 : this._stepIndex + 1;
+    const nextIndex = this.#stepIndex === null ? 0 : this.#stepIndex + 1;
     return this.steps[nextIndex] ?? null;
   }
 
@@ -327,7 +370,7 @@ export default class AdvancementManager extends Application {
    * @param {string} classItem      Class being changed.
    * @param {number} levelDelta     Levels by which to increase or decrease the class.
    * @returns {AdvancementManager}  Manager with new steps.
-   * @private
+   * @protected
    */
   createLevelChangeSteps(classItem, levelDelta) {
     const raceItem = this.clone.system?.details?.race instanceof Item ? this.clone.system.details.race : null;
@@ -376,7 +419,6 @@ export default class AdvancementManager extends Application {
    * @param {Item5e} item          Item that has advancement.
    * @param {number} level         Level in question.
    * @returns {AdvancementFlow[]}  Created flow applications.
-   * @protected
    */
   static flowsForLevel(item, level) {
     return (item?.advancement.byLevel[level] ?? [])
@@ -397,26 +439,33 @@ export default class AdvancementManager extends Application {
   }
 
   /* -------------------------------------------- */
-  /*  Form Rendering                              */
+  /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  getData() {
-    if ( !this.step ) return {};
+  _configureRenderOptions(options) {
+    super._configureRenderOptions(options);
+    options.window ??= {};
+    options.window.subtitle ??= this.subtitle;
+  }
 
-    // Prepare information for subheading
-    const item = this.step.flow.item;
-    let level = this.step.flow.level;
-    if ( (this.step.class) && ["class", "subclass"].includes(item.type) ) level = this.step.class.level;
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    if ( !this.step ) return context;
 
     const visibleSteps = this.steps.filter(s => !s.automatic);
     const visibleIndex = visibleSteps.indexOf(this.step);
 
     return {
+      ...context,
       actor: this.clone,
+      // Keep styles from non-converted flow applications functioning
+      // Should be removed when V1 of `AdvancementFlow` is deprecated
+      flowClasses: this.step.flow instanceof Application ? "dnd5e advancement flow" : "",
       flowId: this.step.flow.id,
-      header: item.name,
-      subheader: level ? game.i18n.format("DND5E.AdvancementLevelHeader", { level }) : "",
       steps: {
         current: visibleIndex + 1,
         total: visibleSteps.length,
@@ -430,7 +479,7 @@ export default class AdvancementManager extends Application {
 
   /** @inheritDoc */
   render(...args) {
-    if ( this.steps.length && (this._stepIndex === null) ) this._stepIndex = 0;
+    if ( this.steps.length && (this.#stepIndex === null) ) this.#stepIndex = 0;
 
     // Ensure the level on the class item matches the specified level
     if ( this.step?.class ) {
@@ -452,8 +501,8 @@ export default class AdvancementManager extends Application {
     if ( allowed === false ) return this;
 
     if ( this.step?.automatic ) {
-      if ( this._advancing ) return this;
-      this._forward();
+      if ( this.#advancing ) return this;
+      this.#forward();
       return this;
     }
 
@@ -463,67 +512,73 @@ export default class AdvancementManager extends Application {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _render(force, options) {
-    await super._render(force, options);
-    if ( (this._state !== Application.RENDER_STATES.RENDERED) || !this.step ) return;
+  async _onRender(context, options) {
+    super._onRender(context, options);
+    if ( !this.rendered || !this.step ) return;
 
     // Render the step
     this.step.flow._element = null;
     this.step.flow.options.manager ??= this;
-    await this.step.flow._render(force, options);
+    await this.step.flow._render(true, options);
     this.setPosition();
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html.find("button[data-action]").click(event => {
-      const buttons = html.find("button");
-      buttons.attr("disabled", true);
-      html.find(".error").removeClass("error");
-      try {
-        switch ( event.currentTarget.dataset.action ) {
-          case "restart":
-            if ( !this.previousStep ) return;
-            return this._restart(event);
-          case "previous":
-            if ( !this.previousStep ) return;
-            return this._backward(event);
-          case "next":
-          case "complete":
-            return this._forward(event);
-        }
-      } finally {
-        buttons.attr("disabled", false);
-      }
-    });
-  }
-
+  /*  Life-Cycle Handlers                         */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   async close(options={}) {
     if ( !options.skipConfirmation ) {
       return new Dialog({
-        title: `${game.i18n.localize("DND5E.AdvancementManagerCloseTitle")}: ${this.actor.name}`,
-        content: game.i18n.localize("DND5E.AdvancementManagerCloseMessage"),
+        title: `${game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Title")}: ${this.actor.name}`,
+        content: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Message"),
         buttons: {
           close: {
-            icon: '<i class="fas fa-times"></i>',
-            label: game.i18n.localize("DND5E.AdvancementManagerCloseButtonStop"),
+            icon: '<i class="fas fa-times" inert></i>',
+            label: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Stop"),
             callback: () => super.close(options)
           },
           continue: {
-            icon: '<i class="fas fa-chevron-right"></i>',
-            label: game.i18n.localize("DND5E.AdvancementManagerCloseButtonContinue")
+            icon: '<i class="fas fa-chevron-right" inert></i>',
+            label: game.i18n.localize("DND5E.ADVANCEMENT.Manager.ClosePrompt.Action.Continue")
           }
         },
         default: "close"
       }).render(true);
     }
     await super.close(options);
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle one of the buttons for moving through the process.
+   * @this {AdvancementManager}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #process(event, target) {
+    target.disabled = true;
+    this.element.querySelector(".error")?.classList.remove("error");
+    try {
+      switch ( target.dataset.action ) {
+        case "restart":
+          if ( this.previousStep ) await this.#restart(event);
+          break;
+        case "previous":
+          if ( this.previousStep ) await this.#backward(event);
+          break;
+        case "next":
+        case "complete":
+          await this.#forward(event);
+          break;
+      }
+    } finally {
+      target.disabled = false;
+    }
   }
 
   /* -------------------------------------------- */
@@ -534,10 +589,9 @@ export default class AdvancementManager extends Application {
    * Advance through the steps until one requiring user interaction is encountered.
    * @param {Event} [event]  Triggering click event if one occurred.
    * @returns {Promise}
-   * @private
    */
-  async _forward(event) {
-    this._advancing = true;
+  async #forward(event) {
+    this.#advancing = true;
     try {
       do {
         const flow = this.step.flow;
@@ -552,7 +606,7 @@ export default class AdvancementManager extends Application {
         else if ( type === "reverse" ) await flow.retainData(await flow.advancement.reverse(flow.level));
         else if ( flow ) await flow._updateObject(event, flow._getSubmitData());
 
-        this._stepIndex++;
+        this.#stepIndex++;
 
         // Ensure the level on the class item matches the specified level
         if ( this.step?.class ) {
@@ -568,11 +622,11 @@ export default class AdvancementManager extends Application {
       this.step.automatic = false;
       if ( this.step.type === "restore" ) this.step.type = "forward";
     } finally {
-      this._advancing = false;
+      this.#advancing = false;
     }
 
     if ( this.step ) this.render(true);
-    else this._complete();
+    else this.#complete();
   }
 
   /* -------------------------------------------- */
@@ -584,13 +638,12 @@ export default class AdvancementManager extends Application {
    * @param {boolean} [options.render=true]  Whether to render the Application after the step has been reversed. Used
    *                                         by the restart workflow.
    * @returns {Promise}
-   * @private
    */
-  async _backward(event, { render=true }={}) {
-    this._advancing = true;
+  async #backward(event, { render=true }={}) {
+    this.#advancing = true;
     try {
       do {
-        this._stepIndex--;
+        this.#stepIndex--;
         if ( !this.step ) break;
         const flow = this.step.flow;
         const type = this.step.type;
@@ -609,7 +662,7 @@ export default class AdvancementManager extends Application {
       ui.notifications.error(error.message);
       this.step.automatic = false;
     } finally {
-      this._advancing = false;
+      this.#advancing = false;
     }
 
     if ( !render ) return;
@@ -623,17 +676,16 @@ export default class AdvancementManager extends Application {
    * Reset back to the manager's initial state.
    * @param {MouseEvent} [event]  The triggering click event if one occurred.
    * @returns {Promise}
-   * @private
    */
-  async _restart(event) {
+  async #restart(event) {
     const restart = await Dialog.confirm({
-      title: game.i18n.localize("DND5E.AdvancementManagerRestartConfirmTitle"),
-      content: game.i18n.localize("DND5E.AdvancementManagerRestartConfirm")
+      title: game.i18n.localize("DND5E.ADVANCEMENT.Manager.RestartPrompt.Title"),
+      content: game.i18n.localize("DND5E.ADVANCEMENT.Manager.RestartPrompt.Message")
     });
     if ( !restart ) return;
     // While there is still a renderable step.
-    while ( this.steps.slice(0, this._stepIndex).some(s => !s.automatic) ) {
-      await this._backward(event, {render: false});
+    while ( this.steps.slice(0, this.#stepIndex).some(s => !s.automatic) ) {
+      await this.#backward(event, {render: false});
     }
     this.render(true);
   }
@@ -644,9 +696,8 @@ export default class AdvancementManager extends Application {
    * Apply changes to actual actor after all choices have been made.
    * @param {Event} event  Button click that triggered the change.
    * @returns {Promise}
-   * @private
    */
-  async _complete(event) {
+  async #complete(event) {
     const updates = this.clone.toObject();
     const items = updates.items;
     delete updates.items;
@@ -697,5 +748,4 @@ export default class AdvancementManager extends Application {
     // Close prompt
     return this.close({ skipConfirmation: true });
   }
-
 }
