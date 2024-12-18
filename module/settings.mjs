@@ -554,8 +554,8 @@ export function registerDeferredSettings() {
   const setting = game.settings.get("core", settingKey);
   const settingConfig = game.settings.settings.get(`core.${settingKey}`);
   const { onChange } = settingConfig ?? {};
-  if ( onChange ) settingConfig.onChange = s => {
-    onChange();
+  if ( onChange ) settingConfig.onChange = (s, ...args) => {
+    onChange(s, ...args);
     setTheme(document.body, isV13 ? s.colorScheme : s);
   };
   setTheme(document.body, isV13 ? setting.colorScheme : setting);
