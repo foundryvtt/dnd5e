@@ -77,10 +77,12 @@ export default class AttackSheet extends ActivitySheet {
 
     context.attackTypeOptions = Object.entries(CONFIG.DND5E.attackTypes)
       .map(([value, config]) => ({ value, label: config.label }));
-    if ( this.item.system.attackType ) context.attackTypeOptions.unshift({
+    if ( this.item.system.validAttackTypes?.size ) context.attackTypeOptions.unshift({
       value: "",
       label: game.i18n.format("DND5E.DefaultSpecific", {
-        default: CONFIG.DND5E.attackTypes[this.item.system.attackType].label.toLowerCase()
+        default: game.i18n.getListFormatter({ type: "disjunction" }).format(
+          Array.from(this.item.system.validAttackTypes).map(t => CONFIG.DND5E.attackTypes[t].label.toLowerCase())
+        )
       })
     });
 

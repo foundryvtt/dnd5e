@@ -2833,6 +2833,9 @@ DND5E.attackModes = Object.seal({
   offhand: {
     label: "DND5E.ATTACK.Mode.Offhand"
   },
+  ranged: {
+    label: "DND5E.ATTACK.Mode.Ranged"
+  },
   thrown: {
     label: "DND5E.ATTACK.Mode.Thrown"
   },

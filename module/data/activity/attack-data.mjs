@@ -139,14 +139,7 @@ export default class AttackActivityData extends BaseActivityData {
   get validAttackTypes() {
     const sourceType = this._source.attack.type.value;
     if ( sourceType ) return new Set([sourceType]);
-    if ( this.item.type !== "weapon" ) return new Set();
-
-    const types = new Set();
-    const attackType = this.attack.type.value || this.item.system.attackType;
-    if ( attackType === "melee" ) types.add("melee");
-    if ( (attackType === "ranged") || ((this.item.system.attackType === "melee")
-      && this.item.system.properties.has("thr")) ) types.add("ranged");
-    return types;
+    return this.item.system.validAttackTypes ?? new Set();
   }
 
   /* -------------------------------------------- */
@@ -236,8 +229,7 @@ export default class AttackActivityData extends BaseActivityData {
       const key = attackMode.split("-").map(s => s.capitalize()).join("");
       attackModeLabel = game.i18n.localize(`DND5E.ATTACK.Mode.${key}`);
     }
-    let actionType = this.actionType;
-    if ( (actionType === "mwak") && (attackMode?.startsWith("thrown")) ) actionType = "rwak";
+    const actionType = this.getActionType(attackMode);
     let actionTypeLabel = game.i18n.localize(`DND5E.Action${actionType.toUpperCase()}`);
     const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
     const isUnarmed = this.attack.type.classification === "unarmed";
@@ -267,9 +259,6 @@ export default class AttackActivityData extends BaseActivityData {
     const rollData = this.getRollData();
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
-    let actionType = this.actionType;
-    if ( (actionType === "mwak") && attackMode?.startsWith("thrown") ) actionType = "rwak";
-
     const weapon = this.item.system;
     const ammo = this.actor?.items.get(ammunition)?.system;
     const { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
@@ -278,7 +267,7 @@ export default class AttackActivityData extends BaseActivityData {
       bonus: this.attack.bonus,
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
       ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
-      actorBonus: this.actor?.system.bonuses?.[actionType]?.attack,
+      actorBonus: this.actor?.system.bonuses?.[this.getActionType(attackMode)]?.attack,
       situational
     }, rollData);
 
@@ -420,7 +409,7 @@ export default class AttackActivityData extends BaseActivityData {
     }
 
     const criticalBonusDice = this.actor?.getFlag("dnd5e", "meleeCriticalDamageDice") ?? 0;
-    if ( (this.actionType === "mwak") && (parseInt(criticalBonusDice) !== 0) ) {
+    if ( (this.getActionType(rollConfig.attackMode) === "mwak") && (parseInt(criticalBonusDice) !== 0) ) {
       foundry.utils.setProperty(roll, "options.critical.bonusDice", criticalBonusDice);
     }
 
