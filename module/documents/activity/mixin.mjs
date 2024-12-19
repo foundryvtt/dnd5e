@@ -1045,6 +1045,11 @@ export default function ActivityMixin(Base) {
             width: 400,
             top: config.event ? config.event.clientY - 80 : null,
             left: window.innerWidth - 710
+          },
+          window: {
+            title: game.i18n.localize(`DND5E.${this.type === "heal" ? "Healing" : "Damage"}Roll`),
+            subtitle: this.item.name,
+            icon: this.item.img
           }
         }
       }, dialog);
