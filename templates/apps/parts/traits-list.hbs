@@ -1,5 +1,5 @@
 <ol class="unlist trait-list">
-    {{#if (and children topLevel (not otherGroup))}}
+    {{#if (and children selectable topLevel (not otherGroup))}}
     <li>
         <label class="name">{{ localize "DND5E.TraitAll" category=label }}</label>
         <div class="proficiency">

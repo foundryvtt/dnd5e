@@ -3665,6 +3665,7 @@ DND5E.bloodied = {
 DND5E.languages = {
   standard: {
     label: "DND5E.Language.Category.Standard",
+    selectable: false,
     children: {
       common: "DND5E.Language.Language.Common",
       draconic: "DND5E.Language.Language.Draconic",
@@ -3680,6 +3681,7 @@ DND5E.languages = {
   },
   exotic: {
     label: "DND5E.Language.Category.Rare",
+    selectable: false,
     children: {
       aarakocra: "DND5E.Language.Language.Aarakocra",
       abyssal: "DND5E.Language.Language.Abyssal",
@@ -3770,6 +3772,8 @@ DND5E.epicBoonInterval = 30000;
  * @property {string} labels.title         Localization key for the trait name.
  * @property {string} labels.localization  Prefix for a localization key that can be used to generate various
  *                                         plural variants of the trait type.
+ * @property {string} [labels.all]         Localization to use for the "all" option for this trait. If not provided,
+ *                                         then no all option will be available.
  * @property {string} icon                 Path to the icon used to represent this trait.
  * @property {string} [actorKeyPath]       If the trait doesn't directly map to an entry as `traits.[key]`, where is
  *                                         this trait's data stored on the actor?
@@ -3815,7 +3819,8 @@ DND5E.traits = {
   languages: {
     labels: {
       title: "DND5E.Languages",
-      localization: "DND5E.TraitLanguagesPlural"
+      localization: "DND5E.TraitLanguagesPlural",
+      all: "DND5E.Language.All"
     },
     icon: "icons/skills/social/diplomacy-peace-alliance.webp"
   },
@@ -3894,7 +3899,7 @@ DND5E.traits = {
     configKey: "conditionTypes"
   }
 };
-preLocalize("traits", { key: "labels.title" });
+preLocalize("traits", { keys: ["labels.title", "labels.all"] });
 
 /* -------------------------------------------- */
 

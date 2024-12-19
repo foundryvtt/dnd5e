@@ -361,6 +361,7 @@ export default class NPCData extends CreatureTemplate {
     AttributesFields.prepareMovement.call(this);
     AttributesFields.prepareConcentration.call(this, rollData);
     SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
+    TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);
 
     // Hit Dice
@@ -529,11 +530,8 @@ export default class NPCData extends CreatureTemplate {
 
         // Languages (e.g. `Common, Draconic`)
         languages: [
-          prepareTrait(this.traits.languages, "languages"),
-          ...Object.entries(CONFIG.DND5E.communicationTypes).map(([key, { label }]) => {
-            const data = this.traits.languages.communication[key];
-            return data?.value ? `${label} ${formatDistance(data.value, data.units)}`.toLowerCase() : null;
-          })
+          formatter.format(this.traits.languages.labels.dialects),
+          formatter.format(this.traits.languages.labels.ranged)
         ].filterJoin("; ") || game.i18n.localize("None"),
 
         // Senses (e.g. `Blindsight 60 ft., Darkvision 120 ft.; Passive Perception 27`)
