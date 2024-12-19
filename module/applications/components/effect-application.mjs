@@ -195,6 +195,8 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
       transfer: false,
       origin: origin.uuid
     }, effectFlags);
+    effectData.changes = await effect.replaceChangeValues(effectData.changes, { target: actor });
+
     const applied = await ActiveEffect.implementation.create(effectData, { parent: actor });
     if ( concentration ) await concentration.addDependent(applied);
     return applied;
