@@ -1,3 +1,5 @@
+import { areKeysPressed } from "../../utils.mjs";
+
 /**
  * @typedef {import("../../drag-drop.mjs").DropEffectValue} DropEffectValue
  */
@@ -32,13 +34,9 @@ export default function DragDropApplicationMixin(Base) {
       let behavior = event.dataTransfer.dropEffect;
 
       if ( event.type === "dragover" ) {
-        behavior = this._defaultDropBehavior(event, data);
-
-        // An initial `dropEffect` of `copy` indicates that a modifier key is held down
-        if ( (event.type === "dragover") && (event.dataTransfer.dropEffect === "copy") ) {
-          if ( (behavior === "copy") && allowed.has("move") ) return "move";
-          else if ( (behavior === "move") && allowed.has("copy") ) return "copy";
-        }
+        if ( areKeysPressed(event, "dragMove") ) behavior = "move";
+        else if ( areKeysPressed(event, "dragCopy") ) behavior = "copy";
+        else behavior = this._defaultDropBehavior(event, data);
       }
 
       if ( (behavior !== "none") && !allowed.has(behavior) ) return allowed.first() ?? "none";
