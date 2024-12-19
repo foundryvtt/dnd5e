@@ -1,4 +1,4 @@
-import { defaultUnits } from "../../../utils.mjs";
+import { defaultUnits, formatDistance, splitSemicolons } from "../../../utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import DamageTraitField from "../fields/damage-trait-field.mjs";
@@ -121,6 +121,48 @@ export default class TraitsField {
 
   /* -------------------------------------------- */
   /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the language labels.
+   * @this {CharacterData|NPCData}
+   */
+  static prepareLanguages() {
+    const languages = this.traits.languages;
+    const labels = languages.labels = { dialects: [], ranged: [] };
+
+    if ( languages.value.has("ALL") ) labels.dialects.push(game.i18n.localize("DND5E.Language.All"));
+    else {
+      const processCategory = (key, data, group) => {
+        // If key is within languages, don't bother with children
+        if ( languages.value.has(key) ) (group?.children ?? labels.dialects).push(data.label ?? data);
+
+        // Display children as part of this group (e.g. "Primordial (Ignan)")
+        else if ( data.children ) {
+          const topLevel = group === undefined;
+          group ??= { label: data.label, children: [] };
+          Object.entries(data.children).forEach(([k, d]) => processCategory(k, d, group));
+          if ( topLevel && group.children.length ) labels.dialects.push(
+            `${data.label} (${game.i18n.getListFormatter({ type: "unit" }).format(group.children)})`
+          );
+        }
+      };
+
+      for ( const [key, data] of Object.entries(CONFIG.DND5E.languages) ) {
+        if ( data.children ) Object.entries(data.children).forEach(([k, d]) => processCategory(k, d));
+        else processCategory(key, data);
+      }
+    }
+
+    labels.dialects.push(...splitSemicolons(languages.custom));
+
+    for ( const [key, { label }] of Object.entries(CONFIG.DND5E.communicationTypes) ) {
+      const data = languages.communication?.[key];
+      if ( !data?.value ) continue;
+      labels.ranged.push(`${label} ${formatDistance(data.value, data.units)}`);
+    }
+  }
+
   /* -------------------------------------------- */
 
   /**

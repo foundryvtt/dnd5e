@@ -206,7 +206,7 @@ export default function ActorSheetV2Mixin(Base) {
     _prepareTraits() {
       const traits = {};
       for ( const [trait, config] of Object.entries(CONFIG.DND5E.traits) ) {
-        if ( trait === "dm" ) continue;
+        if ( ["dm", "languages"].includes(trait) ) continue;
         const key = config.actorKeyPath ?? `system.traits.${trait}`;
         const data = foundry.utils.deepClone(foundry.utils.getProperty(this.actor, key));
         if ( !data ) continue;
@@ -260,13 +260,12 @@ export default function ActorSheetV2Mixin(Base) {
         if ( values.length ) traits.dm = values;
       }
 
-      // Display ranged communication
-      for ( const [key, { label }] of Object.entries(CONFIG.DND5E.communicationTypes) ) {
-        const data = this.actor.system.traits?.languages?.communication?.[key];
-        if ( !data?.value ) return;
-        traits.languages ??= [];
-        traits.languages.push({ label: `${label} ${formatDistance(data.value, data.units)}` });
-      }
+      // Handle languages
+      const languages = this.actor.system.traits?.languages?.labels;
+      if ( languages?.dialects?.length || languages?.ranged?.length ) traits.languages = [
+        ...languages.dialects.map(label => ({ label })),
+        ...languages.ranged.map(label => ({ label }))
+      ];
 
       // Display weapon masteries
       for ( const key of this.actor.system.traits?.weaponProf?.mastery?.value ?? [] ) {
