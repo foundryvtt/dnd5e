@@ -94,6 +94,26 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* -------------------------------------------- */
 
+  /**
+   * Synchronously retrieve the source Actor or Item, or null if it could not be determined.
+   * @returns {Actor5e|Item5e|null}
+   */
+  getSourceSync() {
+    if ( !this.origin || this.origin.startsWith("Compendiun.") ) return null;
+    let origin = fromUuidSync(this.origin);
+    switch ( origin?.documentName ) {
+      case "Activity":
+        origin = origin.item;
+        break;
+      case "ActiveEffect":
+        origin = origin.getSourceSync();
+        break;
+    }
+    return origin;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static async _fromStatusEffect(statusId, { reference, ...effectData }, options) {
     if ( !("description" in effectData) && reference ) effectData.description = `@Embed[${reference} inline]`;
@@ -786,6 +806,53 @@ export default class ActiveEffect5e extends ActiveEffect {
     const current = foundry.utils.getProperty(doc, path) ?? new Set();
     const delta = current.symmetricDifference(source);
     for ( const choice of delta ) overrides.push(`${prefix}.${choice}`);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve the roll data from the origin of this effect.
+   * @param {object} [options]
+   * @param {boolean} [options.deterministic] Whether to force deterministic values for data properties that could be
+   *                                          either a die term or a flat term.
+   * @returns {object}
+   */
+  getRollData({ deterministic=false }={}) {
+    if ( !this.origin || this.origin.startsWith("Compendium.") ) return {};
+    const origin = this.getSourceSync();
+    if ( origin ) return origin.getRollData({ deterministic });
+    return {};
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Replace or evaluate formulas in the effect changes.
+   * @param {object[]} [changes]      The changes to modify.
+   * @returns {Promise<object[]>}     Modified copy of the changes.
+   */
+  async replaceChangeValues(changes) {
+    if ( !changes ) changes = this.changes;
+    changes = foundry.utils.deepClone(changes);
+
+    const rollData = this.getRollData();
+    const mode = this.getFlag("dnd5e", "application.mode");
+
+    for ( const change of changes ) {
+      if ( !Roll.validate(change.value) ) continue;
+      let value;
+      switch ( mode ) {
+        case "evaluate":
+          value = (await Roll.create(change.value, rollData).evaluate({ allowInteractive: false })).total;
+          break;
+        case "replace":
+          value = Roll.replaceFormulaData(change.value, rollData);
+          break;
+      }
+      if ( value !== undefined ) change.value = value;
+    }
+
+    return changes;
   }
 
   /* -------------------------------------------- */
