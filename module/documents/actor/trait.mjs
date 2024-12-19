@@ -189,6 +189,12 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
   const categoryData = await categories(trait);
 
   let result = {};
+
+  if ( traitConfig.labels?.all && !any ) {
+    const key = prefixed ? `${trait}:ALL` : "ALL";
+    result[key] = { label: traitConfig.labels.all, chosen: chosen.has(key), sorting: false };
+  }
+
   if ( prefixed && any ) {
     const key = `${trait}:*`;
     result[key] = {
@@ -203,7 +209,8 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
     if ( prefixed ) key = `${prefix}:${key}`;
     result[key] = {
       label: game.i18n.localize(label),
-      chosen: chosen.has(key),
+      chosen: data.selectable !== false ? chosen.has(key) : false,
+      selectable: data.selectable !== false,
       sorting: topLevel ? traitConfig.sortCategories === true : true
     };
     if ( data.children ) {
@@ -410,8 +417,11 @@ export function keyLabel(key, config={}) {
   const lastKey = parts.pop();
   if ( !lastKey ) return categoryLabel;
 
+  // All (e.g. "All Languages")
+  if ( lastKey === "ALL" ) return traitConfig.labels?.all ?? key;
+
   // Wildcards (e.g. "Artisan's Tools", "any Artisan's Tools", "any 2 Artisan's Tools", or "2 other Artisan's Tools")
-  if ( lastKey === "*" ) {
+  else if ( lastKey === "*" ) {
     let type;
     if ( parts.length ) {
       let category = traitData;

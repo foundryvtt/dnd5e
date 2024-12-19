@@ -259,6 +259,7 @@ export default class CharacterData extends CreatureTemplate {
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
     AttributesFields.prepareConcentration.call(this, rollData);
+    TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);
 
     // Hit Points
