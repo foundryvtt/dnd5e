@@ -378,6 +378,18 @@ export function staticID(id) {
 /* -------------------------------------------- */
 
 /**
+ * Track which KeyboardEvent#code presses associate with each modifier.
+ * Added support for treating Meta separate from Control.
+ * @enum {string[]}
+ */
+const MODIFIER_CODES = {
+  Alt: KeyboardManager.MODIFIER_CODES.Alt,
+  Control: KeyboardManager.MODIFIER_CODES.Control.filter(k => k.startsWith("Control")),
+  Meta: KeyboardManager.MODIFIER_CODES.Control.filter(k => !k.startsWith("Control")),
+  Shift: KeyboardManager.MODIFIER_CODES.Shift
+};
+
+/**
  * Based on the provided event, determine if the keys are pressed to fulfill the specified keybinding.
  * @param {Event} event    Triggering event.
  * @param {string} action  Keybinding action within the `dnd5e` namespace.
@@ -388,11 +400,12 @@ export function areKeysPressed(event, action) {
   const activeModifiers = {};
   const addModifiers = (key, pressed) => {
     activeModifiers[key] = pressed;
-    KeyboardManager.MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
+    MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
   };
-  addModifiers(KeyboardManager.MODIFIER_KEYS.CONTROL, event.ctrlKey || event.metaKey);
-  addModifiers(KeyboardManager.MODIFIER_KEYS.SHIFT, event.shiftKey);
   addModifiers(KeyboardManager.MODIFIER_KEYS.ALT, event.altKey);
+  addModifiers(KeyboardManager.MODIFIER_KEYS.CONTROL, event.ctrlKey);
+  addModifiers("Meta", event.metaKey);
+  addModifiers(KeyboardManager.MODIFIER_KEYS.SHIFT, event.shiftKey);
   return game.keybindings.get("dnd5e", action).some(b => {
     if ( game.keyboard.downKeys.has(b.key) && b.modifiers.every(m => activeModifiers[m]) ) return true;
     if ( b.modifiers.length ) return false;
