@@ -396,10 +396,10 @@ export class ActorDataModel extends SystemDataModel {
 
   /**
    * Reset combat-related uses.
-   * @param {Set<string>} periods              Which recovery periods should be considered.
-   * @param {{ actor: {}, item: [] }} updates  Updates to perform on the actor and containing items.
+   * @param {Set<string>} periods            Which recovery periods should be considered.
+   * @param {CombatRecoveryResults} results  Updates to perform on the actor and containing items.
    */
-  async recoverCombatUses(periods, updates) {}
+  async recoverCombatUses(periods, results) {}
 }
 
 /* -------------------------------------------- */

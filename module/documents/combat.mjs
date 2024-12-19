@@ -17,7 +17,7 @@ export default class Combat5e extends Combat {
   async nextTurn() {
     const previous = this.combatant;
     await super.nextTurn();
-    this._recoverUses({ turnEnd: previous, turnStart: this.combatant });
+    this._recoverUses({ turn: true, turnEnd: previous, turnStart: this.combatant });
     if ( previous && (previous !== this.combatant) ) previous.refreshDynamicRing();
     this.combatant?.refreshDynamicRing();
     return this;
@@ -40,7 +40,17 @@ export default class Combat5e extends Combat {
   async endCombat() {
     const previous = this.combatant;
     await super.endCombat();
+    this._recoverUses({ encounter: true, turn: true, turnEnd: true, turnStart: true });
     previous?.refreshDynamicRing();
+    return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async rollInitiative(ids, options={}) {
+    await super.rollInitiative(ids, options);
+    for ( const id of ids ) await this._recoverUses({ initiative: this.combatants.get(id) });
     return this;
   }
 
