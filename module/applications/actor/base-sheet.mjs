@@ -28,6 +28,10 @@ import TraitsConfig from "./config/traits-config.mjs";
 import WeaponsConfig from "./config/weapons-config.mjs";
 
 /**
+ * @typedef {import("../../drag-drop.mjs").DropEffectValue} DropEffectValue
+ */
+
+/**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
  * @abstract
  */
@@ -930,16 +934,17 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /** @override */
   async _onDropItem(event, data) {
-    if ( !this.actor.isOwner ) return false;
+    const behavior = this._dropBehavior(event, data);
+    if ( !this.actor.isOwner || (behavior === "none") ) return false;
     const item = await Item.implementation.fromDropData(data);
 
     // Handle moving out of container & item sorting
-    if ( this.actor.uuid === item.parent?.uuid ) {
-      if ( item.system.container !== null ) await item.update({"system.container": null});
+    if ( (behavior === "move") && (this.actor.uuid === item.parent?.uuid) ) {
+      if ( item.system.container !== null ) await item.update({ "system.container": null });
       return this._onSortItem(event, item.toObject());
     }
 
-    return this._onDropItemCreate(item, event);
+    return this._onDropItemCreate(item, event, behavior);
   }
 
   /* -------------------------------------------- */
@@ -962,10 +967,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    * Handle the final creation of dropped Item data on the Actor.
    * @param {Item5e[]|Item5e} itemData     The item or items requested for creation.
    * @param {DragEvent} event              The concluding DragEvent which provided the drop data.
+   * @param {DropEffectValue} behavior     The specific drop behavior.
    * @returns {Promise<Item5e[]>}
    * @protected
    */
-  async _onDropItemCreate(itemData, event) {
+  async _onDropItemCreate(itemData, event, behavior) {
     let items = itemData instanceof Array ? itemData : [itemData];
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
@@ -982,7 +988,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const toCreate = await Item5e.createWithContents(items, {
       transformFirst: item => this._onDropSingleItem(item.toObject(), event)
     });
-    return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
+    const created = await Item5e.createDocuments(toCreate, { pack: this.actor.pack, parent: this.actor, keepId: true });
+    if ( behavior === "move" ) items.forEach(i => fromUuid(i.uuid).then(d => d?.delete({ deleteContents: true })));
+    return created;
   }
 
   /* -------------------------------------------- */

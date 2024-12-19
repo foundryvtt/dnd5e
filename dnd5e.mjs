@@ -18,6 +18,7 @@ import * as canvas from "./module/canvas/_module.mjs";
 import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
+import DragDrop5e from "./module/drag-drop.mjs";
 import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
@@ -44,6 +45,8 @@ globalThis.dnd5e = {
   registry,
   utils
 };
+
+DragDrop = DragDrop5e;
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
