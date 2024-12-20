@@ -424,7 +424,7 @@ export default class NPCData extends CreatureTemplate {
   /** @override */
   async recoverCombatUses(periods, updates) {
     // Reset legendary actions at the start of a combat encounter or at the end of the creature's turn
-    if ( this.resources.legact.max && (periods.has("encounter") || periods.has("turnEnd")) ) {
+    if ( this.resources.legact.max && (periods.includes("encounter") || periods.includes("turnEnd")) ) {
       updates.actor["system.resources.legact.value"] = this.resources.legact.max;
     }
   }

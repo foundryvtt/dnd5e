@@ -970,6 +970,18 @@ DND5E.activityActivationTypes = {
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
+  encounter: {
+    label: "DND5E.ACTIVATION.Type.Encounter.Label",
+    group: "DND5E.ACTIVATION.Category.Combat"
+  },
+  turnStart: {
+    label: "DND5E.ACTIVATION.Type.TurnStart.Label",
+    group: "DND5E.ACTIVATION.Category.Combat"
+  },
+  turnEnd: {
+    label: "DND5E.ACTIVATION.Type.TurnEnd.Label",
+    group: "DND5E.ACTIVATION.Category.Combat"
+  },
   legendary: {
     label: "DND5E.LegendaryAction.Label",
     group: "DND5E.ACTIVATION.Category.Monster",
