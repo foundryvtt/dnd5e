@@ -243,15 +243,15 @@ export default class ActivitySheet extends Application5e {
       value,
       label: CONFIG.DND5E.activityConsumptionTypes[value].label
     }));
-    context.consumptionTargets = context.source.consumption.targets.map((data, index) => {
+    context.consumptionTargets = context.activity.consumption.targets.map(data => {
       const typeConfig = CONFIG.DND5E.activityConsumptionTypes[data.type] ?? {};
       const showTextTarget = typeConfig.targetRequiresEmbedded && !this.item.isEmbedded;
       const target = new ConsumptionTargetData(data, { parent: this.activity });
       return {
         data,
         fields: this.activity.schema.fields.consumption.fields.targets.element.fields,
-        prefix: `consumption.targets.${index}.`,
-        source: context.source.consumption.targets[index] ?? data,
+        prefix: `consumption.targets.${data._index}.`,
+        source: context.source.consumption.targets[data._index] ?? data,
         typeOptions: consumptionTypeOptions,
         scalingModes: canScale ? [
           { value: "", label: game.i18n.localize("DND5E.CONSUMPTION.Scaling.None") },
@@ -280,11 +280,11 @@ export default class ActivitySheet extends Application5e {
       { value: "loseAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.LoseAll") },
       { value: "formula", label: game.i18n.localize("DND5E.USES.Recovery.Type.Formula") }
     ];
-    context.usesRecovery = context.source.uses.recovery.map((data, index) => ({
+    context.usesRecovery = context.activity.uses.recovery.map(data => ({
       data,
       fields: this.activity.schema.fields.uses.fields.recovery.element.fields,
-      prefix: `uses.recovery.${index}.`,
-      source: context.source.uses.recovery[index] ?? data,
+      prefix: `uses.recovery.${data._index}.`,
+      source: context.source.uses.recovery[data._index] ?? data,
       formulaOptions: data.period === "recharge" ? Array.fromRange(5, 2).reverse().map(min => ({
         value: min,
         label: game.i18n.format("DND5E.USES.Recovery.Recharge.Range", {
@@ -343,15 +343,15 @@ export default class ActivitySheet extends Application5e {
         .map(effect => ({
           value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
         }));
-      context.appliedEffects = context.activity.effects.reduce((arr, data, index) => {
+      context.appliedEffects = context.activity.effects.reduce((arr, data) => {
         if ( !data.effect ) return arr;
         const effect = {
           data,
           collapsed: this.expandedSections.get(`effects.${data._id}`) ? "" : "collapsed",
           effect: data.effect,
           fields: this.activity.schema.fields.effects.element.fields,
-          prefix: `effects.${index}.`,
-          source: context.source.effects[index] ?? data,
+          prefix: `effects.${data._index}.`,
+          source: context.source.effects[data._index] ?? data,
           contentLink: data.effect.toAnchor().outerHTML,
           additionalSettings: null
         };
@@ -369,20 +369,15 @@ export default class ActivitySheet extends Application5e {
         { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
         ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, config]) => ({ value, label: config.label }))
       ];
-      let indexOffset = 0;
-      context.damageParts = context.activity.damage.parts.map((data, index) => {
-        if ( data.base ) indexOffset--;
+      const typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => ({ value, label }));
+      context.damageParts = context.activity.damage.parts.map(data => {
         const part = {
-          data,
+          data, scalingOptions, typeOptions,
           fields: this.activity.schema.fields.damage.fields.parts.element.fields,
-          index: index + indexOffset,
-          prefix: `damage.parts.${index + indexOffset}.`,
-          source: context.source.damage.parts[index + indexOffset] ?? data,
-          canScale: this.activity.canScaleDamage,
-          scalingOptions,
-          typeOptions: Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => ({
-            value, label: config.label, selected: data.types.has(value)
-          }))
+          index: data._index,
+          prefix: `damage.parts.${data._index}.`,
+          source: context.source.damage.parts[data._index] ?? data,
+          canScale: this.activity.canScaleDamage
         };
         return this._prepareDamagePartContext(context, part);
       });
