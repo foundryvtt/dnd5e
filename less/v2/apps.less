@@ -292,6 +292,7 @@
   }
 
   .pill-lg {
+    --gold-icon-size: 32px;
     background: var(--dnd5e-background-card);
     border: var(--dnd5e-border-gold);
     border-radius: 5px;
@@ -311,11 +312,6 @@
       display: grid;
       place-content: center;
       opacity: .25;
-    }
-
-    .gold-icon {
-      width: 32px;
-      height: 32px;
     }
 
     .name { flex: 1; }
@@ -406,6 +402,10 @@
   }
 
   .gold-icon {
+    block-size: var(--gold-icon-size);
+    inline-size: var(--gold-icon-size);
+    flex: 0 0 var(--gold-icon-size);
+
     border: 2px solid var(--dnd5e-color-gold);
     box-shadow: 0 0 4px var(--dnd5e-shadow-45);
     border-radius: 0;
