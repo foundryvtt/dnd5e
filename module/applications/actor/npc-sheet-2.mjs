@@ -118,14 +118,14 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     ["legact", "legres"].forEach(res => {
       const { max, value } = resources[res];
       context[res] = Array.fromRange(max, 1).map(n => {
-        const i18n = res === "legact" ? "LegAct" : "LegRes";
+        const i18n = res === "legact" ? "LegendaryAction" : "LegendaryResistance";
         const filled = value >= n;
         const classes = ["pip"];
         if ( filled ) classes.push("filled");
         return {
           n, filled,
-          tooltip: `DND5E.${i18n}`,
-          label: game.i18n.format(`DND5E.${i18n}N.${plurals.select(n)}`, { n }),
+          tooltip: `DND5E.${i18n}.Label`,
+          label: game.i18n.format(`DND5E.${i18n}.Ordinal.${plurals.select(n)}`, { n }),
           classes: classes.join(" ")
         };
       });
