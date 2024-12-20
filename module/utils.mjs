@@ -123,6 +123,19 @@ export function formatText(value) {
 /* -------------------------------------------- */
 
 /**
+ * Form a number using the provided volume unit.
+ * @param {number} value         The volume to format.
+ * @param {string} unit          Volume unit as defined in `CONFIG.DND5E.volumeUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatVolume(value, unit, options={}) {
+  return _formatSystemUnits(value, unit, CONFIG.DND5E.volumeUnits[unit], options);
+}
+
+/* -------------------------------------------- */
+
+/**
  * Form a number using the provided weight unit.
  * @param {number} value         The weight to format.
  * @param {string} unit          Weight unit as defined in `CONFIG.DND5E.weightUnits`.
