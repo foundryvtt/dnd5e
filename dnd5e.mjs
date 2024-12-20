@@ -131,6 +131,7 @@ Hooks.once("init", function() {
   // Hook up system data types
   CONFIG.ActiveEffect.dataModels = dataModels.activeEffect.config;
   CONFIG.Actor.dataModels = dataModels.actor.config;
+  CONFIG.ChatMessage.dataModels = dataModels.chatMessage.config;
   CONFIG.Item.dataModels = dataModels.item.config;
   CONFIG.JournalEntryPage.dataModels = dataModels.journal.config;
 
