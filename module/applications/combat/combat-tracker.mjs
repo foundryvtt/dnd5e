@@ -51,13 +51,14 @@ export default class CombatTracker5e extends CombatTracker {
   renderGroups(html) {
     if ( !this.viewed ) return;
     const groups = this.viewed.createGroups();
-    const list = html.querySelector(".directory-list");
-    list.classList.add("dnd5e2");
+    const V13 = game.release.generation >= 13;
+    const list = html.querySelector(".directory-list, .combat-tracker");
     for ( const [key, { combatants, expanded }] of groups.entries() ) {
       const children = list.querySelectorAll(Array.from(combatants).map(c => `[data-combatant-id="${c.id}"]`).join(", "));
       if ( !children.length ) continue;
       const groupContainer = document.createElement("li");
-      groupContainer.classList.add("combatant", "combatant-group", "directory-item", "collapsible");
+      groupContainer.classList.add("combatant", "combatant-group", "collapsible", "dnd5e2-collapsible");
+      if ( !V13 ) groupContainer.classlist.add("directory-item");
       if ( !expanded ) groupContainer.classList.add("collapsed");
 
       // Determine the count
@@ -81,9 +82,9 @@ export default class CombatTracker5e extends CombatTracker {
         <div class="group-header flexrow">
           <img class="token-image" alt="${img.alt}" src="${img.src || img.dataset.src}">
           <div class="token-name flexcol">
-            <h4>
+            <${V13 ? "strong" : "h4"} class="name">
               ${game.i18n.format("DND5E.COMBAT.Group.Title", { name })}
-            </h4>
+            </${V13 ? "strong" : "h4"}>
             <div class="group-numbers">${count}</div>
           </div>
           <div class="token-initiative">
@@ -92,7 +93,7 @@ export default class CombatTracker5e extends CombatTracker {
         </div>
         <div class="collapsible-content">
           <div class="wrapper">
-            <ol class="group-children directory-list"></ol>
+            <ol class="group-children ${V13 ? "" : "directory-list"}"></ol>
           </div>
         </div>
       `;
