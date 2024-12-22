@@ -3,7 +3,7 @@ import BaseConfigSheet from "../api/base-config-sheet.mjs";
 /**
  * Configuration application for an actor's concentration checks.
  */
-export default class ConcentrationConfig extends BaseConfigSheet {
+export default class DeathConfig extends BaseConfigSheet {
   /** @override */
   static DEFAULT_OPTIONS = {
     ability: null,
@@ -17,7 +17,7 @@ export default class ConcentrationConfig extends BaseConfigSheet {
   /** @override */
   static PARTS = {
     config: {
-      template: "systems/dnd5e/templates/actors/config/concentration-config.hbs"
+      template: "systems/dnd5e/templates/actors/config/death-config.hbs"
     }
   };
 
@@ -27,7 +27,7 @@ export default class ConcentrationConfig extends BaseConfigSheet {
 
   /** @override */
   get title() {
-    return game.i18n.format("DND5E.ABILITY.Configure.Title", { ability: game.i18n.localize("DND5E.Concentration") });
+    return game.i18n.localize("DND5E.DeathSaveConfigure");
   }
 
   /* -------------------------------------------- */
@@ -39,18 +39,12 @@ export default class ConcentrationConfig extends BaseConfigSheet {
     context = await super._preparePartContext(partId, context, options);
     const source = this.document.system._source;
 
-    context.data = source.attributes?.concentration ?? {};
-    context.fields = this.document.system.schema.fields.attributes.fields.concentration.fields;
-    const ability = CONFIG.DND5E.abilities[CONFIG.DND5E.defaultAbilities.concentration]?.label?.toLowerCase();
-    context.abilityOptions = [
-      { value: "", label: ability ? game.i18n.format("DND5E.DefaultSpecific", { default: ability }) : "" },
-      { rule: true },
-      ...Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }))
-    ];
+    context.data = source.attributes?.death ?? {};
+    context.fields = this.document.system.schema.getField("attributes.death").fields;
 
     if ( this.document.system.bonuses?.abilities ) context.global = {
       data: source.bonuses?.abilities ?? {},
-      fields: this.document.system.schema.fields.bonuses.fields.abilities.fields
+      fields: this.document.system.schema.getField("bonuses.abilities").fields
     };
 
     return context;
