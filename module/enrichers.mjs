@@ -329,56 +329,171 @@ async function enrichAward(config, label, options) {
  *   <i class="fa-solid fa-dice-d20"></i> DC 15 Charisma check
  * </a>
  * ```
+ *
+ * @example Use multiple skills in a check using default abilities:
+ * ```[[/check skill=acr/ath dc=15]]```
+ * ```[[/check acrobatics athletics 15]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-type="check" data-skill="acr|ath" data-dc="15">
+ *   DC 15
+ *   <a class="roll-action" data-ability="dex" data-skill="acr">
+ *     <i class="fa-solid fa-dice-d20"></i> Dexterity (Acrobatics)
+ *   </a> or
+ *   <a class="roll-action" data-ability="dex">
+ *     <i class="fa-solid fa-dice-d20"></i> Strength (Athletics)
+ *   </a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
+ * ```
+ *
+ * @example Use multiple skills with a fixed ability:
+ * ```[[/check ability=str skill=dec/per dc=15]]```
+ * ```[[/check strength deception persuasion 15]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-type="check" data-ability="str" data-skill="dec|per" data-dc="15">
+ *   DC 15 Strength
+ *   (<a class="roll-action" data-skill="dec"><i class="fa-solid fa-dice-d20"></i> Deception</a> or
+ *   <a class="roll-action" data-ability="per"><i class="fa-solid fa-dice-d20"></i> Persuasion</a>)
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
+ * ```
  */
 async function enrichCheck(config, label, options) {
+  config.skill = config.skill?.replaceAll("/", "|").split("|") ?? [];
+  config.tool = config.tool?.replaceAll("/", "|").split("|") ?? [];
   for ( let value of config.values ) {
     value = foundry.utils.getType(value) === "string" ? slugify(value) : value;
     if ( value in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = value;
-    else if ( value in CONFIG.DND5E.enrichmentLookup.skills ) config.skill = value;
-    else if ( value in CONFIG.DND5E.enrichmentLookup.tools ) config.tool = value;
+    else if ( value in CONFIG.DND5E.enrichmentLookup.skills ) config.skill.push(value);
+    else if ( value in CONFIG.DND5E.enrichmentLookup.tools ) config.tool.push(value);
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
     else config[value] = true;
   }
+  delete config.values;
 
+  const groups = new Map();
   let invalid = false;
 
-  const skillConfig = CONFIG.DND5E.enrichmentLookup.skills[slugify(config.skill)];
-  if ( config.skill && !skillConfig ) {
-    console.warn(`Skill ${config.skill} not found while enriching ${config._input}.`);
-    invalid = true;
-  } else if ( config.skill && !config.ability ) {
-    config.ability = skillConfig.ability;
-  }
-  if ( skillConfig?.key ) config.skill = skillConfig.key;
-
-  const toolConfig = CONFIG.DND5E.tools[slugify(config.tool)];
-  const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(config.tool)];
-  const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
-  if ( config.tool && !toolIndex ) {
-    console.warn(`Tool ${config.tool} not found while enriching ${config._input}.`);
-    invalid = true;
-  } else if ( config.tool && !config.ability && toolConfig ) {
-    config.ability = toolConfig.ability;
-  }
-
+  // TODO: Support "spellcasting" ability
   let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[slugify(config.ability)];
   if ( config.ability && !abilityConfig ) {
-    console.warn(`Ability ${config.ability} not found while enriching ${config._input}.`);
+    console.warn(`Ability "${config.ability}" not found while enriching ${config._input}.`);
     invalid = true;
-  } else if ( !abilityConfig ) {
-    console.warn(`No ability provided while enriching check ${config._input}.`);
+  } else if ( abilityConfig?.key ) config.ability = abilityConfig.key;
+
+  for ( let [index, skill] of config.skill.entries() ) {
+    const skillConfig = CONFIG.DND5E.enrichmentLookup.skills[slugify(skill)];
+    if ( skillConfig ) {
+      if ( skillConfig.key ) skill = config.skill[index] = skillConfig.key;
+      const ability = config.ability || skillConfig.ability;
+      if ( !groups.has(ability) ) groups.set(ability, []);
+      groups.get(ability).push({ key: skill, type: "skill", label: skillConfig.label });
+    } else {
+      console.warn(`Skill "${skill}" not found while enriching ${config._input}.`);
+      invalid = true;
+    }
+  }
+
+  for ( const tool of config.tool ) {
+    const toolConfig = CONFIG.DND5E.tools[slugify(tool)];
+    const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(tool)];
+    const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
+    if ( toolIndex ) {
+      const ability = config.ability || toolConfig?.ability;
+      if ( ability ) {
+        if ( !groups.has(ability) ) groups.set(ability, []);
+        groups.get(ability).push({ key: tool, type: "tool", label: toolIndex.name });
+      } else {
+        console.warn(`Tool "${tool}" found without specified or default ability while enriching ${config._input}.`);
+        invalid = true;
+      }
+    } else {
+      console.warn(`Tool "${tool}" not found while enriching ${config._input}.`);
+      invalid = true;
+    }
+  }
+
+  if ( !abilityConfig && !groups.size ) {
+    console.warn(`No ability provided while enriching ${config._input}.`);
     invalid = true;
   }
-  if ( abilityConfig?.key ) config.ability = abilityConfig.key;
+
+  const complex = (config.skill.length + config.tool.length) > 1;
+  if ( config.passive && complex ) {
+    console.warn(`Multiple skills or tools and passive flag found while enriching ${config._input}, which aren't supported together.`);
+    invalid = true;
+  }
+  if ( label && complex ) {
+    console.warn(`Multiple skills or tools and a custom label found while enriching ${config._input}, which aren't supported together.`);
+    invalid = true;
+  }
 
   if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData);
 
   if ( invalid ) return null;
 
-  const type = config.skill ? "skill" : config.tool ? "tool" : "check";
-  config = { type, ...config };
+  if ( complex ) {
+    const formatter = game.i18n.getListFormatter({ type: "disjunction" });
+    const parts = [];
+    for ( const [ability, associated] of groups.entries() ) {
+      const makeConfig = ({ key, type }) => ({ type, [type]: key, ability: groups.size > 1 ? ability : undefined });
+
+      // Multiple associated proficiencies, link each individually
+      if ( associated.length > 1 ) parts.push(
+        game.i18n.format("EDITOR.DND5E.Inline.SpecificCheck", {
+          ability: CONFIG.DND5E.enrichmentLookup.abilities[ability].label,
+          type: formatter.format(associated.map(a => createRollLink(a.label, makeConfig(a)).outerHTML ))
+        })
+      );
+
+      // Only single associated proficiency, wrap whole thing in roll link
+      else {
+        const associatedConfig = makeConfig(associated[0]);
+        parts.push(createRollLink(createRollLabel({ ...associatedConfig, ability }), associatedConfig).outerHTML);
+      }
+    }
+    label = formatter.format(parts);
+    if ( config.dc && !config.hideDC ) {
+      label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+    }
+    label = game.i18n.format(`EDITOR.DND5E.Inline.Check${config.format === "long" ? "Long" : "Short"}`, { check: label });
+    const template = document.createElement("template");
+    template.innerHTML = label;
+    return createRequestLink(template, {
+      type: "check", ...config, skill: config.skill.join("|"), tool: config.tool.join("|")
+    });
+  }
+
+  const type = config.skill.length ? "skill" : config.tool.length ? "tool" : "check";
+  config = { type, ability: Array.from(groups.keys())[0], ...config, skill: config.skill[0], tool: config.tool[0] };
   if ( !label ) label = createRollLabel(config);
   return config.passive ? createPassiveTag(label, config) : createRequestLink(createRollLink(label), config);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Create the buttons for a check requested in chat.
+ * @param {object} dataset
+ * @returns {object[]}
+ */
+function createCheckRequestButtons(dataset) {
+  const skills = dataset.skill?.split("|") ?? [];
+  const tools = dataset.tool?.split("|") ?? [];
+  if ( (skills.length + tools.length) <= 1 ) return [createRequestButton(dataset)];
+  const baseDataset = { ...dataset };
+  delete baseDataset.skill;
+  delete baseDataset.tool;
+  return [
+    ...skills.map(skill => createRequestButton({
+      ability: CONFIG.DND5E.skills[skill].ability, ...baseDataset, skill, type: "skill"
+    })),
+    ...tools.map(tool => createRequestButton({
+      ability: CONFIG.DND5E.tools[tool]?.ability, ...baseDataset, tool, type: "tool"
+    }))
+  ];
 }
 
 /* -------------------------------------------- */
@@ -412,7 +527,7 @@ async function enrichCheck(config, label, options) {
  *
  * @example Specify multiple abilities:
  * ```[[/save ability=str/dex dc=20]]```
- * ```[[/save strength dexterity dc=20]]```
+ * ```[[/save strength dexterity 20]]```
  * becomes
  * ```html
  * <span class="roll-link-group" data-type="save" data-ability="str|dex" data-dc="20">
@@ -1194,7 +1309,8 @@ async function rollAction(event) {
     const MessageClass = getDocumentClass("ChatMessage");
 
     let buttons;
-    if ( dataset.type === "save" ) buttons = createSaveRequestButtons(dataset);
+    if ( dataset.type === "check" ) buttons = createCheckRequestButtons(dataset);
+    else if ( dataset.type === "save" ) buttons = createSaveRequestButtons(dataset);
     else buttons = [createRequestButton(dataset)];
 
     const chatData = {
