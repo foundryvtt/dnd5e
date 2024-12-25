@@ -5,7 +5,7 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   /** @inheritDoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
-      choices: [-1, 0, 1],
+      choices: AdvantageModeField.#values,
       initial: 0,
       label: "DND5E.AdvantageMode"
     });
@@ -14,7 +14,15 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   /* -------------------------------------------- */
 
   /**
-   * Number of advantage modifications.
+   * Allowed advantage mode values.
+   * @type {number[]}
+   */
+  static #values = [-1, 0, 1];
+
+  /* -------------------------------------------- */
+
+  /**
+   * Number of advantage sources.
    * @type {number}
    */
   #advantage;
@@ -22,7 +30,7 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   /* -------------------------------------------- */
 
   /**
-   * Number of disadvantage modifications.
+   * Number of disadvantage sources.
    * @type {number}
    */
   #disadvantage;
@@ -41,12 +49,8 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   /* -------------------------------------------- */
 
   /** @override */
-  applyChange(value, model, change) {
-    const delta = this._castChangeDelta(change.value);
-    if ( change.mode === CONST.ACTIVE_EFFECT_MODES.CUSTOM ) {
-      return this._applyChangeCustom(value, delta, model, change);
-    }
-    switch (delta) {
+  _applyChangeAdd(value, delta, model, change) {
+    switch ( delta ) {
       case 1:
         this.#advantage++;
         break;
@@ -55,5 +59,33 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
         break;
     }
     return Math.sign(this.#advantage) - Math.sign(this.#disadvantage);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeDowngrade(value, delta, model, change) {
+    return value;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeMultiply(value, delta, model, change) {
+    return value;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeOverride(value, delta, model, change) {
+    return value;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeUpgrade(value, delta, model, change) {
+    return value;
   }
 }
