@@ -686,7 +686,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       let actionType = this.actionType;
       if ( (actionType === "mwak") && rollConfig.attackMode?.startsWith("thrown") ) actionType = "rwak";
       const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${actionType}.damage`);
-      if ( bonus && (parseInt(bonus) !== 0) ) parts.push(bonus);
+      if ( bonus && (Number(bonus) !== 0) ) parts.push(bonus);
     }
 
     const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);
