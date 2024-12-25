@@ -104,6 +104,7 @@ export default class NPCData extends CreatureTemplate {
           formula: new FormulaField({required: true, label: "DND5E.HPFormula"})
         }, {label: "DND5E.HitPoints"}),
         death: new RollConfigField({
+          ability: false,
           success: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
           }),
