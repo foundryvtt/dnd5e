@@ -130,13 +130,14 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
   prepareAbilities({ rollData={}, originalSaves }={}) {
     const flags = this.parent.flags.dnd5e ?? {};
     const { prof = 0, ac } = this.attributes ?? {};
+    for ( const abl of Object.values(this.abilities) ) {
+      if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
+      abl.mod = Math.floor((abl.value - 10) / 2);
+    }
     const checkBonus = simplifyBonus(this.bonuses?.abilities?.check, rollData);
     const saveBonus = simplifyBonus(this.bonuses?.abilities?.save, rollData);
     const dcBonus = simplifyBonus(this.bonuses?.spell?.dc, rollData);
     for ( const [id, abl] of Object.entries(this.abilities) ) {
-      if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
-      abl.mod = Math.floor((abl.value - 10) / 2);
-
       abl.checkProf = this.calculateAbilityCheckProficiency(0, id);
       const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
 

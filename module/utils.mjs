@@ -295,7 +295,7 @@ export function simplifyBonus(bonus, data={}) {
   if ( Number.isNumeric(bonus) ) return Number(bonus);
   try {
     const roll = new Roll(bonus, data);
-    return roll.isDeterministic ? roll.evaluateSync().total : 0;
+    return roll.evaluateSync({strict: false}).total;
   } catch(error) {
     console.error(error);
     return 0;
