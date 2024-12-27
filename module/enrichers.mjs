@@ -15,7 +15,7 @@ export function registerCustomEnrichers() {
     "attack", "award", "check", "concentration", "damage", "heal", "healing", "item", "save", "skill", "tool"
   ];
   CONFIG.TextEditor.enrichers.push({
-    pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> [^\\]]+?)?]](?:{(?<label>[^}]+)})?`, "gi"),
+    pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> .*?)?]](?:{(?<label>[^}]+)})?`, "gi"),
     enricher: enrichString
   },
   {
