@@ -828,6 +828,7 @@ export default class AdvancementManager extends Application {
 
 /**
  * Debug application for visualizing advancement steps.
+ * Note: Intentionally not localized due to its nature as a debug application.
  */
 class AdvancementVisualizer extends Application5e {
   /** @override */
@@ -839,7 +840,7 @@ class AdvancementVisualizer extends Application5e {
     position: {
       top: 50,
       left: 50,
-      width: 350
+      width: 440
     },
     manager: null
   };
