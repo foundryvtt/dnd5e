@@ -355,7 +355,9 @@ export default class Advancement extends BaseAdvancement {
   async createItemData(uuid, id) {
     const source = await fromUuid(uuid);
     if ( !source ) return null;
+    const { _stats } = game.items.fromCompendium(source);
     return source.clone({
+      _stats,
       _id: id ?? foundry.utils.randomID(),
       "flags.dnd5e.sourceId": uuid,
       "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`

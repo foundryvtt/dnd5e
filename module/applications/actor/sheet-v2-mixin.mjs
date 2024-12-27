@@ -1,5 +1,5 @@
 import * as Trait from "../../documents/actor/trait.mjs";
-import { formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
+import { formatDistance, formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
 import Tabs5e from "../tabs.mjs";
 import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
 
@@ -7,6 +7,7 @@ import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
  * Adds common V2 Actor sheet functionality.
  * @param {typeof ActorSheet5e} Base  The base class being mixed.
  * @returns {typeof ActorSheetV2}
+ * @mixin
  */
 export default function ActorSheetV2Mixin(Base) {
   return class ActorSheetV2 extends DocumentSheetV2Mixin(Base) {
@@ -295,13 +296,18 @@ export default function ActorSheetV2Mixin(Base) {
         if ( !section.usesSlots ) return;
         const spells = foundry.utils.getProperty(this.actor.system.spells, section.prop);
         const max = spells.override ?? spells.max ?? 0;
-        section.pips = Array.fromRange(max, 1).map(n => {
+        const value = spells.value ?? 0;
+        section.pips = Array.fromRange(Math.max(max, value), 1).map(n => {
           const filled = spells.value >= n;
-          const label = filled
-            ? game.i18n.format(`DND5E.SpellSlotN.${plurals.select(n)}`, { n })
-            : game.i18n.localize("DND5E.SpellSlotExpended");
+          const temp = n > max;
+          const label = temp
+            ? game.i18n.localize("DND5E.SpellSlotTemporary")
+            : filled
+              ? game.i18n.format(`DND5E.SpellSlotN.${plurals.select(n)}`, { n })
+              : game.i18n.localize("DND5E.SpellSlotExpended");
           const classes = ["pip"];
           if ( filled ) classes.push("filled");
+          if ( temp ) classes.push("tmp");
           return { n, label, filled, tooltip: label, classes: classes.join(" ") };
         });
       });
@@ -336,7 +342,8 @@ export default function ActorSheetV2Mixin(Base) {
             ctx.range = {
               distance: true,
               value: system.range.value,
-              unit: game.i18n.localize(`DND5E.Dist${units.capitalize()}Abbr`)
+              unit: CONFIG.DND5E.movementUnits[units].abbreviation,
+              parts: formatDistance(system.range.value, units, { parts: true })
             };
           }
           else ctx.range = { distance: false };
@@ -491,7 +498,6 @@ export default function ActorSheetV2Mixin(Base) {
     activateListeners(html) {
       super.activateListeners(html);
       html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
-      html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
       html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
       html.find(".sidebar-collapser").on("click", this._onToggleSidebar.bind(this));
       html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));

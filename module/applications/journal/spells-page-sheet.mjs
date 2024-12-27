@@ -176,6 +176,13 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  _canDragDrop() {
+    return this.isEditable;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Handle performing an action.
    * @param {PointerEvent} event  This triggering click event.

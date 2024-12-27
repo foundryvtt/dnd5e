@@ -2,7 +2,7 @@
      {{#if tokenId}}data-token-id="{{tokenId}}"{{/if}} {{#if isSpell}}data-spell-level="{{ item.system.level }}"{{/if}}>
 
     {{!-- Collapsible Item Details --}}
-    <section class="card-header description collapsible">
+    <section class="card-header description collapsible" {{#if data.description.concealed}}data-concealed{{/if}}>
 
         {{!-- Summary --}}
         <header class="summary">

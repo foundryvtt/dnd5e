@@ -43,10 +43,10 @@ const {
  * @property {EffectApplicationData[]} effects   Linked effects that can be applied.
  * @property {object} range
  * @property {boolean} range.override            Override range values inferred from item.
- * @property {TargetField} target
+ * @property {TargetData} target
  * @property {boolean} target.override           Override target values inferred from item.
  * @property {boolean} target.prompt             Should the player be prompted to place the template?
- * @property {UsesField} uses                    Uses available to this activity.
+ * @property {UsesData} uses                     Uses available to this activity.
  */
 export default class BaseActivityData extends foundry.abstract.DataModel {
 

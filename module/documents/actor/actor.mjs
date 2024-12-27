@@ -4,7 +4,7 @@ import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
-import { replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
+import { defaultUnits, replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
@@ -606,6 +606,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
       + (flags.initiativeAlert && isLegacy ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
+    init.score = 10 + init.total;
   }
 
   /* -------------------------------------------- */
@@ -1416,14 +1417,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const rollConfig = foundry.utils.mergeObject({
       ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability),
+      advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+      disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
     rollConfig.rolls = [{
       options: {
-        advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-        disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
         maximum: relevant?.roll.max,
         minimum: relevant?.roll.min
       }
@@ -2024,8 +2025,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * @typedef {D20RollOptions} InitiativeRollOptions
-   * @param {D20Roll.ADV_MODE} [advantageMode]  A specific advantage mode to apply.
-   * @property {string} [flavor]                Special flavor text to apply to the created message.
+   * @property {D20Roll.ADV_MODE} [advantageMode]  A specific advantage mode to apply.
+   * @property {number} [fixed]                    Fixed initiative value to use rather than rolling.
+   * @property {string} [flavor]                   Special flavor text to apply to the created message.
    */
 
   /**
@@ -2038,8 +2040,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this._cachedInitiativeRoll ) return this._cachedInitiativeRoll.clone();
     const config = this.getInitiativeRollConfig(options);
     if ( !config ) return null;
-    const formula = ["1d20"].concat(config.parts).join(" + ");
-    return new CONFIG.Dice.D20Roll(formula, config.data, config.options);
+
+    // Create a normal D20 roll
+    if ( config.options?.fixed === undefined ) {
+      const formula = ["1d20"].concat(config.parts).join(" + ");
+      return new CONFIG.Dice.D20Roll(formula, config.data, config.options);
+    }
+
+    // Create a basic roll with the fixed score
+    return new CONFIG.Dice.BasicRoll(String(config.options.fixed), config.data, config.options);
   }
 
   /* -------------------------------------------- */
@@ -2075,7 +2084,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
     if ( tiebreaker && Number.isNumeric(ability?.value) ) parts.push(String(ability.value / 100));
 
+    // Fixed initiative score
+    const scoreMode = game.settings.get("dnd5e", "initiativeScore");
+    const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && (this.type === "npc"));
+
     options = foundry.utils.mergeObject({
+      fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? game.i18n.localize("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
       maximum: init.roll.max,
@@ -2101,7 +2115,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Roll initiative for this Actor with a dialog that provides an opportunity to elect advantage or other bonuses.
    * @param {Partial<InitiativeRollOptions>} [rollOptions={}]  Options forwarded to the Actor#getInitiativeRoll method.
-   * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor
+   * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor.
    */
   async rollInitiativeDialog(rollOptions={}) {
     const config = {
@@ -2112,13 +2126,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       subject: this
     };
     if ( !config.rolls[0] ) return;
-    const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
-    const message = { rollMode: game.settings.get("core", "rollMode") };
-    const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, message);
-    if ( !rolls.length ) return;
 
-    // Temporarily cache the configured roll and use it to roll initiative for the Actor
-    this._cachedInitiativeRoll = rolls[0];
+    // Display the roll configuration dialog
+    if ( config.rolls[0].options?.fixed === undefined ) {
+      const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
+      const message = { rollMode: game.settings.get("core", "rollMode") };
+      const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, message);
+      if ( !rolls.length ) return;
+      this._cachedInitiativeRoll = rolls[0];
+    }
+
+    // Just create a basic roll with the fixed score
+    else {
+      const { data, options } = config.rolls[0];
+      this._cachedInitiativeRoll = new CONFIG.Dice.BasicRoll(String(options.fixed), data, options);
+    }
+
     await this.rollInitiative({ createCombatants: true });
   }
 
@@ -2210,14 +2233,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else {
       // If no denomination was provided, choose the first available
       if ( !config.denomination ) {
-        cls = this.system.attributes.hd.classes.find(c => c.system.hitDiceUsed < c.system.levels);
+        cls = this.system.attributes.hd.classes.find(c => c.system.hd.value);
         if ( !cls ) return null;
-        config.denomination = cls.system.hitDice;
+        config.denomination = cls.system.hd.denomination;
       }
 
       // Otherwise, locate a class (if any) which has an available hit die of the requested denomination
       else cls = this.system.attributes.hd.classes.find(i => {
-        return (i.system.hitDice === config.denomination) && (i.system.hitDiceUsed < i.system.levels);
+        return (i.system.hd.denomination === config.denomination) && i.system.hd.value;
       });
 
       // If no class is available, display an error notification
@@ -2270,7 +2293,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const updates = { actor: {}, class: {} };
     if ( rollConfig.modifyHitDice !== false ) {
-      if ( cls ) updates.class["system.hitDiceUsed"] = cls.system.hitDiceUsed + 1;
+      if ( cls ) updates.class["system.hd.spent"] = cls.system.hd.spent + 1;
       else updates.actor["system.attributes.hd.spent"] = this.system.attributes.hd.spent + 1;
     }
     const hp = this.system.attributes.hp;
@@ -2331,7 +2354,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async rollClassHitPoints(item, { chatMessage=true }={}) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
     const rollData = {
-      formula: `1${item.system.hitDice}`,
+      formula: `1${item.system.hd.denomination}`,
       data: item.getRollData(),
       chatMessage
     };
@@ -2877,7 +2900,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _prepareMovementAttribution() {
     const { movement } = this.system.attributes;
-    const units = movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0];
+    const units = movement.units || defaultUnits("length");
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, label]) => {
       const value = movement[k];
       if ( value || (k === "walk") ) html += `

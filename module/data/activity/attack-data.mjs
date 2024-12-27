@@ -131,6 +131,25 @@ export default class AttackActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Potential attack types when attacking with this activity.
+   * @type {Set<string>}
+   */
+  get validAttackTypes() {
+    const sourceType = this._source.attack.type.value;
+    if ( sourceType ) return new Set([sourceType]);
+    if ( this.item.type !== "weapon" ) return new Set();
+
+    const types = new Set();
+    const attackType = this.attack.type.value || this.item.system.attackType;
+    if ( attackType === "melee" ) types.add("melee");
+    if ( (attackType === "ranged") || ((this.item.system.attackType === "melee")
+      && this.item.system.properties.has("thr")) ) types.add("ranged");
+    return types;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
@@ -325,6 +344,40 @@ export default class AttackActivityData extends BaseActivityData {
     }
 
     return rollConfig;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a label based on this activity's settings and, if contained in a weapon, additional details from the weapon.
+   * @returns {string}
+   */
+  getRangeLabel() {
+    if ( this.item.type !== "weapon" ) return this.labels?.range ?? "";
+
+    // TODO: Use proper unit formatting with these once https://github.com/foundryvtt/dnd5e/issues/3958 is resolved
+
+    const parts = [];
+
+    // Add reach for melee weapons, unless the activity is explicitly specified as a ranged attack
+    if ( this.validAttackTypes.has("melee") ) {
+      const { reach, units } = this.item.system.range;
+      parts.push(game.i18n.format("DND5E.RANGE.Formatted.Reach", { reach: `${reach ?? 5} ${units}` }));
+    }
+
+    // Add range for ranged or thrown weapons, unless the activity is explicitly specified as melee
+    if ( this.validAttackTypes.has("ranged") ) {
+      let range;
+      if ( this.range.override ) range = `${this.range.value} ${this.range.units ?? ""}`;
+      else {
+        const { value, long, units } = this.item.system.range;
+        if ( long && (value !== long) ) range = `${value}/${long} ${units}`;
+        else range = `${value} ${units}`;
+      }
+      parts.push(game.i18n.format("DND5E.RANGE.Formatted.Range", { range }));
+    }
+
+    return game.i18n.getListFormatter({ type: "disjunction" }).format(parts.filter(_ => _));
   }
 
   /* -------------------------------------------- */

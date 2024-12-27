@@ -478,6 +478,16 @@
     }
   }
 
+  /* Radio Buttons */
+  input[type=radio] {
+    appearance: revert;
+    -webkit-appearance: revert;
+    -moz-appearance: revert;
+    position: unset;
+    margin: revert;
+    &::before, &::after { content: unset; }
+  }
+
   .form-fields > dnd5e-checkbox { flex: none; }
 
   .form-group.checkbox > label, label.checkbox {

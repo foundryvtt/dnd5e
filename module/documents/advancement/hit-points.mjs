@@ -43,7 +43,7 @@ export default class HitPointsAdvancement extends Advancement {
    */
   get hitDie() {
     if ( this.actor?.type === "npc" ) return `d${this.actor.system.attributes.hd.denomination}`;
-    return this.item.system.hitDice;
+    return this.item.system.hd.denomination;
   }
 
   /* -------------------------------------------- */

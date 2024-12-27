@@ -99,16 +99,18 @@ export default class EnchantmentApplicationElement extends HTMLElement {
    * Build a list of enchanted items. Will be called whenever the enchanted items are changed in order to update
    * the card list.
    */
-  async buildItemList() {
-    const enchantedItems = await dnd5e.registry.enchantments.applied(this.enchantmentActivity.uuid).map(enchantment => {
+  buildItemList() {
+    const enchantedItems = dnd5e.registry.enchantments.applied(this.enchantmentActivity.uuid).map(enchantment => {
       const item = enchantment.parent;
       const div = document.createElement("div");
       div.classList.add("preview");
       div.dataset.enchantmentUuid = enchantment.uuid;
       div.innerHTML = `
-        <img src="${item.img}" class="gold-icon" alt="${item.name}">
-        <span class="name">${item.name}</span>
+        <img class="gold-icon">
+        <span class="name"></span>
       `;
+      Object.assign(div.querySelector("img"), { alt: item.name, src: item.img });
+      div.querySelector(".name").append(item.name);
       if ( item.isOwner ) {
         const control = document.createElement("a");
         control.ariaLabel = game.i18n.localize("DND5E.ENCHANTMENT.Action.Remove");
@@ -119,14 +121,9 @@ export default class EnchantmentApplicationElement extends HTMLElement {
       }
       return div;
     });
-    if ( enchantedItems.length ) {
-      this.dropArea.replaceChildren(...enchantedItems);
-    } else {
-      this.dropArea.innerHTML = `<p>${game.i18n.localize("DND5E.ENCHANT.DropArea")}</p>`;
-    }
-    if ( this.countArea ) {
-      this.countArea.querySelector(".current").innerText = enchantedItems.length;
-    }
+    if ( enchantedItems.length ) this.dropArea.replaceChildren(...enchantedItems);
+    else this.dropArea.innerHTML = `<p>${game.i18n.localize("DND5E.ENCHANT.DropArea")}</p>`;
+    if ( this.countArea ) this.countArea.querySelector(".current").innerText = enchantedItems.length;
   }
 
   /* -------------------------------------------- */

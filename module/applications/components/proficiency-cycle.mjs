@@ -4,16 +4,16 @@ import AdoptedStyleSheetMixin from "./adopted-stylesheet-mixin.mjs";
  * A custom HTML element that displays proficiency status and allows cycling through values.
  * @fires change
  */
-export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTMLElement) {
+export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(
+  foundry.applications.elements.AbstractFormInputElement
+) {
   /** @inheritDoc */
   constructor() {
     super();
-    this.#controller = new AbortController();
-    this.#internals = this.attachInternals();
-    this.#internals.role = "spinbutton";
+    this._internals.role = "spinbutton";
     this.#shadowRoot = this.attachShadow({ mode: "open" });
     this._adoptStyleSheet(this._getStyleSheet());
-    this.#value = Number(this.getAttribute("value") ?? 0);
+    this._value = Number(this.getAttribute("value") ?? 0);
   }
 
   /** @inheritDoc */
@@ -82,12 +82,6 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
   #controller;
 
   /**
-   * The custom element's form and accessibility internals.
-   * @type {ElementInternals}
-   */
-  #internals;
-
-  /**
    * Shadow root of the element.
    * @type {ShadowRoot}
    */
@@ -96,36 +90,9 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
   /* -------------------------------------------- */
 
   /** @override */
-  static formAssociated = true;
-
-  /**
-   * The form this element belongs to, if any.
-   * @type {HTMLFormElement}
-   */
-  get form() { return this.#internals.form; }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is the input disabled?
-   * @type {boolean}
-   */
-  get disabled() { return this.hasAttribute("disabled"); }
-
-  set disabled(value) {
-    this.toggleAttribute("disabled", value);
+  _toggleDisabled(value) {
     this.#shadowRoot.querySelector("input")?.toggleAttribute("disabled", value);
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * The name of the toggle.
-   * @type {string}
-   */
-  get name() { return this.getAttribute("name"); }
-
-  set name(value) { this.setAttribute("name", value); }
 
   /* -------------------------------------------- */
 
@@ -138,9 +105,9 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
   set type(value) {
     if ( !["ability", "skill", "tool"].includes(value) ) throw new Error("Type must be 'ability', 'skill', or 'tool'.");
     this.setAttribute("type", value);
-    this.#internals.ariaValueMin = 0;
-    this.#internals.ariaValueMax = value === "ability" ? 1 : 2;
-    this.#internals.ariaValueStep = value === "ability" ? 1 : 0.5;
+    this._internals.ariaValueMin = 0;
+    this._internals.ariaValueMax = value === "ability" ? 1 : 2;
+    this._internals.ariaValueStep = value === "ability" ? 1 : 0.5;
   }
 
   /* -------------------------------------------- */
@@ -155,37 +122,14 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
 
   /* -------------------------------------------- */
 
-  /**
-   * The value of the input as it appears in form data.
-   * @type {number}
-   */
-  #value;
-
-  get value() { return this.#value; }
-
-  set value(value) {
-    value = Number(value);
+  /** @inheritDoc */
+  _setValue(value) {
     if ( !this.validValues.includes(value) ) throw new Error("Value must be a valid proficiency multiplier.");
-    this.#value = value;
-    this.#refreshValue();
+    return super._setValue(value);
   }
 
   /* -------------------------------------------- */
   /*  Methods                                     */
-  /* -------------------------------------------- */
-
-  /** @override */
-  connectedCallback() {
-    this.#buildHTML();
-    this.#refreshValue();
-
-    const { signal } = this.#controller;
-    this.addEventListener("click", this.#onClick.bind(this), { signal });
-    this.addEventListener("contextmenu", this.#onClick.bind(this), { signal });
-    this.#shadowRoot.querySelector("div").addEventListener("contextmenu", e => e.preventDefault(), { signal });
-    this.#shadowRoot.querySelector("input").addEventListener("change", this.#onChangeInput.bind(this), { signal });
-  }
-
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -195,10 +139,8 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
 
   /* -------------------------------------------- */
 
-  /**
-   * Build the HTML internals.
-   */
-  #buildHTML() {
+  /** @override */
+  _buildElements() {
     const div = document.createElement("div");
     this.#shadowRoot.replaceChildren(div);
 
@@ -206,19 +148,31 @@ export default class ProficiencyCycleElement extends AdoptedStyleSheetMixin(HTML
     input.setAttribute("type", "number");
     if ( this.disabled ) input.setAttribute("disabled", "");
     div.appendChild(input);
+
+    return [];
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * Update input and aria attributes based on new input value.
-   */
-  #refreshValue() {
+  /** @override */
+  _refresh() {
     const input = this.#shadowRoot.querySelector("input");
-    input.setAttribute("value", this.#value);
-    this.#internals.ariaValueNow = this.#value;
-    this.#internals.ariaValueText = CONFIG.DND5E.proficiencyLevels[this.#value];
-    this.#internals.setFormValue(this.#value);
+    input.setAttribute("value", this._value);
+    this._internals.ariaValueNow = this._value;
+    this._internals.ariaValueText = CONFIG.DND5E.proficiencyLevels[this._value];
+    this._internals.setFormValue(this._value);
+    this._primaryInput = this.#shadowRoot.querySelector("input");
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _activateListeners() {
+    const { signal } = this.#controller = new AbortController();
+    this.addEventListener("click", this.#onClick.bind(this), { signal });
+    this.addEventListener("contextmenu", this.#onClick.bind(this), { signal });
+    this.#shadowRoot.querySelector("div").addEventListener("contextmenu", e => e.preventDefault(), { signal });
+    this.#shadowRoot.querySelector("input").addEventListener("change", this.#onChangeInput.bind(this), { signal });
   }
 
   /* -------------------------------------------- */

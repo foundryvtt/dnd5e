@@ -529,6 +529,13 @@ export default class JournalClassPageSheet extends JournalPageSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _canDragDrop() {
+    return this.isEditable;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _onDrop(event) {
     const data = TextEditor.getDragEventData(event);
 

@@ -120,6 +120,9 @@ Hooks.once("init", function() {
     delete DND5E.languages.exotic.children.cant;
     DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
     delete DND5E.languages.exotic.children.druidic;
+
+    // Stunned stops movement in legacy.
+    DND5E.conditionEffects.noMovement.add("stunned");
   }
 
   // Register Roll Extensions
@@ -445,7 +448,11 @@ Hooks.once("i18nInit", () => {
         LanguagesExotic: game.i18n.localize("DND5E.LanguagesExoticLegacy"),
         LongRestHint: game.i18n.localize("DND5E.LongRestHintLegacy"),
         LongRestHintGroup: game.i18n.localize("DND5E.LongRestHintGroupLegacy"),
-        TargetRadius: game.i18n.localize("DND5E.TargetRadiusLegacy"),
+        "TARGET.Type.Emanation": foundry.utils.mergeObject(
+          _fallback.DND5E?.TARGET?.Type?.Radius ?? {},
+          translations.DND5E?.TARGET?.Type?.Radius ?? {},
+          { inplace: false }
+        ),
         TraitArmorPlural: foundry.utils.mergeObject(
           _fallback.DND5E?.TraitArmorLegacyPlural ?? {},
           translations.DND5E?.TraitArmorLegacyPlural ?? {},
@@ -579,6 +586,21 @@ Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOpt
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
+
+Hooks.on("preCreateScene", (doc, createData, options, userId) => {
+  // Set default grid units based on metric length setting
+  const units = utils.defaultUnits("length");
+  if ( (units !== dnd5e.grid.units) && !foundry.utils.getProperty(createData, "grid.distance")
+    && !foundry.utils.getProperty(createData, "grid.units") ) {
+    const C = CONFIG.DND5E.movementUnits;
+    doc.updateSource({
+      grid: {
+        // TODO: Replace with `convertLength` method once added
+        distance: dnd5e.grid.distance * (C[dnd5e.grid.units]?.conversion ?? 1) / (C[units]?.conversion ?? 1), units
+      }
+    });
+  }
+});
 
 // TODO: Generalize this logic and make it available in the re-designed transform application.
 Hooks.on("dnd5e.transformActor", (subject, target, d, options) => {

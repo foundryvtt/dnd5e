@@ -2,10 +2,7 @@
     {{~#if hasConsumption}}
     <fieldset>
         <legend>{{ localize "DND5E.USAGE.SECTION.Consumption" }}</legend>
-        {{#if spellSlot}}
-            {{ formField spellSlot.field name=spellSlot.name value=spellSlot.value input=inputs.createCheckboxInput }}
-        {{/if}}
-        {{#each resources}}
+        {{#each fields}}
         <div class="form-group">
             <label>
                 {{ field.label }}

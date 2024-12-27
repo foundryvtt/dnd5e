@@ -83,7 +83,7 @@ export default class IdentifiableTemplate extends SystemDataModel {
       && !this.unidentified.description;
     if ( !fetchName && !fetchDesc ) return;
 
-    const baseItem = await Trait.getBaseItem(this.type.identifier ?? "", { fullItem: fetchDesc });
+    const baseItem = await Trait.getBaseItem(this.type?.identifier ?? "", { fullItem: fetchDesc });
 
     // If a base item is set, fetch that and use its name/description
     if ( baseItem ) {

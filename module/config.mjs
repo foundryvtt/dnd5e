@@ -1624,6 +1624,7 @@ DND5E.consumableTypes = {
     subtypes: {
       arrow: "DND5E.CONSUMABLE.Type.Ammunition.Arrow",
       crossbowBolt: "DND5E.CONSUMABLE.Type.Ammunition.Bolt",
+      energyCell: "DND5E.CONSUMABLE.Type.Ammunition.EnergyCell",
       firearmBullet: "DND5E.CONSUMABLE.Type.Ammunition.BulletFirearm",
       slingBullet: "DND5E.CONSUMABLE.Type.Ammunition.BulletSling",
       blowgunNeedle: "DND5E.CONSUMABLE.Type.Ammunition.Needle"
@@ -1896,6 +1897,9 @@ DND5E.itemProperties = {
   thr: {
     label: "DND5E.Item.Property.Thrown"
   },
+  trait: {
+    label: "DND5E.Item.Property.Trait"
+  },
   two: {
     label: "DND5E.Item.Property.TwoHanded"
   },
@@ -1934,7 +1938,8 @@ DND5E.validProperties = {
     "stealthDisadvantage"
   ]),
   feat: new Set([
-    "mgc"
+    "mgc",
+    "trait"
   ]),
   loot: new Set([
     "mgc"
@@ -2345,17 +2350,73 @@ preLocalize("movementTypes", { sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Default units used for imperial & metric settings.
+ * @enum {{ imperial: string, metric: string }}
+ */
+DND5E.defaultUnits = {
+  length: {
+    imperial: "ft",
+    metric: "m"
+  },
+  weight: {
+    imperial: "lb",
+    metric: "kg"
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {object} UnitConfiguration
+ * @property {string} label              Localized label for the unit.
+ * @property {string} abbreviation       Localized abbreviation for the unit.
+ * @property {number} conversion         Multiplier used to convert between various units.
+ * @property {string} [counted]          Localization path for counted plural forms in various unit display modes.
+ *                                       Only necessary if non-supported unit or using a non-standard name for a
+ *                                       supported unit.
+ * @property {string} [formattingUnit]   Unit formatting value as supported by javascript's internationalization system:
+ *                                       https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers. Only
+ *                                       required if the formatting name doesn't match the unit key.
+ * @property {"imperial"|"metric"} type  Whether this is an "imperial" or "metric" unit.
+ */
+
+/**
  * The valid units of measure for movement distances in the game system.
  * By default this uses the imperial units of feet and miles.
  * @enum {string}
  */
 DND5E.movementUnits = {
-  ft: "DND5E.DistFt",
-  mi: "DND5E.DistMi",
-  m: "DND5E.DistM",
-  km: "DND5E.DistKm"
+  ft: {
+    label: "DND5E.UNITS.DISTANCE.Foot.Label",
+    abbreviation: "DND5E.UNITS.DISTANCE.Foot.Abbreviation",
+    conversion: 1,
+    formattingUnit: "foot",
+    type: "imperial"
+  },
+  mi: {
+    label: "DND5E.UNITS.DISTANCE.Mile.Label",
+    abbreviation: "DND5E.UNITS.DISTANCE.Mile.Abbreviation",
+    conversion: 5_280,
+    formattingUnit: "mile",
+    type: "imperial"
+  },
+  m: {
+    label: "DND5E.UNITS.DISTANCE.Meter.Label",
+    abbreviation: "DND5E.UNITS.DISTANCE.Meter.Abbreviation",
+    conversion: 10 / 3, // D&D uses a simplified 5ft -> 1.5m conversion.
+    formattingUnit: "meter",
+    type: "metric"
+  },
+  km: {
+    label: "DND5E.UNITS.DISTANCE.Kilometer.Label",
+    abbreviation: "DND5E.UNITS.DISTANCE.Kilometer.Abbreviation",
+    conversion: 10_000 / 3, // Matching simplified conversion
+    formattingUnit: "kilometer",
+    type: "metric"
+  }
 };
-preLocalize("movementUnits");
+patchConfig("movementUnits", "label", { since: "DnD5e 4.2", until: "DnD5e 4.4" });
+preLocalize("movementUnits", { keys: ["label", "abbreviation"] });
 
 /* -------------------------------------------- */
 
@@ -2379,7 +2440,7 @@ preLocalize("rangeTypes");
  * @enum {string}
  */
 DND5E.distanceUnits = {
-  ...DND5E.movementUnits,
+  ...Object.fromEntries(Object.entries(DND5E.movementUnits).map(([k, { label }]) => [k, label])),
   ...DND5E.rangeTypes
 };
 preLocalize("distanceUnits");
@@ -2387,41 +2448,35 @@ preLocalize("distanceUnits");
 /* -------------------------------------------- */
 
 /**
- * Configuration data for a weight unit.
- *
- * @typedef {object} WeightUnitConfiguration
- * @property {string} label         Localized label for the unit.
- * @property {string} abbreviation  Localized abbreviation for the unit.
- * @property {number} conversion    Number that by which this unit should be multiplied to arrive at a standard value.
- * @property {string} type          Whether this is an "imperial" or "metric" unit.
- */
-
-/**
  * The valid units for measurement of weight.
- * @enum {WeightUnitConfiguration}
+ * @enum {UnitConfiguration}
  */
 DND5E.weightUnits = {
   lb: {
-    label: "DND5E.WeightUnit.Pounds.Label",
-    abbreviation: "DND5E.WeightUnit.Pounds.Abbreviation",
+    label: "DND5E.UNITS.WEIGHT.Pound.Label",
+    abbreviation: "DND5E.UNITS.WEIGHT.Pound.Abbreviation",
     conversion: 1,
+    formattingUnit: "pound",
     type: "imperial"
   },
   tn: {
-    label: "DND5E.WeightUnit.Tons.Label",
-    abbreviation: "DND5E.WeightUnit.Tons.Abbreviation",
+    label: "DND5E.UNITS.WEIGHT.Ton.Label",
+    abbreviation: "DND5E.UNITS.WEIGHT.Ton.Abbreviation",
+    counted: "DND5E.UNITS.WEIGHT.Ton.Counted",
     conversion: 2000,
     type: "imperial"
   },
   kg: {
-    label: "DND5E.WeightUnit.Kilograms.Label",
-    abbreviation: "DND5E.WeightUnit.Kilograms.Abbreviation",
+    label: "DND5E.UNITS.WEIGHT.Kilogram.Label",
+    abbreviation: "DND5E.UNITS.WEIGHT.Kilogram.Abbreviation",
     conversion: 2.5,
+    formattingUnit: "kilogram",
     type: "metric"
   },
   Mg: {
-    label: "DND5E.WeightUnit.Megagrams.Label",
-    abbreviation: "DND5E.WeightUnit.Megagrams.Abbreviation",
+    label: "DND5E.UNITS.WEIGHT.Megagram.Label",
+    abbreviation: "DND5E.UNITS.WEIGHT.Megagram.Abbreviation",
+    counted: "DND5E.UNITS.WEIGHT.Megagram.Counted",
     conversion: 2500,
     type: "metric"
   }
@@ -2514,21 +2569,56 @@ preLocalize("encumbrance.effects", { key: "name" });
 /* -------------------------------------------- */
 
 /**
+ * @typedef {object} IndividualTargetDefinition
+ * @property {string} label           Localized label for this type.
+ * @property {string} [counted]       Localization path for counted plural forms. Only necessary for scalar types.
+ * @property {boolean} [scalar=true]  Can this target take an associated numeric value?
+ */
+
+/**
  * Targeting types that apply to one or more distinct targets.
- * @enum {string}
+ * @enum {IndividualTargetDefinition}
  */
 DND5E.individualTargetTypes = {
-  self: "DND5E.TargetSelf",
-  ally: "DND5E.TargetAlly",
-  enemy: "DND5E.TargetEnemy",
-  creature: "DND5E.TargetCreature",
-  object: "DND5E.TargetObject",
-  space: "DND5E.TargetSpace",
-  creatureOrObject: "DND5E.TargetCreatureOrObject",
-  any: "DND5E.TargetAny",
-  willing: "DND5E.TargetWilling"
+  self: {
+    label: "DND5E.TARGET.Type.Self.Label",
+    scalar: false
+  },
+  ally: {
+    label: "DND5E.TARGET.Type.Ally.Label",
+    counted: "DND5E.TARGET.Type.Ally.Counted"
+  },
+  enemy: {
+    label: "DND5E.TARGET.Type.Enemy.Label",
+    counted: "DND5E.TARGET.Type.Enemy.Counted"
+  },
+  creature: {
+    label: "DND5E.TARGET.Type.Creature.Label",
+    counted: "DND5E.TARGET.Type.Creature.Counted"
+  },
+  object: {
+    label: "DND5E.TARGET.Type.Object.Label",
+    counted: "DND5E.TARGET.Type.Object.Counted"
+  },
+  space: {
+    label: "DND5E.TARGET.Type.Space.Label",
+    counted: "DND5E.TARGET.Type.Space.Counted"
+  },
+  creatureOrObject: {
+    label: "DND5E.TARGET.Type.CreatureOrObject.Label",
+    counted: "DND5E.TARGET.Type.CreatureOrObject.Counted"
+  },
+  any: {
+    label: "DND5E.TARGET.Type.Any.Label",
+    counted: "DND5E.TARGET.Type.Target.Counted"
+  },
+  willing: {
+    label: "DND5E.TARGET.Type.WillingCreature.Label",
+    counted: "DND5E.TARGET.Type.WillingCreature.Counted"
+  }
 };
-preLocalize("individualTargetTypes");
+patchConfig("individualTargetTypes", "label", { from: "DnD5e 4.2", until: "DnD5e 4.4" });
+preLocalize("individualTargetTypes", { key: "label" });
 
 /* -------------------------------------------- */
 
@@ -2537,6 +2627,7 @@ preLocalize("individualTargetTypes");
  *
  * @typedef {object} AreaTargetDefinition
  * @property {string} label        Localized label for this type.
+ * @property {string} counted      Localization path for counted plural forms.
  * @property {string} template     Type of `MeasuredTemplate` create for this target type.
  * @property {string} [reference]  Reference to a rule page describing this area of effect.
  * @property {string[]} [sizes]    List of available sizes for this template. Options are chosen from the list:
@@ -2551,57 +2642,66 @@ preLocalize("individualTargetTypes");
  */
 DND5E.areaTargetTypes = {
   circle: {
-    label: "DND5E.TargetCircle",
+    label: "DND5E.TARGET.Type.Circle.Label",
+    counted: "DND5E.TARGET.Type.Circle.Counted",
     template: "circle",
     sizes: ["radius"]
   },
   cone: {
-    label: "DND5E.TargetCone",
+    label: "DND5E.TARGET.Type.Cone.Label",
+    counted: "DND5E.TARGET.Type.Cone.Counted",
     template: "cone",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.DqqAOr5JnX71OCOw",
     sizes: ["length"],
     standard: true
   },
   cube: {
-    label: "DND5E.TargetCube",
+    label: "DND5E.TARGET.Type.Cube.Label",
+    counted: "DND5E.TARGET.Type.Cube.Counted",
     template: "rect",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.dRfDIwuaHmUQ06uA",
     sizes: ["width"],
     standard: true
   },
   cylinder: {
-    label: "DND5E.TargetCylinder",
+    label: "DND5E.TARGET.Type.Cylinder.Label",
+    counted: "DND5E.TARGET.Type.Cylinder.Counted",
     template: "circle",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.jZFp4R7tXsIqkiG3",
     sizes: ["radius", "height"],
     standard: true
   },
   line: {
-    label: "DND5E.TargetLine",
+    label: "DND5E.TARGET.Type.Line.Label",
+    counted: "DND5E.TARGET.Type.Line.Counted",
     template: "ray",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6DOoBgg7okm9gBc6",
     sizes: ["length", "width"],
     standard: true
   },
   radius: {
-    label: "DND5E.TargetRadius",
+    label: "DND5E.TARGET.Type.Emanation.Label",
+    counted: "DND5E.TARGET.Type.Emanation.Counted",
     template: "circle",
     standard: true
   },
   sphere: {
-    label: "DND5E.TargetSphere",
+    label: "DND5E.TARGET.Type.Sphere.Label",
+    counted: "DND5E.TARGET.Type.Sphere.Counted",
     template: "circle",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.npdEWb2egUPnB5Fa",
     sizes: ["radius"],
     standard: true
   },
   square: {
-    label: "DND5E.TargetSquare",
+    label: "DND5E.TARGET.Type.Square.Label",
+    counted: "DND5E.TARGET.Type.Square.Counted",
     template: "rect",
     sizes: ["width"]
   },
   wall: {
-    label: "DND5E.TargetWall",
+    label: "DND5E.TARGET.Type.Wall.Label",
+    counted: "DND5E.TARGET.Type.Wall.Counted",
     template: "ray",
     sizes: ["length", "thickness", "height"]
   }
@@ -2627,7 +2727,7 @@ Object.defineProperty(DND5E, "areaTargetOptions", {
  * @enum {string}
  */
 DND5E.targetTypes = {
-  ...DND5E.individualTargetTypes,
+  ...Object.fromEntries(Object.entries(DND5E.individualTargetTypes).map(([k, v]) => [k, v.label])),
   ...Object.fromEntries(Object.entries(DND5E.areaTargetTypes).map(([k, v]) => [k, v.label]))
 };
 preLocalize("targetTypes", { sort: true });
@@ -2716,6 +2816,31 @@ DND5E.attackClassifications = {
   }
 };
 preLocalize("attackClassifications", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
+ * Attack modes available for weapons.
+ * @enum {string}
+ */
+DND5E.attackModes = Object.seal({
+  oneHanded: {
+    label: "DND5E.ATTACK.Mode.OneHanded"
+  },
+  twoHanded: {
+    label: "DND5E.ATTACK.Mode.TwoHanded"
+  },
+  offhand: {
+    label: "DND5E.ATTACK.Mode.Offhand"
+  },
+  thrown: {
+    label: "DND5E.ATTACK.Mode.Thrown"
+  },
+  "thrown-offhand": {
+    label: "DND5E.ATTACK.Mode.ThrownOffhand"
+  }
+});
+preLocalize("attackModes", { key: "label" });
 
 /* -------------------------------------------- */
 
@@ -3426,7 +3551,7 @@ preLocalize("conditionTypes", { key: "label", sort: true });
  * @enum {object}
  */
 DND5E.conditionEffects = {
-  noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "stunned", "unconscious"]),
+  noMovement: new Set(["exhaustion-5", "grappled", "paralyzed", "petrified", "restrained", "unconscious"]),
   halfMovement: new Set(["exhaustion-2"]),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
   petrification: new Set(["petrified"]),
@@ -3634,7 +3759,7 @@ DND5E.epicBoonInterval = 30000;
  *                                         this trait's data stored on the actor?
  * @property {string} [configKey]          If the list of trait options doesn't match the name of the trait, where can
  *                                         the options be found within `CONFIG.DND5E`?
- * @property {Boolean|Number} [dataType]   Type of data represented.
+ * @property {boolean|number} [dataType]   Type of data represented.
  * @property {string} [labelKeyPath]       If config is an enum of objects, where can the label be found?
  * @property {object} [subtypes]           Configuration for traits that take some sort of base item.
  * @property {string} [subtypes.keyPath]   Path to subtype value on base items, should match a category key.

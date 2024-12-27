@@ -294,7 +294,6 @@
   .pill-lg {
     background: var(--dnd5e-background-card);
     border: var(--dnd5e-border-gold);
-    border-width: 2px;
     border-radius: 5px;
     box-shadow: 0 0 12px var(--dnd5e-shadow-15);
     display: flex;
@@ -1584,6 +1583,7 @@ dialog.dnd5e2.application {
     cursor: pointer;
     display: flex;
     align-items: baseline;
+    line-height: 32px;
     gap: 5px;
     transition: all 250ms ease;
 
@@ -1623,6 +1623,19 @@ dialog.dnd5e2.application {
    accommodating fixed position context menus */
 
 .dnd5e2 .context { pointer-events: none; }
+
+/* ---------------------------------- */
+/*  ProseMirror                       */
+/* ---------------------------------- */
+
+#prosemirror-dropdown {
+  --dropdown-background: var(--dnd5e-background-card);
+  --dropdown-border: transparent;
+  --color-control-hover: var(--dnd5e-color-parchment);
+
+  ul { box-shadow: 0 3px 6px var(--dnd5e-shadow-45); }
+  li.divider { border-color: var(--color-border-light-1); }
+}
 
 /* ---------------------------------- */
 /*  Window Handles                    */

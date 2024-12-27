@@ -1,7 +1,7 @@
-import { ModuleArtConfig } from "./module-art.mjs";
-import CompendiumBrowserSourceConfig from "./applications/compendium-browser-source-config.mjs";
-import BastionConfig, { BastionSetting } from "./applications/bastion.mjs";
-import * as Bastion from "./documents/actor/bastion.mjs";
+import BastionSettingsConfig, { BastionSetting } from "./applications/settings/bastion-settings.mjs";
+import CompendiumBrowserSettingsConfig from "./applications/settings/compendium-browser-settings.mjs";
+import ModuleArtSettingsConfig from "./applications/settings/module-art-settings.mjs";
+import VisibilitySettingsConfig from "./applications/settings/visibility-settings.mjs";
 
 /**
  * Register all of the system's keybindings.
@@ -38,32 +38,31 @@ export function registerSystemSettings() {
     default: ""
   });
 
-  // Challenge visibility
   game.settings.register("dnd5e", "challengeVisibility", {
-    name: "SETTINGS.5eChallengeVisibility.Name",
-    hint: "SETTINGS.5eChallengeVisibility.Hint",
+    name: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.Name",
+    hint: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.Hint",
     scope: "world",
-    config: true,
+    config: false,
     default: "player",
     type: String,
     choices: {
-      all: "SETTINGS.5eChallengeVisibility.All",
-      player: "SETTINGS.5eChallengeVisibility.Player",
-      none: "SETTINGS.5eChallengeVisibility.None"
+      all: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.All",
+      player: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.Player",
+      none: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.None"
     }
   });
 
   game.settings.register("dnd5e", "attackRollVisibility", {
-    name: "SETTINGS.5eAttackRollVisibility.Name",
-    hint: "SETTINGS.5eAttackRollVisibility.Hint",
+    name: "SETTINGS.DND5E.VISIBILITY.ATTACK.Name",
+    hint: "SETTINGS.DND5E.VISIBILITY.ATTACK.Hint",
     scope: "world",
-    config: true,
+    config: false,
     default: "none",
     type: String,
     choices: {
-      all: "SETTINGS.5eAttackRollVisibility.All",
-      hideAC: "SETTINGS.5eAttackRollVisibility.HideAC",
-      none: "SETTINGS.5eAttackRollVisibility.None"
+      all: "SETTINGS.DND5E.VISIBILITY.ATTACK.All",
+      hideAC: "SETTINGS.DND5E.VISIBILITY.ATTACK.HideAC",
+      none: "SETTINGS.DND5E.VISIBILITY.ATTACK.None"
     }
   });
 
@@ -71,7 +70,7 @@ export function registerSystemSettings() {
     name: "SETTINGS.DND5E.BLOODIED.Name",
     hint: "SETTINGS.DND5E.BLOODIED.Hint",
     scope: "world",
-    config: true,
+    config: false,
     default: "player",
     type: String,
     choices: {
@@ -210,6 +209,21 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  // Use initiative scores for NPCs
+  game.settings.register("dnd5e", "initiativeScore", {
+    name: "SETTINGS.DND5E.INITIATIVESCORE.Name",
+    hint: "SETTINGS.DND5E.INITIATIVESCORE.Hint",
+    scope: "world",
+    config: true,
+    default: "none",
+    type: String,
+    choices: {
+      none: "SETTINGS.DND5E.INITIATIVESCORE.None",
+      npcs: "SETTINGS.DND5E.INITIATIVESCORE.NPCs",
+      all: "SETTINGS.DND5E.INITIATIVESCORE.All"
+    }
+  });
+
   // Record Currency Weight
   game.settings.register("dnd5e", "currencyWeight", {
     name: "SETTINGS.5eCurWtN",
@@ -331,10 +345,20 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  // Metric Length Weights
+  game.settings.register("dnd5e", "metricLengthUnits", {
+    name: "SETTINGS.DND5E.METRIC.LengthUnits.Name",
+    hint: "SETTINGS.DND5E.METRIC.LengthUnits.Hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false
+  });
+
   // Metric Unit Weights
   game.settings.register("dnd5e", "metricWeightUnits", {
-    name: "SETTINGS.5eMetricN",
-    hint: "SETTINGS.5eMetricL",
+    name: "SETTINGS.DND5E.METRIC.WeightUnits.Name",
+    hint: "SETTINGS.DND5E.METRIC.WeightUnits.Hint",
     scope: "world",
     config: true,
     type: Boolean,
@@ -375,7 +399,7 @@ export function registerSystemSettings() {
     label: "DND5E.ModuleArtConfigL",
     hint: "DND5E.ModuleArtConfigH",
     icon: "fa-solid fa-palette",
-    type: ModuleArtConfig,
+    type: ModuleArtSettingsConfig,
     restricted: true
   });
 
@@ -398,7 +422,7 @@ export function registerSystemSettings() {
     label: "DND5E.CompendiumBrowser.Sources.Label",
     hint: "DND5E.CompendiumBrowser.Sources.Hint",
     icon: "fas fa-book-open-reader",
-    type: CompendiumBrowserSourceConfig,
+    type: CompendiumBrowserSettingsConfig,
     restricted: true
   });
 
@@ -416,7 +440,7 @@ export function registerSystemSettings() {
     label: "DND5E.Bastion.Configuration.Label",
     hint: "DND5E.Bastion.Configuration.Hint",
     icon: "fas fa-chess-rook",
-    type: BastionConfig,
+    type: BastionSettingsConfig,
     restricted: true
   });
 
@@ -431,6 +455,25 @@ export function registerSystemSettings() {
       duration: 7
     },
     onChange: () => game.dnd5e.bastion.initializeUI()
+  });
+
+  // Visibility Settings
+  game.settings.registerMenu("dnd5e", "visibilityConfiguration", {
+    name: "SETTINGS.DND5E.VISIBILITY.Name",
+    label: "SETTINGS.DND5E.VISIBILITY.Label",
+    hint: "SETTINGS.DND5E.VISIBILITY.Hint",
+    icon: "fas fa-eye",
+    type: VisibilitySettingsConfig,
+    restricted: true
+  });
+
+  game.settings.register("dnd5e", "concealItemDescriptions", {
+    name: "SETTINGS.DND5E.VISIBILITY.ITEMDESCRIPTIONS.Name",
+    hint: "SETTINGS.DND5E.VISIBILITY.ITEMDESCRIPTIONS.Hint",
+    scope: "world",
+    config: false,
+    default: false,
+    type: Boolean
   });
 
   // Primary Group
@@ -511,8 +554,8 @@ export function registerDeferredSettings() {
   const setting = game.settings.get("core", settingKey);
   const settingConfig = game.settings.settings.get(`core.${settingKey}`);
   const { onChange } = settingConfig ?? {};
-  if ( onChange ) settingConfig.onChange = s => {
-    onChange();
+  if ( onChange ) settingConfig.onChange = (s, ...args) => {
+    onChange(s, ...args);
     setTheme(document.body, isV13 ? s.colorScheme : s);
   };
   setTheme(document.body, isV13 ? setting.colorScheme : setting);
