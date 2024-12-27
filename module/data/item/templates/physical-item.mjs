@@ -32,7 +32,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Weight"
         }),
         units: new StringField({
-          required: true, label: "DND5E.UNITS.WEIGHT.Label", initial: () => defaultUnits("weight")
+          required: true, blank: false, label: "DND5E.UNITS.WEIGHT.Label", initial: () => defaultUnits("weight")
         })
       }, {label: "DND5E.Weight"}),
       price: new SchemaField({
