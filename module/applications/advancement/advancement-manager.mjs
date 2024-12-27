@@ -1,4 +1,5 @@
 import Advancement from "../../documents/advancement/advancement.mjs";
+import Application5e from "../api/application.mjs";
 
 /**
  * Internal type used to manage each step within the advancement process.
@@ -55,6 +56,8 @@ export default class AdvancementManager extends Application {
      * @private
      */
     this._advancing = false;
+
+    if ( this.options.showVisualizer ) this.#visualizer = new AdvancementVisualizer({ manager: this });
   }
 
   /* -------------------------------------------- */
@@ -65,7 +68,8 @@ export default class AdvancementManager extends Application {
       classes: ["dnd5e", "advancement", "flow"],
       template: "systems/dnd5e/templates/advancement/advancement-manager.hbs",
       width: 460,
-      height: "auto"
+      height: "auto",
+      showVisualizer: false
     });
   }
 
@@ -119,6 +123,14 @@ export default class AdvancementManager extends Application {
     const nextIndex = this._stepIndex === null ? 0 : this._stepIndex + 1;
     return this.steps[nextIndex] ?? null;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Side application for debugging advancement steps.
+   * @type {AdvancementVisualizer}
+   */
+  #visualizer;
 
   /* -------------------------------------------- */
   /*  Factory Methods                             */
@@ -467,6 +479,7 @@ export default class AdvancementManager extends Application {
   async _render(force, options) {
     await super._render(force, options);
     if ( (this._state !== Application.RENDER_STATES.RENDERED) || !this.step ) return;
+    this.#visualizer?.render({ force: true });
 
     // Render the step
     this.step.flow._element = null;
@@ -514,7 +527,10 @@ export default class AdvancementManager extends Application {
           close: {
             icon: '<i class="fas fa-times"></i>',
             label: game.i18n.localize("DND5E.AdvancementManagerCloseButtonStop"),
-            callback: () => super.close(options)
+            callback: () => {
+              this.#visualizer?.close();
+              super.close(options);
+            }
           },
           continue: {
             icon: '<i class="fas fa-chevron-right"></i>',
@@ -524,6 +540,7 @@ export default class AdvancementManager extends Application {
         default: "close"
       }).render(true);
     }
+    this.#visualizer?.close();
     await super.close(options);
   }
 
@@ -543,7 +560,7 @@ export default class AdvancementManager extends Application {
       do {
         const flow = this.step.flow;
         const type = this.step.type;
-        const preEmbeddedItems = this.clone.items.map(i => i);
+        const preEmbeddedItems = Array.from(this.clone.items);
 
         // Apply changes based on step type
         if ( (type === "delete") && this.step.item ) this.clone.items.delete(this.step.item.id);
@@ -665,7 +682,7 @@ export default class AdvancementManager extends Application {
         if ( !this.step ) break;
         const flow = this.step.flow;
         const type = this.step.type;
-        const preEmbeddedItems = this.clone.items.map(i => i);
+        const preEmbeddedItems = Array.from(this.clone.items);
 
         // Reverse step based on step type
         if ( (type === "delete") && this.step.item ) this.clone.updateSource({items: [this.step.item]});
@@ -792,4 +809,60 @@ export default class AdvancementManager extends Application {
     return this.close({ skipConfirmation: true });
   }
 
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Debug application for visualizing advancement steps.
+ */
+class AdvancementVisualizer extends Application5e {
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["advancement-visualizer"],
+    window: {
+      title: "Advancement Steps"
+    },
+    position: {
+      top: 50,
+      left: 50,
+      width: 350
+    },
+    manager: null
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    steps: {
+      template: "systems/dnd5e/templates/advancement/advancement-visualizer.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * The advancement manager that this is visualizing.
+   * @type {AdvancementManager}
+   */
+  get manager() {
+    return this.options.manager;
+  }
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    context.steps = this.manager.steps.map(step => ({
+      ...step,
+      current: step === this.manager.step
+    }));
+    return context;
+  }
 }

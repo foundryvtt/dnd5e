@@ -1,0 +1,18 @@
+<ol class="unlist">
+    {{#each steps}}
+    <li class="card flexrow step {{~#if current}} current{{/if}}" data-type="{{ type }}">
+        <div class="flexcol">
+            <span class="type"><strong>Item:</strong> {{#if flow.item}}{{ flow.item.name }}{{else}}—{{/if}}</span>
+            <span class="flow"><strong>Flow:</strong> {{#if flow}}{{ flow.advancement.type }}, {{ flow.level }}{{else}}—{{/if}}</span>
+        </div>
+        <div class="flexcol">
+            <span class="class"><strong>Class:</strong> {{#if class}}{{ class.item.name }}, {{ class.level }}{{else}}—{{/if}}</span>
+            <div class="icons">
+                <i class="fa-solid fa-forward-fast {{~#if automatic}} enabled{{/if}}" data-tooltip="Automatic"></i>
+                <i class="fa-solid fa-robot {{~#if synthetic}} enabled{{/if}}" data-tooltip="Synthetic"></i>
+                &nbsp;
+            </div>
+        </div>
+    </li>
+    {{/each}}
+</ol>
