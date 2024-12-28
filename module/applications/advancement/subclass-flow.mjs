@@ -116,7 +116,7 @@ export default class SubclassFlow extends AdvancementFlow {
 
     // Ensure the dropped item is a subclass
     if ( item.type !== "subclass" ) {
-      ui.notifications.warn(game.i18n.localize("DND5E.ADVANCEMENT.Subclass.Warning.InvalidType"));
+      ui.notifications.warn("DND5E.ADVANCEMENT.Subclass.Warning.InvalidType", { localize: true });
       return;
     }
 

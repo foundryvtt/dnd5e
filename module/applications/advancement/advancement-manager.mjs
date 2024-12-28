@@ -393,15 +393,20 @@ export default class AdvancementManager extends Application {
 
   /**
    * Creates advancement flows for all advancements at a specific level.
-   * @param {Item5e} item          Item that has advancement.
-   * @param {number} level         Level in question.
-   * @returns {AdvancementFlow[]}  Created flow applications.
+   * @param {Item5e} item                               Item that has advancement.
+   * @param {number} level                              Level in question.
+   * @param {object} [options={}]
+   * @param {AdvancementStep[]} [options.findExisting]  Find if an existing matching flow exists.
+   * @returns {AdvancementFlow[]}                       Created or matched flow applications.
    * @protected
    */
-  static flowsForLevel(item, level) {
+  static flowsForLevel(item, level, { findExisting }={}) {
+    const match = (advancement, step) => (step.flow?.item.id === item.id)
+      && (step.flow?.advancement.id === advancement.id)
+      && (step.flow?.level === level);
     return (item?.advancement.byLevel[level] ?? [])
       .filter(a => a.appliesToClass)
-      .map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
+      .map(a => findExisting?.find(s => match(a, s))?.flow ?? new a.constructor.metadata.apps.flow(item, a.id, level));
   }
 
   /* -------------------------------------------- */
@@ -641,7 +646,7 @@ export default class AdvancementManager extends Application {
         // Determine if there is any advancement to be done for the added item to this level
         // from the previously handled level
         const steps = Array.fromRange(thisLevel - handledLevel + 1, handledLevel)
-          .flatMap(l => this.constructor.flowsForLevel(item, l))
+          .flatMap(l => this.constructor.flowsForLevel(item, l, { findExisting: this.steps }))
           .map(flow => ({ type: "forward", flow, synthetic: true }));
 
         // Add new steps at the end of the level group
