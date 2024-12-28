@@ -3,7 +3,7 @@ import AdvantageModeField from "../fields/advantage-mode-field.mjs";
 const { StringField, NumberField, SchemaField } = foundry.data.fields;
 
 /**
- * @typedef {object} RollConfigData
+ * @typedef {object} RollConfigFieldData
  * @property {string} [ability]  Default ability associated with this roll.
  * @property {object} roll
  * @property {number} roll.min   Minimum number on the die rolled.

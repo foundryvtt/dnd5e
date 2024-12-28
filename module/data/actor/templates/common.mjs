@@ -16,16 +16,8 @@ const { NumberField, SchemaField } = foundry.data.fields;
  * @property {object} bonuses        Bonuses that modify ability checks and saves.
  * @property {string} bonuses.check  Numeric or dice bonus to ability checks.
  * @property {string} bonuses.save   Numeric or dice bonus to ability saving throws.
- * @property {object} check          Properties related to ability checks.
- * @property {object} check.roll
- * @property {number} check.roll.mode   The advantage mode of ability checks.
- * @property {number} check.roll.min    The minimum that can be rolled on the d20.
- * @property {number} check.roll.max    The maximum that can be rolled on the d20.
- * @property {object} save              Properties related to ability saving throws.
- * @property {object} save.roll
- * @property {number} save.roll.mode    The advantage mode of ability saving throws.
- * @property {number} save.roll.min     The minimum that can be rolled on the d20.
- * @property {number} save.roll.max     The maximum that can be rolled on the d20.
+ * @property {RollConfigFieldData} check    Properties related to ability checks.
+ * @property {RollConfigFieldData} save     Properties related to ability saving throws.
  */
 
 /**
@@ -53,9 +45,8 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
           check: new FormulaField({ required: true, label: "DND5E.AbilityCheckBonus" }),
           save: new FormulaField({ required: true, label: "DND5E.SaveBonus" })
         }, { label: "DND5E.AbilityBonuses" }),
-        save: new RollConfigField({
-          ability: false
-        })
+        check: new RollConfigField({ ability: false }),
+        save: new RollConfigField({ ability: false })
       }), {
         initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
         initialKeysOnly: true, label: "DND5E.Abilities"
