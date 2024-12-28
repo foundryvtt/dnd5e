@@ -32,7 +32,6 @@ export class AbilityScoreImprovementConfigurationData extends foundry.abstract.D
 /**
  * Data model for the Ability Score Improvement advancement value.
  *
- * @property {string} type             When on a class, whether the player chose ASI or a Feat.
  * @property {Object<string, number>}  Points assigned to individual scores.
  * @property {Object<string, string>}  Feat that was selected.
  */
@@ -40,7 +39,6 @@ export class AbilityScoreImprovementValueData extends SparseDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
-      type: new StringField({ required: true, initial: "asi", choices: ["asi", "feat"] }),
       assignments: new MappingField(new NumberField({
         nullable: false, integer: true
       }), { required: false, initial: undefined }),

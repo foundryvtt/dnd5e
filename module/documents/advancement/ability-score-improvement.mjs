@@ -90,14 +90,6 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  titleForLevel(level, { configMode=false }={}) {
-    if ( this.value.selected !== "feat" ) return this.title;
-    return game.i18n.localize("DND5E.Feature.Feat");
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
     if ( configMode ) {
@@ -113,21 +105,19 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
       return entries.filterJoin("\n");
     }
 
-    else if ( (this.value.type === "feat") && this.value.feat ) {
+    const parts = [];
+    if ( this.value.feat ) {
       const id = Object.keys(this.value.feat)[0];
       const feat = this.actor.items.get(id);
-      if ( feat ) return feat.toAnchor({classes: ["content-link"]}).outerHTML;
+      if ( feat ) parts.push(feat.toAnchor({classes: ["content-link"]}).outerHTML);
     }
 
-    else if ( (this.value.type === "asi") && this.value.assignments ) {
-      return Object.entries(this.value.assignments).reduce((html, [key, value]) => {
-        const name = CONFIG.DND5E.abilities[key]?.label ?? key;
-        html += `<span class="tag">${name} <strong>${formatter.format(value)}</strong></span>\n`;
-        return html;
-      }, "");
-    }
+    parts.push(...Object.entries(this.value.assignments ?? {}).map(([key, value]) => {
+      const name = CONFIG.DND5E.abilities[key]?.label ?? key;
+      return `<span class="tag">${name} <strong>${formatter.format(value)}</strong></span>`;
+    }));
 
-    return "";
+    return parts.filterJoin(" ");
   }
 
   /* -------------------------------------------- */
@@ -136,38 +126,34 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
 
   /** @inheritDoc */
   async apply(level, data) {
-    if ( data.type === "asi" ) {
-      const assignments = Object.keys(CONFIG.DND5E.abilities).reduce((obj, key) => {
-        obj[key] = (this.configuration.fixed[key] ?? 0) + (data.assignments[key] ?? 0);
-        return obj;
-      }, {});
-      const updates = {};
-      for ( const key of Object.keys(assignments) ) {
-        const ability = this.actor.system.abilities[key];
-        const source = this.actor.system.toObject().abilities[key] ?? {};
-        if ( !ability || !this.canImprove(key) ) continue;
-        assignments[key] = Math.min(assignments[key], ability.max - source.value);
-        if ( assignments[key] ) updates[`system.abilities.${key}.value`] = source.value + assignments[key];
-        else delete assignments[key];
-      }
-      data.assignments = assignments;
-      data.feat = null;
-      this.actor.updateSource(updates);
-    }
-
-    else {
-      let itemData = data.retainedItems?.[data.featUuid];
-      if ( !itemData ) itemData = await this.createItemData(data.featUuid);
-      data.assignments = null;
-      if ( itemData ) {
-        data.feat = { [itemData._id]: data.featUuid };
-        this.actor.updateSource({items: [itemData]});
+    let feat;
+    const updates = {};
+    if ( data.featUuid ) {
+      feat = data.retainedItems?.[data.featUuid];
+      if ( !feat ) feat = await this.createItemData(data.featUuid);
+      if ( feat ) {
+        data.feat = { [feat._id]: data.featUuid };
+        updates.items = [feat];
       }
     }
-
     delete data.featUuid;
     delete data.retainedItems;
-    this.updateSource({value: data});
+
+    data.assignments ??= {};
+    const fixedAbility = feat?.system.asi.abilities.length === 1 ? feat.system.asi.abilities[0] : null;
+    for ( const key of Object.keys(CONFIG.DND5E.abilities) ) {
+      const ability = this.actor.system.abilities[key];
+      const source = this.actor.system.toObject().abilities[key] ?? {};
+      if ( !ability || !this.canImprove(key) ) continue;
+      const assignment = data.assignments[key] ?? 0;
+      const fixed = feat ? fixedAbility === key ? 1 : 0 : this.configuration.fixed[key] ?? 0;
+      data.assignments[key] = Math.min(assignment + fixed, (feat?.system.asi.maximum ?? ability.max) - source.value);
+      if ( data.assignments[key] ) updates[`system.abilities.${key}.value`] = source.value + data.assignments[key];
+      else delete data.assignments[key];
+    }
+
+    this.actor.updateSource(updates);
+    this.updateSource({ value: data });
   }
 
   /* -------------------------------------------- */
@@ -184,23 +170,21 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
   reverse(level) {
     const source = this.value.toObject();
 
-    if ( this.value.type === "asi" ) {
-      const updates = {};
-      for ( const [key, change] of Object.entries(this.value.assignments ?? {}) ) {
-        const ability = this.actor.system.toObject().abilities[key];
-        if ( !ability || !this.canImprove(key) ) continue;
-        updates[`system.abilities.${key}.value`] = ability.value - change;
-        source.assignments[key] -= (this.configuration.fixed[key] ?? 0);
-      }
-      this.actor.updateSource(updates);
-    }
+    const [id, uuid] = Object.entries(this.value.feat ?? {})[0] ?? [];
+    const feat = this.actor.items.get(id);
+    if ( feat ) source.retainedItems = { [uuid]: feat.toObject() };
+    this.actor.items.delete(id);
 
-    else {
-      const [id, uuid] = Object.entries(this.value.feat ?? {})[0] ?? [];
-      const item = this.actor.items.get(id);
-      if ( item ) source.retainedItems = {[uuid]: item.toObject()};
-      this.actor.items.delete(id);
+    const updates = {};
+    const fixedAbility = feat?.system.asi.abilities.length === 1 ? feat.system.asi.abilities[0] : null;
+    for ( const [key, change] of Object.entries(this.value.assignments ?? {}) ) {
+      const ability = this.actor.system.toObject().abilities[key];
+      if ( !ability || !this.canImprove(key) ) continue;
+      updates[`system.abilities.${key}.value`] = ability.value - change;
+      const fixed = feat ? fixedAbility === key ? 1 : 0 : this.configuration.fixed[key] ?? 0;
+      source.assignments[key] -= fixed;
     }
+    this.actor.updateSource(updates);
 
     this.updateSource({ "value.assignments": null, "value.feat": null });
     return source;

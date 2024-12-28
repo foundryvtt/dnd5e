@@ -13,6 +13,9 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  *
+ * @property {object} asi
+ * @property {Set<string>} asi.abilities            Abilities that can be improved by this feat.
+ * @property {number} asi.maximum                   Maximum ability score to which the ability can be increased.
  * @property {object} enchant
  * @property {string} enchant.max                   Maximum number of items that can have this enchantment.
  * @property {string} enchant.period                Frequency at which the enchantment can be swapped.
@@ -30,25 +33,27 @@ export default class FeatData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT", "DND5E.Prerequisites", "DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.FEATURE", "DND5E.ENCHANTMENT", "DND5E.Prerequisites", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      asi: new SchemaField({
+        abilities: new SetField(new StringField()),
+        maximum: new NumberField({ positive: true, integer: true, initial: () => CONFIG.DND5E.maxAbilityScore })
+      }),
       enchant: new SchemaField({
-        max: new FormulaField({deterministic: true}),
+        max: new FormulaField({ deterministic: true }),
         period: new StringField()
       }),
-      type: new ItemTypeField({baseItem: false}, {label: "DND5E.ItemFeatureType"}),
       prerequisites: new SchemaField({
-        level: new NumberField({integer: true, min: 0})
+        level: new NumberField({ integer: true, min: 0 })
       }),
-      properties: new SetField(new StringField(), {
-        label: "DND5E.ItemFeatureProperties"
-      }),
-      requirements: new StringField({required: true, nullable: true, label: "DND5E.Requirements"})
+      properties: new SetField(new StringField()),
+      requirements: new StringField({ required: true, nullable: true }),
+      type: new ItemTypeField({ baseItem: false })
     });
   }
 
@@ -161,6 +166,8 @@ export default class FeatData extends ItemDataModel.mixin(
         placeholder: "DND5E.Requirements" }
     ];
     context.parts = ["dnd5e.details-feat", "dnd5e.field-uses"];
+    context.showAbilityScoreIncrease = this.type.value === "feat";
+    context.abilityOptions = Object.entries(CONFIG.DND5E.abilities).map(([value, { label }]) => ({ value, label }));
   }
 
   /* -------------------------------------------- */

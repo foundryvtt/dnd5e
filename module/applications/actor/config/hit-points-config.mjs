@@ -69,7 +69,6 @@ export default class HitPointsConfig extends BaseConfigSheet {
         .filter(e => e.mode === CONST.ACTIVE_EFFECT_MODES.ADD)
         .map(e => ({ ...e, anchor: e.document.toAnchor().outerHTML}));
     }
-    console.log(context.effects);
 
     context.levels = this.document.system.details?.level ?? 0;
     context.levelMultiplier = `

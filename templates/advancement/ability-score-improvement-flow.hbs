@@ -2,15 +2,11 @@
     <h3>{{{ this.title }}}</h3>
     {{#if advancement.hint}}<p>{{ advancement.hint }}</p>{{/if}}
 
-    <ul class="ability-scores {{#if feat}}disabled{{/if}}">
+    <ul class="ability-scores">
         {{#unless staticIncrease}}
         <label>
-            {{#if feat}}
-            {{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.LockedHint" }}
-            {{else}}
             {{ pointsRemaining }}
-            {{#if advancement.configuration.cap}}<p class="cap">{{ pointCap }}</p>{{/if}}
-            {{/if}}
+            {{#if pointCap}}<p class="cap">{{ pointCap }}</p>{{/if}}
         </label>
         {{/unless}}
         {{#each abilities}}

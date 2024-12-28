@@ -43,27 +43,33 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /** @inheritDoc */
   async getData() {
+    const featASI = this.feat?.system.asi;
+    const featAbilityCount = featASI?.abilities.size ?? 0;
+    const canImprove = ability => this.advancement.canImprove(ability)
+      && this.feat ? featASI.abilities.has(ability) : !this.advancement.configuration.locked.has(ability);
     const points = {
-      assigned: Object.keys(CONFIG.DND5E.abilities).reduce((assigned, key) => {
-        if ( !this.advancement.canImprove(key) || this.advancement.configuration.locked.has(key) ) return assigned;
-        return assigned + (this.assignments[key] ?? 0);
-      }, 0),
-      cap: this.advancement.configuration.cap ?? Infinity,
-      total: this.advancement.configuration.points
+      assigned: Object.keys(CONFIG.DND5E.abilities).reduce((assigned, key) =>
+        assigned + (canImprove(key) ? (this.assignments[key] ?? 0) : 0)
+      , 0),
+      cap: this.feat ? Infinity : (this.advancement.configuration.cap ?? Infinity),
+      total: featAbilityCount === 1 ? 0 : featAbilityCount > 1 ? 1 : this.advancement.configuration.points
     };
     points.available = points.total - points.assigned;
 
     const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
 
+    const allowChange = !this.feat || (featAbilityCount > 1);
     const abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [key, data]) => {
       if ( !this.advancement.canImprove(key) ) return obj;
       const ability = this.advancement.actor.system.abilities[key];
       const assignment = this.assignments[key] ?? 0;
-      const fixed = this.advancement.configuration.fixed[key] ?? 0;
-      const locked = this.advancement.configuration.locked.has(key);
-      const value = Math.min(ability.value + fixed + assignment, ability.max);
-      const max = locked ? value : Math.min(value + points.available, ability.max);
-      const min = Math.min(ability.value + fixed, ability.max);
+      const fixed = this.feat ? featAbilityCount === 1 && featASI.abilities.has(key) ? 1 : 0
+        : this.advancement.configuration.fixed[key] ?? 0;
+      const locked = !canImprove(key);
+      const abilityMax = featASI?.maximum ?? ability.max;
+      const value = Math.min(ability.value + fixed + assignment, abilityMax);
+      const max = locked ? value : Math.min(value + points.available, abilityMax);
+      const min = Math.min(ability.value + fixed, abilityMax);
       obj[key] = {
         key, max, min, value,
         name: `abilities.${key}`,
@@ -71,10 +77,10 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         initial: ability.value + fixed,
         delta: (value - ability.value) ? formatter.format(value - ability.value) : null,
         showDelta: true,
-        isDisabled: !!this.feat,
-        isLocked: !!locked || (ability.value >= ability.max),
-        canIncrease: (value < max) && ((fixed + assignment) < points.cap) && !locked && !this.feat,
-        canDecrease: (value > (ability.value + fixed)) && !locked && !this.feat
+        isDisabled: !!this.feat && (points.total === 0),
+        isLocked: !!locked || (ability.value >= abilityMax),
+        canIncrease: (value < max) && ((fixed + assignment) < points.cap) && !locked && allowChange,
+        canDecrease: (value > (ability.value + fixed)) && !locked && allowChange
       };
       return obj;
     }, {});
@@ -84,7 +90,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       abilities, points,
       feat: this.feat,
       staticIncrease: !this.advancement.configuration.points,
-      pointCap: game.i18n.format(
+      pointCap: this.feat ? null : game.i18n.format(
         `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pluralRules.select(points.cap)}`, {points: points.cap}
       ),
       pointsRemaining: game.i18n.format(
@@ -158,9 +164,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /** @inheritDoc */
   async _updateObject(event, formData) {
-    // TODO: Pass through retained feat data
     await this.advancement.apply(this.level, {
-      type: this.feat ? "feat" : "asi",
       assignments: this.assignments,
       featUuid: this.feat?.uuid,
       retainedItems: this.retainedData?.retainedItems
@@ -178,6 +182,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
    */
   async _onItemDelete(event) {
     event.preventDefault();
+    this.assignemnts = {};
     this.feat = null;
     this.render();
   }
@@ -212,6 +217,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
       return null;
     }
 
+    this.assignments = {};
     this.feat = item;
     this.render();
   }

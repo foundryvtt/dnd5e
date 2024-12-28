@@ -21,6 +21,18 @@
                  input=inputs.createMultiCheckboxInput stacked=true classes="checkbox-grid checkbox-grid-3" }}
 </fieldset>
 
+{{#if showAbilityScoreIncrease}}
+<fieldset>
+    <legend>{{ localize "DND5E.FEATURE.FIELDS.asi.label" }}</legend>
+
+    {{!-- Allowed Abilities --}}
+    {{ formField fields.asi.fields.abilities value=source.asi.abilities options=abilityOptions labelAttr="label" }}
+
+    {{!-- Maximum Score --}}
+    {{ formField fields.asi.fields.maximum value=source.asi.maximum }}
+</fieldset>
+{{/if}}
+
 {{#if system.isEnchantmentSource}}
 <fieldset>
     <legend>{{ localize "DND5E.ENCHANTMENT.Label" }}</legend>

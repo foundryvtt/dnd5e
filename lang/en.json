@@ -1908,6 +1908,33 @@
 "DND5E.FavoriteRemove": "Remove Favorite",
 "DND5E.Favorites": "Favorites",
 "DND5E.FeatureActionRecharge": "Action Recharge",
+
+"DND5E.FEATURE": {
+  "FIELDS": {
+    "asi": {
+      "label": "Ability Score Increase",
+      "abilities": {
+        "label": "Allowed Abilities"
+      },
+      "maximum": {
+        "label": "Maximum Score"
+      }
+    },
+    "prerequisites": {
+      "label": "Prerequisites"
+    },
+    "properties": {
+      "label": "Feature Properties"
+    },
+    "requirements": {
+      "label": "Requirements"
+    },
+    "type": {
+      "label": "Feature Type"
+    }
+  }
+},
+
 "DND5E.Feature": {
   "Background": "Background Feature",
   "Class": {
