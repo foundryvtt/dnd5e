@@ -1047,7 +1047,7 @@ export default function ActivityMixin(Base) {
             left: window.innerWidth - 710
           },
           window: {
-            title: game.i18n.localize(`DND5E.${this.type === "heal" ? "Healing" : "Damage"}Roll`),
+            title: this.damageFlavor,
             subtitle: this.item.name,
             icon: this.item.img
           }

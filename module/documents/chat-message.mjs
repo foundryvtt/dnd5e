@@ -309,9 +309,7 @@ export default class ChatMessage5e extends ChatMessage {
       const subtitle = roll.type === "damage"
         ? isCritical
           ? game.i18n.localize("DND5E.CriticalHit") 
-          : activity.type === "heal"
-            ? game.i18n.localize("DND5E.HealingRoll")
-            : game.i18n.localize("DND5E.DamageRoll")
+          : activity?.damageFlavor ?? game.i18n.localize("DND5E.DamageRoll")
         : roll.type === "attack"
           ? (activity?.getActionLabel(roll.attackMode) ?? "")
           : (item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]));
