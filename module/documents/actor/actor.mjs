@@ -1639,7 +1639,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instances.
    */
   async rollSavingThrow(config={}, dialog={}, message={}) {
-    const abilityLabel = config.isConcentration ? game.i18n.localize("DND5E.Concentration") : CONFIG.DND5E.abilities[config.ability]?.label ?? "";
+    const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
     const dialogConfig = foundry.utils.mergeObject({
       options: {
         window: {
@@ -2011,7 +2011,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     rollConfig.hookNames = [...(config.hookNames ?? []), "concentration"];
     rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
 
-    const dialogConfig = foundry.utils.deepClone(dialog);
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SavePromptTitle", { ability: game.i18n.localize("DND5E.Concentration") })
+        }
+      }
+    }, dialog);
 
     const messageConfig = foundry.utils.deepClone(message);
 
