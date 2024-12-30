@@ -5,7 +5,7 @@ import simplifyRollFormula from "./dice/simplify-roll-formula.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import { rollItem } from "./documents/macro.mjs";
 
-const slugify = value => value?.slugify().replaceAll("-", "");
+const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
 
 /**
  * Set up custom text enrichers.
@@ -333,10 +333,10 @@ async function enrichAward(config, label, options) {
  */
 async function enrichCheck(config, label, options) {
   for ( let value of config.values ) {
-    value = foundry.utils.getType(value) === "string" ? slugify(value) : value;
-    if ( value in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = value;
-    else if ( value in CONFIG.DND5E.enrichmentLookup.skills ) config.skill = value;
-    else if ( value in CONFIG.DND5E.enrichmentLookup.tools ) config.tool = value;
+    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
+    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = slug;
+    else if ( slug in CONFIG.DND5E.enrichmentLookup.skills ) config.skill = slug;
+    else if ( slug in CONFIG.DND5E.enrichmentLookup.tools ) config.tool = slug;
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
     else config[value] = true;
   }
@@ -419,8 +419,9 @@ async function enrichCheck(config, label, options) {
  * ```
  */
 async function enrichSave(config, label, options) {
-  for ( const value of config.values ) {
-    if ( value in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = value;
+  for ( let value of config.values ) {
+    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
+    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = slug;
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
     else config[value] = true;
   }
@@ -689,7 +690,8 @@ function enrichLookup(config, fallback, options) {
     return null;
   }
 
-  const data = activity ? activity.getRollData().activity : options.rollData ?? options.relativeTo?.getRollData();
+  const data = activity ? activity.getRollData().activity : options.rollData
+    ?? options.relativeTo?.getRollData?.() ?? {};
   let value = foundry.utils.getProperty(data, keyPath.substring(1)) ?? fallback;
   if ( value && style ) {
     if ( style === "capitalize" ) value = value.capitalize();
