@@ -4,7 +4,7 @@ This document only covers Active Effects available to the Core dnd5e System.
 
 # Legend
 
-`[number]` - These square brackets mean "replace this with your value of the type within the brackets". So this example: `[number]` would mean you input `3`. If roll data is allowed, you can input any roll data that would *evaluate* to a number.
+`[number]` - These square brackets mean "replace this with your value of the type within the brackets". So this example: `[number]` would mean you input `3`. If roll data is allowed, you can input any roll data that would *evaluate* to a number (no dice allowed).
 
 `[formula]` - When `formula` is mentioned in this document it means this value can be populated with any dice formula. For example, Bless adds several effects with the Effect Value of `1d4`. These fields always allow for the use of roll data.
 
@@ -202,7 +202,7 @@ system.attributes.encumbrance.multipliers.encumbered
                                      .overall
 ```
 
-Multipliers will multiply the default encumbrance values and bonuses will add a fixed amount to them. The values for `encumbered`, `heavilyEncumbered`, and `maximum` apply to the three encumbrance thresholds while `overall` applies to all three equally. Each of these takes a formula.
+Multipliers will multiply the default encumbrance values and bonuses will add a fixed amount to them. The values for `encumbered`, `heavilyEncumbered`, and `maximum` apply to the three encumbrance thresholds while `overall` applies to all three equally. Each of these take numbers and allow roll data.
 
 ---
 
@@ -489,8 +489,7 @@ Temporarily override the displayed creature type of an actor. For example using 
 ## Scale Value
 
 ```
-system.scale.[classIdentifier].[scaleIdentifier]
-                                                .value
+system.scale.[classIdentifier].[scaleIdentifier].value
                                                 .number
                                                 .die
                                                 .faces
@@ -561,14 +560,14 @@ E.g. An Item or Feature which increases a character's Max HP by a flat amount.
 
 | Attribute Key                          | Change Mode | Effect Value | Roll Data? |
 | -------------------------------------- | ----------- | ------------ | ---------- |
-| `system.attributes.hp.bonuses.overall` | Add         | `[formula]`  | Yes        |
+| `system.attributes.hp.bonuses.overall` | Add         | `[number]`   | Yes        |
 
 ### Bonus HP for each Character Level
 E.g. An effect that provides a bonus to the hit points a character gains for each level they acquire (e.g., the Tough feat).
 
 | Attribute Key                        | Change Mode | Effect Value | Roll Data? |
 | ------------------------------------ | ----------- | ------------ | ---------- |
-| `system.attributes.hp.bonuses.level` | Add         | `[formula]`  | Yes        |
+| `system.attributes.hp.bonuses.level` | Add         | `[number]`   | Yes        |
 
 
 # Honorable Mentions
