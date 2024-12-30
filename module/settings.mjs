@@ -21,6 +21,16 @@ export function registerSystemKeybindings() {
     name: "KEYBINDINGS.DND5E.SkipDialogDisadvantage",
     editable: [{ key: "ControlLeft" }, { key: "ControlRight" }, { key: "OsLeft" }, { key: "OsRight" }]
   });
+
+  game.keybindings.register("dnd5e", "dragCopy", {
+    name: "KEYBINDINGS.DND5E.DragCopy",
+    editable: [{ key: "ControlLeft" }, { key: "ControlRight" }, { key: "AltLeft" }, { key: "AltRight" }]
+  });
+
+  game.keybindings.register("dnd5e", "dragMove", {
+    name: "KEYBINDINGS.DND5E.DragMove",
+    editable: [{ key: "ShiftLeft" }, { key: "ShiftRight" }, { key: "OsLeft" }, { key: "OsRight" }]
+  });
 }
 
 /* -------------------------------------------- */

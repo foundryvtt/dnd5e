@@ -345,16 +345,17 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
 
   /** @override */
   async _onDropItem(event, data) {
-    if ( !this.actor.isOwner ) return false;
+    const behavior = this._dropBehavior(event, data);
+    if ( !this.actor.isOwner || (behavior === "none") ) return false;
     const item = await Item.implementation.fromDropData(data);
 
     // Handle moving out of container & item sorting
-    if ( this.actor.uuid === item.parent?.uuid ) {
+    if ( (behavior === "move") && (this.actor.uuid === item.parent?.uuid) ) {
       if ( item.system.container !== null ) await item.update({"system.container": null});
       return this._onSortItem(event, item.toObject());
     }
 
-    return this._onDropItemCreate(item, event);
+    return this._onDropItemCreate(item, event, behavior);
   }
 
   /* -------------------------------------------- */
@@ -374,7 +375,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropItemCreate(itemData, event) {
+  async _onDropItemCreate(itemData, event, behavior) {
     let items = itemData instanceof Array ? itemData : [itemData];
 
     // Filter out items already in containers to avoid creating duplicates
@@ -385,7 +386,9 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     const toCreate = await Item5e.createWithContents(items, {
       transformFirst: item => this._onDropSingleItem(item.toObject(), event)
     });
-    return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
+    const created = await Item5e.createDocuments(toCreate, { pack: this.actor.pack, parent: this.actor, keepId: true });
+    if ( behavior === "move" ) items.forEach(i => fromUuid(i.uuid).then(d => d?.delete({ deleteContents: true })));
+    return created;
   }
 
   /* -------------------------------------------- */
