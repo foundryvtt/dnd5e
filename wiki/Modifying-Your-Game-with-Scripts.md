@@ -79,8 +79,11 @@ Hooks.once("init", () => {
 // Adds a new "plasma" damage type that will be selectable as a new type of damage for weapons and a new type of resistance for actors.
 Hooks.once("init", () => {
   CONFIG.DND5E.damageTypes.plasma = {
-    label: "Plasma",
-    isPhysical: true
+    label: "Plasma",      // The displayed name of the damage type
+    isPhysical: true,     // Whether this is negated by adamantine/magical/silvered
+    icon: "",             // An svg icon.
+    color: new Color(0),  // The color of the damage type (currently unused).
+    reference: ""         // A uuid of a journal entry rules page.
   };
 });
 ```
@@ -91,7 +94,7 @@ Hooks.once("init", () => {
 Hooks.once("init", () => {
   CONFIG.DND5E.itemProperties.laser = {
     label: "Laser",
-    isPhysical: "true"
+    isPhysical: true
   };
   CONFIG.DND5E.validProperties.weapon.add("laser");
 });
