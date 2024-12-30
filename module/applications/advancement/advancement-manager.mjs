@@ -6,7 +6,9 @@ import Application5e from "../api/application.mjs";
  *
  * @typedef {object} AdvancementStep
  * @property {string} type                Step type from "forward", "reverse", "restore", or "delete".
- * @property {AdvancementFlow} [flow]     Flow object for the advancement being applied by this step.
+ * @property {AdvancementFlow} [flow]     Flow object for the advancement being applied by this step. In the case of
+ *                                        "delete" steps, this flow indicates the advancement flow that originally
+ *                                        deleted the item.
  * @property {Item5e} [item]              For "delete" steps only, the item to be removed.
  * @property {object} [class]             Contains data on class if step was triggered by class level change.
  * @property {Item5e} [class.item]        Class item that caused this advancement step.
@@ -406,7 +408,12 @@ export default class AdvancementManager extends Application {
       && (step.flow?.level === level);
     return (item?.advancement.byLevel[level] ?? [])
       .filter(a => a.appliesToClass)
-      .map(a => findExisting?.find(s => match(a, s))?.flow ?? new a.constructor.metadata.apps.flow(item, a.id, level));
+      .map(a => {
+        const existing = findExisting?.find(s => match(a, s))?.flow;
+        if ( !existing ) return new a.constructor.metadata.apps.flow(item, a.id, level);
+        existing.item = item;
+        return existing;
+      });
   }
 
   /* -------------------------------------------- */
@@ -580,8 +587,12 @@ export default class AdvancementManager extends Application {
         const preEmbeddedItems = Array.from(this.clone.items);
 
         // Apply changes based on step type
-        if ( (type === "delete") && this.step.item ) this.clone.items.delete(this.step.item.id);
-        else if ( (type === "delete") && this.step.advancement ) {
+        if ( (type === "delete") && this.step.item ) {
+          if ( this.step.flow?.retainedData?.retainedItems ) {
+            this.step.flow.retainedData.retainedItems[this.step.item.flags.dnd5e?.sourceId] = this.step.item.toObject();
+          }
+          this.clone.items.delete(this.step.item.id);
+        } else if ( (type === "delete") && this.step.advancement ) {
           this.step.advancement.item.deleteAdvancement(this.step.advancement.id, { source: true });
         }
         else if ( type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
@@ -674,7 +685,7 @@ export default class AdvancementManager extends Application {
         .forEach(flow => steps.push({ type: "reverse", flow, automatic: true, synthetic: true }));
 
       // Add a new remove item step to the end of the synthetic steps to finally get rid of this item
-      steps.push({ type: "delete", item, automatic: true, synthetic: true });
+      steps.push({ type: "delete", flow: this.step.flow, item, automatic: true, synthetic: true });
 
       // Add new steps after the current step
       this.steps.splice(this._stepIndex + 1, 0, ...steps);
