@@ -426,7 +426,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     requestAnimationFrame(() => game.tooltip.deactivate());
     game.tooltip.deactivate();
 
-    const modes = CONFIG.DND5E.spellPreparationModes;
+    const modes = CONFIG.DND5E.spellcasting;
 
     const { key } = event.target.closest("[data-key]")?.dataset ?? {};
     const { level, preparationMode } = event.target.closest("[data-level]")?.dataset ?? {};
@@ -434,7 +434,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     let type;
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.tools ) type = "tool";
-    else if ( modes[preparationMode]?.upcast && (level !== "0") && isSlots ) type = "slots";
+    else if ( modes[preparationMode] && !modes[preparationMode].static && (level !== "0") && isSlots ) type = "slots";
     if ( !type ) {
       if ( event.target.matches("[data-item-id] > .item-row") ) return this._onDragItem(event);
       else if ( event.target.matches("[data-item-id] [data-activity-id], [data-item-id][data-activity-id]") ) {
@@ -443,8 +443,11 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       return super._onDragStart(event);
     }
     const dragData = { dnd5e: { action: "favorite", type } };
-    if ( type === "slots" ) dragData.dnd5e.id = (preparationMode === "prepared") ? `spell${level}` : preparationMode;
-    else dragData.dnd5e.id = key;
+    if ( type === "slots" ) {
+      dragData.dnd5e.id = modes[preparationMode]?.separate ? `${preparationMode}${level}` : preparationMode;
+    } else {
+      dragData.dnd5e.id = key;
+    }
     event.dataTransfer.setData("application/json", JSON.stringify(dragData));
   }
 
@@ -926,12 +929,17 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
       if ( suppressed ) subtitle = game.i18n.localize("DND5E.Suppressed");
       const itemId = type === "item" ? favorite.id : type === "activity" ? favorite.item.id : null;
+      let prepMode;
+      if ( type === "slots" ) {
+        const [, type] = id.match(/^([a-z]+)(\d+)?$/) ?? [];
+        prepMode = type;
+      }
       arr.push({
         id, img, type, title, value, uses, sort, save, modifier, passive, range, reference, suppressed, level, itemId,
         effectId: type === "effect" ? favorite.id : null,
         parentId: (type === "effect") && (favorite.parent !== favorite.target) ? favorite.parent.id: null,
         activityId: type === "activity" ? favorite.id : null,
-        preparationMode: (type === "slots") ? (/spell\d+/.test(id) ? "prepared" : id) : null,
+        preparationMode: prepMode,
         key: (type === "skill") || (type === "tool") ? id : null,
         toggle: toggle === undefined ? null : { applicable: true, value: toggle },
         quantity: quantity > 1 ? quantity : "",
@@ -958,23 +966,27 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( type === "slots" ) {
       const { value, max, level } = this.actor.system.spells[id] ?? {};
       const uses = { value, max, name: `system.spells.${id}.value` };
-      if ( !/spell\d+/.test(id) ) return {
+
+      let [, key, slotLevel] = id.match(/^([a-z]+)(\d+)?$/) ?? [];
+      if ( !CONFIG.DND5E.spellcasting[key] ) return;
+      const isSR = CONFIG.DND5E.restTypes.short.recoverSpellSlotTypes.has(key);
+
+      if ( !slotLevel ) return {
         uses, level,
-        title: game.i18n.localize(`DND5E.SpellSlots${id.capitalize()}`),
+        title: game.i18n.localize(`DND5E.SpellSlots${id.capitalize()}`), // TODO: May need to change this label.
         subtitle: [
           game.i18n.localize(`DND5E.SpellLevel${level}`),
-          game.i18n.localize(`DND5E.Abbreviation${CONFIG.DND5E.spellcastingTypes[id]?.shortRest ? "SR" : "LR"}`)
+          game.i18n.localize(`DND5E.Abbreviation${isSR ? "SR" : "LR"}`)
         ],
-        img: CONFIG.DND5E.spellcastingTypes[id]?.img || CONFIG.DND5E.spellcastingTypes.pact.img
+        img: CONFIG.DND5E.spellcasting[key].img
       };
 
       const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
-      const isSR = CONFIG.DND5E.spellcastingTypes.leveled.shortRest;
       return {
         uses, level,
         title: game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level }),
         subtitle: game.i18n.localize(`DND5E.Abbreviation${isSR ? "SR" : "LR"}`),
-        img: CONFIG.DND5E.spellcastingTypes.leveled.img.replace("{id}", id)
+        img: CONFIG.DND5E.spellcasting[key].img.replace("{id}", id)
       };
     }
 

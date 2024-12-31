@@ -126,7 +126,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
     const spellbook = this._prepareSpellbook(context, spells);
     const nPrepared = spells.filter(spell => {
       const prep = spell.system.preparation;
-      return (spell.system.level > 0) && (prep.mode === "prepared") && prep.prepared;
+      return (spell.system.level > 0) && (prep.mode === "spell") && (prep.prepared > 0);
     }).length;
 
     // Sort classes and interleave matching subclasses, put unmatched subclasses into features so they don't disappear
@@ -204,13 +204,12 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
   _prepareItem(item, context) {
     if ( item.type === "spell" ) {
       const prep = item.system.preparation || {};
-      const isAlways = prep.mode === "always";
-      const isPrepared = !!prep.prepared;
-      context.toggleClass = isPrepared ? "active" : "";
-      if ( isAlways ) context.toggleClass = "fixed";
-      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.always.label;
-      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationModes.prepared.label;
-      else context.toggleTitle = game.i18n.localize("DND5E.SpellUnprepared");
+      const isAlways = prep.prepared === CONFIG.DND5E.spellPreparationStates.always.value;
+      const isPrepared = prep.prepared > 0;
+      context.toggleClass = isAlways ? "fixed" : isPrepared ? "active" : "";
+      if ( isAlways ) context.toggleTitle = CONFIG.DND5E.spellPreparationStates.always.label;
+      else if ( isPrepared ) context.toggleTitle = CONFIG.DND5E.spellPreparationStates.prepared.label;
+      else context.toggleTitle = CONFIG.DND5E.spellPreparationStates.unprepared.label;
     }
     else {
       const isActive = !!item.system.equipped;

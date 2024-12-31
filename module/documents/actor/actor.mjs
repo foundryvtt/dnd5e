@@ -633,7 +633,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !this.system.spells ) return;
 
     // Translate the list of classes into spellcasting progression
-    const progression = { slot: 0, pact: 0 };
+    const progression = Object.entries(CONFIG.DND5E.spellcasting).reduce((acc, [k, v]) => {
+      if ( !v.static ) acc[k] = 0;
+      return acc;
+    }, {});
     const types = {};
 
     // Grab all classes with spellcasting
@@ -650,11 +653,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     );
 
     if ( this.type === "npc" ) {
-      if ( progression.slot || progression.pact ) this.system.details.spellLevel = progression.slot || progression.pact;
-      else progression.slot = this.system.details.spellLevel ?? 0;
+      const level = Object.values(progression).find(v => v);
+      if ( level ) this.system.details.spellLevel = level;
+      else progression.spell = this.system.details.spellLevel ?? 0;
     }
 
-    for ( const type of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
+    for ( const [type, v] of Object.entries(CONFIG.DND5E.spellcasting) ) {
+      if ( v.static ) continue;
       this.constructor.prepareSpellcastingSlots(this.system.spells, type, progression, { actor: this });
     }
   }
@@ -690,10 +695,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       `dnd5e.compute${type.capitalize()}Progression`, progression, actor, cls, spellcasting, count
     );
 
-    if ( allowed && (type === "pact") ) {
-      this.computePactProgression(progression, actor, cls, spellcasting, count);
-    } else if ( allowed && (type === "leveled") ) {
-      this.computeLeveledProgression(progression, actor, cls, spellcasting, count);
+    if ( allowed && CONFIG.DND5E.spellcasting[type].separate ) {
+      this.computeLeveledProgression(progression, actor, cls, spellcasting, count, type);
+    } else if ( allowed ) {
+      this.computeUnleveledProgression(progression, actor, cls, spellcasting, count, type);
     }
   }
 
@@ -706,37 +711,39 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {Item5e} cls                            Class for whom this progression is being computed.
    * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
    * @param {number} count                          Number of classes with this type of spellcasting.
+   * @param {string} [type]                         The configuration key for the spellcasting type.
    */
-  static computeLeveledProgression(progression, actor, cls, spellcasting, count) {
-    const prog = CONFIG.DND5E.spellcastingTypes.leveled.progression[spellcasting.progression];
+  static computeLeveledProgression(progression, actor, cls, spellcasting, count, type="spell") {
+    const prog = CONFIG.DND5E.spellcasting[type].progression[spellcasting.progression];
     if ( !prog ) return;
     const rounding = prog.roundUp ? Math.ceil : Math.floor;
-    progression.slot += rounding(spellcasting.levels / prog.divisor ?? 1);
+    progression[type] += rounding(spellcasting.levels / prog.divisor ?? 1);
     // Single-classed, non-full progression rounds up, rather than down.
-    if ( (count === 1) && (prog.divisor > 1) && progression.slot ) {
-      progression.slot = Math.ceil(spellcasting.levels / prog.divisor);
+    if ( (count === 1) && (prog.divisor > 1) && progression[type] ) {
+      progression[type] = Math.ceil(spellcasting.levels / prog.divisor);
     }
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Contribute to the actor's spellcasting progression for a class with pact spellcasting.
+   * Contribute to the actor's spellcasting progression for a class with single-level spellcasting.
    * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
    * @param {Actor5e} actor                         Actor for whom the data is being prepared.
    * @param {Item5e} cls                            Class for whom this progression is being computed.
    * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
    * @param {number} count                          Number of classes with this type of spellcasting.
+   * @param {string} [type]                         The configuration key for the spellcasting type.
    */
-  static computePactProgression(progression, actor, cls, spellcasting, count) {
-    progression.pact += spellcasting.levels;
+  static computeUnleveledProgression(progression, actor, cls, spellcasting, count, type="pact") {
+    progression[type] += spellcasting.levels;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Prepare actor's spell slots using progression data.
-   * @param {object} spells           The `data.spells` object within actor's data. *Will be mutated.*
+   * @param {object} spells           The `system.spells` object within actor's data. *Will be mutated.*
    * @param {string} type             Type of spellcasting slots being prepared.
    * @param {object} progression      Spellcasting progression data.
    * @param {object} [config]
@@ -746,7 +753,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     /**
      * A hook event that fires to convert the provided spellcasting progression into spell slots.
      * The actual hook names include the spellcasting type (e.g. `dnd5e.prepareLeveledSlots`).
-     * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+     * @param {object} spells        The `system.spells` object within actor's data. *Will be mutated.*
      * @param {Actor5e} actor        Actor for whom the data is being prepared.
      * @param {object} progression   Spellcasting progression data.
      * @returns {boolean}            Explicitly return false to prevent default preparation from being performed.
@@ -755,27 +762,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     const allowed = Hooks.call(`dnd5e.prepare${type.capitalize()}Slots`, spells, actor, progression);
 
-    if ( allowed && (type === "pact") ) this.preparePactSlots(spells, actor, progression);
-    else if ( allowed && (type === "leveled") ) this.prepareLeveledSlots(spells, actor, progression);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare leveled spell slots using progression data.
-   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-   * @param {Actor5e} actor        Actor for whom the data is being prepared.
-   * @param {object} progression   Spellcasting progression data.
-   */
-  static prepareLeveledSlots(spells, actor, progression) {
-    const levels = Math.clamp(progression.slot, 0, CONFIG.DND5E.maxLevel);
-    const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
-    for ( const level of Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1) ) {
-      const slot = spells[`spell${level}`] ??= { value: 0 };
-      slot.label = CONFIG.DND5E.spellLevels[level];
-      slot.level = level;
-      slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level - 1] ?? 0;
-      slot.type = "leveled";
+    if ( allowed && CONFIG.DND5E.spellcasting[type].separate ) {
+      this.prepareLeveledSlots(spells, actor, progression, type);
+    } else if ( allowed ) {
+      this.prepareUnleveledSlots(spells, actor, progression, type);
     }
   }
 
@@ -783,13 +773,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Prepare non-leveled spell slots using progression data.
-   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+   * @param {object} spells        The `system.spells` object within actor's data. *Will be mutated.*
    * @param {Actor5e} actor        Actor for whom the data is being prepared.
    * @param {object} progression   Spellcasting progression data.
    * @param {string} key           The internal key for these spell slots on the actor.
-   * @param {object} table         The table used for determining the progression of slots.
    */
-  static prepareAltSlots(spells, actor, progression, key, table) {
+  static prepareUnleveledSlots(spells, actor, progression, key) {
     // Spell data:
     // - x.level: Slot level for casting
     // - x.max: Total number of slots
@@ -799,6 +788,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let keyLevel = Math.clamp(progression[key], 0, CONFIG.DND5E.maxLevel);
     spells[key] ??= {};
     spells[key].type = key;
+    spells[key].label = game.i18n.localize(CONFIG.DND5E.spellcasting[key]?.label ?? "");
     const override = Number.isNumeric(spells[key].override) ? parseInt(spells[key].override) : null;
 
     // Slot override
@@ -806,31 +796,33 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       keyLevel = actor.system.details.spellLevel;
     }
 
-    const [, keyConfig] = Object.entries(table).reverse().find(([l]) => Number(l) <= keyLevel) ?? [];
-    if ( keyConfig ) {
-      spells[key].level = keyConfig.level;
-      if ( override === null ) spells[key].max = keyConfig.slots;
-      else spells[key].max = Math.max(override, 1);
-      spells[key].value = Math.min(spells[key].value, spells[key].max);
-    }
-
-    else {
-      spells[key].max = override || 0;
-      spells[key].level = (spells[key].max > 0) ? 1 : 0;
-    }
+    // Apply slots
+    const configuration = CONFIG.DND5E.spellcasting.calculateSlots(key, keyLevel);
+    if ( foundry.utils.isEmpty(configuration) && !override ) return;
+    const [[level, amount]=[]] = Object.entries(configuration);
+    spells[key].max = Number.isNumeric(override) ? Math.max(parseInt(override), 0) : (amount || 0);
+    spells[key].level = (spells[key].max > 0) ? (level ? parseInt(level) : 1) : 0;
+    spells[key].value = Math.clamp(spells[key].value, 0, spells[key].max);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Convenience method for preparing pact slots specifically.
-   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+   * Prepare alternative leveled spell slots using progression data.
+   * @param {object} spells        The `system.spells` object within actor's data. *Will be mutated.*
    * @param {Actor5e} actor        Actor for whom the data is being prepared.
    * @param {object} progression   Spellcasting progression data.
+   * @param {string} key           The internal key for these spell slots on the actor.
    */
-  static preparePactSlots(spells, actor, progression) {
-    this.prepareAltSlots(spells, actor, progression, "pact", CONFIG.DND5E.pactCastingProgression);
-    spells.pact.label = game.i18n.localize("DND5E.PactMagic");
+  static prepareLeveledSlots(spells, actor, progression, key) {
+    const slots = CONFIG.DND5E.spellcasting.calculateSlots(key, progression[key]);
+    for ( const level of Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1) ) {
+      const slot = spells[`${key}${level}`] ??= { value: 0 };
+      slot.label = CONFIG.DND5E.spellLevels[level];
+      slot.level = level;
+      slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level] ?? 0;
+      slot.type = key;
+    }
   }
 
   /* -------------------------------------------- */
@@ -2824,13 +2816,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const restConfig = CONFIG.DND5E.restTypes[config.type];
     if ( !this.system.spells ) return;
 
-    let types = restConfig.recoverSpellSlotTypes;
-    if ( !types ) {
-      types = new Set();
-      for ( const [key, { shortRest }] of Object.entries(CONFIG.DND5E.spellcastingTypes) ) {
-        if ( recoverLong || (recoverShort && shortRest) ) types.add(key);
-      }
-    }
+    const types = restConfig.recoverSpellSlotTypes;
+    if ( !types?.size ) return;
+
     for ( const [key, slot] of Object.entries(this.system.spells) ) {
       if ( !types.has(slot.type) ) continue;
       result.updateData[`system.spells.${key}.value`] = slot.max;

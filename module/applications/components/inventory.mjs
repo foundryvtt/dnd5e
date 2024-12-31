@@ -264,9 +264,9 @@ export default class InventoryElement extends HTMLElement {
     });
 
     // Toggle Prepared State
-    else if ( ("preparation" in item.system) && (item.system.preparation?.mode === "prepared")
+    else if ( item.system.canPrepare && (item.system.preparation.prepared < 2)
       && !item.getFlag("dnd5e", "cachedFor") ) options.push({
-      name: item.system?.preparation?.prepared ? "DND5E.ContextMenuActionUnprepare" : "DND5E.ContextMenuActionPrepare",
+      name: item.system.preparation.prepared ? "DND5E.ContextMenuActionUnprepare" : "DND5E.ContextMenuActionPrepare",
       icon: "<i class='fas fa-sun fa-fw'></i>",
       condition: () => item.isOwner && !item.compendium?.locked,
       callback: li => this._onAction(li[0], "prepare"),
@@ -433,7 +433,7 @@ export default class InventoryElement extends HTMLElement {
       case "favorite":
         return this.actor.system.addFavorite({type: "item", id: item.getRelativeUUID(this.actor)});
       case "prepare":
-        return item.update({"system.preparation.prepared": !item.system.preparation?.prepared});
+        return item.update({ "system.preparation.prepared": Number(!item.system.preparation?.prepared) });
       case "recharge":
         return item.system.uses?.rollRecharge({ event });
       case "toggleCharge":

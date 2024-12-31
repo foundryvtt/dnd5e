@@ -21,6 +21,7 @@ export default class ItemChoiceConfig extends AdvancementConfig {
   /** @inheritDoc */
   getData(options={}) {
     const indexes = this.advancement.configuration.pool.map(i => fromUuidSync(i.uuid));
+    const config = CONFIG.DND5E.spellcasting[this.advancement.configuration.spell?.preparation];
     const context = {
       ...super.getData(options),
       abilities: Object.entries(CONFIG.DND5E.abilities).reduce((obj, [k, c]) => {
@@ -35,13 +36,13 @@ export default class ItemChoiceConfig extends AdvancementConfig {
       ],
       showContainerWarning: indexes.some(i => i?.type === "container"),
       showSpellConfig: this.advancement.configuration.type === "spell",
-      showRequireSpellSlot: !this.advancement.configuration.spell?.preparation
-        || CONFIG.DND5E.spellPreparationModes[this.advancement.configuration.spell?.preparation]?.upcast,
+      showRequireSpellSlot: !this.advancement.configuration.spell?.preparation || !config?.static,
       validTypes: this.advancement.constructor.VALID_TYPES.reduce((obj, type) => {
         obj[type] = game.i18n.localize(CONFIG.Item.typeLabels[type]);
         return obj;
       }, {})
     };
+    context.showPreparationState = context.showSpellConfig && config?.prepares;
     context.choices = Object.entries(context.levels).reduce((obj, [level, label]) => {
       obj[level] = { label, ...this.advancement.configuration.choices[level] };
       return obj;

@@ -49,15 +49,15 @@
         <div class="form-fields">
 
             {{!-- Prepared --}}
-            {{#if (eq source.preparation.mode "prepared")}}
-            {{ formInput fields.preparation.fields.prepared value=source.preparation.prepared
-                         dataset=(dnd5e-object tooltip="DND5E.Prepared") input=inputs.createCheckboxInput
-                         ariaLabel=(localize "DND5E.Prepared") }}
+            {{#if (lookup (lookup config.spellcasting source.preparation.mode) "prepares")}}
+            {{ formGroup fields.preparation.fields.prepared value=source.preparation.prepared
+                         dataset=(dnd5e-object tooltip="DND5E.Prepared") ariaLabel=(localize "DND5E.Prepared")
+                         classes="label-top" localize=true }}
             {{/if}}
 
             {{!-- Mode --}}
-            {{ formInput fields.preparation.fields.mode value=source.preparation.mode
-                         choices=config.spellPreparationModes labelAttr="label" }}
+            {{ formGroup fields.preparation.fields.mode value=source.preparation.mode
+                         choices=config.spellcasting labelAttr="label" classes="label-top" localize=true }}
         </div>
     </div>
 
