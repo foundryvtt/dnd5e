@@ -37,10 +37,10 @@ export default function DocumentSheetV2Mixin(Base) {
 
     /**
      * The mode the sheet is currently in.
-     * @type {ActorSheetV2.MODES}
+     * @type {ActorSheetV2.MODES|null}
      * @protected
      */
-    _mode = this.constructor.MODES.PLAY;
+    _mode = null;
 
     /* -------------------------------------------- */
 
@@ -49,6 +49,20 @@ export default function DocumentSheetV2Mixin(Base) {
 
     /* -------------------------------------------- */
     /*  Rendering                                   */
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    async _render(force, { mode, ...options }={}) {
+      if ( !this._mode ) {
+        this._mode = mode ?? this.constructor.MODES.PLAY;
+        if ( this.rendered ) {
+          const toggle = this.element[0].querySelector(".window-header .mode-slider");
+          toggle.checked = this._mode === this.constructor.MODES.EDIT;
+        }
+      }
+      return super._render(force, options);
+    }
+
     /* -------------------------------------------- */
 
     /** @inheritDoc */
