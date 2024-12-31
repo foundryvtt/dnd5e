@@ -5,7 +5,7 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   /** @inheritDoc */
   static get _defaults() {
     return foundry.utils.mergeObject(super._defaults, {
-      choices: [-1, 0, 1],
+      choices: AdvantageModeField.#values,
       initial: 0,
       label: "DND5E.AdvantageMode"
     });
@@ -14,46 +14,52 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
   /* -------------------------------------------- */
 
   /**
-   * Number of advantage modifications.
-   * @type {number}
+   * Allowed advantage mode values.
+   * @type {number[]}
    */
-  #advantage;
-
-  /* -------------------------------------------- */
-
-  /**
-   * Number of disadvantage modifications.
-   * @type {number}
-   */
-  #disadvantage;
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  initialize(value, model, options={}) {
-    this.#advantage = Number(value === 1);
-    this.#disadvantage = Number(value === -1);
-    return value;
-  }
+  static #values = [-1, 0, 1];
 
   /* -------------------------------------------- */
   /*  Active Effect Integration                   */
   /* -------------------------------------------- */
 
   /** @override */
-  applyChange(value, model, change) {
-    const delta = this._castChangeDelta(change.value);
-    if ( change.mode === CONST.ACTIVE_EFFECT_MODES.CUSTOM ) {
-      return this._applyChangeCustom(value, delta, model, change);
-    }
-    switch (delta) {
-      case 1:
-        this.#advantage++;
-        break;
-      case -1:
-        this.#disadvantage++;
-        break;
-    }
-    return Math.sign(this.#advantage) - Math.sign(this.#disadvantage);
+  _applyChangeAdd(value, delta, model, change) {
+    if ( ![-1, 1].includes(delta) ) return value;
+    const roll = foundry.utils.getProperty(model, change.key.substring(0, change.key.lastIndexOf(".")));
+    roll.advantage ??= 0;
+    roll.disadvantage ??= 0;
+    if ( delta === 1 ) roll.advantage++;
+    else roll.disadvantage++;
+    const src = foundry.utils.getProperty(model._source, change.key) ?? 0;
+    return Math.sign(roll.advantage + Number(src === 1)) - Math.sign(roll.disadvantage + Number(src === -1));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeDowngrade(value, delta, model, change) {
+    return value;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeMultiply(value, delta, model, change) {
+    return value;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeOverride(value, delta, model, change) {
+    return value;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _applyChangeUpgrade(value, delta, model, change) {
+    return value;
   }
 }
