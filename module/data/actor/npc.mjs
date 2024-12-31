@@ -49,8 +49,9 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {number} resources.legres.value     Currently available legendary resistances.
  * @property {number} resources.legres.max       Maximum number of legendary resistances.
  * @property {object} resources.lair             NPC's lair actions.
- * @property {boolean} resources.lair.value      Does this NPC use lair actions.
+ * @property {boolean} resources.lair.value      This creature can possess a lair (2024) or take lair actions (2014).
  * @property {number} resources.lair.initiative  Initiative count when lair actions are triggered.
+ * @property {boolean} resources.lair.inside     This actor is currently inside its lair.
  * @property {SourceData} source                 Adventure or sourcebook where this NPC originated.
  */
 export default class NPCData extends CreatureTemplate {
@@ -144,11 +145,12 @@ export default class NPCData extends CreatureTemplate {
           })
         }, {label: "DND5E.LegendaryResistance.Label"}),
         lair: new SchemaField({
-          value: new BooleanField({required: true, label: "DND5E.LairAct"}),
+          value: new BooleanField({required: true, label: "DND5E.LAIR.Action.Uses"}),
           initiative: new NumberField({
-            required: true, integer: true, label: "DND5E.LairActionInitiative"
-          })
-        }, {label: "DND5E.LairActionLabel"})
+            required: true, integer: true, label: "DND5E.LAIR.Action.Initiative"
+          }),
+          inside: new BooleanField({ label: "DND5E.LAIR.Inside" })
+        }, {label: "DND5E.LAIR.Action.Label"})
       }, {label: "DND5E.Resources"}),
       source: new SourceField(),
       traits: new SchemaField({
@@ -314,9 +316,15 @@ export default class NPCData extends CreatureTemplate {
       else if ( item.system.attuned ) this.attributes.attunement.value += 1;
     }
 
+    const lairAdjustment = Number(this.resources.lair.value && this.resources.lair.inside);
+
     // Kill Experience
     this.details.xp ??= {};
-    this.details.xp.value = this.parent.getCRExp(this.details.cr);
+    this.details.xp.value = this.parent.getCRExp(this.details.cr === null ? null : this.details.cr + lairAdjustment);
+
+    // Legendary Resistances/Actions
+    if ( this.resources.legact.max ) this.resources.legact.max += lairAdjustment;
+    if ( this.resources.legres.max ) this.resources.legres.max += lairAdjustment;
 
     // Proficiency
     if ( this.details.cr === null ) this.attributes.prof = null;

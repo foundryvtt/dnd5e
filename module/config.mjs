@@ -998,7 +998,7 @@ DND5E.abilityActivationTypes = {
   day: DND5E.timePeriods.day,
   legendary: "DND5E.LegendaryAction.Label",
   mythic: "DND5E.MythicActionLabel",
-  lair: "DND5E.LairActionLabel",
+  lair: "DND5E.LAIR.Action.Label",
   crew: "DND5E.VehicleCrewAction"
 };
 preLocalize("abilityActivationTypes");
@@ -1071,7 +1071,7 @@ DND5E.activityActivationTypes = {
     scalar: true
   },
   lair: {
-    label: "DND5E.LairActionLabel",
+    label: "DND5E.LAIR.Action.Label",
     group: "DND5E.ACTIVATION.Category.Monster"
   },
   crew: {

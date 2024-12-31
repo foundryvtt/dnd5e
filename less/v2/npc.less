@@ -356,6 +356,21 @@
         background: transparent url("ui/legres-inactive.webp") center / contain;
         &.filled { background-image: url("ui/legres-active.webp"); }
       }
+
+      .lair {
+        slide-toggle {
+          --slide-toggle-track-color-unchecked: rgb(0 0 0 / 25%);
+          --slide-toggle-track-color-checked: rgb(214, 109, 41);
+        }
+
+        .spacer {
+          display: grid;
+          place-content: center;
+
+          &.checkbox { height: 26px; }
+          &.toggle { height: 28px; }
+        }
+      }
     }
 
     /* AC, HD, HP, & Death Saves */

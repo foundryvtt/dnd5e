@@ -2453,9 +2453,17 @@
 "DND5E.ItemWeaponType": "Weapon Type",
 "DND5E.ItemWeaponUsage": "Weapon Usage",
 "DND5E.JackOfAllTrades": "Jack of all Trades",
-"DND5E.LairAct": "Uses Lair Action",
-"DND5E.LairActionLabel": "Lair Action",
-"DND5E.LairActionInitiative": "Lair Action Initiative Count",
+
+"DND5E.LAIR": {
+  "Label": "Lair",
+  "Action": {
+    "Label": "Lair Action",
+    "Initiative": "Lair Action Initiative Count",
+    "Uses": "Uses Lair Action"
+  },
+  "HasLair": "Has Lair",
+  "Inside": "Inside Lair"
+},
 
 "DND5E.Language": {
   "All": "All Languages",

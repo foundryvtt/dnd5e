@@ -130,7 +130,8 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
         };
       });
     });
-    context.hasLegendaries = resources.legact.max || resources.legres.max || resources.lair.initiative;
+    context.hasLegendaries = resources.legact.max || resources.legres.max
+      || (context.modernRules && resources.lair.value) || (!context.modernRules && resources.lair.initiative);
 
     // Spellcasting
     this._prepareSpellcasting(context);
@@ -199,7 +200,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
         { key: "bonus", label: "DND5E.BonusAction" },
         { key: "reaction", label: "DND5E.Reaction" },
         { key: "legendary", label: "DND5E.LegendaryAction.Label" },
-        { key: "lair", label: "DND5E.LairActionLabel" }
+        { key: "lair", label: "DND5E.LAIR.Action.Label" }
       ]
     };
     features.forEach(section => {

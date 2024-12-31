@@ -323,9 +323,17 @@
                         {{ numberInput source.resources.legres.max name="system.resources.legres.max" step=1 min=0 }}
                     </label>
                     <label class="lair">
-                        <span class="label roboto-upper">{{ localize "DND5E.LairActionLabel" }}</span>
+                        {{#if modernRules}}
+                        <span class="label roboto-upper">{{ localize "DND5E.LAIR.HasLair" }}</span>
+                        <div class="spacer checkbox">
+                            <dnd5e-checkbox name="system.resources.lair.value"
+                                            {{ checked source.resources.lair.value }}></dnd5e-checkbox>
+                        </div>
+                        {{else}}
+                        <span class="label roboto-upper">{{ localize "DND5E.LAIR.Action.Label" }}</span>
                         {{ numberInput source.resources.lair.initiative name="system.resources.lair.initiative"
                                        placeholder="—" step=1 min=0 }}
+                        {{/if}}
                     </label>
                     {{else}}
                     {{#if system.resources.legact.max}}
@@ -348,9 +356,19 @@
                         </div>
                     </div>
                     {{/if}}
-                    {{#if system.resources.lair.initiative}}
+                    {{#if modernRules}}
+                    {{#if system.resources.lair.value}}
                     <label class="lair">
-                        <span class="label roboto-upper">{{ localize "DND5E.LairActionLabel" }}</span>
+                        <span class="label roboto-upper">{{ localize "DND5E.LAIR.Inside" }}</span>
+                        <div class="spacer toggle">
+                            <slide-toggle name="system.resources.lair.inside"
+                                          {{ checked system.resources.lair.inside }}></slide-toggle>
+                        </div>
+                    </label>
+                    {{/if}}
+                    {{else if system.resources.lair.initiative}}
+                    <label class="lair">
+                        <span class="label roboto-upper">{{ localize "DND5E.LAIR.Action.Label" }}</span>
                         <span class="value">{{ system.resources.lair.initiative }}</span>
                     </label>
                     {{/if}}
