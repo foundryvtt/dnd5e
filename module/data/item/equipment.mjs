@@ -313,6 +313,11 @@ export default class EquipmentData extends ItemDataModel.mixin(
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     await this.preCreateEquipped(data, options, user);
+
+    // Set type as "Vehicle Equipment" if created directly on a vehicle
+    if ( (this.parent.actor?.type === "vehicle") && !foundry.utils.hasProperty(data, "system.type.value") ) {
+      this.updateSource({ "type.value": "vehicle" });
+    }
   }
 
   /* -------------------------------------------- */
