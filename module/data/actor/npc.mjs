@@ -11,7 +11,13 @@ import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
 import TraitsFields from "./templates/traits.mjs";
 
-const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+
+/**
+ * @typedef NPCHabitatData
+ * @property {string} type       The habitat category.
+ * @property {string} [subtype]  An optional discriminator for the main category.
+ */
 
 /**
  * System data definition for NPCs.
@@ -38,7 +44,11 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {string} details.type.subtype       NPC's subtype usually displayed in parenthesis after main type.
  * @property {string} details.type.swarm         Size of the individual creatures in a swarm, if a swarm.
  * @property {string} details.type.custom        Custom type beyond what is available in the configuration.
- * @property {string} details.environment        Common environments in which this NPC is found.
+ * @property {object} details.habitat
+ * @property {NPCHabitatData[]} details.habitat.value  Common habitats in which this NPC is found.
+ * @property {string} details.habitat.custom     Custom habitats.
+ * @property {object} details.treasure
+ * @property {Set<string>} details.treasure.value  Random treasure generation categories for this NPC.
  * @property {number} details.cr                 NPC's challenge rating.
  * @property {number} details.spellLevel         Spellcasting level of this NPC.
  * @property {object} resources
@@ -117,12 +127,21 @@ export default class NPCData extends CreatureTemplate {
         ...DetailsFields.common,
         ...DetailsFields.creature,
         type: new CreatureTypeField(),
-        environment: new StringField({required: true, label: "DND5E.Environment"}),
+        habitat: new SchemaField({
+          value: new ArrayField(new SchemaField({
+            type: new StringField({ required: true }),
+            subtype: new StringField()
+          })),
+          custom: new StringField({ required: true })
+        }),
         cr: new NumberField({
           required: true, nullable: true, min: 0, initial: 1, label: "DND5E.ChallengeRating"
         }),
         spellLevel: new NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
+        }),
+        treasure: new SchemaField({
+          value: new SetField(new StringField())
         })
       }, {label: "DND5E.Details"}),
       resources: new SchemaField({
@@ -155,7 +174,8 @@ export default class NPCData extends CreatureTemplate {
       source: new SourceField(),
       traits: new SchemaField({
         ...TraitsFields.common,
-        ...TraitsFields.creature
+        ...TraitsFields.creature,
+        important: new BooleanField()
       }, {label: "DND5E.Traits"})
     });
   }
@@ -213,9 +233,21 @@ export default class NPCData extends CreatureTemplate {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    NPCData.#migrateEnvironment(source);
     NPCData.#migrateSource(source);
     NPCData.#migrateTypeData(source);
     AttributesFields._migrateInitiative(source.attributes);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convert the plain string environment to a custom habitat.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateEnvironment(source) {
+    const custom = source.details?.environment;
+    if ( (typeof custom === "string") && !("habitat" in source.details) ) source.details.habitat = { custom };
   }
 
   /* -------------------------------------------- */

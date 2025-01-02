@@ -62,6 +62,8 @@ export default class AttributesFields {
    * @property {number} concentration.roll.min  The minimum the d20 can roll.
    * @property {number} concentration.roll.max  The maximum the d20 can roll.
    * @property {number} concentration.roll.mode The default advantage mode for this actor's concentration saving throws.
+   * @property {object} loyalty
+   * @property {number} loyalty.value           The creature's loyalty score.
    */
   static get creature() {
     return {
@@ -81,7 +83,10 @@ export default class AttributesFields {
           save: new FormulaField({ required: true, label: "DND5E.ConcentrationBonus" })
         }),
         limit: new NumberField({ integer: true, min: 0, initial: 1, label: "DND5E.ConcentrationLimit" })
-      }, { label: "DND5E.Concentration" })
+      }, { label: "DND5E.Concentration" }),
+      loyalty: new SchemaField({
+        value: new NumberField({ integer: true, min: 0, max: 20, label: "DND5E.Loyalty" })
+      })
     };
   }
 

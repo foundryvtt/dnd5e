@@ -18,6 +18,7 @@ export {default as ArmorClassConfig} from "./config/armor-class-config.mjs";
 export {default as BaseProficiencyConfig} from "./config/base-proficiency-config.mjs";
 export {default as ConcentrationConfig} from "./config/concentration-config.mjs";
 export {default as DamagesConfig} from "./config/damages-config.mjs";
+export {default as HabitatConfig} from "./config/habitat-config.mjs";
 export {default as HitDiceConfig} from "./config/hit-dice-config.mjs";
 export {default as HitPointsConfig} from "./config/hit-points-config.mjs";
 export {default as InitiativeConfig} from "./config/initiative-config.mjs";
@@ -27,6 +28,7 @@ export {default as SkillsConfig} from "./config/skills-config.mjs";
 export {default as SpellSlotsConfig} from "./config/spell-slots-config.mjs";
 export {default as ToolsConfig} from "./config/tools-config.mjs";
 export {default as TraitsConfig} from "./config/traits-config.mjs";
+export {default as TreasureConfig} from "./config/treasure-config.mjs";
 export {default as WeaponsConfig} from "./config/weapons-config.mjs";
 
 export {default as BaseRestDialog} from "./rest/base-rest-dialog.mjs";

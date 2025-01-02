@@ -1,0 +1,27 @@
+<section class="flexcol">
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.Habitat.Configuration.Legend" }}</legend>
+        <ol class="unlist form-grid form-grid-50" style="--rows: {{ rows }};">
+            {{#each habitats}}
+            <li>
+                <label class="checkbox">
+                    <span>{{ label }}</span>
+                    <dnd5e-checkbox name="{{ id }}.type" {{#if checked}}checked{{/if}}
+                                    {{#if disabled}}disabled{{/if}}></dnd5e-checkbox>
+                </label>
+            </li>
+            {{#if subtypes}}
+            <li class="subtypes">
+                <input type="text" name="{{ id }}.subtype" value="{{ subtype }}"
+                       aria-label="{{ localize "DND5E.Habitat.Configuration.Subtype" type=label }}">
+            </li>
+            {{/if}}
+            {{/each}}
+        </ol>
+    </fieldset>
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.Habitat.Configuration.Custom" }}</legend>
+        {{ formInput custom.field value=custom.value name=custom.name }}
+        <p class="hint">{{ localize "DND5E.SpecialHint" }}</p>
+    </fieldset>
+</section>

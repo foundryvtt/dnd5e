@@ -266,7 +266,8 @@
                                 </div>
                                 <div class="tmp">
                                     <input type="text" name="system.attributes.hp.temp" data-dtype="Number"
-                                           placeholder="{{ localize "DND5E.TMP" }}" value="{{ temp }}">
+                                           placeholder="{{ localize "DND5E.TMP" }}"
+                                           value="{{#if temp}}{{ temp }}{{/if}}">
                                 </div>
                             </div>
                             {{/with}}

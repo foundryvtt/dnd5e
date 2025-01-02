@@ -1,6 +1,6 @@
 import ActorSheet5eNPC from "./npc-sheet.mjs";
 import ActorSheetV2Mixin from "./sheet-v2-mixin.mjs";
-import { simplifyBonus } from "../../utils.mjs";
+import { simplifyBonus, splitSemicolons } from "../../utils.mjs";
 
 /**
  * An Actor sheet for NPCs.
@@ -73,7 +73,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
-    const { attributes, resources } = this.actor.system;
+    const { attributes, details, resources, traits } = this.actor.system;
     context.encumbrance = attributes.encumbrance;
 
     // Ability Scores
@@ -84,9 +84,42 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
       ability.icon = CONFIG.DND5E.abilities[k]?.icon;
     });
 
-    // Show Death Saves
-    context.showDeathSaves = !foundry.utils.isEmpty(this.actor.classes)
-      || this.actor.getFlag("dnd5e", "showDeathSaves");
+    // Important NPCs
+    context.important = !foundry.utils.isEmpty(this.actor.classes) || traits.important;
+
+    if ( this._mode === this.constructor.MODES.PLAY ) {
+      context.showDeathSaves = context.important && !attributes.hp.value;
+      context.showInitiativeScore = game.settings.get("dnd5e", "rulesVersion") === "modern";
+    }
+
+    // Loyalty
+    context.showLoyalty = context.important && game.settings.get("dnd5e", "loyaltyScore") && game.user.isGM;
+
+    // Habitat
+    if ( details?.habitat?.value.length || details?.habitat?.custom ) {
+      const { habitat } = details;
+      const any = details.habitat.value.find(({ type }) => type === "any");
+      context.habitat = habitat.value.reduce((arr, { type, subtype }) => {
+        let { label } = CONFIG.DND5E.habitats[type] ?? {};
+        if ( label && (!any || (type === "any")) ) {
+          if ( subtype ) label = game.i18n.format("DND5E.Habitat.Subtype", { type: label, subtype });
+          arr.push({ label });
+        }
+        return arr;
+      }, [])
+        .concat(splitSemicolons(habitat.custom).map(label => ({ label })))
+        .sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+    }
+
+    // Treasure
+    if ( details?.treasure?.value.size ) {
+      const any = details.treasure.value.has("any");
+      context.treasure = details.treasure.value.reduce((arr, id) => {
+        const { label } = CONFIG.DND5E.treasure[id] ?? {};
+        if ( label && (!any || (id === "any")) ) arr.push({ label });
+        return arr;
+      }, []).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang));
+    }
 
     // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
@@ -287,6 +320,13 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     if ( this.isEditable ) {
       html.find(".editor-edit").on("click", this._onEditBiography.bind(this));
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onShowPortrait(event) {
+    if ( !event.target.closest(".death-saves") ) return super._onShowPortrait();
   }
 
   /* -------------------------------------------- */

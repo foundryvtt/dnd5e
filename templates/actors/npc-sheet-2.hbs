@@ -31,19 +31,74 @@
                 <img src="{{ portrait.src }}" alt="{{ actor.name }}"
                      {{#if (and editable portrait.path)}}data-edit="{{ portrait.path }}"{{/if}}>
 
-                <div class="initiative {{#unless editable}}{{ rollableClass }}{{/unless}}"
-                    {{#if editable}}data-tooltip="DND5E.InitiativeConfig"
-                    aria-label="{{ localize "DND5E.InitiativeConfig" }}"
-                    {{else}}data-tooltip="DND5E.Initiative" aria-label="{{ localize "DND5E.Initiative" }}"
-                    data-action="rollInitiative"{{/if}}>
-                    {{#if editable}}
+                {{#if showDeathSaves}}
+                <div class="death-saves">
+                    <button type="button" data-action="rollDeathSave" data-tooltip="DND5E.DeathSaveRoll"
+                            aria-label="{{ localize "DND5E.DeathSaveRoll" }}"
+                            class="{{ rollableClass }} death-save unbutton">
+                        <dnd5e-icon src="systems/dnd5e/icons/svg/statuses/dead-outline.svg"></dnd5e-icon>
+                    </button>
+
+                    {{#with system.attributes.death}}
+                    <div class="results">
+
+                        {{!-- Successes --}}
+                        <div class="success">
+                            <input type="text" name="system.attributes.death.success" data-dtype="Number"
+                                   inputmode="numeric" pattern="[+=\-]?\d*" placeholder="0" value="{{ success }}"
+                                   aria-label="{{ localize "DND5E.DeathSaveSuccessLabel" }}">
+                            <i class="fa-solid fa-circle-check" inert></i>
+                        </div>
+
+                        {{!-- Failures --}}
+                        <div class="failure">
+                            <input type="text" name="system.attributes.death.failure" data-dtype="Number"
+                                   inputmode="numeric" pattern="[+=\-]?\d*" placeholder="0" value="{{ failure }}"
+                                   aria-label="{{ localize "DND5E.DeathSaveFailureLabel" }}">
+                            <i class="fa-solid fa-circle-xmark" inert></i>
+                        </div>
+                    </div>
+                    {{/with}}
+                </div>
+                {{/if}}
+
+                {{!-- Initiative --}}
+                <div class="initiative-wrapper">
+
+                    {{!-- Initiative Modifier --}}
+                    <div class="initiative {{#unless editable}}{{ rollableClass }}{{/unless}}"
+                        {{#if editable}}data-tooltip="DND5E.InitiativeConfig"
+                         aria-label="{{ localize "DND5E.InitiativeConfig" }}"
+                        {{else}}data-tooltip="DND5E.Initiative" aria-label="{{ localize "DND5E.Initiative" }}"
+                         data-action="rollInitiative"{{/if}}>
+                        {{#if editable}}
                         <a class="config-button" data-action="initiative"><i class="fas fa-cog"></i></a>
-                    {{else}}
-                        <span>
-                            {{ dnd5e-numberFormat system.attributes.init.total signDisplay="always" }}
-                        </span>
+                        {{else}}
+                        <span>{{ dnd5e-numberFormat system.attributes.init.total signDisplay="always" }}</span>
+                        {{/if}}
+                    </div>
+
+                    {{!-- Initiative Score --}}
+                    {{#if showInitiativeScore}}
+                    <div class="initiative-score">{{ system.attributes.init.score }}</div>
                     {{/if}}
                 </div>
+
+                {{!-- Loyalty --}}
+                {{#if showLoyalty}}
+                <div class="loyalty-badge badge" aria-label="{{ localize "DND5E.Loyalty" }}"
+                     {{#unless editable}}data-tooltip="DND5E.Loyalty"{{/unless}}>
+                    {{#if editable}}
+                    <input type="text" class="uninput" name="system.attributes.loyalty.value" inputmode="numeric"
+                           pattern="[+=\-]?\d*" placeholder="—" value="{{ source.attributes.loyalty.value }}"
+                           data-dtype="Number">
+                    {{else if system.attributes.loyalty.value includeZero=true}}
+                    {{ system.attributes.loyalty.value }}
+                    {{else}}
+                    &mdash;
+                    {{/if}}
+                </div>
+                {{/if}}
             </div>
 
             {{!-- Vitals --}}
@@ -68,7 +123,7 @@
 
                 </div>
 
-                {{!-- HP, HD, & Death Saves --}}
+                {{!-- HP --}}
                 <div class="right">
 
                     {{!-- HP --}}
@@ -103,60 +158,21 @@
                     </div>
                     {{/with}}
 
-                    {{#if showDeathSaves}}
-                    {{!-- HD --}}
-                    {{#with system.attributes.hd}}
-                    <div class="meter hit-dice progress" role="meter" aria-valuemin="0" aria-valuenow="{{ value }}"
-                         aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%">
-                        <div class="label">
-                            <span class="max">{{ max }}</span>
-                            <span class="separator">&sol;</span>
-                            <span class="value">{{ value }}</span>
-                        </div>
-                    </div>
-                    {{/with}}
-
-                    {{!-- Death Saves --}}
-                    <div class="death-saves">
-
-                        {{!-- Death Save Successes --}}
-                        <div class="pips" data-prop="system.attributes.death.success">
-                            {{#each death.success}}
-                                {{> pip}}
-                            {{/each}}
-                        </div>
-
-                        {{!-- Roll Death Save --}}
-                        <button type="button" data-action="rollDeathSave" data-tooltip="DND5E.DeathSaveRoll"
-                                aria-label="{{ localize "DND5E.DeathSaveRoll" }}"
-                                class="{{ rollableClass }} death-save unbutton">
-                            <dnd5e-icon src="systems/dnd5e/icons/svg/statuses/dead.svg"></dnd5e-icon>
-                        </button>
-
-                        {{!-- Death Save Failures --}}
-                        <div class="pips" data-prop="system.attributes.death.failure">
-                            {{#each death.failure}}
-                                {{> pip}}
-                            {{/each}}
-                        </div>
-
-                    </div>
-                    {{else}}
                     {{!-- Temp & Tempmax --}}
                     {{#with system.attributes.hp}}
                     <div class="meter sectioned split">
                         <div class="temp">
                             <input type="text" name="system.attributes.hp.temp" data-dtype="Number" inputmode="numeric"
-                                   placeholder="{{ localize "DND5E.TMP" }}" value="{{ temp }}" pattern="[+=\-]?\d*">
+                                   placeholder="{{ localize "DND5E.TMP" }}" value="{{#if temp}}{{ temp }}{{/if}}"
+                                   pattern="[+=\-]?\d*">
                         </div>
                         <div class="tempmax">
                             <input type="text" name="system.attributes.hp.tempmax" data-dtype="Number"
-                                   inputmode="numeric" placeholder="+{{ localize "DND5E.Max" }}" value="{{ tempmax }}"
-                                   pattern="[+=\-]?\d*">
+                                   inputmode="numeric" placeholder="+{{ localize "DND5E.Max" }}"
+                                   value="{{#if tempmax}}{{ tempmax }}{{/if}}" pattern="[+=\-]?\d*">
                         </div>
                     </div>
                     {{/with}}
-                    {{/if}}
 
                 </div>
 
@@ -401,6 +417,20 @@
             {{!-- Sidebar --}}
             <div class="sidebar">
 
+                {{!-- HD --}}
+                {{#if important}}
+                {{#with system.attributes.hd}}
+                <div class="pills-group empty">
+                    {{!-- TODO: Allow clicking this to roll a hit die --}}
+                    <h3 class="icon">
+                        <i class="fa-solid fa-dice-d{{ denomination }}"></i>
+                        <span class="roboto-upper">{{ localize "DND5E.HitDice" }}</span>
+                        <span class="counter">{{ value }} &sol; {{ max }}</span>
+                    </h3>
+                </div>
+                {{/with}}
+                {{/if}}
+
                 {{!-- Speed --}}
                 {{> "dnd5e.actor-trait-pills" values=speed key="speed" icon="fas fa-shoe-prints"
                     label="DND5E.Speed" configAction="movement" }}
@@ -460,6 +490,56 @@
                 {{!-- Languages --}}
                 {{> "dnd5e.actor-trait-pills" values=traits.languages key="languages" icon="fas fa-flag"
                     label="DND5E.Languages" }}
+
+                {{!-- Habitat --}}
+                {{!-- TODO: Unhide once full list of habitats is available
+                {{#if (or editable habitat)}}
+                <div class="pills-group {{#unless habitat}}empty{{/unless}}">
+                    <h3 class="icon">
+                        <i class="fa-solid fa-mountain-sun" inert></i>
+                        <span class="roboto-upper">{{ localize "DND5E.Habitat.Configuration.Label" }}</span>
+                        {{#if editable}}
+                        <a class="config-button" data-action="habitat" data-tooltip="DND5E.Habitat.Configuration.Title"
+                           aria-label="{{ localize "DND5E.Habitat.Configuration.Title" }}">
+                            <i class="fa-solid fa-cog" inert></i>
+                        </a>
+                        {{/if}}
+                    </h3>
+                    <ul class="pills">
+                        {{#each habitat}}
+                        <li class="pill">
+                            <span class="label">{{ label }}</span>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
+                --}}
+
+                {{!-- Treasure --}}
+                {{!-- TODO: ALlow clicking a treasure category pill to roll appropriately for random treasure --}}
+                {{#if (or editable treasure)}}
+                <div class="pills-group {{#unless treasure}}empty{{/unless}}">
+                    <h3 class="icon">
+                        <i class="fa-solid fa-gem" inert></i>
+                        <span class="roboto-upper">{{ localize "DND5E.Treasure.Configuration.Label" }}</span>
+                        {{#if editable}}
+                        <a class="config-button" data-action="treasure"
+                           data-tooltip="DND5E.Treasure.Configuration.Title"
+                           aria-label="{{ localize "DND5E.Treasure.Configuration.Title" }}">
+                            <i class="fa-solid fa-cog" inert></i>
+                        </a>
+                        {{/if}}
+                    </h3>
+                    <ul class="pills">
+                        {{#each treasure}}
+                        <li class="pill">
+                            <span class="label">{{ label }}</span>
+                        </li>
+                        {{/each}}
+                    </ul>
+                </div>
+                {{/if}}
 
             </div>
 

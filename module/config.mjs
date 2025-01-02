@@ -3850,6 +3850,58 @@ preLocalize("communicationTypes", { key: "label" });
 /* -------------------------------------------- */
 
 /**
+ * @typedef HabitatConfiguration5e
+ * @property {string} label        The human-readable habitat name.
+ * @property {boolean} [subtypes]  Whether this habitat is divided into sub-types.
+ */
+
+/**
+ * NPC habitats.
+ * @type {Record<string, HabitatConfiguration5e>}
+ */
+DND5E.habitats = {
+  any: {
+    label: "DND5E.Habitat.Categories.Any"
+  }
+};
+preLocalize("habitats", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef TreasureConfiguration5e
+ * @property {string} label  The human-readable treasure category name.
+ */
+
+/**
+ * NPC Treasure
+ * @type {Record<string, TreasureConfiguration5e>}
+ */
+DND5E.treasure = {
+  any: {
+    label: "DND5E.Treasure.Categories.Any"
+  },
+  arcana: {
+    label: "DND5E.Treasure.Categories.Arcana"
+  },
+  armaments: {
+    label: "DND5E.Treasure.Categories.Armaments"
+  },
+  implements: {
+    label: "DND5E.Treasure.Categories.Implements"
+  },
+  individual: {
+    label: "DND5E.Treasure.Categories.Individual"
+  },
+  relics: {
+    label: "DND5E.Treasure.Categories.Relics"
+  }
+};
+preLocalize("treasure", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
  * Maximum allowed character level.
  * @type {number}
  */
