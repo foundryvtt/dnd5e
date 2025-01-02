@@ -130,6 +130,7 @@ export default class ActivityChoiceDialog extends Application5e {
 
   /**
    * Handle choosing an activity.
+   * @this {ActivityChoiceDialog}
    * @param {PointerEvent} event  The triggering click event.
    * @param {HTMLElement} target  The activity button that was clicked.
    */
