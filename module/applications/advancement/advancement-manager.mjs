@@ -14,6 +14,11 @@ import Advancement from "../../documents/advancement/advancement.mjs";
  */
 
 /**
+ * @typedef AdvancementManagerConfiguration
+ * @property {boolean} [automaticApplication=false]  Apply advancement steps automatically if no user input is required.
+ */
+
+/**
  * Application for controlling the advancement workflow and displaying the interface.
  *
  * @param {Actor5e} actor        Actor on which this advancement is being performed.
@@ -64,7 +69,8 @@ export default class AdvancementManager extends Application {
       classes: ["dnd5e", "advancement", "flow"],
       template: "systems/dnd5e/templates/advancement/advancement-manager.hbs",
       width: 460,
-      height: "auto"
+      height: "auto",
+      automaticApplication: false
     });
   }
 
@@ -128,10 +134,10 @@ export default class AdvancementManager extends Application {
    * @param {Actor5e} actor               Actor from which the advancement should be updated.
    * @param {string} itemId               ID of the item to which the advancements are being dropped.
    * @param {Advancement[]} advancements  Dropped advancements to add.
-   * @param {object} options              Rendering options passed to the application.
+   * @param {object} [options={}]         Rendering options passed to the application.
    * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
-  static forNewAdvancement(actor, itemId, advancements, options) {
+  static forNewAdvancement(actor, itemId, advancements, options={}) {
     const manager = new this(actor, options);
     const clonedItem = manager.clone.items.get(itemId);
     if ( !clonedItem || !advancements.length ) return manager;
@@ -175,7 +181,7 @@ export default class AdvancementManager extends Application {
    * Construct a manager for a newly added item.
    * @param {Actor5e} actor         Actor to which the item is being added.
    * @param {object} itemData       Data for the item being added.
-   * @param {object} options        Rendering options passed to the application.
+   * @param {object} [options={}]   Rendering options passed to the application.
    * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
   static forNewItem(actor, itemData, options={}) {
@@ -217,10 +223,10 @@ export default class AdvancementManager extends Application {
    * @param {Actor5e} actor         Actor from which the choices should be modified.
    * @param {object} itemId         ID of the item whose choices are to be changed.
    * @param {number} level          Level at which the choices are being changed.
-   * @param {object} options        Rendering options passed to the application.
+   * @param {object} [options={}]   Rendering options passed to the application.
    * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
-  static forModifyChoices(actor, itemId, level, options) {
+  static forModifyChoices(actor, itemId, level, options={}) {
     const manager = new this(actor, options);
     const clonedItem = manager.clone.items.get(itemId);
     if ( !clonedItem ) return manager;
@@ -247,10 +253,10 @@ export default class AdvancementManager extends Application {
    * @param {Actor5e} actor         Actor from which the advancement should be unapplied.
    * @param {string} itemId         ID of the item from which the advancement should be deleted.
    * @param {string} advancementId  ID of the advancement to delete.
-   * @param {object} options        Rendering options passed to the application.
+   * @param {object} [options={}]   Rendering options passed to the application.
    * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
-  static forDeletedAdvancement(actor, itemId, advancementId, options) {
+  static forDeletedAdvancement(actor, itemId, advancementId, options={}) {
     const manager = new this(actor, options);
     const clonedItem = manager.clone.items.get(itemId);
     const advancement = clonedItem?.advancement.byId[advancementId];
@@ -279,10 +285,10 @@ export default class AdvancementManager extends Application {
    * Construct a manager for an item that needs to be deleted.
    * @param {Actor5e} actor         Actor from which the item should be deleted.
    * @param {string} itemId         ID of the item to be deleted.
-   * @param {object} options        Rendering options passed to the application.
+   * @param {object} [options={}]   Rendering options passed to the application.
    * @returns {AdvancementManager}  Prepared manager. Steps count can be used to determine if advancements are needed.
    */
-  static forDeletedItem(actor, itemId, options) {
+  static forDeletedItem(actor, itemId, options={}) {
     const manager = new this(actor, options);
     const clonedItem = manager.clone.items.get(itemId);
     if ( !clonedItem ) return manager;
@@ -429,7 +435,7 @@ export default class AdvancementManager extends Application {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  render(...args) {
+  render(forced=false, options={}) {
     if ( this.steps.length && (this._stepIndex === null) ) this._stepIndex = 0;
 
     // Ensure the level on the class item matches the specified level
@@ -451,13 +457,16 @@ export default class AdvancementManager extends Application {
     // Abort if not allowed
     if ( allowed === false ) return this;
 
-    if ( this.step?.automatic ) {
+    const automaticData = (this.options.automaticApplication && (options.direction !== "backward"))
+      ? this.step?.flow?.getAutomaticApplicationValue() : false;
+
+    if ( this.step?.automatic || (automaticData !== false) ) {
       if ( this._advancing ) return this;
-      this._forward();
+      this._forward({ automaticData });
       return this;
     }
 
-    return super.render(...args);
+    return super.render(forced, options);
   }
 
   /* -------------------------------------------- */
@@ -493,7 +502,7 @@ export default class AdvancementManager extends Application {
             return this._backward(event);
           case "next":
           case "complete":
-            return this._forward(event);
+            return this._forward({ event });
         }
       } finally {
         buttons.attr("disabled", false);
@@ -532,11 +541,13 @@ export default class AdvancementManager extends Application {
 
   /**
    * Advance through the steps until one requiring user interaction is encountered.
-   * @param {Event} [event]  Triggering click event if one occurred.
+   * @param {object} config
+   * @param {object} [config.automaticData]  Data provided to handle automatic application.
+   * @param {Event} [config.event]           Triggering click event if one occurred.
    * @returns {Promise}
    * @private
    */
-  async _forward(event) {
+  async _forward({ automaticData, event }) {
     this._advancing = true;
     try {
       do {
@@ -550,6 +561,7 @@ export default class AdvancementManager extends Application {
         }
         else if ( type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
         else if ( type === "reverse" ) await flow.retainData(await flow.advancement.reverse(flow.level));
+        else if ( automaticData && flow ) await flow.advancement.apply(flow.level, automaticData);
         else if ( flow ) await flow._updateObject(event, flow._getSubmitData());
 
         this._stepIndex++;
@@ -571,7 +583,7 @@ export default class AdvancementManager extends Application {
       this._advancing = false;
     }
 
-    if ( this.step ) this.render(true);
+    if ( this.step ) this.render(true, { direction: "forward" });
     else this._complete();
   }
 
@@ -613,7 +625,7 @@ export default class AdvancementManager extends Application {
     }
 
     if ( !render ) return;
-    if ( this.step ) this.render(true);
+    if ( this.step ) this.render(true, { direction: "backward" });
     else this.close({ skipConfirmation: true });
   }
 
