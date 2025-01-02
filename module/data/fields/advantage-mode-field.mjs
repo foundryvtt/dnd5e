@@ -123,10 +123,8 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
     const { override, advantages, disadvantages } = counts ?? this.getCounts(model, change);
     if ( override !== null ) return override;
     const src = foundry.utils.getProperty(model._source, change.key) ?? 0;
-    let advantageCount = advantages.count + Number(src === 1);
-    let disadvantageCount = disadvantages.count + Number(src === -1);
-    if ( advantages.suppressed ) advantageCount = 0;
-    if ( disadvantages.suppressed ) disadvantageCount = 0;
+    const advantageCount = advantages.suppressed ? 0 : advantages.count + Number(src === 1);
+    const disadvantageCount = disadvantages.suppressed ? 0 : disadvantages.count + Number(src === -1);
     return Math.sign(advantageCount) - Math.sign(disadvantageCount);
   }
 }
