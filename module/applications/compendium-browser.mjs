@@ -942,6 +942,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
   /**
    * Handle form submission with selection.
+   * @this {CompendiumBrowser}
    * @param {SubmitEvent} event          The form submission event.
    * @param {HTMLFormElement} form       The submitted form element.
    * @param {FormDataExtended} formData  The data from the submitted form.
