@@ -649,6 +649,19 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve the action type reflecting changes based on the provided attack mode.
+   * @param {string} [attackMode=""]
+   * @returns {string}
+   */
+  getActionType(attackMode="") {
+    let actionType = this.actionType;
+    if ( (actionType === "mwak") && (attackMode?.startsWith("thrown") || (attackMode === "ranged")) ) return "rwak";
+    return actionType;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the roll parts used to create the damage rolls.
    * @param {Partial<DamageRollProcessConfiguration>} [config={}]
    * @returns {DamageRollProcessConfiguration}
@@ -683,8 +696,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const data = { ...rollData };
 
     if ( index === 0 ) {
-      let actionType = this.actionType;
-      if ( (actionType === "mwak") && rollConfig.attackMode?.startsWith("thrown") ) actionType = "rwak";
+      const actionType = this.getActionType(rollConfig.attackMode);
       const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${actionType}.damage`);
       if ( bonus && !/^0+$/.test(bonus) ) parts.push(bonus);
     }

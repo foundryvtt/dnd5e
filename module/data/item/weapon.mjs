@@ -175,7 +175,8 @@ export default class WeaponData extends ItemDataModel.mixin(
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateReach(source) {
-    if ( !source.properties || !source.range?.value || !source.type?.value || source.range?.reach ) return;
+    if ( !source.properties || !source.range?.value || !source.type?.value
+      || (source.range?.reach !== undefined) ) return;
     if ( (CONFIG.DND5E.weaponTypeMap[source.type.value] !== "melee") || source.properties.includes("thr") ) return;
     // Range of `0` or greater than `10` is always included, and so is range longer than `5` without reach property
     if ( (source.range.value === 0) || (source.range.value > 10)
@@ -354,6 +355,11 @@ export default class WeaponData extends ItemDataModel.mixin(
       });
     }
 
+    else if ( !this.attackType && this.range.value ) {
+      if ( modes.length ) modes.push({ rule: true });
+      modes.push({ value: "ranged", label: CONFIG.DND5E.attackModes.ranged.label });
+    }
+
     return modes;
   }
 
@@ -511,6 +517,21 @@ export default class WeaponData extends ItemDataModel.mixin(
     const improvised = (this.type.value === "improv") && !!actor.getFlag("dnd5e", "tavernBrawlerFeat");
     const isProficient = natural || improvised || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Attack types that can be used with this item by default.
+   * @type {Set<string>}
+   */
+  get validAttackTypes() {
+    const types = new Set();
+    const attackType = this.attackType;
+    if ( (attackType === "melee") || (attackType === null) ) types.add("melee");
+    if ( (attackType === "ranged") || this.properties.has("thr")
+      || ((attackType === null) && this.range.value) ) types.add("ranged");
+    return types;
   }
 
   /* -------------------------------------------- */
