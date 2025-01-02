@@ -16,8 +16,8 @@ const { NumberField, SchemaField } = foundry.data.fields;
  * @property {object} bonuses        Bonuses that modify ability checks and saves.
  * @property {string} bonuses.check  Numeric or dice bonus to ability checks.
  * @property {string} bonuses.save   Numeric or dice bonus to ability saving throws.
- * @property {RollConfigFieldData} check    Properties related to ability checks.
- * @property {RollConfigFieldData} save     Properties related to ability saving throws.
+ * @property {RollConfigData} check    Properties related to ability checks.
+ * @property {RollConfigData} save     Properties related to ability saving throws.
  */
 
 /**
