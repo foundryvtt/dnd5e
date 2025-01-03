@@ -113,6 +113,16 @@ export default class ItemGrantAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  automaticApplicationValue(level) {
+    if ( this.configuration.optional
+      || (this.configuration.spell?.ability?.size > 1)
+      || this.configuration.items.some(i => i.optional) ) return false;
+    return Object.fromEntries(this.configuration.items.map(({ uuid }) => [uuid, true]));
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   restore(level, data) {
     const updates = {};

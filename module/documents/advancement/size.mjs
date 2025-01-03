@@ -79,8 +79,16 @@ export default class SizeAdvancement extends Advancement {
 
   /** @inheritDoc */
   async apply(level, data) {
-    this.actor.updateSource({"system.traits.size": data.size ?? "med"});
+    this.actor.updateSource({ "system.traits.size": data.size ?? this.configuration.sizes.first() ?? "med" });
     this.updateSource({ value: data });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  automaticApplicationValue(level) {
+    if ( this.configuration.sizes > 1 ) return false;
+    return this.configuration.sizes.first() ?? "med";
   }
 
   /* -------------------------------------------- */
