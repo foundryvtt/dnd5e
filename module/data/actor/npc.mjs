@@ -127,20 +127,22 @@ export default class NPCData extends CreatureTemplate {
       resources: new SchemaField({
         legact: new SchemaField({
           value: new NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegActRemaining"
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegendaryAction.Remaining"
           }),
           max: new NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegActMax"
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegendaryAction.Max"
           })
-        }, {label: "DND5E.LegAct"}),
+        }, {label: "DND5E.LegendaryAction.Label"}),
         legres: new SchemaField({
           value: new NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegResRemaining"
+            required: true, nullable: false, integer: true, min: 0, initial: 0,
+            label: "DND5E.LegendaryResistance.Remaining"
           }),
           max: new NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.LegResMax"
+            required: true, nullable: false, integer: true, min: 0, initial: 0,
+            label: "DND5E.LegendaryResistance.Max"
           })
-        }, {label: "DND5E.LegRes"}),
+        }, {label: "DND5E.LegendaryResistance.Label"}),
         lair: new SchemaField({
           value: new BooleanField({required: true, label: "DND5E.LairAct"}),
           initiative: new NumberField({
@@ -413,6 +415,20 @@ export default class NPCData extends CreatureTemplate {
     if ( this.resources.legact.max && (periods.has("encounter") || periods.has("turnEnd")) ) {
       updates.actor["system.resources.legact.value"] = this.resources.legact.max;
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Spend a legendary resistance to change a failed saving throw into a success.
+   * @param {ChatMessage5e} message  The chat message containing the failed save.
+   */
+  async resistSave(message) {
+    if ( this.resources.legres.value === 0 ) throw new Error("No legendary resistances remaining.");
+    if ( message.flags.dnd5e?.roll?.type !== "save" ) throw new Error("Chat message must contain a save roll.");
+    if ( message.flags.dnd5e?.roll?.forceSuccess ) throw new Error("Save has already been resisted.");
+    await this.parent.update({ "system.resources.legres.value": this.resources.legres.value - 1 });
+    await message.setFlag("dnd5e", "roll.forceSuccess", true);
   }
 
   /* -------------------------------------------- */
