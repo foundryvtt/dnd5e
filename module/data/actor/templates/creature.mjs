@@ -1,3 +1,4 @@
+import { simplifyBonus } from "../../../utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
@@ -160,6 +161,109 @@ export default class CreatureTemplate extends CommonTemplate {
         ability: "int",
         bonuses: {check: ""}
       };
+    }
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare modifiers and other values for skills.
+   * @param {object} [options={}]
+   * @param {object} [options.rollData={}]     Roll data used to calculate bonuses.
+   * @param {object} [options.originalSkills]  Original skills data for transformed actors.
+   */
+  prepareSkills({ rollData={}, originalSkills }={}) {
+    const globalBonuses = this.bonuses.abilities;
+    const globalCheckBonus = simplifyBonus(globalBonuses.check, rollData);
+    const globalSkillBonus = simplifyBonus(globalBonuses.skill, rollData);
+    for ( const [id, skillData] of Object.entries(this.skills) ) {
+      this.prepareSkill(id, { skillData, rollData, originalSkills, globalBonuses, globalCheckBonus, globalSkillBonus });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepares data for a specific skill.
+   * @param {string} skillId                     The id of the skill to prepare data for.
+   * @param {object} [options]                   Additional options.
+   * @param {SkillData} [options.skillData]      The base skill data for this skill.
+   *                                             If undefined, `this.system.skill[skillId]` is used.
+   * @param {object} [options.rollData]          RollData for this actor, used to evaluate dice terms in bonuses.
+   *                                             If undefined, `this.getRollData()` is used.
+   * @param {object} [options.originalSkills]    Original skills if actor is polymorphed.
+   *                                             If undefined, the skills of the actor identified by
+   *                                             `this.flags.dnd5e.originalActor` are used.
+   * @param {object} [options.globalBonuses]     Global ability bonuses for this actor.
+   *                                             If undefined, `this.system.bonuses.abilities` is used.
+   * @param {number} [options.globalCheckBonus]  Global check bonus for this actor.
+   *                                             If undefined, `globalBonuses.check` will be evaluated using `rollData`.
+   * @param {number} [options.globalSkillBonus]  Global skill bonus for this actor.
+   *                                             If undefined, `globalBonuses.skill` will be evaluated using `rollData`.
+   * @param {string} [options.ability]           The ability to compute bonuses based on.
+   *                                             If undefined, skillData.ability is used.
+   * @returns {SkillData}
+   */
+  prepareSkill(skillId, {
+    skillData, rollData, originalSkills, globalBonuses,
+    globalCheckBonus, globalSkillBonus, ability
+  }={}) {
+    const flags = this.parent.flags.dnd5e ?? {};
+
+    skillData ??= foundry.utils.deepClone(this.skills[skillId]);
+    rollData ??= this.parent.getRollData();
+    originalSkills ??= flags.originalActor ? game.actors?.get(flags.originalActor)?.system?.skills : null;
+    globalBonuses ??= this.bonuses.abilities ?? {};
+    globalCheckBonus ??= simplifyBonus(globalBonuses.check, rollData);
+    globalSkillBonus ??= simplifyBonus(globalBonuses.skill, rollData);
+    ability ??= skillData.ability;
+    const abilityData = this.abilities[ability];
+    skillData.ability = ability;
+    const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
+
+    // Polymorph Skill Proficiencies
+    if ( originalSkills ) skillData.value = Math.max(skillData.value, originalSkills[skillId].value);
+
+    // Compute modifier
+    const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
+    skillData.effectValue = skillData.value;
+    skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
+    skillData.mod = abilityData?.mod ?? 0;
+    skillData.prof = this.calculateAbilityCheckProficiency(skillData.value, skillData.ability);
+    skillData.value = skillData.proficient = skillData.prof.multiplier;
+    skillData.total = skillData.mod + skillData.bonus;
+    if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
+
+    // Compute passive bonus
+    const passive = flags.observantFeat && CONFIG.DND5E.characterFlags.observantFeat.skills.includes(skillId) ? 5 : 0;
+    const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
+    skillData.passive = 10 + skillData.mod + skillData.bonus + skillData.prof.flat + passive + passiveBonus;
+
+    return skillData;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare tool checks. Mutates the values of system.tools.
+   * @param {object} [options={}]
+   * @param {object} [options.rollData={}]     Roll data used to calculate bonuses.
+   */
+  prepareTools({ rollData={} }={}) {
+    const globalCheckBonus = simplifyBonus(this.bonuses.abilities.check, rollData);
+    for ( const tool of Object.values(this.tools) ) {
+      const ability = this.abilities[tool.ability];
+      const baseBonus = simplifyBonus(tool.bonuses.check, rollData);
+      const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, rollData);
+      tool.effectValue = tool.value;
+      tool.bonus = baseBonus + globalCheckBonus + checkBonusAbl;
+      tool.mod = ability?.mod ?? 0;
+      tool.prof = this.calculateAbilityCheckProficiency(tool.value, tool.ability);
+      tool.total = tool.mod + tool.bonus;
+      if ( Number.isNumeric(tool.prof.term) ) tool.total += tool.prof.flat;
+      tool.value = tool.prof.multiplier;
     }
   }
 

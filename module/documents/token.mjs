@@ -1,4 +1,3 @@
-import { SummonsData } from "../data/item/fields/summons-field.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
 /**
