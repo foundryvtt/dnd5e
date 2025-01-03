@@ -117,7 +117,8 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
         i.checked = this.selected.has(i.uuid);
         i.disabled = !i.checked && context.choices.full;
         const validLevel = (i.system.prerequisites?.level ?? -Infinity) <= this.level;
-        if ( !previouslySelected.has(i.uuid) && validLevel ) items.push(i);
+        const available = !previouslySelected.has(i.uuid) || i.system.prerequisites?.repeatable;
+        if ( available && validLevel ) items.push(i);
       }
       return items;
     }, []);
@@ -197,11 +198,13 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     if ( this.selected.has(item.uuid) ) return false;
 
     // Check to ensure the dropped item hasn't been selected at a lower level
-    for ( const [level, data] of Object.entries(this.advancement.value.added ?? {}) ) {
-      if ( level >= this.level ) continue;
-      if ( Object.values(data).includes(item.uuid) ) {
-        ui.notifications.error("DND5E.AdvancementItemChoicePreviouslyChosenWarning", {localize: true});
-        return null;
+    if ( item.system.prerequisites?.repeatable !== true ) {
+      for ( const [level, data] of Object.entries(this.advancement.value.added ?? {}) ) {
+        if ( level >= this.level ) continue;
+        if ( Object.values(data).includes(item.uuid) ) {
+          ui.notifications.error("DND5E.AdvancementItemChoicePreviouslyChosenWarning", {localize: true});
+          return null;
+        }
       }
     }
 
