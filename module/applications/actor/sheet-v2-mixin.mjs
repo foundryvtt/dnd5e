@@ -263,7 +263,7 @@ export default function ActorSheetV2Mixin(Base) {
 
       // Handle languages
       const languages = this.actor.system.traits?.languages?.labels;
-      if ( languages?.dialects?.length ) traits.languages = languages.dialects.map(label => ({ label }));
+      if ( languages?.languages?.length ) traits.languages = languages.languages.map(label => ({ label }));
       for ( const [key, { label }] of Object.entries(CONFIG.DND5E.communicationTypes) ) {
         const data = this.actor.system.traits?.languages?.communication?.[key];
         if ( !data?.value ) continue;

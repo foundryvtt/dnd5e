@@ -129,20 +129,20 @@ export default class TraitsField {
    */
   static prepareLanguages() {
     const languages = this.traits.languages;
-    const labels = languages.labels = { dialects: [], ranged: [] };
+    const labels = languages.labels = { languages: [], ranged: [] };
 
-    if ( languages.value.has("ALL") ) labels.dialects.push(game.i18n.localize("DND5E.Language.All"));
+    if ( languages.value.has("ALL") ) labels.languages.push(game.i18n.localize("DND5E.Language.All"));
     else {
       const processCategory = (key, data, group) => {
         // If key is within languages, don't bother with children
-        if ( languages.value.has(key) ) (group?.children ?? labels.dialects).push(data.label ?? data);
+        if ( languages.value.has(key) ) (group?.children ?? labels.languages).push(data.label ?? data);
 
         // Display children as part of this group (e.g. "Primordial (Ignan)")
         else if ( data.children ) {
           const topLevel = group === undefined;
           group ??= { label: data.label, children: [] };
           Object.entries(data.children).forEach(([k, d]) => processCategory(k, d, group));
-          if ( topLevel && group.children.length ) labels.dialects.push(
+          if ( topLevel && group.children.length ) labels.languages.push(
             `${data.label} (${game.i18n.getListFormatter({ type: "unit" }).format(group.children)})`
           );
         }
@@ -154,7 +154,7 @@ export default class TraitsField {
       }
     }
 
-    labels.dialects.push(...splitSemicolons(languages.custom));
+    labels.languages.push(...splitSemicolons(languages.custom));
 
     for ( const [key, { label }] of Object.entries(CONFIG.DND5E.communicationTypes) ) {
       const data = languages.communication?.[key];

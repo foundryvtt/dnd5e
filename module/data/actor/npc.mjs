@@ -530,7 +530,7 @@ export default class NPCData extends CreatureTemplate {
 
         // Languages (e.g. `Common, Draconic`)
         languages: [
-          formatter.format(this.traits.languages.labels.dialects),
+          formatter.format(this.traits.languages.labels.languages),
           formatter.format(this.traits.languages.labels.ranged)
         ].filterJoin("; ") || game.i18n.localize("None"),
 
