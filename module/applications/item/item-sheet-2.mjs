@@ -116,12 +116,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     // Limited Uses
     context.data = { uses: context.source.uses };
     context.hasLimitedUses = this.item.system.hasLimitedUses;
-    context.recoveryPeriods = [
-      ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
-        .filter(([, { deprecated }]) => !deprecated)
-        .map(([value, { label }]) => ({ value, label, group: "DND5E.DurationTime" })),
-      { value: "recharge", label: "DND5E.USES.Recovery.Recharge.Label" }
-    ];
+    context.recoveryPeriods = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
     context.recoveryTypes = [
       { value: "recoverAll", label: "DND5E.USES.Recovery.Type.RecoverAll" },
       { value: "loseAll", label: "DND5E.USES.Recovery.Type.LoseAll" },
