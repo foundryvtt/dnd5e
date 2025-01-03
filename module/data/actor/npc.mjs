@@ -420,7 +420,7 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /**
-   * Spent a legendary resistance to change a failed saving throw into a success.
+   * Spend a legendary resistance to change a failed saving throw into a success.
    * @param {ChatMessage5e} message  The chat message containing the failed save.
    */
   async resistSave(message) {

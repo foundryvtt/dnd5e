@@ -619,7 +619,7 @@ export default class ChatMessage5e extends ChatMessage {
     `);
 
     // Otherwise if actor has legendary resistances remaining, display resist button
-    else if ( (actor.system.resources.legres.value > 0) && actor.isOwner ) {
+    else if ( actor.system.resources.legres.value && actor.isOwner ) {
       content.insertAdjacentHTML("beforeend", `
         <div class="card-buttons">
           <button type="button">
