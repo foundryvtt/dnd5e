@@ -409,6 +409,18 @@ export default class NPCData extends CreatureTemplate {
 
   /* -------------------------------------------- */
 
+  /**
+   * Create a list of gear that can be collected from this NPC.
+   * @type {Item5e[]}
+   */
+  getGear() {
+    return this.parent.items
+      .filter(i => i.system.quantity && (i.system.type?.value !== "natural"))
+      .sort((lhs, rhs) => lhs.sort - rhs.sort);
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   async recoverCombatUses(periods, updates) {
     // Reset legendary actions at the start of a combat encounter or at the end of the creature's turn
@@ -509,8 +521,9 @@ export default class NPCData extends CreatureTemplate {
           formatNumber(this.attributes.prof, { signDisplay: "always" })})`,
 
         // Gear
-        // TODO: Handle once gear is implemented by system
-        gear: "",
+        gear: formatter.format(
+          this.getGear().map(i => i.system.quantity > 1 ? `${i.name} (${formatNumber(i.system.quantity)})` : i.name)
+        ),
 
         // Initiative (e.g. `+0 (10)`)
         initiative: `${formatNumber(this.attributes.init.total, { signDisplay: "always" })} (${
