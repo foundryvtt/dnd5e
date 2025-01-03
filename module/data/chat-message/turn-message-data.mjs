@@ -1,11 +1,11 @@
 import { formatNumber, getHumanReadableAttributeLabel } from "../../utils.mjs";
 import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
-import ActorDeltasField from "./fields/deltas-field.mjs";
+import { ActorDeltasField } from "./fields/deltas-field.mjs";
 
 const { DocumentIdField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @typedef {import("./fields/deltas-field.mjs").ActorDeltasData} ActorDeltasData
+ * @import { ActorDeltasData } from "./fields/deltas-field.mjs";
  */
 
 /**
@@ -79,7 +79,7 @@ export default class TurnMessageData extends ChatMessageDataModel {
   /* -------------------------------------------- */
 
   /** @override */
-  async _prepareContext() {
+  async _prepareContext(options) {
     const context = {
       actor: this.actor,
       combat: this.combat,
@@ -100,9 +100,9 @@ export default class TurnMessageData extends ChatMessageDataModel {
 
     context.deltas = [
       ...this.deltas.actor.map(d => processDelta(this.actor, d)),
-      ...Object.entries(this.deltas.item).map(([id, deltas]) =>
+      ...Object.entries(this.deltas.item).flatMap(([id, deltas]) =>
         deltas.map(d => processDelta(this.actor.items.get(id), d))
-      ).flat()
+      )
     ];
     return context;
   }

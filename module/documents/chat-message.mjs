@@ -41,7 +41,7 @@ export default class ChatMessage5e extends ChatMessage {
 
   /** @inheritDoc */
   get isRoll() {
-    if ( (this.system?.isRoll !== undefined) ) return this.system.isRoll;
+    if ( this.system?.isRoll !== undefined ) return this.system.isRoll;
     return super.isRoll && !this.flags.dnd5e?.rest;
   }
 
@@ -101,12 +101,12 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getHTML() {
-    const html = await super.getHTML();
+  async getHTML(options={}) {
+    const html = await super.getHTML(options);
     const element = (html instanceof HTMLElement) ? html : html[0];
 
     if ( foundry.utils.getType(this.system?.getHTML) === "function" ) {
-      await this.system.getHTML(element);
+      await this.system.getHTML(element, options);
       return html;
     }
 

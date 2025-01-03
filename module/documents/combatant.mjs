@@ -1,7 +1,7 @@
-import ActorDeltasField from "../data/chat-message/fields/deltas-field.mjs";
+import { ActorDeltasField } from "../data/chat-message/fields/deltas-field.mjs";
 
 /**
- * @typedef {import("../data/chat-message/fields/deltas-field.mjs").ActorDeltasData} ActorDeltasData
+ * @import { ActorDeltasData } from "../data/chat-message/fields/deltas-field.mjs";
  */
 
 /**

@@ -11,7 +11,7 @@ const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.field
 /**
  * A field for storing deltas made to an actor or embedded items.
  */
-export default class ActorDeltasField extends SchemaField {
+export class ActorDeltasField extends SchemaField {
   constructor() {
     super({
       actor: new ArrayField(new IndividualDeltaField()),

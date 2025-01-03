@@ -8,7 +8,7 @@
  * Abstract base class to add some shared functionality to all of the system's custom chat message types.
  * @abstract
  */
-export default class ChatMessageDataModel extends foundry.abstract.DataModel {
+export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel {
 
   /**
    * Metadata for this chat message type.
@@ -40,9 +40,10 @@ export default class ChatMessageDataModel extends foundry.abstract.DataModel {
   /**
    * Perform any changes to the chat message's element before displaying in the list.
    * @param {HTMLElement} element  Element representing the entire chat message.
+   * @param {object} options       Options forwarded to the render function.
    */
-  async getHTML(element) {
-    const rendered = await this.render();
+  async getHTML(element, options) {
+    const rendered = await this.render(options);
     if ( rendered ) element.querySelector(".message-content").innerHTML = rendered;
     this.parent._enrichChatCard(element);
 
@@ -56,21 +57,23 @@ export default class ChatMessageDataModel extends foundry.abstract.DataModel {
 
   /**
    * Render the contents of this chat message.
-   * @returns {string}
+   * @param {object} options  Rendering options.
+   * @returns {Promise<string>}
    */
-  async render() {
+  async render(options) {
     if ( !this.template ) return "";
-    return renderTemplate(this.template, await this._prepareContext());
+    return renderTemplate(this.template, await this._prepareContext(options));
   }
 
   /* -------------------------------------------- */
 
   /**
    * Prepare application rendering context data for a given render request.
+   * @param {object} options  Rendering options.
    * @returns {Promise<ApplicationRenderContext>}   Context data for the render operation.
    * @protected
    */
-  async _prepareContext() {
+  async _prepareContext(options) {
     return {};
   }
 
