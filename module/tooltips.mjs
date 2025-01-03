@@ -126,12 +126,13 @@ export default class Tooltips5e {
     const abilityConfig = CONFIG.DND5E.abilities[ability ?? skillConfig.ability];
 
     let label;
+    const abilityLabel = ability === "spellcasting" ? game.i18n.localize("DND5E.Spellcasting") : abilityConfig.label;
     if ( skillConfig ) {
-      label = game.i18n.format("DND5E.SkillPassiveSpecificHint", { skill: skillConfig.label, ability: abilityConfig.label });
+      label = game.i18n.format("DND5E.SkillPassiveSpecificHint", { skill: skillConfig.label, ability: abilityLabel });
     } else {
       // If no skill was provided, we're doing a passive ability check.
       // This isn't technically a thing in the rules, but we can support it anyway if people want to use it.
-      label = game.i18n.format("DND5E.SkillPassiveHint", { skill: abilityConfig.label });
+      label = game.i18n.format("DND5E.SkillPassiveHint", { skill: abilityLabel });
     }
 
     const party = game.settings.get("dnd5e", "primaryParty")?.actor;
@@ -143,17 +144,18 @@ export default class Tooltips5e {
     const context = { label, party: [] };
     for ( const member of party.system.members ) {
       const systemData = member.actor?.system;
+      const abi = ability === "spellcasting" ? member.actor?.system.attributes?.spellcasting : ability;
       let passive;
-      if ( skill && (!ability || (ability === skillConfig.ability)) ) {
+      if ( skill && (!abi || (abi === skillConfig.ability)) ) {
         // Default passive skill check
         passive = systemData?.skills?.[skill]?.passive;
       } else if ( skill ) {
         // Passive ability check with custom ability
-        const customSkillData = member.actor?._prepareSkill(skill, { ability });
+        const customSkillData = member.actor?._prepareSkill(skill, { ability: abi });
         passive = customSkillData.passive;
       } else {
         // Passive ability check
-        const abilityMod = systemData?.abilities?.[ability]?.mod;
+        const abilityMod = systemData?.abilities?.[abi]?.mod;
         if ( abilityMod !== undefined ) passive = 10 + abilityMod;
       }
 
