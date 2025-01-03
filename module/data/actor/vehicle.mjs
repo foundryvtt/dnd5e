@@ -1,5 +1,7 @@
 import FormulaField from "../fields/formula-field.mjs";
 import SourceField from "../shared/source-field.mjs";
+import DamageTraitField from "./fields/damage-trait-field.mjs";
+import SimpleTraitField from "./fields/simple-trait-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CommonTemplate from "./templates/common.mjs";
 import DetailsFields from "./templates/details.mjs";
@@ -117,8 +119,8 @@ export default class VehicleData extends CommonTemplate {
       traits: new SchemaField({
         ...TraitsFields.common,
         size: new StringField({ required: true, initial: "lg", label: "DND5E.Size" }),
-        di: TraitsFields.makeDamageTrait({ label: "DND5E.DamImm" }, { initial: ["poison", "psychic"] }),
-        ci: TraitsFields.makeSimpleTrait({ label: "DND5E.ConImm" }, { initial: [
+        di: new DamageTraitField({}, { label: "DND5E.DamImm", initialValue: ["poison", "psychic"] }),
+        ci: new SimpleTraitField({}, { label: "DND5E.ConImm", initialValue: [
           "blinded", "charmed", "deafened", "frightened", "paralyzed",
           "petrified", "poisoned", "stunned", "unconscious"
         ] }),

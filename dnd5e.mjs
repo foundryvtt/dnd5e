@@ -445,7 +445,7 @@ Hooks.once("i18nInit", () => {
       DND5E: {
         "Feature.Species": game.i18n.localize("DND5E.Feature.SpeciesLegacy"),
         FlagsAlertHint: game.i18n.localize("DND5E.FlagsAlertHintLegacy"),
-        LanguagesExotic: game.i18n.localize("DND5E.LanguagesExoticLegacy"),
+        "Language.Category.Rare": game.i18n.localize("DND5E.Language.Category.Exotic"),
         LongRestHint: game.i18n.localize("DND5E.LongRestHintLegacy"),
         LongRestHintGroup: game.i18n.localize("DND5E.LongRestHintGroupLegacy"),
         RacialTraits: game.i18n.localize("DND5E.RacialTraitsLegacy"),

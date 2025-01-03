@@ -3660,47 +3660,47 @@ DND5E.bloodied = {
 
 /**
  * Languages a character can learn.
- * @enum {string}
+ * @enum {object}
  */
 DND5E.languages = {
   standard: {
-    label: "DND5E.LanguagesStandard",
+    label: "DND5E.Language.Category.Standard",
     children: {
-      common: "DND5E.LanguagesCommon",
-      draconic: "DND5E.LanguagesDraconic",
-      dwarvish: "DND5E.LanguagesDwarvish",
-      elvish: "DND5E.LanguagesElvish",
-      giant: "DND5E.LanguagesGiant",
-      gnomish: "DND5E.LanguagesGnomish",
-      goblin: "DND5E.LanguagesGoblin",
-      halfling: "DND5E.LanguagesHalfling",
-      orc: "DND5E.LanguagesOrc",
-      sign: "DND5E.LanguagesCommonSign"
+      common: "DND5E.Language.Language.Common",
+      draconic: "DND5E.Language.Language.Draconic",
+      dwarvish: "DND5E.Language.Language.Dwarvish",
+      elvish: "DND5E.Language.Language.Elvish",
+      giant: "DND5E.Language.Language.Giant",
+      gnomish: "DND5E.Language.Language.Gnomish",
+      goblin: "DND5E.Language.Language.Goblin",
+      halfling: "DND5E.Language.Language.Halfling",
+      orc: "DND5E.Language.Language.Orc",
+      sign: "DND5E.Language.Language.CommonSign"
     }
   },
   exotic: {
-    label: "DND5E.LanguagesExotic",
+    label: "DND5E.Language.Category.Rare",
     children: {
-      aarakocra: "DND5E.LanguagesAarakocra",
-      abyssal: "DND5E.LanguagesAbyssal",
-      cant: "DND5E.LanguagesThievesCant",
-      celestial: "DND5E.LanguagesCelestial",
-      deep: "DND5E.LanguagesDeepSpeech",
-      druidic: "DND5E.LanguagesDruidic",
-      gith: "DND5E.LanguagesGith",
-      gnoll: "DND5E.LanguagesGnoll",
-      infernal: "DND5E.LanguagesInfernal",
+      aarakocra: "DND5E.Language.Language.Aarakocra",
+      abyssal: "DND5E.Language.Language.Abyssal",
+      cant: "DND5E.Language.Language.ThievesCant",
+      celestial: "DND5E.Language.Language.Celestial",
+      deep: "DND5E.Language.Language.DeepSpeech",
+      druidic: "DND5E.Language.Language.Druidic",
+      gith: "DND5E.Language.Language.Gith",
+      gnoll: "DND5E.Language.Language.Gnoll",
+      infernal: "DND5E.Language.Language.Infernal",
       primordial: {
-        label: "DND5E.LanguagesPrimordial",
+        label: "DND5E.Language.Language.Primordial",
         children: {
-          aquan: "DND5E.LanguagesAquan",
-          auran: "DND5E.LanguagesAuran",
-          ignan: "DND5E.LanguagesIgnan",
-          terran: "DND5E.LanguagesTerran"
+          aquan: "DND5E.Language.Language.Aquan",
+          auran: "DND5E.Language.Language.Auran",
+          ignan: "DND5E.Language.Language.Ignan",
+          terran: "DND5E.Language.Language.Terran"
         }
       },
-      sylvan: "DND5E.LanguagesSylvan",
-      undercommon: "DND5E.LanguagesUndercommon"
+      sylvan: "DND5E.Language.Language.Sylvan",
+      undercommon: "DND5E.Language.Language.Undercommon"
     }
   }
 };
@@ -3708,6 +3708,19 @@ preLocalize("languages", { key: "label" });
 preLocalize("languages.standard.children", { key: "label", sort: true });
 preLocalize("languages.exotic.children", { key: "label", sort: true });
 preLocalize("languages.exotic.children.primordial.children", { sort: true });
+
+/* -------------------------------------------- */
+
+/**
+ * Communication types that take ranges such as telepathy.
+ * @enum {{ label: string }}
+ */
+DND5E.communicationTypes = {
+  telepathy: {
+    label: "DND5E.Language.Communication.Telepathy"
+  }
+};
+preLocalize("communicationTypes", { key: "label" });
 
 /* -------------------------------------------- */
 

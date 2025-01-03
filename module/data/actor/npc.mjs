@@ -1,7 +1,7 @@
 import Actor5e from "../../documents/actor/actor.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { defaultUnits, formatCR, formatNumber, splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, formatCR, formatDistance, formatNumber, splitSemicolons } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
@@ -478,10 +478,8 @@ export default class NPCData extends CreatureTemplate {
    */
   async _prepareEmbedContext() {
     const formatter = game.i18n.getListFormatter({ type: "unit" });
-    const prepareMeasured = (value, units, label) => {
-      value = `${formatNumber(value)} ${units}.`;
-      return label ? `${label} ${value}` : value;
-    };
+    const prepareMeasured = (value, units, label) => label ? `${label} ${formatDistance(value, units)}`
+      : formatDistance(value, units);
     const prepareTrait = ({ value, custom }, trait) => formatter.format([
       ...Array.from(value).map(t => Trait.keyLabel(t, { trait })).filter(_ => _),
       ...splitSemicolons(custom ?? "")
@@ -530,7 +528,13 @@ export default class NPCData extends CreatureTemplate {
           formatNumber(this.attributes.init.score)})`,
 
         // Languages (e.g. `Common, Draconic`)
-        languages: prepareTrait(this.traits.languages, "languages") || game.i18n.localize("None"),
+        languages: [
+          prepareTrait(this.traits.languages, "languages"),
+          ...Object.entries(CONFIG.DND5E.communicationTypes).map(([key, { label }]) => {
+            const data = this.traits.languages.communication[key];
+            return data?.value ? `${label} ${formatDistance(data.value, data.units)}`.toLowerCase() : null;
+          })
+        ].filterJoin("; ") || game.i18n.localize("None"),
 
         // Senses (e.g. `Blindsight 60 ft., Darkvision 120 ft.; Passive Perception 27`)
         senses: [

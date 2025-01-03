@@ -5,6 +5,7 @@ import FormulaField from "../fields/formula-field.mjs";
 import LocalDocumentField from "../fields/local-document-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
+import SimpleTraitField from "./fields/simple-trait-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
@@ -13,6 +14,10 @@ import TraitsFields from "./templates/traits.mjs";
 const {
   ArrayField, BooleanField, HTMLField, IntegerSortField, NumberField, SchemaField, SetField, StringField
 } = foundry.data.fields;
+
+/**
+ * @import { SimpleTraitData } from "./fields/simple-trait.mjs";
+ */
 
 /**
  * @typedef {object} ActorFavorites5e
@@ -152,15 +157,13 @@ export default class CharacterData extends CreatureTemplate {
       traits: new SchemaField({
         ...TraitsFields.common,
         ...TraitsFields.creature,
-        weaponProf: TraitsFields.makeSimpleTrait({ label: "DND5E.TraitWeaponProf" }, {
-          extraFields: {
-            mastery: new SchemaField({
-              value: new SetField(new StringField()),
-              bonus: new SetField(new StringField())
-            })
-          }
-        }),
-        armorProf: TraitsFields.makeSimpleTrait({ label: "DND5E.TraitArmorProf" })
+        weaponProf: new SimpleTraitField({
+          mastery: new SchemaField({
+            value: new SetField(new StringField()),
+            bonus: new SetField(new StringField())
+          })
+        }, { label: "DND5E.TraitWeaponProf" }),
+        armorProf: new SimpleTraitField({}, { label: "DND5E.TraitArmorProf" })
       }, { label: "DND5E.Traits" }),
       resources: new SchemaField({
         primary: makeResourceField({ label: "DND5E.ResourcePrimary" }),
