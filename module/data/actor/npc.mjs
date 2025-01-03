@@ -533,8 +533,8 @@ export default class NPCData extends CreatureTemplate {
           ...Object.entries(CONFIG.DND5E.communicationTypes).map(([key, { label }]) => {
             const data = this.traits.languages.communication[key];
             return data?.value ? `${label} ${formatDistance(data.value, data.units)}`.toLowerCase() : null;
-          }).filter(_ => _)
-        ].join("; ") || game.i18n.localize("None"),
+          })
+        ].filterJoin("; ") || game.i18n.localize("None"),
 
         // Senses (e.g. `Blindsight 60 ft., Darkvision 120 ft.; Passive Perception 27`)
         senses: [

@@ -384,32 +384,8 @@
             <div class="sidebar">
 
                 {{!-- Speed --}}
-                <div class="pills-group {{#unless speed}}empty{{/unless}}">
-                    <h3 class="icon">
-                        <i class="fas fa-shoe-prints"></i>
-                        <span class="roboto-upper">{{ localize "DND5E.Speed" }}</span>
-                        {{#if editable}}
-                        <a class="config-button" data-action="movement" data-tooltip="DND5E.MovementConfig"
-                           aria-label="{{ localize "DND5E.MovementConfig" }}">
-                            <i class="fas fa-cog"></i>
-                        </a>
-                        {{/if}}
-                    </h3>
-                    <ul class="pills">
-                        {{#each speed}}
-                        <li class="pill">
-                            {{#each icons}}
-                            <i class="{{ icon }}" data-tooltip="{{ label }}" aria-label="{{ label }}"></i>
-                            {{/each}}
-                            <span class="label">{{ label }}</span>
-                            {{#if value}}
-                            <span class="separator">&vert;</span>
-                            <span class="value">{{ value }}</span>
-                            {{/if}}
-                        </li>
-                        {{/each}}
-                    </ul>
-                </div>
+                {{> "dnd5e.actor-trait-pills" values=speed key="speed" icon="fas fa-shoe-prints"
+                    label="DND5E.Speed" configAction="movement" }}
 
                 {{!-- Skills --}}
                 <div class="pills-group {{#unless skills}}empty{{/unless}}">
@@ -437,29 +413,8 @@
                 </div>
 
                 {{!-- Senses --}}
-                <div class="pills-group {{#unless senses}}empty{{/unless}}">
-                    <h3 class="icon">
-                        <i class="fas fa-eye"></i>
-                        <span class="roboto-upper">{{ localize "DND5E.Senses" }}</span>
-                        {{#if editable}}
-                        <a class="config-button" data-action="senses" data-tooltip="DND5E.SensesConfig"
-                           aria-label="{{ localize "DND5E.SensesConfig" }}">
-                            <i class="fas fa-cog"></i>
-                        </a>
-                        {{/if}}
-                    </h3>
-                    <ul class="pills">
-                        {{#each senses}}
-                        <li class="pill">
-                            <span class="label">{{ label }}</span>
-                            {{#if value}}
-                            <span class="separator">&vert;</span>
-                            <span class="value">{{ value }}</span>
-                            {{/if}}
-                        </li>
-                        {{/each}}
-                    </ul>
-                </div>
+                {{> "dnd5e.actor-trait-pills" values=senses key="senses" icon="fas fa-eye"
+                    label="DND5E.Senses" configAction="senses" }}
 
                 {{!-- Resistances --}}
                 {{> "dnd5e.actor-trait-pills" values=traits.dr key="dr" color="green" icon="fas fa-shield-halved"

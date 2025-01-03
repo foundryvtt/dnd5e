@@ -184,29 +184,8 @@
 
         {{!-- Senses --}}
         {{#if (or editable senses)}}
-        <div class="pills-group {{#unless senses}}empty{{/unless}}">
-            <h3 class="icon">
-                <i class="fas fa-eye"></i>
-                <span class="roboto-upper">{{ localize "DND5E.Senses" }}</span>
-                {{#if editable}}
-                <a class="config-button" data-action="senses" data-tooltip="DND5E.SensesConfig"
-                   aria-label="{{ localize "DND5E.SensesConfig" }}">
-                    <i class="fas fa-cog"></i>
-                </a>
-                {{/if}}
-            </h3>
-            <ul class="pills">
-                {{#each senses}}
-                <li class="pill">
-                    <span class="label">{{ label }}</span>
-                    {{#if value}}
-                    <span class="separator">&vert;</span>
-                    <span class="value">{{ value }}</span>
-                    {{/if}}
-                </li>
-                {{/each}}
-            </ul>
-        </div>
+        {{> "dnd5e.actor-trait-pills" values=senses key="senses" icon="fas fa-eye"
+            label="DND5E.Senses" configAction="senses" }}
         {{/if}}
 
         {{!-- Resistances --}}

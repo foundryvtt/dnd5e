@@ -264,9 +264,9 @@ export default function ActorSheetV2Mixin(Base) {
       // Display ranged communication
       for ( const [key, { label }] of Object.entries(CONFIG.DND5E.communicationTypes) ) {
         const data = this.actor.system.traits?.languages?.communication?.[key];
-        if ( !data?.value ) return;
+        if ( !data?.value ) continue;
         traits.languages ??= [];
-        traits.languages.push({ label: `${label} ${formatDistance(data.value, data.units)}` });
+        traits.languages.push({ label, value: data.value });
       }
 
       // Display weapon masteries

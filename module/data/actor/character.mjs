@@ -16,7 +16,7 @@ const {
 } = foundry.data.fields;
 
 /**
- * @typedef {import("./fields/simple-trait.mjs").SimpleTraitData} SimpleTraitData
+ * @import { SimpleTraitData } from "./fields/simple-trait.mjs";
  */
 
 /**

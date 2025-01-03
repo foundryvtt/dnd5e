@@ -7,8 +7,8 @@ import SimpleTraitField from "../fields/simple-trait-field.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
- * @typedef {import("../fields/damage-trait.mjs").DamageTraitData} DamageTraitData
- * @typedef {import("../fields/simple-trait.mjs").SimpleTraitData} SimpleTraitData
+ * @import { DamageTraitData } from "./fields/damage-trait.mjs";
+ * @import { SimpleTraitData } from "./fields/simple-trait.mjs";
  */
 
 /**

@@ -46,14 +46,4 @@ export default class LanguagesConfig extends TraitsConfig {
 
     return context;
   }
-
-  /* -------------------------------------------- */
-  /*  Form Submission                             */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _processFormData(event, form, formData) {
-    const submitData = super._processFormData(event, form, formData);
-    return submitData;
-  }
 }

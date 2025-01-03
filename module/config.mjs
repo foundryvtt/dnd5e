@@ -3666,41 +3666,41 @@ DND5E.languages = {
   standard: {
     label: "DND5E.Language.Category.Standard",
     children: {
-      common: "DND5E.Language.Dialect.Common",
-      draconic: "DND5E.Language.Dialect.Draconic",
-      dwarvish: "DND5E.Language.Dialect.Dwarvish",
-      elvish: "DND5E.Language.Dialect.Elvish",
-      giant: "DND5E.Language.Dialect.Giant",
-      gnomish: "DND5E.Language.Dialect.Gnomish",
-      goblin: "DND5E.Language.Dialect.Goblin",
-      halfling: "DND5E.Language.Dialect.Halfling",
-      orc: "DND5E.Language.Dialect.Orc",
-      sign: "DND5E.Language.Dialect.CommonSign"
+      common: "DND5E.Language.Language.Common",
+      draconic: "DND5E.Language.Language.Draconic",
+      dwarvish: "DND5E.Language.Language.Dwarvish",
+      elvish: "DND5E.Language.Language.Elvish",
+      giant: "DND5E.Language.Language.Giant",
+      gnomish: "DND5E.Language.Language.Gnomish",
+      goblin: "DND5E.Language.Language.Goblin",
+      halfling: "DND5E.Language.Language.Halfling",
+      orc: "DND5E.Language.Language.Orc",
+      sign: "DND5E.Language.Language.CommonSign"
     }
   },
   exotic: {
     label: "DND5E.Language.Category.Rare",
     children: {
-      aarakocra: "DND5E.Language.Dialect.Aarakocra",
-      abyssal: "DND5E.Language.Dialect.Abyssal",
-      cant: "DND5E.Language.Dialect.ThievesCant",
-      celestial: "DND5E.Language.Dialect.Celestial",
-      deep: "DND5E.Language.Dialect.DeepSpeech",
-      druidic: "DND5E.Language.Dialect.Druidic",
-      gith: "DND5E.Language.Dialect.Gith",
-      gnoll: "DND5E.Language.Dialect.Gnoll",
-      infernal: "DND5E.Language.Dialect.Infernal",
+      aarakocra: "DND5E.Language.Language.Aarakocra",
+      abyssal: "DND5E.Language.Language.Abyssal",
+      cant: "DND5E.Language.Language.ThievesCant",
+      celestial: "DND5E.Language.Language.Celestial",
+      deep: "DND5E.Language.Language.DeepSpeech",
+      druidic: "DND5E.Language.Language.Druidic",
+      gith: "DND5E.Language.Language.Gith",
+      gnoll: "DND5E.Language.Language.Gnoll",
+      infernal: "DND5E.Language.Language.Infernal",
       primordial: {
-        label: "DND5E.Language.Dialect.Primordial",
+        label: "DND5E.Language.Language.Primordial",
         children: {
-          aquan: "DND5E.Language.Dialect.Aquan",
-          auran: "DND5E.Language.Dialect.Auran",
-          ignan: "DND5E.Language.Dialect.Ignan",
-          terran: "DND5E.Language.Dialect.Terran"
+          aquan: "DND5E.Language.Language.Aquan",
+          auran: "DND5E.Language.Language.Auran",
+          ignan: "DND5E.Language.Language.Ignan",
+          terran: "DND5E.Language.Language.Terran"
         }
       },
-      sylvan: "DND5E.Language.Dialect.Sylvan",
-      undercommon: "DND5E.Language.Dialect.Undercommon"
+      sylvan: "DND5E.Language.Language.Sylvan",
+      undercommon: "DND5E.Language.Language.Undercommon"
     }
   }
 };
