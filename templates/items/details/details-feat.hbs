@@ -12,9 +12,9 @@
     {{/if}}
 
     {{!-- Feature Prerequisites --}}
-    {{ formField fields.prerequisites.fields.level value=source.prerequisites.level localize=true step=1
-                 label="DND5E.Prerequisites.FIELDS.prerequisites.level.label"
-                 hint="DND5E.Prerequisites.FIELDS.prerequisites.level.hint" }}
+    {{ formField fields.prerequisites.fields.level value=source.prerequisites.level }}
+    {{ formField fields.prerequisites.fields.repeatable value=source.prerequisites.repeatable
+                 input=inputs.createCheckboxInput }}
 
     {{!-- Feature Properties --}}
     {{ formField fields.properties options=properties.options label="DND5E.ItemFeatureProperties" localize=true

@@ -158,7 +158,6 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /** @inheritDoc */
   async _updateObject(event, formData) {
-    // TODO: Pass through retained feat data
     await this.advancement.apply(this.level, {
       type: this.feat ? "feat" : "asi",
       assignments: this.assignments,
