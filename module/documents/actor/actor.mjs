@@ -1759,7 +1759,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async rollDeathSave(config={}, dialog={}, message={}) {
     let oldFormat = false;
-    const death = this.system.attributes.death;
+    const death = this.system.attributes?.death;
     if ( !death ) throw new Error(`Actors of the type '${this.type}' don't support death saves.`);
 
     // Handle deprecated config object
@@ -1795,6 +1795,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       parts.push("@prof");
       data.prof = new Proficiency(this.system.attributes.prof, 1).term;
     }
+
+    // Death save bonus
+    if ( death.bonuses.save ) parts.push(death.bonuses.save);
 
     const initialRoll = config.rolls?.pop();
     if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
