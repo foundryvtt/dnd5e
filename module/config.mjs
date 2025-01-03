@@ -922,7 +922,7 @@ DND5E.abilityActivationTypes = {
   minute: DND5E.timePeriods.minute,
   hour: DND5E.timePeriods.hour,
   day: DND5E.timePeriods.day,
-  legendary: "DND5E.LegendaryActionLabel",
+  legendary: "DND5E.LegendaryAction.Label",
   mythic: "DND5E.MythicActionLabel",
   lair: "DND5E.LairActionLabel",
   crew: "DND5E.VehicleCrewAction"
@@ -971,7 +971,7 @@ DND5E.activityActivationTypes = {
     scalar: true
   },
   legendary: {
-    label: "DND5E.LegendaryActionLabel",
+    label: "DND5E.LegendaryAction.Label",
     group: "DND5E.ACTIVATION.Category.Monster",
     scalar: true
   },

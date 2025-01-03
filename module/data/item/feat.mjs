@@ -98,7 +98,7 @@ export default class FeatData extends ItemDataModel.mixin(
 
     let label;
     const activation = this.activities.contents[0]?.activation.type;
-    if ( activation === "legendary" ) label = game.i18n.localize("DND5E.LegendaryActionLabel");
+    if ( activation === "legendary" ) label = game.i18n.localize("DND5E.LegendaryAction.Label");
     else if ( activation === "lair" ) label = game.i18n.localize("DND5E.LairActionLabel");
     else if ( activation === "action" && this.hasAttack ) label = game.i18n.localize("DND5E.Attack");
     else if ( activation ) label = game.i18n.localize("DND5E.Action");

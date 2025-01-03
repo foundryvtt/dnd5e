@@ -198,7 +198,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
         { key: "action", label: "DND5E.Action" },
         { key: "bonus", label: "DND5E.BonusAction" },
         { key: "reaction", label: "DND5E.Reaction" },
-        { key: "legendary", label: "DND5E.LegendaryActionLabel" },
+        { key: "legendary", label: "DND5E.LegendaryAction.Label" },
         { key: "lair", label: "DND5E.LairActionLabel" }
       ]
     };
