@@ -1,16 +1,20 @@
 import Advancement from "../../documents/advancement/advancement.mjs";
+import Application5e from "../api/application.mjs";
 
 /**
  * Internal type used to manage each step within the advancement process.
  *
  * @typedef {object} AdvancementStep
  * @property {string} type                Step type from "forward", "reverse", "restore", or "delete".
- * @property {AdvancementFlow} [flow]     Flow object for the advancement being applied by this step.
+ * @property {AdvancementFlow} [flow]     Flow object for the advancement being applied by this step. In the case of
+ *                                        "delete" steps, this flow indicates the advancement flow that originally
+ *                                        deleted the item.
  * @property {Item5e} [item]              For "delete" steps only, the item to be removed.
  * @property {object} [class]             Contains data on class if step was triggered by class level change.
  * @property {Item5e} [class.item]        Class item that caused this advancement step.
  * @property {number} [class.level]       Level the class should be during this step.
  * @property {boolean} [automatic=false]  Should the manager attempt to apply this step without user interaction?
+ * @property {boolean} [synthetic=false]  Was this step created as a result of an item introduced or deleted?
  */
 
 /**
@@ -54,6 +58,8 @@ export default class AdvancementManager extends Application {
      * @private
      */
     this._advancing = false;
+
+    if ( this.options.showVisualizer ) this.#visualizer = new AdvancementVisualizer({ manager: this });
   }
 
   /* -------------------------------------------- */
@@ -64,7 +70,8 @@ export default class AdvancementManager extends Application {
       classes: ["dnd5e", "advancement", "flow"],
       template: "systems/dnd5e/templates/advancement/advancement-manager.hbs",
       width: 460,
-      height: "auto"
+      height: "auto",
+      showVisualizer: false
     });
   }
 
@@ -118,6 +125,14 @@ export default class AdvancementManager extends Application {
     const nextIndex = this._stepIndex === null ? 0 : this._stepIndex + 1;
     return this.steps[nextIndex] ?? null;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Side application for debugging advancement steps.
+   * @type {AdvancementVisualizer}
+   */
+  #visualizer;
 
   /* -------------------------------------------- */
   /*  Factory Methods                             */
@@ -373,15 +388,25 @@ export default class AdvancementManager extends Application {
 
   /**
    * Creates advancement flows for all advancements at a specific level.
-   * @param {Item5e} item          Item that has advancement.
-   * @param {number} level         Level in question.
-   * @returns {AdvancementFlow[]}  Created flow applications.
+   * @param {Item5e} item                               Item that has advancement.
+   * @param {number} level                              Level in question.
+   * @param {object} [options={}]
+   * @param {AdvancementStep[]} [options.findExisting]  Find if an existing matching flow exists.
+   * @returns {AdvancementFlow[]}                       Created or matched flow applications.
    * @protected
    */
-  static flowsForLevel(item, level) {
+  static flowsForLevel(item, level, { findExisting }={}) {
+    const match = (advancement, step) => (step.flow?.item.id === item.id)
+      && (step.flow?.advancement.id === advancement.id)
+      && (step.flow?.level === level);
     return (item?.advancement.byLevel[level] ?? [])
       .filter(a => a.appliesToClass)
-      .map(a => new a.constructor.metadata.apps.flow(item, a.id, level));
+      .map(a => {
+        const existing = findExisting?.find(s => match(a, s))?.flow;
+        if ( !existing ) return new a.constructor.metadata.apps.flow(item, a.id, level);
+        existing.item = item;
+        return existing;
+      });
   }
 
   /* -------------------------------------------- */
@@ -466,6 +491,7 @@ export default class AdvancementManager extends Application {
   async _render(force, options) {
     await super._render(force, options);
     if ( (this._state !== Application.RENDER_STATES.RENDERED) || !this.step ) return;
+    this.#visualizer?.render({ force: true });
 
     // Render the step
     this.step.flow._element = null;
@@ -513,7 +539,10 @@ export default class AdvancementManager extends Application {
           close: {
             icon: '<i class="fas fa-times"></i>',
             label: game.i18n.localize("DND5E.AdvancementManagerCloseButtonStop"),
-            callback: () => super.close(options)
+            callback: () => {
+              this.#visualizer?.close();
+              super.close(options);
+            }
           },
           continue: {
             icon: '<i class="fas fa-chevron-right"></i>',
@@ -523,6 +552,7 @@ export default class AdvancementManager extends Application {
         default: "close"
       }).render(true);
     }
+    this.#visualizer?.close();
     await super.close(options);
   }
 
@@ -542,16 +572,22 @@ export default class AdvancementManager extends Application {
       do {
         const flow = this.step.flow;
         const type = this.step.type;
+        const preEmbeddedItems = Array.from(this.clone.items);
 
         // Apply changes based on step type
-        if ( (type === "delete") && this.step.item ) this.clone.items.delete(this.step.item.id);
-        else if ( (type === "delete") && this.step.advancement ) {
+        if ( (type === "delete") && this.step.item ) {
+          if ( this.step.flow?.retainedData?.retainedItems ) {
+            this.step.flow.retainedData.retainedItems[this.step.item.flags.dnd5e?.sourceId] = this.step.item.toObject();
+          }
+          this.clone.items.delete(this.step.item.id);
+        } else if ( (type === "delete") && this.step.advancement ) {
           this.step.advancement.item.deleteAdvancement(this.step.advancement.id, { source: true });
         }
         else if ( type === "restore" ) await flow.advancement.restore(flow.level, flow.retainedData);
         else if ( type === "reverse" ) await flow.retainData(await flow.advancement.reverse(flow.level));
         else if ( flow ) await flow._updateObject(event, flow._getSubmitData());
 
+        this._synthesizeSteps(preEmbeddedItems);
         this._stepIndex++;
 
         // Ensure the level on the class item matches the specified level
@@ -578,6 +614,74 @@ export default class AdvancementManager extends Application {
   /* -------------------------------------------- */
 
   /**
+   * Add synthetic steps for any added or removed items with advancement.
+   * @param {Item5e[]} preEmbeddedItems  Items present before the current step was applied.
+   */
+  _synthesizeSteps(preEmbeddedItems) {
+    // Build a set of item IDs for non-synthetic steps
+    const initialIds = this.steps.reduce((ids, step) => {
+      if ( step.synthetic || !step.flow?.item ) return ids;
+      ids.add(step.flow.item.id);
+      return ids;
+    }, new Set());
+
+    const preIds = new Set(preEmbeddedItems.map(i => i.id));
+    const postIds = new Set(this.clone.items.map(i => i.id));
+    const addedIds = postIds.difference(preIds).difference(initialIds);
+    const deletedIds = preIds.difference(postIds).difference(initialIds);
+
+    for ( const addedId of addedIds ) {
+      const item = this.clone.items.get(addedId);
+      if ( !item.hasAdvancement ) continue;
+
+      let handledLevel = 0;
+      for ( let idx = this._stepIndex; idx < this.steps.length; idx++ ) {
+        // Find spots where the level increases
+        const thisLevel = this.steps[idx].flow?.level || this.steps[idx].class?.level;
+        const nextLevel = this.steps[idx + 1]?.flow?.level || this.steps[idx + 1]?.class?.level;
+        if ( (thisLevel <= handledLevel) || (thisLevel === nextLevel) ) continue;
+
+        // Determine if there is any advancement to be done for the added item to this level
+        // from the previously handled level
+        const steps = Array.fromRange(thisLevel - handledLevel + 1, handledLevel)
+          .flatMap(l => this.constructor.flowsForLevel(item, l, { findExisting: this.steps }))
+          .map(flow => ({ type: "forward", flow, synthetic: true }));
+
+        // Add new steps at the end of the level group
+        this.steps.splice(idx + 1, 0, ...steps);
+        idx += steps.length;
+
+        handledLevel = nextLevel ?? handledLevel;
+      }
+    }
+
+    if ( (this.step.type === "delete") && this.step.synthetic ) return;
+    for ( const deletedId of deletedIds ) {
+      let item = preEmbeddedItems.find(i => i.id === deletedId);
+      if ( !item?.hasAdvancement ) continue;
+
+      // Temporarily add the item back
+      this.clone.updateSource({items: [item.toObject()]});
+      item = this.clone.items.get(item.id);
+
+      // Check for advancement from the maximum level handled by this manager to zero
+      let steps = [];
+      Array.fromRange(this.clone.system.details.level + 1)
+        .flatMap(l => this.constructor.flowsForLevel(item, l))
+        .reverse()
+        .forEach(flow => steps.push({ type: "reverse", flow, automatic: true, synthetic: true }));
+
+      // Add a new remove item step to the end of the synthetic steps to finally get rid of this item
+      steps.push({ type: "delete", flow: this.step.flow, item, automatic: true, synthetic: true });
+
+      // Add new steps after the current step
+      this.steps.splice(this._stepIndex + 1, 0, ...steps);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Reverse through the steps until one requiring user interaction is encountered.
    * @param {Event} [event]                  Triggering click event if one occurred.
    * @param {object} [options]               Additional options to configure behavior.
@@ -594,6 +698,7 @@ export default class AdvancementManager extends Application {
         if ( !this.step ) break;
         const flow = this.step.flow;
         const type = this.step.type;
+        const preEmbeddedItems = Array.from(this.clone.items);
 
         // Reverse step based on step type
         if ( (type === "delete") && this.step.item ) this.clone.updateSource({items: [this.step.item]});
@@ -602,6 +707,8 @@ export default class AdvancementManager extends Application {
         );
         else if ( type === "reverse" ) await flow.advancement.restore(flow.level, flow.retainedData);
         else if ( flow ) await flow.retainData(await flow.advancement.reverse(flow.level));
+
+        this._clearSyntheticSteps(preEmbeddedItems);
         this.clone.reset();
       } while ( this.step?.automatic );
     } catch(error) {
@@ -615,6 +722,26 @@ export default class AdvancementManager extends Application {
     if ( !render ) return;
     if ( this.step ) this.render(true);
     else this.close({ skipConfirmation: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Remove synthetic steps for any added or removed items.
+   * @param {Item5e[]} preEmbeddedItems  Items present before the current step was applied.
+   */
+  _clearSyntheticSteps(preEmbeddedItems) {
+    // Create a disjoint union of the before and after items
+    const preIds = new Set(preEmbeddedItems.map(i => i.id));
+    const postIds = new Set(this.clone.items.map(i => i.id));
+    const modifiedIds = postIds.difference(preIds);
+    preIds.difference(postIds).forEach(id => modifiedIds.add(id));
+
+    // Remove any synthetic steps after the current step if their item has been modified
+    for ( const [idx, element] of Array.from(this.steps.entries()).reverse() ) {
+      if ( idx <= this._stepIndex ) break;
+      if ( element.synthetic && modifiedIds.has(element.flow?.item?.id) ) this.steps.splice(idx, 1);
+    }
   }
 
   /* -------------------------------------------- */
@@ -698,4 +825,61 @@ export default class AdvancementManager extends Application {
     return this.close({ skipConfirmation: true });
   }
 
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Debug application for visualizing advancement steps.
+ * Note: Intentionally not localized due to its nature as a debug application.
+ */
+class AdvancementVisualizer extends Application5e {
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["advancement-visualizer"],
+    window: {
+      title: "Advancement Steps"
+    },
+    position: {
+      top: 50,
+      left: 50,
+      width: 440
+    },
+    manager: null
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    steps: {
+      template: "systems/dnd5e/templates/advancement/advancement-visualizer.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * The advancement manager that this is visualizing.
+   * @type {AdvancementManager}
+   */
+  get manager() {
+    return this.options.manager;
+  }
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    context.steps = this.manager.steps.map(step => ({
+      ...step,
+      current: step === this.manager.step
+    }));
+    return context;
+  }
 }
