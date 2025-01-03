@@ -396,7 +396,7 @@ async function enrichCheck(config, label, options) {
  * becomes
  * ```html
  * <span class="roll-link-group" data-type="save" data-ability="dex">
- *   <a class="roll-action"><i class="fa-solid fa-dice-d20"></i> Dexterity</a>
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20" inert></i> Dexterity</a>
  *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
  * </span>
  * ```
@@ -406,7 +406,7 @@ async function enrichCheck(config, label, options) {
  * becomes
  * ```html
  * <span class="roll-link-group" data-type="save" data-ability="dex" data-dc="20">
- *   <a class="roll-action"><i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity</a>
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20" inert></i> DC 20 Dexterity</a>
  *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
  * </span>
  * ```
@@ -418,18 +418,18 @@ async function enrichCheck(config, label, options) {
  * ```html
  * <span class="roll-link-group" data-type="save" data-ability="str|dex" data-dc="20">
  *   DC 20
- *   <a class="roll-action" data-ability="str"><i class="fa-solid fa-dice-d20"></i> Strength</a> or
- *   <a class="roll-action" data-ability="dex"><i class="fa-solid fa-dice-d20"></i> Dexterity</a>
+ *   <a class="roll-action" data-ability="str"><i class="fa-solid fa-dice-d20" inert></i> Strength</a> or
+ *   <a class="roll-action" data-ability="dex"><i class="fa-solid fa-dice-d20" inert></i> Dexterity</a>
  *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
  * </span>
  * ```
  *
- * @example Create a concentration check:
+ * @example Create a concentration saving throw:
  * ```[[/concentration 10]]```
  * becomes
  * ```html
  * <span class="roll-link-group" data-type="concentration" data-dc=10>
- *   <a class="roll-action"><i class="fa-solid fa-dice-d20"></i> DC 10 concentration</a>
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20" inert></i> DC 10 concentration</a>
  *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
  * </span>
  * ```
@@ -438,7 +438,7 @@ async function enrichSave(config, label, options) {
   config.ability = config.ability?.replace("/", "|").split("|") ?? [];
   for ( let value of config.values ) {
     const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
-    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = slug;
+    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability.push(slug);
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
     else config[value] = true;
   }
@@ -484,7 +484,8 @@ async function enrichSave(config, label, options) {
  * @returns {object[]}
  */
 function createSaveRequestButtons(dataset) {
-  return (dataset.ability?.split("|") ?? []).map(ability => createRequestButton({ ...dataset, ability }));
+  return (dataset.ability?.split("|") ?? [])
+    .map(ability => createRequestButton({ ...dataset, format: "long", ability }));
 }
 
 /* -------------------------------------------- */
@@ -1202,7 +1203,7 @@ async function rollAction(event) {
 
     let buttons;
     if ( dataset.type === "save" ) buttons = createSaveRequestButtons(dataset);
-    else buttons = [createRequestButton(dataset)];
+    else buttons = [createRequestButton({ ...dataset, format: "short" })];
 
     const chatData = {
       user: game.user.id,
@@ -1223,8 +1224,8 @@ async function rollAction(event) {
  */
 function createRequestButton(dataset) {
   return {
-    buttonLabel: createRollLabel({ ...dataset, format: "short", icon: true }),
-    hiddenLabel: createRollLabel({ ...dataset, format: "short", icon: true, hideDC: true }),
+    buttonLabel: createRollLabel({ ...dataset, icon: true }),
+    hiddenLabel: createRollLabel({ ...dataset, icon: true, hideDC: true }),
     dataset: { ...dataset, action: "rollRequest", visibility: "all" }
   };
 }
