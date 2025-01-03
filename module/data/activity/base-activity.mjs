@@ -544,6 +544,11 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     this.name = this.name || game.i18n.localize(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
     this.labels ??= {};
+    const addBaseIndices = data => data?.forEach((d, idx) => Object.defineProperty(d, "_index", { value: idx }));
+    addBaseIndices(this.consumption?.targets);
+    addBaseIndices(this.damage?.parts);
+    addBaseIndices(this.effects);
+    addBaseIndices(this.uses?.recovery);
   }
 
   /* -------------------------------------------- */
