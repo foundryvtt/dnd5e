@@ -1,4 +1,3 @@
-import { formatNumber, getHumanReadableAttributeLabel } from "../../utils.mjs";
 import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
 import { ActorDeltasField } from "./fields/deltas-field.mjs";
 
@@ -90,30 +89,15 @@ export default class TurnMessageData extends ChatMessageDataModel {
       combat: this.combat,
       combatant: this.combatant
     };
-    if ( !context.actor ) return context;
 
-    if ( context.actor.isOwner ) context.activities = Array.from(this.activations)
-      .map(uuid => fromUuidSync(uuid, { relative: context.actor, strict: false }))
-      .filter(_ => _)
-      .sort((lhs, rhs) => (lhs.item.sort - rhs.item.sort) || (lhs.sort - rhs.sort));
+    if ( context.actor?.isOwner ) {
+      context.activities = Array.from(this.activations)
+        .map(uuid => fromUuidSync(uuid, { relative: context.actor, strict: false }))
+        .filter(_ => _)
+        .sort((lhs, rhs) => (lhs.item.sort - rhs.item.sort) || (lhs.sort - rhs.sort));
+      context.deltas = ActorDeltasField.processDeltas.call(this.deltas, this.actor);
+    }
 
-    const processDelta = (doc, delta) => {
-      const type = doc instanceof Actor ? "actor" : "item";
-      return {
-        type,
-        delta: formatNumber(delta.delta, { signDisplay: "always" }),
-        document: doc,
-        label: getHumanReadableAttributeLabel(delta.keyPath, { [type]: doc }) ?? delta.keyPath
-        // TODO: If any rolls were performed for recovery, associate with delta
-      };
-    };
-
-    context.deltas = [
-      ...this.deltas.actor.map(d => processDelta(this.actor, d)),
-      ...Object.entries(this.deltas.item).flatMap(([id, deltas]) =>
-        deltas.map(d => processDelta(this.actor.items.get(id), d))
-      )
-    ];
     return context;
   }
 

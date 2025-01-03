@@ -20,6 +20,7 @@
 "TYPES.ActiveEffect.enchantmentPl": "Enchantments",
 
 "TYPES.ChatMessage": {
+  "rest": "Rest Message",
   "turn": "Combat Turn Message"
 },
 
@@ -849,10 +850,12 @@
 "DND5E.ChatFlavor": "Chat Message Flavor",
 
 "DND5E.CHATMESSAGE": {
+  "Deltas": {
+    "Recovery": "Recovery"
+  },
   "TURN": {
     "Activities": "Activities",
-    "NoCombatant": "Combatant no longer exists!",
-    "Recovery": "Recovery"
+    "NoCombatant": "Combatant no longer exists!"
   }
 },
 
