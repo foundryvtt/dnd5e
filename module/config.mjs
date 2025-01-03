@@ -2778,7 +2778,7 @@ DND5E.restTypes = {
     recoverHitDice: true,
     recoverHitPoints: true,
     recoverPeriods: ["lr", "sr"],
-    recoverSpellSlotTypes: new Set(["leveled", "pact"])
+    recoverSpellSlotTypes: new Set(["spell", "pact"])
   }
 };
 
@@ -2866,9 +2866,223 @@ preLocalize("attackTypes", { key: "label" });
 /* -------------------------------------------- */
 
 /**
+ * @typedef {object} SpellcastingData
+ * @property {string} label                           Human-readable label.
+ * @property {boolean} [static]                       A static spellcasting mode is considered one that
+ *                                                    does not make use of spell slots of any kind, and
+ *                                                    cannot upcast, such as innate or at-will spells.
+ * @property {string} [table]                         A table to use from `DND5E.spellcastingTables`.
+ * @property {string} [img]                           The icon to use if these slots are favorited.
+ * @property {boolean} [separate]                     Are the slots all of the same level or separate levels?
+ * @property {number} order                           Order in which this is shown on the actor sheet spellbook tab.
+ * @property {boolean} [cantrips]                     If `true`, and if a progression, cantrips section will be shown.
+ * @property {boolean} [prepares]                     Can spells be prepared and unprepared?
+ * @property {Record<SpellcastingProgression>} [progression]  The progression subtypes for this spellcasting.
+ */
+
+/**
+ * @typedef {object} SpellcastingProgression
+ * @property {string} label       Human-readable label.
+ * @property {number} divisor     A divisor to determine how much this contributes to the progression.
+ * @property {boolean} [roundUp]  If `true`, division rounds up instead of down.
+ */
+
+/**
+ * Types of spellcasting preparations and progressions.
+ * @enum {SpellcastingData}
+ */
+DND5E.spellcasting = {
+  atwill: {
+    label: "DND5E.SPELLCASTING.MODES.AtWill.label",
+    order: -30,
+    static: true
+  },
+  innate: {
+    label: "DND5E.SPELLCASTING.MODES.Innate.label",
+    order: -20,
+    static: true
+  },
+  ritual: {
+    label: "DND5E.SPELLCASTING.MODES.Ritual.label",
+    order: -10,
+    static: true
+  },
+  spell: {
+    label: "DND5E.SPELLCASTING.MODES.Spell.label",
+    cantrips: true,
+    img: "systems/dnd5e/icons/spell-tiers/{id}.webp",
+    order: 20,
+    prepares: true,
+    separate: true,
+    table: "spell",
+    progression: {
+      full: {
+        label: "DND5E.SPELLCASTING.MODES.Spell.Full.label",
+        divisor: 1
+      },
+      half: {
+        label: "DND5E.SPELLCASTING.MODES.Spell.Half.label",
+        divisor: 2,
+        roundUp: true
+      },
+      third: {
+        label: "DND5E.SPELLCASTING.MODES.Spell.Third.label",
+        divisor: 3
+      },
+      artificer: {
+        label: "DND5E.SPELLCASTING.MODES.Spell.Artificer.label",
+        divisor: 2,
+        roundUp: true
+      }
+    }
+  },
+  pact: {
+    label: "DND5E.SPELLCASTING.MODES.Pact.label",
+    cantrips: true,
+    img: "icons/magic/unholy/silhouette-robe-evil-power.webp",
+    order: 10,
+    prepares: false,
+    separate: false,
+    table: "pact",
+    progression: {
+      pact: {
+        label: "DND5E.SPELLCASTING.MODES.Pact.Full.label",
+        divisor: 1
+      }
+    }
+  }
+};
+preLocalize("spellcasting", { key: "label" });
+preLocalize("spellcasting.spell.progression", { key: "label" });
+preLocalize("spellcasting.pact.progression", { key: "label" });
+
+Object.defineProperty(DND5E.spellcasting, "calculateSlots", {
+  value: function(type, level) {
+    level = Math.clamp(level, 0, CONFIG.DND5E.maxLevel);
+    const configuration = CONFIG.DND5E.spellcasting[type];
+    const table = DND5E.spellcastingTables[configuration.table];
+    if ( foundry.utils.isEmpty(table) ) throw new Error(`The ${type} progression is not valid.`);
+
+    if ( configuration.separate ) {
+      const acc = {};
+      for ( let i = 1; i <= level; i++ ) {
+        for ( const [slotLevel, increase] of Object.entries(table[i] ?? {}) ) {
+          acc[slotLevel] = (acc[slotLevel] ?? 0) + increase;
+        }
+      }
+      return acc;
+    } else {
+      let amount = 0;
+      let slotLevel = 0;
+      for ( let i = 1; i <= level; i++ ) {
+        if ( !table[i] ) continue;
+        amount += (table[i].slots ?? 0);
+        slotLevel += (table[i].level ?? 0);
+      }
+      return ( amount && slotLevel ) ? { [slotLevel]: amount } : {};
+    }
+  },
+  enumerable: false
+});
+Object.defineProperty(DND5E.spellcasting, "progressionChoices", {
+  get() {
+    const choices = [];
+    for ( const v of Object.values(this) ) {
+      if ( v.static ) continue;
+      for ( const [p, q] of Object.entries(v.progression) ) {
+        choices.push({ value: p, label: q.label, group: v.label });
+      }
+    }
+    return choices;
+  },
+  enumerable: false
+});
+Object.defineProperty(DND5E.spellcasting, "_fallback", {
+  get() {
+    return {
+      static: true,
+      order: -10000,
+      label: "—"
+    };
+  },
+  enumerable: false
+});
+
+/* -------------------------------------------- */
+
+/**
+ * Configuration data for spellcasting progressions.
+ * @type {object}
+ */
+DND5E.spellcastingTables = {
+  spell: {
+    1: { 1: 2 },
+    2: { 1: 1 },
+    3: { 1: 1, 2: 2 },
+    4: { 2: 1 },
+    5: { 3: 2 },
+    6: { 3: 1 },
+    7: { 4: 1 },
+    8: { 4: 1 },
+    9: { 4: 1, 5: 1 },
+    10: { 5: 1 },
+    11: { 6: 1 },
+    12: {},
+    13: { 7: 1 },
+    14: {},
+    15: { 8: 1 },
+    16: {},
+    17: { 9: 1 },
+    18: { 5: 1 },
+    19: { 6: 1 },
+    20: { 7: 1 }
+  },
+  pact: {
+    1: { slots: 1, level: 1 },
+    2: { slots: 1 },
+    3: { level: 1 },
+    5: { level: 1 },
+    7: { level: 1 },
+    9: { level: 1 },
+    11: { slots: 1 },
+    17: { slots: 1 }
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {object} SpellPreparationState
+ * @property {string} label     Human-readable label.
+ * @property {number} value     Unique number representing this state.
+ */
+
+/**
+ * The various states of preparation a spell can be in.
+ * @enum {SpellPreparationState}
+ */
+DND5E.spellPreparationStates = {
+  unprepared: {
+    label: "DND5E.SPELLCASTING.STATES.Unprepared",
+    value: 0
+  },
+  prepared: {
+    label: "DND5E.SPELLCASTING.STATES.Prepared",
+    value: 1
+  },
+  always: {
+    label: "DND5E.SPELLCASTING.STATES.AlwaysPrepared",
+    value: 2
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
  * Define the standard slot progression by character level.
  * The entries of this array represent the spell slot progression for a full spell-caster.
  * @type {number[][]}
+ * @deprecated since 4.x.0
  */
 DND5E.SPELL_SLOT_TABLE = [
   [2],
@@ -2906,6 +3120,7 @@ DND5E.SPELL_SLOT_TABLE = [
 /**
  * Define the pact slot & level progression by pact caster level.
  * @enum {PactProgressionConfig}
+ * @deprecated since 4.x.0
  */
 DND5E.pactCastingProgression = {
   1: { slots: 1, level: 1 },
@@ -2934,6 +3149,7 @@ DND5E.pactCastingProgression = {
 /**
  * Various different ways a spell can be prepared.
  * @enum {SpellPreparationModeConfiguration}
+ * @deprecated since 4.x.0
  */
 DND5E.spellPreparationModes = {
   prepared: {
@@ -2991,6 +3207,7 @@ preLocalize("spellPreparationModes", { key: "label" });
 /**
  * Different spellcasting types and their progression.
  * @type {SpellcastingTypeConfiguration}
+ * @deprecated since 4.x.0
  */
 DND5E.spellcastingTypes = {
   leveled: {
@@ -3031,6 +3248,7 @@ preLocalize("spellcastingTypes.leveled.progression", { key: "label" });
 /**
  * Ways in which a class can contribute to spellcasting levels.
  * @enum {string}
+ * @deprecated since 4.x.0
  */
 DND5E.spellProgression = {
   none: "DND5E.SpellNone",

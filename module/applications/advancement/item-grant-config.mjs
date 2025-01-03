@@ -25,10 +25,11 @@ export default class ItemGrantConfig extends AdvancementConfig {
       obj[k] = { label: c.label, selected: context.configuration.spell?.ability.has(k) ? "selected" : "" };
       return obj;
     }, {});
+    const config = CONFIG.DND5E.spellcasting[this.advancement.configuration.spell?.preparation];
     context.showContainerWarning = indexes.some(i => i?.type === "container");
     context.showSpellConfig = indexes.some(i => i?.type === "spell");
-    context.showRequireSpellSlot = !this.advancement.configuration.spell?.preparation
-      || CONFIG.DND5E.spellPreparationModes[this.advancement.configuration.spell?.preparation]?.upcast;
+    context.showRequireSpellSlot = !this.advancement.configuration.spell?.preparation || !config?.static;
+    context.showPreparationState = context.showSpellConfig && config?.prepares;
     return context;
   }
 
