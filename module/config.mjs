@@ -933,9 +933,10 @@ preLocalize("abilityActivationTypes");
 
 /**
  * @typedef {ActivityActivationTypeConfig}
- * @property {string} label            Localized label for the activation type.
- * @property {string} [group]          Localized label for the presentational group.
- * @property {boolean} [scalar=false]  Does this activation type have a numeric value attached?
+ * @property {string} label             Localized label for the activation type.
+ * @property {string} [group]           Localized label for the presentational group.
+ * @property {boolean} [passive=false]  Classify this item as a passive feature on NPC sheets.
+ * @property {boolean} [scalar=false]   Does this activation type have a numeric value attached?
  */
 
 /**
@@ -972,15 +973,18 @@ DND5E.activityActivationTypes = {
   },
   encounter: {
     label: "DND5E.ACTIVATION.Type.Encounter.Label",
-    group: "DND5E.ACTIVATION.Category.Combat"
+    group: "DND5E.ACTIVATION.Category.Combat",
+    passive: true
   },
   turnStart: {
     label: "DND5E.ACTIVATION.Type.TurnStart.Label",
-    group: "DND5E.ACTIVATION.Category.Combat"
+    group: "DND5E.ACTIVATION.Category.Combat",
+    passive: true
   },
   turnEnd: {
     label: "DND5E.ACTIVATION.Type.TurnEnd.Label",
-    group: "DND5E.ACTIVATION.Category.Combat"
+    group: "DND5E.ACTIVATION.Category.Combat",
+    passive: true
   },
   legendary: {
     label: "DND5E.LegendaryAction.Label",

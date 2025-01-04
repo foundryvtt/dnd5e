@@ -25,13 +25,12 @@
             {{#each activities}}
             <li class="activity flexrow item-tooltip" data-activity-uuid="{{ uuid }}" data-item-uuid="{{ item.uuid }}">
                 <img class="gold-icon" src="{{ item.img }}" alt="{{ item.name }}">
-                <span class="name-stacked">
-                    <span class="title">{{ item.name }}</span>
-                    <span class="subtitle">{{ name }}</span>
-                </span>
-                <button type="button" data-action="use">
-                    {{ localize "DND5E.Use" }}
-                </button>
+                <a class="rollable" data-action="use">
+                    <span class="name-stacked">
+                        <span class="title">{{ item.name }}</span>
+                        <span class="subtitle">{{ name }}</span>
+                    </span>
+                </a>
             </li>
             {{/each}}
         </ul>
