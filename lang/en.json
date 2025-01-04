@@ -160,17 +160,27 @@
     }
   },
   "Category": {
+    "Combat": "Combat",
+    "Monster": "Monster",
     "Standard": "Standard",
     "Time": "Time",
-    "Monster": "Monster",
     "Vehicle": "Vehicle"
   },
   "Type": {
+    "Encounter": {
+      "Label": "Start of Encounter"
+    },
     "Legendary": {
       "Counted": {
         "one": "{number} legendary action",
         "other": "{number} legendary actions"
       }
+    },
+    "TurnEnd": {
+      "Label": "End of Turn"
+    },
+    "TurnStart": {
+      "Label": "Start of Turn"
     }
   },
   "Warning": {
@@ -753,7 +763,8 @@
 
 "DND5E.CHATMESSAGE": {
   "TURN": {
-    "NoCombat": "Combat has ended!",
+    "Activities": "Activities",
+    "NoCombatant": "Combatant no longer exists!",
     "Recovery": "Recovery"
   }
 },

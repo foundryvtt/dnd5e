@@ -1,3 +1,4 @@
+import TurnMessageData from "../data/chat-message/turn-message-data.mjs";
 import { ActorDeltasField } from "../data/chat-message/fields/deltas-field.mjs";
 
 /**
@@ -22,6 +23,7 @@ export default class Combatant5e extends Combatant {
         speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.token }),
         system: {
           deltas, periods,
+          activations: TurnMessageData.getActivations(this.actor, periods),
           origin: {
             combat: this.combat.id,
             combatant: this.id
@@ -33,9 +35,8 @@ export default class Combatant5e extends Combatant {
     };
 
     if ( !foundry.utils.isEmpty(messageConfig.data.system.deltas?.actor)
-      || !foundry.utils.isEmpty(messageConfig.data.system.deltas?.item) ) messageConfig.create = true;
-    // TODO: Also create message if actor has items with relevant activation type
-    // when implementing https://github.com/foundryvtt/dnd5e/issues/4861
+      || !foundry.utils.isEmpty(messageConfig.data.system.deltas?.item)
+      || !foundry.utils.isEmpty(messageConfig.data.system.activations) ) messageConfig.create = true;
 
     /**
      * A hook event that fires before a combat state change chat message is created.
@@ -63,7 +64,7 @@ export default class Combatant5e extends Combatant {
 
   /**
    * Reset combat-related uses.
-   * @param {Set<string>} periods  Which recovery periods should be considered.
+   * @param {string[]} periods  Which recovery periods should be considered.
    */
   async recoverCombatUses(periods) {
     /**
@@ -71,7 +72,7 @@ export default class Combatant5e extends Combatant {
      * @function dnd5e.preCombatRecovery
      * @memberof hookEvents
      * @param {Combatant5e} combatant  Combatant that is being recovered.
-     * @param {Set<string>} periods    Periods to be recovered.
+     * @param {string[]} periods       Periods to be recovered.
      * @returns {boolean}              Explicitly return `false` to prevent recovery from being performed.
      */
     if ( Hooks.call("dnd5e.preCombatRecovery", this, periods) === false ) return;
@@ -88,7 +89,7 @@ export default class Combatant5e extends Combatant {
      * @function dnd5e.combatRecovery
      * @memberof hookEvents
      * @param {Combatant5e} combatant                      Combatant that is being recovered.
-     * @param {Set<string>} periods                        Periods that were recovered.
+     * @param {string[]} periods                           Periods that were recovered.
      * @param {{ actor: object, item: object[] }} updates  Update that will be applied to the actor and its items.
      * @returns {boolean}  Explicitly return `false` to prevent updates from being performed.
      */
@@ -99,14 +100,14 @@ export default class Combatant5e extends Combatant {
     if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);
     if ( updates.item.length ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
 
-    const message = await this.createTurnMessage({ deltas, periods: Array.from(periods) });
+    const message = await this.createTurnMessage({ deltas, periods });
 
     /**
      * A hook event that fires after combat-related recovery changes have been applied.
      * @function dnd5e.postCombatRecovery
      * @memberof hookEvents
      * @param {Combatant5e} combatant       Combatant that is being recovered.
-     * @param {Set<string>} periods         Periods that were recovered.
+     * @param {string[]} periods            Periods that were recovered.
      * @param {ChatMessage5e|void} message  Chat message created, if any.
      */
     Hooks.callAll("dnd5e.postCombatRecovery", this, periods, message);
