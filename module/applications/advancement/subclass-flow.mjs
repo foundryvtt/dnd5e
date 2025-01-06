@@ -1,4 +1,3 @@
-import Advancement from "../../documents/advancement/advancement.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import AdvancementFlow from "./advancement-flow.mjs";
 

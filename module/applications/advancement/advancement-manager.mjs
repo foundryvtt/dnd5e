@@ -652,7 +652,7 @@ export default class AdvancementManager extends Application {
         // Find spots where the level increases
         const thisLevel = this.steps[idx].flow?.level || this.steps[idx].class?.level;
         const nextLevel = this.steps[idx + 1]?.flow?.level || this.steps[idx + 1]?.class?.level;
-        if ( (thisLevel <= handledLevel) || (thisLevel === nextLevel) ) continue;
+        if ( (thisLevel < handledLevel) || (thisLevel === nextLevel) ) continue;
 
         // Determine if there is any advancement to be done for the added item to this level
         // from the previously handled level
@@ -747,8 +747,7 @@ export default class AdvancementManager extends Application {
     // Create a disjoint union of the before and after items
     const preIds = new Set(preEmbeddedItems.map(i => i.id));
     const postIds = new Set(this.clone.items.map(i => i.id));
-    const modifiedIds = postIds.difference(preIds);
-    preIds.difference(postIds).forEach(id => modifiedIds.add(id));
+    const modifiedIds = postIds.symmetricDifference(preIds);
 
     // Remove any synthetic steps after the current step if their item has been modified
     for ( const [idx, element] of Array.from(this.steps.entries()).reverse() ) {
