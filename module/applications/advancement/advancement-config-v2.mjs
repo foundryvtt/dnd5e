@@ -146,9 +146,8 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
   static _cleanedObject(object) {
     return Object.entries(object).reduce((obj, [key, value]) => {
       let keep = false;
-      if ( foundry.utils.getType(value) === "Object" ) {
-        keep = Object.values(value).some(v => v);
-      } else if ( value ) keep = true;
+      if ( foundry.utils.getType(value) === "Object" ) keep = Object.values(value).some(v => v);
+      else if ( value ) keep = true;
       if ( keep ) obj[key] = value;
       else obj[`-=${key}`] = null;
       return obj;
