@@ -117,7 +117,7 @@ export default class TraitsConfig extends BaseConfigSheet {
    * @protected
    */
   _processChoice(data, key, choice, categoryChosen=false) {
-    if ( (data.value.includes("ALL") && (key !== "ALL")) || categoryChosen ) {
+    if ( (data.value?.includes("ALL") && (key !== "ALL")) || categoryChosen ) {
       choice.chosen = true;
       choice.disabled = true;
     }
