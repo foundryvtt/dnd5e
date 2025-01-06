@@ -1,6 +1,7 @@
 {
 "DOCUMENT.DND5E": {
   "Activity": "Activity",
+  "Advancement": "Advancement",
   "Warning": {
     "SelectType": "{name} type must be selected for creation."
   }
@@ -278,6 +279,25 @@
       "Type": "Only features with the \"feat\" type can be selected."
     }
   },
+  "Config": {
+    "Details": "Advancement Details"
+  },
+  "HitPoints": {
+    "Action": {
+      "Roll": "Roll {die}"
+    },
+    "Average": "Average",
+    "Hint": "Track the player's hit points for each level in the class.",
+    "MaxAtFirstLevel": "Max at 1st Level: <strong>{max}</strong>",
+    "Roll": "Roll {class} Hit Points",
+    "Starting": "Hit Points at 1st Level",
+    "TakeAverage": "Take Average",
+    "Title": "Hit Points",
+    "Warning": {
+      "Empty": "Hit points must be rolled or the average value must be taken.",
+      "Invalid": "Hit points must be a valid whole number."
+    }
+  },
   "SPELLCONFIG": {
     "FIELDS": {
       "uses": {
@@ -324,14 +344,6 @@
 "DND5E.AdvancementDeleteConfirmationTitle": "Confirm Deletion",
 "DND5E.AdvancementFlowDropAreaHint": "Drop an Item here to choose it.",
 "DND5E.AdvancementHint": "Hint",
-"DND5E.AdvancementHitPointsTitle": "Hit Points",
-"DND5E.AdvancementHitPointsHint": "Track the player's hit points for each level in the class.",
-"DND5E.AdvancementHitPointsAverage": "Take Average",
-"DND5E.AdvancementHitPointsEmptyError": "Hit points must be rolled or the average value must be taken.",
-"DND5E.AdvancementHitPointsInvalidError": "Hit points must be a valid whole number.",
-"DND5E.AdvancementHitPointsMaxAtFirstLevel": "Max at 1st Level: <strong>{max}</strong>",
-"DND5E.AdvancementHitPointsRollMessage": "Roll {class} Hit Points",
-"DND5E.AdvancementHitPointsRollButton": "Roll {die}",
 "DND5E.AdvancementItemChoiceTitle": "Choose Items",
 "DND5E.AdvancementItemChoiceHint": "Present the player with a choice of items (such as equipment, features, or spells) that they can choose for their character at one or more levels.",
 "DND5E.AdvancementItemChoiceChoices": "Choices",

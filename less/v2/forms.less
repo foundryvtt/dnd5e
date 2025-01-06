@@ -371,13 +371,10 @@
   }
 
   /* Form Fields */
-  select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
-    --input-height: var(--form-field-height);
+  textarea, select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
     --input-border-color: transparent;
     transition: all 250ms ease;
     line-height: normal;
-    padding: 0 6px;
-    background: var(--input-background-color);
     outline: none;
 
     &:focus { outline: none; }
@@ -385,6 +382,17 @@
       --input-border-color: var(--dnd5e-color-gold);
       box-shadow: 0 0 6px var(--dnd5e-color-gold);
     }
+  }
+  select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
+    --input-height: var(--form-field-height);
+    padding: 0 6px;
+    background: var(--input-background-color);
+  }
+  textarea {
+    border: 1px solid var(--input-border-color);
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.1);
+    font-size: var(--font-size-11);
   }
 
   :is(.form-group, fieldset) :is(select, input):not([type="range"]) {

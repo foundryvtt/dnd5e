@@ -1,50 +1,48 @@
+import Advancement from "../../documents/advancement/advancement.mjs";
+import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
+
 /**
  * Base configuration application for advancements that can be extended by other types to implement custom
  * editing interfaces.
- *
- * @param {Advancement} advancement            The advancement item being edited.
- * @param {object} [options={}]                Additional options passed to FormApplication.
- * @param {string} [options.dropKeyPath=null]  Path within advancement configuration where dropped items are stored.
- *                                             If populated, will enable default drop & delete behavior.
  */
-export default class AdvancementConfig extends FormApplication {
-  constructor(advancement, options={}) {
-    super(advancement, options);
-    this.#advancementId = advancement.id;
-    this.item = advancement.item;
+export default class AdvancementConfig extends PseudoDocumentSheet {
+  constructor(advancement={}, options={}) {
+    if ( advancement instanceof Advancement ) {
+      options.document = advancement;
+      // TODO: Add deprecation warning for this calling pattern once system has switched over to using the sheet
+      // getter on Advancement, rather than creating separately
+    } else options = { ...advancement, ...options };
+    super(options);
   }
 
   /* -------------------------------------------- */
 
-  /**
-   * The ID of the advancement being created or edited.
-   * @type {string}
-   */
-  #advancementId;
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["advancement"],
+    window: {
+      icon: "fa-solid fa-person-rays"
+    },
+    actions: {
+      deleteItem: AdvancementConfig.#deleteDroppedItem
+    },
+    dropKeyPath: null,
+    position: {
+      width: 400
+    }
+  };
 
   /* -------------------------------------------- */
 
-  /**
-   * Parent item to which this advancement belongs.
-   * @type {Item5e}
-   */
-  item;
+  /** @override */
+  static PARTS = {
+    config: {
+      template: "systems/dnd5e/templates/advancement/advancement-controls-section.hbs"
+    }
+  };
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement", "dialog"],
-      template: "systems/dnd5e/templates/advancement/advancement-config.hbs",
-      width: 400,
-      height: "auto",
-      submitOnChange: true,
-      closeOnSubmit: false,
-      dropKeyPath: null
-    });
-  }
-
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
@@ -52,37 +50,29 @@ export default class AdvancementConfig extends FormApplication {
    * @type {Advancement}
    */
   get advancement() {
-    return this.item.advancement.byId[this.#advancementId];
+    return this.document;
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   get title() {
-    const type = this.advancement.constructor.metadata.title;
-    return `${game.i18n.format("DND5E.AdvancementConfigureTitle", { item: this.item.name })}: ${type}`;
+    return this.advancement.constructor.metadata.title;
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async close(options={}) {
-    await super.close(options);
-    delete this.advancement?.apps[this.appId];
-  }
-
+  /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  getData() {
-    const levels = Object.fromEntries(Array.fromRange(CONFIG.DND5E.maxLevel + 1).map(l => [l, l]));
+  async _prepareContext(options) {
+    const levels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).map(l => ({ value: l, label: l }));
     if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
-    else levels[0] = game.i18n.localize("DND5E.AdvancementLevelAnyHeader");
+    else levels[0].label = game.i18n.localize("DND5E.AdvancementLevelAnyHeader");
     const context = {
-      appId: this.id,
-      CONFIG: CONFIG.DND5E,
-      ...this.advancement.toObject(false),
-      src: this.advancement._source,
+      ...(await super._prepareContext(options)),
+      advancement: this.advancement,
+      configuration: this.advancement.configuration,
       source: this.advancement._source,
       default: {
         title: this.advancement.constructor.metadata.title,
@@ -102,6 +92,29 @@ export default class AdvancementConfig extends FormApplication {
   }
 
   /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle deleting an existing Item entry from the Advancement.
+   * @param {Event} event        The originating click event.
+   * @returns {Promise<Item5e>}  The updated parent Item after the application re-renders.
+   * @this {AdvancementConfig}
+   */
+  static async #deleteDroppedItem(event) {
+    event.preventDefault();
+    const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
+    if ( !uuidToDelete ) return;
+    const items = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
+    const updates = { configuration: await this.prepareConfigurationUpdate({
+      [this.options.dropKeyPath]: items.filter(i => i.uuid !== uuidToDelete)
+    }) };
+    await this.advancement.update(updates);
+  }
+
+  /* -------------------------------------------- */
+  /*  Form Handling                               */
+  /* -------------------------------------------- */
 
   /**
    * Perform any changes to configuration data before it is saved to the advancement.
@@ -115,32 +128,10 @@ export default class AdvancementConfig extends FormApplication {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    // Remove an item from the list
-    if ( this.options.dropKeyPath ) html.on("click", "[data-action='delete']", this._onItemDelete.bind(this));
-
-    for ( const element of html[0].querySelectorAll("multi-select") ) {
-      element.addEventListener("change", this._onChangeInput.bind(this));
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  render(force=false, options={}) {
-    this.advancement.apps[this.appId] = this;
-    return super.render(force, options);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _updateObject(event, formData) {
-    let updates = foundry.utils.expandObject(formData);
-    if ( updates.configuration ) updates.configuration = await this.prepareConfigurationUpdate(updates.configuration);
-    await this.advancement.update(updates);
+  async _processSubmitData(event, submitData) {
+    submitData.configuration ??= {};
+    submitData.configuration = await this.prepareConfigurationUpdate(submitData.configuration);
+    await this.advancement.update(submitData);
   }
 
   /* -------------------------------------------- */
@@ -155,9 +146,8 @@ export default class AdvancementConfig extends FormApplication {
   static _cleanedObject(object) {
     return Object.entries(object).reduce((obj, [key, value]) => {
       let keep = false;
-      if ( foundry.utils.getType(value) === "Object" ) {
-        keep = Object.values(value).some(v => v);
-      } else if ( value ) keep = true;
+      if ( foundry.utils.getType(value) === "Object" ) keep = Object.values(value).some(v => v);
+      else if ( value ) keep = true;
       if ( keep ) obj[key] = value;
       else obj[`-=${key}`] = null;
       return obj;
@@ -168,24 +158,7 @@ export default class AdvancementConfig extends FormApplication {
   /*  Drag & Drop for Item Pools                  */
   /* -------------------------------------------- */
 
-  /**
-   * Handle deleting an existing Item entry from the Advancement.
-   * @param {Event} event        The originating click event.
-   * @returns {Promise<Item5e>}  The updated parent Item after the application re-renders.
-   * @protected
-   */
-  async _onItemDelete(event) {
-    event.preventDefault();
-    const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
-    if ( !uuidToDelete ) return;
-    const items = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
-    const updates = { configuration: await this.prepareConfigurationUpdate({
-      [this.options.dropKeyPath]: items.filter(i => i.uuid !== uuidToDelete)
-    }) };
-    await this.advancement.update(updates);
-  }
-
-  /* -------------------------------------------- */
+  // TODO: Re-implement drag & drop for ApplicationV2
 
   /** @inheritDoc */
   _canDragDrop() {
@@ -244,5 +217,4 @@ export default class AdvancementConfig extends FormApplication {
    * @protected
    */
   _validateDroppedItem(event, item) {}
-
 }

@@ -1,26 +1,14 @@
 import { ConsumptionTargetData } from "../../data/activity/fields/consumption-targets-field.mjs";
 import { formatNumber, formatRange } from "../../utils.mjs";
-import Application5e from "../api/application.mjs";
+import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 
 /**
  * Default sheet for activities.
  */
-export default class ActivitySheet extends Application5e {
-  constructor(options={}) {
-    super(options);
-    this.#activityId = options.document.id;
-    this.#item = options.document.item;
-  }
-
-  /* -------------------------------------------- */
-
+export default class ActivitySheet extends PseudoDocumentSheet {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
-    classes: ["activity", "sheet", "standard-form"],
-    tag: "form",
-    document: null,
-    viewPermission: CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED,
-    editPermission: CONST.DOCUMENT_OWNERSHIP_LEVELS.OWNER,
+    classes: ["activity"],
     window: {
       icon: "fa-solid fa-gauge"
     },
@@ -35,10 +23,6 @@ export default class ActivitySheet extends Application5e {
       deleteRecovery: ActivitySheet.#deleteRecovery,
       dissociateEffect: ActivitySheet.#dissociateEffect,
       toggleCollapsed: ActivitySheet.#toggleCollapsed
-    },
-    form: {
-      handler: ActivitySheet.#onSubmitForm,
-      submitOnChange: true
     },
     position: {
       width: 500,
@@ -100,14 +84,8 @@ export default class ActivitySheet extends Application5e {
    * @type {Activity}
    */
   get activity() {
-    return this.item.system.activities.get(this.#activityId);
+    return this.document;
   }
-
-  /**
-   * ID of this activity on the parent item.
-   * @type {string}
-   */
-  #activityId;
 
   /* -------------------------------------------- */
 
@@ -119,40 +97,6 @@ export default class ActivitySheet extends Application5e {
 
   get expandedSections() {
     return this.#expandedSections;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this Activity sheet visible to the current user?
-   * @type {boolean}
-   */
-  get isVisible() {
-    return this.item.testUserPermission(game.user, this.options.viewPermission);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Is this Document sheet editable by the current User?
-   * This is governed by the editPermission threshold configured for the class.
-   * @type {boolean}
-   */
-  get isEditable() {
-    if ( game.packs.get(this.item.pack)?.locked ) return false;
-    return this.item.testUserPermission(game.user, this.options.editPermission);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Parent item to which this activity belongs.
-   * @type {Item5e}
-   */
-  #item;
-
-  get item() {
-    return this.#item;
   }
 
   /* -------------------------------------------- */
@@ -467,24 +411,6 @@ export default class ActivitySheet extends Application5e {
   /*  Life-Cycle Handlers                         */
   /* -------------------------------------------- */
 
-  /** @override */
-  _canRender(options) {
-    if ( !this.isVisible ) throw new Error(game.i18n.format("SHEETS.DocumentSheetPrivate", {
-      type: game.i18n.localize("DND5E.ACTIVITY.Title.one")
-    }));
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onFirstRender(context, options) {
-    super._onFirstRender(context, options);
-    this.activity.constructor._registerApp(this.activity, this);
-    this.item.apps[this.id] = this;
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   _onRender(context, options) {
     super._onRender(context, options);
@@ -493,24 +419,6 @@ export default class ActivitySheet extends Application5e {
         .toggle("collapsed", !this.#expandedSections.get(element.dataset.expandId));
     }
     this.#toggleNestedTabs();
-    if ( !this.isEditable ) this._disableFields();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _onClose(_options) {
-    this.activity?.constructor._unregisterApp(this.activity, this);
-    delete this.item.apps[this.id];
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async _renderFrame(options) {
-    const frame = await super._renderFrame(options);
-    frame.autocomplete = "off";
-    return frame;
   }
 
   /* -------------------------------------------- */
@@ -720,19 +628,6 @@ export default class ActivitySheet extends Application5e {
   /* -------------------------------------------- */
 
   /**
-   * Handle form submission.
-   * @param {SubmitEvent} event          Triggering submit event.
-   * @param {HTMLFormElement} form       The form that was submitted.
-   * @param {FormDataExtended} formData  Data from the submitted form.
-   */
-  static async #onSubmitForm(event, form, formData) {
-    const submitData = this._prepareSubmitData(event, formData);
-    await this._processSubmitData(event, submitData);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Perform any pre-processing of the form data to prepare it for updating.
    * @param {SubmitEvent} event          Triggering submit event.
    * @param {FormDataExtended} formData  Data from the submitted form.
@@ -752,21 +647,6 @@ export default class ActivitySheet extends Application5e {
         submitData.effects.push({ _id });
       }
     }
-    // Workaround for https://github.com/foundryvtt/foundryvtt/issues/11610
-    this.element.querySelectorAll("fieldset legend :is(input, select, dnd5e-checkbox)").forEach(input => {
-      foundry.utils.setProperty(submitData, input.name, input.value);
-    });
     return submitData;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle updating the activity based on processed submit data.
-   * @param {SubmitEvent} event  Triggering submit event.
-   * @param {object} submitData  Prepared object for updating.
-   */
-  async _processSubmitData(event, submitData) {
-    await this.activity.update(submitData);
   }
 }
