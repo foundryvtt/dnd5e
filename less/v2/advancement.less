@@ -1,0 +1,22 @@
+.advancement-visualizer {
+  .step {
+    position: relative;
+    padding: 4px;
+
+    &.current {
+      border-color: rebeccapurple;
+      &::before {
+        content: "➧";
+        position: absolute;
+        inset-inline-start: -12px;
+        inset-block: 0;
+        align-content: center;
+        color: rebeccapurple;
+        font-size: 18px;
+      }
+    }
+    .icons {
+      i:not(.enabled) { opacity: 15%; }
+    }
+  }
+}

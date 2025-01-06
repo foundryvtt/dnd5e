@@ -1,0 +1,24 @@
+<form id="{{ appId }}" data-level="{{ level }}" data-id="{{ advancement.id }}" data-type="{{ type }}">
+    <h3>{{{ title }}}</h3>
+    {{#if advancement.hint}}<p>{{ advancement.hint }}</p>{{/if}}
+
+    <div class="drop-target">
+        {{#if subclass}}
+        <div class="item-name flexrow">
+            <div class="item-image" style="background-image: url({{ subclass.img }});"></div>
+            <label class="flexrow">
+                <h4><a data-uuid="{{ subclass.uuid }}">{{ subclass.name }}</a></h4>
+                <a class="item-control item-delete" title="{{ localize 'DND5E.ItemDelete' }}" data-action="deleteItem">
+                  <i class="fas fa-trash" inert></i>
+                </a>
+                <input type="hidden" name="uuid" value="{{ subclass.uuid }}">
+            </label>
+        </div>
+        {{else}}
+        <button type="button" data-action="browse">
+            <i class="fa-solid fa-book-open-reader" inert></i>
+            {{ localize "DND5E.CompendiumBrowser.Action.Open" }}
+        </button>
+        {{/if}}
+    </div>
+</form>

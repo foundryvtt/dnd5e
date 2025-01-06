@@ -292,7 +292,9 @@
   "Subclass": {
     "Title": "Subclass",
     "Hint": "Specify what level this class receives its subclass.",
-    "FlowHint": "Select a subclass in the Features tab after level up has completed."
+    "Warning": {
+      "InvalidType": "Only subclasses may be selected."
+    }
   }
 },
 
