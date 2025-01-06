@@ -4150,7 +4150,7 @@ const _ALL_ITEM_TYPES = ["background", "class", "race", "subclass"];
 DND5E.advancementTypes = {
   AbilityScoreImprovement: {
     documentClass: advancement.AbilityScoreImprovementAdvancement,
-    validItemTypes: new Set(["background", "class", "race"])
+    validItemTypes: new Set(["background", "class", "race", "feat"])
   },
   HitPoints: {
     documentClass: advancement.HitPointsAdvancement,
