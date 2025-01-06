@@ -181,8 +181,9 @@ export default function ActorSheetV2Mixin(Base) {
           const toggleable = !this._concentration?.effects.has(effect);
           let source = await effect.getSource();
           // If the source is an ActiveEffect from another Actor, note the source as that Actor instead.
-          if ( (source instanceof dnd5e.documents.ActiveEffect5e) && (source.target !== this.object) ) {
+          if ( source instanceof ActiveEffect ) {
             source = source.target;
+            if ( (source instanceof Item) && source.parent && (source.parent !== this.object) ) source = source.parent;
           }
           arr = await arr;
           arr.push({
