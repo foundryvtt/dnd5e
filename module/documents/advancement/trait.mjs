@@ -120,6 +120,16 @@ export default class TraitAdvancement extends Advancement {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  automaticApplicationValue(level) {
+    // TODO: Ideally this would be able to detect situations where choices are automatically fulfilled because
+    // they only have one valid option, but that is an async process and cannot be called from within `render`
+    if ( this.configuration.choices.length || this.configuration.allowReplacements ) return false;
+    return { chosen: Array.from(this.configuration.grants) };
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async restore(level, data) {
     this.apply(level, data);

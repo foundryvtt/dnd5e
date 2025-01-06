@@ -323,6 +323,18 @@ export default class Advancement extends BaseAdvancement {
    */
   async apply(level, data) { }
 
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieves the data to pass to the apply method in order to apply this advancement automatically, if possible.
+   * @param {number} level    Level being advanced.
+   * @returns {object|false}  Data to pass to the apply method, or `false` if advancement requirers user intervention.
+   */
+  automaticApplicationValue(level) {
+    return false;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -361,6 +373,6 @@ export default class Advancement extends BaseAdvancement {
       _id: id ?? foundry.utils.randomID(),
       "flags.dnd5e.sourceId": uuid,
       "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
-    }, {keepId: true}).toObject();
+    }, { keepId: true }).toObject();
   }
 }
