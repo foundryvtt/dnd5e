@@ -7,41 +7,44 @@ export default class Combat5e extends Combat {
   async startCombat() {
     await super.startCombat();
     this._recoverUses({ encounter: true });
-    this.combatant?.refreshDynamicRing();
     return this;
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onUpdate(changed, options, userId) {
+    super._onUpdate(changed, options, userId);
+    if ( this.current.combatantId !== this.previous.combatantId ) {
+      this.combatants.get(this.previous.combatantId)?.refreshDynamicRing();
+      this.combatants.get(this.current.combatantId)?.refreshDynamicRing();
+    }
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async nextTurn() {
-    const previous = this.combatant;
-    await super.nextTurn();
-    this._recoverUses({ turnEnd: previous, turnStart: this.combatant });
-    if ( previous && (previous !== this.combatant) ) previous.refreshDynamicRing();
-    this.combatant?.refreshDynamicRing();
-    return this;
+  _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    this.combatants.get(this.current.combatantId)?.refreshDynamicRing();
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async previousTurn() {
-    const previous = this.combatant;
-    await super.previousTurn();
-    if ( previous && (previous !== this.combatant) ) previous.refreshDynamicRing();
-    this.combatant?.refreshDynamicRing();
-    return this;
+  async _onEndTurn(combatant) {
+    await super._onEndTurn(combatant);
+    this._recoverUses({ turnEnd: combatant });
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async endCombat() {
-    const previous = this.combatant;
-    await super.endCombat();
-    previous?.refreshDynamicRing();
-    return this;
+  async _onStartTurn(combatant) {
+    await super._onStartTurn(combatant);
+    this._recoverUses({ turnStart: combatant });
   }
 
   /* -------------------------------------------- */
@@ -57,7 +60,7 @@ export default class Combat5e extends Combat {
   async _recoverUses(types) {
     for ( const combatant of this.combatants ) {
       const periods = Object.entries(types).filter(([, v]) => (v === true) || (v === combatant)).map(([k]) => k);
-      if ( periods.length ) await combatant.recoverCombatUses(new Set(periods));
+      if ( periods.length ) await combatant.recoverCombatUses(periods);
     }
   }
 }
