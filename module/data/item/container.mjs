@@ -108,7 +108,8 @@ export default class ContainerData extends ItemDataModel.mixin(
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateCapacity(source) {
-    if ( !source?.capacity || !source.capacity?.type || !source.capacity?.value ) return;
+    if ( !source.capacity || !source.capacity.type || !source.capacity.value || (source.capacity.count !== undefined)
+      || (foundry.utils.getType(source.capacity.weight) === "Object") ) return;
     if ( source.capacity.type === "weight" ) {
       source.capacity.weight ??= {};
       source.capacity.weight.value = source.capacity.value;

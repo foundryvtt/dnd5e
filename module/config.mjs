@@ -2466,7 +2466,7 @@ DND5E.volumeUnits = {
   liter: {
     label: "DND5E.UNITS.VOLUME.Liter.Label",
     abbreviation: "DND5E.UNITS.Volume.Liter.Abbreviation",
-    conversion: 1 / 28.317, // Should we do an approximate conversion here? Does it matter?
+    conversion: 1 / 28.317,
     type: "metric"
   }
 };
