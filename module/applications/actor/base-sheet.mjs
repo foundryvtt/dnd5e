@@ -389,104 +389,78 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const levels = context.actor.system.spells;
     const spellbook = {};
 
-    // Define section and label mappings
-    const sections = Object.entries(CONFIG.DND5E.spellPreparationModes).reduce((acc, [k, {order}]) => {
-      if ( Number.isNumeric(order) ) acc[k] = Number(order);
-      return acc;
-    }, {});
-    const useLabels = {"-30": "-", "-20": "-", "-10": "-", 0: "&infin;"};
-
     // Format a spellbook entry for a certain indexed level
-    const registerSection = (sl, i, label, {prepMode="prepared", value, max, override, config}={}) => {
-      const aeOverride = foundry.utils.hasProperty(this.actor.overrides, `system.spells.spell${i}.override`);
-      spellbook[i] = {
-        order: i,
-        label: label,
-        usesSlots: i > 0,
-        canCreate: owner,
-        canPrepare: ((context.actor.type === "character") && (i >= 1)) || config?.prepares,
+    const registerSection = (key, slotLevel=null, configKey=null) => {
+      const configuration = CONFIG.DND5E.spellcasting[configKey] ?? CONFIG.DND5E.spellcasting._fallback;
+      if ( (key !== "spell0") && (slotLevel === 0) && !configuration.static ) return; // Do not register cantrips in pact/spell.
+      const aeOverride = foundry.utils.hasProperty(this.actor.overrides, `system.spells.${key}.override`);
+      const order = key === "item"
+        ? 10000
+        : (configuration.static || !configuration.separate)
+          ? configuration.order
+          : (configuration.order * 10) + slotLevel;
+
+      spellbook[key] = {
+        order: order,
+        label: key === "item"
+          ? game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook")
+          : slotLevel === 0
+            ? CONFIG.DND5E.spellLevels[0]
+            : configuration.static
+              ? configuration.label
+              : `${configuration.label} — ${slotLevel.ordinalString()}`,
+        usesSlots: !configuration.static && (key !== "spell0"),
+        canCreate: owner && (key !== "item"),
+        canPrepare: configuration.prepares,
         spells: [],
-        uses: useLabels[i] || value || 0,
-        slots: useLabels[i] || max || 0,
-        override: override || 0,
-        dataset: {type: "spell", level: prepMode in sections ? 1 : i, preparationMode: prepMode},
-        prop: sl,
+        uses: configuration.static || !slotLevel ? "—" : levels[key]?.value,
+        slots: configuration.static || !slotLevel ? "—" : levels[key]?.max,
+        override: levels[key]?.override,
+        dataset: {
+          type: "spell",
+          level: Number.isInteger(slotLevel) ? slotLevel : 1,
+          preparationMode: configKey
+        },
+        prop: key,
         editable: context.editable && !aeOverride
       };
     };
 
-    // Determine the maximum spell level which has a slot
-    const maxLevel = Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1).reduce((max, i) => {
-      const level = levels[`spell${i}`];
-      if ( level && (level.max || level.override ) && ( i > max ) ) max = i;
-      return max;
-    }, 0);
-
-    // Level-based spellcasters have cantrips and leveled slots
-    if ( maxLevel > 0 ) {
-      registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
-      for (let lvl = 1; lvl <= maxLevel; lvl++) {
-        const sl = `spell${lvl}`;
-        registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], levels[sl]);
+    // Create initial sections based on data in actor.system.spells.
+    for ( const [k, v] of Object.entries(levels) ) {
+      if ( v.type && v.max ) registerSection(k, Number(v.level), v.type);
+      if ( CONFIG.DND5E.spellcasting[v.type]?.cantrips && !spellbook.spell0 ) {
+        registerSection("spell0", 0, null);
       }
-    }
-
-    // Create spellbook sections for all alternative spell preparation modes that have spell slots.
-    for ( const [k, v] of Object.entries(CONFIG.DND5E.spellPreparationModes) ) {
-      if ( !(k in levels) || !v.upcast || !levels[k].max ) continue;
-
-      if ( !spellbook["0"] && v.cantrips ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
-      const l = levels[k];
-      const level = game.i18n.localize(`DND5E.SpellLevel${l.level}`);
-      const label = `${v.label} — ${level}`;
-      registerSection(k, sections[k], label, {
-        prepMode: k,
-        value: l.value,
-        max: l.max,
-        override: l.override,
-        config: v
-      });
     }
 
     // Iterate over every spell item, adding spells to the spellbook by section
     spells.forEach(spell => {
-      const mode = spell.system.preparation.mode || "prepared";
-      let s = spell.system.level || 0;
-      const sl = `spell${s}`;
+      const mode = spell.system.preparation.mode;
+      const configuration = CONFIG.DND5E.spellcasting[mode] ?? CONFIG.DND5E.spellcasting._fallback;
+      const level = spell.system.level;
+      let key = !configuration.static && !level ? "spell0" : `${mode}${configuration.separate ? level : ""}`;
 
       // Spells from items
       if ( spell.getFlag("dnd5e", "cachedFor") ) {
-        s = "item";
+        key = "item";
         if ( !spell.system.linkedActivity?.displayInSpellbook ) return;
-        if ( !spellbook[s] ) {
-          registerSection(null, s, game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook"));
-          spellbook[s].order = 1000;
-        }
+        if ( !spellbook[key] ) registerSection(key);
       }
 
-      // Specialized spellcasting modes (if they exist)
-      else if ( mode in sections ) {
-        s = sections[mode];
-        if ( !spellbook[s] ) {
-          const l = levels[mode] || {};
-          const config = CONFIG.DND5E.spellPreparationModes[mode];
-          registerSection(mode, s, config.label, {
-            prepMode: mode,
-            value: l.value,
-            max: l.max,
-            override: l.override,
-            config: config
-          });
-        }
+      // At-will, innate, and ritual sections.
+      else if ( configuration.static ) {
+        key = mode;
+        if ( !spellbook[key] ) registerSection(key, null, key);
       }
 
       // Sections for higher-level spells which the caster "should not" have, but spell items exist for
-      else if ( !spellbook[s] ) {
-        registerSection(sl, s, CONFIG.DND5E.spellLevels[s], {levels: levels[sl]});
+      else if ( !spellbook[key] ) {
+        registerSection(key, level, mode);
       }
 
       // Add the spell to the relevant heading
-      spellbook[s].spells.push(spell);
+      spellbook[key].spells.push(spell);
     });
 
     // Sort the spellbook by section level
@@ -535,7 +509,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    * @protected
    */
   _filterItems(items, filters) {
-    const alwaysPrepared = ["innate", "always"];
     const actions = ["action", "bonus", "reaction"];
     const recoveries = ["lr", "sr"];
     const spellSchools = new Set(Object.keys(CONFIG.DND5E.spellSchools));
@@ -565,10 +538,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
       if ( classFilter.size && !classFilter.has(item.system.sourceClass) ) return false;
-      if ( filters.has("prepared") ) {
-        if ( alwaysPrepared.includes(item.system.preparation?.mode) ) return true;
-        return item.system.preparation?.prepared;
-      }
+      if ( filters.has("prepared") ) return item.system.isAvailable;
 
       // Equipment-specific filters
       if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
@@ -1041,7 +1011,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       }
     }
 
-    // Adjust the preparation mode of a leveled spell depending on the section on which it is dropped.
+    // Adjust the preparation mode of a spell depending on the section on which it is dropped.
     if ( itemData.type === "spell" ) this._onDropSpell(itemData, event);
 
     return itemData;
@@ -1056,7 +1026,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    */
   _onDropResetData(itemData, event) {
     if ( !itemData.system ) return;
-    ["attuned", "equipped", "prepared"].forEach(k => delete itemData.system[k]);
+    delete itemData.system.attuned;
+    delete itemData.system.equipped;
+    delete itemData.system.preparation?.prepared;
   }
 
   /* -------------------------------------------- */
@@ -1078,10 +1050,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const { level, preparationMode } = header?.closest("[data-level]")?.dataset ?? {};
 
     // Determine the actor's spell slot progressions, if any.
-    const spellcastKeys = Object.keys(CONFIG.DND5E.spellcastingTypes);
     const progs = Object.values(this.document.classes).reduce((acc, cls) => {
-      const type = cls.spellcasting?.type;
-      if ( spellcastKeys.includes(type) ) acc.add(type);
+      if ( !cls.spellcasting.static ) acc.add(cls.spellcasting.type);
       return acc;
     }, new Set());
 
@@ -1089,24 +1059,24 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Case 1: Drop a cantrip.
     if ( itemData.system.level === 0 ) {
-      const modes = CONFIG.DND5E.spellPreparationModes;
+      const modes = CONFIG.DND5E.spellcasting;
       if ( modes[preparationMode]?.cantrips ) {
-        prep.mode = "prepared";
+        prep.mode = "spell";
       } else if ( !preparationMode ) {
-        const isCaster = this.document.system.details.spellLevel || progs.size;
-        prep.mode = isCaster ? "prepared" : "innate";
+        const isCaster = this.document.system.details?.spellLevel || progs.size;
+        prep.mode = isCaster ? "spell" : "innate";
       } else {
         prep.mode = preparationMode;
       }
-      if ( modes[prep.mode]?.prepares ) prep.prepared = true;
+      if ( modes[prep.mode]?.prepares ) prep.prepared = 1;
     }
 
     // Case 2: Drop a leveled spell in a section without a mode.
     else if ( (level === "0") || !preparationMode ) {
       if ( this.document.type === "npc" ) {
-        prep.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
+        prep.mode = this.document.system.details.spellLevel ? "spell" : "innate";
       } else {
-        const m = progs.has("leveled") ? "prepared" : (progs.first() ?? "innate");
+        const m = progs.has("spell") ? "spell" : (progs.first() ?? "innate");
         prep.mode = progs.has(prep.mode) ? prep.mode : m;
       }
     }

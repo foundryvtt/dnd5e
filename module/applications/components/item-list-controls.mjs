@@ -55,7 +55,6 @@ export default class ItemListControlsElement extends HTMLElement {
       label: "SIDEBAR.SortModePriority",
       comparator: (a, b) => a.linkedName?.localeCompare(b.linkedName, game.i18n.lang)
         || (a.level - b.level)
-        || (a.preparationMode - b.preparationMode)
         || (a.prepared - b.prepared)
         || a.name.localeCompare(b.name, game.i18n.lang)
     },
@@ -345,15 +344,14 @@ export default class ItemListControlsElement extends HTMLElement {
       const items = [];
       section.querySelectorAll(".item").forEach(element => {
         const {
-          itemName, itemSort, itemLevel, itemPreparationMode, itemPreparationPrepared, linkedName
+          itemName, itemSort, itemLevel, itemPreparationPrepared, linkedName
         } = element.dataset;
         items.push({
           element, linkedName,
           name: itemName,
           sort: Number(itemSort),
           level: Number(itemLevel),
-          preparationMode: itemPreparationMode === "always" ? 0 : 1,
-          prepared: itemPreparationPrepared === "true" ? 0 : 1
+          prepared: 2 - itemPreparationPrepared
         });
       });
       items.sort(this.constructor.SORT_MODES[this.sortMode].comparator);

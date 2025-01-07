@@ -59,9 +59,9 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     context.hitDieTypes = CONFIG.DND5E.hitDieTypes.map(d => ({ label: d, value: d }));
 
     // If using modern rules, do not show redundant artificer progression unless it is already selected.
-    context.spellProgression = { ...CONFIG.DND5E.spellProgression };
+    context.spellProgression = CONFIG.DND5E.spellcasting.progressionChoices;
     if ( (game.settings.get("dnd5e", "rulesVersion") === "modern") && (spellcasting?.progression !== "artificer") ) {
-      delete context.spellProgression.artificer;
+      context.spellProgression.findSplice(p => p.value === "artificer");
     }
 
     // Activation
