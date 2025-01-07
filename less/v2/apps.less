@@ -1344,10 +1344,6 @@ dialog.dnd5e2.application {
       font-size: var(--font-size-12);
       text-align: center;
     }
-    [data-action="roll"] {
-      padding: 6px 8px;
-      > i { margin: 0; }
-    }
     &:not(:last-of-type) {
       border-block-end: var(--dnd5e-border-dotted);
       padding-block-end: 4px;
@@ -1483,7 +1479,7 @@ dialog.dnd5e2.application {
 
 .rest.application {
   .window-content > section.flexcol { gap: 12px; }
-  [data-action="rollHitDie"] { flex: .5; }
+  [data-action="rollHitDie"] { flex: 0; }
 }
 
 /* ---------------------------------- */

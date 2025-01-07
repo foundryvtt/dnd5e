@@ -20,8 +20,9 @@
             <select name="denom">
                 {{ selectOptions hitDice.options selected=hitDice.denomination }}
             </select>
-            <button type="button" data-action="rollHitDie">
-                <i class="fa-solid fa-dice-d20" inert></i> {{ localize "DND5E.Roll" }}
+            <button type="button" class="dice-button" data-action="rollHitDie" data-tooltip="DND5E.Roll"
+                    aria-label="{{ localize 'DND5E.Roll' }}">
+                <i class="fa-solid fa-dice-d20" inert></i>
             </button>
         </div>
         {{ formField autoRoll name="autoHD" value=config.autoHD input=inputs.createCheckboxInput rootId=partId }}

@@ -38,7 +38,7 @@ export default class LongRestDialog extends BaseRestDialog {
   /* -------------------------------------------- */
 
   /**
-   * A helper constructor function which displays the Long Rest confirmation dialog and returns a Promise once it's
+   * A helper constructor function which displays the Long Rest confirmation dialog and returns a Promise once its
    * workflow has been resolved.
    * @param {object} [options={}]
    * @param {Actor5e} [options.actor]  Actor that is taking the long rest.
@@ -47,7 +47,7 @@ export default class LongRestDialog extends BaseRestDialog {
   static async longRestDialog({ actor } = {}) {
     foundry.utils.logCompatibilityWarning(
       "The `longRestDialog` method on `LongRestDialog` has been renamed `configure`.",
-      { since: "DnD5e 4.1", until: "DnD5e 4.3" }
+      { since: "DnD5e 4.2", until: "DnD5e 4.4" }
     );
     return this.configure(actor, { type: "long" });
   }

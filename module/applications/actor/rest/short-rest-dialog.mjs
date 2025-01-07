@@ -113,7 +113,7 @@ export default class ShortRestDialog extends BaseRestDialog {
   /* -------------------------------------------- */
 
   /**
-   * A helper constructor function which displays the Short Rest dialog and returns a Promise once it's workflow has
+   * A helper constructor function which displays the Short Rest dialog and returns a Promise once its workflow has
    * been resolved.
    * @param {object} [options={}]
    * @param {Actor5e} [options.actor]  Actor that is taking the short rest.
@@ -122,7 +122,7 @@ export default class ShortRestDialog extends BaseRestDialog {
   static async shortRestDialog({ actor } = {}) {
     foundry.utils.logCompatibilityWarning(
       "The `shortRestDialog` method on `ShortRestDialog` has been renamed `configure`.",
-      { since: "DnD5e 4.1", until: "DnD5e 4.3" }
+      { since: "DnD5e 4.2", until: "DnD5e 4.4" }
     );
     return this.configure(actor, { type: "short" });
   }

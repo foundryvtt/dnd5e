@@ -10,7 +10,7 @@ export default class BaseRestDialog extends Dialog5e {
     if ( options instanceof Actor ) {
       foundry.utils.logCompatibilityWarning(
         "The rest dialogs now take a single options object with `document` and `config` options.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.3" }
+        { since: "DnD5e 4.2", until: "DnD5e 4.4" }
       );
       options = { ..._options, data: _dialogData, document: options };
     }
@@ -130,7 +130,7 @@ export default class BaseRestDialog extends Dialog5e {
 
   /**
    * A helper to handle displaying and responding to the dialog.
-   * @param {Actor5e} actor              The actor being rested.
+   * @param {Actor5e} actor              The actor that is resting.
    * @param {RestConfiguration}  config  Configuration information for the rest.
    * @returns {Promise<RestConfiguration>}
    */
@@ -141,7 +141,7 @@ export default class BaseRestDialog extends Dialog5e {
         buttons: [
           {
             default: true,
-            icon: '<i class="fa-solid fa-bed" inert></i>',
+            icon: "fa-solid fa-bed",
             label: game.i18n.localize("DND5E.REST.Label"),
             name: "rest",
             type: "submit"
