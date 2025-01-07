@@ -1957,6 +1957,21 @@
 "DND5E.FavoriteRemove": "Remove Favorite",
 "DND5E.Favorites": "Favorites",
 "DND5E.FeatureActionRecharge": "Action Recharge",
+
+"DND5E.FEATURE": {
+  "FIELDS": {
+    "properties": {
+      "label": "Feature Properties"
+    },
+    "requirements": {
+      "label": "Requirements"
+    },
+    "type": {
+      "label": "Feature Type"
+    }
+  }
+},
+
 "DND5E.Feature": {
   "Background": "Background Feature",
   "Class": {
@@ -2584,9 +2599,14 @@
   "Header": "Feature Prerequisites",
   "FIELDS": {
     "prerequisites": {
+      "label": "Prerequisites",
       "level": {
         "label": "Required Level",
         "hint": "Character or class level required to select this feature when levelling up."
+      },
+      "repeatable": {
+        "hint": "This feature can be chosen more than once.",
+        "label": "Repeatable"
       }
     }
   }
