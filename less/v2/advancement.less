@@ -1,3 +1,52 @@
+/* ----------------------------------------- */
+/*  Advancement Manager                      */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.manager.application {
+  [data-application-part="manager"] {
+    gap: 12px;
+
+    > .step {
+      h3 {
+        padding-block-end: 0;
+        color: var(--color-text-dark-primary);
+        font-family: var(--dnd5e-font-roboto-condensed);
+        font-size: var(--font-size-20);
+        text-shadow: none;
+      }
+      &.dnd5e {
+        h4 {
+          color: var(--color-text-dark-primary);
+          font-family: var(--dnd5e-font-roboto);
+          text-shadow: none;
+        }
+      }
+    }
+
+    nav { gap: 6px; }
+
+    /* V1 Compatibility */
+    button { height: var(--input-height); }
+
+    label > span {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-weight: bold;
+      font-size: var(--font-size-12);
+    }
+
+    input[type=checkbox]{
+      &:hover, &:focus {
+        box-shadow: none;
+        border: none;
+      }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Visualizer                               */
+/* ----------------------------------------- */
+
 .advancement-visualizer {
   .step {
     position: relative;

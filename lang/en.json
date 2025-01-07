@@ -298,6 +298,33 @@
       "Invalid": "Hit points must be a valid whole number."
     }
   },
+  "Manager": {
+    "Action": {
+      "Complete": "Complete",
+      "NextStep": "Next",
+      "PreviousStep": "Previous",
+      "Restart": "Restart"
+    },
+    "ClosePrompt": {
+      "Action": {
+        "Continue": "Continue",
+        "Stop": "Stop Advancement"
+      },
+      "Message": "<p>If the advancement process is cancelled, choices made so far will be discarded and no changes will be made to the actor.</p>",
+      "Title": "Stop Advancement"
+    },
+    "RestartPrompt": {
+      "Message": "Are you sure you wish to undo all choices so far?",
+      "Title": "Restart Advancement Choices"
+    },
+    "Steps": "Step {current} of {total}",
+    "Title": {
+      "Default": "Advancement",
+      "LevelIncreased": "Level Up Character",
+      "LevelNewClass": "Add Class",
+      "ModifyChoices": "Modify Choices"
+    }
+  },
   "SPELLCONFIG": {
     "FIELDS": {
       "uses": {
@@ -378,21 +405,6 @@
 "DND5E.AdvancementLevelNoneHeader": "No Level",
 "DND5E.AdvancementLevelDownConfirmationMessage": "Leveling this class down will also undo all advancement choices made for it. These changes will be removed from your character as long as the checkbox below is checked.",
 "DND5E.AdvancementLevelDownConfirmationTitle": "Confirm Leveling Down",
-"DND5E.AdvancementManagerCloseTitle": "Stop Advancement",
-"DND5E.AdvancementManagerCloseMessage": "<p>If the advancement process is cancelled, choices made so far will be discarded and no changes will be made to the actor.</p>",
-"DND5E.AdvancementManagerCloseButtonContinue": "Continue",
-"DND5E.AdvancementManagerCloseButtonStop": "Stop Advancement",
-"DND5E.AdvancementManagerComplete": "Complete",
-"DND5E.AdvancementManagerLevelIncreasedTitle": "Level Up Character",
-"DND5E.AdvancementManagerLevelNewClassTitle": "Add Class",
-"DND5E.AdvancementManagerModifyChoicesTitle": "Modify Choices",
-"DND5E.AdvancementManagerNextStep": "Next",
-"DND5E.AdvancementManagerPreviousStep": "Previous",
-"DND5E.AdvancementManagerRestart": "Restart",
-"DND5E.AdvancementManagerRestartConfirm": "Are you sure you wish to undo all choices so far?",
-"DND5E.AdvancementManagerRestartConfirmTitle": "Restart Advancement Choices",
-"DND5E.AdvancementManagerSteps": "Step {current} of {total}",
-"DND5E.AdvancementManagerTitle": "Advancement",
 "DND5E.AdvancementMigrationConfirm": "Apply Migrations",
 "DND5E.AdvancementMigrationHint": "Select which of the following advancements will be added to {name}.",
 "DND5E.AdvancementMigrationTitle": "Migrate Advancement",
