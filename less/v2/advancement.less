@@ -1,4 +1,55 @@
 /* ----------------------------------------- */
+/*  Advancement Config Sheet                 */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.sheet {
+  .items.card {
+    display: grid;
+    grid-template-columns: [name] 1fr [controls] 20px;
+
+    > * { grid-column: 1 / -1; }
+    .header, .items-list, .items-list > li {
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: subgrid;
+    }
+    .header {
+      margin-inline: -10px;
+      padding-block: 3px 2px;
+      padding-inline: 10px;
+      border-radius: 0;
+    }
+    .items-list {
+      container-type: normal;
+    }
+    .item-name { grid-column: name; }
+    .item-controls { grid-column: controls; }
+  }
+
+  .centered { text-align: center; }
+  .drop-area {
+    border: 1px dashed var(--color-border-light-2);
+    border-radius: 4px;
+    padding: 4px;
+  }
+  .hint.warning {
+    color: var(--dnd5e-color-maroon);
+    font-weight: bold;
+  }
+}
+
+/* ----------------------------------------- */
+/*  Grant Items Advancement                  */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.item-grant.sheet {
+  .items.card {
+    grid-template-columns: [optional] 1fr [name] 3fr [controls] 20px;
+    .item-optional { grid-column: optional; }
+  }
+}
+
+/* ----------------------------------------- */
 /*  Advancement Manager                      */
 /* ----------------------------------------- */
 
@@ -34,7 +85,7 @@
       font-size: var(--font-size-12);
     }
 
-    input[type=checkbox]{
+    input[type=checkbox] {
       &:hover, &:focus {
         box-shadow: none;
         border: none;

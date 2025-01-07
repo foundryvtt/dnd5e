@@ -99,6 +99,21 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Perform the pre-localization of this data model.
+   */
+  static localize() {
+    Localization.localizeDataModel(this);
+    if ( this.metadata.dataModels?.configuration ) {
+      Localization.localizeDataModel(this.metadata.dataModels.configuration);
+    }
+    if ( this.metadata.dataModels?.value ) {
+      Localization.localizeDataModel(this.metadata.dataModels.value);
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 

@@ -298,6 +298,26 @@
       "Invalid": "Hit points must be a valid whole number."
     }
   },
+  "ItemGrant": {
+    "Details": "Grant Details",
+    "DropHint": "Drop Items here to add them to the list granted by this advancement.",
+    "FIELDS": {
+      "items": {
+        "label": "Items"
+      },
+      "optional": {
+        "label": "Optional",
+        "hint": "If the whole advancement is marked optional, players may opt out of any of the following items, otherwise all non-optional items are granted."
+      }
+    },
+    "Hint": "Grant the character items (such as equipment, features, or spells) when they reach a certain level.",
+    "Title": "Grant Items",
+    "Warning": {
+      "Container": "Container contents will not be added with containers.",
+      "Duplicate": "That item already exists on this advancement.",
+      "Recursive": "You cannot grant an item in its own advancement."
+    }
+  },
   "Manager": {
     "Action": {
       "Complete": "Complete",
@@ -327,10 +347,25 @@
   },
   "SPELLCONFIG": {
     "FIELDS": {
-      "uses": {
-        "requireSlot": {
-          "label": "Require Slot",
-          "hint": "Require a spell slot to be spent when using the limited uses. If not checked then the uses will be additional free uses that don't consume a slot."
+      "spell": {
+        "label": "Spell Details",
+        "ability": {
+          "label": "Ability"
+        },
+        "preparation": {
+          "label": "Preparation Mode"
+        },
+        "uses": {
+          "max": {
+            "label": "Uses"
+          },
+          "per": {
+            "label": "Period"
+          },
+          "requireSlot": {
+            "label": "Require Slot",
+            "hint": "Require a spell slot to be spent when using the limited uses. If not checked then the uses will be additional free uses that don't consume a slot."
+          }
         }
       }
     },
@@ -391,14 +426,6 @@
 "DND5E.AdvancementItemChoiceTypeHint": "Restrict what Item types can be chosen.",
 "DND5E.AdvancementItemChoiceTypeAny": "Anything",
 "DND5E.AdvancementItemChoiceTypeWarning": "Only {type} items can be selected for this choice.",
-"DND5E.AdvancementItemGrantTitle": "Grant Items",
-"DND5E.AdvancementItemGrantHint": "Grant the character items (such as equipment, features, or spells) when they reach a certain level.",
-"DND5E.AdvancementItemGrantDropHint": "Drop Items here to add them to the list granted by this advancement.",
-"DND5E.AdvancementItemGrantContainerWarning": "Container contents will not be added with containers.",
-"DND5E.AdvancementItemGrantDuplicateWarning": "That item already exists on this advancement.",
-"DND5E.AdvancementItemGrantRecursiveWarning": "You cannot grant an item in its own advancement.",
-"DND5E.AdvancementItemGrantOptional": "Optional",
-"DND5E.AdvancementItemGrantOptionalHint": "If the whole advancement is marked optional, players may opt out of any of the following items, otherwise all non-optional items are granted.",
 "DND5E.AdvancementItemTypeInvalidWarning": "{type} items cannot be added with this advancement type.",
 "DND5E.AdvancementLevelHeader": "Level {level}",
 "DND5E.AdvancementLevelAnyHeader": "Any Level",

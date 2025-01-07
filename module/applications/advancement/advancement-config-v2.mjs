@@ -72,7 +72,11 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
     const context = {
       ...(await super._prepareContext(options)),
       advancement: this.advancement,
-      configuration: this.advancement.configuration,
+      configuration: {
+        data: this.advancement.configuration,
+        fields: this.advancement.configuration?.schema?.fields
+      },
+      fields: this.advancement.schema.fields,
       source: this.advancement._source,
       default: {
         title: this.advancement.constructor.metadata.title,
@@ -92,18 +96,35 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
   }
 
   /* -------------------------------------------- */
+  /*  Life-Cycle Handlers                         */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    if ( !game.user.isGM ) return;
+    new DragDrop({
+      dragSelector: ".draggable",
+      dropSelector: null,
+      callbacks: {
+        dragstart: this._onDragStart.bind(this),
+        drop: this._onDrop.bind(this)
+      }
+    }).bind(this.element);
+  }
+
+  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
   /**
    * Handle deleting an existing Item entry from the Advancement.
-   * @param {Event} event        The originating click event.
-   * @returns {Promise<Item5e>}  The updated parent Item after the application re-renders.
    * @this {AdvancementConfig}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  static async #deleteDroppedItem(event) {
-    event.preventDefault();
-    const uuidToDelete = event.currentTarget.closest("[data-item-uuid]")?.dataset.itemUuid;
+  static async #deleteDroppedItem(event, target) {
+    const uuidToDelete = target.closest("[data-item-uuid]")?.dataset.itemUuid;
     if ( !uuidToDelete ) return;
     const items = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
     const updates = { configuration: await this.prepareConfigurationUpdate({
@@ -155,50 +176,51 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
   }
 
   /* -------------------------------------------- */
-  /*  Drag & Drop for Item Pools                  */
+  /*  Drag & Drop                                 */
   /* -------------------------------------------- */
 
-  // TODO: Re-implement drag & drop for ApplicationV2
-
-  /** @inheritDoc */
-  _canDragDrop() {
-    return this.isEditable;
-  }
+  /**
+   * Handle beginning drag events on the sheet.
+   * @param {DragEvent} event  The initiating drag start event.
+   * @protected
+   */
+  async _onDragStart(event) {}
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /**
+   * Handle dropping items onto the sheet.
+   * @param {DragEvent} event  The concluding drag event.
+   * @protected
+   */
   async _onDrop(event) {
-    if ( !this.options.dropKeyPath ) throw new Error(
-      "AdvancementConfig#options.dropKeyPath must be configured or #_onDrop must be overridden to support"
-      + " drag and drop on advancement config items."
-    );
+    if ( !this.options.dropKeyPath ) return;
 
     // Try to extract the data
     const data = TextEditor.getDragEventData(event);
 
-    if ( data?.type !== "Item" ) return false;
+    if ( data?.type !== "Item" ) return;
     const item = await Item.implementation.fromDropData(data);
 
     try {
       this._validateDroppedItem(event, item);
     } catch(err) {
       ui.notifications.error(err.message);
-      return null;
+      return;
     }
 
     const existingItems = foundry.utils.getProperty(this.advancement.configuration, this.options.dropKeyPath);
 
     // Abort if this uuid is the parent item
     if ( item.uuid === this.item.uuid ) {
-      ui.notifications.error("DND5E.AdvancementItemGrantRecursiveWarning", {localize: true});
-      return null;
+      ui.notifications.error("DND5E.ADVANCEMENT.ItemGrant.Warning.Recursive", {localize: true});
+      return;
     }
 
     // Abort if this uuid exists already
     if ( existingItems.find(i => i.uuid === item.uuid) ) {
-      ui.notifications.warn("DND5E.AdvancementItemGrantDuplicateWarning", {localize: true});
-      return null;
+      ui.notifications.warn("DND5E.ADVANCEMENT.ItemGrant.Warning.Duplicate", {localize: true});
+      return;
     }
 
     await this.advancement.update({[`configuration.${this.options.dropKeyPath}`]: [
