@@ -21,7 +21,17 @@
     }
     .items-list {
       container-type: normal;
+      gap: 0;
+
+      > li {
+        margin: 0 -.75em;
+        padding: 6px .75em;
+
+        &:nth-child(odd) { background: var(--dnd5e-color-table-row-odd); }
+        &:nth-child(even) { background: var(--dnd5e-color-table-row-even); }
+      }
     }
+    .item-optional { display: inline-flex; }
     .item-name { grid-column: name; }
     .item-controls { grid-column: controls; }
   }
