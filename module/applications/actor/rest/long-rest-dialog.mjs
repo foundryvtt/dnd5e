@@ -23,17 +23,6 @@ export default class LongRestDialog extends BaseRestDialog {
   };
 
   /* -------------------------------------------- */
-  /*  Properties                                  */
-  /* -------------------------------------------- */
-
-  /** @override */
-  get promptNewDay() {
-    // It's always a new day when resting 1 week
-    // TODO: Adjust based on actual variant duration, rather than hard-coding
-    return context.variant !== "gritty";
-  }
-
-  /* -------------------------------------------- */
   /*  Factory Methods                             */
   /* -------------------------------------------- */
 
