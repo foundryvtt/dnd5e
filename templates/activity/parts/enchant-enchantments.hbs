@@ -2,11 +2,6 @@
     <fieldset>
         <legend>
             <span>{{ localize "DND5E.ENCHANT.FIELDS.enchant.label" }}</span>
-            <button type="button" class="unbutton control-button" data-action="addEffect"
-                    data-tooltip="DND5E.ENCHANT.Enchantment.Action.Create"
-                    aria-label="{{ localize "DND5E.ENCHANT.Enchantment.Action.Create" }}">
-                <i class="fas fa-plus"></i>
-            </button>
         </legend>
         {{#with fields.enchant.fields as |fields|}}
         {{#unless ../activity.isSpell}}{{ formField fields.identifier value=../source.enchant.identifier }}{{/unless}}
@@ -25,6 +20,12 @@
             </li>
             {{/each}}
         </ul>
+        <button type="button" class="unbutton control-button" data-action="addEffect"
+                data-tooltip="DND5E.ENCHANT.Enchantment.Action.Create"
+                aria-label="{{ localize "DND5E.ENCHANT.Enchantment.Action.Create" }}">
+            <i class="fas fa-plus"></i>
+            <span>{{ localize "DND5E.ENCHANT.Enchantment.Action.Create" }}</span>
+        </button>
     </fieldset>
 </section>
 

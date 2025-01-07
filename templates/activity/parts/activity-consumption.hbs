@@ -2,11 +2,6 @@
     <fieldset>
         <legend>
             <span>{{ localize "DND5E.CONSUMPTION.FIELDS.consumption.label" }}</span>
-            <button type="button" class="unbutton control-button" data-action="addConsumption"
-                    data-tooltip="DND5E.CONSUMPTION.Action.Create"
-                    aria-label="{{ localize "DND5E.CONSUMPTION.Action.Create" }}">
-                <i class="fas fa-plus" inert></i>
-            </button>
         </legend>
 
         {{#if showConsumeSpellSlot}}
@@ -49,9 +44,13 @@
                 </button>
             </div>
         </div>
-        {{else}}
-        <div class="empty">{{ localize "DND5E.None" }}</div>
         {{/each}}
+        <button type="button" class="unbutton control-button" data-action="addConsumption"
+                data-tooltip="DND5E.CONSUMPTION.Action.Create"
+                aria-label="{{ localize "DND5E.CONSUMPTION.Action.Create" }}">
+            <i class="fas fa-plus" inert></i>
+            <span>{{ localize "DND5E.CONSUMPTION.Action.Create" }}</span>
+        </button>
     </fieldset>
 
     {{#if showScaling}}

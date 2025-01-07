@@ -1,11 +1,6 @@
 <fieldset>
     <legend>
         <span>{{ localize "DND5E.ACTIVITY.FIELDS.effects.label" }}</span>
-        <button type="button" class="unbutton control-button" data-action="addEffect"
-                data-tooltip="DND5E.EFFECT.Action.Create"
-                aria-label="{{ localize "DND5E.EFFECT.Action.Create" }}">
-            <i class="fas fa-plus" inert></i>
-        </button>
     </legend>
     <multi-select name="appliedEffects" class="hidden-tags">
         {{ selectOptions allEffects }}
@@ -20,6 +15,12 @@
             {{{ localize "DND5E.EFFECT.Empty" }}}
         </li>
         {{/each}}
+        <button type="button" class="unbutton control-button" data-action="addEffect"
+                data-tooltip="DND5E.EFFECT.Action.Create"
+                aria-label="{{ localize "DND5E.EFFECT.Action.Create" }}">
+            <i class="fas fa-plus" inert></i>
+            <span>{{ localize "DND5E.EFFECT.Action.Create" }}</span>
+        </button>
     </ul>
 </fieldset>
 
