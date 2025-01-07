@@ -355,6 +355,16 @@ export function registerSystemSettings() {
     default: false
   });
 
+  // Metric Volume Weights
+  game.settings.register("dnd5e", "metricVolumeUnits", {
+    name: "SETTINGS.DND5E.METRIC.VolumeUnits.Name",
+    hint: "SETTINGS.DND5E.METRIC.VolumeUnits.Hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false
+  });
+
   // Metric Unit Weights
   game.settings.register("dnd5e", "metricWeightUnits", {
     name: "SETTINGS.DND5E.METRIC.WeightUnits.Name",

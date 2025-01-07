@@ -792,6 +792,40 @@
 
 "DND5E.Casting": "Casting",
 "DND5E.Conditions": "Conditions",
+
+"DND5E.CONTAINER": {
+  "Details": "Container Details",
+  "FIELDS": {
+    "capacity": {
+      "label": "Capacity",
+      "count": {
+        "label": "Item Count"
+      },
+      "volume": {
+        "label": "Volume Capacity",
+        "units": {
+          "label": "Volume Units"
+        },
+        "value": {
+          "label": "Maximum Volume"
+        }
+      },
+      "weight": {
+        "label": "Weight Capacity",
+        "units": {
+          "label": "Weight Units"
+        },
+        "value": {
+          "label": "Maximum Weight"
+        }
+      }
+    },
+    "properties": {
+      "label": "Container Properties"
+    }
+  }
+},
+
 "DND5E.Controls": {
   "Hint": "Enable various hints throughout the UI for certain mouse and keyboard controls.",
   "LeftClick": "Left Click",
@@ -2320,14 +2354,6 @@
 "DND5E.ItemConsumableStatus": "Consumable Status",
 "DND5E.ItemConsumableSubtype": "{category} Type",
 "DND5E.ItemConsumableType": "Consumable Type",
-"DND5E.ItemContainerCapacity": "Capacity",
-"DND5E.ItemContainerCapacityItems": "Items",
-"DND5E.ItemContainerCapacityMax": "Max Capacity",
-"DND5E.ItemContainerCapacityType": "Capacity Type",
-"DND5E.ItemContainerCapacityWeight": "Weight",
-"DND5E.ItemContainerDetails": "Container Details",
-"DND5E.ItemContainerProperties": "Container Properties",
-"DND5E.ItemContainerStatus": "Container Status",
 "DND5E.ItemCreate": "Create Item",
 "DND5E.ItemCritThreshold": "Critical Hit Threshold",
 "DND5E.ItemCritExtraDamage": "Extra Critical Hit Damage",
@@ -2395,6 +2421,7 @@
 "DND5E.ItemRecoveryRollMax": "{name} recovers all charges",
 "DND5E.ItemRecoveryFormulaWarning": "Unable to recover uses for {name}. Invalid recovery formula '{formula}' ({uuid}).",
 "DND5E.ItemRequiredStr": "Required Strength",
+"DND5E.Items": "Items",
 "DND5E.ItemSiegeProperties": "Siege Properties",
 "DND5E.ItemSpeciesDetails": "Species Details",
 "DND5E.ItemSubclassDetails": "Subclass Details",
@@ -3641,6 +3668,7 @@
 "DND5E.Unidentified.Notice": "You must identify this item to learn its details.",
 "DND5E.Unidentified.Title": "Unidentified",
 "DND5E.Unidentified.Value": "???",
+"DND5E.Unit": "Unit",
 
 "DND5E.UNITS": {
   "DISTANCE": {
@@ -3660,6 +3688,31 @@
     "Mile": {
       "Label": "Miles",
       "Abbreviation": "mi"
+    }
+  },
+  "VOLUME": {
+    "Label": "Volume Units",
+    "CubicFoot": {
+      "Label": "Cubic Feet",
+      "Abbreviation": "ft³",
+      "Counted": {
+        "narrow": {
+          "one": "{number}ft³",
+          "other": "{number}ft³"
+        },
+        "short": {
+          "one": "{number} cu ft",
+          "other": "{number} cu ft"
+        },
+        "long": {
+          "one": "{number} cubic foot",
+          "other": "{number} cubic feet"
+        }
+      }
+    },
+    "Liter": {
+      "Label": "Liters",
+      "Abbreviation": "L"
     }
   },
   "WEIGHT": {
@@ -4199,6 +4252,10 @@
     "LengthUnits": {
       "Name": "Use Metric Length Units",
       "Hint": "Defaults to using meters instead of feet for movement and senses."
+    },
+    "VolumeUnits": {
+      "Name": "Use Metric Volume Units",
+      "Hint": "Defaults to using liters instead of cubic feet for container capacity."
     },
     "WeightUnits": {
       "Name": "Use Metric Weight Units",

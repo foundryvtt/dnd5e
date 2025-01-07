@@ -2374,6 +2374,10 @@ DND5E.defaultUnits = {
     imperial: "ft",
     metric: "m"
   },
+  volume: {
+    imperial: "cubicFoot",
+    metric: "liter"
+  },
   weight: {
     imperial: "lb",
     metric: "kg"
@@ -2460,6 +2464,29 @@ DND5E.distanceUnits = {
   ...DND5E.rangeTypes
 };
 preLocalize("distanceUnits");
+
+/* -------------------------------------------- */
+
+/**
+ * The valid units for measurement of volume.
+ * @enum {UnitConfiguration}
+ */
+DND5E.volumeUnits = {
+  cubicFoot: {
+    label: "DND5E.UNITS.VOLUME.CubicFoot.Label",
+    abbreviation: "DND5E.UNITS.Volume.CubicFoot.Abbreviation",
+    counted: "DND5E.UNITS.Volume.CubicFoot.Counted",
+    conversion: 1,
+    type: "imperial"
+  },
+  liter: {
+    label: "DND5E.UNITS.VOLUME.Liter.Label",
+    abbreviation: "DND5E.UNITS.Volume.Liter.Abbreviation",
+    conversion: 1 / 28.317,
+    type: "metric"
+  }
+};
+preLocalize("volumeUnits", { keys: ["label", "abbreviation"] });
 
 /* -------------------------------------------- */
 
