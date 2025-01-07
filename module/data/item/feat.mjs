@@ -1,11 +1,12 @@
 import { ItemDataModel } from "../abstract.mjs";
+import AdvancementField from "../fields/advancement-field.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
-import { FormulaField } from "../fields/_module.mjs";
 
-const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Feature items.
@@ -13,6 +14,7 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  *
+ * @property {Advancement[]}                        Advancement objects for this feature.
  * @property {object} enchant
  * @property {string} enchant.max                   Maximum number of items that can have this enchantment.
  * @property {string} enchant.period                Frequency at which the enchantment can be swapped.
@@ -38,6 +40,7 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       enchant: new SchemaField({
         max: new FormulaField({ deterministic: true }),
         period: new StringField()
