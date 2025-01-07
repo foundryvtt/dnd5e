@@ -360,8 +360,8 @@ function makeResourceField(schemaOptions={}) {
   return new SchemaField({
     value: new NumberField({required: true, integer: true, initial: 0, labels: "DND5E.ResourceValue"}),
     max: new NumberField({required: true, integer: true, initial: 0, labels: "DND5E.ResourceMax"}),
-    sr: new BooleanField({required: true, labels: "DND5E.ShortRestRecovery"}),
-    lr: new BooleanField({required: true, labels: "DND5E.LongRestRecovery"}),
+    sr: new BooleanField({required: true, labels: "DND5E.REST.Short.Recovery"}),
+    lr: new BooleanField({required: true, labels: "DND5E.REST.Long.Recovery"}),
     label: new StringField({required: true, labels: "DND5E.ResourceLabel"})
   }, schemaOptions);
 }

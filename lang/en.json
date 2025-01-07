@@ -2304,15 +2304,12 @@
     "Decrease": "Decrease",
     "Increase": "Increase"
   },
+  "Available": "{number} available",
   "Config": "Adjust Hit Dice"
 },
 
 "DND5E.HitDie": "Hit Die",
 "DND5E.HitDice": "Hit Dice",
-"DND5E.HitDiceAutoSpend": {
-  "Label": "Auto Spend HD",
-  "Hint": "Automatically spend hit dice until they run out or health is full."
-},
 "DND5E.HitDiceConfig": "Adjust Hit Dice",
 "DND5E.HitDiceConfigHint": "Adjust remaining hit dice levels for each class.",
 "DND5E.HitDiceMax": "Maximum Hit Dice",
@@ -2537,20 +2534,6 @@
 "DND5E.LimitedUsesPrompt": "Uses Prompt",
 "DND5E.LimitedUsesPromptTooltip": "If unchecked, the prompt to consume an available use will be suppressed.",
 "DND5E.Long": "Long",
-"DND5E.LongRest": "Long Rest",
-"DND5E.LongRestNormal": "Long Rest (8 hours)",
-"DND5E.LongRestGritty": "Long Rest (7 days)",
-"DND5E.LongRestEpic": "Long Rest (1 hour)",
-"DND5E.LongRestOvernight": "Long Rest (New Day)",
-"DND5E.LongRestHint": "Take a long rest? On a long rest you will recover hit points, hit dice, class resources, limited use item charges, and spell slots.",
-"DND5E.LongRestHintLegacy": "Take a long rest? On a long rest you will recover hit points, half your maximum hit dice, class resources, limited use item charges, and spell slots.",
-"DND5E.LongRestHintGroup": "Take a long rest? On a long rest group members will recover hit points, hit dice, class resources, limited use item charges, and spell slots.",
-"DND5E.LongRestHintGroupLegacy": "Take a long rest? On a long rest group members will recover hit points, half of their maximum hit dice, class resources, limited use item charges, and spell slots.",
-"DND5E.LongRestRecovery": "Recovers after Long Rest",
-"DND5E.LongRestResult": "{name} takes a long rest and recovers {health} Hit Points and {dice} Hit Dice.",
-"DND5E.LongRestResultHitDice": "{name} takes a long rest and recovers {dice} Hit Dice.",
-"DND5E.LongRestResultHitPoints": "{name} takes a long rest and recovers {health} Hit Points.",
-"DND5E.LongRestResultShort": "{name} takes a long rest.",
 "DND5E.MagicalBonus": "Magical Bonus",
 "DND5E.Materials": "Materials",
 "DND5E.Max": "Max",
@@ -2744,9 +2727,68 @@
 "DND5E.ResourcePrimary": "Resource 1",
 "DND5E.ResourceSecondary": "Resource 2",
 "DND5E.ResourceTertiary": "Resource 3",
-"DND5E.Rest": "Rest",
-"DND5E.RestL": "L. Rest",
-"DND5E.RestS": "S. Rest",
+
+"DND5E.REST": {
+  "Configuration": "Rest Configuration",
+  "HitDice": {
+    "AutoSpend": {
+      "Hint": "Automatically spend hit dice until they run out or health is full.",
+      "Label": "Auto Spend HD"
+    },
+    "None": "No Hit Dice remaining to roll during this rest.",
+    "Select": "Select Dice to Roll"
+  },
+  "Label": "Rest",
+  "Long": {
+    "Abbreviation": "LR",
+    "Hint": {
+      "Group": "On a long rest group members will recover hit points, hit dice, class resources, limited use item charges, and spell slots.",
+      "GroupLegacy": "On a long rest group members will recover hit points, half of their maximum hit dice, class resources, limited use item charges, and spell slots.",
+      "Normal": "On a long rest you will recover hit points, hit dice, class resources, limited use item charges, and spell slots.",
+      "NormalLegacy": "On a long rest you will recover hit points, half your maximum hit dice, class resources, limited use item charges, and spell slots."
+    },
+    "Label": "Long Rest",
+    "LabelShort": "L. Rest",
+    "Recovery": "Recovers after Long Rest",
+    "Result": {
+      "Full": "{name} takes a long rest and recovers {health} Hit Points and {dice} Hit Dice.",
+      "HitDice": "{name} takes a long rest and recovers {dice} Hit Dice.",
+      "HitPoints": "{name} takes a long rest and recovers {health} Hit Points.",
+      "Short": "{name} takes a long rest."
+    },
+    "Type": {
+      "Epic": "Long Rest (1 hour)",
+      "Gritty": "Long Rest (7 days)",
+      "Normal": "Long Rest (8 hours)",
+      "Overnight": "Long Rest (New Day)"
+    }
+  },
+  "NewDay": {
+    "Hint": "Recover limited use abilities which recharge at dusk, dawn, or on a new day.",
+    "Label": "New Day"
+  },
+  "Short": {
+    "Abbreviation": "SR",
+    "Hint": {
+      "Group": "On a short rest group members can spend Hit Dice and will recover item uses.",
+      "Normal": "On a short rest you may spend remaining Hit Dice and recover item uses."
+    },
+    "Label": "Short Rest",
+    "LabelShort": "S. Rest",
+    "Recovery": "Recovers after Short Rest",
+    "Result": {
+      "Full": "{name} takes a short rest spending {dice} Hit Dice to recover {health} Hit Points.",
+      "Short": "{name} takes a short rest."
+    },
+    "Type": {
+      "Epic": "Short Rest (5 minutes)",
+      "Gritty": "Short Rest (8 hours)",
+      "Normal": "Short Rest (1 hour)",
+      "Overnight": "Short Rest (New Day)"
+    }
+  }
+},
+
 "DND5E.Ritual": "Ritual",
 "DND5E.RitualAbbr": "R",
 
@@ -2791,8 +2833,6 @@
 "DND5E.MovementAir": "Air",
 "DND5E.MovementSpeeds": "Movement Speeds",
 "DND5E.MovementUnits": "Units",
-"DND5E.NewDay": "Is New Day?",
-"DND5E.NewDayHint": "Recover limited use abilities which recharge \"per day\"?",
 
 "DND5E.SAVE": {
   "Title": {
@@ -2906,18 +2946,6 @@
 "DND5E.SchoolIll": "Illusion",
 "DND5E.SchoolNec": "Necromancy",
 "DND5E.SchoolTrs": "Transmutation",
-"DND5E.ShortRest": "Short Rest",
-"DND5E.ShortRestNormal": "Short Rest (1 hour)",
-"DND5E.ShortRestGritty": "Short Rest (8 hours)",
-"DND5E.ShortRestEpic": "Short Rest (5 minutes)",
-"DND5E.ShortRestOvernight": "Short Rest (New Day)",
-"DND5E.ShortRestHint": "Take a short rest? On a short rest you may spend remaining Hit Dice and recover item uses.",
-"DND5E.ShortRestHintGroup": "Take a short rest? On a short rest group members can spend Hit Dice and will recover item uses.",
-"DND5E.ShortRestNoHD": "No Hit Dice remaining",
-"DND5E.ShortRestRecovery": "Recovers after Short Rest",
-"DND5E.ShortRestResult": "{name} takes a short rest spending {dice} Hit Dice to recover {health} Hit Points.",
-"DND5E.ShortRestResultShort": "{name} takes a short rest.",
-"DND5E.ShortRestSelect": "Select Dice to Roll",
 "DND5E.Size": "Size",
 "DND5E.SizeGargantuan": "Gargantuan",
 "DND5E.SizeGargantuanAbbr": "Gt",
