@@ -22,7 +22,24 @@
         }
       }
     }
+
     nav { gap: 6px; }
+
+    /* V1 Compatibility */
+    button { height: var(--input-height); }
+
+    label > span {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-weight: bold;
+      font-size: var(--font-size-12);
+    }
+
+    input[type=checkbox]{
+      &:hover, &:focus {
+        box-shadow: none;
+        border: none;
+      }
+    }
   }
 }
 
