@@ -3,25 +3,27 @@
     <fieldset>
         <legend>{{ localize "DND5E.ADVANCEMENT.SPELLCONFIG.FIELDS.spell.label" }}</legend>
         {{#with configuration.fields.spell.fields as |fields|}}
-        {{ formGroup fields.ability name="configuration.spell.ability" value=../configuration.data.spell.ability
-                     options=../abilityOptions rootId=../partId }}
+        {{#with @root.configuration.data as |data|}}
+        {{ formGroup fields.ability name="configuration.spell.ability" value=data.spell.ability
+                     options=@root.abilityOptions rootId=@root.partId }}
         {{ formGroup fields.preparation name="configuration.spell.preparation"
-                     value=../configuration.data.spell.preparation choices=../CONFIG.spellPreparationModes
-                     labelAttr="label" blank="" rootId=../partId }}
+                     value=data.spell.preparation choices=@root.CONFIG.spellPreparationModes
+                     labelAttr="label" blank="" rootId=@root.partId }}
         <div class="form-group split-group">
             <label>{{ localize "DND5E.LimitedUses" }}</label>
             <div class="form-fields">
                 {{ formGroup fields.uses.fields.max name="configuration.spell.uses.max" classes="label-top"
-                             value=../configuration.data.spell.uses.max rootId=../partId }}
+                             value=data.spell.uses.max rootId=@root.partId }}
                 {{ formGroup fields.uses.fields.per name="configuration.spell.uses.per" classes="label-top"
-                             value=../configuration.data.spell.uses.per choices=../CONFIG.limitedUsePeriods
-                             labelAttr="label" blank="" rootId=../partId }}
+                             value=data.spell.uses.per choices=@root.CONFIG.limitedUsePeriods
+                             labelAttr="label" blank="" rootId=@root.partId }}
             </div>
         </div>
-        {{#if showRequireSpellSlot}}
+        {{#if @root.showRequireSpellSlot}}
         {{ formGroup fields.uses.fields.requireSlot  name="configuration.spell.uses.requireSlot"
-                     value=../configuration.data.spell.uses.requireSlot rootId=../partId }}
+                     value=data.spell.uses.requireSlot input=@root.inputs.createCheckboxInput rootId=@root.partId }}
         {{/if}}
+        {{/with}}
         {{/with}}
     </fieldset>
     {{/if~}}
