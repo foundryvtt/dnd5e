@@ -446,10 +446,13 @@ Hooks.once("i18nInit", () => {
       DND5E: {
         "Feature.Species": game.i18n.localize("DND5E.Feature.SpeciesLegacy"),
         FlagsAlertHint: game.i18n.localize("DND5E.FlagsAlertHintLegacy"),
+        ItemSpeciesDetails: game.i18n.localize("DND5E.ItemSpeciesDetailsLegacy"),
         "Language.Category.Rare": game.i18n.localize("DND5E.Language.Category.Exotic"),
         RacialTraits: game.i18n.localize("DND5E.RacialTraitsLegacy"),
         "REST.Long.Hint.Normal": game.i18n.localize("DND5E.REST.Long.Hint.NormalLegacy"),
         "REST.Long.Hint.Group": game.i18n.localize("DND5E.REST.Long.Hint.GroupLegacy"),
+        "Species.Add": game.i18n.localize("DND5E.Species.AddLegacy"),
+        "Species.Features": game.i18n.localize("DND5E.Species.FeaturesLegacy"),
         "TARGET.Type.Emanation": foundry.utils.mergeObject(
           _fallback.DND5E?.TARGET?.Type?.Radius ?? {},
           translations.DND5E?.TARGET?.Type?.Radius ?? {},
