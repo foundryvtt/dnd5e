@@ -767,7 +767,9 @@
       font-family: var(--font-primary);
       font-weight: normal;
     }
+  }
 
+  &.sidebar-heading, &.sidebar-info {
     ul.links {
       flex: 1;
       list-style: none;
@@ -795,10 +797,35 @@
     }
 
     .system-info {
+      position: relative;
       font-size: var(--font-size-16);
       i {
         padding-inline-start: 2px;
         font-size: var(--font-size-12);
+      }
+    }
+  }
+
+  &.sidebar-info {
+    margin-bottom: -.5rem;
+
+    .system-badge { margin-top: .5rem; }
+
+    .notification-pip {
+      color: var(--color-text-accent);
+      font-size: var(--font-size-12);
+      top: 4px;
+      right: -14px;
+    }
+
+    ul.links {
+      gap: 0;
+      margin-top: 6px;
+
+      li:not(:last-child)::after {
+        content: " • ";
+        margin-inline: 3px;
+        font-weight: bold;
       }
     }
   }

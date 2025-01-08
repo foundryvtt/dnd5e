@@ -524,44 +524,10 @@ Hooks.on("renderPause", (app, [html]) => {
   img.className = "";
 });
 
-Hooks.on("renderSettings", (app, [html]) => {
-  const details = html.querySelector("#game-details");
-  const pip = details.querySelector(".system-info .update");
-  details.querySelector(".system").remove();
-
-  const heading = document.createElement("div");
-  heading.classList.add("dnd5e2", "sidebar-heading");
-  heading.innerHTML = `
-    <h2>${game.i18n.localize("WORLD.GameSystem")}</h2>
-    <ul class="links">
-      <li>
-        <a href="https://github.com/foundryvtt/dnd5e/releases/latest" target="_blank">
-          ${game.i18n.localize("DND5E.Notes")}
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/foundryvtt/dnd5e/issues" target="_blank">${game.i18n.localize("DND5E.Issues")}</a>
-      </li>
-      <li>
-        <a href="https://github.com/foundryvtt/dnd5e/wiki" target="_blank">${game.i18n.localize("DND5E.Wiki")}</a>
-      </li>
-      <li>
-        <a href="https://discord.com/channels/170995199584108546/670336046164213761" target="_blank">
-          ${game.i18n.localize("DND5E.Discord")}
-        </a>
-      </li>
-    </ul>
-  `;
-  details.insertAdjacentElement("afterend", heading);
-
-  const badge = document.createElement("div");
-  badge.classList.add("dnd5e2", "system-badge");
-  badge.innerHTML = `
-    <img src="systems/dnd5e/ui/official/dnd-badge-32.webp" data-tooltip="${dnd5e.title}" alt="${dnd5e.title}">
-    <span class="system-info">${dnd5e.version}</span>
-  `;
-  if ( pip ) badge.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
-  heading.insertAdjacentElement("afterend", badge);
+Hooks.on("renderSettings", (app, html) => {
+  html = html instanceof HTMLElement ? html : html[0];
+  if ( game.release.generation > 12 ) applications.settings.sidebar.renderSettings(html);
+  else applications.settings.sidebar.renderSettingsLegacy(html);
 });
 
 /* -------------------------------------------- */

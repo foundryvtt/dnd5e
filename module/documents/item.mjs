@@ -73,6 +73,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /** @inheritDoc */
   _initializeSource(data, options={}) {
+    if ( data instanceof foundry.abstract.DataModel ) data = data.toObject();
+
     // Migrate backpack -> container.
     if ( data.type === "backpack" ) {
       data.type = "container";
