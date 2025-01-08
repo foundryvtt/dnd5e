@@ -110,10 +110,10 @@
   },
   "packs": [
     {
-      "name": "heroes",
+      "name": "legacy-heroes",
       "label": "Starter Heroes",
       "system": "dnd5e",
-      "path": "packs/heroes",
+      "path": "packs/legacy-heroes",
       "type": "Actor",
       "private": false,
       "flags": {
@@ -123,10 +123,10 @@
       }
     },
     {
-      "name": "monsters",
+      "name": "legacy-monsters",
       "label": "Monsters (SRD)",
       "system": "dnd5e",
-      "path": "packs/monsters",
+      "path": "packs/legacy-monsters",
       "type": "Actor",
       "private": false,
       "flags": {
@@ -136,10 +136,10 @@
       }
     },
     {
-      "name": "items",
+      "name": "legacy-items",
       "label": "Items (SRD)",
       "system": "dnd5e",
-      "path": "packs/items",
+      "path": "packs/legacy-items",
       "type": "Item",
       "private": false,
       "flags": {
@@ -149,10 +149,10 @@
       }
     },
     {
-      "name": "tradegoods",
+      "name": "legacy-tradegoods",
       "label": "Trade Goods (SRD)",
       "system": "dnd5e",
-      "path": "packs/tradegoods",
+      "path": "packs/legacy-tradegoods",
       "type": "Item",
       "private": false,
       "flags": {
@@ -162,10 +162,10 @@
       }
     },
     {
-      "name": "spells",
+      "name": "legacy-spells",
       "label": "Spells (SRD)",
       "system": "dnd5e",
-      "path": "packs/spells",
+      "path": "packs/legacy-spells",
       "type": "Item",
       "private": false,
       "flags": {
@@ -175,10 +175,10 @@
       }
     },
     {
-      "name": "backgrounds",
+      "name": "legacy-backgrounds",
       "label": "Backgrounds (SRD)",
       "system": "dnd5e",
-      "path": "packs/backgrounds",
+      "path": "packs/legacy-backgrounds",
       "type": "Item",
       "private": false,
       "flags": {
@@ -188,49 +188,23 @@
       }
     },
     {
-      "name": "classes",
+      "name": "legacy-classes",
       "label": "Classes (SRD)",
       "system": "dnd5e",
-      "path": "packs/classes",
+      "path": "packs/legacy-classes",
       "type": "Item",
       "private": false,
       "flags": {
         "dnd5e": {
-          "types": ["class"]
+          "types": ["class", "subclass", "feat", "weapon"]
         }
       }
     },
     {
-      "name": "subclasses",
-      "label": "Subclasses (SRD)",
-      "system": "dnd5e",
-      "path": "packs/subclasses",
-      "type": "Item",
-      "private": false,
-      "flags": {
-        "dnd5e": {
-          "types": ["subclass"]
-        }
-      }
-    },
-    {
-      "name": "classfeatures",
-      "label": "Class & Subclass Features (SRD)",
-      "system": "dnd5e",
-      "path": "packs/classfeatures",
-      "type": "Item",
-      "private": false,
-      "flags": {
-        "dnd5e": {
-          "types": ["feat", "weapon"]
-        }
-      }
-    },
-    {
-      "name": "races",
+      "name": "legacy-races",
       "label": "Races (SRD)",
       "system": "dnd5e",
-      "path": "packs/races",
+      "path": "packs/legacy-races",
       "type": "Item",
       "private": false,
       "flags": {
@@ -240,10 +214,10 @@
       }
     },
     {
-      "name": "monsterfeatures",
+      "name": "legacy-monsterfeatures",
       "label": "Monster Features (SRD)",
       "system": "dnd5e",
-      "path": "packs/monsterfeatures",
+      "path": "packs/legacy-monsterfeatures",
       "type": "Item",
       "private": false,
       "flags": {
@@ -253,10 +227,10 @@
       }
     },
     {
-      "name": "rules",
+      "name": "legacy-rules",
       "label": "Rules (SRD)",
       "system": "dnd5e",
-      "path": "packs/rules",
+      "path": "packs/legacy-rules",
       "type": "JournalEntry",
       "private": false,
       "flags": {
@@ -264,10 +238,10 @@
       }
     },
     {
-      "name": "tables",
+      "name": "legacy-tables",
       "label": "Tables (SRD)",
       "system": "dnd5e",
-      "path": "packs/tables",
+      "path": "packs/legacy-tables",
       "type": "RollTable",
       "private": false,
       "flags": {}
@@ -279,9 +253,9 @@
       "sorting": "m",
       "color": "#cd2c1e",
       "packs": [
-        "rules",
-        "tables",
-        "heroes"
+        "legacy-rules",
+        "legacy-tables",
+        "legacy-heroes"
       ],
       "folders": [
         {
@@ -289,11 +263,9 @@
           "sorting": "m",
           "color": "#b72c1f",
           "packs": [
-            "classes",
-            "subclasses",
-            "classfeatures",
-            "backgrounds",
-            "races"
+            "legacy-classes",
+            "legacy-backgrounds",
+            "legacy-races"
           ]
         },
         {
@@ -301,9 +273,9 @@
           "sorting": "m",
           "color": "#941919 ",
           "packs": [
-            "items",
-            "spells",
-            "tradegoods"
+            "legacy-items",
+            "legacy-spells",
+            "legacy-tradegoods"
           ]
         },
         {
@@ -311,8 +283,8 @@
           "sorting": "m",
           "color": "#7d160c",
           "packs": [
-            "monsters",
-            "monsterfeatures"
+            "legacy-monsters",
+            "legacy-monsterfeatures"
           ]
         }
       ]
@@ -351,14 +323,14 @@
         "SRD 5.1": "SOURCE.BOOK.SRD"
       },
       "spellLists": [
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.ziBzRlrpBm1KVV0j",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.cuG9d7J9fQH9InYT",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.MWiN7ILEO0Vd3zAZ",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.FhucONA0yRZQjMmb",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.sANq9JMycfSq3A5d",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.PVgly1xB2S2I8GLQ",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.mx4TsSbBIAaAkhQ7",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.k7Rs5EyXeA0SFTXD"
+        "Compendium.dnd5e.legacy-rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.ziBzRlrpBm1KVV0j",
+        "Compendium.dnd5e.legacy-rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.cuG9d7J9fQH9InYT",
+        "Compendium.dnd5e.legacy-rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.MWiN7ILEO0Vd3zAZ",
+        "Compendium.dnd5e.legacy-rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.FhucONA0yRZQjMmb",
+        "Compendium.dnd5e.legacy-rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.sANq9JMycfSq3A5d",
+        "Compendium.dnd5e.legacy-rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.PVgly1xB2S2I8GLQ",
+        "Compendium.dnd5e.legacy-rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.mx4TsSbBIAaAkhQ7",
+        "Compendium.dnd5e.legacy-rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.k7Rs5EyXeA0SFTXD"
       ]
     },
     "needsMigrationVersion": "4.0.1",
