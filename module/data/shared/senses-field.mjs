@@ -6,11 +6,12 @@ const { NumberField, StringField } = foundry.data.fields;
 export default class SensesField extends foundry.data.fields.SchemaField {
   constructor(fields={}, options={}) {
     const numberConfig = { required: true, nullable: true, integer: true, min: 0, initial: null };
+    const senses = Object.entries(CONFIG.DND5E.senses).reduce((acc, [k, label]) => {
+      acc[k] = new NumberField({ ...numberConfig, label });
+      return acc;
+    }, {});
     fields = {
-      darkvision: new NumberField({ ...numberConfig, label: "DND5E.SenseDarkvision" }),
-      blindsight: new NumberField({ ...numberConfig, label: "DND5E.SenseBlindsight" }),
-      tremorsense: new NumberField({ ...numberConfig, label: "DND5E.SenseTremorsense" }),
-      truesight: new NumberField({ ...numberConfig, label: "DND5E.SenseTruesight" }),
+      ...senses,
       units: new StringField({
         required: true, nullable: true, blank: false, initial: null, label: "DND5E.SenseUnits"
       }),
