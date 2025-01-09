@@ -440,6 +440,12 @@ export default function ActorSheetV2Mixin(Base) {
       ctx.activities = item.system.activities
         ?.filter(a => !item.getFlag("dnd5e", "riders.activity")?.includes(a.id))
         ?.map(this._prepareActivity.bind(this));
+
+      // Linked Uses
+      const cachedFor = fromUuidSync(item.flags.dnd5e?.cachedFor, { relative: this.actor, strict: false });
+      if ( cachedFor ) ctx.linkedUses = cachedFor.consumption?.targets.find(t => t.type === "activityUses")
+        ? cachedFor.uses : cachedFor.consumption?.targets.find(t => t.type === "itemUses")
+          ? cachedFor.item.system.uses : null;
     }
 
     /* -------------------------------------------- */
