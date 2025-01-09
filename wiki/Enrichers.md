@@ -2,24 +2,45 @@
 
 The dnd5e system adds a number of useful enrichers that can be used within journals or in item or actor descriptions. These enrichers will generate text based on the standard formatting used throughout 5e releases and provide rolls and related behavior that properly hooks into the system.
 
+[Award](#award-enricher) | [Check](#check-enrichers) | [Damage/Heal](#damage-enrichers) | [Item](#item-use-enrichers) | [Lookup](#lookup-enrichers) | [Reference](#reference-enrichers) | [Save](#save-enrichers)
+
 ![Enricher Preview](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enrichers-preview.jpg)
+
+### Using This Guide
+
+This guide breaks down the different types of enrichers offered by the system. Each section lists several examples of using the enricher, a table of options that can be provided, and several potential issues that might cause the enricher to not enrich.
+
+The option table describes the options that can be provided to the enricher. Options are used in the enricher in the format of `<name>=<value>`. If the **Inferred** column is checked, then that indicates that the name can be usually left off and only the value used.
+
+If spaces are required within the value, then you must surround it with double quotation marks: `<name>="Two Words"`. The **Assembled** column indicates that that options can be used with spaces without the quotation marks.
+
+The **Formula** column indicates what type of data is accepted for the value. A list and description of the various formats are available in the dropdown below.
+
+> <details>
+>   <summary>Option Formats</summary>
+>   <ul>
+>     <li><strong>Boolean</strong>: Either `true` or `false`.</li>
+>     <li><strong>Choice</strong>: One of several choices that will be described in the option description below the table.</li>
+>     <li><strong>Formula</strong>: A roll or calculation formula.</li>
+>     <li><strong>@-Path</strong>: A path referencing a part of a document's data that begins with the `@` symbol, such as can be used in roll formulas. Cannot contain spaces or other calculation details.</li>
+>     <li><strong>ID</strong>: A 16-digit ID for a document, found by right clicking on the button in the document header.</li>
+>   </ul>
+> </details>
 
 ## Award Enricher
 See the enrichers section of the [awards guide](Awards).
 
 
-## Check & Save Enrichers
-Check and save enrichers allow for rolling ability checks, skill checks, tool checks, and saving throws using all of the proper modifiers of the character performing the roll.
+## Check Enrichers
+Check enrichers allow for rolling ability checks, skill checks, and tool checks using all of the proper modifiers of the character performing the roll.
 
-It is very common for a feature description or journal entry to include a call for a saving throw. Now you can simply write `[[/save dex]]` and it will be formatted into `"[Dexterity]"`, with that text being a link that will open up the roll save dialog when clicked. By default only the ability is shown, but it can be expanded by writing `[[/save dex format=long]]` which will display as `"[Dexterity saving throw]"`.
+It is very common for a feature description or journal entry to include a call for an ability check. Now you can simply write `[[/check dex]]` and it will be formatted into `"[Dexterity]"`, with that text being a link that will open up the roll check dialog when clicked. By default only the ability is shown, but it can be expanded by writing `[[/check dex format=long]]` which will display as `"[Dexterity check]"`.
 
-The format also supports full-length ability names (e.g. `[[/save dexterity]]`) and prefixed terms (e.g. `[[/save ability=dex]]`) for greater clarity.
+The format also supports full-length ability names (e.g. `[[/check dexterity]]`) and prefixed terms (e.g. `[[/check ability=dex]]`) for greater clarity.
 
-Including a DC in the roll will display it in the description and pass it through to the roll, highlighting in chat whether the result was a success or failure. A value of `[[/save dex 15]]` or `[[/save ability=dexterity dc=15]]` becomes `"[DC 15 Dexterity]"` or `"[DC 15 Dexterity saving throw]"` if `format=long` is set.
+Including a DC in the roll will display it in the description and pass it through to the roll, highlighting in chat whether the result was a success or failure. A value of `[[/check dex 15]]` or `[[/check ability=dexterity dc=15]]` becomes `"[DC 15 Dexterity]"` or `"[DC 15 Dexterity check]"` if `format=long` is set.
 
-The DC can either be a fixed value or a resolved formula based on the stats of the owner of the item included in it. So adding `[[/save dex dc=@abilities.con.dc]]` will set to DC to whatever the pre-calculated constitution DC is on the creature that owns the item with this enricher.
-
-Check, skill, and tool enrichers work in much the same way. Writing `[[/check {ability} {dc}]]` will create a basic ability check, while `[[/skill acrobatics]]` will present an acrobatics check.
+The DC can either be a fixed value or a resolved formula based on the stats of the owner of the item included in it. So adding `[[/check dex dc=@abilities.con.dc]]` will set to DC to whatever the pre-calculated constitution DC is on the creature that owns the item with this enricher.
 
 ![Enricher Passive](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-passive.jpg)
 
@@ -27,9 +48,57 @@ Using the `passive` option on a check enricher displays a passive description an
 
 The `[[/check]]`, `[[/skill]]`, `[[/tool]]` starting terms are all interchangeable, and the final roll will be presented based on the inputs given. So `[[/check dexterity athletics]]` will perform a dexterity check using a character's athletics proficiency if present.
 
-For skill checks, the ability is optional. If one is provided then the person rolling have that ability selected by default even if it isn't the default on their sheet. Otherwise they will use whatever ability is set for that skill on their character sheet.
+For skill or tool checks, the ability is optional. If one is provided then the person rolling have that ability selected by default even if it isn't the default on their sheet. Otherwise they will use whatever ability is set for that skill on their character sheet.
 
-For tool checks, the ability is required. A check like `[[/tool thief]]` will not parse because the ability must be explicitly set like `[[/tool thief dex]]`. A list of the tool ids to use for this enricher is provided below.
+#### Examples
+
+```
+// Example: Make a dexterity check
+[[/check ability=dexterity]]
+[[/check dexterity]]
+[[/check dex]]
+
+// Example: Add a DC to a dexterity check
+[[/check ability=dexterity dc=20]]
+[[/check dexterity 20]]
+[[/check DC 20 Dexterity]]
+
+// Example: Make an acrobatics check using default ability, using either check or skill keyword
+[[/check skill=acrobatics]]
+[[/check acrobatics]]
+[[/skill skill=acrobatics]]
+[[/skill acrobatics]]
+
+// Example: Specify an alternate ability on a skill check
+[[/skill ability=strength skill=intimidation dc=20]]
+[[/skill DC 20 Strength (Intimidation)]]
+[[/skill strength intimidation 20]]
+
+// Example: Passive check
+[[/skill skill=perception dc=15 passive=true]]
+[[/skill DC 15 passive Perception]]
+
+// Example: Use a formula for the DC
+[[/check int dc=@abilities.charisma.dc]]
+[[/check cha dc="8 + @prof"]]
+
+// Example: Tool & Vehicle checks
+[[/tool ability=dexterity tool=thief]]
+[[/tool ability=strength vehicle=water]]
+```
+
+#### Options
+
+| Name       | Format  | Inferred  | Assembled |
+| ---------- | ------- | --------- | --------- |
+| `ability`  | Choice  |     ✔︎     |           |
+| `dc`       | Formula |		 ✔︎     |           |
+| `skill`    | Choice  |		 ✔︎     |           |
+| `tool`     | Choice  |		 ✔︎     |           |
+
+- `ability`: Ability to use with the check
+- `dc`: Specific number or formula used for the DC. Formula must not contain dice values. Can only be used inferred with a number, formulas must contains the `dc=` prefix and spaces in formula must be surrounded by quotation marks
+- `skill` or `tool`: Skill or tool to roll. If ability isn't specified, then the default ability for that skill will be used
 
 > <details>
 > <summary>Tool Ids</summary>
@@ -75,6 +144,11 @@ For tool checks, the ability is required. A check like `[[/tool thief]]` will no
 >
 > Source: `CONFIG.DND5E.toolIds` </details>
 
+#### Potential Issues
+- No ability specified or able to be inferred from proficiency type
+- Skill or tool proficiency specified wasn't found
+- Invalid DC formula
+
 
 ## Damage Enrichers
 Unlike simple inline roll links (the old `[[/r 2d6]]`), damage enrichers allow for properly associating damage types with rolls, automatically calculating the average, and will present the damage roll dialog when clicked allowing them to rolled as criticals or modified with temporary bonuses.
@@ -90,6 +164,49 @@ The formula can also include formula values that will be evaluated before the da
 
 ### Healing Enricher
 While healing can be provided using the standard damage enricher using one of the healing types (`healing` or `temp`), there is also a dedicated enricher to make it a bit clearer. This can be used in the format of `[[/healing {formula}]]` for normal healing and `[[/healing {formula} temp]]` for temporary HP. This also accepts the `average` parameter just like the damage enricher.
+
+#### Examples
+
+```
+// Example: Simple damage formula
+[[/damage formula="1d6 + 2" type=fire]]
+[[/damage formula=1d6+2 type=fire]]
+[[/damage 1d6 + 2 fire]]
+
+// Example: Displaying average damage
+[[/damage formula=2d6 type=radiant average=true]]
+[[/damage 2d6 radiant average]]
+
+// Example: Standard healing
+[[/healing formula="2d4 + 2" type=healing]]
+[[/healing formula="2d4 + 2"]]
+[[/healing 2d4 + 2 healing]]
+[[/healing 2d4 + 2]]
+[[/damage formula="2d4 + 2" type=healing]]
+[[/damage 2d4 + 2 healing]]
+
+// Example: Temp HP
+[[/healing formula=10 type=temphp]]
+[[/healing 10 temp]]
+[[/damage formula=10 type=temphp]]
+[[/damage 10 temp]]
+```
+
+#### Options
+
+| Name        | Format  | Inferred  | Assembled |
+| ----------- | ------- | --------- | --------- |
+| `average`   | Boolean |           |           |
+| `formula`   | Formula |     ✔︎     |     ✔︎     |
+| `type`      | Choice  |     ✔︎     |           |
+
+- `average`: Display the calculated average damage along side the roll in the enriched text (e.g. `7 (2d6) bludgeoning`)
+- `formula`: Formula used for the damage roll
+- `type`: Damage type
+
+#### Potential Issues
+- If no formula is specified
+- Invalid damage formula
 
 
 ## Item Use Enrichers
@@ -115,6 +232,7 @@ The activity name can also be used when referring to an item using its ID in the
 
 ![Item Enricher](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-item.png)
 
+
 ## Lookup Enrichers
 
 The lookup enricher allows for referencing data within an actor's roll data and displaying it in a description. This is most useful for automatically including a creature's name (`[[lookup @name]]`) or their type (`[[lookup @details.type.config.label]]`), but can be used to reference any values normally available in [roll data](Roll-Formulas.md).
@@ -126,12 +244,59 @@ A few additional parameters are available to transform the resulting text:
 - `[[lookup @name uppercase]]`: Converts the text to all uppercase (e.g. "ADULT WHITE DRAGON")
 - `[[lookup @name capitalize]]`: Capitalizes the first word in the text (e.g. "Adult white dragon")
 
+#### Examples
+
+```
+// Example: Display an actor's name in lowercase
+[[lookup @name lowercase]]
+
+// Example: Display an actor's name with a fallback
+[[lookup @name]]{the creature}
+```
+
+#### Options
+
+| Name       | Format  | Inferred  | Assembled |
+| ---------- | ------- | --------- | --------- |
+| `path`     | @-Path  |     ✔︎     |     ✔︎     |
+| `style`    | Choice  |     ✔︎     |           |
+
+- `path`: Path to the formula to display, see [Roll Formulas](Roll-Formulas) for a limited list of these paths. If there is no value found at the path (such as looking up the actor name on an item not in an actor), then the enricher will display the original path unless a fallback is provided using the enricher's label
+- `style`: Formatting that will be applied to the final value. Can be `capitalize`, `lowercase`, or `uppercase`
+
+
 ## Reference Enrichers
 The `&Reference` enricher allows for easy reference to rule pages and displays rich tooltips with the contents of a specific rule. It comes built-in with support for abilities, skills, conditions, damage types, and more.
 
 ![Enricher Reference](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-reference.jpg)
 
 Using the enricher is very simple, simply type `&Reference` with the name of the referenced rule included inside the square brackets. For example `&Reference[prone]` will include be converted to `[Prone]` which links to the prone page in the SRD rules and display a tooltip with the description of the prone condition.
+
+#### Examples
+
+```
+// Example: Reference a condition
+&Reference[condition=prone]
+&Reference[Prone]
+&Reference[prone]
+
+// Example: Reference a condition without the apply button
+&Reference[blinded apply=false]
+
+// Example: Reference another rule
+&Reference[rule="Difficult Terrain"]
+&Reference[Difficult Terrain]
+```
+
+#### Options
+
+| Name       | Format  | Inferred  | Assembled |
+| ---------- | ------- | --------- | --------- |
+| `apply`    | Boolean |           |           |
+| Varies     | Choices |     ✔︎     |     ✔︎     |
+
+- `apply`: Usable only when referencing a condition to prevent the apply condition button from appearing
+- The rule can be referenced explicitly by rule category if necessary, but it is usually sufficient to just put in the name of the rule being referenced
 
 > <details>
 > <summary>Ability References</summary>
@@ -297,3 +462,46 @@ Using the enricher is very simple, simply type `&Reference` with the name of the
 > <p>Inspiration, Carrying Capacity, Encumbrance, Hiding, Passive Perception, Falling, Suffocating, Lightly Obscured, Heavily Obscured, Bright Light, Dim Light, Darkness, Blindsight, Darkvision, Truesight, Surprise, Difficult Terrain, Size, Grappling, Shoving, Half Cover, Three-Quarters Cover, Total Cover, Instant Death, Death Saving Throws, Underwater Combat, Attunement, Telepathy</p>
 >
 > Source: `CONFIG.DND5E.rules`
+
+#### Potential Issues
+- Rule isn't found
+
+
+## Save Enrichers
+Save enrichers allow for rolling saving throws using all of the proper modifiers of the character performing the roll.
+
+Much like check enrichers, save enrichers include two different formats. By default they are presented in the short format. Writing `[[/save dex]]` will result in just the ability name `"[Dexterity]"`. It can be expanded by writing `[[/save dex format=long]]`, which will display as `"[Dexterity saving throw]"`.
+
+The format also supports full-length ability names (e.g. `[[/save dexterity]]`) and prefixed terms (e.g. `[[/save ability=dex]]`) for greater clarity.
+
+Including a DC in the roll will display it in the description and pass it through to the roll, highlighting in chat whether the result was a success or failure. A value of `[[/save dex 15]]` or `[[/save ability=dexterity dc=15]]` becomes `"[DC 15 Dexterity]"` or `"[DC 15 Dexterity saving throw]"` if `format=long` is set.
+
+The DC can either be a fixed value or a resolved formula based on the stats of the owner of the item included in it. So adding `[[/save dex dc=@abilities.con.dc]]` will set to DC to whatever the pre-calculated constitution DC is on the creature that owns the item with this enricher.
+
+#### Examples
+
+```
+// Example: Create a dexterity saving throw
+[[/save ability=dexterity]]
+[[/save dexterity]]
+[[/save dex]]
+
+// Example: Add a DC to the save
+[[/save ability=dexterity dc=20]]
+[[/save dexterity 20]]
+[[/save DC 20 Dexterity]]
+```
+
+#### Options
+
+| Name       | Format  | Inferred  | Assembled |
+| ---------- | ------- | --------- | --------- |
+| `ability`  | Choice  |     ✔︎     |           |
+| `dc`       | Formula |     ✔︎     |           |
+
+- `ability`: Ability to use when making the save=
+- `dc`: Specific number or formula used for the DC. Formula must not contain dice values. Can only be used inferred with a number, formulas must contains the `dc=` prefix
+
+#### Potential Issues
+- If no ability is specified
+- Invalid DC formula
