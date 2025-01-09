@@ -1,22 +1,62 @@
-![Up to date as of 2.0.3](https://img.shields.io/static/v1?label=dnd5e&message=2.0.3&color=informational)
+![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
 
-This Advancement Type also contains the following options:
-* **Scale Type**: This determines the values accepted on the Level sections on the right hand side
-* Anything - Allows an arbitrary input including text and numbers
+The Scale Value advancement allows for setting a value that increases with character or class level and is available anywhere roll formula data is used.
 
-![Scale Value: Anything](https://github.com/foundryvtt/dnd5e/assets/86370342/3d20ec17-a88d-4398-b60a-bc7dda5a9fc0)
+## Configuration
 
-* Dice - Allows a configuration of number of die and die size (options include d2, d3, d4, d6, d8, d10, d12, and d20). It is recommended for features that can use a variable number of these dice to leave the count blank, and define the number used in the feature, (e.g. `1@scale.monk.martial-arts`, `2@scale.monk.martial-arts`) this will ensure accurate values if used in the damage field and critical damage is rolled. Values that are a consistent number of die can have the value column populated (e.g. Sneak Attack)
+// TODO: Configuration Image
 
-![Scale Value: Dice](https://github.com/foundryvtt/dnd5e/assets/86370342/80e49db5-8128-4edc-b2a9-3277ad7d8144)
+The first step in configuring a Scale Value is determining what type of data is being represented. The advancement comes with several supported types including "Numeric" (e.g. Barbarian's Rage bonus), "Challenge Rating" (e.g. Druid's maximum Wild Shape CR), "Dice" (e.g. Rogue's Sneak Attack dice), and "Distance" (e.g. Monk's Unarmored Movement bonus). If none of these types match what is needed, then the "Anything" type can be used.
 
-* Numeric - Allows a configuration of a number value in the level options
+If the "Distance" type is selected then an additional field will be available allowing for setting the units used to measure the distance value. The same units are used across all levels.
 
-![Scale Value: Numeric](https://github.com/foundryvtt/dnd5e/assets/86370342/f687de1a-c92e-4834-ac00-3170451b7129)
+The identifier is important for scale values because it determines how the scale value is accessed in formulas. It should only contain lowercase letters a-z, numbers, underscores (`_`), and dashes (`-`). Beneath the identifier is a hint that includes the full @-value for referencing the scale value with a copy button.
 
-* Distance - Allows for numerical values in the level options, you can choose the units of Feet, Miles, Meters, and Kilometers
+On the right hand you define the scale value itself. The details in this area will change depending on the type selected, but in general these are values grouped by level. Adding a value in a level will cause that value to be used for all levels higher than it until a new value is set.
 
-![Scale Value: Distance](https://github.com/foundryvtt/dnd5e/assets/86370342/496109c8-caa7-4185-97f4-bb84ab3a12eb)
+## Usage
 
-* **Identifier**: Defines the identifier to be used in a formula.
-* **1-20**: Used to define the scale value at a given level
+// TODO: Flow Image
+
+The Scale Value advancement will present to the player the previous value and the new value whenever the scale value would change.
+
+Accessing the scale value in formulas involves typing `@scale.<class identifier>.<advancement identifier>`, so referencing a Barbarian's rages is `@scale.barbarian.rages`.
+
+For the "Dice" scale value type there are several additional options for access. For a Rogue's Sneak Attack, the whole die formula can be accessed like any other type: `@scale.rogue.sneak-attack` produces `4d6`. If only the die part is desired, appending `.die` to the value will fetch it: `@scale.rogue.sneak-attack.die` produces `d6`. Similarly adding `.number` will grab the die count: `@scale.rogue.sneak-attack.number` produces `4`. Finally `.faces` can be used to access the number of faces on the die without the leading `d`: `@scale.rogue.sneak-attack.faces` produces `6`.
+
+## API
+
+The [original proposal](https://github.com/foundryvtt/dnd5e/issues/1406) for the Scale Value advancement is available on GitHub, but may not reflect the current state of the advancement.
+
+### Configuration Schema
+
+The Scale Value advancement configuration contains the `distance.units` string value, one of `CONFIG.DND5E.movementUnits`, which is used by the "Distance" type.
+
+The `identifier` property controls how the advancement is available in formulas.
+
+The `scale` property is a mapping of character or class levels and an object. The contained object structure varies depending on the advancement type, but for most it contains `value` as a string or number.
+
+For die scale value it instead contains `number` and `faces`, two number specifying the number of dice and the denomination, as well as `modifiers`, a set of roll modifiers. The `modifiers` value currently can only be set using an active effect (e.g. `system.scale.rogue.sneak-attack.modifiers | ADD | rr=1`).
+
+The `type` property indicates what type of scale value is used.
+
+```javascript
+{
+  distance: {
+    "units": "ft"
+  },
+  identifier: "unarmored-movement",
+  scale: {
+    2: { value: 10 },
+    6: { value: 15 },
+    10: { value: 20 },
+    14: { value: 25 },
+    18: { value: 30 }
+  },
+  type: "distance"
+}
+```
+
+### Value Schema
+
+None

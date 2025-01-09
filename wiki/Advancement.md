@@ -1,4 +1,4 @@
-![Up to date as of 2.4.0](https://img.shields.io/static/v1?label=dnd5e&message=2.4.0&color=informational)
+![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
 
 ## Advancement System
 
@@ -15,8 +15,11 @@ The advancement system can be disabled for all players in a world by using the `
 
 
 ## Advancement Types
-### Ability Score Improvement *(class, background, or race only)*
+### Ability Score Improvement *(class, background, race, or feature only)*
 [Ability score improvement](Advancement-Type-Ability-Score-Improvement) allows for improving a character's ability scores by either a fixed amount or based on user choice. When added to a class, it also optionally allows for selecting a feat instead of improving abilities.
+
+### Choose Items
+The [choose items advancement](Advancement-Type-Item-Choice) defines a list of features, spells, or other items that the player can choose to add to the actor at a certain level.
 
 ### Grant Items
 The [grant items advancement](Advancement-Type-Item-Grant) defines a list of features, spells, or other items that are added to the actor at a certain level.
@@ -30,16 +33,11 @@ The [hit points advancement](Advancement-Type-Hit-Points) keeps track of hit poi
 ### Size *(race only)*
 The [size](Advancement-Type-Size) advancement stores a list of sizes that can be selected when selecting a race.
 
-### Item Choice
-The [item choice advancement](Advancement-Type-Item-Choice) defines a list of features, spells, or other items that the player can choose to add to the actor at a certain level.
+### Subclass *(class only)*
+The [subclass](Advancement-Type-Subclass) advancement gives players the chance to select a subclass.
 
 ### Trait
 The [trait](Advancement-Type-Trait) advancement grants the character certain traits such as weapon proficiencies, skill expertise, or damage resistances. It presents the player with a list of options if a choice needs to be made.
-
-### Proposed Types
-These advancement types are still under development, links point to the proposal pages for each type:
-- [Equipment](https://github.com/foundryvtt/dnd5e/issues/1871)
-- [Subclass](https://github.com/foundryvtt/dnd5e/issues/1407)
 
 
 ## Advancement Hooks
@@ -50,8 +48,6 @@ Details of the hooks that the advancement system provides can be found on [the h
 ## Custom Advancement Types
 
 For module authors who want to expand beyond the advancement types offered in the system, it is a simple task to create and register custom advancement types.
-
-**Note**: The advancement API is brand new and some changes may be made in upcoming releases of 5e. Be aware that changes to the API in 1.7 may break any custom advancements in future versions.
 
 ### Authoring
 
@@ -68,9 +64,9 @@ The `order` value in the `Advancement#metadata` object determines in which order
 * `25` - Size
 * `30` - Trait
 * `40` - Grant Items
-* `50` - Item Choice
+* `50` - Choose Items
 * `60` - Scale Value
-* `70` - Subclass *(in progress)*
+* `70` - Subclass
 * `100` - (base advancement class)
 
 You can set your ordering value between any of these numbers to position your advancement in the list.
@@ -99,7 +95,10 @@ The only step required to register a custom advancement type with 5e is to add t
 
 ```javascript
 Hooks.once("init", () => {
-  CONFIG.DND5E.advancementTypes.MyModuleCustom = MyModuleCustomAdvancement;
+  CONFIG.DND5E.advancementTypes.MyModuleCustom = {
+    documentClass: MyModuleCustomAdvancement,
+    validItemTypes: new Set(["class", "subclass"])
+  };
 });
 ```
 

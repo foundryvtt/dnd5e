@@ -1,10 +1,10 @@
-![Up to date as of 2.0.3](https://img.shields.io/static/v1?label=dnd5e&message=2.0.3&color=informational)
+![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
 
 The Hit Points advancement type keeps track of hit point choices for each level of a class. This advancement can only be added to classes and each class can only have a single advancement of this type.
 
 ## Configuration
 
-![Hit Point Configuration](https://github.com/foundryvtt/dnd5e/assets/86370342/f7f21d1c-7160-4139-8f79-5a9f403fba59)
+![Hit Points Configuration](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/hit-points-configuration.jpg)
 
 The Hit Points advancement requires no configuration. It will take a custom title and icon like all other advancement types, but everything else is handled automatically including fetching the hit dice type from the class to which it was added.
 
@@ -20,7 +20,7 @@ At higher levels you are given an option between taking the average hit points (
 
 ## API
 
-The original proposal for the Hit Points advancement can be [found here](https://github.com/foundryvtt/dnd5e/issues/1402).
+The [original proposal](https://github.com/foundryvtt/dnd5e/issues/1402) for the Hit Points advancement is available on GitHub, but may not reflect the current state of the advancement.
 
 ### Configuration Schema
 
