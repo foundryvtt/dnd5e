@@ -284,7 +284,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const senses = systemData.attributes.senses ?? {};
     const tags = {};
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
-      const v = senses[k] ?? 0;
+      const v = senses.types[k] ?? 0;
       if ( v === 0 ) continue;
       tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0]}`;
     }

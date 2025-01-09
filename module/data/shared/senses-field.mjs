@@ -1,3 +1,5 @@
+import MappingField from "../fields/mapping-field.mjs";
+
 const { NumberField, StringField } = foundry.data.fields;
 
 /**
@@ -5,19 +7,19 @@ const { NumberField, StringField } = foundry.data.fields;
  */
 export default class SensesField extends foundry.data.fields.SchemaField {
   constructor(fields={}, options={}) {
-    const numberConfig = { required: true, nullable: true, integer: true, min: 0, initial: null };
-    const senses = Object.entries(CONFIG.DND5E.senses).reduce((acc, [k, label]) => {
-      acc[k] = new NumberField({ ...numberConfig, label });
-      return acc;
-    }, {});
+    const types = new MappingField(new NumberField({
+      required: true, nullable: true, integer: true, min: 0, initial: null 
+    }), { initialKeys: CONFIG.DND5E.senses, initialKeysOnly: true })
+  
     fields = {
-      ...senses,
+      types,
       units: new StringField({
         required: true, nullable: true, blank: false, initial: null, label: "DND5E.SenseUnits"
       }),
       special: new StringField({ required: true, label: "DND5E.SenseSpecial" }),
       ...fields
     };
+  
     Object.entries(fields).forEach(([k, v]) => !v ? delete fields[k] : null);
     super(fields, { label: "DND5E.Senses", ...options });
   }

@@ -54,7 +54,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
         type: "boolean",
         createFilter: (filters, value, def) => {
           if ( value === 0 ) return;
-          const filter = { k: "system.senses.darkvision", o: "gt", v: 0 };
+          const filter = { k: "system.senses.types.darkvision", o: "gt", v: 0 };
           if ( value === 1 ) filters.push(filter);
           else filters.push({ o: "NOT", v: filter });
         }
@@ -88,7 +88,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   get sensesLabels() {
     const units = CONFIG.DND5E.movementUnits[this.senses.units || Object.keys(CONFIG.DND5E.movementUnits)[0]];
     return Object.entries(CONFIG.DND5E.senses).reduce((arr, [k, label]) => {
-      const value = this.senses[k];
+      const value = this.senses.types[k];
       if ( value ) arr.push(`${label} ${value} ${units}`);
       return arr;
     }, []).concat(splitSemicolons(this.senses.special));
@@ -147,7 +147,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
       config: "senses",
       tooltip: "DND5E.SensesConfig",
       value: Object.entries(CONFIG.DND5E.senses).reduce((str, [k, label]) => {
-        const value = this.senses[k];
+        const value = this.senses.types[k];
         if ( !value ) return str;
         return `${str}
           <span class="key">${label}</span>

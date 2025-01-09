@@ -98,10 +98,12 @@
         "max": 3
       },
       "senses": {
-        "darkvision": null,
-        "blindsight": null,
-        "tremorsense": null,
-        "truesight": null,
+        "types": {
+          "darkvision": null,
+          "blindsight": null,
+          "tremorsense": null,
+          "truesight": null
+        },
         "units": null,
         "special": ""
       },
@@ -7106,10 +7108,12 @@
           "hover": false
         },
         "senses": {
-          "darkvision": 0,
-          "blindsight": 0,
-          "tremorsense": 0,
-          "truesight": 0,
+          "types": {
+            "darkvision": 0,
+            "blindsight": 0,
+            "tremorsense": 0,
+            "truesight": 0
+          },
           "units": "ft",
           "special": ""
         },

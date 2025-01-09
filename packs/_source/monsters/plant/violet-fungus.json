@@ -95,10 +95,12 @@
         "max": 3
       },
       "senses": {
-        "darkvision": 0,
-        "blindsight": 30,
-        "tremorsense": 0,
-        "truesight": 0,
+        "types": {
+          "darkvision": 0,
+          "blindsight": 30,
+          "tremorsense": 0,
+          "truesight": 0
+        },
         "units": "ft",
         "special": "Blind beyond this radius"
       },

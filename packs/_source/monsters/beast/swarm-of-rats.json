@@ -95,10 +95,12 @@
         "max": 3
       },
       "senses": {
-        "darkvision": 30,
-        "blindsight": 0,
-        "tremorsense": 0,
-        "truesight": 0,
+        "types": {
+          "darkvision": 30,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0
+        },
         "units": "ft",
         "special": ""
       },

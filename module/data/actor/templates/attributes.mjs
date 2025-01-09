@@ -307,8 +307,8 @@ export default class AttributesFields {
     else this.attributes.movement.units ??= race.system.movement.units;
 
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      if ( !race.system.senses[key] || (!force && (this.attributes.senses[key] !== null)) ) continue;
-      this.attributes.senses[key] = race.system.senses[key];
+      if ( !race.system.senses.types[key] || (!force && (this.attributes.senses.types[key] !== null)) ) continue;
+      this.attributes.senses.types[key] = race.system.senses.types[key];
     }
     this.attributes.senses.special = [this.attributes.senses.special, race.system.senses.special].filterJoin(";");
     if ( force && race.system.senses.units ) this.attributes.senses.units = race.system.senses.units;

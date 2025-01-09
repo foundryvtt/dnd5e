@@ -137,7 +137,7 @@ export default function ActorSheetV2Mixin(Base) {
 
       // Senses
       context.senses = Object.entries(CONFIG.DND5E.senses).reduce((obj, [k, label]) => {
-        const value = attributes.senses[k];
+        const value = attributes.senses.types[k];
         if ( value ) obj[k] = { label, value };
         return obj;
       }, {});

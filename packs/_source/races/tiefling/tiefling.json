@@ -199,10 +199,12 @@
       }
     ],
     "senses": {
-      "darkvision": 60,
-      "blindsight": null,
-      "tremorsense": null,
-      "truesight": null,
+      "types": {
+        "darkvision": 60,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null
+      },
       "units": "ft",
       "special": ""
     },
