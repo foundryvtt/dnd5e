@@ -292,9 +292,9 @@
   }
 
   .pill-lg {
+    --gold-icon-size: 32px;
     background: var(--dnd5e-background-card);
     border: var(--dnd5e-border-gold);
-    border-width: 2px;
     border-radius: 5px;
     box-shadow: 0 0 12px var(--dnd5e-shadow-15);
     display: flex;
@@ -312,11 +312,6 @@
       display: grid;
       place-content: center;
       opacity: .25;
-    }
-
-    .gold-icon {
-      width: 32px;
-      height: 32px;
     }
 
     .name { flex: 1; }
@@ -407,6 +402,10 @@
   }
 
   .gold-icon {
+    block-size: var(--gold-icon-size);
+    inline-size: var(--gold-icon-size);
+    flex: 0 0 var(--gold-icon-size);
+
     border: 2px solid var(--dnd5e-color-gold);
     box-shadow: 0 0 4px var(--dnd5e-shadow-45);
     border-radius: 0;
@@ -768,7 +767,9 @@
       font-family: var(--font-primary);
       font-weight: normal;
     }
+  }
 
+  &.sidebar-heading, &.sidebar-info {
     ul.links {
       flex: 1;
       list-style: none;
@@ -796,10 +797,35 @@
     }
 
     .system-info {
+      position: relative;
       font-size: var(--font-size-16);
       i {
         padding-inline-start: 2px;
         font-size: var(--font-size-12);
+      }
+    }
+  }
+
+  &.sidebar-info {
+    margin-bottom: -.5rem;
+
+    .system-badge { margin-top: .5rem; }
+
+    .notification-pip {
+      color: var(--color-text-accent);
+      font-size: var(--font-size-12);
+      top: 4px;
+      right: -14px;
+    }
+
+    ul.links {
+      gap: 0;
+      margin-top: 6px;
+
+      li:not(:last-child)::after {
+        content: " • ";
+        margin-inline: 3px;
+        font-weight: bold;
       }
     }
   }
@@ -968,6 +994,40 @@
     gap: 8px;
     overflow-y: auto;
 
+    > section > .note {
+      --note-color: var(--dnd5e-color-note-info);
+      position: relative;
+      margin-block-end: 0;
+      border-radius: 4px;
+      border: 1px solid var(--note-color);
+      padding-block: 8px;
+      padding-inline-start: 14px;
+      padding-inline-end: 10px;
+      background: color-mix(in oklab, var(--note-color), transparent 80%);
+      font-size: var(--font-size-12);
+
+      &::before {
+        --marker-size: 14px;
+        position: absolute;
+        width: var(--marker-size);
+        height: var(--marker-size);
+        border-radius: 100%;
+        inset-block: calc(50% - var(--marker-size) / 2);
+        inset-inline-start: calc(-1 * var(--marker-size) / 2);
+        align-content: center;
+        background: var(--note-color);
+        color: var(--dnd5e-color-parchment);
+        font-family: var(--font-awesome);
+        font-size: calc(var(--marker-size) * .75);
+        font-weight: bold;
+        text-align: center;
+      }
+      &.info::before { content: "\f129"; }
+      &.warn {
+        --note-color: var(--dnd5e-color-note-warn);
+        &::before { content: "\21"; }
+      }
+    }
     > section:empty { display: none; }
   }
 
@@ -1311,10 +1371,6 @@ dialog.dnd5e2.application {
       font-size: var(--font-size-12);
       text-align: center;
     }
-    [data-action="roll"] {
-      padding: 6px 8px;
-      > i { margin: 0; }
-    }
     &:not(:last-of-type) {
       border-block-end: var(--dnd5e-border-dotted);
       padding-block-end: 4px;
@@ -1442,6 +1498,15 @@ dialog.dnd5e2.application {
       }
     }
   }
+}
+
+/* ---------------------------------- */
+/*  Rest Dialogs                      */
+/* ---------------------------------- */
+
+.rest.application {
+  .window-content > section.flexcol { gap: 12px; }
+  [data-action="rollHitDie"] { flex: 0; }
 }
 
 /* ---------------------------------- */
@@ -1584,6 +1649,7 @@ dialog.dnd5e2.application {
     cursor: pointer;
     display: flex;
     align-items: baseline;
+    line-height: 32px;
     gap: 5px;
     transition: all 250ms ease;
 
@@ -1623,6 +1689,19 @@ dialog.dnd5e2.application {
    accommodating fixed position context menus */
 
 .dnd5e2 .context { pointer-events: none; }
+
+/* ---------------------------------- */
+/*  ProseMirror                       */
+/* ---------------------------------- */
+
+#prosemirror-dropdown {
+  --dropdown-background: var(--dnd5e-background-card);
+  --dropdown-border: transparent;
+  --color-control-hover: var(--dnd5e-color-parchment);
+
+  ul { box-shadow: 0 3px 6px var(--dnd5e-shadow-45); }
+  li.divider { border-color: var(--color-border-light-1); }
+}
 
 /* ---------------------------------- */
 /*  Window Handles                    */

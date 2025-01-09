@@ -131,6 +131,18 @@ export default class AttackActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Potential attack types when attacking with this activity.
+   * @type {Set<string>}
+   */
+  get validAttackTypes() {
+    const sourceType = this._source.attack.type.value;
+    if ( sourceType ) return new Set([sourceType]);
+    return this.item.system.validAttackTypes ?? new Set();
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
@@ -217,8 +229,7 @@ export default class AttackActivityData extends BaseActivityData {
       const key = attackMode.split("-").map(s => s.capitalize()).join("");
       attackModeLabel = game.i18n.localize(`DND5E.ATTACK.Mode.${key}`);
     }
-    let actionType = this.actionType;
-    if ( (actionType === "mwak") && (attackMode?.startsWith("thrown")) ) actionType = "rwak";
+    const actionType = this.getActionType(attackMode);
     let actionTypeLabel = game.i18n.localize(`DND5E.Action${actionType.toUpperCase()}`);
     const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
     const isUnarmed = this.attack.type.classification === "unarmed";
@@ -248,9 +259,6 @@ export default class AttackActivityData extends BaseActivityData {
     const rollData = this.getRollData();
     if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
-    let actionType = this.actionType;
-    if ( (actionType === "mwak") && attackMode?.startsWith("thrown") ) actionType = "rwak";
-
     const weapon = this.item.system;
     const ammo = this.actor?.items.get(ammunition)?.system;
     const { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
@@ -259,7 +267,7 @@ export default class AttackActivityData extends BaseActivityData {
       bonus: this.attack.bonus,
       weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
       ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
-      actorBonus: this.actor?.system.bonuses?.[actionType]?.attack,
+      actorBonus: this.actor?.system.bonuses?.[this.getActionType(attackMode)]?.attack,
       situational
     }, rollData);
 
@@ -329,6 +337,40 @@ export default class AttackActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
 
+  /**
+   * Create a label based on this activity's settings and, if contained in a weapon, additional details from the weapon.
+   * @returns {string}
+   */
+  getRangeLabel() {
+    if ( this.item.type !== "weapon" ) return this.labels?.range ?? "";
+
+    // TODO: Use proper unit formatting with these once https://github.com/foundryvtt/dnd5e/issues/3958 is resolved
+
+    const parts = [];
+
+    // Add reach for melee weapons, unless the activity is explicitly specified as a ranged attack
+    if ( this.validAttackTypes.has("melee") ) {
+      const { reach, units } = this.item.system.range;
+      parts.push(game.i18n.format("DND5E.RANGE.Formatted.Reach", { reach: `${reach ?? 5} ${units}` }));
+    }
+
+    // Add range for ranged or thrown weapons, unless the activity is explicitly specified as melee
+    if ( this.validAttackTypes.has("ranged") ) {
+      let range;
+      if ( this.range.override ) range = `${this.range.value} ${this.range.units ?? ""}`;
+      else {
+        const { value, long, units } = this.item.system.range;
+        if ( long && (value !== long) ) range = `${value}/${long} ${units}`;
+        else range = `${value} ${units}`;
+      }
+      parts.push(game.i18n.format("DND5E.RANGE.Formatted.Range", { range }));
+    }
+
+    return game.i18n.getListFormatter({ type: "disjunction" }).format(parts.filter(_ => _));
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   _processDamagePart(damage, rollConfig, rollData, index=0) {
     if ( !damage.base ) return super._processDamagePart(damage, rollConfig, rollData, index);
@@ -367,7 +409,7 @@ export default class AttackActivityData extends BaseActivityData {
     }
 
     const criticalBonusDice = this.actor?.getFlag("dnd5e", "meleeCriticalDamageDice") ?? 0;
-    if ( (this.actionType === "mwak") && (parseInt(criticalBonusDice) !== 0) ) {
+    if ( (this.getActionType(rollConfig.attackMode) === "mwak") && (parseInt(criticalBonusDice) !== 0) ) {
       foundry.utils.setProperty(roll, "options.critical.bonusDice", criticalBonusDice);
     }
 

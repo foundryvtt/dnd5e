@@ -118,14 +118,14 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     ["legact", "legres"].forEach(res => {
       const { max, value } = resources[res];
       context[res] = Array.fromRange(max, 1).map(n => {
-        const i18n = res === "legact" ? "LegAct" : "LegRes";
+        const i18n = res === "legact" ? "LegendaryAction" : "LegendaryResistance";
         const filled = value >= n;
         const classes = ["pip"];
         if ( filled ) classes.push("filled");
         return {
           n, filled,
-          tooltip: `DND5E.${i18n}`,
-          label: game.i18n.format(`DND5E.${i18n}N.${plurals.select(n)}`, { n }),
+          tooltip: `DND5E.${i18n}.Label`,
+          label: game.i18n.format(`DND5E.${i18n}.Ordinal.${plurals.select(n)}`, { n }),
           classes: classes.join(" ")
         };
       });
@@ -198,7 +198,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
         { key: "action", label: "DND5E.Action" },
         { key: "bonus", label: "DND5E.BonusAction" },
         { key: "reaction", label: "DND5E.Reaction" },
-        { key: "legendary", label: "DND5E.LegendaryActionLabel" },
+        { key: "legendary", label: "DND5E.LegendaryAction.Label" },
         { key: "lair", label: "DND5E.LairActionLabel" }
       ]
     };
@@ -255,7 +255,9 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     const mod = spellAbility?.mod ?? 0;
     const attackBonus = msak === rsak ? msak : 0;
     context.spellcasting.push({
-      label: game.i18n.format("DND5E.SpellcastingClass", { class: spellcaster?.name ?? game.i18n.format("DND5E.NPC") }),
+      label: game.i18n.format("DND5E.SpellcastingClass", {
+        class: spellcaster?.name ?? game.i18n.format("DND5E.NPC.Label")
+      }),
       level: spellcaster?.system.levels ?? details.spellLevel,
       ability: {
         ability, mod,

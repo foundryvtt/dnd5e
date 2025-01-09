@@ -7,6 +7,7 @@ import UsesField from "../../shared/uses-field.mjs";
  * Data model template for items with activities.
  *
  * @property {ActivityCollection} activities  Activities on this item.
+ * @property {UsesData} uses                  Item's limited uses & recovery.
  * @mixin
  */
 export default class ActivitiesTemplate extends SystemDataModel {
@@ -372,7 +373,8 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( !foundry.utils.hasProperty(changed, "system.activities") ) return;
 
     // Track changes to rider activities & effects and store in item flags
-    const riders = this.parent.clone(changed).system.activities.getByType("enchant").reduce((riders, a) => {
+    const cloneChanges = foundry.utils.deepClone(changed);
+    const riders = this.parent.clone(cloneChanges).system.activities.getByType("enchant").reduce((riders, a) => {
       a.effects.forEach(e => {
         e.riders.activity.forEach(activity => riders.activity.add(activity));
         e.riders.effect.forEach(effect => riders.effect.add(effect));

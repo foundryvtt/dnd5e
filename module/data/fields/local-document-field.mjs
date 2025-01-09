@@ -57,10 +57,27 @@ export default class LocalDocumentField extends foundry.data.fields.DocumentIdFi
 
   /* -------------------------------------------- */
 
+  /**
+   * Step up through model's parents to find the specified collection.
+   * @param {DataModel} model
+   * @param {string} collection
+   * @returns {EmbeddedCollection|void}
+   */
+  _findCollection(model, collection) {
+    if ( !model.parent ) return;
+    try {
+      return model.parent.getEmbeddedCollection(collection);
+    } catch(err) {
+      return model.parent[collection] ?? this._findCollection(model.parent, collection);
+    }
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   initialize(value, model, options={}) {
     if ( this.idOnly ) return this.options.fallback || foundry.data.validators.isValidId(value) ? value : null;
-    const collection = model.parent?.[this.model.metadata.collection];
+    const collection = this._findCollection(model, this.model.metadata.collection);
     return () => {
       const document = collection?.get(value);
       if ( !document ) return this.options.fallback ? value : null;

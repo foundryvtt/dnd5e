@@ -1,12 +1,14 @@
 import * as Trait from "../../documents/actor/trait.mjs";
-import { formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
+import { formatDistance, formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
 import Tabs5e from "../tabs.mjs";
 import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
+import ItemSheet5e2 from "../item/item-sheet-2.mjs";
 
 /**
  * Adds common V2 Actor sheet functionality.
  * @param {typeof ActorSheet5e} Base  The base class being mixed.
  * @returns {typeof ActorSheetV2}
+ * @mixin
  */
 export default function ActorSheetV2Mixin(Base) {
   return class ActorSheetV2 extends DocumentSheetV2Mixin(Base) {
@@ -179,8 +181,9 @@ export default function ActorSheetV2Mixin(Base) {
           const toggleable = !this._concentration?.effects.has(effect);
           let source = await effect.getSource();
           // If the source is an ActiveEffect from another Actor, note the source as that Actor instead.
-          if ( (source instanceof dnd5e.documents.ActiveEffect5e) && (source.target !== this.object) ) {
+          if ( source instanceof ActiveEffect ) {
             source = source.target;
+            if ( (source instanceof Item) && source.parent && (source.parent !== this.object) ) source = source.parent;
           }
           arr = await arr;
           arr.push({
@@ -205,7 +208,7 @@ export default function ActorSheetV2Mixin(Base) {
     _prepareTraits() {
       const traits = {};
       for ( const [trait, config] of Object.entries(CONFIG.DND5E.traits) ) {
-        if ( trait === "dm" ) continue;
+        if ( ["dm", "languages"].includes(trait) ) continue;
         const key = config.actorKeyPath ?? `system.traits.${trait}`;
         const data = foundry.utils.deepClone(foundry.utils.getProperty(this.actor, key));
         if ( !data ) continue;
@@ -259,6 +262,16 @@ export default function ActorSheetV2Mixin(Base) {
         if ( values.length ) traits.dm = values;
       }
 
+      // Handle languages
+      const languages = this.actor.system.traits?.languages?.labels;
+      if ( languages?.languages?.length ) traits.languages = languages.languages.map(label => ({ label }));
+      for ( const [key, { label }] of Object.entries(CONFIG.DND5E.communicationTypes) ) {
+        const data = this.actor.system.traits?.languages?.communication?.[key];
+        if ( !data?.value ) continue;
+        traits.languages ??= [];
+        traits.languages.push({ label, value: data.value });
+      }
+
       // Display weapon masteries
       for ( const key of this.actor.system.traits?.weaponProf?.mastery?.value ?? [] ) {
         let value = traits.weapon?.find(w => w.key === key);
@@ -295,13 +308,18 @@ export default function ActorSheetV2Mixin(Base) {
         if ( !section.usesSlots ) return;
         const spells = foundry.utils.getProperty(this.actor.system.spells, section.prop);
         const max = spells.override ?? spells.max ?? 0;
-        section.pips = Array.fromRange(max, 1).map(n => {
+        const value = spells.value ?? 0;
+        section.pips = Array.fromRange(Math.max(max, value), 1).map(n => {
           const filled = spells.value >= n;
-          const label = filled
-            ? game.i18n.format(`DND5E.SpellSlotN.${plurals.select(n)}`, { n })
-            : game.i18n.localize("DND5E.SpellSlotExpended");
+          const temp = n > max;
+          const label = temp
+            ? game.i18n.localize("DND5E.SpellSlotTemporary")
+            : filled
+              ? game.i18n.format(`DND5E.SpellSlotN.${plurals.select(n)}`, { n })
+              : game.i18n.localize("DND5E.SpellSlotExpended");
           const classes = ["pip"];
           if ( filled ) classes.push("filled");
+          if ( temp ) classes.push("tmp");
           return { n, label, filled, tooltip: label, classes: classes.join(" ") };
         });
       });
@@ -336,7 +354,8 @@ export default function ActorSheetV2Mixin(Base) {
             ctx.range = {
               distance: true,
               value: system.range.value,
-              unit: game.i18n.localize(`DND5E.Dist${units.capitalize()}Abbr`)
+              unit: CONFIG.DND5E.movementUnits[units].abbreviation,
+              parts: formatDistance(system.range.value, units, { parts: true })
             };
           }
           else ctx.range = { distance: false };
@@ -491,7 +510,6 @@ export default function ActorSheetV2Mixin(Base) {
     activateListeners(html) {
       super.activateListeners(html);
       html.find(".pips[data-prop]").on("click", this._onTogglePip.bind(this));
-      html.find("proficiency-cycle").on("change", this._onChangeInput.bind(this));
       html.find(".rollable:is(.saving-throw, .ability-check)").on("click", this._onRollAbility.bind(this));
       html.find(".sidebar-collapser").on("click", this._onToggleSidebar.bind(this));
       html.find("[data-item-id][data-action]").on("click", this._onItemAction.bind(this));
@@ -593,8 +611,9 @@ export default function ActorSheetV2Mixin(Base) {
       const item = this.actor.items.get(itemId);
 
       switch ( action ) {
-        case "edit": item?.sheet.render(true); break;
         case "delete": item?.deleteDialog(); break;
+        case "edit": item?.sheet.render(true, { mode: ItemSheet5e2.MODES.EDIT }); break;
+        case "view": item?.sheet.render(true, { mode: ItemSheet5e2.MODES.PLAY }); break;
       }
     }
 

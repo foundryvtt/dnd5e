@@ -1,5 +1,5 @@
+{{#if hasCreation}}
 <section>
-    {{~#if hasCreation}}
     {{> "dnd5e.activity-usage-notes" }}
     <fieldset>
         <legend>{{ localize "DND5E.USAGE.SECTION.Creation" }}</legend>
@@ -12,5 +12,9 @@
         {{ formField template.field name=template.name value=template.value input=inputs.createCheckboxInput }}
         {{/if}}
     </fieldset>
-    {{/if~}}
 </section>
+{{else if enchantment}}
+<input type="hidden" name="enchantmentProfile" value="{{ enchantment }}">
+{{else}}
+<section></section>
+{{/if}}

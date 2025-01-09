@@ -98,4 +98,12 @@ export default class ScaleValueAdvancement extends Advancement {
     return true;
   }
 
+  /* -------------------------------------------- */
+  /*  Application Methods                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  automaticApplicationValue(level) {
+    return {};
+  }
 }

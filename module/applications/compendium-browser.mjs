@@ -1,6 +1,6 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
-import CompendiumBrowserSourceConfig from "./compendium-browser-source-config.mjs";
+import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
 /**
  * @typedef {ApplicationConfiguration} CompendiumBrowserConfiguration
@@ -921,7 +921,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
    * @this {CompendiumBrowser}
    */
   static #onConfigureSources() {
-    new CompendiumBrowserSourceConfig().render({ force: true });
+    new CompendiumBrowserSettingsConfig().render({ force: true });
   }
 
   /* -------------------------------------------- */
@@ -942,6 +942,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
   /**
    * Handle form submission with selection.
+   * @this {CompendiumBrowser}
    * @param {SubmitEvent} event          The form submission event.
    * @param {HTMLFormElement} form       The submitted form element.
    * @param {FormDataExtended} formData  The data from the submitted form.
@@ -1093,7 +1094,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     indexFields.delete("system.source.slug");
 
     // Collate compendium sources.
-    const sources = CompendiumBrowserSourceConfig.collateSources();
+    const sources = CompendiumBrowserSettingsConfig.collateSources();
 
     // Iterate over all packs
     let documents = game.packs

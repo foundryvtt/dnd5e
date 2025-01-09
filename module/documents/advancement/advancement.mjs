@@ -1,6 +1,11 @@
-import AdvancementConfig from "../../applications/advancement/advancement-config.mjs";
+import AdvancementConfig from "../../applications/advancement/advancement-config-v2.mjs";
 import AdvancementFlow from "../../applications/advancement/advancement-flow.mjs";
 import BaseAdvancement from "../../data/advancement/base-advancement.mjs";
+import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
+
+/**
+ * @import { PseudoDocumentsMetadata } from "../mixins/pseudo-document.mjs";
+ */
 
 /**
  * Error that can be thrown during the advancement update preparation process.
@@ -19,7 +24,7 @@ class AdvancementError extends Error {
  * @param {object} [options={}]  Options which affect DataModel construction.
  * @abstract
  */
-export default class Advancement extends BaseAdvancement {
+export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
   constructor(data, {parent=null, ...options}={}) {
     if ( parent instanceof Item ) parent = parent.system;
     super(data, {parent, ...options});
@@ -52,7 +57,7 @@ export default class Advancement extends BaseAdvancement {
   /**
    * Information on how an advancement type is configured.
    *
-   * @typedef {object} AdvancementMetadata
+   * @typedef {PseudoDocumentsMetadata} AdvancementMetadata
    * @property {object} dataModels
    * @property {DataModel} configuration  Data model used for validating configuration data.
    * @property {DataModel} value          Data model used for validating value data.
@@ -77,6 +82,8 @@ export default class Advancement extends BaseAdvancement {
    */
   static get metadata() {
     return {
+      name: "Advancement",
+      label: "DOCUMENT.DND5E.Advancement",
       order: 100,
       icon: "icons/svg/upgrade.svg",
       typeIcon: "icons/svg/upgrade.svg",
@@ -91,56 +98,23 @@ export default class Advancement extends BaseAdvancement {
     };
   }
 
+  /* -------------------------------------------- */
+
   /**
-   * Configuration information for this advancement type.
-   * @type {AdvancementMetadata}
+   * Perform the pre-localization of this data model.
    */
-  get metadata() {
-    return this.constructor.metadata;
+  static localize() {
+    Localization.localizeDataModel(this);
+    if ( this.metadata.dataModels?.configuration ) {
+      Localization.localizeDataModel(this.metadata.dataModels.configuration);
+    }
+    if ( this.metadata.dataModels?.value ) {
+      Localization.localizeDataModel(this.metadata.dataModels.value);
+    }
   }
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
-  /* -------------------------------------------- */
-
-  /**
-   * Unique identifier for this advancement within its item.
-   * @type {string}
-   */
-  get id() {
-    return this._id;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Globally unique identifier for this advancement.
-   * @type {string}
-   */
-  get uuid() {
-    return `${this.item.uuid}.Advancement.${this.id}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Item to which this advancement belongs.
-   * @type {Item5e}
-   */
-  get item() {
-    return this.parent.parent;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Actor to which this advancement's item belongs, if the item is embedded.
-   * @type {Actor5e|null}
-   */
-  get actor() {
-    return this.item.parent ?? null;
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -251,42 +225,7 @@ export default class Advancement extends BaseAdvancement {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Render all of the Application instances which are connected to this advancement.
-   * @param {boolean} [force=false]     Force rendering
-   * @param {object} [context={}]       Optional context
-   */
-  render(force=false, context={}) {
-    for ( const app of Object.values(this.apps) ) app.render(force, context);
-  }
-
-  /* -------------------------------------------- */
   /*  Editing Methods                             */
-  /* -------------------------------------------- */
-
-  /**
-   * Update this advancement.
-   * @param {object} updates          Updates to apply to this advancement.
-   * @returns {Promise<Advancement>}  This advancement after updates have been applied.
-   */
-  async update(updates) {
-    await this.item.updateAdvancement(this.id, updates);
-    return this;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Update this advancement's data on the item without performing a database commit.
-   * @param {object} updates  Updates to apply to this advancement.
-   * @returns {Advancement}   This advancement after updates have been applied.
-   */
-  updateSource(updates) {
-    super.updateSource(updates);
-    return this;
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -296,19 +235,6 @@ export default class Advancement extends BaseAdvancement {
    */
   static availableForItem(item) {
     return true;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Serialize salient information for this Advancement when dragging it.
-   * @returns {object}  An object of drag data.
-   */
-  toDragData() {
-    const dragData = { type: "Advancement" };
-    if ( this.id ) dragData.uuid = this.uuid;
-    else dragData.data = this.toObject();
-    return dragData;
   }
 
   /* -------------------------------------------- */
@@ -322,6 +248,18 @@ export default class Advancement extends BaseAdvancement {
    * @abstract
    */
   async apply(level, data) { }
+
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieves the data to pass to the apply method in order to apply this advancement automatically, if possible.
+   * @param {number} level    Level being advanced.
+   * @returns {object|false}  Data to pass to the apply method, or `false` if advancement requirers user intervention.
+   */
+  automaticApplicationValue(level) {
+    return false;
+  }
 
   /* -------------------------------------------- */
 
@@ -355,10 +293,12 @@ export default class Advancement extends BaseAdvancement {
   async createItemData(uuid, id) {
     const source = await fromUuid(uuid);
     if ( !source ) return null;
+    const { _stats } = game.items.fromCompendium(source);
     return source.clone({
+      _stats,
       _id: id ?? foundry.utils.randomID(),
       "flags.dnd5e.sourceId": uuid,
       "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
-    }, {keepId: true}).toObject();
+    }, { keepId: true }).toObject();
   }
 }

@@ -1,7 +1,6 @@
 <div class="item-detail item-range">
     {{#if range.scalar}}
-    <span class="value">{{ range.value }}</span>
-    <span class="unit">{{ range.units }}</span>
+    {{{ labels.rangeParts }}}
     {{else}}
     <span class="condensed">{{ labels.range }}</span>
     {{/if}}

@@ -15,18 +15,22 @@
 
     {{!-- Hit Dice --}}
     <div class="form-group split-group">
-        <label>{{ localize "DND5E.CLASS.FIELDS.hitDice.label" }}</label>
+        <label>{{ localize "DND5E.CLASS.FIELDS.hd.label" }}</label>
         <div class="form-fields">
 
             {{!-- Denomination --}}
-            {{ formField fields.hitDice value=source.hitDice options=hitDieTypes label="DND5E.Denomination"
+            {{ formField fields.hd.fields.denomination value=source.hd.denomination options=hitDieTypes label="DND5E.Denomination"
                          localize=true classes="label-top" }}
 
             {{!-- Spent --}}
-            {{ formField fields.hitDiceUsed value=source.hitDiceUsed placeholder="0" localize=true label="DND5E.Spent"
+            {{ formField fields.hd.fields.spent value=source.hd.spent placeholder="0" localize=true label="DND5E.Spent"
                          classes="label-top" }}
         </div>
     </div>
+
+    {{#if source.hd.additional}}
+    {{ formGroup fields.hd.fields.additional value=source.hd.additional localize=true }}
+    {{/if}}
 </fieldset>
 
 <fieldset>

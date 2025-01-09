@@ -120,6 +120,9 @@ Hooks.once("init", function() {
     delete DND5E.languages.exotic.children.cant;
     DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
     delete DND5E.languages.exotic.children.druidic;
+
+    // Stunned stops movement in legacy.
+    DND5E.conditionEffects.noMovement.add("stunned");
   }
 
   // Register Roll Extensions
@@ -128,6 +131,7 @@ Hooks.once("init", function() {
   // Hook up system data types
   CONFIG.ActiveEffect.dataModels = dataModels.activeEffect.config;
   CONFIG.Actor.dataModels = dataModels.actor.config;
+  CONFIG.ChatMessage.dataModels = dataModels.chatMessage.config;
   CONFIG.Item.dataModels = dataModels.item.config;
   CONFIG.JournalEntryPage.dataModels = dataModels.journal.config;
 
@@ -442,10 +446,18 @@ Hooks.once("i18nInit", () => {
       DND5E: {
         "Feature.Species": game.i18n.localize("DND5E.Feature.SpeciesLegacy"),
         FlagsAlertHint: game.i18n.localize("DND5E.FlagsAlertHintLegacy"),
-        LanguagesExotic: game.i18n.localize("DND5E.LanguagesExoticLegacy"),
-        LongRestHint: game.i18n.localize("DND5E.LongRestHintLegacy"),
-        LongRestHintGroup: game.i18n.localize("DND5E.LongRestHintGroupLegacy"),
-        TargetRadius: game.i18n.localize("DND5E.TargetRadiusLegacy"),
+        ItemSpeciesDetails: game.i18n.localize("DND5E.ItemSpeciesDetailsLegacy"),
+        "Language.Category.Rare": game.i18n.localize("DND5E.Language.Category.Exotic"),
+        RacialTraits: game.i18n.localize("DND5E.RacialTraitsLegacy"),
+        "REST.Long.Hint.Normal": game.i18n.localize("DND5E.REST.Long.Hint.NormalLegacy"),
+        "REST.Long.Hint.Group": game.i18n.localize("DND5E.REST.Long.Hint.GroupLegacy"),
+        "Species.Add": game.i18n.localize("DND5E.Species.AddLegacy"),
+        "Species.Features": game.i18n.localize("DND5E.Species.FeaturesLegacy"),
+        "TARGET.Type.Emanation": foundry.utils.mergeObject(
+          _fallback.DND5E?.TARGET?.Type?.Radius ?? {},
+          translations.DND5E?.TARGET?.Type?.Radius ?? {},
+          { inplace: false }
+        ),
         TraitArmorPlural: foundry.utils.mergeObject(
           _fallback.DND5E?.TraitArmorLegacyPlural ?? {},
           translations.DND5E?.TraitArmorLegacyPlural ?? {},
@@ -457,6 +469,7 @@ Hooks.once("i18nInit", () => {
   }
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
+  Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
 });
 
 /* -------------------------------------------- */
@@ -514,44 +527,10 @@ Hooks.on("renderPause", (app, [html]) => {
   img.className = "";
 });
 
-Hooks.on("renderSettings", (app, [html]) => {
-  const details = html.querySelector("#game-details");
-  const pip = details.querySelector(".system-info .update");
-  details.querySelector(".system").remove();
-
-  const heading = document.createElement("div");
-  heading.classList.add("dnd5e2", "sidebar-heading");
-  heading.innerHTML = `
-    <h2>${game.i18n.localize("WORLD.GameSystem")}</h2>
-    <ul class="links">
-      <li>
-        <a href="https://github.com/foundryvtt/dnd5e/releases/latest" target="_blank">
-          ${game.i18n.localize("DND5E.Notes")}
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/foundryvtt/dnd5e/issues" target="_blank">${game.i18n.localize("DND5E.Issues")}</a>
-      </li>
-      <li>
-        <a href="https://github.com/foundryvtt/dnd5e/wiki" target="_blank">${game.i18n.localize("DND5E.Wiki")}</a>
-      </li>
-      <li>
-        <a href="https://discord.com/channels/170995199584108546/670336046164213761" target="_blank">
-          ${game.i18n.localize("DND5E.Discord")}
-        </a>
-      </li>
-    </ul>
-  `;
-  details.insertAdjacentElement("afterend", heading);
-
-  const badge = document.createElement("div");
-  badge.classList.add("dnd5e2", "system-badge");
-  badge.innerHTML = `
-    <img src="systems/dnd5e/ui/official/dnd-badge-32.webp" data-tooltip="${dnd5e.title}" alt="${dnd5e.title}">
-    <span class="system-info">${dnd5e.version}</span>
-  `;
-  if ( pip ) badge.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
-  heading.insertAdjacentElement("afterend", badge);
+Hooks.on("renderSettings", (app, html) => {
+  html = html instanceof HTMLElement ? html : html[0];
+  if ( game.release.generation > 12 ) applications.settings.sidebar.renderSettings(html);
+  else applications.settings.sidebar.renderSettingsLegacy(html);
 });
 
 /* -------------------------------------------- */
@@ -579,6 +558,21 @@ Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOpt
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
+
+Hooks.on("preCreateScene", (doc, createData, options, userId) => {
+  // Set default grid units based on metric length setting
+  const units = utils.defaultUnits("length");
+  if ( (units !== dnd5e.grid.units) && !foundry.utils.getProperty(createData, "grid.distance")
+    && !foundry.utils.getProperty(createData, "grid.units") ) {
+    const C = CONFIG.DND5E.movementUnits;
+    doc.updateSource({
+      grid: {
+        // TODO: Replace with `convertLength` method once added
+        distance: dnd5e.grid.distance * (C[dnd5e.grid.units]?.conversion ?? 1) / (C[units]?.conversion ?? 1), units
+      }
+    });
+  }
+});
 
 // TODO: Generalize this logic and make it available in the re-designed transform application.
 Hooks.on("dnd5e.transformActor", (subject, target, d, options) => {

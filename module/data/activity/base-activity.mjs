@@ -43,10 +43,10 @@ const {
  * @property {EffectApplicationData[]} effects   Linked effects that can be applied.
  * @property {object} range
  * @property {boolean} range.override            Override range values inferred from item.
- * @property {TargetField} target
+ * @property {TargetData} target
  * @property {boolean} target.override           Override target values inferred from item.
  * @property {boolean} target.prompt             Should the player be prompted to place the template?
- * @property {UsesField} uses                    Uses available to this activity.
+ * @property {UsesData} uses                     Uses available to this activity.
  */
 export default class BaseActivityData extends foundry.abstract.DataModel {
 
@@ -649,6 +649,19 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve the action type reflecting changes based on the provided attack mode.
+   * @param {string} [attackMode=""]
+   * @returns {string}
+   */
+  getActionType(attackMode="") {
+    let actionType = this.actionType;
+    if ( (actionType === "mwak") && (attackMode?.startsWith("thrown") || (attackMode === "ranged")) ) return "rwak";
+    return actionType;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the roll parts used to create the damage rolls.
    * @param {Partial<DamageRollProcessConfiguration>} [config={}]
    * @returns {DamageRollProcessConfiguration}
@@ -683,10 +696,9 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const data = { ...rollData };
 
     if ( index === 0 ) {
-      let actionType = this.actionType;
-      if ( (actionType === "mwak") && rollConfig.attackMode?.startsWith("thrown") ) actionType = "rwak";
+      const actionType = this.getActionType(rollConfig.attackMode);
       const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${actionType}.damage`);
-      if ( bonus && (parseInt(bonus) !== 0) ) parts.push(bonus);
+      if ( bonus && !/^0+$/.test(bonus) ) parts.push(bonus);
     }
 
     const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);

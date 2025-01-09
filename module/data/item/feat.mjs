@@ -1,11 +1,12 @@
 import { ItemDataModel } from "../abstract.mjs";
+import AdvancementField from "../fields/advancement-field.mjs";
+import FormulaField from "../fields/formula-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
-import { FormulaField } from "../fields/_module.mjs";
 
-const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Data definition for Feature items.
@@ -13,11 +14,13 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  *
+ * @property {Advancement[]}                        Advancement objects for this feature.
  * @property {object} enchant
  * @property {string} enchant.max                   Maximum number of items that can have this enchantment.
  * @property {string} enchant.period                Frequency at which the enchantment can be swapped.
  * @property {object} prerequisites
  * @property {number} prerequisites.level           Character or class level required to choose this feature.
+ * @property {boolean} prerequisites.repeatable     Can this item be selected more than once?
  * @property {Set<string>} properties               General properties of a feature item.
  * @property {string} requirements                  Actor details required to use this feature.
  */
@@ -30,25 +33,25 @@ export default class FeatData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.ENCHANTMENT", "DND5E.Prerequisites", "DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.FEATURE", "DND5E.ENCHANTMENT", "DND5E.Prerequisites", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
+      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       enchant: new SchemaField({
-        max: new FormulaField({deterministic: true}),
+        max: new FormulaField({ deterministic: true }),
         period: new StringField()
       }),
-      type: new ItemTypeField({baseItem: false}, {label: "DND5E.ItemFeatureType"}),
       prerequisites: new SchemaField({
-        level: new NumberField({integer: true, min: 0})
+        level: new NumberField({ integer: true, min: 0 }),
+        repeatable: new BooleanField()
       }),
-      properties: new SetField(new StringField(), {
-        label: "DND5E.ItemFeatureProperties"
-      }),
-      requirements: new StringField({required: true, nullable: true, label: "DND5E.Requirements"})
+      properties: new SetField(new StringField()),
+      requirements: new StringField({ required: true, nullable: true }),
+      type: new ItemTypeField({ baseItem: false })
     });
   }
 
@@ -98,7 +101,7 @@ export default class FeatData extends ItemDataModel.mixin(
 
     let label;
     const activation = this.activities.contents[0]?.activation.type;
-    if ( activation === "legendary" ) label = game.i18n.localize("DND5E.LegendaryActionLabel");
+    if ( activation === "legendary" ) label = game.i18n.localize("DND5E.LegendaryAction.Label");
     else if ( activation === "lair" ) label = game.i18n.localize("DND5E.LairActionLabel");
     else if ( activation === "action" && this.hasAttack ) label = game.i18n.localize("DND5E.Attack");
     else if ( activation ) label = game.i18n.localize("DND5E.Action");

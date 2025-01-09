@@ -4,11 +4,11 @@
     {{#dnd5e-itemContext cls as |ctx|}}
     <div class="class pill-lg" data-item-id="{{ cls.id }}" style="--underlay: url('{{ ctx.prefixedImage }}');">
         <div class="icons {{#if cls.subclass}}subclass{{/if}}">
-            <img class="gold-icon item-tooltip" src="{{ cls.img }}" alt="{{ cls.name }}" data-action="edit"
+            <img class="gold-icon item-tooltip" src="{{ cls.img }}" alt="{{ cls.name }}" data-action="view"
                  data-item-id="{{ cls.id }}">
             {{#if cls.subclass}}
             <img class="gold-icon item-tooltip" src="{{ cls.subclass.img }}" alt="{{ cls.subclass.name }}"
-                 data-action="edit" data-item-id="{{ cls.subclass.id }}">
+                 data-action="view" data-item-id="{{ cls.subclass.id }}">
             {{else if ctx.needsSubclass}}
             <a class="gold-icon subclass-icon" data-action="findItem" data-item-type="subclass"
                data-class-identifier="{{ cls.identifier }}" data-tooltip="DND5E.SubclassAdd"

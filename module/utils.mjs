@@ -4,12 +4,28 @@
 
 /**
  * Format a Challenge Rating using the proper fractional symbols.
- * @param {number} value  CR value for format.
+ * @param {number} value                   CR value to format.
+ * @param {object} [options={}]
+ * @param {boolean} [options.narrow=true]  Use narrow fractions (e.g. ⅛) rather than wide ones (e.g. 1/8).
  * @returns {string}
  */
-export function formatCR(value) {
+export function formatCR(value, { narrow=true }={}) {
   if ( value === null ) return "—";
-  return { 0.125: "⅛", 0.25: "¼", 0.5: "½" }[value] ?? formatNumber(value);
+  const fractions = narrow ? { 0.125: "⅛", 0.25: "¼", 0.5: "½" } : { 0.125: "1/8", 0.25: "1/4", 0.5: "1/2" };
+  return fractions[value] ?? formatNumber(value);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Form a number using the provided distance unit.
+ * @param {number} value         The distance to format.
+ * @param {string} unit          Distance unit as defined in `CONFIG.DND5E.movementUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatDistance(value, unit, options={}) {
+  return _formatSystemUnits(value, unit, CONFIG.DND5E.movementUnits[unit], options);
 }
 
 /* -------------------------------------------- */
@@ -31,9 +47,11 @@ export function formatModifier(mod) {
  * @param {number} value    The value to format.
  * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
  * @param {boolean} [options.numerals]  Format the number as roman numerals.
+ * @param {boolean} [options.words]     Write out number as full word, if possible.
  * @returns {string}
  */
-export function formatNumber(value, { numerals, ...options }={}) {
+export function formatNumber(value, { numerals, words, ...options }={}) {
+  if ( words && game.i18n.has(`DND5E.NUMBER.${value}`, false) ) return game.i18n.localize(`DND5E.NUMBER.${value}`);
   if ( numerals ) return _formatNumberAsNumerals(value);
   const formatter = new Intl.NumberFormat(game.i18n.lang, options);
   return formatter.format(value);
@@ -100,6 +118,104 @@ export function formatRange(min, max, options) {
  */
 export function formatText(value) {
   return new Handlebars.SafeString(value?.replaceAll("\n", "<br>") ?? "");
+}
+
+/* -------------------------------------------- */
+
+/**
+ * A helper function that formats a time in a human-readable format.
+ * @param {number} value         Time to display.
+ * @param {string} unit          Units as defined in `CONFIG.DND5E.timeUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatTime(value, unit, options={}) {
+  options.maximumFractionDigits ??= 0;
+  options.unitDisplay ??= "long";
+  const config = CONFIG.DND5E.timeUnits[unit];
+  if ( config?.counted ) {
+    if ( (options.unitDisplay === "narrow") && game.i18n.has(`${config.counted}.narrow`) ) {
+      return game.i18n.format(`${config.counted}.narrow`, { number: formatNumber(value, options) });
+    } else {
+      const pr = new Intl.PluralRules(game.i18n.lang);
+      return game.i18n.format(`${config.counted}.${pr.select(value)}`, { number: formatNumber(value, options) });
+    }
+  }
+  try {
+    return formatNumber(value, { ...options, style: "unit", unit });
+  } catch(err) {
+    return formatNumber(value, options);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Form a number using the provided volume unit.
+ * @param {number} value         The volume to format.
+ * @param {string} unit          Volume unit as defined in `CONFIG.DND5E.volumeUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatVolume(value, unit, options={}) {
+  return _formatSystemUnits(value, unit, CONFIG.DND5E.volumeUnits[unit], options);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Form a number using the provided weight unit.
+ * @param {number} value         The weight to format.
+ * @param {string} unit          Weight unit as defined in `CONFIG.DND5E.weightUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatWeight(value, unit, options={}) {
+  return _formatSystemUnits(value, unit, CONFIG.DND5E.weightUnits[unit], options);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Format a number using one of core's built-in unit types.
+ * @param {number} value                   Value to display.
+ * @param {string} unit                    Name of the unit to use.
+ * @param {UnitConfiguration} config       Configuration data for the unit.
+ * @param {object} [options={}]            Formatting options passed to `formatNumber`.
+ * @param {boolean} [options.parts=false]  Format to parts.
+ * @returns {string}
+ */
+function _formatSystemUnits(value, unit, config, { parts=false, ...options }={}) {
+  options.unitDisplay ??= "short";
+  if ( config?.counted ) {
+    const localizationKey = `${config.counted}.${options.unitDisplay}.${getPluralRules().select(value)}`;
+    return game.i18n.format(localizationKey, { number: formatNumber(value, options) });
+  }
+  unit = config?.formattingUnit ?? unit;
+  if ( isValidUnit(unit) ) {
+    options.style ??= "unit";
+    options.unit ??= unit;
+  }
+  return (parts ? formatNumberParts : formatNumber)(value, options);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Cached store of Intl.PluralRules instances.
+ * @type {Record<string, Intl.PluralRules>}
+ */
+const _pluralRules = {};
+
+/**
+ * Get a PluralRules object, fetching from cache if possible.
+ * @param {object} [options={}]
+ * @param {string} [options.type=cardinal]
+ * @returns {Intl.PluralRules}
+ */
+export function getPluralRules({ type="cardinal" }={}) {
+  _pluralRules[type] ??= new Intl.PluralRules(game.i18n.lang, { type });
+  return _pluralRules[type];
 }
 
 /* -------------------------------------------- */
@@ -417,7 +533,7 @@ export function getTargetDescriptors() {
  * @returns {Token5e[]}
  */
 export function getSceneTargets() {
-  let targets = canvas.tokens.controlled.filter(t => t.actor);
+  let targets = canvas.tokens?.controlled.filter(t => t.actor) ?? [];
   if ( !targets.length && game.user.character ) targets = game.user.character.getActiveTokens();
   return targets;
 }
@@ -427,20 +543,98 @@ export function getSceneTargets() {
 /* -------------------------------------------- */
 
 /**
+ * Convert the provided length to another unit.
+ * @param {number} value                   The length being converted.
+ * @param {string} from                    The initial units.
+ * @param {string} to                      The final units.
+ * @param {object} [options={}]
+ * @param {boolean} [options.strict=true]  Throw an error if either unit isn't found.
+ * @returns {number}
+ */
+export function convertLength(value, from, to, { strict=true }={}) {
+  const message = unit => `Length unit ${unit} not defined in CONFIG.DND5E.movementUnits`;
+  return _convertSystemUnits(value, from, to, CONFIG.DND5E.movementUnits, { message, strict });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Convert the provided time value to another unit. If no final unit is provided, then will convert it to the largest
+ * unit that can still represent the value as a whole number.
+ * @param {number} value                    The time being converted.
+ * @param {string} from                     The initial unit as defined in `CONFIG.DND5E.timeUnits`.
+ * @param {object} [options={}]
+ * @param {boolean} [options.combat=false]  Use combat units when auto-selecting units, rather than normal units.
+ * @param {boolean} [options.strict=true]   Throw an error if from unit isn't found.
+ * @param {string} [options.to]             The final units, if explicitly provided.
+ * @returns {{ value: number, unit: string }}
+ */
+export function convertTime(value, from, { combat=false, strict=true, to }={}) {
+  const base = value * (CONFIG.DND5E.timeUnits[from]?.conversion ?? 1);
+  if ( !to ) {
+    // Find unit with largest conversion value that can still display the value
+    const unitOptions = Object.entries(CONFIG.DND5E.timeUnits)
+      .reduce((arr, [key, v]) => {
+        if ( ((v.combat ?? false) === combat) && ((base % v.conversion === 0) || (base >= v.conversion * 2)) ) {
+          arr.push({ key, conversion: v.conversion });
+        }
+        return arr;
+      }, [])
+      .sort((lhs, rhs) => rhs.conversion - lhs.conversion);
+    to = unitOptions[0]?.key ?? from;
+  }
+
+  const message = unit => `Time unit ${unit} not defined in CONFIG.DND5E.timeUnits`;
+  return { value: _convertSystemUnits(value, from, to, CONFIG.DND5E.timeUnits, { message, strict }), unit: to };
+}
+
+/* -------------------------------------------- */
+
+/**
  * Convert the provided weight to another unit.
- * @param {number} value  The weight being converted.
- * @param {string} from   The initial units.
- * @param {string} to     The final units.
+ * @param {number} value                   The weight being converted.
+ * @param {string} from                    The initial unit as defined in `CONFIG.DND5E.weightUnits`.
+ * @param {string} to                      The final units.
+ * @param {object} [options={}]
+ * @param {boolean} [options.strict=true]  Throw an error if either unit isn't found.
  * @returns {number}      Weight in the specified units.
  */
-export function convertWeight(value, from, to) {
-  if ( from === to ) return value;
+export function convertWeight(value, from, to, { strict=true }={}) {
   const message = unit => `Weight unit ${unit} not defined in CONFIG.DND5E.weightUnits`;
-  if ( !CONFIG.DND5E.weightUnits[from] ) throw new Error(message(from));
-  if ( !CONFIG.DND5E.weightUnits[to] ) throw new Error(message(to));
-  return value
-    * CONFIG.DND5E.weightUnits[from].conversion
-    / CONFIG.DND5E.weightUnits[to].conversion;
+  return _convertSystemUnits(value, from, to, CONFIG.DND5E.weightUnits, { message, strict });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Convert from one unit to another using one of core's built-in unit types.
+ * @param {number} value                                Value to display.
+ * @param {string} from                                 The initial unit.
+ * @param {string} to                                   The final unit.
+ * @param {UnitConfiguration} config                    Configuration data for the unit.
+ * @param {object} options
+ * @param {function(string): string} [options.message]  Method used to produce the error message if unit not found.
+ * @param {boolean} [options.strict]                    Throw an error if either unit isn't found.
+ * @returns {string}
+ */
+function _convertSystemUnits(value, from, to, config, { message, strict }) {
+  if ( from === to ) return value;
+  if ( strict && !config[from] ) throw new Error(message(from));
+  if ( strict && !config[to] ) throw new Error(message(to));
+  return value * (config[from].conversion ?? 1) / (config[to].conversion ?? 1);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Default units to use depending on system setting.
+ * @param {"length"|"weight"} type  Type of units to select.
+ * @returns {string}
+ */
+export function defaultUnits(type) {
+  return CONFIG.DND5E.defaultUnits[type]?.[
+    game.settings.get("dnd5e", `metric${type.capitalize()}Units`) ? "metric" : "imperial"
+  ];
 }
 
 /* -------------------------------------------- */
@@ -459,6 +653,18 @@ function isValidIdentifier(identifier) {
 export const validators = {
   isValidIdentifier: isValidIdentifier
 };
+
+/* -------------------------------------------- */
+
+/**
+ * Determine whether the provided unit is usable within `Intl.NumberFormat`.
+ * @param {string} unit
+ * @returns {boolean}
+ */
+export function isValidUnit(unit) {
+  if ( unit?.includes("-per-") ) return unit.split("-per-").every(u => isValidUnit(u));
+  return Intl.supportedValuesOf("unit").includes(unit);
+}
 
 /* -------------------------------------------- */
 /*  Handlebars Template Helpers                 */
@@ -544,6 +750,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/shared/fields/field-range.hbs",
     "systems/dnd5e/templates/shared/fields/field-targets.hbs",
     "systems/dnd5e/templates/shared/fields/field-uses.hbs",
+    "systems/dnd5e/templates/shared/fields/fieldlist.hbs",
 
     // Journal Partials
     "systems/dnd5e/templates/journal/parts/journal-legacy-traits.hbs",
@@ -833,6 +1040,8 @@ const _attributeLabelCache = new Map();
  * @returns {string|void}
  */
 export function getHumanReadableAttributeLabel(attr, { actor }={}) {
+  if ( attr.startsWith("system.") ) attr = attr.slice(7);
+
   // Check any actor-specific names first.
   if ( attr.startsWith("resources.") && actor ) {
     const key = attr.replace(/\.value$/, "");

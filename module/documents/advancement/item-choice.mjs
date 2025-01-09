@@ -101,6 +101,13 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  automaticApplicationValue(level) {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   restore(level, data) {
     const original = this.actor.items.get(data.replaced?.original);

@@ -43,13 +43,10 @@ export default class HitDiceConfig extends BaseConfigSheet {
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
     context.classes = Array.from(this.document.system.attributes?.hd?.classes ?? []).map(cls => ({
-      data: {
-        value: cls.system.levels - cls.system.hitDiceUsed, // TODO: Adjust once Zhell's PR is merged
-        max: cls.system.levels
-      },
-      denomination: Number(cls.system.hitDice.slice(1)),
+      data: { ...cls.system.hd },
+      denomination: Number(cls.system.hd.denomination.slice(1)),
       id: cls.id,
-      label: `${cls.name} (${cls.system.hitDice})`
+      label: `${cls.name} (${cls.system.hd.denomination})`
     })).sort((lhs, rhs) => rhs.denomination - lhs.denomination);
     return context;
   }
@@ -93,7 +90,7 @@ export default class HitDiceConfig extends BaseConfigSheet {
     if ( form.reportValidity() ) {
       const submitData = super._processFormData(event, form, formData);
       const classUpdates = Object.entries(submitData).map(([_id, value]) => ({
-        _id, "system.hitDiceUsed": this.document.items.get(_id).system.levels - value
+        _id, "system.hd.spent": this.document.items.get(_id).system.levels - value
       }));
       this.document.updateEmbeddedDocuments("Item", classUpdates);
     }

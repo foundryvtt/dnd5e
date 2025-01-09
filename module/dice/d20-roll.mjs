@@ -8,6 +8,8 @@ import BasicRoll from "./basic-roll.mjs";
  * Configuration data for the process of rolling d20 rolls.
  *
  * @typedef {BasicRollProcessConfiguration} D20RollProcessConfiguration
+ * @property {boolean} [advantage]             Apply advantage to each roll.
+ * @property {boolean} [disadvantage]          Apply disadvantage to each roll.
  * @property {boolean} [elvenAccuracy]         Use three dice when rolling with advantage.
  * @property {boolean} [halflingLucky]         Add a re-roll once modifier to the d20 die.
  * @property {boolean} [reliableTalent]        Set the minimum for the d20 roll to 10.
@@ -76,6 +78,11 @@ export default class D20Roll extends BasicRoll {
   /** @inheritDoc */
   static fromConfig(config, process) {
     const formula = [new CONFIG.Dice.D20Die().formula].concat(config.parts ?? []).join(" + ");
+    config.options.criticalSuccess ??= CONFIG.Dice.D20Die.CRITICAL_SUCCESS_TOTAL;
+    config.options.criticalFailure ??= CONFIG.Dice.D20Die.CRITICAL_FAILURE_TOTAL;
+    config.options.elvenAccuracy ??= process.elvenAccuracy;
+    config.options.halflingLucky ??= process.halflingLucky;
+    config.options.reliableTalent ??= process.reliableTalent;
     config.options.target ??= process.target;
     return new this(formula, config.data, config.options);
   }
@@ -91,27 +98,6 @@ export default class D20Roll extends BasicRoll {
     const newRoll = new this(roll.formula, roll.data, roll.options);
     Object.assign(newRoll, roll);
     return newRoll;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Construct and perform a D20 Roll through the standard workflow.
-   * @param {D20RollProcessConfiguration} [config={}]     Roll configuration data.
-   * @param {BasicRollDialogConfiguration} [dialog={}]    Data for the roll configuration dialog.
-   * @param {BasicRollMessageConfiguration} [message={}]  Configuration data that guides roll message creation.
-   * @returns {D20Roll[]}                                 Any rolls created.
-   */
-  static async build(config={}, dialog={}, message={}) {
-    for ( const roll of config.rolls ?? [] ) {
-      roll.options ??= {};
-      roll.options.criticalSuccess ??= CONFIG.Dice.D20Die.CRITICAL_SUCCESS_TOTAL;
-      roll.options.criticalFailure ??= CONFIG.Dice.D20Die.CRITICAL_FAILURE_TOTAL;
-      roll.options.elvenAccuracy ??= config.elvenAccuracy;
-      roll.options.halflingLucky ??= config.halflingLucky;
-      roll.options.reliableTalent ??= config.reliableTalent;
-    }
-    return super.build(config, dialog, message);
   }
 
   /* -------------------------------------------- */
@@ -134,8 +120,8 @@ export default class D20Roll extends BasicRoll {
 
     // Determine advantage mode
     for ( const roll of config.rolls ?? [] ) {
-      const advantage = roll.options.advantage || keys.advantage;
-      const disadvantage = roll.options.disadvantage || keys.disadvantage;
+      const advantage = roll.options.advantage || config.advantage || keys.advantage;
+      const disadvantage = roll.options.disadvantage || config.disadvantage || keys.disadvantage;
       if ( advantage && !disadvantage ) roll.options.advantageMode = this.ADV_MODE.ADVANTAGE;
       else if ( !advantage && disadvantage ) roll.options.advantageMode = this.ADV_MODE.DISADVANTAGE;
       else roll.options.advantageMode = this.ADV_MODE.NORMAL;

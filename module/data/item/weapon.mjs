@@ -1,4 +1,4 @@
-import { filteredKeys } from "../../utils.mjs";
+import { filteredKeys, formatDistance } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
 import DamageField from "../shared/damage-field.mjs";
@@ -175,7 +175,8 @@ export default class WeaponData extends ItemDataModel.mixin(
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateReach(source) {
-    if ( !source.properties || !source.range?.value || !source.type?.value || source.range?.reach ) return;
+    if ( !source.properties || !source.range?.value || !source.type?.value
+      || (source.range?.reach !== undefined) ) return;
     if ( (CONFIG.DND5E.weaponTypeMap[source.type.value] !== "melee") || source.properties.includes("thr") ) return;
     // Range of `0` or greater than `10` is always included, and so is range longer than `5` without reach property
     if ( (source.range.value === 0) || (source.range.value > 10)
@@ -219,13 +220,10 @@ export default class WeaponData extends ItemDataModel.mixin(
 
     const labels = this.parent.labels ??= {};
     if ( this.hasRange ) {
-      const parts = [
-        this.range.value,
-        this.range.long ? `/ ${this.range.long}` : null,
-        (this.range.units in CONFIG.DND5E.movementUnits)
-          ? game.i18n.localize(`DND5E.Dist${this.range.units.capitalize()}Abbr`) : null
-      ];
-      labels.range = parts.filterJoin(" ");
+      const units = this.range.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
+      const parts = [this.range.value, this.range.long !== this.range.value ? this.range.long : null].filter(_ => _);
+      parts.push(formatDistance(parts.pop(), units));
+      labels.range = parts.filterJoin("/");
     } else labels.range = game.i18n.localize("DND5E.None");
   }
 
@@ -270,7 +268,10 @@ export default class WeaponData extends ItemDataModel.mixin(
 
     // Damage
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
-      return { value, label, selected: context.source.damage.base.types.includes(value) };
+      return {
+        value, label,
+        selected: context.source.damage.base.types.includes?.(value) ?? context.source.damage.base.types.has(value)
+      };
     });
     const makeDenominationOptions = placeholder => [
       { value: "", label: placeholder ? `d${placeholder}` : "" },
@@ -325,12 +326,12 @@ export default class WeaponData extends ItemDataModel.mixin(
     if ( !(this.properties.has("thr") && (this.attackType === "ranged")) ) {
       // Weapons without the "Two-Handed" property or with the "Versatile" property will have One-Handed attack
       if ( this.isVersatile || !this.properties.has("two") ) modes.push({
-        value: "oneHanded", label: game.i18n.localize("DND5E.ATTACK.Mode.OneHanded")
+        value: "oneHanded", label: CONFIG.DND5E.attackModes.oneHanded.label
       });
 
       // Weapons with the "Two-Handed" property or with the "Versatile" property will have Two-Handed attack
       if ( this.isVersatile || this.properties.has("two") ) modes.push({
-        value: "twoHanded", label: game.i18n.localize("DND5E.ATTACK.Mode.TwoHanded")
+        value: "twoHanded", label: CONFIG.DND5E.attackModes.twoHanded.label
       });
     }
 
@@ -340,18 +341,23 @@ export default class WeaponData extends ItemDataModel.mixin(
     // Weapons with the "Light" property will have Offhand attack
     // If player has the "Enhanced Dual Wielding" flag, then allow any melee weapon without the "Two-Handed" property
     if ( isLight ) modes.push({
-      value: "offhand", label: game.i18n.localize("DND5E.ATTACK.Mode.Offhand")
+      value: "offhand", label: CONFIG.DND5E.attackModes.offhand.label
     });
 
     // Weapons with the "Thrown" property will have Thrown attack
     if ( this.properties.has("thr") ) {
       if ( modes.length ) modes.push({ rule: true });
-      modes.push({ value: "thrown", label: game.i18n.localize("DND5E.ATTACK.Mode.Thrown") });
+      modes.push({ value: "thrown", label: CONFIG.DND5E.attackModes.thrown.label });
 
       // Weapons with the "Thrown" & "Light" properties will have an Offhand Throw attack
       if ( isLight ) modes.push({
-        value: "thrown-offhand", label: game.i18n.localize("DND5E.ATTACK.Mode.ThrownOffhand")
+        value: "thrown-offhand", label: CONFIG.DND5E.attackModes["thrown-offhand"].label
       });
+    }
+
+    else if ( !this.attackType && this.range.value ) {
+      if ( modes.length ) modes.push({ rule: true });
+      modes.push({ value: "ranged", label: CONFIG.DND5E.attackModes.ranged.label });
     }
 
     return modes;
@@ -511,6 +517,21 @@ export default class WeaponData extends ItemDataModel.mixin(
     const improvised = (this.type.value === "improv") && !!actor.getFlag("dnd5e", "tavernBrawlerFeat");
     const isProficient = natural || improvised || actorProfs.has(itemProf) || actorProfs.has(this.type.baseItem);
     return Number(isProficient);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Attack types that can be used with this item by default.
+   * @type {Set<string>}
+   */
+  get validAttackTypes() {
+    const types = new Set();
+    const attackType = this.attackType;
+    if ( (attackType === "melee") || (attackType === null) ) types.add("melee");
+    if ( (attackType === "ranged") || this.properties.has("thr")
+      || ((attackType === null) && this.range.value) ) types.add("ranged");
+    return types;
   }
 
   /* -------------------------------------------- */

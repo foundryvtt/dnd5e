@@ -162,14 +162,15 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
 
     const denom = !["smallest", "largest"].includes(this.target) ? this.target : false;
-    const validClasses = Object.values(this.actor.classes).filter(cls => !denom || (cls.system.hitDice === denom));
-    const total = validClasses.reduce((count, cls) => count + cls.system.levels - cls.system.hitDiceUsed, 0);
+    const validClasses = Object.values(this.actor.classes).filter(cls => {
+      return !denom || (cls.system.hd.denomination === denom);
+    });
+    const total = validClasses.reduce((count, cls) => count + cls.system.hd.value, 0);
 
-    if ( this.target === "smallest" ) {
-      validClasses.sort((lhs, rhs) => lhs.system.hitDice.localeCompare(rhs.system.hitDice, "en", { numeric: true }));
-    } else if ( this.target === "largest" ) {
-      validClasses.sort((lhs, rhs) => rhs.system.hitDice.localeCompare(lhs.system.hitDice, "en", { numeric: true }));
-    }
+    if ( !denom ) validClasses.sort((lhs, rhs) => {
+      const sort = lhs.system.hd.denomination.localeCompare(rhs.system.hd.denomination, "en", { numeric: true });
+      return (this.target === "smallest") ? sort : sort * -1;
+    });
 
     let warningMessage;
     if ( !validClasses.length ) warningMessage = "DND5E.CONSUMPTION.Warning.MissingHitDice";
@@ -185,9 +186,9 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
 
     let toConsume = cost;
     for ( const cls of validClasses ) {
-      const available = (toConsume > 0 ? cls.system.levels : 0) - cls.system.hitDiceUsed;
+      const available = toConsume > 0 ? cls.system.hd.value : 0;
       const delta = toConsume > 0 ? Math.min(toConsume, available) : Math.max(toConsume, available);
-      const itemUpdate = { "system.hitDiceUsed": cls.system.hitDiceUsed + delta };
+      const itemUpdate = { "system.hd.spent": cls.system.hd.spent + delta };
       if ( delta !== 0 ) {
         const itemIndex = updates.item.findIndex(i => i._id === cls.id);
         if ( itemIndex === -1 ) updates.item.push({ _id: cls.id, ...itemUpdate });
@@ -314,7 +315,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * Calculate updates to activity or item uses.
    * @param {ActivityUseConfiguration} config  Configuration data for the activity usage.
    * @param {object} options
-   * @param {UsesField} options.uses           Uses data to consume.
+   * @param {UsesData} options.uses            Uses data to consume.
    * @param {string} options.type              Type label to be used in warning messages.
    * @param {BasicRoll[]} options.rolls        Rolls performed as part of the usages.
    * @returns {{ spent: number, quantity: number }|null}

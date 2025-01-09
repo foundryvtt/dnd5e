@@ -78,7 +78,7 @@ export default class HitPointsFlow extends AdvancementFlow {
 
     this.form.querySelector(".rollResult")?.classList.add("error");
     const errorType = formData.value ? "Invalid" : "Empty";
-    throw new Advancement.ERROR(game.i18n.localize(`DND5E.AdvancementHitPoints${errorType}Error`));
+    throw new Advancement.ERROR(game.i18n.localize(`DND5E.ADVANCEMENT.HitPoints.Warning.${errorType}`));
   }
 
 }

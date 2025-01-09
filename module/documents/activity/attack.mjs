@@ -179,17 +179,14 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
     }
 
-    const createMessage = messageConfig.create !== false;
-    messageConfig.create = false;
-    const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
+    const rolls = await CONFIG.Dice.D20Roll.buildConfigure(rollConfig, dialogConfig, messageConfig);
+    await CONFIG.Dice.D20Roll.buildEvaluate(rolls, rollConfig, messageConfig);
     if ( !rolls.length ) return null;
-    if ( createMessage ) {
-      for ( const key of ["ammunition", "attackMode", "mastery"] ) {
-        if ( !rolls[0].options[key] ) continue;
-        foundry.utils.setProperty(messageConfig.data, `flags.dnd5e.roll.${key}`, rolls[0].options[key]);
-      }
-      await CONFIG.Dice.D20Roll.toMessage(rolls, messageConfig.data, { rollMode: messageConfig.rollMode });
+    for ( const key of ["ammunition", "attackMode", "mastery"] ) {
+      if ( !rolls[0].options[key] ) continue;
+      foundry.utils.setProperty(messageConfig.data, `flags.dnd5e.roll.${key}`, rolls[0].options[key]);
     }
+    await CONFIG.Dice.D20Roll.buildPost(rolls, rollConfig, messageConfig);
 
     const flags = {};
     let ammoUpdate = null;
@@ -221,7 +218,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
      * @memberof hookEvents
      * @param {D20Roll[]} rolls                        The resulting rolls.
      * @param {object} data
-     * @param {AttackActivity} data.subject            The Activity that performed the attack.
+     * @param {AttackActivity|null} data.subject       The Activity that performed the attack.
      * @param {AmmunitionUpdate|null} data.ammoUpdate  Any updates related to ammo consumption for this attack.
      */
     Hooks.callAll("dnd5e.rollAttackV2", rolls, { subject: this, ammoUpdate });
@@ -257,9 +254,9 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
      * A hook event that fires after an attack has been rolled and ammunition has been consumed.
      * @function dnd5e.postRollAttack
      * @memberof hookEvents
-     * @param {D20Roll[]} rolls              The resulting rolls.
+     * @param {D20Roll[]} rolls                   The resulting rolls.
      * @param {object} data
-     * @param {AttackActivity} data.subject  The activity that performed the attack.
+     * @param {AttackActivity|null} data.subject  The activity that performed the attack.
      */
     Hooks.callAll("dnd5e.postRollAttack", rolls, { subject: this });
 

@@ -81,7 +81,7 @@ export default class DamagesConfig extends TraitsConfig {
       for ( const [type, formula] of Object.entries(submitData.system?.traits?.dm?.amount ?? {}) ) {
         if ( !formula ) {
           delete submitData.system.traits.dm.amount[type];
-          submitData.system.traits.dm.amount[`-=${type}`] = "";
+          submitData.system.traits.dm.amount[`-=${type}`] = null;
         }
       }
     }
