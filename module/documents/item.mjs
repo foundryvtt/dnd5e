@@ -1228,10 +1228,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancementCollection = this.toObject().system.advancement;
     advancementCollection.push(advancement.toObject());
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
-    return this.update({"system.advancement": advancementCollection}).then(() => {
-      if ( !showConfig ) return this;
-      const config = new cls.metadata.apps.config(this.advancement.byId[advancement.id]);
-      return config.render(true);
+    return this.update({ "system.advancement": advancementCollection }).then(() => {
+      if ( showConfig ) return this.advancement.byId[advancement.id]?.sheet?.render(true);
+      return this;
     });
   }
 
