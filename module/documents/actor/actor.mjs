@@ -2457,16 +2457,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Configuration options for a rest.
    *
    * @typedef {object} RestConfiguration
-   * @property {string} type               Type of rest to perform.
-   * @property {boolean} dialog            Present a dialog window which allows for rolling hit dice as part of the
-   *                                       Short Rest and selecting whether a new day has occurred.
-   * @property {boolean} chat              Should a chat message be created to summarize the results of the rest?
-   * @property {number} duration           Amount of time passed during the rest in minutes.
-   * @property {boolean} newDay            Does this rest carry over to a new day?
-   * @property {boolean} [advanceTime]     Should the game clock be advanced by the rest duration?
-   * @property {boolean} [autoHD]          Should hit dice be spent automatically during a short rest?
-   * @property {number} [autoHDThreshold]  How many hit points should be missing before hit dice are
-   *                                       automatically spent during a short rest.
+   * @property {string} type                   Type of rest to perform.
+   * @property {boolean} dialog                Present a dialog window which allows for rolling hit dice as part of the
+   *                                           Short Rest and selecting whether a new day has occurred.
+   * @property {boolean} chat                  Should a chat message be created to summarize the results of the rest?
+   * @property {number} duration               Amount of time passed during the rest in minutes.
+   * @property {boolean} newDay                Does this rest carry over to a new day?
+   * @property {boolean} [advanceBastionTurn]  Should a bastion turn be advanced for all players?
+   * @property {boolean} [advanceTime]         Should the game clock be advanced by the rest duration?
+   * @property {boolean} [autoHD]              Should hit dice be spent automatically during a short rest?
+   * @property {number} [autoHDThreshold]      How many hit points should be missing before hit dice are
+   *                                           automatically spent during a short rest.
    */
 
   /**
@@ -2477,10 +2478,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {object} deltas
    * @property {number} deltas.hitPoints  Hit points recovered during the rest.
    * @property {number} deltas.hitDice    Hit dice recovered or spent during the rest.
-   * @property {object} updateData        Updates applied to the actor.
-   * @property {object[]} updateItems     Updates applied to actor's items.
    * @property {boolean} newDay           Whether a new day occurred during the rest.
    * @property {Roll[]} rolls             Any rolls that occurred during the rest process, not including hit dice.
+   * @property {object} updateData        Updates applied to the actor.
+   * @property {object[]} updateItems     Updates applied to actor's items.
    */
 
   /* -------------------------------------------- */
@@ -2650,6 +2651,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {RestConfiguration} config  Configuration data for that occurred.
      */
     Hooks.callAll("dnd5e.restCompleted", this, result, config);
+
+    if ( config.advanceBastionTurn && game.user.isGM && game.settings.get("dnd5e", "bastionConfiguration").enabled
+      && this.itemTypes.facility.length ) await dnd5e.bastion.advanceAllFacilities(this);
 
     // Return data summarizing the rest effects
     return result;
