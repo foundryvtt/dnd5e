@@ -112,6 +112,13 @@ export default class TraitAdvancement extends Advancement {
         updates[keyPath] = (this.configuration.mode === "default")
           || ((this.configuration.mode === "upgrade") && (existingValue === 0)) ? 1 : 2;
       }
+
+      if ( key.startsWith("tool") ) {
+        const toolId = key.split(":").pop();
+        const ability = CONFIG.DND5E.tools[toolId]?.ability;
+        const kp = `system.tools.${toolId}.ability`;
+        if ( ability && !foundry.utils.hasProperty(this.actor, kp) ) updates[kp] = ability;
+      }
     }
 
     this.actor.updateSource(updates);
