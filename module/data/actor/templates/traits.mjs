@@ -1,4 +1,4 @@
-import { defaultUnits, formatDistance, splitSemicolons } from "../../../utils.mjs";
+import { defaultUnits, formatLength, splitSemicolons } from "../../../utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import DamageTraitField from "../fields/damage-trait-field.mjs";
@@ -159,7 +159,7 @@ export default class TraitsField {
     for ( const [key, { label }] of Object.entries(CONFIG.DND5E.communicationTypes) ) {
       const data = languages.communication?.[key];
       if ( !data?.value ) continue;
-      labels.ranged.push(`${label} ${formatDistance(data.value, data.units)}`);
+      labels.ranged.push(`${label} ${formatLength(data.value, data.units)}`);
     }
   }
 

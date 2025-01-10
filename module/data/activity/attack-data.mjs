@@ -1,4 +1,5 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+import { convertLength, formatLength } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
@@ -344,14 +345,15 @@ export default class AttackActivityData extends BaseActivityData {
   getRangeLabel() {
     if ( this.item.type !== "weapon" ) return this.labels?.range ?? "";
 
-    // TODO: Use proper unit formatting with these once https://github.com/foundryvtt/dnd5e/issues/3958 is resolved
-
     const parts = [];
 
     // Add reach for melee weapons, unless the activity is explicitly specified as a ranged attack
     if ( this.validAttackTypes.has("melee") ) {
-      const { reach, units } = this.item.system.range;
-      parts.push(game.i18n.format("DND5E.RANGE.Formatted.Reach", { reach: `${reach ?? 5} ${units}` }));
+      let { reach, units } = this.item.system.range;
+      if ( !reach ) reach = convertLength(5, "ft", units);
+      parts.push(game.i18n.format("DND5E.RANGE.Formatted.Reach", {
+        reach: formatLength(reach, units, { strict: false })
+      }));
     }
 
     // Add range for ranged or thrown weapons, unless the activity is explicitly specified as melee
@@ -360,8 +362,8 @@ export default class AttackActivityData extends BaseActivityData {
       if ( this.range.override ) range = `${this.range.value} ${this.range.units ?? ""}`;
       else {
         const { value, long, units } = this.item.system.range;
-        if ( long && (value !== long) ) range = `${value}/${long} ${units}`;
-        else range = `${value} ${units}`;
+        if ( long && (value !== long) ) range = `${value}/${formatLength(long, units, { strict: false })}`;
+        else range = formatLength(value, units, { strict: false });
       }
       parts.push(game.i18n.format("DND5E.RANGE.Formatted.Range", { range }));
     }

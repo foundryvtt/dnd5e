@@ -1,7 +1,7 @@
 import Actor5e from "../../documents/actor/actor.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { defaultUnits, formatCR, formatDistance, formatNumber, splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, formatCR, formatLength, formatNumber, splitSemicolons } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
@@ -479,8 +479,8 @@ export default class NPCData extends CreatureTemplate {
    */
   async _prepareEmbedContext() {
     const formatter = game.i18n.getListFormatter({ type: "unit" });
-    const prepareMeasured = (value, units, label) => label ? `${label} ${formatDistance(value, units)}`
-      : formatDistance(value, units);
+    const prepareMeasured = (value, units, label) => label ? `${label} ${formatLength(value, units)}`
+      : formatLength(value, units);
     const prepareTrait = ({ value, custom }, trait) => formatter.format([
       ...Array.from(value).map(t => Trait.keyLabel(t, { trait })).filter(_ => _),
       ...splitSemicolons(custom ?? "")
