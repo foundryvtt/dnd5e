@@ -4,10 +4,10 @@
         <span class="level-header">
             {{ localize "DND5E.AbbreviationLevel" }}
         </span>
-        <span id="{{ partId }}-choices" class="choices-header">
+        <span class="choices-header">
             {{ localize "DND5E.ADVANCEMENT.ItemChoice.FIELDS.choices.FIELDS.count.label" }}
         </span>
-        <span id="{{ partId }}-replacement" class="replacement-header">
+        <span class="replacement-header">
             <i class="fa-solid fa-shuffle"
                data-tooltip="DND5E.ADVANCEMENT.ItemChoice.FIELDS.choices.FIELDS.replacement.label"
                aria-label="{{ localize 'DND5E.ADVANCEMENT.ItemChoice.FIELDS.choices.FIELDS.replacement.label' }}"></i>
@@ -19,11 +19,11 @@
             <div class="level-number">{{ label }}</div>
             <div class="level-count">
                 <input type="number" name="configuration.choices.{{ @key }}.count" value="{{ count }}" placeholder="0"
-                       min="1" step="1" aria-labelledby="{{ @root.partId }}-choices">
+                       min="1" step="1">
             </div>
             <div class="level-replacement">
-                <dnd5e-checkbox name="configuration.choices.{{ @key }}.replacement" {{ checked replacement }}
-                                aria-labelledby="{{ @root.partId }}-replacement"></dnd5e-checkbox>
+                <dnd5e-checkbox name="configuration.choices.{{ @key }}.replacement"
+                                {{ checked replacement }}></dnd5e-checkbox>
             </div>
         </li>
         {{/each}}

@@ -1,6 +1,13 @@
 const { HandlebarsApplicationMixin } = foundry.applications.api;
 
 /**
+ * @typedef {ApplicationContainerParts}
+ * @property {object} [container]
+ * @property {string} [container.id]         ID of the container. Containers with the same ID will be grouped together.
+ * @property {string[]} [container.classes]  Classes to add to the container.
+ */
+
+/**
  * Mixin method for ApplicationV2-based 5e applications.
  * @template {ApplicationV2} T
  * @param {typeof T} Base   Application class being extended.
@@ -16,6 +23,13 @@ export default function ApplicationV2Mixin(Base) {
         subtitle: ""
       }
     };
+
+    /* -------------------------------------------- */
+
+    /**
+     * @type {Record<string, HandlebarsTemplatePart & ApplicationContainerParts>}
+     */
+    static PARTS = {};
 
     /* -------------------------------------------- */
     /*  Properties                                  */
@@ -62,18 +76,17 @@ export default function ApplicationV2Mixin(Base) {
       super._onFirstRender(context, options);
       const containers = {};
       for ( const [part, config] of Object.entries(this.constructor.PARTS) ) {
-        if ( !config.containerClasses ) continue;
+        if ( !config.container?.id ) continue;
         const element = this.element.querySelector(`[data-application-part="${part}"]`);
         if ( !element ) continue;
-        const className = config.containerClasses.join(" ");
-        if ( !containers[className] ) {
+        if ( !containers[config.container.id] ) {
           const div = document.createElement("div");
-          div.classList.add(...config.containerClasses);
-          containers[className] = div;
+          div.dataset.containerId = config.container.id;
+          div.classList.add(...config.container.classes ?? []);
+          containers[config.container.id] = div;
           element.replaceWith(div);
-          div.append(element);
         }
-        containers[className].append(element);
+        containers[config.container.id].append(element);
       }
     }
 

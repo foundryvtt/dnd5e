@@ -18,23 +18,23 @@ export default class ItemChoiceConfig extends AdvancementConfig {
   /** @inheritDoc */
   static PARTS = {
     config: {
-      containerClasses: ["column-container", "column-left"],
+      container: { classes: ["column-container"], id: "column-left" },
       template: "systems/dnd5e/templates/advancement/advancement-controls-section.hbs"
     },
     details: {
-      containerClasses: ["column-container", "column-left"],
+      container: { classes: ["column-container"], id: "column-left" },
       template: "systems/dnd5e/templates/advancement/item-choice-config-details.hbs"
     },
     spellConfig: {
-      containerClasses: ["column-container", "column-left"],
+      container: { classes: ["column-container"], id: "column-left" },
       template: "systems/dnd5e/templates/advancement/advancement-spell-config-section.hbs"
     },
     items: {
-      containerClasses: ["column-container", "column-center"],
+      container: { classes: ["column-container"], id: "column-center" },
       template: "systems/dnd5e/templates/advancement/item-choice-config-items.hbs"
     },
     levels: {
-      containerClasses: ["column-container", "column-right"],
+      container: { classes: ["column-container"], id: "column-right" },
       template: "systems/dnd5e/templates/advancement/item-choice-config-levels.hbs"
     }
   };

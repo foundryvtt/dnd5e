@@ -19,9 +19,9 @@
         grid-template-columns: [left] var(--grid-column-left-size) [center] var(--grid-column-center-size) [right] var(--grid-column-right-size);
       }
 
-      > .column-container.column-left { grid-area: left; }
-      > .column-container.column-center { grid-area: center; }
-      > .column-container.column-right { grid-area: right; }
+      > .column-container[data-container-id="column-left"] { grid-area: left; }
+      > .column-container[data-container-id="column-center"] { grid-area: center; }
+      > .column-container[data-container-id="column-right"] { grid-area: right; }
     }
   }
 
