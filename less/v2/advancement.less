@@ -27,6 +27,7 @@
 
   .card:is(.items, .levels) {
     display: grid;
+    gap: 0;
 
     > * { grid-column: 1 / -1; }
     .header, .items-list, .items-list > li, .levels-list, .levels-list > li {
@@ -39,6 +40,14 @@
       padding-block: 3px 2px;
       padding-inline: 10px;
       border-radius: 0;
+    }
+
+    .items-list, .levels-list > li {
+      margin: 0 -.75em;
+      padding: 6px .75em;
+
+      &:nth-child(odd) { background: var(--dnd5e-color-table-row-odd); }
+      &:nth-child(even) { background: var(--dnd5e-color-table-row-even); }
     }
   }
   .card.items {
@@ -58,12 +67,17 @@
     .item-optional { display: inline-flex; }
     .item-name { grid-column: name; }
     .item-controls { grid-column: controls; }
+    .name-header { padding-inline-start: 16px; }
   }
   .card.levels {
     grid-template-columns: [level] max-content [count] 1fr;
     gap: 4px 6px;
-    .level-number { grid-column: level; }
+    .level-number {
+      grid-column: level;
+      text-align: center;
+    }
     .level-count { grid-column: count; }
+    .choices-header { text-align: center; }
   }
 
   .centered { text-align: center; }
@@ -89,7 +103,10 @@
 
   .card.levels {
     grid-template-columns: [level] max-content [count] 1fr [replacement] max-content;
-    .level-replacement { grid-column: replacement; }
+    .level-replacement {
+      grid-column: replacement;
+      display: inline-flex;
+    }
   }
 }
 
