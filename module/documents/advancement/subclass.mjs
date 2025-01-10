@@ -64,14 +64,17 @@ export default class SubclassAdvancement extends Advancement {
       itemData = await this.createItemData(data.uuid);
       foundry.utils.setProperty(itemData, "system.classIdentifier", this.item.identifier);
     }
-    this.actor.updateSource({ items: [itemData] });
-    this.updateSource({ value: { document: itemData._id, uuid: data.uuid } });
+    if ( itemData ) {
+      this.actor.updateSource({ items: [itemData] });
+      this.updateSource({ value: { document: itemData._id, uuid: data.uuid } });
+    }
   }
 
   /* -------------------------------------------- */
 
   /** @inheritdoc */
   async restore(level, data) {
+    if ( !data ) return;
     this.actor.updateSource({ items: [data] });
     this.updateSource({ value: { document: data._id, uuid: data.flags.dnd5e.sourceId } });
   }
