@@ -634,7 +634,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    * @returns {object}
    */
   _prepareSubmitData(event, formData) {
-    const submitData = foundry.utils.expandObject(formData.object);
+    const submitData = super._prepareSubmitData(event, formData);
     for ( const keyPath of this.constructor.CLEAN_ARRAYS ) {
       const data = foundry.utils.getProperty(submitData, keyPath);
       if ( data ) foundry.utils.setProperty(submitData, keyPath, Object.values(data));
