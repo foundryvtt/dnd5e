@@ -604,6 +604,48 @@ export default function ActorSheetV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Handling beginning a drag-drop operation on an Activity.
+     * @param {DragEvent} event  The originating drag event.
+     * @protected
+     */
+    _onDragActivity(event) {
+      const { itemId } = event.target.closest("[data-item-id]").dataset;
+      const { activityId } = event.target.closest("[data-activity-id]").dataset;
+      const activity = this.actor.items.get(itemId)?.system.activities?.get(activityId);
+      if ( activity ) event.dataTransfer.setData("text/plain", JSON.stringify(activity.toDragData()));
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle beginning a drag-drop operation on an Item.
+     * @param {DragEvent} event  The originating drag event.
+     * @protected
+     */
+    _onDragItem(event) {
+      const { itemId } = event.target.closest("[data-item-id]").dataset;
+      const item = this.actor.items.get(itemId);
+      if ( item ) event.dataTransfer.setData("text/plain", JSON.stringify(item.toDragData()));
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    _onDragStart(event) {
+      // Add another deferred deactivation to catch the second pointerenter event that seems to be fired on Firefox.
+      requestAnimationFrame(() => game.tooltip.deactivate());
+      game.tooltip.deactivate();
+
+      if ( event.target.matches("[data-item-id] > .item-row") ) return this._onDragItem(event);
+      else if ( event.target.matches("[data-item-id] [data-activity-id], [data-item-id][data-activity-id]") ) {
+        return this._onDragActivity(event);
+      }
+      return super._onDragStart(event);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Handle performing some action on an owned Item.
      * @param {PointerEvent} event  The triggering event.
      * @protected

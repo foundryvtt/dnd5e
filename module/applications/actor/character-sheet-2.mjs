@@ -394,41 +394,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
   /* -------------------------------------------- */
 
-  /**
-   * Handling beginning a drag-drop operation on an Activity.
-   * @param {DragEvent} event  The originating drag event.
-   * @protected
-   */
-  _onDragActivity(event) {
-    const { itemId } = event.target.closest("[data-item-id]").dataset;
-    const { activityId } = event.target.closest("[data-activity-id]").dataset;
-    const activity = this.actor.items.get(itemId)?.system.activities?.get(activityId);
-    if ( activity ) event.dataTransfer.setData("text/plain", JSON.stringify(activity.toDragData()));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle beginning a drag-drop operation on an Item.
-   * @param {DragEvent} event  The originating drag event.
-   * @protected
-   */
-  _onDragItem(event) {
-    const { itemId } = event.target.closest("[data-item-id]").dataset;
-    const item = this.actor.items.get(itemId);
-    if ( item ) event.dataTransfer.setData("text/plain", JSON.stringify(item.toDragData()));
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   _onDragStart(event) {
-    // Add another deferred deactivation to catch the second pointerenter event that seems to be fired on Firefox.
-    requestAnimationFrame(() => game.tooltip.deactivate());
-    game.tooltip.deactivate();
-
     const modes = CONFIG.DND5E.spellPreparationModes;
-
     const { key } = event.target.closest("[data-key]")?.dataset ?? {};
     const { level, preparationMode } = event.target.closest("[data-level]")?.dataset ?? {};
     const isSlots = event.target.closest("[data-favorite-id]") || event.target.classList.contains("spell-header");
@@ -436,13 +404,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.tools ) type = "tool";
     else if ( modes[preparationMode]?.upcast && (level !== "0") && isSlots ) type = "slots";
-    if ( !type ) {
-      if ( event.target.matches("[data-item-id] > .item-row") ) return this._onDragItem(event);
-      else if ( event.target.matches("[data-item-id] [data-activity-id], [data-item-id][data-activity-id]") ) {
-        return this._onDragActivity(event);
-      }
-      return super._onDragStart(event);
-    }
+    if ( !type ) return super._onDragStart(event);
+
+    // Add another deferred deactivation to catch the second pointerenter event that seems to be fired on Firefox.
+    requestAnimationFrame(() => game.tooltip.deactivate());
+    game.tooltip.deactivate();
+
     const dragData = { dnd5e: { action: "favorite", type } };
     if ( type === "slots" ) dragData.dnd5e.id = (preparationMode === "prepared") ? `spell${level}` : preparationMode;
     else dragData.dnd5e.id = key;
