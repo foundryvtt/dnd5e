@@ -25,6 +25,8 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  *
  * @property {object} ammunition
  * @property {string} ammunition.type       Type of ammunition fired by this weapon.
+ * @property {object} armor
+ * @property {number} armor.value           Siege or vehicle weapon's armor class.
  * @property {object} damage
  * @property {DamageData} damage.base       Weapon's base damage.
  * @property {DamageData} damage.versatile  Weapon's versatile damage.
@@ -48,7 +50,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.WEAPON", "DND5E.RANGE", "DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.WEAPON", "DND5E.MOUNTABLE", "DND5E.RANGE", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
@@ -58,6 +60,9 @@ export default class WeaponData extends ItemDataModel.mixin(
       type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"}),
       ammunition: new SchemaField({
         type: new StringField()
+      }),
+      armor: new SchemaField({
+        value: new NumberField({ integer: true, min: 0 })
       }),
       damage: new SchemaField({
         base: new DamageField(),

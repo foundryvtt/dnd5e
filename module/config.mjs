@@ -1884,6 +1884,9 @@ DND5E.featureTypes = {
       charm: "DND5E.Feature.SupernaturalGift.Charm",
       epicBoon: "DND5E.Feature.SupernaturalGift.EpicBoon"
     }
+  },
+  vehicle: {
+    label: "DND5E.Feature.Vehicle.Label"
   }
 };
 preLocalize("featureTypes", { key: "label" });
