@@ -295,7 +295,9 @@ export default class ActivityUsageDialog extends Dialog5e {
         }
       };
       addResources(this.activity.consumption.targets, "consume.resources");
-      if ( context.linkedActivity ) addResources(context.linkedActivity.consumption.targets, "cause.resources");
+      if ( context.linkedActivity && (!this.activity.isSpell || this.activity.consumption.spellSlot) ) {
+        addResources(context.linkedActivity.consumption.targets, "cause.resources");
+      }
     }
 
     context.hasConsumption = context.fields.length > 0;

@@ -623,10 +623,11 @@ export default function ActivityMixin(Base) {
         // TODO: Handle permissions checks in `ActivityUsageDialog`
       }
 
+      const ignoreLinkedConsumption = this.isSpell && !this.consumption.spellSlot;
       if ( config.consume !== false ) {
         const hasActionConsumption = this.activation.type === "legendary";
         const hasResourceConsumption = this.consumption.targets.length > 0;
-        const hasLinkedConsumption = linked?.consumption.targets.length > 0;
+        const hasLinkedConsumption = (linked?.consumption.targets.length > 0) && !ignoreLinkedConsumption;
         const hasSpellSlotConsumption = this.requiresSpellSlot && this.consumption.spellSlot;
         config.consume ??= {};
         config.consume.action ??= hasActionConsumption;
@@ -672,7 +673,7 @@ export default function ActivityMixin(Base) {
       if ( linked ) {
         config.cause ??= {};
         config.cause.activity ??= linked.relativeUUID;
-        config.cause.resources ??= linked.consumption.targets.length > 0;
+        config.cause.resources ??= (linked.consumption.targets.length > 0) && !ignoreLinkedConsumption;
       }
 
       return config;
