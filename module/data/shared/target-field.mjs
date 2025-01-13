@@ -1,4 +1,4 @@
-import { defaultUnits, formatDistance, formatNumber, getPluralRules, prepareFormulaValue } from "../../utils.mjs";
+import { defaultUnits, formatLength, formatNumber, getPluralRules, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { BooleanField, SchemaField, StringField } = foundry.data.fields;
@@ -88,7 +88,7 @@ export default class TargetField extends SchemaField {
       const parts = [];
       if ( this.target.template.count > 1 ) parts.push(`${this.target.template.count} ×`);
       if ( this.target.template.units in CONFIG.DND5E.movementUnits ) {
-        parts.push(formatDistance(this.target.template.size, this.target.template.units));
+        parts.push(formatLength(this.target.template.size, this.target.template.units));
       }
       this.target.template.label = game.i18n.format(
         `${templateConfig.counted}.${pr.select(this.target.template.count || 1)}`, { number: parts.filterJoin(" ") }

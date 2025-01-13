@@ -805,13 +805,7 @@ export default class ItemSheet5e extends ItemSheet {
     switch (action) {
       case "add": return game.dnd5e.applications.advancement.AdvancementSelection.createDialog(this.item);
       case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
-      case "delete":
-        if ( this.item.actor?.system.metadata?.supportsAdvancement
-            && !game.settings.get("dnd5e", "disableAdvancements") ) {
-          manager = AdvancementManager.forDeletedAdvancement(this.item.actor, this.item.id, id);
-          if ( manager.steps.length ) return manager.render(true);
-        }
-        return this.item.deleteAdvancement(id);
+      case "delete": return advancement.deleteDialog();
       case "duplicate": return this.item.duplicateAdvancement(id);
       case "modify-choices":
         const level = target.closest("[data-level]")?.dataset.level;

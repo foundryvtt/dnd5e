@@ -1,5 +1,5 @@
 import Actor5e from "../../documents/actor/actor.mjs";
-import { defaultUnits, formatDistance, splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, formatLength, splitSemicolons } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
 import { CreatureTypeField, MovementField, SensesField } from "../shared/_module.mjs";
@@ -74,7 +74,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
     const units = this.movement.units || defaultUnits("length");
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
       const value = this.movement[k];
-      if ( value ) obj[k] = `${label} ${formatDistance(value, units)}`;
+      if ( value ) obj[k] = `${label} ${formatLength(value, units)}`;
       return obj;
     }, {});
   }
@@ -89,7 +89,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
     const units = this.senses.units || defaultUnits("length");
     return Object.entries(CONFIG.DND5E.senses).reduce((arr, [k, label]) => {
       const value = this.senses.types[k];
-      if ( value ) arr.push(`${label} ${formatDistance(value, units)}`);
+      if ( value ) arr.push(`${label} ${formatLength(value, units)}`);
       return arr;
     }, []).concat(splitSemicolons(this.senses.special));
   }

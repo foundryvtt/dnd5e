@@ -1,4 +1,4 @@
-import { filteredKeys, formatDistance } from "../../utils.mjs";
+import { convertLength, filteredKeys, formatLength } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
 import DamageField from "../shared/damage-field.mjs";
@@ -208,7 +208,9 @@ export default class WeaponData extends ItemDataModel.mixin(
     );
 
     if ( this.attackType === "ranged" ) this.range.reach = null;
-    else if ( this.range.reach === null ) this.range.reach = this.properties.has("rch") ? 10 : 5;
+    else if ( this.range.reach === null ) {
+      this.range.reach = convertLength(this.properties.has("rch") ? 10 : 5, "ft", this.range.units, { strict: false });
+    }
   }
 
   /* -------------------------------------------- */
@@ -222,7 +224,7 @@ export default class WeaponData extends ItemDataModel.mixin(
     if ( this.hasRange ) {
       const units = this.range.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
       const parts = [this.range.value, this.range.long !== this.range.value ? this.range.long : null].filter(_ => _);
-      parts.push(formatDistance(parts.pop(), units));
+      parts.push(formatLength(parts.pop(), units));
       labels.range = parts.filterJoin("/");
     } else labels.range = game.i18n.localize("DND5E.None");
   }

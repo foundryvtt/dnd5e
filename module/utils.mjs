@@ -18,13 +18,13 @@ export function formatCR(value, { narrow=true }={}) {
 /* -------------------------------------------- */
 
 /**
- * Form a number using the provided distance unit.
- * @param {number} value         The distance to format.
- * @param {string} unit          Distance unit as defined in `CONFIG.DND5E.movementUnits`.
+ * Form a number using the provided length unit.
+ * @param {number} value         The length to format.
+ * @param {string} unit          Length unit as defined in `CONFIG.DND5E.movementUnits`.
  * @param {object} [options={}]  Formatting options passed to `formatNumber`.
  * @returns {string}
  */
-export function formatDistance(value, unit, options={}) {
+export function formatLength(value, unit, options={}) {
   return _formatSystemUnits(value, unit, CONFIG.DND5E.movementUnits[unit], options);
 }
 
@@ -621,7 +621,7 @@ function _convertSystemUnits(value, from, to, config, { message, strict }) {
   if ( from === to ) return value;
   if ( strict && !config[from] ) throw new Error(message(from));
   if ( strict && !config[to] ) throw new Error(message(to));
-  return value * (config[from].conversion ?? 1) / (config[to].conversion ?? 1);
+  return value * (config[from]?.conversion ?? 1) / (config[to]?.conversion ?? 1);
 }
 
 /* -------------------------------------------- */

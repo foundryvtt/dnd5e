@@ -1,4 +1,4 @@
-import { formatDistance } from "../../utils.mjs";
+import { formatLength } from "../../utils.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 
@@ -334,7 +334,7 @@ export class ScaleValueTypeDistance extends ScaleValueTypeNumber {
 
   /** @inheritDoc */
   get display() {
-    return formatDistance(this.value, this.parent.configuration.distance?.units || "ft");
+    return formatLength(this.value, this.parent.configuration.distance?.units || "ft");
   }
 }
 

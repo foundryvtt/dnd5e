@@ -1,6 +1,6 @@
 import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
-import { defaultUnits, formatDistance, splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, formatLength, splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
@@ -260,7 +260,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( largestPrimary ) {
       let primary = speeds.shift();
       return {
-        primary: formatDistance(primary?.[1], units),
+        primary: formatLength(primary?.[1], units),
         special: speeds.map(s => s[1]).join(", ")
       };
     }
@@ -268,7 +268,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Case 2: Walk as primary
     else {
       return {
-        primary: formatDistance(movement.walk ?? 0, units),
+        primary: formatLength(movement.walk ?? 0, units),
         special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
       };
     }
@@ -289,7 +289,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses.types[k] ?? 0;
       if ( v === 0 ) continue;
-      tags[k] = `${game.i18n.localize(label)} ${formatDistance(v, units)}`;
+      tags[k] = `${game.i18n.localize(label)} ${formatLength(v, units)}`;
     }
     if ( senses.special ) splitSemicolons(senses.special).forEach((c, i) => tags[`custom${i + 1}`] = c);
     return tags;
