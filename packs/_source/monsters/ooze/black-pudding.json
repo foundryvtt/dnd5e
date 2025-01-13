@@ -686,8 +686,8 @@
       "img": "icons/magic/earth/orb-stone-smoke-teal.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>A creature that touches the pudding or hits it with a melee attack while within 5 feet of it takes <strong>4 (1d8) <em>acid damage</em></strong>. Any nonmagical weapon made of metal or wood that hits the pudding corrodes.</p>\n<p>After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal or wood that hits the pudding is destroyed after dealing damage. The pudding can eat through 2-inch-thick, nonmagical wood or metal in 1 round.</p>\n</section>\n<p>A creature that touches the pudding or hits it with a melee attack while within 5 feet of it takes <em>acid damage</em>. Any nonmagical weapon made of metal or wood that hits the pudding corrodes.</p>",
-          "chat": ""
+          "value": "<p>A creature that touches the pudding or hits it with a melee attack while within 5 feet of it takes <strong>4 (1d8) <em>acid damage</em></strong>. Any nonmagical weapon made of metal or wood that hits the pudding corrodes.</p><p>After dealing damage, the weapon takes a permanent and cumulative -1 penalty to damage rolls. If its penalty drops to -5, the weapon is destroyed. Nonmagical ammunition made of metal or wood that hits the pudding is destroyed after dealing damage. The pudding can eat through 2-inch-thick, nonmagical wood or metal in 1 round.</p>",
+          "chat": "<p>A creature that touches the pudding or hits it with a melee attack while within 5 feet of it takes <em>acid damage</em>. Any nonmagical weapon made of metal or wood that hits the pudding corrodes.</p>"
         },
         "source": {
           "custom": "",
@@ -816,10 +816,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676723,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!NwQpeeaMxAC3fRft.wvlDMuDDdk7peoPa"
     },
@@ -889,8 +889,8 @@
       "img": "icons/creatures/slimes/slime-movement-dripping-pseudopods-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>bludgeoning damage</em></strong> plus <strong>18 (4d8) <em>acid damage</em></strong>.</p>\n<p>In addition, nonmagical armor worn by the target is partly dissolved and takes a permanent and cumulative -1 penalty to the AC it offers. The armor is destroyed if the penalty reduces its AC to 10.</p>\n</section>\n<p>The Black Pudding attacks with its Pseudopod. In addition, nonmagical armor worn by the target is partly dissolved and takes a permanent and cumulative -1 penalty to the AC it offers.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>bludgeoning damage</em></strong> plus <strong>18 (4d8) <em>acid damage</em></strong>.</p><p>In addition, nonmagical armor worn by the target is partly dissolved and takes a permanent and cumulative -1 penalty to the AC it offers. The armor is destroyed if the penalty reduces its AC to 10.</p>",
+          "chat": "<p>The Black Pudding attacks with its Pseudopod. In addition, nonmagical armor worn by the target is partly dissolved and takes a permanent and cumulative -1 penalty to the AC it offers.</p>"
         },
         "source": {
           "custom": "",
@@ -1095,10 +1095,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676723,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!NwQpeeaMxAC3fRft.v6ZspnPr8G5hApkL"
     },
@@ -1109,8 +1109,8 @@
       "img": "icons/creatures/slimes/slime-movement-pseudopod-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>When a pudding that is Medium or larger is subjected to lightning or <em>slashing damage</em>, it splits into two new puddings if it has at least 10 Hit Points. Each new pudding has Hit Points equal to half the original pudding's, rounded down. New puddings are one size smaller than the original pudding.</p>\n</section>\n<p>The pudding splits into two new puddings. New puddings are one size smaller than the original pudding.</p>",
-          "chat": ""
+          "value": "<p>When a pudding that is Medium or larger is subjected to lightning or <em>slashing damage</em>, it splits into two new puddings if it has at least 10 Hit Points. Each new pudding has Hit Points equal to half the original pudding's, rounded down. New puddings are one size smaller than the original pudding.</p>",
+          "chat": "<p>The pudding splits into two new puddings. New puddings are one size smaller than the original pudding.</p>"
         },
         "source": {
           "custom": "",
@@ -1220,10 +1220,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676723,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!NwQpeeaMxAC3fRft.VcVWWSlfTBeXWh3T"
     }

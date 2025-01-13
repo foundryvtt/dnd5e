@@ -886,8 +886,8 @@
       "img": "icons/weapons/swords/sword-guard-brown.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Scout attacks with their Shortsword.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p>",
+          "chat": "<p>The Scout attacks with their Shortsword.</p>"
         },
         "source": {
           "custom": "",
@@ -1081,10 +1081,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676671,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!O3ABqI55Ir1du1Xa.YDoOa6D6QDoR2Htu"
     },
@@ -1095,8 +1095,8 @@
       "img": "icons/weapons/bows/longbow-leather-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +4 to hit, ranged 150/600 ft., one target. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p></section>\n<p>The Scout attacks with their Longbow.</p>",
-          "chat": ""
+          "value": "<p>Ranged Weapon Attack: +4 to hit, ranged 150/600 ft., one target. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p>",
+          "chat": "<p>The Scout attacks with their Longbow.</p>"
         },
         "source": {
           "custom": "",
@@ -1291,10 +1291,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676671,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!O3ABqI55Ir1du1Xa.E2fYrhLigMeVH09l"
     }

@@ -746,8 +746,8 @@
       "img": "icons/magic/light/projectiles-star-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The sphinx is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 16, +8 to hit with spell attacks). It requires no material components to cast its spells. The sphinx has the following wizard spells prepared:</p>\n<p>Cantrips (at will): mage hand, minor illusion, prestidigitation</p>\n<p>1st level (4 slots): detect magic, identify, shield</p>\n<p>2nd level (3 slots): darkness, locate object, suggestion</p>\n<p>3rd level (3 slots): dispel magic, remove curse, tongues</p>\n<p>4th level (3 slots): banishment, greater invisibility</p>\n<p>5th level (1 slot): legend lore</p>\n</section>\n<p>The sphinx is a spellcaster. Its spellcasting ability is Intelligence.</p>",
-          "chat": ""
+          "value": "<p>The sphinx is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 16, +8 to hit with spell attacks). It requires no material components to cast its spells. The sphinx has the following wizard spells prepared:</p><p>Cantrips (at will): mage hand, minor illusion, prestidigitation</p><p>1st level (4 slots): detect magic, identify, shield</p><p>2nd level (3 slots): darkness, locate object, suggestion</p><p>3rd level (3 slots): dispel magic, remove curse, tongues</p><p>4th level (3 slots): banishment, greater invisibility</p><p>5th level (1 slot): legend lore</p>",
+          "chat": "<p>The sphinx is a spellcaster. Its spellcasting ability is Intelligence.</p>"
         },
         "source": {
           "custom": "",
@@ -791,10 +791,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676862,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!6wbasdWWqtXeIAyD.kvyuqG5WztblcJXb"
     },
@@ -930,8 +930,8 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>slashing damage</em></strong>.</p></section>\n<p>The Gynosphinx attacks with its Claw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>slashing damage</em></strong>.</p>",
+          "chat": "<p>The Gynosphinx attacks with its Claw.</p>"
         },
         "source": {
           "custom": "",
@@ -1118,10 +1118,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676862,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!6wbasdWWqtXeIAyD.gVFZXBtgx450yiH7"
     },
@@ -1132,8 +1132,8 @@
       "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The sphinx can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The sphinx regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The sphinx can take 3 legendary actions.</p>",
-          "chat": ""
+          "value": "<p>The sphinx can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The sphinx regains spent legendary actions at the start of its turn.</p>",
+          "chat": "<p>The sphinx can take 3 legendary actions.</p>"
         },
         "source": {
           "custom": "",
@@ -1177,10 +1177,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676862,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!6wbasdWWqtXeIAyD.rH7NbL1u2RarHKKb"
     },
@@ -1250,8 +1250,8 @@
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
-          "chat": ""
+          "value": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>",
+          "chat": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>"
         },
         "source": {
           "custom": "",
@@ -1295,10 +1295,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676862,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!6wbasdWWqtXeIAyD.Sw2aAeas52cJ4uHZ"
     },

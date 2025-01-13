@@ -740,8 +740,8 @@
       "img": "icons/commodities/claws/claw-pincer-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d8 + 2) <em>bludgeoning damage</em></strong>.</p>\n<p>The target is grappled (escape DC 12). The scorpion has two claws, each of which can grapple only one target.</p>\n</section>\n<p>The Giant Scorpion attacks with its Claw. The target is grappled.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d8 + 2) <em>bludgeoning damage</em></strong>.</p><p>The target is grappled (escape DC 12). The scorpion has two claws, each of which can grapple only one target.</p>",
+          "chat": "<p>The Giant Scorpion attacks with its Claw. The target is grappled.</p>"
         },
         "source": {
           "custom": "",
@@ -928,10 +928,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676659,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!GxgIVRX5GbVTifiF.OJ2b64O3e1nni21W"
     },
@@ -942,8 +942,8 @@
       "img": "icons/creatures/abilities/stinger-poison-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>7 (1d10 + 2) <em>piercing damage</em></strong>.</p>\n<p>The target must make a  <strong>DC 12 Constitution</strong> saving throw, taking <strong>22 (4d10) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The Giant Scorpion attacks with its Sting. The target must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>7 (1d10 + 2) <em>piercing damage</em></strong>.</p><p>The target must make a  <strong>DC 12 Constitution</strong> saving throw, taking <strong>22 (4d10) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>",
+          "chat": "<p>The Giant Scorpion attacks with its Sting. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1285,10 +1285,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676659,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!GxgIVRX5GbVTifiF.q6uVUHWyzht5OpwV"
     }

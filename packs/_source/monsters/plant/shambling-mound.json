@@ -808,8 +808,8 @@
       "img": "icons/magic/nature/trap-spikes-thorns-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The shambling mound engulfs a Medium or smaller creature grappled by it. The engulfed target is blinded, restrained, and unable to breathe, and it must succeed on a  <strong>DC 14 Constitution</strong> saving throw at the start of each of the mound's turns or take <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>.</p><p>If the mound moves, the engulfed target moves with it. The mound can have only one creature engulfed at a time.</p></section><p>The shambling mound engulfs a Medium or smaller creature grappled by it. The engulfed target is blinded, restrained, and unable to breathe, and it must make a <strong>Constitution</strong> saving throw at the start of each of the mound's turns. If the mound moves, the engulfed target moves with it.</p>",
-          "chat": ""
+          "value": "<p>The shambling mound engulfs a Medium or smaller creature grappled by it. The engulfed target is blinded, restrained, and unable to breathe, and it must succeed on a  <strong>DC 14 Constitution</strong> saving throw at the start of each of the mound's turns or take <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>.</p><p>If the mound moves, the engulfed target moves with it. The mound can have only one creature engulfed at a time.</p>",
+          "chat": "<p>The shambling mound engulfs a Medium or smaller creature grappled by it. The engulfed target is blinded, restrained, and unable to breathe, and it must make a <strong>Constitution</strong> saving throw at the start of each of the mound's turns. If the mound moves, the engulfed target moves with it.</p>"
         },
         "source": {
           "custom": "",
@@ -941,10 +941,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676589,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!gGeLeV411iQ5Yijs.N42BQALoCmeYphD1"
     },
@@ -955,8 +955,8 @@
       "img": "icons/magic/fire/flame-burning-fist-strike.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Shambling Mound attacks with its Slam.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>.</p>",
+          "chat": "<p>The Shambling Mound attacks with its Slam.</p>"
         },
         "source": {
           "custom": "",
@@ -1143,10 +1143,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676589,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!gGeLeV411iQ5Yijs.lOIA9YKQU8xSx7Lj"
     }

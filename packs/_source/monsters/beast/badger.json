@@ -800,8 +800,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>piercing damage</em>.</strong></p></section>\n<p>The Badger attacks with its Bite.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>piercing damage</em>.</strong></p>",
+          "chat": "<p>The Badger attacks with its Bite.</p>"
         },
         "source": {
           "custom": "",
@@ -992,10 +992,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676500,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!oQvORD924obyPdCc.siQuRYBFdjgVrKlA"
     }

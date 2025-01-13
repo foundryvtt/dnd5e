@@ -615,8 +615,8 @@
       "img": "icons/creatures/abilities/fang-tooth-venomous.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p>\n<p>The target must make a  <strong>DC 11 Constitution</strong> saving throw, taking <strong>10 (3d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one. If the <em>poison damage</em> reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>\n</section>\n<p>The Giant Wasp attacks with its Sting. The target must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p><p>The target must make a  <strong>DC 11 Constitution</strong> saving throw, taking <strong>10 (3d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one. If the <em>poison damage</em> reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>",
+          "chat": "<p>The Giant Wasp attacks with its Sting. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -894,10 +894,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676403,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!4tl0s2SnaLjkoDiI.L1TmhBXd2UrVxExn"
     }

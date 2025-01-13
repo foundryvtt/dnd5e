@@ -670,8 +670,8 @@
       "img": "icons/creatures/claws/claw-talons-glowing-orange.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>If the panther moves at least <strong>20 ft.</strong> straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a <strong>DC 12 Strength saving throw</strong> or be knocked prone. </p><p>If the target is prone, the panther can make one bite attack against it as a bonus action.</p></section><p>If the panther moves at least <strong>20 ft.</strong> straight toward a creature and then hits it with a claw attack on the same turn, that target must make a <strong>Strength</strong> saving throw. </p>",
-          "chat": ""
+          "value": "<p>If the panther moves at least <strong>20 ft.</strong> straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a <strong>DC 12 Strength saving throw</strong> or be knocked prone. </p><p>If the target is prone, the panther can make one bite attack against it as a bonus action.</p>",
+          "chat": "<p>If the panther moves at least <strong>20 ft.</strong> straight toward a creature and then hits it with a claw attack on the same turn, that target must make a <strong>Strength</strong> saving throw. </p>"
         },
         "source": {
           "custom": "",
@@ -853,10 +853,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676768,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!AijNdqMurWxDxUSl.6UmjtTyihpEERg1I"
     },
@@ -867,8 +867,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p><p></p></section><p>The Panther attacks with its Bite.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p>",
+          "chat": "<p>The Panther attacks with its Bite.</p>"
         },
         "source": {
           "custom": "",
@@ -1059,10 +1059,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676768,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!AijNdqMurWxDxUSl.c7iYo6g3A6DP8V4w"
     },
@@ -1073,8 +1073,8 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d4 + 2) <em>slashing damage</em></strong>.</p><p></p></section><p>The Panther attacks with its Claw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d4 + 2) <em>slashing damage</em></strong>.</p>",
+          "chat": "<p>The Panther attacks with its Claw.</p>"
         },
         "source": {
           "custom": "",
@@ -1261,10 +1261,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676768,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!AijNdqMurWxDxUSl.t4bERcqBVDvjJ2gx"
     }

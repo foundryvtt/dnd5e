@@ -822,8 +822,8 @@
       "img": "icons/magic/defensive/shield-barrier-flaming-pentagon-purple-orange.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>Any time the tarrasque is targeted by a magic missile spell, a line spell, or a spell that requires a ranged attack roll, roll a d6. On a 1 to 5, the tarrasque is unaffected.</p><p>On a 6, the tarrasque is unaffected, and the effect is reflected back at the caster as though it originated from the tarrasque, turning the caster into the target.</p></section><p>The tarrasque is unaffected, and the effect is reflected back at the caster as though it originated from the tarrasque, turning the caster into the target.</p>",
-          "chat": ""
+          "value": "<p>Any time the tarrasque is targeted by a magic missile spell, a line spell, or a spell that requires a ranged attack roll, roll a d6. On a 1 to 5, the tarrasque is unaffected.</p><p>On a 6, the tarrasque is unaffected, and the effect is reflected back at the caster as though it originated from the tarrasque, turning the caster into the target.</p>",
+          "chat": "<p>The tarrasque is unaffected, and the effect is reflected back at the caster as though it originated from the tarrasque, turning the caster into the target.</p>"
         },
         "source": {
           "custom": "",
@@ -933,10 +933,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676998,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!KCvt4FdOVJbuZ3T0.tE9TjxIMLnqDisjv"
     },
@@ -1131,8 +1131,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>36 (4d12 + 10) <em>piercing damage</em></strong>. </p><p>If the target is a creature, it is grappled (escape DC 20). Until this grapple ends, the target is restrained, and the tarrasque can't bite another target.</p></section><p>The Tarrasque attacks with its Bite. If the target is a creature, it is grappled. Until this grapple ends, the target is restrained, and the tarrasque can't bite another target.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>36 (4d12 + 10) <em>piercing damage</em></strong>. </p><p>If the target is a creature, it is grappled (escape DC 20). Until this grapple ends, the target is restrained, and the tarrasque can't bite another target.</p>",
+          "chat": "<p>The Tarrasque attacks with its Bite. If the target is a creature, it is grappled. Until this grapple ends, the target is restrained, and the tarrasque can't bite another target.</p>"
         },
         "source": {
           "custom": "",
@@ -1325,10 +1325,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676998,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!KCvt4FdOVJbuZ3T0.suUr7bJqBqE7xk2F"
     },
@@ -1339,8 +1339,8 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>, <strong>15 ft.,</strong> one target. Hit: <strong>28 (4d8 + 10) <em>slashing damage</em></strong>.</p><p></p></section><p>The Tarrasque attacks with its Claw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>, <strong>15 ft.,</strong> one target. Hit: <strong>28 (4d8 + 10) <em>slashing damage</em></strong>.</p>",
+          "chat": "<p>The Tarrasque attacks with its Claw.</p>"
         },
         "source": {
           "custom": "",
@@ -1529,10 +1529,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676998,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!KCvt4FdOVJbuZ3T0.7DRko62ztr6FjZLA"
     },
@@ -1543,8 +1543,8 @@
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>32 (4d10 + 10) <em>piercing damage</em></strong>.</p><p></p></section><p>The Tarrasque attacks with its Horns.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>32 (4d10 + 10) <em>piercing damage</em></strong>.</p>",
+          "chat": "<p>The Tarrasque attacks with its Horns.</p>"
         },
         "source": {
           "custom": "",
@@ -1733,10 +1733,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676998,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!KCvt4FdOVJbuZ3T0.E1RZdzEY2qnG2jLn"
     },
@@ -1747,8 +1747,8 @@
       "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>, <strong>20 ft.,</strong> one target. Hit: <strong>24 (4d6 + 10) <em>bludgeoning damage</em></strong>. </p><p>If the target is a creature, it must succeed on a  <strong>DC 20 Strength</strong> saving throw or be knocked prone.</p></section><p>The Tarrasque attacks with its Tail. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>, <strong>20 ft.,</strong> one target. Hit: <strong>24 (4d6 + 10) <em>bludgeoning damage</em></strong>. </p><p>If the target is a creature, it must succeed on a  <strong>DC 20 Strength</strong> saving throw or be knocked prone.</p>",
+          "chat": "<p>The Tarrasque attacks with its Tail. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>"
         },
         "source": {
           "custom": "",
@@ -2026,10 +2026,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676998,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!KCvt4FdOVJbuZ3T0.Lo4LU9FBxez1Nzqm"
     },
@@ -2040,8 +2040,8 @@
       "img": "icons/creatures/unholy/demons-horned-glowing-pink.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>Each creature of the tarrasque's choice <strong>within 120 feet</strong> of it and aware of it must succeed on a <strong>DC 17 Wisdom saving throw</strong> or become frightened for <strong>1 minute</strong>.</p><p>A creature can repeat the saving throw at the end of each of its turns, with<strong> disadvantage </strong>if the tarrasque is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the tarrasque's Frightful Presence for the next 24 hours.</p></section><p>Each creature of the tarrasque's choice <strong>within 120 feet</strong> of it and aware of it must succeed on a Wisdom saving throw.</p>",
-          "chat": ""
+          "value": "<p>Each creature of the tarrasque's choice <strong>within 120 feet</strong> of it and aware of it must succeed on a <strong>DC 17 Wisdom saving throw</strong> or become frightened for <strong>1 minute</strong>.</p><p>A creature can repeat the saving throw at the end of each of its turns, with<strong> disadvantage </strong>if the tarrasque is within line of sight, ending the effect on itself on a success. If a creature's saving throw is successful or the effect ends for it, the creature is immune to the tarrasque's Frightful Presence for the next 24 hours.</p>",
+          "chat": "<p>Each creature of the tarrasque's choice <strong>within 120 feet</strong> of it and aware of it must succeed on a Wisdom saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -2157,10 +2157,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676998,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!KCvt4FdOVJbuZ3T0.3mtn5D2GoD19WDVW"
     },
@@ -2171,8 +2171,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The tarrasque makes one bite attack against a Large or smaller creature it is grappling. If the attack hits, the target takes the bite's damage, the target is swallowed, and the grapple ends. </p><p>While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside the tarrasque, and it takes <strong>56 (16d6) <em>acid damage</em></strong> at the start of each of the tarrasque's turns.If the tarrasque takes 60 damage or more on a single turn from a creature inside it, the tarrasque must succeed on a  <strong>DC 20 Constitution</strong> saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of the tarrasque. If the tarrasque dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 30 feet of movement, exiting prone.</p></section><p>The Tarrasque attacks with its Swallow.</p>",
-          "chat": ""
+          "value": "<p>The tarrasque makes one bite attack against a Large or smaller creature it is grappling. If the attack hits, the target takes the bite's damage, the target is swallowed, and the grapple ends. </p><p>While swallowed, the creature is blinded and restrained, it has total cover against attacks and other effects outside the tarrasque, and it takes <strong>56 (16d6) <em>acid damage</em></strong> at the start of each of the tarrasque's turns.If the tarrasque takes 60 damage or more on a single turn from a creature inside it, the tarrasque must succeed on a  <strong>DC 20 Constitution</strong> saving throw at the end of that turn or regurgitate all swallowed creatures, which fall prone in a space within 10 feet of the tarrasque. If the tarrasque dies, a swallowed creature is no longer restrained by it and can escape from the corpse by using 30 feet of movement, exiting prone.</p>",
+          "chat": "<p>The Tarrasque attacks with its Swallow.</p>"
         },
         "source": {
           "custom": "",
@@ -2362,10 +2362,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676998,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!KCvt4FdOVJbuZ3T0.7ycN6rrAEJQP3ZOs"
     },
@@ -2376,8 +2376,8 @@
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
-          "chat": ""
+          "value": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>",
+          "chat": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>"
         },
         "source": {
           "custom": "",
@@ -2421,10 +2421,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676998,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!KCvt4FdOVJbuZ3T0.9OZ6Zm76HXyRSKlP"
     },
@@ -2435,8 +2435,8 @@
       "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The tarrasque can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The tarrasque regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The tarrasque can take 3 legendary actions.</p>",
-          "chat": ""
+          "value": "<p>The tarrasque can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The tarrasque regains spent legendary actions at the start of its turn.</p>",
+          "chat": "<p>The tarrasque can take 3 legendary actions.</p>"
         },
         "source": {
           "custom": "",
@@ -2480,10 +2480,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676998,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!KCvt4FdOVJbuZ3T0.sBnQiUt83GYUkKBw"
     },
