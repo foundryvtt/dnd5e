@@ -1,7 +1,7 @@
 import Actor5e from "../../documents/actor/actor.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { defaultUnits, formatCR, formatLength, formatNumber, splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, formatCR, formatLength, formatNumber, getPluralRules, splitSemicolons } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
@@ -418,6 +418,8 @@ export default class NPCData extends CreatureTemplate {
       mod: this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0
     };
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
+
+    this.resources.legact.label = ({ name }) => this.getLegendaryActionsDescription(name);
   }
 
   /* -------------------------------------------- */
@@ -449,6 +451,28 @@ export default class NPCData extends CreatureTemplate {
   cantripLevel(spell) {
     if ( spell.system.preparation.mode === "innate" ) return this.details.cr;
     return this.details.level ? this.details.level : this.details.spellLevel;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Auto-generate a description for the legendary actions block on the NPC stat block.
+   * @param {string} name  Name of the actor to use in the text.
+   * @returns {string}
+   */
+  getLegendaryActionsDescription(name=this.parent.name) {
+    const max = this._source.resources.legact.max;
+    if ( !max ) return "";
+    const pr = getPluralRules().select(max);
+    const rulesVersion = this.source?.rules
+      || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014");
+    return game.i18n.format(`DND5E.LegendaryAction.Description${rulesVersion === "2014" ? "Legacy" : ""}`, {
+      name: name.toLowerCase(),
+      uses: this.resources.lair.value ? game.i18n.format("DND5E.LegendaryAction.LairUses", {
+        normal: formatNumber(max), lair: formatNumber(max + 1)
+      }) : formatNumber(max),
+      usesNamed: game.i18n.format(`DND5E.ACTIVATION.Type.Legendary.Counted.${pr}`, { number: formatNumber(max) })
+    });
   }
 
   /* -------------------------------------------- */
@@ -550,7 +574,7 @@ export default class NPCData extends CreatureTemplate {
         },
         legendary: {
           label: game.i18n.localize("DND5E.NPC.SECTIONS.LegendaryActions"),
-          // TODO: Add legendary description
+          description: "",
           actions: []
         }
       },
@@ -659,19 +683,26 @@ export default class NPCData extends CreatureTemplate {
         let description = (await TextEditor.enrichHTML(item.system.description.value, {
           secrets: false, rollData: item.getRollData(), relativeTo: item
         }));
-        const openingTag = description.match(/^\s*(<p(?:\s[^>]+)?>)/gi)?.[0];
-        if ( openingTag ) description = description.replace(openingTag, "");
-        const uses = item.system.uses.label || item.system.activities?.contents[0]?.uses.label;
-        context.actionSections[category].actions.push({
-          description, openingTag,
-          name: uses ? `${item.name} (${uses})` : item.name,
-          sort: item.sort
-        });
+        if ( item.identifier === "legendary-actions" ) {
+          context.actionSections.legendary.description = description;
+        } else {
+          const openingTag = description.match(/^\s*(<p(?:\s[^>]+)?>)/gi)?.[0];
+          if ( openingTag ) description = description.replace(openingTag, "");
+          const uses = item.system.uses.label || item.system.activities?.contents[0]?.uses.label;
+          context.actionSections[category].actions.push({
+            description, openingTag,
+            name: uses ? `${item.name} (${uses})` : item.name,
+            sort: item.sort
+          });
+        }
       }
     }
-    for ( const key of Object.keys(context.actionSections) ) {
-      if ( context.actionSections[key].actions.length ) {
-        context.actionSections[key].actions.sort((lhs, rhs) => lhs.sort - rhs.sort);
+    for ( const [key, section] of Object.entries(context.actionSections) ) {
+      if ( section.actions.length ) {
+        section.actions.sort((lhs, rhs) => lhs.sort - rhs.sort);
+        if ( (key === "legendary") && !section.description ) {
+          section.description = `<p>${this.getLegendaryActionsDescription()}</p>`;
+        }
       } else delete context.actionSections[key];
     }
 
