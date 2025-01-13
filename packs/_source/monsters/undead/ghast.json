@@ -625,8 +625,8 @@
       "img": "icons/commodities/tech/smoke-bomb-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>Any creature that starts its turn within <strong>5 ft.</strong> of the ghast must succeed on a <strong>DC 10 Constitution saving throw</strong> or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the ghast's Stench for 24 hours.</p></section><p>Any creature that starts its turn within <strong>5 ft.</strong> of the ghast must succeed on a Constitution saving throw.</p>",
-          "chat": ""
+          "value": "<p>Any creature that starts its turn within <strong>5 ft.</strong> of the ghast must succeed on a <strong>DC 10 Constitution saving throw</strong> or be poisoned until the start of its next turn. On a successful saving throw, the creature is immune to the ghast's Stench for 24 hours.</p>",
+          "chat": "<p>Any creature that starts its turn within <strong>5 ft.</strong> of the ghast must succeed on a Constitution saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -741,10 +741,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676781,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!IyIybE5t2adMEVUM.gBiHo206x7uGoySO"
     },
@@ -814,8 +814,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>12 (2d8 + 3) <em>piercing damage</em></strong>.</p><p></p></section><p>The Ghast attacks with its Bite.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>12 (2d8 + 3) <em>piercing damage</em></strong>.</p>",
+          "chat": "<p>The Ghast attacks with its Bite.</p>"
         },
         "source": {
           "custom": "",
@@ -1006,10 +1006,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676781,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!IyIybE5t2adMEVUM.nSgLkorv2oln5BIt"
     },
@@ -1020,8 +1020,8 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>slashing damage</em></strong>. </p><p>If the target is a creature other than an undead, it must succeed on a  <strong>DC 10 Constitution</strong> saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p></section><p>The Ghast attacks with its Claws. If the target is a creature other than an undead, it must make a <strong>Constitution</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>slashing damage</em></strong>. </p><p>If the target is a creature other than an undead, it must succeed on a  <strong>DC 10 Constitution</strong> saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
+          "chat": "<p>The Ghast attacks with its Claws. If the target is a creature other than an undead, it must make a <strong>Constitution</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>"
         },
         "source": {
           "custom": "",
@@ -1208,10 +1208,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676781,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!IyIybE5t2adMEVUM.ricjyd1SKzeQ5gQE"
     }

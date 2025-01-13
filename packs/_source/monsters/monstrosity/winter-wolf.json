@@ -794,8 +794,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>piercing damage</em></strong>. If the target is a creature, it must succeed on a <strong>DC 14 Strength saving throw</strong> or be knocked prone.</p>\n</section>\n<p>The Winter Wolf attacks with its Bite. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>piercing damage</em></strong>. If the target is a creature, it must succeed on a <strong>DC 14 Strength saving throw</strong> or be knocked prone.</p>",
+          "chat": "<p>The Winter Wolf attacks with its Bite. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>"
         },
         "source": {
           "custom": "",
@@ -1075,10 +1075,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676623,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!yGTh874etxUckmAf.5PmQuifZGbPWxAYz"
     },
@@ -1089,8 +1089,8 @@
       "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The wolf exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a  <strong>DC 12 Dexterity</strong> saving throw, taking <strong>18 (4d8) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one. Recharge 5-6.</p></section>\n<p>The wolf exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a <strong>Dexterity</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>The wolf exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a  <strong>DC 12 Dexterity</strong> saving throw, taking <strong>18 (4d8) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one. Recharge 5-6.</p>",
+          "chat": "<p>The wolf exhales a blast of freezing wind in a 15-foot cone. Each creature in that area must make a <strong>Dexterity</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1369,10 +1369,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676623,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!yGTh874etxUckmAf.Rj3oSInoQMIfHrPc"
     }

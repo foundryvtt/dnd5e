@@ -674,8 +674,8 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>bludgeoning damage</em></strong>.</p>\n<p>The target is grappled (escape DC 11). The crab has two claws, each of which can grapple only one target.</p>\n</section>\n<p>The Giant Crab attacks with its Claw. The target is grappled.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>bludgeoning damage</em></strong>.</p><p>The target is grappled (escape DC 11). The crab has two claws, each of which can grapple only one target.</p>",
+          "chat": "<p>The Giant Crab attacks with its Claw. The target is grappled.</p>"
         },
         "source": {
           "custom": "",
@@ -862,10 +862,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676420,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!AOJvmk1IchxNxQzP.7qDtYuaBNQ3zOnBC"
     }

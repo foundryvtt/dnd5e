@@ -615,8 +615,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>4 (1d4 + 2) <em>piercing damage</em></strong>.</p>\n<p>The target must succeed on a  <strong>DC 11 Constitution</strong> saving throw or take <strong>10 (3d6) <em>poison damage</em></strong>. If the <em>poison damage</em> reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>\n</section>\n<p>The Giant Centipede attacks with its Bite. The target must succeed on a  <strong>DC 11 Constitution</strong> saving throw or take <em>poison damage</em>. If the <em>poison damage</em> reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>4 (1d4 + 2) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 11 Constitution</strong> saving throw or take <strong>10 (3d6) <em>poison damage</em></strong>. If the <em>poison damage</em> reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>",
+          "chat": "<p>The Giant Centipede attacks with its Bite. The target must succeed on a  <strong>DC 11 Constitution</strong> saving throw or take <em>poison damage</em>. If the <em>poison damage</em> reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>"
         },
         "source": {
           "custom": "",
@@ -898,10 +898,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676436,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Hn8FFLEzscgT7azz.8EvqvqLumOBhrjeD"
     }

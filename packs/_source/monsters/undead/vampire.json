@@ -622,8 +622,8 @@
       "img": "icons/magic/control/silhouette-hold-change-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>If the vampire isn't in sun light or running water, it can use its action to <strong>polymorph</strong> into a Tiny bat or a Medium cloud of mist, or back into its true form.</p>\n<p>While in bat form, the vampire can't speak, its walking speed is <strong>5 feet,</strong> and it has a flying speed of <strong>30 feet.</strong> Its statistics, other than its size and speed, are unchanged. Anything it is wearing transforms with it, but nothing it is carrying does. It reverts to its true form if it dies<strong>. </strong>While in mist form, the vampire can't take any actions, speak, or manipulate objects. It is weightless, has a flying speed of <strong>20 feet,</strong> can hover, and can enter a hostile creature's space and stop there. In addition, if air can pass through a space, the mist can do so without squeezing, and it can't pass through water. It has<strong> advantage </strong>on Strength, Dexterity, and Constitution saving throws, and it is immune to all <strong>nonmagical damage</strong>, except the damage it takes from sunlight.</p>\n</section>\n<p>The vampire can use its action to <strong>polymorph</strong> or return to its true form.</p>",
-          "chat": ""
+          "value": "<p>If the vampire isn't in sun light or running water, it can use its action to <strong>polymorph</strong> into a Tiny bat or a Medium cloud of mist, or back into its true form.</p><p>While in bat form, the vampire can't speak, its walking speed is <strong>5 feet,</strong> and it has a flying speed of <strong>30 feet.</strong> Its statistics, other than its size and speed, are unchanged. Anything it is wearing transforms with it, but nothing it is carrying does. It reverts to its true form if it dies<strong>. </strong>While in mist form, the vampire can't take any actions, speak, or manipulate objects. It is weightless, has a flying speed of <strong>20 feet,</strong> can hover, and can enter a hostile creature's space and stop there. In addition, if air can pass through a space, the mist can do so without squeezing, and it can't pass through water. It has<strong> advantage </strong>on Strength, Dexterity, and Constitution saving throws, and it is immune to all <strong>nonmagical damage</strong>, except the damage it takes from sunlight.</p>",
+          "chat": "<p>The vampire can use its action to <strong>polymorph</strong> or return to its true form.</p>"
         },
         "source": {
           "custom": "",
@@ -667,10 +667,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676990,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!DDO9lDCDtNHkfShP.BqG5guVa93LaOAn1"
     },
@@ -816,8 +816,8 @@
       "img": "icons/magic/air/fog-gas-smoke-swirling-gray.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>When it drops to <strong>0 hit points</strong> outside its resting place, the vampire transforms into a cloud of mist (as in the Shapechanger trait) instead of falling unconscious, provided that it isn't in sunlight or running water. If it can't transform, it is destroyed.</p><p>While it has <strong>0 hit points</strong> in mist form, it can't revert to its vampire form, and it must reach its resting place within 2 hours or be destroyed. Once in its resting place, it reverts to its vampire form. It is then paralyzed until it regains at least <strong>1 hit point</strong>. After spending 1 hour in its resting place with <strong>0 hit points</strong>, it regains <strong>1 hit point</strong>.</p></section><p>A slain vampire transforms into a cloud of mist (as in the Shapechanger trait) instead of falling unconscious.</p>",
-          "chat": ""
+          "value": "<p>When it drops to <strong>0 hit points</strong> outside its resting place, the vampire transforms into a cloud of mist (as in the Shapechanger trait) instead of falling unconscious, provided that it isn't in sunlight or running water. If it can't transform, it is destroyed.</p><p>While it has <strong>0 hit points</strong> in mist form, it can't revert to its vampire form, and it must reach its resting place within 2 hours or be destroyed. Once in its resting place, it reverts to its vampire form. It is then paralyzed until it regains at least <strong>1 hit point</strong>. After spending 1 hour in its resting place with <strong>0 hit points</strong>, it regains <strong>1 hit point</strong>.</p>",
+          "chat": "<p>A slain vampire transforms into a cloud of mist (as in the Shapechanger trait) instead of falling unconscious.</p>"
         },
         "source": {
           "custom": "",
@@ -861,10 +861,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676990,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!DDO9lDCDtNHkfShP.pVlKFunmE2qxO0pe"
     },
@@ -875,8 +875,8 @@
       "img": "icons/skills/wounds/anatomy-organ-heart-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The vampire regains <strong>20 hit points</strong> at the start of its turn if it has at least <strong>1 hit point</strong> and isn't in sunlight or running water. If the vampire takes <em>radiant damage</em> or damage from holy water, this trait doesn't function at the start of the vampire's next turn.</p></section><p>The vampire regains <strong>20 hit points</strong> at the start of its turn.</p>",
-          "chat": ""
+          "value": "<p>The vampire regains <strong>20 hit points</strong> at the start of its turn if it has at least <strong>1 hit point</strong> and isn't in sunlight or running water. If the vampire takes <em>radiant damage</em> or damage from holy water, this trait doesn't function at the start of the vampire's next turn.</p>",
+          "chat": "<p>The vampire regains <strong>20 hit points</strong> at the start of its turn.</p>"
         },
         "source": {
           "custom": "",
@@ -997,10 +997,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676990,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!DDO9lDCDtNHkfShP.BDnluJG7T7FfBjsQ"
     },
@@ -1250,8 +1250,8 @@
       "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>8 (1d8 + 4) <em>bludgeoning damage</em></strong>. </p><p>Instead of dealing damage, the vampire can grapple the target (escape DC 18).</p></section><p>The Vampire attacks with its Unarmed Strike.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>8 (1d8 + 4) <em>bludgeoning damage</em></strong>. </p><p>Instead of dealing damage, the vampire can grapple the target (escape DC 18).</p>",
+          "chat": "<p>The Vampire attacks with its Unarmed Strike.</p>"
         },
         "source": {
           "custom": "",
@@ -1438,10 +1438,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676990,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!DDO9lDCDtNHkfShP.jYBYvv9EF1UnOvqZ"
     },
@@ -1452,8 +1452,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5 ft.,</strong> one willing creature, or a creature that is grappled by the vampire, incapacitated, or restrained. Hit: <strong>7 (1d6 + 4) <em>piercing damage</em></strong> plus <strong>10 (3d6) <em>necrotic damage</em></strong>. </p><p>The target's hit point maximum is reduced by an amount equal to the <em>necrotic damage</em> taken, and the vampire regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. A humanoid slain in this way and then buried in the ground rises the following night as a vampire spawn under the vampire's control.</p></section><p>The Vampire attacks with its Bite.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5 ft.,</strong> one willing creature, or a creature that is grappled by the vampire, incapacitated, or restrained. Hit: <strong>7 (1d6 + 4) <em>piercing damage</em></strong> plus <strong>10 (3d6) <em>necrotic damage</em></strong>. </p><p>The target's hit point maximum is reduced by an amount equal to the <em>necrotic damage</em> taken, and the vampire regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0. A humanoid slain in this way and then buried in the ground rises the following night as a vampire spawn under the vampire's control.</p>",
+          "chat": "<p>The Vampire attacks with its Bite.</p>"
         },
         "source": {
           "custom": "",
@@ -1658,10 +1658,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676990,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!DDO9lDCDtNHkfShP.uqHuj7Pjf2sjny21"
     },
@@ -1672,8 +1672,8 @@
       "img": "icons/creatures/eyes/human-single-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The vampire targets one humanoid it can see within 30 ft. of it. If the target can see the vampire, the target must succeed on a  <strong>DC 17 Wisdom</strong> saving throw against this magic or be charmed by the vampire. The charmed target regards the vampire as a trusted friend to be heeded and protected. Although the target isn't under the vampire's control, it takes the vampire's requests or actions in the most favorable way it can, and it is a willing target for the vampire's bite attack.</p><p>Each time the vampire or the vampire's companions do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the vampire is destroyed, is on a different plane of existence than the target, or takes a bonus action to end the effect.</p></section><p>The vampire targets one humanoid it can see within 30 ft. of it. If the target can see the vampire, the target must make a <strong>Wisdom</strong> saving throw against this magic.</p>",
-          "chat": ""
+          "value": "<p>The vampire targets one humanoid it can see within 30 ft. of it. If the target can see the vampire, the target must succeed on a  <strong>DC 17 Wisdom</strong> saving throw against this magic or be charmed by the vampire. The charmed target regards the vampire as a trusted friend to be heeded and protected. Although the target isn't under the vampire's control, it takes the vampire's requests or actions in the most favorable way it can, and it is a willing target for the vampire's bite attack.</p><p>Each time the vampire or the vampire's companions do anything harmful to the target, it can repeat the saving throw, ending the effect on itself on a success. Otherwise, the effect lasts 24 hours or until the vampire is destroyed, is on a different plane of existence than the target, or takes a bonus action to end the effect.</p>",
+          "chat": "<p>The vampire targets one humanoid it can see within 30 ft. of it. If the target can see the vampire, the target must make a <strong>Wisdom</strong> saving throw against this magic.</p>"
         },
         "source": {
           "custom": "",
@@ -1789,10 +1789,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676990,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!DDO9lDCDtNHkfShP.RHezeN7HzNf2oKYP"
     },
@@ -1803,8 +1803,8 @@
       "img": "icons/magic/death/skull-trio-badge-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The vampire magically calls 2d4 swarms of bats or rats, provided that the sun isn't up. While outdoors, the vampire can call 3d6 wolves instead. </p><p>The called creatures arrive in 1d4 rounds, acting as allies of the vampire and obeying its spoken commands. The beasts remain for 1 hour, until the vampire dies, or until the vampire dismisses them as a bonus action.</p></section><p>The vampire magically calls swarms of bats or rats. While outdoors, the vampire can call wolves instead. </p>",
-          "chat": ""
+          "value": "<p>The vampire magically calls 2d4 swarms of bats or rats, provided that the sun isn't up. While outdoors, the vampire can call 3d6 wolves instead. </p><p>The called creatures arrive in 1d4 rounds, acting as allies of the vampire and obeying its spoken commands. The beasts remain for 1 hour, until the vampire dies, or until the vampire dismisses them as a bonus action.</p>",
+          "chat": "<p>The vampire magically calls swarms of bats or rats. While outdoors, the vampire can call wolves instead. </p>"
         },
         "source": {
           "custom": "",
@@ -1929,10 +1929,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676990,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!DDO9lDCDtNHkfShP.c9z4o0fkxq37v8KY"
     },
@@ -1943,8 +1943,8 @@
       "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The vampire can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The vampire regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The vampire can take 3 legendary actions.</p>",
-          "chat": ""
+          "value": "<p>The vampire can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The vampire regains spent legendary actions at the start of its turn.</p>",
+          "chat": "<p>The vampire can take 3 legendary actions.</p>"
         },
         "source": {
           "custom": "",
@@ -1988,10 +1988,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676990,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!DDO9lDCDtNHkfShP.rQOFEdWpVwJWS2U4"
     },
@@ -2002,8 +2002,8 @@
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
-          "chat": ""
+          "value": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>",
+          "chat": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>"
         },
         "source": {
           "custom": "",
@@ -2047,10 +2047,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676990,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!DDO9lDCDtNHkfShP.hNBduaMwPI3vordA"
     },

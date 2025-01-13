@@ -627,8 +627,8 @@
       "img": "icons/creatures/slimes/slime-movement-dripping-pseudopods-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>9 (2d6 + 2) <em>bludgeoning damage</em></strong> plus <strong>3 (1d6) <em>acid damage</em></strong>.</p><p></p></section><p>The Ochre Jelly attacks with its Pseudopod.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>9 (2d6 + 2) <em>bludgeoning damage</em></strong> plus <strong>3 (1d6) <em>acid damage</em></strong>.</p>",
+          "chat": "<p>The Ochre Jelly attacks with its Pseudopod.</p>"
         },
         "source": {
           "custom": "",
@@ -833,10 +833,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676619,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!xBhG7Dos3tkg9jWz.SYdqeemFOudCYb9E"
     },
@@ -965,8 +965,8 @@
       "img": "icons/creatures/slimes/slime-movement-pseudopod-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>When a jelly that is Medium or larger is subjected to lightning or <em>slashing damage</em>, it splits into two new jellies if it has at least 10 Hit Points. Each new jelly has Hit Points equal to half the original jelly's, rounded down. New jellies are one size smaller than the original jelly.</p></section><p>The jelly splits into two new jellies. New jellies are one size smaller than the original jelly.</p>",
-          "chat": ""
+          "value": "<p>When a jelly that is Medium or larger is subjected to lightning or <em>slashing damage</em>, it splits into two new jellies if it has at least 10 Hit Points. Each new jelly has Hit Points equal to half the original jelly's, rounded down. New jellies are one size smaller than the original jelly.</p>",
+          "chat": "<p>The jelly splits into two new jellies. New jellies are one size smaller than the original jelly.</p>"
         },
         "source": {
           "custom": "",
@@ -1076,10 +1076,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676619,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!xBhG7Dos3tkg9jWz.2ifhxY5f2Xs4GMxR"
     }
