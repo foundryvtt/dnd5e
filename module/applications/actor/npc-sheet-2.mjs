@@ -90,7 +90,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
 
     // Speed
     context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
-      const value = attributes.movement[k];
+      const value = attributes.movement.types[k];
       if ( value ) {
         obj[k] = { label, value };
         if ( (k === "fly") && attributes.movement.hover ) obj.fly.icons = [{

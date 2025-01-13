@@ -73,7 +73,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   get movementLabels() {
     const units = this.movement.units || defaultUnits("length");
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
-      const value = this.movement[k];
+      const value = this.movement.types[k];
       if ( value ) obj[k] = `${label} ${formatLength(value, units)}`;
       return obj;
     }, {});
@@ -133,7 +133,7 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
       config: "movement",
       tooltip: "DND5E.MovementConfig",
       value: Object.entries(CONFIG.DND5E.movementTypes).reduce((str, [k, label]) => {
-        const value = this.movement[k];
+        const value = this.movement.types[k];
         if ( !value ) return str;
         return `${str}
           <span class="key">${label}</span>

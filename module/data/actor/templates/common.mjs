@@ -111,10 +111,11 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
    */
   static #migrateMovementData(source) {
     const original = source.attributes?.speed?.value ?? source.attributes?.speed;
-    if ( (typeof original !== "string") || (source.attributes.movement?.walk !== undefined) ) return;
+    if ( (typeof original !== "string") || (source.attributes.movement?.types?.walk !== undefined) ) return;
     source.attributes.movement ??= {};
+    source.attributes.movement.types ??= {};
     const s = original.split(" ");
-    if ( s.length > 0 ) source.attributes.movement.walk = Number.isNumeric(s[0]) ? parseInt(s[0]) : 0;
+    if ( s.length > 0 ) source.attributes.movement.types.walk = Number.isNumeric(s[0]) ? parseInt(s[0]) : 0;
   }
 
   /* -------------------------------------------- */

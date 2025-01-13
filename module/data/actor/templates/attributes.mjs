@@ -19,13 +19,14 @@ export default class AttributesFields {
    * @property {string} init.ability     The ability used for initiative rolls.
    * @property {string} init.bonus       The bonus provided to initiative rolls.
    * @property {object} movement
-   * @property {number} movement.burrow  Actor burrowing speed.
-   * @property {number} movement.climb   Actor climbing speed.
-   * @property {number} movement.fly     Actor flying speed.
-   * @property {number} movement.swim    Actor swimming speed.
-   * @property {number} movement.walk    Actor walking speed.
-   * @property {string} movement.units   Movement used to measure the various speeds.
    * @property {boolean} movement.hover  Is this flying creature able to hover in place.
+   * @property {object} movement.types
+   * @property {number} movement.types.burrow  Actor burrowing speed.
+   * @property {number} movement.types.climb   Actor climbing speed.
+   * @property {number} movement.types.fly     Actor flying speed.
+   * @property {number} movement.types.swim    Actor swimming speed.
+   * @property {number} movement.types.walk    Actor walking speed.
+   * @property {string} movement.units   Movement used to measure the various speeds.
    */
   static get common() {
     return {
@@ -46,12 +47,13 @@ export default class AttributesFields {
    * @property {object} attunement
    * @property {number} attunement.max          Maximum number of attuned items.
    * @property {object} senses
-   * @property {number} senses.darkvision       Creature's darkvision range.
-   * @property {number} senses.blindsight       Creature's blindsight range.
-   * @property {number} senses.tremorsense      Creature's tremorsense range.
-   * @property {number} senses.truesight        Creature's truesight range.
-   * @property {string} senses.units            Distance units used to measure senses.
    * @property {string} senses.special          Description of any special senses or restrictions.
+   * @property {object} senses.types
+   * @property {number} senses.types.darkvision       Creature's darkvision range.
+   * @property {number} senses.types.blindsight       Creature's blindsight range.
+   * @property {number} senses.types.tremorsense      Creature's tremorsense range.
+   * @property {number} senses.types.truesight        Creature's truesight range.
+   * @property {string} senses.units            Distance units used to measure senses.
    * @property {string} spellcasting            Primary spellcasting ability.
    * @property {number} exhaustion              Creature's exhaustion level.
    * @property {object} concentration
@@ -271,7 +273,7 @@ export default class AttributesFields {
       ? this.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     for ( const type in CONFIG.DND5E.movementTypes ) {
-      let speed = Math.max(0, this.attributes.movement[type] - reduction);
+      let speed = Math.max(0, this.attributes.movement.types[type] - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
       else {
         if ( halfMovement ) speed *= 0.5;
@@ -284,7 +286,7 @@ export default class AttributesFields {
           speed = Math.min(speed, CONFIG.DND5E.encumbrance.speedReduction.exceedingCarryingCapacity[units] ?? 0);
         }
       }
-      this.attributes.movement[type] = speed;
+      this.attributes.movement.types[type] = speed;
     }
   }
 
@@ -300,8 +302,8 @@ export default class AttributesFields {
    */
   static prepareRace(race, { force=false }={}) {
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( !race.system.movement[key] || (!force && (this.attributes.movement[key] !== null)) ) continue;
-      this.attributes.movement[key] = race.system.movement[key];
+      if ( !race.system.movement.types[key] || (!force && (this.attributes.movement.types[key] !== null)) ) continue;
+      this.attributes.movement.types[key] = race.system.movement.types[key];
     }
     if ( race.system.movement.hover ) this.attributes.movement.hover = true;
     if ( force && race.system.movement.units ) this.attributes.movement.units = race.system.movement.units;

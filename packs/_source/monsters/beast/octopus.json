@@ -83,11 +83,13 @@
         }
       },
       "movement": {
-        "burrow": 0,
-        "climb": 0,
-        "fly": 0,
-        "swim": 30,
-        "walk": 5,
+        "types": {
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 30,
+          "walk": 5
+        },
         "units": "ft",
         "hover": false
       },

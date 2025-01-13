@@ -196,8 +196,8 @@ export default class NPCData extends CreatureTemplate {
         },
         createFilter: (filters, value, def) => {
           for ( const [k, v] of Object.entries(value ?? {}) ) {
-            if ( v === 1 ) filters.push({ k: `system.attributes.movement.${k}`, o: "gt", v: 0 });
-            if ( v === -1 ) filters.push({ k: `system.attributes.movement.${k}`, v: 0 });
+            if ( v === 1 ) filters.push({ k: `system.attributes.movement.types.${k}`, o: "gt", v: 0 });
+            if ( v === -1 ) filters.push({ k: `system.attributes.movement.types.${k}`, v: 0 });
           }
         }
       }]
@@ -342,7 +342,7 @@ export default class NPCData extends CreatureTemplate {
       AttributesFields.prepareRace.call(this, this.details.race, { force: true });
       this.details.type = this.details.race.system.type;
     }
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement[key] ??= 0;
+    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement.types[key] ??= 0;
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses.types[key] ??= 0;
     this.attributes.movement.units ??= defaultUnits("length");
     this.attributes.senses.units ??= defaultUnits("length");
@@ -554,11 +554,11 @@ export default class NPCData extends CreatureTemplate {
 
         // Speed (e.g. `40 ft., Burrow 40 ft., Fly 80 ft.`)
         speed: formatter.format([
-          prepareMeasured(this.attributes.movement.walk, this.attributes.movement.units),
+          prepareMeasured(this.attributes.movement.types.walk, this.attributes.movement.units),
           ...Object.entries(CONFIG.DND5E.movementTypes)
-            .filter(([k]) => this.attributes.movement[k] && (k !== "walk"))
+            .filter(([k]) => this.attributes.movement.types[k] && (k !== "walk"))
             .map(([k, label]) => {
-              let prepared = prepareMeasured(this.attributes.movement[k], this.attributes.movement.units, label);
+              let prepared = prepareMeasured(this.attributes.movement.types[k], this.attributes.movement.units, label);
               if ( (k === "fly") && this.attributes.movement.hover ) {
                 prepared = `${prepared} (${game.i18n.localize("DND5E.MovementHover").toLowerCase()})`;
               }

@@ -384,11 +384,13 @@
         "bonus": ""
       },
       "movement": {
-        "burrow": null,
-        "climb": null,
-        "fly": 60,
-        "swim": null,
-        "walk": null,
+        "types": {
+          "burrow": null,
+          "climb": null,
+          "fly": 60,
+          "swim": null,
+          "walk": null
+        },
         "units": null,
         "hover": true
       },

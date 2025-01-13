@@ -85,11 +85,13 @@
         }
       },
       "movement": {
-        "burrow": null,
-        "climb": null,
-        "fly": null,
-        "swim": null,
-        "walk": null,
+        "types": {
+          "burrow": null,
+          "climb": null,
+          "fly": null,
+          "swim": null,
+          "walk": null
+        },
         "units": null,
         "hover": false
       },
@@ -4540,11 +4542,13 @@
           }
         ],
         "movement": {
-          "burrow": 0,
-          "climb": 0,
-          "fly": 0,
-          "swim": 0,
-          "walk": 30,
+          "types": {
+            "burrow": 0,
+            "climb": 0,
+            "fly": 0,
+            "swim": 0,
+            "walk": 30
+          },
           "units": "ft",
           "hover": false
         },

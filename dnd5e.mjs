@@ -234,7 +234,7 @@ function _configureTrackableAttributes() {
     bar: [],
     value: [
       ...Object.keys(DND5E.abilities).map(ability => `abilities.${ability}.value`),
-      ...Object.keys(DND5E.movementTypes).map(movement => `attributes.movement.${movement}`),
+      ...Object.keys(DND5E.movementTypes).map(movement => `attributes.movement.types.${movement}`),
       "attributes.ac.value", "attributes.init.total"
     ]
   };
@@ -297,7 +297,7 @@ function _configureConsumableAttributes() {
     "attributes.hp.value",
     "attributes.exhaustion",
     ...Object.keys(DND5E.senses).map(sense => `attributes.senses.types.${sense}`),
-    ...Object.keys(DND5E.movementTypes).map(type => `attributes.movement.${type}`),
+    ...Object.keys(DND5E.movementTypes).map(type => `attributes.movement.types.${type}`),
     ...Object.keys(DND5E.currencies).map(denom => `currency.${denom}`),
     "details.xp.value",
     "resources.primary.value", "resources.secondary.value", "resources.tertiary.value",

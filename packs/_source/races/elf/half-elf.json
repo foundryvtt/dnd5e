@@ -142,11 +142,13 @@
       "custom": ""
     },
     "movement": {
-      "burrow": null,
-      "climb": null,
-      "fly": null,
-      "swim": null,
-      "walk": 30,
+      "types": {
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": 30
+      },
       "units": "ft",
       "hover": false
     }

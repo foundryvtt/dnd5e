@@ -756,21 +756,24 @@ function _migrateActorAC(actorData, updateData) {
 /* -------------------------------------------- */
 
 /**
- * Migrate the actor movement & senses to replace `0` with `null`.
+ * Migrate the actor movement & senses to the `types` object.
  * @param {object} actorData   Actor data being migrated.
  * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
  * @returns {object}           Modified version of update data.
  * @private
  */
 function _migrateActorMovementSenses(actorData, updateData) {
-  if ( actorData._stats?.systemVersion && foundry.utils.isNewerVersion("2.4.0", actorData._stats.systemVersion) ) {
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      const keyPath = `system.attributes.movement.${key}`;
-      if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
+  if ( actorData._stats?.systemVersion && foundry.utils.isNewerVersion("4.3.0", actorData._stats.systemVersion) ) {
+    for ( const k of Object.keys(CONFIG.DND5E.movementTypes) ) {
+      const v = foundry.utils.getProperty(actorData, `system.attributes.movement.${k}`) ?? null;
+      updateData[`system.attributes.movement.types.${k}`] = v;
+      updateData[`system.attributes.movement.-=${k}`] = null;
     }
-    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      const keyPath = `system.attributes.senses.${key}`;
-      if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
+
+    for ( const k of Object.keys(CONFIG.DND5E.senses) ) {
+      const v = foundry.utils.getProperty(actorData, `system.attributes.senses.${k}`) ?? null;
+      updateData[`system.attributes.senses.types.${k}`] = v;
+      updateData[`system.attributes.senses.-=${k}`] = null;
     }
   }
   return updateData;
