@@ -12,7 +12,7 @@
             {{ selectOptions config.abilities selected=system.attributes.spellcasting labelAttr="label"
                              blank=(localize "DND5E.None") }}
         </select>
-        <span>{{localize "DND5E.AbbreviationDC"}} {{system.attributes.spelldc}}</span>
+        <span>{{localize "DND5E.AbbreviationDC"}} {{system.attributes.spell.dc}}</span>
     </div>
 
     <ul class="filter-list flexrow" data-filter="spellbook">

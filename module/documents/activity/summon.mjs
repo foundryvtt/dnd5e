@@ -500,7 +500,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
 
       // Match saves
       if ( this.match.saves && item.hasSave ) {
-        let dc = rollData.abilities?.[this.ability]?.dc ?? rollData.attributes.spelldc;
+        let dc = rollData.abilities?.[this.ability]?.dc ?? rollData.attributes.spell.dc;
         if ( this.item.type === "spell" ) {
           const ability = this.item.system.availableAbilities?.first();
           if ( ability ) dc = rollData.abilities[ability]?.dc ?? dc;

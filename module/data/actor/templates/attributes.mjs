@@ -460,8 +460,30 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareSpellcastingAbility() {
-    const spellcastingAbility = this.abilities[this.attributes.spellcasting];
-    this.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.attributes.prof;
-    this.attributes.spellmod = spellcastingAbility ? spellcastingAbility.mod : 0;
+    const ability = this.abilities?.[this.attributes.spellcasting];
+    this.attributes.spell = {
+      abilityLabel: CONFIG.DND5E.abilities[this.attributes.spellcasting]?.label ?? "",
+      attack: ability ? ability.attack : this.attributes.prof,
+      dc: ability ? ability.dc : 8 + this.attributes.prof,
+      mod: ability ? ability.mod : 0
+    };
+    Object.defineProperty(this.attributes, "spelldc", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `attributes.spelldc` property on actors has been moved to `attributes.spell.dc`.",
+          { since: "DnD5e 4.2", until: "DnD5e 5.0" }
+        );
+        return this.spell.dc;
+      }
+    });
+    Object.defineProperty(this.attributes, "spellmod", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `attributes.spellmod` property on actors has been moved to `attributes.spell.mod`.",
+          { since: "DnD5e 4.2", until: "DnD5e 5.0" }
+        );
+        return this.spell.mod;
+      }
+    });
   }
 }
