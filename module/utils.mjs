@@ -1067,7 +1067,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   // Derived fields.
   if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
   else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
-  else if ( attr === "attributes.spelldc" ) label = "DND5E.SpellDC";
+  else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";
 
   // Abilities.
   else if ( attr.startsWith("abilities.") ) {
