@@ -63,7 +63,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     const [elements] = this.element.find(".header-elements");
     if ( !elements || this.actor.limited ) return;
     const xp = this.actor.system.details.xp.value;
-    elements.querySelector(".cr-xp").innerHTML = xp === null ? "" : game.i18n.format("DND5E.ExperiencePointsFormat", {
+    elements.querySelector(".cr-xp").innerHTML = xp === null ? "" : game.i18n.format("DND5E.ExperiencePoints.Format", {
       value: new Intl.NumberFormat(game.i18n.lang).format(xp)
     });
   }

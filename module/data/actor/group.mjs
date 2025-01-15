@@ -70,8 +70,8 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       }, { label: "DND5E.Attributes" }),
       details: new SchemaField({
         xp: new SchemaField({
-          value: new NumberField({ integer: true, min: 0, label: "DND5E.ExperiencePointsCurrent" })
-        }, { label: "DND5E.ExperiencePoints" })
+          value: new NumberField({ integer: true, min: 0, label: "DND5E.ExperiencePoints.Current" })
+        }, { label: "DND5E.ExperiencePoints.Label" })
       }, { label: "DND5E.Details" })
     });
   }
