@@ -172,7 +172,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       if ( activity?.uses?.max?.includes?.(" ? ") ) activity.uses.max = "";
     }
 
-    if ( Array.isArray(source?.uses?.recovery) ) return;
+    if ( Array.isArray(source.uses?.recovery) ) return;
 
     const charged = source.recharge?.charged;
     if ( (source.recharge?.value !== null) && (charged !== undefined) && !source.uses?.max ) {
