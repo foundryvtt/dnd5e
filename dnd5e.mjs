@@ -64,6 +64,7 @@ Hooks.once("init", function() {
   CONFIG.Item.collection = dataModels.collection.Items5e;
   CONFIG.Item.compendiumIndexFields.push("system.container");
   CONFIG.Item.documentClass = documents.Item5e;
+  CONFIG.RollTable.documentClass = documents.RollTable5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
   CONFIG.User.documentClass = documents.User5e;
