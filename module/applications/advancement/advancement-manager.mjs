@@ -1,4 +1,5 @@
 import Advancement from "../../documents/advancement/advancement.mjs";
+import { log } from "../../utils.mjs";
 import Application5e from "../api/application.mjs";
 
 /**
@@ -861,7 +862,7 @@ export default class AdvancementManager extends Application5e {
      * @param {string[]} toDelete                      IDs of items that will be deleted on the actor.
      */
     if ( Hooks.call("dnd5e.preAdvancementManagerComplete", this, updates, toCreate, toUpdate, toDelete) === false ) {
-      console.log("AdvancementManager completion was prevented by the 'preAdvancementManagerComplete' hook.");
+      log("AdvancementManager completion was prevented by the 'preAdvancementManagerComplete' hook.");
       return this.close({ skipConfirmation: true });
     }
 
