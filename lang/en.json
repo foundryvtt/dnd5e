@@ -58,7 +58,7 @@
 "DND5E.AbbreviationDC": "DC",
 "DND5E.AbbreviationKg": "kg",
 "DND5E.AbbreviationLR": "LR",
-"DND5E.AbbreviationLevel": "Lvl.",
+"DND5E.AbbreviationLevel": "Lvl",
 "DND5E.AbbreviationLbs": "lbs.",
 "DND5E.AbbreviationSR": "SR",
 
@@ -280,6 +280,7 @@
     }
   },
   "Config": {
+    "AnyLevel": "Any",
     "Details": "Advancement Details"
   },
   "HitPoints": {
@@ -296,6 +297,65 @@
     "Warning": {
       "Empty": "Hit points must be rolled or the average value must be taken.",
       "Invalid": "Hit points must be a valid whole number."
+    }
+  },
+  "ItemChoice": {
+    "Choose": "choose {count}",
+    "Chosen": "Chosen: {current} of {max}",
+    "Details": "Choice Details",
+    "DropHint": "Drop Items here to add them to the list that can be chosen with this advancement.",
+    "FIELDS": {
+      "allowDrops": {
+        "hint": "Allow players to be able to drop their own choices into this advancement.",
+        "label": "Allow Drops"
+      },
+      "choices": {
+        "hint": "Specify how many choices are allowed at each level.",
+        "label": "Choices",
+        "FIELDS": {
+          "count": {
+            "label": "Count"
+          },
+          "replacement": {
+            "label": "Allow Replacement"
+          }
+        }
+      },
+      "pool": {
+        "label": "Item Options"
+      },
+      "restriction": {
+        "level": {
+          "Available": "Any Available Level",
+          "hint": "Only allow choices from spells of this level.",
+          "label": "Spell Level"
+        },
+        "subtype": {
+          "label": "Subtype"
+        },
+        "type": {
+          "label": "Type"
+        }
+      },
+      "type": {
+        "Any": "Anything",
+        "hint": "Restrict what Item types can be chosen.",
+        "label": "Item Type"
+      }
+    },
+    "Hint": "Present the player with a choice of items (such as equipment, features, or spells) that they can choose for their character at one or more levels.",
+    "Replacement": {
+      "None": "No Replacement",
+      "Title": "replace"
+    },
+    "Title": "Choose Items",
+    "Warning": {
+      "FeatureLevel": "Must be at least level {level} to take this feature.",
+      "InvalidType": "Only {type} items can be selected for this choice.",
+      "NoOriginal": "Previously selected choice no longer available for replacement.",
+      "PreviouslyChosen": "This item has already been chosen at a previous level.",
+      "SpellLevelAvailable": "Only {level} or lower spells can be chosen for this advancement.",
+      "SpellLevelSpecific": "Only {level} spells can be chosen for this advancement."
     }
   },
   "ItemGrant": {
@@ -406,26 +466,6 @@
 "DND5E.AdvancementDeleteConfirmationTitle": "Confirm Deletion",
 "DND5E.AdvancementFlowDropAreaHint": "Drop an Item here to choose it.",
 "DND5E.AdvancementHint": "Hint",
-"DND5E.AdvancementItemChoiceTitle": "Choose Items",
-"DND5E.AdvancementItemChoiceHint": "Present the player with a choice of items (such as equipment, features, or spells) that they can choose for their character at one or more levels.",
-"DND5E.AdvancementItemChoiceChoices": "Choices",
-"DND5E.AdvancementItemChoiceChoose": "choose {count}",
-"DND5E.AdvancementItemChoiceChosen": "Chosen: {current} of {max}",
-"DND5E.AdvancementItemChoiceFeatureLevelWarning": "Must be at least level {level} to take this feature.",
-"DND5E.AdvancementItemChoiceLevelsHint": "Specify how many choices are allowed at each level.",
-"DND5E.AdvancementItemChoiceNoOriginalError": "Previously selected choice no longer available for replacement.",
-"DND5E.AdvancementItemChoicePreviouslyChosenWarning": "This item has already been chosen at a previous level.",
-"DND5E.AdvancementItemChoiceReplacement": "Allow Replacement",
-"DND5E.AdvancementItemChoiceReplacementNone": "No Replacement",
-"DND5E.AdvancementItemChoiceReplacementTitle": "replace",
-"DND5E.AdvancementItemChoiceSpellLevelAvailable": "Any Available Level",
-"DND5E.AdvancementItemChoiceSpellLevelAvailableWarning": "Only {level} or lower spells can be chosen for this advancement.",
-"DND5E.AdvancementItemChoiceSpellLevelSpecificWarning": "Only {level} spells can be chosen for this advancement.",
-"DND5E.AdvancementItemChoiceSpellLevelHint": "Only allow choices from spells of this level.",
-"DND5E.AdvancementItemChoiceType": "Item Type",
-"DND5E.AdvancementItemChoiceTypeHint": "Restrict what Item types can be chosen.",
-"DND5E.AdvancementItemChoiceTypeAny": "Anything",
-"DND5E.AdvancementItemChoiceTypeWarning": "Only {type} items can be selected for this choice.",
 "DND5E.AdvancementItemTypeInvalidWarning": "{type} items cannot be added with this advancement type.",
 "DND5E.AdvancementLevelHeader": "Level {level}",
 "DND5E.AdvancementLevelAnyHeader": "Any Level",
