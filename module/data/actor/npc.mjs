@@ -554,9 +554,12 @@ export default class NPCData extends CreatureTemplate {
       document: this.parent,
       summary: {
         // Challenge Rating (e.g. `23 (XP 50,000; PB +7`))
-        // TODO: Handle increased XP in lair for 2024 creatures
-        cr: `${formatCR(this.details.cr, { narrow: false })} (${game.i18n.localize("DND5E.ExperiencePointsAbbr")} ${
-          formatNumber(this.details.xp.value)}; ${game.i18n.localize("DND5E.ProficiencyBonusAbbr")} ${
+        cr: `${formatCR(this.details.cr, { narrow: false })} (${
+          game.i18n.format(`DND5E.ExperiencePoints.StatBlock.${
+            (this.resources.lair.value) && (this.details.cr !== null) ? "Lair" : "Standard"}`, {
+            value: formatNumber(this.parent.getCRExp(this.details.cr)),
+            lair: formatNumber(this.parent.getCRExp(this.details.cr + 1))
+          })}; ${game.i18n.localize("DND5E.ProficiencyBonusAbbr")} ${
           formatNumber(this.attributes.prof, { signDisplay: "always" })})`,
 
         // Gear

@@ -1050,7 +1050,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   }
 
   if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
-    return game.i18n.localize("DND5E.ExperiencePointsValue");
+    return game.i18n.localize("DND5E.ExperiencePoints.Value");
   }
 
   if ( attr.startsWith(".") && actor ) {

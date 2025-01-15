@@ -1745,18 +1745,24 @@
 "DND5E.Equipped": "Equipped",
 "DND5E.Exhaustion": "Exhaustion",
 "DND5E.ExhaustionLevel": "Exhaustion Level {n}",
-"DND5E.ExperiencePoints": "Experience Points",
-"DND5E.ExperiencePointsAbbr": "XP",
-"DND5E.ExperiencePointsBoons": {
-  "one": "{number} Boon",
-  "other": "{number} Boons"
+
+"DND5E.ExperiencePoints": {
+  "Abbreviation": "XP",
+  "Boons": {
+    "one": "{number} Boon",
+    "other": "{number} Boons"
+  },
+  "Current": "Current XP",
+  "Format": "{value} XP",
+  "Label": "Experience Points",
+  "Progress": "Progress to next Level",
+  "StatBlock": {
+    "Standard": "XP {value}",
+    "Lair": "XP {value}, or {lair} in lair"
+  },
+  "Value": "XP Value"
 },
-"DND5E.ExperiencePointsCurrent": "Current XP",
-"DND5E.ExperiencePointsFormat": "{value} XP",
-"DND5E.ExperiencePointsLabel": "Progress to next level",
-"DND5E.ExperiencePointsMax": "XP for Next Level",
-"DND5E.ExperiencePointsMin": "Minimum XP for This Level",
-"DND5E.ExperiencePointsValue": "XP Value",
+
 "DND5E.Expertise": "Expertise",
 
 "DND5E.FACILITY": {

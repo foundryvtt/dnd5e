@@ -140,9 +140,9 @@ export default class CharacterData extends CreatureTemplate {
         originalClass: new StringField({ required: true, label: "DND5E.ClassOriginal" }),
         xp: new SchemaField({
           value: new NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.ExperiencePointsCurrent"
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.ExperiencePoints.Current"
           })
-        }, { label: "DND5E.ExperiencePoints" }),
+        }, { label: "DND5E.ExperiencePoints.Label" }),
         appearance: new StringField({ required: true, label: "DND5E.Appearance" }),
         trait: new StringField({ required: true, label: "DND5E.PersonalityTraits" }),
         gender: new StringField({ label: "DND5E.Gender" }),
