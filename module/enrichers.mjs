@@ -191,7 +191,7 @@ async function enrichAttack(config, label, options) {
   }
 
   config.type = "attack";
-  if ( label ) return createRollLink(label, config);
+  if ( label ) return createRollLink(label, config, { classes: "roll-link-group roll-link" });
 
   let displayFormula = simplifyRollFormula(config.formula) || "+0";
   if ( !displayFormula.startsWith("+") && !displayFormula.startsWith("-") ) displayFormula = `+${displayFormula}`;
@@ -821,7 +821,9 @@ async function enrichDamage(configs, label, options) {
   const damageTypes = config.damageTypes.join("&");
 
   if ( !config.formulas.length ) return null;
-  if ( label ) return createRollLink(label, { ...config, formulas, damageTypes });
+  if ( label ) {
+    return createRollLink(label, { ...config, formulas, damageTypes }, { classes: "roll-link-group roll-link" });
+  }
 
   const parts = [];
   for ( const [idx, formula] of config.formulas.entries() ) {
