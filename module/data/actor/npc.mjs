@@ -419,7 +419,7 @@ export default class NPCData extends CreatureTemplate {
     };
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
 
-    this.resources.legact.label = ({ name }) => this.getLegendaryActionsDescription(name);
+    this.resources.legact.label = this.getLegendaryActionsDescription();
   }
 
   /* -------------------------------------------- */
