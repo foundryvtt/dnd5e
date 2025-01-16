@@ -246,6 +246,7 @@
       "one": "Max {points} point per score",
       "other": "Max {points} points per score"
     },
+    "Details": "Improvement Details",
     "Feat": {
       "Hint": "Drop a feat here to choose one instead of an ability score improvement."
     },
@@ -256,7 +257,9 @@
       },
       "locked": {
         "label": "Locked",
-        "hint": "Ability cannot be improved."
+        "hint": "Ability cannot be improved.",
+        "locked": "Ability cannot be improved.",
+        "unlocked": "Ability may be improved."
       },
       "fixed": {
         "label": "Fixed Improvement",
