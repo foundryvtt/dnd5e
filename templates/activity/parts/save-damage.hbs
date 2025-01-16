@@ -4,9 +4,7 @@
     </legend>
     {{ formField fields.damage.fields.onSave value=activity.damage.onSave options=onSaveOptions }}
     {{> "systems/dnd5e/templates/activity/parts/damage-parts.hbs" }}
-    <button type="button" class="unbutton control-button add-button" data-action="addDamagePart"
-            data-tooltip="DND5E.DAMAGE.Part.Action.Create"
-            aria-label="{{ localize "DND5E.DAMAGE.Part.Action.Create" }}">
+    <button type="button" class="unbutton control-button add-button" data-action="addDamagePart">
         <i class="fas fa-plus" inert></i>
         <span>{{ localize "DND5E.DAMAGE.Part.Action.Create" }}</span>
     </button>
