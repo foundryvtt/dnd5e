@@ -197,33 +197,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
-          "types": ["class"]
-        }
-      }
-    },
-    {
-      "name": "subclasses",
-      "label": "Subclasses (SRD)",
-      "system": "dnd5e",
-      "path": "packs/subclasses",
-      "type": "Item",
-      "private": false,
-      "flags": {
-        "dnd5e": {
-          "types": ["subclass"]
-        }
-      }
-    },
-    {
-      "name": "classfeatures",
-      "label": "Class & Subclass Features (SRD)",
-      "system": "dnd5e",
-      "path": "packs/classfeatures",
-      "type": "Item",
-      "private": false,
-      "flags": {
-        "dnd5e": {
-          "types": ["feat", "weapon"]
+          "types": ["class", "subclass", "feat", "weapon"]
         }
       }
     },
@@ -291,8 +265,6 @@
           "color": "#b72c1f",
           "packs": [
             "classes",
-            "subclasses",
-            "classfeatures",
             "backgrounds",
             "races"
           ]
