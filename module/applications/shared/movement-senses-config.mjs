@@ -51,9 +51,13 @@ export default class MovementSensesConfig extends BaseConfigSheet {
    * @type {Record<string, string>}
    */
   get types() {
-    if ( this.options.type === "senses" ) return Object.keys(CONFIG.DND5E.senses);
-    if ( this.document.type === "group" ) return ["land", "water", "air"];
-    return Object.keys(CONFIG.DND5E.movementTypes);
+    if ( this.options.type === "senses" ) return Object.entries(CONFIG.DND5E.senses);
+    if ( this.document.type === "group" ) return [
+      ["land", game.i18n.localize("DND5E.MovementLand")],
+      ["water", game.i18n.localize("DND5E.MovementWater")],
+      ["air", game.i18n.localize("DND5E.MovementAir")]
+    ];
+    return Object.entries(CONFIG.DND5E.movementTypes);
   }
 
   /* -------------------------------------------- */
@@ -74,15 +78,20 @@ export default class MovementSensesConfig extends BaseConfigSheet {
     context = await super._preparePartContext(partId, context, options);
     const source = this.document.system._source;
     const placeholderData = this.document.system.details?.race?.system?.[this.options.type] ?? null;
+    const isGroup = this.document.type === "group";
 
     context.data = foundry.utils.getProperty(source, this.keyPath) ?? {};
     context.fields = this.document.system.schema.getField(this.keyPath).fields;
     context.extras = this._prepareExtraFields(context);
-    context.types = this.types.map(key => ({
-      field: context.fields[key],
-      value: context.data[key],
-      placeholder: placeholderData?.[key] ?? ""
-    }));
+    context.types = this.types.map(([key, label]) => {
+      return {
+        field: isGroup ? context.fields[key] : context.fields.types.model,
+        key: `system.${this.keyPath}.${isGroup ? "" : "types."}${key}`,
+        label,
+        placeholder: (isGroup ? placeholderData?.[key] : placeholderData?.types?.[key]) ?? "",
+        value: isGroup ? context.data[key] : context.data.types?.[key]
+      };
+    });
 
     context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
     if ( (this.document.type === "pc") || ((this.document.type === "npc") && placeholderData) ) {
