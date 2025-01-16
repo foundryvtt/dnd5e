@@ -17,8 +17,10 @@
             <input class="averageCheckbox" type="checkbox" name="useAverage" {{ checked data.useAverage }}>
         </label>
         <input class="rollResult" type="number" name="value" value="{{ data.value }}" {{ disabled data.useAverage }}>
-        <button class="rollButton" type="button" name="roll" {{ disabled data.useAverage }}>
-            <i class="fas fa-dice-d20" inert></i> {{ localize "DND5E.ADVANCEMENT.HitPoints.Action.Roll" die=hitDie }}
+        <button class="rollButton" type="button" name="roll" {{ disabled data.useAverage }}
+                data-tooltip="{{ localize "DND5E.ADVANCEMENT.HitPoints.Action.Roll" die=hitDie }}"
+                aria-label="{{ localize "DND5E.ADVANCEMENT.HitPoints.Action.Roll" die=hitDie }}">
+            <i class="fas fa-dice-{{ hitDie }}" inert></i>
         </button>
     </div>
 

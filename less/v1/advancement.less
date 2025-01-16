@@ -418,19 +418,26 @@
     }
     .rolls {
       display: grid;
-      grid-template-columns: 50% 1fr 1fr;
+      grid-template-columns: 50% 1fr 0fr;
       align-items: center;
-      gap: 2px;
+      gap: 8px;
 
       .averageLabel {
-        span, input { vertical-align: middle; }
+        align-items: unset;
+
+        input {
+          margin: 0;
+          height: 1em;
+          order: 1;
+        }
+        span { order: 2; }
       }
       .rollResult {
         text-align: center;
       }
       .rollButton {
-        height: calc(var(--form-field-height) + 5px);
-        line-height: 1.5em;
+        height: calc(var(--form-field-height) + 1px);
+        width: 31px;
       }
     }
   }
