@@ -21,6 +21,7 @@ import * as documents from "./module/documents/_module.mjs";
 import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
+import {configureRedirects} from "./module/redirects.mjs";
 import {default as registry} from "./module/registry.mjs";
 import * as utils from "./module/utils.mjs";
 import {ModuleArt} from "./module/module-art.mjs";
@@ -91,6 +92,9 @@ Hooks.once("init", function() {
 
   // Configure tooltips
   game.dnd5e.tooltips = new Tooltips5e();
+
+  // Set up redirects
+  configureRedirects();
 
   // Set up status effects
   _configureStatusEffects();
