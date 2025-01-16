@@ -38,6 +38,38 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   }
 
   /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _migrateData(source) {
+    this._migrateMovementSenses(source);
+  }
+
+  /**
+   * Migrate movement and senses properties into `types` object
+   * @param {object} source  The source attributes object.
+   * @internal
+   */
+  static _migrateMovementSenses(source) {
+    const attributes = [
+      { key: "movement", config: CONFIG.DND5E.movementTypes },
+      { key: "senses", config: CONFIG.DND5E.senses }
+    ];
+
+    for (const { key, config } of attributes) {
+      const attr = source[key];
+      if (!attr) continue;
+      if (!("types" in attr)) {
+        attr.types = {};
+        for (const k of Object.keys(config)) {
+          attr.types[k] = attr[k] ?? null;
+        }
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {

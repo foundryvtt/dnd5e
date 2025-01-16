@@ -92,6 +92,16 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
+   * Migrate attributes
+   * @param {object} source  The source attributes object.
+   * @internal
+   */
+  static _migrate(source) {
+    this._migrateInitiative(source);
+    this._migrateMovementSenses(source);
+  }
+
+  /**
    * Migrate the old init.value and incorporate it into init.bonus.
    * @param {object} source  The source attributes object.
    * @internal
@@ -101,6 +111,29 @@ export default class AttributesFields {
     if ( !init?.value || (typeof init?.bonus === "string") ) return;
     if ( init.bonus ) init.bonus += init.value < 0 ? ` - ${init.value * -1}` : ` + ${init.value}`;
     else init.bonus = `${init.value}`;
+  }
+
+  /**
+   * Migrate movement and senses properties into `types` object
+   * @param {object} source  The source attributes object.
+   * @internal
+   */
+  static _migrateMovementSenses(source) {
+    const attributes = [
+      { key: "movement", config: CONFIG.DND5E.movementTypes },
+      { key: "senses", config: CONFIG.DND5E.senses }
+    ];
+
+    for (const { key, config } of attributes) {
+      const attr = source[key];
+      if (!attr) continue;
+      if (!("types" in attr)) {
+        attr.types = {};
+        for (const k of Object.keys(config)) {
+          attr.types[k] = attr[k] ?? null;
+        }
+      }
+    }
   }
 
   /* -------------------------------------------- */

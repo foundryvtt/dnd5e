@@ -185,7 +185,7 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
-    AttributesFields._migrateInitiative(source.attributes);
+    AttributesFields._migrate(source.attributes);
   }
 
   /* -------------------------------------------- */
