@@ -1,7 +1,7 @@
 <li data-score="{{ key }}">
     <label>{{ label }}</label>
     {{#if canAdjust}}
-    <button class="unbutton minus" type="button" {{~#if canDecrease}}data-action="decrease"{{else}} disabled{{/if}}
+    <button class="unbutton control-button minus" type="button" {{~#if canDecrease}}data-action="decrease"{{else}} disabled{{/if}}
        data-tooltip="DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.decrease"
        aria-label="{{ localize 'DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.decrease' }}">
         <i class="fas fa-minus" inert></i>
@@ -11,7 +11,7 @@
            step="1" value="{{ value }}" data-initial="{{ initial }}"
            {{#if isLocked}}readonly aria-readonly="true"{{/if}} {{ disabled isDisabled }}>
     {{#if canAdjust}}
-    <button class="unbutton plus" type="button" {{~#if canIncrease}} data-action="increase"{{else}} disabled{{/if}}
+    <button class="unbutton control-button plus" type="button" {{~#if canIncrease}} data-action="increase"{{else}} disabled{{/if}}
        data-tooltip="DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.increase"
        aria-label="{{ localize 'DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.increase' }}">
         <i class="fas fa-plus" inert></i>
@@ -19,9 +19,11 @@
     {{/if}}
     {{#if canLock}}
     <label class="locked">
-        <span>{{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.locked.label" }}</span>
-        <dnd5e-checkbox type="checkbox" name="configuration.locked" value="{{ key }}" {{ checked locked }}>
-        </dnd5e-checkbox>
+        <input type="hidden" name="configuration.locked.{{ key }}" value="{{ locked.value }}" data-dtype="Boolean">
+        <button type="button" class="unbutton control-button" data-action="lock"
+                data-tooltip="{{ locked.hint }}" aria-label="{{ localize locked.hint }}">
+            <i class="fa-solid fa-{{ ifThen locked.value "lock" "unlock" }}" inert></i>
+        </button>
     </label>
     {{/if}}
     {{#if showDelta}}

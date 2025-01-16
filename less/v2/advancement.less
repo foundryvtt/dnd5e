@@ -103,6 +103,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     text-align: center;
+    padding-top: 4px;
 
     li {
       display: grid;
@@ -110,6 +111,8 @@
         "label label label label"
         "minus value value plus"
         "minus delta delta plus";
+      row-gap: 4px;
+      margin: 0;
       &.hint {
         display: block;
         grid-column: 2 / 4;
@@ -118,7 +121,7 @@
       }
       > label:first-child {
         grid-area: label;
-        font-size: var(--font-size-18);
+        font-size: var(--font-size-16);
       }
       > button {
         padding: 0.5em;
@@ -129,9 +132,7 @@
       > input {
         grid-area: value;
         height: 1.5em;
-        border: none;
-        background: none;
-        font-size: var(--font-size-28);
+        font-size: var(--font-size-24);
       }
       > .locked {
         grid-column: 1 / -1;
