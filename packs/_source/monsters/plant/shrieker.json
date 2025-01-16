@@ -83,13 +83,11 @@
         }
       },
       "movement": {
-        "types": {
-          "burrow": 0,
-          "climb": 0,
-          "fly": 0,
-          "swim": 0,
-          "walk": 0
-        },
+        "burrow": 0,
+        "climb": 0,
+        "fly": 0,
+        "swim": 0,
+        "walk": 0,
         "units": "ft",
         "hover": false
       },
@@ -97,12 +95,10 @@
         "max": 3
       },
       "senses": {
-        "types": {
-          "darkvision": 0,
-          "blindsight": 30,
-          "tremorsense": 0,
-          "truesight": 0
-        },
+        "darkvision": 0,
+        "blindsight": 30,
+        "tremorsense": 0,
+        "truesight": 0,
         "units": "ft",
         "special": "Blind beyond this radius"
       },

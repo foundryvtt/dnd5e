@@ -86,13 +86,11 @@
         }
       },
       "movement": {
-        "types": {
-          "burrow": null,
-          "climb": null,
-          "fly": null,
-          "swim": null,
-          "walk": null
-        },
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": null,
         "units": null,
         "hover": false
       },
@@ -100,12 +98,10 @@
         "max": 3
       },
       "senses": {
-        "types": {
-          "darkvision": null,
-          "blindsight": null,
-          "tremorsense": null,
-          "truesight": null
-        },
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
         "units": null,
         "special": ""
       },
@@ -5114,23 +5110,19 @@
           }
         ],
         "senses": {
-          "types": {
-            "darkvision": 60,
-            "blindsight": 0,
-            "tremorsense": 0,
-            "truesight": 0
-          },
+          "darkvision": 60,
+          "blindsight": 0,
+          "tremorsense": 0,
+          "truesight": 0,
           "units": "ft",
           "special": ""
         },
         "movement": {
-          "types": {
-            "burrow": 0,
-            "climb": 0,
-            "fly": 0,
-            "swim": 0,
-            "walk": 30
-          },
+          "burrow": 0,
+          "climb": 0,
+          "fly": 0,
+          "swim": 0,
+          "walk": 30,
           "units": "ft",
           "hover": false
         },

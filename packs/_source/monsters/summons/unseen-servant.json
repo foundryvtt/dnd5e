@@ -384,13 +384,11 @@
         "bonus": ""
       },
       "movement": {
-        "types": {
-          "burrow": null,
-          "climb": null,
-          "fly": null,
-          "swim": null,
-          "walk": 15
-        },
+        "burrow": null,
+        "climb": null,
+        "fly": null,
+        "swim": null,
+        "walk": 15,
         "units": null,
         "hover": false
       },
@@ -398,12 +396,10 @@
         "max": 3
       },
       "senses": {
-        "types": {
-          "darkvision": null,
-          "blindsight": null,
-          "tremorsense": null,
-          "truesight": null
-        },
+        "darkvision": null,
+        "blindsight": null,
+        "tremorsense": null,
+        "truesight": null,
         "units": null,
         "special": ""
       },

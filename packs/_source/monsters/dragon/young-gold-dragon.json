@@ -83,13 +83,11 @@
         }
       },
       "movement": {
-        "types": {
-          "burrow": 0,
-          "climb": 0,
-          "fly": 80,
-          "swim": 40,
-          "walk": 40
-        },
+        "burrow": 0,
+        "climb": 0,
+        "fly": 80,
+        "swim": 40,
+        "walk": 40,
         "units": "ft",
         "hover": false
       },
@@ -97,12 +95,10 @@
         "max": 3
       },
       "senses": {
-        "types": {
-          "darkvision": 120,
-          "blindsight": 30,
-          "tremorsense": 0,
-          "truesight": 0
-        },
+        "darkvision": 120,
+        "blindsight": 30,
+        "tremorsense": 0,
+        "truesight": 0,
         "units": "ft",
         "special": ""
       },
