@@ -122,7 +122,10 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     const input = event.currentTarget;
     if ( input.name === "asi-selected" ) {
       if ( input.checked ) this.feat = { isASI: true };
-      else this.feat = null;
+      else {
+        if ( this.feat?.isASI ) this.assignments = {};
+        this.feat = null;
+      }
     } else {
       const key = input.closest("[data-score]").dataset.score;
       if ( isNaN(input.valueAsNumber) ) this.assignments[key] = 0;
