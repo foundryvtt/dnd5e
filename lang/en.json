@@ -408,6 +408,69 @@
       "ModifyChoices": "Modify Choices"
     }
   },
+  "ScaleValue": {
+    "Details": "Scale Value Details",
+    "FIELDS": {
+      "distance": {
+        "units": {
+          "label": "Distance Units"
+        }
+      },
+      "identifier": {
+        "label": "Identifier"
+      },
+      "scale": {
+        "label": "Scale"
+      },
+      "type": {
+        "label": "Scale Type"
+      }
+    },
+    "Hint": "A single value that changes as a class increases in level that is made available in roll formulas (such as a Monk's martial arts die).",
+    "Title": "Scale Value",
+    "Type": {
+      "CR": {
+        "FIELDS": {
+          "value": {
+            "label": "CR"
+          }
+        },
+        "Hint": "Use this for representing creature challenge ratings for features like Wild Shape",
+        "Label": "Challenge Rating"
+      },
+      "Dice": {
+        "FIELDS": {
+          "faces": {
+            "label": "Faces"
+          },
+          "number": {
+            "label": "Number"
+          }
+        },
+        "Hint": "Use this for dice values like bardic inspiration, sneak attack, or superiority dice.",
+        "Identifier": "This scale value for the current level will be available in a formula using:<br><copyable-text>@scale.{class}.{identifier}</copyable-text> - whole formula (<code>4d6</code>)<br><copyable-text>@scale.{class}.{identifier}.die</copyable-text> - whole die (<code>d6</code>)<br><copyable-text>@scale.{class}.{identifier}.number</copyable-text> - number of dice (<code>4</code>)<br><copyable-text>@scale.{class}.{identifier}.faces</copyable-text> - number of faces (<code>6</code>)",
+        "Label": "Dice"
+      },
+      "Distance": {
+        "Hint": "Use this for numerical values that represent a distance, such as unarmored movement speed, or aura of protection radius.",
+        "Label": "Distance"
+      },
+      "Number": {
+        "Hint": "Use this for purely numerical values like rage damage bonus or number of uses per day.",
+        "Label": "Numeric"
+      },
+      "String": {
+        "FIELDS": {
+          "value": {
+            "label": "Value"
+          }
+        },
+        "Hint": "Use this if you are unsure of the type of the scale values, or if the type does not matter.",
+        "Identifier": "This scale value for the current level will be available in a formula using:<br><copyable-text>@scale.{class}.{identifier}</copyable-text>",
+        "Label": "Anything"
+      }
+    }
+  },
   "SPELLCONFIG": {
     "FIELDS": {
       "spell": {
@@ -480,21 +543,6 @@
 "DND5E.AdvancementMigrationTitle": "Migrate Advancement",
 "DND5E.AdvancementModifyChoices": "Modify Choices",
 "DND5E.AdvancementSaveButton": "Save Advancement",
-"DND5E.AdvancementScaleValueTitle": "Scale Value",
-"DND5E.AdvancementScaleValueHint": "A single value that changes as a class increases in level that is made available in roll formulas (such as a Monk's martial arts die).",
-"DND5E.AdvancementScaleValueIdentifierHint": "This scale value for the current level will be available in a formula using:<br><copyable-text>@scale.{class}.{identifier}</copyable-text>",
-"DND5E.AdvancementScaleValueIdentifierDiceHint": "This scale value for the current level will be available in a formula using:<br><copyable-text>@scale.{class}.{identifier}</copyable-text> - whole formula (<code>4d6</code>)<br><copyable-text>@scale.{class}.{identifier}.die</copyable-text> - whole die (<code>d6</code>)<br><copyable-text>@scale.{class}.{identifier}.number</copyable-text> - number of dice (<code>4</code>)<br><copyable-text>@scale.{class}.{identifier}.faces</copyable-text> - number of faces (<code>6</code>)",
-"DND5E.AdvancementScaleValueTypeCR": "Challenge Rating",
-"DND5E.AdvancementScaleValueTypeDice": "Dice",
-"DND5E.AdvancementScaleValueTypeDistance": "Distance",
-"DND5E.AdvancementScaleValueTypeHintCR": "Use this for representing creature challenge ratings for features like Wild Shape.",
-"DND5E.AdvancementScaleValueTypeHintDice": "Use this for dice values like bardic inspiration, sneak attack, or superiority dice.",
-"DND5E.AdvancementScaleValueTypeHintDistance": "Use this for numerical values that represent a distance, such as unarmored movement speed, or aura of protection radius.",
-"DND5E.AdvancementScaleValueTypeHintNumber": "Use this for purely numerical values like rage damage bonus or number of uses per day.",
-"DND5E.AdvancementScaleValueTypeHintString": "Use this if you are unsure of the type of the scale values, or if the type does not matter.",
-"DND5E.AdvancementScaleValueTypeLabel": "Scale Type",
-"DND5E.AdvancementScaleValueTypeNumber": "Numeric",
-"DND5E.AdvancementScaleValueTypeString": "Anything",
 "DND5E.AdvancementSelectionCreateButton": "Create Advancement",
 "DND5E.AdvancementSelectionTitle": "Select Advancement Type",
 "DND5E.AdvancementSizeTitle": "Size",
