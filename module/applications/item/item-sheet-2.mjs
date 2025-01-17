@@ -181,6 +181,8 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       }
     }
 
+    context.coverOptions = Object.entries(CONFIG.DND5E.cover).map(([value, label]) => ({ value, label }));
+
     return context;
   }
 

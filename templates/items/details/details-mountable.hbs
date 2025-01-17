@@ -6,6 +6,7 @@
 
     {{!-- Armor Class --}}
     {{ formField fields.armor.fields.value value=source.armor.value localize=true }}
+    {{ formField fields.cover value=source.cover options=coverOptions }}
 
     {{!-- Hit Points --}}
     <div class="form-group split-group">

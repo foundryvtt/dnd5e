@@ -5,6 +5,7 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
 /**
  * Data model template for equipment that can be mounted on a vehicle.
  *
+ * @property {number} cover               Amount of cover this item affords to its crew on a vehicle.
  * @property {boolean} crewed             Is this equipment currently crewed?
  * @property {object} hp
  * @property {number} hp.value            Current hit point value.
@@ -21,6 +22,7 @@ export default class MountableTemplate extends SystemDataModel {
   /** @inheritDoc */
   static defineSchema() {
     return {
+      cover: new NumberField({ min: 0, max: 1 }),
       crewed: new BooleanField(),
       hp: new SchemaField({
         conditions: new StringField(),

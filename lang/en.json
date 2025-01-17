@@ -3954,6 +3954,10 @@
 "DND5E.VEHICLE": {
   "MOUNTABLE": {
     "FIELDS": {
+      "cover": {
+        "label": "Cover",
+        "hint": "Cover provided to crew operating this equipment."
+      },
       "crewed": {
         "label": "Crewed"
       },

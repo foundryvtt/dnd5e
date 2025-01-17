@@ -168,7 +168,6 @@ export default class FeatData extends ItemDataModel.mixin(
         placeholder: "DND5E.Requirements" }
     ];
     context.parts = ["dnd5e.details-feat", "dnd5e.field-uses"];
-    context.coverOptions = Object.entries(CONFIG.DND5E.cover).map(([value, label]) => ({ value, label }));
   }
 
   /* -------------------------------------------- */

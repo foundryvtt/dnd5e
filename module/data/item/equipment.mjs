@@ -37,7 +37,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.MOUNTABLE", "DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.VEHICLE.MOUNTABLE", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
