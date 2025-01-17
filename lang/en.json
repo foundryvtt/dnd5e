@@ -164,6 +164,7 @@
   "Category": {
     "Combat": "Combat",
     "Monster": "Monster",
+    "Rest": "Rest",
     "Standard": "Standard",
     "Time": "Time",
     "Vehicle": "Vehicle"
@@ -177,6 +178,12 @@
         "one": "{number} legendary action",
         "other": "{number} legendary actions"
       }
+    },
+    "LongRest": {
+      "Label": "End of a Long Rest"
+    },
+    "ShortRest": {
+      "Label": "End of a Short or Long Rest"
     },
     "TurnEnd": {
       "Label": "End of Turn"
@@ -990,11 +997,11 @@
 "DND5E.ChatFlavor": "Chat Message Flavor",
 
 "DND5E.CHATMESSAGE": {
+  "Activities": "Activities",
   "Deltas": {
     "Recovery": "Recovery"
   },
   "TURN": {
-    "Activities": "Activities",
     "NoCombatant": "Combatant no longer exists!"
   }
 },

@@ -728,6 +728,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
 
     // Chat Message Partials
+    "systems/dnd5e/templates/chat/parts/card-activities.hbs",
     "systems/dnd5e/templates/chat/parts/card-deltas.hbs",
 
     // Item Sheet Partials
