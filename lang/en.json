@@ -2167,6 +2167,10 @@
 
 "DND5E.FEATURE": {
   "FIELDS": {
+    "cover": {
+      "label": "Cover",
+      "hint": "Cover provided to crew by this vehicle feature."
+    },
     "properties": {
       "label": "Feature Properties"
     },
@@ -2215,6 +2219,9 @@
     "Blessing": "Blessing",
     "Charm": "Charm",
     "EpicBoon": "Epic Boon"
+  },
+  "Vehicle": {
+    "Label": "Vehicle Feature"
   }
 },
 "DND5E.Focus": {
@@ -2461,7 +2468,6 @@
 "DND5E.HitPointsTempMaxHint": "Temporary change to the maximum HP.",
 "DND5E.HitPointsTempMaxShort": "Temp Max HP",
 "DND5E.HP": "HP",
-"DND5E.HealthConditions": "Health Conditions",
 "DND5E.HPFormula": "Health Formula",
 "DND5E.HPFormulaError": "The provided hit point formula could not be evaluated.",
 "DND5E.HPFormulaRollMessage": "Roll Hit Point Formula",
@@ -3240,7 +3246,6 @@
   "Name": "Species Name"
 },
 "DND5E.Speed": "Speed",
-"DND5E.SpeedConditions": "Speed Conditions",
 "DND5E.SpeedSpecial": "Special Movement",
 "DND5E.SpellAbility": "Spellcasting Ability",
 "DND5E.SpellAbilitySet": "Set as Primary Spellcasting Ability",
@@ -4140,6 +4145,44 @@
 },
 
 "DND5E.Value": "Value",
+
+"DND5E.VEHICLE": {
+  "MOUNTABLE": {
+    "FIELDS": {
+      "cover": {
+        "label": "Cover",
+        "hint": "Cover provided to crew operating this equipment."
+      },
+      "crewed": {
+        "label": "Crewed"
+      },
+      "hp": {
+        "label": "Hit Points",
+        "conditions": {
+          "label": "Health Conditions"
+        },
+        "dt": {
+          "label": "Damage Threshold"
+        },
+        "max": {
+          "label": "Max HP"
+        },
+        "value": {
+          "label": "Current HP"
+        }
+      },
+      "speed": {
+        "conditions": {
+          "label": "Speed Conditions"
+        },
+        "value": {
+          "label": "Speed"
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Vehicle": "Vehicle",
 "DND5E.VehicleActions": "Actions",
 "DND5E.VehicleActionsHint": "Actions taken with full crew complement",
@@ -4183,6 +4226,11 @@
     "ammunition": {
       "type": {
         "label": "Ammunition Type"
+      }
+    },
+    "armor": {
+      "value": {
+        "label": "Armor Class"
       }
     },
     "damage": {

@@ -11,6 +11,10 @@
                  label=(localize "DND5E.ItemFeatureSubtype" category=(lookup (lookup config.featureTypes source.type.value) "label")) }}
     {{/if}}
 
+    {{#if (eq system.type.value "vehicle")}}
+    {{ formField fields.cover value=source.cover options=coverOptions }}
+    {{/if}}
+
     {{!-- Feature Prerequisites --}}
     {{ formField fields.prerequisites.fields.level value=source.prerequisites.level }}
     {{ formField fields.prerequisites.fields.repeatable value=source.prerequisites.repeatable

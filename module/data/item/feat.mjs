@@ -14,7 +14,9 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  *
- * @property {Advancement[]}                        Advancement objects for this feature.
+ * @property {Advancement[]} advancement            Advancement objects for this feature.
+ * @property {number} cover                         Amount of cover this feature affords to its crew on a vehicle.
+ * @property {boolean} crewed                       Is this vehicle feature currently crewed?
  * @property {object} enchant
  * @property {string} enchant.max                   Maximum number of items that can have this enchantment.
  * @property {string} enchant.period                Frequency at which the enchantment can be swapped.
@@ -41,6 +43,8 @@ export default class FeatData extends ItemDataModel.mixin(
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
+      cover: new NumberField({ min: 0, max: 1 }),
+      crewed: new BooleanField(),
       enchant: new SchemaField({
         max: new FormulaField({ deterministic: true }),
         period: new StringField()
