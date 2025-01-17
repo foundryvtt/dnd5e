@@ -119,12 +119,12 @@ export default class AttributesFields {
    * @internal
    */
   static _migrateMovementSenses(source) {
-    const attributes = [
+    const movementSenses = [
       { key: "movement", config: CONFIG.DND5E.movementTypes },
       { key: "senses", config: CONFIG.DND5E.senses }
     ];
 
-    for (const { key, config } of attributes) {
+    for (const { key, config } of movementSenses) {
       const attr = source[key];
       if (!attr) continue;
       if (!("types" in attr)) {
@@ -349,5 +349,40 @@ export default class AttributesFields {
     this.attributes.senses.special = [this.attributes.senses.special, race.system.senses.special].filterJoin(";");
     if ( force && race.system.senses.units ) this.attributes.senses.units = race.system.senses.units;
     else this.attributes.senses.units ??= race.system.senses.units;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add a shim for the old movement and senses properties
+   * @param {object} attributes The `attributes` object
+   */
+  static shimMovementSenses(attributes) {
+    const movementSenses = [
+      { key: "movement", config: CONFIG.DND5E.movementTypes },
+      { key: "senses", config: CONFIG.DND5E.senses }
+    ];
+
+    for (const { key, config } of movementSenses) {
+      for (const k of Object.keys(config)) {
+        const warnDeprecated = () => {
+          foundry.utils.logCompatibilityWarning(
+            `system.attributes.${key}.${k} is deprecated, use system.attributes.${key}.types.${k} instead.`,
+            { since: "DnD5e 4.3", until: "DnD5e 4.5", once: true }
+          );
+        };
+
+        Object.defineProperty(attributes[key], k, {
+          get: () => {
+            warnDeprecated();
+            return attributes[key].types[k];
+          },
+          set: value => {
+            warnDeprecated();
+            attributes[key].types[k] = value;
+          }
+        });
+      }
+    }
   }
 }

@@ -600,6 +600,7 @@ export const migrateEffectData = function(effect, migrationData, { parent }={}) 
   const updateData = {};
   _migrateDocumentIcon(effect, updateData, {...migrationData, field: "img"});
   _migrateEffectArmorClass(effect, updateData);
+  _migrateEffectMovementSenses(effect, updateData);
   if ( foundry.utils.isNewerVersion("3.1.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
     _migrateTransferEffect(effect, parent, updateData);
   }
@@ -836,6 +837,30 @@ function _migrateEffectArmorClass(effect, updateData) {
     if ( c.key !== "system.attributes.ac.base" ) return c;
     c.key = "system.attributes.ac.armor";
     containsUpdates = true;
+    return c;
+  });
+  if ( containsUpdates ) updateData.changes = changes;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Change active effects that target movement or senses.
+ * @param {object} effect      Effect data to migrate.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ */
+function _migrateEffectMovementSenses(effect, updateData) {
+  let containsUpdates = false;
+  const changes = (effect.changes || []).map(c => {
+    if ((c.key.startsWith("system.attributes.movement.") || c.key.startsWith("system.attributes.senses."))
+      && !c.key.includes(".types")) {
+      const keyParts = c.key.split(".");
+      keyParts.splice(3, 0, "types");
+      c.key = keyParts.join(".");
+      containsUpdates = true;
+    }
     return c;
   });
   if ( containsUpdates ) updateData.changes = changes;

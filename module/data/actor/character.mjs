@@ -225,6 +225,7 @@ export default class CharacterData extends CreatureTemplate {
 
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
+    AttributesFields.shimMovementSenses(this.attributes);
   }
 
   /* -------------------------------------------- */
