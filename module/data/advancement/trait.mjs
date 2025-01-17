@@ -24,11 +24,11 @@ const LANGUAGE_MAP = { modern: _MAP, legacy: foundry.utils.invertObject(_MAP) };
 /**
  * Configuration data for the TraitAdvancement.
  *
- * @property {string} mode                Method by which this advancement modifies the actor's traits.
  * @property {boolean} allowReplacements  Whether all potential choices should be presented to the user if there
  *                                        are no more choices available in a more limited set.
- * @property {string[]} grants            Keys for traits granted automatically.
  * @property {TraitChoice[]} choices      Choices presented to the user.
+ * @property {string[]} grants            Keys for traits granted automatically.
+ * @property {string} mode                Method by which this advancement modifies the actor's traits.
  */
 export class TraitConfigurationData extends foundry.abstract.DataModel {
 
@@ -49,7 +49,7 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
         pool: new SetField(new StringField(), { required: false })
       })),
       grants: new SetField(new StringField(), { required: true }),
-      mode: new StringField({ initial: "default" })
+      mode: new StringField({ required: true, blank: false, initial: "default" })
     };
   }
 

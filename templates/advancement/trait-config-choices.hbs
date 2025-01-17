@@ -1,10 +1,11 @@
 <fieldset class="selected-trait">
     <legend>
         {{ localize "DND5E.ADVANCEMENT.Trait.FIELDS.choices.label" }}
-        <a data-action="addChoice" data-tooltip="DND5E.ADVANCEMENT.Trait.Action.AddChoice"
-           aria-label="{{ localize 'DND5E.ADVANCEMENT.Trait.Action.AddChoice' }}">
+        <button type="button" class="control-button unbutton" data-action="addChoice"
+                data-tooltip="DND5E.ADVANCEMENT.Trait.Action.AddChoice"
+                aria-label="{{ localize 'DND5E.ADVANCEMENT.Trait.Action.AddChoice' }}">
             <i class="fas fa-plus" inert></i>
-        </a>
+        </button>
     </legend>
     <div class="form-group">
         <p class="hint">{{ localize "DND5E.ADVANCEMENT.Trait.FIELDS.choices.hint" }}</p>
@@ -21,10 +22,11 @@
                 {{/if}}
                 <span>{{ label }}</span>
             </label>
-            <a data-action="removeChoice" data-tooltip="DND5E.ADVANCEMENT.Trait.Action.RemoveChoice"
-               aria-label="{{ localize 'DND5E.ADVANCEMENT.Trait.Action.RemoveChoice' }}">
+            <button type="button" class="control-button unbutton" data-action="removeChoice"
+                    data-tooltip="DND5E.ADVANCEMENT.Trait.Action.RemoveChoice"
+                    aria-label="{{ localize 'DND5E.ADVANCEMENT.Trait.Action.RemoveChoice' }}">
                 <i class="fa-solid fa-trash" inert></i>
-            </a>
+            </button>
         </li>
         {{/each}}
     </ul>
