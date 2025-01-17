@@ -20,13 +20,17 @@ Some species might need to use the point cap, which limits how many points can b
 
 The Ability Score Improvement will present the player with a list of all of their ability scores. The large numbers indicate the value of the score after the improvement is complete, with a smaller number beneath it showing how the score has changed. If there is a fixed or locked improvement then a lock symbol will display next to the change and they player won't be able to modify it using the controls. At the top is a indicator of how many points are left to spend, and how many can be spent per-ability.
 
+![Ability Score Improvement - Modern Class Flow](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/asi-flow-modern.jpg)
+
+For classes (when not using the Legacy rules) the Ability Score Improvement will present a choice between selecting the Ability Score Improvement Feat or another feat of your choice. If the ASI feat is selected then the assignment interface show above will appear, otherwise a different feat can be chosen by dropping it onto the sheet.
+
 ![Ability Score Improvement - Class Flow](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/asi-flow-class.jpg)
 
-For classes the Ability Score Improvement has an extra section for taking a feat. The player can drop a feat onto this section from a compendium to take it rather than improving their scores. When this happens the scores will be locked, though they can remove the feat to unlock them.
+When using the Legacy Rules, the player can drop a feat onto this section from a compendium to take it rather than improving their scores. When this happens the scores will be locked, though they can remove the feat to unlock them.
 
 ![Allow Feats Setting](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/asi-allow-feats-setting.jpg)
 
-When using the legacy rules, since feats replacing ability score improvements is an optional rule, it can be disabled by a GM in the system settings screen and none of those controls will appear to players.
+Since feats replacing ability score improvements is an optional rule when using the legacy rules, it can be disabled by a GM in the system settings screen and none of those controls will appear to players.
 
 ## API
 
