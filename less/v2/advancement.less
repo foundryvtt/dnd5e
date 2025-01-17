@@ -302,3 +302,34 @@
     }
   }
 }
+
+/* ----------------------------------------- */
+/*  Trait Advancement                        */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.trait.sheet {
+  .selected-trait {
+    li {
+      display: flex;
+      gap: 6px;
+      &:not(:first-of-type) { padding-block-start: 6px; }
+    }
+    label {
+      flex-grow: 1;
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+      &.selected { font-weight: bold; }
+      &:not(.selected) {
+        cursor: pointer;
+        &:hover { text-shadow: 0 0 8px var(--color-shadow-primary); }
+      }
+    }
+    input[type="radio"] { display: none; }
+  }
+  [data-application-part="traits"] {
+    display: grid;
+    > .form-group { grid-column: 1 / -1; }
+    .traits li.category { gap: 0; }
+  }
+}

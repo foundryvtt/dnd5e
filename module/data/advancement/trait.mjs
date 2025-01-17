@@ -24,38 +24,33 @@ const LANGUAGE_MAP = { modern: _MAP, legacy: foundry.utils.invertObject(_MAP) };
 /**
  * Configuration data for the TraitAdvancement.
  *
- * @property {string} mode                Method by which this advancement modifies the actor's traits.
  * @property {boolean} allowReplacements  Whether all potential choices should be presented to the user if there
  *                                        are no more choices available in a more limited set.
- * @property {string[]} grants            Keys for traits granted automatically.
  * @property {TraitChoice[]} choices      Choices presented to the user.
+ * @property {string[]} grants            Keys for traits granted automatically.
+ * @property {string} mode                Method by which this advancement modifies the actor's traits.
  */
 export class TraitConfigurationData extends foundry.abstract.DataModel {
-  static defineSchema() {
-    return {
-      mode: new StringField({ initial: "default", label: "DND5E.AdvancementTraitMode" }),
-      allowReplacements: new BooleanField({
-        required: true, label: "DND5E.AdvancementTraitAllowReplacements",
-        hint: "DND5E.AdvancementTraitAllowReplacementsHint"
-      }),
-      grants: new SetField(new StringField(), { required: true, label: "DND5E.AdvancementTraitGrants" }),
-      choices: new ArrayField(new SchemaField({
-        count: new NumberField({
-          required: true, positive: true, integer: true, initial: 1, label: "DND5E.AdvancementTraitCount"
-        }),
-        pool: new SetField(new StringField(), { required: false, label: "DOCUMENT.Items" })
-      }), { label: "DND5E.AdvancementTraitChoices" })
-    };
-  }
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.ADVANCEMENT.Trait"];
 
   /* -------------------------------------------- */
 
-  get hint() {
-    foundry.utils.logCompatibilityWarning(
-      "Advancement hints are now part of the base data model.",
-      { since: "DnD5e 3.3", until: "DnD5e 4.1" }
-    );
-    return this.parent.hint ?? "";
+  static defineSchema() {
+    return {
+      allowReplacements: new BooleanField({ required: true }),
+      choices: new ArrayField(new SchemaField({
+        count: new NumberField({ required: true, positive: true, integer: true, initial: 1 }),
+        pool: new SetField(new StringField(), { required: false })
+      })),
+      grants: new SetField(new StringField(), { required: true }),
+      mode: new StringField({ required: true, blank: false, initial: "default" })
+    };
   }
 
   /* -------------------------------------------- */

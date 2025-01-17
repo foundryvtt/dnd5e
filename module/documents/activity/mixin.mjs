@@ -2,7 +2,7 @@ import ActivitySheet from "../../applications/activity/activity-sheet.mjs";
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
-import { formatNumber, getTargetDescriptors } from "../../utils.mjs";
+import { formatNumber, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
 
 /**
@@ -56,14 +56,12 @@ export default function ActivityMixin(Base) {
       Localization.localizeDataModel(this);
       const fields = this.schema.fields;
       if ( fields.damage?.fields.parts ) {
-        this._localizeSchema(fields.damage.fields.parts.element, ["DND5E.DAMAGE.FIELDS.damage.parts"]);
+        localizeSchema(fields.damage.fields.parts.element, ["DND5E.DAMAGE.FIELDS.damage.parts"]);
       }
       if ( fields.consumption ) {
-        this._localizeSchema(fields.consumption.fields.targets.element, [
-          "DND5E.CONSUMPTION.FIELDS.consumption.targets"
-        ]);
+        localizeSchema(fields.consumption.fields.targets.element, ["DND5E.CONSUMPTION.FIELDS.consumption.targets"]);
       }
-      if ( fields.uses ) this._localizeSchema(fields.uses.fields.recovery.element, ["DND5E.USES.FIELDS.uses.recovery"]);
+      if ( fields.uses ) localizeSchema(fields.uses.fields.recovery.element, ["DND5E.USES.FIELDS.uses.recovery"]);
     }
 
     /* -------------------------------------------- */
@@ -76,7 +74,7 @@ export default function ActivityMixin(Base) {
      * @internal
      */
     static _localizeSchema(schema, prefixes) {
-      Localization.localizeDataModel({ schema }, { prefixes });
+      localizeSchema(schema, prefixes);
     }
 
     /* -------------------------------------------- */
