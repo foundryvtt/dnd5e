@@ -22,6 +22,11 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  static _customElements = super._customElements.concat(["dnd5e-checkbox"]);
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {
       dragDrop: [{ dropSelector: "form" }],
@@ -37,6 +42,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
     this.assignments = this.retainedData.assignments ?? {};
     const featUuid = Object.values(this.retainedData.feat ?? {})[0];
     if ( featUuid ) this.feat = await fromUuid(featUuid);
+    else if ( !foundry.utils.isEmpty(this.assignments) ) this.feat = { isASI: true };
   }
 
   /* -------------------------------------------- */
@@ -55,6 +61,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
     const formatter = new Intl.NumberFormat(game.i18n.lang, { signDisplay: "always" });
 
+    const lockImprovement = this.feat && !this.feat.isASI;
     const abilities = Object.entries(CONFIG.DND5E.abilities).reduce((obj, [key, data]) => {
       if ( !this.advancement.canImprove(key) ) return obj;
       const ability = this.advancement.actor.system.abilities[key];
@@ -71,26 +78,29 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         initial: ability.value + fixed,
         delta: (value - ability.value) ? formatter.format(value - ability.value) : null,
         showDelta: true,
-        isDisabled: !!this.feat,
+        isDisabled: lockImprovement,
         isLocked: !!locked || (ability.value >= ability.max),
-        canIncrease: (value < max) && ((fixed + assignment) < points.cap) && !locked && !this.feat,
-        canDecrease: (value > (ability.value + fixed)) && !locked && !this.feat
+        canIncrease: (value < max) && ((fixed + assignment) < points.cap) && !locked && !lockImprovement,
+        canDecrease: (value > (ability.value + fixed)) && !locked && !lockImprovement
       };
       return obj;
     }, {});
 
+    const modernRules = game.settings.get("dnd5e", "rulesVersion") === "modern";
     const pluralRules = new Intl.PluralRules(game.i18n.lang);
     return foundry.utils.mergeObject(super.getData(), {
-      abilities, points,
+      abilities, lockImprovement, points,
       feat: this.feat,
-      staticIncrease: !this.advancement.configuration.points,
       pointCap: game.i18n.format(
-        `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pluralRules.select(points.cap)}`, {points: points.cap}
+        `DND5E.ADVANCEMENT.AbilityScoreImprovement.CapDisplay.${pluralRules.select(points.cap)}`, { points: points.cap }
       ),
       pointsRemaining: game.i18n.format(
         `DND5E.ADVANCEMENT.AbilityScoreImprovement.PointsRemaining.${pluralRules.select(points.available)}`,
         {points: points.available}
-      )
+      ),
+      showASIFeat: modernRules && this.advancement.allowFeat && !lockImprovement,
+      showImprovement: !modernRules || !this.advancement.allowFeat || this.feat?.isASI,
+      staticIncrease: !this.advancement.configuration.points
     });
   }
 
@@ -110,13 +120,21 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   _onChangeInput(event) {
     super._onChangeInput(event);
     const input = event.currentTarget;
-    const key = input.closest("[data-score]").dataset.score;
-    if ( isNaN(input.valueAsNumber) ) this.assignments[key] = 0;
-    else {
-      this.assignments[key] = Math.min(
-        Math.clamp(input.valueAsNumber, Number(input.min), Number(input.max)) - Number(input.dataset.initial),
-        (this.advancement.configuration.cap - (this.advancement.configuration.fixed[key] ?? 0)) ?? Infinity
-      );
+    if ( input.name === "asi-selected" ) {
+      if ( input.checked ) this.feat = { isASI: true };
+      else {
+        if ( this.feat?.isASI ) this.assignments = {};
+        this.feat = null;
+      }
+    } else {
+      const key = input.closest("[data-score]").dataset.score;
+      if ( isNaN(input.valueAsNumber) ) this.assignments[key] = 0;
+      else {
+        this.assignments[key] = Math.min(
+          Math.clamp(input.valueAsNumber, Number(input.min), Number(input.max)) - Number(input.dataset.initial),
+          (this.advancement.configuration.cap - (this.advancement.configuration.fixed[key] ?? 0)) ?? Infinity
+        );
+      }
     }
     this.render();
   }
@@ -159,7 +177,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   /** @inheritDoc */
   async _updateObject(event, formData) {
     await this.advancement.apply(this.level, {
-      type: this.feat ? "feat" : "asi",
+      type: (this.feat && !this.feat.isASI) ? "feat" : "asi",
       assignments: this.assignments,
       featUuid: this.feat?.uuid,
       retainedItems: this.retainedData?.retainedItems
