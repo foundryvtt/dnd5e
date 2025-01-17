@@ -37,10 +37,10 @@
         {{#if feat}}
         <div class="item-image" style="background-image: url('{{ feat.img }}');"></div>
         <a class="name" data-uuid="{{ feat.uuid }}">{{ feat.name }}</a>
-        <a class="item-control" data-action="delete" data-tooltip="DND5E.ItemDelete"
-           aria-label="{{ localize 'DND5E.ItemDelete' }}">
+        <button type="button" class="unbutton control-button item-control" data-action="delete"
+                data-tooltip="DND5E.ItemDelete" aria-label="{{ localize 'DND5E.ItemDelete' }}">
             <i class="fas fa-trash" inert></i>
-        </a>
+        </button>
         {{else}}
         {{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.Feat.Hint" }}
         {{/if}}

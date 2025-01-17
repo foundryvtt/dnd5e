@@ -142,7 +142,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /** @inheritDoc */
   _onChangeInput(event) {
-    if ( event.target.type === "checkbox" ) {
+    if ( event.target.tagName === "DND5E-CHECKBOX" ) {
       if ( event.target.checked ) this.selected.add(event.target.name);
       else this.selected.delete(event.target.name);
     }
@@ -160,7 +160,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
    */
   async _onItemDelete(event) {
     event.preventDefault();
-    const uuidToDelete = event.currentTarget.closest(".item-name")?.querySelector("input")?.name;
+    const uuidToDelete = event.currentTarget.closest(".item-name")?.querySelector("dnd5e-checkbox")?.name;
     if ( !uuidToDelete ) return;
     this.dropped.findSplice(i => i.uuid === uuidToDelete);
     this.selected.delete(uuidToDelete);

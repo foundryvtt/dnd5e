@@ -12,12 +12,12 @@
     {{else}}
 
     <div class="rolls">
-        <label class="averageLabel flexrow">
+        <label class="average-label flexrow">
             <span>{{ localize "DND5E.ADVANCEMENT.HitPoints.TakeAverage" }}</span>
-            <input class="averageCheckbox" type="checkbox" name="useAverage" {{ checked data.useAverage }}>
+            <dnd5e-checkbox class="average-checkbox" name="useAverage" {{ checked data.useAverage }}></dnd5e-checkbox>
         </label>
-        <input class="rollResult" type="number" name="value" value="{{ data.value }}" {{ disabled data.useAverage }}>
-        <button class="rollButton dice-button" type="button" name="roll" {{ disabled data.useAverage }}
+        <input class="roll-result" type="number" name="value" value="{{ data.value }}" {{ disabled data.useAverage }}>
+        <button class="roll-button dice-button" type="button" name="roll" {{ disabled data.useAverage }}
                 data-tooltip="{{ localize "DND5E.ADVANCEMENT.HitPoints.Action.Roll" die=hitDie }}"
                 aria-label="{{ localize "DND5E.ADVANCEMENT.HitPoints.Action.Roll" die=hitDie }}">
             <i class="fas fa-dice-{{ hitDie }}" inert></i>
