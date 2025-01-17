@@ -1,4 +1,4 @@
-![Up to date as of 4.1.0](https://img.shields.io/static/v1?label=dnd5e&message=4.1.0&color=informational)
+![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
 
 The Cast activity allows for casting a spell through an item.
 
@@ -30,6 +30,7 @@ The "Spell" tab contains the rest of the unique properties for the Cast activity
 ![Cast Sheet - Spell Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/cast-effect.jpg)
 
 The "Casting Details" section contains options that affect how casting will occur
+- *Casting Ability*: Sets the activity that determines spell save DC, spell attack rolls, and the `@mod` value in formulas if something other than the player’s default spellcasting ability is desired
 - *Casting Level*: Sets the base level at which the spell is cast. Increasing it ensures the spell is always cast at at least that level, and any scaling will be on top of the casting level
 - *Ignored Properties*: Properties on the spell that will be ignored when casting through this item. Removing "Concentration" property here is not enough to ensure the spell doesn't require concentration, the Duration in the "Activation" tab will also need to be overridden
 - *Override Values*: If checked will display additional options to replace the attack bonus and save DC for the spell. By default spells will use the character's spell attack bonus and save DC, but certain items include fixed values which should be entered in the revealed fields
