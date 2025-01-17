@@ -4,7 +4,7 @@ The Scale Value advancement allows for setting a value that increases with chara
 
 ## Configuration
 
-// TODO: Configuration Image
+![Scale Value Configuration](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/scale-value-configuration.jpg)
 
 The first step in configuring a Scale Value is determining what type of data is being represented. The advancement comes with several supported types including "Numeric" (e.g. Barbarian's Rage bonus), "Challenge Rating" (e.g. Druid's maximum Wild Shape CR), "Dice" (e.g. Rogue's Sneak Attack dice), and "Distance" (e.g. Monk's Unarmored Movement bonus). If none of these types match what is needed, then the "Anything" type can be used.
 
@@ -16,7 +16,7 @@ On the right hand you define the scale value itself. The details in this area wi
 
 ## Usage
 
-// TODO: Flow Image
+![Scale Value Flow](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/scale-value-flow.jpg)
 
 The Scale Value advancement will present to the player the previous value and the new value whenever the scale value would change.
 

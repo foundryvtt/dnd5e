@@ -20,7 +20,7 @@ Each level also includes a checkbox that controls whether previous choices can b
 
 ## Usage
 
-// TODO: Flow Image
+![Choose Items Flow](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/item-choice-flow.jpg)
 
 The Choose Items advancement will present a list of items that can be chosen for a given level, allowing for as many items to be checked as the player is allowed to select. If additional items are allowed, then they can be dropped onto the advancement window and will be added to the bottom of the list. Any dropped items can be removed using the delete button next to them. Details on all items can be viewed by clicking on their names.
 

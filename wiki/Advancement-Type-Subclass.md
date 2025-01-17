@@ -8,9 +8,11 @@ The Subclass advancement contains only the default advancement configuration opt
 
 ## Usage
 
-![Subclass Flow](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/subclass-flow.jpg)
+![Subclass Flow, Compendium Browser Button](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/subclass-flow-initial.jpg)
 
 Players will be presented with a button to open up the compendium browser with pre-populated filters and a drop area where a subclass can be dropped if the player doesn't wish to use the compendium browser.
+
+![Subclass Flow, Selected Subclass](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/subclass-flow-selected.jpg)
 
 ## API
 

@@ -10,11 +10,11 @@ The Hit Points advancement requires no configuration. It will take a custom titl
 
 ## Usage
 
-![Hit Points - Usage, Initial Level](https://github.com/foundryvtt/dnd5e/assets/86370342/1b5b6218-2fe0-4468-845c-4b75f3286417)
+![Hit Points - Usage, Initial Level](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/hit-points-flow-first-level.jpg)
 
 Using the Hit Points advancement is almost as simple as setting it up. At the character's first level there are no options to choose because all level one characters get the maximum hit points allowed by their hit dice. The character's constitution modifier will automatically be added with the hit points, so be sure it is set before adding the first class.
 
-![Hit Points - Usage, Higher Level](https://github.com/foundryvtt/dnd5e/assets/86370342/7e520414-c503-459f-b2c5-510802768c94)
+![Hit Points - Usage, Higher Level](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/hit-points-flow-other-levels.jpg)
 
 At higher levels you are given an option between taking the average hit points (half the max + 1) or rolling for hit points. If the "Take Average" option is selected, it will be remembered at future levels but can be changed at any point.
 
