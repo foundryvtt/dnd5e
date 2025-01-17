@@ -273,6 +273,11 @@
         "increase": "Increase Points"
       }
     },
+    "Journal": {
+      "DescriptionLegacy": "<p>When you reach {firstLevelOrdinal} level, and again at {otherLevelsOrdinal} level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above {maxAbilityScore} using this feature.</p><p>Using the optional feats rule, you can forgo taking this feature to take a feat of your choice instead.</p>",
+      "DescriptionModern": "<p>You gain the Ability Score Improvement feat or another feat of your choice for which you qualify. You gain this feature again at {class} levels {otherLevels}.</p>",
+      "Name": "Ability Score Improvement"
+    },
     "LockedHint": "Scores cannot be modified with a feat selected.",
     "PointsRemaining": {
       "one": "{points} Point Remaining",
@@ -2768,6 +2773,14 @@
 
 "DND5E.Number": "Number",
 "DND5E.OtherFormula": "Other Formula",
+
+"DND5E.ORDINAL": {
+  "one": "{number}st",
+  "two": "{number}nd",
+  "few": "{number}rd",
+  "other": "{number}th"
+},
+
 "DND5E.PactMagic": "Pact Magic",
 "DND5E.Passive": "Passive",
 "DND5E.PassivePerception": "Passive Perception",
