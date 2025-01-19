@@ -242,7 +242,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const movement = systemData.attributes.movement ?? {};
 
     // Prepare an array of available movement speeds
-    let speeds = Object.entries(CONFIG.DND5E.movementTypes).filter(([k]) => !(largestPrimary && k === "walk"))
+    let speeds = Object.entries(CONFIG.DND5E.movementTypes).filter(([k]) => !(!largestPrimary && k === "walk"))
       .map(([k, v]) => {
         const speed = movement.types?.[k] ?? 0;
         const hover = k === "fly" && movement.hover ? ` (${game.i18n.localize("DND5E.MovementHover")})` : "";
@@ -257,7 +257,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( largestPrimary ) {
       let primary = speeds.shift();
       return {
-        primary: formatLength(primary?.[1], units),
+        primary: formatLength(primary?.[0], units),
         special: speeds.map(s => s[1]).join(", ")
       };
     }
@@ -281,6 +281,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    */
   _getSenses(systemData) {
     const senses = systemData.attributes.senses ?? {};
+    senses.types ??= {};
     const tags = {};
     const units = senses.units ?? defaultUnits("length");
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
