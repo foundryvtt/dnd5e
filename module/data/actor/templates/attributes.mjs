@@ -359,27 +359,27 @@ export default class AttributesFields {
    */
   static shimMovementSenses(attributes) {
     const movementSenses = [
-      { key: "movement", config: CONFIG.DND5E.movementTypes },
-      { key: "senses", config: CONFIG.DND5E.senses }
+      { property: "movement", config: CONFIG.DND5E.movementTypes },
+      { property: "senses", config: CONFIG.DND5E.senses }
     ];
 
-    for (const { key, config } of movementSenses) {
-      for (const k of Object.keys(config)) {
-        const warnDeprecated = () => {
-          foundry.utils.logCompatibilityWarning(
-            `system.attributes.${key}.${k} is deprecated, use system.attributes.${key}.types.${k} instead.`,
-            { since: "DnD5e 4.3", until: "DnD5e 4.5", once: true }
-          );
-        };
+    const warnDeprecated = (property, key) => {
+      foundry.utils.logCompatibilityWarning(
+        `system.attributes.${property}.${key} is deprecated, use system.attributes.${property}.types.${key} instead.`,
+        { since: "DnD5e 4.3", until: "DnD5e 4.5", once: true }
+      );
+    };
 
-        Object.defineProperty(attributes[key], k, {
+    for (const { property, config } of movementSenses) {
+      for (const key of Object.keys(config)) {
+        Object.defineProperty(attributes[property], key, {
           get: () => {
-            warnDeprecated();
-            return attributes[key].types[k];
+            warnDeprecated(property, key);
+            return attributes[property].types[key];
           },
           set: value => {
-            warnDeprecated();
-            attributes[key].types[k] = value;
+            warnDeprecated(property, key);
+            attributes[property].types[key] = value;
           }
         });
       }

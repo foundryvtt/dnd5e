@@ -52,18 +52,18 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
    * @internal
    */
   static _migrateMovementSenses(source) {
-    const attributes = [
-      { key: "movement", config: CONFIG.DND5E.movementTypes },
-      { key: "senses", config: CONFIG.DND5E.senses }
+    const movementSenses = [
+      { property: "movement", config: CONFIG.DND5E.movementTypes },
+      { property: "senses", config: CONFIG.DND5E.senses }
     ];
 
-    for (const { key, config } of attributes) {
-      const attr = source[key];
-      if (!attr) continue;
-      if (!("types" in attr)) {
-        attr.types = {};
-        for (const k of Object.keys(config)) {
-          attr.types[k] = attr[k] ?? null;
+    for (const { property, config } of movementSenses) {
+      const attribute = source[property];
+      if (!attribute) continue;
+      if (!("types" in attribute)) {
+        attribute.types = {};
+        for (const key of Object.keys(config)) {
+          attribute.types[key] = attribute[key] ?? null;
         }
       }
     }

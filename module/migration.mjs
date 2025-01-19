@@ -765,16 +765,17 @@ function _migrateActorAC(actorData, updateData) {
  */
 function _migrateActorMovementSenses(actorData, updateData) {
   if ( actorData._stats?.systemVersion && foundry.utils.isNewerVersion("4.3.0", actorData._stats.systemVersion) ) {
-    for ( const k of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      const v = foundry.utils.getProperty(actorData, `system.attributes.movement.${k}`) ?? null;
-      updateData[`system.attributes.movement.types.${k}`] = v;
-      updateData[`system.attributes.movement.-=${k}`] = null;
-    }
+    const movementSenses = [
+      { property: "movement", config: CONFIG.DND5E.movementTypes },
+      { property: "senses", config: CONFIG.DND5E.senses }
+    ];
 
-    for ( const k of Object.keys(CONFIG.DND5E.senses) ) {
-      const v = foundry.utils.getProperty(actorData, `system.attributes.senses.${k}`) ?? null;
-      updateData[`system.attributes.senses.types.${k}`] = v;
-      updateData[`system.attributes.senses.-=${k}`] = null;
+    for (const { property, config } of movementSenses) {
+      for (const key of Object.keys(config)) {
+        const v = foundry.utils.getProperty(actorData, `system.attributes.${property}.${key}`) ?? null;
+        updateData[`system.attributes.${property}.types.${key}`] = v;
+        updateData[`system.attributes.${property}.-=${key}}`] = null;
+      }
     }
   }
   return updateData;
