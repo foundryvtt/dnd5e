@@ -243,15 +243,15 @@ export default class ActivitySheet extends Application5e {
       value,
       label: CONFIG.DND5E.activityConsumptionTypes[value].label
     }));
-    context.consumptionTargets = context.activity.consumption.targets.map(data => {
+    context.consumptionTargets = context.source.consumption.targets.map((data, index) => {
       const typeConfig = CONFIG.DND5E.activityConsumptionTypes[data.type] ?? {};
       const showTextTarget = typeConfig.targetRequiresEmbedded && !this.item.isEmbedded;
       const target = new ConsumptionTargetData(data, { parent: this.activity });
       return {
         data,
         fields: this.activity.schema.fields.consumption.fields.targets.element.fields,
-        prefix: `consumption.targets.${data._index}.`,
-        source: context.source.consumption.targets[data._index] ?? data,
+        prefix: `consumption.targets.${index}.`,
+        source: context.source.consumption.targets[index] ?? data,
         typeOptions: consumptionTypeOptions,
         scalingModes: canScale ? [
           { value: "", label: game.i18n.localize("DND5E.CONSUMPTION.Scaling.None") },
@@ -280,11 +280,11 @@ export default class ActivitySheet extends Application5e {
       { value: "loseAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.LoseAll") },
       { value: "formula", label: game.i18n.localize("DND5E.USES.Recovery.Type.Formula") }
     ];
-    context.usesRecovery = context.activity.uses.recovery.map(data => ({
+    context.usesRecovery = context.source.uses.recovery.map((data, index) => ({
       data,
       fields: this.activity.schema.fields.uses.fields.recovery.element.fields,
-      prefix: `uses.recovery.${data._index}.`,
-      source: context.source.uses.recovery[data._index] ?? data,
+      prefix: `uses.recovery.${index}.`,
+      source: context.source.uses.recovery[index] ?? data,
       formulaOptions: data.period === "recharge" ? Array.fromRange(5, 2).reverse().map(min => ({
         value: min,
         label: game.i18n.format("DND5E.USES.Recovery.Recharge.Range", {
@@ -370,17 +370,19 @@ export default class ActivitySheet extends Application5e {
         ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, config]) => ({ value, label: config.label }))
       ];
       const typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => ({ value, label }));
-      context.damageParts = context.activity.damage.parts.map(data => {
-        const part = {
-          data, scalingOptions, typeOptions,
-          fields: this.activity.schema.fields.damage.fields.parts.element.fields,
-          index: data._index,
-          prefix: `damage.parts.${data._index}.`,
-          source: context.source.damage.parts[data._index] ?? data,
-          canScale: this.activity.canScaleDamage
-        };
-        return this._prepareDamagePartContext(context, part);
+      const makePart = (data, index) => this._prepareDamagePartContext(context, {
+        data, index, scalingOptions, typeOptions,
+        canScale: this.activity.canScaleDamage,
+        fields: this.activity.schema.fields.damage.fields.parts.element.fields,
+        prefix: index !== undefined ? `damage.parts.${index}.` : "_.",
+        source: data
       });
+      context.damageParts = [
+        ...context.activity.damage.parts
+          .filter(p => p._index === undefined)
+          .map((data, index) => makePart(data)),
+        ...context.source.damage.parts.map((data, index) => makePart(data, index))
+      ];
     }
 
     return context;

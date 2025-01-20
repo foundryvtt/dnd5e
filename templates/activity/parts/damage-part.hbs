@@ -34,7 +34,7 @@
     {{/unless}}
 </div>
 
-<div class="field-group">{{ log source.types }}
+<div class="field-group">
     {{ formField fields.types name=(concat prefix "types") value=source.types options=typeOptions hint=false
                  disabled=data.locked label="DND5E.Type" localize=true classes="label-top multi-select" }}
     <!-- TODO: This disabled is only necessary because of https://github.com/foundryvtt/foundryvtt/issues/11564 -->
