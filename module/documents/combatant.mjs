@@ -111,7 +111,7 @@ export default class Combatant5e extends Combatant {
      */
     if ( Hooks.call("dnd5e.combatRecovery", this, periods, results) === false ) return;
 
-    const deltas = ActorDeltasField.getDeltas(this.actor, updates);
+    const deltas = ActorDeltasField.getDeltas(this.actor, results);
 
     if ( !foundry.utils.isEmpty(results.actor) ) await this.actor.update(results.actor);
     if ( results.item.length ) await this.actor.updateEmbeddedDocuments("Item", results.item);

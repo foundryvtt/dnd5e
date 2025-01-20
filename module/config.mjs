@@ -1448,11 +1448,6 @@ DND5E.limitedUsePeriods = {
     abbreviation: "DND5E.USES.Recovery.Period.Initiative.Label",
     type: "special"
   },
-  encounter: {
-    label: "DND5E.USES.Recovery.Period.Encounter.Label",
-    abbreviation: "DND5E.USES.Recovery.Period.Encounter.Label",
-    type: "combat"
-  },
   turnStart: {
     label: "DND5E.USES.Recovery.Period.TurnStart.Label",
     abbreviation: "DND5E.USES.Recovery.Period.TurnStart.Abbreviation",
