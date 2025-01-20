@@ -3,4 +3,8 @@
     {{ formField fields.name value=source.name placeholder=placeholder.name }}
     {{ formField fields.img value=source.img placeholder=placeholder.img }}
     {{ formField fields.description.fields.chatFlavor value=source.description.chatFlavor }}
+    {{#unless (or (eq source.type "forward") (eq source.type "cast"))}}
+        {{ formField fields.followupActivityId value=source.followupActivityId options=followupActivityOptions 
+                     label="DND5E.ACTIVITY.FIELDS.followupActivity.label" hint="DND5E.ACTIVITY.FIELDS.followupActivity.hint" localize=true }}
+    {{/unless}}
 </fieldset>

@@ -349,6 +349,17 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       name: game.i18n.localize(this.activity.metadata.title),
       img: this.activity.metadata.img
     };
+    const filterCycles = (activity, visitedIds) => {
+      if ( visitedIds.includes(activity.id) ) return false;
+      visitedIds.push(activity.id);
+      const nextActivity = this.item.system.activities.get(activity.followupActivityId || activity.activity?.id);
+      if ( !nextActivity ) return true;
+      return filterCycles(nextActivity, visitedIds);
+    };
+    context.followupActivityOptions = Array.from(this.item.system.activities.values())
+      .filter(a => filterCycles(a, [this.activity.id]))
+      .map(a => ({ label: a.name, value: a.id }));
+    context.followupActivityOptions.unshift({ label: "DND5E.None", value: "" });
     return context;
   }
 
