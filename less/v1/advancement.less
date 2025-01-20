@@ -176,9 +176,11 @@
           grid-area: delta;
           font-size: var(--font-size-16);
           font-weight: bold;
-          i {
-            font-size: var(--font-size-12);
-          }
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          i { font-size: var(--font-size-12); }
         }
         .locked {
           grid-column: 1 / -1;
@@ -332,7 +334,7 @@
       .roll-result {
         text-align: center;
       }
-      .rollButton {
+      .roll-button {
         height: unset;
         width: 31px;
       }
