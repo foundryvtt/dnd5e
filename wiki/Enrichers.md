@@ -87,7 +87,7 @@ It is very common for a feature description or journal entry to include a call f
 
 The format also supports full-length ability names (e.g. `[[/check dexterity]]`) and prefixed terms (e.g. `[[/check ability=dex]]`) for greater clarity.
 
-Multiple skills or tools can be provided to the enricher by separating them by slashes when used with the explicit key (e.g. `[[/check skill=acr/ath]]`) or by specifying each skill separately when used without the key (e.g. `[[/check acr ath]]`). If not ability is provided, then each skill or tool will use its default ability. If an ability is provided, then all skills and tools will use that ability. *Providing multiple abilities is not supported.*
+Multiple skills or tools can be provided to the enricher by separating them by slashes when used with the explicit key (e.g. `[[/check skill=acr/ath]]`) or by specifying each skill separately when used without the key (e.g. `[[/check acr ath]]`). If no ability is provided, then each skill or tool will use its default ability. If an ability is provided, then all skills and tools will use that ability. *Providing multiple abilities is not supported.*
 
 Including a DC in the roll will display it in the description and pass it through to the roll, highlighting in chat whether the result was a success or failure. A value of `[[/check dex 15]]` or `[[/check ability=dexterity dc=15]]` becomes `"[DC 15 Dexterity]"` or `"[DC 15 Dexterity check]"` if `format=long` is set.
 
