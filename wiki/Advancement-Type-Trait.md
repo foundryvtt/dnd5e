@@ -1,4 +1,4 @@
-![Up to date as of 2.4.0](https://img.shields.io/static/v1?label=dnd5e&message=2.4.0&color=informational)
+![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
 
 The Trait advancement allows assigning a set of trait to an actor. Traits include things like proficiencies, languages, and resistances.
 
@@ -28,7 +28,7 @@ These trait types can be applied using the Trait advancement:
 - Skills
 - Languages
 - Armor Proficiency
-- Weapon Proficiency
+- Weapon Proficiency or Mastery
 - Tool Proficiency
 - Damage Immunity, Resistance, and Vulnerability
 - Condition Immunity
@@ -39,6 +39,7 @@ There are several different modes that can be used in Trait advancement:
 - **Expertise**: Expertise as handled by Rogues and the like. Will present the player with a list of traits in which they are already proficient, and upgrade any selected traits to double proficiency. Can only be applied to skills and tools.
 - **Forced Expertise**: Just like normal expertise, but doesn't require the character to have existing proficiency in a skill or tool before they gain expertise.
 - **Upgrade**: For any selected traits, if a player is not proficient they will gain proficiency, and if they are already proficient they will gain expertise.
+- **Mastery**: Select mastery in a weapon in which the character already has proficiency.
 
 ## Usage
 
@@ -48,12 +49,38 @@ The Trait advancement presented to the player will display the auto-generated or
 
 ## API
 
-The original proposal for the Hit Points advancement can be [found here](https://github.com/foundryvtt/dnd5e/issues/1405).
+The [original proposal](https://github.com/foundryvtt/dnd5e/issues/1405) for the Trait advancement is available on GitHub, but may not reflect the current state of the advancement.
 
 ### Configuration Schema
 
-// TODO
+The Trait advancement contains `allowReplacements` boolean indicating whether replacements can be taken if the character already has proficiency in the granted traits.
+
+The `choices` property is an array of objects that include a `count`, indicating how many selections can be made as part of this choice, and `pool` containing a set of full-length trait keys.
+
+The `grants` property is another set of a full-length trait keys.
+
+The `mode` property contains one of the allowed trait application modes as defined in `CONFIG.DND5E.traitModes`.
+
+```javascript
+{
+  allowReplacements: false,
+  choices: [{
+    "count": 2,
+    "pool": [
+      "skills:acr", "skills:ani", "skills:ath", "skills:his", "skills:ins", "skills:itm", "skills:prc", "skills:sur"
+    ]
+  }],
+  grants: ["skills:dec"],
+  mode: "default"
+}
+```
 
 ### Value Schema
 
-// TODO
+The Trait advancement keeps track of all traits applied by the advancement, including both grants and choices. These traits are stored as full-length keys (e.g. `languages:standard:common` or `skills:dec`).
+
+```javascript
+{
+  chosen: ["skills:dec", "tool:thief"]
+}
+```
