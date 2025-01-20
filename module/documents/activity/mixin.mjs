@@ -629,7 +629,9 @@ export default function ActivityMixin(Base) {
         const hasSpellSlotConsumption = this.requiresSpellSlot && this.consumption.spellSlot;
         config.consume ??= {};
         config.consume.action ??= hasActionConsumption;
-        config.consume.resources ??= hasResourceConsumption;
+        config.consume.resources ??= Array.from(this.consumption.targets.entries())
+          .filter(([, target]) => !target.combatOnly || this.actor.inCombat)
+          .map(([index]) => index);
         config.consume.spellSlot ??= !linked && hasSpellSlotConsumption;
         config.hasConsumption = hasActionConsumption || hasResourceConsumption || hasLinkedConsumption
           || (!linked && hasSpellSlotConsumption);
@@ -851,7 +853,8 @@ export default function ActivityMixin(Base) {
      * @protected
      */
     _requiresConfigurationDialog(config) {
-      const checkObject = obj => (foundry.utils.getType(obj) === "Object") && Object.values(obj).some(v => v);
+      const checkObject = obj => (foundry.utils.getType(obj) === "Object")
+        && Object.values(obj).some(v => v === true || v?.length);
       return config.concentration?.begin === true
         || checkObject(config.create)
         || ((checkObject(config.consume) || (config.cause?.resources === true)) && config.hasConsumption)

@@ -11,6 +11,24 @@ export default class Combat5e extends Combat {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async endCombat() {
+    await super.endCombat();
+    this._recoverUses({ turn: true, turnEnd: true, turnStart: true });
+    return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async rollInitiative(ids, options={}) {
+    await super.rollInitiative(ids, options);
+    for ( const id of ids ) await this._recoverUses({ initiative: this.combatants.get(id) });
+    return this;
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 
@@ -44,7 +62,7 @@ export default class Combat5e extends Combat {
   /** @inheritDoc */
   async _onStartTurn(combatant) {
     await super._onStartTurn(combatant);
-    this._recoverUses({ turnStart: combatant });
+    this._recoverUses({ turn: true, turnStart: combatant });
   }
 
   /* -------------------------------------------- */
