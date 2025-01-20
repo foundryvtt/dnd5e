@@ -29,6 +29,7 @@
 - [Dynamic Module Art](Dynamic-Module-Art.md)
 - [Enchantment](Enchantment.md)
 - [Enrichers](Enrichers.md)
+  - [Embeds](Embeds.md)
 - [Frequently Asked Questions](FAQ.md)
 - [Hooks](Hooks.md)
 - [Journal Pages](Journal-Pages.md)
