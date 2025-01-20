@@ -10,7 +10,7 @@ Creating an ability score improvement on a class is super easy, just create the 
 
 ![Ability Score Improvement - Config Species](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/asi-configuration-race.jpg)
 
-A few more options might need to be configured when creating an ability score improvement on a species. The controls at the bottom will allow setting a fixed improvement for any one of the scores. If these are set, the player will not be able to add any points to those values. Above that is the number of points that the player can assign, which is frequently 0 for many legacy races or 3 with no fixed improvement for modern species.
+A few more options might need to be configured when creating an ability score improvement on a species. The controls at the bottom will allow setting a fixed improvement for any one of the scores. Above that is the number of points that the player can assign. Locking an ability score prevents points being assigned to that score.
 
 Some species might need to use the point cap, which limits how many points can be assigned to a single score. For example the legacy Half-Elf gets fixed 2 points to Charisma, and two more points that can be assigned, but only 1 per score. So they would have a Point Cap set to 1, Points set to 2, and Charisma set to 2.
 
@@ -22,11 +22,11 @@ The Ability Score Improvement will present the player with a list of all of thei
 
 ![Ability Score Improvement - Modern Class Flow](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/asi-flow-modern.jpg)
 
-For classes (when not using the Legacy rules) the Ability Score Improvement will present a choice between selecting the Ability Score Improvement Feat or another feat of your choice. If the ASI feat is selected then the assignment interface show above will appear, otherwise a different feat can be chosen by dropping it onto the sheet.
+When not using the legacy rules, the Ability Score Improvement for classes will present a choice between selecting the Ability Score Improvement Feat or another feat of your choice. If the ASI feat is selected then the assignment interface show above will appear, otherwise a different feat can be chosen by dropping it onto the sheet.
 
 ![Ability Score Improvement - Class Flow](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/asi-flow-class.jpg)
 
-When using the Legacy Rules, the player can drop a feat onto this section from a compendium to take it rather than improving their scores. When this happens the scores will be locked, though they can remove the feat to unlock them.
+When using the legacy rules, the player can drop a feat onto this section from a compendium to take it rather than improving their scores. When this happens the scores will be locked, though they can remove the feat to unlock them.
 
 ![Allow Feats Setting](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/asi-allow-feats-setting.jpg)
 
