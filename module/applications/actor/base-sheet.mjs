@@ -16,6 +16,7 @@ import ActorSheetMixin from "./sheet-mixin.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
 import ConcentrationConfig from "./config/concentration-config.mjs";
+import DeathConfig from "./config/death-config.mjs";
 import DamagesConfig from "./config/damages-config.mjs";
 import HabitatConfig from "./config/habitat-config.mjs";
 import HitDiceConfig from "./config/hit-dice-config.mjs";
@@ -757,6 +758,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     switch ( button.dataset.action ) {
       case "armor":
         app = new ArmorClassConfig({ document: this.actor });
+        break;
+      case "death":
+        app = new DeathConfig({ document: this.actor });
         break;
       case "habitat":
         app = new HabitatConfig({ document: this.actor });

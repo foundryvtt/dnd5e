@@ -44,6 +44,8 @@ const {
  * @property {string} attributes.hp.bonuses.level         Bonus formula applied for each class level.
  * @property {string} attributes.hp.bonuses.overall       Bonus formula applied to total HP.
  * @property {object} attributes.death
+ * @property {object} attributes.death.bonuses
+ * @property {string} attributes.death.bonuses.save       Numeric or dice bonus to death saving throws.
  * @property {number} attributes.death.success            Number of successful death saves.
  * @property {number} attributes.death.failure            Number of failed death saves.
  * @property {number} attributes.exhaustion               Number of levels of exhaustion.
@@ -123,6 +125,9 @@ export default class CharacterData extends CreatureTemplate {
           }),
           failure: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
+          }),
+          bonuses: new SchemaField({
+            save: new FormulaField({ required: true, label: "DND5E.DeathSaveBonus" })
           })
         }, { label: "DND5E.DeathSave" }),
         inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" })
