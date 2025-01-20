@@ -17,12 +17,12 @@ export default class BaseConfigSheet extends DocumentSheet5e {
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    return {
-      advantageModeOptions: [
-        { value: -1, label: game.i18n.localize("DND5E.Disadvantage") },
-        { value: 0, label: game.i18n.localize("DND5E.Normal") },
-        { value: 1, label: game.i18n.localize("DND5E.Advantage") }
-      ]
-    };
+    const context = await super._prepareContext(options);
+    context.advantageModeOptions = [
+      { value: -1, label: game.i18n.localize("DND5E.Disadvantage") },
+      { value: 0, label: game.i18n.localize("DND5E.Normal") },
+      { value: 1, label: game.i18n.localize("DND5E.Advantage") }
+    ];
+    return context;
   }
 }
