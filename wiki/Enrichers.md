@@ -1,8 +1,8 @@
-![Up to date as of 3.2.0](https://img.shields.io/static/v1?label=dnd5e&message=3.2.0&color=informational)
+![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
 
 The dnd5e system adds a number of useful enrichers that can be used within journals or in item or actor descriptions. These enrichers will generate text based on the standard formatting used throughout 5e releases and provide rolls and related behavior that properly hooks into the system.
 
-[Award](#award-enricher) | [Check](#check-enrichers) | [Damage/Heal](#damage-enrichers) | [Item](#item-use-enrichers) | [Lookup](#lookup-enrichers) | [Reference](#reference-enrichers) | [Save](#save-enrichers)
+[Attack](#attack-enricher) | [Award](#award-enricher) | [Check](#check-enrichers) | [Damage/Heal](#damage-enrichers) | [Item](#item-use-enrichers) | [Lookup](#lookup-enrichers) | [Reference](#reference-enrichers) | [Save](#save-enrichers)
 
 ![Enricher Preview](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enrichers-preview.jpg)
 
@@ -12,7 +12,7 @@ This guide breaks down the different types of enrichers offered by the system. E
 
 The option table describes the options that can be provided to the enricher. Options are used in the enricher in the format of `<name>=<value>`. If the **Inferred** column is checked, then that indicates that the name can be usually left off and only the value used.
 
-If spaces are required within the value, then you must surround it with double quotation marks: `<name>="Two Words"`. The **Assembled** column indicates that that options can be used with spaces without the quotation marks.
+If spaces are required within the value, then you must surround it with double quotation marks: `<name>="Two Words"`. The **Assembled** column indicates that an option can be used with spaces without the quotation marks.
 
 The **Formula** column indicates what type of data is accepted for the value. A list and description of the various formats are available in the dropdown below.
 
@@ -27,6 +27,55 @@ The **Formula** column indicates what type of data is accepted for the value. A 
 >   </ul>
 > </details>
 
+
+## Attack Enricher
+Attack enrichers allow for rolling attack rolls using a provided formula or through a linked activity.
+
+In situations where an attack roll needs to be made without an associated stat block, such as a from a dart trap in an adventure, the attack enricher provides a way to make it easy to roll that attack. Writing `[[/attack +5]]` or `[[/attack formula=5]]` will allow for rolling an attack with a fixed +5 to hit. Clicking this will bring up the standard attack roll dialog with the option for situational bonuses and rolling with advantage and disadvantage, providing a benefit over the default rolling enrichers (e.g. writing `[[/r 1d20 + 5]]`).
+
+The enricher is also helpful when building items for NPC stat blocks, because it can fetch data automatically from the item's attack activity and will be adjusted with the stats of the creature to which the item is added. In that case you can simply write `[[/attack]]` to associate the enricher with the first attack activity, or `[[/attack activity=jdRTb04FngE1B8cF]]` if specifying a specific activity is required. To make building stat blocks easier, the enricher includes an `extended` option that adds additional attack details to match standard NPC stat block formatting (e.g. `"Melee Attack Roll: [+16], reach 15 ft"`). The formatting of the extended enricher will be adjusted based on the rules specified on the containing actor, so it will be presented as `"Melee Weapon Attack: [+16] to hit, reach 15 ft, one target"` if the legacy rules are used.
+
+#### Examples
+
+```
+// Example: Fixed +5 to hit
+[[/attack formula=5]]
+[[/attack +5]]
+
+// Example: Use a specific attack mode
+[[/attack formula=5 attackMode=thrown]]
+[[/attack 5 thrown]]
+
+// Example: Link to specific activity on item, using its to hit value
+[[/attack activity=jdRTb04FngE1B8cF]]
+[[/attack]]
+
+// Example: Display the extended attack description
+[[/attack activity=jdRTb04FngE1B8cF format=extended]]
+[[/attack extended]]
+```
+
+#### Options
+
+| Name         | Format  | Inferred  | Assembled |
+| ------------ | ------- | --------- | --------- |
+| `activity`   | ID      |           |           |
+| `attackMode` | Choice  |     ✔︎     |           |
+| `format`     | Choice  |     ✔︎     |           |
+| `formula`    | Formula |     ✔︎     |     ✔︎     |
+
+- `activity`: Specify a specific activity by ID on the same item as this enricher
+- `attackMode`: Specify an attack mode to use
+- `format`: Display mode of either `short`, `long`, or `extended`
+- `formula`: The formula used when rolling to hit
+
+
+#### Potential Issues
+- If no formula is specified and no attack activity is found
+- If both a formula and an activity ID are explicitly set
+- Invalid to hit formula
+
+
 ## Award Enricher
 See the enrichers section of the [awards guide](Awards).
 
@@ -37,6 +86,8 @@ Check enrichers allow for rolling ability checks, skill checks, and tool checks 
 It is very common for a feature description or journal entry to include a call for an ability check. Now you can simply write `[[/check dex]]` and it will be formatted into `"[Dexterity]"`, with that text being a link that will open up the roll check dialog when clicked. By default only the ability is shown, but it can be expanded by writing `[[/check dex format=long]]` which will display as `"[Dexterity check]"`.
 
 The format also supports full-length ability names (e.g. `[[/check dexterity]]`) and prefixed terms (e.g. `[[/check ability=dex]]`) for greater clarity.
+
+Multiple skills or tools can be provided to the enricher by separating them by slashes when used with the explicit key (e.g. `[[/check skill=acr/ath]]`) or by specifying each skill separately when used without the key (e.g. `[[/check acr ath]]`). If no ability is provided, then each skill or tool will use its default ability. If an ability is provided, then all skills and tools will use that ability. *Providing multiple abilities is not supported.*
 
 Including a DC in the roll will display it in the description and pass it through to the roll, highlighting in chat whether the result was a success or failure. A value of `[[/check dex 15]]` or `[[/check ability=dexterity dc=15]]` becomes `"[DC 15 Dexterity]"` or `"[DC 15 Dexterity check]"` if `format=long` is set.
 
@@ -49,6 +100,10 @@ Using the `passive` option on a check enricher displays a passive description an
 The `[[/check]]`, `[[/skill]]`, `[[/tool]]` starting terms are all interchangeable, and the final roll will be presented based on the inputs given. So `[[/check dexterity athletics]]` will perform a dexterity check using a character's athletics proficiency if present.
 
 For skill or tool checks, the ability is optional. If one is provided then the person rolling have that ability selected by default even if it isn't the default on their sheet. Otherwise they will use whatever ability is set for that skill on their character sheet.
+
+When used on an item, the enricher can also look up its ability, related proficiencies, and DC from a [check activity](Activity-Type-Check). This can be done by explicitly specifying the activity by ID (e.g. `[[/check activity=RLQlsLo5InKHZadn]]`) or by leaving the enricher blank and letting it located the first check activity on the item (e.g. `[[/check]]`).
+
+The check enricher offers two different formats that can be used depending on the context of the enricher. The `short` format will display just the check name (e.g. `"[Dexterity]"` or `"[Strength (Athletics)]`) while the `long` format will also say "check" after that (e.g. `"[Dexterity] check"` or `"[Strength (Athletics)] check`).
 
 #### Examples
 
@@ -74,6 +129,18 @@ For skill or tool checks, the ability is optional. If one is provided then the p
 [[/skill DC 20 Strength (Intimidation)]]
 [[/skill strength intimidation 20]]
 
+// Example: Use multiple skills in a check using default abilities
+[[/check skill=acr/ath dc=15]]
+[[/check acrobatics athletics 15]]
+[[/skill skill=acr/ath dc=15]]
+[[/skill acrobatics athletics 15]]
+
+// Example: Use multiple skills with a single ability
+[[/check ability=str skill=dec/per dc=15]]
+[[/check strength deception persuasion 15]]
+[[/skill ability=str skill=dec/per dc=15]]
+[[/skill strength deception persuasion 15]]
+
 // Example: Passive check
 [[/skill skill=perception dc=15 passive=true]]
 [[/skill DC 15 passive Perception]]
@@ -85,6 +152,10 @@ For skill or tool checks, the ability is optional. If one is provided then the p
 // Example: Tool & Vehicle checks
 [[/tool ability=dexterity tool=thief]]
 [[/tool ability=strength vehicle=water]]
+
+// Example: Link to a check activity, either explicitly or automatically
+[[/check activity=RLQlsLo5InKHZadn]]
+[[/check]]
 ```
 
 #### Options
@@ -92,18 +163,22 @@ For skill or tool checks, the ability is optional. If one is provided then the p
 | Name       | Format  | Inferred  | Assembled |
 | ---------- | ------- | --------- | --------- |
 | `ability`  | Choice  |     ✔︎     |           |
+| `activity` | ID      |           |           |
 | `dc`       | Formula |		 ✔︎     |           |
+| `format`   | Choice  |     ✔︎     |           |
 | `skill`    | Choice  |		 ✔︎     |           |
 | `tool`     | Choice  |		 ✔︎     |           |
 
 - `ability`: Ability to use with the check
+- `activity`: ID of an activity on the same item from which the details should be derived
 - `dc`: Specific number or formula used for the DC. Formula must not contain dice values. Can only be used inferred with a number, formulas must contains the `dc=` prefix and spaces in formula must be surrounded by quotation marks
+- `format`: Display mode of either `short` or `long`
 - `skill` or `tool`: Skill or tool to roll. If ability isn't specified, then the default ability for that skill will be used
 
 > <details>
-> <summary>Tool Ids</summary>
+> <summary>Tool IDs</summary>
 >
-> | Tool                   | Id             |
+> | Tool                   | ID             |
 > |------------------------|----------------|
 > | Alchemist's Supplies   | `alchemist`    |
 > | Bagpipes               | `bagpipes`     |
@@ -145,7 +220,9 @@ For skill or tool checks, the ability is optional. If one is provided then the p
 > Source: `CONFIG.DND5E.toolIds` </details>
 
 #### Potential Issues
-- No ability specified or able to be inferred from proficiency type
+- If no ability or proficiencies specified and no check activity is found
+- If both ability or proficiencies and an activity ID are explicitly set
+- If no ability specified or able to be inferred from proficiency type
 - Skill or tool proficiency specified wasn't found
 - Invalid DC formula
 
@@ -162,8 +239,20 @@ The formula can also include formula values that will be evaluated before the da
 > [!Note]
 > Any values entered in the formula will be resolved based on the stats of the owner of the item, not who ultimately performs the roll.
 
-### Healing Enricher
-While healing can be provided using the standard damage enricher using one of the healing types (`healing` or `temp`), there is also a dedicated enricher to make it a bit clearer. This can be used in the format of `[[/healing {formula}]]` for normal healing and `[[/healing {formula} temp]]` for temporary HP. This also accepts the `average` parameter just like the damage enricher.
+The enricher supports multiple damage types that can be chosen when the damage is rolled. This can be specified by either listing each damage type in the simple form (e.g. `[[/damage 1d4 fire cold]]`) or by separating them by a slash when using the keyed form (e.g. `[[/damage 1d4 type=fire/cold]]`).
+
+If multiple rolls with different damage types are required, they can be specified by splitting each roll with an ampersand (`&`). Writing `[[/damage 1d6 bludgeoning & 1d4 fire]]` will roll both 1d6 bludgeoning and 1d4 fire. Each side of the ampersand takes its own formula and damage type, but other properties like `average` are shared between the parts and only need to be specified once.
+
+When used on an item, the enricher can also look up its formula and type from an [attack](Activity-Type-Attack), [damage](Activity-Type-Damage), or [save](Activity-Type-Save) activity. This can be done by explicitly specifying the activity by ID (e.g. `[[/damage activity=RLQlsLo5InKHZadn]]`) or by leaving the enricher blank and letting it located the first check activity on the item (e.g. `[[/damage]]`).
+
+If an activity is specified, then rolling the damage will be performed through that activity rather than directly from the enricher. This means that modifiers and other bonuses may be added to the damage roll if they are relevant to the actor holding them item.
+
+The damage enricher offers three different formats that can be used depending on the context of the enricher. The `short` format will display the formula and the damage on its own (e.g. `"[1d4] fire"`). The `long` format will also say "damage" after that (e.g. `"[1d4] fire damage`). The `extended` format is designed to be used in NPC stat blocks and includes the "Hit:" prefix (e.g. `"Hit: [1d4] fire damage`). The `short` format is used by default.
+
+### Heal Enricher
+While healing can be provided using the standard damage enricher using one of the healing types (`healing` or `temp`), there is also a dedicated enricher to make it a bit clearer. This can be used in the format of `[[/heal {formula}]]` for normal healing and `[[/heal {formula} temp]]` for temporary HP. This also accepts the `average` parameter just like the damage enricher.
+
+When inferring an activity, the `heal` form will fetch the first [heal activity](Activity-Type-Heal) while the `damage` form will fetch the first attack, damage, or save activity that does damage.
 
 #### Examples
 
@@ -177,35 +266,69 @@ While healing can be provided using the standard damage enricher using one of th
 [[/damage formula=2d6 type=radiant average=true]]
 [[/damage 2d6 radiant average]]
 
+// Example: Presenting two different damage type options when rolling
+[[/damage formula=1d10 type=bludgeoning|slashing]]
+[[/damage formula=1d10 type=bludgeoning/slashing]]
+[[/damage 1d10 bludgeoning slashing]]
+
+// Example: Including two different damage rolls
+[[/damage formula="1d6 + 2" type=piercing & formula=1d4 type=fire average=true]]
+[[/damage 1d6 + 2 piercing & 1d4 fire average]]
+
 // Example: Standard healing
-[[/healing formula="2d4 + 2" type=healing]]
-[[/healing formula="2d4 + 2"]]
-[[/healing 2d4 + 2 healing]]
-[[/healing 2d4 + 2]]
+[[/heal formula="2d4 + 2" type=healing]]
+[[/heal formula="2d4 + 2"]]
+[[/heal 2d4 + 2 healing]]
+[[/heal 2d4 + 2]]
 [[/damage formula="2d4 + 2" type=healing]]
 [[/damage 2d4 + 2 healing]]
 
 // Example: Temp HP
-[[/healing formula=10 type=temphp]]
-[[/healing 10 temp]]
+[[/heal formula=10 type=temphp]]
+[[/heal 10 temp]]
 [[/damage formula=10 type=temphp]]
 [[/damage 10 temp]]
+
+// Example: Link to a activity with damage (attack, damage, or save), either explicitly or automatically
+[[/damage activity=RLQlsLo5InKHZadn]]
+[[/damage]]
+
+// Example: Specify an attack mode when linking to an activity
+[[/damage activity=RLQlsLo5InKHZadn attackMode=twoHanded]]
+[[/damage twoHanded]]
+
+// Example: Use the extended enricher format
+[[/damage activity=RLQlsLo5InKHZadn extended]]
+[[/damage extended]]
+
+// Example: Link to a heal activity, either explicitly or automatically
+[[/heal activity=jdRTb04FngE1B8cF]]
+[[/heal]]
 ```
 
 #### Options
 
-| Name        | Format  | Inferred  | Assembled |
-| ----------- | ------- | --------- | --------- |
-| `average`   | Boolean |           |           |
-| `formula`   | Formula |     ✔︎     |     ✔︎     |
-| `type`      | Choice  |     ✔︎     |           |
+| Name         | Format  | Inferred  | Assembled | Global    |
+| ------------ | ------- | --------- | --------- | --------- |
+| `activity`   | ID      |           |           |     ✔︎     |
+| `attackMode` | Choice  |     ✔︎     |           |     ✔︎     |
+| `average`    | Boolean |           |           |     ✔︎     |
+| `format`     | Choice  |     ✔︎     |           |     ✔︎     |
+| `formula`    | Formula |     ✔︎     |     ✔︎     |           |
+| `type`       | Choice  |     ✔︎     |           |           |
 
+**Note**: The global column indicates options that can be specified within any damage part, but will apply to the whole enriched content (so `[[/damage 1d4 fire & 1d6 bludgeoning average]]` and `[[/damage 1d4 fire average & 1d6 bludgeoning]]` are the same).
+
+- `activity`: ID of an activity on the same item from which the details should be derived
+- `attackMode`: Specify an attack mode to use when rolling the damage. Primarily used when rolling directly from an attack activity
 - `average`: Display the calculated average damage along side the roll in the enriched text (e.g. `7 (2d6) bludgeoning`)
+- `format`: Display mode of either `short`, `long`, or `extended`
 - `formula`: Formula used for the damage roll
-- `type`: Damage type
+- `type`: One or more types of damage or healing
 
 #### Potential Issues
-- If no formula is specified
+- If no formulas are specified and no activity with damage or healing is found
+- If both a formula and an activity ID are explicitly set
 - Invalid damage formula
 
 
@@ -239,6 +362,8 @@ The lookup enricher allows for referencing data within an actor's roll data and 
 
 ![Lookup Enricher](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/enricher-lookup.jpg)
 
+When used on an item, the enricher can also be used to look up activity values by providing the activity ID (`[[lookup @save.dc.value activity=jdRTb04FngE1B8cF]]`).
+
 A few additional parameters are available to transform the resulting text:
 - `[[lookup @name lowercase]]`: Converts the text to all lowercase (e.g. "adult white dragon")
 - `[[lookup @name uppercase]]`: Converts the text to all uppercase (e.g. "ADULT WHITE DRAGON")
@@ -252,15 +377,20 @@ A few additional parameters are available to transform the resulting text:
 
 // Example: Display an actor's name with a fallback
 [[lookup @name]]{the creature}
+
+// Example: Lookup a value from an activity
+[[lookup @save.dc.value activity=jdRTb04FngE1B8cF]]
 ```
 
 #### Options
 
 | Name       | Format  | Inferred  | Assembled |
 | ---------- | ------- | --------- | --------- |
-| `path`     | @-Path  |     ✔︎     |     ✔︎     |
+| `activity` | ID      |           |           |
+| `path`     | @-Path  |     ✔︎     |           |
 | `style`    | Choice  |     ✔︎     |           |
 
+- `activity`: ID of activity within which value should be looked up
 - `path`: Path to the formula to display, see [Roll Formulas](Roll-Formulas) for a limited list of these paths. If there is no value found at the path (such as looking up the actor name on an item not in an actor), then the enricher will display the original path unless a fallback is provided using the enricher's label
 - `style`: Formatting that will be applied to the final value. Can be `capitalize`, `lowercase`, or `uppercase`
 
@@ -474,9 +604,17 @@ Much like check enrichers, save enrichers include two different formats. By defa
 
 The format also supports full-length ability names (e.g. `[[/save dexterity]]`) and prefixed terms (e.g. `[[/save ability=dex]]`) for greater clarity.
 
+Multiple abilities can be provided to the enricher by separating them by slashes when used with the explicit key (e.g. `[[/save ability=str/dex]]`) or by specifying each ability separately when used without the key (e.g. `[[/save str dex]]`).
+
 Including a DC in the roll will display it in the description and pass it through to the roll, highlighting in chat whether the result was a success or failure. A value of `[[/save dex 15]]` or `[[/save ability=dexterity dc=15]]` becomes `"[DC 15 Dexterity]"` or `"[DC 15 Dexterity saving throw]"` if `format=long` is set.
 
 The DC can either be a fixed value or a resolved formula based on the stats of the owner of the item included in it. So adding `[[/save dex dc=@abilities.con.dc]]` will set to DC to whatever the pre-calculated constitution DC is on the creature that owns the item with this enricher.
+
+When used on an item, the enricher can also look up its ability, related proficiencies, and DC from a [save activity](Activity-Type-Save). This can be done by explicitly specifying the activity by ID (e.g. `[[/save activity=RLQlsLo5InKHZadn]]`) or by leaving the enricher blank and letting it located the first save activity on the item (e.g. `[[/save]]`).
+
+A special concentration save can be made by using `[[/concentration]]` for the enricher. This will default to the system's default concentration ability, but can be overridden in the enricher if something else is desired (e.g. `[[/concentration ability=cha]]`). This form also supports specifying a DC.
+
+The save enricher offers two different formats that can be used depending on the context of the enricher. The `short` format will display just the ability name (e.g. `"[Dexterity]"` or `"[Concentration]"`) while the `long` format will also say "saving throw" after that (e.g. `"[Dexterity] saving throw"` or `"[Concentration] saving throw"`).
 
 #### Examples
 
@@ -486,10 +624,27 @@ The DC can either be a fixed value or a resolved formula based on the stats of t
 [[/save dexterity]]
 [[/save dex]]
 
+// Example: Use multiple abilities for the save
+[[/save ability=str/dex dc=20]]
+[[/save strength dexterity 20]]
+
 // Example: Add a DC to the save
 [[/save ability=dexterity dc=20]]
 [[/save dexterity 20]]
 [[/save DC 20 Dexterity]]
+
+// Example: Link to a save activity, either explicitly or automatically
+[[/save activity=RLQlsLo5InKHZadn]]
+[[/save]]
+
+// Example: Make a concentration saving throw with and without a DC
+[[/concentration dc=15]]
+[[/concentration 15]]
+[[/concentration]]
+
+// Example: Use a different ability with a concentration save
+[[/concentration ability=cha]]
+[[/concentration charisma]]
 ```
 
 #### Options
@@ -497,11 +652,16 @@ The DC can either be a fixed value or a resolved formula based on the stats of t
 | Name       | Format  | Inferred  | Assembled |
 | ---------- | ------- | --------- | --------- |
 | `ability`  | Choice  |     ✔︎     |           |
+| `activity` | ID      |           |           |
 | `dc`       | Formula |     ✔︎     |           |
+| `format`   | Choice  |     ✔︎     |           |
 
-- `ability`: Ability to use when making the save=
+- `ability`: Ability to use when making the save
+- `activity`: ID of an activity on the same item from which the details should be derived
 - `dc`: Specific number or formula used for the DC. Formula must not contain dice values. Can only be used inferred with a number, formulas must contains the `dc=` prefix
+- `format`: Display mode of either `short` or `long`
 
 #### Potential Issues
-- If no ability is specified
+- If no ability is specified and no save activity is found
+- If both an ability and an activity ID are explicitly set
 - Invalid DC formula
