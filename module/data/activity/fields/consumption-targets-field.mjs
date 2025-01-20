@@ -69,7 +69,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    */
   get combatOnly() {
     let recovery;
-    switch (this.type) {
+    switch ( this.type ) {
       case "activityUses":
         recovery = this.activity.uses.recovery;
         break;

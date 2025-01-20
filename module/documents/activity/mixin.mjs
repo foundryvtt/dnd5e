@@ -850,7 +850,7 @@ export default function ActivityMixin(Base) {
      */
     _requiresConfigurationDialog(config) {
       const checkObject = obj => (foundry.utils.getType(obj) === "Object")
-        && Object.values(obj).some(v => v === true || v?.length > 0);
+        && Object.values(obj).some(v => v === true || v?.length);
       return config.concentration?.begin === true
         || checkObject(config.create)
         || ((checkObject(config.consume) || (config.cause?.resources === true)) && config.hasConsumption)
