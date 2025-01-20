@@ -1363,6 +1363,12 @@ export default function ActivityMixin(Base) {
 
     /* -------------------------------------------- */
 
+    /**
+     * Handle using the follow-up activity from a chat card.
+     * @param {PointerEvent} event     Triggering click event.
+     * @param {HTMLElement} target     The capturing HTML elmeent which defined a [data-action].
+     * @param {ChatMessage5e} message  Message associated with the activation.
+     */
     async #useFollowup(event, target, message) {
       const followupActivity = this.item.system.activities.get(this.followupActivityId);
       if ( !followupActivity ) return;
