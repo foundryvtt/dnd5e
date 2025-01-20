@@ -1,4 +1,7 @@
 import BaseConfigSheet from "./base-config.mjs";
+import { createCheckboxInput } from "../fields.mjs";
+
+const { BooleanField } = foundry.data.fields;
 
 /**
  * An application class which provides advanced configuration for special character flags which modify an Actor.
@@ -32,6 +35,7 @@ export default class ActorSheetFlags extends BaseConfigSheet {
     data.classes = this._getClasses();
     data.flags = this._getFlags();
     data.bonuses = this._getBonuses();
+    if ( this.document.type === "npc" ) data.npc = this._getNPC();
     return data;
   }
 
@@ -100,6 +104,23 @@ export default class ActorSheetFlags extends BaseConfigSheet {
       b.value = foundry.utils.getProperty(src, b.name) || "";
     }
     return bonuses;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get NPC-specific fields.
+   * @returns {object}
+   * @protected
+   */
+  _getNPC() {
+    return {
+      important: {
+        field: new BooleanField({ label: "DND5E.NPC.Important.Label", hint: "DND5E.NPC.Important.Hint" }),
+        name: "system.traits.important",
+        value: this.document.system._source.traits.important
+      }
+    };
   }
 
   /* -------------------------------------------- */

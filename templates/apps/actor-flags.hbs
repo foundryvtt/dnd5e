@@ -11,6 +11,13 @@
             <p class="notes">{{localize "DND5E.ClassMakeOriginalHint"}}</p>
         </div>
 
+        {{#if npc}}
+        <h3 class="form-header">{{ localize "DND5E.NPC.Label" }}</h3>
+        {{#with npc.important}}
+        {{ formField field name=name value=value localize=true }}
+        {{/with}}
+        {{/if}}
+
         {{#each flags as |fs section|}}
         <h3 class="form-header">{{section}}</h3>
         {{#each fs as |flag key|}}

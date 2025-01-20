@@ -6,6 +6,13 @@ import { ActorDeltasField } from "../data/chat-message/fields/deltas-field.mjs";
  */
 
 /**
+ * @typedef CombatRecoveryResults
+ * @property {object} actor       Updates to be applied to the actor.
+ * @property {object[]} item      Updates to be applied to the actor's items.
+ * @property {BasicRoll[]} rolls  Any recovery rolls performed.
+ */
+
+/**
  * Custom combatant with custom initiative roll handling.
  */
 export default class Combatant5e extends Combatant {
@@ -77,28 +84,37 @@ export default class Combatant5e extends Combatant {
      */
     if ( Hooks.call("dnd5e.preCombatRecovery", this, periods) === false ) return;
 
-    const updates = { actor: {}, item: [] };
-    await this.actor?.system.recoverCombatUses?.(periods, updates);
+    const results = { actor: {}, item: [], rolls: [] };
+    await this.actor?.system.recoverCombatUses?.(periods, results);
 
-    // TODO: If https://github.com/foundryvtt/dnd5e/issues/3214 is implemented, this is where
-    // item/activity uses with combat related recovery can be recovered
+    for ( const item of this.actor?.items ?? [] ) {
+      if ( foundry.utils.getType(item.system.recoverUses) !== "function" ) continue;
+      const rollData = item.getRollData();
+      const { updates, rolls } = await item.system.recoverUses(Array.from(periods), rollData);
+      if ( !foundry.utils.isEmpty(updates) ) {
+        const updateTarget = results.item.find(i => i._id === item.id);
+        if ( updateTarget ) foundry.utils.mergeObject(updateTarget, updates);
+        else results.item.push({ _id: item.id, ...updates });
+      }
+      results.rolls.push(...rolls);
+    }
 
     /**
      * A hook event that fires after combat-related recovery changes have been prepared, but before they have been
      * applied to the actor.
      * @function dnd5e.combatRecovery
      * @memberof hookEvents
-     * @param {Combatant5e} combatant                      Combatant that is being recovered.
-     * @param {string[]} periods                           Periods that were recovered.
-     * @param {{ actor: object, item: object[] }} updates  Update that will be applied to the actor and its items.
+     * @param {Combatant5e} combatant          Combatant that is being recovered.
+     * @param {string[]} periods               Periods that were recovered.
+     * @param {CombatRecoveryResults} results  Update that will be applied to the actor and its items.
      * @returns {boolean}  Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.combatRecovery", this, periods, updates) === false ) return;
+    if ( Hooks.call("dnd5e.combatRecovery", this, periods, results) === false ) return;
 
-    const deltas = ActorDeltasField.getDeltas(this.actor, updates);
+    const deltas = ActorDeltasField.getDeltas(this.actor, results);
 
-    if ( !foundry.utils.isEmpty(updates.actor) ) await this.actor.update(updates.actor);
-    if ( updates.item.length ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
+    if ( !foundry.utils.isEmpty(results.actor) ) await this.actor.update(results.actor);
+    if ( results.item.length ) await this.actor.updateEmbeddedDocuments("Item", results.item);
 
     const message = await this.createTurnMessage({ deltas, periods });
 

@@ -99,6 +99,21 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Perform the pre-localization of this data model.
+   */
+  static localize() {
+    Localization.localizeDataModel(this);
+    if ( this.metadata.dataModels?.configuration ) {
+      Localization.localizeDataModel(this.metadata.dataModels.configuration);
+    }
+    if ( this.metadata.dataModels?.value ) {
+      Localization.localizeDataModel(this.metadata.dataModels.value);
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Instance Properties                         */
   /* -------------------------------------------- */
 
@@ -220,6 +235,19 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
    */
   static availableForItem(item) {
     return true;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async delete(options={}) {
+    if ( this.item.actor?.system.metadata?.supportsAdvancement
+        && !game.settings.get("dnd5e", "disableAdvancements") ) {
+      const manager = dnd5e.applications.advancement.AdvancementManager
+        .forDeletedAdvancement(this.item.actor, this.item.id, this.id);
+      if ( manager.steps.length ) return manager.render(true);
+    }
+    return super.delete(options);
   }
 
   /* -------------------------------------------- */

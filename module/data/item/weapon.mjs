@@ -1,4 +1,4 @@
-import { filteredKeys, formatDistance } from "../../utils.mjs";
+import { convertLength, filteredKeys, formatLength } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
 import DamageField from "../shared/damage-field.mjs";
@@ -25,6 +25,8 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  *
  * @property {object} ammunition
  * @property {string} ammunition.type       Type of ammunition fired by this weapon.
+ * @property {object} armor
+ * @property {number} armor.value           Siege or vehicle weapon's armor class.
  * @property {object} damage
  * @property {DamageData} damage.base       Weapon's base damage.
  * @property {DamageData} damage.versatile  Weapon's versatile damage.
@@ -48,7 +50,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.WEAPON", "DND5E.RANGE", "DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.WEAPON", "DND5E.VEHICLE.MOUNTABLE", "DND5E.RANGE", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
@@ -58,6 +60,9 @@ export default class WeaponData extends ItemDataModel.mixin(
       type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"}),
       ammunition: new SchemaField({
         type: new StringField()
+      }),
+      armor: new SchemaField({
+        value: new NumberField({ integer: true, min: 0 })
       }),
       damage: new SchemaField({
         base: new DamageField(),
@@ -208,7 +213,9 @@ export default class WeaponData extends ItemDataModel.mixin(
     );
 
     if ( this.attackType === "ranged" ) this.range.reach = null;
-    else if ( this.range.reach === null ) this.range.reach = this.properties.has("rch") ? 10 : 5;
+    else if ( this.range.reach === null ) {
+      this.range.reach = convertLength(this.properties.has("rch") ? 10 : 5, "ft", this.range.units, { strict: false });
+    }
   }
 
   /* -------------------------------------------- */
@@ -222,7 +229,7 @@ export default class WeaponData extends ItemDataModel.mixin(
     if ( this.hasRange ) {
       const units = this.range.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
       const parts = [this.range.value, this.range.long !== this.range.value ? this.range.long : null].filter(_ => _);
-      parts.push(formatDistance(parts.pop(), units));
+      parts.push(formatLength(parts.pop(), units));
       labels.range = parts.filterJoin("/");
     } else labels.range = game.i18n.localize("DND5E.None");
   }

@@ -845,21 +845,95 @@ DND5E.toolIds = new Proxy(DND5E.tools, {
 });
 
 /* -------------------------------------------- */
+/*  Time                                        */
+/* -------------------------------------------- */
+
+/**
+ * @typedef {object} TimeUnitConfiguration
+ * @property {string} label            Localized label for this unit.
+ * @property {string} [counted]        Localization path for counted plural forms. Only necessary if non-supported unit
+ *                                     or using non-standard name for a supported unit. List of supported units can be
+ *                                     found here: https://tc39.es/ecma402/#table-sanctioned-single-unit-identifiers
+ * @property {number} conversion       Conversion multiplier used to converting between units.
+ * @property {boolean} [combat=false]  Is this a combat-specific time unit?
+ * @property {boolean} [option=true]   Should this be available when users can select from a list of units?
+ */
+
+/**
+ * Configuration for time units available to the system.
+ * @enum {TimeUnitConfiguration}
+ */
+DND5E.timeUnits = {
+  turn: {
+    label: "DND5E.UNITS.TIME.Turn.Label",
+    counted: "DND5E.UNITS.TIME.Turn.Counted",
+    conversion: .1,
+    combat: true
+  },
+  round: {
+    label: "DND5E.UNITS.TIME.Round.Label",
+    counted: "DND5E.UNITS.TIME.Round.Counted",
+    conversion: .1,
+    combat: true
+  },
+  second: {
+    label: "DND5E.UNITS.TIME.Second.Label",
+    conversion: 1 / 60,
+    option: false
+  },
+  minute: {
+    label: "DND5E.UNITS.TIME.Minute.Label",
+    conversion: 1
+  },
+  hour: {
+    label: "DND5E.UNITS.TIME.Hour.Label",
+    conversion: 60
+  },
+  day: {
+    label: "DND5E.UNITS.TIME.Day.Label",
+    conversion: 1_440
+  },
+  week: {
+    label: "DND5E.UNITS.TIME.Week.Label",
+    conversion: 10_080,
+    option: false
+  },
+  month: {
+    label: "DND5E.UNITS.TIME.Month.Label",
+    conversion: 43_200
+  },
+  year: {
+    label: "DND5E.UNITS.TIME.Year.Label",
+    conversion: 525_600
+  }
+};
+preLocalize("timeUnits", { key: "label" });
+
+/* -------------------------------------------- */
 
 /**
  * Time periods that accept a numeric value.
  * @enum {string}
  */
-DND5E.scalarTimePeriods = {
-  turn: "DND5E.TimeTurn",
-  round: "DND5E.TimeRound",
-  minute: "DND5E.TimeMinute",
-  hour: "DND5E.TimeHour",
-  day: "DND5E.TimeDay",
-  month: "DND5E.TimeMonth",
-  year: "DND5E.TimeYear"
-};
-preLocalize("scalarTimePeriods");
+DND5E.scalarTimePeriods = new Proxy(DND5E.timeUnits, {
+  get(target, prop) {
+    return target[prop]?.label;
+  },
+  has(target, key) {
+    return target[key] && target[key].option !== false;
+  },
+  set(target, prop, value) {
+    foundry.utils.logCompatibilityWarning(
+      "Appending to CONFIG.DND5E.scalarTimePeriods is deprecated, use CONFIG.DND5E.timeUnits instead.",
+      { since: "DnD5e 4.2", until: "DnD5e 4.4", once: true }
+    );
+    target[prop] ??= {};
+    target[prop].label = value;
+  },
+  ownKeys(target) {
+    return Object.keys(target).filter(k => target[k]?.option !== false);
+  }
+});
 
 /* -------------------------------------------- */
 
@@ -924,7 +998,7 @@ DND5E.abilityActivationTypes = {
   day: DND5E.timePeriods.day,
   legendary: "DND5E.LegendaryAction.Label",
   mythic: "DND5E.MythicActionLabel",
-  lair: "DND5E.LairActionLabel",
+  lair: "DND5E.LAIR.Action.Label",
   crew: "DND5E.VehicleCrewAction"
 };
 preLocalize("abilityActivationTypes");
@@ -997,7 +1071,7 @@ DND5E.activityActivationTypes = {
     scalar: true
   },
   lair: {
-    label: "DND5E.LairActionLabel",
+    label: "DND5E.LAIR.Action.Label",
     group: "DND5E.ACTIVATION.Category.Monster"
   },
   crew: {
@@ -1403,9 +1477,10 @@ preLocalize("itemRarity");
  * Configuration data for limited use periods.
  *
  * @typedef {object} LimitedUsePeriodConfiguration
- * @property {string} label           Localized label.
- * @property {string} abbreviation    Shorthand form of the label.
- * @property {boolean} [formula]      Whether this limited use period restores charges via formula.
+ * @property {string} label                Localized label.
+ * @property {string}  abbreviation        Shorthand form of the label.
+ * @property {"combat"|"special"} [group]  Grouping if outside the normal "time" group.
+ * @property {boolean} [formula]           Whether this limited use period restores charges via formula.
  */
 
 /**
@@ -1414,17 +1489,18 @@ preLocalize("itemRarity");
  */
 DND5E.limitedUsePeriods = {
   lr: {
-    label: "DND5E.UsesPeriods.Lr",
-    abbreviation: "DND5E.UsesPeriods.LrAbbreviation"
+    label: "DND5E.USES.Recovery.Period.LongRest.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.LongRest.Abbreviation"
   },
   sr: {
-    label: "DND5E.UsesPeriods.Sr",
-    abbreviation: "DND5E.UsesPeriods.SrAbbreviation"
+    label: "DND5E.USES.Recovery.Period.ShortRest.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.ShortRest.Abbreviation"
   },
   day: {
-    label: "DND5E.UsesPeriods.Day",
-    abbreviation: "DND5E.UsesPeriods.DayAbbreviation"
+    label: "DND5E.USES.Recovery.Period.Day.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.Day.Label"
   },
+  // TODO: Remove with DnD5e 4.4
   charges: {
     label: "DND5E.UsesPeriods.Charges",
     abbreviation: "DND5E.UsesPeriods.ChargesAbbreviation",
@@ -1432,17 +1508,50 @@ DND5E.limitedUsePeriods = {
     deprecated: true
   },
   dawn: {
-    label: "DND5E.UsesPeriods.Dawn",
-    abbreviation: "DND5E.UsesPeriods.DawnAbbreviation",
+    label: "DND5E.USES.Recovery.Period.Dawn.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.Dawn.Label",
     formula: true
   },
   dusk: {
-    label: "DND5E.UsesPeriods.Dusk",
-    abbreviation: "DND5E.UsesPeriods.DuskAbbreviation",
+    label: "DND5E.USES.Recovery.Period.Dusk.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.Dusk.Label",
     formula: true
+  },
+  initiative: {
+    label: "DND5E.USES.Recovery.Period.Initiative.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.Initiative.Label",
+    type: "special"
+  },
+  turnStart: {
+    label: "DND5E.USES.Recovery.Period.TurnStart.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.TurnStart.Abbreviation",
+    type: "combat"
+  },
+  turnEnd: {
+    label: "DND5E.USES.Recovery.Period.TurnEnd.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.TurnEnd.Abbreviation",
+    type: "combat"
+  },
+  turn: {
+    label: "DND5E.USES.Recovery.Period.Turn.Label",
+    abbreviation: "DND5E.USES.Recovery.Period.Turn.Label",
+    type: "combat"
   }
 };
 preLocalize("limitedUsePeriods", { keys: ["label", "abbreviation"] });
+
+Object.defineProperty(DND5E.limitedUsePeriods, "recoveryOptions", {
+  get() {
+    return [
+      ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
+        .filter(([, config]) => !config.deprecated)
+        .map(([value, { label, type }]) => ({
+          value, label, group: game.i18n.localize(`DND5E.USES.Recovery.${type?.capitalize() ?? "Time"}`)
+        })),
+      { value: "recharge", label: game.i18n.localize("DND5E.USES.Recovery.Recharge.Label") }
+    ];
+  }
+});
 
 /* -------------------------------------------- */
 
@@ -1452,13 +1561,13 @@ preLocalize("limitedUsePeriods", { keys: ["label", "abbreviation"] });
  */
 DND5E.enchantmentPeriods = {
   sr: {
-    label: "DND5E.UsesPeriods.Sr"
+    label: "DND5E.ENCHANTMENT.Period.ShortRest"
   },
   lr: {
-    label: "DND5E.UsesPeriods.Lr"
+    label: "DND5E.ENCHANTMENT.Period.LongRest"
   },
   atwill: {
-    label: "DND5E.UsesPeriods.AtWill"
+    label: "DND5E.ENCHANTMENT.Period.AtWill"
   }
 };
 preLocalize("enchantmentPeriods", { key: "label" });
@@ -1810,6 +1919,9 @@ DND5E.featureTypes = {
       charm: "DND5E.Feature.SupernaturalGift.Charm",
       epicBoon: "DND5E.Feature.SupernaturalGift.EpicBoon"
     }
+  },
+  vehicle: {
+    label: "DND5E.Feature.Vehicle.Label"
   }
 };
 preLocalize("featureTypes", { key: "label" });
@@ -2374,6 +2486,10 @@ DND5E.defaultUnits = {
     imperial: "ft",
     metric: "m"
   },
+  volume: {
+    imperial: "cubicFoot",
+    metric: "liter"
+  },
   weight: {
     imperial: "lb",
     metric: "kg"
@@ -2460,6 +2576,29 @@ DND5E.distanceUnits = {
   ...DND5E.rangeTypes
 };
 preLocalize("distanceUnits");
+
+/* -------------------------------------------- */
+
+/**
+ * The valid units for measurement of volume.
+ * @enum {UnitConfiguration}
+ */
+DND5E.volumeUnits = {
+  cubicFoot: {
+    label: "DND5E.UNITS.VOLUME.CubicFoot.Label",
+    abbreviation: "DND5E.UNITS.Volume.CubicFoot.Abbreviation",
+    counted: "DND5E.UNITS.Volume.CubicFoot.Counted",
+    conversion: 1,
+    type: "imperial"
+  },
+  liter: {
+    label: "DND5E.UNITS.VOLUME.Liter.Label",
+    abbreviation: "DND5E.UNITS.Volume.Liter.Abbreviation",
+    conversion: 1 / 28.317,
+    type: "metric"
+  }
+};
+preLocalize("volumeUnits", { keys: ["label", "abbreviation"] });
 
 /* -------------------------------------------- */
 
@@ -2762,13 +2901,14 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
  * Configuration data for rest types.
  *
  * @typedef {object} RestConfiguration
- * @property {Record<string, number>} duration    Duration of different rest variants in minutes.
- * @property {boolean} recoverHitDice             Should hit dice be recovered during this rest?
- * @property {boolean} recoverHitPoints           Should hit points be recovered during this rest?
- * @property {string[]} recoverPeriods            What recovery periods should be applied when this rest is taken. The
- *                                                ordering of the periods determines which is applied if more than one
- *                                                recovery profile is found.
- * @property {Set<string>} recoverSpellSlotTypes  Types of spellcasting slots to recover during this rest.
+ * @property {Record<string, number>} duration      Duration of different rest variants in minutes.
+ * @property {string} label                         Localized label for the rest type.
+ * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
+ * @property {boolean} [recoverHitPoints]           Should hit points be recovered during this rest?
+ * @property {string[]} [recoverPeriods]            What recovery periods should be applied when this rest is taken. The
+ *                                                  ordering of the periods determines which is applied if more than one
+ *                                                  recovery profile is found.
+ * @property {Set<string>} [recoverSpellSlotTypes]  Types of spellcasting slots to recover during this rest.
  */
 
 /**
@@ -2782,21 +2922,24 @@ DND5E.restTypes = {
       gritty: 480,
       epic: 1
     },
+    label: "DND5E.REST.Short.Label",
     recoverPeriods: ["sr"],
     recoverSpellSlotTypes: new Set(["pact"])
   },
   long: {
     duration: {
       normal: 480,
-      gritty: 10080,
+      gritty: 10_080,
       epic: 60
     },
+    label: "DND5E.REST.Long.Label",
     recoverHitDice: true,
     recoverHitPoints: true,
     recoverPeriods: ["lr", "sr"],
     recoverSpellSlotTypes: new Set(["leveled", "pact"])
   }
 };
+preLocalize("restTypes", { key: "label" });
 
 /* -------------------------------------------- */
 
@@ -3407,7 +3550,9 @@ DND5E.consumableResources = [
  *                                 but acts as a status effect?
  * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
  * @property {{ rolls: number, speed: number }} [reduction]  Amount D20 Tests & Speed are reduced per exhaustion level
- *                                                           when using the modern rules.
+ *                                                           when using the modern rules. Speed reduction is measured
+ *                                                           in the default imperial units and converted to metric
+ *                                                           if necessary.
  */
 
 /**
@@ -3743,6 +3888,58 @@ preLocalize("communicationTypes", { key: "label" });
 /* -------------------------------------------- */
 
 /**
+ * @typedef HabitatConfiguration5e
+ * @property {string} label        The human-readable habitat name.
+ * @property {boolean} [subtypes]  Whether this habitat is divided into sub-types.
+ */
+
+/**
+ * NPC habitats.
+ * @type {Record<string, HabitatConfiguration5e>}
+ */
+DND5E.habitats = {
+  any: {
+    label: "DND5E.Habitat.Categories.Any"
+  }
+};
+preLocalize("habitats", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef TreasureConfiguration5e
+ * @property {string} label  The human-readable treasure category name.
+ */
+
+/**
+ * NPC Treasure
+ * @type {Record<string, TreasureConfiguration5e>}
+ */
+DND5E.treasure = {
+  any: {
+    label: "DND5E.Treasure.Categories.Any"
+  },
+  arcana: {
+    label: "DND5E.Treasure.Categories.Arcana"
+  },
+  armaments: {
+    label: "DND5E.Treasure.Categories.Armaments"
+  },
+  implements: {
+    label: "DND5E.Treasure.Categories.Implements"
+  },
+  individual: {
+    label: "DND5E.Treasure.Categories.Individual"
+  },
+  relics: {
+    label: "DND5E.Treasure.Categories.Relics"
+  }
+};
+preLocalize("treasure", { key: "label" });
+
+/* -------------------------------------------- */
+
+/**
  * Maximum allowed character level.
  * @type {number}
  */
@@ -3925,24 +4122,24 @@ preLocalize("traits", { keys: ["labels.title", "labels.all"] });
  */
 DND5E.traitModes = {
   default: {
-    label: "DND5E.AdvancementTraitModeDefaultLabel",
-    hint: "DND5E.AdvancementTraitModeDefaultHint"
+    label: "DND5E.ADVANCEMENT.Trait.Mode.Default.Label",
+    hint: "DND5E.ADVANCEMENT.Trait.Mode.Default.Hint"
   },
   expertise: {
-    label: "DND5E.AdvancementTraitModeExpertiseLabel",
-    hint: "DND5E.AdvancementTraitModeExpertiseHint"
+    label: "DND5E.ADVANCEMENT.Trait.Mode.Expertise.Label",
+    hint: "DND5E.ADVANCEMENT.Trait.Mode.Expertise.Hint"
   },
   forcedExpertise: {
-    label: "DND5E.AdvancementTraitModeForceLabel",
-    hint: "DND5E.AdvancementTraitModeForceHint"
+    label: "DND5E.ADVANCEMENT.Trait.Mode.Force.Label",
+    hint: "DND5E.ADVANCEMENT.Trait.Mode.Force.Hint"
   },
   upgrade: {
-    label: "DND5E.AdvancementTraitModeUpgradeLabel",
-    hint: "DND5E.AdvancementTraitModeUpgradeHint"
+    label: "DND5E.ADVANCEMENT.Trait.Mode.Upgrade.Label",
+    hint: "DND5E.ADVANCEMENT.Trait.Mode.Upgrade.Hint"
   },
   mastery: {
-    label: "DND5E.AdvancementTraitModeMasteryLabel",
-    hint: "DND5E.AdvancementTraitModeMasteryHint"
+    label: "DND5E.ADVANCEMENT.Trait.Mode.Mastery.Label",
+    hint: "DND5E.ADVANCEMENT.Trait.Mode.Mastery.Hint"
   }
 };
 preLocalize("traitModes", { keys: ["label", "hint"] });
@@ -4150,7 +4347,7 @@ const _ALL_ITEM_TYPES = ["background", "class", "race", "subclass"];
 DND5E.advancementTypes = {
   AbilityScoreImprovement: {
     documentClass: advancement.AbilityScoreImprovementAdvancement,
-    validItemTypes: new Set(["background", "class", "race"])
+    validItemTypes: new Set(["background", "class", "race", "feat"])
   },
   HitPoints: {
     documentClass: advancement.HitPointsAdvancement,

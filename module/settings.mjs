@@ -199,6 +199,16 @@ export function registerSystemSettings() {
     requiresReload: true
   });
 
+  // Loyalty
+  game.settings.register("dnd5e", "loyaltyScore", {
+    name: "SETTINGS.DND5E.LOYALTY.Name",
+    hint: "SETTINGS.DND5E.LOYALTY.Hint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Apply Dexterity as Initiative Tiebreaker
   game.settings.register("dnd5e", "initiativeDexTiebreaker", {
     name: "SETTINGS.5eInitTBN",
@@ -349,6 +359,16 @@ export function registerSystemSettings() {
   game.settings.register("dnd5e", "metricLengthUnits", {
     name: "SETTINGS.DND5E.METRIC.LengthUnits.Name",
     hint: "SETTINGS.DND5E.METRIC.LengthUnits.Hint",
+    scope: "world",
+    config: true,
+    type: Boolean,
+    default: false
+  });
+
+  // Metric Volume Weights
+  game.settings.register("dnd5e", "metricVolumeUnits", {
+    name: "SETTINGS.DND5E.METRIC.VolumeUnits.Name",
+    hint: "SETTINGS.DND5E.METRIC.VolumeUnits.Hint",
     scope: "world",
     config: true,
     type: Boolean,

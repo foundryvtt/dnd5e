@@ -42,14 +42,14 @@ export default class HitPointsFlow extends AdvancementFlow {
 
   /** @inheritDoc */
   activateListeners(html) {
-    this.form.querySelector(".averageCheckbox")?.addEventListener("change", event => {
-      this.form.querySelector(".rollResult").disabled = event.target.checked;
-      this.form.querySelector(".rollButton").disabled = event.target.checked;
+    this.form.querySelector(".average-checkbox")?.addEventListener("change", event => {
+      this.form.querySelector(".roll-result").disabled = event.target.checked;
+      this.form.querySelector(".roll-button").disabled = event.target.checked;
       this._updateRollResult();
     });
-    this.form.querySelector(".rollButton")?.addEventListener("click", async () => {
+    this.form.querySelector(".roll-button")?.addEventListener("click", async () => {
       const roll = await this.advancement.actor.rollClassHitPoints(this.advancement.item);
-      this.form.querySelector(".rollResult").value = roll.total;
+      this.form.querySelector(".roll-result").value = roll.total;
     });
     this._updateRollResult();
   }

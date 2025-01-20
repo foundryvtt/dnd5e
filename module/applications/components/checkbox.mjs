@@ -130,8 +130,6 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
 
   set checked(checked) {
     this.toggleAttribute("checked", checked);
-    this.dispatchEvent(new Event("input", { bubbles: true, cancelable: true }));
-    this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
     this._refresh();
   }
 
@@ -139,7 +137,7 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
 
   /** @override */
   get value() {
-    return super.value;
+    return this.checked ? super.value : undefined;
   }
 
   /**
@@ -240,5 +238,7 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
   _onClick(event) {
     event.preventDefault();
     this.checked = !this.checked;
+    this.dispatchEvent(new Event("input", { bubbles: true, cancelable: true }));
+    this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
   }
 }

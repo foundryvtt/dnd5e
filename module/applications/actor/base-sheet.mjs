@@ -1,6 +1,6 @@
 import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
-import { defaultUnits, formatDistance, splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, formatLength, splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
@@ -16,7 +16,9 @@ import ActorSheetMixin from "./sheet-mixin.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
 import ConcentrationConfig from "./config/concentration-config.mjs";
+import DeathConfig from "./config/death-config.mjs";
 import DamagesConfig from "./config/damages-config.mjs";
+import HabitatConfig from "./config/habitat-config.mjs";
 import HitDiceConfig from "./config/hit-dice-config.mjs";
 import HitPointsConfig from "./config/hit-points-config.mjs";
 import InitiativeConfig from "./config/initiative-config.mjs";
@@ -26,6 +28,7 @@ import SkillsConfig from "./config/skills-config.mjs";
 import SpellSlotsConfig from "./config/spell-slots-config.mjs";
 import ToolsConfig from "./config/tools-config.mjs";
 import TraitsConfig from "./config/traits-config.mjs";
+import TreasureConfig from "./config/treasure-config.mjs";
 import WeaponsConfig from "./config/weapons-config.mjs";
 
 /**
@@ -260,7 +263,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( largestPrimary ) {
       let primary = speeds.shift();
       return {
-        primary: formatDistance(primary?.[1], units),
+        primary: formatLength(primary?.[1], units),
         special: speeds.map(s => s[1]).join(", ")
       };
     }
@@ -268,7 +271,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Case 2: Walk as primary
     else {
       return {
-        primary: formatDistance(movement.walk ?? 0, units),
+        primary: formatLength(movement.walk ?? 0, units),
         special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
       };
     }
@@ -289,7 +292,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses[k] ?? 0;
       if ( v === 0 ) continue;
-      tags[k] = `${game.i18n.localize(label)} ${formatDistance(v, units)}`;
+      tags[k] = `${game.i18n.localize(label)} ${formatLength(v, units)}`;
     }
     if ( senses.special ) splitSemicolons(senses.special).forEach((c, i) => tags[`custom${i + 1}`] = c);
     return tags;
@@ -756,6 +759,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       case "armor":
         app = new ArmorClassConfig({ document: this.actor });
         break;
+      case "death":
+        app = new DeathConfig({ document: this.actor });
+        break;
+      case "habitat":
+        app = new HabitatConfig({ document: this.actor });
+        break;
       case "hitDice":
         app = new HitDiceConfig({ document: this.actor });
         break;
@@ -768,6 +777,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       case "movement":
       case "senses":
         app = new MovementSensesConfig({ document: this.actor, type: button.dataset.action });
+        break;
+      case "treasure":
+        app = new TreasureConfig({ document: this.actor });
         break;
       case "flags":
         app = new ActorSheetFlags(this.actor);
@@ -1240,6 +1252,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     event.preventDefault();
     const trait = event.currentTarget.dataset.trait;
     const options = { document: this.actor, trait };
+    if ( trait === "ci" ) options.position = { width: 400 };
     switch ( trait ) {
       case "di":
       case "dm":

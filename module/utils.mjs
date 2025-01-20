@@ -18,13 +18,13 @@ export function formatCR(value, { narrow=true }={}) {
 /* -------------------------------------------- */
 
 /**
- * Form a number using the provided distance unit.
- * @param {number} value         The distance to format.
- * @param {string} unit          Distance unit as defined in `CONFIG.DND5E.movementUnits`.
+ * Form a number using the provided length unit.
+ * @param {number} value         The length to format.
+ * @param {string} unit          Length unit as defined in `CONFIG.DND5E.movementUnits`.
  * @param {object} [options={}]  Formatting options passed to `formatNumber`.
  * @returns {string}
  */
-export function formatDistance(value, unit, options={}) {
+export function formatLength(value, unit, options={}) {
   return _formatSystemUnits(value, unit, CONFIG.DND5E.movementUnits[unit], options);
 }
 
@@ -47,12 +47,14 @@ export function formatModifier(mod) {
  * @param {number} value    The value to format.
  * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
  * @param {boolean} [options.numerals]  Format the number as roman numerals.
+ * @param {boolean} [options.ordinal]   Use ordinal formatting.
  * @param {boolean} [options.words]     Write out number as full word, if possible.
  * @returns {string}
  */
-export function formatNumber(value, { numerals, words, ...options }={}) {
+export function formatNumber(value, { numerals, ordinal, words, ...options }={}) {
   if ( words && game.i18n.has(`DND5E.NUMBER.${value}`, false) ) return game.i18n.localize(`DND5E.NUMBER.${value}`);
   if ( numerals ) return _formatNumberAsNumerals(value);
+  if ( ordinal ) return _formatNumberAsOrdinal(value, options);
   const formatter = new Intl.NumberFormat(game.i18n.lang, options);
   return formatter.format(value);
 }
@@ -79,6 +81,20 @@ function _formatNumberAsNumerals(n) {
     out += numeral.repeat(quotient);
   }
   return out;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Format a number using an ordinal format.
+ * @param {number} n        The number to format.
+ * @param {object} options  Options forwarded to `formatNumber`.
+ * @returns {string}
+ */
+function _formatNumberAsOrdinal(n, options={}) {
+  const pr = getPluralRules({ type: "ordinal" }).select(n);
+  const number = formatNumber(n, options);
+  return game.i18n.has(`DND5E.ORDINAL.${pr}`) ? game.i18n.format(`DND5E.ORDINAL.${pr}`, { number }) : number;
 }
 
 /* -------------------------------------------- */
@@ -118,6 +134,47 @@ export function formatRange(min, max, options) {
  */
 export function formatText(value) {
   return new Handlebars.SafeString(value?.replaceAll("\n", "<br>") ?? "");
+}
+
+/* -------------------------------------------- */
+
+/**
+ * A helper function that formats a time in a human-readable format.
+ * @param {number} value         Time to display.
+ * @param {string} unit          Units as defined in `CONFIG.DND5E.timeUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatTime(value, unit, options={}) {
+  options.maximumFractionDigits ??= 0;
+  options.unitDisplay ??= "long";
+  const config = CONFIG.DND5E.timeUnits[unit];
+  if ( config?.counted ) {
+    if ( (options.unitDisplay === "narrow") && game.i18n.has(`${config.counted}.narrow`) ) {
+      return game.i18n.format(`${config.counted}.narrow`, { number: formatNumber(value, options) });
+    } else {
+      const pr = new Intl.PluralRules(game.i18n.lang);
+      return game.i18n.format(`${config.counted}.${pr.select(value)}`, { number: formatNumber(value, options) });
+    }
+  }
+  try {
+    return formatNumber(value, { ...options, style: "unit", unit });
+  } catch(err) {
+    return formatNumber(value, options);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Form a number using the provided volume unit.
+ * @param {number} value         The volume to format.
+ * @param {string} unit          Volume unit as defined in `CONFIG.DND5E.volumeUnits`.
+ * @param {object} [options={}]  Formatting options passed to `formatNumber`.
+ * @returns {string}
+ */
+export function formatVolume(value, unit, options={}) {
+  return _formatSystemUnits(value, unit, CONFIG.DND5E.volumeUnits[unit], options);
 }
 
 /* -------------------------------------------- */
@@ -502,20 +559,85 @@ export function getSceneTargets() {
 /* -------------------------------------------- */
 
 /**
+ * Convert the provided length to another unit.
+ * @param {number} value                   The length being converted.
+ * @param {string} from                    The initial units.
+ * @param {string} to                      The final units.
+ * @param {object} [options={}]
+ * @param {boolean} [options.strict=true]  Throw an error if either unit isn't found.
+ * @returns {number}
+ */
+export function convertLength(value, from, to, { strict=true }={}) {
+  const message = unit => `Length unit ${unit} not defined in CONFIG.DND5E.movementUnits`;
+  return _convertSystemUnits(value, from, to, CONFIG.DND5E.movementUnits, { message, strict });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Convert the provided time value to another unit. If no final unit is provided, then will convert it to the largest
+ * unit that can still represent the value as a whole number.
+ * @param {number} value                    The time being converted.
+ * @param {string} from                     The initial unit as defined in `CONFIG.DND5E.timeUnits`.
+ * @param {object} [options={}]
+ * @param {boolean} [options.combat=false]  Use combat units when auto-selecting units, rather than normal units.
+ * @param {boolean} [options.strict=true]   Throw an error if from unit isn't found.
+ * @param {string} [options.to]             The final units, if explicitly provided.
+ * @returns {{ value: number, unit: string }}
+ */
+export function convertTime(value, from, { combat=false, strict=true, to }={}) {
+  const base = value * (CONFIG.DND5E.timeUnits[from]?.conversion ?? 1);
+  if ( !to ) {
+    // Find unit with largest conversion value that can still display the value
+    const unitOptions = Object.entries(CONFIG.DND5E.timeUnits)
+      .reduce((arr, [key, v]) => {
+        if ( ((v.combat ?? false) === combat) && ((base % v.conversion === 0) || (base >= v.conversion * 2)) ) {
+          arr.push({ key, conversion: v.conversion });
+        }
+        return arr;
+      }, [])
+      .sort((lhs, rhs) => rhs.conversion - lhs.conversion);
+    to = unitOptions[0]?.key ?? from;
+  }
+
+  const message = unit => `Time unit ${unit} not defined in CONFIG.DND5E.timeUnits`;
+  return { value: _convertSystemUnits(value, from, to, CONFIG.DND5E.timeUnits, { message, strict }), unit: to };
+}
+
+/* -------------------------------------------- */
+
+/**
  * Convert the provided weight to another unit.
- * @param {number} value  The weight being converted.
- * @param {string} from   The initial units.
- * @param {string} to     The final units.
+ * @param {number} value                   The weight being converted.
+ * @param {string} from                    The initial unit as defined in `CONFIG.DND5E.weightUnits`.
+ * @param {string} to                      The final units.
+ * @param {object} [options={}]
+ * @param {boolean} [options.strict=true]  Throw an error if either unit isn't found.
  * @returns {number}      Weight in the specified units.
  */
-export function convertWeight(value, from, to) {
-  if ( from === to ) return value;
+export function convertWeight(value, from, to, { strict=true }={}) {
   const message = unit => `Weight unit ${unit} not defined in CONFIG.DND5E.weightUnits`;
-  if ( !CONFIG.DND5E.weightUnits[from] ) throw new Error(message(from));
-  if ( !CONFIG.DND5E.weightUnits[to] ) throw new Error(message(to));
-  return value
-    * CONFIG.DND5E.weightUnits[from].conversion
-    / CONFIG.DND5E.weightUnits[to].conversion;
+  return _convertSystemUnits(value, from, to, CONFIG.DND5E.weightUnits, { message, strict });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Convert from one unit to another using one of core's built-in unit types.
+ * @param {number} value                                Value to display.
+ * @param {string} from                                 The initial unit.
+ * @param {string} to                                   The final unit.
+ * @param {UnitConfiguration} config                    Configuration data for the unit.
+ * @param {object} options
+ * @param {function(string): string} [options.message]  Method used to produce the error message if unit not found.
+ * @param {boolean} [options.strict]                    Throw an error if either unit isn't found.
+ * @returns {string}
+ */
+function _convertSystemUnits(value, from, to, config, { message, strict }) {
+  if ( from === to ) return value;
+  if ( strict && !config[from] ) throw new Error(message(from));
+  if ( strict && !config[to] ) throw new Error(message(to));
+  return value * (config[from]?.conversion ?? 1) / (config[to]?.conversion ?? 1);
 }
 
 /* -------------------------------------------- */
@@ -944,7 +1066,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   }
 
   if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
-    return game.i18n.localize("DND5E.ExperiencePointsValue");
+    return game.i18n.localize("DND5E.ExperiencePoints.Value");
   }
 
   if ( attr.startsWith(".") && actor ) {
@@ -1015,9 +1137,21 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
 /* -------------------------------------------- */
 
 /**
+ * Perform pre-localization on the contents of a SchemaField. Necessary because the `localizeSchema` method
+ * on `Localization` is private.
+ * @param {SchemaField} schema
+ * @param {string[]} prefixes
+ */
+export function localizeSchema(schema, prefixes) {
+  Localization.localizeDataModel({ schema }, { prefixes });
+}
+
+/* -------------------------------------------- */
+
+/**
  * Split a semi-colon-separated list and clean out any empty entries.
  * @param {string} input
- * @returns {string}
+ * @returns {string[]}
  */
 export function splitSemicolons(input) {
   return input.split(";").map(t => t.trim()).filter(t => t);

@@ -63,6 +63,27 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Should this consumption only be performed during initiative? This will return `true` if consuming activity or item
+   * uses and those uses only recover on "combat" periods.
+   * @type {boolean}
+   */
+  get combatOnly() {
+    let recovery;
+    switch ( this.type ) {
+      case "activityUses":
+        recovery = this.activity.uses.recovery;
+        break;
+      case "itemUses":
+        recovery = (this.target ? this.actor?.items.get(this.target) : this.item)?.system.uses.recovery;
+        break;
+      default: return false;
+    }
+    return recovery?.every(r => CONFIG.DND5E.limitedUsePeriods[r.period]?.type === "combat") ?? false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Item to which this consumption target's activity belongs.
    * @type {Item5e}
    */

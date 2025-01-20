@@ -146,7 +146,7 @@ export default class PseudoDocumentSheet extends Application5e {
 
     // Add document ID copy
     const copyLabel = game.i18n.localize("SHEETS.CopyUuid");
-    const copyId = `<button type="button" class="header-control fa-solid fa-passport" data-action="copyUuid"
+    const copyId = `<button type="button" class="header-control fa-solid fa-passport icon" data-action="copyUuid"
                             data-tooltip="${copyLabel}" aria-label="${copyLabel}"></button>`;
     this.window.close.insertAdjacentHTML("beforebegin", copyId);
 
@@ -216,5 +216,23 @@ export default class PseudoDocumentSheet extends Application5e {
    */
   async _processSubmitData(event, submitData) {
     await this.document.update(submitData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Programmatically submit a PseudoDocumentSheet instance, providing additional data to be merged with form data.
+   * @param {object} options
+   * @param {object} [options.updateData]  Additional data merged with processed form data.
+   */
+  async submit({ updateData={} }={}) {
+    if ( !this.options.form?.handler ) throw new Error(
+      `The ${this.constructor.name} PseudoDocumentSheet does not support a single top-level form element.`
+    );
+    const event = new Event("submit", { cancelable: true });
+    const formData = new FormDataExtended(this.element);
+    const submitData = await this._prepareSubmitData(event, formData);
+    foundry.utils.mergeObject(submitData, updateData, { inplace: true });
+    await this._processSubmitData(event, submitData);
   }
 }

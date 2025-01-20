@@ -4,8 +4,9 @@
 
 .sheet.dnd5e2-journal {
   .window-resizable-handle {
-    bottom: 1px;
-    right: 1px;
+    bottom: 2px;
+    right: 2px;
+    padding: 0;
   }
 
   &.journal-entry .scrollable, &.journal-entry-page.editor-content {
@@ -381,7 +382,8 @@
     }
   }
 
-  a:is(.content-link, .inline-roll), a.roll-link-group .roll-link, :is(.roll-link-group, .reference-link) a {
+  a:is(.content-link, .inline-roll), a.roll-link-group .roll-link,
+  a.roll-link-group.roll-link, :is(.roll-link-group, .reference-link) a {
     background: transparent;
     border: none;
     text-decoration: underline currentcolor;

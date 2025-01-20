@@ -145,10 +145,12 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
    * @param {object} source  The candidate source data from which the model will be constructed.
    */
   static #migrateHitDice(source) {
-    if ( foundry.utils.getType(source.hitDice) === "string" ) {
+    if ( (foundry.utils.getType(source.hitDice) === "string") && (foundry.utils.getType(source.hd) !== "Object") ) {
       source.hd ??= {};
       source.hd.denomination = source.hitDice;
       source.hd.spent = source.hitDiceUsed ?? 0;
+      delete source.hitDice;
+      delete source.hitDiceUsed;
     }
   }
 

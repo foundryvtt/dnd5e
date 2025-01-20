@@ -51,6 +51,11 @@ export default class AdvancementFlow extends FormApplication {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  static _customElements = super._customElements.concat(["dnd5e-checkbox"]);
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   get id() {
     return `actor-${this.advancement.item.id}-advancement-${this.advancement.id}-${this.level}`;
   }

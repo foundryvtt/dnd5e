@@ -168,10 +168,15 @@ async function enrichAttack(config, label, options) {
   }
   config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
 
-  const activity = config.activity ? options.relativeTo?.system.activities?.get(config.activity)
-    : !config.formula ? options.relativeTo?.system.activities?.getByType("attack")[0] : null;
+  const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
+    : !config.formula ? options.relativeTo?.system?.activities?.getByType("attack")[0] : null;
 
   if ( activity ) {
+    if ( activity.type !== "attack" ) {
+      console.warn(`Attack enricher linked to non-attack activity when enriching ${config._input}`);
+      return null;
+    }
+
     config.activityUuid = activity.uuid;
     const attackConfig = activity.getAttackData({ attackMode: config.attackMode });
     config.formula = simplifyRollFormula(
@@ -186,7 +191,7 @@ async function enrichAttack(config, label, options) {
   }
 
   config.type = "attack";
-  if ( label ) return createRollLink(label, config);
+  if ( label ) return createRollLink(label, config, { classes: "roll-link-group roll-link" });
 
   let displayFormula = simplifyRollFormula(config.formula) || "+0";
   if ( !displayFormula.startsWith("+") && !displayFormula.startsWith("-") ) displayFormula = `+${displayFormula}`;
@@ -256,7 +261,7 @@ async function enrichAward(config, label, options) {
   }
   if ( parsed.xp ) entries.push(`
     <span class="award-entry">
-      ${formatNumber(parsed.xp)} ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
+      ${formatNumber(parsed.xp)} ${game.i18n.localize("DND5E.ExperiencePoints.Abbreviation")}
     </span>
   `);
 
@@ -360,6 +365,16 @@ async function enrichAward(config, label, options) {
  *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
  * </span>
  * ```
+ *
+ * @example Link an enricher to an check activity, either explicitly or automatically
+ * ```[[/check activity=RLQlsLo5InKHZadn]]``` or ```[[/check]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-type="check" data-ability="dex" data-dc="20" data-activity-uuid="...">
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20" inert></i> DC 20 Dexterity</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
+ * ```
  */
 async function enrichCheck(config, label, options) {
   config.skill = config.skill?.replaceAll("/", "|").split("|") ?? [];
@@ -376,6 +391,28 @@ async function enrichCheck(config, label, options) {
 
   const groups = new Map();
   let invalid = false;
+
+  const anything = config.ability || config.skill.length || config.tool.length;
+  const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
+    : !anything ? options.relativeTo?.system?.activities?.getByType("check")[0] : null;
+
+  if ( activity ) {
+    if ( activity.type !== "check" ) {
+      console.warn(`Check enricher linked to non-check activity when enriching ${config._input}.`);
+      return null;
+    }
+
+    if ( activity.check.ability ) config.ability = activity.check.ability;
+    config.activityUuid = activity.uuid;
+    config.dc = activity.check.dc.value;
+    config.skill = [];
+    config.tool = [];
+    for ( const associated of activity.check.associated ) {
+      if ( associated in CONFIG.DND5E.skills ) config.skill.push(associated);
+      else if ( associated in CONFIG.DND5E.tools ) config.tool.push(associated);
+    }
+    delete config.activity;
+  }
 
   // TODO: Support "spellcasting" ability
   let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[slugify(config.ability)];
@@ -417,7 +454,7 @@ async function enrichCheck(config, label, options) {
   }
 
   if ( !abilityConfig && !groups.size ) {
-    console.warn(`No ability provided while enriching ${config._input}.`);
+    console.warn(`No ability, skill, tool, or linked activity provided while enriching ${config._input}.`);
     invalid = true;
   }
 
@@ -548,6 +585,16 @@ function createCheckRequestButtons(dataset) {
  *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
  * </span>
  * ```
+ *
+ * @example Link an enricher to an save activity, either explicitly or automatically
+ * ```[[/save activity=RLQlsLo5InKHZadn]]``` or ```[[/save]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-type="save" data-ability="dex" data-dc="20" data-activity-uuid="...">
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20" inert></i> DC 20 Dexterity</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
+ * ```
  */
 async function enrichSave(config, label, options) {
   config.ability = config.ability?.replace("/", "|").split("|") ?? [];
@@ -561,8 +608,23 @@ async function enrichSave(config, label, options) {
     .filter(a => a in CONFIG.DND5E.enrichmentLookup.abilities)
     .map(a => CONFIG.DND5E.enrichmentLookup.abilities[a].key ?? a);
 
+  const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
+    : !config.ability.length ? options.relativeTo?.system?.activities?.getByType("save")[0] : null;
+
+  if ( activity ) {
+    if ( activity.type !== "save" ) {
+      console.warn(`Save enricher linked to non-save activity when enriching ${config._input}`);
+      return null;
+    }
+
+    config.ability = Array.from(activity.save.ability);
+    config.activityUuid = activity.uuid;
+    config.dc = activity.save.dc.value;
+    delete config.activity;
+  }
+
   if ( !config.ability.length && !config._isConcentration ) {
-    console.warn(`No ability found while enriching ${config._input}.`);
+    console.warn(`No ability or linked activity found while enriching ${config._input}.`);
     return null;
   }
 
@@ -698,23 +760,25 @@ async function enrichDamage(configs, label, options) {
   for ( const c of configs ) {
     const formulaParts = [];
     if ( c.activity ) config.activity = c.activity;
+    if ( c.attackMode ) config.attackMode = c.attackMode;
     if ( c.average ) config.average = c.average;
     if ( c.format ) config.format = c.format;
     if ( c.formula ) formulaParts.push(c.formula);
+    c.type = c.type?.replaceAll("/", "|").split("|") ?? [];
     for ( const value of c.values ) {
-      if ( value in CONFIG.DND5E.damageTypes ) c.type = value;
-      else if ( value in CONFIG.DND5E.healingTypes ) c.type = value;
+      if ( value in CONFIG.DND5E.damageTypes ) c.type.push(value);
+      else if ( value in CONFIG.DND5E.healingTypes ) c.type.push(value);
       else if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
       else if ( value === "average" ) config.average = true;
       else if ( value === "extended" ) config.format = "extended";
-      else if ( value === "temp" ) c.type = "temphp";
+      else if ( value === "temp" ) c.type.push("temphp");
       else formulaParts.push(value);
     }
     c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
-    c.type ??= configs._isHealing ? "healing" : null;
+    if ( configs._isHealing && !c.type.length ) c.type.push("healing");
     if ( c.formula ) {
       config.formulas.push(c.formula);
-      config.damageTypes.push(c.type);
+      config.damageTypes.push(c.type.join("|"));
     }
   }
   config.damageTypes = config.damageTypes.map(t => t?.replace("/", "|"));
@@ -725,10 +789,10 @@ async function enrichDamage(configs, label, options) {
     return null;
   }
 
-  let activity = options.relativeTo?.system.activities?.get(config.activity);
-  if ( !activity && !config.formula ) {
+  let activity = options.relativeTo?.system?.activities?.get(config.activity);
+  if ( !activity && !config.formulas.length ) {
     const types = configs._isHealing ? ["heal"] : ["attack", "damage", "save"];
-    for ( const a of options.relativeTo?.system.activities?.getByTypes(...types) ?? [] ) {
+    for ( const a of options.relativeTo?.system?.activities?.getByTypes(...types) ?? [] ) {
       if ( a.damage?.parts.length || a.healing?.formula ) {
         activity = a;
         break;
@@ -757,7 +821,9 @@ async function enrichDamage(configs, label, options) {
   const damageTypes = config.damageTypes.join("&");
 
   if ( !config.formulas.length ) return null;
-  if ( label ) return createRollLink(label, { ...config, formulas, damageTypes });
+  if ( label ) {
+    return createRollLink(label, { ...config, formulas, damageTypes }, { classes: "roll-link-group roll-link" });
+  }
 
   const parts = [];
   for ( const [idx, formula] of config.formulas.entries() ) {
@@ -842,7 +908,7 @@ function enrichLookup(config, fallback, options) {
     else if ( value.startsWith("@") ) keyPath ??= value;
   }
 
-  let activity = options.relativeTo?.system.activities?.get(config.activity);
+  let activity = options.relativeTo?.system?.activities?.get(config.activity);
   if ( config.activity && !activity ) {
     console.warn(`Activity not found when enriching ${config._input}.`);
     return null;

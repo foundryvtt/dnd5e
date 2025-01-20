@@ -6,6 +6,7 @@
 
     {{!-- Armor Class --}}
     {{ formField fields.armor.fields.value value=source.armor.value localize=true }}
+    {{ formField fields.cover value=source.cover options=coverOptions }}
 
     {{!-- Hit Points --}}
     <div class="form-group split-group">
@@ -27,7 +28,8 @@
 
         {{!-- Conditions --}}
         {{ formInput fields.hp.fields.conditions value=source.hp.conditions input=inputs.createTextInput
-                     placeholder=(localize "DND5E.HealthConditions") localize=true classes="full-width" }}
+                     placeholder=(localize "DND5E.VEHICLE.MOUNTABLE.FIELDS.hp.conditions.label") localize=true
+                     classes="full-width" }}
     </div>
 
     {{!-- Speed --}}
@@ -43,7 +45,8 @@
 
         {{!-- Conditions --}}
         {{ formInput fields.speed.fields.conditions value=source.speed.conditions input=inputs.createTextInput
-                     placeholder=(localize "DND5E.SpeedConditions") localize=true classes="full-width" }}
+                     placeholder=(localize "DND5E.VEHICLE.MOUNTABLE.FIELDS.speed.conditions.label") localize=true
+                     classes="full-width" }}
     </div>
     {{/if}}
 </fieldset>

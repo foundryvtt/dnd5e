@@ -1,5 +1,5 @@
 import * as Trait from "../../documents/actor/trait.mjs";
-import { formatDistance, formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
+import { formatLength, formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
 import Tabs5e from "../tabs.mjs";
 import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
 import ItemSheet5e2 from "../item/item-sheet-2.mjs";
@@ -198,6 +198,10 @@ export default function ActorSheetV2Mixin(Base) {
 
       context.effects.suppressed.info = context.effects.suppressed.info[0];
       context.hasConditions = true;
+      const sourceVersion = context.system.source?.rules;
+      context.modernRules = sourceVersion
+        ? sourceVersion === "2024"
+        : game.settings.get("dnd5e", "rulesVersion") === "modern";
 
       return context;
     }
@@ -355,7 +359,7 @@ export default function ActorSheetV2Mixin(Base) {
               distance: true,
               value: system.range.value,
               unit: CONFIG.DND5E.movementUnits[units].abbreviation,
-              parts: formatDistance(system.range.value, units, { parts: true })
+              parts: formatLength(system.range.value, units, { parts: true })
             };
           }
           else ctx.range = { distance: false };
@@ -440,6 +444,12 @@ export default function ActorSheetV2Mixin(Base) {
       ctx.activities = item.system.activities
         ?.filter(a => !item.getFlag("dnd5e", "riders.activity")?.includes(a.id))
         ?.map(this._prepareActivity.bind(this));
+
+      // Linked Uses
+      const cachedFor = fromUuidSync(item.flags.dnd5e?.cachedFor, { relative: this.actor, strict: false });
+      if ( cachedFor ) ctx.linkedUses = cachedFor.consumption?.targets.find(t => t.type === "activityUses")
+        ? cachedFor.uses : cachedFor.consumption?.targets.find(t => t.type === "itemUses")
+          ? cachedFor.item.system.uses : null;
     }
 
     /* -------------------------------------------- */
