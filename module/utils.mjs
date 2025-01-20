@@ -1075,7 +1075,8 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   let name;
   let type = "actor";
 
-  const getSchemaLabel = (attr, type) => {
+  const getSchemaLabel = (attr, type, doc) => {
+    if ( doc ) return doc.system.schema.getField(attr)?.label;
     for ( const model of Object.values(CONFIG[type].dataModels) ) {
       const field = model.schema.getField(attr);
       if ( field ) return field.label;
@@ -1101,7 +1102,18 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     if ( _attributeLabelCache.item.has(attr) ) label = _attributeLabelCache.item.get(attr);
     else if ( attr === "hd.spent" ) label = "DND5E.HitDice";
     else if ( attr === "uses.spent" ) label = "DND5E.Uses";
-    else label = getSchemaLabel(attr, "Item");
+    else label = getSchemaLabel(attr, "Item", item);
+  }
+
+  // Derived fields.
+  else if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
+  else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
+  else if ( attr === "attributes.spelldc" ) label = "DND5E.SpellDC";
+
+  // Abilities.
+  else if ( attr.startsWith("abilities.") ) {
+    const [, key] = attr.split(".");
+    label = game.i18n.format("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
   }
 
   // Skills.
@@ -1128,7 +1140,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   }
 
   // Attempt to find the attribute in a data model.
-  if ( !label ) label = getSchemaLabel(attr, "Actor");
+  if ( !label ) label = getSchemaLabel(attr, "Actor", actor);
 
   if ( label ) {
     label = game.i18n.localize(label);
