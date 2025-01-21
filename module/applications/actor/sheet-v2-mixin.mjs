@@ -215,14 +215,14 @@ export default function ActorSheetV2Mixin(Base) {
      * @returns {object}
      */
     _prepareFlags() {
+      const sections = [];
       const source = (this._mode === this.constructor.MODES.PLAY ? this.document : this.document._source);
       const flags = {
         classes: Object.values(this.document.classes)
           .map(cls => ({ value: cls.id, label: cls.name }))
           .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang)),
         data: source.flags?.dnd5e ?? {},
-        disabled: this._mode === this.constructor.MODES.PLAY,
-        sections: {}
+        disabled: this._mode === this.constructor.MODES.PLAY
       };
 
       // Character Flags
@@ -236,8 +236,8 @@ export default function ActorSheetV2Mixin(Base) {
         else if ( config.type === Number ) flag.field = new foundry.data.fields.NumberField(fieldOptions);
         else flag.fields = new foundry.data.fields.StringField(fieldOptions);
 
-        flags.sections[config.section] ??= [];
-        flags.sections[config.section].push(flag);
+        sections[config.section] ??= [];
+        sections[config.section].push(flag);
       }
 
       // Global Bonuses
@@ -247,8 +247,9 @@ export default function ActorSheetV2Mixin(Base) {
         else globals.push({ field, name: field.fieldPath, value: foundry.utils.getProperty(source, field.fieldPath) });
       };
       addBonus(this.document.system.schema.fields.bonuses);
-      if ( globals.length ) flags.sections[game.i18n.localize("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
+      if ( globals.length ) sections[game.i18n.localize("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
 
+      flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }))
       return flags;
     }
 

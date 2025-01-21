@@ -125,7 +125,9 @@ export default class ActorSheetFlags extends BaseConfigSheet {
   _getNPC() {
     return {
       important: {
-        field: new BooleanField({ label: "DND5E.NPC.Important.Label", hint: "DND5E.NPC.Important.Hint" }),
+        field: new BooleanField({
+          label: "DND5E.NPC.FIELDS.traits.important.label", hint: "DND5E.NPC.FIELDS.traits.important.hint"
+        }),
         name: "system.traits.important",
         value: this.document.system._source.traits.important
       }
