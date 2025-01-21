@@ -191,7 +191,6 @@ export default class ActivitiesTemplate extends SystemDataModel {
         delete source.uses.recovery;
       }
     }
-
     // If period is not blank, set an appropriate recovery type
     else if (source.uses?.per ) {
       if ( CONFIG.DND5E.limitedUsePeriods[source.uses?.per]?.formula && source.uses?.recovery ) {
@@ -205,12 +204,10 @@ export default class ActivitiesTemplate extends SystemDataModel {
         source.uses.recovery = [{ period: source.uses?.per, type: "recoverAll" }];
       }
     }
-    
     // Otherwise, check to see if recharge is set
     else if ( source.recharge?.value ) {
       source.uses.recovery = [{ period: "recharge", formula: source.recharge.value }];
     }
-    
     // Prevent a string value for uses recovery from being cleaned into a default recovery entry
     else if ( source.uses?.recovery === "" ) {
       delete source.uses.recovery;
