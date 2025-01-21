@@ -632,8 +632,8 @@
       "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>16 (2d10 + 5) <em>bludgeoning damage</em></strong>.</p>\n<p>If the target is a creature, it must succeed on a  <strong>DC 15 Constitution</strong> saving throw or have its hit point maximum reduced by an amount equal to the damage taken. The target dies if this attack reduces its hit point maximum to 0. The reduction lasts until removed by the greater restoration spell or other magic.</p>\n</section>\n<p>The Clay Golem attacks with its Slam. If the target is a creature, it must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>16 (2d10 + 5) <em>bludgeoning damage</em></strong>.</p><p>If the target is a creature, it must succeed on a  <strong>DC 15 Constitution</strong> saving throw or have its hit point maximum reduced by an amount equal to the damage taken. The target dies if this attack reduces its hit point maximum to 0. The reduction lasts until removed by the greater restoration spell or other magic.</p>",
+          "chat": "<p>The Clay Golem attacks with its Slam. If the target is a creature, it must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -909,10 +909,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676736,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!YOqhbf8WsX0jH9Fu.vEEJei0CNaNbfQ2w"
     },
@@ -923,8 +923,8 @@
       "img": "icons/skills/movement/feet-winged-boots-brown.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>Recharge 5-6.</p>\n</section>\n<p>Until the end of its next turn, the golem magically gains a +2 bonus to its AC, has advantage on Dexterity saving throws, and can use its slam attack as a bonus action.</p>",
-          "chat": ""
+          "value": "<p>Recharge 5-6.</p>",
+          "chat": "<p>Until the end of its next turn, the golem magically gains a +2 bonus to its AC, has advantage on Dexterity saving throws, and can use its slam attack as a bonus action.</p>"
         },
         "source": {
           "custom": "",
@@ -1050,10 +1050,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676736,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!YOqhbf8WsX0jH9Fu.GOADsI5dGE3ah0Vi"
     },
@@ -1123,8 +1123,8 @@
       "img": "icons/creatures/reptiles/lizard-mouth-glowing-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>Whenever the golem starts its turn with <strong>60 hit points</strong> or fewer, roll a d6. On a 6, the golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see.</p>\n<p>If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself. Once the golem goes berserk, it continues to do so until it is destroyed or regains all its<strong> hit points</strong>.</p>\n</section>\n<p>The golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself.</p>",
-          "chat": ""
+          "value": "<p>Whenever the golem starts its turn with <strong>60 hit points</strong> or fewer, roll a d6. On a 6, the golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see.</p><p>If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself. Once the golem goes berserk, it continues to do so until it is destroyed or regains all its<strong> hit points</strong>.</p>",
+          "chat": "<p>The golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself.</p>"
         },
         "source": {
           "custom": "",
@@ -1234,10 +1234,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676736,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!YOqhbf8WsX0jH9Fu.K5xMZVNv8m2Pw87E"
     },

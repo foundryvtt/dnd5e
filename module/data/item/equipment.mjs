@@ -37,7 +37,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.VEHICLE.MOUNTABLE", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
@@ -166,13 +166,23 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  prepareBaseData() {
+    super.prepareBaseData();
+    if ( this.armor.base === undefined ) {
+      this.armor.base = this.armor.value ?? 0;
+      this.armor.value = this.armor.base + (this.magicAvailable ? (this.armor.magicalBonus ?? 0) : 0);
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   prepareDerivedData() {
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.prepareIdentifiable();
     this.preparePhysicalData();
-    this.armor.base = this._source.armor.value ?? 0;
-    this.armor.value = this.armor.base + (this.magicAvailable ? (this.armor.magicalBonus ?? 0) : 0);
     this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
       ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
     this.type.identifier = this.type.value === "shield"
@@ -303,5 +313,18 @@ export default class EquipmentData extends ItemDataModel.mixin(
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
     await this.preCreateEquipped(data, options, user);
+
+    // Set type as "Vehicle Equipment" if created directly on a vehicle
+    if ( (this.parent.actor?.type === "vehicle") && !foundry.utils.hasProperty(data, "system.type.value") ) {
+      this.updateSource({ "type.value": "vehicle" });
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    await this.preUpdateIdentifiable(changed, options, user);
   }
 }

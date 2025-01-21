@@ -19,8 +19,8 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
       order: 50,
       icon: "icons/magic/symbols/cog-orange-red.webp",
       typeIcon: "systems/dnd5e/icons/svg/item-choice.svg",
-      title: game.i18n.localize("DND5E.AdvancementItemChoiceTitle"),
-      hint: game.i18n.localize("DND5E.AdvancementItemChoiceHint"),
+      title: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Title"),
+      hint: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Hint"),
       multiLevel: true,
       apps: {
         config: ItemChoiceConfig,
@@ -53,8 +53,8 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
   titleForLevel(level, { configMode=false }={}) {
     const data = this.configuration.choices[level] ?? {};
     let tag;
-    if ( data.count ) tag = game.i18n.format("DND5E.AdvancementItemChoiceChoose", { count: data.count });
-    else if ( data.replacement ) tag = game.i18n.localize("DND5E.AdvancementItemChoiceReplacementTitle");
+    if ( data.count ) tag = game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Choose", { count: data.count });
+    else if ( data.replacement ) tag = game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Replacement.Title");
     else return this.title;
     return `${this.title} <em>(${tag})</em>`;
   }
@@ -101,6 +101,13 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  automaticApplicationValue(level) {
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   restore(level, data) {
     const original = this.actor.items.get(data.replaced?.original);
@@ -110,7 +117,7 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
     if ( data.replaced ) {
       if ( !original ) {
-        throw new ItemChoiceAdvancement.ERROR(game.i18n.localize("DND5E.AdvancementItemChoiceNoOriginalError"));
+        throw new ItemChoiceAdvancement.ERROR(game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Warning.NoOriginal"));
       }
       this.actor.items.delete(data.replaced.original);
       this.updateSource({ [`value.replaced.${level}`]: data.replaced });
@@ -159,8 +166,10 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
 
     // Type restriction is set and the item type does not match the selected type
     if ( type && (type !== item.type) ) {
-      const typeLabel = game.i18n.localize(CONFIG.Item.typeLabels[restriction]);
-      if ( strict ) throw new Error(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", {type: typeLabel}));
+      type = game.i18n.localize(CONFIG.Item.typeLabels[restriction]);
+      if ( strict ) {
+        throw new Error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.InvalidType", { type: typeLabel }));
+      }
       return false;
     }
 
@@ -172,7 +181,9 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
       if ( restriction.type !== item.system.type.value ) errorLabel = typeConfig.label;
       else if ( subtype && (restriction.subtype !== item.system.type.subtype) ) errorLabel = subtype;
       if ( errorLabel ) {
-        if ( strict ) throw new Error(game.i18n.format("DND5E.AdvancementItemChoiceTypeWarning", {type: errorLabel}));
+        if ( strict ) {
+          throw new Error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.InvalidType", { type: errorLabel }));
+        }
         return false;
       }
     }
@@ -181,7 +192,9 @@ export default class ItemChoiceAdvancement extends ItemGrantAdvancement {
     const l = parseInt(restriction.level);
     if ( (type === "spell") && !Number.isNaN(l) && (item.system.level !== l) ) {
       const level = CONFIG.DND5E.spellLevels[l];
-      if ( strict ) throw new Error(game.i18n.format("DND5E.AdvancementItemChoiceSpellLevelSpecificWarning", {level}));
+      if ( strict ) {
+        throw new Error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellLevelSpecific", { level }));
+      }
       return false;
     }
 

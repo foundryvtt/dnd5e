@@ -83,7 +83,7 @@ export default class SaveActivityData extends BaseActivityData {
         parts: source.system.damage?.parts?.map(part => this.transformDamagePartData(source, part)) ?? []
       },
       save: {
-        ability: [source.system.save?.ability ?? Object.keys(CONFIG.DND5E.abilities)[0]],
+        ability: [source.system.save?.ability || Object.keys(CONFIG.DND5E.abilities)[0]],
         dc: {
           calculation,
           formula: String(source.system.save?.dc ?? "")

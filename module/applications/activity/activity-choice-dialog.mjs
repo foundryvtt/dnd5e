@@ -86,7 +86,7 @@ export default class ActivityChoiceDialog extends Application5e {
       );
     }
     const activities = this.#item.system.activities
-      .filter(a => !this.#item.getFlag("dnd5e", "riders.activity")?.includes(a.id))
+      .filter(a => !this.#item.getFlag("dnd5e", "riders.activity")?.includes(a.id) && a.canUse)
       .map(this._prepareActivityContext.bind(this))
       .sort((a, b) => a.sort - b.sort);
     return {
@@ -130,6 +130,7 @@ export default class ActivityChoiceDialog extends Application5e {
 
   /**
    * Handle choosing an activity.
+   * @this {ActivityChoiceDialog}
    * @param {PointerEvent} event  The triggering click event.
    * @param {HTMLElement} target  The activity button that was clicked.
    */

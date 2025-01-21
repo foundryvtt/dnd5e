@@ -111,6 +111,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     context.labels.class = Object.values(this.actor.classes).sort((a, b) => {
       return b.system.levels - a.system.levels;
     }).map(c => `${c.name} ${c.system.levels}`).join(" / ");
+    context.showClassDrop = !context.labels.class || (this._mode === this.constructor.MODES.EDIT);
 
     // Exhaustion
     if ( CONFIG.DND5E.conditionTypes.exhaustion ) {
@@ -235,7 +236,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( context.system.details.xp.boonsEarned !== undefined ) {
       const pluralRules = new Intl.PluralRules(game.i18n.lang);
       context.epicBoonsEarned = game.i18n.format(
-        `DND5E.ExperiencePointsBoons.${pluralRules.select(context.system.details.xp.boonsEarned ?? 0)}`,
+        `DND5E.ExperiencePoints.Boons.${pluralRules.select(context.system.details.xp.boonsEarned ?? 0)}`,
         { number: formatNumber(context.system.details.xp.boonsEarned ?? 0, { signDisplay: "always" }) }
       );
     }
@@ -308,8 +309,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         { key: "action", label: "DND5E.Action" },
         { key: "bonus", label: "DND5E.BonusAction" },
         { key: "reaction", label: "DND5E.Reaction" },
-        { key: "sr", label: "DND5E.ShortRest" },
-        { key: "lr", label: "DND5E.LongRest" },
+        { key: "sr", label: "DND5E.REST.Short.Label" },
+        { key: "lr", label: "DND5E.REST.Long.Label" },
         { key: "concentration", label: "DND5E.Concentration" },
         { key: "mgc", label: "DND5E.Item.Property.Magical" }
       ]
@@ -563,6 +564,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( !this.isEditable ) return;
     const filters = { locked: { types: new Set([type]) } };
     if ( classIdentifier ) filters.locked.additional = { class: { [classIdentifier]: 1 } };
+    if ( type === "class" ) {
+      const existingIdentifiers = new Set(Object.keys(this.actor.classes));
+      filters.locked.arbitrary = [{ o: "NOT", v: { k: "system.identifier", o: "in", v: existingIdentifiers } }];
+    }
     const result = await CompendiumBrowser.selectOne({ filters });
     if ( result ) this._onDropItemCreate(await fromUuid(result));
   }
@@ -900,7 +905,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       if ( foundry.utils.getType(save?.ability) === "Set" ) save = {
         ...save, ability: save.ability.size > 2
           ? game.i18n.localize("DND5E.AbbreviationDC")
-          : Array.from(save.ability).map(k => CONFIG.DND5E.abilities[k].abbreviation).join(" / ")
+          : Array.from(save.ability).map(k => CONFIG.DND5E.abilities[k]?.abbreviation).filterJoin(" / ")
       };
 
       const css = [];

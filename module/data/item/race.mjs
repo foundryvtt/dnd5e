@@ -1,5 +1,5 @@
 import Actor5e from "../../documents/actor/actor.mjs";
-import { splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, formatLength, splitSemicolons } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
 import { CreatureTypeField, MovementField, SensesField } from "../shared/_module.mjs";
@@ -31,8 +31,8 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
       advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
-      movement: new MovementField(),
-      senses: new SensesField(),
+      movement: new MovementField({}, { initialUnits: defaultUnits("length") }),
+      senses: new SensesField({}, { initialUnits: defaultUnits("length") }),
       type: new CreatureTypeField({ swarm: false }, { initial: { value: "humanoid" } })
     });
   }
@@ -71,10 +71,10 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
    * @returns {Object<string>}
    */
   get movementLabels() {
-    const units = CONFIG.DND5E.movementUnits[this.movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]];
+    const units = this.movement.units || defaultUnits("length");
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
       const value = this.movement[k];
-      if ( value ) obj[k] = `${label} ${value} ${units}`;
+      if ( value ) obj[k] = `${label} ${formatLength(value, units)}`;
       return obj;
     }, {});
   }
@@ -86,10 +86,10 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
    * @returns {Object<string>}
    */
   get sensesLabels() {
-    const units = CONFIG.DND5E.movementUnits[this.senses.units || Object.keys(CONFIG.DND5E.movementUnits)[0]];
+    const units = this.senses.units || defaultUnits("length");
     return Object.entries(CONFIG.DND5E.senses).reduce((arr, [k, label]) => {
       const value = this.senses[k];
-      if ( value ) arr.push(`${label} ${value} ${units}`);
+      if ( value ) arr.push(`${label} ${formatLength(value, units)}`);
       return arr;
     }, []).concat(splitSemicolons(this.senses.special));
   }

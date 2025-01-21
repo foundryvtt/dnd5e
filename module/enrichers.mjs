@@ -1,18 +1,21 @@
 import { formatNumber, getSceneTargets, getTargetDescriptors, simplifyBonus } from "./utils.mjs";
 import Award from "./applications/award.mjs";
-import { damageRoll } from "./dice/_module.mjs";
+import AttackRollConfigurationDialog from "./applications/dice/attack-configuration-dialog.mjs";
+import simplifyRollFormula from "./dice/simplify-roll-formula.mjs";
 import * as Trait from "./documents/actor/trait.mjs";
 import { rollItem } from "./documents/macro.mjs";
 
-const slugify = value => value?.slugify().replaceAll("-", "");
+const slugify = value => value?.slugify().replaceAll("-", "").replaceAll("(", "").replaceAll(")", "");
 
 /**
  * Set up custom text enrichers.
  */
 export function registerCustomEnrichers() {
-  const stringNames = ["award", "check", "concentration", "damage", "healing", "item", "save", "skill", "tool"];
+  const stringNames = [
+    "attack", "award", "check", "concentration", "damage", "heal", "healing", "item", "save", "skill", "tool"
+  ];
   CONFIG.TextEditor.enrichers.push({
-    pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")}) (?<config>[^\\]]+)]](?:{(?<label>[^}]+)})?`, "gi"),
+    pattern: new RegExp(`\\[\\[/(?<type>${stringNames.join("|")})(?<config> .*?)?]](?!])(?:{(?<label>[^}]+)})?`, "gi"),
     enricher: enrichString
   },
   {
@@ -40,10 +43,13 @@ export function registerCustomEnrichers() {
  */
 async function enrichString(match, options) {
   let { type, config, label } = match.groups;
-  config = parseConfig(config);
+  config = parseConfig(config, { multiple: ["damage", "heal", "healing"].includes(type) });
   config._input = match[0];
+  config._rules = _getRulesVersion(options);
   switch ( type.toLowerCase() ) {
+    case "attack": return enrichAttack(config, label, options);
     case "award": return enrichAward(config, label, options);
+    case "heal":
     case "healing": config._isHealing = true;
     case "damage": return enrichDamage(config, label, options);
     case "check":
@@ -63,11 +69,15 @@ async function enrichString(match, options) {
 /**
  * Parse a roll string into a configuration object.
  * @param {string} match  Matched configuration string.
- * @returns {object}
+ * @param {object} [options={}]
+ * @param {boolean} [options.multiple=false]  Support splitting configuration by "&" into multiple sub-configurations.
+ *                                            If set to `true` then an array of configs will be returned.
+ * @returns {object|object[]}
  */
-function parseConfig(match) {
+function parseConfig(match="", { multiple=false }={}) {
+  if ( multiple ) return match.split("&").map(s => parseConfig(s));
   const config = { _config: match, values: [] };
-  for ( const part of match.match(/(?:[^\s"]+|"[^"]*")+/g) ) {
+  for ( const part of match.match(/(?:[^\s"]+|"[^"]*")+/g) ?? [] ) {
     if ( !part ) continue;
     const [key, value] = part.split("=");
     const valueLower = value?.toLowerCase();
@@ -77,6 +87,141 @@ function parseConfig(match) {
     else config[key] = value.replace(/(^"|"$)/g, "");
   }
   return config;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Determine the appropriate rules version based on the provided document or system setting.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {string}
+ */
+function _getRulesVersion(options) {
+  // Select from actor data first, then item data, and then fall back to system setting
+  return options.relativeTo?.parent?.system?.source?.rules
+    || options.relativeTo?.system?.source?.rules
+    || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014");
+}
+
+/* -------------------------------------------- */
+/*  Attack Enricher                             */
+/* -------------------------------------------- */
+
+/**
+ * Enrich an attack link using a pre-set to hit value.
+ * @param {object} config              Configuration data.
+ * @param {string} [label]             Optional label to replace default text.
+ * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
+ * @returns {HTMLElement|null}         An HTML link if the attack could be built, otherwise null.
+ *
+ * @example Create an attack link using a fixed to hit:
+ * ```[[/attack +5]]``` or ```[[/attack formula=5]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="attack" data-formula="+5">
+ *   <i class="fa-solid fa-dice-d20" inert></i> +5
+ * </a>
+ * ```
+ *
+ * @example Create an attack link using a specific attack mode:
+ * ```[[/attack +5]]``` or ```[[/attack formula=5 attackMode=thrown]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="attack" data-formula="+5" data-attack-mode="thrown">
+ *   <i class="fa-solid fa-dice-d20" inert></i> +5
+ * </a>
+ * ```
+ *
+ * @example Link an enricher to an attack activity, either explicitly or automatically:
+ * ```[[/attack activity=RLQlsLo5InKHZadn]]``` or ```[[/attack]]```
+ * becomes
+ * ```html
+ * <a class="roll-action" data-type="attack" data-formula="+8" data-activity-uuid="...uuid...">
+ *   <i class="fa-solid fa-dice-d20" inert"></i> +8
+ * </a>
+ * ```
+ *
+ * @example Display the full attack section:
+ * ```[[/attack format=extended]]``` or ```[[/attack extended]]```
+ * becomes
+ * ```html
+ * <span class="attack-extended">
+ *   <em>Melee Attack Roll</em>:
+ *   <span class="roll-link-group" data-type="attack" data-formula="+16" data-activity-uuid="...uuid...">
+ *     <a class="roll-link"><i class="fa-solid fa-dice-d20" inert"></i> +16</a>
+ *   </span>, reach 15 ft
+ * </span>
+ * ```
+ */
+async function enrichAttack(config, label, options) {
+  if ( config.activity && config.formula ) {
+    console.warn(`Activity ID and formula found while enriching ${config._input}, only one is supported.`);
+    return null;
+  }
+
+  const formulaParts = [];
+  if ( config.formula ) formulaParts.push(config.formula);
+  for ( const value of config.values ) {
+    if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
+    else if ( value === "extended" ) config.format = "extended";
+    else formulaParts.push(value);
+  }
+  config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+
+  const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
+    : !config.formula ? options.relativeTo?.system?.activities?.getByType("attack")[0] : null;
+
+  if ( activity ) {
+    if ( activity.type !== "attack" ) {
+      console.warn(`Attack enricher linked to non-attack activity when enriching ${config._input}`);
+      return null;
+    }
+
+    config.activityUuid = activity.uuid;
+    const attackConfig = activity.getAttackData({ attackMode: config.attackMode });
+    config.formula = simplifyRollFormula(
+      Roll.defaultImplementation.replaceFormulaData(attackConfig.parts.join(" + "), attackConfig.data)
+    );
+    delete config.activity;
+  }
+
+  if ( !config.activityUuid && !config.formula ) {
+    console.warn(`No formula or linked activity found while enriching ${config._input}.`);
+    return null;
+  }
+
+  config.type = "attack";
+  if ( label ) return createRollLink(label, config, { classes: "roll-link-group roll-link" });
+
+  let displayFormula = simplifyRollFormula(config.formula) || "+0";
+  if ( !displayFormula.startsWith("+") && !displayFormula.startsWith("-") ) displayFormula = `+${displayFormula}`;
+
+  const span = document.createElement("span");
+  span.className = "roll-link-group";
+  _addDataset(span, config);
+  span.innerHTML = game.i18n.format(`EDITOR.DND5E.Inline.Attack${config._rules === "2014" ? "Long" : "Short"}`, {
+    formula: createRollLink(displayFormula).outerHTML
+  });
+
+  if ( config.format === "extended" ) {
+    const type = game.i18n.format(`DND5E.ATTACK.Formatted.${config._rules}`, {
+      type: game.i18n.getListFormatter({ type: "disjunction" }).format(
+        Array.from(activity?.validAttackTypes ?? []).map(t => CONFIG.DND5E.attackTypes[t]?.label)
+      ),
+      classification: CONFIG.DND5E.attackClassifications[activity?.attack.type.classification]?.label ?? ""
+    }).trim();
+    const parts = [span.outerHTML, activity?.getRangeLabel(config.attackMode)];
+    if ( config._rules === "2014" ) parts.push(activity?.target?.affects.labels?.statblock);
+
+    const full = document.createElement("span");
+    full.className = "attack-extended";
+    full.innerHTML = game.i18n.format("EDITOR.DND5E.Inline.AttackExtended", {
+      type, parts: game.i18n.getListFormatter({ type: "unit" }).format(parts.filter(_ => _))
+    });
+    return full;
+  }
+
+  return span;
 }
 
 /* -------------------------------------------- */
@@ -116,7 +261,7 @@ async function enrichAward(config, label, options) {
   }
   if ( parsed.xp ) entries.push(`
     <span class="award-entry">
-      ${formatNumber(parsed.xp)} ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
+      ${formatNumber(parsed.xp)} ${game.i18n.localize("DND5E.ExperiencePoints.Abbreviation")}
     </span>
   `);
 
@@ -151,7 +296,7 @@ async function enrichAward(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-type="check" data-ability="dex">
- *   <i class="fa-solid fa-dice-d20"></i> Dexterity check
+ *   <i class="fa-solid fa-dice-d20" inert></i> Dexterity check
  * </a>
  * ```
  *
@@ -160,7 +305,7 @@ async function enrichAward(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-type="check" data-skill="acr" data-dc="20">
- *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity (Acrobatics) check
+ *   <i class="fa-solid fa-dice-d20" inert></i> DC 20 Dexterity (Acrobatics) check
  * </a>
  * ```
  *
@@ -169,7 +314,7 @@ async function enrichAward(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-type="check" data-ability="str" data-skill="acr">
- *   <i class="fa-solid fa-dice-d20"></i> Strength (Acrobatics) check
+ *   <i class="fa-solid fa-dice-d20" inert></i> Strength (Acrobatics) check
  * </a>
  * ```
  *
@@ -178,7 +323,7 @@ async function enrichAward(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-type="check" data-ability="int" data-tool="thief">
- *   <i class="fa-solid fa-dice-d20"></i> Intelligence (Thieves' Tools) check
+ *   <i class="fa-solid fa-dice-d20" inert></i> Intelligence (Thieves' Tools) check
  * </a>
  * ```
  *
@@ -187,59 +332,206 @@ async function enrichAward(config, label, options) {
  * becomes
  * ```html
  * <a class="roll-action" data-type="check" data-ability="cha" data-dc="15">
- *   <i class="fa-solid fa-dice-d20"></i> DC 15 Charisma check
+ *   <i class="fa-solid fa-dice-d20" inert></i> DC 15 Charisma check
  * </a>
+ * ```
+ *
+ * @example Use multiple skills in a check using default abilities:
+ * ```[[/check skill=acr/ath dc=15]]```
+ * ```[[/check acrobatics athletics 15]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-type="check" data-skill="acr|ath" data-dc="15">
+ *   DC 15
+ *   <a class="roll-action" data-ability="dex" data-skill="acr">
+ *     <i class="fa-solid fa-dice-d20" inert></i> Dexterity (Acrobatics)
+ *   </a> or
+ *   <a class="roll-action" data-ability="dex">
+ *     <i class="fa-solid fa-dice-d20" inert></i> Strength (Athletics)
+ *   </a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
+ * ```
+ *
+ * @example Use multiple skills with a fixed ability:
+ * ```[[/check ability=str skill=dec/per dc=15]]```
+ * ```[[/check strength deception persuasion 15]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-type="check" data-ability="str" data-skill="dec|per" data-dc="15">
+ *   DC 15 Strength
+ *   (<a class="roll-action" data-skill="dec"><i class="fa-solid fa-dice-d20" inert></i> Deception</a> or
+ *   <a class="roll-action" data-ability="per"><i class="fa-solid fa-dice-d20" inert></i> Persuasion</a>)
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
+ * ```
+ *
+ * @example Link an enricher to an check activity, either explicitly or automatically
+ * ```[[/check activity=RLQlsLo5InKHZadn]]``` or ```[[/check]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-type="check" data-ability="dex" data-dc="20" data-activity-uuid="...">
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20" inert></i> DC 20 Dexterity</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
  * ```
  */
 async function enrichCheck(config, label, options) {
+  config.skill = config.skill?.replaceAll("/", "|").split("|") ?? [];
+  config.tool = config.tool?.replaceAll("/", "|").split("|") ?? [];
   for ( let value of config.values ) {
-    value = foundry.utils.getType(value) === "string" ? slugify(value) : value;
-    if ( value in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = value;
-    else if ( value in CONFIG.DND5E.enrichmentLookup.skills ) config.skill = value;
-    else if ( value in CONFIG.DND5E.enrichmentLookup.tools ) config.tool = value;
+    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
+    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = slug;
+    else if ( slug in CONFIG.DND5E.enrichmentLookup.skills ) config.skill.push(slug);
+    else if ( slug in CONFIG.DND5E.enrichmentLookup.tools ) config.tool.push(slug);
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
     else config[value] = true;
   }
+  delete config.values;
 
+  const groups = new Map();
   let invalid = false;
 
-  const skillConfig = CONFIG.DND5E.enrichmentLookup.skills[slugify(config.skill)];
-  if ( config.skill && !skillConfig ) {
-    console.warn(`Skill ${config.skill} not found while enriching ${config._input}.`);
-    invalid = true;
-  } else if ( config.skill && !config.ability ) {
-    config.ability = skillConfig.ability;
-  }
-  if ( skillConfig?.key ) config.skill = skillConfig.key;
+  const anything = config.ability || config.skill.length || config.tool.length;
+  const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
+    : !anything ? options.relativeTo?.system?.activities?.getByType("check")[0] : null;
 
-  const toolConfig = CONFIG.DND5E.tools[slugify(config.tool)];
-  const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(config.tool)];
-  const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
-  if ( config.tool && !toolIndex ) {
-    console.warn(`Tool ${config.tool} not found while enriching ${config._input}.`);
-    invalid = true;
-  } else if ( config.tool && !config.ability && toolConfig ) {
-    config.ability = toolConfig.ability;
+  if ( activity ) {
+    if ( activity.type !== "check" ) {
+      console.warn(`Check enricher linked to non-check activity when enriching ${config._input}.`);
+      return null;
+    }
+
+    if ( activity.check.ability ) config.ability = activity.check.ability;
+    config.activityUuid = activity.uuid;
+    config.dc = activity.check.dc.value;
+    config.skill = [];
+    config.tool = [];
+    for ( const associated of activity.check.associated ) {
+      if ( associated in CONFIG.DND5E.skills ) config.skill.push(associated);
+      else if ( associated in CONFIG.DND5E.tools ) config.tool.push(associated);
+    }
+    delete config.activity;
   }
 
+  // TODO: Support "spellcasting" ability
   let abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[slugify(config.ability)];
   if ( config.ability && !abilityConfig ) {
-    console.warn(`Ability ${config.ability} not found while enriching ${config._input}.`);
+    console.warn(`Ability "${config.ability}" not found while enriching ${config._input}.`);
     invalid = true;
-  } else if ( !abilityConfig ) {
-    console.warn(`No ability provided while enriching check ${config._input}.`);
+  } else if ( abilityConfig?.key ) config.ability = abilityConfig.key;
+
+  for ( let [index, skill] of config.skill.entries() ) {
+    const skillConfig = CONFIG.DND5E.enrichmentLookup.skills[slugify(skill)];
+    if ( skillConfig ) {
+      if ( skillConfig.key ) skill = config.skill[index] = skillConfig.key;
+      const ability = config.ability || skillConfig.ability;
+      if ( !groups.has(ability) ) groups.set(ability, []);
+      groups.get(ability).push({ key: skill, type: "skill", label: skillConfig.label });
+    } else {
+      console.warn(`Skill "${skill}" not found while enriching ${config._input}.`);
+      invalid = true;
+    }
+  }
+
+  for ( const tool of config.tool ) {
+    const toolConfig = CONFIG.DND5E.tools[slugify(tool)];
+    const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(tool)];
+    const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
+    if ( toolIndex ) {
+      const ability = config.ability || toolConfig?.ability;
+      if ( ability ) {
+        if ( !groups.has(ability) ) groups.set(ability, []);
+        groups.get(ability).push({ key: tool, type: "tool", label: toolIndex.name });
+      } else {
+        console.warn(`Tool "${tool}" found without specified or default ability while enriching ${config._input}.`);
+        invalid = true;
+      }
+    } else {
+      console.warn(`Tool "${tool}" not found while enriching ${config._input}.`);
+      invalid = true;
+    }
+  }
+
+  if ( !abilityConfig && !groups.size ) {
+    console.warn(`No ability, skill, tool, or linked activity provided while enriching ${config._input}.`);
     invalid = true;
   }
-  if ( abilityConfig?.key ) config.ability = abilityConfig.key;
+
+  const complex = (config.skill.length + config.tool.length) > 1;
+  if ( config.passive && complex ) {
+    console.warn(`Multiple skills or tools and passive flag found while enriching ${config._input}, which aren't supported together.`);
+    invalid = true;
+  }
+  if ( label && complex ) {
+    console.warn(`Multiple skills or tools and a custom label found while enriching ${config._input}, which aren't supported together.`);
+    invalid = true;
+  }
 
   if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData);
 
   if ( invalid ) return null;
 
-  const type = config.skill ? "skill" : config.tool ? "tool" : "check";
-  config = { type, ...config };
+  if ( complex ) {
+    const formatter = game.i18n.getListFormatter({ type: "disjunction" });
+    const parts = [];
+    for ( const [ability, associated] of groups.entries() ) {
+      const makeConfig = ({ key, type }) => ({ type, [type]: key, ability: groups.size > 1 ? ability : undefined });
+
+      // Multiple associated proficiencies, link each individually
+      if ( associated.length > 1 ) parts.push(
+        game.i18n.format("EDITOR.DND5E.Inline.SpecificCheck", {
+          ability: CONFIG.DND5E.enrichmentLookup.abilities[ability].label,
+          type: formatter.format(associated.map(a => createRollLink(a.label, makeConfig(a)).outerHTML ))
+        })
+      );
+
+      // Only single associated proficiency, wrap whole thing in roll link
+      else {
+        const associatedConfig = makeConfig(associated[0]);
+        parts.push(createRollLink(createRollLabel({ ...associatedConfig, ability }), associatedConfig).outerHTML);
+      }
+    }
+    label = formatter.format(parts);
+    if ( config.dc && !config.hideDC ) {
+      label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+    }
+    label = game.i18n.format(`EDITOR.DND5E.Inline.Check${config.format === "long" ? "Long" : "Short"}`, { check: label });
+    const template = document.createElement("template");
+    template.innerHTML = label;
+    return createRequestLink(template, {
+      type: "check", ...config, skill: config.skill.join("|"), tool: config.tool.join("|")
+    });
+  }
+
+  const type = config.skill.length ? "skill" : config.tool.length ? "tool" : "check";
+  config = { type, ability: Array.from(groups.keys())[0], ...config, skill: config.skill[0], tool: config.tool[0] };
   if ( !label ) label = createRollLabel(config);
-  return config.passive ? createPassiveTag(label, config) : createRollLink(label, config);
+  return config.passive ? createPassiveTag(label, config) : createRequestLink(createRollLink(label), config);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Create the buttons for a check requested in chat.
+ * @param {object} dataset
+ * @returns {object[]}
+ */
+function createCheckRequestButtons(dataset) {
+  const skills = dataset.skill?.split("|") ?? [];
+  const tools = dataset.tool?.split("|") ?? [];
+  if ( (skills.length + tools.length) <= 1 ) return [createRequestButton(dataset)];
+  const baseDataset = { ...dataset };
+  delete baseDataset.skill;
+  delete baseDataset.tool;
+  return [
+    ...skills.map(skill => createRequestButton({
+      ability: CONFIG.DND5E.skills[skill].ability, ...baseDataset, format: "short", skill, type: "skill"
+    })),
+    ...tools.map(tool => createRequestButton({
+      ability: CONFIG.DND5E.tools[tool]?.ability, ...baseDataset, format: "short", tool, type: "tool"
+    }))
+  ];
 }
 
 /* -------------------------------------------- */
@@ -255,48 +547,122 @@ async function enrichCheck(config, label, options) {
  * ```[[/save ability=dex]]```
  * becomes
  * ```html
- * <a class="roll-action" data-type="save" data-key="dex">
- *   <i class="fa-solid fa-dice-d20"></i> Dexterity
- * </a>
+ * <span class="roll-link-group" data-type="save" data-ability="dex">
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20" inert></i> Dexterity</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
  * ```
  *
  * @example Add a DC to the save:
  * ```[[/save ability=dex dc=20]]```
  * becomes
  * ```html
- * <a class="roll-action" data-type="save" data-key="dex" data-dc="20">
- *   <i class="fa-solid fa-dice-d20"></i> DC 20 Dexterity
- * </a>
+ * <span class="roll-link-group" data-type="save" data-ability="dex" data-dc="20">
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20" inert></i> DC 20 Dexterity</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
  * ```
  *
- * @example Create a concentration check:
+ * @example Specify multiple abilities:
+ * ```[[/save ability=str/dex dc=20]]```
+ * ```[[/save strength dexterity 20]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-type="save" data-ability="str|dex" data-dc="20">
+ *   DC 20
+ *   <a class="roll-action" data-ability="str"><i class="fa-solid fa-dice-d20" inert></i> Strength</a> or
+ *   <a class="roll-action" data-ability="dex"><i class="fa-solid fa-dice-d20" inert></i> Dexterity</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
+ * ```
+ *
+ * @example Create a concentration saving throw:
  * ```[[/concentration 10]]```
  * becomes
  * ```html
- * <a class="roll-action" data-type="concentration" data-dc="10">
- *   <i class="fa-solid fa-dice-d20"></i> DC 10 concentration
- * </a>
+ * <span class="roll-link-group" data-type="concentration" data-dc=10>
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20" inert></i> DC 10 concentration</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
+ * ```
+ *
+ * @example Link an enricher to an save activity, either explicitly or automatically
+ * ```[[/save activity=RLQlsLo5InKHZadn]]``` or ```[[/save]]```
+ * becomes
+ * ```html
+ * <span class="roll-link-group" data-type="save" data-ability="dex" data-dc="20" data-activity-uuid="...">
+ *   <a class="roll-action"><i class="fa-solid fa-dice-d20" inert></i> DC 20 Dexterity</a>
+ *   <a class="enricher-action" data-action="request" ...><!-- request link --></a>
+ * </span>
  * ```
  */
 async function enrichSave(config, label, options) {
-  for ( const value of config.values ) {
-    if ( value in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability = value;
+  config.ability = config.ability?.replace("/", "|").split("|") ?? [];
+  for ( let value of config.values ) {
+    const slug = foundry.utils.getType(value) === "string" ? slugify(value) : value;
+    if ( slug in CONFIG.DND5E.enrichmentLookup.abilities ) config.ability.push(slug);
     else if ( Number.isNumeric(value) ) config.dc = Number(value);
     else config[value] = true;
   }
+  config.ability = config.ability
+    .filter(a => a in CONFIG.DND5E.enrichmentLookup.abilities)
+    .map(a => CONFIG.DND5E.enrichmentLookup.abilities[a].key ?? a);
 
-  const abilityConfig = CONFIG.DND5E.enrichmentLookup.abilities[config.ability];
-  if ( !abilityConfig && !config._isConcentration ) {
-    console.warn(`Ability ${config.ability} not found while enriching ${config._input}.`);
+  const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
+    : !config.ability.length ? options.relativeTo?.system?.activities?.getByType("save")[0] : null;
+
+  if ( activity ) {
+    if ( activity.type !== "save" ) {
+      console.warn(`Save enricher linked to non-save activity when enriching ${config._input}`);
+      return null;
+    }
+
+    config.ability = Array.from(activity.save.ability);
+    config.activityUuid = activity.uuid;
+    config.dc = activity.save.dc.value;
+    delete config.activity;
+  }
+
+  if ( !config.ability.length && !config._isConcentration ) {
+    console.warn(`No ability or linked activity found while enriching ${config._input}.`);
     return null;
   }
-  if ( abilityConfig?.key ) config.ability = abilityConfig.key;
 
   if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData);
 
+  if ( config.ability.length > 1 && label ) {
+    console.warn(`Multiple abilities and custom label found while enriching ${config._input}, which aren't supported together.`);
+    return null;
+  }
+
   config = { type: config._isConcentration ? "concentration" : "save", ...config };
-  if ( !label ) label = createRollLabel(config);
-  return createRollLink(label, config);
+  if ( label ) label = createRollLink(label);
+  else if ( config.ability.length <= 1 ) label = createRollLink(createRollLabel(config));
+  else {
+    label = game.i18n.getListFormatter({ type: "disjunction" }).format(config.ability.map(ability =>
+      createRollLink(createRollLabel({ type: "save", ability }), { ability }).outerHTML
+    ));
+    if ( config.dc && !config.hideDC ) {
+      label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
+    }
+    label = game.i18n.format(`EDITOR.DND5E.Inline.Save${config.format === "long" ? "Long" : "Short"}`, { save: label });
+    const template = document.createElement("template");
+    template.innerHTML = label;
+    label = template;
+  }
+  return createRequestLink(label, { ...config, ability: config.ability.join("|") });
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Create the buttons for a save requested in chat.
+ * @param {object} dataset
+ * @returns {object[]}
+ */
+function createSaveRequestButtons(dataset) {
+  return (dataset.ability?.split("|") ?? [])
+    .map(ability => createRequestButton({ ...dataset, format: "long", ability }));
 }
 
 /* -------------------------------------------- */
@@ -305,7 +671,7 @@ async function enrichSave(config, label, options) {
 
 /**
  * Enrich a damage link.
- * @param {object} config              Configuration data.
+ * @param {object[]} configs           Configuration data.
  * @param {string} [label]             Optional label to replace default text.
  * @param {EnrichmentOptions} options  Options provided to customize text enrichment.
  * @returns {HTMLElement|null}         An HTML link if the save could be built, otherwise null.
@@ -314,17 +680,17 @@ async function enrichSave(config, label, options) {
  * ```[[/damage 2d6 type=bludgeoning]]``
  * becomes
  * ```html
- * <a class="roll-action" data-type="damage" data-formula="2d6" data-damage-type="bludgeoning">
- *   <i class="fa-solid fa-dice-d20"></i> 2d6
- * </a> bludgeoning
+ * <a class="roll-link-group" data-type="damage" data-formulas="2d6" data-damage-types="bludgeoning">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 2d6</span> bludgeoning
+ * </a>
  * ````
  *
  * @example Display the average:
  * ```[[/damage 2d6 type=bludgeoning average=true]]``
  * becomes
  * ```html
- * 7 (<a class="roll-action" data-type="damage" data-formula="2d6" data-damage-type="bludgeoning">
- *   <i class="fa-solid fa-dice-d20"></i> 2d6
+ * 7 (<a class="roll-link-group" data-type="damage" data-formulas="2d6" data-damage-types="bludgeoning">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 2d6</span>
  * </a>) bludgeoning
  * ````
  *
@@ -332,58 +698,179 @@ async function enrichSave(config, label, options) {
  * ```[[/damage 8d4dl force average=666]]``
  * becomes
  * ```html
- * 666 (<a class="roll-action" data-type="damage" data-formula="8d4dl" data-damage-type="force">
- *   <i class="fa-solid fa-dice-d20"></i> 8d4dl
+ * 666 (<a class="roll-link-group" data-type="damage" data-formulas="8d4dl" data-damage-types="force">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 8d4dl</span>
  * </a> force
  * ````
  *
  * @example Create a healing link:
- * ```[[/healing 2d6]]``` or ```[[/damage 2d6 healing]]```
+ * ```[[/heal 2d6]]``` or ```[[/damage 2d6 healing]]```
  * becomes
  * ```html
- * <a class="roll-action" data-type="damage" data-formula="2d6" data-damage-type="healing">
- *   <i class="fa-solid fa-dice-d20"></i> 2d6
+ * <a class="roll-link-group" data-type="damage" data-formulas="2d6" data-damage-types="healing">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 2d6</span>
  * </a> healing
  * ```
+ *
+ * @example Specify variable damage types:
+ * ```[[/damage 2d6 type=fire|cold]]``` or ```[[/damage 2d6 type=fire/cold]]```
+ * becomes
+ * ```html
+ * <a class="roll-link-group" data-type="damage" data-formulas="2d6" data-damage-types="fire|cold">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 2d6</span>
+ * </a> fire or cold
+ * ```
+ *
+ * @example Add multiple damage parts
+ * ```[[/damage 1d6 fire & 1d6 cold]]```
+ * becomes
+ * ```html
+ * <a class="roll-link-group" data-type="damage" data-formulas="1d6&1d6" data-damage-types="fire&cold">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 1d6</span> fire and
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 1d6</span> cold
+ * </a>
+ * ```
+ *
+ * @example Link an enricher to an damage activity, either explicitly or automatically
+ * ```[[/damage activity=RLQlsLo5InKHZadn]]``` or ```[[/damage]]```
+ * becomes
+ * ```html
+ * <a class="roll-link-group" data-type="damage" data-formulas="1d6&1d6" data-damage-types="fire&cold"
+ *    data-activity-uuid="...">
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 1d6</span> fire and
+ *   <span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 1d6</span> cold
+ * </a>
+ * ```
+ *
+ * @example Displaying the full hit section:
+ * ```[[/damage extended]]``
+ * becomes
+ * ```html
+ * <span class="damage-extended">
+ *   <em>Hit:</em>
+ *   <a class="roll-link-group" data-type="damage" data-formulas="2d6" data-damage-types="bludgeoning"
+ *      data-activity-uuid="...">
+ *     7 (<span class="roll-link"><i class="fa-solid fa-dice-d20"></i> 2d6</span></a>) Bludgeoning damage
+ *   </a>
+ * </span>
+ * ````
  */
-async function enrichDamage(config, label, options) {
-  const formulaParts = [];
-  if ( config.formula ) formulaParts.push(config.formula);
-  for ( const value of config.values ) {
-    if ( value in CONFIG.DND5E.damageTypes ) config.type = value;
-    else if ( value in CONFIG.DND5E.healingTypes ) config.type = value;
-    else if ( value === "average" ) config.average = true;
-    else if ( value === "temp" ) config.type = "temphp";
-    else formulaParts.push(value);
+async function enrichDamage(configs, label, options) {
+  const config = { type: "damage", formulas: [], damageTypes: [], rollType: configs._isHealing ? "healing" : "damage" };
+  for ( const c of configs ) {
+    const formulaParts = [];
+    if ( c.activity ) config.activity = c.activity;
+    if ( c.attackMode ) config.attackMode = c.attackMode;
+    if ( c.average ) config.average = c.average;
+    if ( c.format ) config.format = c.format;
+    if ( c.formula ) formulaParts.push(c.formula);
+    c.type = c.type?.replaceAll("/", "|").split("|") ?? [];
+    for ( const value of c.values ) {
+      if ( value in CONFIG.DND5E.damageTypes ) c.type.push(value);
+      else if ( value in CONFIG.DND5E.healingTypes ) c.type.push(value);
+      else if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
+      else if ( value === "average" ) config.average = true;
+      else if ( value === "extended" ) config.format = "extended";
+      else if ( value === "temp" ) c.type.push("temphp");
+      else formulaParts.push(value);
+    }
+    c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+    if ( configs._isHealing && !c.type.length ) c.type.push("healing");
+    if ( c.formula ) {
+      config.formulas.push(c.formula);
+      config.damageTypes.push(c.type.join("|"));
+    }
   }
-  config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
-  if ( !config.formula ) return null;
-  config.damageType = config.type ?? (config._isHealing ? "healing" : null);
-  config.type = "damage";
+  config.damageTypes = config.damageTypes.map(t => t?.replace("/", "|"));
+  if ( config.format === "extended" ) config.average ??= true;
 
-  if ( label ) return createRollLink(label, config);
+  if ( config.activity && config.formulas.length ) {
+    console.warn(`Activity ID and formulas found while enriching ${config._input}, only one is supported.`);
+    return null;
+  }
 
-  const typeConfig = CONFIG.DND5E.damageTypes[config.damageType] ?? CONFIG.DND5E.healingTypes[config.damageType];
-  const localizationData = {
-    formula: createRollLink(config.formula, config).outerHTML,
-    type: game.i18n.localize(typeConfig?.label ?? "").toLowerCase()
-  };
-
-  let localizationType = "Short";
-  if ( config.average ) {
-    localizationType = "Long";
-    if ( config.average === true ) {
-      const minRoll = Roll.create(config.formula).evaluate({ minimize: true });
-      const maxRoll = Roll.create(config.formula).evaluate({ maximize: true });
-      localizationData.average = Math.floor(((await minRoll).total + (await maxRoll).total) / 2);
-    } else if ( Number.isNumeric(config.average) ) {
-      localizationData.average = config.average;
+  let activity = options.relativeTo?.system?.activities?.get(config.activity);
+  if ( !activity && !config.formulas.length ) {
+    const types = configs._isHealing ? ["heal"] : ["attack", "damage", "save"];
+    for ( const a of options.relativeTo?.system?.activities?.getByTypes(...types) ?? [] ) {
+      if ( a.damage?.parts.length || a.healing?.formula ) {
+        activity = a;
+        break;
+      }
     }
   }
 
-  const span = document.createElement("span");
-  span.innerHTML = game.i18n.format(`EDITOR.DND5E.Inline.Damage${localizationType}`, localizationData);
-  return span;
+  if ( activity ) {
+    config.activityUuid = activity.uuid;
+    const damageConfig = activity.getDamageConfig({ attackMode: config.attackMode });
+    for ( const roll of damageConfig.rolls ) {
+      config.formulas.push(simplifyRollFormula(
+        Roll.defaultImplementation.replaceFormulaData(roll.parts.join(" + "), roll.data)
+      ));
+      config.damageTypes.push(roll.options.types?.join("|") ?? roll.options.type);
+    }
+    delete config.activity;
+  }
+
+  if ( !config.activityUuid && !config.formulas.length ) {
+    console.warn(`No formula or linked activity found while enriching ${config._input}.`);
+    return null;
+  }
+
+  const formulas = config.formulas.join("&");
+  const damageTypes = config.damageTypes.join("&");
+
+  if ( !config.formulas.length ) return null;
+  if ( label ) {
+    return createRollLink(label, { ...config, formulas, damageTypes }, { classes: "roll-link-group roll-link" });
+  }
+
+  const parts = [];
+  for ( const [idx, formula] of config.formulas.entries() ) {
+    const type = config.damageTypes[idx];
+    const types = type?.split("|")
+      .map(t => CONFIG.DND5E.damageTypes[t]?.label ?? CONFIG.DND5E.healingTypes[t]?.label)
+      .filter(_ => _);
+    const localizationData = {
+      formula: createRollLink(formula, {}, { tag: "span" }).outerHTML,
+      type: game.i18n.getListFormatter({ type: "disjunction" }).format(types)
+    };
+    if ( configs._rules === "2014" ) localizationData.type = localizationData.type.toLowerCase();
+
+    let localizationType = "Short";
+    if ( config.average ) {
+      localizationType = "Long";
+      if ( config.average === true ) {
+        const minRoll = Roll.create(formula).evaluate({ minimize: true });
+        const maxRoll = Roll.create(formula).evaluate({ maximize: true });
+        localizationData.average = Math.floor(((await minRoll).total + (await maxRoll).total) / 2);
+      } else if ( Number.isNumeric(config.average) ) {
+        localizationData.average = config.average;
+      } else {
+        localizationType = "Short";
+      }
+    }
+
+    parts.push(game.i18n.format(`EDITOR.DND5E.Inline.Damage${localizationType}`, localizationData));
+  }
+
+  const link = document.createElement("a");
+  link.className = "roll-link-group";
+  _addDataset(link, { ...config, formulas, damageTypes });
+  if ( config.average && (parts.length === 2) ) {
+    link.innerHTML = game.i18n.format("EDITOR.DND5E.Inline.DamageDouble", { first: parts[0], second: parts[1] });
+  } else {
+    link.innerHTML = game.i18n.getListFormatter().format(parts);
+  }
+
+  if ( config.format === "extended" ) {
+    const span = document.createElement("span");
+    span.className = "damage-extended";
+    span.innerHTML = game.i18n.format("EDITOR.DND5E.Inline.DamageExtended", { damage: link.outerHTML });
+    return span;
+  }
+
+  return link;
 }
 
 /* -------------------------------------------- */
@@ -398,10 +885,17 @@ async function enrichDamage(config, label, options) {
  * @returns {HTMLElement|null}         An HTML element if the lookup could be built, otherwise null.
  *
  * @example Include a creature's name in its description:
- * ```[[lookup @name]]``
+ * ```[[lookup @name]]```
  * becomes
  * ```html
  * <span class="lookup-value">Adult Black Dragon</span>
+ * ```
+ *
+ * @example Lookup a property within an activity:
+ * ```[[lookup @target.template.size activity=dnd5eactivity000]]```
+ * becomes
+ * ```html
+ * <span class="lookup-value">120</span>
  * ```
  */
 function enrichLookup(config, fallback, options) {
@@ -414,12 +908,19 @@ function enrichLookup(config, fallback, options) {
     else if ( value.startsWith("@") ) keyPath ??= value;
   }
 
+  let activity = options.relativeTo?.system?.activities?.get(config.activity);
+  if ( config.activity && !activity ) {
+    console.warn(`Activity not found when enriching ${config._input}.`);
+    return null;
+  }
+
   if ( !keyPath ) {
     console.warn(`Lookup path must be defined to enrich ${config._input}.`);
     return null;
   }
 
-  const data = options.rollData ?? options.relativeTo?.getRollData();
+  const data = activity ? activity.getRollData().activity : options.rollData
+    ?? options.relativeTo?.getRollData?.() ?? {};
   let value = foundry.utils.getProperty(data, keyPath.substring(1)) ?? fallback;
   if ( value && style ) {
     if ( style === "capitalize" ) value = value.capitalize();
@@ -595,6 +1096,14 @@ async function enrichItem(config, label, options) {
     } catch(err) { return null; }
   }
 
+  const makeLink = (label, dataset) => {
+    const span = document.createElement("span");
+    span.classList.add("roll-link-group");
+    _addDataset(span, dataset);
+    span.append(createRollLink(label));
+    return span;
+  };
+
   if ( foundItem ) {
     let foundActivity;
     if ( config.activity ) {
@@ -605,16 +1114,16 @@ async function enrichItem(config, label, options) {
         return null;
       }
       if ( !label ) label = `${foundItem.name}: ${foundActivity.name}`;
-      return createRollLink(label, { type: "item", rollActivityUuid: foundActivity.uuid });
+      return makeLink(label, { type: "item", rollActivityUuid: foundActivity.uuid });
     }
 
     if ( !label ) label = foundItem.name;
-    return createRollLink(label, { type: "item", rollItemUuid: foundItem.uuid });
+    return makeLink(label, { type: "item", rollItemUuid: foundItem.uuid });
   }
 
   // Finally, if config is an item name
   if ( !label ) label = config.activity ? `${givenItem}: ${config.activity}` : givenItem;
-  return createRollLink(label, {
+  return makeLink(label, {
     type: "item", rollItemActor: foundActor?.uuid, rollItemName: givenItem, rollActivityName: config.activity
   });
 }
@@ -680,7 +1189,9 @@ export function createRollLabel(config) {
         label = ability;
       }
       if ( config.passive ) {
-        label = game.i18n.format(`EDITOR.DND5E.Inline.DCPassive${longSuffix}`, { dc: config.dc, check: label });
+        label = game.i18n.format(
+          `EDITOR.DND5E.Inline.${showDC ? "DC" : ""}Passive${longSuffix}`, { dc: config.dc, check: label }
+        );
       } else {
         if ( showDC ) label = game.i18n.format("EDITOR.DND5E.Inline.DC", { dc: config.dc, check: label });
         label = game.i18n.format(`EDITOR.DND5E.Inline.Check${longSuffix}`, { check: label });
@@ -719,34 +1230,50 @@ export function createRollLabel(config) {
 /* -------------------------------------------- */
 
 /**
- * Create a rollable link.
- * @param {string} label    Label to display.
- * @param {object} dataset  Data that will be added to the link for the rolling method.
+ * Create a rollable link with a request section for GMs.
+ * @param {HTMLElement|string} label  Label to display
+ * @param {object} dataset            Data that will be added to the link for the rolling method.
  * @returns {HTMLElement}
  */
-function createRollLink(label, dataset) {
+function createRequestLink(label, dataset) {
   const span = document.createElement("span");
-  span.classList.add("roll-link");
+  span.classList.add("roll-link-group");
   _addDataset(span, dataset);
-
-  // Add main link
-  const link = document.createElement("a");
-  link.dataset.action = "roll";
-  link.innerHTML = `<i class="fa-solid fa-dice-d20"></i>${label}`;
-  span.insertAdjacentElement("afterbegin", link);
+  if ( label instanceof HTMLTemplateElement ) span.append(label.content);
+  else span.append(label);
 
   // Add chat request link for GMs
-  if ( game.user.isGM && (dataset.type !== "damage") && (dataset.type !== "item") ) {
+  if ( game.user.isGM ) {
     const gmLink = document.createElement("a");
     gmLink.classList.add("enricher-action");
     gmLink.dataset.action = "request";
     gmLink.dataset.tooltip = "EDITOR.DND5E.Inline.RequestRoll";
     gmLink.setAttribute("aria-label", game.i18n.localize(gmLink.dataset.tooltip));
-    gmLink.innerHTML = '<i class="fa-solid fa-comment-dots"></i>';
+    gmLink.insertAdjacentHTML("afterbegin", '<i class="fa-solid fa-comment-dots"></i>');
     span.insertAdjacentElement("beforeend", gmLink);
   }
 
   return span;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Create a rollable link.
+ * @param {string} label                           Label to display.
+ * @param {object} [dataset={}]                    Data that will be added to the link for the rolling method.
+ * @param {object} [options={}]
+ * @param {boolean} [options.classes="roll-link"]  Class to add to the link.
+ * @param {string} [options.tag="a"]               Tag to use for the main link.
+ * @returns {HTMLElement}
+ */
+function createRollLink(label, dataset={}, { classes="roll-link", tag="a" }={}) {
+  const link = document.createElement(tag);
+  link.className = classes;
+  link.insertAdjacentHTML("afterbegin", '<i class="fa-solid fa-dice-d20" inert></i>');
+  link.append(label);
+  _addDataset(link, dataset);
+  return link;
 }
 
 /* -------------------------------------------- */
@@ -794,34 +1321,40 @@ async function awardAction(event) {
  * @returns {Promise}
  */
 async function rollAction(event) {
-  const target = event.target.closest('.roll-link, [data-action="rollRequest"], [data-action="concentration"]');
+  const target = event.target.closest('.roll-link-group, [data-action="rollRequest"], [data-action="concentration"]');
   if ( !target ) return;
   event.stopPropagation();
 
-  const { type, ability, skill, tool, dc } = target.dataset;
+  const dataset = {
+    ...((event.target.closest(".roll-link-group") ?? target)?.dataset ?? {}),
+    ...(event.target.closest(".roll-link")?.dataset ?? {})
+  };
+  const { type, ability, skill, tool, dc } = dataset;
   const options = { event };
   if ( ability in CONFIG.DND5E.abilities ) options.ability = ability;
-  if ( dc ) options.target = dc;
+  if ( dc ) options.target = Number(dc);
 
   const action = event.target.closest("a")?.dataset.action ?? "roll";
+  const link = event.target.closest("a") ?? event.target;
 
   // Direct roll
   if ( (action === "roll") || !game.user.isGM ) {
-    target.disabled = true;
+    link.disabled = true;
     try {
       switch ( type ) {
+        case "attack": return await rollAttack(event);
         case "damage": return await rollDamage(event);
-        case "item": return await useItem(target.dataset);
+        case "item": return await useItem(dataset);
       }
 
-      const tokens = getSceneTargets();
-      if ( !tokens.length ) {
+      const actors = getSceneTargets().map(t => t.actor);
+      if ( !actors.length && game.user.character ) actors.push(game.user.character);
+      if ( !actors.length ) {
         ui.notifications.warn("EDITOR.DND5E.Inline.Warning.NoActor", { localize: true });
         return;
       }
 
-      for ( const token of tokens ) {
-        const actor = token.actor;
+      for ( const actor of actors ) {
         switch ( type ) {
           case "check":
             await actor.rollAbilityCheck(options);
@@ -841,24 +1374,93 @@ async function rollAction(event) {
         }
       }
     } finally {
-      target.disabled = false;
+      link.disabled = false;
     }
   }
 
   // Roll request
   else {
     const MessageClass = getDocumentClass("ChatMessage");
+
+    let buttons;
+    if ( dataset.type === "check" ) buttons = createCheckRequestButtons(dataset);
+    else if ( dataset.type === "save" ) buttons = createSaveRequestButtons(dataset);
+    else buttons = [createRequestButton({ ...dataset, format: "short" })];
+
     const chatData = {
       user: game.user.id,
-      content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
-        buttonLabel: createRollLabel({ ...target.dataset, format: "short", icon: true }),
-        hiddenLabel: createRollLabel({ ...target.dataset, format: "short", icon: true, hideDC: true }),
-        dataset: { ...target.dataset, action: "rollRequest", visibility: "all" }
-      }),
+      content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", { buttons }),
       flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),
       speaker: MessageClass.getSpeaker({user: game.user})
     };
     return MessageClass.create(chatData);
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Create a button for a chat request.
+ * @param {object} dataset
+ * @returns {object}
+ */
+function createRequestButton(dataset) {
+  return {
+    buttonLabel: createRollLabel({ ...dataset, icon: true }),
+    hiddenLabel: createRollLabel({ ...dataset, icon: true, hideDC: true }),
+    dataset: { ...dataset, action: "rollRequest", visibility: "all" }
+  };
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Perform an attack roll.
+ * @param {Event} event     The click event triggering the action.
+ * @returns {Promise|void}
+ */
+async function rollAttack(event) {
+  const target = event.target.closest(".roll-link-group");
+  const { activityUuid, attackMode, formula } = target.dataset;
+
+  if ( activityUuid ) {
+    const activity = await fromUuid(activityUuid);
+    if ( activity ) return activity.rollAttack({ attackMode, event });
+  }
+
+  const targets = getTargetDescriptors();
+  const rollConfig = {
+    attackMode, event,
+    hookNames: ["attack", "d20Test"],
+    rolls: [{
+      parts: [formula.replace(/^\s*\+\s*/, "")],
+      options: {
+        target: targets.length === 1 ? targets[0].ac : undefined
+      }
+    }]
+  };
+
+  const dialogConfig = {
+    applicationClass: AttackRollConfigurationDialog
+  };
+
+  const messageConfig = {
+    data: {
+      flags: {
+        dnd5e: {
+          messageType: "roll",
+          roll: { type: "attack" }
+        }
+      },
+      flavor: game.i18n.localize("DND5E.AttackRoll"),
+      speaker: ChatMessage.implementation.getSpeaker()
+    }
+  };
+
+  const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
+  if ( rolls?.length ) {
+    Hooks.callAll("dnd5e.rollAttackV2", rolls, { subject: null, ammoUpdate: null });
+    Hooks.callAll("dnd5e.postRollAttack", rolls, { subject: null });
   }
 }
 
@@ -870,13 +1472,27 @@ async function rollAction(event) {
  * @returns {Promise<void>}
  */
 async function rollDamage(event) {
-  const target = event.target.closest(".roll-link");
-  const { formula, damageType } = target.dataset;
+  const target = event.target.closest(".roll-link-group");
+  let { activityUuid, attackMode, formulas, damageTypes, rollType } = target.dataset;
+
+  if ( activityUuid ) {
+    const activity = await fromUuid(activityUuid);
+    if ( activity ) return activity.rollDamage({ attackMode, event });
+  }
+
+  formulas = formulas?.split("&") ?? [];
+  damageTypes = damageTypes?.split("&") ?? [];
 
   const rollConfig = {
-    event,
+    attackMode, event,
     hookNames: ["damage"],
-    rolls: [{ parts: [formula], options: { type: damageType } }]
+    rolls: formulas.map((formula, idx) => {
+      const types = damageTypes[idx]?.split("|") ?? [];
+      return {
+        parts: [formula],
+        options: { type: types[0], types }
+      };
+    })
   };
 
   const messageConfig = {
@@ -885,11 +1501,11 @@ async function rollDamage(event) {
       flags: {
         dnd5e: {
           messageType: "roll",
-          roll: { type: "damage" },
+          roll: { type: rollType },
           targets: getTargetDescriptors()
         }
       },
-      flavor: game.i18n.localize(`DND5E.${damageType in CONFIG.DND5E.healingTypes ? "Healing" : "Damage"}Roll`),
+      flavor: game.i18n.localize(`DND5E.${rollType === "healing" ? "Healing" : "Damage"}Roll`),
       speaker: ChatMessage.implementation.getSpeaker()
     }
   };

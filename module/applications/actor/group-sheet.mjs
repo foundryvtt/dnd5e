@@ -222,7 +222,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
 
     // Remove items in containers & sort remaining
     context.items = context.items
-      .filter(i => !this.actor.items.has(i.system.container))
+      .filter(i => !this.actor.items.has(i.system.container) && (i.type !== "spell"))
       .sort((a, b) => (a.sort || 0) - (b.sort || 0));
 
     // Classify items

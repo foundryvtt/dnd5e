@@ -1,3 +1,4 @@
+import { defaultUnits } from "../../utils.mjs";
 import BaseConfigSheet from "../actor/api/base-config-sheet.mjs";
 
 /**
@@ -80,17 +81,17 @@ export default class MovementSensesConfig extends BaseConfigSheet {
     context.types = this.types.map(key => ({
       field: context.fields[key],
       value: context.data[key],
-      placeholder: placeholderData?.[key]
+      placeholder: placeholderData?.[key] ?? ""
     }));
 
-    const automaticUnit = CONFIG.DND5E.movementUnits[
-      placeholderData?.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0]
-    ].toLowerCase();
-    context.unitsOptions = [
-      { value: "", label: game.i18n.format("DND5E.AutomaticValue", { value: automaticUnit }) },
-      { rule: true },
-      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, label]) => ({ value, label }))
-    ];
+    context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
+    if ( (this.document.type === "pc") || ((this.document.type === "npc") && placeholderData) ) {
+      const automaticUnit = CONFIG.DND5E.movementUnits[placeholderData?.units ?? defaultUnits("length")]?.label ?? "";
+      context.unitsOptions.unshift(
+        { value: "", label: game.i18n.format("DND5E.AutomaticValue", { value: automaticUnit.toLowerCase() }) },
+        { rule: true }
+      );
+    }
 
     return context;
   }

@@ -631,8 +631,8 @@
       "img": "icons/creatures/reptiles/lizard-mouth-glowing-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>Whenever the golem starts its turn with <strong>40 hit points</strong> or fewer, roll a d6. On a 6, the golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. </p><p>If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself. Once the golem goes berserk, it continues to do so until it is destroyed or regains all its<strong> hit points</strong><strong>. T</strong>he golem's creator, if <strong>within 60 feet</strong> of the berserk golem, can try to calm it by speaking firmly and persuasively. The golem must be able to hear its creator, who must take an action to make a <strong>DC 15 Charisma (Persuasion) check</strong>. If the check succeeds, the golem ceases being berserk. If it takes damage while still at <strong>40 hit points</strong> or fewer, the golem might go berserk again.</p></section><p>The golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself.</p>",
-          "chat": ""
+          "value": "<p>Whenever the golem starts its turn with <strong>40 hit points</strong> or fewer, roll a d6. On a 6, the golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. </p><p>If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself. Once the golem goes berserk, it continues to do so until it is destroyed or regains all its<strong> hit points</strong><strong>. T</strong>he golem's creator, if <strong>within 60 feet</strong> of the berserk golem, can try to calm it by speaking firmly and persuasively. The golem must be able to hear its creator, who must take an action to make a <strong>DC 15 Charisma (Persuasion) check</strong>. If the check succeeds, the golem ceases being berserk. If it takes damage while still at <strong>40 hit points</strong> or fewer, the golem might go berserk again.</p>",
+          "chat": "<p>The golem goes berserk. On each of its turns while berserk, the golem attacks the nearest creature it can see. If no creature is near enough to move to and attack, the golem attacks an object, with preference for an object smaller than itself.</p>"
         },
         "source": {
           "custom": "",
@@ -742,10 +742,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676718,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Hm4o2FgPZsdbXjLq.AwiZrSjLzs3aNC33"
     },
@@ -756,8 +756,8 @@
       "img": "icons/magic/fire/projectile-wave-arrow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>If the golem takes <strong><em>fire damage</em></strong>, it has<strong> disadvantage </strong>on attack rolls and ability checks until the end of its next turn.</p></section><p>If the golem takes <strong><em>fire damage</em></strong>, it has<strong> disadvantage </strong>on some rolls.</p>",
-          "chat": ""
+          "value": "<p>If the golem takes <strong><em>fire damage</em></strong>, it has<strong> disadvantage </strong>on attack rolls and ability checks until the end of its next turn.</p>",
+          "chat": "<p>If the golem takes <strong><em>fire damage</em></strong>, it has<strong> disadvantage </strong>on some rolls.</p>"
         },
         "source": {
           "custom": "",
@@ -801,10 +801,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676718,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Hm4o2FgPZsdbXjLq.Ee9WvQyqy1lRYtuj"
     },
@@ -1176,8 +1176,8 @@
       "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Flesh Golem attacks with its Slam.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>.</p>",
+          "chat": "<p>The Flesh Golem attacks with its Slam.</p>"
         },
         "source": {
           "custom": "",
@@ -1364,10 +1364,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676718,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Hm4o2FgPZsdbXjLq.mjn0iMGrjGTOn42w"
     }

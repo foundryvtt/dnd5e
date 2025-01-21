@@ -106,6 +106,8 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /** @inheritDoc */
   _initializeSource(data, options={}) {
+    if ( data instanceof foundry.abstract.DataModel ) data = data.toObject();
+
     if ( data.flags?.dnd5e?.type === "enchantment" ) {
       data.type = "enchantment";
       delete data.flags.dnd5e.type;

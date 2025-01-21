@@ -6,7 +6,14 @@ import { setTheme } from "../settings.mjs";
  */
 export default class ContextMenu5e extends ContextMenu {
   /** @override */
-  _setPosition([html], [target]) {
+  _setPosition(html, target, options={}) {
+    if ( game.release.generation > 12 ) {
+      html.classList.add("dnd5e2");
+      return this._setFixedPosition(html, target, options);
+    } else {
+      html = html[0];
+      target = target[0];
+    }
     document.body.appendChild(html);
     const { clientWidth, clientHeight } = document.documentElement;
     const { width, height } = html.getBoundingClientRect();

@@ -73,6 +73,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /** @inheritDoc */
   _initializeSource(data, options={}) {
+    if ( data instanceof foundry.abstract.DataModel ) data = data.toObject();
+
     // Migrate backpack -> container.
     if ( data.type === "backpack" ) {
       data.type = "container";
@@ -790,7 +792,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       );
       event = dialog?.event;
     }
-    const activities = this.system.activities?.filter(a => !this.getFlag("dnd5e", "riders.activity")?.includes(a.id));
+    const activities = this.system.activities?.filter(a =>
+      !this.getFlag("dnd5e", "riders.activity")?.includes(a.id) && a.canUse
+    );
     if ( activities?.length ) {
       const { legacy, chooseActivity, ...activityConfig } = config;
       let usageConfig = activityConfig;
@@ -1499,7 +1503,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       let newItemData = transformAll ? await transformAll(item, o) : item;
       if ( transformFirst && (depth === 0) ) newItemData = await transformFirst(newItemData, o);
       if ( !newItemData ) return;
-      if ( newItemData instanceof Item ) newItemData = newItemData.toObject();
+      if ( newItemData instanceof Item ) newItemData = game.items.fromCompendium(newItemData, {
+        clearSort: false, keepId: true, clearOwnership: false
+      });
       foundry.utils.mergeObject(newItemData, {"system.container": containerId} );
       if ( !keepId ) newItemData._id = foundry.utils.randomID();
 

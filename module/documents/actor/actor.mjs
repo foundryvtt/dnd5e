@@ -1,10 +1,11 @@
-import ShortRestDialog from "../../applications/actor/short-rest.mjs";
-import LongRestDialog from "../../applications/actor/long-rest.mjs";
+import ShortRestDialog from "../../applications/actor/rest/short-rest-dialog.mjs";
+import LongRestDialog from "../../applications/actor/rest/long-rest-dialog.mjs";
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
+import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
-import { replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
+import { convertTime, defaultUnits, formatNumber, formatTime, replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
@@ -147,7 +148,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       concentration.effects.add(effect);
       if ( data ) {
         let item = this.items.get(data.id);
-        if ( !item && data.data ) item = new Item.implementation(data.data, { keepId: true, parent: this });
+        if ( !item && (foundry.utils.getType(data.data) === "Object") ) {
+          item = new Item.implementation(data.data, { keepId: true, parent: this });
+        }
         if ( item ) concentration.items.add(item);
       }
     }
@@ -604,6 +607,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
       + (flags.initiativeAlert && isLegacy ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
+    init.score = 10 + init.total;
   }
 
   /* -------------------------------------------- */
@@ -1294,9 +1298,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     return ChatMessage.implementation.create({
       content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
-        dataset: { ...dataset, type: "concentration", visbility: "all" },
-        buttonLabel: createRollLabel({ ...dataset, ...config }),
-        hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
+        buttons: [{
+          dataset: { ...dataset, type: "concentration", visbility: "all" },
+          buttonLabel: createRollLabel({ ...dataset, ...config }),
+          hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
+        }]
       }),
       whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
       speaker: ChatMessage.implementation.getSpeaker({ actor: this })
@@ -1414,14 +1420,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const rollConfig = foundry.utils.mergeObject({
       ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability),
+      advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+      disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
     rollConfig.rolls = [{
       options: {
-        advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-        disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
         maximum: relevant?.roll.max,
         minimum: relevant?.roll.min
       }
@@ -1453,7 +1459,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           : game.i18n.format("DND5E.ToolPromptTitle", { tool: Trait.keyLabel(config.tool, { trait: "tool" }) ?? "" }),
         speaker: ChatMessage.getSpeaker({ actor: this })
       }
-    });
+    }, message);
 
     if ( `dnd5e.preRoll${name}` in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -1509,7 +1515,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const rollData = this.getRollData();
     const abilityId = formData?.get("ability") ?? process.ability;
     const ability = this.system.abilities?.[abilityId];
-    const prof = this.system.calculateAbilityCheckProficiency(relevant.effectValue, abilityId);
+    const prof = this.system.calculateAbilityCheckProficiency(relevant?.effectValue ?? 0, abilityId);
 
     let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
       mod: ability?.mod,
@@ -1754,7 +1760,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async rollDeathSave(config={}, dialog={}, message={}) {
     let oldFormat = false;
-    const death = this.system.attributes.death;
+    const death = this.system.attributes?.death;
     if ( !death ) throw new Error(`Actors of the type '${this.type}' don't support death saves.`);
 
     // Handle deprecated config object
@@ -1790,6 +1796,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       parts.push("@prof");
       data.prof = new Proficiency(this.system.attributes.prof, 1).term;
     }
+
+    // Death save bonus
+    if ( death.bonuses.save ) parts.push(death.bonuses.save);
 
     const initialRoll = config.rolls?.pop();
     if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
@@ -2022,8 +2031,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * @typedef {D20RollOptions} InitiativeRollOptions
-   * @param {D20Roll.ADV_MODE} [advantageMode]  A specific advantage mode to apply.
-   * @property {string} [flavor]                Special flavor text to apply to the created message.
+   * @property {D20Roll.ADV_MODE} [advantageMode]  A specific advantage mode to apply.
+   * @property {number} [fixed]                    Fixed initiative value to use rather than rolling.
+   * @property {string} [flavor]                   Special flavor text to apply to the created message.
    */
 
   /**
@@ -2036,8 +2046,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this._cachedInitiativeRoll ) return this._cachedInitiativeRoll.clone();
     const config = this.getInitiativeRollConfig(options);
     if ( !config ) return null;
-    const formula = ["1d20"].concat(config.parts).join(" + ");
-    return new CONFIG.Dice.D20Roll(formula, config.data, config.options);
+
+    // Create a normal D20 roll
+    if ( config.options?.fixed === undefined ) {
+      const formula = ["1d20"].concat(config.parts).join(" + ");
+      return new CONFIG.Dice.D20Roll(formula, config.data, config.options);
+    }
+
+    // Create a basic roll with the fixed score
+    return new CONFIG.Dice.BasicRoll(String(config.options.fixed), config.data, config.options);
   }
 
   /* -------------------------------------------- */
@@ -2073,7 +2090,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
     if ( tiebreaker && Number.isNumeric(ability?.value) ) parts.push(String(ability.value / 100));
 
+    // Fixed initiative score
+    const scoreMode = game.settings.get("dnd5e", "initiativeScore");
+    const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && (this.type === "npc"));
+
     options = foundry.utils.mergeObject({
+      fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? game.i18n.localize("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
       maximum: init.roll.max,
@@ -2099,7 +2121,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Roll initiative for this Actor with a dialog that provides an opportunity to elect advantage or other bonuses.
    * @param {Partial<InitiativeRollOptions>} [rollOptions={}]  Options forwarded to the Actor#getInitiativeRoll method.
-   * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor
+   * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor.
    */
   async rollInitiativeDialog(rollOptions={}) {
     const config = {
@@ -2110,13 +2132,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       subject: this
     };
     if ( !config.rolls[0] ) return;
-    const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
-    const message = { rollMode: game.settings.get("core", "rollMode") };
-    const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, message);
-    if ( !rolls.length ) return;
 
-    // Temporarily cache the configured roll and use it to roll initiative for the Actor
-    this._cachedInitiativeRoll = rolls[0];
+    // Display the roll configuration dialog
+    if ( config.rolls[0].options?.fixed === undefined ) {
+      const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
+      const message = { rollMode: game.settings.get("core", "rollMode") };
+      const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, message);
+      if ( !rolls.length ) return;
+      this._cachedInitiativeRoll = rolls[0];
+    }
+
+    // Just create a basic roll with the fixed score
+    else {
+      const { data, options } = config.rolls[0];
+      this._cachedInitiativeRoll = new CONFIG.Dice.BasicRoll(String(options.fixed), data, options);
+    }
+
     await this.rollInitiative({ createCombatants: true });
   }
 
@@ -2208,14 +2239,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else {
       // If no denomination was provided, choose the first available
       if ( !config.denomination ) {
-        cls = this.system.attributes.hd.classes.find(c => c.system.hitDiceUsed < c.system.levels);
+        cls = this.system.attributes.hd.classes.find(c => c.system.hd.value);
         if ( !cls ) return null;
-        config.denomination = cls.system.hitDice;
+        config.denomination = cls.system.hd.denomination;
       }
 
       // Otherwise, locate a class (if any) which has an available hit die of the requested denomination
       else cls = this.system.attributes.hd.classes.find(i => {
-        return (i.system.hitDice === config.denomination) && (i.system.hitDiceUsed < i.system.levels);
+        return (i.system.hd.denomination === config.denomination) && i.system.hd.value;
       });
 
       // If no class is available, display an error notification
@@ -2268,7 +2299,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const updates = { actor: {}, class: {} };
     if ( rollConfig.modifyHitDice !== false ) {
-      if ( cls ) updates.class["system.hitDiceUsed"] = cls.system.hitDiceUsed + 1;
+      if ( cls ) updates.class["system.hd.spent"] = cls.system.hd.spent + 1;
       else updates.actor["system.attributes.hd.spent"] = this.system.attributes.hd.spent + 1;
     }
     const hp = this.system.attributes.hp;
@@ -2329,11 +2360,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async rollClassHitPoints(item, { chatMessage=true }={}) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
     const rollData = {
-      formula: `1${item.system.hitDice}`,
+      formula: `1${item.system.hd.denomination}`,
       data: item.getRollData(),
       chatMessage
     };
-    const flavor = game.i18n.format("DND5E.AdvancementHitPointsRollMessage", { class: item.name });
+    const flavor = game.i18n.format("DND5E.ADVANCEMENT.HitPoints.Roll", { class: item.name });
     const messageData = {
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -2447,6 +2478,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    *
    * @typedef {object} RestResult
    * @property {string} type              Type of rest performed.
+   * @property {Actor5e} clone            Clone of the actor before rest is performed.
    * @property {object} deltas
    * @property {number} deltas.hitPoints  Hit points recovered during the rest.
    * @property {number} deltas.hitDice    Hit dice recovered or spent during the rest.
@@ -2465,6 +2497,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async shortRest(config={}) {
     if ( this.type === "vehicle" ) return;
+    const clone = this.clone();
 
     config = foundry.utils.mergeObject({
       type: "short", dialog: true, chat: true, newDay: false, advanceTime: false, autoHD: false, autoHDThreshold: 3,
@@ -2488,7 +2521,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Display a Dialog for rolling hit dice
     if ( config.dialog ) {
       try {
-        foundry.utils.mergeObject(config, await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0}));
+        foundry.utils.mergeObject(config, await ShortRestDialog.configure(this, config));
       } catch(err) { return; }
     }
 
@@ -2503,12 +2536,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.shortRest", this, config) === false ) return;
 
     // Automatically spend hit dice
-    if ( !config.dialog && config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
+    if ( config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
 
     // Return the rest result
     const dhd = foundry.utils.getProperty(this, "system.attributes.hd.value") - hd0;
     const dhp = foundry.utils.getProperty(this, "system.attributes.hp.value") - hp0;
-    return this._rest(config, { dhd, dhp });
+    return this._rest(config, { clone, dhd, dhp });
   }
 
   /* -------------------------------------------- */
@@ -2520,6 +2553,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async longRest(config={}) {
     if ( this.type === "vehicle" ) return;
+    const clone = this.clone();
 
     config = foundry.utils.mergeObject({
       type: "long", dialog: true, chat: true, newDay: true, advanceTime: false,
@@ -2538,7 +2572,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( config.dialog ) {
       try {
-        foundry.utils.mergeObject(config, await LongRestDialog.longRestDialog({actor: this}));
+        foundry.utils.mergeObject(config, await LongRestDialog.configure(this, config));
       } catch(err) { return; }
     }
 
@@ -2552,7 +2586,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     if ( Hooks.call("dnd5e.longRest", this, config) === false ) return;
 
-    return this._rest(config);
+    return this._rest(config, { clone });
   }
 
   /* -------------------------------------------- */
@@ -2580,6 +2614,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newDay: config.newDay === true,
       rolls: []
     }, result);
+    result.clone ??= this.clone();
     if ( "dhp" in result ) result.deltas.hitPoints = result.dhp;
     if ( "dhd" in result ) result.deltas.hitDice = result.dhd;
 
@@ -2612,7 +2647,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
 
     // Display a Chat Message summarizing the rest effects
-    if ( config.chat ) await this._displayRestResultMessage(result, result.longRest);
+    if ( config.chat ) await this._displayRestResultMessage(config, result);
 
     /**
      * A hook event that fires when the rest process is completed for an actor.
@@ -2633,50 +2668,48 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Display a chat message with the result of a rest.
    *
+   * @param {RestConfiguration} config  Rest configuration.
    * @param {RestResult} result         Result of the rest operation.
-   * @param {boolean} [longRest=false]  Is this a long rest?
    * @returns {Promise<ChatMessage>}    Chat message that was created.
    * @protected
    */
-  async _displayRestResultMessage(result, longRest=false) {
-    const { dhd, dhp, newDay } = result;
+  async _displayRestResultMessage(config, result) {
+    let { dhd, dhp, newDay } = result;
+    if ( config.type === "short" ) dhd *= -1;
     const diceRestored = dhd !== 0;
     const healthRestored = dhp !== 0;
+    const longRest = config.type === "long";
     const length = longRest ? "Long" : "Short";
 
-    // Summarize the rest duration
-    let restFlavor;
-    switch (game.settings.get("dnd5e", "restVariant")) {
-      case "normal":
-        restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`;
-        break;
-      case "gritty":
-        restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`;
-        break;
-      case "epic":
-        restFlavor = `DND5E.${length}RestEpic`;
-        break;
-    }
+    const duration = convertTime(config.duration, "minute");
+    const parts = [formatTime(duration.value, duration.unit)];
+    if ( newDay ) parts.push(game.i18n.localize("DND5E.REST.NewDay.Label").toLowerCase());
+    const restFlavor = `${CONFIG.DND5E.restTypes[config.type].label} (${
+      game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
 
     // Determine the chat message to display
     let message;
-    if ( diceRestored && healthRestored ) message = `DND5E.${length}RestResult`;
-    else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.LongRestResultHitPoints";
-    else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.LongRestResultHitDice";
-    else message = `DND5E.${length}RestResultShort`;
+    if ( diceRestored && healthRestored ) message = `DND5E.REST.${length}.Result.Full`;
+    else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.REST.Long.Result.HitPoints";
+    else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.REST.Long.Result.HitDice";
+    else message = `DND5E.REST.${length}.Result.Short`;
 
     // Create a chat message
+    const pr = new Intl.PluralRules(game.i18n.lang);
     let chatData = {
-      user: game.user.id,
-      speaker: {actor: this, alias: this.name},
-      flavor: game.i18n.localize(restFlavor),
-      rolls: result.rolls,
       content: game.i18n.format(message, {
         name: this.name,
-        dice: longRest ? dhd : -dhd,
-        health: dhp
+        dice: game.i18n.format(`DND5E.HITDICE.Counted.${pr.select(dhd)}`, { number: formatNumber(dhd) }),
+        health: game.i18n.format(`DND5E.HITPOINTS.Counted.${pr.select(dhp)}`, { number: formatNumber(dhp) })
       }),
-      "flags.dnd5e.rest": { type: longRest ? "long" : "short" }
+      flavor: game.i18n.localize(restFlavor),
+      type: "rest",
+      rolls: result.rolls,
+      speaker: ChatMessage.getSpeaker({ actor: this, alias: this.name }),
+      system: {
+        deltas: ActorDeltasField.getDeltas(result.clone, { actor: result.updateData, item: result.updateItems }),
+        type: result.type
+      }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);
@@ -2875,7 +2908,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _prepareMovementAttribution() {
     const { movement } = this.system.attributes;
-    const units = movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0];
+    const units = movement.units || defaultUnits("length");
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, label]) => {
       const value = movement[k];
       if ( value || (k === "walk") ) html += `

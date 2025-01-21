@@ -678,8 +678,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>8 (1d10 + 3) <em>piercing damage</em></strong>.</p><p></p></section><p>The Bronze Dragon Wyrmling attacks with its Bite.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>8 (1d10 + 3) <em>piercing damage</em></strong>.</p>",
+          "chat": "<p>The Bronze Dragon Wyrmling attacks with its Bite.</p>"
         },
         "source": {
           "custom": "",
@@ -870,10 +870,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676876,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!hY9ptpO5Xl2tfkcj.Vq0dUbodqBggQAVQ"
     },
@@ -884,8 +884,8 @@
       "img": "icons/creatures/abilities/dragon-ice-breath-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The dragon uses one of the following breath weapons.</p>\n<p>**Lightning Breath.** The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a  <strong>DC 12 Dexterity</strong> saving throw, taking <strong>16 (3d10) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n<p>**Repulsion Breath.** The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a  <strong>DC 12 Strength</strong> saving throw. On a failed save, the creature is pushed 30 feet away from the dragon.</p>\n</section>\n<p>The dragon breathes in!</p>",
-          "chat": ""
+          "value": "<p>The dragon uses one of the following breath weapons.</p><p>**Lightning Breath.** The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a  <strong>DC 12 Dexterity</strong> saving throw, taking <strong>16 (3d10) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p>**Repulsion Breath.** The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a  <strong>DC 12 Strength</strong> saving throw. On a failed save, the creature is pushed 30 feet away from the dragon.</p>",
+          "chat": "<p>The dragon breathes in!</p>"
         },
         "source": {
           "custom": "",
@@ -1011,10 +1011,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676876,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!hY9ptpO5Xl2tfkcj.Bl0NweDKcGjwVdPu"
     },
@@ -1025,8 +1025,8 @@
       "img": "icons/magic/lightning/bolt-strike-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>**Lightning Breath.** The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a  <strong>DC 12 Dexterity</strong> saving throw, taking <strong>16 (3d10) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p> The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a <strong>Dexterity</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>**Lightning Breath.** The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a  <strong>DC 12 Dexterity</strong> saving throw, taking <strong>16 (3d10) <em>lightning damage</em></strong> on a failed save, or half as much damage on a successful one.</p>",
+          "chat": "<p> The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a <strong>Dexterity</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1169,10 +1169,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676876,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!hY9ptpO5Xl2tfkcj.QoYyaNGqsz935dS2"
     },
@@ -1183,8 +1183,8 @@
       "img": "icons/magic/air/air-wave-gust-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>**Repulsion Breath.** The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a  <strong>DC 12 Strength</strong> saving throw. On a failed save, the creature is pushed 30 feet away from the dragon.</p>\n</section>\n<p>The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must make a <strong>Strength</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>**Repulsion Breath.** The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must succeed on a  <strong>DC 12 Strength</strong> saving throw. On a failed save, the creature is pushed 30 feet away from the dragon.</p>",
+          "chat": "<p>The dragon exhales repulsion energy in a 30-foot cone. Each creature in that area must make a <strong>Strength</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1309,10 +1309,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676876,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!hY9ptpO5Xl2tfkcj.WT04ZQprU9op6Wny"
     }

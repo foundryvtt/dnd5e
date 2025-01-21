@@ -134,6 +134,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.prepareIdentifiable();
     this.preparePhysicalData();
     if ( !this.type.value ) return;
     const config = CONFIG.DND5E.consumableTypes[this.type.value];
@@ -172,7 +173,10 @@ export default class ConsumableData extends ItemDataModel.mixin(
       ...this.physicalItemSheetFields
     ];
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
-      return { value, label, selected: context.source.damage.base.types.includes(value) };
+      return {
+        value, label,
+        selected: context.source.damage.base.types.includes?.(value) ?? context.source.damage.base.types.has(value)
+      };
     });
     context.denominationOptions = [
       { value: "", label: "" },
@@ -246,6 +250,16 @@ export default class ConsumableData extends ItemDataModel.mixin(
     else if ( this.type.value === "scroll" ) CONFIG.DND5E.validProperties.spell
       .filter(p => p !== "material").forEach(p => valid.add(p));
     return valid;
+  }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    await this.preUpdateIdentifiable(changed, options, user);
   }
 
   /* -------------------------------------------- */

@@ -792,8 +792,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong>.</p>\n<p>The target must make a  <strong>DC 11 Constitution</strong> saving throw, taking <strong>9 (2d8) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one. If the <em>poison damage</em> reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>\n</section>\n<p>The Giant Spider attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong>.</p><p>The target must make a  <strong>DC 11 Constitution</strong> saving throw, taking <strong>9 (2d8) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one. If the <em>poison damage</em> reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>",
+          "chat": "<p>The Giant Spider attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1075,10 +1075,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676616,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!v99wOosUJjUgcUNF.SuRAERXystPvC7Ci"
     },
@@ -1089,8 +1089,8 @@
       "img": "icons/creatures/webs/web-spider-glowing-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +5 to hit, range 30/60 ft., one creature. Hit: The target is restrained by webbing.</p>\n<p>As an action, the restrained target can make a DC 12 Strength check, bursting the webbing on a success. The webbing can also be attacked and destroyed (AC 10; hp 5; vulnerability to <em>fire damage</em>; immunity to bludgeoning, poison, and <em>psychic damage</em>).</p>\n</section>\n<p>The target is restrained by webbing. As an action, the restrained target can make a Strength check, bursting the webbing on a success.</p>",
-          "chat": ""
+          "value": "<p>Ranged Weapon Attack: +5 to hit, range 30/60 ft., one creature. Hit: The target is restrained by webbing.</p><p>As an action, the restrained target can make a DC 12 Strength check, bursting the webbing on a success. The webbing can also be attacked and destroyed (AC 10; hp 5; vulnerability to <em>fire damage</em>; immunity to bludgeoning, poison, and <em>psychic damage</em>).</p>",
+          "chat": "<p>The target is restrained by webbing. As an action, the restrained target can make a Strength check, bursting the webbing on a success.</p>"
         },
         "source": {
           "custom": "",
@@ -1311,10 +1311,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676616,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!v99wOosUJjUgcUNF.g7e60AxXarlQ9xQC"
     }

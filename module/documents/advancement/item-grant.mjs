@@ -19,8 +19,8 @@ export default class ItemGrantAdvancement extends Advancement {
       order: 40,
       icon: "icons/sundries/books/book-open-purple.webp",
       typeIcon: "systems/dnd5e/icons/svg/item-grant.svg",
-      title: game.i18n.localize("DND5E.AdvancementItemGrantTitle"),
-      hint: game.i18n.localize("DND5E.AdvancementItemGrantHint"),
+      title: game.i18n.localize("DND5E.ADVANCEMENT.ItemGrant.Title"),
+      hint: game.i18n.localize("DND5E.ADVANCEMENT.ItemGrant.Hint"),
       apps: {
         config: ItemGrantConfig,
         flow: ItemGrantFlow
@@ -109,6 +109,16 @@ export default class ItemGrantAdvancement extends Advancement {
       });
     }
     return updates;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  automaticApplicationValue(level) {
+    if ( this.configuration.optional
+      || (this.configuration.spell?.ability?.size > 1)
+      || this.configuration.items.some(i => i.optional) ) return false;
+    return Object.fromEntries(this.configuration.items.map(({ uuid }) => [uuid, true]));
   }
 
   /* -------------------------------------------- */

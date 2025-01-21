@@ -10,12 +10,8 @@ export default class HitDice {
     this.actor = actor;
 
     for ( const item of Object.values(actor.classes) ) {
-      if ( /^d\d+$/.test(item.system.hitDice) ) {
-        this.classes.add(item);
-        this.value += item.system.levels - item.system.hitDiceUsed;
-        this.max += item.system.levels;
-        this.sizes.add(parseInt(item.system.hitDice.slice(1)));
-      }
+      this.classes.add(item);
+      this.sizes.add(parseInt(item.system.hd.denomination.slice(1)));
     }
   }
 
@@ -33,7 +29,13 @@ export default class HitDice {
    * Remaining hit dice.
    * @type {number}
    */
-  value = 0;
+  get value() {
+    if ( this.#value !== undefined ) return this.#value;
+    this.#value = this.classes.reduce((acc, cls) => acc + cls.system.hd.value, 0);
+    return this.#value;
+  }
+
+  #value;
 
   /* -------------------------------------------- */
 
@@ -41,7 +43,13 @@ export default class HitDice {
    * The actor's total amount of hit dice.
    * @type {number}
    */
-  max = 0;
+  get max() {
+    if ( this.#max !== undefined ) return this.#max;
+    this.#max = this.classes.reduce((acc, cls) => acc + cls.system.hd.max, 0);
+    return this.#max;
+  }
+
+  #max;
 
   /* -------------------------------------------- */
 
@@ -146,9 +154,8 @@ export default class HitDice {
   get bySize() {
     const hd = {};
     this.classes.forEach(cls => {
-      const d = cls.system.hitDice;
-      const remaining = cls.system.levels - cls.system.hitDiceUsed;
-      hd[d] = (hd[d] ?? 0) + remaining;
+      const d = cls.system.hd.denomination;
+      hd[d] = (hd[d] ?? 0) + cls.system.hd.value;
     });
     return hd;
   }
@@ -176,19 +183,18 @@ export default class HitDice {
    */
   createHitDiceUpdates({ maxHitDice, fraction=0.5, largest=true, ...config }={}, result={}) {
     if ( !Number.isInteger(maxHitDice) ) maxHitDice = Math.max(Math.floor(this.max * fraction), 1);
-    const classes = Array.from(this.classes).sort((a, b) => {
-      a = parseInt(a.system.hitDice.slice(1));
-      b = parseInt(b.system.hitDice.slice(1));
-      return largest ? (b - a) : (a - b);
+    const classes = Array.from(this.classes).sort((lhs, rhs) => {
+      const sort = lhs.system.hd.denomination.localeCompare(rhs.system.hd.denomination, "en", { numeric: true });
+      return largest ? sort * -1 : sort;
     });
     const updateItems = [];
     let recovered = 0;
     for ( const item of classes ) {
-      const used = item.system.hitDiceUsed;
+      const used = item.system.hd.spent;
       if ( (recovered < maxHitDice) && (used > 0) ) {
         const delta = Math.min(used, maxHitDice - recovered);
         recovered += delta;
-        updateItems.push({ _id: item.id, "system.hitDiceUsed": used - delta });
+        updateItems.push({ _id: item.id, "system.hd.spent": used - delta });
       }
     }
     foundry.utils.mergeObject(result, {

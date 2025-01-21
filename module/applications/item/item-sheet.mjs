@@ -262,17 +262,18 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the base weapons and tools based on the selected type.
+   * @param {object} [context]        Sheet preparation context.
    * @returns {Promise<object|null>}  Object with base items for this type formatted for selectOptions.
    * @protected
    */
-  async _getItemBaseTypes() {
+  async _getItemBaseTypes(context) {
     const baseIds = this.item.type === "equipment" ? {
       ...CONFIG.DND5E.armorIds,
       ...CONFIG.DND5E.shieldIds
     } : CONFIG.DND5E[`${this.item.type}Ids`];
     if ( baseIds === undefined ) return null;
 
-    const baseType = this.item.system.type.value;
+    const baseType = context?.source.type.value ?? this.item.system.type.value;
 
     const items = {};
     for ( const [name, id] of Object.entries(baseIds) ) {
@@ -804,13 +805,7 @@ export default class ItemSheet5e extends ItemSheet {
     switch (action) {
       case "add": return game.dnd5e.applications.advancement.AdvancementSelection.createDialog(this.item);
       case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
-      case "delete":
-        if ( this.item.actor?.system.metadata?.supportsAdvancement
-            && !game.settings.get("dnd5e", "disableAdvancements") ) {
-          manager = AdvancementManager.forDeletedAdvancement(this.item.actor, this.item.id, id);
-          if ( manager.steps.length ) return manager.render(true);
-        }
-        return this.item.deleteAdvancement(id);
+      case "delete": return advancement.deleteDialog();
       case "duplicate": return this.item.duplicateAdvancement(id);
       case "modify-choices":
         const level = target.closest("[data-level]")?.dataset.level;

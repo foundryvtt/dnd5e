@@ -23,7 +23,7 @@ import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
 import {default as registry} from "./module/registry.mjs";
 import * as utils from "./module/utils.mjs";
-import {ModuleArt} from "./module/module-art.mjs";
+import ModuleArt from "./module/module-art.mjs";
 import registerModuleData from "./module/module-registration.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
 
@@ -52,6 +52,8 @@ globalThis.dnd5e = {
 Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
   console.log(`D&D 5e | Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
+
+  if ( game.release.generation < 13 ) patchFromUuid();
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
@@ -120,6 +122,9 @@ Hooks.once("init", function() {
     delete DND5E.languages.exotic.children.cant;
     DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
     delete DND5E.languages.exotic.children.druidic;
+
+    // Stunned stops movement in legacy.
+    DND5E.conditionEffects.noMovement.add("stunned");
   }
 
   // Register Roll Extensions
@@ -128,6 +133,7 @@ Hooks.once("init", function() {
   // Hook up system data types
   CONFIG.ActiveEffect.dataModels = dataModels.activeEffect.config;
   CONFIG.Actor.dataModels = dataModels.actor.config;
+  CONFIG.ChatMessage.dataModels = dataModels.chatMessage.config;
   CONFIG.Item.dataModels = dataModels.item.config;
   CONFIG.JournalEntryPage.dataModels = dataModels.journal.config;
 
@@ -440,11 +446,20 @@ Hooks.once("i18nInit", () => {
         racePl: game.i18n.localize("TYPES.Item.raceLegacyPl")
       },
       DND5E: {
+        "Feature.Species": game.i18n.localize("DND5E.Feature.SpeciesLegacy"),
         FlagsAlertHint: game.i18n.localize("DND5E.FlagsAlertHintLegacy"),
-        LanguagesExotic: game.i18n.localize("DND5E.LanguagesExoticLegacy"),
-        LongRestHint: game.i18n.localize("DND5E.LongRestHintLegacy"),
-        LongRestHintGroup: game.i18n.localize("DND5E.LongRestHintGroupLegacy"),
-        TargetRadius: game.i18n.localize("DND5E.TargetRadiusLegacy"),
+        ItemSpeciesDetails: game.i18n.localize("DND5E.ItemSpeciesDetailsLegacy"),
+        "Language.Category.Rare": game.i18n.localize("DND5E.Language.Category.Exotic"),
+        RacialTraits: game.i18n.localize("DND5E.RacialTraitsLegacy"),
+        "REST.Long.Hint.Normal": game.i18n.localize("DND5E.REST.Long.Hint.NormalLegacy"),
+        "REST.Long.Hint.Group": game.i18n.localize("DND5E.REST.Long.Hint.GroupLegacy"),
+        "Species.Add": game.i18n.localize("DND5E.Species.AddLegacy"),
+        "Species.Features": game.i18n.localize("DND5E.Species.FeaturesLegacy"),
+        "TARGET.Type.Emanation": foundry.utils.mergeObject(
+          _fallback.DND5E?.TARGET?.Type?.Radius ?? {},
+          translations.DND5E?.TARGET?.Type?.Radius ?? {},
+          { inplace: false }
+        ),
         TraitArmorPlural: foundry.utils.mergeObject(
           _fallback.DND5E?.TraitArmorLegacyPlural ?? {},
           translations.DND5E?.TraitArmorLegacyPlural ?? {},
@@ -456,6 +471,7 @@ Hooks.once("i18nInit", () => {
   }
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
+  Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
 });
 
 /* -------------------------------------------- */
@@ -513,44 +529,10 @@ Hooks.on("renderPause", (app, [html]) => {
   img.className = "";
 });
 
-Hooks.on("renderSettings", (app, [html]) => {
-  const details = html.querySelector("#game-details");
-  const pip = details.querySelector(".system-info .update");
-  details.querySelector(".system").remove();
-
-  const heading = document.createElement("div");
-  heading.classList.add("dnd5e2", "sidebar-heading");
-  heading.innerHTML = `
-    <h2>${game.i18n.localize("WORLD.GameSystem")}</h2>
-    <ul class="links">
-      <li>
-        <a href="https://github.com/foundryvtt/dnd5e/releases/latest" target="_blank">
-          ${game.i18n.localize("DND5E.Notes")}
-        </a>
-      </li>
-      <li>
-        <a href="https://github.com/foundryvtt/dnd5e/issues" target="_blank">${game.i18n.localize("DND5E.Issues")}</a>
-      </li>
-      <li>
-        <a href="https://github.com/foundryvtt/dnd5e/wiki" target="_blank">${game.i18n.localize("DND5E.Wiki")}</a>
-      </li>
-      <li>
-        <a href="https://discord.com/channels/170995199584108546/670336046164213761" target="_blank">
-          ${game.i18n.localize("DND5E.Discord")}
-        </a>
-      </li>
-    </ul>
-  `;
-  details.insertAdjacentElement("afterend", heading);
-
-  const badge = document.createElement("div");
-  badge.classList.add("dnd5e2", "system-badge");
-  badge.innerHTML = `
-    <img src="systems/dnd5e/ui/official/dnd-badge-32.webp" data-tooltip="${dnd5e.title}" alt="${dnd5e.title}">
-    <span class="system-info">${dnd5e.version}</span>
-  `;
-  if ( pip ) badge.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
-  heading.insertAdjacentElement("afterend", badge);
+Hooks.on("renderSettings", (app, html) => {
+  html = html instanceof HTMLElement ? html : html[0];
+  if ( game.release.generation > 12 ) applications.settings.sidebar.renderSettings(html);
+  else applications.settings.sidebar.renderSettingsLegacy(html);
 });
 
 /* -------------------------------------------- */
@@ -579,6 +561,21 @@ Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJ
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
+Hooks.on("preCreateScene", (doc, createData, options, userId) => {
+  // Set default grid units based on metric length setting
+  const units = utils.defaultUnits("length");
+  if ( (units !== dnd5e.grid.units) && !foundry.utils.getProperty(createData, "grid.distance")
+    && !foundry.utils.getProperty(createData, "grid.units") ) {
+    const C = CONFIG.DND5E.movementUnits;
+    doc.updateSource({
+      grid: {
+        // TODO: Replace with `convertLength` method once added
+        distance: dnd5e.grid.distance * (C[dnd5e.grid.units]?.conversion ?? 1) / (C[units]?.conversion ?? 1), units
+      }
+    });
+  }
+});
+
 // TODO: Generalize this logic and make it available in the re-designed transform application.
 Hooks.on("dnd5e.transformActor", (subject, target, d, options) => {
   const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
@@ -587,6 +584,108 @@ Hooks.on("dnd5e.transformActor", (subject, target, d, options) => {
   if ( subject.classes.druid.subclass?.identifier === "moon" ) temp *= 3;
   d.system.attributes.hp.temp = temp;
 });
+
+/* -------------------------------------------- */
+/*  Backported Fixes                            */
+/* -------------------------------------------- */
+
+/**
+ * FIXME: Remove when v12 support dropped or https://github.com/foundryvtt/foundryvtt/issues/12023 backported.
+ * @ignore
+ */
+function patchFromUuid() {
+  const _resolveEmbedded = function(parent, parts, {invalid=false}={}) {
+    let doc = parent;
+    while ( doc && (parts.length > 1) ) {
+      const [embeddedName, embeddedId] = parts.splice(0, 2);
+      doc = doc.getEmbeddedDocument(embeddedName, embeddedId, {invalid});
+    }
+    return doc;
+  };
+
+  const _resolveRelativeUuid = function(uuid, relative) {
+    if ( !(relative instanceof foundry.abstract.Document) ) {
+      throw new Error("A relative Document instance must be provided to _resolveRelativeUuid");
+    }
+    uuid = uuid.substring(1);
+    const parts = uuid.split(".");
+    if ( !parts.length ) throw new Error("Invalid relative UUID");
+    let id;
+    let type;
+    let root;
+    let primaryType;
+    let primaryId;
+    let collection;
+
+    // Identify the root document and its collection
+    const getRoot = doc => {
+      if ( doc.parent ) parts.unshift(doc.documentName, doc.id);
+      return doc.parent ? getRoot(doc.parent) : doc;
+    };
+
+    // Even-numbered parts include an explicit child document type
+    if ( (parts.length % 2) === 0 ) {
+      root = getRoot(relative);
+      id = parts.at(-1);
+      type = parts.at(-2);
+      primaryType = root.documentName;
+      primaryId = root.id;
+      uuid = [primaryType, primaryId, ...parts].join(".");
+    }
+
+    // Relative Embedded Document
+    else if ( relative.parent ) {
+      id = parts.at(-1);
+      type = relative.documentName;
+      parts.unshift(type);
+      root = getRoot(relative.parent);
+      primaryType = root.documentName;
+      primaryId = root.id;
+      uuid = [primaryType, primaryId, ...parts].join(".");
+    }
+
+    // Relative Document
+    else {
+      root = relative;
+      id = parts.pop();
+      type = relative.documentName;
+      uuid = [type, id].join(".");
+    }
+
+    // Recreate fully-qualified UUID and return the resolved result
+    collection = root.pack ? root.compendium : root.collection;
+    if ( root.pack ) uuid = `Compendium.${root.pack}.${uuid}`;
+    return {uuid, type, id, collection, primaryType, primaryId, embedded: parts,
+      documentType: primaryType ?? type, documentId: primaryId ?? id};
+  };
+
+  const parseUuid = function(uuid, {relative}={}) {
+    if ( !uuid ) throw new Error("A UUID string is required.");
+    if ( uuid.startsWith(".") && relative ) return _resolveRelativeUuid(uuid, relative);
+    return foundry.utils.parseUuid(uuid, {relative});
+  };
+
+  // Patch fromUuid to call our wrapped parseUuid in order to correctly resolve relative UUIDs on grandchild embedded
+  // Documents.
+  window.fromUuid = async function(uuid, options={}) {
+    if ( !uuid ) return null;
+    /** @deprecated since v11 */
+    if ( foundry.utils.getType(options) !== "Object" ) {
+      foundry.utils.logCompatibilityWarning("Passing a relative document as the second parameter to fromUuid is "
+        + "deprecated. Please pass it within an options object instead.", {since: 11, until: 13});
+      options = {relative: options};
+    }
+    const {relative, invalid=false} = options;
+    let {type, id, primaryId, collection, embedded, doc} = parseUuid(uuid, {relative});
+    if ( collection instanceof CompendiumCollection ) {
+      if ( type === "Folder" ) return collection.folders.get(id);
+      doc = await collection.getDocument(primaryId ?? id);
+    }
+    else doc = doc ?? collection?.get(primaryId ?? id, {invalid});
+    if ( embedded.length ) doc = _resolveEmbedded(doc, embedded, {invalid});
+    return doc || null;
+  };
+}
 
 /* -------------------------------------------- */
 /*  Bundled Module Exports                      */

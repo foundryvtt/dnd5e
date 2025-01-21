@@ -67,7 +67,9 @@ export default class ActorSheet5eNPC extends ActorSheet5e {
       ctx.canToggle = false;
       ctx.totalWeight = item.system.totalWeight?.toNearest(0.1);
       // Item grouping
-      ctx.group = item.system.activities?.contents[0]?.activation.type || "passive";
+      const isPassive = item.system.properties?.has("trait")
+        || CONFIG.DND5E.activityActivationTypes[item.system.activities?.contents[0]?.activation.type]?.passive;
+      ctx.group = isPassive ? "passive" : item.system.activities?.contents[0]?.activation.type || "passive";
       ctx.ungroup = "feat";
       if ( item.type === "weapon" ) ctx.ungroup = "weapon";
       if ( ctx.group === "passive" ) ctx.ungroup = "passive";

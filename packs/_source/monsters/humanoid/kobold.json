@@ -736,8 +736,8 @@
       "img": "icons/weapons/daggers/dagger-jeweled-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d4 + 2) <em>piercing damage</em></strong>.</p><p></p></section><p>The Kobold attacks with its Dagger.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d4 + 2) <em>piercing damage</em></strong>.</p>",
+          "chat": "<p>The Kobold attacks with its Dagger.</p>"
         },
         "source": {
           "custom": "",
@@ -931,10 +931,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676642,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!5ngbctIMeEnuC1p1.io78wguVwNy9VfZ4"
     },
@@ -945,8 +945,8 @@
       "img": "icons/weapons/slings/slingshot-wood.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: <strong>4 (1d4 + 2) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Kobold attacks with its Sling.</p>",
-          "chat": ""
+          "value": "<p>Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit: <strong>4 (1d4 + 2) <em>bludgeoning damage</em></strong>.</p>",
+          "chat": "<p>The Kobold attacks with its Sling.</p>"
         },
         "source": {
           "custom": "",
@@ -1139,10 +1139,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676642,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!5ngbctIMeEnuC1p1.0yHcZm2TzgOyt3fI"
     }

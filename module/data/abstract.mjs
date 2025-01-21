@@ -391,6 +391,15 @@ export class ActorDataModel extends SystemDataModel {
     data.prof.deterministic = deterministic;
     return data;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reset combat-related uses.
+   * @param {string[]} periods               Which recovery periods should be considered.
+   * @param {CombatRecoveryResults} results  Updates to perform on the actor and containing items.
+   */
+  async recoverCombatUses(periods, results) {}
 }
 
 /* -------------------------------------------- */
@@ -467,10 +476,10 @@ export class ItemDataModel extends SystemDataModel {
 
   /** @inheritDoc */
   prepareBaseData() {
-    if ( this.parent.isEmbedded ) {
+    if ( this.parent.isEmbedded && this.parent.actor?.items.has(this.parent.id) ) {
       const sourceId = this.parent.flags.dnd5e?.sourceId ?? this.parent._stats.compendiumSource
         ?? this.parent.flags.core?.sourceId;
-      if ( sourceId ) this.parent.actor?.sourcedItems?.set(sourceId, this.parent);
+      if ( sourceId ) this.parent.actor.sourcedItems?.set(sourceId, this.parent);
     }
   }
 
@@ -526,7 +535,8 @@ export class ItemDataModel extends SystemDataModel {
         }),
         chat: await TextEditor.enrichHTML(chat ?? "", {
           rollData, relativeTo: this.parent, ...enrichmentOptions
-        })
+        }),
+        concealed: game.user.isGM && game.settings.get("dnd5e", "concealItemDescriptions") && !description.chat
       }
     };
 

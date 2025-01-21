@@ -28,6 +28,10 @@
     > i { margin: 0; }
     &:hover, &:focus { background: none; }
   }
+  button.dice-button {
+    padding: 6px 8px;
+    > i { margin: 0; }
+  }
 
   fieldset.unfieldset {
     display: contents;
@@ -168,6 +172,7 @@
     align-items: center;
     gap: 4px;
 
+    &:has(input[type=checkbox]:disabled, dnd5e-checkbox[disabled]) { cursor: default; }
     > span { line-height: calc(var(--form-field-height) + 1px); }
   }
 
@@ -205,23 +210,33 @@
       color: var(--color-text-dark-5);
     }
 
-    &.card > legend {
-      background: var(--dnd5e-background-card);
-      position: relative;
-      border-radius: 2px;
-      padding: 2px 6px 0;
+    &.card {
+      &:not(:has(legend)) { padding-block-start: 10px; }
 
-      &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
+      > legend {
+        background: var(--dnd5e-background-card);
+        position: relative;
         border-radius: 2px;
-        box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-        outline: var(--dnd5e-border-gold);
-        z-index: -1;
+        padding: 2px 6px 0;
+
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 2px;
+          box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+          outline: var(--dnd5e-border-gold);
+          z-index: -1;
+        }
+      }
+
+      > .header {
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-variant: all-small-caps;
+        font-size: var(--font-size-12);
+        font-weight: bold;
       }
     }
-    &.card:not(:has(legend)) { padding-block-start: 10px; }
 
     &:disabled {
       .form-group label, .hint {
@@ -320,6 +335,7 @@
       &.field-groups {
         flex-direction: column;
         align-items: stretch;
+        flex-wrap: nowrap;
       }
 
       .field-group {
@@ -370,13 +386,10 @@
   }
 
   /* Form Fields */
-  select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
-    --input-height: var(--form-field-height);
+  textarea, select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
     --input-border-color: transparent;
     transition: all 250ms ease;
     line-height: normal;
-    padding: 0 6px;
-    background: var(--input-background-color);
     outline: none;
 
     &:focus { outline: none; }
@@ -385,6 +398,17 @@
       box-shadow: 0 0 6px var(--dnd5e-color-gold);
     }
   }
+  select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
+    --input-height: var(--form-field-height);
+    padding: 0 6px;
+    background: var(--input-background-color);
+  }
+  textarea {
+    border: 1px solid var(--input-border-color);
+    padding: 6px;
+    background: rgba(0, 0, 0, 0.1);
+    font-size: var(--font-size-11);
+  }
 
   :is(.form-group, fieldset) :is(select, input):not([type="range"]) {
     color: var(--color-text-dark-primary);
@@ -392,7 +416,7 @@
     font-size: var(--font-size-11);
   }
 
-  input::placeholder {
+  input::placeholder, textarea::placeholder {
     --input-placeholder-color: var(--color-text-light-6);
     opacity: unset;
     color: var(--input-placeholder-color);
@@ -408,7 +432,7 @@
 
   select {
     height: var(--form-field-height);
-    cursor: pointer;
+    &:not(:disabled) { cursor: pointer; }
   }
 
   :is(document-tags, multi-select) .tags.input-element-tags .tag {
@@ -418,6 +442,12 @@
     background: var(--dnd5e-background-card);
     border-radius: 3px;
     &:hover a { text-shadow: 0 0 6px var(--color-shadow-primary); }
+  }
+
+  :is(document-tags, multi-select):has(select:disabled) .tags.input-element-tags .tag {
+    cursor: default;
+    a { cursor: default; }
+    &:hover a { text-shadow: none; }
   }
 
   multi-select.hidden-tags .tags.input-element-tags { display: none; }
@@ -474,8 +504,18 @@
   dnd5e-checkbox {
     &[disabled]:not([checked]) {
       --checkbox-border-color: var(--color-text-light-6);
-      --checkbox-empty-color: var(--color-text-light-6);
+      --checkbox-empty-color: transparent;
     }
+  }
+
+  /* Radio Buttons */
+  input[type=radio] {
+    appearance: revert;
+    -webkit-appearance: revert;
+    -moz-appearance: revert;
+    position: unset;
+    margin: revert;
+    &::before, &::after { content: unset; }
   }
 
   .form-fields > dnd5e-checkbox { flex: none; }
@@ -528,7 +568,7 @@
   }
 
   .form-fields > .control-button, .form-fields .field-group > .control-button {
-    align-self: end;
+    &:not(.middle) { align-self: end; }
     padding: 0 4px;
   }
 
@@ -588,7 +628,7 @@
 
   button:not(.icon, .fa-solid, .fas) {
     height: unset;
-    &:not(.unbutton) { line-height: 28px; }
+    &:not(.copy-button, .unbutton) { line-height: 28px; }
   }
 
   :is(document-tags, multi-select) .tags.input-element-tags .tag {
@@ -598,3 +638,5 @@
     opacity: unset;
   }
 }
+
+.application .flexrow > dnd5e-checkbox { flex: 0; }

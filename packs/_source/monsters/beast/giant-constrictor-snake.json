@@ -615,8 +615,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one creature. Hit: <strong>11 (2d6 + 4) <em>piercing damage</em></strong>.</p></section>\n<p>The Giant Constrictor Snake attacks with its Bite.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one creature. Hit: <strong>11 (2d6 + 4) <em>piercing damage</em></strong>.</p>",
+          "chat": "<p>The Giant Constrictor Snake attacks with its Bite.</p>"
         },
         "source": {
           "custom": "",
@@ -809,10 +809,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676669,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!NpvwE1feOHyEqAbP.qB9j7Epq7UVkGWzY"
     },
@@ -823,8 +823,8 @@
       "img": "icons/creatures/reptiles/serpent-horned-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>.</p>\n<p>The target is grappled (escape DC 16). Until this grapple ends, the creature is restrained, and the snake can't constrict another target.</p>\n</section>\n<p>The Giant Constrictor Snake attacks with its Constrict. The target is grappled. Until this grapple ends, the creature is restrained, and the snake can't constrict another target.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>13 (2d8 + 4) <em>bludgeoning damage</em></strong>.</p><p>The target is grappled (escape DC 16). Until this grapple ends, the creature is restrained, and the snake can't constrict another target.</p>",
+          "chat": "<p>The Giant Constrictor Snake attacks with its Constrict. The target is grappled. Until this grapple ends, the creature is restrained, and the snake can't constrict another target.</p>"
         },
         "source": {
           "custom": "",
@@ -1011,10 +1011,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676669,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!NpvwE1feOHyEqAbP.3FIKn37A037kPgzc"
     }

@@ -3,7 +3,7 @@ import MovementField from "../../shared/movement-field.mjs";
 import SensesField from "../../shared/senses-field.mjs";
 import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
-import { convertWeight, simplifyBonus } from "../../../utils.mjs";
+import { convertLength, convertWeight, simplifyBonus } from "../../../utils.mjs";
 
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -62,6 +62,8 @@ export default class AttributesFields {
    * @property {number} concentration.roll.min  The minimum the d20 can roll.
    * @property {number} concentration.roll.max  The maximum the d20 can roll.
    * @property {number} concentration.roll.mode The default advantage mode for this actor's concentration saving throws.
+   * @property {object} loyalty
+   * @property {number} loyalty.value           The creature's loyalty score.
    */
   static get creature() {
     return {
@@ -81,7 +83,10 @@ export default class AttributesFields {
           save: new FormulaField({ required: true, label: "DND5E.ConcentrationBonus" })
         }),
         limit: new NumberField({ integer: true, min: 0, initial: 1, label: "DND5E.ConcentrationLimit" })
-      }, { label: "DND5E.Concentration" })
+      }, { label: "DND5E.Concentration" }),
+      loyalty: new SchemaField({
+        value: new NumberField({ integer: true, min: 0, max: 20, label: "DND5E.Loyalty" })
+      })
     };
   }
 
@@ -267,8 +272,9 @@ export default class AttributesFields {
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const crawl = this.parent.hasConditionEffect("crawl");
     const units = this.attributes.movement.units;
-    const reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
+    let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
       ? this.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
+    reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     for ( const type in CONFIG.DND5E.movementTypes ) {
       let speed = Math.max(0, this.attributes.movement[type] - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;

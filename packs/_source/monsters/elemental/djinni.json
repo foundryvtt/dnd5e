@@ -863,8 +863,8 @@
       "img": "icons/weapons/swords/sword-katana.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>12 (2d6 + 5) <em>slashing damage</em></strong> plus 3 (1d6) lightning or thunder damage (djinni's choice).</p><p></p></section><p>The Djinni attacks with its Scimitar.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>12 (2d6 + 5) <em>slashing damage</em></strong> plus 3 (1d6) lightning or thunder damage (djinni's choice).</p>",
+          "chat": "<p>The Djinni attacks with its Scimitar.</p>"
         },
         "source": {
           "custom": "",
@@ -1073,10 +1073,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676525,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!5P1VGAZQwOilwZQf.DGP7lnAJT1cv8SA4"
     },
@@ -1087,8 +1087,8 @@
       "img": "icons/magic/air/wind-tornado-cyclone-white.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>A 5-foot-radius, 30-foot-tall cylinder of swirling air magically forms on a point the djinni can see within 120 feet of it. The whirlwind lasts as long as the djinni maintains concentration (as if concentrating on a spell).</p>\n<p>Any creature but the djinni that enters the whirlwind must succeed on a  <strong>DC 18 Strength</strong> saving throw or be restrained by it. The djinni can move the whirlwind up to 60 feet as an action, and creatures restrained by the whirlwind move with it. The whirlwind ends if the djinni loses sight of it.</p>\n<p>A creature can use its action to free a creature restrained by the whirlwind, including itself, by succeeding on a DC 18 Strength check. If the check succeeds, the creature is no longer restrained and moves to the nearest space outside the whirlwind.</p>\n</section>\n<p>A 5-foot-radius, 30-foot-tall cylinder of swirling air magically forms on a point the djinni can see within 120 feet of it. Any creature but the djinni that enters the whirlwind must make a <strong>Strength</strong> saving throw or be restrained by it. The djinni can move the whirlwind up to 60 feet as an action, and creatures restrained by the whirlwind move with it. A creature can use its action to free a creature restrained by the whirlwind, including itself, by succeeding on a Strength check. If the check succeeds, the creature is no longer restrained and moves to the nearest space outside the whirlwind.</p>",
-          "chat": ""
+          "value": "<p>A 5-foot-radius, 30-foot-tall cylinder of swirling air magically forms on a point the djinni can see within 120 feet of it. The whirlwind lasts as long as the djinni maintains concentration (as if concentrating on a spell).</p><p>Any creature but the djinni that enters the whirlwind must succeed on a  <strong>DC 18 Strength</strong> saving throw or be restrained by it. The djinni can move the whirlwind up to 60 feet as an action, and creatures restrained by the whirlwind move with it. The whirlwind ends if the djinni loses sight of it.</p><p>A creature can use its action to free a creature restrained by the whirlwind, including itself, by succeeding on a DC 18 Strength check. If the check succeeds, the creature is no longer restrained and moves to the nearest space outside the whirlwind.</p>",
+          "chat": "<p>A 5-foot-radius, 30-foot-tall cylinder of swirling air magically forms on a point the djinni can see within 120 feet of it. Any creature but the djinni that enters the whirlwind must make a <strong>Strength</strong> saving throw or be restrained by it. The djinni can move the whirlwind up to 60 feet as an action, and creatures restrained by the whirlwind move with it. A creature can use its action to free a creature restrained by the whirlwind, including itself, by succeeding on a Strength check. If the check succeeds, the creature is no longer restrained and moves to the nearest space outside the whirlwind.</p>"
         },
         "source": {
           "custom": "",
@@ -1204,10 +1204,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676525,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!5P1VGAZQwOilwZQf.nE7YNnVM7srBcdfl"
     },

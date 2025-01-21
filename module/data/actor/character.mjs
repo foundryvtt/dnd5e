@@ -1,10 +1,11 @@
 import HitDice from "../../documents/actor/hit-dice.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
-import { simplifyBonus } from "../../utils.mjs";
+import { defaultUnits, simplifyBonus } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import LocalDocumentField from "../fields/local-document-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
+import SimpleTraitField from "./fields/simple-trait-field.mjs";
 import AttributesFields from "./templates/attributes.mjs";
 import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
@@ -13,6 +14,10 @@ import TraitsFields from "./templates/traits.mjs";
 const {
   ArrayField, BooleanField, HTMLField, IntegerSortField, NumberField, SchemaField, SetField, StringField
 } = foundry.data.fields;
+
+/**
+ * @import { SimpleTraitData } from "./fields/simple-trait.mjs";
+ */
 
 /**
  * @typedef {object} ActorFavorites5e
@@ -39,6 +44,8 @@ const {
  * @property {string} attributes.hp.bonuses.level         Bonus formula applied for each class level.
  * @property {string} attributes.hp.bonuses.overall       Bonus formula applied to total HP.
  * @property {object} attributes.death
+ * @property {object} attributes.death.bonuses
+ * @property {string} attributes.death.bonuses.save       Numeric or dice bonus to death saving throws.
  * @property {number} attributes.death.success            Number of successful death saves.
  * @property {number} attributes.death.failure            Number of failed death saves.
  * @property {number} attributes.exhaustion               Number of levels of exhaustion.
@@ -118,6 +125,9 @@ export default class CharacterData extends CreatureTemplate {
           }),
           failure: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
+          }),
+          bonuses: new SchemaField({
+            save: new FormulaField({ required: true, label: "DND5E.DeathSaveBonus" })
           })
         }, { label: "DND5E.DeathSave" }),
         inspiration: new BooleanField({ required: true, label: "DND5E.Inspiration" })
@@ -135,9 +145,9 @@ export default class CharacterData extends CreatureTemplate {
         originalClass: new StringField({ required: true, label: "DND5E.ClassOriginal" }),
         xp: new SchemaField({
           value: new NumberField({
-            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.ExperiencePointsCurrent"
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.ExperiencePoints.Current"
           })
-        }, { label: "DND5E.ExperiencePoints" }),
+        }, { label: "DND5E.ExperiencePoints.Label" }),
         appearance: new StringField({ required: true, label: "DND5E.Appearance" }),
         trait: new StringField({ required: true, label: "DND5E.PersonalityTraits" }),
         gender: new StringField({ label: "DND5E.Gender" }),
@@ -152,15 +162,13 @@ export default class CharacterData extends CreatureTemplate {
       traits: new SchemaField({
         ...TraitsFields.common,
         ...TraitsFields.creature,
-        weaponProf: TraitsFields.makeSimpleTrait({ label: "DND5E.TraitWeaponProf" }, {
-          extraFields: {
-            mastery: new SchemaField({
-              value: new SetField(new StringField()),
-              bonus: new SetField(new StringField())
-            })
-          }
-        }),
-        armorProf: TraitsFields.makeSimpleTrait({ label: "DND5E.TraitArmorProf" })
+        weaponProf: new SimpleTraitField({
+          mastery: new SchemaField({
+            value: new SetField(new StringField()),
+            bonus: new SetField(new StringField())
+          })
+        }, { label: "DND5E.TraitWeaponProf" }),
+        armorProf: new SimpleTraitField({}, { label: "DND5E.TraitArmorProf" })
       }, { label: "DND5E.Traits" }),
       resources: new SchemaField({
         primary: makeResourceField({ label: "DND5E.ResourcePrimary" }),
@@ -192,11 +200,12 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritDoc */
   prepareBaseData() {
     this.attributes.hd = new HitDice(this.parent);
-    this.details.level = this.attributes.hd.max;
+    this.details.level = 0;
     this.attributes.attunement.value = 0;
 
     for ( const item of this.parent.items ) {
       if ( item.system.attuned ) this.attributes.attunement.value += 1;
+      if ( item.type === "class" ) this.details.level += item.system.levels;
     }
 
     // Character proficiency bonus
@@ -237,8 +246,8 @@ export default class CharacterData extends CreatureTemplate {
     }
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement[key] ??= 0;
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses[key] ??= 0;
-    this.attributes.movement.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
-    this.attributes.senses.units ??= Object.keys(CONFIG.DND5E.movementUnits)[0];
+    this.attributes.movement.units ??= defaultUnits("length");
+    this.attributes.senses.units ??= defaultUnits("length");
   }
 
   /* -------------------------------------------- */
@@ -255,6 +264,7 @@ export default class CharacterData extends CreatureTemplate {
     AttributesFields.prepareExhaustionLevel.call(this);
     AttributesFields.prepareMovement.call(this);
     AttributesFields.prepareConcentration.call(this, rollData);
+    TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);
 
     // Hit Points
@@ -355,8 +365,8 @@ function makeResourceField(schemaOptions={}) {
   return new SchemaField({
     value: new NumberField({required: true, integer: true, initial: 0, labels: "DND5E.ResourceValue"}),
     max: new NumberField({required: true, integer: true, initial: 0, labels: "DND5E.ResourceMax"}),
-    sr: new BooleanField({required: true, labels: "DND5E.ShortRestRecovery"}),
-    lr: new BooleanField({required: true, labels: "DND5E.LongRestRecovery"}),
+    sr: new BooleanField({required: true, labels: "DND5E.REST.Short.Recovery"}),
+    lr: new BooleanField({required: true, labels: "DND5E.REST.Long.Recovery"}),
     label: new StringField({required: true, labels: "DND5E.ResourceLabel"})
   }, schemaOptions);
 }
