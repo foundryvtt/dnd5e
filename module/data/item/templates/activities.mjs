@@ -202,7 +202,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
       }
       else if(source.uses)
       {
-        source.uses.recovery = [{ period: source?.uses?.per, type: "recoverAll" }];
+        source.uses.recovery = [{ period: source.uses?.per, type: "recoverAll" }];
       }
     }
     
