@@ -8,7 +8,7 @@
 /**
  * A class responsible for managing module-provided art in compendia.
  */
-export class ModuleArt {
+export default class ModuleArt {
   constructor() {
     /**
      * The stored map of actor UUIDs to their art information.

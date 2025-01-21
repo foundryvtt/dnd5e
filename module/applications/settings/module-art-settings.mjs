@@ -1,3 +1,5 @@
+import ModuleArt from "../../module-art.mjs";
+
 /**
  * A class responsible for allowing GMs to configure art provided by installed modules.
  */
