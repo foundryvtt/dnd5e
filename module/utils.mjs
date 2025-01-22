@@ -1101,7 +1101,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
 
   // Activity labels
   if ( item && attr.startsWith("activities.") ) {
-    let [, activityId, ...keyPath] = attr;
+    let [, activityId, ...keyPath] = attr.split(".");
     const activity = item.system.activities?.get(activityId);
     if ( !activity ) return attr;
     attr = keyPath.join(".");
