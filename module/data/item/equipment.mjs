@@ -168,7 +168,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    if ( this.armor.base === undefined ) this.armor.base = this.armor.value ??= 0;
+    this.armor.base = this.armor.value = (this._source.armor.value ?? 0);
   }
 
   /* -------------------------------------------- */
