@@ -2134,10 +2134,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !config.rolls[0] ) return;
 
     // Display the roll configuration dialog
+    const messageOptions = { rollMode: game.settings.get("core", "rollMode") };
     if ( config.rolls[0].options?.fixed === undefined ) {
       const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
-      const message = { rollMode: game.settings.get("core", "rollMode") };
-      const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, message);
+      const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, messageOptions);
       if ( !rolls.length ) return;
       this._cachedInitiativeRoll = rolls[0];
     }
@@ -2148,7 +2148,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       this._cachedInitiativeRoll = new CONFIG.Dice.BasicRoll(String(options.fixed), data, options);
     }
 
-    await this.rollInitiative({ createCombatants: true });
+    await this.rollInitiative({ createCombatants: true, initiativeOptions: { messageOptions } });
   }
 
   /* -------------------------------------------- */

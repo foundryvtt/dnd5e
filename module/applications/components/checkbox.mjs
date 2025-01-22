@@ -137,7 +137,7 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
 
   /** @override */
   get value() {
-    return this.checked ? super.value : undefined;
+    return super.value;
   }
 
   /**

@@ -78,7 +78,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
         break;
       default: return false;
     }
-    return recovery?.every(r => CONFIG.DND5E.limitedUsePeriods[r.period]?.type === "combat") ?? false;
+    if ( !recovery?.length ) return false;
+    return recovery.every(r => CONFIG.DND5E.limitedUsePeriods[r.period]?.type === "combat");
   }
 
   /* -------------------------------------------- */
