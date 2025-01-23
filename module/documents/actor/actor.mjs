@@ -618,9 +618,31 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Prepare spellcasting DC & modifier.
    */
   _prepareSpellcastingAbility() {
-    const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
-    this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
-    this.system.attributes.spellmod = spellcastingAbility ? spellcastingAbility.mod : 0;
+    const ability = this.system.abilities[this.system.attributes.spellcasting];
+    this.system.attributes.spell = {
+      abilityLabel: CONFIG.DND5E.abilities[this.system.attributes.spellcasting]?.label ?? "",
+      attack: ability ? ability.attack : this.system.attributes.prof,
+      dc: ability ? ability.dc : 8 + this.system.attributes.prof,
+      mod: ability ? ability.mod : 0
+    };
+    Object.defineProperty(this.system.attributes, "spelldc", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `attributes.spelldc` property on actors has been moved to `attributes.spell.dc`.",
+          { since: "DnD5e 4.2", until: "DnD5e 5.0" }
+        );
+        return this.spell.dc;
+      }
+    });
+    Object.defineProperty(this.system.attributes, "spellmod", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `attributes.spellmod` property on actors has been moved to `attributes.spell.mod`.",
+          { since: "DnD5e 4.2", until: "DnD5e 5.0" }
+        );
+        return this.spell.mod;
+      }
+    });
   }
 
   /* -------------------------------------------- */
