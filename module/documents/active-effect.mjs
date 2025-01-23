@@ -34,7 +34,8 @@ export default class ActiveEffect5e extends ActiveEffect {
     "system.attributes.encumbrance.multipliers.encumbered",
     "system.attributes.encumbrance.multipliers.heavilyEncumbered",
     "system.attributes.encumbrance.multipliers.maximum",
-    "system.attributes.encumbrance.multipliers.overall"
+    "system.attributes.encumbrance.multipliers.overall",
+    "save.dc.bonus"
   ]);
 
   /* -------------------------------------------- */
