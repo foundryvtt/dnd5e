@@ -15,7 +15,9 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
    * @type {ChatMessageDataModelMetadata}
    */
   static metadata = Object.freeze({
-    actions: {},
+    actions: {
+      use: ChatMessageDataModel.#useActivity
+    },
     template: ""
   });
 
@@ -122,4 +124,22 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
    * @protected
    */
   _onClickAction(event, target) {}
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle using an activity.
+   * @this {ChatMessageDataModel}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #useActivity(event, target) {
+    target.disabled = true;
+    try {
+      const activity = await fromUuid(target.closest("[data-activity-uuid]")?.dataset.activityUuid);
+      await activity?.use({ event });
+    } finally {
+      target.disabled = false;
+    }
+  }
 }

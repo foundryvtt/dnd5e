@@ -1,4 +1,4 @@
-import TurnMessageData from "../data/chat-message/turn-message-data.mjs";
+import ActivationsField from "../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../data/chat-message/fields/deltas-field.mjs";
 
 /**
@@ -30,7 +30,7 @@ export default class Combatant5e extends Combatant {
         speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.token }),
         system: {
           deltas, periods,
-          activations: TurnMessageData.getActivations(this.actor, periods),
+          activations: ActivationsField.getActivations(this.actor, periods),
           origin: {
             combat: this.combat.id,
             combatant: this.id

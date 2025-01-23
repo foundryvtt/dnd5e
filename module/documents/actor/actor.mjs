@@ -2,6 +2,7 @@ import ShortRestDialog from "../../applications/actor/rest/short-rest-dialog.mjs
 import LongRestDialog from "../../applications/actor/rest/long-rest-dialog.mjs";
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
+import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
@@ -2681,11 +2682,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const longRest = config.type === "long";
     const length = longRest ? "Long" : "Short";
 
+    const typeConfig = CONFIG.DND5E.restTypes[config.type] ?? {};
     const duration = convertTime(config.duration, "minute");
     const parts = [formatTime(duration.value, duration.unit)];
     if ( newDay ) parts.push(game.i18n.localize("DND5E.REST.NewDay.Label").toLowerCase());
-    const restFlavor = `${CONFIG.DND5E.restTypes[config.type].label} (${
-      game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
+    const restFlavor = `${typeConfig.label} (${game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
 
     // Determine the chat message to display
     let message;
@@ -2707,6 +2708,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       rolls: result.rolls,
       speaker: ChatMessage.getSpeaker({ actor: this, alias: this.name }),
       system: {
+        activations: ActivationsField.getActivations(this, typeConfig?.activationPeriods ?? []),
         deltas: ActorDeltasField.getDeltas(result.clone, { actor: result.updateData, item: result.updateItems }),
         type: result.type
       }
