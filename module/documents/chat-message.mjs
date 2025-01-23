@@ -652,6 +652,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _enrichUsageEffects(html) {
+    if ( this.getFlag("dnd5e", "displayOnly") ) return;
     const item = this.getAssociatedItem();
     let effects;
     if ( this.getFlag("dnd5e", "messageType") === "usage" ) {
