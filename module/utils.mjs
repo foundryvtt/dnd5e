@@ -47,12 +47,14 @@ export function formatModifier(mod) {
  * @param {number} value    The value to format.
  * @param {object} options  Options forwarded to {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/NumberFormat}
  * @param {boolean} [options.numerals]  Format the number as roman numerals.
+ * @param {boolean} [options.ordinal]   Use ordinal formatting.
  * @param {boolean} [options.words]     Write out number as full word, if possible.
  * @returns {string}
  */
-export function formatNumber(value, { numerals, words, ...options }={}) {
+export function formatNumber(value, { numerals, ordinal, words, ...options }={}) {
   if ( words && game.i18n.has(`DND5E.NUMBER.${value}`, false) ) return game.i18n.localize(`DND5E.NUMBER.${value}`);
   if ( numerals ) return _formatNumberAsNumerals(value);
+  if ( ordinal ) return _formatNumberAsOrdinal(value, options);
   const formatter = new Intl.NumberFormat(game.i18n.lang, options);
   return formatter.format(value);
 }
@@ -79,6 +81,20 @@ function _formatNumberAsNumerals(n) {
     out += numeral.repeat(quotient);
   }
   return out;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Format a number using an ordinal format.
+ * @param {number} n        The number to format.
+ * @param {object} options  Options forwarded to `formatNumber`.
+ * @returns {string}
+ */
+function _formatNumberAsOrdinal(n, options={}) {
+  const pr = getPluralRules({ type: "ordinal" }).select(n);
+  const number = formatNumber(n, options);
+  return game.i18n.has(`DND5E.ORDINAL.${pr}`) ? game.i18n.format(`DND5E.ORDINAL.${pr}`, { number }) : number;
 }
 
 /* -------------------------------------------- */
@@ -711,6 +727,9 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/columns/column-roll.hbs",
     "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
 
+    // Chat Message Partials
+    "systems/dnd5e/templates/chat/parts/card-deltas.hbs",
+
     // Item Sheet Partials
     "systems/dnd5e/templates/items/details/details-background.hbs",
     "systems/dnd5e/templates/items/details/details-class.hbs",
@@ -1028,18 +1047,24 @@ function _localizeObject(obj, keys) {
 
 /**
  * A cache of already-fetched labels for faster lookup.
- * @type {Map<string, string>}
+ * @type {Record<string, Map<string, string>>}
  */
-const _attributeLabelCache = new Map();
+const _attributeLabelCache = {
+  activity: new Map(),
+  actor: new Map(),
+  item: new Map()
+};
 
 /**
- * Convert an attribute path to a human-readable label.
+ * Convert an attribute path to a human-readable label. Assumes paths are on an actor unless an reference item
+ * is provided.
  * @param {string} attr              The attribute path.
  * @param {object} [options]
  * @param {Actor5e} [options.actor]  An optional reference actor.
+ * @param {Item5e} [options.item]    An optional reference item.
  * @returns {string|void}
  */
-export function getHumanReadableAttributeLabel(attr, { actor }={}) {
+export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   if ( attr.startsWith("system.") ) attr = attr.slice(7);
 
   // Check any actor-specific names first.
@@ -1050,7 +1075,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   }
 
   if ( (attr === "details.xp.value") && (actor?.type === "npc") ) {
-    return game.i18n.localize("DND5E.ExperiencePointsValue");
+    return game.i18n.localize("DND5E.ExperiencePoints.Value");
   }
 
   if ( attr.startsWith(".") && actor ) {
@@ -1061,11 +1086,43 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   }
 
   // Check if the attribute is already in cache.
-  let label = _attributeLabelCache.get(attr);
+  let label = item ? null : _attributeLabelCache.actor.get(attr);
   if ( label ) return label;
+  let name;
+  let type = "actor";
+
+  const getSchemaLabel = (attr, type, doc) => {
+    if ( doc ) return doc.system.schema.getField(attr)?.label;
+    for ( const model of Object.values(CONFIG[type].dataModels) ) {
+      const field = model.schema.getField(attr);
+      if ( field ) return field.label;
+    }
+  };
+
+  // Activity labels
+  if ( item && attr.startsWith("activities.") ) {
+    let [, activityId, ...keyPath] = attr.split(".");
+    const activity = item.system.activities?.get(activityId);
+    if ( !activity ) return attr;
+    attr = keyPath.join(".");
+    name = `${item.name}: ${activity.name}`;
+    type = "activity";
+    if ( _attributeLabelCache.activity.has(attr) ) label = _attributeLabelCache.activity.get(attr);
+    else if ( attr === "uses.spent" ) label = "DND5E.Uses";
+  }
+
+  // Item labels
+  else if ( item ) {
+    name = item.name;
+    type = "item";
+    if ( _attributeLabelCache.item.has(attr) ) label = _attributeLabelCache.item.get(attr);
+    else if ( attr === "hd.spent" ) label = "DND5E.HitDice";
+    else if ( attr === "uses.spent" ) label = "DND5E.Uses";
+    else label = getSchemaLabel(attr, "Item", item);
+  }
 
   // Derived fields.
-  if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
+  else if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
   else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
   else if ( attr === "attributes.spelldc" ) label = "DND5E.SpellDC";
 
@@ -1098,7 +1155,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
     const [, key] = attr.split(".");
     if ( !/spell\d+/.test(key) ) label = `DND5E.SpellSlots${key.capitalize()}`;
     else {
-      const plurals = new Intl.PluralRules(game.i18n.lang, {type: "ordinal"});
+      const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
       const level = Number(key.slice(5));
       label = game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level });
     }
@@ -1111,20 +1168,12 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   }
 
   // Attempt to find the attribute in a data model.
-  if ( !label ) {
-    const { CharacterData, NPCData, VehicleData, GroupData } = dnd5e.dataModels.actor;
-    for ( const model of [CharacterData, NPCData, VehicleData, GroupData] ) {
-      const field = model.schema.getField(attr);
-      if ( field ) {
-        label = field.label;
-        break;
-      }
-    }
-  }
+  if ( !label ) label = getSchemaLabel(attr, "Actor", actor);
 
   if ( label ) {
     label = game.i18n.localize(label);
-    _attributeLabelCache.set(attr, label);
+    _attributeLabelCache[type].set(attr, label);
+    if ( name ) label = `${name} ${label}`;
   }
 
   return label;
@@ -1133,9 +1182,21 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
 /* -------------------------------------------- */
 
 /**
+ * Perform pre-localization on the contents of a SchemaField. Necessary because the `localizeSchema` method
+ * on `Localization` is private.
+ * @param {SchemaField} schema
+ * @param {string[]} prefixes
+ */
+export function localizeSchema(schema, prefixes) {
+  Localization.localizeDataModel({ schema }, { prefixes });
+}
+
+/* -------------------------------------------- */
+
+/**
  * Split a semi-colon-separated list and clean out any empty entries.
  * @param {string} input
- * @returns {string}
+ * @returns {string[]}
  */
 export function splitSemicolons(input) {
   return input.split(";").map(t => t.trim()).filter(t => t);

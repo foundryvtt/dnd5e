@@ -23,7 +23,7 @@ import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
 import {default as registry} from "./module/registry.mjs";
 import * as utils from "./module/utils.mjs";
-import {ModuleArt} from "./module/module-art.mjs";
+import ModuleArt from "./module/module-art.mjs";
 import registerModuleData from "./module/module-registration.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
 
@@ -52,6 +52,8 @@ globalThis.dnd5e = {
 Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
   console.log(`D&D 5e | Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
+
+  if ( game.release.generation < 13 ) patchFromUuid();
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
@@ -582,6 +584,108 @@ Hooks.on("dnd5e.transformActor", (subject, target, d, options) => {
   if ( subject.classes.druid.subclass?.identifier === "moon" ) temp *= 3;
   d.system.attributes.hp.temp = temp;
 });
+
+/* -------------------------------------------- */
+/*  Backported Fixes                            */
+/* -------------------------------------------- */
+
+/**
+ * FIXME: Remove when v12 support dropped or https://github.com/foundryvtt/foundryvtt/issues/12023 backported.
+ * @ignore
+ */
+function patchFromUuid() {
+  const _resolveEmbedded = function(parent, parts, {invalid=false}={}) {
+    let doc = parent;
+    while ( doc && (parts.length > 1) ) {
+      const [embeddedName, embeddedId] = parts.splice(0, 2);
+      doc = doc.getEmbeddedDocument(embeddedName, embeddedId, {invalid});
+    }
+    return doc;
+  };
+
+  const _resolveRelativeUuid = function(uuid, relative) {
+    if ( !(relative instanceof foundry.abstract.Document) ) {
+      throw new Error("A relative Document instance must be provided to _resolveRelativeUuid");
+    }
+    uuid = uuid.substring(1);
+    const parts = uuid.split(".");
+    if ( !parts.length ) throw new Error("Invalid relative UUID");
+    let id;
+    let type;
+    let root;
+    let primaryType;
+    let primaryId;
+    let collection;
+
+    // Identify the root document and its collection
+    const getRoot = doc => {
+      if ( doc.parent ) parts.unshift(doc.documentName, doc.id);
+      return doc.parent ? getRoot(doc.parent) : doc;
+    };
+
+    // Even-numbered parts include an explicit child document type
+    if ( (parts.length % 2) === 0 ) {
+      root = getRoot(relative);
+      id = parts.at(-1);
+      type = parts.at(-2);
+      primaryType = root.documentName;
+      primaryId = root.id;
+      uuid = [primaryType, primaryId, ...parts].join(".");
+    }
+
+    // Relative Embedded Document
+    else if ( relative.parent ) {
+      id = parts.at(-1);
+      type = relative.documentName;
+      parts.unshift(type);
+      root = getRoot(relative.parent);
+      primaryType = root.documentName;
+      primaryId = root.id;
+      uuid = [primaryType, primaryId, ...parts].join(".");
+    }
+
+    // Relative Document
+    else {
+      root = relative;
+      id = parts.pop();
+      type = relative.documentName;
+      uuid = [type, id].join(".");
+    }
+
+    // Recreate fully-qualified UUID and return the resolved result
+    collection = root.pack ? root.compendium : root.collection;
+    if ( root.pack ) uuid = `Compendium.${root.pack}.${uuid}`;
+    return {uuid, type, id, collection, primaryType, primaryId, embedded: parts,
+      documentType: primaryType ?? type, documentId: primaryId ?? id};
+  };
+
+  const parseUuid = function(uuid, {relative}={}) {
+    if ( !uuid ) throw new Error("A UUID string is required.");
+    if ( uuid.startsWith(".") && relative ) return _resolveRelativeUuid(uuid, relative);
+    return foundry.utils.parseUuid(uuid, {relative});
+  };
+
+  // Patch fromUuid to call our wrapped parseUuid in order to correctly resolve relative UUIDs on grandchild embedded
+  // Documents.
+  window.fromUuid = async function(uuid, options={}) {
+    if ( !uuid ) return null;
+    /** @deprecated since v11 */
+    if ( foundry.utils.getType(options) !== "Object" ) {
+      foundry.utils.logCompatibilityWarning("Passing a relative document as the second parameter to fromUuid is "
+        + "deprecated. Please pass it within an options object instead.", {since: 11, until: 13});
+      options = {relative: options};
+    }
+    const {relative, invalid=false} = options;
+    let {type, id, primaryId, collection, embedded, doc} = parseUuid(uuid, {relative});
+    if ( collection instanceof CompendiumCollection ) {
+      if ( type === "Folder" ) return collection.folders.get(id);
+      doc = await collection.getDocument(primaryId ?? id);
+    }
+    else doc = doc ?? collection?.get(primaryId ?? id, {invalid});
+    if ( embedded.length ) doc = _resolveEmbedded(doc, embedded, {invalid});
+    return doc || null;
+  };
+}
 
 /* -------------------------------------------- */
 /*  Bundled Module Exports                      */

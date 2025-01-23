@@ -198,6 +198,10 @@ export default function ActorSheetV2Mixin(Base) {
 
       context.effects.suppressed.info = context.effects.suppressed.info[0];
       context.hasConditions = true;
+      const sourceVersion = context.system.source?.rules;
+      context.modernRules = sourceVersion
+        ? sourceVersion === "2024"
+        : game.settings.get("dnd5e", "rulesVersion") === "modern";
 
       return context;
     }

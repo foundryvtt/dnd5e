@@ -4,7 +4,7 @@ import * as Trait from "../actor/trait.mjs";
 import TraitConfig from "../../applications/advancement/trait-config.mjs";
 import TraitFlow from "../../applications/advancement/trait-flow.mjs";
 import {TraitConfigurationData, TraitValueData} from "../../data/advancement/trait.mjs";
-import { filteredKeys } from "../../utils.mjs";
+import { filteredKeys, localizeSchema } from "../../utils.mjs";
 
 /**
  * Advancement that grants the player with certain traits or presents them with a list of traits from which
@@ -22,13 +22,26 @@ export default class TraitAdvancement extends Advancement {
       order: 30,
       icon: "icons/sundries/scrolls/scroll-yellow-teal.webp",
       typeIcon: "systems/dnd5e/icons/svg/trait.svg",
-      title: game.i18n.localize("DND5E.AdvancementTraitTitle"),
-      hint: game.i18n.localize("DND5E.AdvancementTraitHint"),
+      title: game.i18n.localize("DND5E.ADVANCEMENT.Trait.Title"),
+      hint: game.i18n.localize("DND5E.ADVANCEMENT.Trait.Hint"),
       apps: {
         config: TraitConfig,
         flow: TraitFlow
       }
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform the pre-localization of this data model.
+   */
+  static localize() {
+    super.localize();
+    localizeSchema(
+      this.metadata.dataModels.configuration.schema.fields.choices.element,
+      ["DND5E.ADVANCEMENT.Trait.FIELDS.choices"]
+    );
   }
 
   /* -------------------------------------------- */
@@ -260,7 +273,7 @@ export default class TraitAdvancement extends Advancement {
       const rep = this.representedTraits();
       if ( rep.size === 1 ) return {
         choices: choices.filter(this.representedTraits().map(t => `${t}:*`), { inplace: false }),
-        label: game.i18n.format("DND5E.AdvancementTraitChoicesRemaining", {
+        label: game.i18n.format("DND5E.ADVANCEMENT.Trait.ChoicesRemaining", {
           count: unfilteredLength,
           type: Trait.traitLabel(rep.first(), unfilteredLength)
         })
@@ -282,7 +295,7 @@ export default class TraitAdvancement extends Advancement {
     const rep = this.representedTraits(available.map(a => a.choices.asSet()));
     return {
       choices,
-      label: game.i18n.format("DND5E.AdvancementTraitChoicesRemaining", {
+      label: game.i18n.format("DND5E.ADVANCEMENT.Trait.ChoicesRemaining", {
         count: available.length,
         type: Trait.traitLabel(rep.size === 1 ? rep.first() : null, available.length)
       })

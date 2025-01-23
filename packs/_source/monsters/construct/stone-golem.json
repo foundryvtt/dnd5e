@@ -933,8 +933,8 @@
       "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>19 (3d8 + 6) <em>bludgeoning damage</em></strong>.</p><p></p></section><p>The Stone Golem attacks with its Slam.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>19 (3d8 + 6) <em>bludgeoning damage</em></strong>.</p>",
+          "chat": "<p>The Stone Golem attacks with its Slam.</p>"
         },
         "source": {
           "custom": "",
@@ -1120,10 +1120,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676625,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!z3gSIXHHWYaHjfBT.DelAxHnRbNHC6OoV"
     },
@@ -1134,8 +1134,8 @@
       "img": "icons/tools/navigation/watch-simple-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The golem targets one or more creatures it can see within 10 ft. of it. Each target must make a  <strong>DC 17 Wisdom</strong> saving throw against this magic. </p><p>On a failed save, a target can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the target can take either an action or a bonus action on its turn, not both. These effects last for 1 minute. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p></section><p>The golem targets one or more creatures it can see within 10 ft. of it. Each target must make a <strong>Wisdom</strong> saving throw against this magic. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
-          "chat": ""
+          "value": "<p>The golem targets one or more creatures it can see within 10 ft. of it. Each target must make a  <strong>DC 17 Wisdom</strong> saving throw against this magic. </p><p>On a failed save, a target can't use reactions, its speed is halved, and it can't make more than one attack on its turn. In addition, the target can take either an action or a bonus action on its turn, not both. These effects last for 1 minute. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
+          "chat": "<p>The golem targets one or more creatures it can see within 10 ft. of it. Each target must make a <strong>Wisdom</strong> saving throw against this magic. A target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>"
         },
         "source": {
           "custom": "",
@@ -1265,10 +1265,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676625,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!z3gSIXHHWYaHjfBT.9aTwUWuZQLhMxjcD"
     }

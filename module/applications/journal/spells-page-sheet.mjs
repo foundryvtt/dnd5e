@@ -92,7 +92,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     if ( context.grouping === "school" ) context.sections = sortObjectEntries(context.sections, "header");
 
     if ( this.options.displayAsTable ) Object.values(context.sections).forEach(section => {
-      const spells = section.spells.map(s => linkForUuid(s.uuid));
+      const spells = section.spells.map(s => linkForUuid(s.spell?.uuid)).filter(_ => _);
       section.spellList = game.i18n.getListFormatter({ type: "unit" }).format(spells);
     });
 

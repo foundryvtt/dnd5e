@@ -271,7 +271,14 @@
       gap: .25rem;
 
       > i { font-size: var(--font-size-14); }
-      > span { font-size: var(--font-size-13); }
+      > span {
+        font-size: var(--font-size-13);
+
+        &.counter {
+          margin-left: auto;
+          line-height: 1;
+        }
+      }
 
       > dnd5e-icon {
         font-size: var(--font-size-14);
@@ -596,7 +603,6 @@
         inline-size: var(--bar-percentage);
         box-shadow: 0 0 6px var(--dnd5e-shadow-45);
         clip-path: polygon(0 0, calc(100% + 6px) 0, calc(100% + 6px) 100%, 0 100%);
-        border-radius: 4px;
       }
     }
 
@@ -989,9 +995,6 @@
     padding-block-start: 8px;
     padding-block-end: 14px;
     padding-inline: 14px;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
     overflow-y: auto;
 
     > section > .note {
@@ -1029,6 +1032,11 @@
       }
     }
     > section:empty { display: none; }
+  }
+  .window-content, .window-content > .column-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
   }
 
   /* Tabs */
@@ -1396,6 +1404,80 @@ dialog.dnd5e2.application {
 }
 
 /* ---------------------------------- */
+/*  Habitat Config Sheet              */
+/* ---------------------------------- */
+
+.dnd5e2.habitat-config {
+  .form-grid {
+    --rows: 7;
+    gap: 0;
+    clip-path: polygon(0 1px, 100% 1px, 100% 100%, 0 100%);
+    grid-auto-flow: column;
+    grid-template-rows: repeat(var(--rows), auto);
+
+    li {
+      margin: 0;
+      border-top: var(--dnd5e-border-dotted);
+      padding-left: 10px;
+
+      &.subtypes {
+        border: none;
+        position: relative;
+        padding-left: 28px;
+        margin-top: -1px;
+
+        &::before {
+          content: "┗";
+          position: absolute;
+          top: 8px;
+          left: 10px;
+          font-size: var(--font-size-10);
+          font-weight: bold;
+          color: var(--color-text-dark-5);
+        }
+      }
+
+      input {
+        font-size: var(--font-size-13);
+        font-family: var(--dnd5e-font-roboto-condensed);
+        padding: 4px;
+      }
+    }
+  }
+
+  label.checkbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-13);
+
+    > span { line-height: 2; }
+  }
+
+  fieldset > input { flex-shrink: 0; }
+}
+
+/* ---------------------------------- */
+/*  Treasure Config Sheet             */
+/* ---------------------------------- */
+
+.dnd5e2.treasure-config {
+  label.checkbox {
+    font-size: var(--font-size-13);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > span { line-height: 2; }
+  }
+
+  li {
+    margin: 0;
+    &:not(:last-child) { border-bottom: var(--dnd5e-border-dotted); }
+  }
+}
+
+/* ---------------------------------- */
 /*  Traits Config Sheet               */
 /* ---------------------------------- */
 
@@ -1428,7 +1510,7 @@ dialog.dnd5e2.application {
     .name { grid-column: name; }
     .proficiency {
       grid-column: proficiency;
-      text-align: center;
+      text-align: end;
     }
     li {
       align-items: center;

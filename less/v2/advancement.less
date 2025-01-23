@@ -3,12 +3,34 @@
 /* ----------------------------------------- */
 
 .dnd5e2.advancement.sheet {
-  .items.card {
+  &.grid-columns {
+    --grid-column-left-size: 1fr;
+    --grid-column-center-size: 1fr;
+    --grid-column-right-size: 1fr;
+
+    .window-content {
+      display: grid;
+      gap: 8px;
+
+      &:has(> .column-container:nth-of-type(2)) {
+        grid-template-columns: [left] var(--grid-column-left-size) [right] var(--grid-column-right-size);
+      }
+      &:has(> .column-container:nth-of-type(3)) {
+        grid-template-columns: [left] var(--grid-column-left-size) [center] var(--grid-column-center-size) [right] var(--grid-column-right-size);
+      }
+
+      > .column-container[data-container-id="column-left"] { grid-area: left; }
+      > .column-container[data-container-id="column-center"] { grid-area: center; }
+      > .column-container[data-container-id="column-right"] { grid-area: right; }
+    }
+  }
+
+  .card:is(.items, .levels) {
     display: grid;
-    grid-template-columns: [name] 1fr [controls] 20px;
+    gap: 0;
 
     > * { grid-column: 1 / -1; }
-    .header, .items-list, .items-list > li {
+    .header, .items-list, .items-list > li, .levels-list, .levels-list > li {
       display: grid;
       grid-column: 1 / -1;
       grid-template-columns: subgrid;
@@ -19,6 +41,17 @@
       padding-inline: 10px;
       border-radius: 0;
     }
+
+    .items-list, .levels-list > li {
+      margin: 0 -.75em;
+      padding: 6px .75em;
+
+      &:nth-child(odd) { background: var(--dnd5e-color-table-row-odd); }
+      &:nth-child(even) { background: var(--dnd5e-color-table-row-even); }
+    }
+  }
+  .card.items {
+    grid-template-columns: [name] 1fr [controls] 20px;
     .items-list {
       container-type: normal;
       gap: 0;
@@ -34,6 +67,18 @@
     .item-optional { display: inline-flex; }
     .item-name { grid-column: name; }
     .item-controls { grid-column: controls; }
+    .name-header { padding-inline-start: 16px; }
+  }
+  .card.levels {
+    grid-template-columns: [level] max-content [count] 1fr;
+    gap: 4px 6px;
+    .header > span { text-align: center; }
+    .level-header, .level-level { grid-column: level; }
+    .count-header, .level-count { grid-column: count; }
+    .level-level {
+      align-content: center;
+      text-align: center;
+    }
   }
 
   .centered { text-align: center; }
@@ -49,13 +94,140 @@
 }
 
 /* ----------------------------------------- */
+/*  Ability Score Improvement                */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.ability-score-improvement {
+  .ability-scores {
+    contain: layout;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+    padding-top: 4px;
+
+    li {
+      display: grid;
+      grid-template:
+        "label label label label"
+        "minus value value plus"
+        "minus delta delta plus";
+      row-gap: 4px;
+      margin: 0;
+      &.hint {
+        display: block;
+        grid-column: 2 / 4;
+        align-self: center;
+        text-align: start;
+      }
+      > label:first-child {
+        grid-area: label;
+        font-size: var(--font-size-16);
+      }
+      > button {
+        padding: 0.5em;
+        font-size: var(--font-size-16);
+        &.minus { grid-area: minus; }
+        &.plus { grid-area: plus; }
+      }
+      > input {
+        grid-area: value;
+        height: 1.5em;
+        font-size: var(--font-size-24);
+      }
+      > .locked {
+        grid-column: 1 / -1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        font-size: var(--font-size-12);
+        > dnd5e-checkbox {
+          width: 14px;
+          height: 14px;
+        }
+      }
+    }
+    &.disabled li {
+      opacity: 60%;
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Choose Items Advancement                 */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.item-choice.sheet {
+  --grid-column-left-size: 1fr;
+  --grid-column-center-size: .8fr;
+  --grid-column-right-size: .5fr;
+
+  .card.levels {
+    grid-template-columns: [level] max-content [count] 1fr [replacement] max-content;
+    .replacement-header, .level-replacement { grid-column: replacement; }
+    .level-replacement {
+      display: grid;
+      align-items: center;
+    }
+  }
+}
+
+/* ----------------------------------------- */
 /*  Grant Items Advancement                  */
 /* ----------------------------------------- */
 
 .dnd5e2.advancement.item-grant.sheet {
-  .items.card {
+  .card.items {
     grid-template-columns: [optional] 1fr [name] 3fr [controls] 20px;
     .item-optional { grid-column: optional; }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Scale Value Advancement                  */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.scale-value.sheet {
+  --grid-column-right-size: .6fr;
+  .identifier-hint {
+    code {
+      display: inline;
+      margin: 0;
+      padding: 0;
+      background: none;
+      border: none;
+      color: inherit;
+      font-size: inherit;
+    }
+    copyable-text { font-weight: bold; }
+  }
+  [data-application-part="levels"] {
+    grid-template-columns: [level] max-content [value] 1fr;
+    .value-header, .level-value { grid-column: value; }
+
+    &[data-type="dice"] {
+      grid-template-columns: [level] max-content [number] 1fr [faces] 1fr;
+      .number-header, .level-number { grid-column: number; }
+      .faces-header, .level-faces { grid-column: faces; }
+    }
+    select option[value=""] { color: var(--color-text-light-6); }
+    .new-scale-value select { font-weight: bold; }
+    li.level:not(.new-scale-value) select {
+      color: var(--color-text-light-6);
+      option:not([value=""]) { color: var(--color-text-dark-primary); }
+    }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Size Advancement                         */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.size.sheet {
+  .trait-list {
+    column-gap: 24px;
+    row-gap: 6px;
   }
 }
 
@@ -128,5 +300,36 @@
     .icons {
       i:not(.enabled) { opacity: 15%; }
     }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Trait Advancement                        */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement.trait.sheet {
+  .selected-trait {
+    li {
+      display: flex;
+      gap: 6px;
+      &:not(:first-of-type) { padding-block-start: 6px; }
+    }
+    label {
+      flex-grow: 1;
+      display: flex;
+      gap: 12px;
+      align-items: baseline;
+      &.selected { font-weight: bold; }
+      &:not(.selected) {
+        cursor: pointer;
+        &:hover { text-shadow: 0 0 8px var(--color-shadow-primary); }
+      }
+    }
+    input[type="radio"] { display: none; }
+  }
+  [data-application-part="traits"] {
+    display: grid;
+    > .form-group { grid-column: 1 / -1; }
+    .traits li.category { gap: 0; }
   }
 }

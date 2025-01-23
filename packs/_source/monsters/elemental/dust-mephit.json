@@ -624,8 +624,8 @@
       "img": "icons/magic/light/explosion-star-glow-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>When the mephit dies, it explodes in a burst of dust. Each creature within <strong>5 ft.</strong> of it must then succeed on a <strong>DC 10 Constitution saving throw</strong> or be blinded for <strong>1 minute</strong>. A blinded creature can repeat the saving throw on each of its turns, ending the effect on itself on a success.</p>\n</section>\n<p>When the mephit dies, it explodes in a burst of dust. Each creature within <strong>5 ft.</strong> of it must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>When the mephit dies, it explodes in a burst of dust. Each creature within <strong>5 ft.</strong> of it must then succeed on a <strong>DC 10 Constitution saving throw</strong> or be blinded for <strong>1 minute</strong>. A blinded creature can repeat the saving throw on each of its turns, ending the effect on itself on a success.</p>",
+          "chat": "<p>When the mephit dies, it explodes in a burst of dust. Each creature within <strong>5 ft.</strong> of it must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -827,10 +827,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676711,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!BUCfQ7ihaXX75Vai.v3i1DaUS4Bkc8Ser"
     },
@@ -900,8 +900,8 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>4 (1d4 + 2) <em>slashing damage</em></strong>.</p>\n</section>\n<p>The Dust Mephit attacks with its Claws.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>4 (1d4 + 2) <em>slashing damage</em></strong>.</p>",
+          "chat": "<p>The Dust Mephit attacks with its Claws.</p>"
         },
         "source": {
           "custom": "",
@@ -1090,10 +1090,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676711,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!BUCfQ7ihaXX75Vai.lazTMrXNUpGCrKdR"
     },
@@ -1104,8 +1104,8 @@
       "img": "icons/creatures/abilities/dragon-fire-breath-orange.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The mephit exhales a 15-foot cone of blinding dust.</p>\n<p>Each creature in that area must succeed on a  <strong>DC 10 Dexterity</strong> saving throw or be blinded for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>\n</section>\n<p>The mephit exhales a 15-foot cone of blinding dust. Each creature in that area must make a <strong>Dexterity</strong> saving throw. A creature can repeat the saving throw at the end of each of its turns.</p>",
-          "chat": ""
+          "value": "<p>The mephit exhales a 15-foot cone of blinding dust.</p><p>Each creature in that area must succeed on a  <strong>DC 10 Dexterity</strong> saving throw or be blinded for 1 minute. A creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
+          "chat": "<p>The mephit exhales a 15-foot cone of blinding dust. Each creature in that area must make a <strong>Dexterity</strong> saving throw. A creature can repeat the saving throw at the end of each of its turns.</p>"
         },
         "source": {
           "custom": "",
@@ -1343,10 +1343,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676711,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!BUCfQ7ihaXX75Vai.RTpPc5fs27dBqDuj"
     },

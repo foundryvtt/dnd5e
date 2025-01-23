@@ -630,8 +630,8 @@
       "img": "icons/magic/fire/dagger-rune-enchant-flame-strong-blue-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The solar's weapon attacks are magical. When the solar hits with any weapon, the weapon deals an <strong>extra 6d8 <em>radiant damage</em></strong> (included in the attack).</p></section><p>The solar's weapon attacks are magical. When the solar hits with any weapon, the weapon deals extra <em>radiant damage</em> (included in the attack).</p>",
-          "chat": ""
+          "value": "<p>The solar's weapon attacks are magical. When the solar hits with any weapon, the weapon deals an <strong>extra 6d8 <em>radiant damage</em></strong> (included in the attack).</p>",
+          "chat": "<p>The solar's weapon attacks are magical. When the solar hits with any weapon, the weapon deals extra <em>radiant damage</em> (included in the attack).</p>"
         },
         "source": {
           "custom": "",
@@ -675,10 +675,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676969,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!lOYt73eaJojBDxAV.zkNT86Xasjyzk8Df"
     },
@@ -748,8 +748,8 @@
       "img": "icons/weapons/swords/sword-runed-glowing.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The solar releases its greatsword to hover magically in an unoccupied space within <strong>5 ft.</strong> of it. If the solar can see the sword, the solar can mentally command it as a bonus action to fly up to <strong>50 ft.</strong> and either make one attack against a target or return to the solar's hands.</p><p>If the hovering sword is targeted by any effect, the solar is considered to be holding it. The hovering sword falls if the solar dies.</p></section><p>The solar releases its greatsword to hover magically in an unoccupied space within <strong>5 ft.</strong> of it. If the hovering sword is targeted by any effect, the solar is considered to be holding it. </p>",
-          "chat": ""
+          "value": "<p>The solar releases its greatsword to hover magically in an unoccupied space within <strong>5 ft.</strong> of it. If the solar can see the sword, the solar can mentally command it as a bonus action to fly up to <strong>50 ft.</strong> and either make one attack against a target or return to the solar's hands.</p><p>If the hovering sword is targeted by any effect, the solar is considered to be holding it. The hovering sword falls if the solar dies.</p>",
+          "chat": "<p>The solar releases its greatsword to hover magically in an unoccupied space within <strong>5 ft.</strong> of it. If the hovering sword is targeted by any effect, the solar is considered to be holding it. </p>"
         },
         "source": {
           "custom": "",
@@ -859,10 +859,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676969,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!lOYt73eaJojBDxAV.N5YFwsrzGuUFrblp"
     },
@@ -1267,8 +1267,8 @@
       "img": "icons/weapons/swords/greatsword-guard-gem-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+15 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>22 (4d6 + 8) <em>slashing damage</em></strong> plus <strong>27 (6d8) <em>radiant damage</em></strong>.</p></section>\n<p>The Solar attacks with its Greatsword.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+15 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>22 (4d6 + 8) <em>slashing damage</em></strong> plus <strong>27 (6d8) <em>radiant damage</em></strong>.</p>",
+          "chat": "<p>The Solar attacks with its Greatsword.</p>"
         },
         "source": {
           "custom": "",
@@ -1480,10 +1480,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676969,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!lOYt73eaJojBDxAV.QssrfCioglFdfd8I"
     },
@@ -1494,8 +1494,8 @@
       "img": "icons/weapons/bows/longbow-leather-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +13 to hit, range 150/600 ft., one target. Hit: <strong>15 (2d8 + 6) <em>piercing damage</em></strong> plus <strong>27 (6d8) <em>radiant damage</em></strong>.</p>\n<p>If the target is a creature that has 190 hit points or fewer, it must succeed on a  <strong>DC 15 Constitution</strong> saving throw or die.</p>\n</section>\n<p>The Solar attacks with its Slaying Longbow. If the target is a creature that has 190 hit points or fewer, it must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>Ranged Weapon Attack: +13 to hit, range 150/600 ft., one target. Hit: <strong>15 (2d8 + 6) <em>piercing damage</em></strong> plus <strong>27 (6d8) <em>radiant damage</em></strong>.</p><p>If the target is a creature that has 190 hit points or fewer, it must succeed on a  <strong>DC 15 Constitution</strong> saving throw or die.</p>",
+          "chat": "<p>The Solar attacks with its Slaying Longbow. If the target is a creature that has 190 hit points or fewer, it must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1793,10 +1793,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676969,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!lOYt73eaJojBDxAV.BSLTe0yfltAnguOT"
     },
@@ -1807,8 +1807,8 @@
       "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The solar can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The solar regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The solar can take 3 legendary actions.</p>",
-          "chat": ""
+          "value": "<p>The solar can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The solar regains spent legendary actions at the start of its turn.</p>",
+          "chat": "<p>The solar can take 3 legendary actions.</p>"
         },
         "source": {
           "custom": "",
@@ -1852,10 +1852,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676969,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!lOYt73eaJojBDxAV.sZjcCRCNcf6m4VoK"
     },
@@ -2002,8 +2002,8 @@
       "img": "icons/magic/light/explosion-star-glow-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">The solar emits magical, divine energy. Each creature of its choice in a 10-foot radius must make a  <strong>DC 23 Dexterity</strong> saving throw, taking <strong>14 (4d6) <em>fire damage</em></strong> plus <strong>14 (4d6) <em>radiant damage</em></strong> on a failed save, or half as much damage on a successful one.</section>\n<p>The solar emits magical, divine energy. Each creature of its choice in a 10-foot radius must make a <strong>Dexterity</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<strong>DC 23 Dexterity</strong><strong>14 (4d6) <em>fire damage</em></strong><strong>14 (4d6) <em>radiant damage</em></strong>",
+          "chat": "<p>The solar emits magical, divine energy. Each creature of its choice in a 10-foot radius must make a <strong>Dexterity</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -2274,10 +2274,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676969,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!lOYt73eaJojBDxAV.hvLibxV3shPORnBB"
     },
@@ -2288,8 +2288,8 @@
       "img": "icons/magic/perception/third-eye-blue-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">The solar targets one creature it can see within 30 feet of it. If the target can see it, the target must succeed on a  <strong>DC 15 Constitution</strong> saving throw or be blinded until magic such as the lesser restoration spell removes the blindness.\n<p>The solar targets one creature it can see within 30 feet of it. If the target can see it, the target must make a <strong>Constitution</strong> saving throw.</p>\n</section>\n<p>The solar targets one creature it can see within 30 feet of it. If the target can see it, the target must succeed on a Constitution saving throw or be blinded.</p>",
-          "chat": ""
+          "value": "<strong>DC 15 Constitution</strong><p>The solar targets one creature it can see within 30 feet of it. If the target can see it, the target must make a <strong>Constitution</strong> saving throw.</p>",
+          "chat": "<p>The solar targets one creature it can see within 30 feet of it. If the target can see it, the target must succeed on a Constitution saving throw or be blinded.</p>"
         },
         "source": {
           "custom": "",
@@ -2491,10 +2491,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676969,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!lOYt73eaJojBDxAV.iXcyU8grGuxZbkYJ"
     },
@@ -2564,8 +2564,8 @@
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
-          "chat": ""
+          "value": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>",
+          "chat": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>"
         },
         "source": {
           "custom": "",
@@ -2609,10 +2609,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676969,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!lOYt73eaJojBDxAV.wxR8cWGMfaaMKc1W"
     },

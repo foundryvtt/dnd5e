@@ -37,7 +37,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.VEHICLE.MOUNTABLE", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
@@ -168,10 +168,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareBaseData() {
     super.prepareBaseData();
-    if ( this.armor.base === undefined ) {
-      this.armor.base = this.armor.value ?? 0;
-      this.armor.value = this.armor.base + (this.magicAvailable ? (this.armor.magicalBonus ?? 0) : 0);
-    }
+    this.armor.base = this.armor.value = (this._source.armor.value ?? 0);
   }
 
   /* -------------------------------------------- */
@@ -183,6 +180,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     this.prepareDescriptionData();
     this.prepareIdentifiable();
     this.preparePhysicalData();
+    if ( this.magicAvailable && this.armor.magicalBonus ) this.armor.value += this.armor.magicalBonus;
     this.type.label = CONFIG.DND5E.equipmentTypes[this.type.value]
       ?? game.i18n.localize(CONFIG.Item.typeLabels.equipment);
     this.type.identifier = this.type.value === "shield"

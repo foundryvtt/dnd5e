@@ -1,3 +1,4 @@
+import { formatNumber, getHumanReadableAttributeLabel } from "../../../utils.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -6,6 +7,14 @@ const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.field
  * @typedef ActorDeltasData
  * @property {IndividualDeltaData[]} actor                 Changes for the actor.
  * @property {Record<string, IndividualDeltaData[]>} item  Changes for each item grouped by ID.
+ */
+
+/**
+ * @typedef DeltaDisplayContext
+ * @property {string} type              Type of document to which the delta applies.
+ * @property {string} delta             The formatted numeric change.
+ * @property {Actor5e|Item5e} document  The document to which the delta applies.
+ * @property {string} label             The formatted label for the attribute.
  */
 
 /**
@@ -36,6 +45,23 @@ export class ActorDeltasField extends SchemaField {
         return obj;
       }, {})
     };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare deltas for display in a chat message.
+   * @this {ActorDeltasData}
+   * @param {Actor5e} actor  Actor to which this delta applies.
+   * @returns {DeltaDisplayContext[]}
+   */
+  static processDeltas(actor) {
+    return [
+      ...this.actor.map(d => IndividualDeltaField.processDelta.call(d, actor)),
+      ...Object.entries(this.item).flatMap(([id, deltas]) =>
+        deltas.map(d => IndividualDeltaField.processDelta.call(d, actor.items.get(id)))
+      )
+    ];
   }
 }
 
@@ -76,5 +102,25 @@ export class IndividualDeltaField extends SchemaField {
       if ( delta && !Number.isNaN(delta) ) deltas.push({ keyPath, delta });
     }
     return deltas;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare a delta for display in a chat message.
+   * @this {IndividualDeltaData}
+   * @param {Actor5e|Item5e} doc  Actor or item to which this delta applies.
+   * @returns {DeltaDisplayContext}
+   */
+  static processDelta(doc) {
+    const type = doc instanceof Actor ? "actor" : "item";
+    const value = this.keyPath.endsWith(".spent") ? -this.delta : this.delta;
+    return {
+      type,
+      delta: formatNumber(value, { signDisplay: "always" }),
+      document: doc,
+      label: getHumanReadableAttributeLabel(this.keyPath, { [type]: doc }) ?? this.keyPath
+      // TODO: If any rolls were performed for recovery, associate with delta
+    };
   }
 }

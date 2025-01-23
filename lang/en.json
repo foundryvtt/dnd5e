@@ -20,6 +20,7 @@
 "TYPES.ActiveEffect.enchantmentPl": "Enchantments",
 
 "TYPES.ChatMessage": {
+  "rest": "Rest Message",
   "turn": "Combat Turn Message"
 },
 
@@ -58,7 +59,7 @@
 "DND5E.AbbreviationDC": "DC",
 "DND5E.AbbreviationKg": "kg",
 "DND5E.AbbreviationLR": "LR",
-"DND5E.AbbreviationLevel": "Lvl.",
+"DND5E.AbbreviationLevel": "Lvl",
 "DND5E.AbbreviationLbs": "lbs.",
 "DND5E.AbbreviationSR": "SR",
 
@@ -246,7 +247,9 @@
       "one": "Max {points} point per score",
       "other": "Max {points} points per score"
     },
+    "Details": "Improvement Details",
     "Feat": {
+      "ASIName": "Ability Score Improvement Feat",
       "Hint": "Drop a feat here to choose one instead of an ability score improvement."
     },
     "FIELDS": {
@@ -256,7 +259,9 @@
       },
       "locked": {
         "label": "Locked",
-        "hint": "Ability cannot be improved."
+        "hint": "Ability cannot be improved.",
+        "locked": "Ability cannot be improved.",
+        "unlocked": "Ability may be improved."
       },
       "fixed": {
         "label": "Fixed Improvement",
@@ -269,6 +274,11 @@
         "increase": "Increase Points"
       }
     },
+    "Journal": {
+      "DescriptionLegacy": "<p>When you reach {firstLevelOrdinal} level, and again at {otherLevelsOrdinal} level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above {maxAbilityScore} using this feature.</p><p>Using the optional feats rule, you can forgo taking this feature to take a feat of your choice instead.</p>",
+      "DescriptionModern": "<p>You gain the Ability Score Improvement feat or another feat of your choice for which you qualify. You gain this feature again at {class} levels {otherLevels}.</p>",
+      "Name": "Ability Score Improvement"
+    },
     "LockedHint": "Scores cannot be modified with a feat selected.",
     "PointsRemaining": {
       "one": "{points} Point Remaining",
@@ -280,6 +290,7 @@
     }
   },
   "Config": {
+    "AnyLevel": "Any",
     "Details": "Advancement Details"
   },
   "HitPoints": {
@@ -296,6 +307,65 @@
     "Warning": {
       "Empty": "Hit points must be rolled or the average value must be taken.",
       "Invalid": "Hit points must be a valid whole number."
+    }
+  },
+  "ItemChoice": {
+    "Choose": "choose {count}",
+    "Chosen": "Chosen: {current} of {max}",
+    "Details": "Choice Details",
+    "DropHint": "Drop Items here to add them to the list that can be chosen with this advancement.",
+    "FIELDS": {
+      "allowDrops": {
+        "hint": "Allow players to be able to drop their own choices into this advancement.",
+        "label": "Allow Drops"
+      },
+      "choices": {
+        "hint": "Specify how many choices are allowed at each level.",
+        "label": "Choices",
+        "FIELDS": {
+          "count": {
+            "label": "Count"
+          },
+          "replacement": {
+            "label": "Allow Replacement"
+          }
+        }
+      },
+      "pool": {
+        "label": "Item Options"
+      },
+      "restriction": {
+        "level": {
+          "Available": "Any Available Level",
+          "hint": "Only allow choices from spells of this level.",
+          "label": "Spell Level"
+        },
+        "subtype": {
+          "label": "Subtype"
+        },
+        "type": {
+          "label": "Type"
+        }
+      },
+      "type": {
+        "Any": "Anything",
+        "hint": "Restrict what Item types can be chosen.",
+        "label": "Item Type"
+      }
+    },
+    "Hint": "Present the player with a choice of items (such as equipment, features, or spells) that they can choose for their character at one or more levels.",
+    "Replacement": {
+      "None": "No Replacement",
+      "Title": "replace"
+    },
+    "Title": "Choose Items",
+    "Warning": {
+      "FeatureLevel": "Must be at least level {level} to take this feature.",
+      "InvalidType": "Only {type} items can be selected for this choice.",
+      "NoOriginal": "Previously selected choice no longer available for replacement.",
+      "PreviouslyChosen": "This item has already been chosen at a previous level.",
+      "SpellLevelAvailable": "Only {level} or lower spells can be chosen for this advancement.",
+      "SpellLevelSpecific": "Only {level} spells can be chosen for this advancement."
     }
   },
   "ItemGrant": {
@@ -345,6 +415,82 @@
       "ModifyChoices": "Modify Choices"
     }
   },
+  "ScaleValue": {
+    "Details": "Scale Value Details",
+    "FIELDS": {
+      "distance": {
+        "units": {
+          "label": "Distance Units"
+        }
+      },
+      "identifier": {
+        "label": "Identifier"
+      },
+      "scale": {
+        "label": "Scale"
+      },
+      "type": {
+        "label": "Scale Type"
+      }
+    },
+    "Hint": "A single value that changes as a class increases in level that is made available in roll formulas (such as a Monk's martial arts die).",
+    "Title": "Scale Value",
+    "Type": {
+      "CR": {
+        "FIELDS": {
+          "value": {
+            "label": "CR"
+          }
+        },
+        "Hint": "Use this for representing creature challenge ratings for features like Wild Shape",
+        "Label": "Challenge Rating"
+      },
+      "Dice": {
+        "FIELDS": {
+          "faces": {
+            "label": "Faces"
+          },
+          "number": {
+            "label": "Number"
+          }
+        },
+        "Hint": "Use this for dice values like bardic inspiration, sneak attack, or superiority dice.",
+        "Identifier": "This scale value for the current level will be available in a formula using:<br><copyable-text>@scale.{class}.{identifier}</copyable-text> - whole formula (<code>4d6</code>)<br><copyable-text>@scale.{class}.{identifier}.die</copyable-text> - whole die (<code>d6</code>)<br><copyable-text>@scale.{class}.{identifier}.number</copyable-text> - number of dice (<code>4</code>)<br><copyable-text>@scale.{class}.{identifier}.faces</copyable-text> - number of faces (<code>6</code>)",
+        "Label": "Dice"
+      },
+      "Distance": {
+        "Hint": "Use this for numerical values that represent a distance, such as unarmored movement speed, or aura of protection radius.",
+        "Label": "Distance"
+      },
+      "Number": {
+        "Hint": "Use this for purely numerical values like rage damage bonus or number of uses per day.",
+        "Label": "Numeric"
+      },
+      "String": {
+        "FIELDS": {
+          "value": {
+            "label": "Value"
+          }
+        },
+        "Hint": "Use this if you are unsure of the type of the scale values, or if the type does not matter.",
+        "Identifier": "This scale value for the current level will be available in a formula using:<br><copyable-text>@scale.{class}.{identifier}</copyable-text>",
+        "Label": "Anything"
+      }
+    }
+  },
+  "Size": {
+    "DefaultHint": {
+      "Multiple": "Choose your size from either {sizes}.",
+      "Single": "Your size is {size}."
+    },
+    "FIELDS": {
+      "sizes": {
+        "label": "Sizes"
+      }
+    },
+    "Hint": "Set a character's size.",
+    "Title": "Size"
+  },
   "SPELLCONFIG": {
     "FIELDS": {
       "spell": {
@@ -377,6 +523,64 @@
     "Warning": {
       "InvalidType": "Only subclasses may be selected."
     }
+  },
+  "Trait": {
+    "Action": {
+      "AddChoice": "Add Choice",
+      "RemoveChoice": "Remove Choice"
+    },
+    "ChoicesRemaining": "Select {count} more {type}",
+    "Details": "Trait Details",
+    "FIELDS": {
+      "allowReplacements": {
+        "hint": "If a trait is already set on the actor, allow the player to choose from any other trait as a replacement.",
+        "label": "Allow Replacements"
+      },
+      "choices": {
+        "hint": "The following traits will be presented as a choice to the player.",
+        "label": "Choices",
+        "FIELDS": {
+          "count": {
+            "label": "Count"
+          },
+          "pool": {
+            "label": "Traits"
+          }
+        }
+      },
+      "grants": {
+        "hint": "The following traits will be granted to the character as long as they don't already possess that trait.",
+        "label": "Guaranteed"
+      },
+      "mode": {
+        "label": "Mode"
+      }
+    },
+    "Hint": "Grant a character certain traits or give them an option to select traits (such as proficiencies, skills, languages).",
+    "Mode": {
+      "Default": {
+        "Hint": "Gain a trait or proficiency.",
+        "Label": "Default"
+      },
+      "Expertise": {
+        "Hint": "Gain expertise in a trait in which you already have proficiency.",
+        "Label": "Expertise"
+      },
+      "Force": {
+        "Hint": "Gain expertise in a trait regardless of your previous proficiency level.",
+        "Label": "Forced Expertise"
+      },
+      "Mastery": {
+        "Hint": "Gain mastery with a weapon in which you already have proficiency.",
+        "Label": "Mastery"
+      },
+      "Upgrade": {
+        "Hint": "Gain proficiency in a trait unless you already have it, otherwise gain expertise.",
+        "Label": "Upgrade"
+      }
+    },
+    "TraitType": "Trait Type",
+    "Title": "Traits"
   }
 },
 
@@ -406,26 +610,6 @@
 "DND5E.AdvancementDeleteConfirmationTitle": "Confirm Deletion",
 "DND5E.AdvancementFlowDropAreaHint": "Drop an Item here to choose it.",
 "DND5E.AdvancementHint": "Hint",
-"DND5E.AdvancementItemChoiceTitle": "Choose Items",
-"DND5E.AdvancementItemChoiceHint": "Present the player with a choice of items (such as equipment, features, or spells) that they can choose for their character at one or more levels.",
-"DND5E.AdvancementItemChoiceChoices": "Choices",
-"DND5E.AdvancementItemChoiceChoose": "choose {count}",
-"DND5E.AdvancementItemChoiceChosen": "Chosen: {current} of {max}",
-"DND5E.AdvancementItemChoiceFeatureLevelWarning": "Must be at least level {level} to take this feature.",
-"DND5E.AdvancementItemChoiceLevelsHint": "Specify how many choices are allowed at each level.",
-"DND5E.AdvancementItemChoiceNoOriginalError": "Previously selected choice no longer available for replacement.",
-"DND5E.AdvancementItemChoicePreviouslyChosenWarning": "This item has already been chosen at a previous level.",
-"DND5E.AdvancementItemChoiceReplacement": "Allow Replacement",
-"DND5E.AdvancementItemChoiceReplacementNone": "No Replacement",
-"DND5E.AdvancementItemChoiceReplacementTitle": "replace",
-"DND5E.AdvancementItemChoiceSpellLevelAvailable": "Any Available Level",
-"DND5E.AdvancementItemChoiceSpellLevelAvailableWarning": "Only {level} or lower spells can be chosen for this advancement.",
-"DND5E.AdvancementItemChoiceSpellLevelSpecificWarning": "Only {level} spells can be chosen for this advancement.",
-"DND5E.AdvancementItemChoiceSpellLevelHint": "Only allow choices from spells of this level.",
-"DND5E.AdvancementItemChoiceType": "Item Type",
-"DND5E.AdvancementItemChoiceTypeHint": "Restrict what Item types can be chosen.",
-"DND5E.AdvancementItemChoiceTypeAny": "Anything",
-"DND5E.AdvancementItemChoiceTypeWarning": "Only {type} items can be selected for this choice.",
 "DND5E.AdvancementItemTypeInvalidWarning": "{type} items cannot be added with this advancement type.",
 "DND5E.AdvancementLevelHeader": "Level {level}",
 "DND5E.AdvancementLevelAnyHeader": "Any Level",
@@ -437,52 +621,9 @@
 "DND5E.AdvancementMigrationTitle": "Migrate Advancement",
 "DND5E.AdvancementModifyChoices": "Modify Choices",
 "DND5E.AdvancementSaveButton": "Save Advancement",
-"DND5E.AdvancementScaleValueTitle": "Scale Value",
-"DND5E.AdvancementScaleValueHint": "A single value that changes as a class increases in level that is made available in roll formulas (such as a Monk's martial arts die).",
-"DND5E.AdvancementScaleValueIdentifierHint": "This scale value for the current level will be available in a formula using:<br><copyable-text>@scale.{class}.{identifier}</copyable-text>",
-"DND5E.AdvancementScaleValueIdentifierDiceHint": "This scale value for the current level will be available in a formula using:<br><copyable-text>@scale.{class}.{identifier}</copyable-text> - whole formula (<code>4d6</code>)<br><copyable-text>@scale.{class}.{identifier}.die</copyable-text> - whole die (<code>d6</code>)<br><copyable-text>@scale.{class}.{identifier}.number</copyable-text> - number of dice (<code>4</code>)<br><copyable-text>@scale.{class}.{identifier}.faces</copyable-text> - number of faces (<code>6</code>)",
-"DND5E.AdvancementScaleValueTypeCR": "Challenge Rating",
-"DND5E.AdvancementScaleValueTypeDice": "Dice",
-"DND5E.AdvancementScaleValueTypeDistance": "Distance",
-"DND5E.AdvancementScaleValueTypeHintCR": "Use this for representing creature challenge ratings for features like Wild Shape.",
-"DND5E.AdvancementScaleValueTypeHintDice": "Use this for dice values like bardic inspiration, sneak attack, or superiority dice.",
-"DND5E.AdvancementScaleValueTypeHintDistance": "Use this for numerical values that represent a distance, such as unarmored movement speed, or aura of protection radius.",
-"DND5E.AdvancementScaleValueTypeHintNumber": "Use this for purely numerical values like rage damage bonus or number of uses per day.",
-"DND5E.AdvancementScaleValueTypeHintString": "Use this if you are unsure of the type of the scale values, or if the type does not matter.",
-"DND5E.AdvancementScaleValueTypeLabel": "Scale Type",
-"DND5E.AdvancementScaleValueTypeNumber": "Numeric",
-"DND5E.AdvancementScaleValueTypeString": "Anything",
 "DND5E.AdvancementSelectionCreateButton": "Create Advancement",
 "DND5E.AdvancementSelectionTitle": "Select Advancement Type",
-"DND5E.AdvancementSizeTitle": "Size",
-"DND5E.AdvancementSizeHint": "Set a character's size.",
-"DND5E.AdvancementSizeFlowHintSingle": "Your size is {size}.",
-"DND5E.AdvancementSizeflowHintMultiple": "Choose your size from either {sizes}.",
 "DND5E.AdvancementTitle": "Advancement",
-"DND5E.AdvancementTraitTitle": "Traits",
-"DND5E.AdvancementTraitHint": "Grant a character certain traits or give them an option to select traits (such as proficiencies, skills, languages).",
-"DND5E.AdvancementTraitActionAddChoice": "Add Choice",
-"DND5E.AdvancementTraitActionRemoveChoice": "Remove Choice",
-"DND5E.AdvancementTraitAllowReplacements": "Allow Replacements",
-"DND5E.AdvancementTraitAllowReplacementsHint": "If a trait is already set on the actor, allow the player to choose from any other trait as a replacement.",
-"DND5E.AdvancementTraitChoices": "Choices",
-"DND5E.AdvancementTraitChoicesHint": "The following traits will be presented as a choice to the player.",
-"DND5E.AdvancementTraitChoicesRemaining": "Select {count} more {type}",
-"DND5E.AdvancementTraitCount": "Count",
-"DND5E.AdvancementTraitGrants": "Guaranteed",
-"DND5E.AdvancementTraitGrantsHint": "The following traits will be granted to the character as long as they don't already possess that trait.",
-"DND5E.AdvancementTraitMode": "Mode",
-"DND5E.AdvancementTraitModeDefaultLabel": "Default",
-"DND5E.AdvancementTraitModeDefaultHint": "Gain a trait or proficiency.",
-"DND5E.AdvancementTraitModeExpertiseLabel": "Expertise",
-"DND5E.AdvancementTraitModeExpertiseHint": "Gain expertise in a trait in which you already have proficiency.",
-"DND5E.AdvancementTraitModeForceLabel": "Forced Expertise",
-"DND5E.AdvancementTraitModeForceHint": "Gain expertise in a trait regardless of your previous proficiency level.",
-"DND5E.AdvancementTraitModeMasteryLabel": "Mastery",
-"DND5E.AdvancementTraitModeMasteryHint": "Gain mastery with a weapon in which you already have proficiency.",
-"DND5E.AdvancementTraitModeUpgradeLabel": "Upgrade",
-"DND5E.AdvancementTraitModeUpgradeHint": "Gain proficiency in a trait unless you already have it, otherwise gain expertise.",
-"DND5E.AdvancementTraitType": "Trait Type",
 "DND5E.Advantage": "Advantage",
 "DND5E.AdvantageMode": "Advantage Mode",
 "DND5E.Age": "Age",
@@ -849,10 +990,12 @@
 "DND5E.ChatFlavor": "Chat Message Flavor",
 
 "DND5E.CHATMESSAGE": {
+  "Deltas": {
+    "Recovery": "Recovery"
+  },
   "TURN": {
     "Activities": "Activities",
-    "NoCombatant": "Combatant no longer exists!",
-    "Recovery": "Recovery"
+    "NoCombatant": "Combatant no longer exists!"
   }
 },
 
@@ -1486,6 +1629,8 @@
 "DND5E.Dawn": "Dawn",
 "DND5E.Day": "Day",
 "DND5E.DeathSave": "Death Saves",
+"DND5E.DeathSaveBonus": "Death Save Bonus",
+"DND5E.DeathSaveConfigure": "Configure Death Saves",
 "DND5E.DeathSaveCriticalSuccess": "{name} critically succeeded on a death saving throw and has regained 1 Hit Point!",
 "DND5E.DeathSaveHide": "Hide Death Saves",
 "DND5E.DeathSaveShow": "Show Death Saves",
@@ -1701,6 +1846,12 @@
     "Entry": "{item} on <em>{actor}</em>"
   },
   "Label": "Enchantment",
+  "Period": {
+    "AtWill": "At Will",
+    "LongRest": "Long Rest",
+    "Never": "Never",
+    "ShortRest": "Short Rest"
+  },
   "Warning": {
     "NotOnActor": "Enchantments can only be added to items, not directly to actors.",
     "Override": "This value is being modified by an Enchantment and cannot be edited. Disable the enchantment in the effects tab to edit it."
@@ -1745,18 +1896,24 @@
 "DND5E.Equipped": "Equipped",
 "DND5E.Exhaustion": "Exhaustion",
 "DND5E.ExhaustionLevel": "Exhaustion Level {n}",
-"DND5E.ExperiencePoints": "Experience Points",
-"DND5E.ExperiencePointsAbbr": "XP",
-"DND5E.ExperiencePointsBoons": {
-  "one": "{number} Boon",
-  "other": "{number} Boons"
+
+"DND5E.ExperiencePoints": {
+  "Abbreviation": "XP",
+  "Boons": {
+    "one": "{number} Boon",
+    "other": "{number} Boons"
+  },
+  "Current": "Current XP",
+  "Format": "{value} XP",
+  "Label": "Experience Points",
+  "Progress": "Progress to next Level",
+  "StatBlock": {
+    "Standard": "XP {value}",
+    "Lair": "XP {value}, or {lair} in lair"
+  },
+  "Value": "XP Value"
 },
-"DND5E.ExperiencePointsCurrent": "Current XP",
-"DND5E.ExperiencePointsFormat": "{value} XP",
-"DND5E.ExperiencePointsLabel": "Progress to next level",
-"DND5E.ExperiencePointsMax": "XP for Next Level",
-"DND5E.ExperiencePointsMin": "Minimum XP for This Level",
-"DND5E.ExperiencePointsValue": "XP Value",
+
 "DND5E.Expertise": "Expertise",
 
 "DND5E.FACILITY": {
@@ -2021,6 +2178,10 @@
 
 "DND5E.FEATURE": {
   "FIELDS": {
+    "cover": {
+      "label": "Cover",
+      "hint": "Cover provided to crew by this vehicle feature."
+    },
     "properties": {
       "label": "Feature Properties"
     },
@@ -2069,6 +2230,9 @@
     "Blessing": "Blessing",
     "Charm": "Charm",
     "EpicBoon": "Epic Boon"
+  },
+  "Vehicle": {
+    "Label": "Vehicle Feature"
   }
 },
 "DND5E.Focus": {
@@ -2156,7 +2320,7 @@
   }
 },
 
-"DND5E.FlagsInstructions": "Configure character features and traits which fine-tune behaviors of the DnD5e system.",
+"DND5E.FlagsInstructions": "Configure character features and traits which fine-tune behaviors of the D&D Fifth Edition system.",
 "DND5E.FlagsSave": "Update Special Traits",
 "DND5E.FlagsTitle": "Configure Special Traits",
 "DND5E.FlagsDiamondSoul": "Diamond Soul",
@@ -2220,6 +2384,19 @@
     "one": "Vehicle",
     "other": "Vehicles"
   }
+},
+"DND5E.Habitat": {
+  "Categories": {
+    "Any": "Any"
+  },
+  "Configuration": {
+    "Custom": "Custom",
+    "Label": "Habitat",
+    "Legend": "Categories",
+    "Subtype": "{type} Subtype",
+    "Title": "Configure Habitat"
+  },
+  "Subtype": "{type} ({subtype})"
 },
 "DND5E.Hair": "Hair",
 "DND5E.HalfProficient": "Half Proficient",
@@ -2302,7 +2479,6 @@
 "DND5E.HitPointsTempMaxHint": "Temporary change to the maximum HP.",
 "DND5E.HitPointsTempMaxShort": "Temp Max HP",
 "DND5E.HP": "HP",
-"DND5E.HealthConditions": "Health Conditions",
 "DND5E.HPFormula": "Health Formula",
 "DND5E.HPFormulaError": "The provided hit point formula could not be evaluated.",
 "DND5E.HPFormulaRollMessage": "Roll Hit Point Formula",
@@ -2453,9 +2629,17 @@
 "DND5E.ItemWeaponType": "Weapon Type",
 "DND5E.ItemWeaponUsage": "Weapon Usage",
 "DND5E.JackOfAllTrades": "Jack of all Trades",
-"DND5E.LairAct": "Uses Lair Action",
-"DND5E.LairActionLabel": "Lair Action",
-"DND5E.LairActionInitiative": "Lair Action Initiative Count",
+
+"DND5E.LAIR": {
+  "Label": "Lair",
+  "Action": {
+    "Label": "Lair Action",
+    "Initiative": "Lair Action Initiative Count",
+    "Uses": "Uses Lair Action"
+  },
+  "HasLair": "Has Lair",
+  "Inside": "Inside Lair"
+},
 
 "DND5E.Language": {
   "All": "All Languages",
@@ -2547,6 +2731,7 @@
 "DND5E.LimitedUsesPrompt": "Uses Prompt",
 "DND5E.LimitedUsesPromptTooltip": "If unchecked, the prompt to consume an available use will be suppressed.",
 "DND5E.Long": "Long",
+"DND5E.Loyalty": "Loyalty",
 "DND5E.MagicalBonus": "Magical Bonus",
 "DND5E.Materials": "Materials",
 "DND5E.Max": "Max",
@@ -2584,6 +2769,10 @@
     "LegendaryActions": "Legendary Actions",
     "Reactions": "Reactions",
     "Traits": "Traits"
+  },
+  "Important": {
+    "Hint": "Important NPCs track death saves, hit dice, and loyalty (if enabled). Any NPC with class levels is considered important regardless of this setting.",
+    "Label": "Important NPC"
   }
 },
 
@@ -2601,6 +2790,14 @@
 
 "DND5E.Number": "Number",
 "DND5E.OtherFormula": "Other Formula",
+
+"DND5E.ORDINAL": {
+  "one": "{number}st",
+  "two": "{number}nd",
+  "few": "{number}rd",
+  "other": "{number}th"
+},
+
 "DND5E.PactMagic": "Pact Magic",
 "DND5E.Passive": "Passive",
 "DND5E.PassivePerception": "Passive Perception",
@@ -3060,7 +3257,6 @@
   "Name": "Species Name"
 },
 "DND5E.Speed": "Speed",
-"DND5E.SpeedConditions": "Speed Conditions",
 "DND5E.SpeedSpecial": "Special Movement",
 "DND5E.SpellAbility": "Spellcasting Ability",
 "DND5E.SpellAbilitySet": "Set as Primary Spellcasting Ability",
@@ -3691,6 +3887,21 @@
 "DND5E.TraitWeaponProf": "Weapon Proficiencies",
 "DND5E.Traits": "Traits",
 "DND5E.TraitsChosen": "Chosen Traits",
+"DND5E.Treasure": {
+  "Categories": {
+    "Any": "Any",
+    "Arcana": "Arcana",
+    "Armaments": "Armaments",
+    "Implements": "Implements",
+    "Individual": "Individual",
+    "None": "None",
+    "Relics": "Relics"
+  },
+  "Configuration": {
+    "Label": "Treasure",
+    "Title": "Configure Treasure"
+  }
+},
 "DND5E.Trigger": "Trigger",
 "DND5E.Type": "Type",
 "DND5E.Uncrewed": "Uncrewed",
@@ -3854,20 +4065,8 @@
 "DND5E.UsesMax": "Maximum Uses",
 "DND5E.UsesPeriod": "Recovery Period",
 "DND5E.UsesPeriods": {
-  "AtWill": "At Will",
   "Charges": "Charges",
-  "ChargesAbbreviation": "Charges",
-  "Dawn": "Dawn",
-  "DawnAbbreviation": "Dawn",
-  "Day": "Day",
-  "DayAbbreviation": "Day",
-  "Dusk": "Dusk",
-  "DuskAbbreviation": "Dusk",
-  "Lr": "Long Rest",
-  "LrAbbreviation": "LR",
-  "Never": "Never",
-  "Sr": "Short Rest",
-  "SrAbbreviation": "SR"
+  "ChargesAbbreviation": "Charges"
 },
 
 "DND5E.USES": {
@@ -3907,10 +4106,47 @@
       "Create": "Create Recovery Profile",
       "Delete": "Delete Recovery Profile"
     },
+    "Combat": "Combat",
+    "Never": "Never",
+    "Period": {
+      "Dawn": {
+        "Label": "Dawn"
+      },
+      "Day": {
+        "Label": "Day"
+      },
+      "Dusk": {
+        "Label": "Dusk"
+      },
+      "Initiative": {
+        "Label": "Initiative"
+      },
+      "LongRest": {
+        "Label": "Long Rest",
+        "Abbreviation": "LR"
+      },
+      "ShortRest": {
+        "Label": "Short Rest",
+        "Abbreviation": "SR"
+      },
+      "Turn": {
+        "Label": "Each Turn"
+      },
+      "TurnEnd": {
+        "Label": "End of Turn",
+        "Abbreviation": "Turn Start"
+      },
+      "TurnStart": {
+        "Label": "Start of Turn",
+        "Abbreviation": "Turn End"
+      }
+    },
     "Recharge": {
       "Label": "Recharge",
       "Range": "Recharge {range}"
     },
+    "Special": "Special",
+    "Time": "Time",
     "Type": {
       "Formula": "Custom Formula",
       "LoseAll": "Lose All Uses",
@@ -3945,6 +4181,44 @@
 },
 
 "DND5E.Value": "Value",
+
+"DND5E.VEHICLE": {
+  "MOUNTABLE": {
+    "FIELDS": {
+      "cover": {
+        "label": "Cover",
+        "hint": "Cover provided to crew operating this equipment."
+      },
+      "crewed": {
+        "label": "Crewed"
+      },
+      "hp": {
+        "label": "Hit Points",
+        "conditions": {
+          "label": "Health Conditions"
+        },
+        "dt": {
+          "label": "Damage Threshold"
+        },
+        "max": {
+          "label": "Max HP"
+        },
+        "value": {
+          "label": "Current HP"
+        }
+      },
+      "speed": {
+        "conditions": {
+          "label": "Speed Conditions"
+        },
+        "value": {
+          "label": "Speed"
+        }
+      }
+    }
+  }
+},
+
 "DND5E.Vehicle": "Vehicle",
 "DND5E.VehicleActions": "Actions",
 "DND5E.VehicleActionsHint": "Actions taken with full crew complement",
@@ -3988,6 +4262,11 @@
     "ammunition": {
       "type": {
         "label": "Ammunition Type"
+      }
+    },
+    "armor": {
+      "value": {
+        "label": "Armor Class"
       }
     },
     "damage": {
@@ -4253,7 +4532,7 @@
   "Normal": "Normal (max carrying capacity)",
   "Variant": "Variant (encumbered & heavily encumbered)"
 },
-"SETTINGS.5eFeatsL": "Allow players to choose a feat rather than taking an ability score improvement during class advancement.",
+"SETTINGS.5eFeatsL": "Allow players to choose a feat rather than taking an ability score improvement during class advancement when using the Legacy rules.",
 "SETTINGS.5eFeatsN": "Allow Feats",
 "SETTINGS.5eHonorL": "Enable the use of the optional Honor ability score. Requires the world to be reloaded.",
 "SETTINGS.5eHonorN": "Honor Ability Score",
@@ -4318,6 +4597,10 @@
     "NoXP": "Level Advancement without XP",
     "XP": "Experience Points",
     "XPBoons": "Experience Points with Epic Boons"
+  },
+  "LOYALTY": {
+    "Hint": "Enable optional Loyalty tracking.",
+    "Name": "Loyalty Score"
   },
   "METRIC": {
     "LengthUnits": {

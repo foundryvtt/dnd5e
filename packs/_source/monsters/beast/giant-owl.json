@@ -729,8 +729,8 @@
       "img": "icons/creatures/claws/claw-scaled-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>8 (2d6 + 1) <em>slashing damage</em></strong>.</p></section>\n<p>The Giant Owl attacks with its Talons.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>8 (2d6 + 1) <em>slashing damage</em></strong>.</p>",
+          "chat": "<p>The Giant Owl attacks with its Talons.</p>"
         },
         "source": {
           "custom": "",
@@ -917,10 +917,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676462,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!VVXly3ue0i3YgGrB.6jw1NtpZQXIesO4Y"
     }

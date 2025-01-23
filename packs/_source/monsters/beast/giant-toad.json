@@ -733,8 +733,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d10 + 2) <em>piercing damage</em></strong> plus <strong>5 (1d10) <em>poison damage</em></strong>.</p>\n<p>The target is grappled (escape DC 13). Until this grapple ends, the target is restrained, and the toad can't bite another target.</p>\n</section>\n<p>The Giant Toad attacks with its Bite. The target is grappled. Until this grapple ends, the target is restrained, and the toad can't bite another target.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d10 + 2) <em>piercing damage</em></strong> plus <strong>5 (1d10) <em>poison damage</em></strong>.</p><p>The target is grappled (escape DC 13). Until this grapple ends, the target is restrained, and the toad can't bite another target.</p>",
+          "chat": "<p>The Giant Toad attacks with its Bite. The target is grappled. Until this grapple ends, the target is restrained, and the toad can't bite another target.</p>"
         },
         "source": {
           "custom": "",
@@ -943,10 +943,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676549,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Ixo5shumxy4I9qyD.lYSWskOMRCVLyWLZ"
     },
@@ -957,8 +957,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-tongue-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The toad makes one bite attack against a Medium or smaller target it is grappling. If the attack hits, the target is swallowed, and the grapple ends.</p>\n<p>The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the toad, and it takes <strong>10 (3d6) <em>acid damage</em></strong> at the start of each of the toad's turns. The toad can have only one target swallowed at a time. If the toad dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 ft. of movement, exiting prone.</p>\n</section>\n<p>The Giant Toad attacks with its Swallow.</p>",
-          "chat": ""
+          "value": "<p>The toad makes one bite attack against a Medium or smaller target it is grappling. If the attack hits, the target is swallowed, and the grapple ends.</p><p>The swallowed target is blinded and restrained, it has total cover against attacks and other effects outside the toad, and it takes <strong>10 (3d6) <em>acid damage</em></strong> at the start of each of the toad's turns. The toad can have only one target swallowed at a time. If the toad dies, a swallowed creature is no longer restrained by it and can escape from the corpse using 5 ft. of movement, exiting prone.</p>",
+          "chat": "<p>The Giant Toad attacks with its Swallow.</p>"
         },
         "source": {
           "custom": "",
@@ -1087,10 +1087,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676549,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Ixo5shumxy4I9qyD.6aBDwlIsxceFMXxL"
     }

@@ -2,6 +2,7 @@ import ShortRestDialog from "../../applications/actor/rest/short-rest-dialog.mjs
 import LongRestDialog from "../../applications/actor/rest/long-rest-dialog.mjs";
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
+import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import { convertTime, defaultUnits, formatNumber, formatTime, replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
@@ -1759,7 +1760,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async rollDeathSave(config={}, dialog={}, message={}) {
     let oldFormat = false;
-    const death = this.system.attributes.death;
+    const death = this.system.attributes?.death;
     if ( !death ) throw new Error(`Actors of the type '${this.type}' don't support death saves.`);
 
     // Handle deprecated config object
@@ -1795,6 +1796,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       parts.push("@prof");
       data.prof = new Proficiency(this.system.attributes.prof, 1).term;
     }
+
+    // Death save bonus
+    if ( death.bonuses.save ) parts.push(death.bonuses.save);
 
     const initialRoll = config.rolls?.pop();
     if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
@@ -2130,10 +2134,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !config.rolls[0] ) return;
 
     // Display the roll configuration dialog
+    const messageOptions = { rollMode: game.settings.get("core", "rollMode") };
     if ( config.rolls[0].options?.fixed === undefined ) {
       const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
-      const message = { rollMode: game.settings.get("core", "rollMode") };
-      const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, message);
+      const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, messageOptions);
       if ( !rolls.length ) return;
       this._cachedInitiativeRoll = rolls[0];
     }
@@ -2144,7 +2148,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       this._cachedInitiativeRoll = new CONFIG.Dice.BasicRoll(String(options.fixed), data, options);
     }
 
-    await this.rollInitiative({ createCombatants: true });
+    await this.rollInitiative({ createCombatants: true, initiativeOptions: { messageOptions } });
   }
 
   /* -------------------------------------------- */
@@ -2474,6 +2478,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    *
    * @typedef {object} RestResult
    * @property {string} type              Type of rest performed.
+   * @property {Actor5e} clone            Clone of the actor before rest is performed.
    * @property {object} deltas
    * @property {number} deltas.hitPoints  Hit points recovered during the rest.
    * @property {number} deltas.hitDice    Hit dice recovered or spent during the rest.
@@ -2492,6 +2497,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async shortRest(config={}) {
     if ( this.type === "vehicle" ) return;
+    const clone = this.clone();
 
     config = foundry.utils.mergeObject({
       type: "short", dialog: true, chat: true, newDay: false, advanceTime: false, autoHD: false, autoHDThreshold: 3,
@@ -2535,7 +2541,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Return the rest result
     const dhd = foundry.utils.getProperty(this, "system.attributes.hd.value") - hd0;
     const dhp = foundry.utils.getProperty(this, "system.attributes.hp.value") - hp0;
-    return this._rest(config, { dhd, dhp });
+    return this._rest(config, { clone, dhd, dhp });
   }
 
   /* -------------------------------------------- */
@@ -2547,6 +2553,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async longRest(config={}) {
     if ( this.type === "vehicle" ) return;
+    const clone = this.clone();
 
     config = foundry.utils.mergeObject({
       type: "long", dialog: true, chat: true, newDay: true, advanceTime: false,
@@ -2579,7 +2586,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     if ( Hooks.call("dnd5e.longRest", this, config) === false ) return;
 
-    return this._rest(config);
+    return this._rest(config, { clone });
   }
 
   /* -------------------------------------------- */
@@ -2607,6 +2614,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newDay: config.newDay === true,
       rolls: []
     }, result);
+    result.clone ??= this.clone();
     if ( "dhp" in result ) result.deltas.hitPoints = result.dhp;
     if ( "dhd" in result ) result.deltas.hitDice = result.dhd;
 
@@ -2689,16 +2697,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Create a chat message
     const pr = new Intl.PluralRules(game.i18n.lang);
     let chatData = {
-      user: game.user.id,
-      speaker: {actor: this, alias: this.name},
-      flavor: game.i18n.localize(restFlavor),
-      rolls: result.rolls,
       content: game.i18n.format(message, {
         name: this.name,
         dice: game.i18n.format(`DND5E.HITDICE.Counted.${pr.select(dhd)}`, { number: formatNumber(dhd) }),
         health: game.i18n.format(`DND5E.HITPOINTS.Counted.${pr.select(dhp)}`, { number: formatNumber(dhp) })
       }),
-      "flags.dnd5e.rest": { type: config.type }
+      flavor: game.i18n.localize(restFlavor),
+      type: "rest",
+      rolls: result.rolls,
+      speaker: ChatMessage.getSpeaker({ actor: this, alias: this.name }),
+      system: {
+        deltas: ActorDeltasField.getDeltas(result.clone, { actor: result.updateData, item: result.updateItems }),
+        type: result.type
+      }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);

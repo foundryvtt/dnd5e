@@ -11,6 +11,10 @@
                  label=(localize "DND5E.ItemFeatureSubtype" category=(lookup (lookup config.featureTypes source.type.value) "label")) }}
     {{/if}}
 
+    {{#if (eq system.type.value "vehicle")}}
+    {{ formField fields.cover value=source.cover options=coverOptions }}
+    {{/if}}
+
     {{!-- Feature Prerequisites --}}
     {{ formField fields.prerequisites.fields.level value=source.prerequisites.level }}
     {{ formField fields.prerequisites.fields.repeatable value=source.prerequisites.repeatable
@@ -32,7 +36,7 @@
 
     {{!-- Enchantment Replacement --}}
     {{ formField fields.enchant.fields.period value=source.enchant.period localize=true
-                 choices=config.enchantmentPeriods labelAttr="label" blank="DND5E.UsesPeriods.Never"
+                 choices=config.enchantmentPeriods labelAttr="label" blank="DND5E.ENCHANTMENT.Period.Never"
                  label="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.label"
                  hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.hint" }}
 </fieldset>

@@ -142,7 +142,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
   /** @inheritDoc */
   _onChangeInput(event) {
-    if ( event.target.type === "checkbox" ) {
+    if ( event.target.tagName === "DND5E-CHECKBOX" ) {
       if ( event.target.checked ) this.selected.add(event.target.name);
       else this.selected.delete(event.target.name);
     }
@@ -160,7 +160,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
    */
   async _onItemDelete(event) {
     event.preventDefault();
-    const uuidToDelete = event.currentTarget.closest(".item-name")?.querySelector("input")?.name;
+    const uuidToDelete = event.currentTarget.closest(".item-name")?.querySelector("dnd5e-checkbox")?.name;
     if ( !uuidToDelete ) return;
     this.dropped.findSplice(i => i.uuid === uuidToDelete);
     this.selected.delete(uuidToDelete);
@@ -202,7 +202,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       for ( const [level, data] of Object.entries(this.advancement.value.added ?? {}) ) {
         if ( level >= this.level ) continue;
         if ( Object.values(data).includes(item.uuid) ) {
-          ui.notifications.error("DND5E.AdvancementItemChoicePreviouslyChosenWarning", {localize: true});
+          ui.notifications.error("DND5E.ADVANCEMENT.ItemChoice.Warning.PreviouslyChosen", { localize: true });
           return null;
         }
       }
@@ -210,7 +210,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
     // If a feature has a level pre-requisite, make sure it is less than or equal to current level
     if ( (item.system.prerequisites?.level ?? -Infinity) > this.level ) {
-      ui.notifications.error(game.i18n.format("DND5E.AdvancementItemChoiceFeatureLevelWarning", {
+      ui.notifications.error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.FeatureLevel", {
         level: item.system.prerequisites.level
       }));
       return null;
@@ -221,7 +221,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     if ( (this.advancement.configuration.type === "spell") && spellLevel === "available" ) {
       const maxSlot = this._maxSpellSlotLevel();
       if ( item.system.level > maxSlot ) {
-        ui.notifications.error(game.i18n.format("DND5E.AdvancementItemChoiceSpellLevelAvailableWarning", {
+        ui.notifications.error(game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Warning.SpellLevelAvailable", {
           level: CONFIG.DND5E.spellLevels[maxSlot]
         }));
         return null;

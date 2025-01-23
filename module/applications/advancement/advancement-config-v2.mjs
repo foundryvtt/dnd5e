@@ -19,7 +19,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
 
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["advancement"],
+    classes: ["advancement", "grid-columns"],
     window: {
       icon: "fa-solid fa-person-rays"
     },
@@ -68,7 +68,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
   async _prepareContext(options) {
     const levels = Array.fromRange(CONFIG.DND5E.maxLevel + 1).map(l => ({ value: l, label: l }));
     if ( ["class", "subclass"].includes(this.item.type) ) delete levels[0];
-    else levels[0].label = game.i18n.localize("DND5E.AdvancementLevelAnyHeader");
+    else levels[0].label = game.i18n.localize("DND5E.ADVANCEMENT.Config.AnyLevel");
     const context = {
       ...(await super._prepareContext(options)),
       advancement: this.advancement,

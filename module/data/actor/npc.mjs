@@ -11,7 +11,13 @@ import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
 import TraitsFields from "./templates/traits.mjs";
 
-const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+
+/**
+ * @typedef NPCHabitatData
+ * @property {string} type       The habitat category.
+ * @property {string} [subtype]  An optional discriminator for the main category.
+ */
 
 /**
  * System data definition for NPCs.
@@ -30,15 +36,21 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {number} attributes.hp.tempmax      Temporary change to the maximum HP.
  * @property {string} attributes.hp.formula      Formula used to determine hit points.
  * @property {object} attributes.death
- * @property {number} attributes.death.success   Number of successful death saves.
- * @property {number} attributes.death.failure   Number of failed death saves.
+ * @property {object} attributes.death.bonuses
+ * @property {string} attributes.death.bonuses.save   Numeric or dice bonus to death saving throws.
+ * @property {number} attributes.death.success        Number of successful death saves.
+ * @property {number} attributes.death.failure        Number of failed death saves.
  * @property {object} details
  * @property {TypeData} details.type             Creature type of this NPC.
  * @property {string} details.type.value         NPC's type as defined in the system configuration.
  * @property {string} details.type.subtype       NPC's subtype usually displayed in parenthesis after main type.
  * @property {string} details.type.swarm         Size of the individual creatures in a swarm, if a swarm.
  * @property {string} details.type.custom        Custom type beyond what is available in the configuration.
- * @property {string} details.environment        Common environments in which this NPC is found.
+ * @property {object} details.habitat
+ * @property {NPCHabitatData[]} details.habitat.value  Common habitats in which this NPC is found.
+ * @property {string} details.habitat.custom     Custom habitats.
+ * @property {object} details.treasure
+ * @property {Set<string>} details.treasure.value  Random treasure generation categories for this NPC.
  * @property {number} details.cr                 NPC's challenge rating.
  * @property {number} details.spellLevel         Spellcasting level of this NPC.
  * @property {object} resources
@@ -49,8 +61,9 @@ const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fie
  * @property {number} resources.legres.value     Currently available legendary resistances.
  * @property {number} resources.legres.max       Maximum number of legendary resistances.
  * @property {object} resources.lair             NPC's lair actions.
- * @property {boolean} resources.lair.value      Does this NPC use lair actions.
+ * @property {boolean} resources.lair.value      This creature can possess a lair (2024) or take lair actions (2014).
  * @property {number} resources.lair.initiative  Initiative count when lair actions are triggered.
+ * @property {boolean} resources.lair.inside     This actor is currently inside its lair.
  * @property {SourceData} source                 Adventure or sourcebook where this NPC originated.
  */
 export default class NPCData extends CreatureTemplate {
@@ -109,6 +122,9 @@ export default class NPCData extends CreatureTemplate {
           }),
           failure: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveFailures"
+          }),
+          bonuses: new SchemaField({
+            save: new FormulaField({ required: true, label: "DND5E.DeathSaveBonus" })
           })
         }, {label: "DND5E.DeathSave"})
       }, {label: "DND5E.Attributes"}),
@@ -116,12 +132,21 @@ export default class NPCData extends CreatureTemplate {
         ...DetailsFields.common,
         ...DetailsFields.creature,
         type: new CreatureTypeField(),
-        environment: new StringField({required: true, label: "DND5E.Environment"}),
+        habitat: new SchemaField({
+          value: new ArrayField(new SchemaField({
+            type: new StringField({ required: true }),
+            subtype: new StringField()
+          })),
+          custom: new StringField({ required: true })
+        }),
         cr: new NumberField({
           required: true, nullable: true, min: 0, initial: 1, label: "DND5E.ChallengeRating"
         }),
         spellLevel: new NumberField({
           required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
+        }),
+        treasure: new SchemaField({
+          value: new SetField(new StringField())
         })
       }, {label: "DND5E.Details"}),
       resources: new SchemaField({
@@ -144,16 +169,18 @@ export default class NPCData extends CreatureTemplate {
           })
         }, {label: "DND5E.LegendaryResistance.Label"}),
         lair: new SchemaField({
-          value: new BooleanField({required: true, label: "DND5E.LairAct"}),
+          value: new BooleanField({required: true, label: "DND5E.LAIR.Action.Uses"}),
           initiative: new NumberField({
-            required: true, integer: true, label: "DND5E.LairActionInitiative"
-          })
-        }, {label: "DND5E.LairActionLabel"})
+            required: true, integer: true, label: "DND5E.LAIR.Action.Initiative"
+          }),
+          inside: new BooleanField({ label: "DND5E.LAIR.Inside" })
+        }, {label: "DND5E.LAIR.Action.Label"})
       }, {label: "DND5E.Resources"}),
       source: new SourceField(),
       traits: new SchemaField({
         ...TraitsFields.common,
-        ...TraitsFields.creature
+        ...TraitsFields.creature,
+        important: new BooleanField()
       }, {label: "DND5E.Traits"})
     });
   }
@@ -211,9 +238,21 @@ export default class NPCData extends CreatureTemplate {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    NPCData.#migrateEnvironment(source);
     NPCData.#migrateSource(source);
     NPCData.#migrateTypeData(source);
     AttributesFields._migrate(source.attributes);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Convert the plain string environment to a custom habitat.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateEnvironment(source) {
+    const custom = source.details?.environment;
+    if ( (typeof custom === "string") && !("habitat" in source.details) ) source.details.habitat = { custom };
   }
 
   /* -------------------------------------------- */
@@ -314,9 +353,15 @@ export default class NPCData extends CreatureTemplate {
       else if ( item.system.attuned ) this.attributes.attunement.value += 1;
     }
 
+    const lairAdjustment = Number(this.resources.lair.value && this.resources.lair.inside);
+
     // Kill Experience
     this.details.xp ??= {};
-    this.details.xp.value = this.parent.getCRExp(this.details.cr);
+    this.details.xp.value = this.parent.getCRExp(this.details.cr === null ? null : this.details.cr + lairAdjustment);
+
+    // Legendary Resistances/Actions
+    if ( this.resources.legact.max ) this.resources.legact.max += lairAdjustment;
+    if ( this.resources.legres.max ) this.resources.legres.max += lairAdjustment;
 
     // Proficiency
     if ( this.details.cr === null ) this.attributes.prof = null;
@@ -424,10 +469,10 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @override */
-  async recoverCombatUses(periods, updates) {
+  async recoverCombatUses(periods, results) {
     // Reset legendary actions at the start of a combat encounter or at the end of the creature's turn
     if ( this.resources.legact.max && (periods.includes("encounter") || periods.includes("turnEnd")) ) {
-      updates.actor["system.resources.legact.value"] = this.resources.legact.max;
+      results.actor["system.resources.legact.value"] = this.resources.legact.max;
     }
   }
 
@@ -515,9 +560,12 @@ export default class NPCData extends CreatureTemplate {
       document: this.parent,
       summary: {
         // Challenge Rating (e.g. `23 (XP 50,000; PB +7`))
-        // TODO: Handle increased XP in lair for 2024 creatures
-        cr: `${formatCR(this.details.cr, { narrow: false })} (${game.i18n.localize("DND5E.ExperiencePointsAbbr")} ${
-          formatNumber(this.details.xp.value)}; ${game.i18n.localize("DND5E.ProficiencyBonusAbbr")} ${
+        cr: `${formatCR(this.details.cr, { narrow: false })} (${
+          game.i18n.format(`DND5E.ExperiencePoints.StatBlock.${
+            (this.resources.lair.value) && (this.details.cr !== null) ? "Lair" : "Standard"}`, {
+            value: formatNumber(this.parent.getCRExp(this.details.cr)),
+            lair: formatNumber(this.parent.getCRExp(this.details.cr + 1))
+          })}; ${game.i18n.localize("DND5E.ProficiencyBonusAbbr")} ${
           formatNumber(this.attributes.prof, { signDisplay: "always" })})`,
 
         // Gear

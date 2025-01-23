@@ -210,23 +210,33 @@
       color: var(--color-text-dark-5);
     }
 
-    &.card > legend {
-      background: var(--dnd5e-background-card);
-      position: relative;
-      border-radius: 2px;
-      padding: 2px 6px 0;
+    &.card {
+      &:not(:has(legend)) { padding-block-start: 10px; }
 
-      &::before {
-        content: "";
-        position: absolute;
-        inset: 0;
+      > legend {
+        background: var(--dnd5e-background-card);
+        position: relative;
         border-radius: 2px;
-        box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-        outline: var(--dnd5e-border-gold);
-        z-index: -1;
+        padding: 2px 6px 0;
+
+        &::before {
+          content: "";
+          position: absolute;
+          inset: 0;
+          border-radius: 2px;
+          box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+          outline: var(--dnd5e-border-gold);
+          z-index: -1;
+        }
+      }
+
+      > .header {
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-variant: all-small-caps;
+        font-size: var(--font-size-12);
+        font-weight: bold;
       }
     }
-    &.card:not(:has(legend)) { padding-block-start: 10px; }
 
     &:disabled {
       .form-group label, .hint {
@@ -325,6 +335,7 @@
       &.field-groups {
         flex-direction: column;
         align-items: stretch;
+        flex-wrap: nowrap;
       }
 
       .field-group {
@@ -405,7 +416,7 @@
     font-size: var(--font-size-11);
   }
 
-  input::placeholder {
+  input::placeholder, textarea::placeholder {
     --input-placeholder-color: var(--color-text-light-6);
     opacity: unset;
     color: var(--input-placeholder-color);
@@ -617,7 +628,7 @@
 
   button:not(.icon, .fa-solid, .fas) {
     height: unset;
-    &:not(.unbutton) { line-height: 28px; }
+    &:not(.copy-button, .unbutton) { line-height: 28px; }
   }
 
   :is(document-tags, multi-select) .tags.input-element-tags .tag {
@@ -627,3 +638,5 @@
     opacity: unset;
   }
 }
+
+.application .flexrow > dnd5e-checkbox { flex: 0; }

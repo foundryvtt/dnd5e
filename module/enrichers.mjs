@@ -191,7 +191,7 @@ async function enrichAttack(config, label, options) {
   }
 
   config.type = "attack";
-  if ( label ) return createRollLink(label, config);
+  if ( label ) return createRollLink(label, config, { classes: "roll-link-group roll-link" });
 
   let displayFormula = simplifyRollFormula(config.formula) || "+0";
   if ( !displayFormula.startsWith("+") && !displayFormula.startsWith("-") ) displayFormula = `+${displayFormula}`;
@@ -261,7 +261,7 @@ async function enrichAward(config, label, options) {
   }
   if ( parsed.xp ) entries.push(`
     <span class="award-entry">
-      ${formatNumber(parsed.xp)} ${game.i18n.localize("DND5E.ExperiencePointsAbbr")}
+      ${formatNumber(parsed.xp)} ${game.i18n.localize("DND5E.ExperiencePoints.Abbreviation")}
     </span>
   `);
 
@@ -760,23 +760,25 @@ async function enrichDamage(configs, label, options) {
   for ( const c of configs ) {
     const formulaParts = [];
     if ( c.activity ) config.activity = c.activity;
+    if ( c.attackMode ) config.attackMode = c.attackMode;
     if ( c.average ) config.average = c.average;
     if ( c.format ) config.format = c.format;
     if ( c.formula ) formulaParts.push(c.formula);
+    c.type = c.type?.replaceAll("/", "|").split("|") ?? [];
     for ( const value of c.values ) {
-      if ( value in CONFIG.DND5E.damageTypes ) c.type = value;
-      else if ( value in CONFIG.DND5E.healingTypes ) c.type = value;
+      if ( value in CONFIG.DND5E.damageTypes ) c.type.push(value);
+      else if ( value in CONFIG.DND5E.healingTypes ) c.type.push(value);
       else if ( value in CONFIG.DND5E.attackModes ) config.attackMode = value;
       else if ( value === "average" ) config.average = true;
       else if ( value === "extended" ) config.format = "extended";
-      else if ( value === "temp" ) c.type = "temphp";
+      else if ( value === "temp" ) c.type.push("temphp");
       else formulaParts.push(value);
     }
     c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
-    c.type ??= configs._isHealing ? "healing" : null;
+    if ( configs._isHealing && !c.type.length ) c.type.push("healing");
     if ( c.formula ) {
       config.formulas.push(c.formula);
-      config.damageTypes.push(c.type);
+      config.damageTypes.push(c.type.join("|"));
     }
   }
   config.damageTypes = config.damageTypes.map(t => t?.replace("/", "|"));
@@ -788,7 +790,7 @@ async function enrichDamage(configs, label, options) {
   }
 
   let activity = options.relativeTo?.system?.activities?.get(config.activity);
-  if ( !activity && !config.formula ) {
+  if ( !activity && !config.formulas.length ) {
     const types = configs._isHealing ? ["heal"] : ["attack", "damage", "save"];
     for ( const a of options.relativeTo?.system?.activities?.getByTypes(...types) ?? [] ) {
       if ( a.damage?.parts.length || a.healing?.formula ) {
@@ -819,7 +821,9 @@ async function enrichDamage(configs, label, options) {
   const damageTypes = config.damageTypes.join("&");
 
   if ( !config.formulas.length ) return null;
-  if ( label ) return createRollLink(label, { ...config, formulas, damageTypes });
+  if ( label ) {
+    return createRollLink(label, { ...config, formulas, damageTypes }, { classes: "roll-link-group roll-link" });
+  }
 
   const parts = [];
   for ( const [idx, formula] of config.formulas.entries() ) {
