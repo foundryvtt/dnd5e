@@ -41,6 +41,7 @@ const {
  * @property {boolean} duration.concentration    Does this effect require concentration?
  * @property {boolean} duration.override         Override duration values inferred from item.
  * @property {EffectApplicationData[]} effects   Linked effects that can be applied.
+ * @property {string} followupActivityId                 ID of the follow-up activity, if any
  * @property {object} range
  * @property {boolean} range.override            Override range values inferred from item.
  * @property {TargetData} target
@@ -98,7 +99,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         override: new BooleanField(),
         prompt: new BooleanField({ initial: true })
       }),
-      uses: new UsesField()
+      uses: new UsesField(),
+      followupActivityId: new StringField({ required: true, initial: () => "" })
     };
   }
 

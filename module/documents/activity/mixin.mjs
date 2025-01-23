@@ -942,6 +942,15 @@ export default function ActivityMixin(Base) {
         }
       });
 
+      const followupActivity = this.item.system.activities.get(this.followupActivityId);
+      if ( followupActivity ) buttons.push({
+        label: game.i18n.format("DND5E.ACTIVITY.Action.Followup", { activityName: followupActivity.name }),
+        icon: '<i class="fa-solid fa-forward" inert></i>',
+        dataset: {
+          action: "useFollowup"
+        }
+      });
+
       return buttons;
     }
 
@@ -1250,6 +1259,7 @@ export default function ActivityMixin(Base) {
         else if ( action === "consumeResource" ) await this.#consumeResource(event, target, message);
         else if ( action === "refundResource" ) await this.#refundResource(event, target, message);
         else if ( action === "placeTemplate" ) await this.#placeTemplate();
+        else if ( action === "useFollowup") await this.#useFollowup(event, target, message);
         else await activity._onChatAction(event, target, message);
       } catch(err) {
         Hooks.onError("Activity#onChatAction", err, { log: "error", notify: "error" });
@@ -1352,6 +1362,32 @@ export default function ActivityMixin(Base) {
         });
       }
       return templates;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle using the follow-up activity from a chat card.
+     * @param {PointerEvent} event     Triggering click event.
+     * @param {HTMLElement} target     The capturing HTML elmeent which defined a [data-action].
+     * @param {ChatMessage5e} message  Message associated with the activation.
+     */
+    async #useFollowup(event, target, message) {
+      const followupActivity = this.item.system.activities.get(this.followupActivityId);
+      if ( !followupActivity ) return;
+      const config = {
+        event
+      };
+      const scaling = message.getFlag("dnd5e", "scaling");
+      if ( scaling ) config.scaling = scaling;
+      const spellLevel = message.getFlag("dnd5e", "use.spellLevel");
+      if (spellLevel) {
+        const prepMode = this.item.system.preparation?.mode;
+        config.spell = {
+          slot: (prepMode in this.actor.system.spells) ? prepMode : `spell${spellLevel}`
+        };
+      }
+      await followupActivity.use(config);
     }
 
     /* -------------------------------------------- */

@@ -194,7 +194,8 @@
 "DND5E.ACTIVITY": {
   "Action": {
     "Create": "Create Activity",
-    "Delete": "Delete Activity"
+    "Delete": "Delete Activity",
+    "Followup": "Follow-up: {activityName}"
   },
   "Title": {
     "one": "Activity",
@@ -210,6 +211,10 @@
     },
     "effects": {
       "label": "Applied Effects"
+    },
+    "followupActivity": {
+      "label": "Followup Activity",
+      "hint": "Which activity, if any, should be usable from this activity's chat card."
     },
     "img": {
       "label": "Icon"
