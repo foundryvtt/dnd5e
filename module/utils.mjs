@@ -401,6 +401,20 @@ export function areKeysPressed(event, action) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Localized name for the first key provided by a keybinding.
+ * @param {string} name  Name of the key binding within the `dnd5e` namespace.
+ * @returns {string|null}
+ */
+export function localizedKeybinding(name) {
+  const keybinding = game.keybindings.get("dnd5e", name)[0];
+  if ( !keybinding ) return null;
+  const keyName = `DND5E.Controls.Key.${keybinding.key.replace(/(?:Left|Right)$/, "")}`;
+  return game.i18n.has(keyName) ? game.i18n.localize(keyName) : KeyboardManager.getKeycodeDisplayString(keybinding.key);
+}
+
+/* -------------------------------------------- */
 /*  Object Helpers                              */
 /* -------------------------------------------- */
 

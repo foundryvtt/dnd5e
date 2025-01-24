@@ -1,3 +1,4 @@
+import ActivityChoiceDialog from "../applications/activity/activity-choice-dialog.mjs";
 import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
 import CreateScrollDialog from "../applications/item/create-scroll-dialog.mjs";
@@ -8,12 +9,12 @@ import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
 import { _applyDeprecatedD20Configs } from "../dice/d20-roll.mjs";
+import { areKeysPressed } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
 import Advancement from "./advancement/advancement.mjs";
 import SystemDocumentMixin from "./mixins/document.mjs";
-import ActivityChoiceDialog from "../applications/activity/activity-choice-dialog.mjs";
 
 /**
  * Override and extend the basic Item implementation.
@@ -801,8 +802,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       let dialogConfig = dialog;
       let messageConfig = message;
       let activity = activities[0];
-      if ( ((activities.length > 1) || chooseActivity) && !event?.shiftKey ) {
-        activity = await ActivityChoiceDialog.create(this);
+      const skipDialog = areKeysPressed(event, "skipDialogNormal")
+        || areKeysPressed(event, "skipDialogAdvantage")
+        || areKeysPressed(event, "skipDialogDisadvantage");
+      if ( ((activities.length > 1) || chooseActivity) && !skipDialog ) {
+        ({ activity, event } = await ActivityChoiceDialog.create(this) ?? {});
       }
       if ( !activity ) return;
       if ( legacy !== false ) {
@@ -811,6 +815,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         messageConfig = {};
         activity._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, activityConfig, dialog);
       }
+      usageConfig.event = event;
       return activity.use(usageConfig, dialogConfig, messageConfig);
     }
     if ( this.actor ) return this.displayCard(message);

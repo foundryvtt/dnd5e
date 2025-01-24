@@ -974,7 +974,12 @@
   "MiddleClick": "Middle Click",
   "Name": "Enable Control Hints",
   "Activity": {
-    "FastForwardHint": "<kbd>Shift</kbd> + <left-click> the item to skip this dialog"
+    "FastForwardHint": "<kbd>{key}</kbd> + <left-click> the item to skip this dialog"
+  },
+  "Key": {
+    "Alt": "Alt",
+    "Control": "Control",
+    "Shift": "Shift"
   }
 },
 "DND5E.ChallengeRating": "Challenge Rating",
