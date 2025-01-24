@@ -338,6 +338,12 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    */
   async _prepareIdentityContext(context) {
     context.tab = context.tabs.identity;
+    context.behaviorFields = [];
+    if ( context.fields.target?.fields?.prompt ) context.behaviorFields.push({
+      field: context.fields.target.fields.prompt,
+      value: context.source.target.prompt,
+      input: context.inputs.createCheckboxInput
+    });
     context.placeholder = {
       name: game.i18n.localize(this.activity.metadata.title),
       img: this.activity.metadata.img
