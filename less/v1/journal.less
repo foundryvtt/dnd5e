@@ -9,7 +9,7 @@
   --dnd5e-srd-color-chapter-header: var(--color-text-hyperlink);
 }
 
-.table-of-contents.app {
+.table-of-contents:is(.app, .application) {
   min-height: 480px;
   min-width: 640px;
 
@@ -17,6 +17,10 @@
     background: var(--dnd5e-sheet-background);
     color: var(--color-text-dark-primary);
   }
+}
+
+.table-of-contents.application .window-content {
+  overflow: auto;
 }
 
 .table-of-contents article {
