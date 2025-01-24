@@ -559,6 +559,8 @@ Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOpt
 
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
 
+Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffectConfig);
+
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
 Hooks.on("preCreateScene", (doc, createData, options, userId) => {
