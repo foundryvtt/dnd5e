@@ -464,7 +464,7 @@ system.tools.[abbreviation].value
 > <details>
 > <summary>Artisan Tools</summary>
 >
-> | Tool Type | Value         |
+> | Tool Type               | Value           |
 > | ----------------------- | --------------- |
 > | Alchemist's Supplies    | `acalchemist`   |
 > | Brewer's Supplies       | `brewer`        |
@@ -492,7 +492,7 @@ system.tools.[abbreviation].value
 > <details>
 > <summary>Gaming Sets</summary>
 >
-> | Gaming Set | Value         |
+> | Gaming Set        | Value         |
 > | ----------------- | ------------- |
 > | Playing Cards Set | `card`        |
 > | Chess Set         | `chess`       |
@@ -506,7 +506,7 @@ system.tools.[abbreviation].value
 > <details>
 > <summary>Musical Instruments</summary>
 >
-> | Musical Instrument | Value         |
+> | Instrument  | Value         |
 > | ----------- | ------------- |
 > | Bagpipes    | `bagpipes`    |
 > | Drum        | `drum`        |
@@ -527,7 +527,7 @@ system.tools.[abbreviation].value
 > <details>
 > <summary>Other Tools</summary>
 >
-> | Damage Type | Value         |
+> | Damage Type       | Value         |
 > | ----------------- | ------------- |
 > | Disguise Kit      | `disg`        |
 > | Forgery Kit       | `forg`        |
