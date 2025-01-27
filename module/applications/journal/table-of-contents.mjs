@@ -10,7 +10,7 @@ export default class TableOfContentsCompendium extends Compendium {
 /**
  * Compendium that renders pages as a table of contents.
  */
-class TableOfContentsCompendiumV13 extends foundry.applications.sidebar.apps.Compendium {
+class TableOfContentsCompendiumV13 extends (foundry.applications.sidebar?.apps?.Compendium ?? class {}) {
   /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["table-of-contents"],

@@ -13,7 +13,7 @@ export default class ItemCompendium5e extends Compendium {
 /**
  * Compendium with added support for item containers.
  */
-class ItemCompendium5eV13 extends foundry.applications.sidebar.apps.Compendium {
+class ItemCompendium5eV13 extends (foundry.applications.sidebar?.apps?.Compendium ?? class {}) {
 
   /** @inheritDoc */
   async _onRender(context, options) {
