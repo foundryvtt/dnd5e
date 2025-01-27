@@ -515,9 +515,9 @@ system.tools.[abbreviation].value
 > | Horn        | `horn`        |
 > | Lute        | `lute`        |
 > | Lyre        | `lyre`        |
-> | Pan Flute   | `panflute `   |
+> | Pan Flute   | `panflute`    |
 > | Shawm       | `shawm`       |
-> | Viol        | `viol `       |
+> | Viol        | `viol`        |
 >
 > Source: `CONFIG.DND5E.tools`
 > </details>
