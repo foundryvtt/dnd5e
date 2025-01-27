@@ -18,7 +18,7 @@ export default class RollConfigField extends foundry.data.fields.SchemaField {
   constructor({roll={}, ability="", ...fields}={}, options={}) {
     const opts = { initial: null, nullable: true, min: 1, max: 20, integer: true };
     fields = {
-      ability: ( ability === false ) ? null : new StringField({
+      ability: (ability === false) ? null : new StringField({
         required: true,
         initial: ability,
         label: "DND5E.AbilityModifier"
