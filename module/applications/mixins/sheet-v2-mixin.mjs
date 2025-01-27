@@ -215,6 +215,15 @@ export default function DocumentSheetV2Mixin(Base) {
 
     /* -------------------------------------------- */
 
+    /** @override */
+    _getSecretContent(secret) {
+      const edit = secret.closest("[data-edit]")?.dataset.edit
+        ?? secret.closest("[data-target]")?.dataset.target;
+      if ( edit ) return foundry.utils.getProperty(this.document, edit);
+    }
+
+    /* -------------------------------------------- */
+
     /**
      * Handle the user toggling the sheet mode.
      * @param {Event} event  The triggering event.
@@ -277,13 +286,22 @@ export default function DocumentSheetV2Mixin(Base) {
         const content = await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", context);
         summary.querySelectorAll(".item-summary").forEach(el => el.remove());
         summary.insertAdjacentHTML("beforeend", content);
-        await new Promise(resolve => requestAnimationFrame(resolve));
+        await new Promise(resolve => { requestAnimationFrame(resolve); });
         this._expanded.add(item.id);
       }
 
       row.classList.toggle("collapsed", expanded);
       icon.classList.toggle("fa-compress", !expanded);
       icon.classList.toggle("fa-expand", expanded);
+    }
+
+    /* -------------------------------------------- */
+
+    /** @override */
+    _updateSecret(secret, content) {
+      const edit = secret.closest("[data-edit]")?.dataset.edit
+        ?? secret.closest("[data-target]")?.dataset.target;
+      if ( edit ) return this.document.update({ [edit]: content });
     }
   };
 }

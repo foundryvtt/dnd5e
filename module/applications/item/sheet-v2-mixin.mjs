@@ -263,7 +263,7 @@ export default function ItemSheetV2Mixin(Base) {
       const selector = `:is(${[
         "INPUT", "SELECT", "TEXTAREA", "BUTTON", "DND5E-CHECKBOX", "COLOR-PICKER", "DOCUMENT-TAGS",
         "FILE-PICKER", "HUE-SLIDER", "MULTI-SELECT", "PROSE-MIRROR", "RANGE-PICKER", "STRING-TAGS"
-      ].join(", ")}):not(.interface-only, .description-edit)`;
+      ].join(", ")}):not(.interface-only, .description-edit, .secret > button)`;
       for ( const element of form.querySelectorAll(selector) ) {
         if ( element.tagName === "TEXTAREA" ) element.readOnly = true;
         else element.disabled = true;

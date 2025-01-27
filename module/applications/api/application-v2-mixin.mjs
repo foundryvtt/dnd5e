@@ -175,7 +175,7 @@ export default function ApplicationV2Mixin(Base) {
       const selector = `.window-content :is(${[
         "INPUT", "SELECT", "TEXTAREA", "BUTTON", "DND5E-CHECKBOX", "COLOR-PICKER", "DOCUMENT-TAGS",
         "FILE-PICKER", "HUE-SLIDER", "MULTI-SELECT", "PROSE-MIRROR", "RANGE-PICKER", "STRING-TAGS"
-      ].join(", ")}):not(.interface-only)`;
+      ].join(", ")}):not(.interface-only, .secret > button)`;
       for ( const element of this.element.querySelectorAll(selector) ) {
         if ( element.tagName === "TEXTAREA" ) element.readOnly = true;
         else element.disabled = true;

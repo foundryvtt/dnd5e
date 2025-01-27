@@ -1,6 +1,6 @@
 {{#*inline "description"}}
-    <div class="card description {{#if collapsible}}collapsible{{/if}} {{#if (lookup @root.collapsed target)}}collapsed{{/if}} {{#unless enriched}}empty{{/unless}}"
-         data-target="{{ target }}">
+    <div class="card description {{#if collapsible}}collapsible{{/if}} {{#if (lookup @root.collapsed target)}}collapsed{{/if}}
+                {{~#unless enriched}} empty{{/unless}}" data-target="{{ target }}">
         <div class="header">
             <span>{{ localize label }}</span>
             {{#if @root.owner}}
@@ -18,7 +18,8 @@
     </div>
 {{/inline}}
 
-<div class="tab {{#if singleDescription}}single-description{{/if}}" data-group="primary" data-tab="description">
+<div class="tab {{#if singleDescription}}single-description{{/if}}" data-group="primary" data-tab="description"
+     {{~#if singleDescription}} data-target="system.description.value"{{/if}}>
 
     {{#if editingDescriptionTarget}}
         {{ editor enriched.editing target=editingDescriptionTarget button=false editable=true engine="prosemirror"
