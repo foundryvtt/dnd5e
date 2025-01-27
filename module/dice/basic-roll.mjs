@@ -157,6 +157,10 @@ export default class BasicRoll extends Roll {
       rolls = await DialogClass.configure(config, dialog, message);
     }
 
+    // Store the roll type in roll.options so it can be accessed from only the roll
+    const rollType = foundry.utils.getProperty(message, "data.flags.dnd5e.roll.type");
+    if ( rollType ) rolls.forEach(roll => roll.options.rollType ??= rollType);
+
     /**
      * A hook event that fires after roll configuration is complete, but before the roll is evaluated.
      * Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.postSkillCheckRollConfiguration`,
