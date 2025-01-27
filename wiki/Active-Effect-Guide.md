@@ -456,17 +456,17 @@ These are properties that cause the actor to take increased or decreased damage 
 
 ```
 system.tools.[abbreviation].value
-                             bonuses.check
+                            bonuses.check
 ```
 
-### Artisan Tools
+### Artisan's Tools
 
 > <details>
-> <summary>Artisan Tools</summary>
+> <summary>Artisan's Tools</summary>
 >
 > | Tool Type               | Value           |
 > | ----------------------- | --------------- |
-> | Alchemist's Supplies    | `acalchemist`   |
+> | Alchemist's Supplies    | `alchemist`     |
 > | Brewer's Supplies       | `brewer`        |
 > | Calligrapher's Supplies | `calligrapher`  |
 > | Carpenter's Tools       | `carpenter`     |
