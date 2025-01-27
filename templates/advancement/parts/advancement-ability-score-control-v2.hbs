@@ -22,7 +22,7 @@
         <input type="hidden" name="configuration.locked.{{ key }}" value="{{ locked.value }}" data-dtype="Boolean">
         <button type="button" class="unbutton control-button" data-action="lock"
                 data-tooltip="{{ locked.hint }}" aria-label="{{ localize locked.hint }}">
-            <i class="fa-solid fa-{{ ifThen locked.value "lock" "unlock" }}" inert></i>
+            <i class="fa-solid fa-lock{{ ifThen locked.value "" "-open" }}" inert></i>
         </button>
     </label>
     {{/if}}
