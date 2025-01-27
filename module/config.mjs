@@ -3900,6 +3900,43 @@ preLocalize("communicationTypes", { key: "label" });
 DND5E.habitats = {
   any: {
     label: "DND5E.Habitat.Categories.Any"
+  },
+  arctic: {
+    label: "DND5E.Habitat.Categories.Arctic"
+  },
+  coastal: {
+    label: "DND5E.Habitat.Categories.Coastal"
+  },
+  desert: {
+    label: "DND5E.Habitat.Categories.Desert"
+  },
+  forest: {
+    label: "DND5E.Habitat.Categories.Forest"
+  },
+  grassland: {
+    label: "DND5E.Habitat.Categories.Grassland"
+  },
+  hill: {
+    label: "DND5E.Habitat.Categories.Hill"
+  },
+  mountain: {
+    label: "DND5E.Habitat.Categories.Mountain"
+  },
+  planar: {
+    label: "DND5E.Habitat.Categories.Planar",
+    subtypes: true
+  },
+  swamp: {
+    label: "DND5E.Habitat.Categories.Swamp"
+  },
+  underdark: {
+    label: "DND5E.Habitat.Categories.Underdark"
+  },
+  underwater: {
+    label: "DND5E.Habitat.Categories.Underwater"
+  },
+  urban: {
+    label: "DND5E.Habitat.Categories.Urban"
   }
 };
 preLocalize("habitats", { key: "label" });
