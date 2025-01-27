@@ -120,6 +120,7 @@ export default class CharacterData extends CreatureTemplate {
           })
         }, { label: "DND5E.HitPoints" }),
         death: new RollConfigField({
+          ability: false,
           success: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
           }),

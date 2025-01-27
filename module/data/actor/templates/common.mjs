@@ -4,6 +4,7 @@ import { ActorDataModel } from "../../abstract.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import CurrencyTemplate from "../../shared/currency.mjs";
+import RollConfigField from "../../shared/roll-config-field.mjs";
 
 const { NumberField, SchemaField } = foundry.data.fields;
 
@@ -15,6 +16,8 @@ const { NumberField, SchemaField } = foundry.data.fields;
  * @property {object} bonuses        Bonuses that modify ability checks and saves.
  * @property {string} bonuses.check  Numeric or dice bonus to ability checks.
  * @property {string} bonuses.save   Numeric or dice bonus to ability saving throws.
+ * @property {RollConfigData} check    Properties related to ability checks.
+ * @property {RollConfigData} save     Properties related to ability saving throws.
  */
 
 /**
@@ -41,7 +44,9 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
         bonuses: new SchemaField({
           check: new FormulaField({ required: true, label: "DND5E.AbilityCheckBonus" }),
           save: new FormulaField({ required: true, label: "DND5E.SaveBonus" })
-        }, { label: "DND5E.AbilityBonuses" })
+        }, { label: "DND5E.AbilityBonuses" }),
+        check: new RollConfigField({ ability: false }),
+        save: new RollConfigField({ ability: false })
       }), {
         initialKeys: CONFIG.DND5E.abilities, initialValue: this._initialAbilityValue.bind(this),
         initialKeysOnly: true, label: "DND5E.Abilities"
@@ -147,14 +152,21 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       const checkBonusAbl = simplifyBonus(abl.bonuses?.check, rollData);
       abl.checkBonus = checkBonusAbl + checkBonus;
 
-      abl.save = abl.mod + abl.saveBonus;
-      if ( Number.isNumeric(abl.saveProf.term) ) abl.save += abl.saveProf.flat;
+      abl.save.value = abl.mod + abl.saveBonus;
+      if ( Number.isNumeric(abl.saveProf.term) ) abl.save.value += abl.saveProf.flat;
       abl.dc = 8 + abl.mod + prof + dcBonus;
 
       if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
 
       // If we merged saves when transforming, take the highest bonus here.
-      if ( originalSaves && abl.proficient ) abl.save = Math.max(abl.save, originalSaves[id].save);
+      if ( originalSaves && abl.proficient ) abl.save.value = Math.max(abl.save, originalSaves[id].save.value);
+
+      // Deprecations.
+      abl.save.toString = function() {
+        foundry.utils.logCompatibilityWarning("The 'abilities.<ability>.save' property is now stored in "
+          + "'abilities.<ability>.save.value'.", { since: "4.3", until: "4.5" });
+        return abl.save.value;
+      };
     }
   }
 

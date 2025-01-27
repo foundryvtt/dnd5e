@@ -313,7 +313,7 @@
                                            data-tooltip="{{ hover }}" aria-label="{{ localize hover }}"
                                            value="{{#if @root.editable}}{{ baseProf }}{{else}}{{ proficient }}{{/if}}"
                                            {{ disabled (not @root.editable) }}></proficiency-cycle>
-                        <span class="save">{{ dnd5e-formatModifier save }}</span>
+                        <span class="save">{{ dnd5e-formatModifier save.value }}</span>
                         <i class="fas fa-shield-heart" inert></i>
                     </div>
                 </div>
