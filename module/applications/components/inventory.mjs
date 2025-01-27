@@ -198,7 +198,6 @@ export default class InventoryElement extends HTMLElement {
       {
         name: "DND5E.ItemView",
         icon: '<i class="fas fa-eye"></i>',
-        condition: () => !item.isOwner || item.compendium?.locked,
         callback: li => this._onAction(li[0], "view")
       },
       {

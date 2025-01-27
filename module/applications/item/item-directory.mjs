@@ -32,6 +32,8 @@ export default class ItemDirectory5e extends ItemDirectory {
   async _onClickEntryName(event) {
     const { entryId } = event.target.closest("[data-entry-id]")?.dataset ?? {};
     const item = this.collection.get(entryId);
-    item?.sheet.render(true, { mode: ItemSheet5e2.MODES.EDIT });
+    if ( !item ) return;
+    const mode = item.sheet?._mode ?? (this.collection.locked ? ItemSheet5e2.MODES.PLAY : ItemSheet5e2.MODES.EDIT);
+    item.sheet.render(true, { mode });
   }
 }

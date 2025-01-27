@@ -61,7 +61,9 @@ class ItemCompendium5eV13 extends foundry.applications.sidebar.apps.Compendium {
   async _onClickEntry(event) {
     const { entryId } = event.target.closest("[data-entry-id]")?.dataset ?? {};
     const item = await this.collection.getDocument?.(entryId);
-    item?.sheet.render(true, { mode: this.collection.locked ? ItemSheet5e2.MODES.PLAY : ItemSheet5e2.MODES.EDIT });
+    if ( !item ) return;
+    const mode = item.sheet?._mode ?? (this.collection.locked ? ItemSheet5e2.MODES.PLAY : ItemSheet5e2.MODES.EDIT);
+    item.sheet.render(true, { mode });
   }
 }
 
@@ -119,6 +121,8 @@ class ItemCompendium5eV12 extends Compendium {
   async _onClickEntryName(event) {
     const { entryId } = event.target.closest("[data-entry-id]")?.dataset ?? {};
     const item = await this.collection.getDocument?.(entryId);
-    item?.sheet.render(true, { mode: this.collection.locked ? ItemSheet5e2.MODES.PLAY : ItemSheet5e2.MODES.EDIT });
+    if ( !item ) return;
+    const mode = item.sheet?._mode ?? (this.collection.locked ? ItemSheet5e2.MODES.PLAY : ItemSheet5e2.MODES.EDIT);
+    item.sheet.render(true, { mode });
   }
 }
