@@ -993,7 +993,10 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Create the owned items & contents as normal
     const toCreate = await Item5e.createWithContents(items, {
-      transformFirst: item => this._onDropSingleItem(item.toObject(), event)
+      transformFirst: item => {
+        if ( item instanceof foundry.abstract.Document ) item = item.toObject();
+        this._onDropSingleItem(item, event);
+      }
     });
     return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
   }
