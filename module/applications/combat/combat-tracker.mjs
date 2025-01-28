@@ -58,7 +58,7 @@ export default class CombatTracker5e extends CombatTracker {
       if ( !children.length ) continue;
       const groupContainer = document.createElement("li");
       groupContainer.classList.add("combatant", "combatant-group", "collapsible", "dnd5e2-collapsible");
-      if ( !V13 ) groupContainer.classlist.add("directory-item");
+      if ( !V13 ) groupContainer.classList.add("directory-item");
       if ( !expanded ) groupContainer.classList.add("collapsed");
 
       // Determine the count
@@ -82,9 +82,7 @@ export default class CombatTracker5e extends CombatTracker {
         <div class="group-header flexrow">
           <img class="token-image" alt="${img.alt}" src="${img.src || img.dataset.src}">
           <div class="token-name flexcol">
-            <${V13 ? "strong" : "h4"} class="name">
-              ${game.i18n.format("DND5E.COMBAT.Group.Title", { name })}
-            </${V13 ? "strong" : "h4"}>
+            <${V13 ? "strong" : "h4"} class="name"></${V13 ? "strong" : "h4"}>
             <div class="group-numbers">${count}</div>
           </div>
           <div class="token-initiative">
@@ -98,6 +96,7 @@ export default class CombatTracker5e extends CombatTracker {
         </div>
       `;
       groupContainer.dataset.groupKey = key;
+      groupContainer.querySelector(".name").innerText = game.i18n.format("DND5E.COMBAT.Group.Title", { name });
       children[0].before(groupContainer);
       groupContainer.querySelector(".group-children").replaceChildren(...children);
       groupContainer.addEventListener("click", event => {

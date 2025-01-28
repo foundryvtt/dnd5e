@@ -66,8 +66,8 @@ export default class Combatant5e extends Combatant {
    * @returns {boolean|null}
    */
   getGroupingKey() {
-    if ( !this.token?.baseActor || (this.initiative === null) ) return null;
-    return `${Math.floor(this.initiative).paddedString(4)}:${this.token.baseActor.id}`;
+    if ( this.token?.actorLink || !this.token?.baseActor || (this.initiative === null) ) return null;
+    return `${Math.floor(this.initiative).paddedString(4)}:${this.token.disposition}:${this.token.baseActor.id}`;
   }
 
   /* -------------------------------------------- */
