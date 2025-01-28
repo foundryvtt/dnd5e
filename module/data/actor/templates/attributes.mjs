@@ -204,7 +204,7 @@ export default class AttributesFields {
           const maxDexBonus = simplifyBonus(ac.ability[armorType]);
           const newMaxDex = armors[0].system.properties.has("uncappedAbility") ? Infinity : currMaxDex + maxDexBonus;
           ac.armor = armorData.value ?? ac.armor;
-          ac.dex = Math.min(newMaxDex, this.system.abilities.dex?.mod ?? 0);
+          ac.dex = Math.min(newMaxDex, this.abilities.dex?.mod ?? 0);
           ac.equippedArmor = armors[0];
         }
         else ac.dex = this.abilities.dex?.mod ?? 0;
