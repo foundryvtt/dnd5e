@@ -320,7 +320,7 @@ export default function ActorSheetV2Mixin(Base) {
         const data = this.actor.system.traits?.languages?.communication?.[key];
         if ( !data?.value ) continue;
         traits.languages ??= [];
-        traits.languages.push({ label, value: data.value });
+        traits.languages.push({ label, value: formatLength(data.value, data.units) });
       }
 
       // Display weapon masteries
