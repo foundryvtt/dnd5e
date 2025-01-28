@@ -5,7 +5,7 @@ import PropertyAttribution from "../../applications/property-attribution.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
-import { convertTime, defaultUnits, formatNumber, formatTime, replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
+import { convertTime, defaultUnits, formatNumber, formatTime, simplifyBonus, staticID } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
@@ -227,7 +227,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   applyActiveEffects() {
-    this._prepareScaleValues();
     if ( this.system?.prepareEmbeddedData instanceof Function ) this.system.prepareEmbeddedData();
     // The Active Effects do not have access to their parent at preparation time, so we wait until this stage to
     // determine whether they are suppressed or not.
@@ -257,27 +256,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( origin && this.token?.id ) dnd5e.registry.summons.track(origin.split(".Item.")[0], this.uuid);
 
     if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
-
     this.labels = {};
-
-    // Retrieve data for polymorphed actors
-    const { originalSkills } = this.getOriginalStats();
-
-    // Prepare abilities, skills, & everything else
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const rollData = this.getRollData();
-    const checkBonus = simplifyBonus(globalBonuses?.check, rollData);
-    this._prepareSkills(rollData, globalBonuses, checkBonus, originalSkills);
-    this._prepareTools(rollData, globalBonuses, checkBonus);
-    this._prepareArmorClass();
-    this._prepareInitiative(rollData, checkBonus);
-    this._prepareSpellcastingAbility();
-
-    // Apply condition immunities
-    const conditionImmunities = this.system.traits?.ci?.value;
-    if ( conditionImmunities ) {
-      for ( const condition of conditionImmunities ) this.statuses.delete(condition);
-    }
   }
 
   /* -------------------------------------------- */
@@ -360,269 +339,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
-  /*  Base Data Preparation Helpers               */
-  /* -------------------------------------------- */
-
-  /**
-   * Derive any values that have been scaled by the Advancement system.
-   * Mutates the value of the `system.scale` object.
-   * @protected
-   */
-  _prepareScaleValues() {
-    this.system.scale = this.items.reduce((scale, item) => {
-      if ( CONFIG.DND5E.advancementTypes.ScaleValue.validItemTypes.has(item.type) ) {
-        scale[item.identifier] = item.scaleValues;
-      }
-      return scale;
-    }, {});
-  }
-
-  /* -------------------------------------------- */
-  /*  Derived Data Preparation Helpers            */
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare skill checks. Mutates the values of system.skills.
-   * @param {object} rollData         Data produced by `getRollData` to be applied to bonus formulas.
-   * @param {object} globalBonuses     Global bonus data.
-   * @param {number} globalCheckBonus  Global ability check bonus.
-   * @param {object} originalSkills    A transformed actor's original actor's skills.
-   * @protected
-   */
-  _prepareSkills(rollData, globalBonuses, globalCheckBonus, originalSkills) {
-    if ( this.type === "vehicle" ) return;
-
-    // Skill modifiers
-    for ( const [id, skillData] of Object.entries(this.system.skills) ) {
-      this._prepareSkill(id, { skillData, rollData, originalSkills, globalCheckBonus, globalBonuses });
-    }
-  }
-
+  /*  Data Preparation                            */
   /* -------------------------------------------- */
 
   /**
    * Prepares data for a specific skill.
-   * @param {string} skillId                     The id of the skill to prepare data for.
-   * @param {object} [options]                   Additional options.
-   * @param {SkillData} [options.skillData]      The base skill data for this skill.
-   *                                             If undefined, `this.system.skill[skillId]` is used.
-   * @param {object} [options.rollData]          RollData for this actor, used to evaluate dice terms in bonuses.
-   *                                             If undefined, `this.getRollData()` is used.
-   * @param {object} [options.originalSkills]    Original skills if actor is polymorphed.
-   *                                             If undefined, the skills of the actor identified by
-   *                                             `this.flags.dnd5e.originalActor` are used.
-   * @param {object} [options.globalBonuses]     Global ability bonuses for this actor.
-   *                                             If undefined, `this.system.bonuses.abilities` is used.
-   * @param {number} [options.globalCheckBonus]  Global check bonus for this actor.
-   *                                             If undefined, `globalBonuses.check` will be evaluated using `rollData`.
-   * @param {number} [options.globalSkillBonus]  Global skill bonus for this actor.
-   *                                             If undefined, `globalBonuses.skill` will be evaluated using `rollData`.
-   * @param {string} [options.ability]           The ability to compute bonuses based on.
-   *                                             If undefined, skillData.ability is used.
+   * @param {string} skillId    The id of the skill to prepare data for.
+   * @param {object} [options]  Additional options passed to {@link CreatureTemplate#prepareSkill}.
    * @returns {SkillData}
    * @internal
    */
-  _prepareSkill(skillId, {
-    skillData, rollData, originalSkills, globalBonuses,
-    globalCheckBonus, globalSkillBonus, ability
-  }={}) {
-    const flags = this.flags.dnd5e ?? {};
-
-    skillData ??= foundry.utils.deepClone(this.system.skills[skillId]);
-    rollData ??= this.getRollData();
-    originalSkills ??= flags.originalActor ? game.actors?.get(flags.originalActor)?.system?.skills : null;
-    globalBonuses ??= this.system.bonuses?.abilities ?? {};
-    globalCheckBonus ??= simplifyBonus(globalBonuses.check, rollData);
-    globalSkillBonus ??= simplifyBonus(globalBonuses.skill, rollData);
-    ability ??= skillData.ability;
-    const abilityData = this.system.abilities[ability];
-    skillData.ability = ability;
-    const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
-
-    // Polymorph Skill Proficiencies
-    if ( originalSkills ) {
-      skillData.value = Math.max(skillData.value, originalSkills[skillId].value);
-    }
-
-    // Compute modifier
-    const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
-    skillData.effectValue = skillData.value;
-    skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
-    skillData.mod = abilityData?.mod ?? 0;
-    skillData.prof = this.system.calculateAbilityCheckProficiency(skillData.value, skillData.ability);
-    skillData.value = skillData.proficient = skillData.prof.multiplier;
-    skillData.total = skillData.mod + skillData.bonus;
-    if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
-
-    // Compute passive bonus
-    const passive = flags.observantFeat && CONFIG.DND5E.characterFlags.observantFeat.skills.includes(skillId) ? 5 : 0;
-    const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
-    skillData.passive = 10 + skillData.mod + skillData.bonus + skillData.prof.flat + passive + passiveBonus;
-
-    return skillData;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare tool checks. Mutates the values of system.tools.
-   * @param {object} bonusData       Data produced by `getRollData` to be applied to bonus formulae.
-   * @param {object} globalBonuses   Global bonus data.
-   * @param {number} checkBonus      Global ability check bonus.
-   * @protected
-   */
-  _prepareTools(bonusData, globalBonuses, checkBonus) {
-    if ( this.type === "vehicle" ) return;
-    for ( const tool of Object.values(this.system.tools) ) {
-      const ability = this.system.abilities[tool.ability];
-      const baseBonus = simplifyBonus(tool.bonuses.check, bonusData);
-      const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
-      tool.effectValue = tool.value;
-      tool.bonus = baseBonus + checkBonus + checkBonusAbl;
-      tool.mod = ability?.mod ?? 0;
-      tool.prof = this.system.calculateAbilityCheckProficiency(tool.value, tool.ability);
-      tool.total = tool.mod + tool.bonus;
-      if ( Number.isNumeric(tool.prof.term) ) tool.total += tool.prof.flat;
-      tool.value = tool.prof.multiplier;
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare a character's AC value from their equipped armor and shield.
-   * Mutates the value of the `system.attributes.ac` object.
-   */
-  _prepareArmorClass() {
-    const ac = this.system.attributes.ac;
-
-    // Apply automatic migrations for older data structures
-    let cfg = CONFIG.DND5E.armorClasses[ac.calc];
-    if ( !cfg ) {
-      ac.calc = "flat";
-      if ( Number.isNumeric(ac.value) ) ac.flat = Number(ac.value);
-      cfg = CONFIG.DND5E.armorClasses.flat;
-    }
-
-    // Identify Equipped Items
-    const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
-    const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
-      if ( !equip.system.equipped || !armorTypes.has(equip.system.type.value) ) return obj;
-      if ( equip.system.type.value === "shield" ) obj.shields.push(equip);
-      else obj.armors.push(equip);
-      return obj;
-    }, {armors: [], shields: []});
-    const rollData = this.getRollData({ deterministic: true });
-
-    // Determine base AC
-    switch ( ac.calc ) {
-
-      // Flat AC (no additional bonuses)
-      case "flat":
-        ac.value = Number(ac.flat);
-        return;
-
-      // Natural AC (includes bonuses)
-      case "natural":
-        ac.base = Number(ac.flat);
-        break;
-
-      default:
-        let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        if ( armors.length ) {
-          if ( armors.length > 1 ) this._preparationWarnings.push({
-            message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
-          });
-          const armorData = armors[0].system.armor;
-          const isHeavy = armors[0].system.type.value === "heavy";
-          ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.system.abilities.dex?.mod ?? 0);
-          ac.equippedArmor = armors[0];
-        }
-        else ac.dex = this.system.abilities.dex?.mod ?? 0;
-
-        rollData.attributes.ac = ac;
-        try {
-          const replaced = replaceFormulaData(formula, rollData, {
-            actor: this, missing: null, property: game.i18n.localize("DND5E.ArmorClass")
-          });
-          ac.base = replaced ? new Roll(replaced).evaluateSync().total : 0;
-        } catch(err) {
-          this._preparationWarnings.push({
-            message: game.i18n.format("DND5E.WarnBadACFormula", { formula }), link: "armor", type: "error"
-          });
-          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.base = new Roll(replaced).evaluateSync().total;
-        }
-        break;
-    }
-
-    // Equipped Shield
-    if ( shields.length ) {
-      if ( shields.length > 1 ) this._preparationWarnings.push({
-        message: game.i18n.localize("DND5E.WarnMultipleShields"), type: "warning"
-      });
-      ac.shield = shields[0].system.armor.value ?? 0;
-      ac.equippedShield = shields[0];
-    }
-
-    // Compute cover.
-    ac.cover = Math.max(ac.cover, this.coverBonus);
-
-    // Compute total AC and return
-    ac.min = simplifyBonus(ac.min, rollData);
-    ac.bonus = simplifyBonus(ac.bonus, rollData);
-    ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare the initiative data for an actor.
-   * Mutates the value of the system.attributes.init object.
-   * @param {object} bonusData         Data produced by getRollData to be applied to bonus formulas
-   * @param {number} globalCheckBonus  Global ability check bonus
-   * @protected
-   */
-  _prepareInitiative(bonusData, globalCheckBonus=0) {
-    const init = this.system.attributes.init ??= {};
-    const flags = this.flags.dnd5e || {};
-
-    // Compute initiative modifier
-    const abilityId = init.ability || CONFIG.DND5E.defaultAbilities.initiative;
-    const ability = this.system.abilities?.[abilityId] || {};
-    init.mod = ability.mod ?? 0;
-
-    // Initiative proficiency
-    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
-    const prof = this.system.attributes.prof ?? 0;
-    const joat = flags.jackOfAllTrades && isLegacy;
-    const ra = this._isRemarkableAthlete(abilityId);
-    const alert = flags.initiativeAlert && !isLegacy;
-    init.prof = new Proficiency(prof, alert ? 1 : (joat || ra) ? 0.5 : 0, !ra);
-
-    // Total initiative includes all numeric terms
-    const initBonus = simplifyBonus(init.bonus, bonusData);
-    const abilityBonus = simplifyBonus(ability.bonuses?.check, bonusData);
-    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
-      + (flags.initiativeAlert && isLegacy ? 5 : 0)
-      + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
-    init.score = 10 + init.total;
+  _prepareSkill(skillId, options) {
+    return this.system.prepareSkill?.(skillId, options) ?? {};
   }
 
   /* -------------------------------------------- */
   /*  Spellcasting Preparation                    */
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare spellcasting DC & modifier.
-   */
-  _prepareSpellcastingAbility() {
-    const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
-    this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
-    this.system.attributes.spellmod = spellcastingAbility ? spellcastingAbility.mod : 0;
-  }
-
   /* -------------------------------------------- */
 
   /**

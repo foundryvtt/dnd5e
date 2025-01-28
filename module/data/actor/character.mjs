@@ -31,10 +31,6 @@ const {
  * System data definition for Characters.
  *
  * @property {object} attributes
- * @property {object} attributes.ac
- * @property {number} attributes.ac.flat                  Flat value used for flat or natural armor calculation.
- * @property {string} attributes.ac.calc                  Name of one of the built-in formulas to use.
- * @property {string} attributes.ac.formula               Custom formula to use.
  * @property {object} attributes.hp
  * @property {number} attributes.hp.value                 Current hit points.
  * @property {number} attributes.hp.max                   Override for maximum HP.
@@ -97,11 +93,6 @@ export default class CharacterData extends CreatureTemplate {
       attributes: new SchemaField({
         ...AttributesFields.common,
         ...AttributesFields.creature,
-        ac: new SchemaField({
-          flat: new NumberField({ integer: true, min: 0, label: "DND5E.ArmorClassFlat" }),
-          calc: new StringField({ initial: "default", label: "DND5E.ArmorClassCalculation" }),
-          formula: new FormulaField({ deterministic: true, label: "DND5E.ArmorClassFormula" })
-        }, { label: "DND5E.ArmorClass" }),
         hp: new SchemaField({
           value: new NumberField({
             nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.HitPointsCurrent"
@@ -239,6 +230,7 @@ export default class CharacterData extends CreatureTemplate {
    * Prepare movement & senses values derived from race item.
    */
   prepareEmbeddedData() {
+    super.prepareEmbeddedData();
     if ( this.details.race instanceof Item ) {
       AttributesFields.prepareRace.call(this, this.details.race);
       this.details.type = this.details.race.system.type;
@@ -258,13 +250,19 @@ export default class CharacterData extends CreatureTemplate {
    */
   prepareDerivedData() {
     const rollData = this.parent.getRollData({ deterministic: true });
-    const { originalSaves } = this.parent.getOriginalStats();
+    const { originalSaves, originalSkills } = this.parent.getOriginalStats();
 
     this.prepareAbilities({ rollData, originalSaves });
+    this.prepareSkills({ rollData, originalSkills });
+    this.prepareTools({ rollData });
+    AttributesFields.prepareArmorClass.call(this, rollData);
+    AttributesFields.prepareConcentration.call(this, rollData);
     AttributesFields.prepareEncumbrance.call(this, rollData);
     AttributesFields.prepareExhaustionLevel.call(this);
+    AttributesFields.prepareInitiative.call(this, rollData);
     AttributesFields.prepareMovement.call(this);
     AttributesFields.prepareConcentration.call(this, rollData);
+    AttributesFields.prepareSpellcastingAbility.call(this);
     TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);
 
