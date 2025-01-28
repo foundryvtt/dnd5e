@@ -527,7 +527,7 @@ system.tools.[abbreviation].value
 > <details>
 > <summary>Other Tools</summary>
 >
-> | Damage Type       | Value         |
+> | Tool Type         | Value         |
 > | ----------------- | ------------- |
 > | Disguise Kit      | `disg`        |
 > | Forgery Kit       | `forg`        |
