@@ -1,7 +1,7 @@
 import { areKeysPressed } from "../../utils.mjs";
 
 /**
- * @typedef {import("../../drag-drop.mjs").DropEffectValue} DropEffectValue
+ * @import { DropEffectValue } from "../../drag-drop.mjs"
  */
 
 /**
@@ -28,7 +28,7 @@ export default function DragDropApplicationMixin(Base) {
      */
     _dropBehavior(event, data) {
       const allowed = this._allowedDropBehaviors(event, data);
-      let behavior = DragDrop.dropEffect ?? event.dataTransfer.dropEffect;
+      let behavior = DragDrop.dropEffect ?? event.dataTransfer?.dropEffect;
 
       if ( event.type === "dragover" ) {
         if ( areKeysPressed(event, "dragMove") ) behavior = "move";

@@ -313,7 +313,7 @@ export default function DocumentSheetV2Mixin(Base) {
       if ( !data.uuid ) return "copy";
       const d = foundry.utils.parseUuid(data.uuid);
       const t = foundry.utils.parseUuid(this.document.uuid);
-      return (d.collection === t.collection) && (d.documentId === t.documentId) && (d.documentType === t.documentType)
+      return (d.collection === t.collection) && (d.primaryId === t.primaryId) && (d.primaryType === t.primaryType)
         ? "move" : "copy";
     }
 
