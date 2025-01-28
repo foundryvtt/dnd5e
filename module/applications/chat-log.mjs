@@ -6,11 +6,12 @@ import ChatMessage5e from "../documents/chat-message.mjs";
 export default class ChatLog5e extends ChatLog {
   /** @inheritDoc */
   async updateMessage(message, notify=false) {
-    const element = this.element[0].querySelector(`.message[data-message-id="${message.id}"]`);
-    if ( element ) message._trayStates = new Map([
-      ...Array.from(element.querySelectorAll(".card-tray"))
+    const element = this.element instanceof HTMLElement ? this.element : this.element[0];
+    const card = element.querySelector(`.message[data-message-id="${message.id}"]`);
+    if ( card ) message._trayStates = new Map([
+      ...Array.from(card.querySelectorAll(".card-tray"))
         .map(t => [t.className.replace(" collapsed", ""), t.classList.contains("collapsed")]),
-      ...Array.from(element.querySelectorAll(ChatMessage5e.TRAY_TYPES.join(", "))).map(t => [t.tagName, t.open])
+      ...Array.from(card.querySelectorAll(ChatMessage5e.TRAY_TYPES.join(", "))).map(t => [t.tagName, t.open])
     ]);
     await super.updateMessage(message, notify);
   }
