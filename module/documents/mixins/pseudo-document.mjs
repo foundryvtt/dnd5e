@@ -140,7 +140,7 @@ export default function PseudoDocumentMixin(Base) {
       if ( !cls ) return null;
       if ( !this.constructor._sheets.has(this.uuid) ) {
         let sheet;
-        if ( cls.prototype instanceof Application ) sheet = new cls(this);
+        if ( Application.isPrototypeOf(cls) ) sheet = new cls(this);
         else sheet = new cls({ document: this });
         this.constructor._sheets.set(this.uuid, sheet);
       }
