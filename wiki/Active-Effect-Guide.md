@@ -452,6 +452,108 @@ These are properties that cause the actor to take increased or decreased damage 
 
 ---
 
+## Tools
+
+```
+system.tools.[abbreviation].value
+                            bonuses.check
+```
+
+### Artisan's Tools
+
+> <details>
+> <summary>Artisan's Tools</summary>
+>
+> | Tool Type               | Value           |
+> | ----------------------- | --------------- |
+> | Alchemist's Supplies    | `alchemist`     |
+> | Brewer's Supplies       | `brewer`        |
+> | Calligrapher's Supplies | `calligrapher`  |
+> | Carpenter's Tools       | `carpenter`     |
+> | Cartographer's Tools    | `cartographer`  |
+> | Cobbler's Tools         | `cobbler`       |
+> | Cook's Utensils         | `cook`          |
+> | Glassblower's Tools     | `glassblower`   |
+> | Jeweler's Kit           | `jeweler`       |
+> | Leatherworker's Tools   | `leatherworker` |
+> | Mason's Tools           | `mason`         |
+> | Painter's Supplies      | `painter`       |
+> | Potter's Tools          | `potter`        |
+> | Smith's Tools           | `smith`         |
+> | Tinker's Tools          | `tinker`        |
+> | Weavers's Tools         | `weaver`        |
+> | Woodcarver's Tools      | `woodcarver`    |
+>
+> Source: `CONFIG.DND5E.tools`
+> </details>
+
+### Gaming Sets
+
+> <details>
+> <summary>Gaming Sets</summary>
+>
+> | Gaming Set        | Value         |
+> | ----------------- | ------------- |
+> | Playing Cards Set | `card`        |
+> | Chess Set         | `chess`       |
+> | Dice Set          | `dice`        |
+>
+> Source: `CONFIG.DND5E.tools`
+> </details>
+
+### Musical Instruments
+
+> <details>
+> <summary>Musical Instruments</summary>
+>
+> | Instrument  | Value         |
+> | ----------- | ------------- |
+> | Bagpipes    | `bagpipes`    |
+> | Drum        | `drum`        |
+> | Dulcimer    | `dulcimer`    |
+> | Flute       | `flute`       |
+> | Horn        | `horn`        |
+> | Lute        | `lute`        |
+> | Lyre        | `lyre`        |
+> | Pan Flute   | `panflute`    |
+> | Shawm       | `shawm`       |
+> | Viol        | `viol`        |
+>
+> Source: `CONFIG.DND5E.tools`
+> </details>
+
+### Other Tools
+
+> <details>
+> <summary>Other Tools</summary>
+>
+> | Tool Type         | Value         |
+> | ----------------- | ------------- |
+> | Disguise Kit      | `disg`        |
+> | Forgery Kit       | `forg`        |
+> | Herbalism Kit     | `herb`        |
+> | Navigator's Tools | `navg`        |
+> | Poisoner's Kit    | `pois`        |
+> | Thieves' Tools    | `thief`       |
+>
+> Source: `CONFIG.DND5E.tools`
+> </details>
+
+### Bonus to a Specific Tool Check
+
+| Attribute Key                                | Change Mode | Effect Value | Roll Data? |
+| -------------------------------------------- | ----------- | ------------ | ---------- |
+| `system.tools.[abbreviation].bonuses.check`  | Add         | `[formula]`  | Yes        |
+
+### Upgrade Proficiency Level to Expertise
+The number must be one of 0, 0.5, 1, and 2.
+
+| Attribute Key                        | Change Mode | Effect Value | Roll Data? |
+| ------------------------------------ | ----------- | ------------ | ---------- |
+| `system.tools.[abbreviation].value`  | Upgrade     | `[number]`   | No         |
+
+---
+
 ## Creature Type
 Temporarily override the displayed creature type of an actor. For example using 'humanoid' as the `value` and 'elf' as the `subtype` to display an actor's creature type as 'Humanoid (elf)'.
 
