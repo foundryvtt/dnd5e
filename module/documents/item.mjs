@@ -1583,8 +1583,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       scrollUuid = id;
     }
     const scrollItem = await fromUuid(scrollUuid);
-    const scrollData = scrollItem.toObject();
-    delete scrollData._id;
+    const scrollData = game.items.fromCompendium(scrollItem);
 
     // Create a composite description from the scroll description and the spell details
     const desc = this._createScrollDescription(scrollItem, itemData, null, config);
@@ -1691,8 +1690,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       scrollUuid = id;
     }
     const scrollItem = await fromUuid(scrollUuid);
-    const scrollData = scrollItem.toObject();
-    delete scrollData._id;
+    const scrollData = game.items.fromCompendium(scrollItem);
 
     for ( const level of Array.fromRange(spell.system.level + 1).reverse() ) {
       const values = CONFIG.DND5E.spellScrollValues[level];
