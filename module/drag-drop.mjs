@@ -10,6 +10,14 @@
 export default class DragDrop5e extends DragDrop {
 
   /**
+   * Drop effect used for current drag operation.
+   * @type {DropEffectValue}
+   */
+  static dropEffect = null;
+
+  /* -------------------------------------------- */
+
+  /**
    * Stored drag event payload.
    * @type {{ data: any, event: DragEvent }|null}
    */
@@ -39,7 +47,8 @@ export default class DragDrop5e extends DragDrop {
     await this.callback(event, "dragstart");
     if ( event.dataTransfer.items.length ) {
       event.stopPropagation();
-      const data = event.dataTransfer.getData("application/json") || event.dataTransfer.getData("text/plain");
+      let data = event.dataTransfer.getData("application/json") || event.dataTransfer.getData("text/plain");
+      try { data = JSON.parse(data); } catch(err) {}
       DragDrop5e.#payload = data ? { event, data } : null;
     } else {
       DragDrop5e.#payload = null;
@@ -55,6 +64,7 @@ export default class DragDrop5e extends DragDrop {
    */
   async _handleDragEnd(event) {
     await this.callback(event, "dragend");
+    DragDrop5e.dropEffect = null;
     DragDrop5e.#payload = null;
   }
 
@@ -67,10 +77,6 @@ export default class DragDrop5e extends DragDrop {
    */
   static getPayload(event) {
     if ( !DragDrop5e.#payload?.data ) return null;
-    try {
-      return JSON.parse(DragDrop5e.#payload.data);
-    } catch(err) {
-      return DragDrop5e.#payload.data;
-    }
+    return DragDrop5e.#payload.data;
   }
 }

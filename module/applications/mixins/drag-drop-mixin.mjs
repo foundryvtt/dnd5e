@@ -14,11 +14,8 @@ export default function DragDropApplicationMixin(Base) {
     /** @override */
     _onDragOver(event) {
       const data = DragDrop.getPayload(event);
-      if ( foundry.utils.getType(data) === "Object" ) {
-        event.dataTransfer.dropEffect = this._dropBehavior(event, data);
-      } else {
-        event.dataTransfer.dropEffect = "copy";
-      }
+      DragDrop.dropEffect = event.dataTransfer.dropEffect = (foundry.utils.getType(data) === "Object")
+        ? this._dropBehavior(event, data) : "copy";
     }
 
     /* -------------------------------------------- */
@@ -31,7 +28,7 @@ export default function DragDropApplicationMixin(Base) {
      */
     _dropBehavior(event, data) {
       const allowed = this._allowedDropBehaviors(event, data);
-      let behavior = event.dataTransfer.dropEffect;
+      let behavior = DragDrop.dropEffect ?? event.dataTransfer.dropEffect;
 
       if ( event.type === "dragover" ) {
         if ( areKeysPressed(event, "dragMove") ) behavior = "move";

@@ -32,7 +32,7 @@ import TreasureConfig from "./config/treasure-config.mjs";
 import WeaponsConfig from "./config/weapons-config.mjs";
 
 /**
- * @typedef {import("../../drag-drop.mjs").DropEffectValue} DropEffectValue
+ * @import { DropEffectValue } from "../../drag-drop.mjs"
  */
 
 /**
