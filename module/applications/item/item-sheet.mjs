@@ -496,53 +496,6 @@ export default class ItemSheet5e extends ItemSheet {
       }
     }
     html[0].querySelectorAll('[data-action="view"]').forEach(e => e.addEventListener("click", this._onView.bind(this)));
-
-    // Advancement context menu
-    const contextOptions = this._getAdvancementContextMenuOptions();
-    /**
-     * A hook event that fires when the context menu for the advancements list is constructed.
-     * @function dnd5e.getItemAdvancementContext
-     * @memberof hookEvents
-     * @param {jQuery} html                      The HTML element to which the context options are attached.
-     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
-     */
-    Hooks.call("dnd5e.getItemAdvancementContext", html, contextOptions);
-    if ( contextOptions ) new this.options.contextMenu(html, ".advancement-item", contextOptions);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the set of ContextMenu options which should be applied for advancement entries.
-   * @returns {ContextMenuEntry[]}  Context menu entries.
-   * @protected
-   */
-  _getAdvancementContextMenuOptions() {
-    const condition = li => (this.advancementConfigurationMode || !this.isEmbedded) && this.isEditable;
-    return [
-      {
-        name: "DND5E.AdvancementControlEdit",
-        icon: "<i class='fas fa-edit fa-fw'></i>",
-        condition,
-        callback: li => this._onAdvancementAction(li[0], "edit")
-      },
-      {
-        name: "DND5E.AdvancementControlDuplicate",
-        icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: li => {
-          const id = li[0].closest(".advancement-item")?.dataset.id;
-          const advancement = this.item.advancement.byId[id];
-          return condition(li) && advancement?.constructor.availableForItem(this.item);
-        },
-        callback: li => this._onAdvancementAction(li[0], "duplicate")
-      },
-      {
-        name: "DND5E.AdvancementControlDelete",
-        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
-        condition,
-        callback: li => this._onAdvancementAction(li[0], "delete")
-      }
-    ];
   }
 
   /* -------------------------------------------- */
