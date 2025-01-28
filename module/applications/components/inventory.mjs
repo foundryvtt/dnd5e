@@ -190,15 +190,15 @@ export default class InventoryElement extends HTMLElement {
     // Standard Options
     const options = [
       {
+        name: "DND5E.ItemView",
+        icon: '<i class="fas fa-eye"></i>',
+        callback: li => this._onAction(li[0], "view")
+      },
+      {
         name: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: () => item.isOwner && !item.compendium?.locked,
         callback: li => this._onAction(li[0], "edit")
-      },
-      {
-        name: "DND5E.ItemView",
-        icon: '<i class="fas fa-eye"></i>',
-        callback: li => this._onAction(li[0], "view")
       },
       {
         name: "DND5E.ContextMenuActionDuplicate",
