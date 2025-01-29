@@ -102,7 +102,6 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if ( !game.user.isGM ) return;
     new DragDrop({
       dragSelector: ".draggable",
       dropSelector: null,
