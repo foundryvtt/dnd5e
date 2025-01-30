@@ -555,7 +555,10 @@ Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(m
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
 
-Hooks.on("renderCompendiumDirectory", (app, [html], data) => applications.CompendiumBrowser.injectSidebarButton(html));
+Hooks.on("renderCompendiumDirectory", (app, html) => {
+  html = html instanceof HTMLElement ? html : html[0];
+  applications.CompendiumBrowser.injectSidebarButton(html);
+});
 Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
 Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
 
