@@ -61,6 +61,17 @@ export default class Combatant5e extends Combatant {
 
   /* -------------------------------------------- */
 
+  /**
+   * Key for the group to which this combatant should belong, or `null` if it can't be grouped.
+   * @returns {boolean|null}
+   */
+  getGroupingKey() {
+    if ( this.token?.actorLink || !this.token?.baseActor || (this.initiative === null) ) return null;
+    return `${Math.floor(this.initiative).paddedString(4)}:${this.token.disposition}:${this.token.baseActor.id}`;
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   getInitiativeRoll(formula) {
     if ( !this.actor ) return new CONFIG.Dice.D20Roll(formula ?? "1d20", {});

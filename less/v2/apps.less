@@ -231,20 +231,6 @@
     }
   }
 
-  .collapsible {
-    &.collapsed {
-      .fa-caret-down { transform: rotate(-90deg); }
-      .collapsible-content { grid-template-rows: 0fr; }
-    }
-    .fa-caret-down { transition: transform 250ms ease; }
-    .collapsible-content {
-      display: grid;
-      grid-template-rows: 1fr;
-      transition: grid-template-rows 250ms ease;
-      > .wrapper { overflow: hidden; }
-    }
-  }
-
   .unlist {
     list-style: none;
     padding: 0;
@@ -1704,6 +1690,55 @@ dialog.dnd5e2.application {
         .title { font-size: var(--font-size-13); }
       }
     }
+  }
+}
+
+/* ---------------------------------- */
+/*  Collapsible Content               */
+/* ---------------------------------- */
+
+.dnd5e2 .collapsible, .collapsible.dnd5e2-collapsible {
+  &.collapsed {
+    .fa-caret-down { transform: rotate(-90deg); }
+    .collapsible-content { grid-template-rows: 0fr; }
+  }
+  .fa-caret-down { transition: transform 250ms ease; }
+  .collapsible-content {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 250ms ease;
+    > .wrapper { overflow: hidden; }
+  }
+}
+
+/* ---------------------------------- */
+/*  Combat Tracker                    */
+/* ---------------------------------- */
+
+.combat-sidebar {
+  .combatant-group {
+    .fa-chevron-down { transition: transform 250ms ease; }
+    &.collapsed .fa-chevron-down { transform: rotate(-90deg); }
+
+    &.active::after, &.active::before { transition: border-color 250ms ease; }
+    &.active:not(.collapsed)::after { border-color: color-mix(in oklab, var(--color-border-highlight), transparent); }
+
+    .group-header { cursor: pointer; }
+    .group-numbers {
+      flex: 0 0 20px;
+      color: var(--color-text-light-5);
+      font-size: var(--font-size-12);
+      line-height: 20px;
+    }
+  }
+
+  /* V13 Syles */
+  .combat-tracker {
+    .combatant-group {
+      display: block;
+      &.active:not(.collapsed)::before { border-color: color-mix(in oklab, var(--color-warm-2), transparent); }
+    }
+    .group-children { padding: 0; }
   }
 }
 
