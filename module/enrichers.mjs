@@ -1053,7 +1053,39 @@ async function applyAction(event) {
   const effect = CONFIG.statusEffects.find(e => e.id === status);
   if ( !effect ) return;
   event.stopPropagation();
-  for ( const token of canvas.tokens.controlled ) await token.toggleEffect(effect);
+
+  let duration;
+  if (event.shiftKey) {
+    const {DialogV2} = foundry.applications.api;
+
+    const selectDurationGroup = new foundry.data.fields.NumberField({
+      label: "Duration in s",
+      required: true,
+      min: 1,
+      integer: true,
+      nullable: true,
+      initial: null
+    }).toFormGroup({}, {name: "duration"}).outerHTML;
+
+    const result = await DialogV2.prompt({
+      window: {
+        title: `${effect.name} Duration`
+      },
+      content: selectDurationGroup,
+      modal: true,
+      rejectClose: false,
+      ok: {
+        label: "Ok",
+        callback: (event, button) => new FormDataExtended(button.form).object
+      }
+    });
+
+    if (result?.duration > 0) duration = result.duration;
+  }
+
+  for ( const token of canvas.tokens.controlled ) {
+    await token.actor.toggleStatusEffect(effect.id, {chosenDuration: duration});
+  }
 }
 
 /* -------------------------------------------- */
