@@ -1068,6 +1068,15 @@ async function enrichItem(config, label, options) {
   const itemUuidMatch = givenItem.match(
     /^(?<synthid>Scene\.\w{16}\.Token\.\w{16}\.)?(?<actorid>Actor\.\w{16})(?<itemid>\.?Item(?<relativeId>\.\w{16}))$/
   );
+
+  const makeLink = (label, dataset) => {
+    const span = document.createElement("span");
+    span.classList.add("roll-link-group");
+    _addDataset(span, dataset);
+    span.append(createRollLink(label));
+    return span;
+  };
+
   if ( itemUuidMatch ) {
     const ownerActor = itemUuidMatch.groups.actorid.trim();
     if ( !label ) {
@@ -1078,7 +1087,7 @@ async function enrichItem(config, label, options) {
       }
       label = item.name;
     }
-    return createRollLink(label, { type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
+    return makeLink(label, { type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
   }
 
   let foundItem;
@@ -1095,14 +1104,6 @@ async function enrichItem(config, label, options) {
       foundItem = await fromUuid(givenItem, { relative: options.relativeTo });
     } catch(err) { return null; }
   }
-
-  const makeLink = (label, dataset) => {
-    const span = document.createElement("span");
-    span.classList.add("roll-link-group");
-    _addDataset(span, dataset);
-    span.append(createRollLink(label));
-    return span;
-  };
 
   if ( foundItem ) {
     let foundActivity;

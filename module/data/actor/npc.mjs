@@ -23,10 +23,6 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * System data definition for NPCs.
  *
  * @property {object} attributes
- * @property {object} attributes.ac
- * @property {number} attributes.ac.flat         Flat value used for flat or natural armor calculation.
- * @property {string} attributes.ac.calc         Name of one of the built-in formulas to use.
- * @property {string} attributes.ac.formula      Custom formula to use.
  * @property {object} attributes.hd
  * @property {number} attributes.hd.spent        Number of hit dice spent.
  * @property {object} attributes.hp
@@ -95,11 +91,6 @@ export default class NPCData extends CreatureTemplate {
       attributes: new SchemaField({
         ...AttributesFields.common,
         ...AttributesFields.creature,
-        ac: new SchemaField({
-          flat: new NumberField({integer: true, min: 0, label: "DND5E.ArmorClassFlat"}),
-          calc: new StringField({initial: "default", label: "DND5E.ArmorClassCalculation"}),
-          formula: new FormulaField({deterministic: true, label: "DND5E.ArmorClassFormula"})
-        }, {label: "DND5E.ArmorClass"}),
         hd: new SchemaField({
           spent: new NumberField({integer: true, min: 0, initial: 0})
         }, {label: "DND5E.HitDice"}),
@@ -117,6 +108,7 @@ export default class NPCData extends CreatureTemplate {
           formula: new FormulaField({required: true, label: "DND5E.HPFormula"})
         }, {label: "DND5E.HitPoints"}),
         death: new RollConfigField({
+          ability: false,
           success: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
           }),
@@ -384,6 +376,7 @@ export default class NPCData extends CreatureTemplate {
    * Prepare movement & senses values derived from race item.
    */
   prepareEmbeddedData() {
+    super.prepareEmbeddedData();
     if ( this.details.race instanceof Item ) {
       AttributesFields.prepareRace.call(this, this.details.race, { force: true });
       this.details.type = this.details.race.system.type;
@@ -399,13 +392,18 @@ export default class NPCData extends CreatureTemplate {
   /** @inheritDoc */
   prepareDerivedData() {
     const rollData = this.parent.getRollData({ deterministic: true });
-    const { originalSaves } = this.parent.getOriginalStats();
+    const { originalSaves, originalSkills } = this.parent.getOriginalStats();
 
     this.prepareAbilities({ rollData, originalSaves });
+    this.prepareSkills({ rollData, originalSkills });
+    this.prepareTools({ rollData });
+    AttributesFields.prepareArmorClass.call(this, rollData);
+    AttributesFields.prepareConcentration.call(this, rollData);
     AttributesFields.prepareEncumbrance.call(this, rollData);
     AttributesFields.prepareExhaustionLevel.call(this);
+    AttributesFields.prepareInitiative.call(this, rollData);
     AttributesFields.prepareMovement.call(this);
-    AttributesFields.prepareConcentration.call(this, rollData);
+    AttributesFields.prepareSpellcastingAbility.call(this);
     SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);

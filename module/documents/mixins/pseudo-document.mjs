@@ -132,14 +132,17 @@ export default function PseudoDocumentMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Lazily obtain a ApplicationV2 instance used to configure this PseudoDocument, or null if no sheet is available.
-     * @type {ApplicationV2|null}
+     * Lazily obtain a Application instance used to configure this PseudoDocument, or null if no sheet is available.
+     * @type {Application|ApplicationV2|null}
      */
     get sheet() {
       const cls = this.constructor.metadata.sheetClass ?? this.constructor.metadata.apps?.config;
       if ( !cls ) return null;
       if ( !this.constructor._sheets.has(this.uuid) ) {
-        this.constructor._sheets.set(this.uuid, new cls({ document: this }));
+        let sheet;
+        if ( Application.isPrototypeOf(cls) ) sheet = new cls(this);
+        else sheet = new cls({ document: this });
+        this.constructor._sheets.set(this.uuid, sheet);
       }
       return this.constructor._sheets.get(this.uuid);
     }

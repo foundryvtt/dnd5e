@@ -569,7 +569,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       filters.locked.arbitrary = [{ o: "NOT", v: { k: "system.identifier", o: "in", v: existingIdentifiers } }];
     }
     const result = await CompendiumBrowser.selectOne({ filters });
-    if ( result ) this._onDropItemCreate(await fromUuid(result));
+    if ( result ) this._onDropItemCreate(game.items.fromCompendium(await fromUuid(result), { keepId: true }));
   }
 
   /* -------------------------------------------- */

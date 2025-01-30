@@ -1,6 +1,6 @@
 import { ItemDataModel } from "../../abstract.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
-import {default as EnchantmentField, EnchantmentData} from "../fields/enchantment-field.mjs";
+import EnchantmentField from "../fields/enchantment-field.mjs";
 import SummonsField from "../fields/summons-field.mjs";
 
 const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
