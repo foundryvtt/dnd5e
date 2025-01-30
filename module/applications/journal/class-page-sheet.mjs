@@ -547,7 +547,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     event.preventDefault();
     const textKeyPath = event.currentTarget.dataset.target;
     const label = event.target.closest(".form-group").querySelector("label");
-    const editor = new JournalEditor(this.document, { textKeyPath, title: label?.innerText });
+    const editor = new JournalEditor({ document: this.document, textKeyPath, window: { title: label?.innerText } });
     editor.render(true);
   }
 

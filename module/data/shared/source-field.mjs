@@ -83,6 +83,7 @@ export default class SourceField extends SchemaField {
    * @returns {ClientPackage|null}
    */
   static getPackage(uuid) {
+    if ( !uuid ) return null;
     const pack = foundry.utils.parseUuid(uuid)?.collection?.metadata;
     switch ( pack?.packageType ) {
       case "module": return game.modules.get(pack.packageName);
