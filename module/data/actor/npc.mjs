@@ -656,12 +656,16 @@ export default class NPCData extends CreatureTemplate {
       const category = item.system.properties.has("trait") ? "trait"
         : (item.system.activities?.contents[0]?.activation?.type ?? "trait");
       if ( category in context.actionSections ) {
-        const description = (await TextEditor.enrichHTML(item.system.description.value, {
+        let description = (await TextEditor.enrichHTML(item.system.description.value, {
           secrets: false, rollData: item.getRollData(), relativeTo: item
-        })).replace(/^\s*<p>/g, "").replace(/<\/p>\s*$/g, "");
+        }));
+        const openingTag = description.match(/^\s*(<p(?:\s[^>]+)?>)/gi)?.[0];
+        if ( openingTag ) description = description.replace(openingTag, "");
         const uses = item.system.uses.label || item.system.activities?.contents[0]?.uses.label;
         context.actionSections[category].actions.push({
-          name: uses ? `${item.name} (${uses})` : item.name, description, sort: item.sort
+          description, openingTag,
+          name: uses ? `${item.name} (${uses})` : item.name,
+          sort: item.sort
         });
       }
     }

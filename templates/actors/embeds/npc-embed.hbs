@@ -97,10 +97,9 @@
             <h5 class="statblock-actions-title">{{ label }}</h5>
             {{#each actions}}
             <div class="statblock-action">
-                <p>
-                    <span class="name">{{ name }}</span>
-                    {{{ description }}}
-                </p>
+                {{{ openingTag }}}
+                <span class="name">{{ name }}</span>
+                {{{ description }}}
             </div>
             {{/each}}
         </div>
