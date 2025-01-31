@@ -567,6 +567,8 @@ Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOpt
 
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
 
+Hooks.on("renderActiveEffectConfig", (app, html, data) => documents.ActiveEffect5e.onRenderActiveEffectConfig(html));
+
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
 Hooks.on("renderCombatTracker", (app, html, data) => app.renderGroups(html instanceof HTMLElement ? html : html[0]));
