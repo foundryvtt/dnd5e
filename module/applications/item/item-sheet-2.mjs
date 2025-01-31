@@ -110,7 +110,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     // Equipment
     context.equipmentTypes = [
       ...Object.entries(CONFIG.DND5E.miscEquipmentTypes).map(([value, label]) => ({ value, label })),
-      ...Object.entries(CONFIG.DND5E.armorTypes).map(([value, label]) => ({ value, label, group: "DND5E.Armor" }))
+      ...Object.entries(CONFIG.DND5E.armorTypes).map(([value, { label }]) => ({ value, label, group: "DND5E.Armor" }))
     ];
 
     // Limited Uses
