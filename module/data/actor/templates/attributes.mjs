@@ -405,7 +405,7 @@ export default class AttributesFields {
     const crawl = this.parent.hasConditionEffect("crawl");
     const units = this.attributes.movement.units;
     let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
-      ? this.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
+      ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     for ( const type in CONFIG.DND5E.movementTypes ) {
       let speed = Math.max(0, this.attributes.movement[type] - reduction);

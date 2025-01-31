@@ -267,7 +267,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( largestPrimary ) {
       let primary = speeds.shift();
       return {
-        primary: formatLength(primary?.[1], units),
+        primary: `${primary?.[1]} ${units}`,
         special: speeds.map(s => s[1]).join(", ")
       };
     }
