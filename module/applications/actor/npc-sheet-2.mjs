@@ -14,7 +14,11 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
       height: 700,
       resizable: true,
       scrollY: [".sheet-body"],
-      tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "features" }]
+      tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "features" }],
+      dragDrop: [
+        { dragSelector: ".item-list .item > .item-row", dropSelector: null },
+        { dragSelector: ".item-list .item .activity-row", dropSelector: null }
+      ]
     });
   }
 
