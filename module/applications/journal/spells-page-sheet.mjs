@@ -211,7 +211,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
       case "add-unlinked":
         await this.document.update({"system.unlinkedSpells": [...this.document.system.unlinkedSpells, {}]});
         const id = this.document.toObject().system.unlinkedSpells.pop()._id;
-        new SpellsUnlinkedConfig(id, this.document).render(true);
+        new SpellsUnlinkedConfig({ document: this.document, unlinkedId: id }).render(true);
         break;
       case "delete":
         if ( itemUuid ) {
@@ -224,7 +224,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
         this.render();
         break;
       case "edit-unlinked":
-        if ( unlinkedId ) new SpellsUnlinkedConfig(unlinkedId, this.document).render(true);
+        if ( unlinkedId ) new SpellsUnlinkedConfig({ document: this.document, unlinkedId }).render(true);
         break;
     }
   }
