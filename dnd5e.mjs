@@ -22,11 +22,12 @@ import DragDrop5e from "./module/drag-drop.mjs";
 import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
-import {default as registry} from "./module/registry.mjs";
-import * as utils from "./module/utils.mjs";
 import ModuleArt from "./module/module-art.mjs";
 import registerModuleData from "./module/module-registration.mjs";
+import parseUuid from "./module/parse-uuid.mjs";
+import {default as registry} from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
+import * as utils from "./module/utils.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -495,6 +496,9 @@ Hooks.once("ready", function() {
     }
   });
 
+  // Adjust sourced items on actors now that compendium UUID redirects have been initialized
+  game.actors.forEach(a => a.sourcedItems._redirectKeys());
+
   // Register items by type
   dnd5e.registry.classes.initialize();
 
@@ -611,68 +615,6 @@ function patchFromUuid() {
       doc = doc.getEmbeddedDocument(embeddedName, embeddedId, {invalid});
     }
     return doc;
-  };
-
-  const _resolveRelativeUuid = function(uuid, relative) {
-    if ( !(relative instanceof foundry.abstract.Document) ) {
-      throw new Error("A relative Document instance must be provided to _resolveRelativeUuid");
-    }
-    uuid = uuid.substring(1);
-    const parts = uuid.split(".");
-    if ( !parts.length ) throw new Error("Invalid relative UUID");
-    let id;
-    let type;
-    let root;
-    let primaryType;
-    let primaryId;
-    let collection;
-
-    // Identify the root document and its collection
-    const getRoot = doc => {
-      if ( doc.parent ) parts.unshift(doc.documentName, doc.id);
-      return doc.parent ? getRoot(doc.parent) : doc;
-    };
-
-    // Even-numbered parts include an explicit child document type
-    if ( (parts.length % 2) === 0 ) {
-      root = getRoot(relative);
-      id = parts.at(-1);
-      type = parts.at(-2);
-      primaryType = root.documentName;
-      primaryId = root.id;
-      uuid = [primaryType, primaryId, ...parts].join(".");
-    }
-
-    // Relative Embedded Document
-    else if ( relative.parent ) {
-      id = parts.at(-1);
-      type = relative.documentName;
-      parts.unshift(type);
-      root = getRoot(relative.parent);
-      primaryType = root.documentName;
-      primaryId = root.id;
-      uuid = [primaryType, primaryId, ...parts].join(".");
-    }
-
-    // Relative Document
-    else {
-      root = relative;
-      id = parts.pop();
-      type = relative.documentName;
-      uuid = [type, id].join(".");
-    }
-
-    // Recreate fully-qualified UUID and return the resolved result
-    collection = root.pack ? root.compendium : root.collection;
-    if ( root.pack ) uuid = `Compendium.${root.pack}.${uuid}`;
-    return {uuid, type, id, collection, primaryType, primaryId, embedded: parts,
-      documentType: primaryType ?? type, documentId: primaryId ?? id};
-  };
-
-  const parseUuid = function(uuid, {relative}={}) {
-    if ( !uuid ) throw new Error("A UUID string is required.");
-    if ( uuid.startsWith(".") && relative ) return _resolveRelativeUuid(uuid, relative);
-    return foundry.utils.parseUuid(uuid, {relative});
   };
 
   // Patch fromUuid to call our wrapped parseUuid in order to correctly resolve relative UUIDs on grandchild embedded
