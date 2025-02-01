@@ -1082,7 +1082,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
   async rollSkill(config={}, dialog={}, message={}) {
-    return this.#rollSkillTool("skill", config, dialog, message);
+    const skillLabel = CONFIG.DND5E.skills[config.skill]?.label ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollSkillTool("skill", config, dialogConfig, message);
   }
 
   /* -------------------------------------------- */
@@ -1095,7 +1104,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
   async rollToolCheck(config={}, dialog={}, message={}) {
-    return this.#rollSkillTool("tool", config, dialog, message);
+    const toolLabel = Trait.keyLabel(config.tool, { trait: "tool" }) ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.ToolPromptTitle", { tool: toolLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollSkillTool("tool", config, dialogConfig, message);
   }
 
   /* -------------------------------------------- */
@@ -1319,7 +1337,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instance.
    */
   async rollAbilityCheck(config={}, dialog={}, message={}) {
-    return this.#rollD20Test("check", config, dialog, message);
+    const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.AbilityPromptTitle", { ability: abilityLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollD20Test("check", config, dialogConfig, message);
   }
 
   /**
@@ -1347,7 +1374,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instances.
    */
   async rollSavingThrow(config={}, dialog={}, message={}) {
-    return this.#rollD20Test("save", config, dialog, message);
+    const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SavePromptTitle", { ability: abilityLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollD20Test("save", config, dialogConfig, message);
   }
 
   /**
@@ -1713,7 +1749,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     rollConfig.hookNames = [...(config.hookNames ?? []), "concentration"];
     rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
 
-    const dialogConfig = foundry.utils.deepClone(dialog);
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SavePromptTitle", { ability: game.i18n.localize("DND5E.Concentration") })
+        }
+      }
+    }, dialog);
 
     const messageConfig = foundry.utils.deepClone(message);
 
