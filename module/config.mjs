@@ -2317,13 +2317,15 @@ DND5E.dieSteps = [4, 6, 8, 10, 12, 20, 100];
  */
 DND5E.damageScalingModes = {
   whole: {
-    label: "DND5E.DAMAGE.Scaling.Whole"
+    label: "DND5E.DAMAGE.Scaling.Whole",
+    labelCantrip: "DND5E.DAMAGE.Scaling.WholeCantrip"
   },
   half: {
-    label: "DND5E.DAMAGE.Scaling.Half"
+    label: "DND5E.DAMAGE.Scaling.Half",
+    labelCantrip: "DND5E.DAMAGE.Scaling.HalfCantrip"
   }
 };
-preLocalize("damageScalingModes", { key: "label" });
+preLocalize("damageScalingModes", { keys: ["label", "labelCantrip"] });
 
 /* -------------------------------------------- */
 

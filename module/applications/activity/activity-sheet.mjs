@@ -302,9 +302,10 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
     ];
     if ( context.activity.damage?.parts ) {
+      const scaleKey = (this.item.type === "spell" && this.item.system.level === 0) ? "labelCantrip" : "label";
       const scalingOptions = [
         { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
-        ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, config]) => ({ value, label: config.label }))
+        ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, { [scaleKey]: label }]) => ({ value, label }))
       ];
       const typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => ({ value, label }));
       const makePart = (data, index) => this._prepareDamagePartContext(context, {
