@@ -176,7 +176,7 @@
           "spent": 0,
           "recovery": []
         },
-        "sort": 0
+        "sort": 100000
       },
       "dnd5eactivity100": {
         "_id": "dnd5eactivity100",
@@ -201,7 +201,7 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
@@ -233,25 +233,7 @@
         },
         "damage": {
           "onSave": "half",
-          "parts": [
-            {
-              "number": 1,
-              "denomination": 6,
-              "bonus": "@mod",
-              "types": [
-                "piercing"
-              ],
-              "custom": {
-                "enabled": false,
-                "formula": ""
-              },
-              "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
-              }
-            }
-          ]
+          "parts": []
         },
         "save": {
           "ability": "con",
@@ -262,79 +244,95 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 300000,
+        "name": "Close Wound",
+        "img": "",
+        "appliedEffects": []
       },
-      "dnd5eactivity300": {
-        "_id": "dnd5eactivity300",
-        "type": "utility",
+      "sMuNK1s4Dtvl9KXq": {
+        "type": "damage",
+        "_id": "sMuNK1s4Dtvl9KXq",
+        "sort": 200000,
         "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
+          "type": "",
+          "value": null,
+          "override": false,
+          "condition": "Start of a wounded creature's turn"
         },
         "consumption": {
-          "targets": [],
           "scaling": {
-            "allowed": false,
-            "max": ""
+            "allowed": true,
+            "max": "10"
           },
-          "spellSlot": true
+          "spellSlot": true,
+          "targets": []
         },
         "description": {
           "chatFlavor": ""
         },
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
           "override": false
         },
         "effects": [],
         "range": {
-          "value": "5",
-          "units": "ft",
-          "special": "",
           "override": false
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
+            "units": "ft",
+            "type": ""
           },
           "affects": {
-            "count": "",
-            "type": "",
             "choice": false,
-            "special": ""
+            "type": ""
           },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "1d4",
-          "name": "",
-          "prompt": false,
-          "visible": false
+          "override": false,
+          "prompt": true
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "damage": {
+          "critical": {
+            "allow": false
+          },
+          "parts": [
+            {
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "number": 1,
+              "denomination": "4",
+              "bonus": "",
+              "types": [
+                "necrotic"
+              ],
+              "scaling": {
+                "mode": "whole",
+                "number": 1,
+                "formula": ""
+              }
+            }
+          ]
+        },
+        "name": "Wound Damage",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
     "ammunition": {},
-    "identifier": "shortsword-of-wounding"
+    "identifier": "shortsword-of-wounding",
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -342,14 +340,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.0",
     "createdTime": 1725037190710,
-    "modifiedTime": 1725992514292,
+    "modifiedTime": 1738529511868,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!SpbjbMMoJiva2zOa"
