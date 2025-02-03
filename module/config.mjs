@@ -1045,6 +1045,16 @@ DND5E.activityActivationTypes = {
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
+  longRest: {
+    label: "DND5E.ACTIVATION.Type.LongRest.Label",
+    group: "DND5E.ACTIVATION.Category.Rest",
+    passive: true
+  },
+  shortRest: {
+    label: "DND5E.ACTIVATION.Type.ShortRest.Label",
+    group: "DND5E.ACTIVATION.Category.Rest",
+    passive: true
+  },
   encounter: {
     label: "DND5E.ACTIVATION.Type.Encounter.Label",
     group: "DND5E.ACTIVATION.Category.Combat",
@@ -2905,6 +2915,7 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
  * @typedef {object} RestConfiguration
  * @property {Record<string, number>} duration      Duration of different rest variants in minutes.
  * @property {string} label                         Localized label for the rest type.
+ * @property {string[]} [activationPeriods]         Activation types that should be displayed in the chat card.
  * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
  * @property {boolean} [recoverHitPoints]           Should hit points be recovered during this rest?
  * @property {string[]} [recoverPeriods]            What recovery periods should be applied when this rest is taken. The
@@ -2925,6 +2936,7 @@ DND5E.restTypes = {
       epic: 1
     },
     label: "DND5E.REST.Short.Label",
+    activationPeriods: ["shortRest"],
     recoverPeriods: ["sr"],
     recoverSpellSlotTypes: new Set(["pact"])
   },
@@ -2935,6 +2947,7 @@ DND5E.restTypes = {
       epic: 60
     },
     label: "DND5E.REST.Long.Label",
+    activationPeriods: ["longRest"],
     recoverHitDice: true,
     recoverHitPoints: true,
     recoverPeriods: ["lr", "sr"],
