@@ -3517,7 +3517,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 class SourcedItemsMap extends Map {
   /** @inheritDoc */
   get(key, { remap=true, legacy=true }={}) {
-    if ( remap ) ({ key: uuid } = parseUuid(key));
+    if ( remap ) ({ uuid: key } = parseUuid(key));
     if ( legacy ) {
       foundry.utils.logCompatibilityWarning(
         "The `sourcedItems` data on actor has changed from storing individual items to storing Sets of items. Pass `legacy: false` to retrieve the new Set data.",
