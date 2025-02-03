@@ -23,7 +23,7 @@ import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
 import ModuleArt from "./module/module-art.mjs";
-import registerModuleData from "./module/module-registration.mjs";
+import {registerModuleData, setupModulePacks} from "./module/module-registration.mjs";
 import parseUuid from "./module/parse-uuid.mjs";
 import {default as registry} from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
@@ -55,7 +55,7 @@ DragDrop = DragDrop5e;
 
 Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
-  console.log(`D&D 5e | Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
+  utils.log(`Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
   if ( game.release.generation < 13 ) patchFromUuid();
 
@@ -400,14 +400,8 @@ Hooks.once("setup", function() {
   // Register settings after modules have had a chance to initialize
   registerDeferredSettings();
 
-  // Apply table of contents compendium style if specified in flags
-  game.packs
-    .filter(p => p.metadata.flags?.display === "table-of-contents")
-    .forEach(p => p.applicationClass = applications.journal.TableOfContentsCompendium);
-
-  // Apply custom item compendium
-  game.packs.filter(p => p.metadata.type === "Item")
-    .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
+  // Set up compendiums with custom applications & sorting
+  setupModulePacks();
 
   // Create CSS for currencies
   const style = document.createElement("style");
