@@ -65,9 +65,10 @@ export function setupModulePacks() {
       const complete = setupMethods.map(m => m(pack)).filter(r => r);
       if ( complete.length ) log(`Finished setting up ${pack.metadata.label}: ${complete.join(", ")}`);
     } catch(err) {
-      log(`Error setting up ${pack.metadata.label}\n`, { extras: [err.message], level: "error" });
+      log(`Error setting up ${pack.title}\n`, { extras: [err.message], level: "error" });
     }
   }
+  if ( sortingChanged ) game.settings.set("core", "collectionSortingModes", collectionSortingModes);
   console.groupEnd();
 }
 
@@ -89,10 +90,8 @@ function setupPackDisplay(pack) {
 
 /* -------------------------------------------- */
 
-let sortingChanges;
-const debouncedUpdateSorting = foundry.utils.debounce(() =>
-  game.settings.set("core", "collectionSortingModes", sortingChanges)
-, 250);
+let collectionSortingModes;
+let sortingChanged = false;
 
 /**
  * Set default sorting order based on `flags.dnd5e.sorting`.
@@ -100,9 +99,9 @@ const debouncedUpdateSorting = foundry.utils.debounce(() =>
  * @returns {string|void}    Description of the step.
  */
 function setupPackSorting(pack) {
-  sortingChanges ??= game.settings.get("core", "collectionSortingModes") ?? {};
-  if ( !pack.metadata.flags.dnd5e?.sorting || sortingChanges[pack.metadata.id] ) return;
-  sortingChanges[pack.metadata.id] = pack.metadata.flags.dnd5e.sorting;
-  debouncedUpdateSorting();
+  collectionSortingModes ??= game.settings.get("core", "collectionSortingModes") ?? {};
+  if ( !pack.metadata.flags.dnd5e?.sorting || collectionSortingModes[pack.metadata.id] ) return;
+  collectionSortingModes[pack.metadata.id] = pack.metadata.flags.dnd5e.sorting;
+  sortingChanged = true;
   return "default sorting";
 }
