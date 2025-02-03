@@ -1348,10 +1348,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async rollSkill(config={}, dialog={}, message={}) {
     const skillLabel = CONFIG.DND5E.skills[config.skill]?.label ?? "";
+    const ability = this.system.skills[config.skill]?.ability ?? CONFIG.DND5E.skills[config.skill]?.ability ?? "";
+    const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
     const dialogConfig = foundry.utils.mergeObject({
       options: {
         window: {
-          title: game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel }),
+          title: game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
           subtitle: this.name
         }
       }
@@ -1458,6 +1460,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }, dialog);
 
+    const abilityLabel = CONFIG.DND5E.abilities[relevant?.ability ?? skillConfig?.ability ?? ""]?.label;
+
     const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
@@ -1470,7 +1474,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
             }
           }
         },
-        flavor: type === "skill" ? game.i18n.format("DND5E.SkillPromptTitle", { skill: skillConfig.label })
+        flavor: type === "skill" ? game.i18n.format("DND5E.SkillPromptTitle", { skill: skillConfig.label, ability: abilityLabel })
           : game.i18n.format("DND5E.ToolPromptTitle", { tool: Trait.keyLabel(config.tool, { trait: "tool" }) ?? "" }),
         speaker: ChatMessage.getSpeaker({ actor: this })
       }
