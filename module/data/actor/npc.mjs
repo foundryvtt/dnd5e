@@ -641,7 +641,7 @@ export default class NPCData extends CreatureTemplate {
           size: CONFIG.DND5E.actorSizes[this.traits.size]?.label ?? "",
           type: Actor5e.formatCreatureType(this.details.type),
           alignment: this.details.alignment
-        })
+        }).replace(/, $/, "")
       },
       system: this
     };
