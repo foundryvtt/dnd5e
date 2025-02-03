@@ -2720,7 +2720,10 @@
 "DND5E.Languages": "Languages",
 
 "DND5E.LegendaryAction": {
+  "Description": "Legendary Action Uses: {uses}.",
+  "DescriptionLegacy": "The {name} can take {usesNamed}, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature’s turn. The {name} regains spent legendary actions at the start of its turn.",
   "Label": "Legendary Action",
+  "LairUses": "{normal} ({lair} in Lair)",
   "Max": "Maximum Legendary Actions",
   "Ordinal": {
     "one": "{n}st Legendary Action",
