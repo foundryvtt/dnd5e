@@ -2313,7 +2313,7 @@ DND5E.dieSteps = [4, 6, 8, 10, 12, 20, 100];
 
 /**
  * Methods by which damage scales relative to the overall scaling increase.
- * @enum {{ label: string }}
+ * @enum {{ label: string, labelCantrip: string }}
  */
 DND5E.damageScalingModes = {
   whole: {
