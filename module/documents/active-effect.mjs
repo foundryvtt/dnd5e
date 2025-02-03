@@ -616,24 +616,6 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
-   * Add help icon & tooltip to Attribute Key header
-   * @param {jQuery|HTMLElement} html  The Active Effect Config HTML.
-   */
-  static onRenderActiveEffectConfig(html) {
-    html = html instanceof HTMLElement ? html : html[0];
-    const helpIconElement = document.createElement("i");
-    helpIconElement.classList.add("fa-solid", "fa-circle-question");
-    const tooltipText = game.i18n.localize("DND5E.ActiveEffectAttributeKeyTooltip");
-    helpIconElement.setAttribute("data-tooltip", tooltipText);
-    helpIconElement.setAttribute("data-tooltip-direction", "RIGHT");
-    helpIconElement.setAttribute("data-locked", true);
-    const targetElement = html.querySelector("section[data-tab='effects'],section[data-tab='changes'] .key");
-    if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Adjust exhaustion icon display to match current level.
    * @param {Application} app  The TokenHUD application.
    * @param {jQuery} html      The TokenHUD HTML.
@@ -804,6 +786,28 @@ export default class ActiveEffect5e extends ActiveEffect {
     const current = foundry.utils.getProperty(doc, path) ?? new Set();
     const delta = current.symmetricDifference(source);
     for ( const choice of delta ) overrides.push(`${prefix}.${choice}`);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add help icon & tooltip to Attribute Key header
+   * @param {jQuery|HTMLElement} html  The Active Effect Config HTML.
+   */
+  onRenderActiveEffectConfig(html) {
+    html = html instanceof HTMLElement ? html : html[0];
+    const helpIconElement = document.createElement("i");
+    helpIconElement.classList.add("fa-solid", "fa-circle-question");
+    const tooltipText = game.i18n.format("DND5E.ACTIVEEFFECT.AttributeKeyTooltip", {
+      url: this.type === "enchantment"
+        ? "https://github.com/foundryvtt/dnd5e/wiki/Enchantment"
+        : "https://github.com/foundryvtt/dnd5e/wiki/Active-Effect-Guide"
+    });
+    helpIconElement.setAttribute("data-tooltip", tooltipText);
+    helpIconElement.setAttribute("data-tooltip-direction", "RIGHT");
+    helpIconElement.setAttribute("data-locked", true);
+    const targetElement = html.querySelector("section:is([data-tab='effects'],section[data-tab='changes']) .key");
+    if ( targetElement ) targetElement.insertAdjacentElement("beforeend", helpIconElement);
   }
 
   /* -------------------------------------------- */
