@@ -652,17 +652,11 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _enrichUsageEffects(html) {
-    if ( this.getFlag("dnd5e", "displayOnly") ) return;
+    if ( this.getFlag("dnd5e", "messageType") !== "usage" ) return;
     const item = this.getAssociatedItem();
-    let effects;
-    if ( this.getFlag("dnd5e", "messageType") === "usage" ) {
-      effects = this.getFlag("dnd5e", "use.effects")?.map(id => item?.effects.get(id));
-    } else {
-      if ( this.getFlag("dnd5e", "roll.type") ) return;
-      effects = item?.effects.filter(e => (e.type !== "enchantment")
-        && !item.getFlag("dnd5e", "riders.effect")?.includes(e.id));
-    }
-    effects = effects?.filter(e => e && (game.user.isGM || (e.transfer && (this.author.id === game.user.id))));
+    const effects = this.getFlag("dnd5e", "use.effects")
+      ?.map(id => item?.effects.get(id))
+      .filter(e => e && (game.user.isGM || (e.transfer && (this.author.id === game.user.id))));
     if ( !effects?.length ) return;
 
     const effectApplication = document.createElement("effect-application");

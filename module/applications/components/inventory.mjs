@@ -216,7 +216,7 @@ export default class InventoryElement extends HTMLElement {
       {
         name: "DND5E.DisplayCard",
         icon: '<i class="fas fa-message"></i>',
-        callback: () => item.displayCard({ flags: { "dnd5e.displayOnly": true } })
+        callback: () => item.displayCard()
       },
       {
         name: "DND5E.Scroll.CreateScroll",
