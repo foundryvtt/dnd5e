@@ -1,5 +1,6 @@
 import ActorSheet5eNPC from "./npc-sheet.mjs";
 import ActorSheetV2Mixin from "./sheet-v2-mixin.mjs";
+import { createCheckboxInput } from "../fields.mjs";
 import { simplifyBonus, splitSemicolons } from "../../utils.mjs";
 
 /**
@@ -201,6 +202,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
       label: game.i18n.localize("DND5E.NPC.Label"),
       fields: [{
         field: this.document.system.schema.fields.traits.fields.important,
+        input: createCheckboxInput,
         name: "system.traits.important",
         value: source.system.traits.important
       }]

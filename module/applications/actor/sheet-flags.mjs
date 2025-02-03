@@ -1,5 +1,4 @@
 import BaseConfigSheet from "./base-config.mjs";
-import { createCheckboxInput } from "../fields.mjs";
 
 const { BooleanField } = foundry.data.fields;
 
@@ -10,7 +9,7 @@ export default class ActorSheetFlags extends BaseConfigSheet {
   constructor(...args) {
     foundry.utils.logCompatibilityWarning(
       "The `ActorSheetFlags` application has been deprecated and replaced with a tab on the character sheet.",
-      { since: "DnD5e 4.1", until: "DnD5e 4.3" }
+      { since: "DnD5e 4.3", until: "DnD5e 4.5" }
     );
     super(...args);
   }
