@@ -98,15 +98,13 @@ export default class AttackActivityData extends BaseActivityData {
    * @type {Set<string>}
    */
   get availableAbilities() {
-    const attackClassification = this.attack.type.classification;
-
     // Defer to item if available and matching attack classification
-    if ( this.item.system.availableAbilities && this.item.type === attackClassification ) {
+    if ( this.item.system.availableAbilities && (this.item.type === this.attack.type.classification) ) {
       return this.item.system.availableAbilities;
     }
 
     // Spell attack not associated with a single class, use highest spellcasting ability on actor
-    if ( attackClassification === "spell" ) return new Set(
+    if ( this.attack.type.classification === "spell" ) return new Set(
       this.actor?.system.attributes?.spellcasting
         ? [this.actor.system.attributes.spellcasting]
         : Object.values(this.actor?.spellcastingClasses ?? {}).map(c => c.spellcasting.ability)
