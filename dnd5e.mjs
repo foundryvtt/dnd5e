@@ -609,7 +609,7 @@ Hooks.on("renderDocumentSheetConfig", (app, html) => {
   }
 });
 
-Hooks.on("renderActiveEffectConfig", (app, html, data) => documents.ActiveEffect5e.onRenderActiveEffectConfig(html));
+Hooks.on("renderActiveEffectConfig", (app, html, data) => app.document.onRenderActiveEffectConfig(html));
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
