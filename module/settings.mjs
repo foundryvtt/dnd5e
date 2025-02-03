@@ -1,4 +1,5 @@
 import BastionSettingsConfig, { BastionSetting } from "./applications/settings/bastion-settings.mjs";
+import CombatSettingsConfig from "./applications/settings/combat-settings.mjs";
 import CompendiumBrowserSettingsConfig from "./applications/settings/compendium-browser-settings.mjs";
 import ModuleArtSettingsConfig from "./applications/settings/module-art-settings.mjs";
 import VisibilitySettingsConfig from "./applications/settings/visibility-settings.mjs";
@@ -46,48 +47,6 @@ export function registerSystemSettings() {
     config: false,
     type: String,
     default: ""
-  });
-
-  game.settings.register("dnd5e", "challengeVisibility", {
-    name: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.Name",
-    hint: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.Hint",
-    scope: "world",
-    config: false,
-    default: "player",
-    type: String,
-    choices: {
-      all: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.All",
-      player: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.Player",
-      none: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.None"
-    }
-  });
-
-  game.settings.register("dnd5e", "attackRollVisibility", {
-    name: "SETTINGS.DND5E.VISIBILITY.ATTACK.Name",
-    hint: "SETTINGS.DND5E.VISIBILITY.ATTACK.Hint",
-    scope: "world",
-    config: false,
-    default: "none",
-    type: String,
-    choices: {
-      all: "SETTINGS.DND5E.VISIBILITY.ATTACK.All",
-      hideAC: "SETTINGS.DND5E.VISIBILITY.ATTACK.HideAC",
-      none: "SETTINGS.DND5E.VISIBILITY.ATTACK.None"
-    }
-  });
-
-  game.settings.register("dnd5e", "bloodied", {
-    name: "SETTINGS.DND5E.BLOODIED.Name",
-    hint: "SETTINGS.DND5E.BLOODIED.Hint",
-    scope: "world",
-    config: false,
-    default: "player",
-    type: String,
-    choices: {
-      all: "SETTINGS.DND5E.BLOODIED.All",
-      player: "SETTINGS.DND5E.BLOODIED.Player",
-      none: "SETTINGS.DND5E.BLOODIED.None"
-    }
   });
 
   // Encumbrance tracking
@@ -217,31 +176,6 @@ export function registerSystemSettings() {
     config: true,
     default: false,
     type: Boolean
-  });
-
-  // Apply Dexterity as Initiative Tiebreaker
-  game.settings.register("dnd5e", "initiativeDexTiebreaker", {
-    name: "SETTINGS.5eInitTBN",
-    hint: "SETTINGS.5eInitTBL",
-    scope: "world",
-    config: true,
-    default: false,
-    type: Boolean
-  });
-
-  // Use initiative scores for NPCs
-  game.settings.register("dnd5e", "initiativeScore", {
-    name: "SETTINGS.DND5E.INITIATIVESCORE.Name",
-    hint: "SETTINGS.DND5E.INITIATIVESCORE.Hint",
-    scope: "world",
-    config: true,
-    default: "none",
-    type: String,
-    choices: {
-      none: "SETTINGS.DND5E.INITIATIVESCORE.None",
-      npcs: "SETTINGS.DND5E.INITIATIVESCORE.NPCs",
-      all: "SETTINGS.DND5E.INITIATIVESCORE.All"
-    }
   });
 
   // Record Currency Weight
@@ -395,26 +329,6 @@ export function registerSystemSettings() {
     default: false
   });
 
-  // Critical Damage Modifiers
-  game.settings.register("dnd5e", "criticalDamageModifiers", {
-    name: "SETTINGS.5eCriticalModifiersN",
-    hint: "SETTINGS.5eCriticalModifiersL",
-    scope: "world",
-    config: true,
-    type: Boolean,
-    default: false
-  });
-
-  // Critical Damage Maximize
-  game.settings.register("dnd5e", "criticalDamageMaxDice", {
-    name: "SETTINGS.5eCriticalMaxDiceN",
-    hint: "SETTINGS.5eCriticalMaxDiceL",
-    scope: "world",
-    config: true,
-    type: Boolean,
-    default: false
-  });
-
   // Strict validation
   game.settings.register("dnd5e", "strictValidation", {
     scope: "world",
@@ -487,6 +401,57 @@ export function registerSystemSettings() {
     onChange: () => game.dnd5e.bastion.initializeUI()
   });
 
+  // Combat Settings
+  game.settings.registerMenu("dnd5e", "combatConfiguration", {
+    name: "SETTINGS.DND5E.COMBAT.Name",
+    label: "SETTINGS.DND5E.COMBAT.Label",
+    hint: "SETTINGS.DND5E.COMBAT.Hint",
+    icon: "fas fa-explosion",
+    type: CombatSettingsConfig,
+    restricted: true
+  });
+
+  game.settings.register("dnd5e", "initiativeDexTiebreaker", {
+    name: "SETTINGS.DND5E.COMBAT.DEXTIEBREAKER.Name",
+    hint: "SETTINGS.DND5E.COMBAT.DEXTIEBREAKER.Hint",
+    scope: "world",
+    config: false,
+    default: false,
+    type: Boolean
+  });
+
+  game.settings.register("dnd5e", "initiativeScore", {
+    name: "SETTINGS.DND5E.COMBAT.INITIATIVESCORE.Name",
+    hint: "SETTINGS.DND5E.COMBAT.INITIATIVESCORE.Hint",
+    scope: "world",
+    config: false,
+    default: "none",
+    type: String,
+    choices: {
+      none: "SETTINGS.DND5E.COMBAT.INITIATIVESCORE.None",
+      npcs: "SETTINGS.DND5E.COMBAT.INITIATIVESCORE.NPCs",
+      all: "SETTINGS.DND5E.COMBAT.INITIATIVESCORE.All"
+    }
+  });
+
+  game.settings.register("dnd5e", "criticalDamageModifiers", {
+    name: "SETTINGS.DND5E.CRITICAL.MultiplyModifiers.Name",
+    hint: "SETTINGS.DND5E.CRITICAL.MultiplyModifiers.Hint",
+    scope: "world",
+    config: false,
+    type: Boolean,
+    default: false
+  });
+
+  game.settings.register("dnd5e", "criticalDamageMaxDice", {
+    name: "SETTINGS.DND5E.CRITICAL.MaxDice.Name",
+    hint: "SETTINGS.DND5E.CRITICAL.MaxDice.Hint",
+    scope: "world",
+    config: false,
+    type: Boolean,
+    default: false
+  });
+
   // Visibility Settings
   game.settings.registerMenu("dnd5e", "visibilityConfiguration", {
     name: "SETTINGS.DND5E.VISIBILITY.Name",
@@ -495,6 +460,48 @@ export function registerSystemSettings() {
     icon: "fas fa-eye",
     type: VisibilitySettingsConfig,
     restricted: true
+  });
+
+  game.settings.register("dnd5e", "attackRollVisibility", {
+    name: "SETTINGS.DND5E.VISIBILITY.ATTACK.Name",
+    hint: "SETTINGS.DND5E.VISIBILITY.ATTACK.Hint",
+    scope: "world",
+    config: false,
+    default: "none",
+    type: String,
+    choices: {
+      all: "SETTINGS.DND5E.VISIBILITY.ATTACK.All",
+      hideAC: "SETTINGS.DND5E.VISIBILITY.ATTACK.HideAC",
+      none: "SETTINGS.DND5E.VISIBILITY.ATTACK.None"
+    }
+  });
+
+  game.settings.register("dnd5e", "bloodied", {
+    name: "SETTINGS.DND5E.BLOODIED.Name",
+    hint: "SETTINGS.DND5E.BLOODIED.Hint",
+    scope: "world",
+    config: false,
+    default: "player",
+    type: String,
+    choices: {
+      all: "SETTINGS.DND5E.BLOODIED.All",
+      player: "SETTINGS.DND5E.BLOODIED.Player",
+      none: "SETTINGS.DND5E.BLOODIED.None"
+    }
+  });
+
+  game.settings.register("dnd5e", "challengeVisibility", {
+    name: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.Name",
+    hint: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.Hint",
+    scope: "world",
+    config: false,
+    default: "player",
+    type: String,
+    choices: {
+      all: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.All",
+      player: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.Player",
+      none: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.None"
+    }
   });
 
   game.settings.register("dnd5e", "concealItemDescriptions", {
