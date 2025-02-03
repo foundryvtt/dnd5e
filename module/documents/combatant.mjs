@@ -37,7 +37,7 @@ export default class Combatant5e extends Combatant {
           }
         },
         type: "turn",
-        whisper: game.users.filter(u => this.actor.testUserPermission(game.user, "OWNER"))
+        whisper: game.users.filter(u => this.actor.testUserPermission(u, "OWNER"))
       }
     };
 
