@@ -177,70 +177,75 @@
         },
         "sort": 0
       },
-      "dnd5eactivity300": {
-        "_id": "dnd5eactivity300",
-        "type": "utility",
+      "Ii4hYyOm2JbNc3TE": {
+        "type": "damage",
+        "sort": 0,
         "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
+          "type": "",
+          "value": null,
+          "override": false,
+          "condition": ""
         },
         "consumption": {
-          "targets": [],
           "scaling": {
-            "allowed": false,
-            "max": ""
+            "allowed": false
           },
-          "spellSlot": true
+          "spellSlot": true,
+          "targets": []
         },
         "description": {
           "chatFlavor": ""
         },
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
           "override": false
         },
         "effects": [],
         "range": {
-          "value": "5",
-          "units": "ft",
-          "special": "",
           "override": false
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
+            "units": "ft",
+            "type": ""
           },
           "affects": {
-            "count": "",
-            "type": "",
             "choice": false,
-            "special": ""
+            "type": ""
           },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "3d6",
-          "name": "",
-          "prompt": false,
-          "visible": false
+          "override": false,
+          "prompt": true
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "damage": {
+          "critical": {
+            "allow": false
+          },
+          "parts": [
+            {
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "number": 2,
+              "denomination": "10",
+              "bonus": "",
+              "types": [
+                "slashing"
+              ]
+            }
+          ]
+        },
+        "name": "Damage vs Dragon",
+        "_id": "Ii4hYyOm2JbNc3TE",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
@@ -254,14 +259,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.1.0",
+    "systemVersion": "4.3.0",
     "createdTime": 1725037189874,
-    "modifiedTime": 1729274744187,
+    "modifiedTime": 1738528753384,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!SXjs8JghAPBv7d6j"

@@ -180,7 +180,7 @@
         "_id": "dnd5eactivity100",
         "type": "save",
         "activation": {
-          "type": "action",
+          "type": "",
           "value": 1,
           "condition": "",
           "override": false
@@ -199,7 +199,7 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
@@ -231,25 +231,7 @@
         },
         "damage": {
           "onSave": "half",
-          "parts": [
-            {
-              "number": 1,
-              "denomination": 6,
-              "bonus": "@mod",
-              "types": [
-                "bludgeoning"
-              ],
-              "custom": {
-                "enabled": false,
-                "formula": ""
-              },
-              "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
-              }
-            }
-          ]
+          "parts": []
         },
         "save": {
           "ability": "wis",
@@ -260,79 +242,90 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "Save vs Destruction",
+        "img": "",
+        "appliedEffects": []
       },
-      "dnd5eactivity300": {
-        "_id": "dnd5eactivity300",
-        "type": "utility",
+      "A9ycW95JlC9lpKPF": {
+        "type": "damage",
+        "name": "Construct Damage",
+        "_id": "A9ycW95JlC9lpKPF",
+        "sort": 0,
         "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
+          "type": "",
+          "value": null,
+          "override": false,
+          "condition": ""
         },
         "consumption": {
-          "targets": [],
           "scaling": {
-            "allowed": false,
-            "max": ""
+            "allowed": false
           },
-          "spellSlot": true
+          "spellSlot": true,
+          "targets": []
         },
         "description": {
           "chatFlavor": ""
         },
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
           "override": false
         },
         "effects": [],
         "range": {
-          "value": "5",
-          "units": "ft",
-          "special": "",
           "override": false
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
+            "units": "ft",
+            "type": ""
           },
           "affects": {
-            "count": "",
-            "type": "",
             "choice": false,
-            "special": ""
+            "type": ""
           },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "2d6",
-          "name": "",
-          "prompt": false,
-          "visible": false
+          "override": false,
+          "prompt": true
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "damage": {
+          "critical": {
+            "allow": true,
+            "bonus": ""
+          },
+          "parts": [
+            {
+              "custom": {
+                "enabled": false,
+                "formula": ""
+              },
+              "number": 2,
+              "denomination": "6",
+              "bonus": "",
+              "types": [
+                "radiant"
+              ]
+            }
+          ]
+        },
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
     "ammunition": {},
-    "identifier": "mace-of-disruption"
+    "identifier": "mace-of-disruption",
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -340,14 +333,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.0",
     "createdTime": 1725037277636,
-    "modifiedTime": 1725992543223,
+    "modifiedTime": 1738530002191,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!m7RubLd1lUcMjYgY"
