@@ -2945,7 +2945,7 @@ DND5E.restTypes = {
       epic: 60
     },
     label: "DND5E.REST.Long.Label",
-    activationPeriods: ["longRest", "shortRest"],
+    activationPeriods: ["longRest"],
     recoverHitDice: true,
     recoverHitPoints: true,
     recoverPeriods: ["lr", "sr"],

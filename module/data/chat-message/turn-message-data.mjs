@@ -95,21 +95,4 @@ export default class TurnMessageData extends ChatMessageDataModel {
 
     return context;
   }
-
-  /* -------------------------------------------- */
-  /*  Event Listeners and Handlers                */
-  /* -------------------------------------------- */
-
-  /** @override */
-  _onRender(element) {
-    for ( const e of element.querySelectorAll(".item-tooltip") ) {
-      const uuid = e.closest("[data-item-uuid]")?.dataset.itemUuid;
-      if ( !uuid ) continue;
-      Object.assign(e.dataset, {
-        tooltip: `<section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>`,
-        tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip",
-        tooltipDirection: "LEFT"
-      });
-    }
-  }
 }
