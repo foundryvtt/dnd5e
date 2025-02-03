@@ -1,4 +1,5 @@
 import SpellListJournalPageData from "../../data/journal/spells.mjs";
+import parseUuid from "../../parse-uuid.mjs";
 import { linkForUuid, sortObjectEntries } from "../../utils.mjs";
 import Items5e from "../../data/collection/items-collection.mjs";
 import SpellsUnlinkedConfig from "./spells-unlinked-config.mjs";
@@ -123,28 +124,15 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
       }
     }
 
-    // TODO: Remove when https://github.com/foundryvtt/foundryvtt/issues/11991 is resolved
-    const parseUuid = uuid => {
-      const parsed = foundry.utils.parseUuid(uuid);
-      const remappedUuid = uuid.startsWith("Compendium") ? [
-        "Compendium",
-        parsed.collection.metadata.id,
-        parsed.primaryType ?? parsed.documentType,
-        parsed.primaryId ?? parsed.documentId,
-        ...parsed.embedded
-      ].join(".") : uuid;
-      return { ...parsed, remappedUuid };
-    };
-
     let collections = new Collection();
     const remappedUuids = new Set();
-    for ( const uuid of uuids ) {
-      const { collection, remappedUuid } = parseUuid(uuid);
-      remappedUuids.add(remappedUuid);
+    for ( const baseUuid of uuids ) {
+      const { collection, uuid } = parseUuid(baseUuid);
+      remappedUuids.add(uuid);
       if ( collection && !collections.has(collection) ) {
         if ( collection instanceof Items5e ) collections.set(collection, collection);
         else collections.set(collection, collection.getIndex({ fields }));
-      } else if ( !collection ) uuids.delete(uuid);
+      } else if ( !collection ) uuids.delete(baseUuid);
     }
 
     const spells = (await Promise.all(collections.values())).flatMap(c => c.filter(s => remappedUuids.has(s.uuid)));

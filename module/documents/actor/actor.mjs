@@ -5,6 +5,7 @@ import PropertyAttribution from "../../applications/property-attribution.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
+import parseUuid from "../../parse-uuid.mjs";
 import { convertTime, defaultUnits, formatNumber, formatTime, simplifyBonus, staticID } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
@@ -3566,7 +3567,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
  */
 class SourcedItemsMap extends Map {
   /** @inheritDoc */
-  get(key, { legacy=true }={}) {
+  get(key, { remap=true, legacy=true }={}) {
+    if ( remap ) ({ uuid: key } = parseUuid(key));
     if ( legacy ) {
       foundry.utils.logCompatibilityWarning(
         "The `sourcedItems` data on actor has changed from storing individual items to storing Sets of items. Pass `legacy: false` to retrieve the new Set data.",
@@ -3581,8 +3583,24 @@ class SourcedItemsMap extends Map {
 
   /** @inheritDoc */
   set(key, value) {
-    if ( !this.has(key) ) super.set(key, new Set());
-    this.get(key, { legacy: false }).add(value);
+    const { uuid } = parseUuid(key);
+    if ( !this.has(uuid) ) super.set(uuid, new Set());
+    this.get(uuid, { remap: false, legacy: false }).add(value);
     return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust keys once compendium UUID redirects have been initialized.
+   */
+  _redirectKeys() {
+    for ( const [key, value] of this.entries() ) {
+      const { uuid } = parseUuid(key);
+      if ( key !== uuid ) {
+        this.set(uuid, value);
+        this.delete(key);
+      }
+    }
   }
 }
