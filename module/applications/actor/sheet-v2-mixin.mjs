@@ -1,5 +1,6 @@
 import * as Trait from "../../documents/actor/trait.mjs";
 import { formatLength, formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
+import { createCheckboxInput } from "../fields.mjs";
 import Tabs5e from "../tabs.mjs";
 import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
 import ItemSheet5e2 from "../item/item-sheet-2.mjs";
@@ -197,6 +198,7 @@ export default function ActorSheetV2Mixin(Base) {
       }
 
       context.effects.suppressed.info = context.effects.suppressed.info[0];
+      context.flags = this._prepareFlags();
       context.hasConditions = true;
       const sourceVersion = context.system.source?.rules;
       context.modernRules = sourceVersion
@@ -204,6 +206,51 @@ export default function ActorSheetV2Mixin(Base) {
         : game.settings.get("dnd5e", "rulesVersion") === "modern";
 
       return context;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Prepare flags displayed in the special traits tab.
+     * @returns {object}
+     */
+    _prepareFlags() {
+      const sections = [];
+      const source = (this._mode === this.constructor.MODES.PLAY ? this.document : this.document._source);
+      const flags = {
+        classes: Object.values(this.document.classes)
+          .map(cls => ({ value: cls.id, label: cls.name }))
+          .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang)),
+        data: source.flags?.dnd5e ?? {},
+        disabled: this._mode === this.constructor.MODES.PLAY
+      };
+
+      // Character Flags
+      for ( const [key, config] of Object.entries(CONFIG.DND5E.characterFlags) ) {
+        const flag = { ...config, name: `flags.dnd5e.${key}`, value: flags.data[key] };
+        const fieldOptions = { label: config.name, hint: config.hint };
+        if ( config.type === Boolean ) {
+          flag.field = new foundry.data.fields.BooleanField(fieldOptions);
+          flag.input = createCheckboxInput;
+        }
+        else if ( config.type === Number ) flag.field = new foundry.data.fields.NumberField(fieldOptions);
+        else flag.fields = new foundry.data.fields.StringField(fieldOptions);
+
+        sections[config.section] ??= [];
+        sections[config.section].push(flag);
+      }
+
+      // Global Bonuses
+      const globals = [];
+      const addBonus = field => {
+        if ( field instanceof foundry.data.fields.SchemaField ) Object.values(field.fields).forEach(f => addBonus(f));
+        else globals.push({ field, name: field.fieldPath, value: foundry.utils.getProperty(source, field.fieldPath) });
+      };
+      addBonus(this.document.system.schema.fields.bonuses);
+      if ( globals.length ) sections[game.i18n.localize("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
+
+      flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }))
+      return flags;
     }
 
     /* -------------------------------------------- */

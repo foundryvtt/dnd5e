@@ -80,10 +80,6 @@
                             aria-label="{{ localize "DND5E.REST.Long.Label" }}">
                         <i class="fas fa-campground"></i>
                     </button>
-                    <button type="button" class="config-button gold-button" data-action="flags"
-                            data-tooltip="DND5E.SpecialTraits" aria-label="{{ localize "DND5E.SpecialTraits" }}">
-                        <i class="fas fa-star"></i>
-                    </button>
                 </div>
                 {{/if}}
 
@@ -348,7 +344,7 @@
                 {{!-- Favorites --}}
                 <div class="favorites">
                     <h3 class="icon">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-bookmark"></i>
                         <span class="roboto-upper">{{ localize "DND5E.Favorites" }}</span>
                     </h3>
                     <ul class="unlist">
@@ -518,6 +514,11 @@
 
                 {{!-- Bastion --}}
                 {{~> "dnd5e.character-bastion" ~}}
+
+                {{!-- Special Traits --}}
+                <div class="tab special-traits" data-group="primary" data-tab="special-traits">
+                    {{~> "dnd5e.creature-special-traits" ~}}
+                </div>
 
             </section>
 

@@ -1221,7 +1221,7 @@ export default function ActivityMixin(Base) {
         const isFavorited = this.actor.system.hasFavorite(uuid);
         entries.push({
           name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-          icon: '<i class="fas fa-star fa-fw"></i>',
+          icon: '<i class="fas fa-bookmark fa-fw"></i>',
           condition: () => this.item.isOwner && !this.item.compendium?.locked,
           callback: () => {
             if ( isFavorited ) this.actor.system.removeFavorite(uuid);
