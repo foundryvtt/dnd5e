@@ -1,5 +1,6 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
+import Application5e from "./api/application.mjs";
 import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
 /**
@@ -49,13 +50,10 @@ import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-setti
 
 /**
  * Application for browsing, filtering, and searching for content between multiple compendiums.
- * @extends ApplicationV2
- * @mixes HandlebarsApplicationMixin
+ * @extends Application5e
  * @template CompendiumBrowserConfiguration
  */
-export default class CompendiumBrowser extends foundry.applications.api.HandlebarsApplicationMixin(
-  foundry.applications.api.ApplicationV2
-) {
+export default class CompendiumBrowser extends Application5e {
   constructor(...args) {
     super(...args);
 
@@ -77,7 +75,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
   /** @override */
   static DEFAULT_OPTIONS = {
     id: "compendium-browser-{id}",
-    classes: ["dnd5e2", "compendium-browser", "vertical-tabs"],
+    classes: ["compendium-browser", "vertical-tabs"],
     tag: "form",
     window: {
       title: "DND5E.CompendiumBrowser.Title",
@@ -126,17 +124,18 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     },
     search: {
       id: "sidebar-search",
-      classes: ["sidebar-part", "filter-element"],
+      classes: ["filter-element"],
+      container: { id: "sidebar", classes: ["sidebar", "flexcol"] },
       template: "systems/dnd5e/templates/compendium/browser-sidebar-search.hbs"
     },
     types: {
       id: "sidebar-types",
-      classes: ["sidebar-part"],
+      container: { id: "sidebar", classes: ["sidebar", "flexcol"] },
       template: "systems/dnd5e/templates/compendium/browser-sidebar-types.hbs"
     },
     filters: {
       id: "sidebar-filters",
-      classes: ["sidebar-part"],
+      container: { id: "sidebar", classes: ["sidebar", "flexcol"] },
       template: "systems/dnd5e/templates/compendium/browser-sidebar-filters.hbs",
       templates: ["systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs"]
     },
@@ -416,16 +415,6 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
       const tab = this.constructor.TABS.find(t => t.tab === this.options.tab);
       if ( tab ) foundry.utils.setProperty(options, "dnd5e.browser.types", tab.types);
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @override */
-  _onFirstRender(context, options) {
-    const sidebar = document.createElement("div");
-    sidebar.classList.add("sidebar", "flexcol");
-    sidebar.replaceChildren(...this.element.querySelectorAll(".sidebar-part"));
-    this.element.querySelector(".window-content").insertAdjacentElement("afterbegin", sidebar);
   }
 
   /* -------------------------------------------- */
