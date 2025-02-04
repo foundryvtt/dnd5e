@@ -411,26 +411,17 @@ export function registerSystemSettings() {
     restricted: true
   });
 
-  game.settings.register("dnd5e", "initiativeDexTiebreaker", {
-    name: "SETTINGS.DND5E.COMBAT.DEXTIEBREAKER.Name",
-    hint: "SETTINGS.DND5E.COMBAT.DEXTIEBREAKER.Hint",
+  game.settings.register("dnd5e", "autoRollNPCHP", {
+    name: "SETTINGS.DND5E.NPCS.AutoRollNPCHP.Name",
+    hint: "SETTINGS.DND5E.NPCS.AutoRollNPCHP.Hint",
     scope: "world",
     config: false,
-    default: false,
-    type: Boolean
-  });
-
-  game.settings.register("dnd5e", "initiativeScore", {
-    name: "SETTINGS.DND5E.COMBAT.INITIATIVESCORE.Name",
-    hint: "SETTINGS.DND5E.COMBAT.INITIATIVESCORE.Hint",
-    scope: "world",
-    config: false,
-    default: "none",
+    default: "no",
     type: String,
     choices: {
-      none: "SETTINGS.DND5E.COMBAT.INITIATIVESCORE.None",
-      npcs: "SETTINGS.DND5E.COMBAT.INITIATIVESCORE.NPCs",
-      all: "SETTINGS.DND5E.COMBAT.INITIATIVESCORE.All"
+      no: "SETTINGS.DND5E.NPCS.AutoRollNPCHP.No",
+      silent: "SETTINGS.DND5E.NPCS.AutoRollNPCHP.Silent",
+      yes: "SETTINGS.DND5E.NPCS.AutoRollNPCHP.Yes"
     }
   });
 
@@ -452,17 +443,26 @@ export function registerSystemSettings() {
     default: false
   });
 
-  game.settings.register("dnd5e", "autoRollNPCHP", {
-    name: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.Name",
-    hint: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.Hint",
+  game.settings.register("dnd5e", "initiativeDexTiebreaker", {
+    name: "SETTINGS.DND5E.COMBAT.DexTiebreaker.Name",
+    hint: "SETTINGS.DND5E.COMBAT.DexTiebreaker.Hint",
     scope: "world",
     config: false,
-    default: "no",
+    default: false,
+    type: Boolean
+  });
+
+  game.settings.register("dnd5e", "initiativeScore", {
+    name: "SETTINGS.DND5E.COMBAT.InitiativeScore.Name",
+    hint: "SETTINGS.DND5E.COMBAT.InitiativeScore.Hint",
+    scope: "world",
+    config: false,
+    default: "none",
     type: String,
     choices: {
-      no: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.No",
-      silent: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.Silent",
-      yes: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.Yes"
+      none: "SETTINGS.DND5E.COMBAT.InitiativeScore.None",
+      npcs: "SETTINGS.DND5E.COMBAT.InitiativeScore.NPCs",
+      all: "SETTINGS.DND5E.COMBAT.InitiativeScore.All"
     }
   });
 
@@ -477,16 +477,16 @@ export function registerSystemSettings() {
   });
 
   game.settings.register("dnd5e", "attackRollVisibility", {
-    name: "SETTINGS.DND5E.VISIBILITY.ATTACK.Name",
-    hint: "SETTINGS.DND5E.VISIBILITY.ATTACK.Hint",
+    name: "SETTINGS.DND5E.VISIBILITY.Attack.Name",
+    hint: "SETTINGS.DND5E.VISIBILITY.Attack.Hint",
     scope: "world",
     config: false,
     default: "none",
     type: String,
     choices: {
-      all: "SETTINGS.DND5E.VISIBILITY.ATTACK.All",
-      hideAC: "SETTINGS.DND5E.VISIBILITY.ATTACK.HideAC",
-      none: "SETTINGS.DND5E.VISIBILITY.ATTACK.None"
+      all: "SETTINGS.DND5E.VISIBILITY.Attack.All",
+      hideAC: "SETTINGS.DND5E.VISIBILITY.Attack.HideAC",
+      none: "SETTINGS.DND5E.VISIBILITY.Attack.None"
     }
   });
 
@@ -505,22 +505,22 @@ export function registerSystemSettings() {
   });
 
   game.settings.register("dnd5e", "challengeVisibility", {
-    name: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.Name",
-    hint: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.Hint",
+    name: "SETTINGS.DND5E.VISIBILITY.Challenge.Name",
+    hint: "SETTINGS.DND5E.VISIBILITY.Challenge.Hint",
     scope: "world",
     config: false,
     default: "player",
     type: String,
     choices: {
-      all: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.All",
-      player: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.Player",
-      none: "SETTINGS.DND5E.VISIBILITY.CHALLENGE.None"
+      all: "SETTINGS.DND5E.VISIBILITY.Challenge.All",
+      player: "SETTINGS.DND5E.VISIBILITY.Challenge.Player",
+      none: "SETTINGS.DND5E.VISIBILITY.Challenge.None"
     }
   });
 
   game.settings.register("dnd5e", "concealItemDescriptions", {
-    name: "SETTINGS.DND5E.VISIBILITY.ITEMDESCRIPTIONS.Name",
-    hint: "SETTINGS.DND5E.VISIBILITY.ITEMDESCRIPTIONS.Hint",
+    name: "SETTINGS.DND5E.VISIBILITY.ItemDescriptions.Name",
+    hint: "SETTINGS.DND5E.VISIBILITY.ItemDescriptions.Hint",
     scope: "world",
     config: false,
     default: false,

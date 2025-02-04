@@ -4675,11 +4675,11 @@
     "Hint": "Various configuration options that affect combat.",
     "Label": "Configure Combat",
     "Name": "Combat",
-    "DEXTIEBREAKER": {
+    "DexTiebreaker": {
       "Name": "Dexterity Tiebreaker",
       "Hint": "Append the raw Dexterity ability score to break ties in Initiative."
     },
-    "INITIATIVESCORE": {
+    "InitiativeScore": {
       "Name": "Initiative Score",
       "Hint": "Use a creature's initiative score (10 + bonus) rather than rolling for initiative.",
       "All": "Use Score for Everyone",
@@ -4729,7 +4729,7 @@
   },
   "NPCS": {
     "Name": "NPCs",
-    "AUTOROLLNPCHP": {
+    "AutoRollNPCHP": {
       "Name": "Hit Points",
       "Hint": "Configure whether to roll for NPC max HP whenever a new token is created.",
       "No": "Do not roll",
@@ -4751,21 +4751,21 @@
     "Hint": "Various configuration options that affect player visibility of certain information that the DM may wish to keep secret.",
     "Label": "Configure Visibility",
     "Name": "Visibility",
-    "ATTACK": {
+    "Attack": {
       "Name": "Attack Result Visibility",
       "Hint": "Control visibility of attack roll results in chat cards for players.",
       "All": "Show results & target ACs",
       "HideAC": "Show only results",
       "None": "Hide all"
     },
-    "CHALLENGE": {
+    "Challenge": {
       "All": "Show all",
       "Hint": "Control what roll DCs are visible to the players and whether successes/failures are highlighted.",
       "Name": "Challenge Visibility",
       "None": "Hide all",
       "Player": "Show only from other players"
     },
-    "ITEMDESCRIPTIONS": {
+    "ItemDescriptions": {
       "Hint": "Hide the descriptions of NPC items from players when posted to chat by the DM. Will only hide the descriptions for items without a Chat Description set.",
       "Name": "Conceal NPC Descriptions"
     }
