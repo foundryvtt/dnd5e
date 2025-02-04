@@ -4,6 +4,12 @@ import FormulaField from "../fields/formula-field.mjs";
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import {
+ *   BasicRollProcessConfiguration, BasicRollDialogConfiguration, BasicRollMessageConfiguration
+ * } from "../../dice/basic-roll.mjs";
+ */
+
+/**
  * @typedef {object} UsesData
  * @property {number} spent                 Number of uses that have been spent.
  * @property {string} max                   Formula for the maximum number of uses.
@@ -191,12 +197,19 @@ export default class UsesField extends SchemaField {
   /* -------------------------------------------- */
 
   /**
+   * @typedef {BasicRollProcessConfiguration} RechargeRollProcessConfiguration
+   * @property {boolean} [returnUpdates]  Return item updates rather then performing them. If set to `true`, then the
+   *                                      `dnd5e.postRollRecharge` hook won't be called.
+   */
+
+  /**
    * Rolls a recharge test for an Item or Activity that uses the d6 recharge mechanic.
    * @this {Item5e|Activity}
-   * @param {BasicRollProcessConfiguration} config   Configuration information for the roll.
-   * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
-   * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
-   * @returns {Promise<BasicRoll[]|void>}            The created Roll instances, or `null` if no die was rolled.
+   * @param {RechargeRollProcessConfiguration} config  Configuration information for the roll.
+   * @param {BasicRollDialogConfiguration} dialog      Configuration for the roll dialog.
+   * @param {BasicRollMessageConfiguration} message    Configuration for the roll message.
+   * @returns {Promise<BasicRoll[]|{ rolls: BasicRoll[], updates: object }|void>}  The created Roll instances, update
+   *                                                                               data, or nothing if not rolled.
    */
   static async rollRecharge(config={}, dialog={}, message={}) {
     const uses = this.system ? this.system.uses : this.uses;
@@ -208,6 +221,8 @@ export default class UsesField extends SchemaField {
         parts: ["1d6"],
         data: this.getRollData(),
         options: {
+          delta: this instanceof Item ? { item: this.id, keyPath: "system.uses.spent" }
+            : { item: this.item.id, keyPath: `system.activities.${this.id}.uses.spent` },
           target: parseInt(recharge.formula)
         }
       }]
@@ -217,13 +232,13 @@ export default class UsesField extends SchemaField {
 
     const dialogConfig = foundry.utils.mergeObject({ configure: false }, dialog);
 
-    const messageConfig = foundry.utils.mergeObject(({
+    const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
         speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token })
       },
       rollMode: game.settings.get("core", "rollMode")
-    }));
+    }, message);
 
     if ( "dnd5e.preRollRecharge" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -277,6 +292,7 @@ export default class UsesField extends SchemaField {
       if ( Hooks.call("dnd5e.rollRecharge", this, rolls[0]) === false ) return rolls;
     }
 
+    if ( rollConfig.returnUpdates ) return { rolls, updates };
     if ( !foundry.utils.isEmpty(updates) ) await this.update(updates);
 
     /**
