@@ -213,6 +213,11 @@ export default class InventoryElement extends HTMLElement {
         callback: li => this._onAction(li[0], "delete")
       },
       {
+        name: "DND5E.DisplayCard",
+        icon: '<i class="fas fa-message"></i>',
+        callback: () => item.displayCard()
+      },
+      {
         name: "DND5E.Scroll.CreateScroll",
         icon: '<i class="fa-solid fa-scroll"></i>',
         callback: async li => {
