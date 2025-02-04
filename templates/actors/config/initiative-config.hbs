@@ -1,0 +1,34 @@
+<section class="flexcol">
+    {{!-- Initiative --}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.Initiative" }}</legend>
+        {{ formField fields.ability value=data.ability options=abilityOptions localize=true rootId=partId }}
+        {{ formField fields.bonus value=data.bonus localize=true rootId=partId }}
+        <hr>
+        {{#each flags}}
+        {{ formField field name=name value=value input=../inputs.createCheckboxInput rootId=../partId }}
+        {{/each}}
+    </fieldset>
+
+    {{!-- Rolls --}}
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ROLL.Section" label=(localize "DND5E.Initiative") }}</legend>
+        <div class="form-group split-group">
+            <label>{{ localize "DND5E.ROLL.Range.Label" }}</label>
+            <div class="form-fields">
+                {{ formField fields.roll.fields.min value=data.roll.min placeholder="1" type="number" localize=true
+                             label=(localize "DND5E.Minimum") hint=false classes="label-top" rootId=partId }}
+                {{ formField fields.roll.fields.max value=data.roll.max placeholder="20" type="number" localize=true
+                             label=(localize "DND5E.Maximum") hint=false classes="label-top" rootId=partId }}
+            </div>
+        </div>
+    </fieldset>
+
+    {{!-- Global Bonus --}}
+    <fieldset class="card">
+        <legend>{{ ability.label }}</legend>
+        {{ formField ability.local.field name=ability.local.name value=ability.local.value localize=true rootId=partId }}
+        {{ formField ability.global.field name=ability.global.name value=ability.global.value
+                     label=(localize "DND5E.GlobalBonus") rootId=partId }}
+    </fieldset>
+</fieldset>

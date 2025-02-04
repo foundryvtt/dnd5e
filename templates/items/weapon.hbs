@@ -83,12 +83,14 @@
                 </select>
             </div>
 
+            {{#if baseItems}}
             <div class="form-group">
                 <label>{{ localize "DND5E.ItemWeaponBase" }}</label>
                 <select name="system.type.baseItem">
                     {{selectOptions baseItems selected=system.type.baseItem blank=""}}
                 </select>
             </div>
+            {{/if}}
 
             {{#unless system.isMountable}}
             <div class="form-group input-select">

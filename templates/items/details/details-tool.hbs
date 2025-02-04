@@ -6,8 +6,10 @@
                  blank="" localize=true }}
 
     {{!-- Base Tool --}}
+    {{#if baseItems}}
     {{ formField fields.type.fields.baseItem value=source.type.baseItem choices=baseItems label="DND5E.ItemToolBase"
                  blank="" localize=true }}
+    {{/if}}
 
     {{!-- Tool Properties --}}
     {{ formField fields.properties options=properties.options label="DND5E.ItemToolProperties" localize=true

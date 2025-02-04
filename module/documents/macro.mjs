@@ -7,30 +7,44 @@
 export async function create5eMacro(dropData, slot) {
   const macroData = { type: "script", scope: "actor" };
   switch ( dropData.type ) {
+    case "Activity":
+      const activity = await fromUuid(dropData.uuid);
+      if ( !activity ) {
+        ui.notifications.warn("MACRO.5eUnownedWarn", { localize: true });
+        return null;
+      }
+      foundry.utils.mergeObject(macroData, {
+        name: `${activity.item.name}: ${activity.name}`,
+        img: activity.img,
+        command: `dnd5e.documents.macro.rollItem("${activity.item._source.name}", { activityName: "${
+          activity._source.name}", event });`,
+        flags: { "dnd5e.itemMacro": true }
+      });
+      break;
     case "Item":
       const itemData = await Item.implementation.fromDropData(dropData);
       if ( !itemData ) {
-        ui.notifications.warn("MACRO.5eUnownedWarn", {localize: true});
+        ui.notifications.warn("MACRO.5eUnownedWarn", { localize: true });
         return null;
       }
       foundry.utils.mergeObject(macroData, {
         name: itemData.name,
         img: itemData.img,
-        command: `dnd5e.documents.macro.rollItem("${itemData._source.name}")`,
-        flags: {"dnd5e.itemMacro": true}
+        command: `dnd5e.documents.macro.rollItem("${itemData._source.name}", { event })`,
+        flags: { "dnd5e.itemMacro": true }
       });
       break;
     case "ActiveEffect":
       const effectData = await ActiveEffect.implementation.fromDropData(dropData);
       if ( !effectData ) {
-        ui.notifications.warn("MACRO.5eUnownedWarn", {localize: true});
+        ui.notifications.warn("MACRO.5eUnownedWarn", { localize: true });
         return null;
       }
       foundry.utils.mergeObject(macroData, {
         name: effectData.name,
-        img: effectData.icon,
+        img: effectData.img,
         command: `dnd5e.documents.macro.toggleEffect("${effectData.name}")`,
-        flags: {"dnd5e.effectMacro": true}
+        flags: { "dnd5e.effectMacro": true }
       });
       break;
     default:
@@ -84,12 +98,13 @@ function getMacroTarget(name, documentType) {
  * @param {string} itemName                Name of the item on the selected actor to trigger.
  * @param {object} [options={}]
  * @param {string} [options.activityName]  Name of a specific activity on the item to trigger.
+ * @param {Event} [options.event]          The triggering event.
  * @returns {Promise<ChatMessage|object>}  Usage result.
  */
-export function rollItem(itemName, { activityName }={}) {
+export function rollItem(itemName, { activityName, event }={}) {
   let target = getMacroTarget(itemName, "Item");
   if ( activityName ) target = target?.system.activities?.getName(activityName);
-  return target?.use();
+  return target?.use({ event, legacy: false });
 }
 
 /* -------------------------------------------- */
@@ -101,5 +116,5 @@ export function rollItem(itemName, { activityName }={}) {
  */
 export function toggleEffect(effectName) {
   const effect = getMacroTarget(effectName, "ActiveEffect");
-  return effect?.update({disabled: !effect.disabled});
+  return effect?.update({ disabled: !effect.disabled });
 }

@@ -47,7 +47,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({ value: "potion", baseItem: false }, { label: "DND5E.ItemConsumableType" }),
+      type: new ItemTypeField({ baseItem: false }, { label: "DND5E.ItemConsumableType" }),
       damage: new SchemaField({
         base: new DamageField(),
         replace: new BooleanField()
@@ -134,6 +134,8 @@ export default class ConsumableData extends ItemDataModel.mixin(
     ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.prepareIdentifiable();
+    this.preparePhysicalData();
     if ( !this.type.value ) return;
     const config = CONFIG.DND5E.consumableTypes[this.type.value];
     if ( config ) {
@@ -171,7 +173,10 @@ export default class ConsumableData extends ItemDataModel.mixin(
       ...this.physicalItemSheetFields
     ];
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
-      return { value, label, selected: context.source.damage.base.types.includes(value) };
+      return {
+        value, label,
+        selected: context.source.damage.base.types.includes?.(value) ?? context.source.damage.base.types.has(value)
+      };
     });
     context.denominationOptions = [
       { value: "", label: "" },
@@ -248,7 +253,32 @@ export default class ConsumableData extends ItemDataModel.mixin(
   }
 
   /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    await this.preUpdateIdentifiable(changed, options, user);
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async getCraftCost(options={}) {
+    const { days, gold } = await super.getCraftCost(options);
+    const { consumable, magic } = CONFIG.DND5E.crafting;
+    const { rarity } = this;
+    if ( !this.properties.has("mgc") || !(rarity in magic) ) return { days, gold };
+    const costs = magic[rarity];
+    return {
+      days: Math.floor(costs.days * consumable.days),
+      gold: Math.floor(costs.gold * consumable.gold)
+    };
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */

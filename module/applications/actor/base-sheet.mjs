@@ -1,30 +1,39 @@
 import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
-import { splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, formatLength, splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
+import MovementSensesConfig from "../shared/movement-senses-config.mjs";
+import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 
-import ActorAbilityConfig from "./ability-config.mjs";
-import ActorArmorConfig from "./armor-config.mjs";
-import ActorConcentrationConfig from "./concentration-config.mjs";
-import ActorHitDiceConfig from "./hit-dice-config.mjs";
-import ActorHitPointsConfig from "./hit-points-config.mjs";
-import ActorInitiativeConfig from "./initiative-config.mjs";
-import ActorMovementConfig from "./movement-config.mjs";
-import ActorSensesConfig from "./senses-config.mjs";
 import ActorSheetFlags from "./sheet-flags.mjs";
-import ActorTypeConfig from "./type-config.mjs";
-import DamageModificationConfig from "./damage-modification-config.mjs";
 import SourceConfig from "../source-config.mjs";
 
 import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
-import TraitSelector from "./trait-selector.mjs";
-import ProficiencyConfig from "./proficiency-config.mjs";
-import ToolSelector from "./tool-selector.mjs";
 import ActorSheetMixin from "./sheet-mixin.mjs";
-import ActorSpellSlotsConfig from "./spell-slots-config.mjs";
+
+import AbilityConfig from "./config/ability-config.mjs";
+import ArmorClassConfig from "./config/armor-class-config.mjs";
+import ConcentrationConfig from "./config/concentration-config.mjs";
+import DeathConfig from "./config/death-config.mjs";
+import DamagesConfig from "./config/damages-config.mjs";
+import HabitatConfig from "./config/habitat-config.mjs";
+import HitDiceConfig from "./config/hit-dice-config.mjs";
+import HitPointsConfig from "./config/hit-points-config.mjs";
+import InitiativeConfig from "./config/initiative-config.mjs";
+import LanguagesConfig from "./config/languages-config.mjs";
+import SkillToolConfig from "./config/skill-tool-config.mjs";
+import SkillsConfig from "./config/skills-config.mjs";
+import SpellSlotsConfig from "./config/spell-slots-config.mjs";
+import ToolsConfig from "./config/tools-config.mjs";
+import TraitsConfig from "./config/traits-config.mjs";
+import TreasureConfig from "./config/treasure-config.mjs";
 import WeaponsConfig from "./config/weapons-config.mjs";
+
+/**
+ * @import { DropEffectValue } from "../../drag-drop.mjs"
+ */
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -49,15 +58,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     features: { name: "", properties: new Set() },
     effects: { name: "", properties: new Set() }
   };
-
-  /* -------------------------------------------- */
-
-  /**
-   * Track the most recent drag event.
-   * @type {DragEvent}
-   * @protected
-   */
-  _event = null;
 
   /* -------------------------------------------- */
 
@@ -261,12 +261,13 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Filter and sort speeds on their values
     speeds = speeds.filter(s => s[0]).sort((a, b) => b[0] - a[0]);
+    const units = movement.units ?? defaultUnits("length");
 
     // Case 1: Largest as primary
     if ( largestPrimary ) {
       let primary = speeds.shift();
       return {
-        primary: `${primary ? primary[1] : "0"} ${movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]}`,
+        primary: `${primary?.[1]} ${units}`,
         special: speeds.map(s => s[1]).join(", ")
       };
     }
@@ -274,7 +275,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Case 2: Walk as primary
     else {
       return {
-        primary: `${movement.walk || 0} ${movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0]}`,
+        primary: formatLength(movement.walk ?? 0, units),
         special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
       };
     }
@@ -291,10 +292,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _getSenses(systemData) {
     const senses = systemData.attributes.senses ?? {};
     const tags = {};
+    const units = senses.units ?? defaultUnits("length");
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses[k] ?? 0;
       if ( v === 0 ) continue;
-      tags[k] = `${game.i18n.localize(label)} ${v} ${senses.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0]}`;
+      tags[k] = `${game.i18n.localize(label)} ${formatLength(v, units)}`;
     }
     if ( senses.special ) splitSemicolons(senses.special).forEach((c, i) => tags[`custom${i + 1}`] = c);
     return tags;
@@ -319,6 +321,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _prepareTraits(systemData) {
     const traits = {};
     for ( const [trait, traitConfig] of Object.entries(CONFIG.DND5E.traits) ) {
+      if ( trait === "dm" ) continue;
       const key = traitConfig.actorKeyPath?.replace("system.", "") ?? `traits.${trait}`;
       const data = foundry.utils.deepClone(foundry.utils.getProperty(systemData, key));
       if ( !data ) continue;
@@ -458,8 +461,18 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       let s = spell.system.level || 0;
       const sl = `spell${s}`;
 
+      // Spells from items
+      if ( spell.getFlag("dnd5e", "cachedFor") ) {
+        s = "item";
+        if ( !spell.system.linkedActivity?.displayInSpellbook ) return;
+        if ( !spellbook[s] ) {
+          registerSection(null, s, game.i18n.localize("DND5E.CAST.SECTIONS.Spellbook"));
+          spellbook[s].order = 1000;
+        }
+      }
+
       // Specialized spellcasting modes (if they exist)
-      if ( mode in sections ) {
+      else if ( mode in sections ) {
         s = sections[mode];
         if ( !spellbook[s] ) {
           const l = levels[mode] || {};
@@ -534,6 +547,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const recoveries = ["lr", "sr"];
     const spellSchools = new Set(Object.keys(CONFIG.DND5E.spellSchools));
     const schoolFilter = spellSchools.intersection(filters);
+    const spellcastingClasses = new Set(Object.keys(this.actor.spellcastingClasses));
+    const classFilter = spellcastingClasses.intersection(filters);
 
     return items.filter(item => {
 
@@ -556,6 +571,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( filters.has("ritual") && !item.system.properties?.has("ritual") ) return false;
       if ( filters.has("concentration") && !item.system.properties?.has("concentration") ) return false;
       if ( schoolFilter.size && !schoolFilter.has(item.system.school) ) return false;
+      if ( classFilter.size && !classFilter.has(item.system.sourceClass) ) return false;
       if ( filters.has("prepared") ) {
         if ( alwaysPrepared.includes(item.system.preparation?.mode) ) return true;
         return item.system.preparation?.prepared;
@@ -745,50 +761,57 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     let app;
     switch ( button.dataset.action ) {
       case "armor":
-        app = new ActorArmorConfig(this.actor);
+        app = new ArmorClassConfig({ document: this.actor });
+        break;
+      case "death":
+        app = new DeathConfig({ document: this.actor });
+        break;
+      case "habitat":
+        app = new HabitatConfig({ document: this.actor });
         break;
       case "hitDice":
-        app = new ActorHitDiceConfig(this.actor);
+        app = new HitDiceConfig({ document: this.actor });
         break;
       case "hitPoints":
-        app = new ActorHitPointsConfig(this.actor);
+        app = new HitPointsConfig({ document: this.actor });
         break;
       case "initiative":
-        app = new ActorInitiativeConfig(this.actor);
+        app = new InitiativeConfig({ document: this.actor });
         break;
       case "movement":
-        app = new ActorMovementConfig(this.actor);
+      case "senses":
+        app = new MovementSensesConfig({ document: this.actor, type: button.dataset.action });
+        break;
+      case "treasure":
+        app = new TreasureConfig({ document: this.actor });
         break;
       case "flags":
         app = new ActorSheetFlags(this.actor);
-        break;
-      case "senses":
-        app = new ActorSensesConfig(this.actor);
         break;
       case "source":
         app = new SourceConfig({ document: this.actor });
         break;
       case "type":
-        app = new ActorTypeConfig(this.actor);
+        app = new CreatureTypeConfig({ document: this.actor });
         break;
       case "ability":
         const ability = event.currentTarget.closest("[data-ability]").dataset.ability;
-        if ( ability === "concentration" ) app = new ActorConcentrationConfig(this.actor);
-        else app = new ActorAbilityConfig(this.actor, null, ability);
+        if ( ability === "concentration" ) app = new ConcentrationConfig({ document: this.actor });
+        else app = new AbilityConfig({ document: this.actor, key: ability });
         break;
       case "skill":
         const skill = event.currentTarget.closest("[data-key]").dataset.key;
-        app = new ProficiencyConfig(this.actor, {property: "skills", key: skill});
+        app = new SkillToolConfig({ document: this.actor, trait: "skills", key: skill });
         break;
       case "skills":
-        app = new dnd5e.applications.actor.ActorSkillsConfig(this.actor);
+        app = new SkillsConfig({ document: this.actor });
         break;
       case "spellSlots":
-        app = new ActorSpellSlotsConfig(this.actor);
+        app = new SpellSlotsConfig({ document: this.actor });
         break;
       case "tool":
         const tool = event.currentTarget.closest("[data-key]").dataset.key;
-        app = new ProficiencyConfig(this.actor, {property: "tools", key: tool});
+        app = new SkillToolConfig({ document: this.actor, trait: "tool", key: tool });
         break;
     }
     app?.render(true);
@@ -841,7 +864,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /** @override */
   async _onDropActor(event, data) {
     const canPolymorph = game.user.isGM || (this.actor.isOwner && game.settings.get("dnd5e", "allowPolymorphing"));
-    if ( !canPolymorph ) return false;
+    if ( !canPolymorph || (this._tabs[0].active === "bastion") ) return false;
 
     // Get the target actor
     const cls = getDocumentClass("Actor");
@@ -913,14 +936,6 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /* -------------------------------------------- */
 
-  /** @override */
-  async _onDrop(event) {
-    this._event = event;
-    return super._onDrop(event);
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   async _onDropActiveEffect(event, data) {
     const effect = await ActiveEffect.implementation.fromDropData(data);
@@ -932,16 +947,17 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /** @override */
   async _onDropItem(event, data) {
-    if ( !this.actor.isOwner ) return false;
+    const behavior = this._dropBehavior(event, data);
+    if ( !this.actor.isOwner || (behavior === "none") ) return false;
     const item = await Item.implementation.fromDropData(data);
 
     // Handle moving out of container & item sorting
-    if ( this.actor.uuid === item.parent?.uuid ) {
-      if ( item.system.container !== null ) await item.update({"system.container": null});
+    if ( (behavior === "move") && (this.actor.uuid === item.parent?.uuid) ) {
+      if ( item.system.container !== null ) await item.update({ "system.container": null });
       return this._onSortItem(event, item.toObject());
     }
 
-    return this._onDropItemCreate(item);
+    return this._onDropItemCreate(item, event, behavior);
   }
 
   /* -------------------------------------------- */
@@ -955,18 +971,20 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( !(item instanceof Item) ) item = await fromUuid(item.uuid);
       return item;
     }));
-    return this._onDropItemCreate(droppedItemData);
+    return this._onDropItemCreate(droppedItemData, event);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Handle the final creation of dropped Item data on the Actor.
-   * @param {Item5e[]|Item5e} itemData     The item or items requested for creation
+   * @param {Item5e[]|Item5e} itemData     The item or items requested for creation.
+   * @param {DragEvent} event              The concluding DragEvent which provided the drop data.
+   * @param {DropEffectValue} behavior     The specific drop behavior.
    * @returns {Promise<Item5e[]>}
    * @protected
    */
-  async _onDropItemCreate(itemData) {
+  async _onDropItemCreate(itemData, event, behavior) {
     let items = itemData instanceof Array ? itemData : [itemData];
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
@@ -981,9 +999,14 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Create the owned items & contents as normal
     const toCreate = await Item5e.createWithContents(items, {
-      transformFirst: item => this._onDropSingleItem(item.toObject())
+      transformFirst: item => {
+        if ( item instanceof foundry.abstract.Document ) item = item.toObject();
+        return this._onDropSingleItem(item, event);
+      }
     });
-    return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
+    const created = await Item5e.createDocuments(toCreate, { pack: this.actor.pack, parent: this.actor, keepId: true });
+    if ( behavior === "move" ) items.forEach(i => fromUuid(i.uuid).then(d => d?.delete({ deleteContents: true })));
+    return created;
   }
 
   /* -------------------------------------------- */
@@ -991,11 +1014,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /**
    * Handles dropping of a single item onto this character sheet.
    * @param {object} itemData            The item data to create.
+   * @param {DragEvent} event            The concluding DragEvent which provided the drop data.
    * @returns {Promise<object|boolean>}  The item data to create after processing, or false if the item should not be
    *                                     created or creation has been otherwise handled.
    * @protected
    */
-  async _onDropSingleItem(itemData) {
+  async _onDropSingleItem(itemData, event) {
     // Check to make sure items of this type are allowed on this actor
     if ( this.constructor.unsupportedItemTypes.has(itemData.type) ) {
       ui.notifications.warn(game.i18n.format("DND5E.ActorWarningInvalidItem", {
@@ -1009,11 +1033,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( (itemData.type === "spell")
       && (this._tabs[0].active === "inventory" || this.actor.type === "vehicle") ) {
       const scroll = await Item5e.createScrollFromSpell(itemData);
-      return scroll?.toObject?.();
+      return scroll?.toObject?.() ?? false;
     }
 
     // Clean up data
-    this._onDropResetData(itemData);
+    this._onDropResetData(itemData, event);
 
     // Stack identical consumables
     const stacked = this._onDropStackConsumables(itemData);
@@ -1041,7 +1065,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     }
 
     // Adjust the preparation mode of a leveled spell depending on the section on which it is dropped.
-    if ( itemData.type === "spell" ) this._onDropSpell(itemData);
+    if ( itemData.type === "spell" ) this._onDropSpell(itemData, event);
 
     return itemData;
   }
@@ -1051,8 +1075,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /**
    * Reset certain pieces of data stored on items when they are dropped onto the actor.
    * @param {object} itemData    The item data requested for creation. **Will be mutated.**
+   * @param {DragEvent} event    The concluding DragEvent which provided the drop data.
    */
-  _onDropResetData(itemData) {
+  _onDropResetData(itemData, event) {
     if ( !itemData.system ) return;
     ["attuned", "equipped", "prepared"].forEach(k => delete itemData.system[k]);
   }
@@ -1062,14 +1087,15 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   /**
    * Adjust the preparation mode of a dropped spell depending on the drop location on the sheet.
    * @param {object} itemData    The item data requested for creation. **Will be mutated.**
+   * @param {DragEvent} event    The concluding DragEvent which provided the drop data.
    */
-  _onDropSpell(itemData) {
+  _onDropSpell(itemData, event) {
     if ( !["npc", "character"].includes(this.document.type) ) return;
 
     // Determine the section it is dropped on, if any.
-    let header = this._event.target.closest(".items-header"); // Dropped directly on the header.
+    let header = event.target.closest(".items-header"); // Dropped directly on the header.
     if ( !header ) {
-      const list = this._event.target.closest(".item-list"); // Dropped inside an existing list.
+      const list = event.target.closest(".item-list"); // Dropped inside an existing list.
       header = list?.previousElementSibling;
     }
     const { level, preparationMode } = header?.closest("[data-level]")?.dataset ?? {};
@@ -1185,7 +1211,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _onRollAbilityTest(event) {
     event.preventDefault();
     let ability = event.currentTarget.parentElement.dataset.ability;
-    this.actor.rollAbility(ability, {event: event});
+    this.actor.rollAbility({ ability, event });
   }
 
   /* -------------------------------------------- */
@@ -1199,7 +1225,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _onRollSkillCheck(event) {
     event.preventDefault();
     const skill = event.currentTarget.closest("[data-key]").dataset.key;
-    return this.actor.rollSkill(skill, {event: event});
+    return this.actor.rollSkill({ skill, event });
   }
 
   /* -------------------------------------------- */
@@ -1207,7 +1233,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _onRollToolCheck(event) {
     event.preventDefault();
     const tool = event.currentTarget.closest("[data-key]").dataset.key;
-    return this.actor.rollToolCheck(tool, {event});
+    return this.actor.rollToolCheck({ tool, event });
   }
 
   /* -------------------------------------------- */
@@ -1236,10 +1262,18 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
   _onTraitSelector(event) {
     event.preventDefault();
     const trait = event.currentTarget.dataset.trait;
-    if ( trait === "tool" ) return new ToolSelector(this.actor, trait).render(true);
-    else if ( trait === "dm" ) return new DamageModificationConfig(this.actor).render(true);
-    else if ( trait === "weapon" ) return new WeaponsConfig({ document: this.actor }).render({ force: true });
-    return new TraitSelector(this.actor, trait).render(true);
+    const options = { document: this.actor, trait };
+    if ( trait === "ci" ) options.position = { width: 400 };
+    switch ( trait ) {
+      case "di":
+      case "dm":
+      case "dr":
+      case "dv": return new DamagesConfig(options).render({ force: true });
+      case "languages": return new LanguagesConfig(options).render({ force: true });
+      case "tool": return new ToolsConfig(options).render({ force: true });
+      case "weapon": return new WeaponsConfig(options).render({ force: true });
+      default: return new TraitsConfig(options).render({ force: true });
+    }
   }
 
   /* -------------------------------------------- */
@@ -1255,7 +1289,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( !a || !a.dataset.target ) return;
     switch ( a.dataset.target ) {
       case "armor":
-        (new ActorArmorConfig(this.actor)).render(true);
+        new ArmorClassConfig({ document: this.actor }).render({ force: true });
         return;
       default:
         const item = await fromUuid(a.dataset.target);
@@ -1277,5 +1311,21 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       });
     }
     return buttons;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _updateObject(event, formData) {
+    // Unset any flags which are "false"
+    for ( const [k, v] of Object.entries(formData) ) {
+      if ( k.startsWith("flags.dnd5e.") && !v ) {
+        delete formData[k];
+        if ( foundry.utils.hasProperty(this.document._source, k) ) formData[k.replace(/\.([\w\d]+)$/, ".-=$1")] = null;
+      }
+    }
+
+    // Parent ActorSheet update steps
+    return super._updateObject(event, formData);
   }
 }

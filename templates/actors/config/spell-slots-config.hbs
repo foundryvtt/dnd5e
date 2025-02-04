@@ -1,0 +1,12 @@
+<section>
+    <ol class="unlist form-grid form-grid-20">
+        {{#each overrides}}
+        <li>
+            <label class="input-stack">
+                <span class="roboto-upper">{{ label }}</span>
+                {{ numberInput value name=name min=0 step=1 placeholder=placeholder }}
+            </label>
+        </li>
+        {{/each}}
+    </ol>
+</section>

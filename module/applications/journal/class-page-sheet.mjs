@@ -408,7 +408,7 @@ export default class JournalClassPageSheet extends JournalPageSheet {
       const document = await fromUuid(f.uuid);
       if ( document?.type !== "feat" ) return null;
       return {
-        document,
+        document, level,
         name: modernStyle ? game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
           name: document.name, level: formatNumber(level)
         }) : document.name,
@@ -419,13 +419,38 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     };
 
     let features = [];
-    const itemGrants = Array.from(item.advancement.byType.ItemGrant ?? []).sort((lhs, rhs) => lhs.level - rhs.level);
+    const itemGrants = Array.from(item.advancement.byType.ItemGrant ?? []);
     for ( const advancement of itemGrants ) {
       if ( !!advancement.configuration.optional !== optional ) continue;
       features.push(...advancement.configuration.items.map(f => prepareFeature(f, advancement.level)));
     }
+
+    const asiLevels = (item.advancement.byType.AbilityScoreImprovement ?? []).map(a => a.level).sort((a, b) => a - b);
+    if ( asiLevels.length ) {
+      const [firstLevel, ...otherLevels] = asiLevels;
+      const name = game.i18n.localize("DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.Name");
+      features.push({
+        description: game.i18n.format(
+          `DND5E.ADVANCEMENT.AbilityScoreImprovement.Journal.Description${modernStyle ? "Modern" : "Legacy"}`,
+          {
+            class: item.name,
+            firstLevel: formatNumber(firstLevel),
+            firstLevelOrdinal: formatNumber(firstLevel, { ordinal: true }),
+            maxAbilityScore: formatNumber(CONFIG.DND5E.maxAbilityScore),
+            otherLevels: game.i18n.getListFormatter({ style: "long" }).format(otherLevels.map(l => formatNumber(l))),
+            otherLevelsOrdinal: game.i18n.getListFormatter({ style: "long" })
+              .format(otherLevels.map(l => formatNumber(l, { ordinal: true })))
+          }
+        ),
+        level: asiLevels[0],
+        name: modernStyle ? game.i18n.format("JOURNALENTRYPAGE.DND5E.Class.Features.Name", {
+          name: name, level: formatNumber(firstLevel)
+        }) : name
+      });
+    }
+
     features = await Promise.all(features);
-    return features.filter(f => f);
+    return features.filter(f => f).sort((lhs, rhs) => lhs.level - rhs.level);
   }
 
   /* -------------------------------------------- */
@@ -524,6 +549,13 @@ export default class JournalClassPageSheet extends JournalPageSheet {
     const label = event.target.closest(".form-group").querySelector("label");
     const editor = new JournalEditor(this.document, { textKeyPath, title: label?.innerText });
     editor.render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _canDragDrop() {
+    return this.isEditable;
   }
 
   /* -------------------------------------------- */

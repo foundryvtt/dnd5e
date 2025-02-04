@@ -43,10 +43,10 @@ const {
  * @property {EffectApplicationData[]} effects   Linked effects that can be applied.
  * @property {object} range
  * @property {boolean} range.override            Override range values inferred from item.
- * @property {TargetField} target
+ * @property {TargetData} target
  * @property {boolean} target.override           Override target values inferred from item.
  * @property {boolean} target.prompt             Should the player be prompted to place the template?
- * @property {UsesField} uses                    Uses available to this activity.
+ * @property {UsesData} uses                     Uses available to this activity.
  */
 export default class BaseActivityData extends foundry.abstract.DataModel {
 
@@ -70,7 +70,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
         blank: false, required: true, readOnly: true, initial: () => this.metadata.type
       }),
       name: new StringField({ initial: undefined }),
-      img: new FilePathField({ initial: undefined, categories: ["IMAGE"] }),
+      img: new FilePathField({ initial: undefined, categories: ["IMAGE"], base64: false }),
       sort: new IntegerSortField(),
       activation: new ActivationField({
         override: new BooleanField()
@@ -544,6 +544,11 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     this.name = this.name || game.i18n.localize(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
     this.labels ??= {};
+    const addBaseIndices = data => data?.forEach((d, idx) => Object.defineProperty(d, "_index", { value: idx }));
+    addBaseIndices(this.consumption?.targets);
+    addBaseIndices(this.damage?.parts);
+    addBaseIndices(this.effects);
+    addBaseIndices(this.uses?.recovery);
   }
 
   /* -------------------------------------------- */
@@ -555,10 +560,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   prepareFinalData(rollData) {
     rollData ??= this.getRollData({ deterministic: true });
 
-    this._setOverride("activation");
-    this._setOverride("duration");
-    this._setOverride("range");
-    this._setOverride("target");
+    if ( this.activation ) this._setOverride("activation");
+    if ( this.duration ) this._setOverride("duration");
+    if ( this.range ) this._setOverride("range");
+    if ( this.target ) this._setOverride("target");
 
     Object.defineProperty(this, "_inferredSource", {
       value: Object.freeze(this.toObject(false)),
@@ -567,20 +572,20 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       writable: false
     });
 
-    ActivationField.prepareData.call(this, rollData, this.labels);
-    DurationField.prepareData.call(this, rollData, this.labels);
-    RangeField.prepareData.call(this, rollData, this.labels);
-    TargetField.prepareData.call(this, rollData, this.labels);
-    UsesField.prepareData.call(this, rollData, this.labels);
+    if ( this.activation ) ActivationField.prepareData.call(this, rollData, this.labels);
+    if ( this.duration ) DurationField.prepareData.call(this, rollData, this.labels);
+    if ( this.range ) RangeField.prepareData.call(this, rollData, this.labels);
+    if ( this.target ) TargetField.prepareData.call(this, rollData, this.labels);
+    if ( this.uses ) UsesField.prepareData.call(this, rollData, this.labels);
 
     const actor = this.item.actor;
-    if ( !actor ) return;
+    if ( !actor || !("consumption" in this) ) return;
     for ( const target of this.consumption.targets ) {
       if ( !["itemUses", "material"].includes(target.type) || !target.target ) continue;
 
       // Re-link UUIDs in consumption fields to explicit items on the actor
       if ( target.target.includes(".") ) {
-        const item = actor.sourcedItems?.get(target.target);
+        const item = actor.sourcedItems?.get(target.target, { legacy: false })?.first();
         if ( item ) target.target = item.id;
       }
 
@@ -602,7 +607,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @param {object} rollData     Deterministic roll data from the item.
    */
   prepareDamageLabel(parts, rollData) {
-    this.labels.damage = parts.map(part => {
+    this.labels.damage = parts.map((part, index) => {
       let formula;
       try {
         formula = part.formula;
@@ -610,6 +615,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
           if ( this.item.system.magicAvailable ) formula += ` + ${this.item.system.magicalBonus ?? 0}`;
           if ( (this.item.type === "weapon") && !/@mod\b/.test(formula) ) formula += " + @mod";
         }
+        if ( !index && this.item.system.damage?.bonus ) formula += ` + ${this.item.system.damage.bonus}`;
         const roll = new CONFIG.Dice.BasicRoll(formula, rollData);
         roll.simplify();
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
@@ -649,6 +655,19 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Retrieve the action type reflecting changes based on the provided attack mode.
+   * @param {string} [attackMode=""]
+   * @returns {string}
+   */
+  getActionType(attackMode="") {
+    let actionType = this.actionType;
+    if ( (actionType === "mwak") && (attackMode?.startsWith("thrown") || (attackMode === "ranged")) ) return "rwak";
+    return actionType;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the roll parts used to create the damage rolls.
    * @param {Partial<DamageRollProcessConfiguration>} [config={}]
    * @returns {DamageRollProcessConfiguration}
@@ -683,8 +702,10 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     const data = { ...rollData };
 
     if ( index === 0 ) {
-      const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${this.actionType}.damage`);
-      if ( bonus && (parseInt(bonus) !== 0) ) parts.push(bonus);
+      const actionType = this.getActionType(rollConfig.attackMode);
+      const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${actionType}.damage`);
+      if ( bonus && !/^0+$/.test(bonus) ) parts.push(bonus);
+      if ( this.item.system.damage?.bonus ) parts.push(String(this.item.system.damage.bonus));
     }
 
     const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);

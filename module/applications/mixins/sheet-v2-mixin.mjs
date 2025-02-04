@@ -1,10 +1,12 @@
+import DragDropApplicationMixin from "./drag-drop-mixin.mjs";
+
 /**
  * Adds common V2 sheet functionality.
  * @param {typeof DocumentSheet} Base  The base class being mixed.
  * @returns {typeof DocumentSheetV2}
  */
 export default function DocumentSheetV2Mixin(Base) {
-  return class DocumentSheetV2 extends Base {
+  return class DocumentSheetV2 extends DragDropApplicationMixin(Base) {
     /**
      * @typedef {object} SheetTabDescriptor5e
      * @property {string} tab                       The tab key.
@@ -37,13 +39,34 @@ export default function DocumentSheetV2Mixin(Base) {
 
     /**
      * The mode the sheet is currently in.
-     * @type {ActorSheetV2.MODES}
+     * @type {ActorSheetV2.MODES|null}
      * @protected
      */
-    _mode = this.constructor.MODES.PLAY;
+    _mode = null;
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    static _customElements = super._customElements.concat(["dnd5e-checkbox", "proficiency-cycle", "slide-toggle"]);
+
+    /** @inheritDoc */
+    static _customElements = super._customElements.concat(["dnd5e-checkbox"]);
 
     /* -------------------------------------------- */
     /*  Rendering                                   */
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    async _render(force, { mode, ...options }={}) {
+      if ( (mode === undefined) && (options.renderContext === "createItem") ) mode = this.constructor.MODES.EDIT;
+      this._mode = mode ?? this._mode ?? this.constructor.MODES.PLAY;
+      if ( this.rendered ) {
+        const toggle = this.element[0].querySelector(".window-header .mode-slider");
+        toggle.checked = this._mode === this.constructor.MODES.EDIT;
+      }
+      return super._render(force, options);
+    }
+
     /* -------------------------------------------- */
 
     /** @inheritDoc */
@@ -265,6 +288,45 @@ export default function DocumentSheetV2Mixin(Base) {
       row.classList.toggle("collapsed", expanded);
       icon.classList.toggle("fa-compress", !expanded);
       icon.classList.toggle("fa-expand", expanded);
+    }
+
+    /* -------------------------------------------- */
+    /*  Drag & Drop                                 */
+    /* -------------------------------------------- */
+
+    /** @override */
+    _allowedDropBehaviors(event, data) {
+      if ( !data.uuid ) return new Set(["copy", "link"]);
+      const allowed = new Set(["copy", "move", "link"]);
+      const s = foundry.utils.parseUuid(data.uuid);
+      const t = foundry.utils.parseUuid(this.document.uuid);
+      const sCompendium = s.collection instanceof CompendiumCollection;
+      const tCompendium = t.collection instanceof CompendiumCollection;
+
+      // If either source or target are within a compendium, but not inside the same compendium, move not allowed
+      if ( (sCompendium || tCompendium) && (s.collection !== t.collection) ) allowed.delete("move");
+
+      return allowed;
+    }
+
+    /* -------------------------------------------- */
+
+    /** @override */
+    _defaultDropBehavior(event, data) {
+      if ( !data.uuid ) return "copy";
+      const d = foundry.utils.parseUuid(data.uuid);
+      const t = foundry.utils.parseUuid(this.document.uuid);
+      const base = d.embedded?.length ? "document" : "primary";
+      return (d.collection === t.collection) && (d[`${base}Id`] === t[`${base}Id`])
+        && (d[`${base}Type`] === t[`${base}Type`]) ? "move" : "copy";
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    async _onDragStart(event) {
+      await super._onDragStart(event);
+      if ( !this.document.isOwner || this.document.compendium?.locked ) event.dataTransfer.effectAllowed = "copyLink";
     }
   };
 }

@@ -11,10 +11,14 @@
                  label=(localize "DND5E.ItemFeatureSubtype" category=(lookup (lookup config.featureTypes source.type.value) "label")) }}
     {{/if}}
 
+    {{#if (eq system.type.value "vehicle")}}
+    {{ formField fields.cover value=source.cover options=coverOptions }}
+    {{/if}}
+
     {{!-- Feature Prerequisites --}}
-    {{ formField fields.prerequisites.fields.level value=source.prerequisites.level localize=true step=1
-                 label="DND5E.Prerequisites.FIELDS.prerequisites.level.label"
-                 hint="DND5E.Prerequisites.FIELDS.prerequisites.level.hint" }}
+    {{ formField fields.prerequisites.fields.level value=source.prerequisites.level }}
+    {{ formField fields.prerequisites.fields.repeatable value=source.prerequisites.repeatable
+                 input=inputs.createCheckboxInput }}
 
     {{!-- Feature Properties --}}
     {{ formField fields.properties options=properties.options label="DND5E.ItemFeatureProperties" localize=true
@@ -26,13 +30,13 @@
     <legend>{{ localize "DND5E.ENCHANTMENT.Label" }}</legend>
 
     {{!-- Max Enchantments --}}
-    {{ formField fields.enchant.fields.max value=source.enchantment.max localize=true
+    {{ formField fields.enchant.fields.max value=source.enchant.max localize=true
                  label="DND5E.ENCHANTMENT.FIELDS.enchantment.items.max.label"
                  hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.max.hint" }}
 
     {{!-- Enchantment Replacement --}}
-    {{ formField fields.enchant.fields.period value=source.enchantment.period localize=true
-                 choices=config.enchantmentPeriods labelAttr="label" blank="DND5E.UsesPeriods.Never"
+    {{ formField fields.enchant.fields.period value=source.enchant.period localize=true
+                 choices=config.enchantmentPeriods labelAttr="label" blank="DND5E.ENCHANTMENT.Period.Never"
                  label="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.label"
                  hint="DND5E.ENCHANTMENT.FIELDS.enchantment.items.period.hint" }}
 </fieldset>

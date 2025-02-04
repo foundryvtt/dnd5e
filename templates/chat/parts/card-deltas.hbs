@@ -1,0 +1,12 @@
+<section class="deltas">
+    <strong class="roboto-condensed-upper">{{ localize "DND5E.CHATMESSAGE.Deltas.Recovery" }}</strong>
+    <ul class="unlist">
+        {{#each deltas}}
+        <li class="delta-{{ type }}">
+            <span class="label">{{ label }}</span>
+            <span class="value">{{ delta }}</span>
+        </li>
+        {{/each}}
+    </ul>
+    <!-- TODO: Add button to revert changes -->
+</section>

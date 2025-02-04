@@ -18,19 +18,25 @@ const { ArrayField, BooleanField, EmbeddedDataField, SchemaField, StringField } 
  * @property {SpellConfigurationData} spell        Data used to modify any granted spells.
  */
 export default class ItemGrantConfigurationData extends foundry.abstract.DataModel {
+
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.ADVANCEMENT.ItemGrant", "DND5E.ADVANCEMENT.SPELLCONFIG"];
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static defineSchema() {
     return {
       items: new ArrayField(new SchemaField({
         uuid: new StringField(),
-        optional: new BooleanField({label: "DND5E.AdvancementItemGrantOptional"})
-      }), {required: true, label: "DOCUMENT.Items"}),
-      optional: new BooleanField({
-        required: true, label: "DND5E.AdvancementItemGrantOptional", hint: "DND5E.AdvancementItemGrantOptionalHint"
-      }),
-      spell: new EmbeddedDataField(SpellConfigurationData, {
-        required: true, nullable: true, initial: null
-      })
+        optional: new BooleanField()
+      }), { required: true }),
+      optional: new BooleanField({ required: true }),
+      spell: new EmbeddedDataField(SpellConfigurationData, { required: true, nullable: true, initial: null })
     };
   }
 

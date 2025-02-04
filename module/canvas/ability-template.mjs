@@ -47,6 +47,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     if ( !templateShape ) return null;
 
     // Prepare template data
+    const rollData = activity.getRollData();
     const templateData = foundry.utils.mergeObject({
       t: templateShape,
       user: game.user.id,
@@ -62,8 +63,9 @@ export default class AbilityTemplate extends MeasuredTemplate {
           height: target.height,
           adjustedSize: target.type === "radius"
         },
+        item: activity.item.uuid,
         origin: activity.uuid,
-        spellLevel: activity.item.system.level
+        spellLevel: rollData.item.level
       } }
     }, options);
 
@@ -236,7 +238,7 @@ export default class AbilityTemplate extends MeasuredTemplate {
     const now = Date.now(); // Apply a 20ms throttle
     if ( now - this.#moveTime <= 20 ) return;
     const center = event.data.getLocalPosition(this.layer);
-    const updates = canvas.templates.getSnappedPoint(center);
+    const updates = this.getSnappedPosition(center);
 
     // Adjust template size to take hovered token into account if `adjustedSize` is set
     const baseDistance = this.document.flags.dnd5e?.dimensions?.size;

@@ -619,8 +619,8 @@
       "img": "icons/commodities/claws/claw-pincer-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>bludgeoning damage</em></strong>.</p>\n<p>The target is grappled (escape DC 14) if it is a Large or smaller creature and the chuul doesn't have two other creatures grappled.</p>\n</section>\n<p>The Chuul attacks with its Pincer. The target is grappled if it is a Large or smaller creature.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>bludgeoning damage</em></strong>.</p><p>The target is grappled (escape DC 14) if it is a Large or smaller creature and the chuul doesn't have two other creatures grappled.</p>",
+          "chat": "<p>The Chuul attacks with its Pincer. The target is grappled if it is a Large or smaller creature.</p>"
         },
         "source": {
           "custom": "",
@@ -809,10 +809,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676563,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!P6qC8jB3pnEH0tIE.7lnXqe8AnWhtnQh7"
     },
@@ -823,8 +823,8 @@
       "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>One creature grappled by the chuul must succeed on a  <strong>DC 13 Constitution</strong> saving throw or be poisoned for 1 minute.</p>\n<p>Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>\n</section>\n<p>One creature grappled by the chuul must make a <strong>Constitution</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
-          "chat": ""
+          "value": "<p>One creature grappled by the chuul must succeed on a  <strong>DC 13 Constitution</strong> saving throw or be poisoned for 1 minute.</p><p>Until this poison ends, the target is paralyzed. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
+          "chat": "<p>One creature grappled by the chuul must make a <strong>Constitution</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>"
         },
         "source": {
           "custom": "",
@@ -939,10 +939,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676563,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!P6qC8jB3pnEH0tIE.XUzROtGqVZS61Ofm"
     },

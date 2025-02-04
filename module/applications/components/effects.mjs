@@ -200,7 +200,7 @@ export default class EffectsElement extends HTMLElement {
       const isFavorited = this.document.system.hasFavorite(uuid);
       options.push({
         name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-        icon: "<i class='fas fa-star fa-fw'></i>",
+        icon: "<i class='fas fa-bookmark fa-fw'></i>",
         condition: () => effect.isOwner,
         callback: li => this._onAction(li[0], isFavorited ? "unfavorite" : "favorite"),
         group: "state"

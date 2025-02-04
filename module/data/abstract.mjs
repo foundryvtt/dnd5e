@@ -1,4 +1,5 @@
 import Proficiency from "../documents/actor/proficiency.mjs";
+import * as Trait from "../documents/actor/trait.mjs";
 
 /**
  * Data Model variant with some extra methods to support template mix-ins.
@@ -374,6 +375,33 @@ export class ActorDataModel extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Data preparation steps to perform after item data has been prepared, but before active effects are applied.
+   */
+  prepareEmbeddedData() {
+    this._prepareScaleValues();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Derive any values that have been scaled by the Advancement system.
+   * Mutates the value of the `system.scale` object.
+   * @protected
+   */
+  _prepareScaleValues() {
+    this.scale = this.parent.items.reduce((scale, item) => {
+      if ( CONFIG.DND5E.advancementTypes.ScaleValue.validItemTypes.has(item.type) ) {
+        scale[item.identifier] = item.scaleValues;
+      }
+      return scale;
+    }, {});
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
@@ -390,6 +418,15 @@ export class ActorDataModel extends SystemDataModel {
     data.prof.deterministic = deterministic;
     return data;
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Reset combat-related uses.
+   * @param {string[]} periods               Which recovery periods should be considered.
+   * @param {CombatRecoveryResults} results  Updates to perform on the actor and containing items.
+   */
+  async recoverCombatUses(periods, results) {}
 }
 
 /* -------------------------------------------- */
@@ -466,10 +503,10 @@ export class ItemDataModel extends SystemDataModel {
 
   /** @inheritDoc */
   prepareBaseData() {
-    if ( this.parent.isEmbedded ) {
+    if ( this.parent.isEmbedded && this.parent.actor?.items.has(this.parent.id) ) {
       const sourceId = this.parent.flags.dnd5e?.sourceId ?? this.parent._stats.compendiumSource
         ?? this.parent.flags.core?.sourceId;
-      if ( sourceId ) this.parent.actor?.sourcedItems?.set(sourceId, this.parent);
+      if ( sourceId ) this.parent.actor.sourcedItems?.set(sourceId, this.parent);
     }
   }
 
@@ -525,7 +562,8 @@ export class ItemDataModel extends SystemDataModel {
         }),
         chat: await TextEditor.enrichHTML(chat ?? "", {
           rollData, relativeTo: this.parent, ...enrichmentOptions
-        })
+        }),
+        concealed: game.user.isGM && game.settings.get("dnd5e", "concealItemDescriptions") && !description.chat
       }
     };
 
@@ -542,6 +580,44 @@ export class ItemDataModel extends SystemDataModel {
     context.properties = context.properties.filter(_ => _);
     context.hasProperties = context.tags?.length || context.properties.length;
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine the cost to craft this Item.
+   * @param {object} [options]
+   * @param {"buy"|"craft"|"none"} [options.baseItem="craft"]  Ignore base item if "none". Include full base item gold
+   *                                                           price if "buy". Include base item craft costs if "craft".
+   * @returns {Promise<{ days: number, gold: number }>}
+   */
+  async getCraftCost({ baseItem="craft" }={}) {
+    let days = 0;
+    let gold = 0;
+    if ( !("price" in this) ) return { days, gold };
+    const { price, type, rarity } = this;
+
+    // Mundane Items
+    if ( !this.properties.has("mgc") || !rarity ) {
+      const { mundane } = CONFIG.DND5E.crafting;
+      const valueInGP = price.valueInGP ?? 0;
+      return { days: Math.ceil(valueInGP * mundane.days), gold: Math.floor(valueInGP * mundane.gold) };
+    }
+
+    const base = await Trait.getBaseItem(type.identifier ?? "", { fullItem: true });
+    if ( base && (baseItem !== "none") ) {
+      if ( baseItem === "buy" ) gold += base.system.price.valueInGP ?? 0;
+      else {
+        const costs = await base.system.getCraftCost();
+        days += costs.days;
+        gold += costs.gold;
+      }
+    }
+
+    const { magic } = CONFIG.DND5E.crafting;
+    if ( !(rarity in magic) ) return { days, gold };
+    const costs = magic[rarity];
+    return { days: days + costs.days, gold: gold + costs.gold };
   }
 
   /* -------------------------------------------- */

@@ -742,8 +742,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>0 ft.,</strong> one target in the swarm's space. Hit: <strong>7 (2d6) <em>piercing damage</em></strong>, or <strong>3 (1d6) <em>piercing damage</em></strong> if the swarm has half of its hit points or fewer.</p></section>\n<p>The Swarm of Rats attacks with a flurry of Bites.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>0 ft.,</strong> one target in the swarm's space. Hit: <strong>7 (2d6) <em>piercing damage</em></strong>, or <strong>3 (1d6) <em>piercing damage</em></strong> if the swarm has half of its hit points or fewer.</p>",
+          "chat": "<p>The Swarm of Rats attacks with a flurry of Bites.</p>"
         },
         "source": {
           "custom": "",
@@ -931,10 +931,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676415,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!8ihbbjkaOFTPbI73.ESv9NuVeZhnEW1ua"
     }

@@ -4,6 +4,12 @@ import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 
 export default class ChatMessage5e extends ChatMessage {
 
+  /**
+   * HTML tag names for chat trays that can open and close.
+   * @type {string[]}
+   */
+  static TRAY_TYPES = ["damage-application", "effect-application"];
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -41,6 +47,7 @@ export default class ChatMessage5e extends ChatMessage {
 
   /** @inheritDoc */
   get isRoll() {
+    if ( this.system?.isRoll !== undefined ) return this.system.isRoll;
     return super.isRoll && !this.flags.dnd5e?.rest;
   }
 
@@ -58,6 +65,15 @@ export default class ChatMessage5e extends ChatMessage {
       default: return false;
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Store the state of any trays in the message.
+   * @type {Map<string, boolean>}
+   * @protected
+   */
+  _trayStates;
 
   /* -------------------------------------------- */
   /*  Data Migrations                             */
@@ -88,6 +104,10 @@ export default class ChatMessage5e extends ChatMessage {
   prepareData() {
     super.prepareData();
     this._shimFlags();
+    if ( !this.flags.dnd5e?.item?.data && this.flags.dnd5e?.item?.id ) {
+      const itemData = this.getFlag("dnd5e", "use.consumed.deleted")?.find(i => i._id === this.flags.dnd5e.item.id);
+      if ( itemData ) Object.defineProperty(this.flags.dnd5e.item, "data", { value: itemData });
+    }
     dnd5e.registry.messages.track(this);
   }
 
@@ -96,8 +116,14 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getHTML(...args) {
-    const html = await super.getHTML();
+  async getHTML(options={}) {
+    const html = await super.getHTML(options);
+    const element = (html instanceof HTMLElement) ? html : html[0];
+
+    if ( foundry.utils.getType(this.system?.getHTML) === "function" ) {
+      await this.system.getHTML(element, options);
+      return html;
+    }
 
     this._displayChatActionButtons(html);
     this._highlightCriticalSuccessFailure(html);
@@ -105,9 +131,10 @@ export default class ChatMessage5e extends ChatMessage {
       html.find(".description.collapsible").each((i, el) => el.classList.add("collapsed"));
     }
 
-    this._enrichChatCard(html[0]);
-    this._collapseTrays(html[0]);
-    this._activateActivityListeners(html[0]);
+    this._enrichChatCard(element);
+    this._collapseTrays(element);
+    this._activateActivityListeners(element);
+    dnd5e.bastion._activateChatListeners(this, element);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
@@ -116,7 +143,7 @@ export default class ChatMessage5e extends ChatMessage {
      * @param {ChatMessage5e} message  Chat message being rendered.
      * @param {HTMLElement} html       HTML contents of the message.
      */
-    Hooks.callAll("dnd5e.renderChatMessage", this, html[0]);
+    Hooks.callAll("dnd5e.renderChatMessage", this, element);
 
     return html;
   }
@@ -135,11 +162,11 @@ export default class ChatMessage5e extends ChatMessage {
       // Collapse chat message trays older than 5 minutes
       case "older": collapse = this.timestamp < Date.now() - (5 * 60 * 1000); break;
     }
-    for ( const tray of html.querySelectorAll(".card-tray, .effects-tray") ) {
-      tray.classList.toggle("collapsed", collapse);
+    for ( const tray of html.querySelectorAll(".card-tray") ) {
+      tray.classList.toggle("collapsed", this._trayStates?.get(tray.className.replace(" collapsed", "")) ?? collapse);
     }
-    for ( const element of html.querySelectorAll("damage-application, effect-application") ) {
-      element.toggleAttribute("open", !collapse);
+    for ( const element of html.querySelectorAll(this.constructor.TRAY_TYPES.join(", ")) ) {
+      element.toggleAttribute("open", this._trayStates?.get(element.tagName) ?? !collapse);
     }
   }
 
@@ -182,6 +209,7 @@ export default class ChatMessage5e extends ChatMessage {
     const originatingMessage = this.getOriginatingMessage();
     const displayChallenge = originatingMessage?.shouldDisplayChallenge;
     const displayAttackResult = game.user.isGM || (game.settings.get("dnd5e", "attackRollVisibility") !== "none");
+    const forceSuccess = this.flags.dnd5e?.roll?.forceSuccess === true;
 
     /**
      * Create an icon to indicate success or failure.
@@ -215,11 +243,11 @@ export default class ChatMessage5e extends ChatMessage {
       const isAttack = this.getFlag("dnd5e", "roll.type") === "attack";
       const showResult = isAttack ? displayAttackResult : displayChallenge;
       if ( d.options.target && showResult ) {
-        if ( d20Roll.total >= d.options.target ) total.classList.add("success");
+        if ( d20Roll.isSuccess || forceSuccess ) total.classList.add("success");
         else total.classList.add("failure");
       }
       if ( canCrit && d20Roll.isCritical ) total.classList.add("critical");
-      if ( canCrit && d20Roll.isFumble ) total.classList.add("fumble");
+      if ( canCrit && d20Roll.isFumble && !forceSuccess ) total.classList.add("fumble");
 
       const icons = document.createElement("div");
       icons.classList.add("icons");
@@ -255,11 +283,16 @@ export default class ChatMessage5e extends ChatMessage {
     const avatar = document.createElement("a");
     avatar.classList.add("avatar");
     if ( actor ) avatar.dataset.uuid = actor.uuid;
-    avatar.innerHTML = `<img src="${img}" alt="${nameText}">`;
+    const avatarImg = document.createElement("img");
+    Object.assign(avatarImg, { src: img, alt: nameText });
+    avatar.append(avatarImg);
 
     const name = document.createElement("span");
     name.classList.add("name-stacked");
-    name.innerHTML = `<span class="title">${nameText}</span>`;
+    const title = document.createElement("span");
+    title.classList.add("title");
+    title.append(nameText);
+    name.append(title);
 
     const subtitle = document.createElement("span");
     subtitle.classList.add("subtitle");
@@ -297,7 +330,9 @@ export default class ChatMessage5e extends ChatMessage {
     if ( this.isContentVisible && item && roll ) {
       const isCritical = (roll.type === "damage") && this.rolls[0]?.isCritical;
       const subtitle = roll.type === "damage"
-        ? isCritical ? game.i18n.localize("DND5E.CriticalHit") : game.i18n.localize("DND5E.DamageRoll")
+        ? isCritical
+          ? game.i18n.localize("DND5E.CriticalHit") 
+          : activity?.damageFlavor ?? game.i18n.localize("DND5E.DamageRoll")
         : roll.type === "attack"
           ? (activity?.getActionLabel(roll.attackMode) ?? "")
           : (item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]));
@@ -306,14 +341,19 @@ export default class ChatMessage5e extends ChatMessage {
       flavor.innerHTML = `
         <section class="card-header description ${isCritical ? "critical" : ""}">
           <header class="summary">
-            <img class="gold-icon" src="${item.img}" alt="${item.name}">
             <div class="name-stacked">
-              <span class="title">${item.name}</span>
               <span class="subtitle">${subtitle}</span>
             </div>
           </header>
         </section>
       `;
+      const icon = document.createElement("img");
+      Object.assign(icon, { className: "gold-icon", src: item.img, alt: item.name });
+      flavor.querySelector("header").insertAdjacentElement("afterbegin", icon);
+      const title = document.createElement("span");
+      title.classList.add("title");
+      title.append(item.name);
+      flavor.querySelector(".name-stacked").insertAdjacentElement("afterbegin", title);
       html.querySelector(".message-header .flavor-text").remove();
       html.querySelector(".message-content").insertAdjacentElement("afterbegin", flavor);
     }
@@ -327,6 +367,7 @@ export default class ChatMessage5e extends ChatMessage {
         if ( !(roll instanceof DamageRoll) && this.rolls[i] ) this._enrichRollTooltip(this.rolls[i], el);
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
+      this._enrichSaveTooltip(html);
       this._enrichEnchantmentTooltip(html);
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     } else {
@@ -410,22 +451,30 @@ export default class ChatMessage5e extends ChatMessage {
       </div>
     `;
     const evaluation = tray.querySelector("ul");
-    evaluation.innerHTML = targets.map(({ name, ac, uuid }) => {
+    const rows = targets.map(({ name, ac, uuid }) => {
       if ( !game.user.isGM && (visibility !== "all") ) ac = "";
       const isMiss = !attackRoll.isCritical && ((attackRoll.total < ac) || attackRoll.isFumble);
-      return [`
-        <li data-uuid="${uuid}" class="target ${isMiss ? "miss" : "hit"}">
-          <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
-          <div class="name">${name}</div>
-          ${(ac !== "") ? `
-          <div class="ac">
-            <i class="fas fa-shield-halved"></i>
-            <span>${(ac === null) ? "&infin;" : ac}</span>
-          </div>
-          ` : ""}
-        </li>
-      `, isMiss];
-    }).sort((a, b) => (a[1] === b[1]) ? 0 : a[1] ? 1 : -1).reduce((str, [li]) => str + li, "");
+      const li = document.createElement("li");
+      Object.assign(li.dataset, { uuid, miss: isMiss });
+      li.className = `target ${isMiss ? "miss" : "hit"}`;
+      li.innerHTML = `
+        <i class="fas ${isMiss ? "fa-times" : "fa-check"}"></i>
+        <div class="name"></div>
+        ${(ac !== "") ? `
+        <div class="ac">
+          <i class="fas fa-shield-halved"></i>
+          <span>${(ac === null) ? "&infin;" : ac}</span>
+        </div>
+        ` : ""}
+      `;
+      li.querySelector(".name").append(name);
+      return li;
+    }).sort((a, b) => {
+      const missA = Boolean(a.dataset.miss);
+      const missB = Boolean(b.dataset.miss);
+      return missA === missB ? 0 : missA ? 1 : -1;
+    });
+    evaluation.append(...rows);
     evaluation.querySelectorAll("li.target").forEach(target => {
       target.addEventListener("click", this._onTargetMouseDown.bind(this));
       target.addEventListener("pointerover", this._onTargetHoverIn.bind(this));
@@ -568,6 +617,48 @@ export default class ChatMessage5e extends ChatMessage {
     const afterElement = html.querySelector(".card-footer");
     if ( afterElement ) afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
     else html.querySelector(".chat-card")?.append(enchantmentApplication);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Display option to resist a failed save using a legendary resistance.
+   * @param {HTMLLIElement} html  The chat card.
+   * @protected
+   */
+  _enrichSaveTooltip(html) {
+    const actor = this.getAssociatedActor();
+    const roll = this.getFlag("dnd5e", "roll");
+    if ( (actor?.type !== "npc") || (roll?.type !== "save") || this.rolls.some(r => r.isSuccess) ) return;
+
+    const content = document.createElement("div");
+    content.classList.add("dnd5e2", "chat-card");
+
+    // If message has the `forceSuccess` flag, mark it as resisted
+    if ( roll.forceSuccess ) content.insertAdjacentHTML("beforeend", `
+      <p class="supplement">
+        <strong>${game.i18n.localize("DND5E.ROLL.Status")}</strong>
+        ${game.i18n.localize("DND5E.LegendaryResistance.Resisted")}
+      </p>
+    `);
+
+    // Otherwise if actor has legendary resistances remaining, display resist button
+    else if ( actor.system.resources.legres.value && actor.isOwner ) {
+      content.insertAdjacentHTML("beforeend", `
+        <div class="card-buttons">
+          <button type="button">
+            <i class="fa-solid fa-dragon" inert></i>
+            ${game.i18n.localize("DND5E.LegendaryResistance.Action.Resist")}
+          </button>
+        </div>
+      `);
+      const button = content.querySelector("button");
+      button.addEventListener("click", () => actor.system.resistSave(this));
+    }
+
+    else return;
+
+    html.querySelector(".message-content").append(content);
   }
 
   /* -------------------------------------------- */
@@ -806,11 +897,14 @@ export default class ChatMessage5e extends ChatMessage {
    * @param {ChatPopout} app  The ChatPopout Application instance.
    * @param {jQuery} html     The rendered Application HTML.
    */
-  static onRenderChatPopout(app, [html]) {
+  static onRenderChatPopout(app, html) {
+    html = html instanceof HTMLElement ? html : html[0];
     const close = html.querySelector(".header-button.close");
-    close.innerHTML = '<i class="fas fa-times"></i>';
-    close.dataset.tooltip = game.i18n.localize("Close");
-    close.setAttribute("aria-label", close.dataset.tooltip);
+    if ( close ) {
+      close.innerHTML = '<i class="fas fa-times"></i>';
+      close.dataset.tooltip = game.i18n.localize("Close");
+      close.setAttribute("aria-label", close.dataset.tooltip);
+    }
     html.querySelector(".message-metadata [data-context-menu]")?.remove();
   }
 
@@ -818,9 +912,11 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Wait to apply appropriate element heights until after the chat log has completed its initial batch render.
-   * @param {jQuery} html  The chat log HTML.
+   * @param {HTMLElement|jQuery} html
    */
-  static onRenderChatLog([html]) {
+  static onRenderChatLog(html) {
+    if ( game.release.generation < 13 ) [html] = html;
+    if ( game.user.isGM ) html.dataset.gmUser = "";
     if ( !game.settings.get("dnd5e", "autoCollapseItemCards") ) {
       requestAnimationFrame(() => {
         // FIXME: Allow time for transitions to complete. Adding a transitionend listener does not appear to work, so
@@ -849,7 +945,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @param {boolean} [options.releaseAll=false]  Force all modifiers to be considered released.
    */
   static toggleModifiers({ releaseAll=false }={}) {
-    document.querySelectorAll(".chat-sidebar > ol").forEach(chatlog => {
+    document.querySelectorAll(".chat-sidebar > ol, #chat .chat-scroll > ol").forEach(chatlog => {
       for ( const key of Object.values(KeyboardManager.MODIFIER_KEYS) ) {
         if ( game.keyboard.isModifierActive(key) && !releaseAll ) chatlog.dataset[`modifier${key}`] = "";
         else delete chatlog.dataset[`modifier${key}`];

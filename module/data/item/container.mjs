@@ -1,9 +1,10 @@
+import { defaultUnits } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
+import CurrencyTemplate from "../shared/currency.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
-import CurrencyTemplate from "../shared/currency.mjs";
 
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -15,10 +16,15 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes EquippableItemTemplate
  * @mixes CurrencyTemplate
  *
- * @property {Set<string>} properties       Container properties.
  * @property {object} capacity              Information on container's carrying capacity.
- * @property {string} capacity.type         Method for tracking max capacity as defined in `DND5E.itemCapacityTypes`.
- * @property {number} capacity.value        Total amount of the type this container can carry.
+ * @property {number} capacity.count        Number of items that can be stored within the container.
+ * @property {object} capacity.volume
+ * @property {string} capacity.volume.units  Units used to measure volume capacity.
+ * @property {number} capacity.volume.value  Amount of volume that can be stored.
+ * @property {object} capacity.weight
+ * @property {string} capacity.weight.units  Units used to measure weight capacity.
+ * @property {number} capacity.weight.value  Amount of weight that can be stored.
+ * @property {Set<string>} properties       Container properties.
  */
 export default class ContainerData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, PhysicalItemTemplate, EquippableItemTemplate, CurrencyTemplate
@@ -29,21 +35,26 @@ export default class ContainerData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.CONTAINER", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      quantity: new NumberField({ min: 1, max: 1 }),
-      properties: new SetField(new StringField(), { label: "DND5E.ItemContainerProperties" }),
       capacity: new SchemaField({
-        type: new StringField({
-          required: true, initial: "weight", blank: false, label: "DND5E.ItemContainerCapacityType"
+        count: new NumberField({ min: 0, integer: true }),
+        volume: new SchemaField({
+          value: new NumberField({ min: 0 }),
+          units: new StringField({ initial: () => defaultUnits("volume") })
         }),
-        value: new NumberField({ required: true, min: 0, label: "DND5E.ItemContainerCapacityMax" })
-      }, { label: "DND5E.ItemContainerCapacity" })
+        weight: new SchemaField({
+          value: new NumberField({ min: 0 }),
+          units: new StringField({ initial: () => defaultUnits("weight") })
+        })
+      }),
+      properties: new SetField(new StringField()),
+      quantity: new NumberField({ min: 1, max: 1 })
     });
   }
 
@@ -74,6 +85,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    ContainerData.#migrateCapacity(source);
     ContainerData.#migrateQuantity(source);
   }
 
@@ -87,6 +99,25 @@ export default class ContainerData extends ItemDataModel.mixin(
     if ( foundry.utils.getProperty(source, "system.capacity.weightless") === true ) {
       foundry.utils.setProperty(source, "flags.dnd5e.migratedProperties", ["weightlessContents"]);
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate capacity to support multiple fields and units.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateCapacity(source) {
+    if ( !source.capacity || !source.capacity.type || !source.capacity.value || (source.capacity.count !== undefined)
+      || (foundry.utils.getType(source.capacity.weight) === "Object") ) return;
+    if ( source.capacity.type === "weight" ) {
+      source.capacity.weight ??= {};
+      source.capacity.weight.value = source.capacity.value;
+    } else if ( source.capacity.type === "item" ) {
+      source.capacity.count = source.capacity.value;
+    }
+    delete source.capacity.type;
+    delete source.capacity.value;
   }
 
   /* -------------------------------------------- */
@@ -107,6 +138,8 @@ export default class ContainerData extends ItemDataModel.mixin(
   prepareDerivedData() {
     super.prepareDerivedData();
     this.prepareDescriptionData();
+    this.prepareIdentifiable();
+    this.preparePhysicalData();
   }
 
   /* -------------------------------------------- */
@@ -273,14 +306,15 @@ export default class ContainerData extends ItemDataModel.mixin(
    * @returns {Promise<Item5eCapacityDescriptor>}
    */
   async computeCapacity() {
-    const { value, type } = this.capacity;
-    const context = { max: value ?? Infinity };
-    if ( type === "weight" ) {
-      context.value = await this.contentsWeight;
-      context.units = game.i18n.localize("DND5E.AbbreviationLbs");
-    } else {
+    const context = { max: Infinity, value: 0 };
+    if ( this.capacity.count ) {
       context.value = await this.contentsCount;
-      context.units = game.i18n.localize("DND5E.ItemContainerCapacityItems");
+      context.max = this.capacity.count;
+      context.units = game.i18n.localize("DND5E.Items");
+    } else if ( this.capacity.weight.value ) {
+      context.value = await this.contentsWeight;
+      context.max = this.capacity.weight.value;
+      context.units = CONFIG.DND5E.weightUnits[this.capacity.weight.units]?.label ?? "";
     }
     context.value = context.value.toNearest(0.1);
     context.pct = Math.clamp(context.max ? (context.value / context.max) * 100 : 0, 0, 100);
@@ -289,6 +323,14 @@ export default class ContainerData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( (await super._preUpdate(changed, options, user)) === false ) return false;
+    await this.preUpdateIdentifiable(changed, options, user);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -302,5 +344,20 @@ export default class ContainerData extends ItemDataModel.mixin(
     }
 
     super._onUpdate(changed, options, userId);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onDelete(options, userId) {
+    super._onDelete(options, userId);
+    if ( (userId !== game.user.id) || !options.deleteContents ) return;
+
+    // Delete a container's contents when it is deleted
+    const contents = await this.allContainedItems;
+    if ( contents?.size ) await Item.deleteDocuments(Array.from(contents.map(i => i.id)), {
+      pack: this.parent.pack,
+      parent: this.parent.parent
+    });
   }
 }

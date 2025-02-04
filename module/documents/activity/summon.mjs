@@ -273,7 +273,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     if ( !actor ) throw new Error(game.i18n.format("DND5E.SUMMON.Warning.NoActor", { uuid }));
 
     const actorLink = actor.prototypeToken.actorLink;
-    if ( !actor.pack && (!actorLink || actor.getFlag("dnd5e", "summon.origin") === this.uuid )) return actor;
+    if ( !actor.pack && (!actorLink || actor.getFlag("dnd5e", "summon.origin") === this.item?.uuid )) return actor;
 
     // Search world actors to see if any usable summoned actor instances are present from prior summonings.
     // Linked actors must match the summoning origin (activity) to be considered.
@@ -282,8 +282,8 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       a.getFlag("dnd5e", "summonedCopy")
       // Sourced from the desired actor UUID
       && (a._stats?.compendiumSource === uuid)
-      // Unlinked or created from this activity specifically
-      && ((a.getFlag("dnd5e", "summon.origin") === this.uuid) || !a.prototypeToken.actorLink)
+      // Unlinked or created from this activity's parent item specifically
+      && ((a.getFlag("dnd5e", "summon.origin") === this.item?.uuid) || !a.prototypeToken.actorLink)
     );
     if ( localActor ) return localActor;
 
@@ -347,7 +347,8 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
     actorUpdates["flags.dnd5e.summon"] = {
       level: this.relevantLevel,
       mod: rollData.mod,
-      origin: this.uuid,
+      origin: this.item.uuid,
+      activity: this.id,
       profile: profile._id
     };
 
@@ -478,7 +479,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
 
       // Match attacks
       if ( this.match.attacks && item.system.hasAttack ) {
-        const ability = this.item.abilityMod ?? rollData.attributes?.spellcasting;
+        const ability = this.ability ?? this.item.abilityMod ?? rollData.attributes?.spellcasting;
         const actionType = item.system.activities.getByType("attack")[0].actionType;
         const typeMapping = { mwak: "msak", rwak: "rsak" };
         const parts = [
@@ -499,7 +500,7 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
 
       // Match saves
       if ( this.match.saves && item.hasSave ) {
-        let dc = rollData.attributes.spelldc;
+        let dc = rollData.abilities?.[this.ability]?.dc ?? rollData.attributes.spelldc;
         if ( this.item.type === "spell" ) {
           const ability = this.item.system.availableAbilities?.first();
           if ( ability ) dc = rollData.abilities[ability]?.dc ?? dc;
@@ -522,9 +523,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       else if ( item.isHealing ) damageBonus = healingBonus;
       if ( damageBonus && item.system.activities.find(a => a.damage?.parts?.length || a.healing?.formula) ) {
         changes.push({
-          key: "system.damage.parts",
+          key: "system.damage.bonus",
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: JSON.stringify({ bonus: damageBonus })
+          value: damageBonus
         });
       }
 

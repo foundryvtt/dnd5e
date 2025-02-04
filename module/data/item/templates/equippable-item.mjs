@@ -112,4 +112,21 @@ export default class EquippableItemTemplate extends SystemDataModel {
     const attunement = this.attuned || (this.attunement !== "required");
     return attunement && this.properties.has("mgc") && this.validProperties.has("mgc");
   }
+
+  /* -------------------------------------------- */
+  /*  Socket Event Handlers                       */
+  /* -------------------------------------------- */
+
+  /**
+   * Set as equipped for NPCs, and unequipped for PCs.
+   * @param {object} data     The initial data object provided to the document creation request.
+   * @param {object} options  Additional options which modify the creation request.
+   * @param {User} user       The User requesting the document creation.
+   */
+  preCreateEquipped(data, options, user) {
+    if ( ["character", "npc"].includes(this.parent.actor?.type)
+      && !foundry.utils.hasProperty(data, "system.equipped") ) {
+      this.updateSource({ equipped: this.parent.actor.type === "npc" });
+    }
+  }
 }

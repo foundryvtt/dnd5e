@@ -1,5 +1,5 @@
 <nav class="dialog-buttons flexrow">
     {{#each buttons}}
-    <button type="submit" data-action="{{ @key }}">{{{ icon }}} {{ label }}</button>
+    <button type="submit" data-action="{{ @key }}" {{#if default}}autofocus{{/if}}>{{{ icon }}} {{ label }}</button>
     {{/each}}
 </nav>

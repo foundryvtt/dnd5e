@@ -82,13 +82,19 @@ export default class AdvancementConfig extends FormApplication {
       appId: this.id,
       CONFIG: CONFIG.DND5E,
       ...this.advancement.toObject(false),
-      src: this.advancement.toObject(),
+      src: this.advancement._source,
+      source: this.advancement._source,
       default: {
         title: this.advancement.constructor.metadata.title,
         icon: this.advancement.constructor.metadata.icon,
         hint: ""
       },
       levels,
+      classRestrictionOptions: [
+        { value: "", label: game.i18n.localize("DND5E.AdvancementClassRestrictionNone") },
+        { value: "primary", label: game.i18n.localize("DND5E.AdvancementClassRestrictionPrimary") },
+        { value: "secondary", label: game.i18n.localize("DND5E.AdvancementClassRestrictionSecondary") }
+      ],
       showClassRestrictions: this.item.type === "class",
       showLevelSelector: !this.advancement.constructor.metadata.multiLevel
     };
@@ -212,13 +218,13 @@ export default class AdvancementConfig extends FormApplication {
 
     // Abort if this uuid is the parent item
     if ( item.uuid === this.item.uuid ) {
-      ui.notifications.error("DND5E.AdvancementItemGrantRecursiveWarning", {localize: true});
+      ui.notifications.error("DND5E.ADVANCEMENT.ItemGrant.Warning.Recursive", {localize: true});
       return null;
     }
 
     // Abort if this uuid exists already
     if ( existingItems.find(i => i.uuid === item.uuid) ) {
-      ui.notifications.warn("DND5E.AdvancementItemGrantDuplicateWarning", {localize: true});
+      ui.notifications.warn("DND5E.ADVANCEMENT.ItemGrant.Warning.Duplicate", {localize: true});
       return null;
     }
 

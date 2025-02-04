@@ -699,8 +699,8 @@
       "img": "icons/creatures/mammals/humanoid-cat-skulking-teal.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>While in dim light or darkness, the shadow can take the Hide action as a bonus action.</p>\n</section>\n<p>The shadow can take the Hide action as a bonus action.</p>",
-          "chat": ""
+          "value": "<p>While in dim light or darkness, the shadow can take the Hide action as a bonus action.</p>",
+          "chat": "<p>The shadow can take the Hide action as a bonus action.</p>"
         },
         "source": {
           "custom": "",
@@ -810,10 +810,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676570,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!QGcQYZbVl4bWzi4E.Xa0lRW8VhYHTAQT0"
     },
@@ -883,8 +883,8 @@
       "img": "icons/magic/unholy/strike-hand-glow-pink.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>9 (2d6 + 2) <em>necrotic damage</em></strong>.</p><p>The target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest.If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later.</p></section><p>The Shadow attacks with its Strength Drain.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>9 (2d6 + 2) <em>necrotic damage</em></strong>.</p><p>The target's Strength score is reduced by 1d4. The target dies if this reduces its Strength to 0. Otherwise, the reduction lasts until the target finishes a short or long rest.If a non-evil humanoid dies from this attack, a new shadow rises from the corpse 1d4 hours later.</p>",
+          "chat": "<p>The Shadow attacks with its Strength Drain.</p>"
         },
         "source": {
           "custom": "",
@@ -1071,10 +1071,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676570,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!QGcQYZbVl4bWzi4E.2OUOBIN4TJDoL0sJ"
     }

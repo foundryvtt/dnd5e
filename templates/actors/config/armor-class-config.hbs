@@ -1,0 +1,44 @@
+<section class="flexcol">
+    <div class="final-value">{{ dnd5e-numberFormat data.value }}</div>
+    <fieldset class="card">
+        <legend>{{ localize "DND5E.ArmorClassFormula" }}</legend>
+        {{ formField fields.calc value=source.calc options=calculationOptions localize=true }}
+        {{ formField fields.formula value=formula.value disabled=formula.disabled localize=true }}
+        {{#if dexterity}}
+        <div class="form-group">
+            <label>{{ localize CONFIG.abilities.dex.label }}</label>
+            <div class="form-fields">
+                {{{ dnd5e-numberParts dexterity signDisplay="always" }}}
+            </div>
+        </div>
+        {{/if}}
+        {{#if formula.showFlat}}
+        {{ formField fields.flat value=source.flat localize=true }}
+        {{/if}}
+    </fieldset>
+    {{#if calculations.length}}
+    <fieldset class="card table equipped">
+        <legend>{{ localize "DND5E.ArmorClassCalculation" }}</legend>
+        <div class="header">
+            <div class="armor-value">
+                <i class="fa-solid fa-shield" data-tooltip="DND5E.ArmorValue"
+                   aria-label="{{ localize 'DND5E.ArmorValue' }}"></i>
+            </div>
+            <div class="magical-bonus">
+                <i class="fa-solid fa-wand-sparkles" data-tooltip="DND5E.EquipmentBonus"
+                   aria-label="{{ localize 'DND5E.EquipmentBonus' }}"></i>
+            </div>
+        </div>
+        {{#each calculations}}
+        <div class="form-group">
+            <div class="name">
+                <img src="{{ img }}" class="gold-icon" alt="{{ name }}">
+                {{{ anchor }}}
+            </div>
+            <span class="armor-value {{#if (eq value "—")}}empty{{/if}}">{{ value }}</span>
+            <span class="magical-bonus {{#if (eq magicalBonus "—")}}empty{{/if}}">{{ magicalBonus }}</span>
+        </div>
+        {{/each}}
+    </fieldset>
+    {{/if}}
+</section>

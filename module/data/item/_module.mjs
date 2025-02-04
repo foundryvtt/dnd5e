@@ -3,6 +3,7 @@ import ClassData from "./class.mjs";
 import ConsumableData from "./consumable.mjs";
 import ContainerData from "./container.mjs";
 import EquipmentData from "./equipment.mjs";
+import FacilityData from "./facility.mjs";
 import FeatData from "./feat.mjs";
 import LootData from "./loot.mjs";
 import RaceData from "./race.mjs";
@@ -17,6 +18,7 @@ export {
   ConsumableData,
   ContainerData,
   EquipmentData,
+  FacilityData,
   FeatData,
   LootData,
   RaceData,
@@ -46,6 +48,7 @@ export const config = {
   class: ClassData,
   consumable: ConsumableData,
   equipment: EquipmentData,
+  facility: FacilityData,
   feat: FeatData,
   loot: LootData,
   race: RaceData,

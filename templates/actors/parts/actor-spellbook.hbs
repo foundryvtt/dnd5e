@@ -9,12 +9,8 @@
                       placeholder="0" min=0 step=1 disabled=classSpellcasting}}
         {{/unless}}
         <select name="system.attributes.spellcasting" data-type="String">
-            {{#select system.attributes.spellcasting}}
-            <option value="">{{localize "DND5E.None"}}</option>
-            {{#each abilities as |abl a|}}
-            <option value="{{a}}">{{abl.label}}</option>
-            {{/each}}
-            {{/select}}
+            {{ selectOptions config.abilities selected=system.attributes.spellcasting labelAttr="label"
+                             blank=(localize "DND5E.None") }}
         </select>
         <span>{{localize "DND5E.AbbreviationDC"}} {{system.attributes.spelldc}}</span>
     </div>

@@ -22,11 +22,9 @@ export default class FormulaField extends foundry.data.fields.StringField {
 
   /** @inheritDoc */
   _validateType(value) {
-    Roll.validate(value);
-    if ( this.options.deterministic ) {
-      const roll = new Roll(value);
-      if ( !roll.isDeterministic ) throw new Error("must not contain dice terms");
-    }
+    const roll = new Roll(value.replace(/@([a-z.0-9_-]+)/gi, "1"));
+    roll.evaluateSync({ strict: false });
+    if ( this.options.deterministic && !roll.isDeterministic ) throw new Error(`must not contain dice terms: ${value}`);
     super._validateType(value);
   }
 

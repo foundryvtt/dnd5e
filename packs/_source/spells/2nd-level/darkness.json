@@ -28,18 +28,22 @@
     },
     "target": {
       "affects": {
-        "choice": false
+        "choice": false,
+        "count": "",
+        "type": ""
       },
       "template": {
         "units": "ft",
         "type": "sphere",
         "size": "15",
-        "contiguous": false
+        "contiguous": false,
+        "count": ""
       }
     },
     "range": {
       "value": "60",
-      "units": "ft"
+      "units": "ft",
+      "special": ""
     },
     "uses": {
       "max": "",
@@ -127,9 +131,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037356237,
-    "modifiedTime": 1725992719846,
+    "modifiedTime": 1731016464670,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!S7VbUetIfVT7B6Eq"

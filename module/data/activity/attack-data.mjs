@@ -1,4 +1,5 @@
 import simplifyRollFormula from "../../dice/simplify-roll-formula.mjs";
+import { convertLength, formatLength } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import BaseActivityData from "./base-activity.mjs";
@@ -80,14 +81,27 @@ export default class AttackActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  get activationLabels() {
+    const labels = super.activationLabels;
+    if ( labels && (this.item.type === "weapon") && this.item.labels?.range && !this.range.override ) {
+      labels.range = this.item.labels.range;
+    }
+    return labels;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Abilities that could potentially be used with this attack. Unless a specific ability is specified then
    * whichever ability has the highest modifier will be selected when making an attack.
    * @type {Set<string>}
    */
   get availableAbilities() {
-    // Defer to item if available
-    if ( this.item.system.availableAbilities ) return this.item.system.availableAbilities;
+    // Defer to item if available and matching attack classification
+    if ( this.item.system.availableAbilities && (this.item.type === this.attack.type.classification) ) {
+      return this.item.system.availableAbilities;
+    }
 
     // Spell attack not associated with a single class, use highest spellcasting ability on actor
     if ( this.attack.type.classification === "spell" ) return new Set(
@@ -99,7 +113,6 @@ export default class AttackActivityData extends BaseActivityData {
     // Weapon & unarmed attacks uses melee or ranged ability depending on type, or both if actor is an NPC
     const melee = CONFIG.DND5E.defaultAbilities.meleeAttack;
     const ranged = CONFIG.DND5E.defaultAbilities.rangedAttack;
-    if ( this.actor?.type === "npc" ) return new Set([melee, ranged]);
     return new Set([this.attack.type.value === "melee" ? melee : ranged]);
   }
 
@@ -121,6 +134,18 @@ export default class AttackActivityData extends BaseActivityData {
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Potential attack types when attacking with this activity.
+   * @type {Set<string>}
+   */
+  get validAttackTypes() {
+    const sourceType = this._source.attack.type.value;
+    if ( sourceType ) return new Set([sourceType]);
+    return this.item.system.validAttackTypes ?? new Set();
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
@@ -130,7 +155,7 @@ export default class AttackActivityData extends BaseActivityData {
     let damageParts = source.system.damage?.parts ?? [];
     const hasBase = (source.type === "weapon")
       || ((source.type === "consumable") && (source.system?.type?.value === "ammo"));
-    if ( hasBase && damageParts.length ) {
+    if ( hasBase && damageParts.length && !source.system.damage?.base ) {
       const [base, ...rest] = damageParts;
       source.system.damage.parts = [base];
       damageParts = rest;
@@ -166,8 +191,8 @@ export default class AttackActivityData extends BaseActivityData {
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    this.attack.type.value ||= this.item.system.attackType ?? "";
-    this.attack.type.classification ||= this.item.system.attackClassification ?? "";
+    this.attack.type.value ||= this.item.system.attackType ?? "melee";
+    this.attack.type.classification ||= this.item.system.attackClassification ?? "weapon";
   }
 
   /* -------------------------------------------- */
@@ -207,8 +232,7 @@ export default class AttackActivityData extends BaseActivityData {
       const key = attackMode.split("-").map(s => s.capitalize()).join("");
       attackModeLabel = game.i18n.localize(`DND5E.ATTACK.Mode.${key}`);
     }
-    let actionType = this.actionType;
-    if ( (actionType === "mwak") && (attackMode?.startsWith("thrown")) ) actionType = "rwak";
+    const actionType = this.getActionType(attackMode);
     let actionTypeLabel = game.i18n.localize(`DND5E.Action${actionType.toUpperCase()}`);
     const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
     const isUnarmed = this.attack.type.classification === "unarmed";
@@ -228,32 +252,30 @@ export default class AttackActivityData extends BaseActivityData {
 
   /**
    * Get the roll parts used to create the attack roll.
+   * @param {object} [config={}]
+   * @param {string} [config.ammunition]
+   * @param {string} [config.attackMode]
+   * @param {string} [config.situational]
    * @returns {{ data: object, parts: string[] }}
    */
-  getAttackData() {
-    const parts = [];
-    const data = this.getRollData();
-    const item = this.item.system;
+  getAttackData({ ammunition, attackMode, situational }={}) {
+    const rollData = this.getRollData();
+    if ( this.attack.flat ) return CONFIG.Dice.BasicRoll.constructParts({ toHit: this.attack.bonus }, rollData);
 
-    if ( this.actor && !this.attack.flat ) {
-      // Ability modifier & proficiency bonus
-      if ( this.attack.ability !== "none" ) parts.push("@mod");
-      if ( item.prof?.hasProficiency ) {
-        parts.push("@prof");
-        data.prof = item.prof.term;
-      }
+    const weapon = this.item.system;
+    const ammo = this.actor?.items.get(ammunition)?.system;
+    const { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+      mod: this.attack.ability !== "none" ? rollData.mod : null,
+      prof: weapon.prof?.term,
+      bonus: this.attack.bonus,
+      weaponMagic: weapon.magicAvailable ? weapon.magicalBonus : null,
+      ammoMagic: ammo?.magicAvailable ? ammo.magicalBonus : null,
+      actorBonus: this.actor?.system.bonuses?.[this.getActionType(attackMode)]?.attack,
+      situational
+    }, rollData);
 
-      // Actor-level global bonus to attack rolls
-      const actorBonus = this.actor.system.bonuses?.[this.actionType];
-      if ( actorBonus?.attack ) parts.push(actorBonus.attack);
-
-      // Add exhaustion reduction
-      this.actor.addRollExhaustion(parts, data);
-    }
-
-    // Include the activity's attack bonus & item's magical bonus
-    if ( this.attack.bonus ) parts.push(this.attack.bonus);
-    if ( item.magicalBonus && item.magicAvailable && !this.attack.flat ) parts.push(item.magicalBonus);
+    // Add exhaustion reduction
+    this.actor?.addRollExhaustion(parts, data);
 
     return { data, parts };
   }
@@ -290,7 +312,7 @@ export default class AttackActivityData extends BaseActivityData {
       // Add the ammunition's damage
       if ( ammo.damage.base.formula ) {
         const basePartIndex = rollConfig.rolls.findIndex(i => i.base);
-        const damage = ammo.damage.base.clone();
+        const damage = ammo.damage.base.clone(ammo.damage.base);
         const rollData = this.getRollData();
 
         // If mode is "replace" and base part is present, replace the base part
@@ -318,13 +340,48 @@ export default class AttackActivityData extends BaseActivityData {
 
   /* -------------------------------------------- */
 
+  /**
+   * Create a label based on this activity's settings and, if contained in a weapon, additional details from the weapon.
+   * @returns {string}
+   */
+  getRangeLabel() {
+    if ( this.item.type !== "weapon" ) return this.labels?.range ?? "";
+
+    const parts = [];
+
+    // Add reach for melee weapons, unless the activity is explicitly specified as a ranged attack
+    if ( this.validAttackTypes.has("melee") ) {
+      let { reach, units } = this.item.system.range;
+      if ( !reach ) reach = convertLength(5, "ft", units);
+      parts.push(game.i18n.format("DND5E.RANGE.Formatted.Reach", {
+        reach: formatLength(reach, units, { strict: false })
+      }));
+    }
+
+    // Add range for ranged or thrown weapons, unless the activity is explicitly specified as melee
+    if ( this.validAttackTypes.has("ranged") ) {
+      let range;
+      if ( this.range.override ) range = `${this.range.value} ${this.range.units ?? ""}`;
+      else {
+        const { value, long, units } = this.item.system.range;
+        if ( long && (value !== long) ) range = `${value}/${formatLength(long, units, { strict: false })}`;
+        else range = formatLength(value, units, { strict: false });
+      }
+      parts.push(game.i18n.format("DND5E.RANGE.Formatted.Range", { range }));
+    }
+
+    return game.i18n.getListFormatter({ type: "disjunction" }).format(parts.filter(_ => _));
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   _processDamagePart(damage, rollConfig, rollData, index=0) {
     if ( !damage.base ) return super._processDamagePart(damage, rollConfig, rollData, index);
 
     // Swap base damage for versatile if two-handed attack is made on versatile weapon
     if ( this.item.system.isVersatile && (rollConfig.attackMode === "twoHanded") ) {
-      const versatile = this.item.system.damage.versatile.clone();
+      const versatile = this.item.system.damage.versatile.clone(this.item.system.damage.versatile);
       versatile.base = true;
       versatile.denomination ||= damage.steppedDenomination();
       versatile.number ||= damage.number;
@@ -356,7 +413,7 @@ export default class AttackActivityData extends BaseActivityData {
     }
 
     const criticalBonusDice = this.actor?.getFlag("dnd5e", "meleeCriticalDamageDice") ?? 0;
-    if ( (this.actionType === "mwak") && (parseInt(criticalBonusDice) !== 0) ) {
+    if ( (this.getActionType(rollConfig.attackMode) === "mwak") && (parseInt(criticalBonusDice) !== 0) ) {
       foundry.utils.setProperty(roll, "options.critical.bonusDice", criticalBonusDice);
     }
 

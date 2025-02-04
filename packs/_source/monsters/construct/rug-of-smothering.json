@@ -626,8 +626,8 @@
       "img": "icons/magic/lightning/orb-ball-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The rug is incapacitated while in the area of an antimagic field. </p><p>If targeted by dispel magic, the rug must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for <strong>1 minute</strong>.</p></section><p>The rug is incapacitated while in the area of an antimagic field. </p>",
-          "chat": ""
+          "value": "<p>The rug is incapacitated while in the area of an antimagic field. </p><p>If targeted by dispel magic, the rug must succeed on a Constitution saving throw against the caster's spell save DC or fall unconscious for <strong>1 minute</strong>.</p>",
+          "chat": "<p>The rug is incapacitated while in the area of an antimagic field. </p>"
         },
         "source": {
           "custom": "",
@@ -671,10 +671,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676584,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!f6HaKROPIcBRmSd1.PGulBR18kfO768c7"
     },
@@ -803,8 +803,8 @@
       "img": "icons/magic/water/wave-water-explosion.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one Medium or smaller creature. Hit:</p>\n<p>The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the rug can't smother another target. In addition, at the start of each of the target's turns, the target takes <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong>.</p>\n</section>\n<p>The Rug of Smothering makes a smothering attack! The creature is grappled. Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the rug can't smother another target.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one Medium or smaller creature. Hit:</p><p>The creature is grappled (escape DC 13). Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the rug can't smother another target. In addition, at the start of each of the target's turns, the target takes <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong>.</p>",
+          "chat": "<p>The Rug of Smothering makes a smothering attack! The creature is grappled. Until this grapple ends, the target is restrained, blinded, and at risk of suffocating, and the rug can't smother another target.</p>"
         },
         "source": {
           "custom": "",
@@ -991,10 +991,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676584,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!f6HaKROPIcBRmSd1.7p94WH1WPMhF1ZP9"
     }

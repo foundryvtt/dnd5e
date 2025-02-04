@@ -54,7 +54,7 @@
         {{/each}}
     </fieldset>
 
-    {{#unless activity.isSpell}}
+    {{#if showScaling}}
     {{#with fields.consumption.fields.scaling.fields as |fields|}}
     <fieldset>
         <legend>{{ localize "DND5E.CONSUMPTION.FIELDS.consumption.scaling.label" }}</legend>
@@ -65,7 +65,7 @@
         {{/if}}
     </fieldset>
     {{/with}}
-    {{/unless}}
+    {{/if}}
 
     {{> "dnd5e.field-uses" hasLimitedUses=true }}
 </section>

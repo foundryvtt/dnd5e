@@ -52,16 +52,16 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     context.toggleTitle = game.i18n.localize(`DND5E.${isCrewed ? "Crewed" : "Uncrewed"}`);
 
     // Handle crew actions
-    if ( item.type === "feat" && item.system.activation.type === "crew" ) {
-      context.cover = game.i18n.localize(`DND5E.${item.system.cover ? "CoverTotal" : "None"}`);
-      if ( item.system.cover === .5 ) context.cover = "½";
+    if ( (item.type === "feat") && (item.system.activation.type === "crew") ) {
+      if ( item.system.cover === 1 ) context.cover = game.i18n.localize("DND5E.CoverTotal");
+      else if ( item.system.cover === .5 ) context.cover = "½";
       else if ( item.system.cover === .75 ) context.cover = "¾";
-      else if ( item.system.cover === null ) context.cover = "—";
+      else context.cover = "—";
     }
 
     // Prepare vehicle weapons
     if ( (item.type === "equipment") || (item.type === "weapon") ) {
-      context.threshold = item.system.hp.dt ? item.system.hp.dt : "—";
+      context.threshold = item.system.hp?.dt ? item.system.hp.dt : "—";
     }
   }
 
@@ -210,6 +210,8 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
           else if (act.type === "reaction") features.reactions.items.push(item);
           else features.actions.items.push(item);
           break;
+        case "spell":
+          break;
         default:
           cargo.cargo.items.push(item);
       }
@@ -305,10 +307,10 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropSingleItem(itemData) {
+  async _onDropSingleItem(itemData, event) {
     const cargoTypes = ["weapon", "equipment", "consumable", "tool", "loot", "container"];
     const isCargo = cargoTypes.includes(itemData.type) && (this._tabs[0].active === "cargo");
     foundry.utils.setProperty(itemData, "flags.dnd5e.vehicleCargo", isCargo);
-    return super._onDropSingleItem(itemData);
+    return super._onDropSingleItem(itemData, event);
   }
 }

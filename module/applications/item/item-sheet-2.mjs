@@ -35,7 +35,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /** @inheritDoc */
   async getData(options) {
     const context = await super.getData(options);
-    const { activities, spellcasting } = this.item.system;
+    const { activities, building, craft, order, spellcasting, type } = this.item.system;
     const target = this.item.type === "spell" ? this.item.system.target : null;
 
     // Effects
@@ -74,20 +74,21 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
 
     // Targets
     context.targetTypes = [
-      ...Object.entries(CONFIG.DND5E.individualTargetTypes).map(([value, label]) => {
+      ...Object.entries(CONFIG.DND5E.individualTargetTypes).map(([value, { label }]) => {
         return { value, label, group: "DND5E.TargetTypeIndividual" };
       }),
       ...Object.entries(CONFIG.DND5E.areaTargetTypes).map(([value, { label }]) => {
         return { value, label, group: "DND5E.TargetTypeArea" };
       })
     ];
-    context.scalarTarget = !["", "self", "any"].includes(target?.affects?.type);
-    context.affectsPlaceholder = game.i18n.localize(`DND5E.Target${target?.template?.type ? "Every" : "Any"}`);
+    context.scalarTarget = target?.affects?.type
+      && (CONFIG.DND5E.individualTargetTypes[target.affects.type]?.scalar !== false);
+    context.affectsPlaceholder = game.i18n.localize(`DND5E.TARGET.Count.${target?.template?.type ? "Every" : "Any"}`);
 
     // Range
     context.rangeTypes = [
       ...Object.entries(CONFIG.DND5E.rangeTypes).map(([value, label]) => ({ value, label })),
-      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, label]) => {
+      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => {
         return { value, label, group: "DND5E.RangeDistance" };
       })
     ];
@@ -115,12 +116,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     // Limited Uses
     context.data = { uses: context.source.uses };
     context.hasLimitedUses = this.item.system.hasLimitedUses;
-    context.recoveryPeriods = [
-      ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
-        .filter(([, { deprecated }]) => !deprecated)
-        .map(([value, { label }]) => ({ value, label, group: "DND5E.DurationTime" })),
-      { value: "recharge", label: "DND5E.USES.Recovery.Recharge.Label" }
-    ];
+    context.recoveryPeriods = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
     context.recoveryTypes = [
       { value: "recoverAll", label: "DND5E.USES.Recovery.Type.RecoverAll" },
       { value: "loseAll", label: "DND5E.USES.Recovery.Type.LoseAll" },
@@ -135,10 +131,52 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     }));
 
     // Activities
-    context.activities = (activities ?? []).map(({ _id: id, name, img, sort }) => ({
+    context.activities = (activities ?? []).filter(a => {
+      return CONFIG.DND5E.activityTypes[a.type]?.configurable !== false;
+    }).map(({ _id: id, name, img, sort }) => ({
       id, name, sort,
       img: { src: img, svg: img?.endsWith(".svg") }
     }));
+
+    // Facilities
+    if ( this.item.type === "facility" ) {
+      context.orders = Object.entries(CONFIG.DND5E.facilities.orders).reduce((obj, [value, config]) => {
+        const { label, basic, hidden } = config;
+        if ( hidden ) return obj;
+        // TODO: More hard-coding that we can potentially avoid.
+        if ( value === "build" ) {
+          if ( !building.built ) obj.executable.push({ value, label });
+          return obj;
+        }
+        if ( value === "change" ) {
+          if ( type.subtype === "garden" ) obj.executable.push({ value, label });
+          return obj;
+        }
+        if ( type.value === "basic" ) {
+          if ( !building.built ) return obj;
+          if ( basic ) obj.executable.push({ value, label });
+        } else if ( (type.value === "special") && !basic ) {
+          obj.available.push({ value, label });
+          if ( (value === order) || (value === "maintain") ) obj.executable.push({ value, label });
+        }
+        return obj;
+      }, { available: [], executable: [] });
+    }
+
+    if ( (type?.value === "special") && ((order === "craft") || (order === "harvest")) ) {
+      context.canCraft = true;
+      context.isHarvesting = order === "harvest";
+      const crafting = await fromUuid(craft.item);
+      if ( crafting ) {
+        context.craft = {
+          img: crafting.img,
+          name: crafting.name,
+          contentLink: crafting.toAnchor().outerHTML
+        };
+      }
+    }
+
+    context.coverOptions = Object.entries(CONFIG.DND5E.cover).map(([value, label]) => ({ value, label }));
 
     return context;
   }
@@ -195,6 +233,9 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       html.find("button.control-button").on("click", this._onSheetAction.bind(this));
     }
 
+    new ContextMenu5e(html, ".advancement-item[data-id]", [], {
+      onOpen: target => dnd5e.documents.advancement.Advancement.onContextMenu(this.item, target)
+    });
     new ContextMenu5e(html, ".activity[data-activity-id]", [], {
       onOpen: target => dnd5e.documents.activity.UtilityActivity.onContextMenu(this.item, target)
     });
@@ -256,6 +297,17 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
   /* -------------------------------------------- */
 
   /**
+   * Handle removing the Item currently being crafted.
+   * @returns {Promise}
+   * @protected
+   */
+  _onRemoveCraft() {
+    return this.submit({ updateData: { "system.craft": null } });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Handle performing some sheet action.
    * @param {PointerEvent} event  The originating event.
    * @returns {Promise|void}
@@ -268,6 +320,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       case "addRecovery": return this._onAddRecovery();
       case "deleteActivity": return this._onDeleteActivity(target);
       case "deleteRecovery": return this._onDeleteRecovery(target);
+      case "removeCraft": return this._onRemoveCraft();
     }
   }
 

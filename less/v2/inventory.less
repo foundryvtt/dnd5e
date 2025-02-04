@@ -14,7 +14,6 @@
     --bar-color-3: color-mix(in oklab, var(--bar-color-2), black 20%);
     background: linear-gradient(to right, var(--bar-color-1), var(--bar-color-2));
     border-right: var(--border-width) solid var(--bar-color-3);
-    border-radius: 3px 3px 0 0;
   }
 
   /* ---------------------------------- */
@@ -183,6 +182,11 @@
         box-shadow: none;
         filter: drop-shadow(0 0 1px var(--dnd5e-color-black));
 
+        &.tmp.filled {
+          --icon-fill: var(--dnd5e-color-sc-2);
+          --icon-stroke: var(--dnd5e-color-sc-2)
+        }
+        &.tmp:hover { filter: drop-shadow(0 0 2px var(--dnd5e-color-sc-2)); }
         &.filled { --icon-fill: var(--dnd5e-color-gold); }
         &:hover { filter: drop-shadow(0 0 2px var(--dnd5e-color-gold)); }
       }
@@ -404,12 +408,10 @@
       /* Spell Range */
       .item-range {
         width: 50px;
-        display: flex;
-        gap: .1875rem;
+        display: block;
         align-self: center;
-        align-items: baseline;
 
-        .value { font-weight: bold; }
+        .integer { font-weight: bold; }
 
         .unit {
           color: var(--color-text-light-6);

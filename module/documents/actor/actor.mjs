@@ -1,9 +1,13 @@
-import ShortRestDialog from "../../applications/actor/short-rest.mjs";
-import LongRestDialog from "../../applications/actor/long-rest.mjs";
+import ShortRestDialog from "../../applications/actor/rest/short-rest-dialog.mjs";
+import LongRestDialog from "../../applications/actor/rest/long-rest-dialog.mjs";
+import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
-import { d20Roll } from "../../dice/dice.mjs";
+import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
+import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
+import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
-import { replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
+import parseUuid from "../../parse-uuid.mjs";
+import { convertTime, defaultUnits, formatNumber, formatTime, simplifyBonus, staticID } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
@@ -31,7 +35,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _spellcastingClasses;
 
   /**
-   * Mapping of item source IDs to the items.
+   * Mapping of item compendium source UUIDs to the items.
    * @type {Map<string, Item5e>}
    */
   sourcedItems = this.sourcedItems;
@@ -146,7 +150,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       concentration.effects.add(effect);
       if ( data ) {
         let item = this.items.get(data.id);
-        if ( !item && data.data ) item = new Item.implementation(data.data, { keepId: true, parent: this });
+        if ( !item && (foundry.utils.getType(data.data) === "Object") ) {
+          item = new Item.implementation(data.data, { keepId: true, parent: this });
+        }
         if ( item ) concentration.items.add(item);
       }
     }
@@ -213,7 +219,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   prepareEmbeddedDocuments() {
-    this.sourcedItems = new Map();
+    this.sourcedItems = new SourcedItemsMap();
     this._embeddedPreparation = true;
     super.prepareEmbeddedDocuments();
     delete this._embeddedPreparation;
@@ -223,7 +229,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   applyActiveEffects() {
-    this._prepareScaleValues();
     if ( this.system?.prepareEmbeddedData instanceof Function ) this.system.prepareEmbeddedData();
     // The Active Effects do not have access to their parent at preparation time, so we wait until this stage to
     // determine whether they are suppressed or not.
@@ -253,26 +258,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( origin && this.token?.id ) dnd5e.registry.summons.track(origin.split(".Item.")[0], this.uuid);
 
     if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
-
     this.labels = {};
-
-    // Retrieve data for polymorphed actors
-    const { originalSkills } = this.getOriginalStats();
-
-    // Prepare abilities, skills, & everything else
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const rollData = this.getRollData();
-    const checkBonus = simplifyBonus(globalBonuses?.check, rollData);
-    this._prepareSkills(rollData, globalBonuses, checkBonus, originalSkills);
-    this._prepareTools(rollData, globalBonuses, checkBonus);
-    this._prepareArmorClass();
-    this._prepareInitiative(rollData, checkBonus);
-
-    // Apply condition immunities
-    const conditionImmunities = this.system.traits?.ci?.value;
-    if ( conditionImmunities ) {
-      for ( const condition of conditionImmunities ) this.statuses.delete(condition);
-    }
   }
 
   /* -------------------------------------------- */
@@ -310,7 +296,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   getCRExp(cr) {
     if ( cr === null ) return null;
     if ( cr < 1.0 ) return Math.max(200 * cr, 10);
-    return CONFIG.DND5E.CR_EXP_LEVELS[cr];
+    return CONFIG.DND5E.CR_EXP_LEVELS[cr] ?? Object.values(CONFIG.DND5E.CR_EXP_LEVELS).pop();
   }
 
   /* -------------------------------------------- */
@@ -355,275 +341,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
-  /*  Base Data Preparation Helpers               */
-  /* -------------------------------------------- */
-
-  /**
-   * Derive any values that have been scaled by the Advancement system.
-   * Mutates the value of the `system.scale` object.
-   * @protected
-   */
-  _prepareScaleValues() {
-    this.system.scale = this.items.reduce((scale, item) => {
-      if ( CONFIG.DND5E.advancementTypes.ScaleValue.validItemTypes.has(item.type) ) {
-        scale[item.identifier] = item.scaleValues;
-      }
-      return scale;
-    }, {});
-  }
-
-  /* -------------------------------------------- */
-  /*  Derived Data Preparation Helpers            */
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare skill checks. Mutates the values of system.skills.
-   * @param {object} rollData         Data produced by `getRollData` to be applied to bonus formulas.
-   * @param {object} globalBonuses     Global bonus data.
-   * @param {number} globalCheckBonus  Global ability check bonus.
-   * @param {object} originalSkills    A transformed actor's original actor's skills.
-   * @protected
-   */
-  _prepareSkills(rollData, globalBonuses, globalCheckBonus, originalSkills) {
-    if ( this.type === "vehicle" ) return;
-
-    // Skill modifiers
-    for ( const [id, skillData] of Object.entries(this.system.skills) ) {
-      this._prepareSkill(id, { skillData, rollData, originalSkills, globalCheckBonus, globalBonuses });
-    }
-  }
-
+  /*  Data Preparation                            */
   /* -------------------------------------------- */
 
   /**
    * Prepares data for a specific skill.
-   * @param {string} skillId                     The id of the skill to prepare data for.
-   * @param {object} [options]                   Additional options.
-   * @param {SkillData} [options.skillData]      The base skill data for this skill.
-   *                                             If undefined, `this.system.skill[skillId]` is used.
-   * @param {object} [options.rollData]          RollData for this actor, used to evaluate dice terms in bonuses.
-   *                                             If undefined, `this.getRollData()` is used.
-   * @param {object} [options.originalSkills]    Original skills if actor is polymorphed.
-   *                                             If undefined, the skills of the actor identified by
-   *                                             `this.flags.dnd5e.originalActor` are used.
-   * @param {object} [options.globalBonuses]     Global ability bonuses for this actor.
-   *                                             If undefined, `this.system.bonuses.abilities` is used.
-   * @param {number} [options.globalCheckBonus]  Global check bonus for this actor.
-   *                                             If undefined, `globalBonuses.check` will be evaluated using `rollData`.
-   * @param {number} [options.globalSkillBonus]  Global skill bonus for this actor.
-   *                                             If undefined, `globalBonuses.skill` will be evaluated using `rollData`.
-   * @param {string} [options.ability]           The ability to compute bonuses based on.
-   *                                             If undefined, skillData.ability is used.
+   * @param {string} skillId    The id of the skill to prepare data for.
+   * @param {object} [options]  Additional options passed to {@link CreatureTemplate#prepareSkill}.
    * @returns {SkillData}
    * @internal
    */
-  _prepareSkill(skillId, {
-    skillData, rollData, originalSkills, globalBonuses,
-    globalCheckBonus, globalSkillBonus, ability
-  }={}) {
-    const flags = this.flags.dnd5e ?? {};
-
-    skillData ??= foundry.utils.deepClone(this.system.skills[skillId]);
-    rollData ??= this.getRollData();
-    originalSkills ??= flags.originalActor ? game.actors?.get(flags.originalActor)?.system?.skills : null;
-    globalBonuses ??= this.system.bonuses?.abilities ?? {};
-    globalCheckBonus ??= simplifyBonus(globalBonuses.check, rollData);
-    globalSkillBonus ??= simplifyBonus(globalBonuses.skill, rollData);
-    ability ??= skillData.ability;
-    const abilityData = this.system.abilities[ability];
-    skillData.ability = ability;
-
-    const feats = CONFIG.DND5E.characterFlags;
-
-    const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
-    let roundDown = true;
-
-    // Remarkable Athlete
-    if ( this._isRemarkableAthlete(skillData.ability) && (skillData.value < 0.5) ) {
-      skillData.value = 0.5;
-      roundDown = false;
-    }
-
-    // Jack of All Trades
-    else if ( flags.jackOfAllTrades && (skillData.value < 0.5) ) {
-      skillData.value = 0.5;
-    }
-
-    // Polymorph Skill Proficiencies
-    if ( originalSkills ) {
-      skillData.value = Math.max(skillData.value, originalSkills[skillId].value);
-    }
-
-    // Compute modifier
-    const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
-    skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
-    skillData.mod = abilityData?.mod ?? 0;
-    skillData.prof = new Proficiency(this.system.attributes.prof, skillData.value, roundDown);
-    skillData.proficient = skillData.value;
-    skillData.total = skillData.mod + skillData.bonus;
-    if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
-
-    // Compute passive bonus
-    const passive = flags.observantFeat && feats.observantFeat.skills.includes(skillId) ? 5 : 0;
-    const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
-    skillData.passive = 10 + skillData.mod + skillData.bonus + skillData.prof.flat + passive + passiveBonus;
-
-    return skillData;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare tool checks. Mutates the values of system.tools.
-   * @param {object} bonusData       Data produced by `getRollData` to be applied to bonus formulae.
-   * @param {object} globalBonuses   Global bonus data.
-   * @param {number} checkBonus      Global ability check bonus.
-   * @protected
-   */
-  _prepareTools(bonusData, globalBonuses, checkBonus) {
-    if ( this.type === "vehicle" ) return;
-    const flags = this.flags.dnd5e ?? {};
-    for ( const tool of Object.values(this.system.tools) ) {
-      const ability = this.system.abilities[tool.ability];
-      const baseBonus = simplifyBonus(tool.bonuses.check, bonusData);
-      let roundDown = true;
-
-      // Remarkable Athlete.
-      if ( this._isRemarkableAthlete(tool.ability) && (tool.value < 0.5) ) {
-        tool.value = 0.5;
-        roundDown = false;
-      }
-
-      // Jack of All Trades.
-      else if ( flags.jackOfAllTrades && (tool.value < 0.5) ) tool.value = 0.5;
-
-      const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
-      tool.bonus = baseBonus + checkBonus + checkBonusAbl;
-      tool.mod = ability?.mod ?? 0;
-      tool.prof = new Proficiency(this.system.attributes.prof, tool.value, roundDown);
-      tool.total = tool.mod + tool.bonus;
-      if ( Number.isNumeric(tool.prof.term) ) tool.total += tool.prof.flat;
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare a character's AC value from their equipped armor and shield.
-   * Mutates the value of the `system.attributes.ac` object.
-   */
-  _prepareArmorClass() {
-    const ac = this.system.attributes.ac;
-
-    // Apply automatic migrations for older data structures
-    let cfg = CONFIG.DND5E.armorClasses[ac.calc];
-    if ( !cfg ) {
-      ac.calc = "flat";
-      if ( Number.isNumeric(ac.value) ) ac.flat = Number(ac.value);
-      cfg = CONFIG.DND5E.armorClasses.flat;
-    }
-
-    // Identify Equipped Items
-    const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
-    const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
-      if ( !equip.system.equipped || !armorTypes.has(equip.system.type.value) ) return obj;
-      if ( equip.system.type.value === "shield" ) obj.shields.push(equip);
-      else obj.armors.push(equip);
-      return obj;
-    }, {armors: [], shields: []});
-    const rollData = this.getRollData({ deterministic: true });
-
-    // Determine base AC
-    switch ( ac.calc ) {
-
-      // Flat AC (no additional bonuses)
-      case "flat":
-        ac.value = Number(ac.flat);
-        return;
-
-      // Natural AC (includes bonuses)
-      case "natural":
-        ac.base = Number(ac.flat);
-        break;
-
-      default:
-        let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        if ( armors.length ) {
-          if ( armors.length > 1 ) this._preparationWarnings.push({
-            message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
-          });
-          const armorData = armors[0].system.armor;
-          const isHeavy = armors[0].system.type.value === "heavy";
-          ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.system.abilities.dex?.mod ?? 0);
-          ac.equippedArmor = armors[0];
-        }
-        else ac.dex = this.system.abilities.dex?.mod ?? 0;
-
-        rollData.attributes.ac = ac;
-        try {
-          const replaced = replaceFormulaData(formula, rollData, {
-            actor: this, missing: null, property: game.i18n.localize("DND5E.ArmorClass")
-          });
-          ac.base = replaced ? new Roll(replaced).evaluateSync().total : 0;
-        } catch(err) {
-          this._preparationWarnings.push({
-            message: game.i18n.format("DND5E.WarnBadACFormula", { formula }), link: "armor", type: "error"
-          });
-          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.base = new Roll(replaced).evaluateSync().total;
-        }
-        break;
-    }
-
-    // Equipped Shield
-    if ( shields.length ) {
-      if ( shields.length > 1 ) this._preparationWarnings.push({
-        message: game.i18n.localize("DND5E.WarnMultipleShields"), type: "warning"
-      });
-      ac.shield = shields[0].system.armor.value ?? 0;
-      ac.equippedShield = shields[0];
-    }
-
-    // Compute cover.
-    ac.cover = Math.max(ac.cover, this.coverBonus);
-
-    // Compute total AC and return
-    ac.min = simplifyBonus(ac.min, rollData);
-    ac.bonus = simplifyBonus(ac.bonus, rollData);
-    ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare the initiative data for an actor.
-   * Mutates the value of the system.attributes.init object.
-   * @param {object} bonusData         Data produced by getRollData to be applied to bonus formulas
-   * @param {number} globalCheckBonus  Global ability check bonus
-   * @protected
-   */
-  _prepareInitiative(bonusData, globalCheckBonus=0) {
-    const init = this.system.attributes.init ??= {};
-    const flags = this.flags.dnd5e || {};
-
-    // Compute initiative modifier
-    const abilityId = init.ability || CONFIG.DND5E.defaultAbilities.initiative;
-    const ability = this.system.abilities?.[abilityId] || {};
-    init.mod = ability.mod ?? 0;
-
-    // Initiative proficiency
-    const prof = this.system.attributes.prof ?? 0;
-    const joat = flags.jackOfAllTrades && (game.settings.get("dnd5e", "rulesVersion") === "legacy");
-    const ra = this._isRemarkableAthlete(abilityId);
-    init.prof = new Proficiency(prof, (joat || ra) ? 0.5 : 0, !ra);
-
-    // Total initiative includes all numeric terms
-    const initBonus = simplifyBonus(init.bonus, bonusData);
-    const abilityBonus = simplifyBonus(ability.bonuses?.check, bonusData);
-    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
-      + (flags.initiativeAlert ? 5 : 0)
-      + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
+  _prepareSkill(skillId, options) {
+    return this.system.prepareSkill?.(skillId, options) ?? {};
   }
 
   /* -------------------------------------------- */
@@ -632,16 +361,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Prepare data related to the spell-casting capabilities of the Actor.
-   * Mutates the value of the system.spells object.
+   * Mutates the value of the system.spells object. Must be called after final item preparation.
    * @protected
    */
   _prepareSpellcasting() {
     if ( !this.system.spells ) return;
-
-    // Spellcasting DC and modifier
-    const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
-    this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
-    this.system.attributes.spellmod = spellcastingAbility ? spellcastingAbility.mod : 0;
 
     // Translate the list of classes into spellcasting progression
     const progression = { slot: 0, pact: 0 };
@@ -1308,9 +1032,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     return ChatMessage.implementation.create({
       content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
-        dataset: { ...dataset, type: "concentration", visbility: "all" },
-        buttonLabel: createRollLabel({ ...dataset, ...config }),
-        hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
+        buttons: [{
+          dataset: { ...dataset, type: "concentration", visbility: "all" },
+          buttonLabel: createRollLabel({ ...dataset, ...config }),
+          hiddenLabel: createRollLabel({ ...dataset, ...config, hideDC: true })
+        }]
       }),
       whisper: game.users.filter(user => this.testUserPermission(user, "OWNER")),
       speaker: ChatMessage.implementation.getSpeaker({ actor: this })
@@ -1351,191 +1077,228 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Roll a Skill Check
-   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {string} skillId      The skill id (e.g. "ins")
-   * @param {object} options      Options which configure how the skill check is rolled
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
+   * Roll an ability check with a skill.
+   * @param {Partial<SkillToolRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<SkillToolRollDialogConfiguration>} dialog   Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message     Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
-  async rollSkill(skillId, options={}) {
-    const skl = this.system.skills[skillId];
-    const abl = this.system.abilities[options.ability ?? skl.ability];
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const parts = ["@mod", "@abilityCheckBonus"];
-    const data = this.getRollData();
-
-    // Add ability modifier
-    data.mod = abl?.mod ?? 0;
-    data.defaultAbility = options.ability ?? skl.ability;
-
-    // Include proficiency bonus
-    if ( skl.prof.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = skl.prof.term;
-    }
-
-    // Global ability check bonus
-    if ( globalBonuses.check ) {
-      parts.push("@checkBonus");
-      data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
-    }
-
-    // Ability-specific check bonus
-    if ( abl?.bonuses?.check ) data.abilityCheckBonus = Roll.replaceFormulaData(abl.bonuses.check, data);
-    else data.abilityCheckBonus = 0;
-
-    // Skill-specific skill bonus
-    if ( skl.bonuses?.check ) {
-      const checkBonusKey = `${skillId}CheckBonus`;
-      parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = Roll.replaceFormulaData(skl.bonuses.check, data);
-    }
-
-    // Global skill check bonus
-    if ( globalBonuses.skill ) {
-      parts.push("@skillBonus");
-      data.skillBonus = Roll.replaceFormulaData(globalBonuses.skill, data);
-    }
-
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
-
-    // Reliable Talent applies to any skill check we have full or better proficiency in
-    const reliableTalent = (skl.value >= 1 && this.getFlag("dnd5e", "reliableTalent"));
-
-    // Roll and return
-    const flavor = game.i18n.format("DND5E.SkillPromptTitle", {skill: CONFIG.DND5E.skills[skillId]?.label ?? ""});
-    const rollData = foundry.utils.mergeObject({
-      data: data,
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      chooseModifier: true,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      reliableTalent,
-      messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "skill", skillId }
+  async rollSkill(config={}, dialog={}, message={}) {
+    const skillLabel = CONFIG.DND5E.skills[config.skill]?.label ?? "";
+    const ability = this.system.skills[config.skill]?.ability ?? CONFIG.DND5E.skills[config.skill]?.ability ?? "";
+    const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
+          subtitle: this.name
+        }
       }
-    }, options);
-    rollData.parts = parts.concat(options.parts ?? []);
-
-    /**
-     * A hook event that fires before a skill check is rolled for an Actor.
-     * @function dnd5e.preRollSkill
-     * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the skill check is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} skillId               ID of the skill being rolled as defined in `DND5E.skills`.
-     * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollSkill", this, rollData, skillId) === false ) return;
-
-    const roll = await d20Roll(rollData);
-
-    /**
-     * A hook event that fires after a skill check has been rolled for an Actor.
-     * @function dnd5e.rollSkill
-     * @memberof hookEvents
-     * @param {Actor5e} actor   Actor for which the skill check has been rolled.
-     * @param {D20Roll} roll    The resulting roll.
-     * @param {string} skillId  ID of the skill that was rolled as defined in `DND5E.skills`.
-     */
-    if ( roll ) Hooks.callAll("dnd5e.rollSkill", this, roll, skillId);
-
-    return roll;
+    }, dialog);
+    return this.#rollSkillTool("skill", config, dialogConfig, message);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Roll a Tool Check.
-   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonuses.
-   * @param {string} toolId       The identifier of the tool being rolled.
-   * @param {object} options      Options which configure how the tool check is rolled.
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance.
+   * Roll an ability check with a tool.
+   * @param {Partial<SkillToolRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<SkillToolRollDialogConfiguration>} dialog   Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message     Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
-  async rollToolCheck(toolId, options={}) {
-    // Prepare roll data.
-    const tool = this.system.tools[toolId];
-    const ability = this.system.abilities[options.ability || (tool?.ability ?? "int")];
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const parts = ["@mod", "@abilityCheckBonus"];
-    const data = this.getRollData();
+  async rollToolCheck(config={}, dialog={}, message={}) {
+    const toolLabel = Trait.keyLabel(config.tool, { trait: "tool" }) ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.ToolPromptTitle", { tool: toolLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollSkillTool("tool", config, dialogConfig, message);
+  }
 
-    // Add ability modifier.
-    data.mod = ability?.mod ?? 0;
-    data.defaultAbility = options.ability || (tool?.ability ?? "int");
+  /* -------------------------------------------- */
 
-    // Add proficiency.
-    const prof = options.prof ?? tool?.prof;
-    if ( prof?.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = prof.term;
+  /**
+   * @typedef {D20RollProcessConfiguration} SkillToolRollProcessConfiguration
+   * @property {string} [ability]  The ability to be rolled with the skill.
+   * @property {string} [bonus]    Additional bonus term added to the check.
+   * @property {Item5e} [item]     Tool item used for rolling.
+   * @property {string} [skill]    The skill to roll.
+   * @property {string} [tool]     The tool to roll.
+   */
+
+  /**
+   * @typedef {BasicRollDialogConfiguration} SkillToolRollDialogConfiguration
+   * @property {SkillToolRollConfigurationDialogOptions} [options]  Configuration options.
+   */
+
+  /**
+   * Shared rolling functionality between skill & tool checks.
+   * @param {"skill"|"tool"} type                                Type of roll.
+   * @param {Partial<SkillToolRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<SkillToolRollDialogConfiguration>} dialog   Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message     Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
+   */
+  async #rollSkillTool(type, config={}, dialog={}, message={}) {
+    let oldFormat = false;
+    const name = type === "skill" ? "Skill" : "ToolCheck";
+
+    // Handle deprecated calling pattern
+    if ( foundry.utils.getType(config) !== "Object" ) {
+      foundry.utils.logCompatibilityWarning(
+        `The \`roll${name}\` method on Actor5e now takes roll, dialog, and message config objects as parameters.`,
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      oldFormat = true;
+      const oldConfig = dialog;
+      config = { [type]: config };
+      if ( oldConfig.ability ) config.ability = oldConfig.ability;
+      if ( oldConfig.bonus ) config.bonus = oldConfig.bonus;
+      dialog = {};
+      _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
     }
 
-    // Global ability check bonus.
-    if ( globalBonuses.check ) {
-      parts.push("@checkBonus");
-      data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
+    const skillConfig = CONFIG.DND5E.skills[config.skill];
+    const toolConfig = CONFIG.DND5E.tools[config.tool];
+    if ( ((type === "skill") && !skillConfig) || ((type === "tool") && !toolConfig) ) {
+      return this.rollAbilityTest(config, dialog, message);
     }
 
-    // Ability-specific check bonus.
-    if ( ability?.bonuses.check ) data.abilityCheckBonus = Roll.replaceFormulaData(ability.bonuses.check, data);
-    else data.abilityCheckBonus = 0;
+    const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
+    const buildConfig = this._buildSkillToolConfig.bind(this, type, config.rolls?.shift());
 
-    // Tool-specific check bonus.
-    if ( tool?.bonuses.check || options.bonus ) {
-      parts.push("@toolBonus");
-      const bonus = [];
-      if ( tool?.bonuses.check ) bonus.push(Roll.replaceFormulaData(tool.bonuses.check, data));
-      if ( options.bonus ) bonus.push(Roll.replaceFormulaData(options.bonus, data));
-      data.toolBonus = bonus.join(" + ");
+    const rollConfig = foundry.utils.mergeObject({
+      ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability),
+      advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+      disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
+      reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
+    }, config);
+    rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
+    rollConfig.rolls = [{
+      options: {
+        maximum: relevant?.roll.max,
+        minimum: relevant?.roll.min
+      }
+    }].concat(config.rolls ?? []);
+    rollConfig.subject = this;
+    rollConfig.rolls.forEach((r, index) => buildConfig(rollConfig, r, null, index));
+
+    const dialogConfig = foundry.utils.mergeObject({
+      applicationClass: SkillToolRollConfigurationDialog,
+      options: {
+        buildConfig,
+        chooseAbility: true
+      }
+    }, dialog);
+
+    const abilityLabel = CONFIG.DND5E.abilities[relevant?.ability ?? skillConfig?.ability ?? ""]?.label;
+
+    const messageConfig = foundry.utils.mergeObject({
+      create: true,
+      data: {
+        flags: {
+          dnd5e: {
+            messageType: "roll",
+            roll: {
+              [`${type}Id`]: config[type],
+              type
+            }
+          }
+        },
+        flavor: type === "skill"
+          ? game.i18n.format("DND5E.SkillPromptTitle", { skill: skillConfig.label, ability: abilityLabel })
+          : game.i18n.format("DND5E.ToolPromptTitle", { tool: Trait.keyLabel(config.tool, { trait: "tool" }) ?? "" }),
+        speaker: ChatMessage.getSpeaker({ actor: this })
+      }
+    }, message);
+
+    if ( `dnd5e.preRoll${name}` in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        `The \`dnd5e.preRoll${name}\` hook has been deprecated and replaced with \`dnd5e.preRoll${type.capitalize()}V2\`.`,
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
+      if ( Hooks.call(`dnd5e.preRoll${name}`, this, oldConfig, config.skill) === false ) return null;
+      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
+    }
+
+    const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
+    if ( !rolls.length ) return null;
+
+    /**
+     * A hook event that fires after an skill or tool check has been rolled.
+     * @function dnd5e.rollSkillV2
+     * @function dnd5e.rollToolCheckV2
+     * @memberof hookEvents
+     * @param {D20Roll[]} rolls       The resulting rolls.
+     * @param {object} data
+     * @param {string} [data.skill]   ID of the skill that was rolled as defined in `CONFIG.DND5E.skills`.
+     * @param {string} [data.tool]    ID of the tool that was rolled as defined in `CONFIG.DND5E.tools`.
+     * @param {Actor5e} data.subject  Actor for which the roll has been performed.
+     */
+    Hooks.callAll(`dnd5e.roll${name}V2`, rolls, { [type]: config[type], subject: this });
+
+    if ( `dnd5e.roll${name}` in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        `The \`dnd5e.roll${name}\` hook has been deprecated and replaced with \`dnd5e.roll${type.capitalize()}V2\`.`,
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      Hooks.callAll(`dnd5e.roll${name}`, this, rolls[0], config.skill);
+    }
+
+    return oldFormat ? rolls[0] : rolls;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Configure a roll config for each roll performed as part of the skill or tool check process. Will be called once
+   * per roll in the process each time an option is changed in the roll configuration interface.
+   * @param {"skill"|"tool"} type                          Type of roll.
+   * @param {Partial<D20RollConfiguration>} [initialRoll]  Initial roll passed to the rolling method.
+   * @param {D20RollProcessConfiguration} process          Configuration for the entire rolling process.
+   * @param {D20RollConfiguration} config                  Configuration for a specific roll.
+   * @param {FormDataExtended} [formData]                  Any data entered into the rolling prompt.
+   * @param {number} index                                 Index of the roll within all rolls being prepared.
+   */
+  _buildSkillToolConfig(type, initialRoll, process, config, formData, index) {
+    const relevant = type === "skill" ? this.system.skills?.[process.skill] : this.system.tools?.[process.tool];
+    const rollData = this.getRollData();
+    const abilityId = formData?.get("ability") ?? process.ability;
+    const ability = this.system.abilities?.[abilityId];
+    const prof = this.system.calculateAbilityCheckProficiency(relevant?.effectValue ?? 0, abilityId);
+
+    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+      mod: ability?.mod,
+      prof: prof?.hasProficiency ? prof.term : null,
+      [`${config[type]}Bonus`]: relevant?.bonuses?.check,
+      extraBonus: process.bonus,
+      [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
+      [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
+      abilityCheckBonus: this.system.bonuses?.abilities?.check,
+      situational: config.data?.situational
+    }, { ...rollData });
+    const options = config.options ?? {};
+
+    if ( index === 0 ) {
+      if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
+      if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
+      if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
     }
 
     // Add exhaustion reduction
     this.addRollExhaustion(parts, data);
 
-    // Reliable Talent applies to any tool check we have full or better proficiency in
-    const reliableTalent = (prof?.multiplier >= 1 && this.getFlag("dnd5e", "reliableTalent"));
-
-    const flavor = game.i18n.format("DND5E.ToolPromptTitle", {tool: Trait.keyLabel(toolId, {trait: "tool"}) ?? ""});
-    const rollData = foundry.utils.mergeObject({
-      data, flavor,
-      title: `${flavor}: ${this.name}`,
-      chooseModifier: true,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      reliableTalent,
-      messageData: {
-        speaker: options.speaker || ChatMessage.implementation.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "tool", toolId}
-      }
-    }, options);
-    rollData.parts = parts.concat(options.parts ?? []);
-
-    /**
-     * A hook event that fires before a tool check is rolled for an Actor.
-     * @function dnd5e.preRollToolCheck
-     * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the tool check is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} toolId                Identifier of the tool being rolled.
-     * @returns {boolean}                    Explicitly return `false` to prevent skill check from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollToolCheck", this, rollData, toolId) === false ) return;
-
-    const roll = await d20Roll(rollData);
-
-    /**
-     * A hook event that fires after a tool check has been rolled for an Actor.
-     * @function dnd5e.rollToolCheck
-     * @memberof hookEvents
-     * @param {Actor5e} actor   Actor for which the tool check has been rolled.
-     * @param {D20Roll} roll    The resulting roll.
-     * @param {string} toolId   Identifier of the tool that was rolled.
-     */
-    if ( roll ) Hooks.callAll("dnd5e.rollToolCheck", this, roll, toolId);
-
-    return roll;
+    config.parts = parts;
+    config.data = data;
+    config.data.abilityId = abilityId;
+    config.options = options;
   }
 
   /* -------------------------------------------- */
@@ -1543,22 +1306,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Roll a generic ability test or saving throw.
    * Prompt the user for input on which variety of roll they want to do.
-   * @param {string} abilityId    The ability id (e.g. "str")
-   * @param {object} options      Options which configure how ability tests or saving throws are rolled
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
    */
-  rollAbility(abilityId, options={}) {
+  rollAbility(config={}, dialog={}, message={}) {
+    let abilityId = config;
+    if ( foundry.utils.getType(config) === "Object" ) abilityId = config.ability;
+    else foundry.utils.logCompatibilityWarning(
+      "The `rollAbility` method on Actor5e now takes roll, dialog, and message config objects as parameters.",
+      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+    );
     const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
     new Dialog({
-      title: `${game.i18n.format("DND5E.AbilityPromptTitle", {ability: label})}: ${this.name}`,
-      content: `<p>${game.i18n.format("DND5E.AbilityPromptText", {ability: label})}</p>`,
+      title: `${game.i18n.format("DND5E.AbilityPromptTitle", { ability: label })}: ${this.name}`,
+      content: `<p>${game.i18n.format("DND5E.AbilityPromptText", { ability: label })}</p>`,
       buttons: {
         test: {
           label: game.i18n.localize("DND5E.ActionAbil"),
-          callback: () => this.rollAbilityTest(abilityId, options)
+          callback: () => this.rollAbilityCheck(config, dialog, message)
         },
         save: {
           label: game.i18n.localize("DND5E.ActionSave"),
-          callback: () => this.rollAbilitySave(abilityId, options)
+          callback: () => this.rollSavingThrow(config, dialog, message)
         }
       }
     }).render(true);
@@ -1567,195 +1337,234 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Roll an Ability Test
-   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {string} abilityId    The ability ID (e.g. "str")
-   * @param {object} options      Options which configure how ability tests are rolled
-   * @returns {Promise<D20Roll>}  A Promise which resolves to the created Roll instance
+   * Roll an Ability Check.
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instance.
    */
-  async rollAbilityTest(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
-    const abl = this.system.abilities[abilityId];
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const parts = [];
-    const data = this.getRollData();
-
-    // Add ability modifier
-    parts.push("@mod");
-    data.mod = abl?.mod ?? 0;
-
-    // Include proficiency bonus
-    if ( abl?.checkProf.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = abl.checkProf.term;
-    }
-
-    // Add ability-specific check bonus
-    if ( abl?.bonuses?.check ) {
-      const checkBonusKey = `${abilityId}CheckBonus`;
-      parts.push(`@${checkBonusKey}`);
-      data[checkBonusKey] = Roll.replaceFormulaData(abl.bonuses.check, data);
-    }
-
-    // Add global actor bonus
-    if ( globalBonuses.check ) {
-      parts.push("@checkBonus");
-      data.checkBonus = Roll.replaceFormulaData(globalBonuses.check, data);
-    }
-
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
-
-    // Roll and return
-    const flavor = game.i18n.format("DND5E.AbilityPromptTitle", {ability: label});
-    const rollData = foundry.utils.mergeObject({
-      data,
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "ability", abilityId }
+  async rollAbilityCheck(config={}, dialog={}, message={}) {
+    const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.AbilityPromptTitle", { ability: abilityLabel }),
+          subtitle: this.name
+        }
       }
-    }, options);
-    rollData.parts = parts.concat(options.parts ?? []);
+    }, dialog);
+    return this.#rollD20Test("check", config, dialogConfig, message);
+  }
 
-    /**
-     * A hook event that fires before an ability test is rolled for an Actor.
-     * @function dnd5e.preRollAbilityTest
-     * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the ability test is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} abilityId             ID of the ability being rolled as defined in `DND5E.abilities`.
-     * @returns {boolean}                    Explicitly return `false` to prevent ability test from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollAbilityTest", this, rollData, abilityId) === false ) return;
-
-    const roll = await d20Roll(rollData);
-
-    /**
-     * A hook event that fires after an ability test has been rolled for an Actor.
-     * @function dnd5e.rollAbilityTest
-     * @memberof hookEvents
-     * @param {Actor5e} actor     Actor for which the ability test has been rolled.
-     * @param {D20Roll} roll      The resulting roll.
-     * @param {string} abilityId  ID of the ability that was rolled as defined in `DND5E.abilities`.
-     */
-    if ( roll ) Hooks.callAll("dnd5e.rollAbilityTest", this, roll, abilityId);
-
-    return roll;
+  /**
+   * Roll an Ability Test.
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instance.
+   */
+  async rollAbilityTest(config={}, dialog={}, message={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The `rollAbilityTest` method on Actor5e has been renamed `rollAbilityCheck`.",
+      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+    );
+    return this.rollAbilityCheck(config, dialog, message);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Roll an Ability Saving Throw
-   * Prompt the user for input regarding Advantage/Disadvantage and any Situational Bonus
-   * @param {string} abilityId          The ability ID (e.g. "str")
-   * @param {object} [options]          Options which configure how ability saves are rolled
-   * @returns {Promise<D20Roll|null>}   A Promise which resolves to the created Roll instance
+   * Roll a Saving Throw.
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instances.
    */
-  async rollAbilitySave(abilityId, options={}) {
-    const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
-    const abl = this.system.abilities[abilityId];
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const parts = [];
-    const data = this.getRollData();
-
-    // Add ability modifier
-    parts.push("@mod");
-    data.mod = abl?.mod ?? 0;
-
-    // Include proficiency bonus
-    if ( abl?.saveProf.hasProficiency ) {
-      parts.push("@prof");
-      data.prof = abl.saveProf.term;
-    }
-
-    // Include ability-specific saving throw bonus
-    if ( abl?.bonuses?.save ) {
-      const saveBonusKey = `${abilityId}SaveBonus`;
-      parts.push(`@${saveBonusKey}`);
-      data[saveBonusKey] = Roll.replaceFormulaData(abl.bonuses.save, data);
-    }
-
-    // Include a global actor ability save bonus
-    if ( globalBonuses.save ) {
-      parts.push("@saveBonus");
-      data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
-    }
-
-    // Include cover in dexterity saving throws
-    if ( (abilityId === "dex") && data.attributes?.ac?.cover ) {
-      parts.push("@cover");
-      data.cover = data.attributes.ac.cover;
-    }
-
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
-
-    // Roll and return
-    const flavor = game.i18n.format("DND5E.SavePromptTitle", {ability: label});
-    const rollData = foundry.utils.mergeObject({
-      data,
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      messageData: {
-        speaker: options.speaker || ChatMessage.getSpeaker({actor: this}),
-        "flags.dnd5e.roll": {type: "save", abilityId }
+  async rollSavingThrow(config={}, dialog={}, message={}) {
+    const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SavePromptTitle", { ability: abilityLabel }),
+          subtitle: this.name
+        }
       }
-    }, options);
-    rollData.parts = parts.concat(options.parts ?? []);
+    }, dialog);
+    return this.#rollD20Test("save", config, dialogConfig, message);
+  }
 
-    /**
-     * A hook event that fires before an ability save is rolled for an Actor.
-     * @function dnd5e.preRollAbilitySave
-     * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the ability save is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @param {string} abilityId             ID of the ability being rolled as defined in `DND5E.abilities`.
-     * @returns {boolean}                    Explicitly return `false` to prevent ability save from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollAbilitySave", this, rollData, abilityId) === false ) return;
-
-    const roll = await d20Roll(rollData);
-
-    /**
-     * A hook event that fires after an ability save has been rolled for an Actor.
-     * @function dnd5e.rollAbilitySave
-     * @memberof hookEvents
-     * @param {Actor5e} actor     Actor for which the ability save has been rolled.
-     * @param {D20Roll} roll      The resulting roll.
-     * @param {string} abilityId  ID of the ability that was rolled as defined in `DND5E.abilities`.
-     */
-    if ( roll ) Hooks.callAll("dnd5e.rollAbilitySave", this, roll, abilityId);
-
-    return roll;
+  /**
+   * Roll an Ability Saving Throw.
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instances.
+   */
+  async rollAbilitySave(config={}, dialog={}, message={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The `rollAbilitySave` method on Actor5e has been renamed `rollSavingThrow`.",
+      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+    );
+    return this.rollSavingThrow(config, dialog, message);
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Perform a death saving throw, rolling a d20 plus any global save bonuses
-   * @param {object} options          Additional options which modify the roll
-   * @returns {Promise<D20Roll|null>} A Promise which resolves to the Roll instance
+   * @typedef {D20RollProcessConfiguration} AbilityRollProcessConfiguration
+   * @property {string} [ability]  ID of the ability to roll as found in `CONFIG.DND5E.abilities`.
    */
-  async rollDeathSave(options={}) {
-    const death = this.system.attributes.death;
+
+  /**
+   * Shared rolling functionality between ability checks & saving throws.
+   * @param {"check"|"save"} type                     D20 test type.
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}               A Promise which resolves to the created Roll instance.
+   */
+  async #rollD20Test(type, config={}, dialog={}, message={}) {
+    let oldFormat = false;
+    const name = type === "check" ? "AbilityCheck" : "SavingThrow";
+    const oldName = type === "check" ? "AbilityTest" : "AbilitySave";
+
+    // Handle deprecated calling pattern
+    if ( config && (foundry.utils.getType(config) !== "Object") ) {
+      foundry.utils.logCompatibilityWarning(
+        `The \`roll${oldName}\` method on Actor5e now takes roll, dialog, and message config objects as parameters.`,
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      oldFormat = true;
+      const oldConfig = dialog;
+      config = { ability: config };
+      dialog = {};
+      _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
+    }
+
+    const ability = this.system.abilities?.[config.ability];
+    const abilityConfig = CONFIG.DND5E.abilities[config.ability];
+
+    const rollData = this.getRollData();
+    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+      mod: ability?.mod,
+      prof: ability?.[`${type}Prof`].hasProficiency ? ability[`${type}Prof`].term : null,
+      [`${config.ability}${type.capitalize()}Bonus`]: ability?.bonuses[type],
+      [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
+      cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null
+    }, rollData);
+    const options = {};
+
+    const initialRoll = config.rolls?.pop();
+    if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
+    if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
+    if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
+
+    const rollConfig = foundry.utils.mergeObject({
+      halflingLucky: this.getFlag("dnd5e", "halflingLucky")
+    }, config);
+    rollConfig.hookNames = [...(config.hookNames ?? []), name, "d20Test"];
+    rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
+    rollConfig.rolls.forEach(({ parts, data }) => this.addRollExhaustion(parts, data));
+    rollConfig.subject = this;
+
+    const dialogConfig = foundry.utils.deepClone(dialog);
+
+    const messageConfig = foundry.utils.mergeObject({
+      create: true,
+      data: {
+        flags: {
+          dnd5e: {
+            messageType: "roll",
+            roll: {
+              ability: config.ability,
+              type: type === "check" ? "ability" : "save"
+            }
+          }
+        },
+        flavor: game.i18n.format(
+          `DND5E.${type === "check" ? "Ability" : "Save"}PromptTitle`, { ability: abilityConfig?.label ?? "" }
+        ),
+        speaker: ChatMessage.getSpeaker({ actor: this })
+      }
+    }, message);
+
+    if ( "dnd5e.preRollAbilityTest" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        `The \`dnd5e.preRoll${oldName}\` hook has been deprecated and replaced with \`dnd5e.preRoll${name}V2\`.`,
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
+      if ( Hooks.call(`dnd5e.preRoll${oldName}`, this, oldConfig, config.ability) === false ) return null;
+      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
+    }
+
+    const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
+    if ( !rolls.length ) return null;
+
+    /**
+     * A hook event that fires after an ability check or save has been rolled.
+     * @function dnd5e.rollAbilityCheck
+     * @function dnd5e.rollSavingThrow
+     * @memberof hookEvents
+     * @param {D20Roll[]} rolls       The resulting rolls.
+     * @param {object} data
+     * @param {string} data.ability   ID of the ability that was rolled as defined in `CONFIG.DND5E.abilities`.
+     * @param {Actor5e} data.subject  Actor for which the roll has been performed.
+     */
+    Hooks.callAll(`dnd5e.roll${name}`, rolls, { ability: config.ability, subject: this });
+
+    if ( `dnd5e.roll${name}` in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        `The \`dnd5e.roll${oldName}\` hook has been deprecated and replaced with \`dnd5e.roll${name}\`.`,
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      Hooks.callAll(`dnd5e.roll${oldName}`, this, rolls[0], config.ability);
+    }
+
+    return oldFormat ? rolls[0] : rolls;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform a death saving throw, rolling a d20 plus any global save bonuses.
+   * @param {Partial<D20RollProcessConfiguration>} config     Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog    Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message  Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                       A Promise which resolves to the Roll instance.
+   */
+  async rollDeathSave(config={}, dialog={}, message={}) {
+    let oldFormat = false;
+    const death = this.system.attributes?.death;
     if ( !death ) throw new Error(`Actors of the type '${this.type}' don't support death saves.`);
+
+    // Handle deprecated config object
+    if ( config.legacy !== false ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `rollDeathSave` method on Actor5e now takes roll, dialog, and message config objects as parameters. "
+        + "Pass the `legacy: false` option to config object to suppress this warning once updates have been made.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      oldFormat = true;
+      const oldConfig = config;
+      config = {};
+      _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
+    }
 
     // Display a warning if we are not at zero HP or if we already have reached 3
     if ( (this.system.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3) ) {
-      ui.notifications.warn("DND5E.DeathSaveUnnecessary", {localize: true});
+      ui.notifications.warn("DND5E.DeathSaveUnnecessary", { localize: true });
       return null;
     }
 
-    // Evaluate a global saving throw bonus
-    const speaker = options.speaker || ChatMessage.getSpeaker({actor: this});
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
     const parts = [];
-    const data = this.getRollData();
+    let data = {};
+    const options = {
+      advantage: death.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+      disadvantage: death.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+      maximum: death.roll.max,
+      minimum: death.roll.min
+    };
 
     // Diamond Soul adds proficiency
     if ( this.getFlag("dnd5e", "diamondSoul") ) {
@@ -1763,48 +1572,53 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       data.prof = new Proficiency(this.system.attributes.prof, 1).term;
     }
 
-    // Include a global actor ability save bonus
-    if ( globalBonuses.save ) {
-      parts.push("@saveBonus");
-      data.saveBonus = Roll.replaceFormulaData(globalBonuses.save, data);
+    // Death save bonus
+    if ( death.bonuses.save ) parts.push(death.bonuses.save);
+
+    const initialRoll = config.rolls?.pop();
+    if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
+    if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
+    if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
+
+    const rollConfig = foundry.utils.mergeObject({ target: 10 }, config);
+    rollConfig.hookNames = [...(config.hookNames ?? []), "deathSave"];
+    rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
+
+    const dialogConfig = foundry.utils.deepClone(dialog);
+
+    const messageConfig = foundry.utils.mergeObject({
+      data: {
+        flags: {
+          dnd5e: {
+            roll: {
+              type: "death"
+            }
+          }
+        },
+        flavor: game.i18n.localize("DND5E.DeathSavingThrow")
+      }
+    }, message);
+
+    if ( "dnd5e.preRollDeathSave" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.preRollDeathSave` hook has been deprecated and replaced with `dnd5e.preRollDeathSaveV2`.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
+      if ( Hooks.call("dnd5e.preRollDeathSave", this, oldConfig) === false ) return null;
+      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
     }
 
-    // Add exhaustion reduction
-    this.addRollExhaustion(parts, data);
-
-    // Evaluate the roll
-    const flavor = game.i18n.localize("DND5E.DeathSavingThrow");
-    const rollData = foundry.utils.mergeObject({
-      data,
-      title: `${flavor}: ${this.name}`,
-      flavor,
-      halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
-      targetValue: 10,
-      messageData: {
-        speaker: speaker,
-        "flags.dnd5e.roll": {type: "death"}
-      }
-    }, options);
-    rollData.parts = parts.concat(options.parts ?? []);
-
-    /**
-     * A hook event that fires before a death saving throw is rolled for an Actor.
-     * @function dnd5e.preRollDeathSave
-     * @memberof hookEvents
-     * @param {Actor5e} actor                Actor for which the death saving throw is being rolled.
-     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
-     * @returns {boolean}                    Explicitly return `false` to prevent death saving throw from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollDeathSave", this, rollData) === false ) return;
-
-    const roll = await d20Roll(rollData);
-    if ( !roll ) return null;
+    const rolls = await this.rollSavingThrow(rollConfig, dialogConfig, messageConfig);
+    if ( !rolls?.length ) return null;
 
     // Take action depending on the result
     const details = {};
+    const roll = rolls[0];
+    const returnValue = oldFormat ? roll : rolls;
 
     // Save success
-    if ( roll.total >= (roll.options.targetValue ?? 10) ) {
+    if ( roll.total >= (roll.options.target ?? 10) ) {
       let successes = (death.success || 0) + 1;
 
       // Critical Success = revive with 1hp
@@ -1844,58 +1658,113 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * updates have been performed.
      * @function dnd5e.rollDeathSave
      * @memberof hookEvents
-     * @param {Actor5e} actor              Actor for which the death saving throw has been rolled.
-     * @param {D20Roll} roll               The resulting roll.
-     * @param {object} details
-     * @param {object} details.updates     Updates that will be applied to the actor as a result of this save.
-     * @param {string} details.chatString  Localizable string displayed in the create chat message. If not set, then
-     *                                     no chat message will be displayed.
-     * @returns {boolean}                  Explicitly return `false` to prevent updates from being performed.
+     * @param {D20Roll[]} rolls         The resulting rolls.
+     * @param {object} data
+     * @param {string} data.chatString  Localizable string displayed in the create chat message. If not set, then
+     *                                  no chat message will be displayed.
+     * @param {object} data.updates     Updates that will be applied to the actor as a result of this save.
+     * @param {Actor5e} data.subject    Actor for which the death saving throw has been rolled.
+     * @returns {boolean}               Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.rollDeathSave", this, roll, details) === false ) return roll;
+    if ( Hooks.call("dnd5e.rollDeathSaveV2", rolls, { ...details, subject: this }) === false ) return returnValue;
+
+    if ( "dnd5e.rollDeathSave" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.rollDeathSave` hook has been deprecated and replaced with `dnd5e.rollDeathSaveV2`.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      if ( Hooks.call("dnd5e.rollDeathSave", this, rolls[0], details) === false ) return returnValue;
+    }
 
     if ( !foundry.utils.isEmpty(details.updates) ) await this.update(details.updates);
 
     // Display success/failure chat message
+    let resultsMessage;
     if ( details.chatString ) {
-      let chatData = { content: game.i18n.format(details.chatString, {name: this.name}), speaker };
+      const chatData = {
+        content: game.i18n.format(details.chatString, { name: this.name }),
+        speaker: messageConfig.speaker ?? ChatMessage.getSpeaker({ actor: this })
+      };
       ChatMessage.applyRollMode(chatData, roll.options.rollMode);
-      await ChatMessage.create(chatData);
+      resultsMessage = await ChatMessage.create(chatData);
     }
 
-    // Return the rolled result
-    return roll;
+    /**
+     * A hook event that fires after a death saving throw has been rolled and after changes have been applied.
+     * @function dnd5e.postRollDeathSave
+     * @memberof hookEvents
+     * @param {D20Roll[]} rolls                  The resulting rolls.
+     * @param {object} data
+     * @param {ChatMessage5e|void} data.message  The created results chat message.
+     * @param {Actor5e} data.subject             Actor for which the death saving throw has been rolled.
+     */
+    Hooks.callAll("dnd5e.postRollDeathSave", rolls, { message: resultsMessage, subject: this });
+
+    return returnValue;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Perform a saving throw to maintain concentration.
-   * @param {object} [options]          Options to configure how the saving throw is rolled
-   * @returns {Promise<D20Roll|null>}   A Promise which resolves to the created Roll instance
+   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
+   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
+   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
+   * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instance.
    */
-  async rollConcentration(options={}) {
+  async rollConcentration(config={}, dialog={}, message={}) {
+    let oldFormat = false;
     if ( !this.isOwner ) return null;
     const conc = this.system.attributes?.concentration;
     if ( !conc ) throw new Error("You may not make a Concentration Saving Throw with this Actor.");
 
-    const config = CONFIG.DND5E;
-    const modes = CONFIG.Dice.D20Roll.ADV_MODE;
+    // Handle deprecated config object
+    if ( config.legacy !== false ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `rollConcentration` method on Actor5e now takes roll, dialog, and message config objects as parameters."
+        + "Pass the `legacy: false` option to config object to suppress this warning once updates have been made.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      oldFormat = true;
+      const oldConfig = config;
+      config = {};
+      _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
+    }
+
+    let data = {};
     const parts = [];
+    const options = {
+      advantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+      disadvantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+      maximum: conc.roll.max,
+      minimum: conc.roll.min
+    };
 
     // Concentration bonus
     if ( conc.bonuses.save ) parts.push(conc.bonuses.save);
 
-    const ability = (conc.ability in config.abilities) ? conc.ability : config.defaultAbilities.concentration;
+    const initialRoll = config.rolls?.pop();
+    if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
+    if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
+    if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
 
-    options = foundry.utils.mergeObject({
-      ability: ability,
+    const rollConfig = foundry.utils.mergeObject({
+      ability: (conc.ability in CONFIG.DND5E.abilities) ? conc.ability : CONFIG.DND5E.defaultAbilities.concentration,
       isConcentration: true,
-      targetValue: 10,
-      advantage: options.advantage || (conc.roll.mode === modes.ADVANTAGE),
-      disadvantage: options.disadvantage || (conc.roll.mode === modes.DISADVANTAGE)
-    }, options);
-    options.parts = parts.concat(options.parts ?? []);
+      target: 10
+    }, config);
+    rollConfig.hookNames = [...(config.hookNames ?? []), "concentration"];
+    rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
+
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SavePromptTitle", { ability: game.i18n.localize("DND5E.Concentration") })
+        }
+      }
+    }, dialog);
+
+    const messageConfig = foundry.utils.deepClone(message);
 
     /**
      * A hook event that fires before a saving throw to maintain concentration is rolled for an Actor.
@@ -1905,128 +1774,162 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {D20RollConfiguration} options    Configuration data for the pending roll.
      * @returns {boolean}                       Explicitly return `false` to prevent the save from being performed.
      */
-    if ( Hooks.call("dnd5e.preRollConcentration", this, options) === false ) return;
+    if ( "dnd5e.preRollConcentration" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.preRollConcentration` hook has been deprecated and replaced with `dnd5e.preRollConcentrationV2`.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
+      if ( Hooks.call("dnd5e.preRollConcentration", this, oldConfig) === false ) return null;
+      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
+    }
 
-    // Perform a standard ability save.
-    const roll = await this.rollAbilitySave(options.ability, options);
+    const rolls = await this.rollSavingThrow(rollConfig, dialogConfig, messageConfig);
+    if ( !rolls?.length ) return null;
 
     /**
      * A hook event that fires after a saving throw to maintain concentration is rolled for an Actor.
      * @function dnd5e.rollConcentration
      * @memberof hookEvents
-     * @param {Actor5e} actor     Actor for which the saving throw has been rolled.
-     * @param {D20Roll} roll      The resulting roll.
+     * @param {D20Roll[]} rolls     The resulting rolls.
+     * @param {object} data
+     * @param {Actor5e} data.actor  Actor for which the saving throw has been rolled.
      */
-    if ( roll ) Hooks.callAll("dnd5e.rollConcentration", this, roll);
+    Hooks.callAll("dnd5e.rollConcentrationV2", rolls, { subject: this });
 
-    return roll;
+    if ( "dnd5e.rollConcentration" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.rollConcentration` hook has been deprecated and replaced with `dnd5e.rollConcentrationV2`.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      );
+      Hooks.callAll("dnd5e.rollConcentration", this, rolls[0]);
+    }
+
+    return oldFormat ? rolls[0] : rolls;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * @typedef {D20RollOptions} InitiativeRollOptions
+   * @property {D20Roll.ADV_MODE} [advantageMode]  A specific advantage mode to apply.
+   * @property {number} [fixed]                    Fixed initiative value to use rather than rolling.
+   * @property {string} [flavor]                   Special flavor text to apply to the created message.
+   */
+
+  /**
+   * Get an un-evaluated D20Roll instance used to roll initiative for this Actor.
+   * @param {Partial<InitiativeRollOptions>} options  Configuration information for the roll.
+   * @returns {D20Roll|null}                          The constructed but unevaluated D20Roll.
+   */
+  getInitiativeRoll(options={}) {
+    // Use a temporarily cached initiative roll
+    if ( this._cachedInitiativeRoll ) return this._cachedInitiativeRoll.clone();
+    const config = this.getInitiativeRollConfig(options);
+    if ( !config ) return null;
+
+    // Create a normal D20 roll
+    if ( config.options?.fixed === undefined ) {
+      const formula = ["1d20"].concat(config.parts).join(" + ");
+      return new CONFIG.Dice.D20Roll(formula, config.data, config.options);
+    }
+
+    // Create a basic roll with the fixed score
+    return new CONFIG.Dice.BasicRoll(String(config.options.fixed), config.data, config.options);
   }
 
   /* -------------------------------------------- */
 
   /**
    * Get an un-evaluated D20Roll instance used to roll initiative for this Actor.
-   * @param {object} [options]                        Options which modify the roll
-   * @param {D20Roll.ADV_MODE} [options.advantageMode]    A specific advantage mode to apply
-   * @param {string} [options.flavor]                     Special flavor text to apply
-   * @returns {D20Roll}                               The constructed but unevaluated D20Roll
+   * @param {Partial<InitiativeRollOptions>} options  Configuration information for the roll.
+   * @returns {D20RollConfiguration|null}             Roll configuration.
    */
-  getInitiativeRoll(options={}) {
-
-    // Use a temporarily cached initiative roll
-    if ( this._cachedInitiativeRoll ) return this._cachedInitiativeRoll.clone();
-
-    // Obtain required data
+  getInitiativeRollConfig(options={}) {
     const init = this.system.attributes?.init;
+    const flags = this.flags.dnd5e ?? {};
     const abilityId = init?.ability || CONFIG.DND5E.defaultAbilities.initiative;
-    const data = this.getRollData();
-    const flags = this.flags.dnd5e || {};
+    const ability = this.system.abilities?.[abilityId];
+
+    const rollData = this.getRollData();
+    let { parts, data } = CONFIG.Dice.BasicRoll.constructParts({
+      mod: init?.mod,
+      prof: init.prof.hasProficiency ? init.prof.term : null,
+      initiativeBonus: init.bonus,
+      [`${abilityId}AbilityCheckBonus`]: ability?.bonuses?.check,
+      abilityCheckBonus: this.system.bonuses?.abilities?.check,
+      alert: flags.initiativeAlert && (game.settings.get("dnd5e", "rulesVersion") === "legacy") ? 5 : null
+    }, rollData);
+
     const remarkableAthlete = flags.remarkableAthlete && (game.settings.get("dnd5e", "rulesVersion") === "modern");
-    if ( flags.initiativeAdv || remarkableAthlete ) options.advantageMode ??= dnd5e.dice.D20Roll.ADV_MODE.ADVANTAGE;
-
-    // Standard initiative formula
-    const parts = ["1d20"];
-
-    // Special initiative bonuses
-    if ( init ) {
-      parts.push(init.mod);
-      if ( init.prof.term !== "0" ) {
-        parts.push("@prof");
-        data.prof = init.prof.term;
-      }
-      if ( init.bonus ) {
-        parts.push("@bonus");
-        data.bonus = Roll.replaceFormulaData(init.bonus, data);
-      }
-    }
-
-    // Ability check bonuses
-    if ( "abilities" in this.system ) {
-      const abilityBonus = this.system.abilities[abilityId]?.bonuses?.check;
-      if ( abilityBonus ) {
-        parts.push("@abilityBonus");
-        data.abilityBonus = Roll.replaceFormulaData(abilityBonus, data);
-      }
-    }
-
-    // Global check bonus
-    if ( "bonuses" in this.system ) {
-      const globalCheckBonus = this.system.bonuses.abilities?.check;
-      if ( globalCheckBonus ) {
-        parts.push("@globalBonus");
-        data.globalBonus = Roll.replaceFormulaData(globalCheckBonus, data);
-      }
-    }
-
-    // Alert feat
-    if ( flags.initiativeAlert ) {
-      parts.push("@alertBonus");
-      data.alertBonus = 5;
-    }
+    if ( flags.initiativeAdv || remarkableAthlete ) options.advantage ??= true;
 
     // Add exhaustion reduction
     this.addRollExhaustion(parts, data);
 
     // Ability score tiebreaker
     const tiebreaker = game.settings.get("dnd5e", "initiativeDexTiebreaker");
-    if ( tiebreaker && ("abilities" in this.system) ) {
-      const abilityValue = this.system.abilities[abilityId]?.value;
-      if ( Number.isNumeric(abilityValue) ) parts.push(String(abilityValue / 100));
-    }
+    if ( tiebreaker && Number.isNumeric(ability?.value) ) parts.push(String(ability.value / 100));
+
+    // Fixed initiative score
+    const scoreMode = game.settings.get("dnd5e", "initiativeScore");
+    const useScore = (scoreMode === "all") || ((scoreMode === "npcs") && game.user.isGM && (this.type === "npc"));
 
     options = foundry.utils.mergeObject({
+      fixed: useScore ? init.score : undefined,
       flavor: options.flavor ?? game.i18n.localize("DND5E.Initiative"),
       halflingLucky: flags.halflingLucky ?? false,
-      critical: null,
-      fumble: null
+      maximum: init.roll.max,
+      minimum: init.roll.min
     }, options);
 
-    // Create the d20 roll
-    const formula = parts.join(" + ");
-    return new CONFIG.Dice.D20Roll(formula, data, options);
+    const rollConfig = { parts, data, options, subject: this };
+
+    /**
+     * A hook event that fires before initiative roll is prepared for an Actor.
+     * @function dnd5e.preConfigureInitiative
+     * @memberof hookEvents
+     * @param {Actor5e} subject              The Actor that is rolling initiative.
+     * @param {D20RollConfiguration} config  Configuration data for the pending roll.
+     */
+    Hooks.callAll("dnd5e.preConfigureInitiative", this, rollConfig);
+
+    return rollConfig;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Roll initiative for this Actor with a dialog that provides an opportunity to elect advantage or other bonuses.
-   * @param {object} [rollOptions]      Options forwarded to the Actor#getInitiativeRoll method
-   * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor
+   * @param {Partial<InitiativeRollOptions>} [rollOptions={}]  Options forwarded to the Actor#getInitiativeRoll method.
+   * @returns {Promise<void>}           A promise which resolves once initiative has been rolled for the Actor.
    */
   async rollInitiativeDialog(rollOptions={}) {
-    // Create and configure the Initiative roll
-    const roll = this.getInitiativeRoll(rollOptions);
-    const choice = await roll.configureDialog({
-      defaultRollMode: game.settings.get("core", "rollMode"),
-      title: `${game.i18n.localize("DND5E.InitiativeRoll")}: ${this.name}`,
-      chooseModifier: false,
-      defaultAction: rollOptions.advantageMode ?? dnd5e.dice.D20Roll.ADV_MODE.NORMAL
-    });
-    if ( choice === null ) return; // Closed dialog
+    const config = {
+      evaluate: false,
+      event: rollOptions.event,
+      hookNames: ["initiativeDialog", "abilityCheck", "d20Test"],
+      rolls: [this.getInitiativeRollConfig(rollOptions)],
+      subject: this
+    };
+    if ( !config.rolls[0] ) return;
 
-    // Temporarily cache the configured roll and use it to roll initiative for the Actor
-    this._cachedInitiativeRoll = roll;
-    await this.rollInitiative({createCombatants: true});
+    // Display the roll configuration dialog
+    const messageOptions = { rollMode: game.settings.get("core", "rollMode") };
+    if ( config.rolls[0].options?.fixed === undefined ) {
+      const dialog = { options: { title: game.i18n.localize("DND5E.InitiativeRoll") } };
+      const rolls = await CONFIG.Dice.D20Roll.build(config, dialog, messageOptions);
+      if ( !rolls.length ) return;
+      this._cachedInitiativeRoll = rolls[0];
+    }
+
+    // Just create a basic roll with the fixed score
+    else {
+      const { data, options } = config.rolls[0];
+      this._cachedInitiativeRoll = new CONFIG.Dice.BasicRoll(String(options.fixed), data, options);
+    }
+
+    await this.rollInitiative({ createCombatants: true, initiativeOptions: { messageOptions } });
   }
 
   /* -------------------------------------------- */
@@ -2117,14 +2020,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     else {
       // If no denomination was provided, choose the first available
       if ( !config.denomination ) {
-        cls = this.system.attributes.hd.classes.find(c => c.system.hitDiceUsed < c.system.levels);
+        cls = this.system.attributes.hd.classes.find(c => c.system.hd.value);
         if ( !cls ) return null;
-        config.denomination = cls.system.hitDice;
+        config.denomination = cls.system.hd.denomination;
       }
 
       // Otherwise, locate a class (if any) which has an available hit die of the requested denomination
       else cls = this.system.attributes.hd.classes.find(i => {
-        return (i.system.hitDice === config.denomination) && (i.system.hitDiceUsed < i.system.levels);
+        return (i.system.hd.denomination === config.denomination) && i.system.hd.value;
       });
 
       // If no class is available, display an error notification
@@ -2136,8 +2039,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     formula ??= `max(0, 1${config.denomination} + @abilities.con.mod)`;
     const rollConfig = foundry.utils.deepClone(config);
-    rollConfig.subject = this;
+    rollConfig.hookNames = [...(config.hookNames ?? []), "hitDie"];
     rollConfig.rolls = [{ parts: [formula], data: this.getRollData() }].concat(config.rolls ?? []);
+    rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({
       configure: false
@@ -2153,17 +2057,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         "flags.dnd5e.roll": {type: "hitDie"}
       }
     }, message);
-
-    /**
-     * A hook event that fires before a hit die is rolled for an Actor.
-     * @function dnd5e.preRollHitDieV2
-     * @memberof hookEvents
-     * @param {HitDieRollProcessConfiguration} config  Configuration information for the roll.
-     * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
-     * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
-     * @returns {boolean}                              Explicitly return `false` to prevent hit die from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollHitDieV2", rollConfig, dialogConfig, messageConfig) === false ) return null;
 
     if ( "dnd5e.preRollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -2187,7 +2080,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const updates = { actor: {}, class: {} };
     if ( rollConfig.modifyHitDice !== false ) {
-      if ( cls ) updates.class["system.hitDiceUsed"] = cls.system.hitDiceUsed + 1;
+      if ( cls ) updates.class["system.hd.spent"] = cls.system.hd.spent + 1;
       else updates.actor["system.attributes.hd.spent"] = this.system.attributes.hd.spent + 1;
     }
     const hp = this.system.attributes.hp;
@@ -2248,11 +2141,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async rollClassHitPoints(item, { chatMessage=true }={}) {
     if ( item.type !== "class" ) throw new Error("Hit points can only be rolled for a class item.");
     const rollData = {
-      formula: `1${item.system.hitDice}`,
+      formula: `1${item.system.hd.denomination}`,
       data: item.getRollData(),
       chatMessage
     };
-    const flavor = game.i18n.format("DND5E.AdvancementHitPointsRollMessage", { class: item.name });
+    const flavor = game.i18n.format("DND5E.ADVANCEMENT.HitPoints.Roll", { class: item.name });
     const messageData = {
       title: `${flavor}: ${this.name}`,
       flavor,
@@ -2349,16 +2242,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Configuration options for a rest.
    *
    * @typedef {object} RestConfiguration
-   * @property {string} type               Type of rest to perform.
-   * @property {boolean} dialog            Present a dialog window which allows for rolling hit dice as part of the
-   *                                       Short Rest and selecting whether a new day has occurred.
-   * @property {boolean} chat              Should a chat message be created to summarize the results of the rest?
-   * @property {number} duration           Amount of time passed during the rest in minutes.
-   * @property {boolean} newDay            Does this rest carry over to a new day?
-   * @property {boolean} [advanceTime]     Should the game clock be advanced by the rest duration?
-   * @property {boolean} [autoHD]          Should hit dice be spent automatically during a short rest?
-   * @property {number} [autoHDThreshold]  How many hit points should be missing before hit dice are
-   *                                       automatically spent during a short rest.
+   * @property {string} type                   Type of rest to perform.
+   * @property {boolean} dialog                Present a dialog window which allows for rolling hit dice as part of the
+   *                                           Short Rest and selecting whether a new day has occurred.
+   * @property {boolean} chat                  Should a chat message be created to summarize the results of the rest?
+   * @property {number} duration               Amount of time passed during the rest in minutes.
+   * @property {boolean} newDay                Does this rest carry over to a new day?
+   * @property {boolean} [advanceBastionTurn]  Should a bastion turn be advanced for all players?
+   * @property {boolean} [advanceTime]         Should the game clock be advanced by the rest duration?
+   * @property {boolean} [autoHD]              Should hit dice be spent automatically during a short rest?
+   * @property {number} [autoHDThreshold]      How many hit points should be missing before hit dice are
+   *                                           automatically spent during a short rest.
    */
 
   /**
@@ -2366,13 +2260,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    *
    * @typedef {object} RestResult
    * @property {string} type              Type of rest performed.
+   * @property {Actor5e} clone            Clone of the actor before rest is performed.
    * @property {object} deltas
    * @property {number} deltas.hitPoints  Hit points recovered during the rest.
    * @property {number} deltas.hitDice    Hit dice recovered or spent during the rest.
-   * @property {object} updateData        Updates applied to the actor.
-   * @property {object[]} updateItems     Updates applied to actor's items.
    * @property {boolean} newDay           Whether a new day occurred during the rest.
    * @property {Roll[]} rolls             Any rolls that occurred during the rest process, not including hit dice.
+   * @property {object} updateData        Updates applied to the actor.
+   * @property {object[]} updateItems     Updates applied to actor's items.
    */
 
   /* -------------------------------------------- */
@@ -2384,6 +2279,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async shortRest(config={}) {
     if ( this.type === "vehicle" ) return;
+    const clone = this.clone();
 
     config = foundry.utils.mergeObject({
       type: "short", dialog: true, chat: true, newDay: false, advanceTime: false, autoHD: false, autoHDThreshold: 3,
@@ -2407,7 +2303,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Display a Dialog for rolling hit dice
     if ( config.dialog ) {
       try {
-        foundry.utils.mergeObject(config, await ShortRestDialog.shortRestDialog({actor: this, canRoll: hd0 > 0}));
+        foundry.utils.mergeObject(config, await ShortRestDialog.configure(this, config));
       } catch(err) { return; }
     }
 
@@ -2422,12 +2318,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( Hooks.call("dnd5e.shortRest", this, config) === false ) return;
 
     // Automatically spend hit dice
-    if ( !config.dialog && config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
+    if ( config.autoHD ) await this.autoSpendHitDice({ threshold: config.autoHDThreshold });
 
     // Return the rest result
     const dhd = foundry.utils.getProperty(this, "system.attributes.hd.value") - hd0;
     const dhp = foundry.utils.getProperty(this, "system.attributes.hp.value") - hp0;
-    return this._rest(config, { dhd, dhp });
+    return this._rest(config, { clone, dhd, dhp });
   }
 
   /* -------------------------------------------- */
@@ -2439,6 +2335,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   async longRest(config={}) {
     if ( this.type === "vehicle" ) return;
+    const clone = this.clone();
 
     config = foundry.utils.mergeObject({
       type: "long", dialog: true, chat: true, newDay: true, advanceTime: false,
@@ -2457,7 +2354,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( config.dialog ) {
       try {
-        foundry.utils.mergeObject(config, await LongRestDialog.longRestDialog({actor: this}));
+        foundry.utils.mergeObject(config, await LongRestDialog.configure(this, config));
       } catch(err) { return; }
     }
 
@@ -2471,7 +2368,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     if ( Hooks.call("dnd5e.longRest", this, config) === false ) return;
 
-    return this._rest(config);
+    return this._rest(config, { clone });
   }
 
   /* -------------------------------------------- */
@@ -2499,6 +2396,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newDay: config.newDay === true,
       rolls: []
     }, result);
+    result.clone ??= this.clone();
     if ( "dhp" in result ) result.deltas.hitPoints = result.dhp;
     if ( "dhd" in result ) result.deltas.hitDice = result.dhd;
 
@@ -2531,7 +2429,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config.advanceTime && (config.duration > 0) && game.user.isGM ) await game.time.advance(60 * config.duration);
 
     // Display a Chat Message summarizing the rest effects
-    if ( config.chat ) await this._displayRestResultMessage(result, result.longRest);
+    if ( config.chat ) await this._displayRestResultMessage(config, result);
 
     /**
      * A hook event that fires when the rest process is completed for an actor.
@@ -2543,6 +2441,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     Hooks.callAll("dnd5e.restCompleted", this, result, config);
 
+    if ( config.advanceBastionTurn && game.user.isGM && game.settings.get("dnd5e", "bastionConfiguration").enabled
+      && this.itemTypes.facility.length ) await dnd5e.bastion.advanceAllFacilities(this);
+
     // Return data summarizing the rest effects
     return result;
   }
@@ -2552,50 +2453,49 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Display a chat message with the result of a rest.
    *
+   * @param {RestConfiguration} config  Rest configuration.
    * @param {RestResult} result         Result of the rest operation.
-   * @param {boolean} [longRest=false]  Is this a long rest?
    * @returns {Promise<ChatMessage>}    Chat message that was created.
    * @protected
    */
-  async _displayRestResultMessage(result, longRest=false) {
-    const { dhd, dhp, newDay } = result;
+  async _displayRestResultMessage(config, result) {
+    let { dhd, dhp, newDay } = result;
+    if ( config.type === "short" ) dhd *= -1;
     const diceRestored = dhd !== 0;
     const healthRestored = dhp !== 0;
+    const longRest = config.type === "long";
     const length = longRest ? "Long" : "Short";
 
-    // Summarize the rest duration
-    let restFlavor;
-    switch (game.settings.get("dnd5e", "restVariant")) {
-      case "normal":
-        restFlavor = (longRest && newDay) ? "DND5E.LongRestOvernight" : `DND5E.${length}RestNormal`;
-        break;
-      case "gritty":
-        restFlavor = (!longRest && newDay) ? "DND5E.ShortRestOvernight" : `DND5E.${length}RestGritty`;
-        break;
-      case "epic":
-        restFlavor = `DND5E.${length}RestEpic`;
-        break;
-    }
+    const typeConfig = CONFIG.DND5E.restTypes[config.type] ?? {};
+    const duration = convertTime(config.duration, "minute");
+    const parts = [formatTime(duration.value, duration.unit)];
+    if ( newDay ) parts.push(game.i18n.localize("DND5E.REST.NewDay.Label").toLowerCase());
+    const restFlavor = `${typeConfig.label} (${game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
 
     // Determine the chat message to display
     let message;
-    if ( diceRestored && healthRestored ) message = `DND5E.${length}RestResult`;
-    else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.LongRestResultHitPoints";
-    else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.LongRestResultHitDice";
-    else message = `DND5E.${length}RestResultShort`;
+    if ( diceRestored && healthRestored ) message = `DND5E.REST.${length}.Result.Full`;
+    else if ( longRest && !diceRestored && healthRestored ) message = "DND5E.REST.Long.Result.HitPoints";
+    else if ( longRest && diceRestored && !healthRestored ) message = "DND5E.REST.Long.Result.HitDice";
+    else message = `DND5E.REST.${length}.Result.Short`;
 
     // Create a chat message
+    const pr = new Intl.PluralRules(game.i18n.lang);
     let chatData = {
-      user: game.user.id,
-      speaker: {actor: this, alias: this.name},
-      flavor: game.i18n.localize(restFlavor),
-      rolls: result.rolls,
       content: game.i18n.format(message, {
         name: this.name,
-        dice: longRest ? dhd : -dhd,
-        health: dhp
+        dice: game.i18n.format(`DND5E.HITDICE.Counted.${pr.select(dhd)}`, { number: formatNumber(dhd) }),
+        health: game.i18n.format(`DND5E.HITPOINTS.Counted.${pr.select(dhp)}`, { number: formatNumber(dhp) })
       }),
-      "flags.dnd5e.rest": { type: longRest ? "long" : "short" }
+      flavor: game.i18n.localize(restFlavor),
+      type: "rest",
+      rolls: result.rolls,
+      speaker: ChatMessage.getSpeaker({ actor: this, alias: this.name }),
+      system: {
+        activations: ActivationsField.getActivations(this, typeConfig?.activationPeriods ?? []),
+        deltas: ActorDeltasField.getDeltas(result.clone, { actor: result.updateData, item: result.updateItems }),
+        type: result.type
+      }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);
@@ -2794,7 +2694,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _prepareMovementAttribution() {
     const { movement } = this.system.attributes;
-    const units = movement.units || Object.keys(CONFIG.DND5E.movementUnits)[0];
+    const units = movement.units || defaultUnits("length");
     return Object.entries(CONFIG.DND5E.movementTypes).reduce((html, [k, label]) => {
       const value = movement[k];
       if ( value || (k === "walk") ) html += `
@@ -2913,7 +2813,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         if ( change.mode !== CONST.ACTIVE_EFFECT_MODES.ADD ) return n;
         return n + simplifyBonus(change.value, rollData);
       }, 0);
-      if ( value ) attributions.push({ value, label: source, mode: CONST.ACTIVE_EFFECT_MODES.ADD });
+      if ( value ) attributions.push({ value, label: source, document: e, mode: CONST.ACTIVE_EFFECT_MODES.ADD });
     }
     return attributions;
   }
@@ -3171,6 +3071,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const tokenData = d.prototypeToken;
       delete d.prototypeToken;
       tokenData.delta = d;
+      tokenData.elevation = this.token.elevation;
+      tokenData.rotation = this.token.rotation;
       const previousActorData = this.token.delta.toObject();
       foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
       await this.sheet?.close();
@@ -3209,6 +3111,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newTokenData._id = t.id;
       newTokenData.actorId = newActor.id;
       newTokenData.actorLink = true;
+      newTokenData.elevation = t.document.elevation;
+      newTokenData.rotation = t.document.rotation;
 
       const dOriginalActor = foundry.utils.getProperty(d, "flags.dnd5e.originalActor");
       foundry.utils.setProperty(newTokenData, "flags.dnd5e.originalActor", dOriginalActor);
@@ -3303,6 +3207,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const tokenUpdates = tokens.map(t => {
         const update = foundry.utils.deepClone(tokenData);
         update._id = t.id;
+        update.elevation = t.document.elevation;
+        update.rotation = t.document.rotation;
         delete update.x;
         delete update.y;
         return update;
@@ -3427,14 +3333,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   async _onUpdate(data, options, userId) {
     super._onUpdate(data, options, userId);
+
+    const isHpUpdate = !!data.system?.attributes?.hp;
+
     if ( userId === game.userId ) {
-      await this.updateBloodied(options);
+      if ( isHpUpdate ) await this.updateBloodied(options);
       await this.updateEncumbrance(options);
       this._onUpdateExhaustion(data, options);
     }
 
     const hp = options.dnd5e?.hp;
-    if ( hp && !options.isRest && !options.isAdvancement ) {
+    if ( isHpUpdate && hp && !options.isRest && !options.isAdvancement ) {
       const curr = this.system.attributes.hp;
       const changes = {
         hp: curr.value - hp.value,
@@ -3444,7 +3353,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       if ( Number.isInteger(changes.total) && (changes.total !== 0) ) {
         this._displayTokenEffect(changes);
-        if ( !game.settings.get("dnd5e", "disableConcentration") && (userId === game.userId) && (changes.total < 0) ) {
+        if ( !game.settings.get("dnd5e", "disableConcentration") && (userId === game.userId) && (changes.total < 0)
+          && (options.dnd5e?.concentrationCheck !== false) && (curr.value < curr.effectiveMax) ) {
           this.challengeConcentration({ dc: this.getConcentrationDC(-changes.total) });
         }
 
@@ -3655,5 +3565,50 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const ids = new Set(documents.map(d => d.getRelativeUUID(this)));
     const favorites = this.system.favorites.filter(f => !ids.has(f.id));
     return this.update({ "system.favorites": favorites });
+  }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * @extends {Map<string, Set<Item5e>>}
+ */
+class SourcedItemsMap extends Map {
+  /** @inheritDoc */
+  get(key, { remap=true, legacy=true }={}) {
+    if ( remap ) ({ uuid: key } = parseUuid(key));
+    if ( legacy ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `sourcedItems` data on actor has changed from storing individual items to storing Sets of items. Pass `legacy: false` to retrieve the new Set data.",
+        { since: "DnD5e 4.1", until: "DnD5e 4.3", once: true }
+      );
+      return super.get(key)?.first();
+    }
+    return super.get(key);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  set(key, value) {
+    const { uuid } = parseUuid(key);
+    if ( !this.has(uuid) ) super.set(uuid, new Set());
+    this.get(uuid, { remap: false, legacy: false }).add(value);
+    return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust keys once compendium UUID redirects have been initialized.
+   */
+  _redirectKeys() {
+    for ( const [key, value] of this.entries() ) {
+      const { uuid } = parseUuid(key);
+      if ( key !== uuid ) {
+        this.set(uuid, value);
+        this.delete(key);
+      }
+    }
   }
 }

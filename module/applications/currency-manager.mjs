@@ -163,6 +163,67 @@ export default class CurrencyManager extends DialogMixin(FormApplication) {
   /* -------------------------------------------- */
 
   /**
+   * Deduct a certain amount of currency from a given Actor.
+   * @param {Actor5e} actor                          The actor.
+   * @param {number} amount                          The amount of currency.
+   * @param {string} denomination                    The currency's denomination.
+   * @param {object} [options]
+   * @param {boolean} [options.recursive=false]      Deduct currency from containers as well as the base Actor. TODO
+   * @param {"high"|"low"} [options.priority="low"]  Prioritize higher denominations before lower, or vice-versa.
+   * @param {boolean} [options.exact=true]           Prioritize deducting the requested denomination first.
+   * @throws {Error} If the Actor does not have sufficient currency.
+   * @returns {Promise<Actor5e>|void}
+   */
+  static deductActorCurrency(actor, amount, denomination, options={}) {
+    if ( amount <= 0 ) return;
+    // eslint-disable-next-line no-unused-vars
+    const { item, remainder, ...updates } = this.getActorCurrencyUpdates(actor, amount, denomination, options);
+    if ( remainder ) throw new Error(game.i18n.format("DND5E.CurrencyManager.Error.InsufficientFunds", {
+      denomination,
+      amount: new Intl.NumberFormat(game.i18n.lang).format(amount),
+      name: actor.name
+    }));
+    return actor.update(updates);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine model updates for deducting a certain amount of currency from a given Actor.
+   * @param {Actor5e} actor                          The actor.
+   * @param {number} amount                          The amount of currency.
+   * @param {string} denomination                    The currency's denomination.
+   * @param {object} [options]
+   * @param {boolean} [options.recursive=false]      Deduct currency from containers as well as the base Actor. TODO
+   * @param {"high"|"low"} [options.priority="low"]  Prioritize higher denominations before lower, or vice-versa.
+   * @param {boolean} [options.exact=true]           Prioritize deducting the requested denomination first.
+   * @returns {{ item: object[], remainder: number, [p: string]: any }}
+   */
+  static getActorCurrencyUpdates(actor, amount, denomination, { recursive=false, priority="low", exact=true }={}) {
+    const { currency } = actor.system;
+    const updates = { system: { currency: { ...currency } }, remainder: amount, item: [] };
+    if ( amount <= 0 ) return updates;
+
+    const currencies = Object.entries(CONFIG.DND5E.currencies).map(([denom, { conversion }]) => {
+      return [denom, conversion];
+    }).sort(([, a], [, b]) => priority === "high" ? a - b : b - a);
+    const baseConversion = CONFIG.DND5E.currencies[denomination].conversion;
+
+    if ( exact ) currencies.unshift([denomination, baseConversion]);
+    for ( const [denom, conversion] of currencies ) {
+      const multiplier = conversion / baseConversion;
+      const deduct = Math.min(updates.system.currency[denom], Math.floor(updates.remainder * multiplier));
+      updates.remainder -= deduct / multiplier;
+      updates.system.currency[denom] -= deduct;
+      if ( !updates.remainder ) return updates;
+    }
+
+    return updates;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Transfer currency between one document and another.
    * @param {Actor5e|Item5e} origin       Document from which to move the currency.
    * @param {Document[]} destinations     Documents that should receive the currency.

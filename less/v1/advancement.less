@@ -1,6 +1,7 @@
 .dnd5e.advancement {
   input[type="text"], input[type="number"], select {
     height: var(--form-field-height);
+    color: var(--color-text-dark-primary);
     &[readonly] {
       color: var(--color-text-dark-6);
       box-shadow: none;
@@ -176,9 +177,11 @@
           grid-area: delta;
           font-size: var(--font-size-16);
           font-weight: bold;
-          i {
-            font-size: var(--font-size-12);
-          }
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          gap: 4px;
+          i { font-size: var(--font-size-12); }
         }
         .locked {
           grid-column: 1 / -1;
@@ -199,12 +202,9 @@
     }
     .drop-area {
       padding-block: 0.5em;
-      h4 {
-        font-size: var(--font-size-16);
-      }
-      a.item-control {
-        flex: 0;
-      }
+      align-items: center;
+      .name { font-size: var(--font-size-16); }
+      .item-control { flex: 0; }
     }
     .drop-area.empty {
       padding-block: 1em;
@@ -253,106 +253,6 @@
       font-family: var(--font-primary);
       font-size: var(--font-size-12);
       height: 140px;
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Scale Value                              */
-  /* ----------------------------------------- */
-  &.scale-value {
-    --grid-two-column-right-size: 0.6fr;
-
-    select {
-      &.new-scale-value {
-        font-weight: bold;
-      }
-
-      option[value=""] {
-        color: var(--color-text-light-6);
-      }
-    }
-
-    copyable-text {
-      font-weight: bold;
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Size                                     */
-  /* ----------------------------------------- */
-  &.size {
-    textarea {
-      flex: 1 0 100%;
-    }
-
-    .trait-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.25rem;
-      padding: 0;
-      list-style: none;
-
-      li {
-        flex: 1 1 40%;
-      }
-    }
-  }
-
-  /* ----------------------------------------- */
-  /*  Traits                                   */
-  /* ----------------------------------------- */
-  &.traits {
-    --grid-two-column-right-size: 0.6fr;
-
-    form {
-      grid-gap: 1rem;
-    }
-
-    .selected-trait {
-      h4 {
-        font-weight: bold;
-      }
-      ul {
-        list-style: none;
-        padding: 0;
-        li {
-          display: flex;
-          gap: 0.5em;
-          &:not(:first-of-type) {
-            padding-block-start: 0.5em;
-          }
-        }
-        label {
-          flex-grow: 1;
-          display: flex;
-          gap: 1em;
-          align-items: baseline;
-
-          &:not(.selected) {
-            cursor: pointer;
-            &:hover {
-              text-shadow: 0 0 8px var(--color-shadow-primary);
-            }
-          }
-          &.selected {
-            font-weight: bold;
-          }
-
-          input[type="radio"] {
-            display: none;
-          }
-        }
-      }
-    }
-
-    .hint textarea {
-      flex: 1 0 100%;
-    }
-
-    [data-action="add-choice"] {
-      display: block;
-      padding-block: 0.25em;
-      text-align: center;
     }
   }
 }
@@ -418,19 +318,26 @@
     }
     .rolls {
       display: grid;
-      grid-template-columns: 50% 1fr 1fr;
+      grid-template-columns: 50% 1fr 0fr;
       align-items: center;
-      gap: 2px;
+      gap: 8px;
 
-      .averageLabel {
-        span, input { vertical-align: middle; }
+      .average-label {
+        align-items: unset;
+        gap: 8px;
+
+        .average-checkbox {
+          flex: 0;
+          order: 1;
+        }
+        span { order: 2; }
       }
-      .rollResult {
+      .roll-result {
         text-align: center;
       }
-      .rollButton {
-        height: calc(var(--form-field-height) + 5px);
-        line-height: 1.5em;
+      .roll-button {
+        height: unset;
+        width: 31px;
       }
     }
   }
@@ -451,6 +358,10 @@
     }
     .replaced h4 {
       text-decoration: rgb(200 0 0) line-through 2px;
+    }
+    label.flexrow {
+      justify-content: space-between;
+      input[type=checkbox] { flex: none; }
     }
   }
 

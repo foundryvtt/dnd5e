@@ -36,7 +36,7 @@ export default class HealActivity extends ActivityMixin(HealActivityData) {
 
   /** @override */
   get damageFlavor() {
-    return game.i18n.localize("DND5E.Healing");
+    return game.i18n.localize("DND5E.HealingRoll");
   }
 
   /* -------------------------------------------- */
@@ -53,6 +53,13 @@ export default class HealActivity extends ActivityMixin(HealActivityData) {
         action: "rollHealing"
       }
     }].concat(super._usageChatButtons(message));
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _triggerSubsequentActions(config, results) {
+    this.rollDamage({ event: config.event }, {}, { data: { "flags.dnd5e.originatingMessage": results.message?.id } });
   }
 
   /* -------------------------------------------- */

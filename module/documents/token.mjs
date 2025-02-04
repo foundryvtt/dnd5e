@@ -1,4 +1,3 @@
-import { SummonsData } from "../data/item/fields/summons-field.mjs";
 import SystemFlagsMixin from "./mixins/flags.mjs";
 
 /**
@@ -24,6 +23,8 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
 
   /** @inheritDoc */
   _initializeSource(data, options={}) {
+    if ( data instanceof foundry.abstract.DataModel ) data = data.toObject();
+
     // Migrate backpack -> container.
     for ( const item of data.delta?.items ?? [] ) {
       // This will be correctly flagged as needing a source migration when the synthetic actor is created, but we need

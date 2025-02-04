@@ -7,8 +7,12 @@ const { DiceTerm, NumericTerm } = foundry.dice.terms;
  *
  * @typedef {object} BasicRollProcessConfiguration
  * @property {BasicRollConfiguration[]} rolls  Configuration data for individual rolls.
+ * @property {boolean} [evaluate=true]         Should the rolls be evaluated? If set to `false`, then no chat message
+ *                                             will be created regardless of message configuration.
  * @property {Event} [event]                   Event that triggered the rolls.
+ * @property {string[]} [hookNames]            Name suffixes for configuration hooks called.
  * @property {Document} [subject]              Document that initiated this roll.
+ * @property {number} [target]                 Default target value for all rolls.
  */
 
 /**
@@ -45,9 +49,10 @@ const { DiceTerm, NumericTerm } = foundry.dice.terms;
  * Configuration data for creating a roll message.
  *
  * @typedef {object} BasicRollMessageConfiguration
- * @property {boolean} [create=true]  Create a message when the rolling is complete.
- * @property {string} [rollMode]      The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
- * @property {object} [data={}]       Additional data used when creating the message.
+ * @property {boolean} [create=true]     Create a message when the rolling is complete.
+ * @property {ChatMessage5e} [document]  Final created chat message document once process is completed.
+ * @property {string} [rollMode]         The roll mode to apply to this message from `CONFIG.Dice.rollModes`.
+ * @property {object} [data={}]          Additional data used when creating the message.
  */
 
 /* -------------------------------------------- */
@@ -75,7 +80,29 @@ export default class BasicRoll extends Roll {
    */
   static fromConfig(config, process) {
     const formula = (config.parts ?? []).join(" + ");
+    config.options ??= {};
+    config.options.target ??= process.target;
     return new this(formula, config.data, config.options);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Construct roll parts and populate its data object.
+   * @param {object} parts   Information on the parts to be constructed.
+   * @param {object} [data]  Roll data to use and populate while constructing the parts.
+   * @returns {{ parts: string[], data: object }}
+   */
+  static constructParts(parts, data={}) {
+    const finalParts = [];
+    for ( const [key, value] of Object.entries(parts) ) {
+      if ( !value && (value !== 0) ) continue;
+      finalParts.push(`@${key}`);
+      foundry.utils.setProperty(
+        data, key, foundry.utils.getType(value) === "string" ? Roll.replaceFormulaData(value, data) : value
+      );
+    }
+    return { parts: finalParts, data };
   }
 
   /* -------------------------------------------- */
@@ -88,6 +115,39 @@ export default class BasicRoll extends Roll {
    * @returns {BasicRoll[]}
    */
   static async build(config={}, dialog={}, message={}) {
+    const rolls = await this.buildConfigure(config, dialog, message);
+    await this.buildEvaluate(rolls, config, message);
+    await this.buildPost(rolls, config, message);
+    return rolls;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Stage one of the standard rolling workflow, configuring the roll.
+   * @param {BasicRollProcessConfiguration} [config={}]   Configuration for the rolls.
+   * @param {BasicRollDialogConfiguration} [dialog={}]    Configuration for roll prompt.
+   * @param {BasicRollMessageConfiguration} [message={}]  Configuration for message creation.
+   * @returns {BasicRoll[]}
+   */
+  static async buildConfigure(config={}, dialog={}, message={}) {
+    config.hookNames = [...(config.hookNames ?? []), ""];
+
+    /**
+     * A hook event that fires before a roll is performed. Multiple hooks may be called depending on the rolling
+     * method (e.g. `dnd5e.preRollSkillV2`, `dnd5e.preRollAbilityCheckV2`, `dnd5e.preRollV2`). Exact contents of the
+     * configuration object will also change based on the roll type, but the same objects will always be present.
+     * @function dnd5e.preRollV2
+     * @memberof hookEvents
+     * @param {BasicRollProcessConfiguration} config   Configuration data for the pending roll.
+     * @param {BasicRollDialogConfiguration} dialog    Presentation data for the roll configuration dialog.
+     * @param {BasicRollMessageConfiguration} message  Configuration data for the roll's message.
+     * @returns {boolean}                              Explicitly return `false` to prevent the roll.
+     */
+    for ( const hookName of config.hookNames ) {
+      if ( Hooks.call(`dnd5e.preRoll${hookName.capitalize()}V2`, config, dialog, message) === false ) return [];
+    }
+
     this.applyKeybindings(config, dialog, message);
 
     let rolls;
@@ -97,13 +157,64 @@ export default class BasicRoll extends Roll {
       rolls = await DialogClass.configure(config, dialog, message);
     }
 
-    for ( const roll of rolls ) await roll.evaluate();
+    // Store the roll type in roll.options so it can be accessed from only the roll
+    const rollType = foundry.utils.getProperty(message, "data.flags.dnd5e.roll.type");
+    if ( rollType ) rolls.forEach(roll => roll.options.rollType ??= rollType);
 
-    if ( rolls?.length && (message.create !== false) ) {
-      await this.toMessage(rolls, message.data, { rollMode: message.rollMode });
+    /**
+     * A hook event that fires after roll configuration is complete, but before the roll is evaluated.
+     * Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.postSkillCheckRollConfiguration`,
+     * `dnd5e.postAbilityTestRollConfiguration`, and `dnd5e.postRollConfiguration` for skill checks). Exact contents of
+     * the configuration object will also change based on the roll type, but the same objects will always be present.
+     * @function dnd5e.postRollConfiguration
+     * @memberof hookEvents
+     * @param {BasicRoll[]} rolls                      Rolls that have been constructed but not evaluated.
+     * @param {BasicRollProcessConfiguration} config   Configuration information for the roll.
+     * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
+     * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
+     * @returns {boolean}                              Explicitly return `false` to prevent rolls.
+     */
+    for ( const hookName of config.hookNames ) {
+      const name = `dnd5e.post${hookName.capitalize()}RollConfiguration`;
+      if ( Hooks.call(name, rolls, config, dialog, message) === false ) return [];
     }
 
     return rolls;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Stage two of the standard rolling workflow, evaluating the rolls.
+   * @param {BasicRoll[]} rolls                           Rolls to evaluate.
+   * @param {BasicRollProcessConfiguration} [config={}]   Configuration for the rolls.
+   * @param {BasicRollMessageConfiguration} [message={}]  Configuration for message creation.
+   */
+  static async buildEvaluate(rolls, config={}, message={}) {
+    if ( config.evaluate !== false ) {
+      for ( const roll of rolls ) await roll.evaluate();
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Stage three of the standard rolling workflow, posting a message to chat.
+   * @param {BasicRoll[]} rolls                      Rolls to evaluate.
+   * @param {BasicRollProcessConfiguration} config   Configuration for the rolls.
+   * @param {BasicRollMessageConfiguration} message  Configuration for message creation.
+   * @returns {ChatMessage5e|void}
+   */
+  static async buildPost(rolls, config, message) {
+    message.data = foundry.utils.expandObject(message.data ?? {});
+    const messageId = config.event?.target.closest("[data-message-id]")?.dataset.messageId;
+    if ( messageId ) foundry.utils.setProperty(message.data, "flags.dnd5e.originatingMessage", messageId);
+
+    if ( rolls?.length && (config.evaluate !== false) && (message.create !== false) ) {
+      message.document = await this.toMessage(rolls, message.data, { rollMode: message.rollMode });
+    }
+
+    return message.document;
   }
 
   /* -------------------------------------------- */
@@ -153,7 +264,7 @@ export default class BasicRoll extends Roll {
    * This function can either create the ChatMessage directly, or return the data object that will be used to create it.
    *
    * @param {BasicRoll[]} rolls              Rolls to add to the message.
-   * @param {object} messageData             The data object to use when creating the message
+   * @param {object} messageData             The data object to use when creating the message.
    * @param {options} [options]              Additional options which modify the created message.
    * @param {string} [options.rollMode]      The template roll mode to use for the message from CONFIG.Dice.rollModes
    * @param {boolean} [options.create=true]  Whether to automatically create the chat message, or only return the
@@ -170,6 +281,7 @@ export default class BasicRoll extends Roll {
     // Prepare chat data
     messageData = foundry.utils.mergeObject({ sound: CONFIG.sounds.dice }, messageData);
     messageData.rolls = rolls;
+    this._prepareMessageData(rolls, messageData);
 
     // Process the chat data
     const cls = getDocumentClass("ChatMessage");
@@ -182,6 +294,16 @@ export default class BasicRoll extends Roll {
       return msg.toObject();
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Perform specific changes to message data before creating message.
+   * @param {BasicRoll[]} rolls   Rolls to add to the message.
+   * @param {object} messageData  The data object to use when creating the message.
+   * @protected
+   */
+  static _prepareMessageData(rolls, messageData) {}
 
   /* -------------------------------------------- */
   /*  Evaluate Methods                            */

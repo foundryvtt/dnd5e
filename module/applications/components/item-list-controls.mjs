@@ -53,7 +53,8 @@ export default class ItemListControlsElement extends HTMLElement {
     p: {
       icon: "fa-arrow-down-1-9",
       label: "SIDEBAR.SortModePriority",
-      comparator: (a, b) => (a.level - b.level)
+      comparator: (a, b) => a.linkedName?.localeCompare(b.linkedName, game.i18n.lang)
+        || (a.level - b.level)
         || (a.preparationMode - b.preparationMode)
         || (a.prepared - b.prepared)
         || a.name.localeCompare(b.name, game.i18n.lang)
@@ -326,7 +327,7 @@ export default class ItemListControlsElement extends HTMLElement {
       for ( const item of this.list.querySelectorAll(".item") ) {
         const { grouped, ungrouped } = item.dataset;
         const section = sections[group ? grouped : ungrouped];
-        section.appendChild(item);
+        section?.appendChild(item);
       }
     }
     this._applyFilters();
@@ -343,9 +344,11 @@ export default class ItemListControlsElement extends HTMLElement {
     for ( const section of this.list.querySelectorAll(".items-section .item-list") ) {
       const items = [];
       section.querySelectorAll(".item").forEach(element => {
-        const { itemName, itemSort, itemLevel, itemPreparationMode, itemPreparationPrepared } = element.dataset;
+        const {
+          itemName, itemSort, itemLevel, itemPreparationMode, itemPreparationPrepared, linkedName
+        } = element.dataset;
         items.push({
-          element,
+          element, linkedName,
           name: itemName,
           sort: Number(itemSort),
           level: Number(itemLevel),

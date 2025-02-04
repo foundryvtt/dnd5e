@@ -1,6 +1,6 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
-import CompendiumBrowserSourceConfig from "./compendium-browser-source-config.mjs";
+import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
 /**
  * @typedef {ApplicationConfiguration} CompendiumBrowserConfiguration
@@ -21,6 +21,8 @@ import CompendiumBrowserSourceConfig from "./compendium-browser-source-config.mj
  * @property {string} [documentClass]  Document type to fetch (e.g. Actor or Item).
  * @property {Set<string>} [types]     Individual document subtypes to filter upon (e.g. "loot", "class", "npc").
  * @property {object} [additional]     Additional type-specific filters applied.
+ * @property {FilterDescription[]} [arbitrary]  Additional arbitrary filters to apply, not displayed in the UI.
+ *                                     Only available as part of locked filters.
  * @property {string} [name]           A substring to filter by Document name.
  */
 
@@ -589,8 +591,9 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     // TODO: Determine if new set of results need to be fetched, otherwise use old results and re-sort as necessary
     // Sorting changes alone shouldn't require a re-fetch, but any change to filters will
     const filters = CompendiumBrowser.applyFilters(context.filterDefinitions, context.filters.additional);
-    // Add the name filter
+    // Add the name & arbitrary filters
     if ( this.#filters.name?.length ) filters.push({ k: "name", o: "icontains", v: this.#filters.name });
+    if ( context.filters.arbitrary?.length ) filters.push(...context.filters.arbitrary);
     this.#results = CompendiumBrowser.fetch(CONFIG[context.filters.documentClass].documentClass, {
       filters,
       types: context.filters.types,
@@ -921,7 +924,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
    * @this {CompendiumBrowser}
    */
   static #onConfigureSources() {
-    new CompendiumBrowserSourceConfig().render({ force: true });
+    new CompendiumBrowserSettingsConfig().render({ force: true });
   }
 
   /* -------------------------------------------- */
@@ -942,6 +945,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
   /**
    * Handle form submission with selection.
+   * @this {CompendiumBrowser}
    * @param {SubmitEvent} event          The form submission event.
    * @param {HTMLFormElement} form       The submitted form element.
    * @param {FormDataExtended} formData  The data from the submitted form.
@@ -1093,7 +1097,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     indexFields.delete("system.source.slug");
 
     // Collate compendium sources.
-    const sources = CompendiumBrowserSourceConfig.collateSources();
+    const sources = CompendiumBrowserSettingsConfig.collateSources();
 
     // Iterate over all packs
     let documents = game.packs

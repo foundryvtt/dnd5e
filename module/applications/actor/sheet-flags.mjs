@@ -1,9 +1,20 @@
 import BaseConfigSheet from "./base-config.mjs";
 
+const { BooleanField } = foundry.data.fields;
+
 /**
  * An application class which provides advanced configuration for special character flags which modify an Actor.
  */
 export default class ActorSheetFlags extends BaseConfigSheet {
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning(
+      "The `ActorSheetFlags` application has been deprecated and replaced with a tab on the character sheet.",
+      { since: "DnD5e 4.3", until: "DnD5e 4.5" }
+    );
+    super(...args);
+  }
+
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
   static get defaultOptions() {
@@ -32,6 +43,7 @@ export default class ActorSheetFlags extends BaseConfigSheet {
     data.classes = this._getClasses();
     data.flags = this._getFlags();
     data.bonuses = this._getBonuses();
+    if ( this.document.type === "npc" ) data.npc = this._getNPC();
     return data;
   }
 
@@ -83,23 +95,42 @@ export default class ActorSheetFlags extends BaseConfigSheet {
   _getBonuses() {
     const src = this.object.toObject();
     const bonuses = [
-      {name: "system.bonuses.mwak.attack", label: "DND5E.BonusMWAttack"},
-      {name: "system.bonuses.mwak.damage", label: "DND5E.BonusMWDamage"},
-      {name: "system.bonuses.rwak.attack", label: "DND5E.BonusRWAttack"},
-      {name: "system.bonuses.rwak.damage", label: "DND5E.BonusRWDamage"},
-      {name: "system.bonuses.msak.attack", label: "DND5E.BonusMSAttack"},
-      {name: "system.bonuses.msak.damage", label: "DND5E.BonusMSDamage"},
-      {name: "system.bonuses.rsak.attack", label: "DND5E.BonusRSAttack"},
-      {name: "system.bonuses.rsak.damage", label: "DND5E.BonusRSDamage"},
-      {name: "system.bonuses.abilities.check", label: "DND5E.BonusAbilityCheck"},
-      {name: "system.bonuses.abilities.save", label: "DND5E.BonusAbilitySave"},
-      {name: "system.bonuses.abilities.skill", label: "DND5E.BonusAbilitySkill"},
-      {name: "system.bonuses.spell.dc", label: "DND5E.BonusSpellDC"}
+      {name: "system.bonuses.mwak.attack", label: "DND5E.BONUSES.FIELDS.bonuses.mwak.attack.label"},
+      {name: "system.bonuses.mwak.damage", label: "DND5E.BONUSES.FIELDS.bonuses.mwak.damage.label"},
+      {name: "system.bonuses.rwak.attack", label: "DND5E.BONUSES.FIELDS.bonuses.rwak.attack.label"},
+      {name: "system.bonuses.rwak.damage", label: "DND5E.BONUSES.FIELDS.bonuses.rwak.damage.label"},
+      {name: "system.bonuses.msak.attack", label: "DND5E.BONUSES.FIELDS.bonuses.msak.attack.label"},
+      {name: "system.bonuses.msak.damage", label: "DND5E.BONUSES.FIELDS.bonuses.msak.damage.label"},
+      {name: "system.bonuses.rsak.attack", label: "DND5E.BONUSES.FIELDS.bonuses.rsak.attack.label"},
+      {name: "system.bonuses.rsak.damage", label: "DND5E.BONUSES.FIELDS.bonuses.rsak.damage.label"},
+      {name: "system.bonuses.abilities.check", label: "DND5E.BONUSES.FIELDS.bonuses.abilities.check.label"},
+      {name: "system.bonuses.abilities.save", label: "DND5E.BONUSES.FIELDS.bonuses.abilities.save.label"},
+      {name: "system.bonuses.abilities.skill", label: "DND5E.BONUSES.FIELDS.bonuses.abilities.skill.label"},
+      {name: "system.bonuses.spell.dc", label: "DND5E.BONUSES.FIELDS.bonuses.spell.dc.label"}
     ];
     for ( let b of bonuses ) {
       b.value = foundry.utils.getProperty(src, b.name) || "";
     }
     return bonuses;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get NPC-specific fields.
+   * @returns {object}
+   * @protected
+   */
+  _getNPC() {
+    return {
+      important: {
+        field: new BooleanField({
+          label: "DND5E.NPC.FIELDS.traits.important.label", hint: "DND5E.NPC.FIELDS.traits.important.hint"
+        }),
+        name: "system.traits.important",
+        value: this.document.system._source.traits.important
+      }
+    };
   }
 
   /* -------------------------------------------- */

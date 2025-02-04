@@ -2,6 +2,7 @@ import Item5e from "../../documents/item.mjs";
 import {parseInputDelta} from "../../utils.mjs";
 import CurrencyManager from "../currency-manager.mjs";
 import ContextMenu5e from "../context-menu.mjs";
+import ItemSheet5e2 from "../item/item-sheet-2.mjs";
 
 /**
  * Custom element that handles displaying actor & container inventories.
@@ -47,6 +48,8 @@ export default class InventoryElement extends HTMLElement {
         }));
       });
     }
+
+    this.querySelectorAll("input").forEach(e => e.addEventListener("focus", () => e.select()));
 
     // Bind activity menu to child to work around lack of stopImmediatePropagation in ContextMenu#bind
     new ContextMenu5e(this.querySelector(".items-list"), ".activity-row[data-activity-id]", [], {
@@ -187,28 +190,26 @@ export default class InventoryElement extends HTMLElement {
     // Standard Options
     const options = [
       {
+        name: "DND5E.ItemView",
+        icon: '<i class="fas fa-eye"></i>',
+        callback: li => this._onAction(li[0], "view")
+      },
+      {
         name: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: () => item.isOwner && !item.compendium?.locked,
         callback: li => this._onAction(li[0], "edit")
       },
       {
-        name: "DND5E.ItemView",
-        icon: '<i class="fas fa-eye"></i>',
-        condition: () => !item.isOwner || item.compendium?.locked,
-        callback: li => this._onAction(li[0], "view")
-      },
-      {
         name: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: () => !item.system.metadata?.singleton && !["class", "subclass"].includes(item.type) && item.isOwner
-          && !item.compendium?.locked,
+        condition: () => item.canDuplicate && item.isOwner && !item.compendium?.locked,
         callback: li => this._onAction(li[0], "duplicate")
       },
       {
         name: "DND5E.ContextMenuActionDelete",
         icon: "<i class='fas fa-trash fa-fw'></i>",
-        condition: () => item.isOwner && !item.compendium?.locked,
+        condition: () => item.canDelete && item.isOwner && !item.compendium?.locked,
         callback: li => this._onAction(li[0], "delete")
       },
       {
@@ -218,7 +219,8 @@ export default class InventoryElement extends HTMLElement {
           const scroll = await Item5e.createScrollFromSpell(item);
           if ( scroll ) Item5e.create(scroll, { parent: this.actor });
         },
-        condition: li => (item.type === "spell") && this.actor?.isOwner && !this.actor?.compendium?.locked,
+        condition: li => (item.type === "spell") && !item.getFlag("dnd5e", "cachedFor") && this.actor?.isOwner
+          && !this.actor?.compendium?.locked,
         group: "action"
       },
       {
@@ -262,7 +264,8 @@ export default class InventoryElement extends HTMLElement {
     });
 
     // Toggle Prepared State
-    else if ( ("preparation" in item.system) && (item.system.preparation?.mode === "prepared") ) options.push({
+    else if ( ("preparation" in item.system) && (item.system.preparation?.mode === "prepared")
+      && !item.getFlag("dnd5e", "cachedFor") ) options.push({
       name: item.system?.preparation?.prepared ? "DND5E.ContextMenuActionUnprepare" : "DND5E.ContextMenuActionPrepare",
       icon: "<i class='fas fa-sun fa-fw'></i>",
       condition: () => item.isOwner && !item.compendium?.locked,
@@ -285,7 +288,7 @@ export default class InventoryElement extends HTMLElement {
       const isFavorited = this.actor.system.hasFavorite(uuid);
       options.push({
         name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-        icon: '<i class="fas fa-star fa-fw"></i>',
+        icon: '<i class="fas fa-bookmark fa-fw"></i>',
         condition: () => item.isOwner && !item.compendium?.locked,
         callback: li => this._onAction(li[0], isFavorited ? "unfavorite" : "favorite"),
         group: "state"
@@ -421,8 +424,9 @@ export default class InventoryElement extends HTMLElement {
       case "duplicate":
         return item.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: item.name})}, {save: true});
       case "edit":
+        return item.sheet.render(true, { mode: ItemSheet5e2.MODES.EDIT });
       case "view":
-        return item.sheet.render(true);
+        return item.sheet.render(true, { mode: ItemSheet5e2.MODES.PLAY });
       case "equip":
         return item.update({"system.equipped": !item.system.equipped});
       case "expand":

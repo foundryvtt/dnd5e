@@ -72,17 +72,13 @@
                 {{!-- Resting & Special Traits --}}
                 {{#if actor.isOwner}}
                 <div class="sheet-header-buttons">
-                    <button type="button" class="short-rest gold-button" data-tooltip="DND5E.ShortRest"
-                            aria-label="{{ localize "DND5E.ShortRest" }}">
+                    <button type="button" class="short-rest gold-button" data-tooltip="DND5E.REST.Short.Label"
+                            aria-label="{{ localize "DND5E.REST.Short.Label" }}">
                         <i class="fas fa-utensils"></i>
                     </button>
-                    <button type="button" class="long-rest gold-button" data-tooltip="DND5E.LongRest"
-                            aria-label="{{ localize "DND5E.LongRest" }}">
+                    <button type="button" class="long-rest gold-button" data-tooltip="DND5E.REST.Long.Label"
+                            aria-label="{{ localize "DND5E.REST.Long.Label" }}">
                         <i class="fas fa-campground"></i>
-                    </button>
-                    <button type="button" class="config-button gold-button" data-action="flags"
-                            data-tooltip="DND5E.SpecialTraits" aria-label="{{ localize "DND5E.SpecialTraits" }}">
-                        <i class="fas fa-star"></i>
                     </button>
                 </div>
                 {{/if}}
@@ -102,7 +98,7 @@
                     <span class="max">{{ dnd5e-numberFormat max }}</span>
                     {{/unless}}
                 </div>
-                <div class="xp-bar" role="meter" aria-label="{{ localize "DND5E.ExperiencePointsLabel" }}"
+                <div class="xp-bar" role="meter" aria-label="{{ localize "DND5E.ExperiencePoints.Progress" }}"
                      aria-valuemin="{{ min }}" aria-valuenow="{{ value }}" aria-valuemax="{{ max }}"
                      aria-valuetext="{{ pct }}%" style="--bar-percentage: {{ pct }}%;"></div>
                 {{/with}}
@@ -158,11 +154,13 @@
                         {{!-- AC & Exhaustion --}}
                         <div class="top">
 
+                            {{#if exhaustion}}
                             <div class="pips" data-prop="system.attributes.exhaustion">
                                 {{#each exhaustion.left}}
                                     {{> pip }}
                                 {{/each}}
                             </div>
+                            {{/if}}
 
                             {{!-- AC --}}
                             <div class="ac-badge badge" aria-label="{{ localize "DND5E.ArmorClass" }}">
@@ -179,11 +177,13 @@
                                 {{/if}}
                             </div>
 
+                            {{#if exhaustion}}
                             <div class="pips" data-prop="system.attributes.exhaustion">
                                 {{#each exhaustion.right}}
                                     {{> pip }}
                                 {{/each}}
                             </div>
+                            {{/if}}
                         </div>
 
                         {{!-- Initiative, Speed, & Proficiency --}}
@@ -262,7 +262,8 @@
                                 </div>
                                 <div class="tmp">
                                     <input type="text" name="system.attributes.hp.temp" data-dtype="Number"
-                                           placeholder="{{ localize "DND5E.TMP" }}" value="{{ temp }}">
+                                           placeholder="{{ localize "DND5E.TMP" }}"
+                                           value="{{#if temp}}{{ temp }}{{/if}}">
                                 </div>
                             </div>
                             {{/with}}
@@ -305,11 +306,19 @@
                             </div>
 
                             {{!-- Roll Death Save --}}
+                            {{#if editable}}
+                            <button type="button" data-action="death" data-tooltip="DND5E.DeathSaveConfigure"
+                                    aria-label="{{ localize "DND5E.DeathSaveConfigure" }}"
+                                    class="death-save config-button unbutton">
+                              <i class="fas fa-cog" inert></i>
+                            </button>
+                            {{else}}
                             <button type="button" data-action="rollDeathSave" data-tooltip="DND5E.DeathSaveRoll"
                                     aria-label="{{ localize "DND5E.DeathSaveRoll" }}"
                                     class="{{ rollableClass }} death-save unbutton">
                                 <dnd5e-icon src="systems/dnd5e/icons/svg/statuses/dead.svg"></dnd5e-icon>
                             </button>
+                            {{/if}}
 
                             {{!-- Failures --}}
                             <div class="pips" data-prop="system.attributes.death.failure">
@@ -335,7 +344,7 @@
                 {{!-- Favorites --}}
                 <div class="favorites">
                     <h3 class="icon">
-                        <i class="fas fa-star"></i>
+                        <i class="fas fa-bookmark"></i>
                         <span class="roboto-upper">{{ localize "DND5E.Favorites" }}</span>
                     </h3>
                     <ul class="unlist">
@@ -405,7 +414,7 @@
                                     {{else if save.dc.value}}
                                     {{#with save}}
                                     <span class="ability">
-                                        {{ lookup (lookup @root.config.abilities ability) "abbreviation" }}
+                                        {{ ability }}
                                     </span>
                                     <span class="value">{{ dc.value }}</span>
                                     {{/with}}
@@ -487,8 +496,7 @@
 
                 {{!-- Features --}}
                 <div class="tab features" data-group="primary" data-tab="features">
-                    {{> "dnd5e.creature-features" sections=features.sections filters=features.filters
-                        showClassDrop=true }}
+                    {{> "dnd5e.creature-features" sections=features.sections filters=features.filters }}
                 </div>
 
                 {{!-- Spells --}}
@@ -503,6 +511,14 @@
 
                 {{!-- Biography --}}
                 {{~> "dnd5e.character-biography" ~}}
+
+                {{!-- Bastion --}}
+                {{~> "dnd5e.character-bastion" ~}}
+
+                {{!-- Special Traits --}}
+                <div class="tab special-traits" data-group="primary" data-tab="special-traits">
+                    {{~> "dnd5e.creature-special-traits" ~}}
+                </div>
 
             </section>
 

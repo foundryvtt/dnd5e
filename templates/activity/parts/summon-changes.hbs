@@ -16,6 +16,7 @@
         <div class="form-group">
             <p class="hint">{{ localize "DND5E.SUMMON.ItemChanges.Hint" }}</p>
         </div>
+        {{ formField fields.match.fields.ability value=source.match.ability options=abilityOptions }}
         {{ formField fields.match.fields.attacks value=source.match.attacks input=inputs.createCheckboxInput }}
         {{ formField fields.match.fields.saves value=source.match.saves input=inputs.createCheckboxInput }}
         {{ formField fields.bonuses.fields.attackDamage value=source.bonuses.attackDamage }}

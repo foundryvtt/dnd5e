@@ -1,4 +1,5 @@
 import SpellListJournalPageData from "../../data/journal/spells.mjs";
+import parseUuid from "../../parse-uuid.mjs";
 import { linkForUuid, sortObjectEntries } from "../../utils.mjs";
 import Items5e from "../../data/collection/items-collection.mjs";
 import SpellsUnlinkedConfig from "./spells-unlinked-config.mjs";
@@ -92,7 +93,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     if ( context.grouping === "school" ) context.sections = sortObjectEntries(context.sections, "header");
 
     if ( this.options.displayAsTable ) Object.values(context.sections).forEach(section => {
-      const spells = section.spells.map(s => linkForUuid(s.uuid));
+      const spells = section.spells.map(s => linkForUuid(s.spell?.uuid)).filter(_ => _);
       section.spellList = game.i18n.getListFormatter({ type: "unit" }).format(spells);
     });
 
@@ -124,15 +125,17 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     }
 
     let collections = new Collection();
-    for ( const uuid of uuids ) {
-      const { collection } = foundry.utils.parseUuid(uuid);
+    const remappedUuids = new Set();
+    for ( const baseUuid of uuids ) {
+      const { collection, uuid } = parseUuid(baseUuid);
+      remappedUuids.add(uuid);
       if ( collection && !collections.has(collection) ) {
         if ( collection instanceof Items5e ) collections.set(collection, collection);
         else collections.set(collection, collection.getIndex({ fields }));
-      } else if ( !collection ) uuids.delete(uuid);
+      } else if ( !collection ) uuids.delete(baseUuid);
     }
 
-    const spells = (await Promise.all(collections.values())).flatMap(c => c.filter(s => uuids.has(s.uuid)));
+    const spells = (await Promise.all(collections.values())).flatMap(c => c.filter(s => remappedUuids.has(s.uuid)));
 
     for ( const unlinked of this.document.system.unlinkedSpells ) {
       if ( !uuids.has(unlinked.source.uuid) ) spells.push({ unlinked });
@@ -172,6 +175,13 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     html.querySelectorAll("[data-action]").forEach(e => {
       e.addEventListener("click", this._onAction.bind(this));
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _canDragDrop() {
+    return this.isEditable;
   }
 
   /* -------------------------------------------- */

@@ -34,7 +34,7 @@
         {{/if}}
         <a class="name saving-throw full {{ @root.rollableClass }}">{{ label }}</a>
         <a class="name saving-throw abbr {{ @root.rollableClass }}">{{ abbr }}</a>
-        <div class="bonus">{{ dnd5e-formatModifier save }}</div>
+        <div class="bonus">{{ dnd5e-formatModifier save.value }}</div>
         {{#if @root.editable}}
         <a class="config-button" data-action="ability" data-tooltip="{{ config }}" aria-label="{{ localize config }}">
             <i class="fas fa-cog"></i>
@@ -127,7 +127,7 @@
                 </div>
                 {{/with}}
                 {{#if race}}
-                <div class="pill-lg texture race item-tooltip" data-action="edit"
+                <div class="pill-lg texture race item-tooltip" data-action="view"
                      data-item-id="{{ system.details.race.id }}"
                      aria-label="{{#if actor.isOwner}}{{ localize "DND5E.ItemEdit" }}{{else}}{{ localize "DND5E.ItemView" }}{{/if}}">
                     {{#if system.details.race.img}}
@@ -156,7 +156,7 @@
                 </div>
                 {{/if}}
                 {{#if background}}
-                <div class="pill-lg texture background item-tooltip" data-action="edit"
+                <div class="pill-lg texture background item-tooltip" data-action="view"
                      data-item-id="{{ system.details.background.id }}"
                      aria-label="{{#if actor.isOwner}}{{ localize "DND5E.ItemEdit" }}{{else}}{{ localize "DND5E.ItemView" }}{{/if}}">
                     {{#if system.details.background.img}}
@@ -184,29 +184,8 @@
 
         {{!-- Senses --}}
         {{#if (or editable senses)}}
-        <div class="pills-group {{#unless senses}}empty{{/unless}}">
-            <h3 class="icon">
-                <i class="fas fa-eye"></i>
-                <span class="roboto-upper">{{ localize "DND5E.Senses" }}</span>
-                {{#if editable}}
-                <a class="config-button" data-action="senses" data-tooltip="DND5E.SensesConfig"
-                   aria-label="{{ localize "DND5E.SensesConfig" }}">
-                    <i class="fas fa-cog"></i>
-                </a>
-                {{/if}}
-            </h3>
-            <ul class="pills">
-                {{#each senses}}
-                <li class="pill">
-                    <span class="label">{{ label }}</span>
-                    {{#if value}}
-                    <span class="separator">&vert;</span>
-                    <span class="value">{{ value }}</span>
-                    {{/if}}
-                </li>
-                {{/each}}
-            </ul>
-        </div>
+        {{> "dnd5e.actor-trait-pills" values=senses key="senses" icon="fas fa-eye"
+            label="DND5E.Senses" configAction="senses" }}
         {{/if}}
 
         {{!-- Resistances --}}

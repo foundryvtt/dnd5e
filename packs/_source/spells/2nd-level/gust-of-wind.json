@@ -28,17 +28,22 @@
     },
     "target": {
       "affects": {
-        "choice": false
+        "choice": false,
+        "count": "",
+        "type": ""
       },
       "template": {
         "units": "ft",
         "type": "line",
         "size": "60",
-        "contiguous": false
+        "contiguous": false,
+        "width": "",
+        "count": ""
       }
     },
     "range": {
-      "units": "self"
+      "units": "self",
+      "special": ""
     },
     "uses": {
       "max": "",
@@ -132,9 +137,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037351790,
-    "modifiedTime": 1725992718360,
+    "modifiedTime": 1731016507018,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!FSMy6VAjDnXY9vWz"

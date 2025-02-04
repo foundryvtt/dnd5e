@@ -1,4 +1,4 @@
-import { convertWeight } from "../../../utils.mjs";
+import { convertWeight, defaultUnits } from "../../../utils.mjs";
 import SystemDataModel from "../../abstract.mjs";
 
 const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.data.fields;
@@ -32,8 +32,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
           required: true, nullable: false, initial: 0, min: 0, label: "DND5E.Weight"
         }),
         units: new StringField({
-          required: true, label: "DND5E.WeightUnit.Label",
-          initial: () => game.settings.get("dnd5e", "metricWeightUnits") ? "kg" : "lb"
+          required: true, blank: false, label: "DND5E.UNITS.WEIGHT.Label", initial: () => defaultUnits("weight")
         })
       }, {label: "DND5E.Weight"}),
       price: new SchemaField({
@@ -129,6 +128,24 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare physical item properties.
+   */
+  preparePhysicalData() {
+    if ( !("gp" in CONFIG.DND5E.currencies) ) return;
+    const { value, denomination } = this.price;
+    const { conversion } = CONFIG.DND5E.currencies[denomination] ?? {};
+    const { gp } = CONFIG.DND5E.currencies;
+    if ( conversion ) {
+      const multiplier = gp.conversion / conversion;
+      this.price.valueInGP = Math.floor(value * multiplier);
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Migrations                                  */
   /* -------------------------------------------- */
 
@@ -177,7 +194,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     if ( !("weight" in source) || (foundry.utils.getType(source.weight) === "Object") ) return;
     source.weight = {
       value: Number.isNumeric(source.weight) ? Number(source.weight) : 0,
-      units: game.settings.get("dnd5e", "metricWeightUnits") ? "kg" : "lb"
+      units: defaultUnits("weight")
     };
   }
 
@@ -200,7 +217,7 @@ export default class PhysicalItemTemplate extends SystemDataModel {
     // Render the actor sheet, compendium, or sidebar
     if ( this.parent.isEmbedded ) this.parent.actor.sheet?.render(false, rendering);
     else if ( this.parent.pack ) game.packs.get(this.parent.pack).apps.forEach(a => a.render(false, rendering));
-    else ui.sidebar.tabs.items.render(false, rendering);
+    else ui.items.render(false, rendering);
 
     // Render former container if it was moved between containers
     if ( formerContainer ) {
@@ -213,22 +230,35 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _preUpdate(changed, options, user) {
+    if ( await super._preUpdate(changed, options, user) === false ) return false;
+    if ( foundry.utils.hasProperty(changed, "system.container") ) {
+      options.formerContainer = (await this.parent.container)?.uuid;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   _onCreate(data, options, userId) {
-    this._renderContainers();
+    super._onCreate(data, options, userId);
+    if ( options.render !== false ) this._renderContainers();
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   _onUpdate(changed, options, userId) {
-    this._renderContainers({ formerContainer: options.formerContainer });
+    super._onUpdate(changed, options, userId);
+    if ( options.render !== false ) this._renderContainers({ formerContainer: options.formerContainer });
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
   _onDelete(options, userId) {
-    this._renderContainers();
+    super._onDelete(options, userId);
+    if ( options.render !== false ) this._renderContainers();
   }
 
   /* -------------------------------------------- */

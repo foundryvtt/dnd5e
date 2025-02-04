@@ -65,8 +65,9 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     }
 
     const rollConfig = foundry.utils.deepClone(config);
-    rollConfig.subject = this;
+    rollConfig.hookNames = [...(config.hookNames ?? []), "formula"];
     rollConfig.rolls = [{ parts: [this.roll.formula], data: this.getRollData() }].concat(config.rolls ?? []);
+    rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({
       configure: this.roll.prompt,
@@ -93,17 +94,6 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
       }
     }, message);
 
-    /**
-     * A hook event that fires before a formula is rolled for a Utility activity.
-     * @function dnd5e.preRollFormulaV2
-     * @memberof hookEvents
-     * @param {BasicRollProcessConfiguration} config   Configuration information for the roll.
-     * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
-     * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
-     * @returns {boolean}                   Explicitly return `false` to prevent the roll from being performed.
-     */
-    if ( Hooks.call("dnd5e.preRollFormulaV2", rollConfig, dialogConfig, messageConfig) === false ) return;
-
     if ( "dnd5e.preRollFormula" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.preRollFormula` hook has been deprecated and replaced with `dnd5e.preRollFormulaV2`.",
@@ -119,6 +109,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     }
 
     const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
+    if ( !rolls.length ) return;
 
     /**
      * A hook event that fires after a formula has been rolled for a Utility activity.

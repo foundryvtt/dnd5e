@@ -615,8 +615,8 @@
       "img": "icons/magic/control/hypnosis-mesmerism-eye.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>If a creature starts its turn within <strong>30 ft.</strong> of the basilisk and the two of them can see each other, the basilisk can force the creature to make a <strong>DC 12 Constitution saving throw</strong> if the basilisk isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified until freed by the greater restoration spell or other magic.</p>\n<p>A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the basilisk until the start of its next turn, when it can avert its eyes again. If it looks at the basilisk in the meantime, it must immediately make the save<strong>. I</strong>f the basilisk sees its reflection within <strong>30 ft.</strong> of it in bright light, it mistakes itself for a rival and targets itself with its gaze.</p>\n</section>\n<p>The basilisk can force the creature to make a <strong>Constitution</strong> saving throw. It must repeat the saving throw at the end of its next turn. A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the basilisk until the start of its next turn, when it can avert its eyes again. If it looks at the basilisk in the meantime, it must immediately make the save.</p>",
-          "chat": ""
+          "value": "<p>If a creature starts its turn within <strong>30 ft.</strong> of the basilisk and the two of them can see each other, the basilisk can force the creature to make a <strong>DC 12 Constitution saving throw</strong> if the basilisk isn't incapacitated. On a failed save, the creature magically begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified until freed by the greater restoration spell or other magic.</p><p>A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the basilisk until the start of its next turn, when it can avert its eyes again. If it looks at the basilisk in the meantime, it must immediately make the save<strong>. I</strong>f the basilisk sees its reflection within <strong>30 ft.</strong> of it in bright light, it mistakes itself for a rival and targets itself with its gaze.</p>",
+          "chat": "<p>The basilisk can force the creature to make a <strong>Constitution</strong> saving throw. It must repeat the saving throw at the end of its next turn. A creature that isn't surprised can avert its eyes to avoid the saving throw at the start of its turn. If it does so, it can't see the basilisk until the start of its next turn, when it can avert its eyes again. If it looks at the basilisk in the meantime, it must immediately make the save.</p>"
         },
         "source": {
           "custom": "",
@@ -732,10 +732,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676591,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!hqj2yXtgwt64v3Lj.bKBPawscKpixPeO0"
     },
@@ -746,8 +746,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>piercing damage</em></strong> plus <strong>7 (2d6) <em>poison damage</em></strong>.</p></section>\n<p>The Basilisk attacks with its Bite.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>piercing damage</em></strong> plus <strong>7 (2d6) <em>poison damage</em></strong>.</p>",
+          "chat": "<p>The Basilisk attacks with its Bite.</p>"
         },
         "source": {
           "custom": "",
@@ -956,10 +956,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676591,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!hqj2yXtgwt64v3Lj.atyoFYgU32nJ9kPK"
     }

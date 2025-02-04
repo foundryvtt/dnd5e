@@ -631,8 +631,8 @@
       "img": "icons/magic/fire/barrier-wall-explosion-orange.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>Blinding dust and sand swirls magically around the mummy lord. Each creature within 5 feet of the mummy lord must succeed on a  <strong>DC 16 Constitution</strong> saving throw or be blinded until the end of the creature's next turn.</p>\n</section>\n<p>Blinding dust and sand swirls magically around the mummy lord. Each creature within 5 feet of the mummy lord must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>Blinding dust and sand swirls magically around the mummy lord. Each creature within 5 feet of the mummy lord must succeed on a  <strong>DC 16 Constitution</strong> saving throw or be blinded until the end of the creature's next turn.</p>",
+          "chat": "<p>Blinding dust and sand swirls magically around the mummy lord. Each creature within 5 feet of the mummy lord must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -757,10 +757,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676962,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!UFW8M3JHzHkxUEGM.Os0eEymWpLTVR2Xv"
     },
@@ -771,8 +771,8 @@
       "img": "icons/magic/air/wind-vortex-swirl-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The mummy lord utters a blasphemous word. Each non-undead creature within 10 feet of the mummy lord that can hear the magical utterance must succeed on a  <strong>DC 16 Constitution</strong> saving throw or be stunned until the end of the mummy lord's next turn.</p>\n</section>\n<p>The mummy lord utters a blasphemous word. Each non-undead creature within 10 feet of the mummy lord that can hear the magical utterance must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>The mummy lord utters a blasphemous word. Each non-undead creature within 10 feet of the mummy lord that can hear the magical utterance must succeed on a  <strong>DC 16 Constitution</strong> saving throw or be stunned until the end of the mummy lord's next turn.</p>",
+          "chat": "<p>The mummy lord utters a blasphemous word. Each non-undead creature within 10 feet of the mummy lord that can hear the magical utterance must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -897,10 +897,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676962,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!UFW8M3JHzHkxUEGM.3PBv68cIzTlrzcYe"
     },
@@ -1105,8 +1105,8 @@
       "img": "icons/magic/control/debuff-energy-hold-levitate-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>A destroyed mummy lord gains a new body in 24 hours if its heart is intact, regaining all its<strong> hit points</strong> and becoming active again. The new body appears <strong>within 5 feet</strong> of the mummy lord's heart.</p></section><p>A destroyed mummy lord gains a new body in 24 hours.</p>",
-          "chat": ""
+          "value": "<p>A destroyed mummy lord gains a new body in 24 hours if its heart is intact, regaining all its<strong> hit points</strong> and becoming active again. The new body appears <strong>within 5 feet</strong> of the mummy lord's heart.</p>",
+          "chat": "<p>A destroyed mummy lord gains a new body in 24 hours.</p>"
         },
         "source": {
           "custom": "",
@@ -1150,10 +1150,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676962,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!UFW8M3JHzHkxUEGM.AEc5FXdpe3M7KHQI"
     },
@@ -1164,8 +1164,8 @@
       "img": "icons/magic/light/projectiles-star-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The mummy lord is a 10th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 17, +9 to hit with spell attacks). The mummy lord has the following cleric spells prepared:</p>\n<p>Cantrips (at will): sacred flame, thaumaturgy</p>\n<p>1st level (4 slots): command, guiding bolt, shield of faith</p>\n<p>2nd level (3 slots): hold person, silence, spiritual weapon</p>\n<p>3rd level (3 slots): animate dead, dispel magic</p>\n<p>4th level (3 slots): divination, guardian of faith</p>\n<p>5th level (2 slots): contagion, insect plague</p>\n<p>6th level (1 slot): harm</p>\n</section>\n<p>The mummy lord is a spellcaster. Its spellcasting ability is Wisdom.</p>",
-          "chat": ""
+          "value": "<p>The mummy lord is a 10th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 17, +9 to hit with spell attacks). The mummy lord has the following cleric spells prepared:</p><p>Cantrips (at will): sacred flame, thaumaturgy</p><p>1st level (4 slots): command, guiding bolt, shield of faith</p><p>2nd level (3 slots): hold person, silence, spiritual weapon</p><p>3rd level (3 slots): animate dead, dispel magic</p><p>4th level (3 slots): divination, guardian of faith</p><p>5th level (2 slots): contagion, insect plague</p><p>6th level (1 slot): harm</p>",
+          "chat": "<p>The mummy lord is a spellcaster. Its spellcasting ability is Wisdom.</p>"
         },
         "source": {
           "custom": "",
@@ -1209,10 +1209,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676962,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!UFW8M3JHzHkxUEGM.FeMPdVmbrjP2L3CO"
     },
@@ -1348,8 +1348,8 @@
       "img": "icons/skills/melee/unarmed-punch-fist-yellow-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>14 (3d6 + 4) <em>bludgeoning damage</em></strong> plus <strong>21 (6d6) <em>necrotic damage</em></strong>. </p><p>If the target is a creature, it must succeed on a  <strong>DC 16 Constitution</strong> saving throw or be cursed with mummy rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic.</p></section><p>The Mummy Lord attacks with its Rotting Fist. If the target is a creature, it must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>14 (3d6 + 4) <em>bludgeoning damage</em></strong> plus <strong>21 (6d6) <em>necrotic damage</em></strong>. </p><p>If the target is a creature, it must succeed on a  <strong>DC 16 Constitution</strong> saving throw or be cursed with mummy rot. The cursed target can't regain hit points, and its hit point maximum decreases by 10 (3d6) for every 24 hours that elapse. If the curse reduces the target's hit point maximum to 0, the target dies, and its body turns to dust. The curse lasts until removed by the remove curse spell or other magic.</p>",
+          "chat": "<p>The Mummy Lord attacks with its Rotting Fist. If the target is a creature, it must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1643,10 +1643,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676962,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!UFW8M3JHzHkxUEGM.M6t9H8pMhzQxM9qv"
     },
@@ -1657,8 +1657,8 @@
       "img": "icons/magic/perception/hand-eye-pink.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The mummy lord targets one creature it can see within 60 feet of it. If the target can see the mummy lord, it must succeed on a  <strong>DC 16 Wisdom</strong> saving throw against this magic or become frightened until the end of the mummy's next turn. </p><p>If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all mummies and mummy lords for the next 24 hours.</p></section><p>The mummy lord targets one creature it can see within 60 ft. of it. If the target can see the mummy, it must make a <strong>Wisdom</strong> saving throw against this magic.</p>",
-          "chat": ""
+          "value": "<p>The mummy lord targets one creature it can see within 60 feet of it. If the target can see the mummy lord, it must succeed on a  <strong>DC 16 Wisdom</strong> saving throw against this magic or become frightened until the end of the mummy's next turn. </p><p>If the target fails the saving throw by 5 or more, it is also paralyzed for the same duration. A target that succeeds on the saving throw is immune to the Dreadful Glare of all mummies and mummy lords for the next 24 hours.</p>",
+          "chat": "<p>The mummy lord targets one creature it can see within 60 ft. of it. If the target can see the mummy, it must make a <strong>Wisdom</strong> saving throw against this magic.</p>"
         },
         "source": {
           "custom": "",
@@ -1774,10 +1774,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676962,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!UFW8M3JHzHkxUEGM.yHydHrxw4vlDlyjf"
     },
@@ -1788,8 +1788,8 @@
       "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The mummy lord can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The mummy lord regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The mummy lord can take 3 legendary actions.</p>",
-          "chat": ""
+          "value": "<p>The mummy lord can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The mummy lord regains spent legendary actions at the start of its turn.</p>",
+          "chat": "<p>The mummy lord can take 3 legendary actions.</p>"
         },
         "source": {
           "custom": "",
@@ -1833,10 +1833,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676962,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!UFW8M3JHzHkxUEGM.und47mebgauAcPu4"
     },
@@ -1847,8 +1847,8 @@
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
-          "chat": ""
+          "value": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>",
+          "chat": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>"
         },
         "source": {
           "custom": "",
@@ -1892,10 +1892,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676962,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!UFW8M3JHzHkxUEGM.NMN6cq7RkU8ccxKF"
     },

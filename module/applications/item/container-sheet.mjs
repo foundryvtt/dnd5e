@@ -136,7 +136,7 @@ export default class ContainerSheet extends ItemSheet5e {
     // Create any remaining items
     const toCreate = await Item5e.createWithContents(items, {
       container: this.item,
-      transformAll: itemData => itemData.type === "spell" ? Item5e.createScrollFromSpell(itemData) : itemData
+      transformAll: (itemData, options) => this._onDropSingleItem(itemData, { ...options, event })
     });
     if ( this.item.folder ) toCreate.forEach(d => d.folder = this.item.folder.id);
     return Item5e.createDocuments(toCreate, {pack: this.item.pack, parent: this.item.parent, keepId: true});
@@ -153,10 +153,11 @@ export default class ContainerSheet extends ItemSheet5e {
    */
   async _onDropItem(event, data) {
     const item = await Item.implementation.fromDropData(data);
-    if ( !this.item.isOwner || !item ) return false;
+    const behavior = this._dropBehavior(event, data);
+    if ( !this.item.isOwner || !item || (behavior === "none") ) return false;
 
     // If item already exists in this container, just adjust its sorting
-    if ( item.system.container === this.item.id ) {
+    if ( (behavior === "move") && (item.system.container === this.item.id) ) {
       return this._onSortItem(event, item);
     }
 
@@ -168,17 +169,46 @@ export default class ContainerSheet extends ItemSheet5e {
     }
 
     // If item already exists in same DocumentCollection, just adjust its container property
-    if ( (item.actor === this.item.actor) && (item.pack === this.item.pack) ) {
-      return item.update({folder: this.item.folder, "system.container": this.item.id});
+    if ( (behavior === "move") && (item.actor === this.item.actor) && (item.pack === this.item.pack) ) {
+      return item.update({ folder: this.item.folder, "system.container": this.item.id });
     }
 
     // Otherwise, create a new item & contents in this context
     const toCreate = await Item5e.createWithContents([item], {
       container: this.item,
-      transformAll: itemData => itemData.type === "spell" ? Item5e.createScrollFromSpell(itemData) : itemData
+      transformAll: (itemData, options) => this._onDropSingleItem(itemData, { ...options, event })
     });
     if ( this.item.folder ) toCreate.forEach(d => d.folder = this.item.folder.id);
-    return Item5e.createDocuments(toCreate, {pack: this.item.pack, parent: this.item.actor, keepId: true});
+    const created = Item5e.createDocuments(toCreate, { pack: this.item.pack, parent: this.item.actor, keepId: true });
+    if ( behavior === "move" ) item.delete({ deleteContents: true });
+    return created;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Process a single item when dropping into the container.
+   * @param {object} itemData           The item data to create.
+   * @param {object} options
+   * @param {string} options.container  ID of the container to create the items.
+   * @param {number} options.depth      Current depth of the item being created.
+   * @param {DragEvent} options.event   The concluding DragEvent which provided the drop data.
+   * @returns {Promise<object|false>}   The item data to create after processing, or false if the item should not be
+   *                                    created or creation has been otherwise handled.
+   * @protected
+   */
+  async _onDropSingleItem(itemData, { container, depth, event }) {
+    if ( itemData.type === "spell" ) {
+      const scroll = await Item5e.createScrollFromSpell(itemData);
+      return scroll?.toObject?.() ?? false;
+    }
+
+    if ( this.item.actor && (container === this.item.id) ) {
+      const result = await this.item.actor.sheet._onDropStackConsumables(itemData, { container });
+      if ( result ) return false;
+    }
+
+    return itemData;
   }
 
   /* -------------------------------------------- */

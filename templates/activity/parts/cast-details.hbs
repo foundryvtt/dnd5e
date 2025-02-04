@@ -1,5 +1,6 @@
 <fieldset>
     <legend>{{ localize "DND5E.CAST.FIELDS.spell.label" }}</legend>
+    {{ formField fields.spell.fields.ability value=source.spell.ability options=abilityOptions }}
     {{#if levelOptions}}
     {{ formField fields.spell.fields.level value=source.spell.level options=levelOptions }}
     {{/if}}

@@ -51,6 +51,11 @@ export default class AdvancementFlow extends FormApplication {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  static _customElements = super._customElements.concat(["dnd5e-checkbox"]);
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   get id() {
     return `actor-${this.advancement.item.id}-advancement-${this.advancement.id}-${this.level}`;
   }
@@ -106,6 +111,16 @@ export default class AdvancementFlow extends FormApplication {
 
     // Call setPosition on manager to adjust for size changes
     this.options.manager?.setPosition();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve automatic application data from the advancement, if supported.
+   * @returns {object|false}  Data to pass to the apply method, or `false` if advancement requirers user intervention.
+   */
+  getAutomaticApplicationValue() {
+    return this.advancement.automaticApplicationValue(this.level);
   }
 
   /* -------------------------------------------- */

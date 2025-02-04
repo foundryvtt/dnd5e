@@ -84,7 +84,6 @@
         width: var(--tab-full-width);
         height: 40px;
         position: relative;
-        display: flex;
         align-items: center;
         background: var(--dnd5e-color-black);
         color: var(--dnd5e-color-gold);
@@ -92,6 +91,8 @@
         border: 1px solid transparent;
         transition: all 250ms ease;
         flex: none;
+
+        &:not([hidden]) { display: flex; }
 
         i { font-size: var(--font-size-14); }
 
@@ -230,20 +231,6 @@
     }
   }
 
-  .collapsible {
-    &.collapsed {
-      .fa-caret-down { transform: rotate(-90deg); }
-      .collapsible-content { grid-template-rows: 0fr; }
-    }
-    .fa-caret-down { transition: transform 250ms ease; }
-    .collapsible-content {
-      display: grid;
-      grid-template-rows: 1fr;
-      transition: grid-template-rows 250ms ease;
-      > .wrapper { overflow: hidden; }
-    }
-  }
-
   .unlist {
     list-style: none;
     padding: 0;
@@ -270,7 +257,14 @@
       gap: .25rem;
 
       > i { font-size: var(--font-size-14); }
-      > span { font-size: var(--font-size-13); }
+      > span {
+        font-size: var(--font-size-13);
+
+        &.counter {
+          margin-left: auto;
+          line-height: 1;
+        }
+      }
 
       > dnd5e-icon {
         font-size: var(--font-size-14);
@@ -291,9 +285,9 @@
   }
 
   .pill-lg {
+    --gold-icon-size: 32px;
     background: var(--dnd5e-background-card);
     border: var(--dnd5e-border-gold);
-    border-width: 2px;
     border-radius: 5px;
     box-shadow: 0 0 12px var(--dnd5e-shadow-15);
     display: flex;
@@ -311,11 +305,6 @@
       display: grid;
       place-content: center;
       opacity: .25;
-    }
-
-    .gold-icon {
-      width: 32px;
-      height: 32px;
     }
 
     .name { flex: 1; }
@@ -406,6 +395,10 @@
   }
 
   .gold-icon {
+    block-size: var(--gold-icon-size);
+    inline-size: var(--gold-icon-size);
+    flex: 0 0 var(--gold-icon-size);
+
     border: 2px solid var(--dnd5e-color-gold);
     box-shadow: 0 0 4px var(--dnd5e-shadow-45);
     border-radius: 0;
@@ -593,10 +586,9 @@
         content: "";
         position: absolute;
         block-size: 100%;
-        inline-size: calc(var(--bar-percentage) - var(--border-width));
+        inline-size: var(--bar-percentage);
         box-shadow: 0 0 6px var(--dnd5e-shadow-45);
         clip-path: polygon(0 0, calc(100% + 6px) 0, calc(100% + 6px) 100%, 0 100%);
-        border-radius: 4px;
       }
     }
 
@@ -618,6 +610,68 @@
         font-size: var(--font-size-14);
         opacity: .8;
       }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Slots                             */
+  /* ---------------------------------- */
+
+  .slots {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    .slot {
+      --slot-size: 32px;
+      flex: 0 0 var(--slot-size);
+      height: var(--slot-size);
+      width: var(--slot-size);
+      border: var(--dnd5e-border-gold);
+      border-radius: 3px;
+      overflow: hidden;
+      background: var(--dnd5e-background-card);
+      position: relative;
+
+      &.empty { box-shadow: inset 0 0 3px var(--dnd5e-shadow-45); }
+
+      .deletion-control {
+        width: unset;
+        height: unset;
+        cursor: pointer;
+        position: absolute;
+        inset: -3px -3px 0 0;
+      }
+    }
+
+    .occupant-slot {
+      overflow: visible;
+      cursor: pointer;
+
+      &.empty {
+        display: inline-grid;
+        place-content: center;
+
+        &::before {
+          font-family: var(--font-awesome);
+          font-weight: bold;
+          opacity: .15;
+        }
+      }
+
+      &.hireling.empty::before { content: "\f007"; }
+      &.defender.empty::before { content: "\f132"; }
+      &.creature.empty::before { content: "\f7ab"; }
+    }
+
+    :is(.item-slot, .occupant-slot) img {
+      border: none;
+      border-radius: 3px;
+      width: 100%;
+      height: 100%;
+      max-width: unset;
+      object-fit: cover;
+      background: var(--dnd5e-color-iron-gray);
     }
   }
 
@@ -661,6 +715,26 @@
         }
       }
     }
+
+    &.single-item {
+      margin-block: 0;
+      > li {
+        padding: 6px;
+        border: var(--dnd5e-border-gold);
+        box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+        .details { align-items: center; }
+        .control-button { --size: 24px; }
+      }
+      document-tags {
+        row-gap: 0;
+        input { font-size: var(--font-size-11); }
+      }
+      .gold-icon {
+        flex: 0 0 24px;
+        height: 24px;
+        border-width: 1px;
+      }
+    }
   }
 
   /* ---------------------------------- */
@@ -685,7 +759,9 @@
       font-family: var(--font-primary);
       font-weight: normal;
     }
+  }
 
+  &.sidebar-heading, &.sidebar-info {
     ul.links {
       flex: 1;
       list-style: none;
@@ -713,11 +789,54 @@
     }
 
     .system-info {
+      position: relative;
       font-size: var(--font-size-16);
       i {
         padding-inline-start: 2px;
         font-size: var(--font-size-12);
       }
+    }
+  }
+
+  &.sidebar-info {
+    margin-bottom: -.5rem;
+
+    .system-badge { margin-top: .5rem; }
+
+    .notification-pip {
+      color: var(--color-text-accent);
+      font-size: var(--font-size-12);
+      top: 4px;
+      right: -14px;
+    }
+
+    ul.links {
+      gap: 0;
+      margin-top: 6px;
+
+      li:not(:last-child)::after {
+        content: " • ";
+        margin-inline: 3px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  /* ---------------------------------- */
+  /*  Bastions                          */
+  /* ---------------------------------- */
+
+  &#bastion-turn {
+    pointer-events: all;
+    margin: 0 5px 10px 15px;
+    color: var(--color-text-light-highlight);
+    width: var(--players-width);
+    background: rgb(0 0 0 / 80%);
+    border: 1px solid var(--color-border-dark);
+
+    &:hover {
+      border-color: var(--color-border-highlight-alt);
+      box-shadow: 0 0 10px var(--color-shadow-highlight);
     }
   }
 
@@ -763,12 +882,6 @@
   height: 1em;
   display: inline-block;
   background: transparent no-repeat center / contain;
-
-  &.cp { background-image: url("icons/currency/copper.webp"); }
-  &.sp { background-image: url("icons/currency/silver.webp"); }
-  &.ep { background-image: url("icons/currency/electrum.webp"); }
-  &.gp { background-image: url("icons/currency/gold.webp"); }
-  &.pp { background-image: url("icons/currency/platinum.webp"); }
 }
 
 /* ---------------------------------- */
@@ -868,12 +981,48 @@
     padding-block-start: 8px;
     padding-block-end: 14px;
     padding-inline: 14px;
+    overflow-y: auto;
+
+    > section > .note {
+      --note-color: var(--dnd5e-color-note-info);
+      position: relative;
+      margin-block-end: 0;
+      border-radius: 4px;
+      border: 1px solid var(--note-color);
+      padding-block: 8px;
+      padding-inline-start: 14px;
+      padding-inline-end: 10px;
+      background: color-mix(in oklab, var(--note-color), transparent 80%);
+      font-size: var(--font-size-12);
+
+      &::before {
+        --marker-size: 14px;
+        position: absolute;
+        width: var(--marker-size);
+        height: var(--marker-size);
+        border-radius: 100%;
+        inset-block: calc(50% - var(--marker-size) / 2);
+        inset-inline-start: calc(-1 * var(--marker-size) / 2);
+        align-content: center;
+        background: var(--note-color);
+        color: var(--dnd5e-color-parchment);
+        font-family: var(--font-awesome);
+        font-size: calc(var(--marker-size) * .75);
+        font-weight: bold;
+        text-align: center;
+      }
+      &.info::before { content: "\f129"; }
+      &.warn {
+        --note-color: var(--dnd5e-color-note-warn);
+        &::before { content: "\21"; }
+      }
+    }
+    > section:empty { display: none; }
+  }
+  .window-content, .window-content > .column-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
-    overflow-y: auto;
-
-    > section:empty { display: none; }
   }
 
   /* Tabs */
@@ -979,8 +1128,11 @@ dialog.dnd5e2.application {
 /*  Skill Configuration Dialog        */
 /* ---------------------------------- */
 
-.dnd5e2.dialog.skills-config {
-  .card { padding: 6px 10px; }
+.dnd5e2.config-sheet.skills {
+  [data-application-part="traits"].card {
+    display: block;
+    padding: 6px 10px;
+  }
 
   .skills-list {
     --skill-rows: 9;
@@ -995,6 +1147,7 @@ dialog.dnd5e2.application {
     align-items: center;
     gap: 8px;
     padding: 6px;
+    margin-bottom: 0;
     border-bottom: var(--dnd5e-border-dotted);
 
     .name {
@@ -1087,44 +1240,341 @@ dialog.dnd5e2.application {
 }
 
 /* ---------------------------------- */
-/*  Weapons Config Sheet              */
+/*  Config Sheets                     */
 /* ---------------------------------- */
 
-.dnd5e2.weapons.trait-selector {
-  [data-application-part="traits"] {
+.dnd5e2.config-sheet {
+  .window-content {
+    > section:is(.flexcol, .flexrow) { gap: 12px; }
+    .final-value {
+      font-size: var(--font-size-32);
+      text-align: center;
+    }
+    .form-group {
+      .plusSign, .minusSign {
+        flex: 0 0 1.5em;
+        font-size: var(--font-size-16);
+        text-align: center;
+      }
+      .integer { padding-inline-start: 4px; }
+    }
+  }
+  .header {
+    margin-inline: -10px;
+    padding-block: 3px 2px;
+    padding-inline: 10px;
+    border-radius: 0;
+  }
+}
+
+/* ---------------------------------- */
+/*  Armor Class Config Sheet          */
+/* ---------------------------------- */
+
+.dnd5e2.armor-class.config-sheet {
+  .equipped {
+    display: grid;
+    grid-template-columns: [name] 4fr [armorValue] 1fr [magicalBonus] 1fr;
+
+    .header, .form-group {
+      display: grid;
+      grid-column: 1 / -1;
+      grid-template-columns: subgrid;
+    }
+    .form-group {
+      margin-inline: -.75em;
+      padding-inline: .75em;
+      &:nth-child(even) { background: var(--dnd5e-color-table-row-even); }
+      &:nth-child(odd) { background: var(--dnd5e-color-table-row-odd); }
+    }
+    .name {
+      grid-column: name;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      .gold-icon {
+        flex: 0 0 32px;
+        width: 32px;
+        height: 32px;
+      }
+      .content-link > i { display: none; }
+    }
+    .armor-value { grid-column: armorValue; }
+    .magical-bonus { grid-column: magicalBonus; }
+    .armor-value, .magical-bonus {
+      &.empty { color: var(--color-text-light-6); }
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Creature Type Config Sheet        */
+/* ---------------------------------- */
+
+.dnd5e2.creature-type.config-sheet {
+  .card { padding: 6px 10px; }
+  .final-value { font-size: var(--font-size-24); }
+
+  .types-list {
+    --type-rows: 8;
+    gap: 0;
+    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 1px), 0 calc(100% - 1px));
+    grid-auto-flow: column;
+    grid-template-rows: repeat(var(--type-rows), auto);
+  }
+
+  .type-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-block-end: 0;
+    border-block-end: var(--dnd5e-border-dotted);
+    padding: 0;
+    label {
+      display: flex;
+      justify-content: space-between;
+      padding: 6px 10px;
+      &:hover {
+        cursor: pointer;
+        background: var(--dnd5e-background-parchment);
+      }
+    }
+    &.custom label {
+      padding-block: 0;
+      padding-inline: 6px 10px;
+    }
+    label, input[type="text"] {
+      font-size: var(--font-size-14);
+      font-family: var(--dnd5e-font-roboto-condensed);
+      flex: 1;
+    }
+    input[type="radio"] { margin-block-end: 4px; }
+    input[type="text"] { padding: 6px; }
+  }
+}
+
+/* ---------------------------------- */
+/*  Hit Dice Config Sheet             */
+/* ---------------------------------- */
+
+.dnd5e2.hit-dice.config-sheet {
+  fieldset { padding-block: 8px; }
+  .form-group {
+    .separator { flex: 0; }
+    .max {
+      font-size: var(--font-size-12);
+      text-align: center;
+    }
+    &:not(:last-of-type) {
+      border-block-end: var(--dnd5e-border-dotted);
+      padding-block-end: 4px;
+    }
+  }
+  input:invalid { outline: 1px solid var(--dnd5e-color-failure); }
+}
+
+/* ---------------------------------- */
+/*  Hit Points Config Sheet           */
+/* ---------------------------------- */
+
+.dnd5e2.hit-points.config-sheet {
+  .multiplier {
+    flex: 0 0 4em;
+    text-align: center;
+    .times { font-size: var(--font-size-14); }
+  }
+  .form-group > label .content-link {
+    padding: 0;
+    > i { display: none; }
+  }
+}
+
+/* ---------------------------------- */
+/*  Habitat Config Sheet              */
+/* ---------------------------------- */
+
+.dnd5e2.habitat-config {
+  .form-grid {
+    --rows: 7;
+    gap: 0;
+    clip-path: polygon(0 1px, 100% 1px, 100% 100%, 0 100%);
+    grid-auto-flow: column;
+    grid-template-rows: repeat(var(--rows), auto);
+
+    li {
+      margin: 0;
+      border-top: var(--dnd5e-border-dotted);
+      padding-left: 10px;
+
+      &.subtypes {
+        border: none;
+        position: relative;
+        padding-left: 28px;
+        margin-top: -1px;
+
+        &::before {
+          content: "┗";
+          position: absolute;
+          top: 8px;
+          left: 10px;
+          font-size: var(--font-size-10);
+          font-weight: bold;
+          color: var(--color-text-dark-5);
+        }
+      }
+
+      input {
+        font-size: var(--font-size-13);
+        font-family: var(--dnd5e-font-roboto-condensed);
+        padding: 4px;
+      }
+    }
+  }
+
+  label.checkbox {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: var(--font-size-13);
+
+    > span { line-height: 2; }
+  }
+
+  fieldset > input { flex-shrink: 0; }
+}
+
+/* ---------------------------------- */
+/*  Treasure Config Sheet             */
+/* ---------------------------------- */
+
+.dnd5e2.treasure-config {
+  label.checkbox {
+    font-size: var(--font-size-13);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > span { line-height: 2; }
+  }
+
+  li {
+    margin: 0;
+    &:not(:last-child) { border-bottom: var(--dnd5e-border-dotted); }
+  }
+}
+
+/* ---------------------------------- */
+/*  Traits Config Sheet               */
+/* ---------------------------------- */
+
+.dnd5e2.trait-selector {
+  [data-application-part="traits"] { gap: 12px; }
+  &:not(.trait-columns) [data-application-part="traits"] {
     display: flex;
     flex-wrap: wrap;
-    gap: 12px;
     align-items: flex-start;
-
     fieldset.traits { flex: 1 1 40%; }
     fieldset:not(.traits) { flex: 1 0 100%; }
   }
+  &.trait-columns [data-application-part="traits"] {
+    column-count: 2;
+    .traits:not(:last-of-type) { margin-block-end: 12px; }
+  }
   .traits {
     --checkbox-size: 16px;
-    display: grid;
-    grid-template-columns: [name] 2fr [proficiency] 1fr [mastery] 1fr;
+    display: inline-grid;
+    grid-template-columns: [name] 2fr [proficiency] 1fr;
+    width: 100%;
+    break-inside: avoid-column;
 
+    > .hint { grid-column: 1 / -1; }
     .header, ol, li {
       display: grid;
       grid-column: 1 / -1;
       grid-template-columns: subgrid;
     }
-    .header {
-      margin-inline: -10px;
-      padding-block: 3px 2px;
-      padding-inline: 10px;
-      border-radius: 0;
-    }
     .name { grid-column: name; }
-    .proficiency { grid-column: proficiency; }
-    .mastery { grid-column: mastery; }
-    .proficiency, .mastery { text-align: center; }
+    .proficiency {
+      grid-column: proficiency;
+      text-align: end;
+    }
     li {
       align-items: center;
       &:not(:last-of-type) { border-bottom: var(--dnd5e-border-dotted); }
+      &.category { gap: 4px; }
+      li {
+        position: relative;
+        margin: 0 0 4px 0;
+        &::before {
+          content: "┗";
+          position: absolute;
+          left: -1.8em;
+          font-size: var(--font-size-10);
+          font-weight: bold;
+          top: 3px;
+          color: var(--color-text-dark-5);
+        }
+      }
     }
   }
+}
+
+/* ---------------------------------- */
+
+.dnd5e2.tools.trait-selector {
+  .traits {
+    grid-template-columns: [proficiency] 15px [name] 1fr [bonus] 20px [config] 20px;
+    li {
+      padding-block-start: 1px;
+      &:not(:last-of-type) { padding-block-end: 4px; }
+    }
+    .bonus { grid-column: bonus; }
+  }
+}
+
+/* ---------------------------------- */
+
+.dnd5e2.weapons.trait-selector {
+  .traits {
+    grid-template-columns: [name] 2fr [proficiency] 1fr [mastery] 1fr;
+    .mastery {
+      grid-column: mastery;
+      text-align: center;
+    }
+  }
+}
+
+/* ---------------------------------- */
+
+.dnd5e2.damages-config.trait-selector {
+  .traits {
+    grid-template-columns: [icon] 16px [name] 2fr [proficiency] 1fr;
+    .trait-list li {
+      dnd5e-icon, i {
+        --icon-fill: var(--color-text-light-6);
+        color: var(--color-text-light-6);
+      }
+
+      > i {
+        font-family: var(--font-awesome);
+        font-weight: bold;
+        font-style: normal;
+
+        &.ada::before { content: "\f132"; }
+        &.mgc::before { content: "\f72b"; }
+        &.sil::before { content: "\53"; }
+      }
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Rest Dialogs                      */
+/* ---------------------------------- */
+
+.rest.application {
+  .window-content > section.flexcol { gap: 12px; }
+  [data-action="rollHitDie"] { flex: 0; }
 }
 
 /* ---------------------------------- */
@@ -1244,6 +1694,55 @@ dialog.dnd5e2.application {
 }
 
 /* ---------------------------------- */
+/*  Collapsible Content               */
+/* ---------------------------------- */
+
+.dnd5e2 .collapsible, .collapsible.dnd5e2-collapsible {
+  &.collapsed {
+    .fa-caret-down { transform: rotate(-90deg); }
+    .collapsible-content { grid-template-rows: 0fr; }
+  }
+  .fa-caret-down { transition: transform 250ms ease; }
+  .collapsible-content {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 250ms ease;
+    > .wrapper { overflow: hidden; }
+  }
+}
+
+/* ---------------------------------- */
+/*  Combat Tracker                    */
+/* ---------------------------------- */
+
+.combat-sidebar {
+  .combatant-group {
+    .fa-chevron-down { transition: transform 250ms ease; }
+    &.collapsed .fa-chevron-down { transform: rotate(-90deg); }
+
+    &.active::after, &.active::before { transition: border-color 250ms ease; }
+    &.active:not(.collapsed)::after { border-color: color-mix(in oklab, var(--color-border-highlight), transparent); }
+
+    .group-header { cursor: pointer; }
+    .group-numbers {
+      flex: 0 0 20px;
+      color: var(--color-text-light-5);
+      font-size: var(--font-size-12);
+      line-height: 20px;
+    }
+  }
+
+  /* V13 Syles */
+  .combat-tracker {
+    .combatant-group {
+      display: block;
+      &.active:not(.collapsed)::before { border-color: color-mix(in oklab, var(--color-warm-2), transparent); }
+    }
+    .group-children { padding: 0; }
+  }
+}
+
+/* ---------------------------------- */
 /*  Context Menus                     */
 /* ---------------------------------- */
 
@@ -1267,6 +1766,7 @@ dialog.dnd5e2.application {
     cursor: pointer;
     display: flex;
     align-items: baseline;
+    line-height: 32px;
     gap: 5px;
     transition: all 250ms ease;
 
@@ -1308,6 +1808,19 @@ dialog.dnd5e2.application {
 .dnd5e2 .context { pointer-events: none; }
 
 /* ---------------------------------- */
+/*  ProseMirror                       */
+/* ---------------------------------- */
+
+#prosemirror-dropdown {
+  --dropdown-background: var(--dnd5e-background-card);
+  --dropdown-border: transparent;
+  --color-control-hover: var(--dnd5e-color-parchment);
+
+  ul { box-shadow: 0 3px 6px var(--dnd5e-shadow-45); }
+  li.divider { border-color: var(--color-border-light-1); }
+}
+
+/* ---------------------------------- */
 /*  Window Handles                    */
 /* ---------------------------------- */
 
@@ -1324,3 +1837,9 @@ dialog.dnd5e2.application {
 
   > i { display: none; }
 }
+
+/* ---------------------------------- */
+/*  Keybindings                       */
+/* ---------------------------------- */
+
+#keybindings [data-tab="system"] .control.conflicts { display: none; }

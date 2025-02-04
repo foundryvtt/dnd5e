@@ -1,7 +1,7 @@
 {
   "_id": "EJFql4aNWHHJSxT9",
   "name": "Wand of Fear",
-  "type": "consumable",
+  "type": "equipment",
   "img": "icons/weapons/staves/staff-animal-skull-horned.webp",
   "system": {
     "description": {
@@ -63,6 +63,7 @@
     },
     "container": null,
     "properties": [
+      "foc",
       "mgc"
     ],
     "magicalBonus": null,
@@ -80,12 +81,9 @@
           "targets": [
             {
               "type": "itemUses",
+              "value": "2",
               "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
+              "scaling": {}
             }
           ],
           "scaling": {
@@ -99,15 +97,15 @@
         },
         "duration": {
           "concentration": false,
-          "value": "",
-          "units": "",
+          "value": "1",
+          "units": "minute",
           "special": "",
           "override": false
         },
         "effects": [],
         "range": {
-          "value": "60",
-          "units": "ft",
+          "value": "",
+          "units": "self",
           "special": "",
           "override": false
         },
@@ -123,7 +121,7 @@
           },
           "affects": {
             "count": "",
-            "type": "",
+            "type": "creature",
             "choice": false,
             "special": ""
           },
@@ -143,84 +141,80 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 300000,
+        "name": "Cone of Fear",
+        "img": "",
+        "appliedEffects": []
       },
-      "dnd5eactivity300": {
-        "_id": "dnd5eactivity300",
-        "type": "utility",
+      "J1oQUVbZNLMFnm4f": {
+        "type": "cast",
+        "spell": {
+          "uuid": "Compendium.dnd5e.spells.Item.arzCrMRgcNiQuh43",
+          "challenge": {
+            "attack": null,
+            "save": 15,
+            "override": true
+          },
+          "level": "1",
+          "properties": [
+            "vocal",
+            "somatic",
+            "material"
+          ],
+          "spellbook": true
+        },
+        "_id": "J1oQUVbZNLMFnm4f",
+        "sort": 200000,
         "activation": {
           "type": "action",
-          "value": 1,
-          "condition": "",
+          "value": null,
           "override": false
         },
         "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
           "targets": [
             {
-              "type": "itemUses",
-              "target": "",
+              "type": "activityUses",
               "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
+              "scaling": {}
             }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
+          ]
         },
         "description": {
           "chatFlavor": ""
         },
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
           "override": false
         },
-        "effects": [],
         "range": {
-          "value": "60",
-          "units": "ft",
-          "special": "",
           "override": false
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "cone",
-            "size": "60",
-            "width": "",
-            "height": "",
             "units": "ft"
           },
           "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
+            "choice": false
           },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "1d6 +1",
-          "name": "",
-          "prompt": false,
-          "visible": false
+          "override": false,
+          "prompt": true
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "name": "",
+        "img": ""
       }
     },
     "attuned": false,
@@ -232,14 +226,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037136851,
-    "modifiedTime": 1725992496076,
+    "modifiedTime": 1731015855536,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!EJFql4aNWHHJSxT9"

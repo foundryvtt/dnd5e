@@ -1,7 +1,7 @@
 {
   "_id": "d5HNCmLIPCpPoX2w",
   "name": "Rod of Lordly Might",
-  "type": "consumable",
+  "type": "equipment",
   "img": "icons/weapons/staves/staff-ornate-gold-jeweled.webp",
   "system": {
     "description": {
@@ -63,6 +63,7 @@
     },
     "container": null,
     "properties": [
+      "foc",
       "mgc"
     ],
     "magicalBonus": null,
@@ -178,9 +179,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.1.0",
     "createdTime": 1725037232621,
-    "modifiedTime": 1725992528184,
+    "modifiedTime": 1730323616099,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!d5HNCmLIPCpPoX2w"

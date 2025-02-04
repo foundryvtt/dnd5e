@@ -435,11 +435,7 @@
           box-shadow: 0 0 6px var(--dnd5e-shadow-45);
           width: unset;
 
-          .meter {
-            border-radius: 3px;
-
-            .progress::before { border-radius: 4px; }
-          }
+          .meter { border-radius: 3px; }
         }
       }
     }
@@ -520,6 +516,11 @@
 
         li { line-height: 1.5; }
       }
+
+      .form-group .sep.unit {
+        margin-inline: 4px;
+        font-weight: bold;
+      }
     }
 
     /* Activities */
@@ -566,6 +567,25 @@
       }
 
       + .activity { margin-top: 8px; }
+    }
+
+    /* Facilities */
+    fieldset.harvesting {
+      display: grid;
+      grid-template: "a a" "b c" / 1fr 60px;
+      column-gap: 8px;
+
+      > .form-group { grid-area: a; }
+      .facility-craft { grid-area: b; }
+
+      .quantity {
+        grid-area: c;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        .separator { color: var(--color-text-dark-5); }
+      }
     }
 
   }

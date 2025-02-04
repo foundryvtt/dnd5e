@@ -4,6 +4,13 @@ import FormulaField from "../fields/formula-field.mjs";
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @typedef {object} UsesData
+ * @property {number} spent                 Number of uses that have been spent.
+ * @property {string} max                   Formula for the maximum number of uses.
+ * @property {UsesRecoveryData[]} recovery  Recovery profiles for this activity's uses.
+ */
+
+/**
  * Data for a recovery profile for an activity's uses.
  *
  * @typedef {object} UsesRecoveryData
@@ -14,10 +21,6 @@ const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.field
 
 /**
  * Field for storing uses data.
- *
- * @property {number} spent                 Number of uses that have been spent.
- * @property {string} max                   Formula for the maximum number of uses.
- * @property {UsesRecoveryData[]} recovery  Recovery profiles for this activity's uses.
  */
 export default class UsesField extends SchemaField {
   constructor(fields={}, options={}) {
@@ -72,10 +75,41 @@ export default class UsesField extends SchemaField {
     }
     if ( labels ) labels.recovery = game.i18n.getListFormatter({ style: "narrow" }).format(periods);
 
+    this.uses.label = UsesField.getStatblockLabel.call(this);
+
     Object.defineProperty(this.uses, "rollRecharge", {
       value: UsesField.rollRecharge.bind(this.parent?.system ? this.parent : this),
       configurable: true
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create a label for uses data that matches the style seen on NPC stat blocks. Complex recovery data might result
+   * in no label being generated if it doesn't represent recovery that can be normally found on a NPC.
+   * @this {ItemDataModel|BaseActivityData}
+   * @returns {string}
+   */
+  static getStatblockLabel() {
+    if ( !this.uses.max || (this.uses.recovery.length !== 1) ) return "";
+    const recovery = this.uses.recovery[0];
+
+    // Recharge X–Y
+    if ( recovery.period === "recharge" ) {
+      const value = parseInt(recovery.formula);
+      return `${game.i18n.localize("DND5E.Recharge")} ${value === 6 ? "6" : `${value}–6`}`;
+    }
+
+    // Recharge after a Short or Long Rest
+    if ( ["lr", "sr"].includes(recovery.period) && (this.uses.max === 1) ) {
+      return game.i18n.localize(`DND5E.Recharge${recovery.period === "sr" ? "Short" : "Long"}`);
+    }
+
+    // X/Day
+    const period = CONFIG.DND5E.limitedUsePeriods[recovery.period === "sr" ? "sr" : "day"]?.label ?? "";
+    if ( !period ) return "";
+    return `${this.uses.max}/${period}`;
   }
 
   /* -------------------------------------------- */
@@ -90,7 +124,7 @@ export default class UsesField extends SchemaField {
    * @returns {Promise<{ updates: object, rolls: BasicRoll[] }|false>}
    */
   static async recoverUses(periods, rollData) {
-    if ( !this.uses.recovery.length ) return false;
+    if ( !this.uses?.recovery.length ) return false;
 
     // Search the recovery profiles in order to find the first matching period,
     // and then find the first profile that uses that recovery period
@@ -178,6 +212,7 @@ export default class UsesField extends SchemaField {
         }
       }]
     }, config);
+    rollConfig.hookNames = [...(config.hookNames ?? []), "recharge"];
     rollConfig.subject = this;
 
     const dialogConfig = foundry.utils.mergeObject({ configure: false }, dialog);
@@ -189,17 +224,6 @@ export default class UsesField extends SchemaField {
       },
       rollMode: game.settings.get("core", "rollMode")
     }));
-
-    /**
-     * A hook event that fires before recharge is rolled for an Item or Activity.
-     * @function dnd5e.preRollRechargeV2
-     * @memberof hookEvents
-     * @param {BasicRollProcessConfiguration} config   Configuration information for the roll.
-     * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
-     * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
-     * @returns {boolean}                              Explicitly return `false` to prevent recharge from being rolled.
-     */
-    if ( Hooks.call("dnd5e.preRollRechargeV2", rollConfig, dialogConfig, messageConfig) === false ) return;
 
     if ( "dnd5e.preRollRecharge" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
@@ -217,15 +241,14 @@ export default class UsesField extends SchemaField {
       messageConfig.create = hookData.chatMessage;
     }
 
-    const createMessage = messageConfig.create !== false;
-    const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, { ...messageConfig, create: false });
-    if ( rolls?.length && createMessage ) {
-      messageConfig.data.flavor = game.i18n.format("DND5E.ItemRechargeCheck", {
-        name: this.name,
-        result: game.i18n.localize(`DND5E.ItemRecharge${rolls[0].isSuccess ? "Success" : "Failure"}`)
-      });
-      await CONFIG.Dice.BasicRoll.toMessage(rolls, messageConfig.data, { rollMode: messageConfig.rollMode });
-    }
+    const rolls = await CONFIG.Dice.BasicRoll.buildConfigure(rollConfig, dialogConfig, messageConfig);
+    await CONFIG.Dice.BasicRoll.buildEvaluate(rolls, rollConfig, messageConfig);
+    if ( !rolls.length ) return;
+    messageConfig.data.flavor = game.i18n.format("DND5E.ItemRechargeCheck", {
+      name: this.name,
+      result: game.i18n.localize(`DND5E.ItemRecharge${rolls[0].isSuccess ? "Success" : "Failure"}`)
+    });
+    await CONFIG.Dice.BasicRoll.buildPost(rolls, rollConfig, messageConfig);
 
     const updates = {};
     if ( rolls[0].isSuccess ) {

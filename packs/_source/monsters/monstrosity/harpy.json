@@ -742,8 +742,8 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (2d4 + 1) <em>slashing damage</em></strong>.</p><p></p></section><p>The Harpy attacks with its Claws.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (2d4 + 1) <em>slashing damage</em></strong>.</p>",
+          "chat": "<p>The Harpy attacks with its Claws.</p>"
         },
         "source": {
           "custom": "",
@@ -930,10 +930,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676769,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!CqQ6pXQA5WXZNOm3.WqD5jsrWCeNHoD9O"
     },
@@ -944,8 +944,8 @@
       "img": "icons/weapons/clubs/club-simple-barbed.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>3 (1d4 + 1) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Harpy attacks with its Club.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>3 (1d4 + 1) <em>bludgeoning damage</em></strong>.</p>",
+          "chat": "<p>The Harpy attacks with its Club.</p>"
         },
         "source": {
           "custom": "",
@@ -1138,10 +1138,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676769,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!CqQ6pXQA5WXZNOm3.ywVQhULZvd4Jn51c"
     },
@@ -1152,8 +1152,8 @@
       "img": "icons/magic/air/wind-vortex-swirl-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The harpy sings a magical melody. Every humanoid and giant within 300 ft. of the harpy that can hear the song must succeed on a  <strong>DC 11 Wisdom</strong> saving throw or be charmed until the song ends. The harpy must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the harpy is incapacitated.</p>\n<p>While charmed by the harpy, a target is incapacitated and ignores the songs of other harpies. If the charmed target is more than 5 feet away from the harpy, the target must move on its turn toward the harpy by the most direct route, trying to get within 5 feet. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the harpy, the target can repeat the saving throw. A charmed target can also repeat the saving throw at the end of each of its turns. If the saving throw is successful, the effect ends on it.</p>\n<p>A target that successfully saves is immune to this harpy's song for the next 24 hours.</p>\n</section>\n<p>The harpy sings a magical melody. Every humanoid and giant within 300 ft. of the harpy that can hear the song must make a <strong>Wisdom</strong> saving throw. A creature can also repeat the saving throw at the end of each of its turns.</p>",
-          "chat": ""
+          "value": "<p>The harpy sings a magical melody. Every humanoid and giant within 300 ft. of the harpy that can hear the song must succeed on a  <strong>DC 11 Wisdom</strong> saving throw or be charmed until the song ends. The harpy must take a bonus action on its subsequent turns to continue singing. It can stop singing at any time. The song ends if the harpy is incapacitated.</p><p>While charmed by the harpy, a target is incapacitated and ignores the songs of other harpies. If the charmed target is more than 5 feet away from the harpy, the target must move on its turn toward the harpy by the most direct route, trying to get within 5 feet. It doesn't avoid opportunity attacks, but before moving into damaging terrain, such as lava or a pit, and whenever it takes damage from a source other than the harpy, the target can repeat the saving throw. A charmed target can also repeat the saving throw at the end of each of its turns. If the saving throw is successful, the effect ends on it.</p><p>A target that successfully saves is immune to this harpy's song for the next 24 hours.</p>",
+          "chat": "<p>The harpy sings a magical melody. Every humanoid and giant within 300 ft. of the harpy that can hear the song must make a <strong>Wisdom</strong> saving throw. A creature can also repeat the saving throw at the end of each of its turns.</p>"
         },
         "source": {
           "custom": "",
@@ -1268,10 +1268,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676769,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!CqQ6pXQA5WXZNOm3.QeobH0xuWk2yWmsb"
     }

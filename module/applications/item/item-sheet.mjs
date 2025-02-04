@@ -1,13 +1,12 @@
 import ActiveEffect5e from "../../documents/active-effect.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { filteredKeys, sortObjectEntries } from "../../utils.mjs";
-import ActorMovementConfig from "../actor/movement-config.mjs";
-import ActorSensesConfig from "../actor/senses-config.mjs";
-import ActorTypeConfig from "../actor/type-config.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import AdvancementMigrationDialog from "../advancement/advancement-migration-dialog.mjs";
 import Accordion from "../accordion.mjs";
 import EffectsElement from "../components/effects.mjs";
+import CreatureTypeConfig from "../shared/creature-type-config.mjs";
+import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import SourceConfig from "../source-config.mjs";
 import StartingEquipmentConfig from "./starting-equipment-config.mjs";
 
@@ -263,17 +262,18 @@ export default class ItemSheet5e extends ItemSheet {
 
   /**
    * Get the base weapons and tools based on the selected type.
-   * @returns {Promise<object>}  Object with base items for this type formatted for selectOptions.
+   * @param {object} [context]        Sheet preparation context.
+   * @returns {Promise<object|null>}  Object with base items for this type formatted for selectOptions.
    * @protected
    */
-  async _getItemBaseTypes() {
+  async _getItemBaseTypes(context) {
     const baseIds = this.item.type === "equipment" ? {
       ...CONFIG.DND5E.armorIds,
       ...CONFIG.DND5E.shieldIds
     } : CONFIG.DND5E[`${this.item.type}Ids`];
-    if ( baseIds === undefined ) return {};
+    if ( baseIds === undefined ) return null;
 
-    const baseType = this.item.system.type.value;
+    const baseType = context?.source.type.value ?? this.item.system.type.value;
 
     const items = {};
     for ( const [name, id] of Object.entries(baseIds) ) {
@@ -281,6 +281,7 @@ export default class ItemSheet5e extends ItemSheet {
       if ( baseType !== baseItem?.system?.type?.value ) continue;
       items[name] = baseItem.name;
     }
+    if ( foundry.utils.isEmpty(items) ) return null;
     return Object.fromEntries(Object.entries(items).sort((lhs, rhs) => lhs[1].localeCompare(rhs[1], game.i18n.lang)));
   }
 
@@ -397,6 +398,7 @@ export default class ItemSheet5e extends ItemSheet {
         }
       })
     };
+    this.editors[name].initial = initialContent = foundry.utils.getProperty(this.item._source, name);
     return super.activateEditor(name, options, initialContent);
   }
 
@@ -431,7 +433,7 @@ export default class ItemSheet5e extends ItemSheet {
         ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.LimitedUses")
         }));
-        return null;
+        return {};
       }
     }
 
@@ -445,7 +447,7 @@ export default class ItemSheet5e extends ItemSheet {
         ui.notifications.error(game.i18n.format("DND5E.FormulaCannotContainDiceError", {
           name: game.i18n.localize("DND5E.Duration")
         }));
-        return null;
+        return {};
       }
     }
 
@@ -454,7 +456,7 @@ export default class ItemSheet5e extends ItemSheet {
       formData.system.identifier = this.item._source.system.identifier;
       this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
       ui.notifications.error("DND5E.IdentifierError", {localize: true});
-      return null;
+      return {};
     }
 
     // Return the flattened submission data
@@ -494,53 +496,6 @@ export default class ItemSheet5e extends ItemSheet {
       }
     }
     html[0].querySelectorAll('[data-action="view"]').forEach(e => e.addEventListener("click", this._onView.bind(this)));
-
-    // Advancement context menu
-    const contextOptions = this._getAdvancementContextMenuOptions();
-    /**
-     * A hook event that fires when the context menu for the advancements list is constructed.
-     * @function dnd5e.getItemAdvancementContext
-     * @memberof hookEvents
-     * @param {jQuery} html                      The HTML element to which the context options are attached.
-     * @param {ContextMenuEntry[]} entryOptions  The context menu entries.
-     */
-    Hooks.call("dnd5e.getItemAdvancementContext", html, contextOptions);
-    if ( contextOptions ) new this.options.contextMenu(html, ".advancement-item", contextOptions);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Get the set of ContextMenu options which should be applied for advancement entries.
-   * @returns {ContextMenuEntry[]}  Context menu entries.
-   * @protected
-   */
-  _getAdvancementContextMenuOptions() {
-    const condition = li => (this.advancementConfigurationMode || !this.isEmbedded) && this.isEditable;
-    return [
-      {
-        name: "DND5E.AdvancementControlEdit",
-        icon: "<i class='fas fa-edit fa-fw'></i>",
-        condition,
-        callback: li => this._onAdvancementAction(li[0], "edit")
-      },
-      {
-        name: "DND5E.AdvancementControlDuplicate",
-        icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: li => {
-          const id = li[0].closest(".advancement-item")?.dataset.id;
-          const advancement = this.item.advancement.byId[id];
-          return condition(li) && advancement?.constructor.availableForItem(this.item);
-        },
-        callback: li => this._onAdvancementAction(li[0], "duplicate")
-      },
-      {
-        name: "DND5E.AdvancementControlDelete",
-        icon: "<i class='fas fa-trash fa-fw' style='color: rgb(255, 65, 65);'></i>",
-        condition,
-        callback: li => this._onAdvancementAction(li[0], "delete")
-      }
-    ];
   }
 
   /* -------------------------------------------- */
@@ -557,10 +512,8 @@ export default class ItemSheet5e extends ItemSheet {
     let app;
     switch ( button.dataset.action ) {
       case "movement":
-        app = new ActorMovementConfig(this.item, { keyPath: "system.movement" });
-        break;
       case "senses":
-        app = new ActorSensesConfig(this.item, { keyPath: "system.senses" });
+        app = new MovementSensesConfig({ document: this.item, type: button.dataset.action });
         break;
       case "source":
         app = new SourceConfig({ document: this.item, keyPath: "system.source" });
@@ -569,7 +522,7 @@ export default class ItemSheet5e extends ItemSheet {
         app = new StartingEquipmentConfig(this.item);
         break;
       case "type":
-        app = new ActorTypeConfig(this.item, { keyPath: "system.type" });
+        app = new CreatureTypeConfig({ document: this.item, keyPath: "type" });
         break;
     }
     app?.render(true);
@@ -728,7 +681,9 @@ export default class ItemSheet5e extends ItemSheet {
       options.keepOrigin = true;
       options.dnd5e = {
         enchantmentProfile: effect.id,
-        activityId: data.activityId
+        activityId: data.activityId ?? effect.parent?.system.activities?.getByType("enchant").find(a =>
+          a.effects.some(e => e._id === effect.id)
+        )?.id
       };
     }
 
@@ -803,13 +758,7 @@ export default class ItemSheet5e extends ItemSheet {
     switch (action) {
       case "add": return game.dnd5e.applications.advancement.AdvancementSelection.createDialog(this.item);
       case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
-      case "delete":
-        if ( this.item.actor?.system.metadata?.supportsAdvancement
-            && !game.settings.get("dnd5e", "disableAdvancements") ) {
-          manager = AdvancementManager.forDeletedAdvancement(this.item.actor, this.item.id, id);
-          if ( manager.steps.length ) return manager.render(true);
-        }
-        return this.item.deleteAdvancement(id);
+      case "delete": return advancement.deleteDialog();
       case "duplicate": return this.item.duplicateAdvancement(id);
       case "modify-choices":
         const level = target.closest("[data-level]")?.dataset.level;

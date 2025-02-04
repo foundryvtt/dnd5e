@@ -13,13 +13,20 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
     this._internals.role = "checkbox";
     this._value = this.getAttribute("value");
     this.#defaultValue = this._value;
-    this.#shadowRoot = this.attachShadow({ mode: "closed" });
+    if ( this.constructor.useShadowRoot ) this.#shadowRoot = this.attachShadow({ mode: "closed" });
   }
 
   /* -------------------------------------------- */
 
   /** @override */
   static tagName = "dnd5e-checkbox";
+
+  /* -------------------------------------------- */
+
+  /**
+   * Should a show root be created for this element?
+   */
+  static useShadowRoot = true;
 
   /* -------------------------------------------- */
 
@@ -32,6 +39,8 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
       height: var(--checkbox-size, 18px);
       aspect-ratio: 1;
     }
+
+    :host(:disabled) { cursor: default; }
 
     :host > div {
       width: 100%;
@@ -121,8 +130,6 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
 
   set checked(checked) {
     this.toggleAttribute("checked", checked);
-    this.dispatchEvent(new Event("input", { bubbles: true, cancelable: true }));
-    this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
     this._refresh();
   }
 
@@ -155,7 +162,6 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
 
   /** @override */
   connectedCallback() {
-    this._controller = new AbortController();
     this._adoptStyleSheet(this._getStyleSheet());
     const elements = this._buildElements();
     this.#shadowRoot.replaceChildren(...elements);
@@ -213,9 +219,17 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
 
   /** @override */
   _activateListeners() {
-    const { signal } = this._controller;
+    const { signal } = this._controller = new AbortController();
     this.addEventListener("click", this._onClick.bind(this), { signal });
     this.addEventListener("keydown", event => event.key === " " ? this._onClick(event) : null, { signal });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _refresh() {
+    super._refresh();
+    this._internals.ariaChecked = `${this.hasAttribute("checked")}`;
   }
 
   /* -------------------------------------------- */
@@ -224,5 +238,7 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
   _onClick(event) {
     event.preventDefault();
     this.checked = !this.checked;
+    this.dispatchEvent(new Event("input", { bubbles: true, cancelable: true }));
+    this.dispatchEvent(new Event("change", { bubbles: true, cancelable: true }));
   }
 }

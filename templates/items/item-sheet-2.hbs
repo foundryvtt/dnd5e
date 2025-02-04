@@ -88,6 +88,19 @@
 
             {{/if}}
 
+            {{!-- Facilities --}}
+            {{#if (eq item.type "facility")}}
+            <div class="quantity">
+                <span class="value">{{ localize "DND5E.FACILITY.Squares" squares=system.squares }}</span>
+            </div>
+            {{#if (eq system.type.value "basic")}}
+            <div class="price">
+                <span class="value">{{ dnd5e-numberFormat system.price.value }}</span>
+                <i class="currency gp" aria-label="{{ config.currencies.gp.label }}"></i>
+            </div>
+            {{/if}}
+            {{/if}}
+
             {{!-- School --}}
             {{#if (eq item.type "spell")}}
             <div class="school" aria-label="{{ labels.school }}">
@@ -147,7 +160,8 @@
     </section>
 
     {{!-- Child Creation --}}
-    <button type="button" class="create-child gold-button" aria-label="{{ localize "CONTROLS.CommonCreate" }}">
+    <button type="button" class="create-child gold-button interface-only"
+            aria-label="{{ localize "CONTROLS.CommonCreate" }}">
         <i class="fas fa-plus" inert></i>
     </button>
 
