@@ -116,7 +116,7 @@ export default function ApplicationV2Mixin(Base) {
       // Subtitles
       const subtitle = document.createElement("h2");
       subtitle.classList.add("window-subtitle");
-      frame.querySelector(".window-title").insertAdjacentElement("afterend", subtitle);
+      frame?.querySelector(".window-title")?.insertAdjacentElement("afterend", subtitle);
 
       // Icon
       if ( (options.window?.icon ?? "").includes(".") ) {
