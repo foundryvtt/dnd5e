@@ -32,8 +32,9 @@ export default class PropertyAttribution extends Application5e {
   /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["property-attribution"],
-    position: {
-      width: 320
+    window: {
+      frame: false,
+      positioned: false
     }
   };
 
@@ -55,14 +56,14 @@ export default class PropertyAttribution extends Application5e {
    * @returns {Promise<string>}
    */
   async renderTooltip() {
-    const options = {};
-    this._configureRenderOptions(options);
-    const context = await this._prepareContext(options);
-    const rendered = await this._renderHTML(context, options);
-    const div = document.createElement("div");
-    div.append(...Object.values(rendered));
-    return div.innerHTML;
+    await this.render({ force: true });
+    return this.element.innerHTML;
   }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _insertElement(element) {}
 
   /* -------------------------------------------- */
 
