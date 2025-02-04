@@ -452,6 +452,20 @@ export function registerSystemSettings() {
     default: false
   });
 
+  game.settings.register("dnd5e", "autoRollNPCHP", {
+    name: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.Name",
+    hint: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.Hint",
+    scope: "world",
+    config: false,
+    default: "no",
+    type: String,
+    choices: {
+      no: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.No",
+      silent: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.Silent",
+      yes: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.Yes"
+    }
+  });
+
   // Visibility Settings
   game.settings.registerMenu("dnd5e", "visibilityConfiguration", {
     name: "SETTINGS.DND5E.VISIBILITY.Name",
@@ -544,23 +558,6 @@ export function registerSystemSettings() {
     ),
     default: [],
     config: true
-  });
-
-  // Auto roll NPC HP on drop
-  game.settings.register("dnd5e", "autoRollNPCHP", {
-    name: "SETTINGS.DND5E.AUTOROLLNPCHP.Name",
-    hint: "SETTINGS.DND5E.AUTOROLLNPCHP.Hint",
-    scope: "world",
-    config: true,
-    default: "no",
-    type: new foundry.data.fields.StringField({
-      required: true,
-      choices: {
-        no: "SETTINGS.DND5E.AUTOROLLNPCHP.No",
-        silent: "SETTINGS.DND5E.AUTOROLLNPCHP.Silent",
-        yes: "SETTINGS.DND5E.AUTOROLLNPCHP.Yes"
-      }
-    })
   });
 }
 
