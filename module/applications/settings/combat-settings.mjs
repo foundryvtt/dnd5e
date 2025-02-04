@@ -55,7 +55,8 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
         context.fields = [
           this.createSettingField("autoRollNPCHP")
         ];
-        context.legend = game.i18n.localize("SETTINGS.DND5E.NPCS.Name")
+        context.legend = game.i18n.localize("SETTINGS.DND5E.NPCS.Name");
+        break;
     }
     return context;
   }
