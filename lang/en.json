@@ -4610,10 +4610,6 @@
 "SETTINGS.5eAutoCollapseCardN": "Collapse Item Cards in Chat",
 "SETTINGS.5eAutoSpellTemplateL": "When a spell is cast, defaults to begin the process to create the corresponding Measured Template if any (requires TRUSTED or higher player role)",
 "SETTINGS.5eAutoSpellTemplateN": "Always place Spell Template",
-"SETTINGS.5eCriticalMaxDiceN": "Critical Damage Maximize Dice",
-"SETTINGS.5eCriticalMaxDiceL": "Make critical hits more deadly by maximizing the values of base damage dice.",
-"SETTINGS.5eCriticalModifiersN": "Critical Damage Multiply Modifiers",
-"SETTINGS.5eCriticalModifiersL": "Make critical hits more deadly by multiplying non-dice modifiers in addition to rolled dice.",
 "SETTINGS.5eCurWtL": "Carried currency affects character encumbrance following the rules on PHB pg. 143.",
 "SETTINGS.5eCurWtN": "Apply Currency Weight",
 "SETTINGS.5eDiagEuclidean": "Euclidean (7.07 ft. Diagonal)",
@@ -4632,8 +4628,6 @@
 "SETTINGS.5eFeatsN": "Allow Feats",
 "SETTINGS.5eHonorL": "Enable the use of the optional Honor ability score. Requires the world to be reloaded.",
 "SETTINGS.5eHonorN": "Honor Ability Score",
-"SETTINGS.5eInitTBL": "Append the raw Dexterity ability score to break ties in Initiative.",
-"SETTINGS.5eInitTBN": "Initiative Dexterity Tiebreaker",
 "SETTINGS.5eNoAdvancementsN": "Disable level-up automation",
 "SETTINGS.5eNoAdvancementsL": "Do not prompt for level-up or character creation choices.",
 "SETTINGS.5eNoConcentrationN": "Disable concentration tracking",
@@ -4676,16 +4670,36 @@
     "Older": "Collapse Older Trays",
     "Never": "Expand All"
   },
+  "COMBAT": {
+    "Hint": "Various configuration options that affect combat.",
+    "Label": "Configure Combat",
+    "Name": "Combat",
+    "DEXTIEBREAKER": {
+      "Name": "Dexterity Tiebreaker",
+      "Hint": "Append the raw Dexterity ability score to break ties in Initiative."
+    },
+    "INITIATIVESCORE": {
+      "Name": "Initiative Score",
+      "Hint": "Use a creature's initiative score (10 + bonus) rather than rolling for initiative.",
+      "All": "Use Score for Everyone",
+      "None": "Always Roll for Initiative",
+      "NPCs": "Use Score for GM NPCs"
+    }
+  },
+  "CRITICAL": {
+    "Name": "Critical Damage",
+    "MaxDice": {
+      "Name": "Maximize Dice",
+      "Hint": "Make critical hits more deadly by maximizing the values of base damage dice."
+    },
+    "MultiplyModifiers": {
+      "Name": "Multiply Modifiers",
+      "Hint": "Make critical hits more deadly by multiplying non-dice modifiers in addition to rolled dice."
+    }
+  },
   "DEFAULTSKILLS": {
     "Name": "Default Skills",
     "Hint": "The default skills that appear on NPC sheets regardless of level of proficiency."
-  },
-  "INITIATIVESCORE": {
-    "Name": "Initiative Score",
-    "Hint": "Use a creature's initiative score (10 + bonus) rather than rolling for initiative.",
-    "All": "Use Score for Everyone",
-    "None": "Always Roll for Initiative",
-    "NPCs": "Use Score for GM NPCs"
   },
   "LEVELING": {
     "Name": "Leveling Mode",
