@@ -452,6 +452,20 @@ export function registerSystemSettings() {
     default: false
   });
 
+  game.settings.register("dnd5e", "autoRollNPCHP", {
+    name: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.Name",
+    hint: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.Hint",
+    scope: "world",
+    config: false,
+    default: "no",
+    type: String,
+    choices: {
+      no: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.No",
+      silent: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.Silent",
+      yes: "SETTINGS.DND5E.NPCS.AUTOROLLNPCHP.Yes"
+    }
+  });
+
   // Visibility Settings
   game.settings.registerMenu("dnd5e", "visibilityConfiguration", {
     name: "SETTINGS.DND5E.VISIBILITY.Name",

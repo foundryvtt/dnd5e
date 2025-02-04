@@ -4727,6 +4727,16 @@
       "Hint": "Replaces all reference to lbs with kgs and updates the encumbrance calculations to use metric weight units."
     }
   },
+  "NPCS": {
+    "Name": "NPCs",
+    "AUTOROLLNPCHP": {
+      "Name": "Auto-roll NPC HP",
+      "Hint": "Configure whether max HP is rolled from HP formula when an NPC token is created.",
+      "No": "Do not auto-roll",
+      "Silent": "Auto-roll without creating chat card",
+      "Yes": "Auto-roll and create chat card"
+    }
+  },
   "THEME": {
     "Name": "Theme",
     "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings."

@@ -21,6 +21,9 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
     criticals: {
       template: "systems/dnd5e/templates/settings/base-config.hbs"
     },
+    npcs: {
+      template: "systems/dnd5e/templates/settings/base-config.hbs"
+    },
     footer: {
       template: "templates/generic/form-footer.hbs"
     }
@@ -48,6 +51,11 @@ export default class CombatSettingsConfig extends BaseSettingsConfig {
         ];
         context.legend = game.i18n.localize("SETTINGS.DND5E.CRITICAL.Name");
         break;
+      case "npcs":
+        context.fields = [
+          this.createSettingField("autoRollNPCHP")
+        ];
+        context.legend = game.i18n.localize("SETTINGS.DND5E.NPCS.Name")
     }
     return context;
   }
