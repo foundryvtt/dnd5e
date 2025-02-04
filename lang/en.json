@@ -4611,47 +4611,12 @@
 "SETTINGS.5eAutoCollapseCardN": "Collapse Item Cards in Chat",
 "SETTINGS.5eAutoSpellTemplateL": "When a spell is cast, defaults to begin the process to create the corresponding Measured Template if any (requires TRUSTED or higher player role)",
 "SETTINGS.5eAutoSpellTemplateN": "Always place Spell Template",
-"SETTINGS.5eCurWtL": "Carried currency affects character encumbrance following the rules on PHB pg. 143.",
-"SETTINGS.5eCurWtN": "Apply Currency Weight",
-"SETTINGS.5eDiagEuclidean": "Euclidean (7.07 ft. Diagonal)",
-"SETTINGS.5eDiagL": "Configure which diagonal movement rule should be used for games within this system.",
-"SETTINGS.5eDiagN": "Diagonal Movement Rule",
-"SETTINGS.5eDiagPHB": "PHB: Equidistant (5/5/5)",
-"SETTINGS.5eDiagDMG": "DMG: Alternating (5/10/5)",
-"SETTINGS.5eEncumbrance": {
-  "Hint": "Enable automatic tracking of encumbrance and the application of status effects for characters carrying too much.",
-  "Name": "Encumbrance Tracking",
-  "None": "None",
-  "Normal": "Normal (max carrying capacity)",
-  "Variant": "Variant (encumbered & heavily encumbered)"
-},
-"SETTINGS.5eFeatsL": "Allow players to choose a feat rather than taking an ability score improvement during class advancement when using the Legacy rules.",
-"SETTINGS.5eFeatsN": "Allow Feats",
-"SETTINGS.5eHonorL": "Enable the use of the optional Honor ability score. Requires the world to be reloaded.",
-"SETTINGS.5eHonorN": "Honor Ability Score",
 "SETTINGS.5eNoAdvancementsN": "Disable level-up automation",
 "SETTINGS.5eNoAdvancementsL": "Do not prompt for level-up or character creation choices.",
 "SETTINGS.5eNoConcentrationN": "Disable concentration tracking",
 "SETTINGS.5eNoConcentrationL": "Disable the system's automated tracking of concentration.",
-"SETTINGS.5eProfBonus": "PHB: Bonus (+2, +3, +4, +5, +6)",
-"SETTINGS.5eProfDice": "DMG: Dice (1d4, 1d6, 1d8, 1d10, 1d12)",
-"SETTINGS.5eProfL": "Configure proficiency modifier to use a fixed bonus or a dice roll. Reloading the world is required for this change to take effect.",
-"SETTINGS.5eProfN": "Proficiency Variant",
-"SETTINGS.5eReset": "Reset",
-"SETTINGS.5eRestL": "Configure which rest variant should be used for games within this system.",
-"SETTINGS.5eRestN": "Rest Variant",
-"SETTINGS.5eRestPHB": "Player's Handbook (LR: 8 hours, SR: 1 hour)",
-"SETTINGS.5eRestGritty": "Gritty Realism (LR: 7 days, SR: 8 hours)",
-"SETTINGS.5eRestEpic": "Epic Heroism (LR: 1 hour, SR: 1 min)",
 "SETTINGS.5eGridAlignedSquareTemplatesL": "When square templates are created as the result of casting a spell or using an item, they will be locked to the grid alignment and unable to be rotated.",
 "SETTINGS.5eGridAlignedSquareTemplatesN": "Grid-Aligned Square Templates",
-"SETTINGS.5eSanityL": "Enable the use of the optional Sanity ability score. Requires the world to be reloaded.",
-"SETTINGS.5eSanityN": "Sanity Ability Score",
-"SETTINGS.5eUndoChanges": "Undo Changes",
-"SETTINGS.5eTokenRings": {
-  "Name": "Disable Dynamic Token Rings",
-  "Hint": "Disabling the token ring animations can improve performance."
-},
 "SETTINGS.DND5E": {
   "ALLOWSUMMONING": {
     "Name": "Allow Summoning",
@@ -4702,13 +4667,7 @@
     "Name": "Default Skills",
     "Hint": "The default skills that appear on NPC sheets regardless of level of proficiency."
   },
-  "LEVELING": {
-    "Name": "Leveling Mode",
-    "Hint": "Determine how the players gain new levels.",
-    "NoXP": "Level Advancement without XP",
-    "XP": "Experience Points",
-    "XPBoons": "Experience Points with Epic Boons"
-  },
+  "General": "General",
   "LOYALTY": {
     "Hint": "Enable optional Loyalty tracking.",
     "Name": "Loyalty Score"
@@ -4746,6 +4705,54 @@
     "Hint": "Change handling of various rules between the 2024 and 2014 rule sets.",
     "Legacy": "Legacy Rules (2014)",
     "Modern": "Modern Rules (2024)"
+  },
+  "VARIANT": {
+    "Hint": "Enable and configure rules variations offered by the system.",
+    "Label": "Configure Variant Rules",
+    "Name": "Variant Rules",
+    "AllowFeats": {
+      "Hint": "Allow players to choose a feat rather than taking an ability score improvement during class advancement when using the Legacy rules.",
+      "Name": "Allow Feats"
+    },
+    "CurrencyWeight": {
+      "Hint": "Carried currency affects character encumbrance.",
+      "Name": "Track Currency Weight"
+    },
+    "Encumbrance": {
+      "Hint": "Enable automatic tracking of encumbrance and the application of status effects for characters carrying too much.",
+      "Name": "Encumbrance Tracking",
+      "None": "None",
+      "Normal": "Normal (max carrying capacity)",
+      "Variant": "Variant (encumbered & heavily encumbered)"
+    },
+    "HonorScore": {
+      "Hint": "Enable the use of the optional Honor ability score.",
+      "Name": "Honor Ability Score"
+    },
+    "LevelingMode": {
+      "Hint": "Determine how the players gain new levels.",
+      "Name": "Leveling Mode",
+      "NoXP": "Level Advancement without XP",
+      "XP": "Experience Points",
+      "XPBoons": "Experience Points with Epic Boons"
+    },
+    "ProficiencyModifier": {
+      "Bonus": "PHB: Bonus (+2, +3, +4, +5, +6)",
+      "Dice": "DMG: Dice (1d4, 1d6, 1d8, 1d10, 1d12)",
+      "Hint": "Configure proficiency modifier to use a fixed bonus or a dice roll.",
+      "Name": "Proficiency Variant"
+    },
+    "Rest": {
+      "Epic": "Epic Heroism (LR: 1 hour, SR: 1 min)",
+      "Gritty": "Gritty Realism (LR: 7 days, SR: 8 hours)",
+      "Hint": "Configure which rest variant should be used for games within this system.",
+      "Name": "Rest Variant",
+      "Normal": "Player's Handbook (LR: 8 hours, SR: 1 hour)"
+    },
+    "SanityScore": {
+      "Hint": "Enable the use of the optional Sanity ability score.",
+      "Name": "Sanity Ability Score"
+    }
   },
   "VISIBILITY": {
     "Hint": "Various configuration options that affect player visibility of certain information that the DM may wish to keep secret.",
