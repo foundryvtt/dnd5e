@@ -58,6 +58,9 @@ Hooks.once("init", function() {
   utils.log(`Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
   if ( game.release.generation < 13 ) patchFromUuid();
+  CONFIG.compatibility.excludePatterns.push(
+    /now namespaced under/, /V1 Application framework/, /Set#isSubset/, /ChatMessage#getHTML/, /renderChatMessage/
+  );
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;

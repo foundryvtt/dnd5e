@@ -31,12 +31,12 @@ export default class EffectsElement extends HTMLElement {
     }
 
     const MenuCls = this.hasAttribute("v2") ? ContextMenu5e : ContextMenu;
-    new MenuCls(this, "[data-effect-id]", [], {onOpen: element => {
+    new MenuCls(this, "[data-effect-id]", [], { onOpen: element => {
       const effect = this.getEffect(element.dataset);
       if ( !effect ) return;
       ui.context.menuItems = this._getContextOptions(effect);
       Hooks.call("dnd5e.getActiveEffectContextOptions", effect, ui.context.menuItems);
-    }});
+    }, jQuery: true });
   }
 
   /* -------------------------------------------- */
