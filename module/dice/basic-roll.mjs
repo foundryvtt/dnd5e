@@ -128,7 +128,7 @@ export default class BasicRoll extends Roll {
    * @param {BasicRollProcessConfiguration} [config={}]   Configuration for the rolls.
    * @param {BasicRollDialogConfiguration} [dialog={}]    Configuration for roll prompt.
    * @param {BasicRollMessageConfiguration} [message={}]  Configuration for message creation.
-   * @returns {BasicRoll[]}
+   * @returns {Promise<BasicRoll[]>}
    */
   static async buildConfigure(config={}, dialog={}, message={}) {
     config.hookNames = [...(config.hookNames ?? []), ""];
@@ -151,8 +151,12 @@ export default class BasicRoll extends Roll {
     this.applyKeybindings(config, dialog, message);
 
     let rolls;
-    if ( dialog.configure === false ) rolls = config.rolls?.map(c => this.fromConfig(c, config)) ?? [];
-    else {
+    if ( dialog.configure === false ) {
+      rolls = config.rolls?.map((r, index) => {
+        dialog.options?.buildConfig(config, r, null, index);
+        return this.fromConfig(r, config);
+      }) ?? [];
+    } else {
       const DialogClass = dialog.applicationClass ?? this.DefaultConfigurationDialog;
       rolls = await DialogClass.configure(config, dialog, message);
     }

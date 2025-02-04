@@ -1187,7 +1187,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }].concat(config.rolls ?? []);
     rollConfig.subject = this;
-    rollConfig.rolls.forEach((r, index) => buildConfig(rollConfig, r, null, index));
 
     const dialogConfig = foundry.utils.mergeObject({
       applicationClass: SkillToolRollConfigurationDialog,
@@ -1232,7 +1231,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !rolls.length ) return null;
 
     /**
-     * A hook event that fires after an skill or tool check has been rolled.
+     * A hook event that fires after a skill or tool check has been rolled.
      * @function dnd5e.rollSkillV2
      * @function dnd5e.rollToolCheckV2
      * @memberof hookEvents
@@ -1295,8 +1294,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Add exhaustion reduction
     this.addRollExhaustion(parts, data);
 
-    config.parts = parts;
-    config.data = data;
+    config.parts = [...(config.parts ?? []), ...parts];
+    config.data = { ...data, ...(config.data ?? {}) };
     config.data.abilityId = abilityId;
     config.options = options;
   }
