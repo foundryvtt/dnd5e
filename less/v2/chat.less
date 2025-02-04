@@ -796,9 +796,11 @@ enchantment-application {
     a.rollable:hover .subtitle { text-shadow: none; }
   }
   .deltas ul {
-    li {
+    .delta {
       display: flex;
       justify-content: space-between;
+      .label { flex-grow: 1; }
+      .roll { font-size: var(--font-size-12); }
     }
   }
 }

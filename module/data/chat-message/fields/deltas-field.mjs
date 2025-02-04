@@ -121,10 +121,11 @@ export class IndividualDeltaField extends SchemaField {
     const type = doc instanceof Actor ? "actor" : "item";
     const value = this.keyPath.endsWith(".spent") ? -this.delta : this.delta;
     return {
-      type, rolls,
+      type,
       delta: formatNumber(value, { signDisplay: "always" }),
       document: doc,
-      label: getHumanReadableAttributeLabel(this.keyPath, { [type]: doc }) ?? this.keyPath
+      label: getHumanReadableAttributeLabel(this.keyPath, { [type]: doc }) ?? this.keyPath,
+      rolls: rolls.map(roll => ({ roll, anchor: roll.toAnchor().outerHTML.replace(`${roll.total}</a>`, "</a>") }))
     };
   }
 }

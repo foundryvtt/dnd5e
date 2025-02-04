@@ -135,7 +135,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       type: game.i18n.format("DND5E.CONSUMPTION.Type.ActivityUses.Warning", {
         activity: this.activity.name, item: this.item.name
       }),
-      rolls: updates.rolls
+      rolls: updates.rolls,
+      delta: { item: this.item.id, keyPath: `system.activities.${this.activity.id}.uses.spent` }
     });
     if ( result ) foundry.utils.mergeObject(updates.activity, { "uses.spent": result.spent });
   }
@@ -150,8 +151,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @throws ConsumptionError
    */
   static async consumeAttribute(config, updates) {
-    const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
     const keyPath = `system.${this.target}`;
+    const cost = (await this.resolveCost({ config, delta: { keyPath }, rolls: updates.rolls })).total;
 
     if ( !foundry.utils.hasProperty(this.actor, keyPath) ) throw new ConsumptionError(
       game.i18n.format("DND5E.CONSUMPTION.Warning.MissingAttribute", {
@@ -239,7 +240,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
     const result = await this._usesConsumption(config, {
       uses: item.system.uses,
       type: game.i18n.format("DND5E.CONSUMPTION.Type.ItemUses.Warning", { name: this.item.name }),
-      rolls: updates.rolls
+      rolls: updates.rolls,
+      delta: { item: item.id, keyPath: "system.uses.spent" }
     });
     if ( !result ) return;
 
@@ -277,7 +279,8 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       activity: this.activity.name, item: this.item.name
     }));
 
-    const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
+    const delta = { item: item.id, keyPath: "system.quantity" };
+    const cost = (await this.resolveCost({ config, delta, rolls: updates.rolls })).total;
 
     let warningMessage;
     if ( cost > 0 && !item.system.quantity ) warningMessage = "DND5E.CONSUMPTION.Warning.None";
@@ -308,10 +311,11 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @throws ConsumptionError
    */
   static async consumeSpellSlots(config, updates) {
-    const cost = (await this.resolveCost({ config, rolls: updates.rolls })).total;
     const levelNumber = Math.clamp(
       this.resolveLevel({ config, rolls: updates.rolls }), 1, Object.keys(CONFIG.DND5E.spellLevels).length - 1
     );
+    const keyPath = `system.spells.spell${levelNumber}.value`;
+    const cost = (await this.resolveCost({ config, delta: { keyPath }, rolls: updates.rolls })).total;
 
     // Check to see if enough slots are available at the specified level
     const levelData = this.actor.system.spells?.[`spell${levelNumber}`];
@@ -328,7 +332,7 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
       }));
     }
 
-    updates.actor[`system.spells.spell${levelNumber}.value`] = Math.max(0, newValue);
+    updates.actor[keyPath] = Math.max(0, newValue);
   }
 
   /* -------------------------------------------- */
@@ -340,11 +344,12 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @param {UsesData} options.uses            Uses data to consume.
    * @param {string} options.type              Type label to be used in warning messages.
    * @param {BasicRoll[]} options.rolls        Rolls performed as part of the usages.
+   * @param {object} [options.delta]           Delta information stored in roll options.
    * @returns {{ spent: number, quantity: number }|null}
    * @internal
    */
-  async _usesConsumption(config, { uses, type, rolls }) {
-    const cost = (await this.resolveCost({ config, rolls })).total;
+  async _usesConsumption(config, { uses, type, rolls, delta }) {
+    const cost = (await this.resolveCost({ config, delta, rolls })).total;
 
     let warningMessage;
     if ( cost > 0 && !uses.value ) warningMessage = "DND5E.CONSUMPTION.Warning.None";
@@ -711,14 +716,15 @@ export class ConsumptionTargetData extends foundry.abstract.DataModel {
    * @param {string} formula                   Formula for the initial value.
    * @param {number} scaling                   Amount to scale the formula.
    * @param {object} [options={}]
+   * @param {object} [options.delta]           Delta information stored in roll options.
    * @param {boolean} [options.evaluate=true]  Should the slot roll be evaluated?
    * @param {BasicRoll[]} [options.rolls]      Rolls performed as part of the usages.
    * @returns {Promise<BasicRoll>|BasicRoll}
    * @internal
    */
-  _resolveScaledRoll(formula, scaling, { evaluate=true, rolls }={}) {
+  _resolveScaledRoll(formula, scaling, { delta, evaluate=true, rolls }={}) {
     const rollData = this.activity.getRollData();
-    const roll = new CONFIG.Dice.BasicRoll(formula, rollData);
+    const roll = new CONFIG.Dice.BasicRoll(formula, rollData, { delta });
 
     if ( scaling ) {
       // If a scaling formula is provided, multiply it and add to the end of the initial formula
