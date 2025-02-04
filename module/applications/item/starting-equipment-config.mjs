@@ -40,7 +40,7 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _prepareContext(options={}) {
+  async _prepareContext(options) {
     const context = await super._prepareContext(options);
 
     const processEntry = async (entry, depth=1) => {
