@@ -624,13 +624,12 @@
 /* ----------------------------------------- */
 
 .dnd5e2.starting-equipment {
-  --background-depth-1: var(--dnd5e-color-card);
-  --background-depth-2: color-mix(in oklab, var(--dnd5e-color-card), black 5%);
+  --background-depth-1: var(--dnd5e-background-card);
+  --background-depth-2: var(--dnd5e-background-parchment);
   --background-depth-3: color-mix(in oklab, var(--dnd5e-color-card), black 10%);
 
-  select, input {
-    height: calc(var(--form-field-height) + 1px);
-  }
+  select, input { height: calc(var(--form-field-height) + 1px); }
+  button[data-action="add-entry"] { width: 100%; }
 
   ul {
     margin-block-end: 0;
@@ -642,7 +641,7 @@
     position: relative;
     padding: 8px;
     background: var(--background-depth-1);
-    border: 2px solid var(--dnd5e-color-gold);
+    border: var(--dnd5e-border-gold);
     border-radius: 4px;
     box-shadow: 0 0 4px var(--dnd5e-shadow-45);
 
@@ -686,9 +685,11 @@
       align-items: center;
     }
     .drop-area {
-      border: 1px dashed black;
+      border: 1px dashed var(--color-border-light-2);
       border-radius: 4px;
-      padding-inline: 4px;
+      padding: 6px;
+      font-size: var(--font-size-11);
+      color: var(--color-text-dark-5);
     }
     .require-proficiency {
       flex: 0.66;
