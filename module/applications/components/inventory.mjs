@@ -187,7 +187,7 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   _getContextOptions(item, element) {
-    const compendiumLocked = this.item[game.release.generation < 13 ? "compendium" : "collection"]?.locked;
+    const compendiumLocked = item[game.release.generation < 13 ? "compendium" : "collection"]?.locked;
     // TODO: Move away from using jQuery in callbacks once V12 support is dropped
 
     // Standard Options

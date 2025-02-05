@@ -347,10 +347,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     // Apply special context menus for items outside inventory elements
     const featuresElement = html[0].querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
     if ( featuresElement ) new ContextMenu5e(
-      game.release.generation < 13 ? html : html[0],
-      ".pills-lg [data-item-id], .favorites [data-item-id], .facility[data-item-id]",
-      [],
-      { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: false }
+      html[0], ".pills-lg [data-item-id], .favorites [data-item-id], .facility[data-item-id]", [],
+      { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: true }
     );
 
     // Edit mode only.
