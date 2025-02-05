@@ -1189,8 +1189,9 @@ export default function ActivityMixin(Base) {
      */
     getContextMenuOptions() {
       const entries = [];
+      const compendiumLocked = this.item[game.release.generation < 13 ? "compendium" : "collection"]?.locked;
 
-      if ( this.item.isOwner && !this.item.compendium?.locked ) {
+      if ( this.item.isOwner && !compendiumLocked ) {
         entries.push({
           name: "DND5E.ContextMenuActionEdit",
           icon: '<i class="fas fa-pen-to-square fa-fw"></i>',
@@ -1222,7 +1223,7 @@ export default function ActivityMixin(Base) {
         entries.push({
           name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
           icon: '<i class="fas fa-bookmark fa-fw"></i>',
-          condition: () => this.item.isOwner && !this.item.compendium?.locked,
+          condition: () => this.item.isOwner && !compendiumLocked,
           callback: () => {
             if ( isFavorited ) this.actor.system.removeFavorite(uuid);
             else this.actor.system.addFavorite({ type: "activity", id: uuid });
