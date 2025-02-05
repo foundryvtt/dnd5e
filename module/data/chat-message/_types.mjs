@@ -37,3 +37,10 @@
  * @property {string} origin.combatant      ID of the relevant combatant within the combat.
  * @property {Set<string>} periods          Combat state change that triggered this message.
  */
+
+/**
+ * @typedef UsageMessageSystemData
+ * @property {string} [cause]          Relative ID of the activity that caused this one on the same actor.
+ * @property {ActorDeltasData} deltas  Actor/item consumption from this turn change.
+ * @property {string[]} effects        Effects that can be applied.
+ */

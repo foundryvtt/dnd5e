@@ -98,6 +98,25 @@ export default class EnchantActivity extends ActivityMixin(BaseEnchantActivityDa
   /* -------------------------------------------- */
 
   /** @override */
+  onRenderChatCard(message, element) {
+    const enchantmentProfile = message.getFlag("dnd5e", "use.enchantmentProfile");
+    if ( !enchantmentProfile || !message.isContentVisible ) return;
+
+    // Ensure concentration is still being maintained
+    const concentrationId = message.getFlag("dnd5e", "use.concentrationId");
+    if ( concentrationId && !message.getAssociatedActor()?.effects.get(concentrationId) ) return;
+
+    // Create the enchantment tray
+    const enchantmentApplication = document.createElement("enchantment-application");
+    enchantmentApplication.classList.add("dnd5e2");
+    const afterElement = element.querySelector(".card-footer");
+    if ( afterElement ) afterElement.insertAdjacentElement("beforebegin", enchantmentApplication);
+    else element.querySelector(".chat-card")?.append(enchantmentApplication);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   async _triggerSubsequentActions(config, results) {
     if ( !this.enchant.self ) return;
 
