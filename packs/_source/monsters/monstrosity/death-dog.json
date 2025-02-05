@@ -615,8 +615,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p>\n<p>If the target is a creature, it must succeed on a  <strong>DC 12 Constitution</strong> saving throw against disease or become poisoned until the disease is cured. Every 24 hours that elapse, the creature must repeat the saving throw, reducing its hit point maximum by 5 (1d10) on a failure. This reduction lasts until the disease is cured. The creature dies if the disease reduces its hit point maximum to 0.</p>\n</section>\n<p>The Death Dog attacks with its Bite. If the target is a creature, it must make a <strong>Constitution</strong> saving throw. Every 24 hours that elapse, the creature must repeat the saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p><p>If the target is a creature, it must succeed on a  <strong>DC 12 Constitution</strong> saving throw against disease or become poisoned until the disease is cured. Every 24 hours that elapse, the creature must repeat the saving throw, reducing its hit point maximum by 5 (1d10) on a failure. This reduction lasts until the disease is cured. The creature dies if the disease reduces its hit point maximum to 0.</p>",
+          "chat": "<p>The Death Dog attacks with its Bite. If the target is a creature, it must make a <strong>Constitution</strong> saving throw. Every 24 hours that elapse, the creature must repeat the saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -896,10 +896,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676448,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!PH78NBdvoaszAb61.TKV9mS1lvqMAyCaB"
     },

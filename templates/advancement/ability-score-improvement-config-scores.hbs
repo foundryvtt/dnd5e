@@ -1,0 +1,13 @@
+<fieldset>
+    <ul class="ability-scores unlist">
+        {{> "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control-v2.hbs" points
+            canAdjust=true }}
+        <li class="hint">
+            {{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.hint" }}
+        </li>
+        {{#each abilities}}
+        {{> "systems/dnd5e/templates/advancement/parts/advancement-ability-score-control-v2.hbs" this canAdjust=true
+            canLock=true }}
+        {{/each}}
+    </ul>
+</fieldset>

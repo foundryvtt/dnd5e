@@ -17,8 +17,8 @@ export default class ScaleValueAdvancement extends Advancement {
       order: 60,
       icon: "icons/sundries/gaming/dice-pair-white-green.webp",
       typeIcon: "systems/dnd5e/icons/svg/scale-value.svg",
-      title: game.i18n.localize("DND5E.AdvancementScaleValueTitle"),
-      hint: game.i18n.localize("DND5E.AdvancementScaleValueHint"),
+      title: game.i18n.localize("DND5E.ADVANCEMENT.ScaleValue.Title"),
+      hint: game.i18n.localize("DND5E.ADVANCEMENT.ScaleValue.Hint"),
       multiLevel: true,
       apps: {
         config: ScaleValueConfig,
@@ -34,6 +34,14 @@ export default class ScaleValueAdvancement extends Advancement {
    * @enum {ScaleValueType}
    */
   static TYPES = TYPES;
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static localize() {
+    super.localize();
+    Object.values(TYPES).forEach(v => Localization.localizeDataModel(v));
+  }
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
@@ -98,4 +106,32 @@ export default class ScaleValueAdvancement extends Advancement {
     return true;
   }
 
+  /* -------------------------------------------- */
+  /*  Application Methods                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  automaticApplicationValue(level) {
+    return {};
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc*/
+  getContextMenuOptions() {
+    const options = super.getContextMenuOptions();
+    options.push({
+      name: "DND5E.ADVANCEMENT.ScaleValue.Action.CopyFormula",
+      icon: '<i class="fa-solid fa-copy"></i>',
+      callback: () => {
+        const value = `@scale.${this.item.identifier}.${this.identifier}`;
+        game.clipboard.copyPlainText(value);
+        ui.notifications.info(game.i18n.format("DND5E.Copied", { value }), { console: false });
+      },
+      group: "copy"
+    });
+    return options;
+  }
 }

@@ -1,25 +1,9 @@
 <fieldset>
-    <legend>{{ localize "DND5E.ItemContainerDetails" }}</legend>
+    <legend>{{ localize "DND5E.CONTAINER.Details" }}</legend>
 
     {{!-- Container Properties --}}
-    {{ formField fields.properties options=properties.options label="DND5E.ItemContainerProperties" localize=true
-                 input=inputs.createMultiCheckboxInput stacked=true classes="checkbox-grid checkbox-grid-3" }}
-
-    {{!-- Capacity --}}
-    <div class="form-group split-group">
-        <label>{{ localize "DND5E.ItemContainerCapacity" }}</label>
-        <div class="form-fields">
-
-            {{!-- Amount --}}
-            {{ formField fields.capacity.fields.value value=source.capacity.value label="DND5E.Amount" localize=true
-                         classes="label-top" placeholder="—" }}
-
-            {{!-- Type --}}
-            {{ formField fields.capacity.fields.type value=source.capacity.type label="DND5E.Type" localize=true
-                         classes="label-top" choices=config.itemCapacityTypes }}
-
-        </div>
-    </div>
+    {{ formField fields.properties options=properties.options input=inputs.createMultiCheckboxInput stacked=true
+                 classes="checkbox-grid checkbox-grid-3" }}
 
     {{!-- Attunement --}}
     {{#if properties.object.mgc}}
@@ -41,4 +25,45 @@
     </div>
     {{/if}}
 
+</fieldset>
+
+<fieldset>
+    <legend>{{ localize "DND5E.CONTAINER.FIELDS.capacity.label" }}</legend>
+
+    {{!-- Item Capacity --}}
+    {{ formField fields.capacity.fields.count value=source.capacity.count placeholder="—" }}
+
+    {{!-- Volume Capacity --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.CONTAINER.FIELDS.capacity.volume.label" }}</label>
+        <div class="form-fields">
+
+            {{!-- Amount --}}
+            {{ formField fields.capacity.fields.volume.fields.value value=source.capacity.volume.value
+                         label="DND5E.Amount" localize=true classes="label-top" placeholder="—" }}
+
+            {{!-- Units --}}
+            {{ formField fields.capacity.fields.volume.fields.units value=source.capacity.volume.units
+                         label="DND5E.Unit" localize=true classes="label-top" choices=config.volumeUnits
+                         labelAttr="label" }}
+
+        </div>
+    </div>
+
+    {{!-- Weight Capacity --}}
+    <div class="form-group split-group">
+        <label>{{ localize "DND5E.CONTAINER.FIELDS.capacity.weight.label" }}</label>
+        <div class="form-fields">
+
+            {{!-- Amount --}}
+            {{ formField fields.capacity.fields.weight.fields.value value=source.capacity.weight.value
+                         label="DND5E.Amount" localize=true classes="label-top" placeholder="—" }}
+
+            {{!-- Units --}}
+            {{ formField fields.capacity.fields.weight.fields.units value=source.capacity.weight.units
+                         label="DND5E.Unit" localize=true classes="label-top" choices=config.weightUnits
+                         labelAttr="label" }}
+
+        </div>
+    </div>
 </fieldset>

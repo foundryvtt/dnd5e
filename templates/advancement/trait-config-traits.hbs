@@ -1,0 +1,15 @@
+<fieldset class="card traits">
+    <legend>{{ localize "DND5E.ADVANCEMENT.Trait.FIELDS.choices.FIELDS.pool.label" }}</legend>
+    <div class="form-group split-group">
+        <div class="form-fields">
+            {{#if count}}
+            {{ formField count.field name="configuration.count" value=count.value classes="label-top" rootId=partId }}
+            {{/if}}
+            {{ formField trait.typeField name="selectedTrait" value=trait.selected options=trait.typeOptions
+                         classes="label-top" rootId=partId }}
+        </div>
+    </div>
+
+    {{> "dnd5e.traits-list" choices=trait.options keyPath="configuration.checked." topLevel=true
+                            field=trait.field input=trait.input }}
+</fieldset>

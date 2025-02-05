@@ -72,7 +72,7 @@ export default class TraitsConfig extends BaseConfigSheet {
     context.choices = await Trait.choices(this.options.trait, { chosen });
     context.fields = Trait.actorFields(this.document, this.options.trait);
 
-    // Handle custom weapons not in a top-level category
+    // Handle custom traits not in a top-level category
     const other = {
       label: this.otherLabel,
       children: new SelectChoices(),
@@ -83,7 +83,7 @@ export default class TraitsConfig extends BaseConfigSheet {
       other.children[key] = choice;
       delete context.choices[key];
     }
-    if ( !foundry.utils.isEmpty(other.children) ) context.choices.other = other;
+    if ( !foundry.utils.isEmpty(other.children) ) context.choices.OTHER = other;
     this._processChoices(context.data, context.choices);
 
     return context;
@@ -102,7 +102,7 @@ export default class TraitsConfig extends BaseConfigSheet {
   _processChoices(data, choices, categoryChosen=false) {
     for ( const [key, choice] of Object.entries(choices) ) {
       this._processChoice(data, key, choice, categoryChosen);
-      if ( choice.children ) this._processChoices(data, choice.children, choice.chosen);
+      if ( choice.children ) this._processChoices(data, choice.children, choice.chosen && (key !== "OTHER"));
     }
   }
 
@@ -117,7 +117,7 @@ export default class TraitsConfig extends BaseConfigSheet {
    * @protected
    */
   _processChoice(data, key, choice, categoryChosen=false) {
-    if ( categoryChosen ) {
+    if ( (data.value?.includes("ALL") && (key !== "ALL")) || categoryChosen ) {
       choice.chosen = true;
       choice.disabled = true;
     }

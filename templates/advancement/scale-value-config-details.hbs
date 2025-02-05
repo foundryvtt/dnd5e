@@ -1,0 +1,20 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ADVANCEMENT.ScaleValue.Details" }}</legend>
+    {{ formField configuration.fields.type name="configuration.type" value=configuration.data.type options=type.options
+                 hint=(localize type.hint) rootId=partId }}
+    {{#if (eq configuration.data.type "distance")}}
+    {{ formField configuration.fields.distance.fields.units name="configuration.distance.units" labelAttr="label"
+                 value=configuration.data.distance.units options=distanceOptions rootId=partId }}
+    {{/if}}
+
+    <div class="form-group">
+        <label>{{ localize "DND5E.Identifier" }}</label>
+        <div class="form-fields">
+            {{ formInput configuration.fields.identifier name="configuration.identifier"
+                         value=configuration.data.identifier placeholder=identifier.placeholder }}
+        </div>
+        <p class="hint identifier-hint">
+            {{{ localize identifier.hint }}}
+        </p>
+    </div>
+</fieldset>

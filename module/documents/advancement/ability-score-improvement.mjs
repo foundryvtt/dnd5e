@@ -50,7 +50,8 @@ export default class AbilityScoreImprovementAdvancement extends Advancement {
    * @type {boolean}
    */
   get allowFeat() {
-    return (this.item.type === "class") && game.settings.get("dnd5e", "allowFeats");
+    return (this.item.type === "class") && (game.settings.get("dnd5e", "allowFeats")
+      || game.settings.get("dnd5e", "rulesVersion") === "modern");
   }
 
   /* -------------------------------------------- */

@@ -890,8 +890,8 @@
       "img": "icons/weapons/crossbows/crossbow-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +2 to hit, range 100/400 ft., one target. Hit: <strong>5 (1d10) <em>piercing damage</em></strong>.</p></section>\n<p>The Thug attacks with their Heavy Crossbow.</p>",
-          "chat": ""
+          "value": "<p>Ranged Weapon Attack: +2 to hit, range 100/400 ft., one target. Hit: <strong>5 (1d10) <em>piercing damage</em></strong>.</p>",
+          "chat": "<p>The Thug attacks with their Heavy Crossbow.</p>"
         },
         "source": {
           "custom": "",
@@ -1086,10 +1086,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676656,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Cy3A0rsNMPLZozam.9INT7D1zulhfsok7"
     },
@@ -1100,8 +1100,8 @@
       "img": "icons/weapons/maces/mace-round-spiked-black.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>5 (1d6 + 2) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Thug attacks with their Mace.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>5 (1d6 + 2) <em>bludgeoning damage</em></strong>.</p>",
+          "chat": "<p>The Thug attacks with their Mace.</p>"
         },
         "source": {
           "custom": "",
@@ -1292,10 +1292,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676656,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Cy3A0rsNMPLZozam.6gRu9IFFkvxesFfK"
     }

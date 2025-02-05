@@ -615,8 +615,8 @@
       "img": "icons/creatures/abilities/stinger-poison-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit:<strong> 1 <em>piercing damage</em>.</strong></p>\n<p>The target must make a  <strong>DC 9 Constitution</strong> saving throw, taking <strong>4 (1d8) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The Scorpion attacks with its Sting. The target must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit:<strong> 1 <em>piercing damage</em>.</strong></p><p>The target must make a  <strong>DC 9 Constitution</strong> saving throw, taking <strong>4 (1d8) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>",
+          "chat": "<p>The Scorpion attacks with its Sting. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -958,10 +958,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676467,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Y0vxQVF7w2P38FK2.ltue5DUb1SZfphHE"
     }

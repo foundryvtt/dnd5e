@@ -1,33 +1,38 @@
 import PhysicalItemTemplate from "../../data/item/templates/physical-item.mjs";
 import { EquipmentEntryData } from "../../data/item/templates/starting-equipment.mjs";
+import DocumentSheet5e from "../api/document-sheet.mjs";
 
 /**
  * Configuration application for Starting Equipment.
  */
-export default class StartingEquipmentConfig extends DocumentSheet {
+export default class StartingEquipmentConfig extends DocumentSheet5e {
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["starting-equipment"],
+    form: {
+      submitOnChange: true
+    },
+    position: {
+      width: 480
+    }
+  };
 
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "starting-equipment"],
-      dragDrop: [{ dragSelector: ".drag-bar", dropSelector: "form" }],
-      template: "systems/dnd5e/templates/apps/starting-equipment-config.hbs",
-      width: 480,
-      height: "auto",
-      sheetConfig: false,
-      closeOnSubmit: false,
-      submitOnChange: true,
-      submitOnClose: true
-    });
-  }
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    config: {
+      template: "systems/dnd5e/templates/apps/starting-equipment-config.hbs"
+    }
+  };
 
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /** @override */
   get title() {
-    return `${game.i18n.localize("DND5E.StartingEquipment.Action.Configure")}: ${this.document.name}`;
+    return game.i18n.localize("DND5E.StartingEquipment.Action.Configure");
   }
 
   /* -------------------------------------------- */
@@ -35,8 +40,8 @@ export default class StartingEquipmentConfig extends DocumentSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getData(options={}) {
-    const context = super.getData(options);
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
 
     const processEntry = async (entry, depth=1) => {
       const data = {
@@ -63,19 +68,24 @@ export default class StartingEquipmentConfig extends DocumentSheet {
   }
 
   /* -------------------------------------------- */
-  /*  Event Listeners                             */
+  /*  Life-Cycle Handlers                         */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  activateListeners(jQuery) {
-    super.activateListeners(jQuery);
-    const html = jQuery[0];
-
-    for ( const element of html.querySelectorAll("[data-action]") ) {
-      element.addEventListener("click", event => this._onAction(event.target));
-    }
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    new DragDrop({
+      dragSelector: ".drag-bar",
+      dropSelector: null,
+      callbacks: {
+        dragstart: this._onDragStart.bind(this),
+        drop: this._onDrop.bind(this)
+      }
+    }).bind(this.element);
   }
 
+  /* -------------------------------------------- */
+  /*  Event Listeners                             */
   /* -------------------------------------------- */
 
   /**
@@ -96,20 +106,39 @@ export default class StartingEquipmentConfig extends DocumentSheet {
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  _getSubmitData(...args) {
-    const data = foundry.utils.expandObject(super._getSubmitData(...args));
-    data.startingEquipment = Object.values(data.startingEquipment ?? {});
+  /** @override */
+  _onClickAction(event, target) {
+    this._onAction(target);
+  }
 
-    const highestSort = data.startingEquipment.reduce((sort, i) => i.sort > sort ? i.sort : sort, 0);
-    switch ( data.action ) {
+  /* -------------------------------------------- */
+  /*  Form Handling                               */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _prepareSubmitData(event, form, formData) {
+    const submitData = this._processFormData(event, form, formData);
+    // Skip the validation step here because it causes a bunch of problems with providing array
+    // updates when using the `submit` method
+    return submitData;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _processSubmitData(event, form, submitData) {
+    let { action, depth, entryId, linkedUuid, startingEquipment } = submitData;
+    startingEquipment = Object.values(startingEquipment ?? {});
+
+    const highestSort = startingEquipment.reduce((sort, i) => i.sort > sort ? i.sort : sort, 0);
+    switch ( action ) {
       case "add-entry":
-        data.startingEquipment.push({
+        startingEquipment.push({
           _id: foundry.utils.randomID(),
-          group: data.entryId,
+          group: entryId,
           sort: highestSort + CONST.SORT_INTEGER_DENSITY,
-          type: (data.depth < 3) && !data.linkedUuid ? "OR" : "linked",
-          key: data.linkedUuid
+          type: (depth < 3) && !linkedUuid ? "OR" : "linked",
+          key: linkedUuid
         });
         break;
       case "delete-entry":
@@ -118,23 +147,16 @@ export default class StartingEquipmentConfig extends DocumentSheet {
           deleteIds.add(entry._id);
           entry.children?.forEach(c => getDeleteIds(c));
         };
-        getDeleteIds(this.document.system.startingEquipment.find(i => i._id === data.entryId));
-        data.startingEquipment = data.startingEquipment.filter(e => !deleteIds.has(e._id));
+        getDeleteIds(this.document.system.startingEquipment.find(i => i._id === entryId));
+        startingEquipment = startingEquipment.filter(e => !deleteIds.has(e._id));
         break;
     }
 
-    return { "system.startingEquipment": data.startingEquipment };
+    await super._processSubmitData(event, form, { "system.startingEquipment": startingEquipment });
   }
 
   /* -------------------------------------------- */
   /*  Drag & Drop                                 */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _canDragDrop() {
-    return this.isEditable;
-  }
-
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -231,7 +253,7 @@ export default class StartingEquipmentConfig extends DocumentSheet {
     // If dropped outside any entry, move to top level and sort to top or bottom of list
     else if ( !dropEntry ) {
       updateData = { [`startingEquipment.${dragEntry._id}.group`]: null };
-      const box = this.form.getBoundingClientRect();
+      const box = this.element.getBoundingClientRect();
       sortBefore = (event.clientY - box.y) < (box.height * .75);
       const sortedEntries = this.document.system.startingEquipment.filter(e => !e.group)
         .sort((lhs, rhs) => lhs.sort - rhs.sort);

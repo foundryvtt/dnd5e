@@ -85,8 +85,8 @@
     },
     "properties": [
       "hvy",
-      "two",
-      "mgc"
+      "mgc",
+      "two"
     ],
     "proficient": null,
     "type": {
@@ -182,7 +182,7 @@
         "_id": "dnd5eactivity100",
         "type": "save",
         "activation": {
-          "type": "action",
+          "type": "",
           "value": 1,
           "condition": "",
           "override": false
@@ -201,7 +201,7 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
@@ -223,33 +223,28 @@
             "units": ""
           },
           "affects": {
-            "count": "",
-            "type": "",
+            "count": "1",
+            "type": "creature",
             "choice": false,
-            "special": ""
+            "special": "Giant"
           },
           "prompt": true,
           "override": false
         },
         "damage": {
-          "onSave": "half",
+          "onSave": "full",
           "parts": [
             {
-              "number": 1,
-              "denomination": 12,
-              "bonus": "@mod",
-              "types": [
-                "slashing"
-              ],
               "custom": {
                 "enabled": false,
                 "formula": ""
               },
-              "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
-              }
+              "number": 2,
+              "denomination": "6",
+              "bonus": "",
+              "types": [
+                "slashing"
+              ]
             }
           ]
         },
@@ -262,79 +257,19 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
-      },
-      "dnd5eactivity300": {
-        "_id": "dnd5eactivity300",
-        "type": "utility",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "",
-          "override": false
-        },
-        "consumption": {
-          "targets": [],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "value": "5",
-          "units": "ft",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "2d6",
-          "name": "",
-          "prompt": false,
-          "visible": false
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
+        "sort": 0,
+        "name": "",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
     "ammunition": {},
-    "identifier": "giant-slayer-greataxe"
+    "identifier": "giant-slayer-greataxe",
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -342,14 +277,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.0",
     "createdTime": 1725037266409,
-    "modifiedTime": 1725992539339,
+    "modifiedTime": 1738529160843,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!jmSC8I5awCoxNVv7"

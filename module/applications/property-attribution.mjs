@@ -1,3 +1,5 @@
+import Application5e from "./api/application.mjs";
+
 /**
  * Description for a single part of a property attribution.
  * @typedef {object} AttributionDescription
@@ -17,7 +19,7 @@
  * @param {string} property                        Dot separated path to the property.
  * @param {object} [options={}]                    Application rendering options.
  */
-export default class PropertyAttribution extends Application {
+export default class PropertyAttribution extends Application5e {
   constructor(object, attributions, property, options={}) {
     super(options);
     this.object = object;
@@ -27,17 +29,26 @@ export default class PropertyAttribution extends Application {
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      id: "property-attribution",
-      classes: ["dnd5e", "property-attribution"],
-      template: "systems/dnd5e/templates/apps/property-attribution.hbs",
-      width: 320,
-      height: "auto"
-    });
-  }
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["property-attribution"],
+    window: {
+      frame: false,
+      positioned: false
+    }
+  };
 
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    attribution: {
+      template: "systems/dnd5e/templates/apps/property-attribution.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /**
@@ -45,14 +56,19 @@ export default class PropertyAttribution extends Application {
    * @returns {Promise<string>}
    */
   async renderTooltip() {
-    const data = this.getData(this.options);
-    return (await this._renderInner(data))[0].outerHTML;
+    await this.render({ force: true });
+    return this.element.innerHTML;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  getData(options={}) {
+  /** @override */
+  _insertElement(element) {}
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _prepareContext(options) {
     const property = foundry.utils.getProperty(this.object.system, this.property);
     let total;
     if ( Number.isNumeric(property)) total = property;
@@ -72,6 +88,8 @@ export default class PropertyAttribution extends Application {
     };
   }
 
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
   /* -------------------------------------------- */
 
   /**

@@ -7,9 +7,8 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
   static defineSchema() {
     return {
       ability: new SetField(new StringField()),
-      preparation: new StringField({ label: "DND5E.SpellPreparation.Mode" }),
+      preparation: new StringField(),
       prepared: new NumberField({
-        label: "DND5E.SpellPrepared",
         nullable: false,
         initial: CONFIG.DND5E.spellPreparationStates.unprepared.value,
         choices: () => {
@@ -20,10 +19,10 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
         }
       }),
       uses: new SchemaField({
-        max: new FormulaField({ deterministic: true, label: "DND5E.UsesMax" }),
-        per: new StringField({ label: "DND5E.UsesPeriod" }),
+        max: new FormulaField({ deterministic: true }),
+        per: new StringField(),
         requireSlot: new BooleanField()
-      }, { label: "DND5E.LimitedUses" })
+      })
     };
   }
 

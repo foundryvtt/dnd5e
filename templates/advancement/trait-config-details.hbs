@@ -1,0 +1,8 @@
+<fieldset>
+    <legend>{{ localize "DND5E.ADVANCEMENT.Trait.Details" }}</legend>
+    {{ formField configuration.fields.mode name="configuration.mode" value=configuration.data.mode
+                 hint=mode.hint options=mode.options rootId=partId }}
+    {{ formField configuration.fields.allowReplacements name="configuration.allowReplacements"
+                 value=configuration.data.allowReplacements input=inputs.createCheckboxInput
+                 disabled=disableAllowReplacements rootId=partId }}
+</fieldset>

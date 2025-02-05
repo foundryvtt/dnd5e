@@ -1,0 +1,15 @@
+<section class="flexcol">
+    <fieldset class="card">
+        <ol class="unlist">
+            {{#each treasure}}
+            <li>
+                <label class="checkbox">
+                    <span>{{ label }}</span>
+                    <dnd5e-checkbox name="{{ name }}" {{#if checked}}checked{{/if}}
+                                    {{#if disabled}}disabled{{/if}}></dnd5e-checkbox>
+                </label>
+            </li>
+            {{/each}}
+        </ol>
+    </fieldset>
+</section>

@@ -624,8 +624,8 @@
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>If the wereboar moves at least 15 feet straight toward a target and then hits it with its tusks on the same turn, the target takes an extra <strong>7 (2d6) <em>slashing damage</em></strong>. </p><p>If the target is a creature, it must succeed on a  <strong>DC 13 Strength</strong> saving throw or be knocked prone.</p></section><p>If the wereboar moves at least 15 feet straight toward a target and then hits it with its tusks on the same turn, the target takes extra <em>slashing damage</em>. If the target is a creature, it must make aStrength saving throw or be knocked prone.</p>",
-          "chat": ""
+          "value": "<p>If the wereboar moves at least 15 feet straight toward a target and then hits it with its tusks on the same turn, the target takes an extra <strong>7 (2d6) <em>slashing damage</em></strong>. </p><p>If the target is a creature, it must succeed on a  <strong>DC 13 Strength</strong> saving throw or be knocked prone.</p>",
+          "chat": "<p>If the wereboar moves at least 15 feet straight toward a target and then hits it with its tusks on the same turn, the target takes extra <em>slashing damage</em>. If the target is a creature, it must make aStrength saving throw or be knocked prone.</p>"
         },
         "source": {
           "custom": "",
@@ -822,10 +822,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676932,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!J9hgSaZODGjrNl9B.TizBVS6hRuBa8JYY"
     },
@@ -957,8 +957,8 @@
       "img": "icons/magic/death/skull-horned-goat-pentagram-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>If the wereboar <strong>takes 14 damage</strong> or less that would reduce it to <strong>0 hit points</strong>, it is reduced to <strong>1 hit point</strong> instead.</p></section><p>If the wereboar takes damage that would reduce it to <strong>0 hit points</strong>, it is reduced to <strong>1 hit point</strong> instead.</p>",
-          "chat": ""
+          "value": "<p>If the wereboar <strong>takes 14 damage</strong> or less that would reduce it to <strong>0 hit points</strong>, it is reduced to <strong>1 hit point</strong> instead.</p>",
+          "chat": "<p>If the wereboar takes damage that would reduce it to <strong>0 hit points</strong>, it is reduced to <strong>1 hit point</strong> instead.</p>"
         },
         "source": {
           "custom": "",
@@ -1007,10 +1007,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676932,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!J9hgSaZODGjrNl9B.NwivB5zd15WhthVJ"
     },
@@ -1021,8 +1021,8 @@
       "img": "icons/magic/control/silhouette-hold-change-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The wereboar can use its action to <strong>polymorph</strong> into a boar-humanoid hybrid or into a boar, or back into its true form, which is humanoid. </p><p>Its statistics, other than its AC, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.</p></section><p>The wereboar can use its action to <strong>polymorph</strong>, or return to its true form.</p>",
-          "chat": ""
+          "value": "<p>The wereboar can use its action to <strong>polymorph</strong> into a boar-humanoid hybrid or into a boar, or back into its true form, which is humanoid. </p><p>Its statistics, other than its AC, are the same in each form. Any equipment it is wearing or carrying isn't transformed. It reverts to its true form if it dies.</p>",
+          "chat": "<p>The wereboar can use its action to <strong>polymorph</strong>, or return to its true form.</p>"
         },
         "source": {
           "custom": "",
@@ -1132,10 +1132,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676932,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!J9hgSaZODGjrNl9B.zzskoOXzAiMDZfbc"
     },
@@ -1146,8 +1146,8 @@
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>slashing damage</em></strong>. </p><p>If the target is a humanoid, it must succeed on a  <strong>DC 12 Constitution</strong> saving throw or be cursed with wereboar lycanthropy.</p></section><p>The Wereboar attacks with its Tusks. If the target is a humanoid, it must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>slashing damage</em></strong>. </p><p>If the target is a humanoid, it must succeed on a  <strong>DC 12 Constitution</strong> saving throw or be cursed with wereboar lycanthropy.</p>",
+          "chat": "<p>The Wereboar attacks with its Tusks. If the target is a humanoid, it must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1407,10 +1407,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676932,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!J9hgSaZODGjrNl9B.3TD2NpdjIDJxeLl9"
     },
@@ -1421,8 +1421,8 @@
       "img": "icons/weapons/maces/mace-spiked-wood-grey.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong>.</p>\n</section>\n<p>The Wereboar attacks with its Maul.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong>.</p>",
+          "chat": "<p>The Wereboar attacks with its Maul.</p>"
         },
         "source": {
           "custom": "",
@@ -1612,10 +1612,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676932,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!J9hgSaZODGjrNl9B.dtdXnvp5cptFkGPu"
     }

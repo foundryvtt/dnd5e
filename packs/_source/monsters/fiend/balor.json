@@ -628,8 +628,8 @@
       "img": "icons/magic/fire/explosion-fireball-large-red-orange.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>When the balor dies, it explodes, and each creature within 30 feet of it must make a  <strong>DC 20 Dexterity</strong> saving throw, taking <strong>70 (20d6) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n<p>The explosion ignites flammable objects in that area that aren't being worn or carried, and it destroys the balor's weapons.</p>\n</section>\n<p>When the balor dies, it explodes, and each creature within 30 feet of it must make a <strong>Dexterity</strong> saving throw. The explosion ignites flammable objects in that area that aren't being worn or carried, and it destroys the balor's weapons.</p>",
-          "chat": ""
+          "value": "<p>When the balor dies, it explodes, and each creature within 30 feet of it must make a  <strong>DC 20 Dexterity</strong> saving throw, taking <strong>70 (20d6) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p>The explosion ignites flammable objects in that area that aren't being worn or carried, and it destroys the balor's weapons.</p>",
+          "chat": "<p>When the balor dies, it explodes, and each creature within 30 feet of it must make a <strong>Dexterity</strong> saving throw. The explosion ignites flammable objects in that area that aren't being worn or carried, and it destroys the balor's weapons.</p>"
         },
         "source": {
           "custom": "",
@@ -762,10 +762,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676903,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!uZ8NrRenwYZ4qNf6.nzkZgDrDq0RwWUao"
     },
@@ -776,8 +776,8 @@
       "img": "icons/magic/air/fog-gas-smoke-swirling-orange.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>At the start of each of the balor's turns, each creature within 5 feet of it takes <strong>10 (3d6) <em>fire damage</em></strong>, and flammable objects in the aura that aren't being worn or carried ignite.</p>\n<p>A creature that touches the balor or hits it with a melee attack while within 5 feet of it takes <strong>10 (3d6) <em>fire damage</em></strong>.</p>\n</section>\n<p>At the start of each of the balor's turns, each creature within 5 feet of it takes <em>fire damage</em>, and flammable objects in the aura that aren't being worn or carried ignite. A creature that touches the balor or hits it with a melee attack while within 5 feet of it takes <em>fire damage</em>.</p>",
-          "chat": ""
+          "value": "<p>At the start of each of the balor's turns, each creature within 5 feet of it takes <strong>10 (3d6) <em>fire damage</em></strong>, and flammable objects in the aura that aren't being worn or carried ignite.</p><p>A creature that touches the balor or hits it with a melee attack while within 5 feet of it takes <strong>10 (3d6) <em>fire damage</em></strong>.</p>",
+          "chat": "<p>At the start of each of the balor's turns, each creature within 5 feet of it takes <em>fire damage</em>, and flammable objects in the aura that aren't being worn or carried ignite. A creature that touches the balor or hits it with a melee attack while within 5 feet of it takes <em>fire damage</em>.</p>"
         },
         "source": {
           "custom": "",
@@ -906,10 +906,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676903,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!uZ8NrRenwYZ4qNf6.FWSzSLqeIDq7meXC"
     },
@@ -1289,8 +1289,8 @@
       "img": "icons/weapons/swords/greatsword-crossguard-steel.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>21 (3d8 + 8) <em>slashing damage</em></strong> plus <strong>13 (3d8) <em>lightning damage</em></strong>.</p>\n<p>If the balor scores a critical hit, it rolls damage dice three times, instead of twice.</p>\n</section>\n<p>The Balor attacks with its Longsword.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>21 (3d8 + 8) <em>slashing damage</em></strong> plus <strong>13 (3d8) <em>lightning damage</em></strong>.</p><p>If the balor scores a critical hit, it rolls damage dice three times, instead of twice.</p>",
+          "chat": "<p>The Balor attacks with its Longsword.</p>"
         },
         "source": {
           "custom": "",
@@ -1502,10 +1502,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676903,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!uZ8NrRenwYZ4qNf6.6ZAh5TkiXwQMUfDB"
     },
@@ -1516,8 +1516,8 @@
       "img": "icons/weapons/misc/whip-red-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>30 ft.,</strong> one target. Hit: <strong>15 (2d6 + 8) <em>slashing damage</em></strong> plus <strong>10 (3d6) <em>fire damage</em></strong>.</p>\n<p>The target must succeed on a  <strong>DC 20 Strength</strong> saving throw or be pulled up to 25 feet toward the balor.</p>\n</section>\n<p>The Balor attacks with its Whip. The target must make a <strong>Strength</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>30 ft.,</strong> one target. Hit: <strong>15 (2d6 + 8) <em>slashing damage</em></strong> plus <strong>10 (3d6) <em>fire damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 20 Strength</strong> saving throw or be pulled up to 25 feet toward the balor.</p>",
+          "chat": "<p>The Balor attacks with its Whip. The target must make a <strong>Strength</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1818,10 +1818,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676903,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!uZ8NrRenwYZ4qNf6.1oGgJQB1ItqyKoZ5"
     }

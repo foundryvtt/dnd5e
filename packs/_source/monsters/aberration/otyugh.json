@@ -674,8 +674,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>12 (2d8 + 3) <em>piercing damage</em></strong>.</p>\n<p>If the target is a creature, it must succeed on a  <strong>DC 15 Constitution</strong> saving throw against disease or become poisoned until the disease is cured. Every 24 hours that elapse, the target must repeat the saving throw, reducing its hit point maximum by 5 (1d10) on a failure. The disease is cured on a success. The target dies if the disease reduces its hit point maximum to 0. This reduction to the target's hit point maximum lasts until the disease is cured.</p>\n</section>\n<p>The Otyugh attacks with its Bite. If the target is a creature, it must make a <strong>Constitution</strong> saving throw. Every 24 hours that elapse, the target must repeat the saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>12 (2d8 + 3) <em>piercing damage</em></strong>.</p><p>If the target is a creature, it must succeed on a  <strong>DC 15 Constitution</strong> saving throw against disease or become poisoned until the disease is cured. Every 24 hours that elapse, the target must repeat the saving throw, reducing its hit point maximum by 5 (1d10) on a failure. The disease is cured on a success. The target dies if the disease reduces its hit point maximum to 0. This reduction to the target's hit point maximum lasts until the disease is cured.</p>",
+          "chat": "<p>The Otyugh attacks with its Bite. If the target is a creature, it must make a <strong>Constitution</strong> saving throw. Every 24 hours that elapse, the target must repeat the saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -955,10 +955,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676821,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!jcZblJ6lqtW0ePxe.CCawltKiVU4Mup9i"
     },
@@ -969,8 +969,8 @@
       "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>bludgeoning damage</em></strong> plus <strong>4 (1d8) <em>piercing damage</em></strong>.</p><p>If the target is Medium or smaller, it is grappled (escape DC 13) and restrained until the grapple ends. The otyugh has two tentacles, each of which can grapple one target.</p></section><p>The Otyugh attacks with its Tentacle. If the target is Medium or smaller, it is grappled, and restrained until the grapple ends. The otyugh has two tentacles, each of which can grapple one target.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>bludgeoning damage</em></strong> plus <strong>4 (1d8) <em>piercing damage</em></strong>.</p><p>If the target is Medium or smaller, it is grappled (escape DC 13) and restrained until the grapple ends. The otyugh has two tentacles, each of which can grapple one target.</p>",
+          "chat": "<p>The Otyugh attacks with its Tentacle. If the target is Medium or smaller, it is grappled, and restrained until the grapple ends. The otyugh has two tentacles, each of which can grapple one target.</p>"
         },
         "source": {
           "custom": "",
@@ -1177,10 +1177,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676821,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!jcZblJ6lqtW0ePxe.BPYsBEkmZMcGYZDh"
     },
@@ -1191,8 +1191,8 @@
       "img": "icons/magic/death/undead-skeleton-deformed-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The otyugh slams creatures grappled by it into each other or a solid surface. Each creature must succeed on a  <strong>DC 14 Constitution</strong> saving throw or take <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong> and be stunned until the end of the otyugh's next turn. </p><p>On a successful save, the target takes half the <em>bludgeoning damage</em> and isn't stunned.</p></section><p>The otyugh slams creatures grappled by it into each other or a solid surface. Each creature must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>The otyugh slams creatures grappled by it into each other or a solid surface. Each creature must succeed on a  <strong>DC 14 Constitution</strong> saving throw or take <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong> and be stunned until the end of the otyugh's next turn. </p><p>On a successful save, the target takes half the <em>bludgeoning damage</em> and isn't stunned.</p>",
+          "chat": "<p>The otyugh slams creatures grappled by it into each other or a solid surface. Each creature must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1421,10 +1421,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676821,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!jcZblJ6lqtW0ePxe.9d1ZhvT1vIJsNnN1"
     },

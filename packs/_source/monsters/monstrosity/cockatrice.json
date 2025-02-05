@@ -615,8 +615,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>3 (1d4 + 1) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 11 Constitution</strong> saving throw against being magically petrified. On a failed save, the creature begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified for 24 hours.</p></section><p>The Cockatrice attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw. On a failed save, it must repeat the saving throw at the end of its next turn.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>3 (1d4 + 1) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 11 Constitution</strong> saving throw against being magically petrified. On a failed save, the creature begins to turn to stone and is restrained. It must repeat the saving throw at the end of its next turn. On a success, the effect ends. On a failure, the creature is petrified for 24 hours.</p>",
+          "chat": "<p>The Cockatrice attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw. On a failed save, it must repeat the saving throw at the end of its next turn.</p>"
         },
         "source": {
           "custom": "",
@@ -898,10 +898,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676429,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!EpYl7qifM5pq6W6B.gpxvIs8yjQ4awt4s"
     }

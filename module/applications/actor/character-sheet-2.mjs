@@ -54,7 +54,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
     { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
     { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
-    { tab: "bastion", label: "DND5E.Bastion.Label", icon: "fas fa-chess-rook" }
+    { tab: "bastion", label: "DND5E.Bastion.Label", icon: "fas fa-chess-rook" },
+    { tab: "special-traits", label: "DND5E.SpecialTraits", icon: "fas fa-star" }
   ];
 
   /**
@@ -111,6 +112,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     context.labels.class = Object.values(this.actor.classes).sort((a, b) => {
       return b.system.levels - a.system.levels;
     }).map(c => `${c.name} ${c.system.levels}`).join(" / ");
+    context.showClassDrop = !context.labels.class || (this._mode === this.constructor.MODES.EDIT);
 
     // Exhaustion
     if ( CONFIG.DND5E.conditionTypes.exhaustion ) {
@@ -235,7 +237,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( context.system.details.xp.boonsEarned !== undefined ) {
       const pluralRules = new Intl.PluralRules(game.i18n.lang);
       context.epicBoonsEarned = game.i18n.format(
-        `DND5E.ExperiencePointsBoons.${pluralRules.select(context.system.details.xp.boonsEarned ?? 0)}`,
+        `DND5E.ExperiencePoints.Boons.${pluralRules.select(context.system.details.xp.boonsEarned ?? 0)}`,
         { number: formatNumber(context.system.details.xp.boonsEarned ?? 0, { signDisplay: "always" }) }
       );
     }
@@ -308,8 +310,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
         { key: "action", label: "DND5E.Action" },
         { key: "bonus", label: "DND5E.BonusAction" },
         { key: "reaction", label: "DND5E.Reaction" },
-        { key: "sr", label: "DND5E.ShortRest" },
-        { key: "lr", label: "DND5E.LongRest" },
+        { key: "sr", label: "DND5E.REST.Short.Label" },
+        { key: "lr", label: "DND5E.REST.Long.Label" },
         { key: "concentration", label: "DND5E.Concentration" },
         { key: "mgc", label: "DND5E.Item.Property.Magical" }
       ]
@@ -393,41 +395,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
   /* -------------------------------------------- */
 
-  /**
-   * Handling beginning a drag-drop operation on an Activity.
-   * @param {DragEvent} event  The originating drag event.
-   * @protected
-   */
-  _onDragActivity(event) {
-    const { itemId } = event.target.closest("[data-item-id]").dataset;
-    const { activityId } = event.target.closest("[data-activity-id]").dataset;
-    const activity = this.actor.items.get(itemId)?.system.activities?.get(activityId);
-    if ( activity ) event.dataTransfer.setData("text/plain", JSON.stringify(activity.toDragData()));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle beginning a drag-drop operation on an Item.
-   * @param {DragEvent} event  The originating drag event.
-   * @protected
-   */
-  _onDragItem(event) {
-    const { itemId } = event.target.closest("[data-item-id]").dataset;
-    const item = this.actor.items.get(itemId);
-    if ( item ) event.dataTransfer.setData("text/plain", JSON.stringify(item.toDragData()));
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   _onDragStart(event) {
-    // Add another deferred deactivation to catch the second pointerenter event that seems to be fired on Firefox.
-    requestAnimationFrame(() => game.tooltip.deactivate());
-    game.tooltip.deactivate();
-
     const modes = CONFIG.DND5E.spellcasting;
-
     const { key } = event.target.closest("[data-key]")?.dataset ?? {};
     const { level, preparationMode } = event.target.closest("[data-level]")?.dataset ?? {};
     const isSlots = event.target.closest("[data-favorite-id]") || event.target.classList.contains("spell-header");
@@ -435,13 +405,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.tools ) type = "tool";
     else if ( modes[preparationMode] && !modes[preparationMode].static && (level !== "0") && isSlots ) type = "slots";
-    if ( !type ) {
-      if ( event.target.matches("[data-item-id] > .item-row") ) return this._onDragItem(event);
-      else if ( event.target.matches("[data-item-id] [data-activity-id], [data-item-id][data-activity-id]") ) {
-        return this._onDragActivity(event);
-      }
-      return super._onDragStart(event);
-    }
+    if ( !type ) return super._onDragStart(event);
+
+    // Add another deferred deactivation to catch the second pointerenter event that seems to be fired on Firefox.
+    requestAnimationFrame(() => game.tooltip.deactivate());
+    game.tooltip.deactivate();
+
     const dragData = { dnd5e: { action: "favorite", type } };
     if ( type === "slots" ) {
       dragData.dnd5e.id = modes[preparationMode]?.separate ? `${preparationMode}${level}` : preparationMode;
@@ -449,6 +418,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       dragData.dnd5e.id = key;
     }
     event.dataTransfer.setData("application/json", JSON.stringify(dragData));
+    event.dataTransfer.effectAllowed = "link";
   }
 
   /* -------------------------------------------- */
@@ -566,8 +536,12 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( !this.isEditable ) return;
     const filters = { locked: { types: new Set([type]) } };
     if ( classIdentifier ) filters.locked.additional = { class: { [classIdentifier]: 1 } };
+    if ( type === "class" ) {
+      const existingIdentifiers = new Set(Object.keys(this.actor.classes));
+      filters.locked.arbitrary = [{ o: "NOT", v: { k: "system.identifier", o: "in", v: existingIdentifiers } }];
+    }
     const result = await CompendiumBrowser.selectOne({ filters });
-    if ( result ) this._onDropItemCreate(await fromUuid(result));
+    if ( result ) this._onDropItemCreate(game.items.fromCompendium(await fromUuid(result), { keepId: true }));
   }
 
   /* -------------------------------------------- */
@@ -614,6 +588,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
   /* -------------------------------------------- */
   /*  Favorites                                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _defaultDropBehavior(event, data) {
+    if ( data.dnd5e?.action === "favorite" || (["Activity", "Item"].includes(data.type)
+      && event.target.closest(".favorites")) ) return "link";
+    return super._defaultDropBehavior(event, data);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -903,7 +886,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       if ( foundry.utils.getType(save?.ability) === "Set" ) save = {
         ...save, ability: save.ability.size > 2
           ? game.i18n.localize("DND5E.AbbreviationDC")
-          : Array.from(save.ability).map(k => CONFIG.DND5E.abilities[k].abbreviation).join(" / ")
+          : Array.from(save.ability).map(k => CONFIG.DND5E.abilities[k]?.abbreviation).filterJoin(" / ")
       };
 
       const css = [];

@@ -858,8 +858,8 @@
       "img": "icons/skills/melee/strike-sword-blood-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>When the azer hits with a metal melee weapon, it deals an extra <strong>3 (1d6) <em>fire damage</em></strong> (included in the attack).</p>\n</section>\n<p>When the azer hits with a metal melee weapon, it deals extra <em>fire damage</em> (included in the attack).</p>",
-          "chat": ""
+          "value": "<p>When the azer hits with a metal melee weapon, it deals an extra <strong>3 (1d6) <em>fire damage</em></strong> (included in the attack).</p>",
+          "chat": "<p>When the azer hits with a metal melee weapon, it deals extra <em>fire damage</em> (included in the attack).</p>"
         },
         "source": {
           "custom": "",
@@ -903,10 +903,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676547,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!IiEDPMWqBlzkggYD.WRygAnkpMeaqiw70"
     },
@@ -976,8 +976,8 @@
       "img": "icons/weapons/hammers/hammer-drilling-spiked.webp",
       "system": {
         "description": {
-          "value": "<section>\n<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>bludgeoning damage</em></strong>, or <strong>8 (1d10 + 3) <em>bludgeoning damage</em></strong> if used with two hands to make a melee attack, plus <strong>3 (1d6) <em>fire damage</em></strong>.</p>\n</section>\n</section>\n<p>A heavy metal hammer capable of being wielded with a single hand with a shield or in two hands to deliver crushing concussive blows.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>bludgeoning damage</em></strong>, or <strong>8 (1d10 + 3) <em>bludgeoning damage</em></strong> if used with two hands to make a melee attack, plus <strong>3 (1d6) <em>fire damage</em></strong>.</p>",
+          "chat": "<section>\n\n</section>\n<p>A heavy metal hammer capable of being wielded with a single hand with a shield or in two hands to deliver crushing concussive blows.</p>"
         },
         "source": {
           "custom": "",
@@ -1188,10 +1188,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676547,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!IiEDPMWqBlzkggYD.YvzdCGQeCV1XOcUt"
     }

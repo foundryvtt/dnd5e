@@ -622,8 +622,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one willing creature, or a creature that is grappled by the vampire, incapacitated, or restrained. Hit: <strong>6 (1d6 + 3) <em>piercing damage</em></strong> plus <strong>7 (2d6) <em>necrotic damage</em></strong>.</p><p>The target's hit point maximum is reduced by an amount equal to the <em>necrotic damage</em> taken, and the vampire regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0.</p></section><p>The Vampire Spawn attacks with its Bite.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one willing creature, or a creature that is grappled by the vampire, incapacitated, or restrained. Hit: <strong>6 (1d6 + 3) <em>piercing damage</em></strong> plus <strong>7 (2d6) <em>necrotic damage</em></strong>.</p><p>The target's hit point maximum is reduced by an amount equal to the <em>necrotic damage</em> taken, and the vampire regains hit points equal to that amount. The reduction lasts until the target finishes a long rest. The target dies if this effect reduces its hit point maximum to 0.</p>",
+          "chat": "<p>The Vampire Spawn attacks with its Bite.</p>"
         },
         "source": {
           "custom": "",
@@ -832,10 +832,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676837,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!zpaZb7I8alY32vWV.HebvJc2NqYvdR79s"
     },
@@ -846,8 +846,8 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>8 (2d4 + 3) <em>slashing damage</em></strong>. </p><p></p></section><p>The Vampire Spawn attacks with its Claws. Instead of dealing damage, the vampire can grapple the target.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>8 (2d4 + 3) <em>slashing damage</em></strong>. </p>",
+          "chat": "<p>The Vampire Spawn attacks with its Claws. Instead of dealing damage, the vampire can grapple the target.</p>"
         },
         "source": {
           "custom": "",
@@ -1034,10 +1034,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676837,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!zpaZb7I8alY32vWV.DY9MW3aTF5T5zhpo"
     },
@@ -1173,8 +1173,8 @@
       "img": "icons/skills/wounds/anatomy-organ-heart-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The vampire regains <strong>10 hit points</strong> at the start of its turn if it has at least <strong>1 hit point</strong> and isn't in sunlight or running water. If the vampire takes <em>radiant damage</em> or damage from holy water, this trait doesn't function at the start of the vampire's next turn.</p></section><p>The vampire regains <strong>10 hit points</strong> at the start of its turn.</p>",
-          "chat": ""
+          "value": "<p>The vampire regains <strong>10 hit points</strong> at the start of its turn if it has at least <strong>1 hit point</strong> and isn't in sunlight or running water. If the vampire takes <em>radiant damage</em> or damage from holy water, this trait doesn't function at the start of the vampire's next turn.</p>",
+          "chat": "<p>The vampire regains <strong>10 hit points</strong> at the start of its turn.</p>"
         },
         "source": {
           "custom": "",
@@ -1295,10 +1295,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676837,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!zpaZb7I8alY32vWV.wzRyhY2I1U0ytB7D"
     },

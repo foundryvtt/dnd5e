@@ -1,0 +1,29 @@
+<fieldset class="card items">
+    <legend>{{ localize "DND5E.ADVANCEMENT.ItemChoice.FIELDS.pool.label" }}</legend>
+    <div class="header">
+        <div class="item-name name-header">{{ localize "DOCUMENT.Item" }}</div>
+    </div>
+    <ol class="items-list unlist">
+        {{#each items}}
+        <li class="item flexrow" data-item-uuid="{{ data.uuid }}">
+            <div class="item-name">
+                {{{ dnd5e-linkForUuid data.uuid renderBroken=true }}}
+                <input type="hidden" name="configuration.pool.{{ @index }}.uuid" value="{{ data.uuid }}">
+            </div>
+            <div class="item-controls flexrow">
+                <a class="item-control item-action" data-action="deleteItem" data-tooltip="DND5E.ItemDelete"
+                   aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                    <i class="fas fa-trash" inert></i>
+                </a>
+            </div>
+        </li>
+        {{/each}}
+    </ol>
+
+    <div class="form-group">
+        {{#if showContainerWarning}}
+        <p class="hint centered warning">{{ localize "DND5E.ADVANCEMENT.ItemGrant.Warning.Container" }}</p>
+        {{/if}}
+        <p class="hint centered drop-area">{{ localize "DND5E.ADVANCEMENT.ItemChoice.DropHint" }}</p>
+    </div>
+</fieldset>

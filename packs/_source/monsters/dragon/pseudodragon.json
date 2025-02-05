@@ -791,8 +791,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d4 + 2) <em>piercing damage</em></strong>.</p><p></p></section><p>The Pseudodragon attacks with its Bite.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d4 + 2) <em>piercing damage</em></strong>.</p>",
+          "chat": "<p>The Pseudodragon attacks with its Bite.</p>"
         },
         "source": {
           "custom": "",
@@ -983,10 +983,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676693,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!fkCNtbvPOMd7mipF.GJgN3Qy49XCaKmTc"
     },
@@ -997,8 +997,8 @@
       "img": "icons/creatures/abilities/fang-tooth-venomous.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>4 (1d4 + 2) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 11 Constitution</strong> saving throw or become poisoned for 1 hour. If the saving throw fails by 5 or more, the target falls unconscious for the same duration, or until it takes damage or another creature uses an action to shake it awake.</p></section><p>The Pseudodragon attacks with its Sting. The target must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>4 (1d4 + 2) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 11 Constitution</strong> saving throw or become poisoned for 1 hour. If the saving throw fails by 5 or more, the target falls unconscious for the same duration, or until it takes damage or another creature uses an action to shake it awake.</p>",
+          "chat": "<p>The Pseudodragon attacks with its Sting. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1274,10 +1274,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676693,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!fkCNtbvPOMd7mipF.MKFXRWP55I1bVlyD"
     }

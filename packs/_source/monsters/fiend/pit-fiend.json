@@ -630,8 +630,8 @@
       "img": "icons/magic/water/elemental-water.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>Any creature hostile to the pit fiend that starts its turn <strong>within 20 feet</strong> of the pit fiend must make a <strong>DC 21 Wisdom saving throw</strong>, unless the pit fiend is incapacitated. On a failed save, the creature is frightened until the start of its next turn. If a creature's saving throw is successful, the creature is immune to the pit fiend's Fear Aura for the next 24 hours.</p></section><p>Any creature hostile to the pit fiend that starts its turn <strong>within 20 feet</strong> of the pit fiend must make a <strong>Wisdom</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>Any creature hostile to the pit fiend that starts its turn <strong>within 20 feet</strong> of the pit fiend must make a <strong>DC 21 Wisdom saving throw</strong>, unless the pit fiend is incapacitated. On a failed save, the creature is frightened until the start of its next turn. If a creature's saving throw is successful, the creature is immune to the pit fiend's Fear Aura for the next 24 hours.</p>",
+          "chat": "<p>Any creature hostile to the pit fiend that starts its turn <strong>within 20 feet</strong> of the pit fiend must make a <strong>Wisdom</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -746,10 +746,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676943,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!RCv5y7iWlfNxkinx.wkqjn4bqhPIUUo7k"
     },
@@ -1062,8 +1062,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>22 (4d6 + 8) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 21 Constitution</strong> saving throw or become poisoned. While poisoned in this way, the target can't regain hit points, and it takes <strong>21 (6d6) <em>poison damage</em></strong> at the start of each of its turns. The poisoned target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p></section><p>The Pit Fiend attacks with its Bite. The target must succeed on a  <strong>DC 21 Constitution</strong> saving throw or become poisoned. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>22 (4d6 + 8) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 21 Constitution</strong> saving throw or become poisoned. While poisoned in this way, the target can't regain hit points, and it takes <strong>21 (6d6) <em>poison damage</em></strong> at the start of each of its turns. The poisoned target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
+          "chat": "<p>The Pit Fiend attacks with its Bite. The target must succeed on a  <strong>DC 21 Constitution</strong> saving throw or become poisoned. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>"
         },
         "source": {
           "custom": "",
@@ -1409,10 +1409,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676943,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!RCv5y7iWlfNxkinx.GjIQl7UOQUtsrj2v"
     },
@@ -1423,8 +1423,8 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>Melee Weapon Attack: +14 to hit, reach 10 ft. , one target. Hit: <strong>17 (2d8 + 8) <em>slashing damage</em></strong>.</p><p></p></section><p>The Pit Fiend attacks with its Claw.</p>",
-          "chat": ""
+          "value": "<p>Melee Weapon Attack: +14 to hit, reach 10 ft. , one target. Hit: <strong>17 (2d8 + 8) <em>slashing damage</em></strong>.</p>",
+          "chat": "<p>The Pit Fiend attacks with its Claw.</p>"
         },
         "source": {
           "custom": "",
@@ -1613,10 +1613,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676943,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!RCv5y7iWlfNxkinx.RkuPEGbAXHhxfNWJ"
     },
@@ -1627,8 +1627,8 @@
       "img": "icons/weapons/maces/mace-round-spiked-black.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d6 + 8) <em>bludgeoning damage</em></strong> plus <strong>21 (6d6) <em>fire damage</em></strong>.</p><p></p></section><p>The Pit Fiend attacks with its Mace.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d6 + 8) <em>bludgeoning damage</em></strong> plus <strong>21 (6d6) <em>fire damage</em></strong>.</p>",
+          "chat": "<p>The Pit Fiend attacks with its Mace.</p>"
         },
         "source": {
           "custom": "",
@@ -1839,10 +1839,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676943,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!RCv5y7iWlfNxkinx.gpjBebqxqbQA35st"
     },
@@ -1853,8 +1853,8 @@
       "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>24 (3d10 + 8) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Pit Fiend attacks with its Tail.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>24 (3d10 + 8) <em>bludgeoning damage</em></strong>.</p>",
+          "chat": "<p>The Pit Fiend attacks with its Tail.</p>"
         },
         "source": {
           "custom": "",
@@ -2043,10 +2043,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676943,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!RCv5y7iWlfNxkinx.Gh1DbMpJiaTlTwWp"
     },

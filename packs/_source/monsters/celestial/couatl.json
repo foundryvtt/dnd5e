@@ -624,8 +624,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>8 (1d6 + 5) <em>piercing damage</em></strong>.</p>\n<p>The target must succeed on a  <strong>DC 13 Constitution</strong> saving throw or be poisoned for 24 hours. Until this poison ends, the target is unconscious. Another creature can use an action to shake the target awake.</p>\n</section>\n<p>The Couatl attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>8 (1d6 + 5) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 13 Constitution</strong> saving throw or be poisoned for 24 hours. Until this poison ends, the target is unconscious. Another creature can use an action to shake the target awake.</p>",
+          "chat": "<p>The Couatl attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -907,10 +907,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676688,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.7M1OrMoMMTCEKxta"
     },
@@ -921,8 +921,8 @@
       "img": "icons/creatures/reptiles/serpent-horned-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one Medium or smaller creature. Hit: <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong>.</p>\n<p>The target is grappled (escape DC 15). Until this grapple ends, the target is restrained, and the couatl can't constrict another target.</p>\n</section>\n<p>The Couatl attacks with its Constrict. The target is grappled. Until this grapple ends, the target is restrained, and the couatl can't constrict another target.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one Medium or smaller creature. Hit: <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong>.</p><p>The target is grappled (escape DC 15). Until this grapple ends, the target is restrained, and the couatl can't constrict another target.</p>",
+          "chat": "<p>The Couatl attacks with its Constrict. The target is grappled. Until this grapple ends, the target is restrained, and the couatl can't constrict another target.</p>"
         },
         "source": {
           "custom": "",
@@ -1111,10 +1111,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676688,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.8LkzioyaScFxfst7"
     },

@@ -829,8 +829,8 @@
       "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">Once per turn.</section>\n<p>The assassin deals an extra 13 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the assassin that isn't incapacitated and the assassin doesn't have disadvantage on the attack roll.</p>",
-          "chat": ""
+          "value": "",
+          "chat": "<p>The assassin deals an extra 13 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the assassin that isn't incapacitated and the assassin doesn't have disadvantage on the attack roll.</p>"
         },
         "source": {
           "custom": "",
@@ -957,10 +957,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676773,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!EMvcuOpu7ABCmBWi.EcECOhaJIpCtN2o7"
     },
@@ -1096,8 +1096,8 @@
       "img": "icons/weapons/swords/sword-guard-brown.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>piercing damage</em></strong>.</p>\n<p>The target must make a  <strong>DC 15 Constitution</strong> saving throw, taking <strong>24 (7d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The Assassin attacks with their Shortsword. The target must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>piercing damage</em></strong>.</p><p>The target must make a  <strong>DC 15 Constitution</strong> saving throw, taking <strong>24 (7d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>",
+          "chat": "<p>The Assassin attacks with their Shortsword. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1446,10 +1446,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676773,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!EMvcuOpu7ABCmBWi.Kbg12IJ0YW79vP06"
     },
@@ -1460,8 +1460,8 @@
       "img": "icons/weapons/crossbows/crossbow-simple-brown.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>Ranged Weapon Attack: +6 to hit, range 80/320 ft., one target. Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong>.</p>\n<p>The target must make a  <strong>DC 15 Constitution</strong> saving throw, taking <strong>24 (7d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The Assassin attacks with its Light Crossbow. The target must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>Ranged Weapon Attack: +6 to hit, range 80/320 ft., one target. Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong>.</p><p>The target must make a  <strong>DC 15 Constitution</strong> saving throw, taking <strong>24 (7d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>",
+          "chat": "<p>The Assassin attacks with its Light Crossbow. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1811,10 +1811,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676773,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!EMvcuOpu7ABCmBWi.rNQK7okIBNZ2zDvD"
     }

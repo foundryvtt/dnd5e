@@ -674,8 +674,8 @@
       "img": "icons/skills/melee/strike-sword-stabbed-brown.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The hydra has five heads. While it has more than one head, the hydra has<strong> advantage </strong>on saving throws <strong>against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious</strong><strong>. </strong></p>\n<p>Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.</p>\n<p>At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken <em>fire damage</em> since its last turn. The hydra regains <strong>10 hit points</strong> for each head regrown in this way.</p>\n</section>\n<p>The hydra has five heads. While it has more than one head, the hydra has<strong> advantage </strong>on saving throws <strong>against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious</strong>.</p>",
-          "chat": ""
+          "value": "<p>The hydra has five heads. While it has more than one head, the hydra has<strong> advantage </strong>on saving throws <strong>against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious</strong><strong>. </strong></p><p>Whenever the hydra takes 25 or more damage in a single turn, one of its heads dies. If all its heads die, the hydra dies.</p><p>At the end of its turn, it grows two heads for each of its heads that died since its last turn, unless it has taken <em>fire damage</em> since its last turn. The hydra regains <strong>10 hit points</strong> for each head regrown in this way.</p>",
+          "chat": "<p>The hydra has five heads. While it has more than one head, the hydra has<strong> advantage </strong>on saving throws <strong>against being blinded, charmed, deafened, frightened, stunned, and knocked unconscious</strong>.</p>"
         },
         "source": {
           "custom": "",
@@ -719,10 +719,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676555,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!K4vsSlHqbBAHUDHY.fsAeJDaI0a6sBeFk"
     },
@@ -976,8 +976,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>10 (1d10 + 5) <em>piercing damage</em></strong>.</p><p></p></section><p>The Hydra attacks with its Bite.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>10 (1d10 + 5) <em>piercing damage</em></strong>.</p>",
+          "chat": "<p>The Hydra attacks with its Bite.</p>"
         },
         "source": {
           "custom": "",
@@ -1170,10 +1170,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676555,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!K4vsSlHqbBAHUDHY.fYE4f0Oa2I0MetId"
     }

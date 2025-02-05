@@ -71,7 +71,7 @@
         "max": 1,
         "temp": 0,
         "tempmax": 0,
-        "formula": "Half of Summoner Max."
+        "formula": ""
       },
       "init": {
         "ability": "",
@@ -621,8 +621,8 @@
       "img": "icons/magic/air/air-wave-gust-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The avatar can move through other creatures and objects as if they were difficult terrain.</p>\n<p>It takes <strong>5 (1d10) <em>force damage</em></strong> if it ends its turn inside an object.</p>\n</section>\n<p>The avatar can move through other creatures and objects as if they were difficult terrain.</p>",
-          "chat": ""
+          "value": "<p>The avatar can move through other creatures and objects as if they were difficult terrain.</p><p>It takes <strong>5 (1d10) <em>force damage</em></strong> if it ends its turn inside an object.</p>",
+          "chat": "<p>The avatar can move through other creatures and objects as if they were difficult terrain.</p>"
         },
         "source": {
           "custom": "",
@@ -751,10 +751,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676519,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!XiSWKZzAUxdmFOLL.tXHiE3pxHbBF8bS6"
     },
@@ -824,8 +824,8 @@
       "img": "icons/skills/melee/strike-scythe-fire-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The avatar sweeps its spectral scythe through a creature within 5 feet of it, dealing <strong>7 (1d8 + 3) <em>slashing damage</em></strong> plus <strong>4 (1d8) <em>necrotic damage</em></strong>.</p>\n</section>\n<p>The avatar sweeps its spectral scythe through a creature within 5 feet of it.</p>",
-          "chat": ""
+          "value": "<p>The avatar sweeps its spectral scythe through a creature within 5 feet of it, dealing <strong>7 (1d8 + 3) <em>slashing damage</em></strong> plus <strong>4 (1d8) <em>necrotic damage</em></strong>.</p>",
+          "chat": "<p>The avatar sweeps its spectral scythe through a creature within 5 feet of it.</p>"
         },
         "source": {
           "custom": "",
@@ -972,10 +972,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676519,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!XiSWKZzAUxdmFOLL.d7ERliHkrcvQAF1X"
     }

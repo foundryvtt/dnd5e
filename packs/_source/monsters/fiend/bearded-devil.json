@@ -803,8 +803,8 @@
       "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p>\n<p>The target must succeed on a  <strong>DC 12 Constitution</strong> saving throw or be poisoned for 1 minute. While poisoned in this way, the target can't regain hit points. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>\n</section>\n<p>The Bearded Devil attacks with its Beard. The target must make a <strong>Constitution</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 12 Constitution</strong> saving throw or be poisoned for 1 minute. While poisoned in this way, the target can't regain hit points. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
+          "chat": "<p>The Bearded Devil attacks with its Beard. The target must make a <strong>Constitution</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>"
         },
         "source": {
           "custom": "",
@@ -1080,10 +1080,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676649,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!9ggQBmAKXraOtz7S.ndwCjJFBLTujojCl"
     },
@@ -1094,8 +1094,8 @@
       "img": "icons/weapons/polearms/halberd-crescent-glowing.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>8 (1d10 + 3) <em>slashing damage</em></strong>.</p>\n<p>If the target is a creature other than an undead or a construct, it must succeed on a  <strong>DC 12 Constitution</strong> saving throw or lose 5 (1d10) hit points at the start of each of its turns due to an infernal wound.</p>\n<p>Each time the devil hits the wounded target with this attack, the damage dealt by the wound increases by 5 (1d10). Any creature can take an action to stanch the wound with a successful DC 12 Wisdom (Medicine) check. The wound also closes if the target receives magical healing.</p>\n</section>\n<p>The Bearded Devil attacks with its Glaive. If the target is a creature other than an undead or a construct, it must make a <strong>Constitution</strong> saving throw. Any creature can take an action to stanch the wound with a successful Wisdom (Medicine) check.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>8 (1d10 + 3) <em>slashing damage</em></strong>.</p><p>If the target is a creature other than an undead or a construct, it must succeed on a  <strong>DC 12 Constitution</strong> saving throw or lose 5 (1d10) hit points at the start of each of its turns due to an infernal wound.</p><p>Each time the devil hits the wounded target with this attack, the damage dealt by the wound increases by 5 (1d10). Any creature can take an action to stanch the wound with a successful DC 12 Wisdom (Medicine) check. The wound also closes if the target receives magical healing.</p>",
+          "chat": "<p>The Bearded Devil attacks with its Glaive. If the target is a creature other than an undead or a construct, it must make a <strong>Constitution</strong> saving throw. Any creature can take an action to stanch the wound with a successful Wisdom (Medicine) check.</p>"
         },
         "source": {
           "custom": "",
@@ -1445,10 +1445,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676649,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!9ggQBmAKXraOtz7S.RgZ4lGrNf9AaIyrG"
     },

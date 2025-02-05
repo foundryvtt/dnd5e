@@ -187,8 +187,7 @@
         },
         "sort": 0
       },
-      "dnd5eactivity100": {
-        "_id": "dnd5eactivity100",
+      "c7OxfMTmc5olDsea": {
         "type": "save",
         "activation": {
           "type": "action",
@@ -200,12 +199,9 @@
           "targets": [
             {
               "type": "itemUses",
-              "target": "",
               "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
+              "target": "",
+              "scaling": {}
             }
           ],
           "scaling": {
@@ -220,7 +216,7 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
@@ -252,28 +248,12 @@
         },
         "damage": {
           "onSave": "half",
-          "parts": [
-            {
-              "number": 1,
-              "denomination": 8,
-              "bonus": "@mod",
-              "types": [
-                "piercing"
-              ],
-              "custom": {
-                "enabled": false,
-                "formula": ""
-              },
-              "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
-              }
-            }
-          ]
+          "parts": []
         },
         "save": {
-          "ability": "con",
+          "ability": [
+            "con"
+          ],
           "dc": {
             "calculation": "",
             "formula": "15"
@@ -281,14 +261,18 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "Save vs Death",
+        "_id": "c7OxfMTmc5olDsea"
       }
     },
     "attuned": false,
     "ammunition": {},
-    "identifier": "nine-lives-stealer-rapier"
+    "identifier": "nine-lives-stealer-rapier",
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -296,14 +280,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.0",
     "createdTime": 1725037177328,
-    "modifiedTime": 1725992509703,
+    "modifiedTime": 1738530046384,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!OUGMoQYeJzxEcRvm"

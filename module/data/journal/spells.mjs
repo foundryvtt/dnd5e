@@ -32,6 +32,7 @@ const { ArrayField, DocumentIdField, HTMLField, NumberField, SchemaField, SetFie
  * @property {UnlinkedSpellConfiguration[]} unlinkedSpells  Unavailable spells that are entered manually.
  */
 export default class SpellListJournalPageData extends foundry.abstract.TypeDataModel {
+  /** @override */
   static defineSchema() {
     return {
       type: new StringField({
@@ -71,6 +72,13 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
     level: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.Level",
     school: "JOURNALENTRYPAGE.DND5E.SpellList.Grouping.School"
   };
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareDerivedData() {
+    this.unlinkedSpells.forEach(s => SourceField.prepareData.call(s.source, s.source?.uuid));
+  }
 
   /* -------------------------------------------- */
 

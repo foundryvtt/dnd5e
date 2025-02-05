@@ -2,6 +2,7 @@ import Item5e from "../../documents/item.mjs";
 import {parseInputDelta} from "../../utils.mjs";
 import CurrencyManager from "../currency-manager.mjs";
 import ContextMenu5e from "../context-menu.mjs";
+import ItemSheet5e2 from "../item/item-sheet-2.mjs";
 
 /**
  * Custom element that handles displaying actor & container inventories.
@@ -189,16 +190,15 @@ export default class InventoryElement extends HTMLElement {
     // Standard Options
     const options = [
       {
+        name: "DND5E.ItemView",
+        icon: '<i class="fas fa-eye"></i>',
+        callback: li => this._onAction(li[0], "view")
+      },
+      {
         name: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
         condition: () => item.isOwner && !item.compendium?.locked,
         callback: li => this._onAction(li[0], "edit")
-      },
-      {
-        name: "DND5E.ItemView",
-        icon: '<i class="fas fa-eye"></i>',
-        condition: () => !item.isOwner || item.compendium?.locked,
-        callback: li => this._onAction(li[0], "view")
       },
       {
         name: "DND5E.ContextMenuActionDuplicate",
@@ -211,6 +211,11 @@ export default class InventoryElement extends HTMLElement {
         icon: "<i class='fas fa-trash fa-fw'></i>",
         condition: () => item.canDelete && item.isOwner && !item.compendium?.locked,
         callback: li => this._onAction(li[0], "delete")
+      },
+      {
+        name: "DND5E.DisplayCard",
+        icon: '<i class="fas fa-message"></i>',
+        callback: () => item.displayCard()
       },
       {
         name: "DND5E.Scroll.CreateScroll",
@@ -288,7 +293,7 @@ export default class InventoryElement extends HTMLElement {
       const isFavorited = this.actor.system.hasFavorite(uuid);
       options.push({
         name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-        icon: '<i class="fas fa-star fa-fw"></i>',
+        icon: '<i class="fas fa-bookmark fa-fw"></i>',
         condition: () => item.isOwner && !item.compendium?.locked,
         callback: li => this._onAction(li[0], isFavorited ? "unfavorite" : "favorite"),
         group: "state"
@@ -424,8 +429,9 @@ export default class InventoryElement extends HTMLElement {
       case "duplicate":
         return item.clone({name: game.i18n.format("DOCUMENT.CopyOf", {name: item.name})}, {save: true});
       case "edit":
+        return item.sheet.render(true, { mode: ItemSheet5e2.MODES.EDIT });
       case "view":
-        return item.sheet.render(true);
+        return item.sheet.render(true, { mode: ItemSheet5e2.MODES.PLAY });
       case "equip":
         return item.update({"system.equipped": !item.system.equipped});
       case "expand":

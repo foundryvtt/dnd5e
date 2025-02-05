@@ -34,7 +34,8 @@ export default class ActiveEffect5e extends ActiveEffect {
     "system.attributes.encumbrance.multipliers.encumbered",
     "system.attributes.encumbrance.multipliers.heavilyEncumbered",
     "system.attributes.encumbrance.multipliers.maximum",
-    "system.attributes.encumbrance.multipliers.overall"
+    "system.attributes.encumbrance.multipliers.overall",
+    "save.dc.bonus"
   ]);
 
   /* -------------------------------------------- */
@@ -106,6 +107,8 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /** @inheritDoc */
   _initializeSource(data, options={}) {
+    if ( data instanceof foundry.abstract.DataModel ) data = data.toObject();
+
     if ( data.flags?.dnd5e?.type === "enchantment" ) {
       data.type = "enchantment";
       delete data.flags.dnd5e.type;

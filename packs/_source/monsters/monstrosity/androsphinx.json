@@ -745,8 +745,8 @@
       "img": "icons/magic/light/projectiles-star-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The sphinx is a 12th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 18, +10 to hit with spell attacks). It requires no material components to cast its spells. The sphinx has the following cleric spells prepared:</p>\n<p>• Cantrips (at will): sacred flame, spare the dying, thaumaturgy• 1st level (4 slots): command, detect evil and good, detect magic• 2nd level (3 slots): lesser restoration, zone of truth• 3rd level (3 slots): dispel magic, tongues• 4th level (3 slots): banishment, freedom of movement• 5th level (2 slots): flame strike, greater restoration• 6th level (1 slot): heroes' feast</p>\n</section>\n<p>The sphinx is a spellcaster. Its spellcasting ability is Wisdom.</p>",
-          "chat": ""
+          "value": "<p>The sphinx is a 12th-level spellcaster. Its spellcasting ability is Wisdom (spell save DC 18, +10 to hit with spell attacks). It requires no material components to cast its spells. The sphinx has the following cleric spells prepared:</p><p>• Cantrips (at will): sacred flame, spare the dying, thaumaturgy• 1st level (4 slots): command, detect evil and good, detect magic• 2nd level (3 slots): lesser restoration, zone of truth• 3rd level (3 slots): dispel magic, tongues• 4th level (3 slots): banishment, freedom of movement• 5th level (2 slots): flame strike, greater restoration• 6th level (1 slot): heroes' feast</p>",
+          "chat": "<p>The sphinx is a spellcaster. Its spellcasting ability is Wisdom.</p>"
         },
         "source": {
           "custom": "",
@@ -790,10 +790,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676749,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!nEC1BRwM8Lx9hLXW.zXzGfPnSFJbfZ7oW"
     },
@@ -804,8 +804,8 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>17 (2d10 + 6) <em>slashing damage</em></strong>.</p></section>\n<p>The Androsphinx attacks with its Claw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>17 (2d10 + 6) <em>slashing damage</em></strong>.</p>",
+          "chat": "<p>The Androsphinx attacks with its Claw.</p>"
         },
         "source": {
           "custom": "",
@@ -992,10 +992,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676749,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!nEC1BRwM8Lx9hLXW.yotsIj19d5spOVGb"
     },
@@ -1131,8 +1131,8 @@
       "img": "icons/magic/sonic/scream-wail-shout-teal.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The sphinx emits a magical roar. Each time it roars before finishing a long rest, the roar is louder and the effect is different, as detailed below. Each creature within 500 feet of the sphinx and able to hear the roar must make a saving throw.</p>\n<p>**First Roar.** Each creature that fails a  <strong>DC 18 Wisdom</strong> saving throw is frightened for 1 minute. A frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.**Second Roar.** Each creature that fails a  <strong>DC 18 Wisdom</strong> saving throw is deafened and frightened for 1 minute. A frightened creature is paralyzed and can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.**Third Roar.** Each creature makes a  <strong>DC 18 Constitution</strong> saving throw. On a failed save, a creature takes 44 (8d10) thunder damage and is knocked prone. On a successful save, the creature takes half as much damage and isn't knocked prone.</p>\n</section>\n<p>The sphinx emits a magical roar. Each time it roars before finishing a long rest, the roar is louder and the effect is different. Each creature within 500 feet of the sphinx and able to hear the roar must make a saving throw.</p>",
-          "chat": ""
+          "value": "<p>The sphinx emits a magical roar. Each time it roars before finishing a long rest, the roar is louder and the effect is different, as detailed below. Each creature within 500 feet of the sphinx and able to hear the roar must make a saving throw.</p><p>**First Roar.** Each creature that fails a  <strong>DC 18 Wisdom</strong> saving throw is frightened for 1 minute. A frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.**Second Roar.** Each creature that fails a  <strong>DC 18 Wisdom</strong> saving throw is deafened and frightened for 1 minute. A frightened creature is paralyzed and can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.**Third Roar.** Each creature makes a  <strong>DC 18 Constitution</strong> saving throw. On a failed save, a creature takes 44 (8d10) thunder damage and is knocked prone. On a successful save, the creature takes half as much damage and isn't knocked prone.</p>",
+          "chat": "<p>The sphinx emits a magical roar. Each time it roars before finishing a long rest, the roar is louder and the effect is different. Each creature within 500 feet of the sphinx and able to hear the roar must make a saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1258,10 +1258,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676749,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!nEC1BRwM8Lx9hLXW.ez87kySQJgKUPT9L"
     },

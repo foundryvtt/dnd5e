@@ -446,6 +446,10 @@
   }
 }
 
+.dice-roll + .chat-card {
+  margin-block-start: .375rem;
+}
+
 .chat-sidebar:not([data-gm-user]) .card-header[data-concealed] {
   .summary { cursor: inherit; }
   .fa-chevron-down, .details { display: none; }
@@ -768,6 +772,33 @@ enchantment-application {
     &.miss > i {
       color: var(--dnd5e-color-failure);
       height: 12px;
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Rest & Turn Cards                 */
+/* ---------------------------------- */
+
+.dnd5e2.chat-card {
+  section > strong:first-child {
+    display: block;
+    margin-block-start: 1em;
+  }
+  .activities ul {
+    margin-block-start: 8px;
+
+    li {
+      --gold-icon-size: 32px;
+      gap: 8px;
+    }
+
+    a.rollable:hover .subtitle { text-shadow: none; }
+  }
+  .deltas ul {
+    li {
+      display: flex;
+      justify-content: space-between;
     }
   }
 }

@@ -2,8 +2,12 @@ import ActivitySheet from "../../applications/activity/activity-sheet.mjs";
 import ActivityUsageDialog from "../../applications/activity/activity-usage-dialog.mjs";
 import AbilityTemplate from "../../canvas/ability-template.mjs";
 import { ConsumptionError } from "../../data/activity/fields/consumption-targets-field.mjs";
-import { formatNumber, getTargetDescriptors } from "../../utils.mjs";
+import { formatNumber, getTargetDescriptors, localizeSchema } from "../../utils.mjs";
 import PseudoDocumentMixin from "../mixins/pseudo-document.mjs";
+
+/**
+ * @import { PseudoDocumentsMetadata } from "../mixins/pseudo-document.mjs";
+ */
 
 /**
  * Mixin used to provide base logic to all activities.
@@ -34,6 +38,7 @@ export default function ActivityMixin(Base) {
      */
     static metadata = Object.freeze({
       name: "Activity",
+      label: "DOCUMENT.DND5E.Activity",
       sheetClass: ActivitySheet,
       usage: {
         actions: {},
@@ -51,14 +56,12 @@ export default function ActivityMixin(Base) {
       Localization.localizeDataModel(this);
       const fields = this.schema.fields;
       if ( fields.damage?.fields.parts ) {
-        this._localizeSchema(fields.damage.fields.parts.element, ["DND5E.DAMAGE.FIELDS.damage.parts"]);
+        localizeSchema(fields.damage.fields.parts.element, ["DND5E.DAMAGE.FIELDS.damage.parts"]);
       }
       if ( fields.consumption ) {
-        this._localizeSchema(fields.consumption.fields.targets.element, [
-          "DND5E.CONSUMPTION.FIELDS.consumption.targets"
-        ]);
+        localizeSchema(fields.consumption.fields.targets.element, ["DND5E.CONSUMPTION.FIELDS.consumption.targets"]);
       }
-      if ( fields.uses ) this._localizeSchema(fields.uses.fields.recovery.element, ["DND5E.USES.FIELDS.uses.recovery"]);
+      if ( fields.uses ) localizeSchema(fields.uses.fields.recovery.element, ["DND5E.USES.FIELDS.uses.recovery"]);
     }
 
     /* -------------------------------------------- */
@@ -71,7 +74,7 @@ export default function ActivityMixin(Base) {
      * @internal
      */
     static _localizeSchema(schema, prefixes) {
-      Localization.localizeDataModel({ schema }, { prefixes });
+      localizeSchema(schema, prefixes);
     }
 
     /* -------------------------------------------- */
@@ -618,14 +621,17 @@ export default function ActivityMixin(Base) {
         // TODO: Handle permissions checks in `ActivityUsageDialog`
       }
 
+      const ignoreLinkedConsumption = this.isSpell && !this.consumption.spellSlot;
       if ( config.consume !== false ) {
         const hasActionConsumption = this.activation.type === "legendary";
         const hasResourceConsumption = this.consumption.targets.length > 0;
-        const hasLinkedConsumption = linked?.consumption.targets.length > 0;
+        const hasLinkedConsumption = (linked?.consumption.targets.length > 0) && !ignoreLinkedConsumption;
         const hasSpellSlotConsumption = this.requiresSpellSlot && this.consumption.spellSlot;
         config.consume ??= {};
         config.consume.action ??= hasActionConsumption;
-        config.consume.resources ??= hasResourceConsumption;
+        config.consume.resources ??= Array.from(this.consumption.targets.entries())
+          .filter(([, target]) => !target.combatOnly || this.actor.inCombat)
+          .map(([index]) => index);
         config.consume.spellSlot ??= !linked && hasSpellSlotConsumption;
         config.hasConsumption = hasActionConsumption || hasResourceConsumption || hasLinkedConsumption
           || (!linked && hasSpellSlotConsumption);
@@ -667,7 +673,7 @@ export default function ActivityMixin(Base) {
       if ( linked ) {
         config.cause ??= {};
         config.cause.activity ??= linked.relativeUUID;
-        config.cause.resources ??= linked.consumption.targets.length > 0;
+        config.cause.resources ??= (linked.consumption.targets.length > 0) && !ignoreLinkedConsumption;
       }
 
       return config;
@@ -741,7 +747,7 @@ export default function ActivityMixin(Base) {
           else if ( count > legendary.value ) message = "DND5E.ACTIVATION.Warning.NotEnoughActions";
           if ( message ) {
             const err = new ConsumptionError(game.i18n.format(message, {
-              type: game.i18n.localize("DND5E.LegAct"),
+              type: game.i18n.localize("DND5E.LegendaryAction.Label"),
               required: formatNumber(count),
               available: formatNumber(legendary.value)
             }));
@@ -847,7 +853,8 @@ export default function ActivityMixin(Base) {
      * @protected
      */
     _requiresConfigurationDialog(config) {
-      const checkObject = obj => (foundry.utils.getType(obj) === "Object") && Object.values(obj).some(v => v);
+      const checkObject = obj => (foundry.utils.getType(obj) === "Object")
+        && Object.values(obj).some(v => v === true || v?.length);
       return config.concentration?.begin === true
         || checkObject(config.create)
         || ((checkObject(config.consume) || (config.cause?.resources === true)) && config.hasConsumption)
@@ -1045,6 +1052,11 @@ export default function ActivityMixin(Base) {
             width: 400,
             top: config.event ? config.event.clientY - 80 : null,
             left: window.innerWidth - 710
+          },
+          window: {
+            title: this.damageFlavor,
+            subtitle: this.item.name,
+            icon: this.item.img
           }
         }
       }, dialog);
@@ -1209,7 +1221,7 @@ export default function ActivityMixin(Base) {
         const isFavorited = this.actor.system.hasFavorite(uuid);
         entries.push({
           name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-          icon: '<i class="fas fa-star fa-fw"></i>',
+          icon: '<i class="fas fa-bookmark fa-fw"></i>',
           condition: () => this.item.isOwner && !this.item.compendium?.locked,
           callback: () => {
             if ( isFavorited ) this.actor.system.removeFavorite(uuid);

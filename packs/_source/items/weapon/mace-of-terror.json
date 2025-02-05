@@ -257,25 +257,7 @@
         },
         "damage": {
           "onSave": "half",
-          "parts": [
-            {
-              "number": 1,
-              "denomination": 6,
-              "bonus": "@mod",
-              "types": [
-                "bludgeoning"
-              ],
-              "custom": {
-                "enabled": false,
-                "formula": ""
-              },
-              "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
-              }
-            }
-          ]
+          "parts": []
         },
         "save": {
           "ability": "wis",
@@ -293,7 +275,8 @@
     },
     "attuned": false,
     "ammunition": {},
-    "identifier": "mace-of-terror"
+    "identifier": "mace-of-terror",
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -301,14 +284,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.0",
     "createdTime": 1725037225984,
-    "modifiedTime": 1725992525987,
+    "modifiedTime": 1738529800586,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!b46t42bMruQf9v3O"

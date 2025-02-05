@@ -30,7 +30,7 @@ export default class SkillsConfig extends TraitsConfig {
   /** @inheritDoc */
   async _preparePartContext(partId, context, options) {
     context = await super._preparePartContext(partId, context, options);
-    context.skills = context.choices.other.children;
+    context.skills = context.choices.OTHER.children;
     context.rows = Math.ceil(Object.keys(context.skills).length / 2);
     return context;
   }

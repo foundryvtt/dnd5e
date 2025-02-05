@@ -16,8 +16,8 @@ export default class HitPointsAdvancement extends Advancement {
       order: 10,
       icon: "icons/magic/life/heart-pink.webp",
       typeIcon: "systems/dnd5e/icons/svg/hit-points.svg",
-      title: game.i18n.localize("DND5E.AdvancementHitPointsTitle"),
-      hint: game.i18n.localize("DND5E.AdvancementHitPointsHint"),
+      title: game.i18n.localize("DND5E.ADVANCEMENT.HitPoints.Title"),
+      hint: game.i18n.localize("DND5E.ADVANCEMENT.HitPoints.Hint"),
       multiLevel: true,
       apps: {
         config: HitPointsConfig,
@@ -28,6 +28,16 @@ export default class HitPointsAdvancement extends Advancement {
 
   /* -------------------------------------------- */
   /*  Instance Properties                         */
+  /* -------------------------------------------- */
+
+  /**
+   * The amount gained if the average is taken.
+   * @type {number}
+   */
+  get average() {
+    return (this.hitDieValue / 2) + 1;
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -161,6 +171,15 @@ export default class HitPointsAdvancement extends Advancement {
       "system.attributes.hp.value": this.actor.system.attributes.hp.value + this.#getApplicableValue(value)
     });
     this.updateSource({ value: data });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  automaticApplicationValue(level) {
+    if ( (level === 1) && this.item.isOriginalClass ) return { [level]: "max" };
+    if ( this.value[level - 1] === "avg" ) return { [level]: "avg" };
+    return false;
   }
 
   /* -------------------------------------------- */

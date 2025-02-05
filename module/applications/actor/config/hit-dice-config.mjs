@@ -90,7 +90,7 @@ export default class HitDiceConfig extends BaseConfigSheet {
     if ( form.reportValidity() ) {
       const submitData = super._processFormData(event, form, formData);
       const classUpdates = Object.entries(submitData).map(([_id, value]) => ({
-        _id, "system.hitDiceUsed": this.document.items.get(_id).system.levels - value
+        _id, "system.hd.spent": this.document.items.get(_id).system.levels - value
       }));
       this.document.updateEmbeddedDocuments("Item", classUpdates);
     }

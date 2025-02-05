@@ -1,4 +1,4 @@
-import { formatDistance, prepareFormulaValue } from "../../utils.mjs";
+import { formatLength, prepareFormulaValue } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
 const { SchemaField, StringField } = foundry.data.fields;
@@ -39,8 +39,8 @@ export default class RangeField extends SchemaField {
 
     if ( labels && this.range.units ) {
       if ( this.range.scalar && this.range.value ) {
-        labels.range = formatDistance(this.range.value, this.range.units);
-        labels.rangeParts = formatDistance(this.range.value, this.range.units, { parts: true });
+        labels.range = formatLength(this.range.value, this.range.units);
+        labels.rangeParts = formatLength(this.range.value, this.range.units, { parts: true });
       } else if ( !this.range.scalar ) {
         labels.range = CONFIG.DND5E.distanceUnits[this.range.units];
       }

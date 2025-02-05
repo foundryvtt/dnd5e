@@ -1,4 +1,5 @@
 export {default as AdvancementConfig} from "./advancement-config.mjs";
+export {default as AdvancementConfigV2} from "./advancement-config-v2.mjs";
 export {default as AdvancementConfirmationDialog} from "./advancement-confirmation-dialog.mjs";
 export {default as AdvancementFlow} from "./advancement-flow.mjs";
 export {default as AdvancementManager} from "./advancement-manager.mjs";

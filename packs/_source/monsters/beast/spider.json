@@ -674,8 +674,8 @@
       "img": "icons/creatures/abilities/fang-tooth-venomous.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit:<strong> 1 <em>piercing damage</em>.</strong></p><p>The target must succeed on a  <strong>DC 9 Constitution</strong> saving throw or take <strong>2 (1d4) <em>poison damage</em></strong>.</p></section><p>The Spider attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit:<strong> 1 <em>piercing damage</em>.</strong></p><p>The target must succeed on a  <strong>DC 9 Constitution</strong> saving throw or take <strong>2 (1d4) <em>poison damage</em></strong>.</p>",
+          "chat": "<p>The Spider attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -971,10 +971,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676396,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!28gU50HtG8Kp7uIz.ysV0KgiPcJOYCdMh"
     },

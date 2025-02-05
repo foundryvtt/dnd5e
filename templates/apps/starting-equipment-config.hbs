@@ -1,4 +1,4 @@
-<form autocomplete="off">
+<div>
     {{#*inline "list-level"}}
     <ul class="flexcol">
         {{#each entries}}
@@ -36,8 +36,8 @@
                 {{/if}}
                 {{#if showRequireProficiency}}
                 <label class="flexrow require-proficiency">
-                    <input type="checkbox" name="startingEquipment.{{ id }}.requiresProficiency"
-                           {{ checked entry.requiresProficiency }}>
+                    <dnd5e-checkbox name="startingEquipment.{{ id }}.requiresProficiency"
+                           {{ checked entry.requiresProficiency }}></dnd5e-checkbox>
                     {{ localize "DND5E.StartingEquipment.RequireProficiency" }}
                 </label>
                 {{else}}
@@ -61,4 +61,4 @@
     {{/inline}}
 
     {{> "list-level" }}
- </form>
+ </div>

@@ -116,12 +116,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     // Limited Uses
     context.data = { uses: context.source.uses };
     context.hasLimitedUses = this.item.system.hasLimitedUses;
-    context.recoveryPeriods = [
-      ...Object.entries(CONFIG.DND5E.limitedUsePeriods)
-        .filter(([, { deprecated }]) => !deprecated)
-        .map(([value, { label }]) => ({ value, label, group: "DND5E.DurationTime" })),
-      { value: "recharge", label: "DND5E.USES.Recovery.Recharge.Label" }
-    ];
+    context.recoveryPeriods = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
     context.recoveryTypes = [
       { value: "recoverAll", label: "DND5E.USES.Recovery.Type.RecoverAll" },
       { value: "loseAll", label: "DND5E.USES.Recovery.Type.LoseAll" },
@@ -181,6 +176,8 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       }
     }
 
+    context.coverOptions = Object.entries(CONFIG.DND5E.cover).map(([value, label]) => ({ value, label }));
+
     return context;
   }
 
@@ -236,6 +233,9 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       html.find("button.control-button").on("click", this._onSheetAction.bind(this));
     }
 
+    new ContextMenu5e(html, ".advancement-item[data-id]", [], {
+      onOpen: target => dnd5e.documents.advancement.Advancement.onContextMenu(this.item, target)
+    });
     new ContextMenu5e(html, ".activity[data-activity-id]", [], {
       onOpen: target => dnd5e.documents.activity.UtilityActivity.onContextMenu(this.item, target)
     });

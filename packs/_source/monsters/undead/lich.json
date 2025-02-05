@@ -914,8 +914,8 @@
       "img": "icons/magic/perception/silhouette-stealth-shadow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The lich fixes its gaze on one creature it can see within 10 feet of it. The target must succeed on a  <strong>DC 18 Wisdom</strong> saving throw against this magic or become grappled for 1 minute. The grappled target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the lich's gaze for the next 24 hours.</p>\n</section>\n<p>The lich fixes its gaze on one creature it can see within 10 feet of it. The target must make a <strong>Wisdom</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>The lich fixes its gaze on one creature it can see within 10 feet of it. The target must succeed on a  <strong>DC 18 Wisdom</strong> saving throw against this magic or become grappled for 1 minute. The grappled target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. If a target's saving throw is successful or the effect ends for it, the target is immune to the lich's gaze for the next 24 hours.</p>",
+          "chat": "<p>The lich fixes its gaze on one creature it can see within 10 feet of it. The target must make a <strong>Wisdom</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1041,10 +1041,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676949,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bfh29vIEoGzI240e.Uox2GEp5GMXOOXOc"
     },
@@ -1055,8 +1055,8 @@
       "img": "icons/magic/death/projectile-skull-fire-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>Each non-undead creature within 20 feet of the lich must make a  <strong>DC 18 Constitution</strong> saving throw against this magic, taking <strong>21 (6d6) <em>necrotic damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>Each non-undead creature within 20 feet of the lich must make a <strong>Constitution</strong> saving throw against this magic.</p>",
-          "chat": ""
+          "value": "<p>Each non-undead creature within 20 feet of the lich must make a  <strong>DC 18 Constitution</strong> saving throw against this magic, taking <strong>21 (6d6) <em>necrotic damage</em></strong> on a failed save, or half as much damage on a successful one.</p>",
+          "chat": "<p>Each non-undead creature within 20 feet of the lich must make a <strong>Constitution</strong> saving throw against this magic.</p>"
         },
         "source": {
           "custom": "",
@@ -1199,10 +1199,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676949,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bfh29vIEoGzI240e.sXU9KTYnmgi08EQw"
     },
@@ -1348,8 +1348,8 @@
       "img": "icons/magic/control/debuff-energy-hold-levitate-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>If it has a phylactery, a destroyed lich gains a new body in 1d10 days, regaining all its<strong> hit points</strong> and becoming active again. The new body appears <strong>within 5 feet</strong> of the phylactery.</p></section><p>A destroyed lich gains a new body in 1d10 days, regaining all its<strong> hit points</strong> and becoming active again.</p>",
-          "chat": ""
+          "value": "<p>If it has a phylactery, a destroyed lich gains a new body in 1d10 days, regaining all its<strong> hit points</strong> and becoming active again. The new body appears <strong>within 5 feet</strong> of the phylactery.</p>",
+          "chat": "<p>A destroyed lich gains a new body in 1d10 days, regaining all its<strong> hit points</strong> and becoming active again.</p>"
         },
         "source": {
           "custom": "",
@@ -1459,10 +1459,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676949,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bfh29vIEoGzI240e.stk9i3rPK7z99CDf"
     },
@@ -1473,8 +1473,8 @@
       "img": "icons/magic/light/projectiles-star-purple.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The lich is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 20, +12 to hit with spell attacks). The lich has the following wizard spells prepared:</p>\n<p>Cantrips (at will): mage hand, prestidigitation, ray of frost</p>\n<p>1st level (4 slots): detect magic, magic missile, shield, thunderwave</p>\n<p>2nd level (3 slots): detect thoughts, invisibility, acid arrow, mirror image</p>\n<p>3rd level (3 slots): animate dead, counterspell, dispel magic, fireball</p>\n<p>4th level (3 slots): blight, dimension door</p>\n<p>5th level (3 slots): cloudkill, scrying</p>\n<p>6th level (1 slot): disintegrate, globe of invulnerability</p>\n<p>7th level (1 slot): finger of death, plane shift</p>\n<p>8th level (1 slot): dominate monster, power word stun</p>\n<p>9th level (1 slot): power word kill</p>\n</section>\n<p>The lich is an spellcaster. Its spellcasting ability is Intelligence.</p>",
-          "chat": ""
+          "value": "<p>The lich is an 18th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 20, +12 to hit with spell attacks). The lich has the following wizard spells prepared:</p><p>Cantrips (at will): mage hand, prestidigitation, ray of frost</p><p>1st level (4 slots): detect magic, magic missile, shield, thunderwave</p><p>2nd level (3 slots): detect thoughts, invisibility, acid arrow, mirror image</p><p>3rd level (3 slots): animate dead, counterspell, dispel magic, fireball</p><p>4th level (3 slots): blight, dimension door</p><p>5th level (3 slots): cloudkill, scrying</p><p>6th level (1 slot): disintegrate, globe of invulnerability</p><p>7th level (1 slot): finger of death, plane shift</p><p>8th level (1 slot): dominate monster, power word stun</p><p>9th level (1 slot): power word kill</p>",
+          "chat": "<p>The lich is an spellcaster. Its spellcasting ability is Intelligence.</p>"
         },
         "source": {
           "custom": "",
@@ -1518,10 +1518,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676949,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bfh29vIEoGzI240e.UMoMhboTLq75ZJW8"
     },
@@ -1532,8 +1532,8 @@
       "img": "icons/magic/water/water-hand.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Spell Attack:</em><strong>+12 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>10 (3d6) <em>cold damage</em></strong>. </p><p>The target must succeed on a  <strong>DC 18 Constitution</strong> saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p></section><p>The Lich attacks with its Paralyzing Touch. The target must make a <strong>Constitution</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Spell Attack:</em><strong>+12 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>10 (3d6) <em>cold damage</em></strong>. </p><p>The target must succeed on a  <strong>DC 18 Constitution</strong> saving throw or be paralyzed for 1 minute. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>",
+          "chat": "<p>The Lich attacks with its Paralyzing Touch. The target must make a <strong>Constitution</strong> saving throw. The target can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success.</p>"
         },
         "source": {
           "custom": "",
@@ -1813,10 +1813,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676949,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bfh29vIEoGzI240e.KDSrdpdFPDKnh80y"
     },
@@ -1886,8 +1886,8 @@
       "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The lich can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The lich regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The lich can take 3 legendary actions.</p>",
-          "chat": ""
+          "value": "<p>The lich can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The lich regains spent legendary actions at the start of its turn.</p>",
+          "chat": "<p>The lich can take 3 legendary actions.</p>"
         },
         "source": {
           "custom": "",
@@ -1931,10 +1931,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676949,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bfh29vIEoGzI240e.GvT7gczoJ6QCocrA"
     },
@@ -2004,8 +2004,8 @@
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
-          "chat": ""
+          "value": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>",
+          "chat": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>"
         },
         "source": {
           "custom": "",
@@ -2049,10 +2049,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676949,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!bfh29vIEoGzI240e.XbzBKNTXHSUjzWtt"
     },

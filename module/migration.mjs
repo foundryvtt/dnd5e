@@ -1,3 +1,5 @@
+import { log } from "./utils.mjs";
+
 /**
  * Perform a system migration for the entire World, applying migrations for Actors, Items, and Compendium packs.
  * @param {object} [options={}]
@@ -22,7 +24,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
       const version = actor._stats.systemVersion;
       let updateData = migrateActorData(actor, source, migrationData, flags, { actorUuid: actor.uuid });
       if ( !foundry.utils.isEmpty(updateData) ) {
-        console.log(`Migrating Actor document ${actor.name}`);
+        log(`Migrating Actor document ${actor.name}`);
         if ( flags.persistSourceMigration ) {
           updateData = foundry.utils.mergeObject(source, updateData, {inplace: false});
         }
@@ -51,7 +53,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
       const source = valid ? item.toObject() : game.data.items.find(i => i._id === item.id);
       let updateData = migrateItemData(item, source, migrationData, flags);
       if ( !foundry.utils.isEmpty(updateData) ) {
-        console.log(`Migrating Item document ${item.name}`);
+        log(`Migrating Item document ${item.name}`);
         if ( flags.persistSourceMigration ) {
           if ( "effects" in updateData ) updateData.effects = source.effects.map(effect => foundry.utils.mergeObject(
             effect, updateData.effects.find(e => e._id === effect._id) ?? {}, { inplace: false, performDeletions: true }
@@ -73,7 +75,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
     try {
       const updateData = migrateMacroData(m.toObject(), migrationData);
       if ( !foundry.utils.isEmpty(updateData) ) {
-        console.log(`Migrating Macro document ${m.name}`);
+        log(`Migrating Macro document ${m.name}`);
         await m.update(updateData, {enforceTypes: false, render: false});
       }
     } catch(err) {
@@ -87,7 +89,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
     try {
       const updateData = migrateRollTableData(table.toObject(), migrationData);
       if ( !foundry.utils.isEmpty(updateData) ) {
-        console.log(`Migrating RollTable document ${table.name}`);
+        log(`Migrating RollTable document ${table.name}`);
         await table.update(updateData, { enforceTypes: false, render: false });
       }
     } catch(err) {
@@ -101,7 +103,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
     try {
       const updateData = migrateSceneData(s, migrationData);
       if ( !foundry.utils.isEmpty(updateData) ) {
-        console.log(`Migrating Scene document ${s.name}`);
+        log(`Migrating Scene document ${s.name}`);
         await s.update(updateData, {enforceTypes: false, render: false});
       }
     } catch(err) {
@@ -117,7 +119,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         const source = token.actor.toObject();
         let updateData = migrateActorData(token.actor, source, migrationData, flags, { actorUuid: token.actor.uuid });
         if ( !foundry.utils.isEmpty(updateData) ) {
-          console.log(`Migrating ActorDelta document ${token.actor.name} [${token.delta.id}] in Scene ${s.name}`);
+          log(`Migrating ActorDelta document ${token.actor.name} [${token.delta.id}] in Scene ${s.name}`);
           if ( flags.persistSourceMigration ) {
             updateData = foundry.utils.mergeObject(source, updateData, { inplace: false });
           } else {
@@ -226,7 +228,7 @@ export async function migrateCompendium(pack, { bypassVersionCheck=false, strict
         if ( foundry.utils.isEmpty(updateData) ) continue;
         if ( flags.persistSourceMigration ) updateData = foundry.utils.mergeObject(source, updateData);
         await doc.update(updateData, { diff: !flags.persistSourceMigration });
-        console.log(`Migrated ${documentName} document ${doc.name} in Compendium ${pack.collection}`);
+        log(`Migrated ${documentName} document ${doc.name} in Compendium ${pack.collection}`);
       }
 
       // Handle migration failures
@@ -237,7 +239,7 @@ export async function migrateCompendium(pack, { bypassVersionCheck=false, strict
       }
     }
 
-    console.log(`Migrated all ${documentName} documents from Compendium ${pack.collection}`);
+    log(`Migrated all ${documentName} documents from Compendium ${pack.collection}`);
   } finally {
     // Apply the original locked status for the pack
     await pack.configure({locked: wasLocked});
@@ -356,7 +358,7 @@ export async function migrateArmorClass(pack) {
 
   for ( const actor of actors ) {
     try {
-      console.log(`Migrating ${actor.name}...`);
+      log(`Migrating ${actor.name}...`);
       const src = actor.toObject();
       const update = {_id: actor.id};
 
@@ -381,7 +383,7 @@ export async function migrateArmorClass(pack) {
   await Actor.implementation.updateDocuments(updates, {pack: pack.collection});
   await pack.getDocuments(); // Force a re-prepare of all actors.
   await pack.configure({locked: wasLocked});
-  console.log(`Migrated the AC of all Actors from Compendium ${pack.collection}`);
+  log(`Migrated the AC of all Actors from Compendium ${pack.collection}`);
 }
 
 /* -------------------------------------------- */
@@ -920,7 +922,7 @@ export async function purgeFlags(pack) {
       });
     }
     await doc.update(update, {recursive: false});
-    console.log(`Purged flags from ${doc.name}`);
+    log(`Purged flags from ${doc.name}`);
   }
   await pack.configure({locked: true});
 }

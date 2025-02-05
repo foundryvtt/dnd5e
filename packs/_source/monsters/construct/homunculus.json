@@ -620,8 +620,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit:<strong> 1 <em>piercing damage</em>.</strong></p><p>The target must succeed on a  <strong>DC 10 Constitution</strong> saving throw or be poisoned for 1 minute. If the saving throw fails by 5 or more, the target is instead poisoned for 5 (1d10) minutes and unconscious while poisoned in this way.</p></section><p>The Homunculus attacks with its Bite.The target must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit:<strong> 1 <em>piercing damage</em>.</strong></p><p>The target must succeed on a  <strong>DC 10 Constitution</strong> saving throw or be poisoned for 1 minute. If the saving throw fails by 5 or more, the target is instead poisoned for 5 (1d10) minutes and unconscious while poisoned in this way.</p>",
+          "chat": "<p>The Homunculus attacks with its Bite.The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -901,10 +901,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676472,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!ZQTCZfTV9ZoTjNCU.1uXv78I9YByiz6rV"
     },

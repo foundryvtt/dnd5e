@@ -1,0 +1,13 @@
+<div class="dnd5e2 chat-card rest-card">
+    {{{ content }}}
+
+    {{#if actor}}
+
+    {{!-- Deltas --}}
+    {{#if deltas.length}}{{> "dnd5e.card-deltas" }}{{/if}}
+
+    {{!-- Actions --}}
+    {{#if activities.length}}{{> "dnd5e.card-activities" }}{{/if}}
+
+    {{/if}}
+</div>

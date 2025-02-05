@@ -29,4 +29,21 @@ export default class SkillToolRollConfigurationDialog extends D20RollConfigurati
     });
     return context;
   }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _onChangeForm(formConfig, event) {
+    super._onChangeForm(formConfig, event);
+    if ( this.config.skill && (event.target?.name === "ability") ) {
+      const skillLabel = CONFIG.DND5E.skills[this.config.skill]?.label ?? "";
+      const ability = event.target.value ?? this.config.ability;
+      const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
+      const flavor = game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel });
+      foundry.utils.setProperty(this.message, "data.flavor", flavor);
+      this._updateFrame({ window: { title: flavor } });
+    }
+  }
 }

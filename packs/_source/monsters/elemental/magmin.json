@@ -621,8 +621,8 @@
       "img": "icons/magic/light/explosion-star-glow-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>When the magmin dies, it explodes in a burst of fire and magma. </p><p>Each creature within 10 ft. of it must make a  <strong>DC 11 Dexterity</strong> saving throw, taking <strong>7 (2d6) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one. Flammable objects that aren't being worn or carried in that area are ignited.</p></section><p>When the magmin dies, it explodes in a burst of fire and magma. Each creature within 10 ft. of it must make a <strong>Dexterity</strong> saving throw. Flammable objects that aren't being worn or carried in that area are ignited.</p>",
-          "chat": ""
+          "value": "<p>When the magmin dies, it explodes in a burst of fire and magma. </p><p>Each creature within 10 ft. of it must make a  <strong>DC 11 Dexterity</strong> saving throw, taking <strong>7 (2d6) <em>fire damage</em></strong> on a failed save, or half as much damage on a successful one. Flammable objects that aren't being worn or carried in that area are ignited.</p>",
+          "chat": "<p>When the magmin dies, it explodes in a burst of fire and magma. Each creature within 10 ft. of it must make a <strong>Dexterity</strong> saving throw. Flammable objects that aren't being worn or carried in that area are ignited.</p>"
         },
         "source": {
           "custom": "",
@@ -755,10 +755,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676529,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!8MD1vRBTcgSXXk3u.0xdLfPJEHYwh8MIT"
     },
@@ -894,8 +894,8 @@
       "img": "icons/magic/fire/flame-burning-fist-strike.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (2d6) <em>fire damage</em></strong>. </p><p></p></section><p>The Magmin attacks with its Touch. If the target is a creature or a flammable object, it ignites. Until a target takes an action to douse the fire, the target takes <strong>3 (1d6) <em>fire damage</em></strong> at the end of each of its turns.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (2d6) <em>fire damage</em></strong>. </p>",
+          "chat": "<p>The Magmin attacks with its Touch. If the target is a creature or a flammable object, it ignites. Until a target takes an action to douse the fire, the target takes <strong>3 (1d6) <em>fire damage</em></strong> at the end of each of its turns.</p>"
         },
         "source": {
           "custom": "",
@@ -1148,10 +1148,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676529,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!8MD1vRBTcgSXXk3u.th3hfRWQ3PT9f3Gs"
     }

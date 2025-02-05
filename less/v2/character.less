@@ -16,11 +16,6 @@
     box-shadow: 0 0 20px var(--color-shadow-dark);
   }
 
-  .window-resizable-handle {
-    bottom: 0;
-    right: 1px;
-  }
-
   /* ---------------------------------- */
   /*  Sheet Header                      */
   /* ---------------------------------- */
@@ -365,7 +360,7 @@
               justify-content: center;
               padding: 10px;
             }
-          
+
             .pips .pip.filled.death::before {
               content: "\f54c";
               font-family: var(--font-awesome);
@@ -490,6 +485,11 @@
               dnd5e-icon {
                 --icon-size: 40px;
                 --icon-fill: var(--dnd5e-color-gold);
+              }
+
+              .fas {
+                color: var(--dnd5e-color-gold);
+                font-size: 32px;
               }
 
               &:hover {
@@ -1211,10 +1211,7 @@
 
       .facilities.special {
         grid-area: c;
-        h3 {
-          > span { line-height: 1; }
-          .counter { margin-left: auto; }
-        }
+        h3 > span { line-height: 1; }
       }
     }
 

@@ -19,7 +19,7 @@
                 <a data-uuid="{{ uuid }}">{{ name }}</a>
             </h4>
             {{#if optional}}
-            <input type="checkbox" name="{{ uuid }}" {{ checked checked }}>
+            <dnd5e-checkbox name="{{ uuid }}" {{ checked checked }}></dnd5e-checkbox>
             {{else}}
             <input type="hidden" name="{{ uuid }}" value="true" data-dtype="Boolean">
             {{/if}}

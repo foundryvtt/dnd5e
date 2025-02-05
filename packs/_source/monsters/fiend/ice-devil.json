@@ -630,8 +630,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>12 (2d6 + 5) <em>piercing damage</em></strong> plus <strong>10 (3d6) <em>cold damage</em></strong>.</p><p></p></section><p>The Ice Devil attacks with its Bite.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>12 (2d6 + 5) <em>piercing damage</em></strong> plus <strong>10 (3d6) <em>cold damage</em></strong>.</p>",
+          "chat": "<p>The Ice Devil attacks with its Bite.</p>"
         },
         "source": {
           "custom": "",
@@ -840,10 +840,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676909,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!1zzRQps9jZdLZGqI.DV4KS0OE541vGOtI"
     },
@@ -968,8 +968,8 @@
       "img": "icons/magic/water/barrier-ice-crystal-wall-jagged-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The devil magically forms an opaque wall of ice on a solid surface it can see within 60 feet of it. The wall is 1 foot thick and up to 30 feet long and 10 feet high, or it's a hemispherical dome up to 20 feet in diameter.</p>\n<p>When the wall appears, each creature in its space is pushed out of it by the shortest route. The creature chooses which side of the wall to end up on, unless the creature is incapacitated. The creature then makes a  <strong>DC 17 Dexterity</strong> saving throw, taking <strong>35 (10d6) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n<p>The wall lasts for 1 minute or until the devil is incapacitated or dies. The wall can be damaged and breached; each 10-foot section has AC 5, 30 hit points, vulnerability to <em>fire damage</em>, and immunity to acid, cold, necrotic, poison, and <em>psychic damage</em>. If a section is destroyed, it leaves behind a sheet of frigid air in the space the wall occupied. Whenever a creature finishes moving through the frigid air on a turn, willingly or otherwise, the creature must make a  <strong>DC 17 Constitution</strong> saving throw, taking <strong>17 (5d6) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one. The frigid air dissipates when the rest of the wall vanishes.</p>\n</section>\n<p>The devil magically forms an opaque wall of ice on a solid surface it can see within 60 feet of it. The wall is 1 foot thick and up to 30 feet long and 10 feet high, or it's a hemispherical dome up to 20 feet in diameter.When the wall appears, each creature in its space is pushed out of it by the shortest route. The creature chooses which side of the wall to end up on, unless the creature is incapacitated. The creature then makes a Dexterity saving throw.</p>\n<p>The wall can be damaged and breached. If a section is destroyed, it leaves behind a sheet of frigid air in the space the wall occupied. Whenever a creature finishes moving through the frigid air on a turn, willingly or otherwise, the creature must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>The devil magically forms an opaque wall of ice on a solid surface it can see within 60 feet of it. The wall is 1 foot thick and up to 30 feet long and 10 feet high, or it's a hemispherical dome up to 20 feet in diameter.</p><p>When the wall appears, each creature in its space is pushed out of it by the shortest route. The creature chooses which side of the wall to end up on, unless the creature is incapacitated. The creature then makes a  <strong>DC 17 Dexterity</strong> saving throw, taking <strong>35 (10d6) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one.</p><p>The wall lasts for 1 minute or until the devil is incapacitated or dies. The wall can be damaged and breached; each 10-foot section has AC 5, 30 hit points, vulnerability to <em>fire damage</em>, and immunity to acid, cold, necrotic, poison, and <em>psychic damage</em>. If a section is destroyed, it leaves behind a sheet of frigid air in the space the wall occupied. Whenever a creature finishes moving through the frigid air on a turn, willingly or otherwise, the creature must make a  <strong>DC 17 Constitution</strong> saving throw, taking <strong>17 (5d6) <em>cold damage</em></strong> on a failed save, or half as much damage on a successful one. The frigid air dissipates when the rest of the wall vanishes.</p>",
+          "chat": "<p>The devil magically forms an opaque wall of ice on a solid surface it can see within 60 feet of it. The wall is 1 foot thick and up to 30 feet long and 10 feet high, or it's a hemispherical dome up to 20 feet in diameter.When the wall appears, each creature in its space is pushed out of it by the shortest route. The creature chooses which side of the wall to end up on, unless the creature is incapacitated. The creature then makes a Dexterity saving throw.</p>\n<p>The wall can be damaged and breached. If a section is destroyed, it leaves behind a sheet of frigid air in the space the wall occupied. Whenever a creature finishes moving through the frigid air on a turn, willingly or otherwise, the creature must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1266,10 +1266,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676909,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!1zzRQps9jZdLZGqI.nCTze3rZpWcTeuYQ"
     },
@@ -1280,8 +1280,8 @@
       "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>12 (2d6 + 5) <em>bludgeoning damage</em></strong> plus <strong>10 (3d6) <em>cold damage</em></strong>.</p></section>\n<p>The Ice Devil attacks with its Tail.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>12 (2d6 + 5) <em>bludgeoning damage</em></strong> plus <strong>10 (3d6) <em>cold damage</em></strong>.</p>",
+          "chat": "<p>The Ice Devil attacks with its Tail.</p>"
         },
         "source": {
           "custom": "",
@@ -1488,10 +1488,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676909,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!1zzRQps9jZdLZGqI.AQ551xglVn90BdwU"
     },
@@ -1502,8 +1502,8 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d4 + 5) <em>slashing damage</em></strong> plus <strong>10 (3d6) <em>cold damage</em></strong>.</p></section>\n<p>The Ice Devil attacks with its Claws.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d4 + 5) <em>slashing damage</em></strong> plus <strong>10 (3d6) <em>cold damage</em></strong>.</p>",
+          "chat": "<p>The Ice Devil attacks with its Claws.</p>"
         },
         "source": {
           "custom": "",
@@ -1710,10 +1710,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676909,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!1zzRQps9jZdLZGqI.E6iXljYXLdQyfk1l"
     },

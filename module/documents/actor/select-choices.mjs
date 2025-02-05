@@ -220,7 +220,7 @@ export default class SelectChoices {
       // Check children, remove entry if no children match filter
       else if ( !filter.has(wildcardKey) && !filter.has(`${key}:*`) ) {
         if ( trait.children ) trait.children.filter(filter);
-        if ( foundry.utils.isEmpty(trait.children ?? {}) ) delete this[key];
+        if ( !Object.keys(trait.children ?? {}).length ) delete this[key];
       }
     }
 

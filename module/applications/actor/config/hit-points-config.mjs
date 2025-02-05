@@ -69,7 +69,6 @@ export default class HitPointsConfig extends BaseConfigSheet {
         .filter(e => e.mode === CONST.ACTIVE_EFFECT_MODES.ADD)
         .map(e => ({ ...e, anchor: e.document.toAnchor().outerHTML}));
     }
-    console.log(context.effects);
 
     context.levels = this.document.system.details?.level ?? 0;
     context.levelMultiplier = `
@@ -107,7 +106,7 @@ export default class HitPointsConfig extends BaseConfigSheet {
 
   /** @inheritDoc */
   _processSubmitData(event, form, submitData) {
-    const clone = this.document.clone(submitData);
+    const clone = this.document.clone(foundry.utils.deepClone(submitData));
     const { value, max } = this.document.system.attributes.hp;
     const maxDelta = clone.system.attributes.hp.max - max;
     const current = submitData.system.attributes.hp.value ?? value;

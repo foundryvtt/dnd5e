@@ -615,8 +615,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>6 (1d4 + 4) <em>piercing damage</em></strong>.</p>\n<p>The target must make a  <strong>DC 11 Constitution</strong> saving throw, taking <strong>10 (3d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>\n</section>\n<p>The Giant Poisonous Snake attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>6 (1d4 + 4) <em>piercing damage</em></strong>.</p><p>The target must make a  <strong>DC 11 Constitution</strong> saving throw, taking <strong>10 (3d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>",
+          "chat": "<p>The Giant Poisonous Snake attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -899,10 +899,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676473,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!ZW39DE2zI3TXVYC9.GlOJaYXJFUP0Hd80"
     }

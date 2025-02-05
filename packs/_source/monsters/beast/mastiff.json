@@ -670,8 +670,8 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>piercing damage</em></strong>.</p>\n<p>If the target is a creature, it must succeed on a  <strong>DC 11 Strength</strong> saving throw or be knocked prone.</p>\n</section>\n<p>The Mastiff attacks with its Bite. If the target is a creature, it must succeed on a Strength saving throw or be knocked prone.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>piercing damage</em></strong>.</p><p>If the target is a creature, it must succeed on a  <strong>DC 11 Strength</strong> saving throw or be knocked prone.</p>",
+          "chat": "<p>The Mastiff attacks with its Bite. If the target is a creature, it must succeed on a Strength saving throw or be knocked prone.</p>"
         },
         "source": {
           "custom": "",
@@ -951,10 +951,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676468,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!YTpL2c3NO4sOn2UA.QLJgy1aF5ijBEp4K"
     }

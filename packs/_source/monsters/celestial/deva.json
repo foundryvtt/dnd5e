@@ -626,8 +626,8 @@
       "img": "icons/magic/fire/dagger-rune-enchant-flame-strong-blue-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\"><p>The deva's weapon attacks are magical. When the deva hits with any weapon, the weapon deals an <strong>extra 4d8 <em>radiant damage</em></strong> (included in the attack).</p></section><p>The deva's weapon attacks are magical. When the deva hits with any weapon, the weapon deals extra <em>radiant damage</em> (included in the attack).</p>",
-          "chat": ""
+          "value": "<p>The deva's weapon attacks are magical. When the deva hits with any weapon, the weapon deals an <strong>extra 4d8 <em>radiant damage</em></strong> (included in the attack).</p>",
+          "chat": "<p>The deva's weapon attacks are magical. When the deva hits with any weapon, the weapon deals extra <em>radiant damage</em> (included in the attack).</p>"
         },
         "source": {
           "custom": "",
@@ -671,10 +671,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676597,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!m4H3hjamBNMH09S9.KRskTTMCEepXUPwU"
     },
@@ -1204,8 +1204,8 @@
       "img": "icons/weapons/maces/mace-round-spiked-black.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d6 + 4) <em>bludgeoning damage</em></strong> plus <strong>18 (4d8) <em>radiant damage</em></strong>.</p></section>\n<p>The Deva attacks with its Mace.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (1d6 + 4) <em>bludgeoning damage</em></strong> plus <strong>18 (4d8) <em>radiant damage</em></strong>.</p>",
+          "chat": "<p>The Deva attacks with its Mace.</p>"
         },
         "source": {
           "custom": "",
@@ -1414,10 +1414,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676597,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!m4H3hjamBNMH09S9.qADu4OS68yINJCnZ"
     },

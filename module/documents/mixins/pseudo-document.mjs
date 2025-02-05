@@ -36,8 +36,9 @@ export default function PseudoDocumentMixin(Base) {
     /**
      * Configuration information for PseudoDocuments.
      *
-     * @typedef {object} PseudoDocumentsMetadata
+     * @typedef PseudoDocumentsMetadata
      * @property {string} name        Base type name of this PseudoDocument (e.g. "Activity", "Advancement").
+     * @property {string} label       Localized name for this PseudoDocument type.
      */
 
     /**
@@ -131,14 +132,17 @@ export default function PseudoDocumentMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Lazily obtain a ApplicationV2 instance used to configure this PseudoDocument, or null if no sheet is available.
-     * @type {ApplicationV2|null}
+     * Lazily obtain a Application instance used to configure this PseudoDocument, or null if no sheet is available.
+     * @type {Application|ApplicationV2|null}
      */
     get sheet() {
       const cls = this.constructor.metadata.sheetClass ?? this.constructor.metadata.apps?.config;
       if ( !cls ) return null;
       if ( !this.constructor._sheets.has(this.uuid) ) {
-        this.constructor._sheets.set(this.uuid, new cls({ document: this }));
+        let sheet;
+        if ( Application.isPrototypeOf(cls) ) sheet = new cls(this);
+        else sheet = new cls({ document: this });
+        this.constructor._sheets.set(this.uuid, sheet);
       }
       return this.constructor._sheets.get(this.uuid);
     }
@@ -228,7 +232,7 @@ export default function PseudoDocumentMixin(Base) {
      * @returns {Promise<PseudoDocument>}  A Promise which resolves to the deleted PseudoDocument.
      */
     async deleteDialog(options={}) {
-      const type = game.i18n.localize(this.metadata.title);
+      const type = game.i18n.localize(this.metadata.label);
       return Dialog.confirm({
         title: `${game.i18n.format("DOCUMENT.Delete", { type })}: ${this.name || this.title}`,
         content: `<h4>${game.i18n.localize("AreYouSure")}</h4><p>${game.i18n.format("SIDEBAR.DeleteWarning", {

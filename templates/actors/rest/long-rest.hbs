@@ -1,0 +1,14 @@
+<section class="flexcol">
+    <div class="note info">
+        {{ localize (ifThen isGroup "DND5E.REST.Long.Hint.Group" "DND5E.REST.Long.Hint.Normal") }}
+    </div>
+
+    {{#if fields.length}}
+    <fieldset>
+        <legend>{{ localize "DND5E.REST.Configuration" }}</legend>
+        {{#each fields}}
+        {{ formField field name=name value=value input=input options=options rootId=../partId }}
+        {{/each}}
+    </fieldset>
+    {{/if}}
+</section>

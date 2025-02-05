@@ -523,9 +523,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
       else if ( item.isHealing ) damageBonus = healingBonus;
       if ( damageBonus && item.system.activities.find(a => a.damage?.parts?.length || a.healing?.formula) ) {
         changes.push({
-          key: "system.damage.parts",
+          key: "system.damage.bonus",
           mode: CONST.ACTIVE_EFFECT_MODES.ADD,
-          value: JSON.stringify({ bonus: damageBonus })
+          value: damageBonus
         });
       }
 

@@ -1,5 +1,6 @@
 import * as Filter from "../filter.mjs";
 import SourceField from "../data/shared/source-field.mjs";
+import Application5e from "./api/application.mjs";
 import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-settings.mjs";
 
 /**
@@ -21,6 +22,8 @@ import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-setti
  * @property {string} [documentClass]  Document type to fetch (e.g. Actor or Item).
  * @property {Set<string>} [types]     Individual document subtypes to filter upon (e.g. "loot", "class", "npc").
  * @property {object} [additional]     Additional type-specific filters applied.
+ * @property {FilterDescription[]} [arbitrary]  Additional arbitrary filters to apply, not displayed in the UI.
+ *                                     Only available as part of locked filters.
  * @property {string} [name]           A substring to filter by Document name.
  */
 
@@ -47,13 +50,10 @@ import CompendiumBrowserSettingsConfig from "./settings/compendium-browser-setti
 
 /**
  * Application for browsing, filtering, and searching for content between multiple compendiums.
- * @extends ApplicationV2
- * @mixes HandlebarsApplicationMixin
+ * @extends Application5e
  * @template CompendiumBrowserConfiguration
  */
-export default class CompendiumBrowser extends foundry.applications.api.HandlebarsApplicationMixin(
-  foundry.applications.api.ApplicationV2
-) {
+export default class CompendiumBrowser extends Application5e {
   constructor(...args) {
     super(...args);
 
@@ -75,7 +75,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
   /** @override */
   static DEFAULT_OPTIONS = {
     id: "compendium-browser-{id}",
-    classes: ["dnd5e2", "compendium-browser", "vertical-tabs"],
+    classes: ["compendium-browser", "vertical-tabs"],
     tag: "form",
     window: {
       title: "DND5E.CompendiumBrowser.Title",
@@ -124,17 +124,18 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     },
     search: {
       id: "sidebar-search",
-      classes: ["sidebar-part", "filter-element"],
+      classes: ["filter-element"],
+      container: { id: "sidebar", classes: ["sidebar", "flexcol"] },
       template: "systems/dnd5e/templates/compendium/browser-sidebar-search.hbs"
     },
     types: {
       id: "sidebar-types",
-      classes: ["sidebar-part"],
+      container: { id: "sidebar", classes: ["sidebar", "flexcol"] },
       template: "systems/dnd5e/templates/compendium/browser-sidebar-types.hbs"
     },
     filters: {
       id: "sidebar-filters",
-      classes: ["sidebar-part"],
+      container: { id: "sidebar", classes: ["sidebar", "flexcol"] },
       template: "systems/dnd5e/templates/compendium/browser-sidebar-filters.hbs",
       templates: ["systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs"]
     },
@@ -418,16 +419,6 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
   /* -------------------------------------------- */
 
-  /** @override */
-  _onFirstRender(context, options) {
-    const sidebar = document.createElement("div");
-    sidebar.classList.add("sidebar", "flexcol");
-    sidebar.replaceChildren(...this.element.querySelectorAll(".sidebar-part"));
-    this.element.querySelector(".window-content").insertAdjacentElement("afterbegin", sidebar);
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
@@ -589,8 +580,9 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
     // TODO: Determine if new set of results need to be fetched, otherwise use old results and re-sort as necessary
     // Sorting changes alone shouldn't require a re-fetch, but any change to filters will
     const filters = CompendiumBrowser.applyFilters(context.filterDefinitions, context.filters.additional);
-    // Add the name filter
+    // Add the name & arbitrary filters
     if ( this.#filters.name?.length ) filters.push({ k: "name", o: "icontains", v: this.#filters.name });
+    if ( context.filters.arbitrary?.length ) filters.push(...context.filters.arbitrary);
     this.#results = CompendiumBrowser.fetch(CONFIG[context.filters.documentClass].documentClass, {
       filters,
       types: context.filters.types,
@@ -942,6 +934,7 @@ export default class CompendiumBrowser extends foundry.applications.api.Handleba
 
   /**
    * Handle form submission with selection.
+   * @this {CompendiumBrowser}
    * @param {SubmitEvent} event          The form submission event.
    * @param {HTMLFormElement} form       The submitted form element.
    * @param {FormDataExtended} formData  The data from the submitted form.

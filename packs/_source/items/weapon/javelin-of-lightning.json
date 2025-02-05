@@ -89,8 +89,8 @@
       "conditions": ""
     },
     "properties": [
-      "thr",
-      "mgc"
+      "mgc",
+      "thr"
     ],
     "proficient": null,
     "type": {
@@ -117,12 +117,8 @@
           "targets": [
             {
               "type": "itemUses",
-              "target": "",
               "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
+              "target": ""
             }
           ],
           "scaling": {
@@ -186,29 +182,28 @@
           "includeBase": true,
           "parts": [
             {
-              "number": 4,
-              "denomination": 6,
-              "bonus": "",
-              "types": [
-                "lightning"
-              ],
               "custom": {
                 "enabled": false,
                 "formula": ""
               },
-              "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
-              }
+              "number": 4,
+              "denomination": "6",
+              "bonus": "",
+              "types": [
+                "lightning"
+              ]
             }
           ]
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "",
+        "img": "",
+        "appliedEffects": []
       },
       "dnd5eactivity100": {
         "_id": "dnd5eactivity100",
@@ -223,12 +218,8 @@
           "targets": [
             {
               "type": "itemUses",
-              "target": "",
               "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
+              "target": ""
             }
           ],
           "scaling": {
@@ -250,9 +241,9 @@
         "effects": [],
         "range": {
           "value": "120",
-          "units": "ft",
+          "units": "self",
           "special": "",
-          "override": false
+          "override": true
         },
         "target": {
           "template": {
@@ -277,21 +268,16 @@
           "onSave": "half",
           "parts": [
             {
-              "number": 1,
-              "denomination": 6,
-              "bonus": "@mod",
-              "types": [
-                "piercing"
-              ],
               "custom": {
                 "enabled": false,
                 "formula": ""
               },
-              "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
-              }
+              "number": 4,
+              "denomination": "6",
+              "bonus": "",
+              "types": [
+                "lightning"
+              ]
             }
           ]
         },
@@ -304,89 +290,19 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
-      },
-      "dnd5eactivity300": {
-        "_id": "dnd5eactivity300",
-        "type": "utility",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "Command word.",
-          "override": false
-        },
-        "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "",
-          "units": "inst",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "value": "120",
-          "units": "ft",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "line",
-            "size": "120",
-            "width": "",
-            "height": "",
-            "units": "ft"
-          },
-          "affects": {
-            "count": "",
-            "type": "",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "4d6",
-          "name": "",
-          "prompt": false,
-          "visible": false
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
+        "sort": 0,
+        "name": "",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
     "ammunition": {},
-    "identifier": "javelin-of-lightning"
+    "identifier": "javelin-of-lightning",
+    "mastery": ""
   },
   "effects": [],
   "folder": "MLMTCAvKsuFE3vYA",
@@ -394,14 +310,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.0",
     "createdTime": 1725037166137,
-    "modifiedTime": 1725992505884,
+    "modifiedTime": 1738529748986,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!LEC1wkaAUnWzDPDD"

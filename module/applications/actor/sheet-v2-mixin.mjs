@@ -1,7 +1,9 @@
 import * as Trait from "../../documents/actor/trait.mjs";
-import { formatDistance, formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
+import { formatLength, formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
+import { createCheckboxInput } from "../fields.mjs";
 import Tabs5e from "../tabs.mjs";
 import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
+import ItemSheet5e2 from "../item/item-sheet-2.mjs";
 
 /**
  * Adds common V2 Actor sheet functionality.
@@ -180,8 +182,9 @@ export default function ActorSheetV2Mixin(Base) {
           const toggleable = !this._concentration?.effects.has(effect);
           let source = await effect.getSource();
           // If the source is an ActiveEffect from another Actor, note the source as that Actor instead.
-          if ( (source instanceof dnd5e.documents.ActiveEffect5e) && (source.target !== this.object) ) {
+          if ( source instanceof ActiveEffect ) {
             source = source.target;
+            if ( (source instanceof Item) && source.parent && (source.parent !== this.object) ) source = source.parent;
           }
           arr = await arr;
           arr.push({
@@ -195,9 +198,59 @@ export default function ActorSheetV2Mixin(Base) {
       }
 
       context.effects.suppressed.info = context.effects.suppressed.info[0];
+      context.flags = this._prepareFlags();
       context.hasConditions = true;
+      const sourceVersion = context.system.source?.rules;
+      context.modernRules = sourceVersion
+        ? sourceVersion === "2024"
+        : game.settings.get("dnd5e", "rulesVersion") === "modern";
 
       return context;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Prepare flags displayed in the special traits tab.
+     * @returns {object}
+     */
+    _prepareFlags() {
+      const sections = [];
+      const source = (this._mode === this.constructor.MODES.PLAY ? this.document : this.document._source);
+      const flags = {
+        classes: Object.values(this.document.classes)
+          .map(cls => ({ value: cls.id, label: cls.name }))
+          .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang)),
+        data: source.flags?.dnd5e ?? {},
+        disabled: this._mode === this.constructor.MODES.PLAY
+      };
+
+      // Character Flags
+      for ( const [key, config] of Object.entries(CONFIG.DND5E.characterFlags) ) {
+        const flag = { ...config, name: `flags.dnd5e.${key}`, value: flags.data[key] };
+        const fieldOptions = { label: config.name, hint: config.hint };
+        if ( config.type === Boolean ) {
+          flag.field = new foundry.data.fields.BooleanField(fieldOptions);
+          flag.input = createCheckboxInput;
+        }
+        else if ( config.type === Number ) flag.field = new foundry.data.fields.NumberField(fieldOptions);
+        else flag.fields = new foundry.data.fields.StringField(fieldOptions);
+
+        sections[config.section] ??= [];
+        sections[config.section].push(flag);
+      }
+
+      // Global Bonuses
+      const globals = [];
+      const addBonus = field => {
+        if ( field instanceof foundry.data.fields.SchemaField ) Object.values(field.fields).forEach(f => addBonus(f));
+        else globals.push({ field, name: field.fieldPath, value: foundry.utils.getProperty(source, field.fieldPath) });
+      };
+      addBonus(this.document.system.schema.fields.bonuses);
+      if ( globals.length ) sections[game.i18n.localize("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
+
+      flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }))
+      return flags;
     }
 
     /* -------------------------------------------- */
@@ -206,7 +259,7 @@ export default function ActorSheetV2Mixin(Base) {
     _prepareTraits() {
       const traits = {};
       for ( const [trait, config] of Object.entries(CONFIG.DND5E.traits) ) {
-        if ( trait === "dm" ) continue;
+        if ( ["dm", "languages"].includes(trait) ) continue;
         const key = config.actorKeyPath ?? `system.traits.${trait}`;
         const data = foundry.utils.deepClone(foundry.utils.getProperty(this.actor, key));
         if ( !data ) continue;
@@ -258,6 +311,16 @@ export default function ActorSheetV2Mixin(Base) {
           return value;
         }).filter(f => f);
         if ( values.length ) traits.dm = values;
+      }
+
+      // Handle languages
+      const languages = this.actor.system.traits?.languages?.labels;
+      if ( languages?.languages?.length ) traits.languages = languages.languages.map(label => ({ label }));
+      for ( const [key, { label }] of Object.entries(CONFIG.DND5E.communicationTypes) ) {
+        const data = this.actor.system.traits?.languages?.communication?.[key];
+        if ( !data?.value ) continue;
+        traits.languages ??= [];
+        traits.languages.push({ label, value: data.value });
       }
 
       // Display weapon masteries
@@ -343,7 +406,7 @@ export default function ActorSheetV2Mixin(Base) {
               distance: true,
               value: system.range.value,
               unit: CONFIG.DND5E.movementUnits[units].abbreviation,
-              parts: formatDistance(system.range.value, units, { parts: true })
+              parts: formatLength(system.range.value, units, { parts: true })
             };
           }
           else ctx.range = { distance: false };
@@ -426,6 +489,12 @@ export default function ActorSheetV2Mixin(Base) {
       ctx.activities = item.system.activities
         ?.filter(a => !item.getFlag("dnd5e", "riders.activity")?.includes(a.id))
         ?.map(this._prepareActivity.bind(this));
+
+      // Linked Uses
+      const cachedFor = fromUuidSync(item.flags.dnd5e?.cachedFor, { relative: this.actor, strict: false });
+      if ( cachedFor ) ctx.linkedUses = cachedFor.consumption?.targets.find(t => t.type === "activityUses")
+        ? cachedFor.uses : cachedFor.consumption?.targets.find(t => t.type === "itemUses")
+          ? cachedFor.item.system.uses : null;
     }
 
     /* -------------------------------------------- */
@@ -584,6 +653,48 @@ export default function ActorSheetV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Handling beginning a drag-drop operation on an Activity.
+     * @param {DragEvent} event  The originating drag event.
+     * @protected
+     */
+    _onDragActivity(event) {
+      const { itemId } = event.target.closest("[data-item-id]").dataset;
+      const { activityId } = event.target.closest("[data-activity-id]").dataset;
+      const activity = this.actor.items.get(itemId)?.system.activities?.get(activityId);
+      if ( activity ) event.dataTransfer.setData("text/plain", JSON.stringify(activity.toDragData()));
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle beginning a drag-drop operation on an Item.
+     * @param {DragEvent} event  The originating drag event.
+     * @protected
+     */
+    _onDragItem(event) {
+      const { itemId } = event.target.closest("[data-item-id]").dataset;
+      const item = this.actor.items.get(itemId);
+      if ( item ) event.dataTransfer.setData("text/plain", JSON.stringify(item.toDragData()));
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    _onDragStart(event) {
+      // Add another deferred deactivation to catch the second pointerenter event that seems to be fired on Firefox.
+      requestAnimationFrame(() => game.tooltip.deactivate());
+      game.tooltip.deactivate();
+
+      if ( event.target.matches("[data-item-id] > .item-row") ) return this._onDragItem(event);
+      else if ( event.target.matches("[data-item-id] [data-activity-id], [data-item-id][data-activity-id]") ) {
+        return this._onDragActivity(event);
+      }
+      return super._onDragStart(event);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * Handle performing some action on an owned Item.
      * @param {PointerEvent} event  The triggering event.
      * @protected
@@ -597,8 +708,9 @@ export default function ActorSheetV2Mixin(Base) {
       const item = this.actor.items.get(itemId);
 
       switch ( action ) {
-        case "edit": item?.sheet.render(true); break;
         case "delete": item?.deleteDialog(); break;
+        case "edit": item?.sheet.render(true, { mode: ItemSheet5e2.MODES.EDIT }); break;
+        case "view": item?.sheet.render(true, { mode: ItemSheet5e2.MODES.PLAY }); break;
       }
     }
 

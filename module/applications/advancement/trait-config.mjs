@@ -1,6 +1,8 @@
-import AdvancementConfig from "./advancement-config.mjs";
+import AdvancementConfig from "./advancement-config-v2.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { filteredKeys } from "../../utils.mjs";
+
+const { BooleanField, StringField } = foundry.data.fields;
 
 /**
  * Configuration application for traits.
@@ -12,6 +14,48 @@ export default class TraitConfig extends AdvancementConfig {
     this.trait = this.types.first() ?? "skills";
   }
 
+  /* -------------------------------------------- */
+
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["trait", "trait-selector"],
+    actions: {
+      addChoice: TraitConfig.#addChoice,
+      removeChoice: TraitConfig.#removeChoice
+    },
+    position: {
+      width: 680
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static PARTS = {
+    config: {
+      container: { classes: ["column-container"], id: "column-left" },
+      template: "systems/dnd5e/templates/advancement/advancement-controls-section.hbs"
+    },
+    details: {
+      container: { classes: ["column-container"], id: "column-left" },
+      template: "systems/dnd5e/templates/advancement/trait-config-details.hbs"
+    },
+    guaranteed: {
+      container: { classes: ["column-container"], id: "column-left" },
+      template: "systems/dnd5e/templates/advancement/trait-config-guaranteed.hbs"
+    },
+    choices: {
+      container: { classes: ["column-container"], id: "column-left" },
+      template: "systems/dnd5e/templates/advancement/trait-config-choices.hbs"
+    },
+    traits: {
+      container: { classes: ["column-container"], id: "column-right" },
+      template: "systems/dnd5e/templates/advancement/trait-config-traits.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
   /* -------------------------------------------- */
 
   /**
@@ -51,23 +95,12 @@ export default class TraitConfig extends AdvancementConfig {
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "advancement", "traits", "two-column"],
-      template: "systems/dnd5e/templates/advancement/trait-config.hbs",
-      width: 640
-    });
-  }
-
-  /* -------------------------------------------- */
-  /*  Context Preparation                         */
+  /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getData() {
-    const context = super.getData();
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
 
     context.grants = {
       label: Trait.localizedList({ grants: this.config.grants }) || "—",
@@ -80,16 +113,11 @@ export default class TraitConfig extends AdvancementConfig {
       selected: this.selected === index
     }));
     const chosen = (this.selected === -1) ? context.grants.data : context.choices[this.selected].data.pool;
-    context.count = context.choices[this.selected]?.data.count;
+    if ( this.selected !== -1 ) context.count = {
+      field: context.configuration.fields.choices.element.fields.count,
+      value: context.choices[this.selected]?.data.count
+    };
     context.selectedIndex = this.selected;
-
-    context.validTraitTypes = Object.entries(CONFIG.DND5E.traits).reduce((obj, [key, config]) => {
-      if ( ((this.config.mode === "default") || (this.config.mode === "mastery" ? config.mastery : config.expertise))
-        && (config.dataType !== Number) ) {
-        obj[key] = config.labels.title;
-      }
-      return obj;
-    }, {});
 
     const rep = this.advancement.representedTraits();
     context.disableAllowReplacements = rep.size > 1;
@@ -103,69 +131,84 @@ export default class TraitConfig extends AdvancementConfig {
     }
     context.default.hint = Trait.localizedList({ grants: this.config.grants, choices: this.config.choices });
 
-    context.choiceOptions = await Trait.choices(this.trait, { chosen, prefixed: true, any: this.selected !== -1 });
-    context.selectedTraitHeader = `${CONFIG.DND5E.traits[this.trait].labels.localization}.other`;
-    context.selectedTrait = this.trait;
+    context.trait = {
+      field: new BooleanField(),
+      input: context.inputs.createCheckboxInput,
+      options: await Trait.choices(this.trait, { chosen, prefixed: true, any: this.selected !== -1 }),
+      selected: this.trait,
+      selectedHeader: `${CONFIG.DND5E.traits[this.trait].labels.localization}.other`,
+      typeField: new StringField({ label: game.i18n.localize("DND5E.ADVANCEMENT.Trait.TraitType") }),
+      typeOptions: Object.entries(CONFIG.DND5E.traits)
+        .filter(([, config]) => ((this.config.mode === "default") || (this.config.mode === "mastery"
+          ? config.mastery : config.expertise)) && (config.dataType !== Number))
+        .map(([value, config]) => ({ value, label: config.labels.title }))
+    };
 
     // Disable selecting categories in mastery mode
     if ( this.advancement.configuration.mode === "mastery" ) {
-      context.choiceOptions.forEach((key, value) => value.disabled = !!value.children);
+      context.trait.options.forEach((key, value) => value.disabled = !!value.children);
     }
+
+    context.mode = {
+      hint: CONFIG.DND5E.traitModes[this.advancement.configuration.mode].hint,
+      options: Object.entries(CONFIG.DND5E.traitModes).map(([value, { label }]) => ({ value, label }))
+    };
 
     return context;
   }
 
   /* -------------------------------------------- */
-  /*  Event Handlers                              */
+  /*  Life-Cycle Handlers                         */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-
-    this.form.querySelectorAll("[data-action]").forEach(a => a.addEventListener("click", this._onAction.bind(this)));
-
+  _onRender(context, options) {
+    super._onRender(context, options);
     // Handle selecting & disabling category children when a category is selected
-    for ( const checkbox of html[0].querySelectorAll(".trait-selector input:checked") ) {
-      const toCheck = checkbox.name.endsWith("*")
-        ? checkbox.closest("ol").querySelectorAll(`input:not([name="${checkbox.name}"])`)
-        : checkbox.closest("li").querySelector("ol")?.querySelectorAll("input");
+    for ( const checkbox of this.element.querySelectorAll(".trait-list dnd5e-checkbox[checked]") ) {
+      const toCheck = (checkbox.name.endsWith("*") || checkbox.name.endsWith("ALL"))
+        ? checkbox.closest("ol").querySelectorAll(`dnd5e-checkbox:not([name="${checkbox.name}"])`)
+        : checkbox.closest("li").querySelector("ol")?.querySelectorAll("dnd5e-checkbox");
       toCheck?.forEach(i => i.checked = i.disabled = true);
     }
   }
 
   /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
 
   /**
-   * Handle clicks to the Add and Remove buttons above the list.
-   * @param {Event} event  Triggering click.
+   * Handle adding a new choice.
+   * @this {TraitConfig}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
    */
-  async _onAction(event) {
-    event.preventDefault();
-    switch ( event.currentTarget.dataset.action ) {
-      case "add-choice":
-        this.config.choices.push({ count: 1 });
-        this.selected = this.config.choices.length - 1;
-        break;
+  static async #addChoice(event, target) {
+    this.config.choices.push({ count: 1 });
+    this.selected = this.config.choices.length - 1;
+    await this.advancement.update({ configuration: await this.prepareConfigurationUpdate() });
+  }
 
-      case "remove-choice":
-        const input = event.currentTarget.closest("li").querySelector("[name='selectedIndex']");
-        const selectedIndex = Number(input.value);
-        this.config.choices.splice(selectedIndex, 1);
-        if ( selectedIndex <= this.selected ) this.selected -= 1;
-        break;
+  /* -------------------------------------------- */
 
-      default:
-        return;
-    }
-
+  /**
+   * Handle removing a choice.
+   * @this {TraitConfig}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #removeChoice(event, target) {
+    const input = target.closest("li").querySelector("[name='selectedIndex']");
+    const selectedIndex = Number(input.value);
+    this.config.choices.splice(selectedIndex, 1);
+    if ( selectedIndex <= this.selected ) this.selected -= 1;
     await this.advancement.update({ configuration: await this.prepareConfigurationUpdate() });
   }
 
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async _onChangeInput(event) {
+  _onChangeForm(formConfig, event) {
     // Display new set of trait choices
     if ( event.target.name === "selectedTrait" ) {
       this.trait = event.target.value;
@@ -189,9 +232,11 @@ export default class TraitConfig extends AdvancementConfig {
       if ( !validTraitTypes.includes(this.trait) ) this.trait = validTraitTypes[0];
     }
 
-    super._onChangeInput(event);
+    super._onChangeForm(formConfig, event);
   }
 
+  /* -------------------------------------------- */
+  /*  Form Handling                               */
   /* -------------------------------------------- */
 
   /** @inheritDoc */

@@ -14,6 +14,8 @@ export default class Dialog5e extends Application5e {
     }
   };
 
+  /* -------------------------------------------- */
+
   /** @override */
   static PARTS = {
     content: {

@@ -4,6 +4,12 @@ import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 
 export default class ChatMessage5e extends ChatMessage {
 
+  /**
+   * HTML tag names for chat trays that can open and close.
+   * @type {string[]}
+   */
+  static TRAY_TYPES = ["damage-application", "effect-application"];
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -41,6 +47,7 @@ export default class ChatMessage5e extends ChatMessage {
 
   /** @inheritDoc */
   get isRoll() {
+    if ( this.system?.isRoll !== undefined ) return this.system.isRoll;
     return super.isRoll && !this.flags.dnd5e?.rest;
   }
 
@@ -58,6 +65,15 @@ export default class ChatMessage5e extends ChatMessage {
       default: return false;
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Store the state of any trays in the message.
+   * @type {Map<string, boolean>}
+   * @protected
+   */
+  _trayStates;
 
   /* -------------------------------------------- */
   /*  Data Migrations                             */
@@ -100,8 +116,14 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getHTML(...args) {
-    const html = await super.getHTML();
+  async getHTML(options={}) {
+    const html = await super.getHTML(options);
+    const element = (html instanceof HTMLElement) ? html : html[0];
+
+    if ( foundry.utils.getType(this.system?.getHTML) === "function" ) {
+      await this.system.getHTML(element, options);
+      return html;
+    }
 
     this._displayChatActionButtons(html);
     this._highlightCriticalSuccessFailure(html);
@@ -109,10 +131,10 @@ export default class ChatMessage5e extends ChatMessage {
       html.find(".description.collapsible").each((i, el) => el.classList.add("collapsed"));
     }
 
-    this._enrichChatCard(html[0]);
-    this._collapseTrays(html[0]);
-    this._activateActivityListeners(html[0]);
-    dnd5e.bastion._activateChatListeners(this, html[0]);
+    this._enrichChatCard(element);
+    this._collapseTrays(element);
+    this._activateActivityListeners(element);
+    dnd5e.bastion._activateChatListeners(this, element);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
@@ -121,7 +143,7 @@ export default class ChatMessage5e extends ChatMessage {
      * @param {ChatMessage5e} message  Chat message being rendered.
      * @param {HTMLElement} html       HTML contents of the message.
      */
-    Hooks.callAll("dnd5e.renderChatMessage", this, html[0]);
+    Hooks.callAll("dnd5e.renderChatMessage", this, element);
 
     return html;
   }
@@ -140,11 +162,11 @@ export default class ChatMessage5e extends ChatMessage {
       // Collapse chat message trays older than 5 minutes
       case "older": collapse = this.timestamp < Date.now() - (5 * 60 * 1000); break;
     }
-    for ( const tray of html.querySelectorAll(".card-tray, .effects-tray") ) {
-      tray.classList.toggle("collapsed", collapse);
+    for ( const tray of html.querySelectorAll(".card-tray") ) {
+      tray.classList.toggle("collapsed", this._trayStates?.get(tray.className.replace(" collapsed", "")) ?? collapse);
     }
-    for ( const element of html.querySelectorAll("damage-application, effect-application") ) {
-      element.toggleAttribute("open", !collapse);
+    for ( const element of html.querySelectorAll(this.constructor.TRAY_TYPES.join(", ")) ) {
+      element.toggleAttribute("open", this._trayStates?.get(element.tagName) ?? !collapse);
     }
   }
 
@@ -187,6 +209,7 @@ export default class ChatMessage5e extends ChatMessage {
     const originatingMessage = this.getOriginatingMessage();
     const displayChallenge = originatingMessage?.shouldDisplayChallenge;
     const displayAttackResult = game.user.isGM || (game.settings.get("dnd5e", "attackRollVisibility") !== "none");
+    const forceSuccess = this.flags.dnd5e?.roll?.forceSuccess === true;
 
     /**
      * Create an icon to indicate success or failure.
@@ -220,11 +243,11 @@ export default class ChatMessage5e extends ChatMessage {
       const isAttack = this.getFlag("dnd5e", "roll.type") === "attack";
       const showResult = isAttack ? displayAttackResult : displayChallenge;
       if ( d.options.target && showResult ) {
-        if ( d20Roll.total >= d.options.target ) total.classList.add("success");
+        if ( d20Roll.isSuccess || forceSuccess ) total.classList.add("success");
         else total.classList.add("failure");
       }
       if ( canCrit && d20Roll.isCritical ) total.classList.add("critical");
-      if ( canCrit && d20Roll.isFumble ) total.classList.add("fumble");
+      if ( canCrit && d20Roll.isFumble && !forceSuccess ) total.classList.add("fumble");
 
       const icons = document.createElement("div");
       icons.classList.add("icons");
@@ -307,7 +330,9 @@ export default class ChatMessage5e extends ChatMessage {
     if ( this.isContentVisible && item && roll ) {
       const isCritical = (roll.type === "damage") && this.rolls[0]?.isCritical;
       const subtitle = roll.type === "damage"
-        ? isCritical ? game.i18n.localize("DND5E.CriticalHit") : game.i18n.localize("DND5E.DamageRoll")
+        ? isCritical
+          ? game.i18n.localize("DND5E.CriticalHit") 
+          : activity?.damageFlavor ?? game.i18n.localize("DND5E.DamageRoll")
         : roll.type === "attack"
           ? (activity?.getActionLabel(roll.attackMode) ?? "")
           : (item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]));
@@ -342,6 +367,7 @@ export default class ChatMessage5e extends ChatMessage {
         if ( !(roll instanceof DamageRoll) && this.rolls[i] ) this._enrichRollTooltip(this.rolls[i], el);
       });
       this._enrichDamageTooltip(this.rolls.filter(r => r instanceof DamageRoll), html);
+      this._enrichSaveTooltip(html);
       this._enrichEnchantmentTooltip(html);
       html.querySelectorAll(".dice-roll").forEach(el => el.addEventListener("click", this._onClickDiceRoll.bind(this)));
     } else {
@@ -596,21 +622,58 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /**
+   * Display option to resist a failed save using a legendary resistance.
+   * @param {HTMLLIElement} html  The chat card.
+   * @protected
+   */
+  _enrichSaveTooltip(html) {
+    const actor = this.getAssociatedActor();
+    const roll = this.getFlag("dnd5e", "roll");
+    if ( (actor?.type !== "npc") || (roll?.type !== "save") || this.rolls.some(r => r.isSuccess) ) return;
+
+    const content = document.createElement("div");
+    content.classList.add("dnd5e2", "chat-card");
+
+    // If message has the `forceSuccess` flag, mark it as resisted
+    if ( roll.forceSuccess ) content.insertAdjacentHTML("beforeend", `
+      <p class="supplement">
+        <strong>${game.i18n.localize("DND5E.ROLL.Status")}</strong>
+        ${game.i18n.localize("DND5E.LegendaryResistance.Resisted")}
+      </p>
+    `);
+
+    // Otherwise if actor has legendary resistances remaining, display resist button
+    else if ( actor.system.resources.legres.value && actor.isOwner ) {
+      content.insertAdjacentHTML("beforeend", `
+        <div class="card-buttons">
+          <button type="button">
+            <i class="fa-solid fa-dragon" inert></i>
+            ${game.i18n.localize("DND5E.LegendaryResistance.Action.Resist")}
+          </button>
+        </div>
+      `);
+      const button = content.querySelector("button");
+      button.addEventListener("click", () => actor.system.resistSave(this));
+    }
+
+    else return;
+
+    html.querySelector(".message-content").append(content);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Display the effects tray with effects the user can apply.
    * @param {HTMLLiElement} html  The chat card.
    * @protected
    */
   _enrichUsageEffects(html) {
+    if ( this.getFlag("dnd5e", "messageType") !== "usage" ) return;
     const item = this.getAssociatedItem();
-    let effects;
-    if ( this.getFlag("dnd5e", "messageType") === "usage" ) {
-      effects = this.getFlag("dnd5e", "use.effects")?.map(id => item?.effects.get(id));
-    } else {
-      if ( this.getFlag("dnd5e", "roll.type") ) return;
-      effects = item?.effects.filter(e => (e.type !== "enchantment")
-        && !item.getFlag("dnd5e", "riders.effect")?.includes(e.id));
-    }
-    effects = effects?.filter(e => e && (game.user.isGM || (e.transfer && (this.author.id === game.user.id))));
+    const effects = this.getFlag("dnd5e", "use.effects")
+      ?.map(id => item?.effects.get(id))
+      .filter(e => e && (game.user.isGM || (e.transfer && (this.author.id === game.user.id))));
     if ( !effects?.length ) return;
 
     const effectApplication = document.createElement("effect-application");

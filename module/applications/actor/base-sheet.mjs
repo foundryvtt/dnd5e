@@ -1,6 +1,6 @@
 import * as Trait from "../../documents/actor/trait.mjs";
 import Item5e from "../../documents/item.mjs";
-import { defaultUnits, formatDistance, splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, formatLength, splitSemicolons } from "../../utils.mjs";
 import EffectsElement from "../components/effects.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
@@ -16,16 +16,24 @@ import ActorSheetMixin from "./sheet-mixin.mjs";
 import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
 import ConcentrationConfig from "./config/concentration-config.mjs";
+import DeathConfig from "./config/death-config.mjs";
 import DamagesConfig from "./config/damages-config.mjs";
+import HabitatConfig from "./config/habitat-config.mjs";
 import HitDiceConfig from "./config/hit-dice-config.mjs";
 import HitPointsConfig from "./config/hit-points-config.mjs";
 import InitiativeConfig from "./config/initiative-config.mjs";
+import LanguagesConfig from "./config/languages-config.mjs";
 import SkillToolConfig from "./config/skill-tool-config.mjs";
 import SkillsConfig from "./config/skills-config.mjs";
 import SpellSlotsConfig from "./config/spell-slots-config.mjs";
 import ToolsConfig from "./config/tools-config.mjs";
 import TraitsConfig from "./config/traits-config.mjs";
+import TreasureConfig from "./config/treasure-config.mjs";
 import WeaponsConfig from "./config/weapons-config.mjs";
+
+/**
+ * @import { DropEffectValue } from "../../drag-drop.mjs"
+ */
 
 /**
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
@@ -259,7 +267,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     if ( largestPrimary ) {
       let primary = speeds.shift();
       return {
-        primary: formatDistance(primary?.[1], units),
+        primary: `${primary?.[1]} ${units}`,
         special: speeds.map(s => s[1]).join(", ")
       };
     }
@@ -267,7 +275,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Case 2: Walk as primary
     else {
       return {
-        primary: formatDistance(movement.walk ?? 0, units),
+        primary: formatLength(movement.walk ?? 0, units),
         special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
       };
     }
@@ -288,7 +296,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
       const v = senses[k] ?? 0;
       if ( v === 0 ) continue;
-      tags[k] = `${game.i18n.localize(label)} ${formatDistance(v, units)}`;
+      tags[k] = `${game.i18n.localize(label)} ${formatLength(v, units)}`;
     }
     if ( senses.special ) splitSemicolons(senses.special).forEach((c, i) => tags[`custom${i + 1}`] = c);
     return tags;
@@ -725,6 +733,12 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       case "armor":
         app = new ArmorClassConfig({ document: this.actor });
         break;
+      case "death":
+        app = new DeathConfig({ document: this.actor });
+        break;
+      case "habitat":
+        app = new HabitatConfig({ document: this.actor });
+        break;
       case "hitDice":
         app = new HitDiceConfig({ document: this.actor });
         break;
@@ -737,6 +751,9 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       case "movement":
       case "senses":
         app = new MovementSensesConfig({ document: this.actor, type: button.dataset.action });
+        break;
+      case "treasure":
+        app = new TreasureConfig({ document: this.actor });
         break;
       case "flags":
         app = new ActorSheetFlags(this.actor);
@@ -900,16 +917,17 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
   /** @override */
   async _onDropItem(event, data) {
-    if ( !this.actor.isOwner ) return false;
+    const behavior = this._dropBehavior(event, data);
+    if ( !this.actor.isOwner || (behavior === "none") ) return false;
     const item = await Item.implementation.fromDropData(data);
 
     // Handle moving out of container & item sorting
-    if ( this.actor.uuid === item.parent?.uuid ) {
-      if ( item.system.container !== null ) await item.update({"system.container": null});
+    if ( (behavior === "move") && (this.actor.uuid === item.parent?.uuid) ) {
+      if ( item.system.container !== null ) await item.update({ "system.container": null });
       return this._onSortItem(event, item.toObject());
     }
 
-    return this._onDropItemCreate(item, event);
+    return this._onDropItemCreate(item, event, behavior);
   }
 
   /* -------------------------------------------- */
@@ -932,10 +950,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    * Handle the final creation of dropped Item data on the Actor.
    * @param {Item5e[]|Item5e} itemData     The item or items requested for creation.
    * @param {DragEvent} event              The concluding DragEvent which provided the drop data.
+   * @param {DropEffectValue} behavior     The specific drop behavior.
    * @returns {Promise<Item5e[]>}
    * @protected
    */
-  async _onDropItemCreate(itemData, event) {
+  async _onDropItemCreate(itemData, event, behavior) {
     let items = itemData instanceof Array ? itemData : [itemData];
     const itemsWithoutAdvancement = items.filter(i => !i.system.advancement?.length);
     const multipleAdvancements = (items.length - itemsWithoutAdvancement.length) > 1;
@@ -950,9 +969,14 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
 
     // Create the owned items & contents as normal
     const toCreate = await Item5e.createWithContents(items, {
-      transformFirst: item => this._onDropSingleItem(item.toObject(), event)
+      transformFirst: item => {
+        if ( item instanceof foundry.abstract.Document ) item = item.toObject();
+        return this._onDropSingleItem(item, event);
+      }
     });
-    return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
+    const created = await Item5e.createDocuments(toCreate, { pack: this.actor.pack, parent: this.actor, keepId: true });
+    if ( behavior === "move" ) items.forEach(i => fromUuid(i.uuid).then(d => d?.delete({ deleteContents: true })));
+    return created;
   }
 
   /* -------------------------------------------- */
@@ -1209,10 +1233,17 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     event.preventDefault();
     const trait = event.currentTarget.dataset.trait;
     const options = { document: this.actor, trait };
-    if ( trait === "tool" ) return new ToolsConfig(options).render({ force: true });
-    else if ( ["dr", "di", "dv", "dm"].includes(trait) ) return new DamagesConfig(options).render({ force: true });
-    else if ( trait === "weapon" ) return new WeaponsConfig(options).render({ force: true });
-    return new TraitsConfig(options).render({ force: true });
+    if ( trait === "ci" ) options.position = { width: 400 };
+    switch ( trait ) {
+      case "di":
+      case "dm":
+      case "dr":
+      case "dv": return new DamagesConfig(options).render({ force: true });
+      case "languages": return new LanguagesConfig(options).render({ force: true });
+      case "tool": return new ToolsConfig(options).render({ force: true });
+      case "weapon": return new WeaponsConfig(options).render({ force: true });
+      default: return new TraitsConfig(options).render({ force: true });
+    }
   }
 
   /* -------------------------------------------- */
@@ -1250,5 +1281,21 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       });
     }
     return buttons;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _updateObject(event, formData) {
+    // Unset any flags which are "false"
+    for ( const [k, v] of Object.entries(formData) ) {
+      if ( k.startsWith("flags.dnd5e.") && !v ) {
+        delete formData[k];
+        if ( foundry.utils.hasProperty(this.document._source, k) ) formData[k.replace(/\.([\w\d]+)$/, ".-=$1")] = null;
+      }
+    }
+
+    // Parent ActorSheet update steps
+    return super._updateObject(event, formData);
   }
 }

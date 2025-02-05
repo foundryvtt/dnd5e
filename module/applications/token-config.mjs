@@ -1,4 +1,3 @@
-import TokenDocument5e from "../documents/token.mjs";
 import { getHumanReadableAttributeLabel } from "../utils.mjs";
 
 /**

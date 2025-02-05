@@ -615,8 +615,8 @@
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>If the rhinoceros moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra <strong>9 (2d8) <em>bludgeoning damage</em></strong>.</p>\n<p>If the target is a creature, it must succeed on a  <strong>DC 15 Strength</strong> saving throw or be knocked prone.</p>\n</section>\n<p>If the rhinoceros moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes extra <em>bludgeoning damage</em>. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>",
-          "chat": ""
+          "value": "<p>If the rhinoceros moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra <strong>9 (2d8) <em>bludgeoning damage</em></strong>.</p><p>If the target is a creature, it must succeed on a  <strong>DC 15 Strength</strong> saving throw or be knocked prone.</p>",
+          "chat": "<p>If the rhinoceros moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes extra <em>bludgeoning damage</em>. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>"
         },
         "source": {
           "custom": "",
@@ -835,10 +835,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676573,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!SBCe2BSa6opTS5M4.e1ZjZT7dyExUSEOu"
     },
@@ -849,8 +849,8 @@
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>14 (2d8 + 5) <em>bludgeoning damage</em></strong>.</p></section>\n<p>The Rhinoceros attacks with its Gore.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>14 (2d8 + 5) <em>bludgeoning damage</em></strong>.</p>",
+          "chat": "<p>The Rhinoceros attacks with its Gore.</p>"
         },
         "source": {
           "custom": "",
@@ -1037,10 +1037,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676573,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!SBCe2BSa6opTS5M4.uFv78t6CwySS1gio"
     }

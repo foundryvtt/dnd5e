@@ -1,0 +1,27 @@
+<fieldset class="card levels" data-type="{{ configuration.data.type }}">
+    <legend>{{ localize "DND5E.ADVANCEMENT.ScaleValue.FIELDS.scale.label" }}</legend>
+    <div class="header">
+        <span class="level-level">
+            {{ localize "DND5E.AbbreviationLevel" }}
+        </span>
+        {{#each type.fields}}
+        {{#unless options.hidden}}
+        <span class="{{ @key }}-header">
+            {{ label }}
+        </span>
+        {{/unless}}
+        {{/each}}
+    </div>
+    <ol class="levels-list unlist">
+        {{#each levels}}
+        <li class="level {{ className }}">
+            <div class="level-level">{{ @key }}</div>
+            {{#each fields}}
+            <div class="level-{{ @key }}">
+                {{ formInput field name=name value=value input=input options=options placeholder=placeholder }}
+            </div>
+            {{/each}}
+        </li>
+        {{/each}}
+    </ol>
+</fieldset>

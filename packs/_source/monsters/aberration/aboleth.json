@@ -613,8 +613,8 @@
       "img": "icons/magic/control/hypnosis-mesmerism-watch.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The aboleth targets one creature it can see within 30 ft. of it. The target must succeed on a  <strong>DC 14 Wisdom</strong> saving throw or be magically charmed by the aboleth until the aboleth dies or until it is on a different plane of existence from the target.</p>\n<p>The charmed target is under the aboleth's control and can't take reactions, and the aboleth and the target can communicate telepathically with each other over any distance.Whenever the charmed target takes damage, the target can repeat the saving throw. On a success, the effect ends. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from the aboleth.</p>\n</section>\n<p>The target must make a <strong>Wisdom</strong> saving throw. Whenever the target takes damage, the target can repeat the saving throw. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from the aboleth.</p>",
-          "chat": ""
+          "value": "<p>The aboleth targets one creature it can see within 30 ft. of it. The target must succeed on a  <strong>DC 14 Wisdom</strong> saving throw or be magically charmed by the aboleth until the aboleth dies or until it is on a different plane of existence from the target.</p><p>The charmed target is under the aboleth's control and can't take reactions, and the aboleth and the target can communicate telepathically with each other over any distance.Whenever the charmed target takes damage, the target can repeat the saving throw. On a success, the effect ends. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from the aboleth.</p>",
+          "chat": "<p>The target must make a <strong>Wisdom</strong> saving throw. Whenever the target takes damage, the target can repeat the saving throw. No more than once every 24 hours, the target can also repeat the saving throw when it is at least 1 mile away from the aboleth.</p>"
         },
         "source": {
           "custom": "",
@@ -745,10 +745,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676971,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!shhHtE7b92PefCWB.Wpa7li8EJJJ7W3kA"
     },
@@ -964,8 +964,8 @@
       "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The aboleth makes one tail attack.</p>\n</section>\n<p>The aboleth swipes its tail against its prey!</p>",
-          "chat": ""
+          "value": "<p>The aboleth makes one tail attack.</p>",
+          "chat": "<p>The aboleth swipes its tail against its prey!</p>"
         },
         "source": {
           "custom": "",
@@ -1113,10 +1113,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676971,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!shhHtE7b92PefCWB.nb2rVHLawik6EjMJ"
     },
@@ -1281,8 +1281,8 @@
       "img": "icons/magic/water/bubbles-air-water-blue.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>While underwater, the aboleth is surrounded by transformative mucus. A creature that touches the aboleth or that hits it with a melee attack while within <strong>5 ft.</strong> of it must make a <strong>DC 14 Constitution saving throw</strong>. On a failure, the creature is diseased for 1d4 hours. The diseased creature can breathe only underwater.</p>\n</section>\n<p>While underwater, the aboleth is surrounded by transformative mucus. A creature that touches the aboleth or that hits it with a melee attack while within <strong>5 ft.</strong> of it must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p>While underwater, the aboleth is surrounded by transformative mucus. A creature that touches the aboleth or that hits it with a melee attack while within <strong>5 ft.</strong> of it must make a <strong>DC 14 Constitution saving throw</strong>. On a failure, the creature is diseased for 1d4 hours. The diseased creature can breathe only underwater.</p>",
+          "chat": "<p>While underwater, the aboleth is surrounded by transformative mucus. A creature that touches the aboleth or that hits it with a melee attack while within <strong>5 ft.</strong> of it must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1462,10 +1462,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676971,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!shhHtE7b92PefCWB.dZWUNgKiLNxVg983"
     },
@@ -1535,8 +1535,8 @@
       "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>12 (2d6 + 5) <em>bludgeoning damage</em></strong>.</p>\n<p>If the target is a creature, it must succeed on a  <strong>DC 14 Constitution</strong> saving throw or become diseased. The disease has no effect for 1 minute and can be removed by any magic that cures disease. After 1 minute, the diseased creature gains Tentacle Disease.</p>\n</section>\n<p>The Aboleth attacks with its Tentacle. If the target is a creature, it must make a <strong>Constitution</strong> saving throw.</p>",
-          "chat": ""
+          "value": "<p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>12 (2d6 + 5) <em>bludgeoning damage</em></strong>.</p><p>If the target is a creature, it must succeed on a  <strong>DC 14 Constitution</strong> saving throw or become diseased. The disease has no effect for 1 minute and can be removed by any magic that cures disease. After 1 minute, the diseased creature gains Tentacle Disease.</p>",
+          "chat": "<p>The Aboleth attacks with its Tentacle. If the target is a creature, it must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
           "custom": "",
@@ -1814,10 +1814,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676971,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!shhHtE7b92PefCWB.sgauK8Lyt8qxsxOH"
     },
@@ -1828,8 +1828,8 @@
       "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>Melee Weapon Attack: +9 to hit, reach 10 ft. one target. Hit: <strong>15 (3d6 + 5) <em>bludgeoning damage</em></strong>.</p>\n</section>\n<p>The Aboleth attacks with its Tail.</p>",
-          "chat": ""
+          "value": "<p>Melee Weapon Attack: +9 to hit, reach 10 ft. one target. Hit: <strong>15 (3d6 + 5) <em>bludgeoning damage</em></strong>.</p>",
+          "chat": "<p>The Aboleth attacks with its Tail.</p>"
         },
         "source": {
           "custom": "",
@@ -2018,10 +2018,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676971,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!shhHtE7b92PefCWB.FwOZEwx7MPDq8Igu"
     },
@@ -2091,8 +2091,8 @@
       "img": "icons/magic/acid/projectile-glowing-bubbles.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p><strong>After 1 minute</strong>, the diseased creature's skin becomes translucent and slimy, the creature can't regain hit points unless it is underwater, and the disease can be removed only by heal or another disease-curing spell of 6th level or higher. When the creature is <strong>outside a body of water</strong>, it takes <strong>6 (1d12) acid damage every 10 minutes</strong> unless moisture is applied to the skin before 10 minutes have passed.</p>\n</section>\n<p>You feel a surging pain rushing through your body!</p>",
-          "chat": ""
+          "value": "<p><strong>After 1 minute</strong>, the diseased creature's skin becomes translucent and slimy, the creature can't regain hit points unless it is underwater, and the disease can be removed only by heal or another disease-curing spell of 6th level or higher. When the creature is <strong>outside a body of water</strong>, it takes <strong>6 (1d12) acid damage every 10 minutes</strong> unless moisture is applied to the skin before 10 minutes have passed.</p>",
+          "chat": "<p>You feel a surging pain rushing through your body!</p>"
         },
         "source": {
           "custom": "",
@@ -2221,10 +2221,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676971,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!shhHtE7b92PefCWB.Lnp6wFaKnkpuWJs2"
     },
@@ -2360,8 +2360,8 @@
       "img": "icons/magic/nature/stealth-hide-eyes-green.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>\n</section>\n<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>",
-          "chat": ""
+          "value": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. On initiative count 20 (losing all initiative ties), it can use one of its lair action options. It can't do so while incapacitated or otherwise unable to take actions. If surprised, it can't use one until after its first turn in the combat.</p>",
+          "chat": "<p>If a legendary creature has lair actions, it can use them to harness the ambient magic in its lair. </p>"
         },
         "source": {
           "custom": "",
@@ -2405,10 +2405,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676971,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!shhHtE7b92PefCWB.7GePgmNDyzzHHCKS"
     },
@@ -2419,8 +2419,8 @@
       "img": "icons/magic/light/hand-sparks-glow-yellow.webp",
       "system": {
         "description": {
-          "value": "<section class=\"secret\">\n<p>The aboleth can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The aboleth regains spent legendary actions at the start of its turn.</p>\n</section>\n<p>The aboleth can take 3 legendary actions.</p>",
-          "chat": ""
+          "value": "<p>The aboleth can take 3 legendary actions. Only one legendary action option can be used at a time and only at the end of another creature's turn. The aboleth regains spent legendary actions at the start of its turn.</p>",
+          "chat": "<p>The aboleth can take 3 legendary actions.</p>"
         },
         "source": {
           "custom": "",
@@ -2464,10 +2464,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.2.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1736804676971,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!shhHtE7b92PefCWB.SHlQeobxHZU6iQ24"
     },
