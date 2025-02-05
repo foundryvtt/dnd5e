@@ -639,8 +639,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   static onRenderActiveEffectConfig(app, html) {
     // TODO: rebase once #4805 is merged.
     if ( game.release.generation < 13 ) html = html[0];
-    const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {
-    }).toFormGroup({
+    const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {}).toFormGroup({
       label: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.label"),
       hint: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.hint")
     }, {
@@ -650,9 +649,12 @@ export default class ActiveEffect5e extends ActiveEffect {
     }).outerHTML;
     html.querySelector("[data-tab=details] > .form-group:last-child").insertAdjacentHTML("afterend", element);
 
-    html.querySelector(".form-fields:has([name=statuses])").insertAdjacentHTML("afterend", `
-      <p class="hint">${app.document.schema.fields.statuses.hint}</p>`);
-    if ( game.release.generation < 13 ) app.setPosition();
+    if ( game.release.generation < 13 ) {
+      html.querySelector(".form-fields:has([name=statuses])").insertAdjacentHTML("afterend", `
+        <p class="hint">${app.document.schema.fields.statuses.hint}</p>
+      `);
+      app.setPosition();
+    }
   }
 
   /* -------------------------------------------- */
