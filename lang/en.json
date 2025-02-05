@@ -198,6 +198,14 @@
   }
 },
 
+"DND5E.ACTIVEEFFECT": {
+  "FIELDS": {
+    "statuses": {
+      "hint": "While affected by this Active Effect, the target will be treated as having these additional status conditions."
+    }
+  }
+},
+
 "DND5E.ACTIVITY": {
   "Action": {
     "Create": "Create Activity",
@@ -1231,8 +1239,8 @@
 "DND5E.ConDiseased": "Diseased",
 "DND5E.CONDITIONS": {
   "RiderConditions": {
-    "label": "Additional Effects",
-    "hint": "Configure additional conditions that will be applied when this effect is created on an actor."
+    "label": "Separate Status Conditions",
+    "hint": "When this Active Effect is applied, these additional status conditions will be applied separately."
   }
 },
 "DND5E.ConExhaustion": "Exhaustion",

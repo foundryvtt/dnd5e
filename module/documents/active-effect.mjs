@@ -40,6 +40,11 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "DND5E.ACTIVEEFFECT"];
+
+  /* -------------------------------------------- */
+
   /**
    * Is this effect an enchantment on an item that accepts enchantment?
    * @type {boolean}
@@ -644,6 +649,10 @@ export default class ActiveEffect5e extends ActiveEffect {
       options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name }))
     }).outerHTML;
     html.querySelector("[data-tab=details] > .form-group:last-child").insertAdjacentHTML("afterend", element);
+
+    html.querySelector(".form-fields:has([name=statuses])").insertAdjacentHTML("afterend", `
+      <p class="hint">${app.document.schema.fields.statuses.hint}</p>`);
+    if ( game.release.generation < 13 ) app.setPosition();
   }
 
   /* -------------------------------------------- */
