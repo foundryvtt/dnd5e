@@ -153,7 +153,7 @@ export default class BasicRoll extends Roll {
     let rolls;
     if ( dialog.configure === false ) {
       rolls = config.rolls?.map((r, index) => {
-        dialog.options?.buildConfig(config, r, null, index);
+        dialog.options?.buildConfig?.(config, r, null, index);
         return this.fromConfig(r, config);
       }) ?? [];
     } else {
@@ -409,5 +409,34 @@ export default class BasicRoll extends Roll {
     }
 
     this.resetFormula();
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Merge two roll configurations.
+   * @param {Partial<BasicRollConfiguration>} original  The initial configuration that will be merged into.
+   * @param {Partial<BasicRollConfiguration>} other     The configuration to merge.
+   * @returns {Partial<BasicRollConfiguration>}         The original instance.
+   */
+  static mergeConfigs(original, other={}) {
+    if ( other.data ) {
+      original.data ??= {};
+      Object.assign(original.data, other.data);
+    }
+
+    if ( other.parts?.length ) {
+      original.parts ??= [];
+      original.parts.unshift(...other.parts);
+    }
+
+    if ( other.options ) {
+      original.options ??= {};
+      foundry.utils.mergeObject(original.options, other.options);
+    }
+
+    return original;
   }
 }
