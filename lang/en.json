@@ -198,6 +198,15 @@
   }
 },
 
+"DND5E.ACTIVEEFFECT": {
+  "FIELDS": {
+    "statuses": {
+      "label": "Status Conditions",
+      "hint": "While affected by this Active Effect, the target will be treated as having these additional status conditions."
+    }
+  }
+},
+
 "DND5E.ACTIVITY": {
   "Action": {
     "Create": "Create Activity",
@@ -1229,6 +1238,12 @@
 "DND5E.ConCharmed": "Charmed",
 "DND5E.ConDeafened": "Deafened",
 "DND5E.ConDiseased": "Diseased",
+"DND5E.CONDITIONS": {
+  "RiderConditions": {
+    "label": "Separate Status Conditions",
+    "hint": "When this Active Effect is applied, these additional status conditions will be applied separately."
+  }
+},
 "DND5E.ConExhaustion": "Exhaustion",
 "DND5E.ConFrightened": "Frightened",
 "DND5E.ConGrappled": "Grappled",

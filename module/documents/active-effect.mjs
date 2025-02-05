@@ -40,6 +40,11 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* -------------------------------------------- */
 
+  /** @inheritdoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "DND5E.ACTIVEEFFECT"];
+
+  /* -------------------------------------------- */
+
   /**
    * Is this effect an enchantment on an item that accepts enchantment?
    * @type {boolean}
@@ -337,23 +342,31 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Create conditions that are applied separately from an effect.
-   * @returns {Promise<ActiveEffect5e[]|void>}      Created rider effects.
+   * @returns {Promise<ActiveEffect5e[]>}      Created rider effects.
    */
   async createRiderConditions() {
-    const riders = new Set(this.statuses.reduce((acc, status) => {
+    const riders = new Set();
+
+    for ( const status of this.getFlag("dnd5e", "riders.statuses") ?? [] ) {
+      riders.add(status);
+    }
+
+    for ( const status of this.statuses ) {
       const r = CONFIG.statusEffects.find(e => e.id === status)?.riders ?? [];
-      return acc.concat(r);
-    }, []));
-    if ( !riders.size ) return;
+      for ( const p of r ) riders.add(p);
+    }
+
+    if ( !riders.size ) return [];
 
     const createRider = async id => {
       const existing = this.parent.effects.get(staticID(`dnd5e${id}`));
       if ( existing ) return;
-      const effect = await ActiveEffect.implementation.fromStatusEffect(id);
-      return ActiveEffect.implementation.create(effect, { parent: this.parent, keepId: true });
+      const effect = await ActiveEffect5e.fromStatusEffect(id);
+      return effect.toObject();
     };
 
-    return Promise.all(Array.from(riders).map(createRider));
+    const effectData = await Promise.all(Array.from(riders).map(createRider));
+    return ActiveEffect5e.createDocuments(effectData.filter(_ => _), { keepId: true, parent: this.parent });
   }
 
   /* -------------------------------------------- */
@@ -614,6 +627,34 @@ export default class ActiveEffect5e extends ActiveEffect {
     Hooks.on("renderTokenHUD", this.onTokenHUDRender);
     document.addEventListener("click", this.onClickTokenHUD.bind(this), { capture: true });
     document.addEventListener("contextmenu", this.onClickTokenHUD.bind(this), { capture: true });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add modifications to the core ActiveEffect config.
+   * @param {ActiveEffectConfig} app   The ActiveEffect config.
+   * @param {jQuery|HTMLElement} html  The ActiveEffect config element.
+   */
+  static onRenderActiveEffectConfig(app, html) {
+    // TODO: rebase once #4805 is merged.
+    if ( game.release.generation < 13 ) html = html[0];
+    const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {}).toFormGroup({
+      label: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.label"),
+      hint: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.hint")
+    }, {
+      name: "flags.dnd5e.riders.statuses",
+      value: app.document.getFlag("dnd5e", "riders.statuses") ?? [],
+      options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name }))
+    }).outerHTML;
+    html.querySelector("[data-tab=details] > .form-group:last-child").insertAdjacentHTML("afterend", element);
+
+    if ( game.release.generation < 13 ) {
+      html.querySelector(".form-fields:has([name=statuses])").insertAdjacentHTML("afterend", `
+        <p class="hint">${app.document.schema.fields.statuses.hint}</p>
+      `);
+      app.setPosition();
+    }
   }
 
   /* -------------------------------------------- */
