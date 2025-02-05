@@ -86,7 +86,7 @@ export default class SpellListJournalPageData extends foundry.abstract.TypeDataM
   async toEmbed(config, options={}) {
     for ( const value of config.values ) {
       if ( value === "table" ) config.table = true;
-      else if ( value in JournalSpellListPageSheet.GROUPING_MODES ) config.grouping = value;
+      else if ( value in this.constructor.GROUPING_MODES ) config.grouping = value;
     }
     if ( config.table ) config.grouping = "level";
 

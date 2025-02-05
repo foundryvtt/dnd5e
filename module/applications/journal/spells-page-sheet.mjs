@@ -1,4 +1,3 @@
-import SpellListJournalPageData from "../../data/journal/spells.mjs";
 import parseUuid from "../../parse-uuid.mjs";
 import { linkForUuid, sortObjectEntries } from "../../utils.mjs";
 import Items5e from "../../data/collection/items-collection.mjs";
@@ -30,7 +29,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
    * @type {Record<string, string>}
    */
   static get GROUPING_MODES() {
-    return SpellListJournalPageData.GROUPING_MODES;
+    return dnd5e.dataModels.journal.SpellListJournalPageData.GROUPING_MODES;
   }
 
   /* -------------------------------------------- */
