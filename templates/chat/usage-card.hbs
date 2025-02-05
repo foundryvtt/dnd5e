@@ -1,0 +1,11 @@
+<div>
+    {{{ content }}}
+
+    {{#if effects.length}}
+    <effect-application class="dnd5e2">
+        {{#each effects}}
+        <option value="{{ id }}"></option>
+        {{/each}}
+    </effect-application>
+    {{/if}}
+</div>

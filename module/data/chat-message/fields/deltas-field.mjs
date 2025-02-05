@@ -11,13 +11,14 @@ const { ArrayField, NumberField, ObjectField, SchemaField, StringField } = found
  * A field for storing deltas made to an actor or embedded items.
  */
 export class ActorDeltasField extends SchemaField {
-  constructor() {
+  constructor(fields={}, options={}) {
     super({
       actor: new ArrayField(new IndividualDeltaField()),
       created: new ArrayField(new StringField(), { required: false }),
       deleted: new ArrayField(new ObjectField(), { required: false }),
-      item: new MappingField(new ArrayField(new IndividualDeltaField()))
-    });
+      item: new MappingField(new ArrayField(new IndividualDeltaField())),
+      ...fields
+    }, options);
   }
 
   /* -------------------------------------------- */
