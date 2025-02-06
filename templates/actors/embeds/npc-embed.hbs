@@ -40,7 +40,7 @@
                             <th scope="row">{{ label }}</th>
                             <td class="score">{{ dnd5e-numberFormat value }}</td>
                             <td>{{ dnd5e-numberFormat mod signDisplay="always" }}</td>
-                            <td>{{ dnd5e-numberFormat save signDisplay="always" }}</td>
+                            <td>{{ dnd5e-numberFormat save.value signDisplay="always" }}</td>
                         </tr>
                         {{/each}}
                     </tbody>
