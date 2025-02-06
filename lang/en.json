@@ -503,6 +503,9 @@
           "label": "Type"
         }
       },
+      "sorting": {
+        "label": "Sorting Mode"
+      },
       "type": {
         "Any": "Anything",
         "hint": "Restrict what Item types can be chosen.",
@@ -534,6 +537,9 @@
       "optional": {
         "label": "Optional",
         "hint": "If the whole advancement is marked optional, players may opt out of any of the following items, otherwise all non-optional items are granted."
+      },
+      "sorting": {
+        "label": "Sorting Mode"
       }
     },
     "Hint": "Grant the character items (such as equipment, features, or spells) when they reach a certain level.",
