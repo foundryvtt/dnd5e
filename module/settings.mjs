@@ -608,8 +608,9 @@ export function applyLegacyRules() {
   DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
   delete DND5E.languages.exotic.children.druidic;
 
-  // Stunned stops movement in legacy.
+  // Stunned stops movement in legacy & surprised doesn't provide initiative disadvantage.
   DND5E.conditionEffects.noMovement.add("stunned");
+  DND5E.conditionEffects.initiativeDisadvantage.delete("surprised");
 
   // Adjust references.
   Object.assign(DND5E.rules, LEGACY.RULES);
