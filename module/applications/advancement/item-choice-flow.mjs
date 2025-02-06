@@ -86,7 +86,11 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     const config = this.advancement.configuration;
     const counts = this.counts;
     const value = this.advancement.value;
-    this.pool ??= (await Promise.all(config.pool.map(i => fromUuid(i.uuid)))).filter(_ => _);
+    this.pool ??= (await Promise.all(config.pool
+      .sort((lhs, rhs) => this.advancement.configuration.sorting === "m" ? lhs.sort - rhs.sort : 0)
+      .map(i => fromUuid(i.uuid))
+    )).filter(_ => _)
+      .sort((lhs, rhs) => this.advancement.configuration.sorting === "a" ? lhs.name.localeCompare(rhs.name) : 0);
     this.retained ??= Object.entries(value.added).reduce((obj, [level, added]) => {
       obj[level] = Object.fromEntries(Object.entries(added).map(([id]) => [id, actor.items.get(id)]));
       return obj;
