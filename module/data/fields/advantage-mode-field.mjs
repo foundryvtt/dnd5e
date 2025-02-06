@@ -127,4 +127,25 @@ export default class AdvantageModeField extends foundry.data.fields.NumberField 
     const disadvantageCount = disadvantages.suppressed ? 0 : disadvantages.count + Number(src === -1);
     return Math.sign(advantageCount) - Math.sign(disadvantageCount);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Helper for setting the advantage mode programmatically.
+   * @param {DataModel} model                   The model the change is applied to.
+   * @param {string} keyPath                    Path to the advantage mode field on the model.
+   * @param {number} value                      An integer in the interval [-1, 1], indicating advantage (1),
+   *                                            disadvantage (-1), or neither (0).
+   * @param {object} [options={}]
+   * @param {boolean} [options.override=false]  Override the mode rather than following the normal advantage rules.
+   * @returns {number}                          Final advantage value.
+   */
+  static setMode(model, keyPath, value, { override=false }={}) {
+    const field = keyPath.startsWith("system.") ? model.system.schema.getField(keyPath.slice(7))
+      : model.schema.getField(keyPath);
+    const change = { key: keyPath, value, mode: CONST.ACTIVE_EFFECT_MODES[override ? "OVERRIDE" : "ADD"] };
+    const final = field.applyChange(foundry.utils.getProperty(model, keyPath), model, change);
+    foundry.utils.setProperty(model, keyPath, final);
+    return final;
+  }
 }
