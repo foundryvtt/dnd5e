@@ -426,7 +426,7 @@ export default class InventoryElement extends HTMLElement {
       case "crew":
         return item.update({"system.crewed": !item.system.crewed});
       case "currency":
-        return new CurrencyManager(this.document).render(true);
+        return new CurrencyManager({ document: this.document }).render({ force: true });
       case "delete":
         return item.deleteDialog();
       case "duplicate":

@@ -1,28 +1,99 @@
 import { filteredKeys, formatNumber } from "../utils.mjs";
-import DialogMixin from "./dialog-mixin.mjs";
+import Application5e from "./api/application.mjs";
+
+/**
+ * @typedef AwardOptions
+ * @property {Record<string, number>|null} currency  Amount of each currency to award.
+ * @property {boolean} each                          Distribute full award to each destination, rather than dividing it
+ *                                                   among the destinations.
+ * @property {Set<string>} savedDestinations         Set of IDs for previously selected destinations.
+ * @property {number|null} xp                        Amount of experience points to award.
+ */
 
 /**
  * Application for awarding XP and currency to players.
  */
-export default class Award extends DialogMixin(FormApplication) {
+export default class Award extends Application5e {
+  constructor(options, _options={}) {
+    if ( options instanceof foundry.abstract.Document ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `Award` origin actor should now be passed within the options object as `origin`.",
+        { since: "DnD5e 4.3", until: "DnD5e 4.5" }
+      );
+      _options.origin = options;
+      options = _options;
+    }
 
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e2", "award", "dialog"],
-      template: "systems/dnd5e/templates/apps/award.hbs",
-      title: "DND5E.Award.Title",
-      width: 350,
-      height: "auto",
-      currency: null,
-      xp: null,
-      each: false,
-      savedDestinations: new Set()
-    });
+    if ( !options ) options = _options;
+    for ( const key of ["currency", "each", "savedDestinations", "xp"] ) {
+      if ( !(key in options) ) continue;
+      options.award ??= {};
+      options.award[key] = options[key];
+      delete options[key];
+      foundry.utils.logCompatibilityWarning(
+        `The \`${key}\` option in \`Award\` has been moved to \`award.${key}\`.`,
+        { since: "DnD5e 4.3", until: "DnD5e 4.5" }
+      );
+    }
+
+    super(options);
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    award: {
+      currency: null,
+      each: false,
+      savedDestinations: new Set(),
+      xp: null
+    },
+    classes: ["award", "standard-form"],
+    form: {
+      handler: Award.#handleFormSubmission
+    },
+    origin: null,
+    position: {
+      width: 350
+    },
+    tag: "form",
+    window: {
+      title: "DND5E.Award.Title"
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    award: {
+      template: "systems/dnd5e/templates/apps/award.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Award options.
+   * @type {AwardOptions}
+   */
+  get award() {
+    return this.options.award;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Group actor from which this award is being granted.
+   * @type {Actor5e}
+   */
+  get origin() {
+    return this.options.origin;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -30,7 +101,7 @@ export default class Award extends DialogMixin(FormApplication) {
    * @type {Actor5e[]}
    */
   get transferDestinations() {
-    if ( this.isPartyAward ) return this.object.system.transferDestinations ?? [];
+    if ( this.isPartyAward ) return this.origin.system.transferDestinations ?? [];
     if ( !game.user.isGM ) return [];
     const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
     return primaryParty
@@ -45,7 +116,7 @@ export default class Award extends DialogMixin(FormApplication) {
    * @type {boolean}
    */
   get isPartyAward() {
-    return this.object?.system.type?.value === "party";
+    return this.origin?.system.type?.value === "party";
   }
 
   /* -------------------------------------------- */
@@ -53,22 +124,21 @@ export default class Award extends DialogMixin(FormApplication) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  getData(options={}) {
-    const context = super.getData(options);
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
 
-    context.CONFIG = CONFIG.DND5E;
     context.currency = Object.entries(CONFIG.DND5E.currencies).reduce((obj, [k, { label, icon }]) => {
       obj[k] = {
         label, icon,
-        value: this.options.currency ? this.options.currency[k] : this.object?.system.currency[k]
+        value: this.award.currency ? this.award.currency[k] : this.origin?.system.currency[k]
       };
       return obj;
     }, {});
-    context.destinations = Award.prepareDestinations(this.transferDestinations, this.options.savedDestinations);
-    context.each = this.options.each ?? false;
+    context.destinations = Award.prepareDestinations(this.transferDestinations, this.award.savedDestinations);
+    context.each = this.award.each ?? false;
     context.hideXP = game.settings.get("dnd5e", "levelingMode") === "noxp";
     context.noPrimaryParty = !game.settings.get("dnd5e", "primaryParty")?.actor && !this.isPartyAward;
-    context.xp = this.options.xp ?? this.object?.system.details.xp.value ?? this.object?.system.details.xp.derived;
+    context.xp = this.award.xp ?? this.origin?.system.details.xp.value ?? this.origin?.system.details.xp.derived;
 
     return context;
   }
@@ -93,20 +163,22 @@ export default class Award extends DialogMixin(FormApplication) {
   }
 
   /* -------------------------------------------- */
-  /*  Event Handling                              */
+  /*  Life-Cycle Handlers                         */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
+  _onRender(context, options) {
+    super._onRender(context, options);
     this._validateForm();
   }
 
   /* -------------------------------------------- */
+  /*  Form Handling                               */
+  /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _onChangeInput(event) {
-    super._onChangeInput(event);
+  _onChangeForm(formConfig, event) {
+    super._onChangeForm(formConfig, event);
     this._validateForm();
   }
 
@@ -117,24 +189,31 @@ export default class Award extends DialogMixin(FormApplication) {
    * @protected
    */
   _validateForm() {
-    const data = foundry.utils.expandObject(this._getSubmitData());
+    const formData = new FormDataExtended(this.element);
+    const data = foundry.utils.expandObject(formData.object);
     let valid = true;
     if ( !filteredKeys(data.amount ?? {}).length && !data.xp ) valid = false;
     if ( !filteredKeys(data.destination ?? {}).length ) valid = false;
-    this.form.querySelector('button[name="transfer"]').disabled = !valid;
+    this.element.querySelector('button[name="transfer"]').disabled = !valid;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async _updateObject(event, formData) {
-    const data = foundry.utils.expandObject(formData);
+  /**
+   * Handle submitting the award form.
+   * @this {Award}
+   * @param {Event|SubmitEvent} event    The form submission event.
+   * @param {HTMLFormElement} form       The submitted form.
+   * @param {FormDataExtended} formData  Data from the dialog.
+   */
+  static async #handleFormSubmission(event, form, formData) {
+    const data = foundry.utils.expandObject(formData.object);
     const destinations = this.transferDestinations.filter(d => data.destination[d.id]);
     const each = formData.each;
     this._saveDestinations(destinations);
     const results = new Map();
-    await this.constructor.awardCurrency(data.amount, destinations, { each, origin: this.object, results });
-    await this.constructor.awardXP(data.xp, destinations, { each, origin: this.object, results });
+    await this.constructor.awardCurrency(data.amount, destinations, { each, origin: this.origin, results });
+    await this.constructor.awardXP(data.xp, destinations, { each, origin: this.origin, results });
     this.constructor.displayAwardMessages(results);
     this.close();
   }
@@ -147,7 +226,7 @@ export default class Award extends DialogMixin(FormApplication) {
    * @protected
    */
   _saveDestinations(destinations) {
-    const target = this.isPartyAward ? this.object : game.user;
+    const target = this.isPartyAward ? this.origin : game.user;
     target.setFlag("dnd5e", "awardDestinations", destinations);
   }
 
@@ -199,7 +278,7 @@ export default class Award extends DialogMixin(FormApplication) {
       remainingDestinations -= 1;
     }
 
-    if ( origin ) await origin.update({"system.currency": originCurrency});
+    if ( origin ) await origin.update({ "system.currency": originCurrency });
   }
 
   /* -------------------------------------------- */
@@ -223,13 +302,13 @@ export default class Award extends DialogMixin(FormApplication) {
     const perDestination = Math.floor(Math.min(amount, originUpdate) / destinations.length);
     originUpdate -= amount;
     for ( const destination of destinations ) {
-      await destination.update({"system.details.xp.value": destination.system.details.xp.value + perDestination});
+      await destination.update({ "system.details.xp.value": destination.system.details.xp.value + perDestination });
       if ( !results.has(destination) ) results.set(destination, {});
       const result = results.get(destination);
       result.xp = perDestination;
     }
 
-    if ( Number.isFinite(originUpdate) ) await origin.update({"system.details.xp.value": originUpdate});
+    if ( Number.isFinite(originUpdate) ) await origin.update({ "system.details.xp.value": originUpdate });
   }
 
   /* -------------------------------------------- */
@@ -338,8 +417,8 @@ export default class Award extends DialogMixin(FormApplication) {
       // Otherwise show the UI with defaults
       else {
         const savedDestinations = game.user.getFlag("dnd5e", "awardDestinations");
-        const app = new Award(null, { currency, xp, each, savedDestinations });
-        app.render(true);
+        const app = new Award({ award: { currency, xp, each, savedDestinations } });
+        app.render({ force: true });
       }
     } catch(err) {
       ui.notifications.warn(err.message);
