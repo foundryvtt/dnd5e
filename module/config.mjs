@@ -3934,7 +3934,8 @@ DND5E.conditionEffects = {
   halfMovement: new Set(["exhaustion-2"]),
   crawl: new Set(["prone", "exceedingCarryingCapacity"]),
   petrification: new Set(["petrified"]),
-  halfHealth: new Set(["exhaustion-4"])
+  halfHealth: new Set(["exhaustion-4"]),
+  initiativeDisadvantage: new Set(["surprised"])
 };
 
 /* -------------------------------------------- */
@@ -4410,6 +4411,7 @@ preLocalize("traitModes", { keys: ["label", "hint"] });
  * @property {string} placeholder
  * @property {string[]} [abilities]
  * @property {Object<string, string>} [choices]
+ * @property {boolean} [deprecated]               Hide the flag unless it already has a value.
  * @property {string[]} [skills]
  */
 
@@ -4447,7 +4449,8 @@ DND5E.characterFlags = {
     name: "DND5E.FlagsInitiativeAdv",
     hint: "DND5E.FlagsInitiativeAdvHint",
     section: "DND5E.Feats",
-    type: Boolean
+    type: Boolean,
+    deprecated: true
   },
   initiativeAlert: {
     name: "DND5E.FlagsAlert",

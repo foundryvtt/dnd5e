@@ -1,6 +1,7 @@
 import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import Proficiency from "../../../documents/actor/proficiency.mjs";
 import { convertLength, convertWeight, defaultUnits, replaceFormulaData, simplifyBonus } from "../../../utils.mjs";
+import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MovementField from "../../shared/movement-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
@@ -380,13 +381,21 @@ export default class AttributesFields {
     const alert = flags.initiativeAlert && !isLegacy;
     init.prof = new Proficiency(prof, alert ? 1 : (joat || ra) ? 0.5 : 0, !ra);
 
+    // Adjust rolling mode
+    if ( (flags.remarkableAthlete && !isLegacy) || flags.initiativeAdv ) {
+      AdvantageModeField.setMode(this, "attributes.init.roll.mode", 1);
+    }
+    if ( this.parent.hasConditionEffect("initiativeDisadvantage") ) {
+      AdvantageModeField.setMode(this, "attributes.init.roll.mode", -1);
+    }
+
     // Total initiative includes all numeric terms
     const initBonus = simplifyBonus(init.bonus, rollData);
     const abilityBonus = simplifyBonus(ability.bonuses?.check, rollData);
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
       + (flags.initiativeAlert && isLegacy ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
-    init.score = 10 + init.total;
+    init.score = 10 + init.total + (init.roll.mode * 5);
   }
 
   /* -------------------------------------------- */
