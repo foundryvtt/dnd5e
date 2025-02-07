@@ -610,6 +610,8 @@ export function applyLegacyRules() {
 
   // Stunned stops movement in legacy & surprised doesn't provide initiative disadvantage.
   DND5E.conditionEffects.noMovement.add("stunned");
+  DND5E.conditionEffects.initiativeAdvantage.delete("invisible");
+  DND5E.conditionEffects.initiativeDisadvantage.delete("incapacitated");
   DND5E.conditionEffects.initiativeDisadvantage.delete("surprised");
 
   // Adjust references.

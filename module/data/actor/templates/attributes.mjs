@@ -382,7 +382,8 @@ export default class AttributesFields {
     init.prof = new Proficiency(prof, alert ? 1 : (joat || ra) ? 0.5 : 0, !ra);
 
     // Adjust rolling mode
-    if ( (flags.remarkableAthlete && !isLegacy) || flags.initiativeAdv ) {
+    const advFlag = (flags.remarkableAthlete && !isLegacy) || flags.initiativeAdv;
+    if ( advFlag || this.parent.hasConditionEffect("initiativeAdvantage") ) {
       AdvantageModeField.setMode(this, "attributes.init.roll.mode", 1);
     }
     if ( this.parent.hasConditionEffect("initiativeDisadvantage") ) {
