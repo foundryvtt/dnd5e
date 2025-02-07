@@ -1,4 +1,4 @@
-![Up to date as of 3.0.0](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
+![Up to date as of 4.2.0](https://img.shields.io/static/v1?label=dnd5e&message=4.2.0&color=informational)
 
 For a general overview of World Scripts, see the [Foundry Community Wiki](https://foundryvtt.wiki/en/basics/world-scripts), much of this guide has been lifted from that page, but the example scripts below will be limited to DnD5e specific scripts.
 
@@ -32,7 +32,7 @@ To include your Javascript file in your world, first, shut down Foundry complete
     "minimum": "12",
     "verified": "12"
   },
-  "systemVersion": "3.3.1"
+  "systemVersion": "4.2.0"
 }
 ```
 Add an `esmodules` key: `esmodules: [],` after any existing key (within a single pair of curly brackets `{}`). Omit the trailing comma if no key follows. If your file already has an `esmodules` key, leave it unmodified.
@@ -49,7 +49,7 @@ Your world.json file should now look something like this:
     "minimum": "12",
     "verified": "12"
   },
-  "systemVersion": "3.3.1"
+  "systemVersion": "4.2.0"
 }
 ```
 5. Save and close world.json.
@@ -227,16 +227,19 @@ Hooks.once("init", () => {
 });
 ```
 
-## Add new Item Activation Cost Types
+## Add new Activation Cost Types
 ```js
 // Adds in options to display in the Activation Cost dropdown
 Hooks.once("init", () => {
-  CONFIG.DND5E.abilityActivationTypes.crithit = "Critical Hit";
-  CONFIG.DND5E.abilityActivationTypes.attack = "On Attack";
-  CONFIG.DND5E.abilityActivationTypes.replaceattack = "Replaces Attack";
-  CONFIG.DND5E.abilityActivationTypes.meleehit = "On Melee Hit";
-  CONFIG.DND5E.abilityActivationTypes.rangedhit = "On Ranged Hit";
-  CONFIG.DND5E.abilityActivationTypes.weaponhit = "On Weapon Hit";
+  CONFIG.DND5E.activityActivationType.crithit = {
+    label: "Critical Hit",
+    group: "DND5E.ACTIVATION.Category.Combat"
+  };
+  CONFIG.DND5E.activityActivationType.moon = {
+    label: "Moons",
+    group: "DND5E.ACTIVATION.Category.Time",
+    scalar: true // Takes an associated number
+  };
 });
 ```
 
@@ -259,7 +262,10 @@ Similar to the Weapon Types above, an item in a compendium will need to be refer
 ```js
 // Adds new Tool Proficiency for Hacking Tools
 Hooks.once("init", () => {
-  CONFIG.DND5E.toolIds.hacking = "uuid";
+  CONFIG.DND5E.tools.hacking = {
+    ability: "int",
+    id: "uuid"
+  };
 });
 ```
 
