@@ -379,6 +379,10 @@
     }
   },
   "ItemChoice": {
+    "Action": {
+      "SelectGeneric": "Select Item",
+      "SelectSpecific": "Select {type}"
+    },
     "Choose": "choose {count}",
     "Chosen": "Chosen: {current} of {max}",
     "Details": "Choice Details",
@@ -435,6 +439,7 @@
     "Warning": {
       "FeatureLevel": "Must be at least level {level} to take this feature.",
       "InvalidType": "Only {type} items can be selected for this choice.",
+      "MaxSelected": "No additional items can be selected, uncheck items before selecting more.",
       "NoOriginal": "Previously selected choice no longer available for replacement.",
       "PreviouslyChosen": "This item has already been chosen at a previous level.",
       "SpellLevelAvailable": "Only {level} or lower spells can be chosen for this advancement.",

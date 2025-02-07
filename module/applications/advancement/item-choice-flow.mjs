@@ -1,4 +1,5 @@
 import Actor5e from "../../documents/actor/actor.mjs";
+import CompendiumBrowser from "../compendium-browser.mjs";
 import ItemGrantFlow from "./item-grant-flow.mjs";
 
 /**
@@ -132,6 +133,19 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     context.abilities.disabled = previouslySelected.size;
     this.ability ??= context.abilities.selected;
 
+    if ( this.advancement.configuration.type ) {
+      let type = game.i18n.localize(CONFIG.Item.typeLabels[this.advancement.configuration.type]);
+      if ( (this.advancement.configuration.type === "feat") && this.advancement.configuration.restriction.type ) {
+        const typeConfig = CONFIG.DND5E.featureTypes[this.advancement.configuration.restriction.type];
+        const subtype = typeConfig.subtypes?.[this.advancement.configuration.restriction.subtype];
+        if ( subtype ) type = subtype;
+        else type = typeConfig.label;
+      }
+      context.selectLabel = game.i18n.format("DND5E.ADVANCEMENT.ItemChoice.Action.SelectSpecific", { type });
+    } else {
+      context.selectLabel = game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.Action.SelectGeneric");
+    }
+
     return context;
   }
 
@@ -140,7 +154,65 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
   /** @inheritDoc */
   activateListeners(html) {
     super.activateListeners(html);
-    html.find(".item-delete").click(this._onItemDelete.bind(this));
+    html.find('[data-action="browse"]').click(this._onBrowseCompendium.bind(this));
+    html.find('[data-action="delete"]').click(this._onItemDelete.bind(this));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening the compendium browser and displaying the result.
+   * @param {Event} event  The originating click event.
+   * @protected
+   */
+  async _onBrowseCompendium(event) {
+    event.preventDefault();
+
+    // Determine how many items can be selected
+    const max = this.advancement.configuration.choices[this.level]?.count ?? 0;
+    const current = this.selected.size;
+    if ( current >= max ) {
+      ui.notifications.warn("DND5E.ADVANCEMENT.ItemChoice.Warning.MaxSelected", { localize: true });
+      return;
+    }
+
+    const config = this.advancement.configuration;
+    const filters = { locked: { additional: { }, documentClass: "Item" } };
+
+    // Apply restrictions based on type
+    if ( config.type ) {
+      filters.locked.types = new Set([config.type]);
+      if ( (config.type === "feat") && config.restriction.type ) {
+        const typeConfig = CONFIG.DND5E.featureTypes[config.restriction.type];
+        const subtype = typeConfig.subtypes?.[config.restriction.subtype];
+        filters.locked.additional.category = { [config.restriction.type]: 1 };
+        if ( subtype ) filters.locked.additional.subtype = { [config.restriction.subtype]: 1 };
+      }
+    }
+
+    // Apply restrictions based on level
+    if ( config.type === "feat" ) {
+      filters.locked.arbitrary = [{ k: "system.prerequisites.level", o: "lte", v: this.level }];
+    } else if ( (config.type === "spell") && (config.restriction.level !== "") ) {
+      filters.locked.additional.level = {
+        min: config.restriction.level === "available" ? undefined : Number(config.restriction.level),
+        max: config.restriction.level === "available" ? this._maxSpellSlotLevel() : Number(config.restriction.level)
+      };
+    }
+
+    const result = await CompendiumBrowser.select({ filters, selection: { min: 1, max: max - current } });
+    if ( !result?.size ) return;
+
+    const items = await Promise.all(Array.from(result).map(uuid => fromUuid(uuid)));
+    for ( const item of items ) {
+      this.selected.add(item.uuid);
+      if ( !this.pool.find(i => i.uuid === item.uuid) ) {
+        this.dropped.push(item);
+        item.dropped = true;
+      }
+    }
+
+    this.render();
   }
 
   /* -------------------------------------------- */
@@ -165,7 +237,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
    */
   async _onItemDelete(event) {
     event.preventDefault();
-    const uuidToDelete = event.currentTarget.closest(".item-name")?.querySelector("input")?.name;
+    const uuidToDelete = event.currentTarget.closest("[data-uuid]")?.dataset.uuid;
     if ( !uuidToDelete ) return;
     this.dropped.findSplice(i => i.uuid === uuidToDelete);
     this.selected.delete(uuidToDelete);
