@@ -150,6 +150,11 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         position: {
           top: config.event ? config.event.clientY - 80 : null,
           left: window.innerWidth - 710
+        },
+        window: {
+          title: game.i18n.localize("DND5E.AttackRoll"),
+          subtitle: this.item.name,
+          icon: this.item.img
         }
       }
     }, dialog);
@@ -334,7 +339,11 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
         : actor.items.get(lastAttack.getFlag("dnd5e", "roll.ammunition"));
     }
 
-    this.rollDamage({ event, ammunition, attackMode });
+    const isCritical = lastAttack?.rolls[0]?.isCritical;
+    const dialogConfig = {};
+    if ( isCritical ) dialogConfig.options = { defaultButton: "critical" };
+
+    this.rollDamage({ event, ammunition, attackMode, isCritical }, dialogConfig);
   }
 
   /* -------------------------------------------- */

@@ -1045,6 +1045,16 @@ DND5E.activityActivationTypes = {
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
+  longRest: {
+    label: "DND5E.ACTIVATION.Type.LongRest.Label",
+    group: "DND5E.ACTIVATION.Category.Rest",
+    passive: true
+  },
+  shortRest: {
+    label: "DND5E.ACTIVATION.Type.ShortRest.Label",
+    group: "DND5E.ACTIVATION.Category.Rest",
+    passive: true
+  },
   encounter: {
     label: "DND5E.ACTIVATION.Type.Encounter.Label",
     group: "DND5E.ACTIVATION.Category.Combat",
@@ -2313,17 +2323,19 @@ DND5E.dieSteps = [4, 6, 8, 10, 12, 20, 100];
 
 /**
  * Methods by which damage scales relative to the overall scaling increase.
- * @enum {{ label: string }}
+ * @enum {{ label: string, labelCantrip: string }}
  */
 DND5E.damageScalingModes = {
   whole: {
-    label: "DND5E.DAMAGE.Scaling.Whole"
+    label: "DND5E.DAMAGE.Scaling.Whole",
+    labelCantrip: "DND5E.DAMAGE.Scaling.WholeCantrip"
   },
   half: {
-    label: "DND5E.DAMAGE.Scaling.Half"
+    label: "DND5E.DAMAGE.Scaling.Half",
+    labelCantrip: "DND5E.DAMAGE.Scaling.HalfCantrip"
   }
 };
-preLocalize("damageScalingModes", { key: "label" });
+preLocalize("damageScalingModes", { keys: ["label", "labelCantrip"] });
 
 /* -------------------------------------------- */
 
@@ -2903,6 +2915,7 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
  * @typedef {object} RestConfiguration
  * @property {Record<string, number>} duration      Duration of different rest variants in minutes.
  * @property {string} label                         Localized label for the rest type.
+ * @property {string[]} [activationPeriods]         Activation types that should be displayed in the chat card.
  * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
  * @property {boolean} [recoverHitPoints]           Should hit points be recovered during this rest?
  * @property {string[]} [recoverPeriods]            What recovery periods should be applied when this rest is taken. The
@@ -2923,6 +2936,7 @@ DND5E.restTypes = {
       epic: 1
     },
     label: "DND5E.REST.Short.Label",
+    activationPeriods: ["shortRest"],
     recoverPeriods: ["sr"],
     recoverSpellSlotTypes: new Set(["pact"])
   },
@@ -2933,6 +2947,7 @@ DND5E.restTypes = {
       epic: 60
     },
     label: "DND5E.REST.Long.Label",
+    activationPeriods: ["longRest"],
     recoverHitDice: true,
     recoverHitPoints: true,
     recoverPeriods: ["lr", "sr"],
@@ -3900,6 +3915,43 @@ preLocalize("communicationTypes", { key: "label" });
 DND5E.habitats = {
   any: {
     label: "DND5E.Habitat.Categories.Any"
+  },
+  arctic: {
+    label: "DND5E.Habitat.Categories.Arctic"
+  },
+  coastal: {
+    label: "DND5E.Habitat.Categories.Coastal"
+  },
+  desert: {
+    label: "DND5E.Habitat.Categories.Desert"
+  },
+  forest: {
+    label: "DND5E.Habitat.Categories.Forest"
+  },
+  grassland: {
+    label: "DND5E.Habitat.Categories.Grassland"
+  },
+  hill: {
+    label: "DND5E.Habitat.Categories.Hill"
+  },
+  mountain: {
+    label: "DND5E.Habitat.Categories.Mountain"
+  },
+  planar: {
+    label: "DND5E.Habitat.Categories.Planar",
+    subtypes: true
+  },
+  swamp: {
+    label: "DND5E.Habitat.Categories.Swamp"
+  },
+  underdark: {
+    label: "DND5E.Habitat.Categories.Underdark"
+  },
+  underwater: {
+    label: "DND5E.Habitat.Categories.Underwater"
+  },
+  urban: {
+    label: "DND5E.Habitat.Categories.Urban"
   }
 };
 preLocalize("habitats", { key: "label" });

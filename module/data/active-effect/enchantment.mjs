@@ -57,6 +57,17 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
           }
           return false;
         } catch(err) {}
+      case "system.damage.types":
+        const adjust = (damage, keyPath) =>
+          ActiveEffect.applyField(damage, { ...change, key: "types", value: change.value });
+        if ( item.system.damage?.base ) {
+          changes["system.damage.base.types"] = adjust(item.system.damage.base, "system.damage.base");
+        }
+        for ( const activity of item.system.activities?.getByTypes("attack", "damage", "save") ?? [] ) {
+          for ( const part of activity.damage.parts ) adjust(part);
+          changes[`system.activities.${activity.id}.damage.parts`] = activity.damage.parts;
+        }
+        return false;
       case "system.save.dc":
       case "system.save.scaling":
         let value = change.value;

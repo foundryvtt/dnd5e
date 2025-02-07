@@ -1,7 +1,7 @@
 import Actor5e from "../../documents/actor/actor.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { defaultUnits, formatCR, formatLength, formatNumber, splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, formatCR, formatLength, formatNumber, getPluralRules, splitSemicolons } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
@@ -23,10 +23,6 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * System data definition for NPCs.
  *
  * @property {object} attributes
- * @property {object} attributes.ac
- * @property {number} attributes.ac.flat         Flat value used for flat or natural armor calculation.
- * @property {string} attributes.ac.calc         Name of one of the built-in formulas to use.
- * @property {string} attributes.ac.formula      Custom formula to use.
  * @property {object} attributes.hd
  * @property {number} attributes.hd.spent        Number of hit dice spent.
  * @property {object} attributes.hp
@@ -73,7 +69,7 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.NPC", "DND5E.BONUSES", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
@@ -95,11 +91,6 @@ export default class NPCData extends CreatureTemplate {
       attributes: new SchemaField({
         ...AttributesFields.common,
         ...AttributesFields.creature,
-        ac: new SchemaField({
-          flat: new NumberField({integer: true, min: 0, label: "DND5E.ArmorClassFlat"}),
-          calc: new StringField({initial: "default", label: "DND5E.ArmorClassCalculation"}),
-          formula: new FormulaField({deterministic: true, label: "DND5E.ArmorClassFormula"})
-        }, {label: "DND5E.ArmorClass"}),
         hd: new SchemaField({
           spent: new NumberField({integer: true, min: 0, initial: 0})
         }, {label: "DND5E.HitDice"}),
@@ -117,6 +108,7 @@ export default class NPCData extends CreatureTemplate {
           formula: new FormulaField({required: true, label: "DND5E.HPFormula"})
         }, {label: "DND5E.HitPoints"}),
         death: new RollConfigField({
+          ability: false,
           success: new NumberField({
             required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.DeathSaveSuccesses"
           }),
@@ -383,6 +375,7 @@ export default class NPCData extends CreatureTemplate {
    * Prepare movement & senses values derived from race item.
    */
   prepareEmbeddedData() {
+    super.prepareEmbeddedData();
     if ( this.details.race instanceof Item ) {
       AttributesFields.prepareRace.call(this, this.details.race, { force: true });
       this.details.type = this.details.race.system.type;
@@ -398,13 +391,18 @@ export default class NPCData extends CreatureTemplate {
   /** @inheritDoc */
   prepareDerivedData() {
     const rollData = this.parent.getRollData({ deterministic: true });
-    const { originalSaves } = this.parent.getOriginalStats();
+    const { originalSaves, originalSkills } = this.parent.getOriginalStats();
 
     this.prepareAbilities({ rollData, originalSaves });
+    this.prepareSkills({ rollData, originalSkills });
+    this.prepareTools({ rollData });
+    AttributesFields.prepareArmorClass.call(this, rollData);
+    AttributesFields.prepareConcentration.call(this, rollData);
     AttributesFields.prepareEncumbrance.call(this, rollData);
     AttributesFields.prepareExhaustionLevel.call(this);
+    AttributesFields.prepareInitiative.call(this, rollData);
     AttributesFields.prepareMovement.call(this);
-    AttributesFields.prepareConcentration.call(this, rollData);
+    AttributesFields.prepareSpellcastingAbility.call(this);
     SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
     TraitsFields.prepareLanguages.call(this);
     TraitsFields.prepareResistImmune.call(this);
@@ -420,6 +418,8 @@ export default class NPCData extends CreatureTemplate {
       mod: this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0
     };
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
+
+    this.resources.legact.label = this.getLegendaryActionsDescription();
   }
 
   /* -------------------------------------------- */
@@ -451,6 +451,28 @@ export default class NPCData extends CreatureTemplate {
   cantripLevel(spell) {
     if ( spell.system.preparation.mode === "innate" ) return this.details.cr;
     return this.details.level ? this.details.level : this.details.spellLevel;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Auto-generate a description for the legendary actions block on the NPC stat block.
+   * @param {string} name  Name of the actor to use in the text.
+   * @returns {string}
+   */
+  getLegendaryActionsDescription(name=this.parent.name) {
+    const max = this._source.resources.legact.max;
+    if ( !max ) return "";
+    const pr = getPluralRules().select(max);
+    const rulesVersion = this.source?.rules
+      || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014");
+    return game.i18n.format(`DND5E.LegendaryAction.Description${rulesVersion === "2014" ? "Legacy" : ""}`, {
+      name: name.toLowerCase(),
+      uses: this.resources.lair.value ? game.i18n.format("DND5E.LegendaryAction.LairUses", {
+        normal: formatNumber(max), lair: formatNumber(max + 1)
+      }) : formatNumber(max),
+      usesNamed: game.i18n.format(`DND5E.ACTIVATION.Type.Legendary.Counted.${pr}`, { number: formatNumber(max) })
+    });
   }
 
   /* -------------------------------------------- */
@@ -552,7 +574,7 @@ export default class NPCData extends CreatureTemplate {
         },
         legendary: {
           label: game.i18n.localize("DND5E.NPC.SECTIONS.LegendaryActions"),
-          // TODO: Add legendary description
+          description: "",
           actions: []
         }
       },
@@ -619,7 +641,7 @@ export default class NPCData extends CreatureTemplate {
           size: CONFIG.DND5E.actorSizes[this.traits.size]?.label ?? "",
           type: Actor5e.formatCreatureType(this.details.type),
           alignment: this.details.alignment
-        })
+        }).replace(/, $/, "")
       },
       system: this
     };
@@ -658,18 +680,29 @@ export default class NPCData extends CreatureTemplate {
       const category = item.system.properties.has("trait") ? "trait"
         : (item.system.activities?.contents[0]?.activation?.type ?? "trait");
       if ( category in context.actionSections ) {
-        const description = (await TextEditor.enrichHTML(item.system.description.value, {
+        let description = (await TextEditor.enrichHTML(item.system.description.value, {
           secrets: false, rollData: item.getRollData(), relativeTo: item
-        })).replace(/^\s*<p>/g, "").replace(/<\/p>\s*$/g, "");
-        const uses = item.system.uses.label || item.system.activities?.contents[0]?.uses.label;
-        context.actionSections[category].actions.push({
-          name: uses ? `${item.name} (${uses})` : item.name, description, sort: item.sort
-        });
+        }));
+        if ( item.identifier === "legendary-actions" ) {
+          context.actionSections.legendary.description = description;
+        } else {
+          const openingTag = description.match(/^\s*(<p(?:\s[^>]+)?>)/gi)?.[0];
+          if ( openingTag ) description = description.replace(openingTag, "");
+          const uses = item.system.uses.label || item.system.activities?.contents[0]?.uses.label;
+          context.actionSections[category].actions.push({
+            description, openingTag,
+            name: uses ? `${item.name} (${uses})` : item.name,
+            sort: item.sort
+          });
+        }
       }
     }
-    for ( const key of Object.keys(context.actionSections) ) {
-      if ( context.actionSections[key].actions.length ) {
-        context.actionSections[key].actions.sort((lhs, rhs) => lhs.sort - rhs.sort);
+    for ( const [key, section] of Object.entries(context.actionSections) ) {
+      if ( section.actions.length ) {
+        section.actions.sort((lhs, rhs) => lhs.sort - rhs.sort);
+        if ( (key === "legendary") && !section.description ) {
+          section.description = `<p>${this.getLegendaryActionsDescription()}</p>`;
+        }
       } else delete context.actionSections[key];
     }
 

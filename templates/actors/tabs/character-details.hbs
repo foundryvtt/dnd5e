@@ -34,7 +34,7 @@
         {{/if}}
         <a class="name saving-throw full {{ @root.rollableClass }}">{{ label }}</a>
         <a class="name saving-throw abbr {{ @root.rollableClass }}">{{ abbr }}</a>
-        <div class="bonus">{{ dnd5e-formatModifier save }}</div>
+        <div class="bonus">{{ dnd5e-formatModifier save.value }}</div>
         {{#if @root.editable}}
         <a class="config-button" data-action="ability" data-tooltip="{{ config }}" aria-label="{{ localize config }}">
             <i class="fas fa-cog"></i>

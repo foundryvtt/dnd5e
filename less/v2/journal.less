@@ -283,6 +283,8 @@
     .statblock-actions {
       color: var(--statblock-text-primary);
 
+      > p { font-style: italic; }
+
       .statblock-action {
         > p:first-child > .name {
           font-style: italic;
@@ -418,7 +420,7 @@
       content: "\f105";
       font-family: var(--font-awesome);
       font-weight: bold;
-      margin: 0 4px 0 -6px;
+      margin: 0 4px 0 2px;
       font-size: var(--font-size-10);
       color: var(--color-text-light-6);
     }
@@ -427,7 +429,7 @@
   .roll-link > i.fa-dice-d20, a.inline-roll > i.fa-dice-d20 {
     display: inline-block;
     width: 1em;
-    height: 1em;
+    height: 1.1em;
     background: url("../../icons/svg/d20-black.svg") no-repeat center / contain;
     vertical-align: middle;
 
@@ -462,5 +464,18 @@
         color: var(--color-form-label-hover);
       }
     }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Journal Pages                            */
+/* ----------------------------------------- */
+
+.dnd5e2.journal-editor {
+  .window-content { padding: 0; }
+  [data-application-part], .editor { height: 100%; }
+  .prosemirror {
+    menu { border-radius: 0; }
+    .editor-container { overflow-y: auto; }
   }
 }

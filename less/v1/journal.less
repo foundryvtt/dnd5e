@@ -9,7 +9,7 @@
   --dnd5e-srd-color-chapter-header: var(--color-text-hyperlink);
 }
 
-.table-of-contents.app {
+.table-of-contents:is(.app, .application) {
   min-height: 480px;
   min-width: 640px;
 
@@ -17,6 +17,10 @@
     background: var(--dnd5e-sheet-background);
     color: var(--color-text-dark-primary);
   }
+}
+
+.table-of-contents.application .window-content {
+  overflow: auto;
 }
 
 .table-of-contents article {
@@ -127,23 +131,6 @@
 /* ----------------------------------------- */
 /*  Journal Pages                            */
 /* ----------------------------------------- */
-
-.journal-editor {
-  min-width: 340px;
-  min-height: 260px;
-
-  .window-content {
-    padding: 0;
-  }
-  .prosemirror {
-    menu {
-      border-radius: 0;
-    }
-    .editor-container {
-      overflow-y: auto;
-    }
-  }
-}
 
 .journal-entry-page.sheet:is(.class-journal, .spells) {
   min-block-size: 600px;

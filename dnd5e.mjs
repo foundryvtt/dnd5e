@@ -18,14 +18,16 @@ import * as canvas from "./module/canvas/_module.mjs";
 import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
+import DragDrop5e from "./module/drag-drop.mjs";
 import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
-import {default as registry} from "./module/registry.mjs";
-import * as utils from "./module/utils.mjs";
 import ModuleArt from "./module/module-art.mjs";
-import registerModuleData from "./module/module-registration.mjs";
+import {registerModuleData, setupModulePacks} from "./module/module-registration.mjs";
+import parseUuid from "./module/parse-uuid.mjs";
+import {default as registry} from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
+import * as utils from "./module/utils.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -45,15 +47,20 @@ globalThis.dnd5e = {
   utils
 };
 
+DragDrop = DragDrop5e;
+
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
 /* -------------------------------------------- */
 
 Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
-  console.log(`D&D 5e | Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
+  utils.log(`Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
   if ( game.release.generation < 13 ) patchFromUuid();
+  CONFIG.compatibility.excludePatterns.push(
+    /now namespaced under/, /V1 Application framework/, /Set#isSubset/, /ChatMessage#getHTML/, /renderChatMessage/
+  );
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
@@ -66,6 +73,7 @@ Hooks.once("init", function() {
   CONFIG.Item.collection = dataModels.collection.Items5e;
   CONFIG.Item.compendiumIndexFields.push("system.container");
   CONFIG.Item.documentClass = documents.Item5e;
+  CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
   CONFIG.User.documentClass = documents.User5e;
@@ -77,8 +85,9 @@ Hooks.once("init", function() {
   CONFIG.Dice.D20Roll = dice.D20Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.Note.objectClass = canvas.Note5e;
+  CONFIG.ui.chat = applications.ChatLog5e;
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
-  CONFIG.ui.items = dnd5e.applications.item.ItemDirectory5e;
+  CONFIG.ui.items = applications.item.ItemDirectory5e;
 
   // Register System Settings
   registerSystemSettings();
@@ -394,14 +403,8 @@ Hooks.once("setup", function() {
   // Register settings after modules have had a chance to initialize
   registerDeferredSettings();
 
-  // Apply table of contents compendium style if specified in flags
-  game.packs
-    .filter(p => p.metadata.flags?.display === "table-of-contents")
-    .forEach(p => p.applicationClass = applications.journal.TableOfContentsCompendium);
-
-  // Apply custom item compendium
-  game.packs.filter(p => p.metadata.type === "Item")
-    .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
+  // Set up compendiums with custom applications & sorting
+  setupModulePacks();
 
   // Create CSS for currencies
   const style = document.createElement("style");
@@ -484,11 +487,14 @@ Hooks.once("i18nInit", () => {
 Hooks.once("ready", function() {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {
-    if ( ["Item", "ActiveEffect"].includes(data.type) ) {
+    if ( ["ActiveEffect", "Activity", "Item"].includes(data.type) ) {
       documents.macro.create5eMacro(data, slot);
       return false;
     }
   });
+
+  // Adjust sourced items on actors now that compendium UUID redirects have been initialized
+  game.actors.forEach(a => a.sourcedItems._redirectKeys());
 
   // Register items by type
   dnd5e.registry.classes.initialize();
@@ -553,13 +559,20 @@ Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(m
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
 
-Hooks.on("renderCompendiumDirectory", (app, [html], data) => applications.CompendiumBrowser.injectSidebarButton(html));
+Hooks.on("renderCompendiumDirectory", (app, html) => {
+  html = html instanceof HTMLElement ? html : html[0];
+  applications.CompendiumBrowser.injectSidebarButton(html);
+});
 Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
 Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
 
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
 
+Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffectConfig);
+
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
+
+Hooks.on("renderCombatTracker", (app, html, data) => app.renderGroups(html instanceof HTMLElement ? html : html[0]));
 
 Hooks.on("preCreateScene", (doc, createData, options, userId) => {
   // Set default grid units based on metric length setting
@@ -601,68 +614,6 @@ function patchFromUuid() {
       doc = doc.getEmbeddedDocument(embeddedName, embeddedId, {invalid});
     }
     return doc;
-  };
-
-  const _resolveRelativeUuid = function(uuid, relative) {
-    if ( !(relative instanceof foundry.abstract.Document) ) {
-      throw new Error("A relative Document instance must be provided to _resolveRelativeUuid");
-    }
-    uuid = uuid.substring(1);
-    const parts = uuid.split(".");
-    if ( !parts.length ) throw new Error("Invalid relative UUID");
-    let id;
-    let type;
-    let root;
-    let primaryType;
-    let primaryId;
-    let collection;
-
-    // Identify the root document and its collection
-    const getRoot = doc => {
-      if ( doc.parent ) parts.unshift(doc.documentName, doc.id);
-      return doc.parent ? getRoot(doc.parent) : doc;
-    };
-
-    // Even-numbered parts include an explicit child document type
-    if ( (parts.length % 2) === 0 ) {
-      root = getRoot(relative);
-      id = parts.at(-1);
-      type = parts.at(-2);
-      primaryType = root.documentName;
-      primaryId = root.id;
-      uuid = [primaryType, primaryId, ...parts].join(".");
-    }
-
-    // Relative Embedded Document
-    else if ( relative.parent ) {
-      id = parts.at(-1);
-      type = relative.documentName;
-      parts.unshift(type);
-      root = getRoot(relative.parent);
-      primaryType = root.documentName;
-      primaryId = root.id;
-      uuid = [primaryType, primaryId, ...parts].join(".");
-    }
-
-    // Relative Document
-    else {
-      root = relative;
-      id = parts.pop();
-      type = relative.documentName;
-      uuid = [type, id].join(".");
-    }
-
-    // Recreate fully-qualified UUID and return the resolved result
-    collection = root.pack ? root.compendium : root.collection;
-    if ( root.pack ) uuid = `Compendium.${root.pack}.${uuid}`;
-    return {uuid, type, id, collection, primaryType, primaryId, embedded: parts,
-      documentType: primaryType ?? type, documentId: primaryId ?? id};
-  };
-
-  const parseUuid = function(uuid, {relative}={}) {
-    if ( !uuid ) throw new Error("A UUID string is required.");
-    if ( uuid.startsWith(".") && relative ) return _resolveRelativeUuid(uuid, relative);
-    return foundry.utils.parseUuid(uuid, {relative});
   };
 
   // Patch fromUuid to call our wrapped parseUuid in order to correctly resolve relative UUIDs on grandchild embedded

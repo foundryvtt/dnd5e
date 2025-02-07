@@ -114,4 +114,24 @@ export default class ScaleValueAdvancement extends Advancement {
   automaticApplicationValue(level) {
     return {};
   }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc*/
+  getContextMenuOptions() {
+    const options = super.getContextMenuOptions();
+    options.push({
+      name: "DND5E.ADVANCEMENT.ScaleValue.Action.CopyFormula",
+      icon: '<i class="fa-solid fa-copy"></i>',
+      callback: () => {
+        const value = `@scale.${this.item.identifier}.${this.identifier}`;
+        game.clipboard.copyPlainText(value);
+        ui.notifications.info(game.i18n.format("DND5E.Copied", { value }), { console: false });
+      },
+      group: "copy"
+    });
+    return options;
+  }
 }

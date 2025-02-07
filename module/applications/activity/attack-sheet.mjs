@@ -1,4 +1,3 @@
-import { safePropertyExists } from "../../utils.mjs";
 import ActivitySheet from "./activity-sheet.mjs";
 
 /**

@@ -1,4 +1,3 @@
-import Advancement from "../../documents/advancement/advancement.mjs";
 import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 
 /**
@@ -7,7 +6,7 @@ import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
  */
 export default class AdvancementConfig extends PseudoDocumentSheet {
   constructor(advancement={}, options={}) {
-    if ( advancement instanceof Advancement ) {
+    if ( advancement instanceof dnd5e.documents.advancement.Advancement ) {
       options.document = advancement;
       // TODO: Add deprecation warning for this calling pattern once system has switched over to using the sheet
       // getter on Advancement, rather than creating separately
@@ -102,7 +101,6 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    if ( !game.user.isGM ) return;
     new DragDrop({
       dragSelector: ".draggable",
       dropSelector: null,

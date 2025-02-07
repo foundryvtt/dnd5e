@@ -1052,6 +1052,11 @@ export default function ActivityMixin(Base) {
             width: 400,
             top: config.event ? config.event.clientY - 80 : null,
             left: window.innerWidth - 710
+          },
+          window: {
+            title: this.damageFlavor,
+            subtitle: this.item.name,
+            icon: this.item.img
           }
         }
       }, dialog);
@@ -1184,8 +1189,9 @@ export default function ActivityMixin(Base) {
      */
     getContextMenuOptions() {
       const entries = [];
+      const compendiumLocked = this.item[game.release.generation < 13 ? "compendium" : "collection"]?.locked;
 
-      if ( this.item.isOwner && !this.item.compendium?.locked ) {
+      if ( this.item.isOwner && !compendiumLocked ) {
         entries.push({
           name: "DND5E.ContextMenuActionEdit",
           icon: '<i class="fas fa-pen-to-square fa-fw"></i>',
@@ -1216,8 +1222,8 @@ export default function ActivityMixin(Base) {
         const isFavorited = this.actor.system.hasFavorite(uuid);
         entries.push({
           name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-          icon: '<i class="fas fa-star fa-fw"></i>',
-          condition: () => this.item.isOwner && !this.item.compendium?.locked,
+          icon: '<i class="fas fa-bookmark fa-fw"></i>',
+          condition: () => this.item.isOwner && !compendiumLocked,
           callback: () => {
             if ( isFavorited ) this.actor.system.removeFavorite(uuid);
             else this.actor.system.addFavorite({ type: "activity", id: uuid });

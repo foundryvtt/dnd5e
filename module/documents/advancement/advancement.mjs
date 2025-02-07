@@ -314,4 +314,68 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
       "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
     }, { keepId: true }).toObject();
   }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Construct context menu options for this Activity.
+   * @returns {ContextMenuEntry[]}
+   */
+  getContextMenuOptions() {
+    if ( this.item.isOwner && !this.item[game.release.generation < 13 ? "compendium" : "collection"]?.locked ) return [
+      {
+        name: "DND5E.ADVANCEMENT.Action.Edit",
+        icon: "<i class='fas fa-edit fa-fw'></i>",
+        callback: () => this.sheet?.render(true)
+      },
+      {
+        name: "DND5E.ADVANCEMENT.Action.Duplicate",
+        icon: "<i class='fas fa-copy fa-fw'></i>",
+        condition: li => this?.constructor.availableForItem(this.item),
+        callback: () => {
+          const createData = this.toObject();
+          delete createData._id;
+          this.item.createAdvancement(createData.type, createData, { renderSheet: false });
+        }
+      },
+      {
+        name: "DND5E.ADVANCEMENT.Action.Delete",
+        icon: "<i class='fas fa-trash fa-fw'></i>",
+        callback: () => this.deleteDialog()
+      }
+    ];
+
+    return [{
+      name: "DND5E.ADVANCEMENT.Action.View",
+      icon: "<i class='fas fa-eye fa-fw'></i>",
+      callback: () => this.sheet?.render(true)
+    }];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle context menu events on activities.
+   * @param {Item5e} item         The Item the Activity belongs to.
+   * @param {HTMLElement} target  The element the menu was triggered on.
+   */
+  static onContextMenu(item, target) {
+    const { id } = target.closest("[data-id]")?.dataset ?? {};
+    const advancement = item.advancement?.byId[id];
+    if ( !advancement ) return;
+    const menuItems = advancement.getContextMenuOptions();
+
+    /**
+     * A hook even that fires when the context menu for an Advancement is opened.
+     * @function dnd5e.getItemAdvancementContext
+     * @memberof hookEvents
+     * @param {Advancement} advancement       The Advancement.
+     * @param {HTMLElement} target            The element that menu was triggered on.
+     * @param {ContextMenuEntry[]} menuItems  The context menu entries.
+     */
+    Hooks.callAll("dnd5e.getItemAdvancementContext", advancement, target, menuItems);
+    ui.context.menuItems = menuItems;
+  }
 }

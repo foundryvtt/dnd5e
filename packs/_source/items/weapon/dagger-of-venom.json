@@ -116,17 +116,7 @@
           "override": false
         },
         "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
+          "targets": [],
           "scaling": {
             "allowed": false,
             "max": ""
@@ -204,17 +194,7 @@
           "override": false
         },
         "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
+          "targets": [],
           "scaling": {
             "allowed": false,
             "max": ""
@@ -227,7 +207,7 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
@@ -261,21 +241,16 @@
           "onSave": "half",
           "parts": [
             {
-              "number": 1,
-              "denomination": 4,
-              "bonus": "@mod",
-              "types": [
-                "piercing"
-              ],
               "custom": {
                 "enabled": false,
                 "formula": ""
               },
-              "scaling": {
-                "mode": "whole",
-                "number": null,
-                "formula": ""
-              }
+              "number": 2,
+              "denomination": "10",
+              "bonus": "",
+              "types": [
+                "poison"
+              ]
             }
           ]
         },
@@ -288,9 +263,13 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "",
+        "img": "",
+        "appliedEffects": []
       },
       "dnd5eactivity300": {
         "_id": "dnd5eactivity300",
@@ -305,12 +284,8 @@
           "targets": [
             {
               "type": "itemUses",
-              "target": "",
               "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
+              "target": ""
             }
           ],
           "scaling": {
@@ -325,7 +300,7 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
@@ -356,16 +331,20 @@
           "override": false
         },
         "roll": {
-          "formula": "2d10",
+          "formula": "",
           "name": "",
           "prompt": false,
           "visible": false
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "Poison Blade",
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
@@ -379,14 +358,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.0",
     "createdTime": 1725037109200,
-    "modifiedTime": 1725992486919,
+    "modifiedTime": 1738528652910,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!7i4s9msZWpAw4Ynv"

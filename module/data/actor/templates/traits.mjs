@@ -166,10 +166,14 @@ export default class TraitsField {
   /* -------------------------------------------- */
 
   /**
-   * Modify resistances and immunities for the petrified condition.
-   * @this {CharacterData|NPCData}
+   * Prepare condition immunities & petrified condition.
+   * @this {CharacterData|NPCData|VehicleData}
    */
   static prepareResistImmune() {
+    // Apply condition immunities
+    for ( const condition of this.traits.ci.value ) this.parent.statuses.delete(condition);
+
+    // Apply petrified condition
     if ( this.parent.hasConditionEffect("petrification") ) {
       this.traits.dr.custom = game.i18n.localize("DND5E.DamageAll");
       Object.keys(CONFIG.DND5E.damageTypes).forEach(type => this.traits.dr.value.add(type));

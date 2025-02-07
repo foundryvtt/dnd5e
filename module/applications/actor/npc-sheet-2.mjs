@@ -1,5 +1,6 @@
 import ActorSheet5eNPC from "./npc-sheet.mjs";
 import ActorSheetV2Mixin from "./sheet-v2-mixin.mjs";
+import { createCheckboxInput } from "../fields.mjs";
 import { simplifyBonus, splitSemicolons } from "../../utils.mjs";
 
 /**
@@ -14,7 +15,11 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
       height: 700,
       resizable: true,
       scrollY: [".sheet-body"],
-      tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "features" }]
+      tabs: [{ navSelector: ".tabs", contentSelector: ".tab-body", initial: "features" }],
+      dragDrop: [
+        { dragSelector: ".item-list .item > .item-row", dropSelector: null },
+        { dragSelector: ".item-list .item .activity-row", dropSelector: null }
+      ]
     });
   }
 
@@ -24,7 +29,8 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     { tab: "inventory", label: "DND5E.Inventory", svg: "backpack" },
     { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
     { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
-    { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" }
+    { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
+    { tab: "special-traits", label: "DND5E.SpecialTraits", icon: "fas fa-star" }
   ];
 
   /**
@@ -187,6 +193,26 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     }
 
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _prepareFlags() {
+    const flags = super._prepareFlags();
+    const source = (this._mode === this.constructor.MODES.PLAY ? this.document : this.document._source);
+
+    flags.sections.unshift({
+      label: game.i18n.localize("DND5E.NPC.Label"),
+      fields: [{
+        field: this.document.system.schema.fields.traits.fields.important,
+        input: createCheckboxInput,
+        name: "system.traits.important",
+        value: source.system.traits.important
+      }]
+    });
+
+    return flags;
   }
 
   /* -------------------------------------------- */

@@ -1,0 +1,6 @@
+<fieldset>
+    <legend>{{ localize "TYPES.Item.spell" }}</legend>
+    {{ formField fields.name value=name }}
+    {{ formField fields.system.fields.level value=system.level options=spellLevelOptions localize=true }}
+    {{ formField fields.system.fields.school value=system.school options=spellSchoolOptions localize=true }}
+</fieldset>

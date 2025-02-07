@@ -4,6 +4,12 @@ import simplifyRollFormula from "../dice/simplify-roll-formula.mjs";
 
 export default class ChatMessage5e extends ChatMessage {
 
+  /**
+   * HTML tag names for chat trays that can open and close.
+   * @type {string[]}
+   */
+  static TRAY_TYPES = ["damage-application", "effect-application"];
+
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
@@ -59,6 +65,15 @@ export default class ChatMessage5e extends ChatMessage {
       default: return false;
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Store the state of any trays in the message.
+   * @type {Map<string, boolean>}
+   * @protected
+   */
+  _trayStates;
 
   /* -------------------------------------------- */
   /*  Data Migrations                             */
@@ -147,11 +162,11 @@ export default class ChatMessage5e extends ChatMessage {
       // Collapse chat message trays older than 5 minutes
       case "older": collapse = this.timestamp < Date.now() - (5 * 60 * 1000); break;
     }
-    for ( const tray of html.querySelectorAll(".card-tray, .effects-tray") ) {
-      tray.classList.toggle("collapsed", collapse);
+    for ( const tray of html.querySelectorAll(".card-tray") ) {
+      tray.classList.toggle("collapsed", this._trayStates?.get(tray.className.replace(" collapsed", "")) ?? collapse);
     }
-    for ( const element of html.querySelectorAll("damage-application, effect-application") ) {
-      element.toggleAttribute("open", !collapse);
+    for ( const element of html.querySelectorAll(this.constructor.TRAY_TYPES.join(", ")) ) {
+      element.toggleAttribute("open", this._trayStates?.get(element.tagName) ?? !collapse);
     }
   }
 
@@ -315,7 +330,9 @@ export default class ChatMessage5e extends ChatMessage {
     if ( this.isContentVisible && item && roll ) {
       const isCritical = (roll.type === "damage") && this.rolls[0]?.isCritical;
       const subtitle = roll.type === "damage"
-        ? isCritical ? game.i18n.localize("DND5E.CriticalHit") : game.i18n.localize("DND5E.DamageRoll")
+        ? isCritical
+          ? game.i18n.localize("DND5E.CriticalHit") 
+          : activity?.damageFlavor ?? game.i18n.localize("DND5E.DamageRoll")
         : roll.type === "attack"
           ? (activity?.getActionLabel(roll.attackMode) ?? "")
           : (item.system.type?.label ?? game.i18n.localize(CONFIG.Item.typeLabels[item.type]));
@@ -652,16 +669,11 @@ export default class ChatMessage5e extends ChatMessage {
    * @protected
    */
   _enrichUsageEffects(html) {
+    if ( this.getFlag("dnd5e", "messageType") !== "usage" ) return;
     const item = this.getAssociatedItem();
-    let effects;
-    if ( this.getFlag("dnd5e", "messageType") === "usage" ) {
-      effects = this.getFlag("dnd5e", "use.effects")?.map(id => item?.effects.get(id));
-    } else {
-      if ( this.getFlag("dnd5e", "roll.type") ) return;
-      effects = item?.effects.filter(e => (e.type !== "enchantment")
-        && !item.getFlag("dnd5e", "riders.effect")?.includes(e.id));
-    }
-    effects = effects?.filter(e => e && (game.user.isGM || (e.transfer && (this.author.id === game.user.id))));
+    const effects = this.getFlag("dnd5e", "use.effects")
+      ?.map(id => item?.effects.get(id))
+      .filter(e => e && (game.user.isGM || (e.transfer && (this.author.id === game.user.id))));
     if ( !effects?.length ) return;
 
     const effectApplication = document.createElement("effect-application");

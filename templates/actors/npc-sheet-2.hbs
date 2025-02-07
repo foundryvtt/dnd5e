@@ -251,11 +251,6 @@
                                     aria-label="{{ localize "DND5E.REST.Long.Label" }}">
                                 <i class="fas fa-campground"></i>
                             </button>
-                            <button type="button" class="config-button gold-button" data-action="flags"
-                                    data-tooltip="DND5E.SpecialTraits"
-                                    aria-label="{{ localize "DND5E.SpecialTraits" }}">
-                                <i class="fas fa-star"></i>
-                            </button>
                         </div>
 
                         <div class="proficiency">
@@ -313,7 +308,7 @@
                                            data-tooltip="{{ hover }}" aria-label="{{ localize hover }}"
                                            value="{{#if @root.editable}}{{ baseProf }}{{else}}{{ proficient }}{{/if}}"
                                            {{ disabled (not @root.editable) }}></proficiency-cycle>
-                        <span class="save">{{ dnd5e-formatModifier save }}</span>
+                        <span class="save">{{ dnd5e-formatModifier save.value }}</span>
                         <i class="fas fa-shield-heart" inert></i>
                     </div>
                 </div>
@@ -492,7 +487,6 @@
                     label="DND5E.Languages" }}
 
                 {{!-- Habitat --}}
-                {{!-- TODO: Unhide once full list of habitats is available
                 {{#if (or editable habitat)}}
                 <div class="pills-group {{#unless habitat}}empty{{/unless}}">
                     <h3 class="icon">
@@ -514,10 +508,9 @@
                     </ul>
                 </div>
                 {{/if}}
-                --}}
 
                 {{!-- Treasure --}}
-                {{!-- TODO: ALlow clicking a treasure category pill to roll appropriately for random treasure --}}
+                {{!-- TODO: Allow clicking a treasure category pill to roll appropriately for random treasure --}}
                 {{#if (or editable treasure)}}
                 <div class="pills-group {{#unless treasure}}empty{{/unless}}">
                     <h3 class="icon">
@@ -568,6 +561,11 @@
 
                 {{!-- Biography --}}
                 {{~> "dnd5e.npc-biography" ~}}
+
+                {{!-- Special Traits --}}
+                <div class="tab special-traits" data-group="primary" data-tab="special-traits">
+                    {{~> "dnd5e.creature-special-traits" ~}}
+                </div>
 
             </section>
 

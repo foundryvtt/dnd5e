@@ -2,10 +2,12 @@ import ShortRestDialog from "../../applications/actor/rest/short-rest-dialog.mjs
 import LongRestDialog from "../../applications/actor/rest/long-rest-dialog.mjs";
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
+import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
-import { convertTime, defaultUnits, formatNumber, formatTime, replaceFormulaData, simplifyBonus, staticID } from "../../utils.mjs";
+import parseUuid from "../../parse-uuid.mjs";
+import { convertTime, defaultUnits, formatNumber, formatTime, simplifyBonus, staticID } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
 import SystemDocumentMixin from "../mixins/document.mjs";
@@ -227,7 +229,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   applyActiveEffects() {
-    this._prepareScaleValues();
     if ( this.system?.prepareEmbeddedData instanceof Function ) this.system.prepareEmbeddedData();
     // The Active Effects do not have access to their parent at preparation time, so we wait until this stage to
     // determine whether they are suppressed or not.
@@ -257,27 +258,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( origin && this.token?.id ) dnd5e.registry.summons.track(origin.split(".Item.")[0], this.uuid);
 
     if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
-
     this.labels = {};
-
-    // Retrieve data for polymorphed actors
-    const { originalSkills } = this.getOriginalStats();
-
-    // Prepare abilities, skills, & everything else
-    const globalBonuses = this.system.bonuses?.abilities ?? {};
-    const rollData = this.getRollData();
-    const checkBonus = simplifyBonus(globalBonuses?.check, rollData);
-    this._prepareSkills(rollData, globalBonuses, checkBonus, originalSkills);
-    this._prepareTools(rollData, globalBonuses, checkBonus);
-    this._prepareArmorClass();
-    this._prepareInitiative(rollData, checkBonus);
-    this._prepareSpellcastingAbility();
-
-    // Apply condition immunities
-    const conditionImmunities = this.system.traits?.ci?.value;
-    if ( conditionImmunities ) {
-      for ( const condition of conditionImmunities ) this.statuses.delete(condition);
-    }
   }
 
   /* -------------------------------------------- */
@@ -360,269 +341,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   }
 
   /* -------------------------------------------- */
-  /*  Base Data Preparation Helpers               */
-  /* -------------------------------------------- */
-
-  /**
-   * Derive any values that have been scaled by the Advancement system.
-   * Mutates the value of the `system.scale` object.
-   * @protected
-   */
-  _prepareScaleValues() {
-    this.system.scale = this.items.reduce((scale, item) => {
-      if ( CONFIG.DND5E.advancementTypes.ScaleValue.validItemTypes.has(item.type) ) {
-        scale[item.identifier] = item.scaleValues;
-      }
-      return scale;
-    }, {});
-  }
-
-  /* -------------------------------------------- */
-  /*  Derived Data Preparation Helpers            */
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare skill checks. Mutates the values of system.skills.
-   * @param {object} rollData         Data produced by `getRollData` to be applied to bonus formulas.
-   * @param {object} globalBonuses     Global bonus data.
-   * @param {number} globalCheckBonus  Global ability check bonus.
-   * @param {object} originalSkills    A transformed actor's original actor's skills.
-   * @protected
-   */
-  _prepareSkills(rollData, globalBonuses, globalCheckBonus, originalSkills) {
-    if ( this.type === "vehicle" ) return;
-
-    // Skill modifiers
-    for ( const [id, skillData] of Object.entries(this.system.skills) ) {
-      this._prepareSkill(id, { skillData, rollData, originalSkills, globalCheckBonus, globalBonuses });
-    }
-  }
-
+  /*  Data Preparation                            */
   /* -------------------------------------------- */
 
   /**
    * Prepares data for a specific skill.
-   * @param {string} skillId                     The id of the skill to prepare data for.
-   * @param {object} [options]                   Additional options.
-   * @param {SkillData} [options.skillData]      The base skill data for this skill.
-   *                                             If undefined, `this.system.skill[skillId]` is used.
-   * @param {object} [options.rollData]          RollData for this actor, used to evaluate dice terms in bonuses.
-   *                                             If undefined, `this.getRollData()` is used.
-   * @param {object} [options.originalSkills]    Original skills if actor is polymorphed.
-   *                                             If undefined, the skills of the actor identified by
-   *                                             `this.flags.dnd5e.originalActor` are used.
-   * @param {object} [options.globalBonuses]     Global ability bonuses for this actor.
-   *                                             If undefined, `this.system.bonuses.abilities` is used.
-   * @param {number} [options.globalCheckBonus]  Global check bonus for this actor.
-   *                                             If undefined, `globalBonuses.check` will be evaluated using `rollData`.
-   * @param {number} [options.globalSkillBonus]  Global skill bonus for this actor.
-   *                                             If undefined, `globalBonuses.skill` will be evaluated using `rollData`.
-   * @param {string} [options.ability]           The ability to compute bonuses based on.
-   *                                             If undefined, skillData.ability is used.
+   * @param {string} skillId    The id of the skill to prepare data for.
+   * @param {object} [options]  Additional options passed to {@link CreatureTemplate#prepareSkill}.
    * @returns {SkillData}
    * @internal
    */
-  _prepareSkill(skillId, {
-    skillData, rollData, originalSkills, globalBonuses,
-    globalCheckBonus, globalSkillBonus, ability
-  }={}) {
-    const flags = this.flags.dnd5e ?? {};
-
-    skillData ??= foundry.utils.deepClone(this.system.skills[skillId]);
-    rollData ??= this.getRollData();
-    originalSkills ??= flags.originalActor ? game.actors?.get(flags.originalActor)?.system?.skills : null;
-    globalBonuses ??= this.system.bonuses?.abilities ?? {};
-    globalCheckBonus ??= simplifyBonus(globalBonuses.check, rollData);
-    globalSkillBonus ??= simplifyBonus(globalBonuses.skill, rollData);
-    ability ??= skillData.ability;
-    const abilityData = this.system.abilities[ability];
-    skillData.ability = ability;
-    const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
-
-    // Polymorph Skill Proficiencies
-    if ( originalSkills ) {
-      skillData.value = Math.max(skillData.value, originalSkills[skillId].value);
-    }
-
-    // Compute modifier
-    const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
-    skillData.effectValue = skillData.value;
-    skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
-    skillData.mod = abilityData?.mod ?? 0;
-    skillData.prof = this.system.calculateAbilityCheckProficiency(skillData.value, skillData.ability);
-    skillData.value = skillData.proficient = skillData.prof.multiplier;
-    skillData.total = skillData.mod + skillData.bonus;
-    if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
-
-    // Compute passive bonus
-    const passive = flags.observantFeat && CONFIG.DND5E.characterFlags.observantFeat.skills.includes(skillId) ? 5 : 0;
-    const passiveBonus = simplifyBonus(skillData.bonuses?.passive, rollData);
-    skillData.passive = 10 + skillData.mod + skillData.bonus + skillData.prof.flat + passive + passiveBonus;
-
-    return skillData;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare tool checks. Mutates the values of system.tools.
-   * @param {object} bonusData       Data produced by `getRollData` to be applied to bonus formulae.
-   * @param {object} globalBonuses   Global bonus data.
-   * @param {number} checkBonus      Global ability check bonus.
-   * @protected
-   */
-  _prepareTools(bonusData, globalBonuses, checkBonus) {
-    if ( this.type === "vehicle" ) return;
-    for ( const tool of Object.values(this.system.tools) ) {
-      const ability = this.system.abilities[tool.ability];
-      const baseBonus = simplifyBonus(tool.bonuses.check, bonusData);
-      const checkBonusAbl = simplifyBonus(ability?.bonuses?.check, bonusData);
-      tool.effectValue = tool.value;
-      tool.bonus = baseBonus + checkBonus + checkBonusAbl;
-      tool.mod = ability?.mod ?? 0;
-      tool.prof = this.system.calculateAbilityCheckProficiency(tool.value, tool.ability);
-      tool.total = tool.mod + tool.bonus;
-      if ( Number.isNumeric(tool.prof.term) ) tool.total += tool.prof.flat;
-      tool.value = tool.prof.multiplier;
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare a character's AC value from their equipped armor and shield.
-   * Mutates the value of the `system.attributes.ac` object.
-   */
-  _prepareArmorClass() {
-    const ac = this.system.attributes.ac;
-
-    // Apply automatic migrations for older data structures
-    let cfg = CONFIG.DND5E.armorClasses[ac.calc];
-    if ( !cfg ) {
-      ac.calc = "flat";
-      if ( Number.isNumeric(ac.value) ) ac.flat = Number(ac.value);
-      cfg = CONFIG.DND5E.armorClasses.flat;
-    }
-
-    // Identify Equipped Items
-    const armorTypes = new Set(Object.keys(CONFIG.DND5E.armorTypes));
-    const {armors, shields} = this.itemTypes.equipment.reduce((obj, equip) => {
-      if ( !equip.system.equipped || !armorTypes.has(equip.system.type.value) ) return obj;
-      if ( equip.system.type.value === "shield" ) obj.shields.push(equip);
-      else obj.armors.push(equip);
-      return obj;
-    }, {armors: [], shields: []});
-    const rollData = this.getRollData({ deterministic: true });
-
-    // Determine base AC
-    switch ( ac.calc ) {
-
-      // Flat AC (no additional bonuses)
-      case "flat":
-        ac.value = Number(ac.flat);
-        return;
-
-      // Natural AC (includes bonuses)
-      case "natural":
-        ac.base = Number(ac.flat);
-        break;
-
-      default:
-        let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
-        if ( armors.length ) {
-          if ( armors.length > 1 ) this._preparationWarnings.push({
-            message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
-          });
-          const armorData = armors[0].system.armor;
-          const isHeavy = armors[0].system.type.value === "heavy";
-          ac.armor = armorData.value ?? ac.armor;
-          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.system.abilities.dex?.mod ?? 0);
-          ac.equippedArmor = armors[0];
-        }
-        else ac.dex = this.system.abilities.dex?.mod ?? 0;
-
-        rollData.attributes.ac = ac;
-        try {
-          const replaced = replaceFormulaData(formula, rollData, {
-            actor: this, missing: null, property: game.i18n.localize("DND5E.ArmorClass")
-          });
-          ac.base = replaced ? new Roll(replaced).evaluateSync().total : 0;
-        } catch(err) {
-          this._preparationWarnings.push({
-            message: game.i18n.format("DND5E.WarnBadACFormula", { formula }), link: "armor", type: "error"
-          });
-          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
-          ac.base = new Roll(replaced).evaluateSync().total;
-        }
-        break;
-    }
-
-    // Equipped Shield
-    if ( shields.length ) {
-      if ( shields.length > 1 ) this._preparationWarnings.push({
-        message: game.i18n.localize("DND5E.WarnMultipleShields"), type: "warning"
-      });
-      ac.shield = shields[0].system.armor.value ?? 0;
-      ac.equippedShield = shields[0];
-    }
-
-    // Compute cover.
-    ac.cover = Math.max(ac.cover, this.coverBonus);
-
-    // Compute total AC and return
-    ac.min = simplifyBonus(ac.min, rollData);
-    ac.bonus = simplifyBonus(ac.bonus, rollData);
-    ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare the initiative data for an actor.
-   * Mutates the value of the system.attributes.init object.
-   * @param {object} bonusData         Data produced by getRollData to be applied to bonus formulas
-   * @param {number} globalCheckBonus  Global ability check bonus
-   * @protected
-   */
-  _prepareInitiative(bonusData, globalCheckBonus=0) {
-    const init = this.system.attributes.init ??= {};
-    const flags = this.flags.dnd5e || {};
-
-    // Compute initiative modifier
-    const abilityId = init.ability || CONFIG.DND5E.defaultAbilities.initiative;
-    const ability = this.system.abilities?.[abilityId] || {};
-    init.mod = ability.mod ?? 0;
-
-    // Initiative proficiency
-    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
-    const prof = this.system.attributes.prof ?? 0;
-    const joat = flags.jackOfAllTrades && isLegacy;
-    const ra = this._isRemarkableAthlete(abilityId);
-    const alert = flags.initiativeAlert && !isLegacy;
-    init.prof = new Proficiency(prof, alert ? 1 : (joat || ra) ? 0.5 : 0, !ra);
-
-    // Total initiative includes all numeric terms
-    const initBonus = simplifyBonus(init.bonus, bonusData);
-    const abilityBonus = simplifyBonus(ability.bonuses?.check, bonusData);
-    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
-      + (flags.initiativeAlert && isLegacy ? 5 : 0)
-      + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
-    init.score = 10 + init.total;
+  _prepareSkill(skillId, options) {
+    return this.system.prepareSkill?.(skillId, options) ?? {};
   }
 
   /* -------------------------------------------- */
   /*  Spellcasting Preparation                    */
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare spellcasting DC & modifier.
-   */
-  _prepareSpellcastingAbility() {
-    const spellcastingAbility = this.system.abilities[this.system.attributes.spellcasting];
-    this.system.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.system.attributes.prof;
-    this.system.attributes.spellmod = spellcastingAbility ? spellcastingAbility.mod : 0;
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -1350,7 +1084,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
   async rollSkill(config={}, dialog={}, message={}) {
-    return this.#rollSkillTool("skill", config, dialog, message);
+    const skillLabel = CONFIG.DND5E.skills[config.skill]?.label ?? "";
+    const ability = this.system.skills[config.skill]?.ability ?? CONFIG.DND5E.skills[config.skill]?.ability ?? "";
+    const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollSkillTool("skill", config, dialogConfig, message);
   }
 
   /* -------------------------------------------- */
@@ -1363,7 +1108,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
   async rollToolCheck(config={}, dialog={}, message={}) {
-    return this.#rollSkillTool("tool", config, dialog, message);
+    const toolLabel = Trait.keyLabel(config.tool, { trait: "tool" }) ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.ToolPromptTitle", { tool: toolLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollSkillTool("tool", config, dialogConfig, message);
   }
 
   /* -------------------------------------------- */
@@ -1443,6 +1197,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }, dialog);
 
+    const abilityLabel = CONFIG.DND5E.abilities[relevant?.ability ?? skillConfig?.ability ?? ""]?.label;
+
     const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
@@ -1455,7 +1211,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
             }
           }
         },
-        flavor: type === "skill" ? game.i18n.format("DND5E.SkillPromptTitle", { skill: skillConfig.label })
+        flavor: type === "skill"
+          ? game.i18n.format("DND5E.SkillPromptTitle", { skill: skillConfig.label, ability: abilityLabel })
           : game.i18n.format("DND5E.ToolPromptTitle", { tool: Trait.keyLabel(config.tool, { trait: "tool" }) ?? "" }),
         speaker: ChatMessage.getSpeaker({ actor: this })
       }
@@ -1587,7 +1344,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instance.
    */
   async rollAbilityCheck(config={}, dialog={}, message={}) {
-    return this.#rollD20Test("check", config, dialog, message);
+    const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.AbilityPromptTitle", { ability: abilityLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollD20Test("check", config, dialogConfig, message);
   }
 
   /**
@@ -1615,7 +1381,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instances.
    */
   async rollSavingThrow(config={}, dialog={}, message={}) {
-    return this.#rollD20Test("save", config, dialog, message);
+    const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SavePromptTitle", { ability: abilityLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollD20Test("save", config, dialogConfig, message);
   }
 
   /**
@@ -1981,7 +1756,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     rollConfig.hookNames = [...(config.hookNames ?? []), "concentration"];
     rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
 
-    const dialogConfig = foundry.utils.deepClone(dialog);
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SavePromptTitle", { ability: game.i18n.localize("DND5E.Concentration") })
+        }
+      }
+    }, dialog);
 
     const messageConfig = foundry.utils.deepClone(message);
 
@@ -2461,16 +2242,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Configuration options for a rest.
    *
    * @typedef {object} RestConfiguration
-   * @property {string} type               Type of rest to perform.
-   * @property {boolean} dialog            Present a dialog window which allows for rolling hit dice as part of the
-   *                                       Short Rest and selecting whether a new day has occurred.
-   * @property {boolean} chat              Should a chat message be created to summarize the results of the rest?
-   * @property {number} duration           Amount of time passed during the rest in minutes.
-   * @property {boolean} newDay            Does this rest carry over to a new day?
-   * @property {boolean} [advanceTime]     Should the game clock be advanced by the rest duration?
-   * @property {boolean} [autoHD]          Should hit dice be spent automatically during a short rest?
-   * @property {number} [autoHDThreshold]  How many hit points should be missing before hit dice are
-   *                                       automatically spent during a short rest.
+   * @property {string} type                   Type of rest to perform.
+   * @property {boolean} dialog                Present a dialog window which allows for rolling hit dice as part of the
+   *                                           Short Rest and selecting whether a new day has occurred.
+   * @property {boolean} chat                  Should a chat message be created to summarize the results of the rest?
+   * @property {number} duration               Amount of time passed during the rest in minutes.
+   * @property {boolean} newDay                Does this rest carry over to a new day?
+   * @property {boolean} [advanceBastionTurn]  Should a bastion turn be advanced for all players?
+   * @property {boolean} [advanceTime]         Should the game clock be advanced by the rest duration?
+   * @property {boolean} [autoHD]              Should hit dice be spent automatically during a short rest?
+   * @property {number} [autoHDThreshold]      How many hit points should be missing before hit dice are
+   *                                           automatically spent during a short rest.
    */
 
   /**
@@ -2482,10 +2264,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {object} deltas
    * @property {number} deltas.hitPoints  Hit points recovered during the rest.
    * @property {number} deltas.hitDice    Hit dice recovered or spent during the rest.
-   * @property {object} updateData        Updates applied to the actor.
-   * @property {object[]} updateItems     Updates applied to actor's items.
    * @property {boolean} newDay           Whether a new day occurred during the rest.
    * @property {Roll[]} rolls             Any rolls that occurred during the rest process, not including hit dice.
+   * @property {object} updateData        Updates applied to the actor.
+   * @property {object[]} updateItems     Updates applied to actor's items.
    */
 
   /* -------------------------------------------- */
@@ -2659,6 +2441,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     Hooks.callAll("dnd5e.restCompleted", this, result, config);
 
+    if ( config.advanceBastionTurn && game.user.isGM && game.settings.get("dnd5e", "bastionConfiguration").enabled
+      && this.itemTypes.facility.length ) await dnd5e.bastion.advanceAllFacilities(this);
+
     // Return data summarizing the rest effects
     return result;
   }
@@ -2681,11 +2466,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const longRest = config.type === "long";
     const length = longRest ? "Long" : "Short";
 
+    const typeConfig = CONFIG.DND5E.restTypes[config.type] ?? {};
     const duration = convertTime(config.duration, "minute");
     const parts = [formatTime(duration.value, duration.unit)];
     if ( newDay ) parts.push(game.i18n.localize("DND5E.REST.NewDay.Label").toLowerCase());
-    const restFlavor = `${CONFIG.DND5E.restTypes[config.type].label} (${
-      game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
+    const restFlavor = `${typeConfig.label} (${game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
 
     // Determine the chat message to display
     let message;
@@ -2707,6 +2492,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       rolls: result.rolls,
       speaker: ChatMessage.getSpeaker({ actor: this, alias: this.name }),
       system: {
+        activations: ActivationsField.getActivations(this, typeConfig?.activationPeriods ?? []),
         deltas: ActorDeltasField.getDeltas(result.clone, { actor: result.updateData, item: result.updateItems }),
         type: result.type
       }
@@ -3285,6 +3071,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const tokenData = d.prototypeToken;
       delete d.prototypeToken;
       tokenData.delta = d;
+      tokenData.elevation = this.token.elevation;
+      tokenData.rotation = this.token.rotation;
       const previousActorData = this.token.delta.toObject();
       foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
       await this.sheet?.close();
@@ -3323,6 +3111,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newTokenData._id = t.id;
       newTokenData.actorId = newActor.id;
       newTokenData.actorLink = true;
+      newTokenData.elevation = t.document.elevation;
+      newTokenData.rotation = t.document.rotation;
 
       const dOriginalActor = foundry.utils.getProperty(d, "flags.dnd5e.originalActor");
       foundry.utils.setProperty(newTokenData, "flags.dnd5e.originalActor", dOriginalActor);
@@ -3417,6 +3207,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const tokenUpdates = tokens.map(t => {
         const update = foundry.utils.deepClone(tokenData);
         update._id = t.id;
+        update.elevation = t.document.elevation;
+        update.rotation = t.document.rotation;
         delete update.x;
         delete update.y;
         return update;
@@ -3783,7 +3575,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
  */
 class SourcedItemsMap extends Map {
   /** @inheritDoc */
-  get(key, { legacy=true }={}) {
+  get(key, { remap=true, legacy=true }={}) {
+    if ( remap ) ({ uuid: key } = parseUuid(key));
     if ( legacy ) {
       foundry.utils.logCompatibilityWarning(
         "The `sourcedItems` data on actor has changed from storing individual items to storing Sets of items. Pass `legacy: false` to retrieve the new Set data.",
@@ -3798,8 +3591,24 @@ class SourcedItemsMap extends Map {
 
   /** @inheritDoc */
   set(key, value) {
-    if ( !this.has(key) ) super.set(key, new Set());
-    this.get(key, { legacy: false }).add(value);
+    const { uuid } = parseUuid(key);
+    if ( !this.has(uuid) ) super.set(uuid, new Set());
+    this.get(uuid, { remap: false, legacy: false }).add(value);
     return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust keys once compendium UUID redirects have been initialized.
+   */
+  _redirectKeys() {
+    for ( const [key, value] of this.entries() ) {
+      const { uuid } = parseUuid(key);
+      if ( key !== uuid ) {
+        this.set(uuid, value);
+        this.delete(key);
+      }
+    }
   }
 }
