@@ -32,9 +32,11 @@
 - [Frequently Asked Questions](FAQ.md)
 - [Hooks](Hooks.md)
 - [Journal Pages](Journal-Pages.md)
-- [Module Registration](Module-Registration.md)
+- Module Development
+  - [Module Registration](Module-Registration.md)
+  - [System HTML](System-HTML.md)
+  - [Table of Contents](Table-of-Contents.md)
 - [Roll Formulas](Roll-Formulas.md)
-- [System HTML](System-HTML.md)
 - Tutorials
   - [Custom Classes](Custom-Class-Advancement.md)
   - [Custom Races](Custom-Race-Tutorial.md)
