@@ -101,3 +101,13 @@ Hiding a specific page can be done using the `tocHidden` flag on the specific pa
 const journalPage = await fromUuid("...");
 journalPage.setFlag("dnd5e", "tocHidden", true);
 ```
+
+### Custom Styling
+
+The table of contents application gets a special attribute with the compendium ID added to support custom styling:
+
+```css
+.table-of-contents[data-compendium-id="dnd5e.rules"] {
+  // Styles here
+}
+```
