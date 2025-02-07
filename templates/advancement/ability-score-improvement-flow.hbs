@@ -1,5 +1,5 @@
 <form id="{{ appId }}" data-level="{{ level }}" data-id="{{ advancement.id }}" data-type="{{ type }}">
-    <h3>{{{ this.title }}}</h3>
+    <h3>{{{ title }}}</h3>
     {{#if advancement.hint}}<p>{{ advancement.hint }}</p>{{/if}}
 
     {{#if showImprovement}}
@@ -21,30 +21,38 @@
     {{/if}}
 
     {{#if advancement.allowFeat}}
-    {{#if showImprovement}}<h3>{{ localize "DND5E.Feature.Feat.Label" }}</h3>{{/if}}
+    <div class="feat-section flexcol">
+        {{#if showImprovement}}<h3>{{ localize "DND5E.Feature.Feat.Label" }}</h3>{{/if}}
 
-    {{#if showASIFeat}}
-    <div class="item-name flexrow drop-area dnd5e2">
-        <div class="item-image"
-             style="background-image: url('icons/skills/melee/weapons-crossed-swords-white-blue.webp');"></div>
-        <span class="name">{{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.Feat.ASIName" }}</span>
-        <dnd5e-checkbox class="item-control" name="asi-selected" {{ checked feat.isASI }}></dnd5e-checkbox>
-    </div>
-    {{/if}}
-
-    {{#unless feat.isASI}}
-    <div class="item-name flexrow drop-area {{#unless feat}}empty{{/unless}}">
-        {{#if feat}}
-        <div class="item-image" style="background-image: url('{{ feat.img }}');"></div>
-        <a class="name" data-uuid="{{ feat.uuid }}">{{ feat.name }}</a>
-        <button type="button" class="unbutton control-button item-control" data-action="delete"
-                data-tooltip="DND5E.ItemDelete" aria-label="{{ localize 'DND5E.ItemDelete' }}">
-            <i class="fas fa-trash" inert></i>
-        </button>
-        {{else}}
-        {{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.Feat.Hint" }}
+        {{#if showASIFeat}}
+        <div class="pill-lg {{#if lockImprovement}}locked{{/if}}">
+            <img class="gold-icon" src="icons/skills/melee/weapons-crossed-swords-white-blue.webp"
+                 alt="{{ localize 'DND5E.ADVANCEMENT.AbilityScoreImprovement.Feat.ASIName' }}">
+            <div class="name-stacked">
+                <div class="title">{{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.Feat.ASIName" }}</div>
+            </div>
+            <dnd5e-checkbox class="item-control" name="asi-selected" {{ checked feat.isASI }}
+                            {{ disabled lockImprovement }}></dnd5e-checkbox>
+        </div>
         {{/if}}
+
+        {{#unless feat.isASI}}
+        <div class="pill-lg {{#unless feat}}roboto-upper empty{{/unless}}"
+             {{~#if feat}} data-uuid="{{ feat.uuid }}"{{else}} data-action="browse"{{/if}}>
+            {{#if feat}}
+            <img class="gold-icon" data-action="viewItem" src="{{ feat.img }}" alt="{{ feat.name }}">
+            <div class="name-stacked">
+                <div class="title">{{ feat.name }}</div>
+            </div>
+            <button type="button" class="unbutton control-button item-control" data-action="delete"
+                    data-tooltip="DND5E.ItemDelete" aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                <i class="fas fa-trash" inert></i>
+            </button>
+            {{else}}
+            {{ localize "DND5E.ADVANCEMENT.AbilityScoreImprovement.Action.Select" }}
+            {{/if}}
+        </div>
+        {{/unless}}
     </div>
-    {{/unless}}
     {{/if}}
 </form>
