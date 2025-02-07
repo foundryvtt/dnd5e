@@ -187,15 +187,15 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( source.uses?.per === "charges" ) {
       if ( source.uses.recovery ) {
         source.uses.recovery = [{ period: "lr", type: "formula", formula: source.uses.recovery }];
-      } else if ( source.uses ) {
+      } else {
         delete source.uses.recovery;
       }
     }
 
     // If period is not blank, set an appropriate recovery type
     else if ( source.uses?.per ) {
-      if ( CONFIG.DND5E.limitedUsePeriods[source.uses?.per]?.formula && source.uses?.recovery ) {
-        source.uses.recovery = [{ period: source?.uses?.per, type: "formula", formula: source?.uses?.recovery }];
+      if ( CONFIG.DND5E.limitedUsePeriods[source.uses.per]?.formula && source.uses?.recovery ) {
+        source.uses.recovery = [{ period: source.uses.per, type: "formula", formula: source.uses.recovery }];
       }
       else if ( source.uses ) source.uses.recovery = [{ period: source.uses?.per, type: "recoverAll" }];
     }
