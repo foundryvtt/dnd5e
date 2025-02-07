@@ -6,7 +6,7 @@ The table of contents system allows modules to take advantage of automatic gener
 
 ### Pack Registration
 
-The first set to setting up the ToC is to add a flag to whichever journal compendium pack it should appear for. In your module's manifest (`module.json` or `world.json`) add a `flags` object to the pack definition and add a `display` flag set to `table-of-contents`:
+The first step to setting up the ToC is to add a flag to whichever journal compendium pack for which it should appear. In your module's manifest (`module.json` or `world.json`) add a `flags` object to the pack definition and add a `display` flag set to `table-of-contents`:
 
 ```json
 {
@@ -59,7 +59,7 @@ journalEntry.setFlag("dnd5e", "showPages", false);
 
 #### `position` flag
 
-The `position` flag is used to control where chapters and appendices appear in the list. It is usually as simple as setting the first chapter to have a `1`, the second chapter to have `2`, and so on. The position is independent between chapters and appendices, so you can have appendix A also have an position of `1`.
+The `position` flag is used to control where chapters and appendices appear in the list. It is usually as simple as setting the first chapter to have a `1`, the second chapter to have `2`, and so on. The position is independent between chapters and appendices, so you can have appendix A also have a position of `1`.
 
 ```javascript
 const journalEntry = await fromUuid("...");
@@ -70,7 +70,7 @@ This flag only has effect for `chapter` and `appendix` entries.
 
 #### `append` & `order` flags
 
-The `append` and `order` flags are used by `special` entries to control where they appear in the final list. The `append` flag specifies which chapter the special entry will be added to. If no `append` is provided, then a special entry will be added after all of the other chapters and appendices as a top-level entry.
+The `append` and `order` flags are used by `special` entries to control where they appear in the final list. The `append` flag specifies to which chapter the special entry will be added. If no `append` is provided, then a special entry will be added after all of the other chapters and appendices as a top-level entry.
 
 **Note**: The `append` flag corresponds to the absolute chapter position starting at `1`, so if you have 5 chapters and 2 appendices, the range of valid values will be 1–7, with 1–5 being the first through fifth chapter, and 6 & 7 being the first and second appendix.
 
