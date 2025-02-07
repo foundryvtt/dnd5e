@@ -21,15 +21,37 @@ To include your Javascript file in your world, first, shut down Foundry complete
 
 1. Navigate to your world's directory in your user data folder.
 2. Open world.json in a text editor (Visual Studio Code is a good choice, but almost any editor will do).
-3. In the world.json file, look for a line with the esmodules key. If there isn't one, add it after any of the existing keys, like this:
+3. Your world.json file might look something like this:
 ```json
 {
-  "title": "My Cool DnD Game",
-  "esmodules": [],
-  "version": "1.0.0"
+  "title": "Cool DnD World!!",
+  "id": "cool-dnd-world",
+  "system": "dnd5e",
+  "coreVersion": "12.331",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+  "systemVersion": "3.3.1"
 }
 ```
-4. Add the path to your Javascript file to the esmodules array. If your Javascript file is stored in the root of the world directory as suggested above, just write the filename in quotation marks. It will look like this when you're done: `"esmodules": [ "my-script.js" ],` Note the comma is required at the end of the line, unless you've added this as the very last key in the JSON file. If you are unsure if your world.json file is formatted correctly, you can check it with an online JSON validator such as [JSONLint](https://jsonlint.com/).
+Add an `esmodules` key: `esmodules: [],` after any existing key (within a single pair of curly brackets `{}`). Omit the trailing comma if no key follows. If your file already has an `esmodules` key, leave it unmodified.
+4. Add the path to your Javascript file to the esmodules array. If your Javascript file is stored in the root of the world directory as suggested above, just write the filename in quotation marks inside the square brackets `[]`. If you are unsure if your world.json file is formatted correctly, you can check it with an online JSON validator such as [JSONLint](https://jsonlint.com/).
+Your world.json file should now look something like this:
+```json
+{
+  "title": "Cool DnD World!!",
+  "id": "cool-dnd-world",
+  "esmodules": [ "my-script.js" ],
+  "system": "dnd5e",
+  "coreVersion": "12.331",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+  "systemVersion": "3.3.1"
+}
+```
 5. Save and close world.json.
 6. Create a file called my-script.js in the same directory of world.json
 7. Copy an example from the next chapter into it
