@@ -168,9 +168,9 @@ export default class ActivitiesTemplate extends SystemDataModel {
    */
   static #migrateUses(source) {
     // Remove any old ternary operators from uses to prevent errors
-    if ( source.uses?.max?.includes(" ? ") ) source.uses.max = "";
+    if ( source.uses?.max?.includes?.(" ? ") ) source.uses.max = "";
     for ( const activity of Object.values(source.activities ?? {}) ) {
-      if ( activity?.uses?.max?.includes(" ? ") ) activity.uses.max = "";
+      if ( activity?.uses?.max?.includes?.(" ? ") ) activity.uses.max = "";
     }
 
     if ( Array.isArray(source.uses?.recovery) ) return;
@@ -185,7 +185,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( foundry.utils.getType(source.uses?.recovery) !== "string" ) return;
 
     // If period is charges, set the recovery type to `formula`
-    if ( source.uses.per === "charges" ) {
+    if ( source.uses?.per === "charges" ) {
       if ( source.uses.recovery ) {
         source.uses.recovery = [{ period: "lr", type: "formula", formula: source.uses.recovery }];
       } else {
@@ -194,7 +194,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     }
 
     // If period is not blank, set an appropriate recovery type
-    else if ( source.uses.per ) {
+    else if ( source.uses?.per ) {
       if ( CONFIG.DND5E.limitedUsePeriods[source.uses.per]?.formula && source.uses.recovery ) {
         source.uses.recovery = [{ period: source.uses.per, type: "formula", formula: source.uses.recovery }];
       }
