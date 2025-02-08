@@ -1,4 +1,4 @@
-![Up to date as of 3.0.0](https://img.shields.io/static/v1?label=dnd5e&message=3.0.0&color=informational)
+![Up to date as of 4.3.0](https://img.shields.io/static/v1?label=dnd5e&message=4.3.0&color=informational)
 
 For a general overview of World Scripts, see the [Foundry Community Wiki](https://foundryvtt.wiki/en/basics/world-scripts), much of this guide has been lifted from that page, but the example scripts below will be limited to DnD5e specific scripts.
 
@@ -224,6 +224,56 @@ Hooks.once("init", () => {
   delete CONFIG.DND5E.languages.standard.children.dwarvish;
   delete CONFIG.DND5E.languages.exotic.children.aarakocra;
   delete CONFIG.DND5E.languages.exotic.children.primordial.children.aquan;
+});
+```
+
+## Modify Movement Types
+### Add a movement type
+```js
+// Adds a new "Glide" movement type
+Hooks.once("init", () => {
+  CONFIG.DND5E.movementTypes.glide = "Glide";
+});
+```
+
+### Rename a movement type
+```js
+// Renames the "Burrow" movement type to "Tunnel"
+Hooks.once("init", () => {
+  CONFIG.DND5E.movementTypes.burrow = "Tunnel";
+});
+```
+
+### Delete a movement type
+```js
+// Deletes the "Burrow" movement type
+Hooks.once("init", () => {
+  delete CONFIG.DND5E.movementTypes.burrow;
+});
+```
+
+## Modify Senses
+### Add a sense
+```js
+// Adds a new "Echolocation" sense
+Hooks.once("init", () => {
+  CONFIG.DND5E.senses.echolocation = "Echolocation";
+});
+```
+
+### Rename a sense
+```js
+// Renames the "Darkvision" sense to "Low-Light Vision"
+Hooks.once("init", () => {
+  CONFIG.DND5E.senses.darkvision = "Low-Light Vision";
+});
+```
+
+### Delete a sense
+```js
+// Deletes the "Darkvision" sense
+Hooks.once("init", () => {
+  delete CONFIG.DND5E.senses.darkvision;
 });
 ```
 
