@@ -254,6 +254,56 @@ Hooks.once("init", () => {
 });
 ```
 
+## Modify Movement Types
+### Add a movement type
+```js
+// Adds a new "Glide" movement type
+Hooks.once("init", () => {
+  CONFIG.DND5E.movementTypes.glide = "Glide";
+});
+```
+
+### Rename a movement type
+```js
+// Renames the "Burrow" movement type to "Tunnel"
+Hooks.once("init", () => {
+  CONFIG.DND5E.movementTypes.burrow = "Tunnel";
+});
+```
+
+### Delete a movement type
+```js
+// Deletes the "Burrow" movement type
+Hooks.once("init", () => {
+  delete CONFIG.DND5E.movementTypes.burrow;
+});
+```
+
+## Modify Senses
+### Add a sense
+```js
+// Adds a new "Echolocation" sense
+Hooks.once("init", () => {
+  CONFIG.DND5E.senses.echolocation = "Echolocation";
+});
+```
+
+### Rename a sense
+```js
+// Renames the "Darkvision" sense to "Low-Light Vision"
+Hooks.once("init", () => {
+  CONFIG.DND5E.senses.darkvision = "Low-Light Vision";
+});
+```
+
+### Delete a sense
+```js
+// Deletes the "Darkvision" sense
+Hooks.once("init", () => {
+  delete CONFIG.DND5E.senses.darkvision;
+});
+```
+
 ### Add new Activation Cost Types
 ```js
 // Adds in options to display in the Activation Cost dropdown
