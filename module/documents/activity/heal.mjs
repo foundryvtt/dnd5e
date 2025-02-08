@@ -36,7 +36,7 @@ export default class HealActivity extends ActivityMixin(HealActivityData) {
 
   /** @override */
   get damageFlavor() {
-    return game.i18n.localize("DND5E.Healing");
+    return game.i18n.localize("DND5E.HealingRoll");
   }
 
   /* -------------------------------------------- */

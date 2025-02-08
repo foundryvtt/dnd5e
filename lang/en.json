@@ -164,6 +164,7 @@
   "Category": {
     "Combat": "Combat",
     "Monster": "Monster",
+    "Rest": "Rest",
     "Standard": "Standard",
     "Time": "Time",
     "Vehicle": "Vehicle"
@@ -178,6 +179,12 @@
         "other": "{number} legendary actions"
       }
     },
+    "LongRest": {
+      "Label": "End of a Long Rest"
+    },
+    "ShortRest": {
+      "Label": "End of a Short Rest"
+    },
     "TurnEnd": {
       "Label": "End of Turn"
     },
@@ -188,6 +195,15 @@
   "Warning": {
     "NoActions": "No {type} are available, but activating this requires at least {required}.",
     "NotEnoughActions": "Not enough {type} to activate, {required} required but only {available} available."
+  }
+},
+
+"DND5E.ACTIVEEFFECT": {
+  "FIELDS": {
+    "statuses": {
+      "label": "Status Conditions",
+      "hint": "While affected by this Active Effect, the target will be treated as having these additional status conditions."
+    }
   }
 },
 
@@ -860,30 +876,75 @@
 "DND5E.BiopgrahyPublicEdit": "Edit Public Biography",
 "DND5E.Bonds": "Bonds",
 "DND5E.Bonus": "Bonus",
-"DND5E.BonusAbility": "Global Ability Bonuses",
-"DND5E.BonusAbilityCheck": "Global Ability Check Bonus",
-"DND5E.BonusAbilitySave": "Global Saving Throw Bonus",
-"DND5E.BonusAbilitySaveTitle": "Global Saving Throws",
-"DND5E.BonusAbilitySkill": "Global Skill Check Bonus",
 "DND5E.BonusAction": "Bonus Action",
 "DND5E.BonusActionAbbr": "BA",
 "DND5E.BonusAttack": "Attack Bonus",
 "DND5E.BonusDamage": "Damage Bonus",
-"DND5E.BonusMSAttack": "Melee Spell Attack Bonus",
-"DND5E.BonusMSDamage": "Melee Spell Damage Bonus",
-"DND5E.BonusMWAttack": "Melee Weapon Attack Bonus",
-"DND5E.BonusMWDamage": "Melee Weapon Damage Bonus",
-"DND5E.BonusRSAttack": "Ranged Spell Attack Bonus",
-"DND5E.BonusRSDamage": "Ranged Spell Damage Bonus",
-"DND5E.BonusRWAttack": "Ranged Weapon Attack Bonus",
-"DND5E.BonusRWDamage": "Ranged Weapon Damage Bonus",
 "DND5E.BonusSaveForm": "Update Bonuses",
-"DND5E.BonusSpell": "Global Spell Bonuses",
-"DND5E.BonusSpellDC": "Global Spell DC Bonus",
 "DND5E.BonusTitle": "Configure Actor Bonuses",
-"DND5E.Bonuses": "Global Bonuses",
-"DND5E.BonusesHint": "Define global bonuses as formulas which are added to certain rolls. For example: 1d4 + 2",
-"DND5E.BonusesInstructions": "Configure character bonuses which are added to the appropriate dice roll",
+
+"DND5E.BONUSES": {
+  "FIELDS": {
+    "bonuses": {
+      "label": "Global Bonuses",
+      "hint": "Global bonuses as formulas which are added to certain rolls.",
+      "abilities": {
+        "label": "Global Ability Bonuses",
+        "check": {
+          "label": "Global Ability Check Bonus"
+        },
+        "save": {
+          "label": "Global Saving Throw Bonus"
+        },
+        "skill": {
+          "label": "Global Skill Check Bonus"
+        }
+      },
+      "msak": {
+        "label": "Melee Spell Bonuses",
+        "attack": {
+          "label": "Melee Spell Attack Bonus"
+        },
+        "damage": {
+          "label": "Melee Spell Damage Bonus"
+        }
+      },
+      "mwak": {
+        "label": "Melee Weapon Bonuses",
+        "attack": {
+          "label": "Melee Weapon Attack Bonus"
+        },
+        "damage": {
+          "label": "Melee Weapon Damage Bonus"
+        }
+      },
+      "rsak": {
+        "label": "Ranged Spell Bonuses",
+        "attack": {
+          "label": "Ranged Spell Attack Bonus"
+        },
+        "damage": {
+          "label": "Ranged Spell Damage Bonus"
+        }
+      },
+      "rwak": {
+        "label": "Ranged Weapon Bonuses",
+        "attack": {
+          "label": "Ranged Weapon Attack Bonus"
+        },
+        "damage": {
+          "label": "Ranged Weapon Damage Bonus"
+        }
+      },
+      "spell": {
+        "label": "Global Spell Bonuses",
+        "dc": {
+          "label": "Global Spell DC Bonus"
+        }
+      }
+    }
+  }
+},
 
 "DND5E.CAST": {
   "Title": "Cast",
@@ -996,11 +1057,11 @@
 "DND5E.ChatFlavor": "Chat Message Flavor",
 
 "DND5E.CHATMESSAGE": {
+  "Activities": "Activities",
   "Deltas": {
     "Recovery": "Recovery"
   },
   "TURN": {
-    "Activities": "Activities",
     "NoCombatant": "Combatant no longer exists!"
   }
 },
@@ -1077,6 +1138,21 @@
 "DND5E.ClassOriginal": "Original Class",
 "DND5E.ClassSaves": "Saving Throws",
 "DND5E.Confirm": "Confirm",
+
+"DND5E.COMBAT": {
+  "Group": {
+    "ActiveCount": "{current} of {combatants}",
+    "Title": "{name} Group"
+  }
+},
+
+"DND5E.COMBATANT": {
+  "Counted": {
+    "one": "{number} combatant",
+    "other": "{number} combatants"
+  }
+},
+
 "DND5E.CompendiumBrowser": {
   "Title": "Compendium Browser",
   "Action": {
@@ -1162,6 +1238,12 @@
 "DND5E.ConCharmed": "Charmed",
 "DND5E.ConDeafened": "Deafened",
 "DND5E.ConDiseased": "Diseased",
+"DND5E.CONDITIONS": {
+  "RiderConditions": {
+    "label": "Separate Status Conditions",
+    "hint": "When this Active Effect is applied, these additional status conditions will be applied separately."
+  }
+},
 "DND5E.ConExhaustion": "Exhaustion",
 "DND5E.ConFrightened": "Frightened",
 "DND5E.ConGrappled": "Grappled",
@@ -1584,8 +1666,10 @@
   },
   "Scaling": {
     "Half": "Every Other Level",
+    "HalfCantrip": "Half Cantrip Scaling",
     "None": "No Scaling",
-    "Whole": "Every Level"
+    "Whole": "Every Level",
+    "WholeCantrip": "Cantrip Scaling"
   }
 },
 
@@ -1671,6 +1755,7 @@
 "DND5E.Disadvantage": "Disadvantage",
 "DND5E.Discord": "Discord",
 "DND5E.Disclaimer": "Disclaimer",
+"DND5E.DisplayCard": "Display in Chat",
 "DND5E.DistAny": "Any",
 "DND5E.DistFt": "Feet",
 "DND5E.DistFtAbbr": "ft",
@@ -2703,7 +2788,10 @@
 "DND5E.Languages": "Languages",
 
 "DND5E.LegendaryAction": {
+  "Description": "Legendary Action Uses: {uses}.",
+  "DescriptionLegacy": "The {name} can take {usesNamed}, choosing from the options below. Only one legendary action option can be used at a time and only at the end of another creature’s turn. The {name} regains spent legendary actions at the start of its turn.",
   "Label": "Legendary Action",
+  "LairUses": "{normal} ({lair} in Lair)",
   "Max": "Maximum Legendary Actions",
   "Ordinal": {
     "one": "{n}st Legendary Action",
@@ -2781,16 +2869,20 @@
 
 "DND5E.NPC": {
   "Label": "NPC",
+  "FIELDS": {
+    "traits": {
+      "important": {
+        "hint": "Important NPCs track death saves, hit dice, and loyalty (if enabled). Any NPC with class levels is considered important regardless of this setting.",
+        "label": "Important NPC"
+      }
+    }
+  },
   "SECTIONS": {
     "Actions": "Actions",
     "BonusActions": "Bonus Actions",
     "LegendaryActions": "Legendary Actions",
     "Reactions": "Reactions",
     "Traits": "Traits"
-  },
-  "Important": {
-    "Hint": "Important NPCs track death saves, hit dice, and loyalty (if enabled). Any NPC with class levels is considered important regardless of this setting.",
-    "Label": "Important NPC"
   }
 },
 
@@ -3210,7 +3302,7 @@
 "DND5E.SkillSlt": "Sleight of Hand",
 "DND5E.SkillSte": "Stealth",
 "DND5E.SkillSur": "Survival",
-"DND5E.SkillPromptTitle": "{skill} Skill Check",
+"DND5E.SkillPromptTitle": "{ability} ({skill}) Check",
 "DND5E.SkillConfigureTitle": "Configure {skill}",
 "DND5E.SkillConfigure": "Configure Skill",
 "DND5E.SkillsConfig": "Configure Skills",
@@ -4513,6 +4605,8 @@
   }
 },
 
+"KEYBINDINGS.DND5E.DragCopy": "Force Copy when Dragging Document",
+"KEYBINDINGS.DND5E.DragMove": "Force Move when Dragging Document",
 "KEYBINDINGS.DND5E.SkipDialogNormal": "Skip Dialog",
 "KEYBINDINGS.DND5E.SkipDialogAdvantage": "Skip Dialog (roll with Advantage/Critical)",
 "KEYBINDINGS.DND5E.SkipDialogDisadvantage": "Skip Dialog (roll with Disadvantage)",
@@ -4532,53 +4626,12 @@
 "SETTINGS.5eAutoCollapseCardN": "Collapse Item Cards in Chat",
 "SETTINGS.5eAutoSpellTemplateL": "When a spell is cast, defaults to begin the process to create the corresponding Measured Template if any (requires TRUSTED or higher player role)",
 "SETTINGS.5eAutoSpellTemplateN": "Always place Spell Template",
-"SETTINGS.5eCriticalMaxDiceN": "Critical Damage Maximize Dice",
-"SETTINGS.5eCriticalMaxDiceL": "Make critical hits more deadly by maximizing the values of base damage dice.",
-"SETTINGS.5eCriticalModifiersN": "Critical Damage Multiply Modifiers",
-"SETTINGS.5eCriticalModifiersL": "Make critical hits more deadly by multiplying non-dice modifiers in addition to rolled dice.",
-"SETTINGS.5eCurWtL": "Carried currency affects character encumbrance following the rules on PHB pg. 143.",
-"SETTINGS.5eCurWtN": "Apply Currency Weight",
-"SETTINGS.5eDiagEuclidean": "Euclidean (7.07 ft. Diagonal)",
-"SETTINGS.5eDiagL": "Configure which diagonal movement rule should be used for games within this system.",
-"SETTINGS.5eDiagN": "Diagonal Movement Rule",
-"SETTINGS.5eDiagPHB": "PHB: Equidistant (5/5/5)",
-"SETTINGS.5eDiagDMG": "DMG: Alternating (5/10/5)",
-"SETTINGS.5eEncumbrance": {
-  "Hint": "Enable automatic tracking of encumbrance and the application of status effects for characters carrying too much.",
-  "Name": "Encumbrance Tracking",
-  "None": "None",
-  "Normal": "Normal (max carrying capacity)",
-  "Variant": "Variant (encumbered & heavily encumbered)"
-},
-"SETTINGS.5eFeatsL": "Allow players to choose a feat rather than taking an ability score improvement during class advancement when using the Legacy rules.",
-"SETTINGS.5eFeatsN": "Allow Feats",
-"SETTINGS.5eHonorL": "Enable the use of the optional Honor ability score. Requires the world to be reloaded.",
-"SETTINGS.5eHonorN": "Honor Ability Score",
-"SETTINGS.5eInitTBL": "Append the raw Dexterity ability score to break ties in Initiative.",
-"SETTINGS.5eInitTBN": "Initiative Dexterity Tiebreaker",
 "SETTINGS.5eNoAdvancementsN": "Disable level-up automation",
 "SETTINGS.5eNoAdvancementsL": "Do not prompt for level-up or character creation choices.",
 "SETTINGS.5eNoConcentrationN": "Disable concentration tracking",
 "SETTINGS.5eNoConcentrationL": "Disable the system's automated tracking of concentration.",
-"SETTINGS.5eProfBonus": "PHB: Bonus (+2, +3, +4, +5, +6)",
-"SETTINGS.5eProfDice": "DMG: Dice (1d4, 1d6, 1d8, 1d10, 1d12)",
-"SETTINGS.5eProfL": "Configure proficiency modifier to use a fixed bonus or a dice roll. Reloading the world is required for this change to take effect.",
-"SETTINGS.5eProfN": "Proficiency Variant",
-"SETTINGS.5eReset": "Reset",
-"SETTINGS.5eRestL": "Configure which rest variant should be used for games within this system.",
-"SETTINGS.5eRestN": "Rest Variant",
-"SETTINGS.5eRestPHB": "Player's Handbook (LR: 8 hours, SR: 1 hour)",
-"SETTINGS.5eRestGritty": "Gritty Realism (LR: 7 days, SR: 8 hours)",
-"SETTINGS.5eRestEpic": "Epic Heroism (LR: 1 hour, SR: 1 min)",
 "SETTINGS.5eGridAlignedSquareTemplatesL": "When square templates are created as the result of casting a spell or using an item, they will be locked to the grid alignment and unable to be rotated.",
 "SETTINGS.5eGridAlignedSquareTemplatesN": "Grid-Aligned Square Templates",
-"SETTINGS.5eSanityL": "Enable the use of the optional Sanity ability score. Requires the world to be reloaded.",
-"SETTINGS.5eSanityN": "Sanity Ability Score",
-"SETTINGS.5eUndoChanges": "Undo Changes",
-"SETTINGS.5eTokenRings": {
-  "Name": "Disable Dynamic Token Rings",
-  "Hint": "Disabling the token ring animations can improve performance."
-},
 "SETTINGS.DND5E": {
   "ALLOWSUMMONING": {
     "Name": "Allow Summoning",
@@ -4598,24 +4651,38 @@
     "Older": "Collapse Older Trays",
     "Never": "Expand All"
   },
+  "COMBAT": {
+    "Hint": "Various configuration options that affect combat.",
+    "Label": "Configure Combat",
+    "Name": "Combat",
+    "DexTiebreaker": {
+      "Name": "Dexterity Tiebreaker",
+      "Hint": "Append the raw Dexterity ability score to break ties in Initiative."
+    },
+    "InitiativeScore": {
+      "Name": "Initiative Score",
+      "Hint": "Use a creature's initiative score (10 + bonus) rather than rolling for initiative.",
+      "All": "Use Score for Everyone",
+      "None": "Always Roll for Initiative",
+      "NPCs": "Use Score for GM NPCs"
+    }
+  },
+  "CRITICAL": {
+    "Name": "Critical Damage",
+    "MaxDice": {
+      "Name": "Maximize Dice",
+      "Hint": "Make critical hits more deadly by maximizing the values of base damage dice."
+    },
+    "MultiplyModifiers": {
+      "Name": "Multiply Modifiers",
+      "Hint": "Make critical hits more deadly by multiplying non-dice modifiers in addition to rolled dice."
+    }
+  },
   "DEFAULTSKILLS": {
     "Name": "Default Skills",
     "Hint": "The default skills that appear on NPC sheets regardless of level of proficiency."
   },
-  "INITIATIVESCORE": {
-    "Name": "Initiative Score",
-    "Hint": "Use a creature's initiative score (10 + bonus) rather than rolling for initiative.",
-    "All": "Use Score for Everyone",
-    "None": "Always Roll for Initiative",
-    "NPCs": "Use Score for GM NPCs"
-  },
-  "LEVELING": {
-    "Name": "Leveling Mode",
-    "Hint": "Determine how the players gain new levels.",
-    "NoXP": "Level Advancement without XP",
-    "XP": "Experience Points",
-    "XPBoons": "Experience Points with Epic Boons"
-  },
+  "General": "General",
   "LOYALTY": {
     "Hint": "Enable optional Loyalty tracking.",
     "Name": "Loyalty Score"
@@ -4634,6 +4701,16 @@
       "Hint": "Replaces all reference to lbs with kgs and updates the encumbrance calculations to use metric weight units."
     }
   },
+  "NPCS": {
+    "Name": "NPCs",
+    "AutoRollNPCHP": {
+      "Name": "Hit Points",
+      "Hint": "Configure whether to roll for NPC max HP whenever a new token is created.",
+      "No": "Do not roll",
+      "Silent": "Roll without creating chat card",
+      "Yes": "Roll and create chat card"
+    }
+  },
   "THEME": {
     "Name": "Theme",
     "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings."
@@ -4644,25 +4721,73 @@
     "Legacy": "Legacy Rules (2014)",
     "Modern": "Modern Rules (2024)"
   },
+  "VARIANT": {
+    "Hint": "Enable and configure rules variations offered by the system.",
+    "Label": "Configure Variant Rules",
+    "Name": "Variant Rules",
+    "AllowFeats": {
+      "Hint": "Allow players to choose a feat rather than taking an ability score improvement during class advancement when using the Legacy rules.",
+      "Name": "Allow Feats"
+    },
+    "CurrencyWeight": {
+      "Hint": "Carried currency affects character encumbrance.",
+      "Name": "Track Currency Weight"
+    },
+    "Encumbrance": {
+      "Hint": "Enable automatic tracking of encumbrance and the application of status effects for characters carrying too much.",
+      "Name": "Encumbrance Tracking",
+      "None": "None",
+      "Normal": "Normal (max carrying capacity)",
+      "Variant": "Variant (encumbered & heavily encumbered)"
+    },
+    "HonorScore": {
+      "Hint": "Enable the use of the optional Honor ability score.",
+      "Name": "Honor Ability Score"
+    },
+    "LevelingMode": {
+      "Hint": "Determine how the players gain new levels.",
+      "Name": "Leveling Mode",
+      "NoXP": "Level Advancement without XP",
+      "XP": "Experience Points",
+      "XPBoons": "Experience Points with Epic Boons"
+    },
+    "ProficiencyModifier": {
+      "Bonus": "PHB: Bonus (+2, +3, +4, +5, +6)",
+      "Dice": "DMG: Dice (1d4, 1d6, 1d8, 1d10, 1d12)",
+      "Hint": "Configure proficiency modifier to use a fixed bonus or a dice roll.",
+      "Name": "Proficiency Variant"
+    },
+    "Rest": {
+      "Epic": "Epic Heroism (LR: 1 hour, SR: 1 min)",
+      "Gritty": "Gritty Realism (LR: 7 days, SR: 8 hours)",
+      "Hint": "Configure which rest variant should be used for games within this system.",
+      "Name": "Rest Variant",
+      "Normal": "Player's Handbook (LR: 8 hours, SR: 1 hour)"
+    },
+    "SanityScore": {
+      "Hint": "Enable the use of the optional Sanity ability score.",
+      "Name": "Sanity Ability Score"
+    }
+  },
   "VISIBILITY": {
     "Hint": "Various configuration options that affect player visibility of certain information that the DM may wish to keep secret.",
     "Label": "Configure Visibility",
     "Name": "Visibility",
-    "ATTACK": {
+    "Attack": {
       "Name": "Attack Result Visibility",
       "Hint": "Control visibility of attack roll results in chat cards for players.",
       "All": "Show results & target ACs",
       "HideAC": "Show only results",
       "None": "Hide all"
     },
-    "CHALLENGE": {
+    "Challenge": {
       "All": "Show all",
       "Hint": "Control what roll DCs are visible to the players and whether successes/failures are highlighted.",
       "Name": "Challenge Visibility",
       "None": "Hide all",
       "Player": "Show only from other players"
     },
-    "ITEMDESCRIPTIONS": {
+    "ItemDescriptions": {
       "Hint": "Hide the descriptions of NPC items from players when posted to chat by the DM. Will only hide the descriptions for items without a Chat Description set.",
       "Name": "Conceal NPC Descriptions"
     }

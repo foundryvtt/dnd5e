@@ -54,7 +54,8 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     { tab: "spells", label: "TYPES.Item.spellPl", icon: "fas fa-book" },
     { tab: "effects", label: "DND5E.Effects", icon: "fas fa-bolt" },
     { tab: "biography", label: "DND5E.Biography", icon: "fas fa-feather" },
-    { tab: "bastion", label: "DND5E.Bastion.Label", icon: "fas fa-chess-rook" }
+    { tab: "bastion", label: "DND5E.Bastion.Label", icon: "fas fa-chess-rook" },
+    { tab: "special-traits", label: "DND5E.SpecialTraits", icon: "fas fa-star" }
   ];
 
   /**
@@ -345,11 +346,10 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
     // Apply special context menus for items outside inventory elements
     const featuresElement = html[0].querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
-    if ( featuresElement ) {
-      new ContextMenu5e(html, ".pills-lg [data-item-id], .favorites [data-item-id], .facility[data-item-id]", [], {
-        onOpen: (...args) => featuresElement._onOpenContextMenu(...args)
-      });
-    }
+    if ( featuresElement ) new ContextMenu5e(
+      html[0], ".pills-lg [data-item-id], .favorites [data-item-id], .facility[data-item-id]", [],
+      { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: true }
+    );
 
     // Edit mode only.
     if ( this._mode === this.constructor.MODES.EDIT ) {
@@ -394,41 +394,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
   /* -------------------------------------------- */
 
-  /**
-   * Handling beginning a drag-drop operation on an Activity.
-   * @param {DragEvent} event  The originating drag event.
-   * @protected
-   */
-  _onDragActivity(event) {
-    const { itemId } = event.target.closest("[data-item-id]").dataset;
-    const { activityId } = event.target.closest("[data-activity-id]").dataset;
-    const activity = this.actor.items.get(itemId)?.system.activities?.get(activityId);
-    if ( activity ) event.dataTransfer.setData("text/plain", JSON.stringify(activity.toDragData()));
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle beginning a drag-drop operation on an Item.
-   * @param {DragEvent} event  The originating drag event.
-   * @protected
-   */
-  _onDragItem(event) {
-    const { itemId } = event.target.closest("[data-item-id]").dataset;
-    const item = this.actor.items.get(itemId);
-    if ( item ) event.dataTransfer.setData("text/plain", JSON.stringify(item.toDragData()));
-  }
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   _onDragStart(event) {
-    // Add another deferred deactivation to catch the second pointerenter event that seems to be fired on Firefox.
-    requestAnimationFrame(() => game.tooltip.deactivate());
-    game.tooltip.deactivate();
-
     const modes = CONFIG.DND5E.spellPreparationModes;
-
     const { key } = event.target.closest("[data-key]")?.dataset ?? {};
     const { level, preparationMode } = event.target.closest("[data-level]")?.dataset ?? {};
     const isSlots = event.target.closest("[data-favorite-id]") || event.target.classList.contains("spell-header");
@@ -436,17 +404,17 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.tools ) type = "tool";
     else if ( modes[preparationMode]?.upcast && (level !== "0") && isSlots ) type = "slots";
-    if ( !type ) {
-      if ( event.target.matches("[data-item-id] > .item-row") ) return this._onDragItem(event);
-      else if ( event.target.matches("[data-item-id] [data-activity-id], [data-item-id][data-activity-id]") ) {
-        return this._onDragActivity(event);
-      }
-      return super._onDragStart(event);
-    }
+    if ( !type ) return super._onDragStart(event);
+
+    // Add another deferred deactivation to catch the second pointerenter event that seems to be fired on Firefox.
+    requestAnimationFrame(() => game.tooltip.deactivate());
+    game.tooltip.deactivate();
+
     const dragData = { dnd5e: { action: "favorite", type } };
     if ( type === "slots" ) dragData.dnd5e.id = (preparationMode === "prepared") ? `spell${level}` : preparationMode;
     else dragData.dnd5e.id = key;
     event.dataTransfer.setData("application/json", JSON.stringify(dragData));
+    event.dataTransfer.effectAllowed = "link";
   }
 
   /* -------------------------------------------- */
@@ -616,6 +584,15 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
 
   /* -------------------------------------------- */
   /*  Favorites                                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _defaultDropBehavior(event, data) {
+    if ( data.dnd5e?.action === "favorite" || (["Activity", "Item"].includes(data.type)
+      && event.target.closest(".favorites")) ) return "link";
+    return super._defaultDropBehavior(event, data);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */

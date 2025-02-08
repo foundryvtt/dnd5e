@@ -378,6 +378,18 @@ export function staticID(id) {
 /* -------------------------------------------- */
 
 /**
+ * Track which KeyboardEvent#code presses associate with each modifier.
+ * Added support for treating Meta separate from Control.
+ * @enum {string[]}
+ */
+const MODIFIER_CODES = {
+  Alt: KeyboardManager.MODIFIER_CODES.Alt,
+  Control: KeyboardManager.MODIFIER_CODES.Control.filter(k => k.startsWith("Control")),
+  Meta: KeyboardManager.MODIFIER_CODES.Control.filter(k => !k.startsWith("Control")),
+  Shift: KeyboardManager.MODIFIER_CODES.Shift
+};
+
+/**
  * Based on the provided event, determine if the keys are pressed to fulfill the specified keybinding.
  * @param {Event} event    Triggering event.
  * @param {string} action  Keybinding action within the `dnd5e` namespace.
@@ -388,16 +400,35 @@ export function areKeysPressed(event, action) {
   const activeModifiers = {};
   const addModifiers = (key, pressed) => {
     activeModifiers[key] = pressed;
-    KeyboardManager.MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
+    MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
   };
-  addModifiers(KeyboardManager.MODIFIER_KEYS.CONTROL, event.ctrlKey || event.metaKey);
-  addModifiers(KeyboardManager.MODIFIER_KEYS.SHIFT, event.shiftKey);
   addModifiers(KeyboardManager.MODIFIER_KEYS.ALT, event.altKey);
+  addModifiers(KeyboardManager.MODIFIER_KEYS.CONTROL, event.ctrlKey);
+  addModifiers("Meta", event.metaKey);
+  addModifiers(KeyboardManager.MODIFIER_KEYS.SHIFT, event.shiftKey);
   return game.keybindings.get("dnd5e", action).some(b => {
     if ( game.keyboard.downKeys.has(b.key) && b.modifiers.every(m => activeModifiers[m]) ) return true;
     if ( b.modifiers.length ) return false;
     return activeModifiers[b.key];
   });
+}
+
+/* -------------------------------------------- */
+/*  Logging                                     */
+/* -------------------------------------------- */
+
+/**
+ * Log a console message with the "D&D 5e" prefix and styling.
+ * @param {string} message                    Message to display.
+ * @param {object} [options={}]
+ * @param {string} [options.color="#6e0000"]  Color to use for the log.
+ * @param {any[]} [options.extras=[]]         Extra options passed to the logging method.
+ * @param {string} [options.level="log"]      Console logging method to call.
+ */
+export function log(message, { color="#6e0000", extras=[], level="log" }={}) {
+  console[level](
+    `%cD&D 5e | %c${message}`, `color: ${color}; font-variant: small-caps`, "color: revert", ...extras
+  );
 }
 
 /* -------------------------------------------- */
@@ -716,6 +747,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
     "systems/dnd5e/templates/actors/tabs/character-details.hbs",
     "systems/dnd5e/templates/actors/tabs/creature-features.hbs",
+    "systems/dnd5e/templates/actors/tabs/creature-special-traits.hbs",
     "systems/dnd5e/templates/actors/tabs/creature-spells.hbs",
     "systems/dnd5e/templates/actors/tabs/group-members.hbs",
     "systems/dnd5e/templates/actors/tabs/npc-biography.hbs",
@@ -728,6 +760,7 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
 
     // Chat Message Partials
+    "systems/dnd5e/templates/chat/parts/card-activities.hbs",
     "systems/dnd5e/templates/chat/parts/card-deltas.hbs",
 
     // Item Sheet Partials

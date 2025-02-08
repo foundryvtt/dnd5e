@@ -233,11 +233,11 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       html.find("button.control-button").on("click", this._onSheetAction.bind(this));
     }
 
-    new ContextMenu5e(html, ".advancement-item[data-id]", [], {
-      onOpen: target => dnd5e.documents.advancement.Advancement.onContextMenu(this.item, target)
+    new ContextMenu5e(html[0], ".advancement-item[data-id]", [], {
+      onOpen: target => dnd5e.documents.advancement.Advancement.onContextMenu(this.item, target), jQuery: false
     });
-    new ContextMenu5e(html, ".activity[data-activity-id]", [], {
-      onOpen: target => dnd5e.documents.activity.UtilityActivity.onContextMenu(this.item, target)
+    new ContextMenu5e(html[0], ".activity[data-activity-id]", [], {
+      onOpen: target => dnd5e.documents.activity.UtilityActivity.onContextMenu(this.item, target), jQuery: false
     });
   }
 

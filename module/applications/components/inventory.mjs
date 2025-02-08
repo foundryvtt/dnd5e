@@ -53,12 +53,12 @@ export default class InventoryElement extends HTMLElement {
 
     // Bind activity menu to child to work around lack of stopImmediatePropagation in ContextMenu#bind
     new ContextMenu5e(this.querySelector(".items-list"), ".activity-row[data-activity-id]", [], {
-      onOpen: this._onOpenContextMenu.bind(this)
+      onOpen: this._onOpenContextMenu.bind(this), jQuery: true
     });
 
     // Item context menus
     const MenuCls = this.hasAttribute("v2") ? ContextMenu5e : ContextMenu;
-    new MenuCls(this, "[data-item-id]", [], { onOpen: this._onOpenContextMenu.bind(this) });
+    new MenuCls(this, "[data-item-id]", [], { onOpen: this._onOpenContextMenu.bind(this), jQuery: true });
   }
 
   /* -------------------------------------------- */
@@ -187,6 +187,9 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   _getContextOptions(item, element) {
+    const compendiumLocked = item[game.release.generation < 13 ? "compendium" : "collection"]?.locked;
+    // TODO: Move away from using jQuery in callbacks once V12 support is dropped
+
     // Standard Options
     const options = [
       {
@@ -197,20 +200,25 @@ export default class InventoryElement extends HTMLElement {
       {
         name: "DND5E.ContextMenuActionEdit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
-        condition: () => item.isOwner && !item.compendium?.locked,
+        condition: () => item.isOwner && !compendiumLocked,
         callback: li => this._onAction(li[0], "edit")
       },
       {
         name: "DND5E.ContextMenuActionDuplicate",
         icon: "<i class='fas fa-copy fa-fw'></i>",
-        condition: () => item.canDuplicate && item.isOwner && !item.compendium?.locked,
+        condition: () => item.canDuplicate && item.isOwner && !compendiumLocked,
         callback: li => this._onAction(li[0], "duplicate")
       },
       {
         name: "DND5E.ContextMenuActionDelete",
         icon: "<i class='fas fa-trash fa-fw'></i>",
-        condition: () => item.canDelete && item.isOwner && !item.compendium?.locked,
+        condition: () => item.canDelete && item.isOwner && !compendiumLocked,
         callback: li => this._onAction(li[0], "delete")
+      },
+      {
+        name: "DND5E.DisplayCard",
+        icon: '<i class="fas fa-message"></i>',
+        callback: () => item.displayCard()
       },
       {
         name: "DND5E.Scroll.CreateScroll",
@@ -220,7 +228,7 @@ export default class InventoryElement extends HTMLElement {
           if ( scroll ) Item5e.create(scroll, { parent: this.actor });
         },
         condition: li => (item.type === "spell") && !item.getFlag("dnd5e", "cachedFor") && this.actor?.isOwner
-          && !this.actor?.compendium?.locked,
+          && !this.actor?.[game.release.generation < 13 ? "compendium" : "collection"]?.locked,
         group: "action"
       },
       {
@@ -239,7 +247,7 @@ export default class InventoryElement extends HTMLElement {
       options.push({
         name: item.system.attuned ? "DND5E.ContextMenuActionUnattune" : "DND5E.ContextMenuActionAttune",
         icon: "<i class='fas fa-sun fa-fw'></i>",
-        condition: () => item.isOwner && !item.compendium?.locked,
+        condition: () => item.isOwner && !compendiumLocked,
         callback: li => this._onAction(li[0], "attune"),
         group: "state"
       });
@@ -249,7 +257,7 @@ export default class InventoryElement extends HTMLElement {
     if ( "equipped" in item.system ) options.push({
       name: item.system.equipped ? "DND5E.ContextMenuActionUnequip" : "DND5E.ContextMenuActionEquip",
       icon: "<i class='fas fa-shield-alt fa-fw'></i>",
-      condition: () => item.isOwner && !item.compendium?.locked,
+      condition: () => item.isOwner && !compendiumLocked,
       callback: li => this._onAction(li[0], "equip"),
       group: "state"
     });
@@ -258,7 +266,7 @@ export default class InventoryElement extends HTMLElement {
     if ( item.hasRecharge ) options.push({
       name: item.isOnCooldown ? "DND5E.ContextMenuActionCharge" : "DND5E.ContextMenuActionExpendCharge",
       icon: '<i class="fa-solid fa-bolt"></i>',
-      condition: () => item.isOwner && !item.compendium?.locked,
+      condition: () => item.isOwner && !compendiumLocked,
       callback: li => this._onAction(li[0], "toggleCharge"),
       group: "state"
     });
@@ -268,7 +276,7 @@ export default class InventoryElement extends HTMLElement {
       && !item.getFlag("dnd5e", "cachedFor") ) options.push({
       name: item.system?.preparation?.prepared ? "DND5E.ContextMenuActionUnprepare" : "DND5E.ContextMenuActionPrepare",
       icon: "<i class='fas fa-sun fa-fw'></i>",
-      condition: () => item.isOwner && !item.compendium?.locked,
+      condition: () => item.isOwner && !compendiumLocked,
       callback: li => this._onAction(li[0], "prepare"),
       group: "state"
     });
@@ -277,7 +285,7 @@ export default class InventoryElement extends HTMLElement {
     if ( "identified" in item.system ) options.push({
       name: "DND5E.Identify",
       icon: '<i class="fas fa-magnifying-glass"></i>',
-      condition: () => item.isOwner && !item.compendium?.locked && !item.system.identified,
+      condition: () => item.isOwner && !compendiumLocked && !item.system.identified,
       callback: () => item.update({ "system.identified": true }),
       group: "state"
     });
@@ -288,8 +296,8 @@ export default class InventoryElement extends HTMLElement {
       const isFavorited = this.actor.system.hasFavorite(uuid);
       options.push({
         name: isFavorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
-        icon: '<i class="fas fa-star fa-fw"></i>',
-        condition: () => item.isOwner && !item.compendium?.locked,
+        icon: '<i class="fas fa-bookmark fa-fw"></i>',
+        condition: () => item.isOwner && !compendiumLocked,
         callback: li => this._onAction(li[0], isFavorited ? "unfavorite" : "favorite"),
         group: "state"
       });

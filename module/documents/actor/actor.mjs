@@ -2,9 +2,11 @@ import ShortRestDialog from "../../applications/actor/rest/short-rest-dialog.mjs
 import LongRestDialog from "../../applications/actor/rest/long-rest-dialog.mjs";
 import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool-configuration-dialog.mjs";
 import PropertyAttribution from "../../applications/property-attribution.mjs";
+import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
+import parseUuid from "../../parse-uuid.mjs";
 import { convertTime, defaultUnits, formatNumber, formatTime, simplifyBonus, staticID } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
@@ -1082,7 +1084,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
   async rollSkill(config={}, dialog={}, message={}) {
-    return this.#rollSkillTool("skill", config, dialog, message);
+    const skillLabel = CONFIG.DND5E.skills[config.skill]?.label ?? "";
+    const ability = this.system.skills[config.skill]?.ability ?? CONFIG.DND5E.skills[config.skill]?.ability ?? "";
+    const abilityLabel = CONFIG.DND5E.abilities[ability]?.label ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SkillPromptTitle", { skill: skillLabel, ability: abilityLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollSkillTool("skill", config, dialogConfig, message);
   }
 
   /* -------------------------------------------- */
@@ -1095,7 +1108,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                          A Promise which resolves to the created Roll instance.
    */
   async rollToolCheck(config={}, dialog={}, message={}) {
-    return this.#rollSkillTool("tool", config, dialog, message);
+    const toolLabel = Trait.keyLabel(config.tool, { trait: "tool" }) ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.ToolPromptTitle", { tool: toolLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollSkillTool("tool", config, dialogConfig, message);
   }
 
   /* -------------------------------------------- */
@@ -1175,6 +1197,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }, dialog);
 
+    const abilityLabel = CONFIG.DND5E.abilities[relevant?.ability ?? skillConfig?.ability ?? ""]?.label;
+
     const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
@@ -1187,7 +1211,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
             }
           }
         },
-        flavor: type === "skill" ? game.i18n.format("DND5E.SkillPromptTitle", { skill: skillConfig.label })
+        flavor: type === "skill"
+          ? game.i18n.format("DND5E.SkillPromptTitle", { skill: skillConfig.label, ability: abilityLabel })
           : game.i18n.format("DND5E.ToolPromptTitle", { tool: Trait.keyLabel(config.tool, { trait: "tool" }) ?? "" }),
         speaker: ChatMessage.getSpeaker({ actor: this })
       }
@@ -1319,7 +1344,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instance.
    */
   async rollAbilityCheck(config={}, dialog={}, message={}) {
-    return this.#rollD20Test("check", config, dialog, message);
+    const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.AbilityPromptTitle", { ability: abilityLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollD20Test("check", config, dialogConfig, message);
   }
 
   /**
@@ -1347,7 +1381,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instances.
    */
   async rollSavingThrow(config={}, dialog={}, message={}) {
-    return this.#rollD20Test("save", config, dialog, message);
+    const abilityLabel = CONFIG.DND5E.abilities[config.ability]?.label ?? "";
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SavePromptTitle", { ability: abilityLabel }),
+          subtitle: this.name
+        }
+      }
+    }, dialog);
+    return this.#rollD20Test("save", config, dialogConfig, message);
   }
 
   /**
@@ -1713,7 +1756,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     rollConfig.hookNames = [...(config.hookNames ?? []), "concentration"];
     rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
 
-    const dialogConfig = foundry.utils.deepClone(dialog);
+    const dialogConfig = foundry.utils.mergeObject({
+      options: {
+        window: {
+          title: game.i18n.format("DND5E.SavePromptTitle", { ability: game.i18n.localize("DND5E.Concentration") })
+        }
+      }
+    }, dialog);
 
     const messageConfig = foundry.utils.deepClone(message);
 
@@ -2193,16 +2242,17 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Configuration options for a rest.
    *
    * @typedef {object} RestConfiguration
-   * @property {string} type               Type of rest to perform.
-   * @property {boolean} dialog            Present a dialog window which allows for rolling hit dice as part of the
-   *                                       Short Rest and selecting whether a new day has occurred.
-   * @property {boolean} chat              Should a chat message be created to summarize the results of the rest?
-   * @property {number} duration           Amount of time passed during the rest in minutes.
-   * @property {boolean} newDay            Does this rest carry over to a new day?
-   * @property {boolean} [advanceTime]     Should the game clock be advanced by the rest duration?
-   * @property {boolean} [autoHD]          Should hit dice be spent automatically during a short rest?
-   * @property {number} [autoHDThreshold]  How many hit points should be missing before hit dice are
-   *                                       automatically spent during a short rest.
+   * @property {string} type                   Type of rest to perform.
+   * @property {boolean} dialog                Present a dialog window which allows for rolling hit dice as part of the
+   *                                           Short Rest and selecting whether a new day has occurred.
+   * @property {boolean} chat                  Should a chat message be created to summarize the results of the rest?
+   * @property {number} duration               Amount of time passed during the rest in minutes.
+   * @property {boolean} newDay                Does this rest carry over to a new day?
+   * @property {boolean} [advanceBastionTurn]  Should a bastion turn be advanced for all players?
+   * @property {boolean} [advanceTime]         Should the game clock be advanced by the rest duration?
+   * @property {boolean} [autoHD]              Should hit dice be spent automatically during a short rest?
+   * @property {number} [autoHDThreshold]      How many hit points should be missing before hit dice are
+   *                                           automatically spent during a short rest.
    */
 
   /**
@@ -2214,10 +2264,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {object} deltas
    * @property {number} deltas.hitPoints  Hit points recovered during the rest.
    * @property {number} deltas.hitDice    Hit dice recovered or spent during the rest.
-   * @property {object} updateData        Updates applied to the actor.
-   * @property {object[]} updateItems     Updates applied to actor's items.
    * @property {boolean} newDay           Whether a new day occurred during the rest.
    * @property {Roll[]} rolls             Any rolls that occurred during the rest process, not including hit dice.
+   * @property {object} updateData        Updates applied to the actor.
+   * @property {object[]} updateItems     Updates applied to actor's items.
    */
 
   /* -------------------------------------------- */
@@ -2391,6 +2441,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     Hooks.callAll("dnd5e.restCompleted", this, result, config);
 
+    if ( config.advanceBastionTurn && game.user.isGM && game.settings.get("dnd5e", "bastionConfiguration").enabled
+      && this.itemTypes.facility.length ) await dnd5e.bastion.advanceAllFacilities(this);
+
     // Return data summarizing the rest effects
     return result;
   }
@@ -2413,11 +2466,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const longRest = config.type === "long";
     const length = longRest ? "Long" : "Short";
 
+    const typeConfig = CONFIG.DND5E.restTypes[config.type] ?? {};
     const duration = convertTime(config.duration, "minute");
     const parts = [formatTime(duration.value, duration.unit)];
     if ( newDay ) parts.push(game.i18n.localize("DND5E.REST.NewDay.Label").toLowerCase());
-    const restFlavor = `${CONFIG.DND5E.restTypes[config.type].label} (${
-      game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
+    const restFlavor = `${typeConfig.label} (${game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
 
     // Determine the chat message to display
     let message;
@@ -2439,6 +2492,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       rolls: result.rolls,
       speaker: ChatMessage.getSpeaker({ actor: this, alias: this.name }),
       system: {
+        activations: ActivationsField.getActivations(this, typeConfig?.activationPeriods ?? []),
         deltas: ActorDeltasField.getDeltas(result.clone, { actor: result.updateData, item: result.updateItems }),
         type: result.type
       }
@@ -3017,6 +3071,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const tokenData = d.prototypeToken;
       delete d.prototypeToken;
       tokenData.delta = d;
+      tokenData.elevation = this.token.elevation;
+      tokenData.rotation = this.token.rotation;
       const previousActorData = this.token.delta.toObject();
       foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
       await this.sheet?.close();
@@ -3055,6 +3111,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newTokenData._id = t.id;
       newTokenData.actorId = newActor.id;
       newTokenData.actorLink = true;
+      newTokenData.elevation = t.document.elevation;
+      newTokenData.rotation = t.document.rotation;
 
       const dOriginalActor = foundry.utils.getProperty(d, "flags.dnd5e.originalActor");
       foundry.utils.setProperty(newTokenData, "flags.dnd5e.originalActor", dOriginalActor);
@@ -3149,6 +3207,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const tokenUpdates = tokens.map(t => {
         const update = foundry.utils.deepClone(tokenData);
         update._id = t.id;
+        update.elevation = t.document.elevation;
+        update.rotation = t.document.rotation;
         delete update.x;
         delete update.y;
         return update;
@@ -3515,7 +3575,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
  */
 class SourcedItemsMap extends Map {
   /** @inheritDoc */
-  get(key, { legacy=true }={}) {
+  get(key, { remap=true, legacy=true }={}) {
+    if ( remap ) ({ uuid: key } = parseUuid(key));
     if ( legacy ) {
       foundry.utils.logCompatibilityWarning(
         "The `sourcedItems` data on actor has changed from storing individual items to storing Sets of items. Pass `legacy: false` to retrieve the new Set data.",
@@ -3530,8 +3591,24 @@ class SourcedItemsMap extends Map {
 
   /** @inheritDoc */
   set(key, value) {
-    if ( !this.has(key) ) super.set(key, new Set());
-    this.get(key, { legacy: false }).add(value);
+    const { uuid } = parseUuid(key);
+    if ( !this.has(uuid) ) super.set(uuid, new Set());
+    this.get(uuid, { remap: false, legacy: false }).add(value);
     return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Adjust keys once compendium UUID redirects have been initialized.
+   */
+  _redirectKeys() {
+    for ( const [key, value] of this.entries() ) {
+      const { uuid } = parseUuid(key);
+      if ( key !== uuid ) {
+        this.set(uuid, value);
+        this.delete(key);
+      }
+    }
   }
 }

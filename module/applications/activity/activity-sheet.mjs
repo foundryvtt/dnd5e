@@ -280,15 +280,15 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         .map(effect => ({
           value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
         }));
-      context.appliedEffects = context.activity.effects.reduce((arr, data, index) => {
+      context.appliedEffects = context.activity.effects.reduce((arr, data) => {
         if ( !data.effect ) return arr;
         const effect = {
           data,
           collapsed: this.expandedSections.get(`effects.${data._id}`) ? "" : "collapsed",
           effect: data.effect,
           fields: this.activity.schema.fields.effects.element.fields,
-          prefix: `effects.${index}.`,
-          source: context.source.effects[index] ?? data,
+          prefix: `effects.${data._index}.`,
+          source: context.source.effects[data._index] ?? data,
           contentLink: data.effect.toAnchor().outerHTML,
           additionalSettings: null
         };
@@ -302,27 +302,25 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
     ];
     if ( context.activity.damage?.parts ) {
+      const scaleKey = (this.item.type === "spell") && (this.item.system.level === 0) ? "labelCantrip" : "label";
       const scalingOptions = [
         { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
-        ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, config]) => ({ value, label: config.label }))
+        ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, { [scaleKey]: label }]) => ({ value, label }))
       ];
-      let indexOffset = 0;
-      context.damageParts = context.activity.damage.parts.map((data, index) => {
-        if ( data.base ) indexOffset--;
-        const part = {
-          data,
-          fields: this.activity.schema.fields.damage.fields.parts.element.fields,
-          index: index + indexOffset,
-          prefix: `damage.parts.${index + indexOffset}.`,
-          source: context.source.damage.parts[index + indexOffset] ?? data,
-          canScale: this.activity.canScaleDamage,
-          scalingOptions,
-          typeOptions: Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => ({
-            value, label: config.label, selected: data.types.has(value)
-          }))
-        };
-        return this._prepareDamagePartContext(context, part);
+      const typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => ({ value, label }));
+      const makePart = (data, index) => this._prepareDamagePartContext(context, {
+        data, index, scalingOptions, typeOptions,
+        canScale: this.activity.canScaleDamage,
+        fields: this.activity.schema.fields.damage.fields.parts.element.fields,
+        prefix: index !== undefined ? `damage.parts.${index}.` : "_.",
+        source: data
       });
+      context.damageParts = [
+        ...context.activity.damage.parts
+          .filter(p => p._index === undefined)
+          .map((data, index) => makePart(data)),
+        ...context.source.damage.parts.map((data, index) => makePart(data, index))
+      ];
     }
 
     return context;

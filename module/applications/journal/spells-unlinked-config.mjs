@@ -1,41 +1,41 @@
+import DocumentSheet5e from "../api/document-sheet.mjs";
+
 /**
  * Application for configuring a single unlinked spell in a spell list.
  */
-export default class SpellsUnlinkedConfig extends DocumentSheet {
-  constructor(unlinkedId, object, options={}) {
-    super(object, options);
-    this.unlinkedId = unlinkedId;
-  }
+export default class SpellsUnlinkedConfig extends DocumentSheet5e {
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    classes: ["unlinked-spell-config"],
+    form: {
+      submitOnChange: true
+    },
+    position: {
+      width: 400
+    },
+    sheetConfig: false,
+    unlinkedId: null
+  };
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e", "unlinked-spell-config"],
-      template: "systems/dnd5e/templates/journal/page-spell-list-unlinked-config.hbs",
-      width: 400,
-      height: "auto",
-      sheetConfig: false
-    });
-  }
+  /** @override */
+  static PARTS = {
+    spell: {
+      template: "systems/dnd5e/templates/journal/page-spell-list-unlinked-spell.hbs"
+    },
+    source: {
+      template: "systems/dnd5e/templates/journal/page-spell-list-unlinked-source.hbs"
+    }
+  };
 
   /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
-  /**
-   * ID of the unlinked spell entry being edited.
-   * @type {string}
-   */
-  unlinkedId;
-
-  /* -------------------------------------------- */
-
   /** @inheritDoc */
   get title() {
-    return `${game.i18n.localize(
-      "JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Configuration")}: ${this.document.name}`;
+    return game.i18n.localize("JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Configuration");
   }
 
   /* -------------------------------------------- */
@@ -43,12 +43,13 @@ export default class SpellsUnlinkedConfig extends DocumentSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  getData() {
+  async _prepareContext(options) {
     const context = {
-      ...super.getData(),
-      ...this.document.system.unlinkedSpells.find(u => u._id === this.unlinkedId),
-      appId: this.id,
-      CONFIG: CONFIG.DND5E
+      ...await super._prepareContext(options),
+      ...this.document.system.unlinkedSpells.find(u => u._id === this.options.unlinkedId),
+      fields: this.document.system.schema.fields.unlinkedSpells.element.fields,
+      spellLevelOptions: Object.entries(CONFIG.DND5E.spellLevels).map(([value, label]) => ({ value, label })),
+      spellSchoolOptions: Object.entries(CONFIG.DND5E.spellSchools).map(([value, { label }]) => ({ value, label }))
     };
     return context;
   }
@@ -56,10 +57,11 @@ export default class SpellsUnlinkedConfig extends DocumentSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _updateObject(event, formData) {
-    const unlinkedSpells = this.document.toObject().system.unlinkedSpells;
-    const editing = unlinkedSpells.find(s => s._id === this.unlinkedId);
-    foundry.utils.mergeObject(editing, formData);
-    this.document.update({"system.unlinkedSpells": unlinkedSpells});
+  _processFormData(event, form, formData) {
+    const submitData = super._processFormData(event, form, formData);
+    const unlinkedSpells = this.document.system.toObject().unlinkedSpells;
+    const editing = unlinkedSpells.find(s => s._id === this.options.unlinkedId);
+    foundry.utils.mergeObject(editing, submitData);
+    return { system: { unlinkedSpells: unlinkedSpells } };
   }
 }

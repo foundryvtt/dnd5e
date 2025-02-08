@@ -27,6 +27,8 @@ class TableOfContentsCompendiumV13 extends (foundry.applications.sidebar?.apps?.
     }
   };
 
+  /* -------------------------------------------- */
+
   /** @override */
   static PARTS = {
     article: {
@@ -34,19 +36,6 @@ class TableOfContentsCompendiumV13 extends (foundry.applications.sidebar?.apps?.
       template: "systems/dnd5e/templates/journal/table-of-contents.hbs"
     }
   };
-
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["table-of-contents"],
-      template: "systems/dnd5e/templates/journal/table-of-contents.hbs",
-      width: 800,
-      height: 950,
-      resizable: true,
-      contextMenuSelector: "[data-entry-id]",
-      dragDrop: [{dragSelector: "[data-document-id]", dropSelector: "article"}]
-    });
-  }
 
   /* -------------------------------------------- */
 
@@ -161,6 +150,15 @@ class TableOfContentsCompendiumV13 extends (foundry.applications.sidebar?.apps?.
     }
 
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _renderFrame(options) {
+    const frame = await super._renderFrame(options);
+    frame.dataset.compendiumId = this.collection.metadata.id;
+    return frame;
   }
 
   /* -------------------------------------------- */
@@ -298,6 +296,7 @@ class TableOfContentsCompendiumV12 extends Compendium {
   activateListeners(html) {
     super.activateListeners(html);
     html.find("a").on("click", this._onClickLink.bind(this));
+    this.element[0].dataset.compendiumId = this.collection.metadata.id;
   }
 
   /* -------------------------------------------- */

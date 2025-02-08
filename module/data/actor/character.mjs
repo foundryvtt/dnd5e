@@ -75,6 +75,15 @@ const {
  */
 export default class CharacterData extends CreatureTemplate {
 
+  /* -------------------------------------------- */
+  /*  Model Configuration                         */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.BONUSES"];
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     supportsAdvancement: true

@@ -362,7 +362,7 @@ export default class WeaponData extends ItemDataModel.mixin(
       });
     }
 
-    else if ( !this.attackType && this.range.value ) {
+    else if ( !this.attackType && ((this.range.value ?? 0) > (this.range.reach ?? 0)) ) {
       if ( modes.length ) modes.push({ rule: true });
       modes.push({ value: "ranged", label: CONFIG.DND5E.attackModes.ranged.label });
     }

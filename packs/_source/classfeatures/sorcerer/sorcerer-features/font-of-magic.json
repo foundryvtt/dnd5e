@@ -34,79 +34,162 @@
     "requirements": "Sorcerer 2",
     "properties": [],
     "activities": {
-      "dnd5eactivity000": {
-        "_id": "dnd5eactivity000",
+      "EHLXN6WrPpxg0pRN": {
         "type": "utility",
+        "name": "Regain Spell Slot",
         "activation": {
-          "type": "special",
+          "type": "bonus",
           "value": null,
-          "condition": "",
-          "override": false
+          "override": false,
+          "condition": ""
         },
         "consumption": {
+          "scaling": {
+            "allowed": true,
+            "max": "5"
+          },
+          "spellSlot": true,
           "targets": [
             {
               "type": "itemUses",
+              "value": "1 + @scaling + floor(@scaling / 3)",
               "target": "",
-              "value": "1",
               "scaling": {
-                "mode": "",
+                "mode": ""
+              }
+            },
+            {
+              "type": "spellSlots",
+              "value": "-1",
+              "target": "1",
+              "scaling": {
+                "mode": "level",
                 "formula": ""
               }
             }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
+          ]
         },
         "description": {
           "chatFlavor": ""
         },
         "duration": {
+          "units": "inst",
           "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
           "override": false
         },
         "effects": [],
         "range": {
-          "units": "",
-          "special": "",
-          "override": false
+          "override": false,
+          "units": "self",
+          "special": ""
         },
         "target": {
           "template": {
-            "count": "",
             "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
+            "units": "ft",
+            "type": ""
           },
           "affects": {
-            "count": "",
-            "type": "",
             "choice": false,
-            "special": ""
+            "count": "",
+            "type": ""
           },
-          "prompt": true,
-          "override": false
-        },
-        "roll": {
-          "formula": "",
-          "name": "",
-          "prompt": false,
-          "visible": false
+          "override": false,
+          "prompt": false
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "roll": {
+          "prompt": false,
+          "visible": false,
+          "name": "",
+          "formula": ""
+        },
+        "img": "systems/dnd5e/icons/svg/damage/force.svg",
+        "_id": "EHLXN6WrPpxg0pRN"
+      },
+      "72ZtIT83h5t5iHHC": {
+        "type": "utility",
+        "name": "Regain Sorcery Points",
+        "activation": {
+          "type": "",
+          "value": null,
+          "override": false,
+          "condition": ""
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": true,
+            "max": "9"
+          },
+          "spellSlot": true,
+          "targets": [
+            {
+              "type": "spellSlots",
+              "value": "1",
+              "target": "1",
+              "scaling": {
+                "mode": "level",
+                "formula": ""
+              }
+            },
+            {
+              "type": "itemUses",
+              "value": "0 - @scaling",
+              "target": "",
+              "scaling": {
+                "mode": "amount",
+                "formula": ""
+              }
+            }
+          ]
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "override": false,
+          "units": "self",
+          "special": ""
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "count": "",
+            "type": ""
+          },
+          "override": false,
+          "prompt": false
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "sort": 0,
+        "roll": {
+          "prompt": false,
+          "visible": false,
+          "name": "",
+          "formula": ""
+        },
+        "img": "systems/dnd5e/icons/svg/activity/heal.svg",
+        "_id": "72ZtIT83h5t5iHHC"
       }
     },
     "enchant": {},
@@ -116,7 +199,14 @@
     "identifier": "font-of-magic"
   },
   "sort": 0,
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "img": "icons/magic/control/silhouette-hold-change-blue.webp",
   "effects": [],
   "folder": "s3pztJl6gzeYmXdi",
@@ -124,9 +214,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.0",
     "createdTime": 1725037382917,
-    "modifiedTime": 1725992288017,
+    "modifiedTime": 1738906913202,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!LBKChJY5n02Afhnq"

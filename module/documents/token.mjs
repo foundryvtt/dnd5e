@@ -167,6 +167,28 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   }
 
   /* -------------------------------------------- */
+  /*  Event Handlers                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+
+    if ( (this.actor?.type === "npc") && !this.actorLink
+      && foundry.utils.getProperty(this.actor, "system.attributes.hp.formula")?.trim().length ) {
+      const autoRoll = game.settings.get("dnd5e", "autoRollNPCHP");
+      if ( autoRoll === "no" ) return;
+      const roll = await this.actor.rollNPCHitPoints({ chatMessage: autoRoll === "yes" });
+      this.delta.updateSource({
+        "system.attributes.hp": {
+          max: roll.total,
+          value: roll.total
+        }
+      });
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Socket Event Handlers                       */
   /* -------------------------------------------- */
 

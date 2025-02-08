@@ -519,7 +519,7 @@ export default class ItemSheet5e extends ItemSheet {
         app = new SourceConfig({ document: this.item, keyPath: "system.source" });
         break;
       case "starting-equipment":
-        app = new StartingEquipmentConfig(this.item);
+        app = new StartingEquipmentConfig({ document: this.item });
         break;
       case "type":
         app = new CreatureTypeConfig({ document: this.item, keyPath: "type" });
