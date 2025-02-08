@@ -27,9 +27,10 @@ const {
  * @property {Record<number, ItemChoiceLevelConfig>} choices  Choices & config for specific levels.
  * @property {ItemChoicePoolEntry[]} pool                     Items that can be chosen.
  * @property {object} restriction
- * @property {string} restriction.type                        Specific item type allowed.
- * @property {string} restriction.subtype                     Item sub-type allowed.
  * @property {"available"|number} restriction.level           Level of spell allowed.
+ * @property {string} restriction.list                        Spell list from which a spell must be selected.
+ * @property {string} restriction.subtype                     Item sub-type allowed.
+ * @property {string} restriction.type                        Specific item type allowed.
  * @property {SpellConfigurationData} spell                   Mutations applied to spell items.
  * @property {string} type                                    Type of item allowed, if it should be restricted.
  */
@@ -55,6 +56,7 @@ export class ItemChoiceConfigurationData extends foundry.abstract.DataModel {
       pool: new ArrayField(new SchemaField({ uuid: new StringField() })),
       restriction: new SchemaField({
         level: new StringField(),
+        list: new StringField(),
         subtype: new StringField(),
         type: new StringField()
       }),

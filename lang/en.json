@@ -409,6 +409,10 @@
           "hint": "Only allow choices from spells of this level.",
           "label": "Spell Level"
         },
+        "list": {
+          "hint": "Only allow spells from this list.",
+          "label": "Spell List"
+        },
         "subtype": {
           "label": "Subtype"
         },
@@ -434,7 +438,8 @@
       "NoOriginal": "Previously selected choice no longer available for replacement.",
       "PreviouslyChosen": "This item has already been chosen at a previous level.",
       "SpellLevelAvailable": "Only {level} or lower spells can be chosen for this advancement.",
-      "SpellLevelSpecific": "Only {level} spells can be chosen for this advancement."
+      "SpellLevelSpecific": "Only {level} spells can be chosen for this advancement.",
+      "SpellList": "Only spells available on the {list} spell list can be chosen for this advancement."
     }
   },
   "ItemGrant": {

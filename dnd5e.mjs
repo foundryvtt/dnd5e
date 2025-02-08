@@ -493,6 +493,7 @@ Hooks.once("ready", function() {
 
   // Register items by type
   dnd5e.registry.classes.initialize();
+  dnd5e.registry.subclasses.initialize();
 
   // Chat message listeners
   documents.ChatMessage5e.activateListeners();

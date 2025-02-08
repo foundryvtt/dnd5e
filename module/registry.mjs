@@ -285,7 +285,7 @@ class SpellListRegistry {
       const lists = this.#byType.get(type);
       if ( !lists ) return [];
       return Array.from(lists.entries())
-        .map(([value, list]) => ({ value, label: list.name, group, type }))
+        .map(([value, list]) => ({ value: `${type}.${value}`, label: list.name, group, type }))
         .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
     }).flat();
   }
@@ -376,7 +376,8 @@ export class SpellList {
    * @enum {string}
    */
   static #REGISTRIES = {
-    class: "classes"
+    class: "classes",
+    subclass: "subclasses"
   };
 
   /* -------------------------------------------- */
@@ -474,6 +475,18 @@ export class SpellList {
     }
 
     return added;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether the provided spell is included in the list.
+   * @param {Item5e|string} spell  Spell item or a compendium UUID.
+   * @returns {boolean}
+   */
+  has(spell) {
+    if ( spell instanceof Item ) spell = spell._stats?.compendiumSource ?? spell.uuid;
+    return this.#spells.has(spell);
   }
 
   /* -------------------------------------------- */
@@ -597,5 +610,6 @@ export default {
   messages: MessageRegistry,
   ready: RegistryStatus.ready,
   spellLists: SpellListRegistry,
+  subclasses: new ItemRegistry("subclass"),
   summons: SummonRegistry
 };
