@@ -105,6 +105,16 @@ export function registerSystemSettings() {
     type: Boolean
   });
 
+  // Disable Exhaustion Automation
+  game.settings.register("dnd5e", "disableExhaustion", {
+    name: "SETTINGS.5eNoExhaustionN",
+    hint: "SETTINGS.5eNoExhaustionL",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Collapse Item Cards (by default)
   game.settings.register("dnd5e", "autoCollapseItemCards", {
     name: "SETTINGS.5eAutoCollapseCardN",
