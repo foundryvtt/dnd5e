@@ -227,7 +227,7 @@ export default function ActorSheetV2Mixin(Base) {
 
       // Character Flags
       for ( const [key, config] of Object.entries(CONFIG.DND5E.characterFlags) ) {
-        const flag = { ...config, name: `flags.dnd5e.${key}`, value: flags.data[key] };
+        const flag = { ...config, name: `flags.dnd5e.${key}`, value: foundry.utils.getProperty(flags.data, key) };
         const fieldOptions = { label: config.name, hint: config.hint };
         if ( config.type === Boolean ) {
           flag.field = new foundry.data.fields.BooleanField(fieldOptions);
