@@ -3,7 +3,7 @@ import Item5e from "../../documents/item.mjs";
 import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
 import ItemSheet5e2 from "./item-sheet-2.mjs";
 
-export default class ItemCompendium5e extends Compendium {
+export default class ItemCompendium5e extends (foundry.applications?.sidebar?.apps?.Compendium ?? Compendium) {
   constructor(...args) {
     super(...args);
     if ( game.release.version < 13 ) return new ItemCompendium5eV12(...args);
@@ -95,7 +95,7 @@ class ItemCompendium5eV13 extends DragDropApplicationMixin(foundry.applications.
  * Compendium with added support for item containers.
  * TODO: Remove when v12 support is dropped.
  */
-class ItemCompendium5eV12 extends DragDropApplicationMixin(Compendium) {
+class ItemCompendium5eV12 extends DragDropApplicationMixin(foundry.applications?.sidebar?.apps?.Compendium ?? Compendium) {
 
   /** @inheritDoc */
   async _render(...args) {
