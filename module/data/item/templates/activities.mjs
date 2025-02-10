@@ -323,12 +323,26 @@ export default class ActivitiesTemplate extends SystemDataModel {
   async recoverUses(periods, rollData) {
     const updates = {};
     const rolls = [];
+    const autoRecharge = game.settings.get("dnd5e", "autoRecharge");
+    const shouldRecharge = periods.includes("turnStart") && (this.parent.actor.type === "npc")
+      && (autoRecharge !== "no");
+    const recharge = async doc => {
+      const config = { apply: false };
+      const message = { create: autoRecharge !== "silent" };
+      const result = await UsesField.rollRecharge.call(doc, config, {}, message);
+      if ( result ) {
+        if ( doc instanceof Item ) foundry.utils.mergeObject(updates, result.updates);
+        else foundry.utils.mergeObject(updates, { [`system.activities.${doc.id}`]: result.updates });
+        rolls.push(...result.rolls);
+      }
+    };
 
     const result = await UsesField.recoverUses.call(this, periods, rollData);
     if ( result ) {
       foundry.utils.mergeObject(updates, { "system.uses": result.updates });
       rolls.push(...result.rolls);
     }
+    if ( shouldRecharge ) await recharge(this.parent);
 
     for ( const activity of this.activities ) {
       const result = await UsesField.recoverUses.call(activity, periods, rollData);
@@ -336,6 +350,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
         foundry.utils.mergeObject(updates, { [`system.activities.${activity.id}.uses`]: result.updates });
         rolls.push(...result.rolls);
       }
+      if ( shouldRecharge ) await recharge(activity);
     }
 
     return { updates, rolls };
