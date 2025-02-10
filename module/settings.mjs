@@ -299,7 +299,7 @@ export function registerSystemSettings() {
     hint: "SETTINGS.DND5E.NPCS.AutoRecharge.Hint",
     scope: "world",
     config: false,
-    default: "yes",
+    default: "no",
     type: String,
     choices: {
       no: "SETTINGS.DND5E.NPCS.AutoRecharge.No",

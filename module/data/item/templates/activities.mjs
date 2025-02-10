@@ -327,7 +327,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     const shouldRecharge = periods.includes("turnStart") && (this.parent.actor.type === "npc")
       && (autoRecharge !== "no");
     const recharge = async doc => {
-      const config = { returnUpdates: true };
+      const config = { apply: false };
       const message = { create: autoRecharge !== "silent" };
       const result = await UsesField.rollRecharge.call(doc, config, {}, message);
       if ( result ) {

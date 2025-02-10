@@ -198,8 +198,8 @@ export default class UsesField extends SchemaField {
 
   /**
    * @typedef {BasicRollProcessConfiguration} RechargeRollProcessConfiguration
-   * @property {boolean} [returnUpdates]  Return item updates rather then performing them. If set to `true`, then the
-   *                                      `dnd5e.postRollRecharge` hook won't be called.
+   * @property {boolean} [apply]  Apply the uses updates back to the item or activity. If set to `false`, then the
+   *                              `dnd5e.postRollRecharge` hook won't be called.
    */
 
   /**
@@ -215,6 +215,15 @@ export default class UsesField extends SchemaField {
     const uses = this.system ? this.system.uses : this.uses;
     const recharge = uses?.recovery.find(({ period }) => period === "recharge");
     if ( !recharge ) return;
+
+    let oldReturn = false;
+    if ( config.apply === undefined ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `apply` parameter should be passed to `rollRecharge` to opt-in to the new return behavior.",
+        { since: "DnD5e 4.3", until: "DnD5e 5.0" }
+      );
+      oldReturn = config.apply = true;
+    }
 
     const rollConfig = foundry.utils.mergeObject({
       rolls: [{
@@ -292,8 +301,7 @@ export default class UsesField extends SchemaField {
       if ( Hooks.call("dnd5e.rollRecharge", this, rolls[0]) === false ) return rolls;
     }
 
-    if ( rollConfig.returnUpdates ) return { rolls, updates };
-    if ( !foundry.utils.isEmpty(updates) ) await this.update(updates);
+    if ( rollConfig.apply && !foundry.utils.isEmpty(updates) ) await this.update(updates);
 
     /**
      * A hook event that fires after an Item or Activity has rolled recharge and usage updates have been performed.
@@ -305,6 +313,6 @@ export default class UsesField extends SchemaField {
      */
     Hooks.callAll("dnd5e.postRollRecharge", rolls, { subject: this });
 
-    return rolls;
+    return oldReturn ? rolls : { rolls, updates };
   }
 }
