@@ -154,6 +154,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
 
       abl.save.value = abl.mod + abl.saveBonus;
       if ( Number.isNumeric(abl.saveProf.term) ) abl.save.value += abl.saveProf.flat;
+      abl.attack = abl.mod + prof;
       abl.dc = 8 + abl.mod + prof + dcBonus;
 
       if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;

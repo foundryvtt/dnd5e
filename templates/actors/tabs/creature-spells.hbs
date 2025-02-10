@@ -48,7 +48,7 @@
             <div class="level">
                 <span class="label">{{ localize "DND5E.Level" }}</span>
                 {{#if (and @root.editable noSpellcaster)}}
-                {{ numberInput @root.system.details.spellLevel name="system.details.spellLevel" min=0 step=1
+                {{ numberInput @root.system.attributes.spell.level name="system.attributes.spell.level" min=0 step=1
                                placeholder="—" }}
                 {{else}}
                 <span class="value">{{ level }}</span>

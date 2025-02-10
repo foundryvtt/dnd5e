@@ -263,7 +263,7 @@ function _configureTrackableAttributes() {
       ...common.value,
       ...Object.keys(DND5E.skills).map(skill => `skills.${skill}.passive`),
       ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
-      "attributes.spelldc"
+      "attributes.spell.attack", "attributes.spell.dc"
     ]
   };
 
@@ -274,7 +274,7 @@ function _configureTrackableAttributes() {
     },
     npc: {
       bar: [...creature.bar, "resources.legact", "resources.legres"],
-      value: [...creature.value, "details.cr", "details.spellLevel", "details.xp.value"]
+      value: [...creature.value, "attributes.spell.level", "details.cr", "details.xp.value"]
     },
     vehicle: {
       bar: [...common.bar, "attributes.hp"],

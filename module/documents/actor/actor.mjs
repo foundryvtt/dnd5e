@@ -386,8 +386,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     );
 
     if ( this.type === "npc" ) {
-      if ( progression.slot || progression.pact ) this.system.details.spellLevel = progression.slot || progression.pact;
-      else progression.slot = this.system.details.spellLevel ?? 0;
+      if ( progression.slot || progression.pact ) {
+        this.system.attributes.spell.level = progression.slot || progression.pact;
+      } else progression.slot = this.system.attributes.spell.level ?? 0;
     }
 
     for ( const type of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
@@ -539,7 +540,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Slot override
     if ( (keyLevel === 0) && (actor.type === "npc") && (override !== null) ) {
-      keyLevel = actor.system.details.spellLevel;
+      keyLevel = actor.system.attributes.spell.level;
     }
 
     const [, keyConfig] = Object.entries(table).reverse().find(([l]) => Number(l) <= keyLevel) ?? [];
