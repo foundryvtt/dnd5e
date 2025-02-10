@@ -806,7 +806,13 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   getDependents() {
     return (this.getFlag("dnd5e", "dependents") || []).reduce((arr, { uuid }) => {
-      const effect = fromUuidSync(uuid);
+      let effect;
+      // TODO: Remove this special casing once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
+      if ( this.parent.pack && uuid.includes(this.parent.uuid) ) {
+        const [, embeddedName, id] = uuid.replace(this.parent.uuid, "").split(".");
+        effect = this.parent.getEmbeddedDocument(embeddedName, id);
+      }
+      else effect = fromUuidSync(uuid, { strict: false });
       if ( effect ) arr.push(effect);
       return arr;
     }, []);

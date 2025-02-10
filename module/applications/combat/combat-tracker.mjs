@@ -10,11 +10,22 @@ import { formatNumber, getPluralRules } from "../../utils.mjs";
  * An extension of the base CombatTracker class to provide some 5e-specific functionality.
  * @extends {CombatTracker}
  */
-export default class CombatTracker5e extends CombatTracker {
+export default class CombatTracker5e extends (foundry.applications?.sidebar?.tabs?.CombatTracker ?? CombatTracker) {
 
   /** @inheritDoc */
   async getData(options={}) {
     const context = await super.getData(options);
+    context.turns.forEach(turn => {
+      turn.initiative = formatNumber(Number(turn.initiative), { maximumFractionDigits: 0 });
+    });
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareTrackerContext(context, options) {
+    await super._prepareTrackerContext(context, options);
     context.turns.forEach(turn => {
       turn.initiative = formatNumber(Number(turn.initiative), { maximumFractionDigits: 0 });
     });
@@ -41,6 +52,21 @@ export default class CombatTracker5e extends CombatTracker {
     new ContextMenu5e(
       html.querySelector(".directory-list"), ".directory-item:not(.combatant-group)", this._getEntryContextOptions()
     );
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _getEntryContextOptions() {
+    const options = super._getEntryContextOptions();
+    options.forEach(o => {
+      const condition = o.condition ?? (function() { return true; });
+      o.condition = li => {
+        const el = li instanceof HTMLElement ? li : li[0];
+        return condition(li) && !el.matches(".combatant-group");
+      };
+    });
+    return options;
   }
 
   /* -------------------------------------------- */
