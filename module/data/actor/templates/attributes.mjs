@@ -461,17 +461,16 @@ export default class AttributesFields {
    */
   static prepareSpellcastingAbility() {
     const ability = this.abilities?.[this.attributes.spellcasting];
-    this.attributes.spell = {
-      abilityLabel: CONFIG.DND5E.abilities[this.attributes.spellcasting]?.label ?? "",
-      attack: ability ? ability.attack : this.attributes.prof,
-      dc: ability ? ability.dc : 8 + this.attributes.prof,
-      mod: ability ? ability.mod : 0
-    };
+    this.attributes.spell ??= {};
+    this.attributes.spell.abilityLabel = CONFIG.DND5E.abilities[this.attributes.spellcasting]?.label ?? "";
+    this.attributes.spell.attack = ability ? ability.attack : this.attributes.prof;
+    this.attributes.spell.dc = ability ? ability.dc : 8 + this.attributes.prof;
+    this.attributes.spell.mod = ability ? ability.mod : 0;
     Object.defineProperty(this.attributes, "spelldc", {
       get() {
         foundry.utils.logCompatibilityWarning(
           "The `attributes.spelldc` property on actors has been moved to `attributes.spell.dc`.",
-          { since: "DnD5e 4.2", until: "DnD5e 5.0" }
+          { since: "DnD5e 4.3", until: "DnD5e 5.0" }
         );
         return this.spell.dc;
       }
@@ -480,7 +479,7 @@ export default class AttributesFields {
       get() {
         foundry.utils.logCompatibilityWarning(
           "The `attributes.spellmod` property on actors has been moved to `attributes.spell.mod`.",
-          { since: "DnD5e 4.2", until: "DnD5e 5.0" }
+          { since: "DnD5e 4.3", until: "DnD5e 5.0" }
         );
         return this.spell.mod;
       }

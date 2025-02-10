@@ -5,7 +5,7 @@
         <label>{{localize "DND5E.Spellcasting"}}</label>
         {{else}}
         <label>{{localize "DND5E.Level"}}</label>
-        {{numberInput system.details.spellLevel name="system.details.spellLevel" class="spellcasting-level"
+        {{numberInput system.attributes.spell.level name="system.attributes.spell.level" class="spellcasting-level"
                       placeholder="0" min=0 step=1 disabled=classSpellcasting}}
         {{/unless}}
         <select name="system.attributes.spellcasting" data-type="String">
