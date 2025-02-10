@@ -3,6 +3,7 @@ import AdoptedStyleSheetMixin from "./adopted-stylesheet-mixin.mjs";
 import CheckboxElement from "./checkbox.mjs";
 import CopyableTextElement from "./copyable-text.mjs";
 import DamageApplicationElement from "./damage-application.mjs";
+import DoubleRangePickerElement from "./double-range-picker.mjs";
 import EffectApplicationElement from "./effect-application.mjs";
 import EffectsElement from "./effects.mjs";
 import EnchantmentApplicationElement from "./enchantment-application.mjs";
@@ -18,6 +19,7 @@ window.customElements.define(CopyableTextElement.tagName, CopyableTextElement);
 window.customElements.define(DamageApplicationElement.tagName, DamageApplicationElement);
 window.customElements.define(ActivitiesElement.tagName, ActivitiesElement);
 window.customElements.define(CheckboxElement.tagName, CheckboxElement);
+window.customElements.define(DoubleRangePickerElement.tagName, DoubleRangePickerElement);
 window.customElements.define(EffectsElement.tagName, EffectsElement);
 window.customElements.define(IconElement.tagName, IconElement);
 window.customElements.define(InventoryElement.tagName, InventoryElement);
@@ -31,6 +33,7 @@ window.customElements.define(SlideToggleElement.tagName, SlideToggleElement);
 
 export {
   ActivitiesElement, AdoptedStyleSheetMixin, CopyableTextElement, CheckboxElement, DamageApplicationElement,
-  EffectApplicationElement, EffectsElement, EnchantmentApplicationElement, FiligreeBoxElement, FilterStateElement,
-  IconElement, InventoryElement, ItemListControlsElement, ProficiencyCycleElement, SlideToggleElement
+  DoubleRangePickerElement, EffectApplicationElement, EffectsElement, EnchantmentApplicationElement,
+  FiligreeBoxElement, FilterStateElement, IconElement, InventoryElement, ItemListControlsElement,
+  ProficiencyCycleElement, SlideToggleElement
 };
