@@ -249,7 +249,8 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const movement = systemData.attributes.movement ?? {};
 
     // Prepare an array of available movement speeds
-    let speeds = Object.entries(CONFIG.DND5E.movementTypes).filter(([k]) => !(!largestPrimary && k === "walk"))
+    let speeds = Object.entries(CONFIG.DND5E.movementTypes)
+      .filter(([k]) => largestPrimary || (k !== "walk"))
       .map(([k, v]) => {
         const speed = movement.types?.[k] ?? 0;
         const hover = k === "fly" && movement.hover ? ` (${game.i18n.localize("DND5E.MovementHover")})` : "";

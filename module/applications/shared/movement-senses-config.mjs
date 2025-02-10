@@ -83,15 +83,13 @@ export default class MovementSensesConfig extends BaseConfigSheet {
     context.data = foundry.utils.getProperty(source, this.keyPath) ?? {};
     context.fields = this.document.system.schema.getField(this.keyPath).fields;
     context.extras = this._prepareExtraFields(context);
-    context.types = this.types.map(([k, label]) => {
-      return {
-        field: isGroup ? context.fields[k] : context.fields.types.model,
-        key: `system.${this.keyPath}.${isGroup ? "" : "types."}${k}`,
-        label,
-        placeholder: (isGroup ? placeholderData?.[k] : placeholderData?.types?.[k]) ?? "",
-        value: isGroup ? context.data[k] : context.data.types?.[k]
-      };
-    });
+    context.types = this.types.map(([k, label]) => ({
+      field: isGroup ? context.fields[k] : context.fields.types.model,
+      key: `system.${this.keyPath}.${isGroup ? "" : "types."}${k}`,
+      label,
+      placeholder: (isGroup ? placeholderData?.[k] : placeholderData?.types?.[k]) ?? "",
+      value: isGroup ? context.data[k] : context.data.types?.[k]
+    }));
 
     context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => ({ value, label }));
     if ( (this.document.type === "pc") || ((this.document.type === "npc") && placeholderData) ) {

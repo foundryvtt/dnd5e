@@ -111,7 +111,7 @@ export default class AttributesFields {
 
   /**
    * Migrate attributes
-   * @param {object} source  The source attributes object.
+   * @param {object} [source]  The source attributes object.
    * @internal
    */
   static _migrate(source) {
@@ -119,9 +119,11 @@ export default class AttributesFields {
     this._migrateMovementSenses(source);
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Migrate the old init.value and incorporate it into init.bonus.
-   * @param {object} source  The source attributes object.
+   * @param {object} [source]  The source attributes object.
    * @internal
    */
   static _migrateInitiative(source) {
@@ -131,9 +133,11 @@ export default class AttributesFields {
     else init.bonus = `${init.value}`;
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Migrate movement and senses properties into `types` object
-   * @param {object} source  The source attributes object.
+   * @param {object} [source]  The source attributes object.
    * @internal
    */
   static _migrateMovementSenses(source) {
@@ -144,12 +148,10 @@ export default class AttributesFields {
 
     for (const { key, config } of movementSenses) {
       const attr = source[key];
-      if (!attr) continue;
-      if (!("types" in attr)) {
-        attr.types = {};
-        for (const k of Object.keys(config)) {
-          attr.types[k] = attr[k] ?? null;
-        }
+      if ( !attr || ("types" in attr) ) continue;
+      attr.types = {};
+      for ( const k of Object.keys(config) ) {
+        attr.types[k] = attr[k] ?? null;
       }
     }
   }
@@ -485,10 +487,10 @@ export default class AttributesFields {
     if ( force && race.system.senses.units ) this.attributes.senses.units = race.system.senses.units;
     else this.attributes.senses.units ??= race.system.senses.units;
   }
-  
+
   /* -------------------------------------------- */
-  
-  /*
+
+  /**
    * Prepare spellcasting DC & modifier.
    * @this {CharacterData|NPCData}
    */
@@ -517,8 +519,8 @@ export default class AttributesFields {
       );
     };
 
-    for (const { property, config } of movementSenses) {
-      for (const key of Object.keys(config)) {
+    for ( const { property, config } of movementSenses ) {
+      for ( const key of Object.keys(config) ) {
         Object.defineProperty(attributes[property], key, {
           get: () => {
             warnDeprecated(property, key);

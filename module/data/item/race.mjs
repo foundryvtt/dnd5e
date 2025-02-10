@@ -38,38 +38,6 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
   }
 
   /* -------------------------------------------- */
-  /*  Data Migration                              */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static _migrateData(source) {
-    this._migrateMovementSenses(source);
-  }
-
-  /**
-   * Migrate movement and senses properties into `types` object
-   * @param {object} source  The source attributes object.
-   * @internal
-   */
-  static _migrateMovementSenses(source) {
-    const movementSenses = [
-      { property: "movement", config: CONFIG.DND5E.movementTypes },
-      { property: "senses", config: CONFIG.DND5E.senses }
-    ];
-
-    for (const { property, config } of movementSenses) {
-      const attribute = source[property];
-      if (!attribute) continue;
-      if (!("types" in attribute)) {
-        attribute.types = {};
-        for (const key of Object.keys(config)) {
-          attribute.types[key] = attribute[key] ?? null;
-        }
-      }
-    }
-  }
-
-  /* -------------------------------------------- */
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
@@ -134,6 +102,38 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
    */
   get typeLabel() {
     return Actor5e.formatCreatureType(this.type);
+  }
+
+  /* -------------------------------------------- */
+  /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static _migrateData(source) {
+    RaceData.#migrateMovementSenses(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate movement and senses properties into `types` object
+   * @param {object} source  The source attributes object.
+   * @internal
+   */
+  static #migrateMovementSenses(source) {
+    const movementSenses = [
+      { property: "movement", config: CONFIG.DND5E.movementTypes },
+      { property: "senses", config: CONFIG.DND5E.senses }
+    ];
+
+    for ( const { property, config } of movementSenses ) {
+      const attribute = source[property];
+      if ( !attribute || ("types" in attribute) ) continue;
+      attribute.types = {};
+      for (const key of Object.keys(config)) {
+        attribute.types[key] = attribute[key] ?? null;
+      }
+    }
   }
 
   /* -------------------------------------------- */
