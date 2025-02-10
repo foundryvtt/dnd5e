@@ -856,10 +856,16 @@ function _migrateEffectArmorClass(effect, updateData) {
  */
 function _migrateEffectMovementSenses(effect, updateData) {
   let containsUpdates = false;
+  const configKeys = {
+    movement: Object.keys(CONFIG.DND5E.movementTypes),
+    senses: Object.keys(CONFIG.DND5E.senses)
+  };
   const changes = (effect.changes || []).map(c => {
-    if ((c.key.startsWith("system.attributes.movement.") || c.key.startsWith("system.attributes.senses."))
-      && !c.key.includes(".types")) {
-      const keyParts = c.key.split(".");
+    const keyParts = c.key.split(".");
+    if ( !c.key.includes(".types")
+      && c.key.startsWith("system.attributes.")
+      && configKeys[keyParts[2]].includes(keyParts[3])
+    ) {
       keyParts.splice(3, 0, "types");
       c.key = keyParts.join(".");
       containsUpdates = true;
