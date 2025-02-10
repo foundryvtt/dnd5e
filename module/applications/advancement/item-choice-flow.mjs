@@ -253,7 +253,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
     // For advancements on classes or subclasses, use the largest slot available for that class
     if ( spellcasting ) {
       const progression = { slot: 0, pact: {} };
-      const maxSpellLevel = CONFIG.DND5E.SPELL_SLOT_TABLE[CONFIG.DND5E.SPELL_SLOT_TABLE.length - 1].length;
+      const maxSpellLevel = Math.max(...Object.keys(CONFIG.DND5E.spellLevels));
       spells = Object.fromEntries(Array.fromRange(maxSpellLevel, 1).map(l => [`spell${l}`, {}]));
       Actor5e.computeClassProgression(progression, this.advancement.item, { spellcasting });
       Actor5e.prepareSpellcastingSlots(spells, spellcasting.type, progression);

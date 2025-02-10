@@ -414,20 +414,19 @@ export default function ActorSheetV2Mixin(Base) {
 
         // Prepared
         const mode = system.preparation?.mode;
-        const config = CONFIG.DND5E.spellPreparationModes[mode] ?? {};
-        if ( config.prepares && !linked ) {
-          const isAlways = mode === "always";
-          const prepared = isAlways || system.preparation.prepared;
+        if ( CONFIG.DND5E.spellcasting[mode]?.prepares && !linked ) {
+          const isAlways = system.preparation.prepared === CONFIG.DND5E.spellPreparationStates.always.value;
+          const prepared = system.preparation.prepared > 0;
           ctx.preparation = {
             applicable: true,
             disabled: !item.isOwner || isAlways,
             cls: prepared ? "active" : "",
             icon: `<i class="fa-${prepared ? "solid" : "regular"} fa-${isAlways ? "certificate" : "sun"}"></i>`,
             title: isAlways
-              ? CONFIG.DND5E.spellPreparationModes.always.label
+              ? CONFIG.DND5E.spellPreparationStates.always.label
               : prepared
-                ? CONFIG.DND5E.spellPreparationModes.prepared.label
-                : game.i18n.localize("DND5E.SpellUnprepared")
+                ? CONFIG.DND5E.spellPreparationStates.prepared.label
+                : CONFIG.DND5E.spellPreparationStates.unprepared.label
           };
         }
         else ctx.preparation = { applicable: false };
@@ -442,7 +441,6 @@ export default function ActorSheetV2Mixin(Base) {
           itemLevel: item.system.level,
           itemName: item.name,
           itemSort: item.sort,
-          itemPreparationMode: item.system.preparation.mode,
           itemPreparationPrepared: item.system.preparation.prepared,
           linkedName: linked?.name
         };

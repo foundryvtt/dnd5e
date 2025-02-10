@@ -805,9 +805,9 @@ export default function ActivityMixin(Base) {
       else if ( ((config.consume === true) || config.consume.spellSlot)
         && this.requiresSpellSlot && this.consumption.spellSlot ) {
         const mode = this.item.system.preparation.mode;
-        const isLeveled = ["always", "prepared"].includes(mode);
+        const isLeveled = CONFIG.DND5E.spellcasting[mode]?.separate;
         const effectiveLevel = this.item.system.level + (config.scaling ?? 0);
-        const slot = config.spell?.slot ?? (isLeveled ? `spell${effectiveLevel}` : mode);
+        const slot = config.spell?.slot ?? (isLeveled ? `${mode}${effectiveLevel}` : mode);
         const slotData = this.actor.system.spells?.[slot];
         if ( slotData ) {
           if ( slotData.value ) {

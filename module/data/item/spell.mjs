@@ -24,8 +24,8 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @property {number} materials.cost             GP cost for the required components.
  * @property {number} materials.supply           Quantity of this component available.
  * @property {object} preparation                Details on how this spell is prepared.
- * @property {string} preparation.mode           Spell preparation mode as defined in `DND5E.spellPreparationModes`.
- * @property {boolean} preparation.prepared      Is the spell currently prepared?
+ * @property {string} preparation.mode           Spell preparation mode as defined in `DND5E.spellcasting`.
+ * @property {number} preparation.prepared       Current prepared state, as defined in `DND5E.spellPreparationStates`.
  * @property {Set<string>} properties            General components and tags for this spell.
  * @property {RangeData} range                   Range of the spell
  * @property {string} school                     Magical school to which this spell belongs.
@@ -59,8 +59,18 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
         supply: new NumberField({ required: true, initial: 0, min: 0, label: "DND5E.SpellMaterialsSupply" })
       }, { label: "DND5E.SpellMaterials" }),
       preparation: new SchemaField({
-        mode: new StringField({ required: true, initial: "prepared", label: "DND5E.SpellPreparation.Mode" }),
-        prepared: new BooleanField({ required: true, label: "DND5E.SpellPrepared" })
+        mode: new StringField({ required: true, initial: "spell", label: "DND5E.SpellPreparation.Mode" }),
+        prepared: new NumberField({
+          label: "DND5E.SpellPrepared",
+          nullable: false,
+          initial: CONFIG.DND5E.spellPreparationStates.unprepared.value,
+          choices: () => {
+            return Object.values(CONFIG.DND5E.spellPreparationStates).reduce((acc, v) => {
+              acc[v.value] = v.label;
+              return acc;
+            }, {});
+          }
+        })
       }, { label: "DND5E.SpellPreparation.Label" }),
       properties: new SetField(new StringField(), { label: "DND5E.SpellComponents" }),
       range: new RangeField(),
@@ -130,6 +140,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     ActivitiesTemplate.migrateActivities(source);
     SpellData.#migrateActivation(source);
     SpellData.#migrateTarget(source);
+    SpellData.#migratePreparationState(source);
   }
 
   /* -------------------------------------------- */
@@ -182,6 +193,25 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
+
+  /**
+   * Migrate preparation data.
+   * Added in DnD5e 4.x.0. // TODO
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migratePreparationState(source) {
+    if ( source.preparation?.mode === "always" ) {
+      source.preparation.mode = "spell";
+      source.preparation.prepared = 2;
+    } else {
+      if ( source.preparation?.mode === "prepared" ) source.preparation.mode = "spell";
+      if ( [true, false].includes(source.preparation?.prepared) ) {
+        source.preparation.prepared = Number(source.preparation.prepared);
+      }
+    }
+  }
+
+  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -192,7 +222,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     super.prepareDerivedData();
     this.prepareDescriptionData();
 
-    this.preparation.mode ||= "prepared";
+    this.preparation.mode ||= "spell";
     this.properties.add("mgc");
     this.duration.concentration = this.properties.has("concentration");
 
@@ -211,6 +241,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       return obj;
     }, { all: [], vsm: [], tags: [] });
     labels.components.vsm = game.i18n.getListFormatter({ style: "narrow" }).format(labels.components.vsm);
+
+    this.preparation.static = (CONFIG.DND5E.spellcasting[this.preparation.mode] ?? { static: true }).static === true;
 
     const uuid = this.parent._stats.compendiumSource ?? this.parent.uuid;
     Object.defineProperty(labels, "classes", {
@@ -239,10 +271,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     TargetField.prepareData.call(this, rollData, labels);
 
     // Count preparations.
-    const { mode, prepared } = this.preparation;
-    const config = CONFIG.DND5E.spellPreparationModes[mode];
-    const isPrepared = config?.prepares && (mode !== "always") && (this.level > 0) && prepared;
-    if ( this.parent.isOwned && this.sourceClass && isPrepared ) {
+    if ( this.parent.isOwned && this.sourceClass && this.countsPrepared ) {
       const sourceClass = this.parent.actor.spellcastingClasses[this.sourceClass];
       const sourceSubclass = sourceClass?.subclass;
       if ( sourceClass ) sourceClass.system.spellcasting.preparation.value++;
@@ -322,6 +351,16 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /* -------------------------------------------- */
 
   /**
+   * Can this spell be prepared?
+   * @type {boolean}
+   */
+  get canPrepare() {
+    return !!CONFIG.DND5E.spellcasting[this.preparation.mode]?.prepares && (this.level > 0);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Properties displayed in chat.
    * @type {string[]}
    */
@@ -342,9 +381,33 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
 
+  /**
+   * Is this spell counting towards the number of prepared spells?
+   * @type {boolean}
+   */
+  get countsPrepared() {
+    return !!CONFIG.DND5E.spellcasting[this.preparation.mode]?.prepares
+      && (this.level > 0)
+      && (this.preparation.prepared === CONFIG.DND5E.spellPreparationStates.prepared.value);
+  }
+
+  /* -------------------------------------------- */
+
   /** @override */
   get criticalThreshold() {
     return this.parent?.actor?.flags.dnd5e?.spellCriticalThreshold ?? Infinity;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Is this spell available to the caster?
+   * @type {boolean}
+   */
+  get isAvailable() {
+    return this.preparation.static
+      || !this.level
+      || (!!CONFIG.DND5E.spellcasting[this.preparation.mode]?.prepares && (this.preparation.prepared > 0));
   }
 
   /* -------------------------------------------- */
@@ -400,7 +463,7 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     // Set as prepared for NPCs, and not prepared for PCs
     if ( ["character", "npc"].includes(this.parent.actor.type)
       && !foundry.utils.hasProperty(data, "system.preparation.prepared") ) {
-      this.updateSource({ "preparation.prepared": this.parent.actor.type === "npc" });
+      this.updateSource({ "preparation.prepared": Number(this.parent.actor.type === "npc") });
     }
 
     if ( ["atwill", "innate"].includes(this.preparation.mode) || this.sourceClass ) return;
@@ -411,13 +474,14 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     const setClass = cls => {
       const update = { sourceClass: cls };
       const type = this.parent.actor.classes[cls].spellcasting.type;
-      if ( (type !== "leveled") && (this.preparation.mode === "prepared") && (this.level > 0)
-        && (type in CONFIG.DND5E.spellPreparationModes) ) update["preparation.mode"] = type;
+      // TODO: Should this simply compare the spell's preparation mode to the spellcasting type?
+      if ( (type !== "spell") && (this.preparation.mode === "spell") && (this.level > 0)
+        && (type in CONFIG.DND5E.spellcasting) ) update["preparation.mode"] = type;
       this.updateSource(update);
     };
 
     // If preparation mode matches an alt spellcasting type and matching class exists, set as that class
-    if ( this.preparation.mode in CONFIG.DND5E.spellcastingTypes ) {
+    if ( this.preparation.mode in CONFIG.DND5E.spellcasting ) {
       const altClasses = classes.filter(i => this.parent.actor.classes[i].spellcasting.type === this.preparation.mode);
       if ( altClasses.size === 1 ) setClass(altClasses.first());
       return;

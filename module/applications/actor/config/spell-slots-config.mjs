@@ -39,21 +39,28 @@ export default class SpellSlotsConfig extends BaseConfigSheet {
 
     const source = this.document._source.system.spells;
     const { spells } = this.document.system;
-    context.overrides = Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1).map(level => ({
-      value: source[`spell${level}`]?.override,
-      label: CONFIG.DND5E.spellLevels[level],
-      name: `system.spells.spell${level}.override`,
-      placeholder: spells[`spell${level}`]?.max ?? 0
-    }));
+    const maxSpellLevel = Object.keys(CONFIG.DND5E.spellLevels).length - 1;
+    context.overrides = [];
 
-    for ( const k of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
-      const hasSpell = this.document.items.some(i => i.type === "spell" && i.system.preparation.mode === k);
-      if ( parseInt(spells[k]?.level) || hasSpell ) context.overrides.push({
-        label: CONFIG.DND5E.spellPreparationModes[k].label,
-        value: source[k]?.override,
-        name: `system.spells.${k}.override`,
-        placeholder: spells[k]?.max ?? 0
-      });
+    for ( const [k, v] of Object.entries(CONFIG.DND5E.spellcasting) ) {
+      if ( !v.static && v.separate ) {
+        for ( let i = 1; i <= maxSpellLevel; i++ ) {
+          // Special handling for regular spell slots for backwards compatibility.
+          context.overrides.push({
+            label: `${v.label} (${i.ordinalString()})`,
+            name: `system.spells.${k}${i}.override`,
+            placeholder: spells[`${k}${i}`]?.max ?? 0,
+            value: source[`${k}${i}`]?.override
+          });
+        }
+      } else if ( !v.static ) {
+        context.overrides.push({
+          label: v.label,
+          name: `system.spells.${k}.override`,
+          placeholder: spells[k]?.max ?? 0,
+          value: source[k]?.override
+        });
+      }
     }
 
     return context;

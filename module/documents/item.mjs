@@ -447,25 +447,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Does this item scale with any kind of consumption?
-   * @type {string|null}
-   */
-  get usageScaling() {
-    // TODO: Re-implement on activity
-    const { level, preparation, consume } = this.system;
-    const isLeveled = (this.type === "spell") && (level > 0);
-    if ( isLeveled && CONFIG.DND5E.spellPreparationModes[preparation.mode]?.upcast ) return "slot";
-    else if ( isLeveled && this.hasResource && consume.scale ) return "resource";
-    return null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Spellcasting details for a class or subclass.
    *
    * @typedef {object} SpellcastingDescription
-   * @property {string} type              Spellcasting type as defined in ``CONFIG.DND5E.spellcastingTypes`.
+   * @property {string} type              Spellcasting type as defined in `CONFIG.DND5E.spellcasting`.
    * @property {string|null} progression  Progression within the specified spellcasting type if supported.
    * @property {string} ability           Ability used when casting spells from this class or subclass.
    * @property {number|null} levels       Number of levels of this class or subclass's class if embedded.
