@@ -66,7 +66,7 @@ const journalEntry = await fromUuid("...");
 journalEntry.setFlag("dnd5e", "position", 1);
 ```
 
-This flag only has effect for `chapter` and `appendix` entries.
+This flag only effects `chapter` and `appendix` entries.
 
 #### `append` & `order` flags
 

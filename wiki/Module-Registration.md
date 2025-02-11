@@ -8,7 +8,7 @@ These flags should be applied to the `flags` object within an individual compend
 
 ### Display Mode
 
-The `display` flag can be used to specify that a specific compendium should use the [Table of Contents][Table-of-Contents.md] display rather than the default compendium interface. It should only be used for compendiums with the `JournalEntry` document type.
+The `dnd5e.display` flag can be used to specify that a specific compendium should use the [Table of Contents][Table-of-Contents.md] display rather than the default compendium interface. It should only be used for compendiums with the `JournalEntry` document type.
 
 ```json
 {
@@ -19,7 +19,9 @@ The `display` flag can be used to specify that a specific compendium should use 
   "type": "JournalEntry",
   "private": false,
   "flags": {
-    "display": "table-of-contents"
+    "dnd5e": {
+      "display": "table-of-contents"
+    }
   }
 }
 ```
@@ -30,7 +32,7 @@ The `dnd5e.types` flag indicates what types of items or actors a compendium cont
 
 ### Sorting
 
-The `dnd5e.sorting` flag gives a method to indicate the default top-level sorting for a compendium, taking either `"m"` for manual sorting or `"a"` for automatic (though since core's default sorting is automatic, there is no reason to set that value). This will not replace the sorting mode if a user has already modified it for a compendium, but will be applied for a freshly installed module or for a new user.
+The `dnd5e.sorting` flag gives a method to indicate the default top-level sorting for a compendium, taking either `"m"` for manual sorting or `"a"` for alphabetical (though since core's default sorting is alphabetical, there is no reason to set that value). This will not replace the sorting mode if a user has already modified it for a compendium, but will be applied for a freshly installed module or for a new user.
 
 ```json
 {
