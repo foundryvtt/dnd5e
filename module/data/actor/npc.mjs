@@ -201,6 +201,26 @@ export default class NPCData extends CreatureTemplate {
           keyPath: "system.details.type.value"
         }
       }],
+      ["habitat", {
+        label: "DND5E.Habitat.Configuration.Label",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.habitats
+        },
+        createFilter: (filters, value, def) => {
+          const { include, exclude } = Object.entries(value).reduce((d, [key, value]) => {
+            if ( value === 1 ) d.include.push(key);
+            else if ( value === -1 ) d.exclude.push(key);
+            return d;
+          }, { include: [], exclude: [] });
+          if ( include.length ) filters.push({
+            k: "system.details.habitat.value", o: "has", v: { k: "type", o: "in", v: include }
+          });
+          if ( exclude.length ) filters.push({
+            o: "NOT", v: { k: "system.details.habitat.value", o: "has", v: { k: "type", o: "in", v: exclude } }
+          });
+        }
+      }],
       ["cr", {
         label: "DND5E.ChallengeRating",
         type: "range",
