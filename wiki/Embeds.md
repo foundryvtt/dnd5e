@@ -1,6 +1,6 @@
 ![Up to date as of 4.3.0](https://img.shields.io/static/v1?label=dnd5e&message=4.3.0&color=informational)
 
-Foundry provides an [enricher](Enrichers) that allows embedding a document within journal page or description on an item or actor. The DnD5e system extends this functionality in several useful ways.
+Foundry provides an [enricher](Enrichers) that allows embedding a document within a journal page or description on an item or actor. The DnD5e system extends this functionality in several useful ways.
 
 ### Standard Embed Usage
 
