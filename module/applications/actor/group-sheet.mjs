@@ -291,7 +291,10 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
       case "award":
-        const award = new Award(this.object, { savedDestinations: this.actor.getFlag("dnd5e", "awardDestinations") });
+        const award = new Award({
+          award: { savedDestinations: this.actor.getFlag("dnd5e", "awardDestinations") },
+          origin: this.object
+        });
         award.render(true);
         break;
       case "longRest":

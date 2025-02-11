@@ -656,26 +656,9 @@
 .dnd5e2:is(.award, .currency-manager) {
   --award-gap: 8px;
 
-  nav {
-    display: flex;
-    gap: var(--award-gap);
-    justify-content: center;
-    padding-block-end: var(--award-gap);
-
-    a {
-      border-block-end: 3px solid var(--dnd5e-color-beige);
-      padding-block: 2px;
-      padding-inline: 6px;
-
-      &.active {
-        border-color: var(--dnd5e-color-crimson);
-        text-shadow: 0 0 10px var(--color-shadow-primary);
-      }
-    }
-  }
-
   [data-tab="convert"] p {
     font-size: var(--font-size-14);
+    margin: 0;
     padding-inline: 4px;
   }
 
@@ -692,7 +675,7 @@
     grid-auto-flow: column;
     grid-template-rows: 1fr 1fr;
     gap: var(--award-gap);
-    button {
+    button[data-action] {
       padding-inline: 6px;
       width: unset;
       line-height: unset;
@@ -750,4 +733,6 @@
       font-weight: bold;
     }
   }
+
+  button[type=submit] { width: 100%; }
 }
