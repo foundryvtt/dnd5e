@@ -115,6 +115,7 @@ export default class AttributesFields {
    * @internal
    */
   static _migrate(source) {
+    if ( !source ) return;
     this._migrateInitiative(source);
     this._migrateMovementSenses(source);
   }
@@ -123,7 +124,7 @@ export default class AttributesFields {
 
   /**
    * Migrate the old init.value and incorporate it into init.bonus.
-   * @param {object} [source]  The source attributes object.
+   * @param {object} source  The source attributes object.
    * @internal
    */
   static _migrateInitiative(source) {
@@ -137,7 +138,7 @@ export default class AttributesFields {
 
   /**
    * Migrate movement and senses properties into `types` object
-   * @param {object} [source]  The source attributes object.
+   * @param {object} source  The source attributes object.
    * @internal
    */
   static _migrateMovementSenses(source) {
