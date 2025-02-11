@@ -25,6 +25,11 @@
                 <i class="fa-solid fa-dice-d20" inert></i>
             </button>
         </div>
+        <div class="healthbar">
+            <div class="progress-potential" style="width:{{progressBarPotential}}%"></div>
+            <div class="progress" style="width:{{progressBar}}%"></div>
+            <div class="overlay">{{healthBarText}}</div>
+        </div>
         {{ formField autoRoll name="autoHD" value=config.autoHD input=inputs.createCheckboxInput rootId=partId }}
     </fieldset>
     {{else}}

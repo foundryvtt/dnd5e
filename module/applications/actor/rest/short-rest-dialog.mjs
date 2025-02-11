@@ -56,7 +56,8 @@ export default class ShortRestDialog extends BaseRestDialog {
         denomination: `d${hd.denomination}`,
         options: [{
           value: `d${hd.denomination}`,
-          label: `d${hd.denomination} (${game.i18n.format("DND5E.HITDICE.Available", { number: hd.value })})`
+          label: `d${hd.denomination} (${game.i18n.format("DND5E.HITDICE.Available", { number: hd.value })})`,
+          number: hd.value
         }]
       };
     }
@@ -68,7 +69,7 @@ export default class ShortRestDialog extends BaseRestDialog {
           value, label: `${value} (${game.i18n.format("DND5E.HITDICE.Available", { number })})`, number
         }))
       };
-      context.denomination = (this.actor.system.attributes.hd.bySize[this.#denom] > 0)
+      context.hitDice.denomination = (this.actor.system.attributes.hd.bySize[this.#denom] > 0)
         ? this.#denom : context.hitDice.options.find(o => o.number > 0)?.value;
     }
 
@@ -78,6 +79,18 @@ export default class ShortRestDialog extends BaseRestDialog {
       name: "autoHD",
       value: context.config.autoHD
     });
+
+    const numericalDenom = Number(context.hitDice.denomination?.slice(1));
+    if ( numericalDenom ) {
+      const { value: currHP, max: maxHP } = this.actor.system.attributes.hp;
+      context.healthBarText = `${game.i18n.localize("DND5E.HP")}: ${currHP} / ${maxHP}`;
+      context.progressBar = 100 * currHP / maxHP;
+      let potentialRegain = numericalDenom;
+      if (context.config.autoHD) {
+        potentialRegain = context.hitDice.options.reduce((arr, hd) => arr + (Number(hd.value.slice(1)) * hd.number), 0);
+      }
+      context.progressBarPotential = 100 * (currHP + potentialRegain) / maxHP;
+    }
 
     return context;
   }
@@ -95,6 +108,13 @@ export default class ShortRestDialog extends BaseRestDialog {
   static async #rollHitDie(event, target) {
     this.#denom = this.form.denom.value;
     await this.actor.rollHitDie({ denomination: this.#denom });
+    foundry.utils.mergeObject(this.config, new FormDataExtended(this.form).object);
+    this.render();
+  }
+
+  _onChangeForm(formConfig, event) {
+    super._onChangeForm(formConfig, event);
+    this.#denom = this.form.denom.value;
     foundry.utils.mergeObject(this.config, new FormDataExtended(this.form).object);
     this.render();
   }
