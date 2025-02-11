@@ -26,8 +26,10 @@ export default class CombatTracker5e extends (foundry.applications?.sidebar?.tab
   /** @inheritDoc */
   async _prepareTrackerContext(context, options) {
     await super._prepareTrackerContext(context, options);
-    context.turns.forEach(turn => {
-      turn.initiative = formatNumber(Number(turn.initiative), { maximumFractionDigits: 0 });
+    context.turns?.forEach(turn => {
+      if ( Number.isFinite(turn.initiative) ) {
+        turn.initiative = formatNumber(Number(turn.initiative), { maximumFractionDigits: 0 });
+      }
     });
     return context;
   }
