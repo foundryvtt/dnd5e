@@ -1,5 +1,5 @@
 <div class="statblock npc">
-    <h4 class="statblock-title">{{ document.name }}</h4>
+    <h4 class="statblock-title">{{#if anchor}}{{{ anchor }}}{{else}}{{ name }}{{/if}}</h4>
     <span class="statblock-tags">{{ summary.tag }}</span>
     <div class="statblock-content">
         <div class="statblock-header">
