@@ -84,14 +84,18 @@ export default class ShortRestDialog extends BaseRestDialog {
     if ( numericalDenom ) {
       const { value: currHP, max: maxHP } = this.actor.system.attributes.hp;
       context.progressBar = 100 * currHP / maxHP;
-      let minRegain = Math.max(1 + this.actor.system.abilities.con.mod, 1);
-      let maxRegain = Math.max(numericalDenom + this.actor.system.abilities.con.mod, 1);
+      const conMod = this.actor.system.abilities.con.mod;
+      let minRegain = Math.max(1 + conMod, 1);
+      let maxRegain = Math.max(numericalDenom + conMod, 1);
       if (context.config.autoHD) {
         minRegain = minRegain * context.hd.value;
-        maxRegain = context.hitDice.options.reduce((arr, hd) => arr + (Number(hd.value.slice(1)) * hd.number), 0);
+        maxRegain = context.hitDice.options.reduce((acc, hd) => {
+          return acc + (Math.max(Number(hd.value.slice(1)) + conMod, 1) * hd.number);
+        }, 0);
       }
-      context.potentialMin = 100 * (currHP + minRegain) / maxHP;
-      context.potentialMax = 100 * (currHP + maxRegain) / maxHP;
+      context.potentialMin = 100 * minRegain / maxHP;
+      context.potentialMax = 100 * maxRegain / maxHP;
+      context.maxLeft = context.potentialMin + context.progressBar;
     }
 
     return context;

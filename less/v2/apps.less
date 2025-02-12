@@ -1573,6 +1573,9 @@ dialog.dnd5e2.application {
 /* ---------------------------------- */
 
 .rest.application {
+  @keyframes fade-in-out {
+    50% {opacity: 10%;}
+  }
   .window-content > section.flexcol { gap: 12px; }
   [data-action="rollHitDie"] { flex: 0; }
 
@@ -1590,14 +1593,16 @@ dialog.dnd5e2.application {
   
     .progress-potential-max {
       z-index: 1;
-      background: linear-gradient(to right, #d9313138 0%, #bb777738 100%);
+      background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-3) 100%);
       position: absolute;
+      animation: fade-in-out 2s infinite;
     }
   
     .progress-potential-min {
       z-index: 2;
-      background-color: #d93131;
+      background-color: var(--dnd5e-color-hp-1);
       position: absolute;
+      animation: fade-in-out 2s infinite;
     }
   
     .progress {
