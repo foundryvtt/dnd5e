@@ -234,7 +234,7 @@ export default function ActorSheetV2Mixin(Base) {
           flag.input = createCheckboxInput;
         }
         else if ( config.type === Number ) flag.field = new foundry.data.fields.NumberField(fieldOptions);
-        else flag.fields = new foundry.data.fields.StringField(fieldOptions);
+        else flag.field = new foundry.data.fields.StringField(fieldOptions);
 
         sections[config.section] ??= [];
         sections[config.section].push(flag);
