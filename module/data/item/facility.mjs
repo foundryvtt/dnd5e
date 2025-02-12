@@ -243,7 +243,8 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
     const actor = this.parent?.parent;
     if ( !actor ) return;
     const { basic } = CONFIG.DND5E.facilities.advancement;
-    const [, available = 0] = Object.entries(basic).reverse().find(([level]) => level <= actor.system.details.level) || [];
+    const [, available = 0] = Object.entries(basic).reverse()
+      .find(([level]) => level <= actor.system.details.level) ?? [];
     const existing = actor.itemTypes.facility.filter(f => f.system.type.value === "basic").length;
     const free = available - existing;
     if ( free > 0 ) this.updateSource({ "building.built": true });
