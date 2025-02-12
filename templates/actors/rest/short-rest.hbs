@@ -25,10 +25,15 @@
                 <i class="fa-solid fa-dice-d20" inert></i>
             </button>
         </div>
-        <div class="healthbar">
-            <div class="progress-potential" style="width:{{progressBarPotential}}%"></div>
+        <div class="meter hit-points healthbar">
+            <div class="label">
+                <span class="value">{{ hp.value }}</span>
+                <span class="separator">/</span>
+                <span class="max">{{ hp.effectiveMax }}</span>
+            </div>
+            <div class="progress-potential-max" style="width:{{potentialMax}}%"></div>
+            <div class="progress-potential-min" style="width:{{potentialMin}}%"></div>
             <div class="progress" style="width:{{progressBar}}%"></div>
-            <div class="overlay">{{healthBarText}}</div>
         </div>
         {{ formField autoRoll name="autoHD" value=config.autoHD input=inputs.createCheckboxInput rootId=partId }}
     </fieldset>

@@ -83,13 +83,15 @@ export default class ShortRestDialog extends BaseRestDialog {
     const numericalDenom = Number(context.hitDice.denomination?.slice(1));
     if ( numericalDenom ) {
       const { value: currHP, max: maxHP } = this.actor.system.attributes.hp;
-      context.healthBarText = `${game.i18n.localize("DND5E.HP")}: ${currHP} / ${maxHP}`;
       context.progressBar = 100 * currHP / maxHP;
-      let potentialRegain = numericalDenom;
+      let minRegain = Math.max(1 + this.actor.system.abilities.con.mod, 1);
+      let maxRegain = Math.max(numericalDenom + this.actor.system.abilities.con.mod, 1);
       if (context.config.autoHD) {
-        potentialRegain = context.hitDice.options.reduce((arr, hd) => arr + (Number(hd.value.slice(1)) * hd.number), 0);
+        minRegain = minRegain * context.hd.value;
+        maxRegain = context.hitDice.options.reduce((arr, hd) => arr + (Number(hd.value.slice(1)) * hd.number), 0);
       }
-      context.progressBarPotential = 100 * (currHP + potentialRegain) / maxHP;
+      context.potentialMin = 100 * (currHP + minRegain) / maxHP;
+      context.potentialMax = 100 * (currHP + maxRegain) / maxHP;
     }
 
     return context;

@@ -1576,36 +1576,34 @@ dialog.dnd5e2.application {
   .window-content > section.flexcol { gap: 12px; }
   [data-action="rollHitDie"] { flex: 0; }
 
-  .healthbar {
-    width: 100%;
-    height: 20px;
-    border-radius: 5px;
-    overflow: hidden;
-    
+  .meter.hit-points {
+    height: 32px;
+    font-size: var(--font-size-16);
+
     > div {
       height: 100%;
     }
 
-    .progress-potential {
-      z-index: 1;
-      background-color: #bb7777;
+    .label {
+      z-index: 4;
     }
-
-    .progress {
+  
+    .progress-potential-max {
+      z-index: 1;
+      background: linear-gradient(to right, #d9313138 0%, #bb777738 100%);
+      position: absolute;
+    }
+  
+    .progress-potential-min {
       z-index: 2;
       background-color: #d93131;
-      position: relative;
-      top: -20px;
+      position: absolute;
     }
-
-    .overlay {
+  
+    .progress {
       z-index: 3;
-      position: relative;
-      top: -40px;
-      text-align: center;
-      color: white;
-      box-shadow: 0 0 2px 2px inset rgb(0 0 0 / 25%);
-      line-height: 20px;
+      background: linear-gradient(to right, var(--dnd5e-color-hp-1) 0%, var(--dnd5e-color-hp-2) 100%);
+      position: absolute;
     }
   }
 }
