@@ -79,15 +79,19 @@ export default class ScaleValueAdvancement extends Advancement {
 
   /**
    * Scale value for the given level.
-   * @param {number} level      Level for which to get the scale value.
-   * @returns {ScaleValueType}  Scale value at the given level or null if none exists.
+   * @param {number} level           Level for which to get the scale value.
+   * @returns {ScaleValueType|null}  Scale value at the given level or null if none exists.
    */
   valueForLevel(level) {
-    const key = Object.keys(this.configuration.scale).reverse().find(l => Number(l) <= level);
-    const data = this.configuration.scale[key];
     const TypeClass = this.constructor.TYPES[this.configuration.type];
-    if ( !data || !TypeClass ) return null;
-    return new TypeClass(data, { parent: this });
+    if ( !TypeClass ) return null;
+    const validKeys = Object.keys(TypeClass.schema.fields);
+    const data = {};
+    for ( const [key, value] of Object.entries(this.configuration.scale).reverse() ) {
+      if ( Number(key) > level ) continue;
+      validKeys.forEach(k => (data[k] ??= value[k]));
+    }
+    return foundry.utils.isEmpty(data) ? null : new TypeClass(data, { parent: this });
   }
 
   /* -------------------------------------------- */
