@@ -11,6 +11,7 @@
     "sourceType": "module"
   },
   "plugins": [
+    "custom-eslint-rules",
     "jsdoc"
   ],
   "rules": {
@@ -196,7 +197,9 @@
     "jsdoc/require-throws": "off",
     "jsdoc/require-yields": "warn",
     "jsdoc/require-yields-check": "warn",
-    "jsdoc/valid-types": "off"
+    "jsdoc/valid-types": "off",
+
+    "custom-eslint-rules/if-condition-spacing": "error"
   },
   "settings": {
     "jsdoc": {
