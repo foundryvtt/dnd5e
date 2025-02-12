@@ -574,6 +574,11 @@ export default class NPCData extends CreatureTemplate {
     if ( !config.statblock ) return super.toEmbed(config, options);
 
     const context = await this._prepareEmbedContext();
+    context.name = config.label || this.parent.name;
+    if ( config.cite && !config.inline ) {
+      config.cite = false;
+      context.anchor = this.parent.toAnchor({ name: context.name }).outerHTML;
+    }
     const template = document.createElement("template");
     template.innerHTML = await renderTemplate("systems/dnd5e/templates/actors/embeds/npc-embed.hbs", context);
 
