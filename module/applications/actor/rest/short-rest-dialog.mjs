@@ -112,6 +112,11 @@ export default class ShortRestDialog extends BaseRestDialog {
     this.render();
   }
 
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
     this.#denom = this.form.denom.value;
