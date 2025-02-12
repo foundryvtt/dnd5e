@@ -179,17 +179,7 @@ export default class UsesField extends SchemaField {
       const newSpent = Math.clamp(this.uses.spent - total, 0, this.uses.max);
       if ( newSpent !== this.uses.spent ) {
         updates.spent = newSpent;
-        if ( !roll.isDeterministic ) {
-          rolls.push(roll);
-          const diff = this.uses.spent - newSpent;
-          const isMax = newSpent === 0;
-          const localizationKey = `DND5E.Item${diff < 0 ? "Loss" : "Recovery"}Roll${isMax ? "Max" : ""}`;
-          await roll.toMessage({
-            user: game.user.id,
-            speaker: { actor: item.actor, alias: item.name },
-            flavor: game.i18n.format(localizationKey, { name: item.name, count: Math.abs(diff) })
-          });
-        }
+        if ( !roll.isDeterministic ) rolls.push(roll);
       }
     }
 
