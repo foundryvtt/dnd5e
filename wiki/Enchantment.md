@@ -1,4 +1,4 @@
-![Up to date as of 4.1.0](https://img.shields.io/static/v1?label=dnd5e&message=4.1.0&color=informational)
+![Up to date as of 4.3.0](https://img.shields.io/static/v1?label=dnd5e&message=4.3.0&color=informational)
 
 Enchantments are a special type of Active Effect that makes changes on the item to which they are added, rather than the actor like normal Active Effects. They are configured in much the same way as normal Active Effects, but rely on different attribute keys that are documented below.
 
@@ -330,7 +330,9 @@ system.actionType
               flat
        critical.threshold
                 damage
-       damage.parts
+       damage.bonus
+              parts
+              types
               versatile
        formula
        save.ability
@@ -353,11 +355,21 @@ system.actionType
 
 #### Add Extra Damage
 
-Since damage is both a roll formula and damage type, you need to include both when adding extra damage.
+To add a bonus to the first damage part, using the same damage type, you can use `system.damage.bonus`. If you wish to add a new damage part with its own damage type, you'll want to add to `system.damage.parts`. Since damage is both a roll formula and damage type, you need to include both when adding extra damage.
 
 | Attribute Key         | Change Mode | Effect Value        | Roll Data? |
 | --------------------- | ----------- | ------------------- | ---------- |
+| `system.damage.bonus` | Any         | `[number]`          | Yes        |
 | `system.damage.parts` | Add         | `[["2d6", "fire"]]` | Yes        |
+
+#### Changing Damage Type
+
+There are two ways to change the damage type using an enchantment. If the item being affected is a weapon or ammunition, then the base damage on the item can be changed directly. For other item types, or if you want to change the damage type for all activities on an item, then the `system.damage.types` key can be used.
+
+| Attribute Key              | Change Mode  | Effect Value    | Roll Data? |
+| -------------------------- | ------------ | --------------- | ---------- |
+| `system.damage.base.types` | Add/Override | `[damage type]` | No         |
+| `system.damage.types`      | Add/Override | `[damage type]` | No         |
 
 > <details>
 > <summary>Damage Types</summary>
@@ -408,7 +420,17 @@ Enchantments can also target changes to item activities based on their type. Thi
 
 ### Save Activity Examples
 
+#### Adding a Save DC Bonus
+
+A bonus can be added to the save DC of an activity regardless of how the save DC is determined.
+
+| Attribute Key                          | Change Mode | Effect Value | Roll Data? |
+| -------------------------------------- | ----------- | ------------ | ---------- |
+| `activities[save].save.dc.bonus`       | Any         | `[formula]`  | Yes        |
+
 #### Setting a Specific Save DC
+
+If you want to completely replace the save DC for an item, it can be done by overriding the calculation mode with an empty value and setting formula.
 
 | Attribute Key                          | Change Mode | Effect Value | Roll Data? |
 | -------------------------------------- | ----------- | ------------ | ---------- |

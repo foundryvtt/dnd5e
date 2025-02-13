@@ -1,10 +1,54 @@
-![Up to date as of 4.0.0](https://img.shields.io/static/v1?label=dnd5e&message=4.0.0&color=informational)
+![Up to date as of 4.3.0](https://img.shields.io/static/v1?label=dnd5e&message=4.3.0&color=informational)
 
 The system includes a number of features allowing modules and worlds to register information for the system directly in their manifests, rather than requiring separate scripts.
 
-## Compendium Types
+## Compendium Flags
 
-Compendiums can contain flags indicating what types of items or actors they contain. This is used to aid the Compendium Browser in quickly searching for content. More information about how this is set up can be found on the [Compendium Browser guide](Compendium-Browser.md#module-support).
+These flags should be applied to the `flags` object within an individual compendium definition inside the `packs` array.
+
+### Display Mode
+
+The `dnd5e.display` flag can be used to specify that a specific compendium should use the [Table of Contents][Table-of-Contents.md] display rather than the default compendium interface. It should only be used for compendiums with the `JournalEntry` document type.
+
+```json
+{
+  "name": "rules",
+  "label": "Rules (SRD)",
+  "system": "dnd5e",
+  "path": "packs/rules",
+  "type": "JournalEntry",
+  "private": false,
+  "flags": {
+    "dnd5e": {
+      "display": "table-of-contents"
+    }
+  }
+}
+```
+
+### Document Types
+
+The `dnd5e.types` flag indicates what types of items or actors a compendium contains. This is used to aid the Compendium Browser in quickly searching for content. More information about how this is set up can be found on the [Compendium Browser guide](Compendium-Browser.md#module-support).
+
+### Sorting
+
+The `dnd5e.sorting` flag gives a method to indicate the default top-level sorting for a compendium, taking either `"m"` for manual sorting or `"a"` for alphabetical (though since core's default sorting is alphabetical, there is no reason to set that value). This will not replace the sorting mode if a user has already modified it for a compendium, but will be applied for a freshly installed module or for a new user.
+
+```json
+{
+  "name": "spells",
+  "label": "Spells (SRD)",
+  "system": "dnd5e",
+  "path": "packs/spells",
+  "type": "Item",
+  "flags": {
+    "dnd5e": {
+      "sorting": "m",
+      "types": ["spell"]
+    }
+  }
+}
+```
 
 ## Source Books
 
