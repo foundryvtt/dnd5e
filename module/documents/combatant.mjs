@@ -21,12 +21,14 @@ export default class Combatant5e extends Combatant {
    * @param {object} [data={}]
    * @param {ActorDeltasData} [data.deltas]
    * @param {string[]} [data.periods]
+   * @param {BasicRoll[]} [data.rolls]
    * @returns {ChatMessage5e|void}
    */
-  async createTurnMessage({ deltas, periods }={}) {
+  async createTurnMessage({ deltas, periods, rolls }={}) {
     const messageConfig = {
       create: false,
       data: {
+        rolls,
         speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.token }),
         system: {
           deltas, periods,
@@ -127,7 +129,7 @@ export default class Combatant5e extends Combatant {
     if ( !foundry.utils.isEmpty(results.actor) ) await this.actor.update(results.actor);
     if ( results.item.length ) await this.actor.updateEmbeddedDocuments("Item", results.item);
 
-    const message = await this.createTurnMessage({ deltas, periods });
+    const message = await this.createTurnMessage({ deltas, periods, rolls: results.rolls });
 
     /**
      * A hook event that fires after combat-related recovery changes have been applied.

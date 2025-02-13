@@ -3,23 +3,21 @@ import { getHumanReadableAttributeLabel } from "../utils.mjs";
 /**
  * Custom token configuration application for handling dynamic rings & resource labels.
  */
-export default class TokenConfig5e extends TokenConfig {
-  /** @inheritDoc */
-  static get defaultOptions() {
-    const options = super.defaultOptions;
-    options.tabs.push({
-      navSelector: '.tabs[data-group="appearance"]', contentSelector: '.tab[data-tab="appearance"]', initial: "token"
-    });
-    return options;
-  }
-
-  /* -------------------------------------------- */
-
+export class TokenConfig5e extends (foundry.applications?.sheets?.TokenConfig ?? TokenConfig) {
   /** @inheritDoc */
   async _render(...args) {
     await super._render(...args);
     if ( !this.rendered ) return;
     this._prepareResourceLabels(this.element[0]);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    if ( !this.rendered ) return;
+    this._prepareResourceLabels(this.element);
   }
 
   /* -------------------------------------------- */
@@ -35,13 +33,31 @@ export default class TokenConfig5e extends TokenConfig {
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
+    context.scale = Math.abs(this.token._source.texture.scaleX);
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareResourcesTab() {
+    const context = await super._prepareResourcesTab();
+    this._addItemAttributes(context.barAttributes);
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
   /**
    * Adds charge based items as attributes for the current token.
    * @param {object} attributes The attribute groups to add the item entries to.
    * @protected
    */
   _addItemAttributes(attributes) {
-    const actor = this.object?.actor;
+    const actor = this.actor ?? this.object?.actor;
     const items = actor?.items.reduce((arr, i) => {
       if ( i.hasLimitedUses ) arr.push([i.getRelativeUUID(actor), i.name]);
       return arr;
@@ -61,9 +77,9 @@ export default class TokenConfig5e extends TokenConfig {
    * @protected
    */
   _prepareResourceLabels(html) {
-    const actor = this.object?.actor;
+    const actor = this.actor ?? this.object?.actor;
 
-    for ( const select of html.querySelectorAll("select.bar-attribute") ) {
+    for ( const select of html.querySelectorAll('select:is(.bar-attribute, [name$=".attribute"])') ) {
       select.querySelectorAll("optgroup").forEach(group => {
         const options = Array.from(group.querySelectorAll("option"));
 
@@ -78,5 +94,23 @@ export default class TokenConfig5e extends TokenConfig {
         group.append(...options);
       });
     }
+  }
+}
+
+export class PrototypeTokenConfig5e extends (foundry.applications?.sheets?.PrototypeTokenConfig ?? class {}) {
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    if ( !this.rendered ) return;
+    TokenConfig5e.prototype._prepareResourceLabels.call(this, this.element);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareResourcesTab() {
+    const context = await super._prepareResourcesTab();
+    TokenConfig5e.prototype._addItemAttributes.call(this, context.barAttributes);
+    return context;
   }
 }

@@ -34,6 +34,9 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
           changes[`system.activities.${activity.id}.${key}`] = ActiveEffect.applyField(activity, { ...change, key });
         }
         return false;
+      case "system.damage.bonus":
+        change.key = "system.damageBonus";
+        break;
       case "system.damage.parts":
         try {
           let damage;

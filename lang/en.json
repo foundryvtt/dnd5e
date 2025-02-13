@@ -257,8 +257,9 @@
 
 "DND5E.ADVANCEMENT": {
   "AbilityScoreImprovement": {
-    "Title": "Ability Score Improvement",
-    "Hint": "Allow the player to increase one or more ability scores or take an optional feat.",
+    "Action": {
+      "Select": "Select Feat"
+    },
     "CapDisplay": {
       "one": "Max {points} point per score",
       "other": "Max {points} points per score"
@@ -290,6 +291,7 @@
         "increase": "Increase Points"
       }
     },
+    "Hint": "Allow the player to increase one or more ability scores or take an optional feat.",
     "Journal": {
       "DescriptionLegacy": "<p>When you reach {firstLevelOrdinal} level, and again at {otherLevelsOrdinal} level, you can increase one ability score of your choice by 2, or you can increase two ability scores of your choice by 1. As normal, you can’t increase an ability score above {maxAbilityScore} using this feature.</p><p>Using the optional feats rule, you can forgo taking this feature to take a feat of your choice instead.</p>",
       "DescriptionModern": "<p>You gain the Ability Score Improvement feat or another feat of your choice for which you qualify. You gain this feature again at {class} levels {otherLevels}.</p>",
@@ -300,6 +302,7 @@
       "one": "{points} Point Remaining",
       "other": "{points} Points Remaining"
     },
+    "Title": "Ability Score Improvement",
     "Warning": {
       "Level": "Must be at least level {level} to take this feat.",
       "Type": "Only features with the \"feat\" type can be selected."
@@ -544,8 +547,11 @@
     "FreeCasting": "Free Casting"
   },
   "Subclass": {
-    "Title": "Subclass",
+    "Action": {
+      "Select": "Select Subclass"
+    },
     "Hint": "Specify what level this class receives its subclass.",
+    "Title": "Subclass",
     "Warning": {
       "InvalidType": "Only subclasses may be selected."
     }
@@ -4703,6 +4709,13 @@
   },
   "NPCS": {
     "Name": "NPCs",
+    "AutoRecharge": {
+      "Name": "Recharge Abilities",
+      "Hint": "Roll to recharge NPC abilities automatically at the start of the NPC's turn.",
+      "No": "Do not recharge automatically",
+      "Silent": "Recharge without creating chat card",
+      "Yes": "Recharge and display chat card"
+    },
     "AutoRollNPCHP": {
       "Name": "Hit Points",
       "Hint": "Configure whether to roll for NPC max HP whenever a new token is created.",

@@ -63,6 +63,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     if ( (game.settings.get("dnd5e", "rulesVersion") === "modern") && (spellcasting?.progression !== "artificer") ) {
       delete context.spellProgression.artificer;
     }
+    context.spellProgression = Object.entries(context.spellProgression).map(([value, label]) => ({ value, label }));
 
     // Activation
     context.activationTypes = [
@@ -176,7 +177,13 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       }
     }
 
+    // Cover
     context.coverOptions = Object.entries(CONFIG.DND5E.cover).map(([value, label]) => ({ value, label }));
+
+    // Source Class
+    context.spellcastingClasses = Object.entries(this.item.parent?.spellcastingClasses ?? {}).map(([value, cls]) => {
+      return { value, label: cls.name };
+    });
 
     return context;
   }

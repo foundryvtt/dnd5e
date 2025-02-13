@@ -46,9 +46,9 @@ export default class SubclassFlow extends AdvancementFlow {
   activateListeners(jQuery) {
     super.activateListeners(jQuery);
     const [html] = jQuery;
-    html.querySelector("a[data-uuid]")?.addEventListener("click", this._onClickFeature.bind(this));
     html.querySelector('[data-action="browse"]')?.addEventListener("click", this._onBrowseCompendium.bind(this));
-    html.querySelector('[data-action="deleteItem"]')?.addEventListener("click", this._onItemDelete.bind(this));
+    html.querySelector('[data-action="delete"]')?.addEventListener("click", this._onItemDelete.bind(this));
+    html.querySelector("[data-action='viewItem']")?.addEventListener("click", this._onClickFeature.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -80,7 +80,7 @@ export default class SubclassFlow extends AdvancementFlow {
    */
   async _onClickFeature(event) {
     event.preventDefault();
-    const uuid = event.currentTarget.dataset.uuid;
+    const uuid = event.target.closest("[data-uuid]")?.dataset.uuid;
     const item = await fromUuid(uuid);
     item?.sheet.render(true);
   }

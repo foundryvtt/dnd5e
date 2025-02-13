@@ -304,7 +304,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
    * @protected
    */
   _prepareSpellcasting(context) {
-    const { abilities, attributes, bonuses, details } = this.actor.system;
+    const { abilities, attributes, bonuses } = this.actor.system;
     context.spellcasting = [];
     const msak = simplifyBonus(bonuses.msak.attack, context.rollData);
     const rsak = simplifyBonus(bonuses.rsak.attack, context.rollData);
@@ -318,7 +318,7 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
       label: game.i18n.format("DND5E.SpellcastingClass", {
         class: spellcaster?.name ?? game.i18n.format("DND5E.NPC.Label")
       }),
-      level: spellcaster?.system.levels ?? details.spellLevel,
+      level: spellcaster?.system.levels ?? attributes.spell.level,
       ability: {
         ability, mod,
         label: CONFIG.DND5E.abilities[ability]?.abbreviation

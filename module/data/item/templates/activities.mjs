@@ -168,9 +168,9 @@ export default class ActivitiesTemplate extends SystemDataModel {
    */
   static #migrateUses(source) {
     // Remove any old ternary operators from uses to prevent errors
-    if ( source.uses?.max?.includes(" ? ") ) source.uses.max = "";
+    if ( source.uses?.max?.includes?.(" ? ") ) source.uses.max = "";
     for ( const activity of Object.values(source.activities ?? {}) ) {
-      if ( activity?.uses?.max?.includes(" ? ") ) activity.uses.max = "";
+      if ( activity?.uses?.max?.includes?.(" ? ") ) activity.uses.max = "";
     }
 
     if ( Array.isArray(source.uses?.recovery) ) return;
@@ -185,7 +185,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     if ( foundry.utils.getType(source.uses?.recovery) !== "string" ) return;
 
     // If period is charges, set the recovery type to `formula`
-    if ( source.uses.per === "charges" ) {
+    if ( source.uses?.per === "charges" ) {
       if ( source.uses.recovery ) {
         source.uses.recovery = [{ period: "lr", type: "formula", formula: source.uses.recovery }];
       } else {
@@ -194,7 +194,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
     }
 
     // If period is not blank, set an appropriate recovery type
-    else if ( source.uses.per ) {
+    else if ( source.uses?.per ) {
       if ( CONFIG.DND5E.limitedUsePeriods[source.uses.per]?.formula && source.uses.recovery ) {
         source.uses.recovery = [{ period: source.uses.per, type: "formula", formula: source.uses.recovery }];
       }
@@ -323,12 +323,26 @@ export default class ActivitiesTemplate extends SystemDataModel {
   async recoverUses(periods, rollData) {
     const updates = {};
     const rolls = [];
+    const autoRecharge = game.settings.get("dnd5e", "autoRecharge");
+    const shouldRecharge = periods.includes("turnStart") && (this.parent.actor.type === "npc")
+      && (autoRecharge !== "no");
+    const recharge = async doc => {
+      const config = { apply: false };
+      const message = { create: autoRecharge !== "silent" };
+      const result = await UsesField.rollRecharge.call(doc, config, {}, message);
+      if ( result ) {
+        if ( doc instanceof Item ) foundry.utils.mergeObject(updates, result.updates);
+        else foundry.utils.mergeObject(updates, { [`system.activities.${doc.id}`]: result.updates });
+        rolls.push(...result.rolls);
+      }
+    };
 
     const result = await UsesField.recoverUses.call(this, periods, rollData);
     if ( result ) {
       foundry.utils.mergeObject(updates, { "system.uses": result.updates });
       rolls.push(...result.rolls);
     }
+    if ( shouldRecharge ) await recharge(this.parent);
 
     for ( const activity of this.activities ) {
       const result = await UsesField.recoverUses.call(activity, periods, rollData);
@@ -336,6 +350,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
         foundry.utils.mergeObject(updates, { [`system.activities.${activity.id}.uses`]: result.updates });
         rolls.push(...result.rolls);
       }
+      if ( shouldRecharge ) await recharge(activity);
     }
 
     return { updates, rolls };

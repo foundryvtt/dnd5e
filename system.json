@@ -5,7 +5,7 @@
   "version": "4.3.0",
   "compatibility": {
     "minimum": "12.331",
-    "verified": "13.335"
+    "verified": "13.336"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
@@ -262,7 +262,9 @@
       "type": "JournalEntry",
       "private": false,
       "flags": {
-        "display": "table-of-contents"
+        "dnd5e": {
+          "display": "table-of-contents"
+        }
       }
     },
     {

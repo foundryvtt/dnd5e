@@ -1116,7 +1116,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
       if ( modes[preparationMode]?.cantrips ) {
         prep.mode = "prepared";
       } else if ( !preparationMode ) {
-        const isCaster = this.document.system.details.spellLevel || progs.size;
+        const isCaster = this.document.system.attributes.spell?.level || progs.size;
         prep.mode = isCaster ? "prepared" : "innate";
       } else {
         prep.mode = preparationMode;
@@ -1127,7 +1127,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Case 2: Drop a leveled spell in a section without a mode.
     else if ( (level === "0") || !preparationMode ) {
       if ( this.document.type === "npc" ) {
-        prep.mode = this.document.system.details.spellLevel ? "prepared" : "innate";
+        prep.mode = this.document.system.attributes.spell.level ? "prepared" : "innate";
       } else {
         const m = progs.has("leveled") ? "prepared" : (progs.first() ?? "innate");
         prep.mode = progs.has(prep.mode) ? prep.mode : m;

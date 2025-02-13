@@ -294,6 +294,20 @@ export function registerSystemSettings() {
     restricted: true
   });
 
+  game.settings.register("dnd5e", "autoRecharge", {
+    name: "SETTINGS.DND5E.NPCS.AutoRecharge.Name",
+    hint: "SETTINGS.DND5E.NPCS.AutoRecharge.Hint",
+    scope: "world",
+    config: false,
+    default: "no",
+    type: String,
+    choices: {
+      no: "SETTINGS.DND5E.NPCS.AutoRecharge.No",
+      silent: "SETTINGS.DND5E.NPCS.AutoRecharge.Silent",
+      yes: "SETTINGS.DND5E.NPCS.AutoRecharge.Yes"
+    }
+  });
+
   game.settings.register("dnd5e", "autoRollNPCHP", {
     name: "SETTINGS.DND5E.NPCS.AutoRollNPCHP.Name",
     hint: "SETTINGS.DND5E.NPCS.AutoRollNPCHP.Hint",

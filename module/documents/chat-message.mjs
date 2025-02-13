@@ -331,7 +331,7 @@ export default class ChatMessage5e extends ChatMessage {
       const isCritical = (roll.type === "damage") && this.rolls[0]?.isCritical;
       const subtitle = roll.type === "damage"
         ? isCritical
-          ? game.i18n.localize("DND5E.CriticalHit") 
+          ? game.i18n.localize("DND5E.CriticalHit")
           : activity?.damageFlavor ?? game.i18n.localize("DND5E.DamageRoll")
         : roll.type === "attack"
           ? (activity?.getActionLabel(roll.attackMode) ?? "")
@@ -830,7 +830,7 @@ export default class ChatMessage5e extends ChatMessage {
       properties: new Set(roll.options.properties ?? [])
     }));
     return Promise.all(canvas.tokens.controlled.map(t => {
-      return t.actor?.applyDamage(damages, { multiplier, invertHealing: false, ignore: true });
+      return t.actor?.applyDamage(damages, { multiplier });
     }));
   }
 

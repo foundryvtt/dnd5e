@@ -1,12 +1,12 @@
 /**
  * The detection mode for Blindsight.
  */
-export class DetectionModeBlindsight extends DetectionMode {
+export class DetectionModeBlindsight extends (foundry.canvas?.perception?.DetectionMode ?? DetectionMode) {
   constructor() {
     super({
       id: "blindsight",
       label: "DND5E.SenseBlindsight",
-      type: DetectionMode.DETECTION_TYPES.OTHER,
+      type: (foundry.canvas?.perception?.DetectionMode ?? DetectionMode).DETECTION_TYPES.OTHER,
       walls: true,
       angle: false
     });

@@ -3,7 +3,7 @@ import ChatMessage5e from "../documents/chat-message.mjs";
 /**
  * Custom implementation of the chat log to support saving tray states.
  */
-export default class ChatLog5e extends ChatLog {
+export default class ChatLog5e extends (foundry.applications?.sidebar?.tabs?.ChatLog ?? ChatLog) {
   /** @inheritDoc */
   async updateMessage(message, notify=false) {
     const element = this.element instanceof HTMLElement ? this.element : this.element[0];
