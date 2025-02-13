@@ -647,6 +647,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       value: app.document.getFlag("dnd5e", "riders.statuses") ?? [],
       options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name }))
     }).outerHTML;
+    // Have to use outerHTML and insertAdjacentHTML for v12 compatibility
     html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")?.insertAdjacentHTML("afterend", element);
 
     if ( game.release.generation < 13 ) {
