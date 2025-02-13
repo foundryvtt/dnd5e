@@ -6,7 +6,7 @@ The table of contents system allows modules to take advantage of automatic gener
 
 ### Pack Registration
 
-The first step to setting up the ToC is to add a flag to whichever journal compendium pack needs it. In your module's manifest (`module.json` or `world.json`) add a `flags` object to the pack definition and add a `display` flag set to `table-of-contents`:
+The first step to setting up the ToC is to add a flag to whichever journal compendium pack needs it. In your module's manifest (`module.json` or `world.json`) add a `flags` object to the pack definition and add a `dnd5e.display` flag set to `table-of-contents`:
 
 ```json
 {
