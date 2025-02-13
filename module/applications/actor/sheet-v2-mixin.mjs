@@ -236,8 +236,10 @@ export default function ActorSheetV2Mixin(Base) {
         else if ( config.type === Number ) flag.field = new foundry.data.fields.NumberField(fieldOptions);
         else flag.field = new foundry.data.fields.StringField(fieldOptions);
 
-        sections[config.section] ??= [];
-        sections[config.section].push(flag);
+        if ( !config.deprecated || flag.value ) {
+          sections[config.section] ??= [];
+          sections[config.section].push(flag);
+        }
       }
 
       // Global Bonuses
@@ -249,7 +251,7 @@ export default function ActorSheetV2Mixin(Base) {
       addBonus(this.document.system.schema.fields.bonuses);
       if ( globals.length ) sections[game.i18n.localize("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
 
-      flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }))
+      flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }));
       return flags;
     }
 
