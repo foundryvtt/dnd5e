@@ -3,7 +3,7 @@ import { getHumanReadableAttributeLabel } from "../utils.mjs";
 /**
  * Custom token configuration application for handling dynamic rings & resource labels.
  */
-export default class TokenConfig5e extends (foundry.applications?.sheets?.TokenConfig ?? TokenConfig) {
+export class TokenConfig5e extends (foundry.applications?.sheets?.TokenConfig ?? TokenConfig) {
   /** @inheritDoc */
   async _render(...args) {
     await super._render(...args);
@@ -94,5 +94,23 @@ export default class TokenConfig5e extends (foundry.applications?.sheets?.TokenC
         group.append(...options);
       });
     }
+  }
+}
+
+export class PrototypeTokenConfig5e extends (foundry.applications?.sheets?.PrototypeTokenConfig ?? class {}) {
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    if ( !this.rendered ) return;
+    TokenConfig5e.prototype._prepareResourceLabels.call(this, this.element);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareResourcesTab() {
+    const context = await super._prepareResourcesTab();
+    TokenConfig5e.prototype._addItemAttributes.call(this, context.barAttributes);
+    return context;
   }
 }

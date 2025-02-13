@@ -214,7 +214,9 @@ Hooks.once("init", function() {
     types: ["spells"]
   });
 
-  CONFIG.Token.prototypeSheetClass = applications.TokenConfig5e;
+  CONFIG.Token.prototypeSheetClass = game.release.generation < 13
+    ? applications.TokenConfig5e
+    : applications.PrototypeTokenConfig5e;
   DocumentSheetConfig.unregisterSheet(TokenDocument, "core", TokenConfig);
   DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
     label: "DND5E.SheetClassToken"
