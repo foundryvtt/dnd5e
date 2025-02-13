@@ -20,7 +20,9 @@ The first step to setting up the ToC is to add a flag to whichever journal compe
       "type": "JournalEntry",
       "private": false,
       "flags": {
-        "display": "table-of-contents"
+        "dnd5e": {
+          "display": "table-of-contents"
+        }
       }
     }
   ]
