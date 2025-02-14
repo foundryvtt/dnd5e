@@ -209,7 +209,7 @@ export default class Award extends Application5e {
   static async #handleFormSubmission(event, form, formData) {
     const data = foundry.utils.expandObject(formData.object);
     const destinations = this.transferDestinations.filter(d => data.destination[d.id]);
-    const each = formData.each;
+    const each = data.each;
     this._saveDestinations(destinations);
     const results = new Map();
     await this.constructor.awardCurrency(data.amount, destinations, { each, origin: this.origin, results });
@@ -222,7 +222,7 @@ export default class Award extends Application5e {
 
   /**
    * Save the selected destination IDs to either the current group's flags or the user's flags.
-   * @param {Set<Actor5e>} destinations  Selected destinations to save.
+   * @param {Actor5e[]} destinations  Selected destinations to save.
    * @protected
    */
   _saveDestinations(destinations) {
