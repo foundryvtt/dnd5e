@@ -1240,7 +1240,13 @@ export default class CompendiumBrowser extends Application5e {
     `;
     button.addEventListener("click", event => (new CompendiumBrowser()).render({ force: true }));
 
-    const headerActions = html.querySelector(".header-actions");
+    let headerActions = html.querySelector(".header-actions");
+    // FIXME: Workaround for 336 bug. Remove when 337 released.
+    if ( !headerActions ) {
+      headerActions = document.createElement("div");
+      headerActions.className = "header-actions action-buttons flexrow";
+      html.querySelector(":scope > header").insertAdjacentElement("afterbegin", headerActions);
+    }
     headerActions.append(button);
   }
 
