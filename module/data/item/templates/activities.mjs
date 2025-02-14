@@ -441,7 +441,10 @@ export default class ActivitiesTemplate extends SystemDataModel {
       if ( existingSpell ) {
         const enchantment = existingSpell.effects.get(CastActivity.ENCHANTMENT_ID);
         await enchantment.update({ changes: activity.getSpellChanges() });
-      } else cachedInserts.push(await activity.getCachedSpellData());
+      } else {
+        const cached = await activity.getCachedSpellData();
+        if ( cached ) cachedInserts.push(cached);
+      }
     }
     if ( cachedInserts.length ) await this.parent.actor.createEmbeddedDocuments("Item", cachedInserts);
   }

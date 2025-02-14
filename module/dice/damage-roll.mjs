@@ -97,8 +97,8 @@ export default class DamageRoll extends BasicRoll {
   /** @override */
   static applyKeybindings(config, dialog, message) {
     const keys = {
-      normal: areKeysPressed(config.event, "skipDialogNormal")
-        || areKeysPressed(config.event, "skipDialogDisadvantage"),
+      default: areKeysPressed(config.event, "skipDialogNormal"),
+      normal: areKeysPressed(config.event, "skipDialogDisadvantage"),
       critical: areKeysPressed(config.event, "skipDialogAdvantage")
     };
 
@@ -108,7 +108,7 @@ export default class DamageRoll extends BasicRoll {
     // Determine critical mode
     for ( const roll of config.rolls ) {
       roll.options ??= {};
-      roll.options.isCritical ??= config.isCritical ?? keys.critical;
+      roll.options.isCritical ??= (config.isCritical || keys.critical) && !keys.normal;
     }
   }
 
