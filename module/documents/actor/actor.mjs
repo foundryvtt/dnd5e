@@ -3559,6 +3559,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 class SourcedItemsMap extends Map {
   /** @inheritDoc */
   get(key, { remap=true, legacy=true }={}) {
+    if ( !key ) return;
     if ( remap ) ({ uuid: key } = parseUuid(key) ?? {});
     if ( legacy ) {
       foundry.utils.logCompatibilityWarning(
