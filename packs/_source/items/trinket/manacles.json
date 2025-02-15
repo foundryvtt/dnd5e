@@ -5,7 +5,7 @@
   "img": "icons/sundries/survival/cuffs-shackles-steel.webp",
   "system": {
     "description": {
-      "value": "<p>These metal restraints can bind a Small or Medium creature. Escaping the manacles requires a successful DC 20 Dexterity check. Breaking them requires a successful DC 20 Strength check. Each set of manacles comes with one key. Without the key, a creature proficient with thieves' tools can pick the manacles' lock with a successful DC 15 Dexterity check. Manacles have 15 hit points.</p>",
+      "value": "<p>These metal restraints can bind a Small or Medium creature. Escaping the manacles requires a successful [[/check activity=dnd5eactivity000]] check. Breaking them requires a successful [[/check activity=mLC6xcSBAuwPuhVn]] check. Each set of manacles comes with one key. Without the key, a creature proficient with thieves' tools can pick the manacles' lock with a successful [[/check activity=JuQrIeoUh5Q5uAEq]]{DC 15 Dexterity} check. Manacles have 15 hit points.</p>",
       "chat": ""
     },
     "source": {
@@ -29,7 +29,7 @@
     "rarity": "",
     "identified": true,
     "uses": {
-      "max": "1",
+      "max": "",
       "recovery": [],
       "autoDestroy": false,
       "spent": 0
@@ -65,21 +65,11 @@
         "activation": {
           "type": "action",
           "value": 1,
-          "condition": "Creature must be Small or Medium.",
+          "condition": "",
           "override": false
         },
         "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
+          "targets": [],
           "scaling": {
             "allowed": false,
             "max": ""
@@ -98,7 +88,7 @@
         },
         "effects": [],
         "range": {
-          "units": "touch",
+          "units": "",
           "special": "",
           "override": false
         },
@@ -113,8 +103,8 @@
             "units": ""
           },
           "affects": {
-            "count": "1",
-            "type": "creature",
+            "count": "",
+            "type": "",
             "choice": false,
             "special": ""
           },
@@ -122,82 +112,6 @@
           "override": false
         },
         "check": {
-          "ability": "",
-          "dc": {}
-        },
-        "uses": {
-          "spent": 0,
-          "recovery": []
-        },
-        "sort": 0
-      },
-      "dnd5eactivity100": {
-        "_id": "dnd5eactivity100",
-        "type": "save",
-        "activation": {
-          "type": "action",
-          "value": 1,
-          "condition": "Creature must be Small or Medium.",
-          "override": false
-        },
-        "consumption": {
-          "targets": [
-            {
-              "type": "itemUses",
-              "target": "",
-              "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
-            }
-          ],
-          "scaling": {
-            "allowed": false,
-            "max": ""
-          },
-          "spellSlot": true
-        },
-        "description": {
-          "chatFlavor": ""
-        },
-        "duration": {
-          "concentration": false,
-          "value": "",
-          "units": "",
-          "special": "",
-          "override": false
-        },
-        "effects": [],
-        "range": {
-          "units": "touch",
-          "special": "",
-          "override": false
-        },
-        "target": {
-          "template": {
-            "count": "",
-            "contiguous": false,
-            "type": "",
-            "size": "",
-            "width": "",
-            "height": "",
-            "units": ""
-          },
-          "affects": {
-            "count": "1",
-            "type": "creature",
-            "choice": false,
-            "special": ""
-          },
-          "prompt": true,
-          "override": false
-        },
-        "damage": {
-          "onSave": "half",
-          "parts": []
-        },
-        "save": {
           "ability": "dex",
           "dc": {
             "calculation": "",
@@ -206,9 +120,145 @@
         },
         "uses": {
           "spent": 0,
-          "recovery": []
+          "recovery": [],
+          "max": ""
         },
-        "sort": 0
+        "sort": 0,
+        "name": "Dexterity Check",
+        "img": "",
+        "appliedEffects": []
+      },
+      "mLC6xcSBAuwPuhVn": {
+        "type": "check",
+        "activation": {
+          "type": "action",
+          "value": 1,
+          "condition": "",
+          "override": false
+        },
+        "consumption": {
+          "targets": [],
+          "scaling": {
+            "allowed": false,
+            "max": ""
+          },
+          "spellSlot": true
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "concentration": false,
+          "value": "",
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "units": "",
+          "special": "",
+          "override": false
+        },
+        "target": {
+          "template": {
+            "count": "",
+            "contiguous": false,
+            "type": "",
+            "size": "",
+            "width": "",
+            "height": "",
+            "units": ""
+          },
+          "affects": {
+            "count": "",
+            "type": "",
+            "choice": false,
+            "special": ""
+          },
+          "prompt": true,
+          "override": false
+        },
+        "check": {
+          "ability": "str",
+          "dc": {
+            "calculation": "",
+            "formula": "20"
+          },
+          "associated": []
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "sort": 0,
+        "name": "Strength Check",
+        "_id": "mLC6xcSBAuwPuhVn",
+        "img": "",
+        "appliedEffects": []
+      },
+      "JuQrIeoUh5Q5uAEq": {
+        "type": "check",
+        "name": "Pick Lock",
+        "_id": "JuQrIeoUh5Q5uAEq",
+        "sort": 0,
+        "activation": {
+          "type": "action",
+          "override": false,
+          "condition": ""
+        },
+        "consumption": {
+          "scaling": {
+            "allowed": false
+          },
+          "spellSlot": true,
+          "targets": []
+        },
+        "description": {
+          "chatFlavor": ""
+        },
+        "duration": {
+          "units": "inst",
+          "concentration": false,
+          "override": false
+        },
+        "effects": [],
+        "range": {
+          "override": false,
+          "units": "",
+          "special": ""
+        },
+        "target": {
+          "template": {
+            "contiguous": false,
+            "units": "ft",
+            "type": ""
+          },
+          "affects": {
+            "choice": false,
+            "type": ""
+          },
+          "override": false,
+          "prompt": true
+        },
+        "uses": {
+          "spent": 0,
+          "recovery": [],
+          "max": ""
+        },
+        "check": {
+          "associated": [
+            "thief"
+          ],
+          "dc": {
+            "calculation": "",
+            "formula": "15"
+          },
+          "ability": "dex"
+        },
+        "img": "",
+        "appliedEffects": []
       }
     },
     "attuned": false,
@@ -220,14 +270,21 @@
   "ownership": {
     "default": 0
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "_stats": {
     "duplicateSource": null,
-    "coreVersion": "12.331",
+    "coreVersion": "13.335",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.0",
     "createdTime": 1725037308976,
-    "modifiedTime": 1725992553939,
+    "modifiedTime": 1739616297010,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!tWJLHIL6ZIZUez9k"
