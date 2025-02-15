@@ -240,7 +240,7 @@ export default class D20Roll extends BasicRoll {
   configureModifiers() {
     if ( !this.validD20Roll ) return;
 
-    if (this.options.customDie) this.d20.options.customDie = this.options.customDie;
+    if ( this.options.customDie ) this.d20.options.customDie = this.options.customDie;
 
     if ( this.options.advantageMode === undefined ) {
       const { advantage, disadvantage } = this.options;
