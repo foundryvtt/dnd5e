@@ -350,7 +350,7 @@ export default function ActivityMixin(Base) {
        * @param {ActivityMessageConfiguration} messageConfig  Configuration info for the created chat message.
        * @returns {boolean}  Explicitly return `false` to prevent activity from being activated.
        */
-      if ( Hooks.call("dnd5e.preActivityConsumption", this, usageConfig, messageConfig) === false ) return;
+      if ( Hooks.call("dnd5e.preActivityConsumption", this, usageConfig, messageConfig) === false ) return false;
 
       if ( "dnd5e.preItemUsageConsumption" in Hooks.events ) {
         foundry.utils.logCompatibilityWarning(
@@ -358,7 +358,7 @@ export default function ActivityMixin(Base) {
           { since: "DnD5e 4.0", until: "DnD5e 4.4" }
         );
         const { config, options } = this._createDeprecatedConfigs(usageConfig, {}, messageConfig);
-        if ( Hooks.call("dnd5e.preItemUsageConsumption", this.item, config, options) === false ) return;
+        if ( Hooks.call("dnd5e.preItemUsageConsumption", this.item, config, options) === false ) return false;
         this._applyDeprecatedConfigs(usageConfig, {}, messageConfig, config, options);
       }
 
@@ -376,7 +376,7 @@ export default function ActivityMixin(Base) {
        * @param {ActivityUsageUpdates} updates                Updates to apply to the actor and other documents.
        * @returns {boolean}  Explicitly return `false` to prevent activity from being activated.
        */
-      if ( Hooks.call("dnd5e.activityConsumption", this, usageConfig, messageConfig, updates) === false ) return;
+      if ( Hooks.call("dnd5e.activityConsumption", this, usageConfig, messageConfig, updates) === false ) return false;
 
       if ( "dnd5e.itemUsageConsumption" in Hooks.events ) {
         foundry.utils.logCompatibilityWarning(
@@ -390,7 +390,7 @@ export default function ActivityMixin(Base) {
           itemUpdates: updates.item.find(i => i._id === this.item.id),
           resourceUpdates: updates.item.filter(i => i._id !== this.item.id)
         };
-        if ( Hooks.call("dnd5e.itemUsageConsumption", this.item, config, options, usage) === false ) return;
+        if ( Hooks.call("dnd5e.itemUsageConsumption", this.item, config, options, usage) === false ) return false;
         this._applyDeprecatedConfigs(usageConfig, {}, messageConfig, config, options);
         updates.actor = usage.actorUpdates;
         updates.delete = usage.deleteIds;
@@ -416,7 +416,7 @@ export default function ActivityMixin(Base) {
        * @param {ActivityUsageUpdates} updates                Applied updates to the actor and other documents.
        * @returns {boolean}  Explicitly return `false` to prevent activity from being activated.
        */
-      if ( Hooks.call("dnd5e.postActivityConsumption", this, usageConfig, messageConfig, updates) === false ) return;
+      if ( Hooks.call("dnd5e.postActivityConsumption", this, usageConfig, messageConfig, updates) === false ) return false;
 
       return updates;
     }
