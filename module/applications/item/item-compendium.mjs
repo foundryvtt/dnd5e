@@ -46,7 +46,7 @@ class ItemCompendium5eV13 extends DragDropApplicationMixin(foundry.applications.
   /** @override */
   _defaultDropBehavior(event, data) {
     if ( !data.uuid ) return "copy";
-    if ( data.type !== "Item" ) return "none";
+    if ( (data.type !== "Folder") && (data.type !== "Item") ) return "none";
     return foundry.utils.parseUuid(data.uuid).collection === this.collection ? "move" : "copy";
   }
 
@@ -95,7 +95,9 @@ class ItemCompendium5eV13 extends DragDropApplicationMixin(foundry.applications.
  * Compendium with added support for item containers.
  * TODO: Remove when v12 support is dropped.
  */
-class ItemCompendium5eV12 extends DragDropApplicationMixin(foundry.applications?.sidebar?.apps?.Compendium ?? Compendium) {
+class ItemCompendium5eV12 extends DragDropApplicationMixin(
+  foundry.applications?.sidebar?.apps?.Compendium ?? Compendium
+) {
 
   /** @inheritDoc */
   async _render(...args) {
@@ -129,7 +131,7 @@ class ItemCompendium5eV12 extends DragDropApplicationMixin(foundry.applications?
   /** @override */
   _defaultDropBehavior(event, data) {
     if ( !data.uuid ) return "copy";
-    if ( data.type !== "Item" ) return "none";
+    if ( (data.type !== "Folder") && (data.type !== "Item") ) return "none";
     return foundry.utils.parseUuid(data.uuid).collection === this.collection ? "move" : "copy";
   }
 
