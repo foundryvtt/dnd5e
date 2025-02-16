@@ -1,4 +1,4 @@
-![Up to date as of 3.2.0](https://img.shields.io/static/v1?label=dnd5e&message=3.2.0&color=informational)
+![Up to date as of 4.3.1](https://img.shields.io/static/v1?label=dnd5e&message=4.3.1&color=informational)
 
 > <details><summary>To explore the data model within Foundry to find the properties detailed below, here are a few approaches:</summary>
 >
@@ -38,7 +38,7 @@
 
 `@abilities.*.checkProf` - Ability check [proficiency](Roll-Formulas#proficiency) details
 
-`@abilities.*.save` - Flat ability save modifier (without any dice bonuses)
+`@abilities.*.save.value` - Flat ability save modifier (without any dice bonuses)
 
 `@abilities.*.saveBonus` - Flat ability save bonus, combining ability-specific bonuses with global save bonuses
 
@@ -156,9 +156,11 @@
 
 `@attributes.prof` - Base, numerical proficiency value (does not reflect options like Proficiency Dice)
 
-`@attributes.spelldc` - Spell save DC based on the selected spellcasting ability
+`@attributes.spell.dc` - Spell save DC based on the selected spellcasting ability
 
-`@attributes.spellmod` - Base ability modifier for the actor's selected spellcasting ability
+`@attributes.spell.mod` - Base ability modifier for the actor's selected spellcasting ability
+
+`@attributes.spell.attack` - Spell attack bonus for the actor's selected spellcasting ability
 
 ### Classes
 
@@ -168,7 +170,7 @@
 
 `@classes.*.hitDice` - The hit die denomination of the class, e.g., 'd8'.
 
-`@classes.*.hitDiceUsed` - How many hit dice this class has expended.
+`@classes.*.hd.spent` - How many hit dice this class has expended.
 
 ### Currency
 
