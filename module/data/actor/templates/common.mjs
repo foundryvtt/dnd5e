@@ -166,7 +166,12 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       abl.save.toString = function() {
         foundry.utils.logCompatibilityWarning("The 'abilities.<ability>.save' property is now stored in "
           + "'abilities.<ability>.save.value'.", { since: "4.3", until: "4.5" });
-        return abl.save.value;
+        return String(abl.save.value);
+      };
+      abl.save.toJSON = function() {
+        foundry.utils.logCompatibilityWarning("The 'abilities.<ability>.save' property is now stored in "
+          + "'abilities.<ability>.save.value'.", { since: "4.3", until: "4.5" });
+        return `!${abl.save.value}!`;
       };
     }
   }
