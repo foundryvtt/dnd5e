@@ -206,7 +206,7 @@ export default class UsesField extends SchemaField {
   static async rollRecharge(config={}, dialog={}, message={}) {
     const uses = this.system ? this.system.uses : this.uses;
     const recharge = uses?.recovery.find(({ period }) => period === "recharge");
-    if ( !recharge ) return;
+    if ( !recharge || !uses?.spent ) return;
 
     let oldReturn = false;
     if ( config.apply === undefined ) {
