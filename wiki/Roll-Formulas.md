@@ -168,7 +168,7 @@
 
 `@classes.*.levels` - The current level of the class.
 
-`@classes.*.hitDice` - The hit die denomination of the class, e.g., 'd8'.
+`@classes.*.hd.denomination` - The hit die denomination of the class, e.g., 'd8'.
 
 `@classes.*.hd.spent` - How many hit dice this class has expended.
 
