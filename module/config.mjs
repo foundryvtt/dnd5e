@@ -1489,8 +1489,8 @@ preLocalize("itemRarity");
  * @typedef {object} LimitedUsePeriodConfiguration
  * @property {string} label                Localized label.
  * @property {string}  abbreviation        Shorthand form of the label.
- * @property {"combat"|"special"} [group]  Grouping if outside the normal "time" group.
  * @property {boolean} [formula]           Whether this limited use period restores charges via formula.
+ * @property {"combat"|"special"} [type]   Grouping if outside the normal "time" group.
  */
 
 /**
@@ -1509,13 +1509,6 @@ DND5E.limitedUsePeriods = {
   day: {
     label: "DND5E.USES.Recovery.Period.Day.Label",
     abbreviation: "DND5E.USES.Recovery.Period.Day.Label"
-  },
-  // TODO: Remove with DnD5e 4.4
-  charges: {
-    label: "DND5E.UsesPeriods.Charges",
-    abbreviation: "DND5E.UsesPeriods.ChargesAbbreviation",
-    formula: true,
-    deprecated: true
   },
   dawn: {
     label: "DND5E.USES.Recovery.Period.Dawn.Label",
