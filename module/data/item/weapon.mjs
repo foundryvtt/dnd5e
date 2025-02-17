@@ -232,7 +232,9 @@ export default class WeaponData extends ItemDataModel.mixin(
       parts.push(formatLength(parts.pop(), units));
       labels.range = parts.filterJoin("/");
     }
-    if ( this.range.reach ) labels.reach = formatLength(this.range.reach, units);
+    if ( this.range.reach ) {
+      labels.reach = game.i18n.format("DND5E.RANGE.Formatted.Reach", { reach: formatLength(this.range.reach, units) });
+    }
   }
 
   /* -------------------------------------------- */
