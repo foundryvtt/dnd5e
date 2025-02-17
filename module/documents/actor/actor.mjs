@@ -1281,8 +1281,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       extraBonus: process.bonus,
       [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
       [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
-      abilityCheckBonus: this.system.bonuses?.abilities?.check,
-      situational: config.data?.situational
+      abilityCheckBonus: this.system.bonuses?.abilities?.check
     }, { ...rollData });
 
     // Add exhaustion reduction

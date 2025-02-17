@@ -283,7 +283,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     const attackMode = formData?.get("attackMode") ?? process.attackMode;
     const mastery = formData?.get("mastery") ?? process.mastery;
 
-    let { parts, data } = this.getAttackData({ ammunition, attackMode, situational: config.data?.situational });
+    let { parts, data } = this.getAttackData({ ammunition, attackMode });
     const options = config.options ?? {};
     if ( ammunition !== undefined ) options.ammunition = ammunition;
     if ( attackMode !== undefined ) options.attackMode = attackMode;
