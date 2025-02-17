@@ -328,6 +328,18 @@ export default class BasicRoll extends Roll {
   }
 
   /* -------------------------------------------- */
+  /*  Roll Formula Parsing                        */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static replaceFormulaData(formula, data, options) {
+    // This looks for the pattern `$!!$` and replaces it with just the value between the marks (the bang has
+    // been added to ensure this is a deliberate shim from the system, not a unintentional usage that should
+    // show an error).
+    return super.replaceFormulaData(formula, data, options).replaceAll(/\$"?!(.+?)!"?\$/g, "$1");
+  }
+
+  /* -------------------------------------------- */
   /*  Maximize/Minimize Methods                   */
   /* -------------------------------------------- */
 

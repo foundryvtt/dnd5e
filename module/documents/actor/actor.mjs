@@ -1281,8 +1281,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       extraBonus: process.bonus,
       [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
       [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
-      abilityCheckBonus: this.system.bonuses?.abilities?.check,
-      situational: config.data?.situational
+      abilityCheckBonus: this.system.bonuses?.abilities?.check
     }, { ...rollData });
 
     // Add exhaustion reduction
@@ -3559,6 +3558,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 class SourcedItemsMap extends Map {
   /** @inheritDoc */
   get(key, { remap=true, legacy=true }={}) {
+    if ( !key ) return;
     if ( remap ) ({ uuid: key } = parseUuid(key) ?? {});
     if ( legacy ) {
       foundry.utils.logCompatibilityWarning(

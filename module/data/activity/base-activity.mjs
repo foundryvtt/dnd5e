@@ -132,8 +132,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    */
   get activationLabels() {
     if ( !this.activation.type || this.isSpell ) return null;
-    const { activation, duration, range, target } = this.labels;
-    return { activation, duration, range, target };
+    const { activation, duration, range, reach, target } = this.labels;
+    return { activation, duration, range, reach, target };
   }
 
   /* -------------------------------------------- */
