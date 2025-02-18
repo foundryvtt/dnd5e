@@ -508,7 +508,7 @@ export default function ActorSheetV2Mixin(Base) {
      * @protected
      */
     _prepareActivity(activity) {
-      let { _id, activation, img, labels, name, range, save, uses } = activity;
+      let { _id, activation, img, labels, name, range, save, uses } = activity.prepareSheetContext();
 
       // To Hit
       const toHit = parseInt(labels.toHit);

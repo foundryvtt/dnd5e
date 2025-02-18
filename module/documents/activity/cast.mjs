@@ -101,6 +101,16 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
   }
 
   /* -------------------------------------------- */
+  /*  Data Preparation                            */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  prepareSheetContext() {
+    const spell = this.cachedSpell ?? fromUuidSync(this.spell.uuid);
+    return { ...this, _id: this._id, name: spell.name, img: spell.img };
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
