@@ -538,6 +538,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Prepare context to display this activity in a parent sheet.
+   * @returns {object}
+   */
+  prepareSheetContext() {
+    return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare data related to this activity.
    */
   prepareData() {

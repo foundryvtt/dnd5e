@@ -134,10 +134,13 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     // Activities
     context.activities = (activities ?? []).filter(a => {
       return CONFIG.DND5E.activityTypes[a.type]?.configurable !== false;
-    }).map(({ _id: id, name, img, sort }) => ({
-      id, name, sort,
-      img: { src: img, svg: img?.endsWith(".svg") }
-    }));
+    }).map(activity => {
+      const { _id: id, name, img, sort } = activity.prepareSheetContext();
+      return {
+        id, name, sort,
+        img: { src: img, svg: img?.endsWith(".svg") }
+      };
+    });
 
     // Facilities
     if ( this.item.type === "facility" ) {
