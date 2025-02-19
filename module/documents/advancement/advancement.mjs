@@ -231,7 +231,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
   /**
    * Can an advancement of this type be added to the provided item?
    * @param {Item5e} item  Item to check against.
-   * @returns {boolean}    Should this be enabled as an option on the `AdvancementSelection` dialog?
+   * @returns {boolean}    Should this be enabled as an option when creating an advancement.
    */
   static availableForItem(item) {
     return true;
@@ -377,5 +377,30 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
      */
     Hooks.callAll("dnd5e.getItemAdvancementContext", advancement, target, menuItems);
     ui.context.menuItems = menuItems;
+  }
+
+  /* -------------------------------------------- */
+  /*  Importing and Exporting                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static _createDialogData(type, parent) {
+    const Advancement = CONFIG.DND5E.advancementTypes[type].documentClass;
+    return {
+      type,
+      disabled: !Advancement.availableForItem(parent),
+      label: Advancement.metadata?.title,
+      hint: Advancement.metadata?.hint,
+      icon: Advancement.metadata?.typeIcon ?? Advancement.metadata?.icon
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static _createDialogTypes(parent) {
+    return Object.entries(CONFIG.DND5E.advancementTypes)
+      .filter(([, { hidden, validItemTypes }]) => !hidden && validItemTypes?.has(parent.type))
+      .map(([k]) => k);
   }
 }
