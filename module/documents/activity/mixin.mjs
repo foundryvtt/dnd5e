@@ -1430,6 +1430,17 @@ export default function ActivityMixin(Base) {
       if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
       else updates.item[itemIndex][keyPath] = activityUpdates;
     }
+
+    /* -------------------------------------------- */
+    /*  Importing and Exporting                     */
+    /* -------------------------------------------- */
+
+    /** @override */
+    static _createDialogTypes(parent) {
+      return Object.entries(CONFIG.DND5E.activityTypes)
+        .filter(([, { configurable }]) => configurable !== false)
+        .map(([k]) => k);
+    }
   }
   return Activity;
 }
