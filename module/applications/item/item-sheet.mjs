@@ -756,7 +756,7 @@ export default class ItemSheet5e extends ItemSheet {
     let manager;
     if ( ["edit", "delete", "duplicate"].includes(action) && !advancement ) return;
     switch (action) {
-      case "add": return game.dnd5e.applications.advancement.AdvancementSelection.createDialog(this.item);
+      case "add": return dnd5e.documents.advancement.Advancement.createDialog({}, { parent: this.item });
       case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
       case "delete": return advancement.deleteDialog();
       case "duplicate": return this.item.duplicateAdvancement(id);
