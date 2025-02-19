@@ -1843,15 +1843,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       folders, name, type,
       folder: data.folder,
       hasFolders: folders.length > 0,
-      types: types.reduce((arr, type) => {
+      types: types.map(type => {
         const label = CONFIG[this.documentName]?.typeLabels?.[type] ?? type;
-        arr.push({
+        const data = {
           type,
           label: game.i18n.has(label) ? game.i18n.localize(label) : type,
           icon: this.getDefaultArtwork({ type })?.img ?? "icons/svg/item-bag.svg"
-        });
-        return arr;
-      }, []).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
+        };
+        data.svg = data.icon?.endsWith(".svg");
+        return data;
+      }).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
     });
     return Dialog.prompt({
       title, content,
