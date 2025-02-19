@@ -1670,13 +1670,17 @@ dialog.dnd5e2.application {
       }
     }
 
-    img {
+    dnd5e-icon, img {
+      --icon-fill: var(--color-text-dark-primary);
+      --icon-size: 32px;
       width: 32px;
       height: 32px;
+      display: block;
+    }
+    img {
       object-fit: contain;
       object-position: center;
       border: none;
-      filter: invert(100%);
     }
   }
 
