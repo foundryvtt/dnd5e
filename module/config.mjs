@@ -3373,90 +3373,299 @@ DND5E.sourcePacks = {
 /* -------------------------------------------- */
 
 /**
+ * @import { TransformationSettingData } from "./data/settings/transformation-setting.mjs";
+ */
+
+/**
+ * @typedef TransformationConfiguration
+ * @property {Record<string, TransformationFlagConfiguration>} effects
+ * @property {Record<string, TransformationFlagConfiguration>} keep
+ * @property {Record<string, TransformationFlagConfiguration>} merge
+ * @property {Record<string, TransformationFlagConfiguration>} others
+ * @property {Record<string, TransformationPresetConfiguration} presets
+ */
+
+/**
+ * @typedef TransformationFlagConfiguration
+ * @property {string} label         Localized label for the flag.
+ * @property {string} [hint]        Localized hint for the flag.
+ * @property {boolean} [default]    This should be part of the default transformation settings.
+ * @property {string[]} [disables]  Names of specific settings to disable, or whole categories if an `*` is used.
+ */
+
+/**
+ * @typedef TransformationPresetConfiguration
+ * @property {string} icon                         Icon representing this preset on the button.
+ * @property {string} label                        Localized label for the preset.
+ * @property {TransformationSettingData} settings  Options that will be set for the preset.
+ */
+
+/**
+ * Settings that configuration how actors are changed when transformation is applied.
+ * @typedef {TransformationConfiguration}
+ */
+DND5E.transformation = {
+  effects: {
+    all: {
+      label: "DND5E.TRANSFORM.Setting.Effects.All.Label",
+      hint: "DND5E.TRANSFORM.Setting.Effects.All.Hint",
+      disables: ["effects.*"]
+    },
+    origin: {
+      label: "DND5E.TRANSFORM.Setting.Effects.Origin.Label",
+      hint: "DND5E.TRANSFORM.Setting.Effects.Origin.Hint",
+      default: true
+    },
+    otherOrigin: {
+      label: "DND5E.TRANSFORM.Setting.Effects.OtherOrigin.Label",
+      hint: "DND5E.TRANSFORM.Setting.Effects.OtherOrigin.Hint",
+      default: true
+    },
+    background: {
+      label: "DND5E.TRANSFORM.Setting.Effects.Background.Label",
+      default: true
+    },
+    class: {
+      label: "DND5E.TRANSFORM.Setting.Effects.Class.Label",
+      default: true
+    },
+    feat: {
+      label: "DND5E.TRANSFORM.Setting.Effects.Feature.Label",
+      default: true
+    },
+    equipment: {
+      label: "DND5E.TRANSFORM.Setting.Effects.Equipment.Label",
+      default: true
+    },
+    spell: {
+      label: "DND5E.TRANSFORM.Setting.Effects.Spell.Label",
+      default: true
+    }
+  },
+  keep: {
+    physical: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Physical.Label",
+      hint: "DND5E.TRANSFORM.Setting.Keep.Physical.Hint"
+    },
+    mental: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Mental.Label",
+      hint: "DND5E.TRANSFORM.Setting.Keep.Mental.Hint"
+    },
+    saves: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Saves.Label",
+      disables: ["merge.saves"]
+    },
+    skills: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Skills.Label",
+      disables: ["merge.skills"]
+    },
+    class: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Proficiency.Label"
+    },
+    feats: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Features.Label"
+    },
+    items: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Equipment.Label"
+    },
+    spells: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Spells.Label"
+    },
+    bio: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Biography.Label"
+    },
+    type: {
+      label: "DND5E.TRANSFORM.Setting.Keep.CreatureType.Label"
+    },
+    hp: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Health.Label"
+    },
+    vision: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Vision.Label",
+      default: true
+    },
+    self: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Self.Label",
+      hint: "DND5E.TRANSFORM.Setting.Keep.Self.Hint",
+      disables: ["keep.*", "merge.*"]
+    }
+  },
+  merge: {
+    saves: {
+      label: "DND5E.TRANSFORM.Setting.Merge.Saves.Label",
+      disables: ["keep.saves"]
+    },
+    skills: {
+      label: "DND5E.TRANSFORM.Setting.Merge.Skills.Label",
+      disables: ["keep.skills"]
+    }
+  },
+  other: {
+    addTemp: {
+      label: "DND5E.TRANSFORM.Setting.Other.AddTemp.Label",
+      hint: "DND5E.TRANSFORM.Setting.Other.AddTemp.Hint"
+    }
+  },
+  presets: {
+    wildshape: {
+      icon: '<i class="fas fa-paw" inert></i>',
+      label: "DND5E.TRANSFORM.Preset.WildShape.Label",
+      settings: {
+        effects: new Set(["otherOrigin", "origin", "feat", "spell", "class", "background"]),
+        keep: new Set(["bio", "class", "feats", "hp", "mental", "type"]),
+        merge: new Set(["saves", "skills"])
+      }
+    },
+    polymorph: {
+      icon: '<i class="fas fa-pastafarianism" inert></i>',
+      label: "DND5E.TRANSFORM.Preset.Polymorph.Label",
+      settings: {
+        effects: new Set(["otherOrigin", "origin", "spell"]),
+        keep: new Set(["hp", "type"]),
+        addTemp: true
+      }
+    },
+    polymorphSelf: {
+      icon: '<i class="fas fa-eye" inert></i>',
+      label: "DND5E.TRANSFORM.Preset.Appearance.Label",
+      settings: {
+        effects: new Set(["all"]),
+        keep: new Set(["self"])
+      }
+    }
+  }
+};
+preLocalize("transformation.effects", { keys: ["label", "hint"] });
+preLocalize("transformation.keep", { keys: ["label", "hint"] });
+preLocalize("transformation.merge", { keys: ["label", "hint"] });
+preLocalize("transformation.other", { keys: ["label", "hint"], sort: true });
+preLocalize("transformation.presets", { key: "label", sort: true });
+
+/**
  * Settings to configure how actors are merged when polymorphing is applied.
  * @enum {string}
+ * @deprecated since DnD5e 4.4, available until DnD5e 5.0
  */
-DND5E.polymorphSettings = {
-  keepPhysical: "DND5E.PolymorphKeepPhysical",
-  keepMental: "DND5E.PolymorphKeepMental",
-  keepSaves: "DND5E.PolymorphKeepSaves",
-  keepSkills: "DND5E.PolymorphKeepSkills",
-  mergeSaves: "DND5E.PolymorphMergeSaves",
-  mergeSkills: "DND5E.PolymorphMergeSkills",
-  keepClass: "DND5E.PolymorphKeepClass",
-  keepFeats: "DND5E.PolymorphKeepFeats",
-  keepSpells: "DND5E.PolymorphKeepSpells",
-  keepItems: "DND5E.PolymorphKeepItems",
-  keepBio: "DND5E.PolymorphKeepBio",
-  keepVision: "DND5E.PolymorphKeepVision",
-  keepSelf: "DND5E.PolymorphKeepSelf",
-  keepType: "DND5E.PolymorphKeepType",
-  keepHP: "DND5E.PolymorphKeepHP",
-  addTemp: "DND5E.PolymorphAddTemp"
-};
-preLocalize("polymorphSettings", { sort: true });
+DND5E.polymorphSettings = new Proxy(DND5E.transformation, {
+  get(target, prop) {
+    if ( typeof prop !== "string" ) return target[prop];
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.polymorphSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+    );
+    const [category, key] = _splitPolymorphKey(prop);
+    return target[category]?.[key]?.label;
+  },
+  set(target, prop, value) {
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.polymorphSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+    );
+    const [category, key] = _splitPolymorphKey(prop);
+    if ( !category ) return false;
+    target[category][key] = { label: value };
+    return true;
+  }
+});
 
 /**
  * Settings to configure how actors are effects are merged when polymorphing is applied.
  * @enum {string}
+ * @deprecated since DnD5e 4.4, available until DnD5e 5.0
  */
-DND5E.polymorphEffectSettings = {
-  keepAE: "DND5E.PolymorphKeepAE",
-  keepOtherOriginAE: "DND5E.PolymorphKeepOtherOriginAE",
-  keepOriginAE: "DND5E.PolymorphKeepOriginAE",
-  keepEquipmentAE: "DND5E.PolymorphKeepEquipmentAE",
-  keepFeatAE: "DND5E.PolymorphKeepFeatureAE",
-  keepSpellAE: "DND5E.PolymorphKeepSpellAE",
-  keepClassAE: "DND5E.PolymorphKeepClassAE",
-  keepBackgroundAE: "DND5E.PolymorphKeepBackgroundAE"
-};
-preLocalize("polymorphEffectSettings", { sort: true });
+DND5E.polymorphEffectSettings = new Proxy(DND5E.transformation, {
+  get(target, prop) {
+    if ( typeof prop !== "string" ) return target[prop];
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.polymorphEffectSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+    );
+    if ( prop === "keepAE" ) return target.effects.all?.label;
+    const [category, key] = _splitPolymorphKey(prop);
+    return target[category]?.[key]?.label;
+  },
+  set(target, prop, value) {
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.polymorphEffectSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+    );
+    if ( prop === "keepAE" ) {
+      target.effects.all = { label: value };
+      return true;
+    }
+    const [category, key] = _splitPolymorphKey(prop);
+    if ( !category ) return false;
+    target[category][key] = { label: value };
+    return true;
+  }
+});
 
 /**
  * Settings to configure how actors are merged when preset polymorphing is applied.
  * @enum {object}
  */
-DND5E.transformationPresets = {
-  wildshape: {
-    icon: '<i class="fas fa-paw"></i>',
-    label: "DND5E.PolymorphWildShape",
-    options: {
-      keepBio: true,
-      keepClass: true,
-      keepFeats: true,
-      keepHP: true,
-      keepMental: true,
-      keepType: true,
-      mergeSaves: true,
-      mergeSkills: true,
-      keepEquipmentAE: false,
-      preset: "wildshape"
-    }
+DND5E.transformationPresets = new Proxy(DND5E.transformation, {
+  get(target, prop) {
+    if ( typeof prop !== "string" ) return target[prop];
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.transformationPresets` is deprecated, use `CONFIG.DND5E.transformation.presets` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+    );
+    const preset = target.presets[prop];
+    if ( !preset ) return;
+    const { effects, keep, merge, other, ...remainder } = preset.settings;
+    return {
+      icon: preset.icon,
+      label: preset.label,
+      options: {
+        ...Object.fromEntries(Array.from(effects ?? []).map(k => [`keep${k === "all" ? "" : k.capitalize()}AE`, true])),
+        ...Object.fromEntries(Array.from(keep ?? []).map(k => [`keep${k === "hp" ? "HP" : k.capitalize()}`, true])),
+        ...Object.fromEntries(Array.from(merge ?? []).map(k => [`merge${k.capitalize()}`, true])),
+        ...Object.fromEntries(Array.from(other ?? []).map(k => [k, true])),
+        ...remainder,
+        preset: prop
+      }
+    };
   },
-  polymorph: {
-    icon: '<i class="fas fa-pastafarianism"></i>',
-    label: "DND5E.Polymorph",
-    options: {
-      addTemp: true,
-      keepHP: true,
-      keepType: true,
-      keepEquipmentAE: false,
-      keepClassAE: false,
-      keepFeatAE: false,
-      keepBackgroundAE: false,
-      preset: "polymorph"
+  set(target, prop, value) {
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.transformationPresets` is deprecated, use `CONFIG.DND5E.transformation.presets` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+    );
+    const preset = { label: value.label, icon: value.icon, settings: {} };
+    for ( const [k, v] of Object.entries(value.options ?? {}) ) {
+      if ( v === false ) continue;
+      const [category, key] = _splitPolymorphKey(k);
+      if ( category ) {
+        preset.settings[category] ??= new Set();
+        preset.settings[category].add(key);
+      } else {
+        preset.settings[k] = v;
+      }
     }
-  },
-  polymorphSelf: {
-    icon: '<i class="fas fa-eye"></i>',
-    label: "DND5E.PolymorphSelf",
-    options: {
-      keepSelf: true,
-      preset: "polymorphSelf"
-    }
+    target.presets[prop] = preset;
+    return true;
   }
+});
+
+const _splitPolymorphKey = prop => {
+  let category;
+  if ( prop.endsWith("AE") ) {
+    if ( prop === "keepAE" ) return ["effects", "all"];
+    category = "effects";
+    prop = prop.replace("keep", "").replace("AE", "");
+  } else if ( prop.startsWith("keep") ) {
+    category = "keep";
+    if ( prop === "keepHP" ) return ["keep", "hp"];
+    else prop = prop.replace("keep", "");
+  } else if ( prop.startsWith("merge") ) {
+    category = "merge";
+    prop = prop.replace("merge", "");
+  } else {
+    return [null, prop];
+  }
+  return [category, prop.charAt(0).toLowerCase() + prop.slice(1)];
 };
-preLocalize("transformationPresets", { sort: true, keys: ["label"] });
 
 /* -------------------------------------------- */
 
