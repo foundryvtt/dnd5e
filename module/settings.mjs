@@ -1,9 +1,12 @@
-import BastionSettingsConfig, { BastionSetting } from "./applications/settings/bastion-settings.mjs";
+import BastionSettingsConfig from "./applications/settings/bastion-settings.mjs";
 import CombatSettingsConfig from "./applications/settings/combat-settings.mjs";
 import CompendiumBrowserSettingsConfig from "./applications/settings/compendium-browser-settings.mjs";
 import ModuleArtSettingsConfig from "./applications/settings/module-art-settings.mjs";
 import VariantRulesSettingsConfig from "./applications/settings/variant-rules-settings.mjs";
 import VisibilitySettingsConfig from "./applications/settings/visibility-settings.mjs";
+import BastionSetting from "./data/settings/bastion-setting.mjs";
+import PrimaryPartySetting from "./data/settings/primary-party-setting.mjs";
+import TransformationSetting from "./data/settings/transformation-setting.mjs";
 
 /**
  * Register all of the system's keybindings.
@@ -48,6 +51,13 @@ export function registerSystemSettings() {
     config: false,
     type: String,
     default: ""
+  });
+
+  // Polymorph Settings
+  game.settings.register("dnd5e", "transformationSettings", {
+    scope: "client",
+    config: false,
+    type: TransformationSetting
   });
 
   // Rules version
@@ -141,35 +151,6 @@ export function registerSystemSettings() {
     config: true,
     default: false,
     type: Boolean
-  });
-
-  // Polymorph Settings
-  game.settings.register("dnd5e", "polymorphSettings", {
-    scope: "client",
-    default: {
-      keepPhysical: false,
-      keepMental: false,
-      keepSaves: false,
-      keepSkills: false,
-      mergeSaves: false,
-      mergeSkills: false,
-      keepClass: false,
-      keepFeats: false,
-      keepSpells: false,
-      keepItems: false,
-      keepBio: false,
-      keepVision: true,
-      keepSelf: false,
-      keepAE: false,
-      keepOriginAE: true,
-      keepOtherOriginAE: true,
-      keepFeatAE: true,
-      keepSpellAE: true,
-      keepEquipmentAE: true,
-      keepClassAE: true,
-      keepBackgroundAE: true,
-      transformTokens: true
-    }
   });
 
   // Allow Summoning
@@ -533,7 +514,7 @@ export function registerSystemSettings() {
     scope: "world",
     config: false,
     default: null,
-    type: PrimaryPartyData,
+    type: PrimaryPartySetting,
     onChange: s => ui.actors.render()
   });
 
@@ -559,17 +540,6 @@ export function registerSystemSettings() {
     default: [],
     config: true
   });
-}
-
-/**
- * Data model for tracking information on the primary party.
- *
- * @property {Actor5e} actor  Group actor representing the primary party.
- */
-class PrimaryPartyData extends foundry.abstract.DataModel {
-  static defineSchema() {
-    return { actor: new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseActor) };
-  }
 }
 
 /* -------------------------------------------- */
