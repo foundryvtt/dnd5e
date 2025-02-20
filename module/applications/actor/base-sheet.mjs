@@ -12,6 +12,7 @@ import AdvancementConfirmationDialog from "../advancement/advancement-confirmati
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 
 import ActorSheetMixin from "./sheet-mixin.mjs";
+import TransformDialog from "./transform-dialog.mjs";
 
 import AbilityConfig from "./config/ability-config.mjs";
 import ArmorClassConfig from "./config/armor-class-config.mjs";
@@ -871,67 +872,24 @@ export default class ActorSheet5e extends ActorSheetMixin(foundry.appv1?.sheets?
     const sourceActor = await cls.fromDropData(data);
     if ( !sourceActor ) return;
 
-    // Define a function to record polymorph settings for future use
-    const rememberOptions = html => {
-      const options = {};
-      html.find("input").each((i, el) => {
-        options[el.name] = el.checked;
-      });
-      const settings = foundry.utils.mergeObject(game.settings.get("dnd5e", "polymorphSettings") ?? {}, options);
-      game.settings.set("dnd5e", "polymorphSettings", settings);
-      return settings;
+    // Configure the transformation
+    const settings = await TransformDialog.promptSettings(this.actor, sourceActor, {
+      transform: { settings: game.settings.get("dnd5e", "transformationSettings") }
+    });
+    if ( !settings ) return;
+    await game.settings.set("dnd5e", "transformationSettings", settings.toObject());
+
+    // Convert settings into old format
+    const { effects, keep, merge, other, ...remainder } = settings;
+    const deprecatedSettings = {
+      ...Object.fromEntries(Array.from(effects ?? []).map(k => [`keep${k === "all" ? "" : k.capitalize()}AE`, true])),
+      ...Object.fromEntries(Array.from(keep ?? []).map(k => [`keep${k === "hp" ? "HP" : k.capitalize()}`, true])),
+      ...Object.fromEntries(Array.from(merge ?? []).map(k => [`merge${k.capitalize()}`, true])),
+      ...Object.fromEntries(Array.from(other ?? []).map(k => [k, true])),
+      ...remainder
     };
 
-    // Create and render the Dialog
-    return new Dialog({
-      title: game.i18n.localize("DND5E.PolymorphPromptTitle"),
-      content: {
-        options: game.settings.get("dnd5e", "polymorphSettings"),
-        settings: CONFIG.DND5E.polymorphSettings,
-        effectSettings: CONFIG.DND5E.polymorphEffectSettings,
-        isToken: this.actor.isToken
-      },
-      default: "accept",
-      buttons: {
-        accept: {
-          icon: '<i class="fas fa-check"></i>',
-          label: game.i18n.localize("DND5E.PolymorphAcceptSettings"),
-          callback: html => this.actor.transformInto(sourceActor, rememberOptions(html))
-        },
-        wildshape: {
-          icon: CONFIG.DND5E.transformationPresets.wildshape.icon,
-          label: CONFIG.DND5E.transformationPresets.wildshape.label,
-          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
-            CONFIG.DND5E.transformationPresets.wildshape.options,
-            { transformTokens: rememberOptions(html).transformTokens }
-          ))
-        },
-        polymorph: {
-          icon: CONFIG.DND5E.transformationPresets.polymorph.icon,
-          label: CONFIG.DND5E.transformationPresets.polymorph.label,
-          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
-            CONFIG.DND5E.transformationPresets.polymorph.options,
-            { transformTokens: rememberOptions(html).transformTokens }
-          ))
-        },
-        self: {
-          icon: CONFIG.DND5E.transformationPresets.polymorphSelf.icon,
-          label: CONFIG.DND5E.transformationPresets.polymorphSelf.label,
-          callback: html => this.actor.transformInto(sourceActor, foundry.utils.mergeObject(
-            CONFIG.DND5E.transformationPresets.polymorphSelf.options,
-            { transformTokens: rememberOptions(html).transformTokens }
-          ))
-        },
-        cancel: {
-          icon: '<i class="fas fa-times"></i>',
-          label: game.i18n.localize("Cancel")
-        }
-      }
-    }, {
-      classes: ["dialog", "dnd5e", "polymorph"],
-      width: 900,
-      template: "systems/dnd5e/templates/apps/polymorph-prompt.hbs"
-    }).render(true);
+    return this.actor.transformInto(sourceActor, deprecatedSettings);
   }
 
   /* -------------------------------------------- */
@@ -1304,7 +1262,7 @@ export default class ActorSheet5e extends ActorSheetMixin(foundry.appv1?.sheets?
     let buttons = super._getHeaderButtons();
     if ( this.actor.isPolymorphed ) {
       buttons.unshift({
-        label: "DND5E.PolymorphRestoreTransformation",
+        label: "DND5E.TRANSFORM.Action.Restore",
         class: "restore-transformation",
         icon: "fas fa-backward",
         onclick: () => this.actor.revertOriginalForm()
