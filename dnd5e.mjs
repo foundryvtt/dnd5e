@@ -119,11 +119,11 @@ Hooks.once("init", function() {
     delete DND5E.spellcastingTypes.leveled.progression.half.roundUp;
 
     // Adjust Wild Shape and Polymorph presets.
-    delete DND5E.transformationPresets.wildshape.options.keepHP;
-    delete DND5E.transformationPresets.wildshape.options.keepType;
-    delete DND5E.transformationPresets.polymorph.options.addTemp;
-    delete DND5E.transformationPresets.polymorph.options.keepHP;
-    delete DND5E.transformationPresets.polymorph.options.keepType;
+    DND5E.transformation.presets.wildshape.settings.keep.delete("hp");
+    DND5E.transformation.presets.wildshape.settings.keep.delete("type");
+    delete DND5E.transformation.presets.polymorph.settings.addTemp;
+    DND5E.transformation.presets.polymorph.settings.keep.delete("hp");
+    DND5E.transformation.presets.polymorph.settings.keep.delete("type");
 
     // Adjust language categories.
     delete DND5E.languages.standard.children.sign;
