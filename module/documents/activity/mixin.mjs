@@ -1136,11 +1136,14 @@ export default function ActivityMixin(Base) {
 
       const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
       if ( !rolls?.length ) return;
+
+      const canUpdate = this.item.isOwner && !this.item[game.release.generation < 13 ? "compendium" : "inCompendium"];
       const lastDamageTypes = rolls.reduce((obj, roll, index) => {
         if ( roll.options.type ) obj[index] = roll.options.type;
         return obj;
       }, {});
-      if ( !foundry.utils.isEmpty(lastDamageTypes) && this.actor.items.has(this.item.id) ) {
+      if ( canUpdate && !foundry.utils.isEmpty(lastDamageTypes)
+        && (this.actor && this.actor.items.has(this.item.id)) ) {
         await this.item.setFlag("dnd5e", `last.${this.id}.damageType`, lastDamageTypes);
       }
 
