@@ -621,6 +621,7 @@ export function registerDeferredSettings() {
  * @param {Set<string>} [flags=[]]  Additional theming flags to set.
  */
 export function setTheme(element, theme="", flags=new Set()) {
+  if ( foundry.utils.getType(theme) === "Object" ) theme = theme.applications;
   element.className = element.className.replace(/\bdnd5e-(theme|flag)-[\w-]+\b/g, "");
 
   // Primary Theme
