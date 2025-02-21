@@ -967,7 +967,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Activity|void}
    */
   getAssociatedActivity() {
-    const activity = fromUuidSync(this.getFlag("dnd5e", "activity.uuid"));
+    const activity = fromUuidSync(this.getFlag("dnd5e", "activity.uuid"), { strict: false });
     if ( activity ) return activity;
     return this.getAssociatedItem()?.system.activities?.get(this.getFlag("dnd5e", "activity.id"));
   }
@@ -994,7 +994,7 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {Item5e|void}
    */
   getAssociatedItem() {
-    const item = fromUuidSync(this.getFlag("dnd5e", "item.uuid"));
+    const item = fromUuidSync(this.getFlag("dnd5e", "item.uuid"), { strict: false });
     if ( item ) return item;
     const actor = this.getAssociatedActor();
     if ( !actor ) return;
