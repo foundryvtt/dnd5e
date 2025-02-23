@@ -152,8 +152,8 @@ export default class ContainerSheet extends ItemSheet5e {
    * @protected
    */
   async _onDropItem(event, data) {
-    const item = await Item.implementation.fromDropData(data);
     const behavior = this._dropBehavior(event, data);
+    const item = await Item.implementation.fromDropData(data);
     if ( !this.item.isOwner || !item || (behavior === "none") ) return false;
 
     // If item already exists in this container, just adjust its sorting

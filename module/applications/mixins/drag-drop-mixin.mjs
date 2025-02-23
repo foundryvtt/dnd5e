@@ -21,7 +21,8 @@ export default function DragDropApplicationMixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * The behavior for the dropped data.
+     * The behavior for the dropped data. When called during the drop event, ensure this is called before awaiting
+     * anything or the drop behavior will be lost.
      * @param {DragEvent} event  The drag event.
      * @param {object} data      The drag payload.
      * @returns {DropEffectValue}
