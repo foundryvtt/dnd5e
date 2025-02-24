@@ -3515,12 +3515,7 @@ DND5E.transformation = {
       disables: ["keep.skills"]
     }
   },
-  other: {
-    addTemp: {
-      label: "DND5E.TRANSFORM.Setting.Other.AddTemp.Label",
-      hint: "DND5E.TRANSFORM.Setting.Other.AddTemp.Hint"
-    }
-  },
+  other: {},
   presets: {
     wildshape: {
       icon: '<i class="fas fa-paw" inert></i>',
@@ -3528,7 +3523,8 @@ DND5E.transformation = {
       settings: {
         effects: new Set(["otherOrigin", "origin", "feat", "spell", "class", "background"]),
         keep: new Set(["bio", "class", "feats", "hp", "mental", "type"]),
-        merge: new Set(["saves", "skills"])
+        merge: new Set(["saves", "skills"]),
+        tempFormula: "max(@classes.druid.levels, @subclasses.moon.levels * 3)"
       }
     },
     polymorph: {
@@ -3537,7 +3533,7 @@ DND5E.transformation = {
       settings: {
         effects: new Set(["otherOrigin", "origin", "spell"]),
         keep: new Set(["hp", "type"]),
-        addTemp: true
+        tempFormula: "@source.attributes.hp.max"
       }
     },
     polymorphSelf: {

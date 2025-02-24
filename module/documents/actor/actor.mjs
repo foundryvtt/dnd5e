@@ -22,18 +22,12 @@ import BasicRoll from "../../dice/basic-roll.mjs";
 export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
-   * The data source for Actor5e.classes allowing it to be lazily computed.
-   * @type {Record<string, Item5e>}
-   * @private
+   * Lazily computed store of classes, subclasses, background, and species.
+   * @type {Record<string, Record<string, Item5e|Item5e[]>>}
    */
-  _classes;
+  _lazy = {};
 
-  /**
-   * Cached spellcasting classes.
-   * @type {Record<string, Item5e>}
-   * @private
-   */
-  _spellcastingClasses;
+  /* -------------------------------------------- */
 
   /**
    * Mapping of item compendium source UUIDs to the items.
@@ -68,9 +62,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Record<string, Item5e>}
    */
   get classes() {
-    if ( this._classes !== undefined ) return this._classes;
-    if ( !["character", "npc"].includes(this.type) ) return this._classes = {};
-    return this._classes = Object.fromEntries(this.itemTypes.class.map(cls => [cls.identifier, cls]));
+    if ( this._lazy?.classes !== undefined ) return this._lazy.classes;
+    return this._lazy.classes = Object.fromEntries(this.itemTypes.class.map(cls => [cls.identifier, cls]));
   }
 
   /* -------------------------------------------- */
@@ -93,11 +86,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Record<string, Item5e>}
    */
   get spellcastingClasses() {
-    if ( this._spellcastingClasses !== undefined ) return this._spellcastingClasses;
-    return this._spellcastingClasses = Object.entries(this.classes).reduce((obj, [identifier, cls]) => {
+    if ( this._lazy.spellcastingClasses !== undefined ) return this._lazy.spellcastingClasses;
+    return this._lazy.spellcastingClasses = Object.entries(this.classes).reduce((obj, [identifier, cls]) => {
       if ( cls.spellcasting && (cls.spellcasting.progression !== "none") ) obj[identifier] = cls;
       return obj;
     }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * A mapping of subclasses belonging to this Actor.
+   * @type {Record<string, Item5e>}
+   */
+  get subclasses() {
+    if ( this._lazy?.subclasses !== undefined ) return this._lazy.subclasses;
+    return this._lazy.subclasses = Object.fromEntries(this.itemTypes.subclass.map(i => [i.identifier, i]));
   }
 
   /* -------------------------------------------- */
@@ -212,8 +216,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @internal
    */
   _clearCachedValues() {
-    this._classes = undefined;
-    this._spellcastingClasses = undefined;
+    this._lazy = {};
   }
 
   /* --------------------------------------------- */
@@ -2853,7 +2856,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {boolean} [keepBackgroundAE=true]    Keep effects which originate from actors background
    * @property {boolean} [keepHP=false]             Keep HP & HD
    * @property {boolean} [keepType=false]           Keep creature type
-   * @property {boolean} [addTemp=false]            Add temporary hit points equal to the target's max HP
+   * @property {string} [tempFormula=""]            Formula for temp HP to add
    * @property {boolean} [transformTokens=true]     Transform linked tokens too
    * @property {string} [preset]                    The transformation preset used (if any).
    */
@@ -2871,7 +2874,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false, keepItems=false,
     keepBio=false, keepVision=false, keepSelf=false, keepAE=false, keepOriginAE=true, keepOtherOriginAE=true,
     keepSpellAE=true, keepEquipmentAE=true, keepFeatAE=true, keepClassAE=true, keepBackgroundAE=true,
-    keepHP=false, keepType=false, addTemp=false, transformTokens=true, preset}={}, {renderSheet=true}={}) {
+    keepHP=false, keepType=false, tempFormula="", transformTokens=true, preset}={}, {renderSheet=true}={}) {
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -2885,6 +2888,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     o.flags.dnd5e = o.flags.dnd5e || {};
     o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
     const source = target.toObject();
+    const rollData = { ...this.getRollData(), source: target.getRollData() };
 
     if ( keepSelf ) {
       o.img = source.img;
@@ -3009,7 +3013,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       if ( keepHP ) d.system.attributes.hp = { ...this.system.attributes.hp };
 
       // Add temporary hit points
-      if ( addTemp ) d.system.attributes.hp.temp = target.system.attributes.hp.max;
+      const tempHp = simplifyBonus(tempFormula, rollData);
+      if ( tempHp ) d.system.attributes.hp.temp = tempHp;
 
       // Remove active effects
       const oEffects = foundry.utils.deepClone(d.effects);
@@ -3079,7 +3084,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     Hooks.callAll("dnd5e.transformActor", this, target, d, {
       keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills, keepClass, keepFeats, keepSpells,
       keepItems, keepBio, keepVision, keepSelf, keepAE, keepOriginAE, keepOtherOriginAE, keepSpellAE,
-      keepEquipmentAE, keepFeatAE, keepClassAE, keepBackgroundAE, keepHP, keepType, addTemp, transformTokens, preset
+      keepEquipmentAE, keepFeatAE, keepClassAE, keepBackgroundAE, keepHP, keepType, tempFormula, transformTokens, preset
     }, {renderSheet});
 
     // Create new Actor with transformed data

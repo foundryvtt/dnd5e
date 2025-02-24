@@ -1,3 +1,5 @@
+import FormulaField from "../fields/formula-field.mjs";
+
 const { BooleanField, SetField, StringField } = foundry.data.fields;
 
 /**
@@ -7,6 +9,7 @@ const { BooleanField, SetField, StringField } = foundry.data.fields;
  * @property {Set<string>} merge
  * @property {Set<string>} other
  * @property {string} [preset]
+ * @property {string} [tempFormula]       Formula for temp HP that will be added during transformation.
  * @property {boolean} [transformTokens]
  */
 
@@ -14,6 +17,12 @@ const { BooleanField, SetField, StringField } = foundry.data.fields;
  * A data model that represents the previous transformation preset.
  */
 export default class TransformationSetting extends foundry.abstract.DataModel {
+
+  /** @override */
+  static LOCALIZATION_PREFIXES = ["DND5E.TRANSFORM.Setting"];
+
+  /* -------------------------------------------- */
+
   /** @override */
   static defineSchema() {
     return {
@@ -22,6 +31,7 @@ export default class TransformationSetting extends foundry.abstract.DataModel {
       merge: new SetField(new StringField(), { initial: () => TransformationSetting.#initial("merge") }),
       other: new SetField(new StringField(), { initial: () => TransformationSetting.#initial("other") }),
       preset: new StringField({ initial: null, nullable: true }),
+      tempFormula: new FormulaField({ determinstic: true }),
       transformTokens: new BooleanField({ initial: true })
     };
   }
