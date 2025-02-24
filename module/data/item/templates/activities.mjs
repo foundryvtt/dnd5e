@@ -479,7 +479,7 @@ export default class ActivitiesTemplate extends SystemDataModel {
         get: () => {
           foundry.utils.logCompatibilityWarning(
             `The \`${property}\` property on \`${template}\` has been deprecated.`,
-            { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+            { since: "DnD5e 4.0", until: "DnD5e 4.5", once: true }
           );
           return get();
         },

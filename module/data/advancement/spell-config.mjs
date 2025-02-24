@@ -82,29 +82,4 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
       }
     }
   }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Changes that this spell configuration indicates should be performed on spells.
-   * @param {object} data  Data for the advancement process.
-   * @returns {object}
-   * @deprecated since DnD5e 4.0, available until DnD5e 4.4
-   */
-  getSpellChanges(data={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `getSpellChanges` method on `SpellConfigurationData` has been deprecated and replaced with `applySpellChanges`.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-    );
-    const updates = {};
-    if ( this.ability.size ) {
-      updates["system.ability"] = this.ability.has(data.ability) ? data.ability : this.ability.first();
-    }
-    if ( this.preparation ) updates["system.preparation.mode"] = this.preparation;
-    if ( this.uses.max && this.uses.per ) {
-      updates["system.uses.max"] = this.uses.max;
-      updates["system.uses.per"] = this.uses.per;
-    }
-    return updates;
-  }
 }
