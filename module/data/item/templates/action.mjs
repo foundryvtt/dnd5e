@@ -14,7 +14,7 @@ export default class ActionTemplate extends ItemDataModel {
   static defineSchema() {
     foundry.utils.logCompatibilityWarning(
       "The `ActionTemplate` data model has been deprecated in favor of `ActivitiesTemplate`.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+      { since: "DnD5e 4.0", until: "DnD5e 4.5", once: true }
     );
     return {
       ability: new StringField({required: true, nullable: true, initial: null, label: "DND5E.AbilityModifier"}),

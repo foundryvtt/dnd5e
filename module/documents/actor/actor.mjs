@@ -918,7 +918,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( activity instanceof Item ) {
       foundry.utils.logCompatibilityWarning(
         "The `beginConcentrating` method on Actor5e now takes an Activity, rather than an Item.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
       );
       activity = activity.system.activities?.contents[0];
       if ( !activity ) return;
@@ -1976,7 +1976,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config && (foundry.utils.getType(config) !== "Object") ) {
       foundry.utils.logCompatibilityWarning(
         "Actor5e.rollHitDie now takes roll, dialog, and message config objects as parameters.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
       );
       oldFormat = true;
       formula = dialog.formula;
@@ -2043,7 +2043,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "dnd5e.preRollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.preRollHitDie` hook has been deprecated and replaced with `dnd5e.preRollHitDieV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
       );
       const hookData = {
         formula: rollConfig.rolls[0].parts[0], data: rollConfig.rolls[0].data,
@@ -2088,7 +2088,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "dnd5e.rollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.rollHitDie` hook has been deprecated and replaced with `dnd5e.rollHitDieV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
       );
       if ( Hooks.call("dnd5e.rollHitDie", this, rolls[0], updates) === false ) return null;
     }
@@ -3563,16 +3563,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
  */
 class SourcedItemsMap extends Map {
   /** @inheritDoc */
-  get(key, { remap=true, legacy=true }={}) {
+  get(key, { remap=true }={}) {
     if ( !key ) return;
     if ( remap ) ({ uuid: key } = parseUuid(key) ?? {});
-    if ( legacy ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `sourcedItems` data on actor has changed from storing individual items to storing Sets of items. Pass `legacy: false` to retrieve the new Set data.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.3", once: true }
-      );
-      return super.get(key)?.first();
-    }
     return super.get(key);
   }
 
@@ -3582,7 +3575,7 @@ class SourcedItemsMap extends Map {
   set(key, value) {
     const { uuid } = parseUuid(key);
     if ( !this.has(uuid) ) super.set(uuid, new Set());
-    this.get(uuid, { remap: false, legacy: false }).add(value);
+    this.get(uuid, { remap: false }).add(value);
     return this;
   }
 
