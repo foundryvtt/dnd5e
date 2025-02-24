@@ -119,11 +119,11 @@ Hooks.once("init", function() {
     delete DND5E.spellcastingTypes.leveled.progression.half.roundUp;
 
     // Adjust Wild Shape and Polymorph presets.
-    DND5E.transformation.presets.wildshape.settings.keep.delete("hp");
-    DND5E.transformation.presets.wildshape.settings.keep.delete("type");
-    delete DND5E.transformation.presets.polymorph.settings.addTemp;
-    DND5E.transformation.presets.polymorph.settings.keep.delete("hp");
-    DND5E.transformation.presets.polymorph.settings.keep.delete("type");
+    for ( const preset of ["polymorph", "wildshape"] ) {
+      DND5E.transformation.presets[preset].settings.keep.delete("hp");
+      DND5E.transformation.presets[preset].settings.keep.delete("type");
+      delete DND5E.transformation.presets[preset].settings.tempFormula;
+    }
 
     // Adjust language categories.
     delete DND5E.languages.standard.children.sign;
@@ -476,6 +476,7 @@ Hooks.once("i18nInit", () => {
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
   Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
+  Localization.localizeDataModel(dataModels.settings.TransformationSetting);
 });
 
 /* -------------------------------------------- */
@@ -600,15 +601,6 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
       }
     });
   }
-});
-
-// TODO: Generalize this logic and make it available in the re-designed transform application.
-Hooks.on("dnd5e.transformActor", (subject, target, d, options) => {
-  const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
-  if ( (options.preset !== "wildshape") || !subject.classes?.druid || isLegacy ) return;
-  let temp = subject.classes.druid.system.levels;
-  if ( subject.classes.druid.subclass?.identifier === "moon" ) temp *= 3;
-  d.system.attributes.hp.temp = temp;
 });
 
 /* -------------------------------------------- */

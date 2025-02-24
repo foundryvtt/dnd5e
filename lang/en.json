@@ -4080,8 +4080,30 @@
       },
       "Spell": {
         "Label": "Spell Effects"
+      }
+    },
+    "FIELDS": {
+      "effects": {
+        "label": "Active Effects"
       },
-      "Title": "Active Effects"
+      "keep": {
+        "hint": "These details will be retained from the source actor.",
+        "label": "Keep"
+      },
+      "merge": {
+        "hint": "Merge these proficiencies, keeping whichever has the higher modifier.",
+        "label": "Merge"
+      },
+      "other": {
+        "label": "Other Options"
+      },
+      "tempFormula": {
+        "hint": "Formula for temp HP that will be added upon transformation.",
+        "label": "Temp Formula"
+      },
+      "transformTokens": {
+        "label": "Transform Tokens"
+      }
     },
     "Keep": {
       "Biography": {
@@ -4099,7 +4121,6 @@
       "Health": {
         "Label": "Hit Points & Hit Dice"
       },
-      "Hint": "These details will be retained from the source actor.",
       "Mental": {
         "Hint": "Keep intelligence, wisdom, and charisma scores.",
         "Label": "Mental Abilities"
@@ -4124,27 +4145,17 @@
       "Spells": {
         "Label": "Spells"
       },
-      "Title": "Keep",
       "Vision": {
         "Label": "Vision"
       }
     },
     "Merge": {
-      "Hint": "Merge these proficiencies, keeping whichever has the higher modifier.",
       "Saves": {
         "Label": "Save Proficiencies"
       },
       "Skills": {
         "Label": "Skill Proficiencies"
-      },
-      "Title": "Merge"
-    },
-    "Other": {
-      "AddTemp": {
-        "Hint": "Add the target's current HP as temporary HP",
-        "Label": "Add Temp HP"
-      },
-      "Title": "Other Options"
+      }
     }
   },
   "TemporaryClass": "Temporary Class",
