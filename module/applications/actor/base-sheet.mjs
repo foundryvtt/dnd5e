@@ -879,17 +879,7 @@ export default class ActorSheet5e extends ActorSheetMixin(foundry.appv1?.sheets?
     if ( !settings ) return;
     await game.settings.set("dnd5e", "transformationSettings", settings.toObject());
 
-    // Convert settings into old format
-    const { effects, keep, merge, other, ...remainder } = settings;
-    const deprecatedSettings = {
-      ...Object.fromEntries(Array.from(effects ?? []).map(k => [`keep${k === "all" ? "" : k.capitalize()}AE`, true])),
-      ...Object.fromEntries(Array.from(keep ?? []).map(k => [`keep${k === "hp" ? "HP" : k.capitalize()}`, true])),
-      ...Object.fromEntries(Array.from(merge ?? []).map(k => [`merge${k.capitalize()}`, true])),
-      ...Object.fromEntries(Array.from(other ?? []).map(k => [k, true])),
-      ...remainder
-    };
-
-    return this.actor.transformInto(sourceActor, deprecatedSettings);
+    return this.actor.transformInto(sourceActor, settings);
   }
 
   /* -------------------------------------------- */
