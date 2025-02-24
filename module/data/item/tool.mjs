@@ -119,7 +119,7 @@ export default class ToolData extends ItemDataModel.mixin(
     this.prepareIdentifiable();
     this.preparePhysicalData();
     this.type.label = CONFIG.DND5E.toolTypes[this.type.value] ?? game.i18n.localize(CONFIG.Item.typeLabels.tool);
-    this.type.identifier = CONFIG.DND5E.toolIds[this.type.baseItem];
+    this.type.identifier = CONFIG.DND5E.tools[this.type.baseItem]?.id;
   }
 
   /* -------------------------------------------- */

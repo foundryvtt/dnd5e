@@ -421,7 +421,6 @@ export default class NPCData extends CreatureTemplate {
 
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
-    SourceField.shimActor.call(this);
   }
 
   /* -------------------------------------------- */

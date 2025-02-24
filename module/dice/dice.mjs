@@ -172,7 +172,7 @@ export async function damageRoll({
 }={}) {
   foundry.utils.logCompatibilityWarning(
     "The `damageRoll` standalone method has been deprecated and replaced with `CONFIG.Dice.DamageRoll.build`.",
-    { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+    { since: "DnD5e 4.0", until: "DnD5e 4.5" }
   );
 
   const rollConfig = {

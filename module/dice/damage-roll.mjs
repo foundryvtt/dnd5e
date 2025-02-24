@@ -304,7 +304,7 @@ export default class DamageRoll extends BasicRoll {
     title, defaultRollMode, defaultCritical=false, template, allowCritical=true}={}, options={}) {
     foundry.utils.logCompatibilityWarning(
       "The `configureDialog` on DamageRoll has been deprecated and is now handled through `DamageRoll.build`.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      { since: "DnD5e 4.0", until: "DnD5e 4.5" }
     );
     const DialogClass = this.DefaultConfigurationDialog;
     return await DialogClass.configure(
