@@ -153,9 +153,9 @@ export default class TransformDialog extends Dialog5e {
   async _prepareSettingsContext(context, options) {
     context.categories = ["keep", "merge", "effects", "other"].map(cat => ({
       category: cat,
-      title: `DND5E.TRANSFORM.Setting.${cat.capitalize()}.Title`,
-      hint: game.i18n.has(`DND5E.TRANSFORM.Setting.${cat.capitalize()}.Hint`)
-        ? `DND5E.TRANSFORM.Setting.${cat.capitalize()}.Hint` : "",
+      title: `DND5E.TRANSFORM.Setting.FIELDS.${cat}.label`,
+      hint: game.i18n.has(`DND5E.TRANSFORM.Setting.FIELDS.${cat}.hint`)
+        ? `DND5E.TRANSFORM.Setting.FIELDS.${cat}.hint` : "",
       settings: Object.entries(CONFIG.DND5E.transformation[cat]).map(([name, config]) => ({
         field: new BooleanField({ label: config.label, hint: config.hint }),
         input: context.inputs.createCheckboxInput,
@@ -163,6 +163,20 @@ export default class TransformDialog extends Dialog5e {
         value: this.#settings[cat]?.has(name)
       }))
     }));
+    const fields = TransformationSetting.schema.fields;
+    context.categories[3].settings.push(
+      {
+        field: fields.tempFormula,
+        name: "tempFormula",
+        value: this.#settings.tempFormula
+      },
+      {
+        field: fields.transformTokens,
+        input: context.inputs.createCheckboxInput,
+        name: "transformTokens",
+        value: this.#settings.transformTokens
+      }
+    );
     return context;
   }
 
@@ -218,11 +232,12 @@ export default class TransformDialog extends Dialog5e {
    */
   static async #setPreset(event, target) {
     const preset = CONFIG.DND5E.transformation.presets[target.dataset.preset];
-    if ( preset ) {
-      this.#settings = new TransformationSetting({ ...preset.settings, preset: target.dataset.preset });
-    } else {
-      this.#settings = new TransformationSetting();
-    }
+    if ( preset ) this.#settings = new TransformationSetting({
+      ...preset.settings,
+      preset: target.dataset.preset,
+      transformTokens: this.element.querySelector('[name="transformTokens"]').checked
+    });
+    else this.#settings = new TransformationSetting();
     this.render({ parts: ["presets", "settings"] });
   }
 
