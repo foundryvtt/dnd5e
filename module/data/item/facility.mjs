@@ -208,6 +208,9 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
 
     if ( this.disabled ) this.progress.order = "repair";
 
+    // Trade
+    if ( Number.isFinite(this.trade.creatures.max) ) this.trade.creatures.max -= this.trade.pending.creatures.length;
+
     // Labels
     const labels = this.parent.labels ??= {};
     if ( this.order ) labels.order = game.i18n.localize(`DND5E.FACILITY.Orders.${this.order}.present`);
