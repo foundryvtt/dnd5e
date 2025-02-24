@@ -1041,7 +1041,7 @@ export default class ChatMessage5e extends ChatMessage {
       + "`dnd5e.messageType` flag.";
       Object.defineProperty(flags.use, "type", {
         get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true });
+          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.5", once: true });
           return flags.item?.type;
         },
         configurable: true,
@@ -1049,7 +1049,7 @@ export default class ChatMessage5e extends ChatMessage {
       });
       Object.defineProperty(flags.use, "itemId", {
         get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true });
+          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.5", once: true });
           return flags.item?.id;
         },
         configurable: true,
@@ -1057,7 +1057,7 @@ export default class ChatMessage5e extends ChatMessage {
       });
       Object.defineProperty(flags.use, "itemUuid", {
         get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true });
+          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.5", once: true });
           return flags.item?.uuid;
         },
         configurable: true,
@@ -1070,7 +1070,7 @@ export default class ChatMessage5e extends ChatMessage {
       + "`dnd5e.item.uuid`.";
       Object.defineProperty(flags.roll, "itemId", {
         get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true });
+          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.5", once: true });
           return flags.item?.id;
         },
         configurable: true,
@@ -1078,7 +1078,7 @@ export default class ChatMessage5e extends ChatMessage {
       });
       Object.defineProperty(flags.roll, "itemUuid", {
         get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true });
+          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.5", once: true });
           return flags.item?.uuid;
         },
         configurable: true,
@@ -1090,7 +1090,7 @@ export default class ChatMessage5e extends ChatMessage {
       get() {
         foundry.utils.logCompatibilityWarning(
           "The `dnd5e.itemData` flag on `ChatMessage` is now `dnd5e.item.data`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+          { since: "DnD5e 4.0", until: "DnD5e 4.5", once: true }
         );
         return this.item.data;
       },

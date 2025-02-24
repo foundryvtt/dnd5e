@@ -831,16 +831,11 @@ DND5E.tools = {
  */
 DND5E.toolIds = new Proxy(DND5E.tools, {
   get(target, prop) {
-    return target[prop]?.id ?? target[prop];
-  },
-  set(target, prop, value) {
     foundry.utils.logCompatibilityWarning(
-      "Appending to CONFIG.DND5E.toolIds is deprecated, use CONFIG.DND5E.tools instead.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.2", once: true }
+      "`CONFIG.DND5E.toolIds` is deprecated, use `CONFIG.DND5E.tools` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
     );
-    target[prop] ??= { ability: "int" };
-    target[prop].id = value;
-    return true;
+    return target[prop]?.id ?? target[prop];
   }
 });
 
@@ -921,14 +916,6 @@ DND5E.scalarTimePeriods = new Proxy(DND5E.timeUnits, {
   },
   has(target, key) {
     return target[key] && target[key].option !== false;
-  },
-  set(target, prop, value) {
-    foundry.utils.logCompatibilityWarning(
-      "Appending to CONFIG.DND5E.scalarTimePeriods is deprecated, use CONFIG.DND5E.timeUnits instead.",
-      { since: "DnD5e 4.2", until: "DnD5e 4.4", once: true }
-    );
-    target[prop] ??= {};
-    target[prop].label = value;
   },
   ownKeys(target) {
     return Object.keys(target).filter(k => target[k]?.option !== false);
@@ -1510,7 +1497,7 @@ DND5E.limitedUsePeriods = {
     label: "DND5E.USES.Recovery.Period.Day.Label",
     abbreviation: "DND5E.USES.Recovery.Period.Day.Label"
   },
-  // TODO: Remove with DnD5e 4.4
+  // TODO: Remove with DnD5e 4.5
   charges: {
     label: "DND5E.UsesPeriods.Charges",
     abbreviation: "DND5E.UsesPeriods.ChargesAbbreviation",
@@ -2559,7 +2546,6 @@ DND5E.movementUnits = {
     type: "metric"
   }
 };
-patchConfig("movementUnits", "label", { since: "DnD5e 4.2", until: "DnD5e 4.4" });
 preLocalize("movementUnits", { keys: ["label", "abbreviation"] });
 
 /* -------------------------------------------- */
@@ -2784,7 +2770,6 @@ DND5E.individualTargetTypes = {
     counted: "DND5E.TARGET.Type.WillingCreature.Counted"
   }
 };
-patchConfig("individualTargetTypes", "label", { from: "DnD5e 4.2", until: "DnD5e 4.4" });
 preLocalize("individualTargetTypes", { key: "label" });
 
 /* -------------------------------------------- */
@@ -4118,7 +4103,7 @@ DND5E.traits = {
     icon: "icons/skills/trades/smithing-anvil-silver-red.webp",
     actorKeyPath: "system.tools",
     configKey: "toolProficiencies",
-    subtypes: { keyPath: "toolType", ids: ["toolIds"] },
+    subtypes: { keyPath: "toolType", ids: ["tools"] },
     children: { vehicle: "vehicleTypes" },
     sortCategories: true,
     expertise: true

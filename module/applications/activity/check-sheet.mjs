@@ -53,7 +53,7 @@ export default class CheckSheet extends ActivitySheet {
       ...Object.entries(CONFIG.DND5E.skills).map(([value, { label }]) => ({
         value, label, group: game.i18n.localize("DND5E.Skills")
       })),
-      ...Object.keys(CONFIG.DND5E.toolIds).map(value => ({
+      ...Object.keys(CONFIG.DND5E.tools).map(value => ({
         value, label: Trait.keyLabel(value, { trait: "tool" }), group: game.i18n.localize("TYPES.Item.toolPl")
       })).sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang))
     ];

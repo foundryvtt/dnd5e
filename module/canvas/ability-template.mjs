@@ -104,7 +104,7 @@ export default class AbilityTemplate extends (foundry.canvas?.placeables?.Measur
     if ( "dnd5e.preCreateItemTemplate" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.preCreateItemTemplate` hook has been deprecated and replaced with `dnd5e.preCreateActivityTemplate`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
       );
       if ( Hooks.call("dnd5e.preCreateItemTemplate", activity.item, templateData) === false ) return null;
     }
@@ -132,7 +132,7 @@ export default class AbilityTemplate extends (foundry.canvas?.placeables?.Measur
     if ( "dnd5e.createItemTemplate" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.createItemTemplate` hook has been deprecated and replaced with `dnd5e.createActivityTemplate`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
       );
       Hooks.callAll("dnd5e.createItemTemplate", activity.item, created[0]);
     }
@@ -147,12 +147,12 @@ export default class AbilityTemplate extends (foundry.canvas?.placeables?.Measur
    * @param {Item5e} item               The Item object for which to construct the template
    * @param {object} [options={}]       Options to modify the created template.
    * @returns {AbilityTemplate|null}    The template object, or null if the item does not produce a template
-   * @deprecated since DnD5e 4.0, available until DnD5e 4.4
+   * @deprecated since DnD5e 4.0, available until DnD5e 4.5
    */
   static fromItem(item, options={}) {
     foundry.utils.logCompatibilityWarning(
       "The `AbilityTemplate#fromItem` method has been deprecated and replaced with `fromActivity`.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      { since: "DnD5e 4.0", until: "DnD5e 4.5" }
     );
     const activity = this.system.activities?.contents[0];
     if ( activity ) return this.fromActivity(activity, options)?.[0] ?? null;
