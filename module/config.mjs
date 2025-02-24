@@ -1,5 +1,6 @@
 import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import { ConsumptionTargetData } from "./data/activity/fields/consumption-targets-field.mjs";
+import TransformationSetting from "./data/settings/transformation-setting.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
@@ -3553,7 +3554,7 @@ DND5E.polymorphSettings = new Proxy(DND5E.transformation, {
       "`CONFIG.DND5E.polymorphSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
       { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
     );
-    const [category, key] = _splitPolymorphKey(prop);
+    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
     return target[category]?.[key]?.label;
   },
   set(target, prop, value) {
@@ -3561,7 +3562,7 @@ DND5E.polymorphSettings = new Proxy(DND5E.transformation, {
       "`CONFIG.DND5E.polymorphSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
       { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
     );
-    const [category, key] = _splitPolymorphKey(prop);
+    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
     if ( !category ) return false;
     target[category][key] = { label: value };
     return true;
@@ -3581,7 +3582,7 @@ DND5E.polymorphEffectSettings = new Proxy(DND5E.transformation, {
       { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
     );
     if ( prop === "keepAE" ) return target.effects.all?.label;
-    const [category, key] = _splitPolymorphKey(prop);
+    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
     return target[category]?.[key]?.label;
   },
   set(target, prop, value) {
@@ -3593,7 +3594,7 @@ DND5E.polymorphEffectSettings = new Proxy(DND5E.transformation, {
       target.effects.all = { label: value };
       return true;
     }
-    const [category, key] = _splitPolymorphKey(prop);
+    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
     if ( !category ) return false;
     target[category][key] = { label: value };
     return true;
@@ -3613,16 +3614,12 @@ DND5E.transformationPresets = new Proxy(DND5E.transformation, {
     );
     const preset = target.presets[prop];
     if ( !preset ) return;
-    const { effects, keep, merge, other, ...remainder } = preset.settings;
+    const setting = new TransformationSetting(preset.settings);
     return {
       icon: preset.icon,
       label: preset.label,
       options: {
-        ...Object.fromEntries(Array.from(effects ?? []).map(k => [`keep${k === "all" ? "" : k.capitalize()}AE`, true])),
-        ...Object.fromEntries(Array.from(keep ?? []).map(k => [`keep${k === "hp" ? "HP" : k.capitalize()}`, true])),
-        ...Object.fromEntries(Array.from(merge ?? []).map(k => [`merge${k.capitalize()}`, true])),
-        ...Object.fromEntries(Array.from(other ?? []).map(k => [k, true])),
-        ...remainder,
+        ...setting._toDeprecatedConfig(),
         preset: prop
       }
     };
@@ -3632,40 +3629,15 @@ DND5E.transformationPresets = new Proxy(DND5E.transformation, {
       "`CONFIG.DND5E.transformationPresets` is deprecated, use `CONFIG.DND5E.transformation.presets` instead.",
       { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
     );
-    const preset = { label: value.label, icon: value.icon, settings: {} };
-    for ( const [k, v] of Object.entries(value.options ?? {}) ) {
-      if ( v === false ) continue;
-      const [category, key] = _splitPolymorphKey(k);
-      if ( category ) {
-        preset.settings[category] ??= new Set();
-        preset.settings[category].add(key);
-      } else {
-        preset.settings[k] = v;
-      }
-    }
-    target.presets[prop] = preset;
+    const preset = {
+      label: value.label,
+      icon: value.icon,
+      settings: TransformationSetting._fromDeprecatedConfig(value.options ?? {})
+    };
+    target.presets[prop] = preset.toObject();
     return true;
   }
 });
-
-const _splitPolymorphKey = prop => {
-  let category;
-  if ( prop.endsWith("AE") ) {
-    if ( prop === "keepAE" ) return ["effects", "all"];
-    category = "effects";
-    prop = prop.replace("keep", "").replace("AE", "");
-  } else if ( prop.startsWith("keep") ) {
-    category = "keep";
-    if ( prop === "keepHP" ) return ["keep", "hp"];
-    else prop = prop.replace("keep", "");
-  } else if ( prop.startsWith("merge") ) {
-    category = "merge";
-    prop = prop.replace("merge", "");
-  } else {
-    return [null, prop];
-  }
-  return [category, prop.charAt(0).toLowerCase() + prop.slice(1)];
-};
 
 /* -------------------------------------------- */
 
