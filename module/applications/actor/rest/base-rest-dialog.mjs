@@ -6,14 +6,7 @@ const { BooleanField } = foundry.data.fields;
  * Dialog with shared resting functionality.
  */
 export default class BaseRestDialog extends Dialog5e {
-  constructor(options={}, _dialogData={}, _options={}) {
-    if ( options instanceof Actor ) {
-      foundry.utils.logCompatibilityWarning(
-        "The rest dialogs now take a single options object with `document` and `config` options.",
-        { since: "DnD5e 4.2", until: "DnD5e 4.4" }
-      );
-      options = { ..._options, data: _dialogData, document: options };
-    }
+  constructor(options={}) {
     super(options);
     this.actor = options.document;
     this.#config = options.config;

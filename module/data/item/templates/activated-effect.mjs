@@ -13,7 +13,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
   static defineSchema() {
     foundry.utils.logCompatibilityWarning(
       "The `ActivatedEffectTemplate` data model has been deprecated in favor of `ActivitiesTemplate`.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+      { since: "DnD5e 4.0", until: "DnD5e 4.5", once: true }
     );
     return {
       activation: new SchemaField({
@@ -140,7 +140,7 @@ export default class ActivatedEffectTemplate extends SystemDataModel {
     // Substitute source UUIDs in consumption targets
     if ( !this.parent.isEmbedded ) return;
     if ( ["ammo", "charges", "material"].includes(this.consume.type) && this.consume.target?.includes(".") ) {
-      const item = this.parent.actor.sourcedItems?.get(this.consume.target, { legacy: false })?.first();
+      const item = this.parent.actor.sourcedItems?.get(this.consume.target)?.first();
       if ( item ) this.consume.target = item.id;
     }
   }

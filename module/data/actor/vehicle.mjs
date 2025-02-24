@@ -166,7 +166,6 @@ export default class VehicleData extends CommonTemplate {
     this.attributes.ac.calc = "flat";
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
-    SourceField.shimActor.call(this);
   }
 
   /* -------------------------------------------- */

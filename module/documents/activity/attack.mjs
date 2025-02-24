@@ -177,7 +177,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     if ( "dnd5e.preRollAttack" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.preRollAttack` hook has been deprecated and replaced with `dnd5e.preRollAttackV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
       );
       const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
       if ( Hooks.call("dnd5e.preRollAttack", this.item, oldConfig) === false ) return null;
@@ -232,7 +232,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     if ( "dnd5e.rollAttack" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.rollAttack` hook has been deprecated and replaced with `dnd5e.rollAttackV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
       );
       const oldAmmoUpdate = ammoUpdate ? [{ _id: ammoUpdate.id, "system.quantity": ammoUpdate.quantity }] : [];
       Hooks.callAll("dnd5e.rollAttack", this.item, rolls[0], oldAmmoUpdate);
