@@ -25,7 +25,7 @@
                 </div>
                 {{#if showTargets}}
                 <div class="field-group">
-                    {{ formField fields.target name=(concat prefix "target") value=data.target options=validTargets
+                    {{ formField fields.target name=(concat prefix "target") value=selectedTarget options=validTargets
                                  placeholder=targetPlaceholder label="DND5E.Target" localize=true hint=false
                                  classes="label-top" }}
                 </div>

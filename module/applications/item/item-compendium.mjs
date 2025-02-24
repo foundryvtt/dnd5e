@@ -55,8 +55,8 @@ class ItemCompendium5eV13 extends DragDropApplicationMixin(foundry.applications.
   /** @inheritDoc */
   async _handleDroppedEntry(target, data) {
     // Obtain the dropped Document
-    let item = await Item.fromDropData(data);
     const behavior = this._dropBehavior(event, data);
+    let item = await Item.fromDropData(data);
     if ( !item || (behavior === "none") ) return;
 
     // Create item and its contents if it doesn't already exist here
@@ -140,8 +140,8 @@ class ItemCompendium5eV12 extends DragDropApplicationMixin(
   /** @inheritDoc */
   async _handleDroppedEntry(target, data) {
     // Obtain the dropped Document
-    let item = await Item.fromDropData(data);
     const behavior = this._dropBehavior(event, data);
+    let item = await Item.fromDropData(data);
     if ( !item || (behavior === "none") ) return;
 
     // Create item and its contents if it doesn't already exist here

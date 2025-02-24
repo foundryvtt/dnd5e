@@ -182,6 +182,7 @@ async function enrichAttack(config, label, options) {
     config.formula = simplifyRollFormula(
       Roll.defaultImplementation.replaceFormulaData(attackConfig.parts.join(" + "), attackConfig.data)
     );
+    if ( attackConfig.data.scaling ) config.scaling ??= String(attackConfig.data.scaling.increase);
     delete config.activity;
   }
 
@@ -807,6 +808,7 @@ async function enrichDamage(configs, label, options) {
       config.formulas.push(simplifyRollFormula(
         Roll.defaultImplementation.replaceFormulaData(roll.parts.join(" + "), roll.data)
       ));
+      if ( roll.data.scaling ) config.scaling ??= String(roll.data.scaling.increase);
       config.damageTypes.push(roll.options.types?.join("|") ?? roll.options.type);
     }
     delete config.activity;
@@ -1422,10 +1424,10 @@ function createRequestButton(dataset) {
  */
 async function rollAttack(event) {
   const target = event.target.closest(".roll-link-group");
-  const { activityUuid, attackMode, formula } = target.dataset;
+  const { activityUuid, attackMode, formula, scaling } = target.dataset;
 
   if ( activityUuid ) {
-    const activity = await fromUuid(activityUuid);
+    const activity = await _fetchActivity(activityUuid, Number(scaling ?? 0));
     if ( activity ) return activity.rollAttack({ attackMode, event });
   }
 
@@ -1474,10 +1476,10 @@ async function rollAttack(event) {
  */
 async function rollDamage(event) {
   const target = event.target.closest(".roll-link-group");
-  let { activityUuid, attackMode, formulas, damageTypes, rollType } = target.dataset;
+  let { activityUuid, attackMode, formulas, damageTypes, rollType, scaling } = target.dataset;
 
   if ( activityUuid ) {
-    const activity = await fromUuid(activityUuid);
+    const activity = await _fetchActivity(activityUuid, Number(scaling ?? 0));
     if ( activity ) return activity.rollDamage({ attackMode, event });
   }
 
@@ -1514,6 +1516,21 @@ async function rollDamage(event) {
   const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, {}, messageConfig);
   if ( !rolls?.length ) return;
   Hooks.callAll("dnd5e.rollDamageV2", rolls);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Fetch an activity with scaling applied.
+ * @param {string} uuid     Activity UUID.
+ * @param {number} scaling  Scaling increase to apply.
+ * @returns {Activity|void}
+ */
+async function _fetchActivity(uuid, scaling) {
+  const activity = await fromUuid(uuid);
+  if ( !activity || !scaling ) return activity;
+  const item = activity.item.clone({ "flags.dnd5e.scaling": scaling }, { keepId: true });
+  return item.system.activities.get(activity.id);
 }
 
 /* -------------------------------------------- */

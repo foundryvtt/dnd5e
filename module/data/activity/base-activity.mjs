@@ -538,6 +538,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Prepare context to display this activity in a parent sheet.
+   * @returns {object}
+   */
+  prepareSheetContext() {
+    return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare data related to this activity.
    */
   prepareData() {
@@ -675,7 +685,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   getDamageConfig(config={}) {
     if ( !this.damage?.parts ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
-    const rollConfig = foundry.utils.mergeObject({ scaling: 0 }, config);
+    const rollConfig = foundry.utils.deepClone(config);
     const rollData = this.getRollData();
     rollConfig.rolls = this.damage.parts
       .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index))
@@ -697,7 +707,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @protected
    */
   _processDamagePart(damage, rollConfig, rollData, index=0) {
-    const scaledFormula = damage.scaledFormula(rollData.scaling);
+    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling);
     const parts = scaledFormula ? [scaledFormula] : [];
     const data = { ...rollData };
 
