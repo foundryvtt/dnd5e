@@ -24,7 +24,3 @@ export {default as SheetConfig} from "./sheet-config.mjs";
 export {default as SourceConfig} from "./source-config.mjs";
 export {default as Tabs5e} from "./tabs.mjs";
 export {PrototypeTokenConfig5e, TokenConfig5e} from "./token-config.mjs";
-
-// Deprecations
-export {default as BastionConfig} from "./bastion.mjs";
-export {default as CompendiumBrowserSourceConfig} from "./compendium-browser-source-config.mjs";
