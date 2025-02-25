@@ -30,4 +30,17 @@
 
     &::before, &::after { filter: grayscale(1); }
   }
+
+  .statblock.npc {
+    --statblock-background: rgb(0 0 0 / .35);
+    --statblock-ability-border: black;
+    --statblock-ability-header-1st: rgb(83, 73, 50);
+    --statblock-ability-header-2nd: rgb(62, 68, 48);
+    --statblock-ability-stat-1st: rgb(89, 63, 63);
+    --statblock-ability-stat-2nd: rgb(89, 67, 87);
+    --statblock-border: var(--dnd5e-color-gold);
+    --statblock-text-header: var(--color-text-dark-primary);
+    --statblock-text-primary: var(--color-text-dark-primary);
+    --statblock-text-secondary: color-mix(in oklab, var(--color-text-dark-primary), transparent 25%)
+  }
 }

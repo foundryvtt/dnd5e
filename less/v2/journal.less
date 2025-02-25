@@ -189,6 +189,7 @@
   /* NPC Stat Blocks */
   .statblock.npc {
     --statblock-background: rgb(235 228 214 / .35);
+    --statblock-ability-border: white;
     --statblock-ability-header-1st: rgb(234 229 217);
     --statblock-ability-header-2nd: rgb(215 217 208);
     --statblock-ability-stat-1st: rgb(218 211 203);
@@ -281,7 +282,7 @@
         }
         tbody {
           tr {
-            border-block: 1px solid white;
+            border-block: 1px solid var(--statblock-ability-border);
             &:nth-of-type(odd) {
               th, .score { background: var(--statblock-ability-header-1st); }
               td { background: var(--statblock-ability-stat-1st); }
