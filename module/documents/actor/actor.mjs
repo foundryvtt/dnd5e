@@ -4,6 +4,7 @@ import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
+import AdvantageModeField from "../../data/fields/advantage-mode-field.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
 import parseUuid from "../../parse-uuid.mjs";
@@ -1172,20 +1173,25 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
+    const abilityId = relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability);
+    const ability = this.system.abilities?.[abilityId];
     const buildConfig = this._buildSkillToolConfig.bind(this, type);
 
+    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
+      `abilities.${abilityId}.check.roll.mode`,
+      `${type}s.${type === "skill" ? config.skill : config.tool}.roll.mode`
+    ]);
+
     const rollConfig = foundry.utils.mergeObject({
-      ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability),
-      advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-      disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+      ability: abilityId, advantage, disadvantage,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
     rollConfig.rolls = [BasicRoll.mergeConfigs({
       options: {
-        maximum: relevant?.roll.max,
-        minimum: relevant?.roll.min
+        maximum: Math.min(relevant?.roll.max ?? Infinity, ability?.check.roll.max ?? Infinity),
+        minimum: Math.max(relevant?.roll.min ?? -Infinity, ability?.check.roll.min ?? -Infinity)
       }
     }, config.rolls?.shift())].concat(config.rolls ?? []);
     rollConfig.subject = this;
@@ -1198,7 +1204,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }, dialog);
 
-    const abilityLabel = CONFIG.DND5E.abilities[relevant?.ability ?? skillConfig?.ability ?? ""]?.label;
+    const abilityLabel = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
 
     const messageConfig = foundry.utils.mergeObject({
       create: true,
@@ -1443,7 +1449,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
       cover: (config.ability === "dex") && (type === "save") ? this.system.attributes?.ac?.cover : null
     }, rollData);
-    const options = {};
+    const options = {
+      advantage: ability?.[type]?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
+      disadvantage: ability?.[type]?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
+      maximum: ability?.[type]?.roll.max,
+      minimum: ability?.[type]?.roll.min
+    };
 
     const rollConfig = foundry.utils.mergeObject({
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
@@ -1716,20 +1727,29 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
     }
 
+    const abilityId = (conc.ability in CONFIG.DND5E.abilities) ? conc.ability
+      : CONFIG.DND5E.defaultAbilities.concentration;
+    const ability = this.system.abilities?.[abilityId];
+
+    const { advantage, disadvantage } = AdvantageModeField.combineFields(this.system, [
+      `abilities.${abilityId}.save.roll.mode`,
+      "attributes.concentration.roll.mode"
+    ]);
+
     let data = {};
     const parts = [];
     const options = {
-      advantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
-      disadvantage: conc.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
-      maximum: conc.roll.max,
-      minimum: conc.roll.min
+      advantage,
+      disadvantage,
+      maximum: Math.min(conc.roll.max ?? Infinity, ability?.save.roll.max ?? Infinity),
+      minimum: Math.max(conc.roll.min ?? -Infinity, ability?.save.roll.min ?? -Infinity)
     };
 
     // Concentration bonus
     if ( conc.bonuses.save ) parts.push(conc.bonuses.save);
 
     const rollConfig = foundry.utils.mergeObject({
-      ability: (conc.ability in CONFIG.DND5E.abilities) ? conc.ability : CONFIG.DND5E.defaultAbilities.concentration,
+      ability: abilityId,
       isConcentration: true,
       target: 10
     }, config);
