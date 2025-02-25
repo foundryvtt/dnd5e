@@ -1101,7 +1101,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   if ( attr.startsWith("system.") ) attr = attr.slice(7);
 
   // Check any actor-specific names first.
-  if ( attr.startsWith("resources.") && actor ) {
+  if ( attr.match(/^resources\.(?:primary|secondary|tertiary)/) && actor ) {
     const key = attr.replace(/\.value$/, "");
     const resource = foundry.utils.getProperty(actor, `system.${key}`);
     if ( resource?.label ) return resource.label;
