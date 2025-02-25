@@ -1,4 +1,5 @@
 import { simplifyBonus } from "../../../utils.mjs";
+import AdvantageModeField from "../../fields/advantage-mode-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
