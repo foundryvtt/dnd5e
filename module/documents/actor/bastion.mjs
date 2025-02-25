@@ -286,10 +286,7 @@ export default class Bastion {
       // Bought goods
       else if ( trade.pending.value !== null ) {
         if ( trade.pending.creatures.length ) {
-          const creatures = trade.creatures.value.concat(trade.pending.creatures);
-          const diff = trade.creatures.max - creatures.length;
-          if ( diff < 0 ) creatures.splice(diff);
-          updates["system.trade.creatures.value"] = creatures;
+          updates["system.trade.creatures.value"] = trade.creatures.value.concat(trade.pending.creatures);
         }
         else updates["system.trade.stock.value"] = Math.min(trade.stock.value + trade.pending.value, trade.stock.max);
       }
@@ -551,7 +548,7 @@ export default class Bastion {
     }
 
     if ( !turnButton ) {
-      const v12 = game.release.generation < 13 ? "v12" : "";
+      const v12 = game.release.generation < 13 ? "v12" : "faded-ui";
       document.querySelector("#controls, #scene-controls")?.insertAdjacentHTML("afterend", `
         <button type="button" id="bastion-turn" data-action="bastionTurn" class="dnd5e2 ${v12}">
           <i class="fas fa-chess-rook"></i>

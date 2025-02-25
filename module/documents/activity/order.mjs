@@ -270,7 +270,7 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
           if ( sold ) creatures.push(await fromUuid(this.item.system.trade.creatures.value[i]));
         }
       }
-      else creatures.push(...await Promise.all(trade.creatures.buy.filter(_ => _).map(fromUuid)));
+      else creatures.push(...await Promise.all(trade.creatures.buy.filter(_ => _).map(uuid => fromUuid(uuid))));
       supplements.push(`
         <strong>${game.i18n.localize(`DND5E.FACILITY.Trade.${trade.sell ? "Sell" : "Buy"}.Supplement`)}</strong>
         ${game.i18n.getListFormatter({ style: "narrow" }).format(creatures.map(a => a.toAnchor().outerHTML))}
