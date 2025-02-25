@@ -45,7 +45,7 @@ export default class HealActivityData extends BaseActivityData {
   getDamageConfig(config={}) {
     if ( !this.healing.formula ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
-    const rollConfig = foundry.utils.deepClone(config);
+    const rollConfig = foundry.utils.mergeObject({ critical: { allow: false } }, config);
     const rollData = this.getRollData();
     rollConfig.rolls = [this._processDamagePart(this.healing, rollConfig, rollData)].concat(config.rolls ?? []);
 
