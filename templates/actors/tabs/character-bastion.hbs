@@ -129,21 +129,21 @@
     {{#if hirelings.length}}
     <div class="slots facility-occupants hirelings" data-prop="system.hirelings">
         {{#each hirelings}}
-            {{> ".occupant" type="hireling" index=@key }}
+            {{> ".occupant" type="hireling" }}
         {{/each}}
     </div>
     {{/if}}
     {{#if defenders.length}}
     <div class="slots facility-occupants defenders" data-prop="system.defenders">
         {{#each defenders}}
-            {{> ".occupant" type="defender" index=@key }}
+            {{> ".occupant" type="defender" }}
         {{/each}}
     </div>
     {{/if}}
     {{#if creatures.length}}
     <div class="slots facility-occupants creatures" data-prop="system.trade.creatures">
         {{#each creatures}}
-            {{> ".occupant" type="creature" index=@key }}
+            {{> ".occupant" type="creature" }}
         {{/each}}
     </div>
     {{/if}}
@@ -152,13 +152,18 @@
 
 {{#*inline ".occupant"}}
 <div {{#if actor}}data-actor-uuid="{{ actor.uuid }}" data-action="viewOccupant"{{/if}}
-      class="slot occupant-slot {{ type }} {{#if empty}}empty{{/if}}" data-index="{{ index }}">
+      class="slot occupant-slot {{ type }} {{#if empty}}empty{{/if}} {{#if pending}}pending{{/if}}"
+      data-index="{{ index }}" {{#if pending}}data-tooltip="{{ localize "DND5E.Bastion.Trade.Pending" }}"{{/if}}>
     {{#if actor}}
+    {{#unless pending}}
     <img src="{{ actor.img }}" alt="{{ actor.name }}">
+    {{/unless}}
+    {{/if}}
     {{#if @root.editable}}
+    {{#if (or actor pending)}}
     <a class="deletion-control" data-action="deleteOccupant"
        aria-label="{{ localize "DND5E.FACILITY.Action.DeleteOccupant" }}">
-        <i class="fas fa-circle-xmark"></i>
+        <i class="fas fa-circle-xmark" inert></i>
     </a>
     {{/if}}
     {{/if}}
