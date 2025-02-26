@@ -11,6 +11,10 @@ import PhysicalItemTemplate from "./templates/physical-item.mjs";
 const { NumberField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ */
+
+/**
  * Data definition for Tool items.
  * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
@@ -19,10 +23,12 @@ const { NumberField, SetField, StringField } = foundry.data.fields;
  * @mixes PhysicalItemTemplate
  * @mixes EquippableItemTemplate
  *
- * @property {string} ability     Default ability when this tool is being used.
- * @property {string} chatFlavor  Additional text added to chat when this tool is used.
- * @property {number} proficient  Level of proficiency in this tool as defined in `DND5E.proficiencyLevels`.
- * @property {string} bonus       Bonus formula added to tool rolls.
+ * @property {string} ability                      Default ability when this tool is being used.
+ * @property {string} bonus                        Bonus formula added to tool rolls.
+ * @property {string} chatFlavor                   Additional text added to chat when this tool is used.
+ * @property {number} proficient                   Level of proficiency as defined in `DND5E.proficiencyLevels`.
+ * @property {Set<string>} properties              Tool properties.
+ * @property {Omit<ItemTypeData, "subtype">} type  Tool type and base item.
  */
 export default class ToolData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,

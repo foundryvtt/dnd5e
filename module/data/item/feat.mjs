@@ -9,6 +9,10 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ */
+
+/**
  * Data definition for Feature items.
  * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
@@ -25,6 +29,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {boolean} prerequisites.repeatable     Can this item be selected more than once?
  * @property {Set<string>} properties               General properties of a feature item.
  * @property {string} requirements                  Actor details required to use this feature.
+ * @property {Omit<ItemTypeData, "baseItem">} type  Feature type and subtype.
  */
 export default class FeatData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, ItemTypeTemplate
