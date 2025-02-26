@@ -8,11 +8,18 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ */
+
+/**
  * Data definition for Loot items.
  * @mixes ItemDescriptionTemplate
  * @mixes ItemTypeTemplate
  * @mixes IdentifiableTemplate
  * @mixes PhysicalItemTemplate
+ *
+ * @property {Set<string>} properties               General properties of a loot item.
+ * @property {Omit<ItemTypeData, "baseItem">} type  Loot type and subtype.
  */
 export default class LootData extends ItemDataModel.mixin(
   ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate, PhysicalItemTemplate
