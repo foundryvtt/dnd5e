@@ -162,6 +162,10 @@ export default function ItemSheetV2Mixin(Base) {
         editable: this.item._source.name,
         field: this.item.schema.getField("name")
       };
+      context.img = {
+        value: this.item.img,
+        editable: this.item._source.img
+      };
 
       if ( ("identified" in this.item.system) && (identified === false) ) {
         context.name = {

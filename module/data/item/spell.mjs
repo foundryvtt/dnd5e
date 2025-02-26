@@ -355,8 +355,13 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
    */
   get linkedActivity() {
     const relative = this.parent.actor;
-    if ( !relative ) return null;
-    return fromUuidSync(this.parent.getFlag("dnd5e", "cachedFor"), { relative, strict: false }) ?? null;
+    const uuid = this.parent.getFlag("dnd5e", "cachedFor");
+    if ( !relative || !uuid ) return null;
+    const data = foundry.utils.parseUuid(uuid, { relative });
+    const [, itemId, , activityId] = data?.embedded ?? [];
+    return relative.items.get(itemId)?.system.activities?.get(activityId) ?? null;
+    // TODO: Swap back to fromUuidSync once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
+    // return fromUuidSync(this.parent.getFlag("dnd5e", "cachedFor"), { relative, strict: false }) ?? null;
   }
 
   /* -------------------------------------------- */

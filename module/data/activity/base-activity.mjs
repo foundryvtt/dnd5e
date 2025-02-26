@@ -132,8 +132,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    */
   get activationLabels() {
     if ( !this.activation.type || this.isSpell ) return null;
-    const { activation, duration, range, target } = this.labels;
-    return { activation, duration, range, target };
+    const { activation, duration, range, reach, target } = this.labels;
+    return { activation, duration, range, reach, target };
   }
 
   /* -------------------------------------------- */
@@ -538,6 +538,16 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Prepare context to display this activity in a parent sheet.
+   * @returns {object}
+   */
+  prepareSheetContext() {
+    return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare data related to this activity.
    */
   prepareData() {
@@ -615,7 +625,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
           if ( this.item.system.magicAvailable ) formula += ` + ${this.item.system.magicalBonus ?? 0}`;
           if ( (this.item.type === "weapon") && !/@mod\b/.test(formula) ) formula += " + @mod";
         }
-        if ( !index && this.item.system.damage?.bonus ) formula += ` + ${this.item.system.damage.bonus}`;
+        if ( !index && this.item.system.damageBonus ) formula += ` + ${this.item.system.damageBonus}`;
         const roll = new CONFIG.Dice.BasicRoll(formula, rollData);
         roll.simplify();
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
@@ -675,7 +685,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   getDamageConfig(config={}) {
     if ( !this.damage?.parts ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
-    const rollConfig = foundry.utils.mergeObject({ scaling: 0 }, config);
+    const rollConfig = foundry.utils.deepClone(config);
     const rollData = this.getRollData();
     rollConfig.rolls = this.damage.parts
       .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index))
@@ -697,7 +707,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @protected
    */
   _processDamagePart(damage, rollConfig, rollData, index=0) {
-    const scaledFormula = damage.scaledFormula(rollData.scaling);
+    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling);
     const parts = scaledFormula ? [scaledFormula] : [];
     const data = { ...rollData };
 
@@ -705,7 +715,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       const actionType = this.getActionType(rollConfig.attackMode);
       const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${actionType}.damage`);
       if ( bonus && !/^0+$/.test(bonus) ) parts.push(bonus);
-      if ( this.item.system.damage?.bonus ) parts.push(String(this.item.system.damage.bonus));
+      if ( this.item.system.damageBonus ) parts.push(String(this.item.system.damageBonus));
     }
 
     const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);

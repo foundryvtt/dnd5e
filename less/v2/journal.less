@@ -202,6 +202,11 @@
     h4.statblock-title {
       color: color-mix(in oklab, var(--statblock-text-header) 75%, transparent);
       font-size: var(--font-size-18);
+      .content-link {
+        padding: 0;
+        text-decoration: none;
+        > i { display: none; }
+      }
     }
     h5.statblock-actions-title {
       margin-block-start: 8px;
@@ -386,6 +391,7 @@
 
   a:is(.content-link, .inline-roll), a.roll-link-group .roll-link,
   a.roll-link-group.roll-link, :is(.roll-link-group, .reference-link) a {
+    --content-link-text-color: var(--color-text-dark-primary);
     background: transparent;
     border: none;
     text-decoration: underline currentcolor;

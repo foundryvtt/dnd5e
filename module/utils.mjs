@@ -1101,7 +1101,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   if ( attr.startsWith("system.") ) attr = attr.slice(7);
 
   // Check any actor-specific names first.
-  if ( attr.startsWith("resources.") && actor ) {
+  if ( attr.match(/^resources\.(?:primary|secondary|tertiary)/) && actor ) {
     const key = attr.replace(/\.value$/, "");
     const resource = foundry.utils.getProperty(actor, `system.${key}`);
     if ( resource?.label ) return resource.label;
@@ -1157,7 +1157,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   // Derived fields.
   else if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
   else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
-  else if ( attr === "attributes.spelldc" ) label = "DND5E.SpellDC";
+  else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";
 
   // Abilities.
   else if ( attr.startsWith("abilities.") ) {

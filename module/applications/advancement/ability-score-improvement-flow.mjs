@@ -1,3 +1,4 @@
+import CompendiumBrowser from "../compendium-browser.mjs";
 import AdvancementFlow from "./advancement-flow.mjs";
 
 /**
@@ -98,7 +99,7 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         `DND5E.ADVANCEMENT.AbilityScoreImprovement.PointsRemaining.${pluralRules.select(points.available)}`,
         {points: points.available}
       ),
-      showASIFeat: modernRules && this.advancement.allowFeat && !lockImprovement,
+      showASIFeat: modernRules && this.advancement.allowFeat,
       showImprovement: !modernRules || !this.advancement.allowFeat || this.feat?.isASI,
       staticIncrease: !this.advancement.configuration.points
     });
@@ -110,8 +111,9 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
   activateListeners(html) {
     super.activateListeners(html);
     html.find(".adjustment-button").click(this._onClickButton.bind(this));
-    html.find("a[data-uuid]").click(this._onClickFeature.bind(this));
+    html.find("[data-action='browse']").click(this._onBrowseCompendium.bind(this));
     html.find("[data-action='delete']").click(this._onItemDelete.bind(this));
+    html.find("[data-action='viewItem']").click(this._onClickFeature.bind(this));
   }
 
   /* -------------------------------------------- */
@@ -136,6 +138,26 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
         );
       }
     }
+    this.render();
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle opening the compendium browser and displaying the result.
+   * @param {PointerEvent} event  The triggering event.
+   * @protected
+   */
+  async _onBrowseCompendium(event) {
+    event.preventDefault();
+    const filters = {
+      locked: {
+        additional: { category: { feat: 1 } },
+        types: new Set(["feat"])
+      }
+    };
+    const result = await CompendiumBrowser.selectOne({ filters, tab: "feats" });
+    if ( result ) this.feat = await fromUuid(result);
     this.render();
   }
 
@@ -167,9 +189,22 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
    */
   async _onClickFeature(event) {
     event.preventDefault();
-    const uuid = event.currentTarget.dataset.uuid;
+    const uuid = event.target.closest("[data-uuid]")?.dataset.uuid;
     const item = await fromUuid(uuid);
     item?.sheet.render(true);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle deleting a dropped feat.
+   * @param {Event} event  The originating click event.
+   * @protected
+   */
+  async _onItemDelete(event) {
+    event.preventDefault();
+    this.feat = null;
+    this.render();
   }
 
   /* -------------------------------------------- */
@@ -186,19 +221,6 @@ export default class AbilityScoreImprovementFlow extends AdvancementFlow {
 
   /* -------------------------------------------- */
   /*  Drag & Drop                                 */
-  /* -------------------------------------------- */
-
-  /**
-   * Handle deleting a dropped feat.
-   * @param {Event} event  The originating click event.
-   * @protected
-   */
-  async _onItemDelete(event) {
-    event.preventDefault();
-    this.feat = null;
-    this.render();
-  }
-
   /* -------------------------------------------- */
 
   /** @inheritDoc */

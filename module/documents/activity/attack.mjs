@@ -4,6 +4,7 @@ import AttackActivityData from "../../data/activity/attack-data.mjs";
 import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { getTargetDescriptors } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
+import BasicRoll from "../../dice/basic-roll.mjs";
 
 /**
  * Activity for making attacks and rolling damage.
@@ -101,7 +102,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       ui.notifications.warn("DND5E.ATTACK.Warning.NoQuantity", { localize: true });
     }
 
-    const buildConfig = this._buildAttackConfig.bind(this, config.rolls?.shift());
+    const buildConfig = this._buildAttackConfig.bind(this);
 
     const rollConfig = foundry.utils.mergeObject({
       ammunition: this.item.getFlag("dnd5e", `last.${this.id}.ammunition`),
@@ -129,16 +130,15 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     }
 
     rollConfig.hookNames = [...(config.hookNames ?? []), "attack", "d20Test"];
-    rollConfig.rolls = [{
+    rollConfig.rolls = [BasicRoll.mergeConfigs({
       options: {
         ammunition: rollConfig.ammunition,
         attackMode: rollConfig.attackMode,
         criticalSuccess: this.criticalThreshold,
         mastery: rollConfig.mastery
       }
-    }].concat(config.rolls ?? []);
+    }, config.rolls?.shift())].concat(config.rolls ?? []);
     rollConfig.subject = this;
-    rollConfig.rolls.forEach((r, index) => buildConfig(rollConfig, r, null, index));
 
     const dialogConfig = foundry.utils.mergeObject({
       applicationClass: AttackRollConfigurationDialog,
@@ -196,6 +196,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     const flags = {};
     let ammoUpdate = null;
 
+    const canUpdate = this.item.isOwner && !this.item[game.release.generation < 13 ? "compendium" : "inCompendium"];
     if ( rolls[0].options.ammunition ) {
       const ammo = this.actor?.items.get(rolls[0].options.ammunition);
       if ( ammo ) {
@@ -213,7 +214,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     if ( rolls[0].options.attackMode ) flags.attackMode = rolls[0].options.attackMode;
     else if ( rollConfig.attackMode ) rolls[0].options.attackMode = rollConfig.attackMode;
     if ( rolls[0].options.mastery ) flags.mastery = rolls[0].options.mastery;
-    if ( !foundry.utils.isEmpty(flags) && this.actor.items.has(this.item.id) ) {
+    if ( canUpdate && !foundry.utils.isEmpty(flags) && (this.actor && this.actor.items.has(this.item.id)) ) {
       await this.item.setFlag("dnd5e", `last.${this.id}`, flags);
     }
 
@@ -242,7 +243,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     }
 
     // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
-    if ( ammoUpdate?.destroy ) {
+    if ( canUpdate && ammoUpdate?.destroy ) {
       // If ammunition was deleted, store a copy of it in the roll message
       const data = this.actor.items.get(ammoUpdate.id).toObject();
       const messageId = messageConfig.data?.flags?.dnd5e?.originatingMessage
@@ -251,7 +252,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       await attackMessage?.setFlag("dnd5e", "roll.ammunitionData", data);
       await this.actor.deleteEmbeddedDocuments("Item", [ammoUpdate.id]);
     }
-    else if ( ammoUpdate ) await this.actor?.updateEmbeddedDocuments("Item", [
+    else if ( canUpdate && ammoUpdate ) await this.actor?.updateEmbeddedDocuments("Item", [
       { _id: ammoUpdate.id, "system.quantity": ammoUpdate.quantity }
     ]);
 
@@ -273,31 +274,24 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
   /**
    * Configure a roll config for each roll performed as part of the attack process. Will be called once per roll
    * in the process each time an option is changed in the roll configuration interface.
-   * @param {Partial<D20RollConfiguration>} [initialRoll]  Initial roll passed to the rolling method.
    * @param {D20RollProcessConfiguration} process          Configuration for the entire rolling process.
    * @param {D20RollConfiguration} config                  Configuration for a specific roll.
    * @param {FormDataExtended} [formData]                  Any data entered into the rolling prompt.
    * @param {number} index                                 Index of the roll within all rolls being prepared.
    */
-  _buildAttackConfig(initialRoll, process, config, formData, index) {
+  _buildAttackConfig(process, config, formData, index) {
     const ammunition = formData?.get("ammunition") ?? process.ammunition;
     const attackMode = formData?.get("attackMode") ?? process.attackMode;
     const mastery = formData?.get("mastery") ?? process.mastery;
 
-    let { parts, data } = this.getAttackData({ ammunition, attackMode, situational: config.data?.situational });
+    let { parts, data } = this.getAttackData({ ammunition, attackMode });
     const options = config.options ?? {};
     if ( ammunition !== undefined ) options.ammunition = ammunition;
     if ( attackMode !== undefined ) options.attackMode = attackMode;
     if ( mastery !== undefined ) options.mastery = mastery;
 
-    if ( index === 0 ) {
-      if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
-      if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
-      if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
-    }
-
-    config.parts = parts;
-    config.data = data;
+    config.parts = [...(config.parts ?? []), ...parts];
+    config.data = { ...data, ...(config.data ?? {}) };
     config.options = options;
   }
 

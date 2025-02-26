@@ -273,6 +273,22 @@
         border: none;
       }
     }
+
+    .pill-lg {
+      max-width: unset;
+      &.empty:not(.disabled) {
+        cursor: pointer;
+        transition: opacity 250ms ease;
+        &:hover { opacity: .5; }
+      }
+      &.locked { opacity: .7; }
+      .name-stacked { flex: 1; }
+      .control-button { padding-inline: 4px; }
+      img[data-action] {
+        cursor: pointer;
+        &:hover { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
+      }
+    }
   }
 }
 

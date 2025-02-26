@@ -350,7 +350,7 @@ export default function ActivityMixin(Base) {
        * @param {ActivityMessageConfiguration} messageConfig  Configuration info for the created chat message.
        * @returns {boolean}  Explicitly return `false` to prevent activity from being activated.
        */
-      if ( Hooks.call("dnd5e.preActivityConsumption", this, usageConfig, messageConfig) === false ) return;
+      if ( Hooks.call("dnd5e.preActivityConsumption", this, usageConfig, messageConfig) === false ) return false;
 
       if ( "dnd5e.preItemUsageConsumption" in Hooks.events ) {
         foundry.utils.logCompatibilityWarning(
@@ -358,7 +358,7 @@ export default function ActivityMixin(Base) {
           { since: "DnD5e 4.0", until: "DnD5e 4.4" }
         );
         const { config, options } = this._createDeprecatedConfigs(usageConfig, {}, messageConfig);
-        if ( Hooks.call("dnd5e.preItemUsageConsumption", this.item, config, options) === false ) return;
+        if ( Hooks.call("dnd5e.preItemUsageConsumption", this.item, config, options) === false ) return false;
         this._applyDeprecatedConfigs(usageConfig, {}, messageConfig, config, options);
       }
 
@@ -376,7 +376,7 @@ export default function ActivityMixin(Base) {
        * @param {ActivityUsageUpdates} updates                Updates to apply to the actor and other documents.
        * @returns {boolean}  Explicitly return `false` to prevent activity from being activated.
        */
-      if ( Hooks.call("dnd5e.activityConsumption", this, usageConfig, messageConfig, updates) === false ) return;
+      if ( Hooks.call("dnd5e.activityConsumption", this, usageConfig, messageConfig, updates) === false ) return false;
 
       if ( "dnd5e.itemUsageConsumption" in Hooks.events ) {
         foundry.utils.logCompatibilityWarning(
@@ -390,7 +390,7 @@ export default function ActivityMixin(Base) {
           itemUpdates: updates.item.find(i => i._id === this.item.id),
           resourceUpdates: updates.item.filter(i => i._id !== this.item.id)
         };
-        if ( Hooks.call("dnd5e.itemUsageConsumption", this.item, config, options, usage) === false ) return;
+        if ( Hooks.call("dnd5e.itemUsageConsumption", this.item, config, options, usage) === false ) return false;
         this._applyDeprecatedConfigs(usageConfig, {}, messageConfig, config, options);
         updates.actor = usage.actorUpdates;
         updates.delete = usage.deleteIds;
@@ -416,7 +416,7 @@ export default function ActivityMixin(Base) {
        * @param {ActivityUsageUpdates} updates                Applied updates to the actor and other documents.
        * @returns {boolean}  Explicitly return `false` to prevent activity from being activated.
        */
-      if ( Hooks.call("dnd5e.postActivityConsumption", this, usageConfig, messageConfig, updates) === false ) return;
+      if ( Hooks.call("dnd5e.postActivityConsumption", this, usageConfig, messageConfig, updates) === false ) return false;
 
       return updates;
     }
@@ -648,15 +648,18 @@ export default function ActivityMixin(Base) {
       else {
         const canScale = linked ? linked.consumption.scaling.allowed : this.canScale;
         const linkedDelta = (linked?.spell?.level ?? Infinity) - this.item.system.level;
-        if ( canScale ) config.scaling ??= Number.isFinite(linkedDelta) ? linkedDelta : 0;
-        else config.scaling = false;
+        if ( !canScale ) config.scaling = false;
+        else if ( Number.isFinite(linkedDelta) ) config.scaling ??= linkedDelta;
 
         if ( this.requiresSpellSlot ) {
           const mode = this.item.system.preparation.mode;
           config.spell ??= {};
           config.spell.slot ??= linked?.spell?.level ? `spell${linked.spell.level}`
             : (mode in this.actor.system.spells) ? mode : `spell${this.item.system.level}`;
+          const scaling = (this.actor.system.spells?.[config.spell.slot]?.level ?? 0) - this.item.system.level;
+          if ( scaling > 0 ) config.scaling ??= scaling;
         }
+        config.scaling ??= 0;
       }
 
       if ( this.requiresConcentration && !game.settings.get("dnd5e", "disableConcentration") ) {
@@ -1136,11 +1139,14 @@ export default function ActivityMixin(Base) {
 
       const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
       if ( !rolls?.length ) return;
+
+      const canUpdate = this.item.isOwner && !this.item[game.release.generation < 13 ? "compendium" : "inCompendium"];
       const lastDamageTypes = rolls.reduce((obj, roll, index) => {
         if ( roll.options.type ) obj[index] = roll.options.type;
         return obj;
       }, {});
-      if ( !foundry.utils.isEmpty(lastDamageTypes) && this.actor.items.has(this.item.id) ) {
+      if ( canUpdate && !foundry.utils.isEmpty(lastDamageTypes)
+        && (this.actor && this.actor.items.has(this.item.id)) ) {
         await this.item.setFlag("dnd5e", `last.${this.id}.damageType`, lastDamageTypes);
       }
 

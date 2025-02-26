@@ -1,6 +1,6 @@
 import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import Proficiency from "../../../documents/actor/proficiency.mjs";
-import { convertLength, convertWeight, replaceFormulaData, simplifyBonus } from "../../../utils.mjs";
+import { convertLength, convertWeight, defaultUnits, replaceFormulaData, simplifyBonus } from "../../../utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MovementField from "../../shared/movement-field.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
@@ -403,7 +403,7 @@ export default class AttributesFields {
     const heavilyEncumbered = statuses.has("heavilyEncumbered");
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const crawl = this.parent.hasConditionEffect("crawl");
-    const units = this.attributes.movement.units;
+    const units = this.attributes.movement.units ??= defaultUnits("length");
     const applyExhaustion = (game.settings.get("dnd5e", "rulesVersion") === "modern")
       && !game.settings.get("dnd5e", "disableExhaustion");
     let reduction = applyExhaustion
@@ -462,8 +462,31 @@ export default class AttributesFields {
    * @this {CharacterData|NPCData}
    */
   static prepareSpellcastingAbility() {
-    const spellcastingAbility = this.abilities[this.attributes.spellcasting];
-    this.attributes.spelldc = spellcastingAbility ? spellcastingAbility.dc : 8 + this.attributes.prof;
-    this.attributes.spellmod = spellcastingAbility ? spellcastingAbility.mod : 0;
+    const ability = this.abilities?.[this.attributes.spellcasting];
+    this.attributes.spell ??= {};
+    this.attributes.spell.abilityLabel = CONFIG.DND5E.abilities[this.attributes.spellcasting]?.label ?? "";
+    this.attributes.spell.attack = ability ? ability.attack : this.attributes.prof;
+    this.attributes.spell.dc = ability ? ability.dc : 8 + this.attributes.prof;
+    this.attributes.spell.mod = ability ? ability.mod : 0;
+    Object.defineProperty(this.attributes, "spelldc", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `attributes.spelldc` property on actors has been moved to `attributes.spell.dc`.",
+          { since: "DnD5e 4.3", until: "DnD5e 5.0" }
+        );
+        return this.spell.dc;
+      },
+      enumerable: true
+    });
+    Object.defineProperty(this.attributes, "spellmod", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `attributes.spellmod` property on actors has been moved to `attributes.spell.mod`.",
+          { since: "DnD5e 4.3", until: "DnD5e 5.0" }
+        );
+        return this.spell.mod;
+      },
+      enumerable: true
+    });
   }
 }

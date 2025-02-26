@@ -36,6 +36,8 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {string} attributes.death.bonuses.save   Numeric or dice bonus to death saving throws.
  * @property {number} attributes.death.success        Number of successful death saves.
  * @property {number} attributes.death.failure        Number of failed death saves.
+ * @property {object} attributes.spell
+ * @property {number} attributes.spell.level     Spellcasting level of this NPC.
  * @property {object} details
  * @property {TypeData} details.type             Creature type of this NPC.
  * @property {string} details.type.value         NPC's type as defined in the system configuration.
@@ -48,7 +50,6 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {object} details.treasure
  * @property {Set<string>} details.treasure.value  Random treasure generation categories for this NPC.
  * @property {number} details.cr                 NPC's challenge rating.
- * @property {number} details.spellLevel         Spellcasting level of this NPC.
  * @property {object} resources
  * @property {object} resources.legact           NPC's legendary actions.
  * @property {number} resources.legact.value     Currently available legendary actions.
@@ -118,7 +119,12 @@ export default class NPCData extends CreatureTemplate {
           bonuses: new SchemaField({
             save: new FormulaField({ required: true, label: "DND5E.DeathSaveBonus" })
           })
-        }, {label: "DND5E.DeathSave"})
+        }, {label: "DND5E.DeathSave"}),
+        spell: new SchemaField({
+          level: new NumberField({
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
+          })
+        })
       }, {label: "DND5E.Attributes"}),
       details: new SchemaField({
         ...DetailsFields.common,
@@ -133,9 +139,6 @@ export default class NPCData extends CreatureTemplate {
         }),
         cr: new NumberField({
           required: true, nullable: true, min: 0, initial: 1, label: "DND5E.ChallengeRating"
-        }),
-        spellLevel: new NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
         }),
         treasure: new SchemaField({
           value: new SetField(new StringField())
@@ -198,6 +201,26 @@ export default class NPCData extends CreatureTemplate {
           keyPath: "system.details.type.value"
         }
       }],
+      ["habitat", {
+        label: "DND5E.Habitat.Configuration.Label",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.habitats
+        },
+        createFilter: (filters, value, def) => {
+          const { include, exclude } = Object.entries(value).reduce((d, [key, value]) => {
+            if ( value === 1 ) d.include.push(key);
+            else if ( value === -1 ) d.exclude.push(key);
+            return d;
+          }, { include: [], exclude: [] });
+          if ( include.length ) filters.push({
+            k: "system.details.habitat.value", o: "has", v: { k: "type", o: "in", v: include }
+          });
+          if ( exclude.length ) filters.push({
+            o: "NOT", v: { k: "system.details.habitat.value", o: "has", v: { k: "type", o: "in", v: exclude } }
+          });
+        }
+      }],
       ["cr", {
         label: "DND5E.ChallengeRating",
         type: "range",
@@ -232,6 +255,7 @@ export default class NPCData extends CreatureTemplate {
     super._migrateData(source);
     NPCData.#migrateEnvironment(source);
     NPCData.#migrateSource(source);
+    NPCData.#migrateSpellLevel(source);
     NPCData.#migrateTypeData(source);
     AttributesFields._migrateInitiative(source.attributes);
   }
@@ -262,6 +286,18 @@ export default class NPCData extends CreatureTemplate {
     if ( custom ) {
       source.source ??= {};
       source.source.custom = custom;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Move spell level from `details.spellLevel` to `attributes.spell.level`.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateSpellLevel(source) {
+    if ( source.details?.spellLevel !== undefined ) {
+      foundry.utils.setProperty(source, "attributes.spell.level", source.details.spellLevel);
     }
   }
 
@@ -360,8 +396,25 @@ export default class NPCData extends CreatureTemplate {
     else this.attributes.prof = Proficiency.calculateMod(Math.max(this.details.cr, this.details.level, 1));
 
     // Spellcaster Level
-    if ( this.attributes.spellcasting && !Number.isNumeric(this.details.spellLevel) ) {
-      this.details.spellLevel = Math.max(this.details.cr, 1);
+    const attributes = this.attributes;
+    Object.defineProperty(this.details, "spellLevel", {
+      get() {
+        foundry.utils.logCompatibilityWarning(
+          "The `details.spellLevel` property on NPCs have moved to `attributes.spell.level`.",
+          { since: "DnD5e 4.3", until: "DnD5e 5.0" }
+        );
+        return attributes.spell.level;
+      },
+      set(value) {
+        foundry.utils.logCompatibilityWarning(
+          "The `details.spellLevel` property on NPCs have moved to `attributes.spell.level`.",
+          { since: "DnD5e 4.3", until: "DnD5e 5.0" }
+        );
+        attributes.spell.level = value;
+      }
+    });
+    if ( this.attributes.spellcasting && !Number.isNumeric(this.attributes.spell.level) ) {
+      this.attributes.spell.level = Math.max(this.details.cr, 1);
     }
 
     AttributesFields.prepareBaseArmorClass.call(this);
@@ -450,7 +503,7 @@ export default class NPCData extends CreatureTemplate {
    */
   cantripLevel(spell) {
     if ( spell.system.preparation.mode === "innate" ) return this.details.cr;
-    return this.details.level ? this.details.level : this.details.spellLevel;
+    return this.details.level ? this.details.level : this.attributes.spell.level;
   }
 
   /* -------------------------------------------- */
@@ -521,6 +574,11 @@ export default class NPCData extends CreatureTemplate {
     if ( !config.statblock ) return super.toEmbed(config, options);
 
     const context = await this._prepareEmbedContext();
+    context.name = config.label || this.parent.name;
+    if ( config.cite && !config.inline ) {
+      config.cite = false;
+      context.anchor = this.parent.toAnchor({ name: context.name }).outerHTML;
+    }
     const template = document.createElement("template");
     template.innerHTML = await renderTemplate("systems/dnd5e/templates/actors/embeds/npc-embed.hbs", context);
 

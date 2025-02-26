@@ -63,6 +63,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     if ( (game.settings.get("dnd5e", "rulesVersion") === "modern") && (spellcasting?.progression !== "artificer") ) {
       delete context.spellProgression.artificer;
     }
+    context.spellProgression = Object.entries(context.spellProgression).map(([value, label]) => ({ value, label }));
 
     // Activation
     context.activationTypes = [
@@ -122,7 +123,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       { value: "loseAll", label: "DND5E.USES.Recovery.Type.LoseAll" },
       { value: "formula", label: "DND5E.USES.Recovery.Type.Formula" }
     ];
-    context.usesRecovery = (context.system.uses?.recovery ?? []).map((data, index) => ({
+    context.usesRecovery = (context.source.uses?.recovery ?? []).map((data, index) => ({
       data,
       fields: context.fields.uses.fields.recovery.element.fields,
       prefix: `system.uses.recovery.${index}.`,
@@ -133,10 +134,13 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     // Activities
     context.activities = (activities ?? []).filter(a => {
       return CONFIG.DND5E.activityTypes[a.type]?.configurable !== false;
-    }).map(({ _id: id, name, img, sort }) => ({
-      id, name, sort,
-      img: { src: img, svg: img?.endsWith(".svg") }
-    }));
+    }).map(activity => {
+      const { _id: id, name, img, sort } = activity.prepareSheetContext();
+      return {
+        id, name, sort,
+        img: { src: img, svg: img?.endsWith(".svg") }
+      };
+    });
 
     // Facilities
     if ( this.item.type === "facility" ) {
@@ -176,7 +180,13 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       }
     }
 
+    // Cover
     context.coverOptions = Object.entries(CONFIG.DND5E.cover).map(([value, label]) => ({ value, label }));
+
+    // Source Class
+    context.spellcastingClasses = Object.entries(this.item.parent?.spellcastingClasses ?? {}).map(([value, cls]) => {
+      return { value, label: cls.name };
+    });
 
     return context;
   }

@@ -1,5 +1,5 @@
 /* eslint-disable no-constructor-return */
-export default class TableOfContentsCompendium extends Compendium {
+export default class TableOfContentsCompendium extends (foundry.applications?.sidebar?.apps?.Compendium ?? Compendium) {
   constructor(...args) {
     super(...args);
     if ( game.release.version < 13 ) return new TableOfContentsCompendiumV12(...args);
@@ -196,7 +196,7 @@ class TableOfContentsCompendiumV13 extends (foundry.applications.sidebar?.apps?.
  * Compendium that renders pages as a table of contents.
  * TODO: Remove when v12 support is dropped.
  */
-class TableOfContentsCompendiumV12 extends Compendium {
+class TableOfContentsCompendiumV12 extends (foundry.applications?.sidebar?.apps?.Compendium ?? Compendium) {
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {

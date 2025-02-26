@@ -1,26 +1,80 @@
 import { filteredKeys } from "../utils.mjs";
 import Award from "./award.mjs";
-import DialogMixin from "./dialog-mixin.mjs";
+import Application5e from "./api/application.mjs";
 
 /**
  * Application for performing currency conversions & transfers.
  */
-export default class CurrencyManager extends DialogMixin(FormApplication) {
-
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["dnd5e2", "currency-manager", "dialog"],
-      tabs: [{navSelector: "nav", contentSelector: ".sheet-content", initial: "transfer"}],
-      template: "systems/dnd5e/templates/apps/currency-manager.hbs",
-      title: "DND5E.CurrencyManager.Title",
-      width: 350,
-      height: "auto"
-    });
+export default class CurrencyManager extends Application5e {
+  constructor(options, _options={}) {
+    if ( options instanceof foundry.abstract.Document ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `CurrencyManager` document should now be passed within the options object as `document`.",
+        { since: "DnD5e 4.3", until: "DnD5e 4.5" }
+      );
+      _options.document = options;
+      options = _options;
+    }
+    super(options);
   }
 
   /* -------------------------------------------- */
+
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    actions: {
+      setAll: CurrencyManager.#setTransferValue,
+      setHalf: CurrencyManager.#setTransferValue
+    },
+    classes: ["currency-manager", "standard-form"],
+    document: null,
+    form: {
+      closeOnSubmit: true,
+      handler: CurrencyManager.#handleFormSubmission
+    },
+    position: {
+      width: 350
+    },
+    tag: "form",
+    window: {
+      title: "DND5E.CurrencyManager.Title"
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static PARTS = {
+    tabs: {
+      template: "templates/generic/tab-navigation.hbs"
+    },
+    convert: {
+      template: "systems/dnd5e/templates/apps/currency-manager-convert.hbs"
+    },
+    transfer: {
+      template: "systems/dnd5e/templates/apps/currency-manager-transfer.hbs"
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  tabGroups = {
+    primary: "transfer"
+  };
+
+  /* -------------------------------------------- */
   /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * Document for which the currency is being managed.
+   * @type {Actor5e|Item5e}
+   */
+  get document() {
+    return this.options.document;
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -29,13 +83,13 @@ export default class CurrencyManager extends DialogMixin(FormApplication) {
    */
   get transferDestinations() {
     const destinations = [];
-    const actor = this.object instanceof Actor ? this.object : this.object.parent;
-    if ( actor && (actor !== this.object) ) destinations.push(actor);
+    const actor = this.document instanceof Actor ? this.document : this.document.parent;
+    if ( actor && (actor !== this.document) ) destinations.push(actor);
     destinations.push(...(actor?.system.transferDestinations ?? []));
-    destinations.push(...(actor?.itemTypes.container.filter(b => b !== this.object) ?? []));
+    destinations.push(...(actor?.itemTypes.container.filter(b => b !== this.document) ?? []));
     if ( game.user.isGM ) {
       const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
-      if ( primaryParty && (this.object !== primaryParty) && !destinations.includes(primaryParty) ) {
+      if ( primaryParty && (this.document !== primaryParty) && !destinations.includes(primaryParty) ) {
         destinations.push(primaryParty);
       }
     }
@@ -47,51 +101,76 @@ export default class CurrencyManager extends DialogMixin(FormApplication) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  getData(options={}) {
-    const context = super.getData(options);
+  async _prepareContext(options) {
+    const context = await super._prepareContext(options);
 
-    context.CONFIG = CONFIG.DND5E;
-    context.currency = this.object.system.currency;
+    context.currency = this.document.system.currency;
     context.destinations = Award.prepareDestinations(this.transferDestinations);
+    context.tabs = this._getTabs();
 
     return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _preparePartContext(partId, context) {
+    context = await super._preparePartContext(partId, context);
+    context.tab = context.tabs[partId];
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare the tab information for the sheet.
+   * @returns {Record<string, Partial<ApplicationTab>>}
+   * @protected
+   */
+  _getTabs() {
+    return {
+      convert: {
+        id: "convert", group: "primary", icon: "fa-solid fa-arrow-up-short-wide",
+        label: "DND5E.CurrencyManager.Convert.Label",
+        active: this.tabGroups.primary === "convert",
+        cssClass: this.tabGroups.primary === "convert" ? "active" : ""
+      },
+      transfer: {
+        id: "transfer", group: "primary", icon: "fa-solid fa-reply-all fa-flip-horizontal",
+        label: "DND5E.CurrencyManager.Transfer.Label",
+        active: this.tabGroups.primary === "transfer",
+        cssClass: this.tabGroups.primary === "transfer" ? "active" : ""
+      }
+    };
   }
 
   /* -------------------------------------------- */
   /*  Event Handling                              */
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  activateListeners(jQuery) {
-    super.activateListeners(jQuery);
-    const html = jQuery[0];
-
-    for ( const button of html.querySelectorAll('[name^="set"]') ) {
-      button.addEventListener("click", this._onSetTransferValue.bind(this));
+  /**
+   * Handle setting the transfer amount based on the buttons.
+   * @this {CurrencyManager}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   * @protected
+   */
+  static #setTransferValue(event, target) {
+    for ( let [key, value] of Object.entries(this.document.system.currency) ) {
+      if ( target.dataset.action === "setHalf" ) value = Math.floor(value / 2);
+      const input = this.element.querySelector(`[name="amount.${key}"]`);
+      if ( input && value ) input.value = value;
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onChangeInput(event) {
-    super._onChangeInput(event);
     this._validateForm();
   }
 
   /* -------------------------------------------- */
+  /*  Form Handling                               */
+  /* -------------------------------------------- */
 
-  /**
-   * Handle setting the transfer amount based on the buttons.
-   * @param {PointerEvent} event  Triggering click event.
-   * @protected
-   */
-  _onSetTransferValue(event) {
-    for ( let [key, value] of Object.entries(this.object.system.currency) ) {
-      if ( event.target.name === "setHalf" ) value = Math.floor(value / 2);
-      const input = this.form.querySelector(`[name="amount.${key}"]`);
-      if ( input && value ) input.value = value;
-    }
+  /** @inheritDoc */
+  _onChangeForm(formConfig, event) {
+    super._onChangeForm(formConfig, event);
     this._validateForm();
   }
 
@@ -102,28 +181,34 @@ export default class CurrencyManager extends DialogMixin(FormApplication) {
    * @protected
    */
   _validateForm() {
-    const data = foundry.utils.expandObject(this._getSubmitData());
+    const formData = new FormDataExtended(this.element);
+    const data = foundry.utils.expandObject(formData.object);
     let valid = true;
     if ( !filteredKeys(data.amount ?? {}).length ) valid = false;
     if ( !filteredKeys(data.destination ?? {}).length ) valid = false;
-    this.form.querySelector('button[name="transfer"]').disabled = !valid;
+    this.element.querySelector('button[name="transfer"]').disabled = !valid;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  async _updateObject(event, formData) {
-    const data = foundry.utils.expandObject(formData);
+  /**
+   * Handle submitting the currency manager form.
+   * @this {Award}
+   * @param {Event|SubmitEvent} event    The form submission event.
+   * @param {HTMLFormElement} form       The submitted form.
+   * @param {FormDataExtended} formData  Data from the dialog.
+   */
+  static async #handleFormSubmission(event, form, formData) {
+    const data = foundry.utils.expandObject(formData.object);
     switch ( event.submitter?.name ) {
       case "convert":
-        await this.constructor.convertCurrency(this.object);
+        await this.constructor.convertCurrency(this.document);
         break;
       case "transfer":
         const destinations = this.transferDestinations.filter(d => data.destination[d.id]);
-        await this.constructor.transferCurrency(this.object, destinations, data.amount);
+        await this.constructor.transferCurrency(this.document, destinations, data.amount);
         break;
     }
-    this.close();
   }
 
   /* -------------------------------------------- */
@@ -157,7 +242,7 @@ export default class CurrencyManager extends DialogMixin(FormApplication) {
     }
 
     // Save the updated currency object
-    return doc.update({"system.currency": currency});
+    return doc.update({ "system.currency": currency });
   }
 
   /* -------------------------------------------- */

@@ -14,6 +14,7 @@ import SystemDocumentMixin from "../mixins/document.mjs";
 import Proficiency from "./proficiency.mjs";
 import SelectChoices from "./select-choices.mjs";
 import * as Trait from "./trait.mjs";
+import BasicRoll from "../../dice/basic-roll.mjs";
 
 /**
  * Extend the base Actor class to implement additional system-specific logic.
@@ -386,8 +387,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     );
 
     if ( this.type === "npc" ) {
-      if ( progression.slot || progression.pact ) this.system.details.spellLevel = progression.slot || progression.pact;
-      else progression.slot = this.system.details.spellLevel ?? 0;
+      if ( progression.slot || progression.pact ) {
+        this.system.attributes.spell.level = progression.slot || progression.pact;
+      } else progression.slot = this.system.attributes.spell.level ?? 0;
     }
 
     for ( const type of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
@@ -539,7 +541,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Slot override
     if ( (keyLevel === 0) && (actor.type === "npc") && (override !== null) ) {
-      keyLevel = actor.system.details.spellLevel;
+      keyLevel = actor.system.attributes.spell.level;
     }
 
     const [, keyConfig] = Object.entries(table).reverse().find(([l]) => Number(l) <= keyLevel) ?? [];
@@ -1173,7 +1175,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
-    const buildConfig = this._buildSkillToolConfig.bind(this, type, config.rolls?.shift());
+    const buildConfig = this._buildSkillToolConfig.bind(this, type);
 
     const rollConfig = foundry.utils.mergeObject({
       ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability),
@@ -1183,14 +1185,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       reliableTalent: (relevant?.value >= 1) && this.getFlag("dnd5e", "reliableTalent")
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), type, "abilityCheck", "d20Test"];
-    rollConfig.rolls = [{
+    rollConfig.rolls = [BasicRoll.mergeConfigs({
       options: {
         maximum: relevant?.roll.max,
         minimum: relevant?.roll.min
       }
-    }].concat(config.rolls ?? []);
+    }, config.rolls?.shift())].concat(config.rolls ?? []);
     rollConfig.subject = this;
-    rollConfig.rolls.forEach((r, index) => buildConfig(rollConfig, r, null, index));
 
     const dialogConfig = foundry.utils.mergeObject({
       applicationClass: SkillToolRollConfigurationDialog,
@@ -1235,7 +1236,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !rolls.length ) return null;
 
     /**
-     * A hook event that fires after an skill or tool check has been rolled.
+     * A hook event that fires after a skill or tool check has been rolled.
      * @function dnd5e.rollSkillV2
      * @function dnd5e.rollToolCheckV2
      * @memberof hookEvents
@@ -1264,13 +1265,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * Configure a roll config for each roll performed as part of the skill or tool check process. Will be called once
    * per roll in the process each time an option is changed in the roll configuration interface.
    * @param {"skill"|"tool"} type                          Type of roll.
-   * @param {Partial<D20RollConfiguration>} [initialRoll]  Initial roll passed to the rolling method.
    * @param {D20RollProcessConfiguration} process          Configuration for the entire rolling process.
    * @param {D20RollConfiguration} config                  Configuration for a specific roll.
    * @param {FormDataExtended} [formData]                  Any data entered into the rolling prompt.
    * @param {number} index                                 Index of the roll within all rolls being prepared.
    */
-  _buildSkillToolConfig(type, initialRoll, process, config, formData, index) {
+  _buildSkillToolConfig(type, process, config, formData, index) {
     const relevant = type === "skill" ? this.system.skills?.[process.skill] : this.system.tools?.[process.tool];
     const rollData = this.getRollData();
     const abilityId = formData?.get("ability") ?? process.ability;
@@ -1284,24 +1284,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       extraBonus: process.bonus,
       [`${abilityId}CheckBonus`]: ability?.bonuses?.check,
       [`${type}Bonus`]: this.system.bonuses?.abilities?.[type],
-      abilityCheckBonus: this.system.bonuses?.abilities?.check,
-      situational: config.data?.situational
+      abilityCheckBonus: this.system.bonuses?.abilities?.check
     }, { ...rollData });
-    const options = config.options ?? {};
-
-    if ( index === 0 ) {
-      if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
-      if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
-      if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
-    }
 
     // Add exhaustion reduction
     this.addRollExhaustion(parts, data);
 
-    config.parts = parts;
-    config.data = data;
+    config.parts = [...(config.parts ?? []), ...parts];
+    config.data = { ...data, ...(config.data ?? {}) };
     config.data.abilityId = abilityId;
-    config.options = options;
   }
 
   /* -------------------------------------------- */
@@ -1457,16 +1448,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }, rollData);
     const options = {};
 
-    const initialRoll = config.rolls?.pop();
-    if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
-    if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
-    if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
-
     const rollConfig = foundry.utils.mergeObject({
       halflingLucky: this.getFlag("dnd5e", "halflingLucky")
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), name, "d20Test"];
-    rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
+    rollConfig.rolls = [
+      BasicRoll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
+    ].concat(config.rolls ?? []);
     rollConfig.rolls.forEach(({ parts, data }) => this.addRollExhaustion(parts, data));
     rollConfig.subject = this;
 
@@ -1578,14 +1566,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Death save bonus
     if ( death.bonuses.save ) parts.push(death.bonuses.save);
 
-    const initialRoll = config.rolls?.pop();
-    if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
-    if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
-    if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
-
     const rollConfig = foundry.utils.mergeObject({ target: 10 }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "deathSave"];
-    rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
+    rollConfig.rolls = [
+      BasicRoll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
+    ].concat(config.rolls ?? []);
 
     const dialogConfig = foundry.utils.deepClone(dialog);
 
@@ -1746,18 +1731,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Concentration bonus
     if ( conc.bonuses.save ) parts.push(conc.bonuses.save);
 
-    const initialRoll = config.rolls?.pop();
-    if ( initialRoll?.data ) data = { ...data, ...initialRoll.data };
-    if ( initialRoll?.parts ) parts.unshift(...initialRoll.parts);
-    if ( initialRoll?.options ) foundry.utils.mergeObject(options, initialRoll.options);
-
     const rollConfig = foundry.utils.mergeObject({
       ability: (conc.ability in CONFIG.DND5E.abilities) ? conc.ability : CONFIG.DND5E.defaultAbilities.concentration,
       isConcentration: true,
       target: 10
     }, config);
     rollConfig.hookNames = [...(config.hookNames ?? []), "concentration"];
-    rollConfig.rolls = [{ parts, data, options }].concat(config.rolls ?? []);
+    rollConfig.rolls = [
+      BasicRoll.mergeConfigs({ parts, data, options }, config.rolls?.shift())
+    ].concat(config.rolls ?? []);
 
     const dialogConfig = foundry.utils.mergeObject({
       options: {
@@ -3579,7 +3561,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 class SourcedItemsMap extends Map {
   /** @inheritDoc */
   get(key, { remap=true, legacy=true }={}) {
-    if ( remap ) ({ uuid: key } = parseUuid(key));
+    if ( !key ) return;
+    if ( remap ) ({ uuid: key } = parseUuid(key) ?? {});
     if ( legacy ) {
       foundry.utils.logCompatibilityWarning(
         "The `sourcedItems` data on actor has changed from storing individual items to storing Sets of items. Pass `legacy: false` to retrieve the new Set data.",

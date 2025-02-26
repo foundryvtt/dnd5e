@@ -637,7 +637,6 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @param {jQuery|HTMLElement} html  The ActiveEffect config element.
    */
   static onRenderActiveEffectConfig(app, html) {
-    // TODO: rebase once #4805 is merged.
     if ( game.release.generation < 13 ) html = html[0];
     const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {}).toFormGroup({
       label: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.label"),
@@ -646,8 +645,11 @@ export default class ActiveEffect5e extends ActiveEffect {
       name: "flags.dnd5e.riders.statuses",
       value: app.document.getFlag("dnd5e", "riders.statuses") ?? [],
       options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name }))
-    }).outerHTML;
-    html.querySelector("[data-tab=details] > .form-group:last-child").insertAdjacentHTML("afterend", element);
+    });
+    // TODO: Temporary fix to work around https://github.com/foundryvtt/foundryvtt/issues/11567
+    // Replace with `after` when switched to V13-only
+    html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")
+      ?.insertAdjacentHTML("afterend", element.outerHTML);
 
     if ( game.release.generation < 13 ) {
       html.querySelector(".form-fields:has([name=statuses])").insertAdjacentHTML("afterend", `
@@ -806,7 +808,13 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   getDependents() {
     return (this.getFlag("dnd5e", "dependents") || []).reduce((arr, { uuid }) => {
-      const effect = fromUuidSync(uuid);
+      let effect;
+      // TODO: Remove this special casing once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
+      if ( this.parent.pack && uuid.includes(this.parent.uuid) ) {
+        const [, embeddedName, id] = uuid.replace(this.parent.uuid, "").split(".");
+        effect = this.parent.getEmbeddedDocument(embeddedName, id);
+      }
+      else effect = fromUuidSync(uuid, { strict: false });
       if ( effect ) arr.push(effect);
       return arr;
     }, []);

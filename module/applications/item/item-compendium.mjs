@@ -3,7 +3,7 @@ import Item5e from "../../documents/item.mjs";
 import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
 import ItemSheet5e2 from "./item-sheet-2.mjs";
 
-export default class ItemCompendium5e extends Compendium {
+export default class ItemCompendium5e extends (foundry.applications?.sidebar?.apps?.Compendium ?? Compendium) {
   constructor(...args) {
     super(...args);
     if ( game.release.version < 13 ) return new ItemCompendium5eV12(...args);
@@ -46,7 +46,7 @@ class ItemCompendium5eV13 extends DragDropApplicationMixin(foundry.applications.
   /** @override */
   _defaultDropBehavior(event, data) {
     if ( !data.uuid ) return "copy";
-    if ( data.type !== "Item" ) return "none";
+    if ( (data.type !== "Folder") && (data.type !== "Item") ) return "none";
     return foundry.utils.parseUuid(data.uuid).collection === this.collection ? "move" : "copy";
   }
 
@@ -55,8 +55,8 @@ class ItemCompendium5eV13 extends DragDropApplicationMixin(foundry.applications.
   /** @inheritDoc */
   async _handleDroppedEntry(target, data) {
     // Obtain the dropped Document
-    let item = await Item.fromDropData(data);
     const behavior = this._dropBehavior(event, data);
+    let item = await Item.fromDropData(data);
     if ( !item || (behavior === "none") ) return;
 
     // Create item and its contents if it doesn't already exist here
@@ -95,7 +95,9 @@ class ItemCompendium5eV13 extends DragDropApplicationMixin(foundry.applications.
  * Compendium with added support for item containers.
  * TODO: Remove when v12 support is dropped.
  */
-class ItemCompendium5eV12 extends DragDropApplicationMixin(Compendium) {
+class ItemCompendium5eV12 extends DragDropApplicationMixin(
+  foundry.applications?.sidebar?.apps?.Compendium ?? Compendium
+) {
 
   /** @inheritDoc */
   async _render(...args) {
@@ -129,7 +131,7 @@ class ItemCompendium5eV12 extends DragDropApplicationMixin(Compendium) {
   /** @override */
   _defaultDropBehavior(event, data) {
     if ( !data.uuid ) return "copy";
-    if ( data.type !== "Item" ) return "none";
+    if ( (data.type !== "Folder") && (data.type !== "Item") ) return "none";
     return foundry.utils.parseUuid(data.uuid).collection === this.collection ? "move" : "copy";
   }
 
@@ -138,8 +140,8 @@ class ItemCompendium5eV12 extends DragDropApplicationMixin(Compendium) {
   /** @inheritDoc */
   async _handleDroppedEntry(target, data) {
     // Obtain the dropped Document
-    let item = await Item.fromDropData(data);
     const behavior = this._dropBehavior(event, data);
+    let item = await Item.fromDropData(data);
     if ( !item || (behavior === "none") ) return;
 
     // Create item and its contents if it doesn't already exist here

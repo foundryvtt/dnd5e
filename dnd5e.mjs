@@ -214,14 +214,13 @@ Hooks.once("init", function() {
     types: ["spells"]
   });
 
-  if ( game.release.generation === 12 ) {
-    // TODO: Update sheet classes and remove the above check
-    CONFIG.Token.prototypeSheetClass = applications.TokenConfig5e;
-    DocumentSheetConfig.unregisterSheet(TokenDocument, "core", TokenConfig);
-    DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
-      label: "DND5E.SheetClassToken"
-    });
-  }
+  CONFIG.Token.prototypeSheetClass = game.release.generation < 13
+    ? applications.TokenConfig5e
+    : applications.PrototypeTokenConfig5e;
+  DocumentSheetConfig.unregisterSheet(TokenDocument, "core", TokenConfig);
+  DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
+    label: "DND5E.SheetClassToken"
+  });
 
   // Preload Handlebars helpers & partials
   utils.registerHandlebarsHelpers();
@@ -266,7 +265,7 @@ function _configureTrackableAttributes() {
       ...common.value,
       ...Object.keys(DND5E.skills).map(skill => `skills.${skill}.passive`),
       ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
-      "attributes.spelldc"
+      "attributes.spell.attack", "attributes.spell.dc"
     ]
   };
 
@@ -277,7 +276,7 @@ function _configureTrackableAttributes() {
     },
     npc: {
       bar: [...creature.bar, "resources.legact", "resources.legres"],
-      value: [...creature.value, "details.cr", "details.spellLevel", "details.xp.value"]
+      value: [...creature.value, "attributes.spell.level", "details.cr", "details.xp.value"]
     },
     vehicle: {
       bar: [...common.bar, "attributes.hp"],

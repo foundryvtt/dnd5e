@@ -1,4 +1,4 @@
-import { convertLength, filteredKeys, formatLength } from "../../utils.mjs";
+import { convertLength, defaultUnits, filteredKeys, formatLength } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
 import DamageField from "../shared/damage-field.mjs";
@@ -226,12 +226,15 @@ export default class WeaponData extends ItemDataModel.mixin(
     this.prepareFinalEquippableData();
 
     const labels = this.parent.labels ??= {};
+    const units = this.range.units ?? defaultUnits("length");
     if ( this.hasRange ) {
-      const units = this.range.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
       const parts = [this.range.value, this.range.long !== this.range.value ? this.range.long : null].filter(_ => _);
       parts.push(formatLength(parts.pop(), units));
       labels.range = parts.filterJoin("/");
-    } else labels.range = game.i18n.localize("DND5E.None");
+    }
+    if ( this.range.reach ) {
+      labels.reach = game.i18n.format("DND5E.RANGE.Formatted.Reach", { reach: formatLength(this.range.reach, units) });
+    }
   }
 
   /* -------------------------------------------- */

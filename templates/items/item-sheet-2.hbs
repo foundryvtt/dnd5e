@@ -6,7 +6,8 @@
         {{!-- Image --}}
         <div class="left">
 
-            <img class="item-image" src="{{ item.img }}" alt="{{ name.value }}" {{#if editable}}data-edit="img"{{/if}}>
+            <img class="item-image" src="{{ifThen editable img.editable img.value }}" alt="{{ name.value }}"
+                 {{#if editable}}data-edit="img"{{/if}}>
 
         </div>
 

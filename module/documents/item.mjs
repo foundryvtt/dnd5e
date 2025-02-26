@@ -1551,8 +1551,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         values.bonus = spellcastingClass.spellcasting.attack;
         values.dc = spellcastingClass.spellcasting.save;
       } else {
-        values.bonus = spell.actor.system.attributes?.spellmod;
-        values.dc = spell.actor.system.attributes?.spelldc;
+        values.bonus = spell.actor.system.attributes?.spell?.mod;
+        values.dc = spell.actor.system.attributes?.spell?.dc;
       }
     }
 

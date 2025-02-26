@@ -90,7 +90,7 @@ export default class TurnMessageData extends ChatMessageDataModel {
 
     if ( context.actor?.isOwner ) {
       context.activities = ActivationsField.processActivations.call(this.activations, this.actor);
-      context.deltas = ActorDeltasField.processDeltas.call(this.deltas, this.actor);
+      context.deltas = ActorDeltasField.processDeltas.call(this.deltas, this.actor, this.parent.rolls);
     }
 
     return context;

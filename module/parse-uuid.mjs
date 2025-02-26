@@ -4,10 +4,11 @@
  * @ignore
  */
 export default function parseUuid(uuid, {relative}={}) {
-  if ( game.release.generation >= 12 ) return foundry.utils.parseUuid(uuid, { relative });
+  if ( game.release.generation > 12 ) return foundry.utils.parseUuid(uuid, { relative });
   if ( !uuid ) throw new Error("A UUID string is required.");
   if ( uuid.startsWith(".") && relative ) return _resolveRelativeUuid(uuid, relative);
   const parsed = foundry.utils.parseUuid(uuid, {relative});
+  if ( !parsed?.collection ) return parsed;
   const remappedUuid = uuid.startsWith("Compendium") ? [
     "Compendium",
     parsed.collection.metadata.id,

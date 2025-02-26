@@ -43,19 +43,13 @@ export default class CastActivityData extends BaseActivityData {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  prepareData() {
-    const spell = fromUuidSync(this.spell.uuid);
-    if ( spell ) {
-      this.name = this.name || spell.name;
-      this.img = this.img || spell.img;
-    }
-    super.prepareData();
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   prepareFinalData(rollData) {
+    const spell = fromUuidSync(this.spell.uuid) ?? this.cachedSpell;
+    if ( spell ) {
+      this.name = this._source.name || spell.name || this.name;
+      this.img = this._source.img || spell.img || this.name;
+    }
+
     super.prepareFinalData(rollData);
 
     for ( const field of ["activation", "duration", "range", "target"] ) {
