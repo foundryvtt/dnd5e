@@ -13,16 +13,17 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @mixes ItemDescriptionTemplate
  * @mixes StartingEquipmentTemplate
  *
+ * @property {object[]} advancement             Advancement objects for this class.
+ * @property {object} hd                        Object describing hit dice properties.
+ * @property {string} hd.additional             Additional hit dice beyond the level of the class.
+ * @property {string} hd.denomination           Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
+ * @property {number} hd.spent                  Number of hit dice consumed.
  * @property {number} levels                    Current number of levels in this class.
  * @property {object} primaryAbility
  * @property {Set<string>} primaryAbility.value List of primary abilities used by this class.
  * @property {boolean} primaryAbility.all       If multiple abilities are selected, does multiclassing require all of
  *                                              them to be 13 or just one.
- * @property {object} hd                        Object describing hit dice properties.
- * @property {string} hd.additional             Additional hit dice beyond the level of the class.
- * @property {string} hd.denomination           Denomination of hit dice available as defined in `DND5E.hitDieTypes`.
- * @property {number} hd.spent                  Number of hit dice consumed.
- * @property {object[]} advancement             Advancement objects for this class.
+ * @property {Set<string>} properties           General properties of a class item.
  * @property {SpellcastingField} spellcasting   Details on class's spellcasting ability.
  */
 export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTemplate, StartingEquipmentTemplate) {
@@ -39,11 +40,7 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      levels: new NumberField({ required: true, nullable: false, integer: true, min: 0, initial: 1 }),
-      primaryAbility: new SchemaField({
-        value: new SetField(new StringField()),
-        all: new BooleanField({ initial: true })
-      }),
+      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       hd: new SchemaField({
         additional: new FormulaField({ deterministic: true, required: true }),
         denomination: new StringField({
@@ -52,7 +49,12 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
         }),
         spent: new NumberField({ required: true, nullable: false, integer: true, initial: 0, min: 0 })
       }),
-      advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
+      levels: new NumberField({ required: true, nullable: false, integer: true, min: 0, initial: 1 }),
+      primaryAbility: new SchemaField({
+        value: new SetField(new StringField()),
+        all: new BooleanField({ initial: true })
+      }),
+      properties: new SetField(new StringField()),
       spellcasting: new SpellcastingField()
     });
   }
@@ -71,7 +73,8 @@ export default class ClassData extends ItemDataModel.mixin(ItemDescriptionTempla
           if ( value === -1 ) filters.push(filter);
           else filters.push({ o: "NOT", v: filter });
         }
-      }]
+      }],
+      ["properties", this.compendiumBrowserPropertiesFilter("class")]
     ]);
   }
 
