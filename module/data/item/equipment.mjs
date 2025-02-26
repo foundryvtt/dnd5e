@@ -11,6 +11,10 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ */
+
+/**
  * Data definition for Equipment items.
  * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
@@ -20,12 +24,14 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes EquippableItemTemplate
  * @mixes MountableTemplate
  *
- * @property {object} armor               Armor details and equipment type information.
- * @property {number} armor.value         Base armor class or shield bonus.
- * @property {number} armor.dex           Maximum dex bonus added to armor class.
- * @property {number} armor.magicalBonus  Bonus added to AC from the armor's magical nature.
- * @property {number} strength            Minimum strength required to use a piece of armor.
- * @property {number} proficient          Does the owner have proficiency in this piece of equipment?
+ * @property {object} armor                        Armor details and equipment type information.
+ * @property {number} armor.value                  Base armor class or shield bonus.
+ * @property {number} armor.dex                    Maximum dex bonus added to armor class.
+ * @property {number} armor.magicalBonus           Bonus added to AC from the armor's magical nature.
+ * @property {number} proficient                   Does the owner have proficiency in this piece of equipment?
+ * @property {Set<string>} properties              Equipment properties.
+ * @property {number} strength                     Minimum strength required to use a piece of armor.
+ * @property {Omit<ItemTypeData, "subtype">} type  Equipment type & base item.
  */
 export default class EquipmentData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
@@ -44,17 +50,17 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({ subtype: false }, { label: "DND5E.ItemEquipmentType" }),
       armor: new SchemaField({
         value: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ArmorClass" }),
         magicalBonus: new NumberField({ min: 0, integer: true, label: "DND5E.MagicalBonus" }),
         dex: new NumberField({ required: true, integer: true, label: "DND5E.ItemEquipmentDexMod" })
       }),
-      properties: new SetField(new StringField(), { label: "DND5E.ItemEquipmentProperties" }),
-      strength: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr" }),
       proficient: new NumberField({
         required: true, min: 0, max: 1, integer: true, initial: null, label: "DND5E.ProficiencyLevel"
-      })
+      }),
+      properties: new SetField(new StringField(), { label: "DND5E.ItemEquipmentProperties" }),
+      strength: new NumberField({ required: true, integer: true, min: 0, label: "DND5E.ItemRequiredStr" }),
+      type: new ItemTypeField({ subtype: false }, { label: "DND5E.ItemEquipmentType" })
     });
   }
 
