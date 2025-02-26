@@ -110,6 +110,19 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
+   * Migrate attributes
+   * @param {object} [source]  The source attributes object.
+   * @internal
+   */
+  static _migrate(source) {
+    if ( !source ) return;
+    this._migrateInitiative(source);
+    this._migrateMovementSenses(source);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Migrate the old init.value and incorporate it into init.bonus.
    * @param {object} source  The source attributes object.
    * @internal
@@ -119,6 +132,29 @@ export default class AttributesFields {
     if ( !init?.value || (typeof init?.bonus === "string") ) return;
     if ( init.bonus ) init.bonus += init.value < 0 ? ` - ${init.value * -1}` : ` + ${init.value}`;
     else init.bonus = `${init.value}`;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate movement and senses properties into `types` object
+   * @param {object} source  The source attributes object.
+   * @internal
+   */
+  static _migrateMovementSenses(source) {
+    const movementSenses = [
+      { key: "movement", config: CONFIG.DND5E.movementTypes },
+      { key: "senses", config: CONFIG.DND5E.senses }
+    ];
+
+    for (const { key, config } of movementSenses) {
+      const attr = source[key];
+      if ( !attr || ("types" in attr) ) continue;
+      attr.types = {};
+      for ( const k of Object.keys(config) ) {
+        attr.types[k] = attr[k] ?? null;
+      }
+    }
   }
 
   /* -------------------------------------------- */
@@ -408,7 +444,7 @@ export default class AttributesFields {
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     for ( const type in CONFIG.DND5E.movementTypes ) {
-      let speed = Math.max(0, this.attributes.movement[type] - reduction);
+      let speed = Math.max(0, this.attributes.movement.types[type] - reduction);
       if ( noMovement || (crawl && (type !== "walk")) ) speed = 0;
       else {
         if ( halfMovement ) speed *= 0.5;
@@ -421,7 +457,7 @@ export default class AttributesFields {
           speed = Math.min(speed, CONFIG.DND5E.encumbrance.speedReduction.exceedingCarryingCapacity[units] ?? 0);
         }
       }
-      this.attributes.movement[type] = speed;
+      this.attributes.movement.types[type] = speed;
     }
   }
 
@@ -437,16 +473,16 @@ export default class AttributesFields {
    */
   static prepareRace(race, { force=false }={}) {
     for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      if ( !race.system.movement[key] || (!force && (this.attributes.movement[key] !== null)) ) continue;
-      this.attributes.movement[key] = race.system.movement[key];
+      if ( !race.system.movement.types[key] || (!force && (this.attributes.movement.types[key] !== null)) ) continue;
+      this.attributes.movement.types[key] = race.system.movement.types[key];
     }
     if ( race.system.movement.hover ) this.attributes.movement.hover = true;
     if ( force && race.system.movement.units ) this.attributes.movement.units = race.system.movement.units;
     else this.attributes.movement.units ??= race.system.movement.units;
 
     for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      if ( !race.system.senses[key] || (!force && (this.attributes.senses[key] !== null)) ) continue;
-      this.attributes.senses[key] = race.system.senses[key];
+      if ( !race.system.senses.types[key] || (!force && (this.attributes.senses.types[key] !== null)) ) continue;
+      this.attributes.senses.types[key] = race.system.senses.types[key];
     }
     this.attributes.senses.special = [this.attributes.senses.special, race.system.senses.special].filterJoin(";");
     if ( force && race.system.senses.units ) this.attributes.senses.units = race.system.senses.units;
@@ -486,5 +522,40 @@ export default class AttributesFields {
       },
       enumerable: true
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add a shim for the old movement and senses properties
+   * @param {object} attributes The `attributes` object
+   */
+  static shimMovementSenses(attributes) {
+    const movementSenses = [
+      { property: "movement", config: CONFIG.DND5E.movementTypes },
+      { property: "senses", config: CONFIG.DND5E.senses }
+    ];
+
+    const warnDeprecated = (property, key) => {
+      foundry.utils.logCompatibilityWarning(
+        `system.attributes.${property}.${key} is deprecated, use system.attributes.${property}.types.${key} instead.`,
+        { since: "DnD5e 4.3", until: "DnD5e 4.5", once: true }
+      );
+    };
+
+    for ( const { property, config } of movementSenses ) {
+      for ( const key of Object.keys(config) ) {
+        Object.defineProperty(attributes[property], key, {
+          get: () => {
+            warnDeprecated(property, key);
+            return attributes[property].types[key];
+          },
+          set: value => {
+            warnDeprecated(property, key);
+            attributes[property].types[key] = value;
+          }
+        });
+      }
+    }
   }
 }

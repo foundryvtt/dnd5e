@@ -602,6 +602,7 @@ export const migrateEffectData = function(effect, migrationData, { parent }={}) 
   const updateData = {};
   _migrateDocumentIcon(effect, updateData, {...migrationData, field: "img"});
   _migrateEffectArmorClass(effect, updateData);
+  _migrateEffectMovementSenses(effect, updateData);
   if ( foundry.utils.isNewerVersion("3.1.0", effect._stats?.systemVersion ?? parent?._stats?.systemVersion) ) {
     _migrateTransferEffect(effect, parent, updateData);
   }
@@ -758,21 +759,25 @@ function _migrateActorAC(actorData, updateData) {
 /* -------------------------------------------- */
 
 /**
- * Migrate the actor movement & senses to replace `0` with `null`.
+ * Migrate the actor movement & senses to the `types` object.
  * @param {object} actorData   Actor data being migrated.
  * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
  * @returns {object}           Modified version of update data.
  * @private
  */
 function _migrateActorMovementSenses(actorData, updateData) {
-  if ( actorData._stats?.systemVersion && foundry.utils.isNewerVersion("2.4.0", actorData._stats.systemVersion) ) {
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) {
-      const keyPath = `system.attributes.movement.${key}`;
-      if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
-    }
-    for ( const key of Object.keys(CONFIG.DND5E.senses) ) {
-      const keyPath = `system.attributes.senses.${key}`;
-      if ( foundry.utils.getProperty(actorData, keyPath) === 0 ) updateData[keyPath] = null;
+  if ( actorData._stats?.systemVersion && foundry.utils.isNewerVersion("4.3.0", actorData._stats.systemVersion) ) {
+    const movementSenses = [
+      { property: "movement", config: CONFIG.DND5E.movementTypes },
+      { property: "senses", config: CONFIG.DND5E.senses }
+    ];
+
+    for (const { property, config } of movementSenses) {
+      for (const key of Object.keys(config)) {
+        const v = foundry.utils.getProperty(actorData, `system.attributes.${property}.${key}`) ?? null;
+        updateData[`system.attributes.${property}.types.${key}`] = v;
+        updateData[`system.attributes.${property}.-=${key}}`] = null;
+      }
     }
   }
   return updateData;
@@ -835,6 +840,36 @@ function _migrateEffectArmorClass(effect, updateData) {
     if ( c.key !== "system.attributes.ac.base" ) return c;
     c.key = "system.attributes.ac.armor";
     containsUpdates = true;
+    return c;
+  });
+  if ( containsUpdates ) updateData.changes = changes;
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Change active effects that target movement or senses.
+ * @param {object} effect      Effect data to migrate.
+ * @param {object} updateData  Existing update to expand upon.
+ * @returns {object}           The updateData to apply.
+ */
+function _migrateEffectMovementSenses(effect, updateData) {
+  let containsUpdates = false;
+  const configKeys = {
+    movement: Object.keys(CONFIG.DND5E.movementTypes),
+    senses: Object.keys(CONFIG.DND5E.senses)
+  };
+  const changes = (effect.changes || []).map(c => {
+    const keyParts = c.key.split(".");
+    if ( !c.key.includes(".types")
+      && c.key.startsWith("system.attributes.")
+      && configKeys[keyParts[2]].includes(keyParts[3])
+    ) {
+      keyParts.splice(3, 0, "types");
+      c.key = keyParts.join(".");
+      containsUpdates = true;
+    }
     return c;
   });
   if ( containsUpdates ) updateData.changes = changes;
