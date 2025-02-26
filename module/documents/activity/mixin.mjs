@@ -648,15 +648,18 @@ export default function ActivityMixin(Base) {
       else {
         const canScale = linked ? linked.consumption.scaling.allowed : this.canScale;
         const linkedDelta = (linked?.spell?.level ?? Infinity) - this.item.system.level;
-        if ( canScale ) config.scaling ??= Number.isFinite(linkedDelta) ? linkedDelta : 0;
-        else config.scaling = false;
+        if ( !canScale ) config.scaling = false;
+        else if ( Number.isFinite(linkedDelta) ) config.scaling ??= linkedDelta;
 
         if ( this.requiresSpellSlot ) {
           const mode = this.item.system.preparation.mode;
           config.spell ??= {};
           config.spell.slot ??= linked?.spell?.level ? `spell${linked.spell.level}`
             : (mode in this.actor.system.spells) ? mode : `spell${this.item.system.level}`;
+          const scaling = (this.actor.system.spells?.[config.spell.slot]?.level ?? 0) - this.item.system.level;
+          if ( scaling > 0 ) config.scaling ??= scaling;
         }
+        config.scaling ??= 0;
       }
 
       if ( this.requiresConcentration && !game.settings.get("dnd5e", "disableConcentration") ) {

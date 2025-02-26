@@ -106,7 +106,8 @@ export default class CastActivity extends ActivityMixin(CastActivityData) {
 
   /** @inheritDoc */
   prepareSheetContext() {
-    const spell = this.cachedSpell ?? fromUuidSync(this.spell.uuid);
+    const spell = this.cachedSpell ?? fromUuidSync(this.spell?.uuid);
+    if ( !spell ) return super.prepareSheetContext();
     return { ...this, _id: this._id, name: spell.name, img: spell.img };
   }
 

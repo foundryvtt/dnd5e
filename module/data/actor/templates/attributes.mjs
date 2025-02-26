@@ -473,7 +473,8 @@ export default class AttributesFields {
           { since: "DnD5e 4.3", until: "DnD5e 5.0" }
         );
         return this.spell.dc;
-      }
+      },
+      enumerable: true
     });
     Object.defineProperty(this.attributes, "spellmod", {
       get() {
@@ -482,7 +483,8 @@ export default class AttributesFields {
           { since: "DnD5e 4.3", until: "DnD5e 5.0" }
         );
         return this.spell.mod;
-      }
+      },
+      enumerable: true
     });
   }
 }
