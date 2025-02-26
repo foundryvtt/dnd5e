@@ -14,6 +14,10 @@ import MountableTemplate from "./templates/mountable.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ */
+
+/**
  * Data definition for Weapon items.
  * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
@@ -24,21 +28,22 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes MountableTemplate
  *
  * @property {object} ammunition
- * @property {string} ammunition.type       Type of ammunition fired by this weapon.
+ * @property {string} ammunition.type              Type of ammunition fired by this weapon.
  * @property {object} armor
- * @property {number} armor.value           Siege or vehicle weapon's armor class.
+ * @property {number} armor.value                  Siege or vehicle weapon's armor class.
  * @property {object} damage
- * @property {DamageData} damage.base       Weapon's base damage.
- * @property {DamageData} damage.versatile  Weapon's versatile damage.
- * @property {number} magicalBonus          Magical bonus added to attack & damage rolls.
- * @property {string} mastery               Mastery Property usable with this weapon.
- * @property {Set<string>} properties       Weapon's properties.
- * @property {number} proficient            Does the weapon's owner have proficiency?
+ * @property {DamageData} damage.base              Weapon's base damage.
+ * @property {DamageData} damage.versatile         Weapon's versatile damage.
+ * @property {number} magicalBonus                 Magical bonus added to attack & damage rolls.
+ * @property {string} mastery                      Mastery Property usable with this weapon.
+ * @property {Set<string>} properties              Weapon's properties.
+ * @property {number} proficient                   Does the weapon's owner have proficiency?
  * @property {object} range
- * @property {number} range.value           Short range of the weapon.
- * @property {number} range.long            Long range of the weapon.
- * @property {number|null} range.reach      Reach of the weapon.
- * @property {string} range.units           Units used to measure the weapon's range and reach.
+ * @property {number} range.value                  Short range of the weapon.
+ * @property {number} range.long                   Long range of the weapon.
+ * @property {number|null} range.reach             Reach of the weapon.
+ * @property {string} range.units                  Units used to measure the weapon's range and reach.
+ * @property {Omit<ItemTypeData, "subtype">} type  Weapon type and base item.
  */
 export default class WeaponData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
@@ -57,7 +62,6 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"}),
       ammunition: new SchemaField({
         type: new StringField()
       }),
@@ -79,7 +83,8 @@ export default class WeaponData extends ItemDataModel.mixin(
         long: new NumberField({ min: 0 }),
         reach: new NumberField({ min: 0 }),
         units: new StringField()
-      })
+      }),
+      type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"})
     });
   }
 
