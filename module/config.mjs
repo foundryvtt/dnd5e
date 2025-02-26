@@ -2005,6 +2005,9 @@ DND5E.itemProperties = {
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.FjWqT5iyJ89kohdA",
     isTag: true
   },
+  sidekick: {
+    label: "DND5E.Item.Property.Sidekick"
+  },
   sil: {
     label: "DND5E.Item.Property.Silvered",
     isPhysical: true
@@ -2050,6 +2053,9 @@ preLocalize("itemProperties", { keys: ["label", "abbreviation"], sort: true });
  * @enum {object}
  */
 DND5E.validProperties = {
+  class: new Set([
+    "sidekick"
+  ]),
   consumable: new Set([
     "mgc"
   ]),
