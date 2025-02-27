@@ -211,11 +211,15 @@
       .number-header, .level-number { grid-column: number; }
       .faces-header, .level-faces { grid-column: faces; }
     }
-    select option[value=""] { color: var(--color-text-light-6); }
-    .new-scale-value select { font-weight: bold; }
-    li.level:not(.new-scale-value) select {
-      color: var(--color-text-light-6);
-      option:not([value=""]) { color: var(--color-text-dark-primary); }
+    input, select {
+      font-weight: bold;
+      color: var(--color-text-dark-primary);
+    }
+    div.placeholder {
+      input, select {
+        color: var(--color-text-light-6);
+        font-weight: normal;
+      }
     }
   }
 }
