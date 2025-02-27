@@ -77,7 +77,8 @@ export default class D20Roll extends BasicRoll {
 
   /** @inheritDoc */
   static fromConfig(config, process) {
-    const formula = [new CONFIG.Dice.D20Die().formula].concat(config.parts ?? []).join(" + ");
+    const die = config.options?.customDie || new CONFIG.Dice.D20Die().formula;
+    const formula = [die].concat(config.parts ?? []).join(" + ");
     config.options.criticalSuccess ??= CONFIG.Dice.D20Die.CRITICAL_SUCCESS_TOTAL;
     config.options.criticalFailure ??= CONFIG.Dice.D20Die.CRITICAL_FAILURE_TOTAL;
     config.options.elvenAccuracy ??= process.elvenAccuracy;
@@ -201,7 +202,7 @@ export default class D20Roll extends BasicRoll {
    * @type {boolean}
    */
   get validD20Roll() {
-    return (this.d20 instanceof CONFIG.Dice.D20Die) && this.d20.isValid;
+    return !!this.options.customDie || ( (this.d20 instanceof CONFIG.Dice.D20Die) && this.d20.isValid );
   }
 
   /* -------------------------------------------- */
@@ -238,6 +239,8 @@ export default class D20Roll extends BasicRoll {
    */
   configureModifiers() {
     if ( !this.validD20Roll ) return;
+
+    if ( this.options.customDie ) this.d20.options.customDie = this.options.customDie;
 
     if ( this.options.advantageMode === undefined ) {
       const { advantage, disadvantage } = this.options;
