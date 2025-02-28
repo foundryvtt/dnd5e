@@ -91,7 +91,7 @@ export default class ActorSheet5eCharacter extends ActorSheet5e {
 
       // Item grouping
       ctx.ungroup = "passive";
-      const [originId] = item.getFlag("dnd5e", "advancementOrigin")?.split(".") ?? [];
+      const [originId] = (item.flags.dnd5e?.ultimateOrigin ?? item.flags.dnd5e?.advancementOrigin)?.split(".") ?? [];
       const group = this.actor.items.get(originId);
       switch ( group?.type ) {
         case "race": ctx.group = "race"; break;

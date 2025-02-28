@@ -307,11 +307,13 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
     const source = await fromUuid(uuid);
     if ( !source ) return null;
     const { _stats } = game.items.fromCompendium(source);
+    const advancementOrigin = `${this.item.id}.${this.id}`;
     return source.clone({
       _stats,
       _id: id ?? foundry.utils.randomID(),
       "flags.dnd5e.sourceId": uuid,
-      "flags.dnd5e.advancementOrigin": `${this.item.id}.${this.id}`
+      "flags.dnd5e.advancementOrigin": advancementOrigin,
+      "flags.dnd5e.ultimateOrigin": this.item.getFlag("dnd5e", "ultimateOrigin") ?? advancementOrigin
     }, { keepId: true }).toObject();
   }
 
