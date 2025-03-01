@@ -1,6 +1,7 @@
 import ItemSheet5e from "./item-sheet.mjs";
 import ItemSheetV2Mixin from "./sheet-v2-mixin.mjs";
 import ContextMenu5e from "../context-menu.mjs";
+import { formatNumber, formatRange } from "../../utils.mjs";
 
 /**
  * V2 Item sheet implementation.
@@ -119,16 +120,21 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     context.hasLimitedUses = this.item.system.hasLimitedUses;
     context.recoveryPeriods = CONFIG.DND5E.limitedUsePeriods.recoveryOptions;
     context.recoveryTypes = [
-      { value: "recoverAll", label: "DND5E.USES.Recovery.Type.RecoverAll" },
-      { value: "loseAll", label: "DND5E.USES.Recovery.Type.LoseAll" },
-      { value: "formula", label: "DND5E.USES.Recovery.Type.Formula" }
+      { value: "recoverAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.RecoverAll") },
+      { value: "loseAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.LoseAll") },
+      { value: "formula", label: game.i18n.localize("DND5E.USES.Recovery.Type.Formula") }
     ];
-    context.usesRecovery = (context.source.uses?.recovery ?? []).map((data, index) => ({
+    context.usesRecovery = context.source.uses.recovery.map((data, index) => ({
       data,
       fields: context.fields.uses.fields.recovery.element.fields,
       prefix: `system.uses.recovery.${index}.`,
       source: context.source.uses.recovery[index] ?? data,
-      formulaOptions: data.period === "recharge" ? data.recharge?.options : null
+      formulaOptions: data.period === "recharge" ? Array.fromRange(5, 2).reverse().map(min => ({
+        value: min,
+        label: game.i18n.format("DND5E.USES.Recovery.Recharge.Range", {
+        range: min === 6 ? formatNumber(6) : formatRange(min, 6)
+        })
+      })) : null
     }));
 
     // Activities
