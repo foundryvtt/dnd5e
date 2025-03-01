@@ -124,7 +124,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       { value: "loseAll", label: game.i18n.localize("DND5E.USES.Recovery.Type.LoseAll") },
       { value: "formula", label: game.i18n.localize("DND5E.USES.Recovery.Type.Formula") }
     ];
-    context.usesRecovery = context.source.uses.recovery.map((data, index) => ({
+    context.usesRecovery = (context.source.uses?.recovery ?? []).map((data, index) => ({
       data,
       fields: context.fields.uses.fields.recovery.element.fields,
       prefix: `system.uses.recovery.${index}.`,
