@@ -3433,6 +3433,7 @@ preLocalize("polymorphEffectSettings", { sort: true });
  */
 DND5E.transformationPresets = {
   wildshape: {
+    order: 0.1,
     icon: '<i class="fas fa-paw"></i>',
     label: "DND5E.PolymorphWildShape",
     options: {
@@ -3449,6 +3450,7 @@ DND5E.transformationPresets = {
     }
   },
   polymorph: {
+    order: 0.2,
     icon: '<i class="fas fa-pastafarianism"></i>',
     label: "DND5E.Polymorph",
     options: {
@@ -3463,6 +3465,7 @@ DND5E.transformationPresets = {
     }
   },
   polymorphSelf: {
+    order: 0.3,
     icon: '<i class="fas fa-eye"></i>',
     label: "DND5E.PolymorphSelf",
     options: {
