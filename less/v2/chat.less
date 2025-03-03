@@ -406,11 +406,23 @@
         flex-direction: column;
         gap: .25rem;
         overflow: hidden;
+
+        /* Immediate children vert margins
+         * are handled by the column gap */
+        > * {
+          margin-top:0;
+          margin-bottom:0;
+        }
       }
 
       p {
         margin: 0;
         &:first-child { padding-top: .5rem; }
+      }
+
+      /* Reduce padding of cells to help fit in card */
+      td {
+        padding:0.1em;
       }
     }
 
