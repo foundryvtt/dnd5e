@@ -11,11 +11,15 @@
     </header>
     <ol class="unlist card">
         {{#each types}}
-        <li>
+        <li {{~#if hint}} data-tooltip="{{ hint }}"{{/if}}>
             <label>
+                {{#if svg}}
+                <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                {{else}}
                 <img src="{{ icon }}" alt="{{ label }}">
+                {{/if}}
                 <span>{{ label }}</span>
-                <input type="radio" name="type" value="{{ type }}" required>
+                <input type="radio" name="type" value="{{ type }}" required {{ disabled disabled }}>
             </label>
         </li>
         {{/each}}
