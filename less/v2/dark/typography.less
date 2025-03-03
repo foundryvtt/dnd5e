@@ -1,5 +1,5 @@
 /* TODO: Add .dnd5e2-journal when dark mode journal sheets are implemented */
-.theme-dark .dnd5e2:not(.chat-card):not(.dnd5e-tooltip):not(.content),
+.theme-dark :where(.dnd5e2):not(.chat-card, .dnd5e-tooltip, .content),
 .dnd5e2.dnd5e-theme-dark {
   --dnd5e-color-table-row-odd: var(--dnd5e-color-iron-gray);
   --dnd5e-color-table-row-even: color-mix(in oklab, var(--dnd5e-color-table-row-odd), black 10%);
@@ -10,10 +10,9 @@
     --table-background-color: var(--dnd5e-color-blue-gray-1);
     --dnd5e-color-table-border: color-mix(in oklab, var(--dnd5e-color-table-row-even), black 10%);
 
-    thead {
-      --dnd5e-color-hd-1: #491d25;
-      --dnd5e-color-hd-2: #311b1f;
-    }
+    /* Set header gradient colors via inheritance for easier override (0,2,1) */
+    --dnd5e-color-hd-1: #491d25;
+    --dnd5e-color-hd-2: #311b1f;
   }
 
   .roll-link > i.fa-dice-d20, a.inline-roll > i.fa-dice-d20 { filter: invert(1); }
