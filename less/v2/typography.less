@@ -290,8 +290,179 @@
     }
   }
 
+  /* NPC Stat Blocks */
+  .double-column .statblock {
+    max-width: calc(var(--dnd5e-statblock-column-width) * 2);
+
+    .statblock-content {
+      columns: 2;
+    }
+  }
+
+  .statblock.npc {
+    max-width: var(--dnd5e-statblock-column-width);
+    background: var(--dnd5e-statblock-background);
+    border: 3px double var(--dnd5e-statblock-border);
+    border-radius: 8px;
+    padding-block: 4px;
+    padding-inline: 8px;
+    box-shadow: 2px 2px 2px var(--dnd5e-shadow-15);
+
+    .statblock-title,
+    .statblock-actions-title {
+      border-block-end: 1px solid currentcolor;
+      font-variant: small-caps;
+      break-after: avoid;
+    }
+
+    .statblock-title {
+      color: color-mix(
+      in oklab,
+      var(--dnd5e-statblock-text-header) 75%,
+      transparent
+      );
+      font-size: var(--font-size-18);
+
+      i {
+        display: none;
+      }
+
+      .content-link {
+        padding: 0;
+        text-decoration: none;
+      }
+    }
+    .statblock-actions-title {
+      margin-block-start: 8px;
+      color: var(--dnd5e-statblock-text-header);
+      font-size: var(--font-size-16);
+      font-weight: normal;
+    }
+    .statblock-tags {
+      color: var(--dnd5e-statblock-text-secondary);
+      font-style: italic;
+    }
+
+    .statblock-content {
+      column-width: var(--dnd5e-statblock-column-width);
+    }
+    .statblock-header {
+      break-inside: avoid;
+      color: var(--dnd5e-statblock-text-header);
+
+      dl {
+        display: flex;
+        flex-wrap: wrap;
+
+        > div {
+          flex: 1 0 100%;
+          &.half-width {
+            flex: 1 0 50%;
+          }
+        }
+
+        div > :is(dt, dd) {
+          display: inline;
+          line-height: 1.5;
+        }
+        dt {
+          color: var(--dnd5e-statblock-text-header);
+          text-shadow: none;
+        }
+      }
+      .abilities {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 6px;
+
+        table,
+        thead,
+        tbody,
+        tr,
+        th,
+        td {
+          all: revert;
+        }
+        table {
+          border-collapse: collapse;
+        }
+        thead th {
+          color: var(--dnd5e-statblock-text-secondary);
+          font-family: var(--dnd5e-font-roboto);
+          font-size: var(--font-size-10);
+          font-weight: normal;
+          text-transform: uppercase;
+
+          &.visually-hidden {
+            clip: rect(0 0 0 0);
+            clip-path: inset(50%);
+            font-size: 1px;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+        }
+        tbody {
+          tr {
+            border-block: 1px solid white;
+            &:nth-of-type(odd) {
+              th,
+              .score {
+                background: var(--dnd5e-statblock-ability-header-1st);
+              }
+              td {
+                background: var(--dnd5e-statblock-ability-stat-1st);
+              }
+            }
+            &:nth-of-type(even) {
+              th,
+              .score {
+                background: var(--dnd5e-statblock-ability-header-2nd);
+              }
+              td {
+                background: var(--dnd5e-statblock-ability-stat-2nd);
+              }
+            }
+          }
+          th {
+            font-variant: small-caps;
+          }
+          td {
+            text-align: center;
+          }
+        }
+      }
+    }
+
+    .statblock-actions {
+      color: var(--dnd5e-statblock-text-primary);
+
+      > p {
+        font-style: italic;
+      }
+
+      .statblock-action {
+        > p:first-child > .name {
+          font-style: italic;
+          font-weight: bold;
+          &::after {
+            content: ". ";
+          }
+        }
+        a,
+        button {
+          display: contents;
+          cursor: inherit;
+          pointer-events: none;
+          :is(.fas, .fa-solid, .far, .fa-regular) {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
   /** System Rich Text Blocks **/
-  :is(.journal-entry-content, .journal-page-content, .editor-content, .card-content) {
+  :is(.journal-entry-content, .journal-page-content, .editor-content, .card-content, .item-summary) {
     font-family: var(--dnd5e-font-roboto-condensed);
 
     h1,
@@ -305,177 +476,11 @@
     h4 {
       font-family: var(--dnd5e-font-roboto-slab);
       font-weight: bold;
+      font-size: var(--font-size-13);
     }
 
-    /* NPC Stat Blocks */
-    .double-column .statblock {
-      max-width: calc(var(--dnd5e-statblock-column-width) * 2);
-
-      .statblock-content {
-        columns: 2;
-      }
-    }
-
-    .statblock.npc {
-      max-width: var(--dnd5e-statblock-column-width);
-      background: var(--dnd5e-statblock-background);
-      border: 3px double var(--dnd5e-statblock-border);
-      border-radius: 8px;
-      padding-block: 4px;
-      padding-inline: 8px;
-      box-shadow: 2px 2px 2px var(--dnd5e-shadow-15);
-
-      .statblock-title,
-      .statblock-actions-title {
-        border-block-end: 1px solid currentcolor;
-        font-variant: small-caps;
-        break-after: avoid;
-      }
-
-      .statblock-title {
-        color: color-mix(
-          in oklab,
-          var(--dnd5e-statblock-text-header) 75%,
-          transparent
-        );
-        font-size: var(--font-size-18);
-
-        i {
-          display: none;
-        }
-
-        .content-link {
-          padding: 0;
-          text-decoration: none;
-        }
-      }
-      .statblock-actions-title {
-        margin-block-start: 8px;
-        color: var(--dnd5e-statblock-text-header);
-        font-size: var(--font-size-16);
-        font-weight: normal;
-      }
-      .statblock-tags {
-        color: var(--dnd5e-statblock-text-secondary);
-        font-style: italic;
-      }
-
-      .statblock-content {
-        column-width: var(--dnd5e-statblock-column-width);
-      }
-      .statblock-header {
-        break-inside: avoid;
-        color: var(--dnd5e-statblock-text-header);
-
-        dl {
-          display: flex;
-          flex-wrap: wrap;
-
-          > div {
-            flex: 1 0 100%;
-            &.half-width {
-              flex: 1 0 50%;
-            }
-          }
-
-          div > :is(dt, dd) {
-            display: inline;
-            line-height: 1.5;
-          }
-          dt {
-            color: var(--dnd5e-statblock-text-header);
-            text-shadow: none;
-          }
-        }
-        .abilities {
-          display: grid;
-          grid-template-columns: 1fr 1fr 1fr;
-          gap: 6px;
-
-          table,
-          thead,
-          tbody,
-          tr,
-          th,
-          td {
-            all: revert;
-          }
-          table {
-            border-collapse: collapse;
-          }
-          thead th {
-            color: var(--dnd5e-statblock-text-secondary);
-            font-family: var(--dnd5e-font-roboto);
-            font-size: var(--font-size-10);
-            font-weight: normal;
-            text-transform: uppercase;
-
-            &.visually-hidden {
-              clip: rect(0 0 0 0);
-              clip-path: inset(50%);
-              font-size: 1px;
-              overflow: hidden;
-              white-space: nowrap;
-            }
-          }
-          tbody {
-            tr {
-              border-block: 1px solid white;
-              &:nth-of-type(odd) {
-                th,
-                .score {
-                  background: var(--dnd5e-statblock-ability-header-1st);
-                }
-                td {
-                  background: var(--dnd5e-statblock-ability-stat-1st);
-                }
-              }
-              &:nth-of-type(even) {
-                th,
-                .score {
-                  background: var(--dnd5e-statblock-ability-header-2nd);
-                }
-                td {
-                  background: var(--dnd5e-statblock-ability-stat-2nd);
-                }
-              }
-            }
-            th {
-              font-variant: small-caps;
-            }
-            td {
-              text-align: center;
-            }
-          }
-        }
-      }
-
-      .statblock-actions {
-        color: var(--dnd5e-statblock-text-primary);
-
-        > p {
-          font-style: italic;
-        }
-
-        .statblock-action {
-          > p:first-child > .name {
-            font-style: italic;
-            font-weight: bold;
-            &::after {
-              content: ". ";
-            }
-          }
-          a,
-          button {
-            display: contents;
-            cursor: inherit;
-            pointer-events: none;
-            :is(.fas, .fa-solid, .far, .fa-regular) {
-              display: none;
-            }
-          }
-        }
-      }
+    h5 {
+      font-size: var(--font-size-13);
     }
   }
 }
