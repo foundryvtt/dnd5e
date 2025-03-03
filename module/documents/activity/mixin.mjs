@@ -298,7 +298,7 @@ export default function ActivityMixin(Base) {
       }
 
       // Create chat message
-      messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
+      activity._finalizeMessageConfig(usageConfig, messageConfig, results);
       results.message = await activity._createUsageMessage(messageConfig);
 
       // Perform any final usage steps
@@ -902,6 +902,19 @@ export default function ActivityMixin(Base) {
         subtitle: this.description.chatFlavor || data.subtitle,
         supplements
       };
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Apply any final modifications to message config immediately before message is created.
+     * @param {ActivityUseConfiguration} usageConfig        Configuration data for the activation.
+     * @param {ActivityMessageConfiguration} messageConfig  Configuration data for the chat message.
+     * @param {ActivityUsageResults} results                Final details on the activation.
+     * @protected
+     */
+    _finalizeMessageConfig(usageConfig, messageConfig, results) {
+      messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
     }
 
     /* -------------------------------------------- */
