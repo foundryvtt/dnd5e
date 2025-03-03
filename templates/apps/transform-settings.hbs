@@ -1,0 +1,15 @@
+<div>
+    {{#each categories}}
+    <div class=" settings-category category-{{ category }}">
+        <fieldset class="card">
+            <legend>{{ localize title }}</legend>
+            {{#if hint}}
+            <div class="form-group">
+                <p class="hint">{{ localize hint }}</p>
+            </div>
+            {{/if}}
+            {{> "dnd5e.fieldlist" settings }}
+        </fieldset>
+    </div>
+    {{/each}}
+</div>
