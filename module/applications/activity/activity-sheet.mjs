@@ -1,5 +1,5 @@
 import { ConsumptionTargetData } from "../../data/activity/fields/consumption-targets-field.mjs";
-import { formatNumber, formatRange } from "../../utils.mjs";
+import UsesField from "../../data/shared/uses-field.mjs";
 import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 
 /**
@@ -225,12 +225,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       fields: this.activity.schema.fields.uses.fields.recovery.element.fields,
       prefix: `uses.recovery.${index}.`,
       source: context.source.uses.recovery[index] ?? data,
-      formulaOptions: data.period === "recharge" ? Array.fromRange(5, 2).reverse().map(min => ({
-        value: min,
-        label: game.i18n.format("DND5E.USES.Recovery.Recharge.Range", {
-          range: min === 6 ? formatNumber(6) : formatRange(min, 6)
-        })
-      })) : null
+      formulaOptions: data.period === "recharge" ? UsesField.rechargeOptions : null
     }));
 
     // Template dimensions

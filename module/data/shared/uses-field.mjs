@@ -64,14 +64,7 @@ export default class UsesField extends SchemaField {
       if ( recovery.period === "recharge" ) {
         recovery.formula ??= "6";
         recovery.type = "recoverAll";
-        recovery.recharge = {
-          options: Array.fromRange(5, 2).reverse().map(min => ({
-            value: min,
-            label: game.i18n.format("DND5E.USES.Recovery.Recharge.Range", {
-              range: min === 6 ? formatNumber(6) : formatRange(min, 6)
-            })
-          }))
-        };
+        recovery.recharge = { options: UsesField.rechargeOptions };
         if ( labels ) labels.recharge ??= `${game.i18n.localize("DND5E.Recharge")} [${
           recovery.formula}${parseInt(recovery.formula) < 6 ? "+" : ""}]`;
       } else if ( recovery.period in CONFIG.DND5E.limitedUsePeriods ) {
@@ -87,6 +80,21 @@ export default class UsesField extends SchemaField {
       value: UsesField.rollRecharge.bind(this.parent?.system ? this.parent : this),
       configurable: true
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recharge range options.
+   * @returns {FormSelectOption[]}
+   */
+  static get rechargeOptions() {
+    return Array.fromRange(5, 2).reverse().map(min => ({
+      value: min,
+      label: game.i18n.format("DND5E.USES.Recovery.Recharge.Range", {
+        range: min === 6 ? formatNumber(6) : formatRange(min, 6)
+      })
+    }));
   }
 
   /* -------------------------------------------- */
