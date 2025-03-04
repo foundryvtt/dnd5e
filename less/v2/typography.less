@@ -84,11 +84,11 @@
     margin: 0.5em 0px;
 
     :where(p:first-child) {
-      margin-top:0px;
+      margin-block-start: 0px;
     }
 
     :where(p:last-child) {
-      margin-bottom:0px;
+      margin-block-end: 0px;
     }
 
     caption {
@@ -317,9 +317,9 @@
 
     .statblock-title {
       color: color-mix(
-      in oklab,
-      var(--dnd5e-statblock-text-header) 75%,
-      transparent
+        in oklab,
+        var(--dnd5e-statblock-text-header) 75%,
+        transparent
       );
       font-size: var(--font-size-18);
 
