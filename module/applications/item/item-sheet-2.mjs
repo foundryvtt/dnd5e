@@ -1,6 +1,6 @@
+import ContextMenu5e from "../context-menu.mjs";
 import ItemSheet5e from "./item-sheet.mjs";
 import ItemSheetV2Mixin from "./sheet-v2-mixin.mjs";
-import ContextMenu5e from "../context-menu.mjs";
 
 /**
  * V2 Item sheet implementation.
