@@ -186,49 +186,6 @@
     }
   }
 
-  /* Notable Callout */
-  .notable {
-    background-color: var(--dnd5e-block-notable-color);
-    margin: 30px 5px;
-    padding: 20px 28px 25px 30px;
-    border-width: 3px 1px;
-    border-style: solid;
-    border-color: var(--dnd5e-block-notable-border);
-    filter: drop-shadow(0 5px 8px var(--dnd5e-shadow-15));
-
-    /* Remove underline from all headers in notables
-     * to reduce visual noise and save some space */
-    :is(h1, h2, h3, h4, h5) {
-      border: none;
-      font-family: var(--dnd5e-font-roboto-slab);
-    }
-
-    &::before,
-    &::after {
-      content: "";
-      background: var(--dnd5e-block-notable-decor);
-      height: 11px;
-      position: absolute;
-      left: 0;
-      z-index: -1;
-    }
-
-    &::before {
-      top: -13px;
-      right: 0;
-    }
-
-    &::after {
-      bottom: -13px;
-      right: 0;
-      transform: scaleY(-1);
-    }
-
-    p:last-of-type {
-      margin-bottom: 0;
-    }
-  }
-
   /* Embed Captions */
   .content-embed figcaption cite {
     display: block;
