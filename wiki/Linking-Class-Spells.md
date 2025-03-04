@@ -58,3 +58,32 @@ Within the spellLists array, copy and paste each of the UUIDs you copied in Step
 ```
 
 Once you've saved your `module.json`, you can start foundry back up and the header of the spells should be adjusted. You can update your spell list pages later and those changes will be available the next time you reload the page - you only have to edit `module.json` whenever you add or remove a spell list page, not when the page itself is merely updated.
+
+## Troubleshooting
+
+If the above guide isn't working, try the following steps:
+
+- Refresh (f5) Foundry. The spell list register is initialized on world load.
+- Restart Foundry. Updates to module.json are not read while a world is open.
+- Double check that you grabbed *all* of the spell list UUIDs you want and put them in your module.json.
+- Make sure that the `flags` you've added to are at the *top* level of your module.json and not nested somewhere, like inside of a pack. Foundry uses the name "flags" frequently, and in this case you probably have to define it for yourself.
+
+If all else fails, you can try to debug by accessing the actual spell registry at `dnd5e.registry.spellLists` in world. It has two relevant methods, `forType` and `forSpell`, whose signatures are copied below.
+
+```js
+  /**
+   * Retrieve a specific spell list from the registry.
+   * @param {string} type        Type of list as defined in `CONFIG.DND5E.spellListTypes`.
+   * @param {string} identifier  Identifier of the specific spell list.
+   * @returns {SpellList|null}
+   */
+  forType(type, identifier)
+
+
+  /**
+   * Retrieve a list of spell lists a spell belongs to.
+   * @param {string} uuid  UUID of a spell item.
+   * @returns {Set<SpellList>}
+   */
+  forSpell(uuid)
+```
