@@ -488,11 +488,11 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
           rollData.bonuses?.[typeMapping[actionType] ?? actionType]?.attack
         ].filter(p => p);
         changes.push({
-          key: "system.attack.bonus",
+          key: "activities[attack].attack.bonus",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: parts.join(" + ")
         }, {
-          key: "system.attack.flat",
+          key: "activities[attack].attack.flat",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: true
         });
@@ -506,13 +506,13 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
           if ( ability ) dc = rollData.abilities[ability]?.dc ?? dc;
         }
         changes.push({
-          key: "system.save.dc",
+          key: "activities[save].save.dc.formula",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
           value: dc
         }, {
-          key: "system.save.scaling",
+          key: "activities[save].save.calculation",
           mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-          value: "flat"
+          value: ""
         });
       }
 
