@@ -70,7 +70,7 @@
         "value": 243,
         "max": 243,
         "temp": null,
-        "tempmax": 0,
+        "tempmax": null,
         "formula": "18d10 + 144"
       },
       "init": {
@@ -581,8 +581,8 @@
     "texture": {
       "src": null,
       "tint": "#ffffff",
-      "scaleX": 1,
-      "scaleY": 1,
+      "scaleX": 2,
+      "scaleY": 2,
       "offsetX": 0,
       "offsetY": 0,
       "rotation": 0,
@@ -615,7 +615,7 @@
         "ring": null,
         "background": null
       },
-      "effects": 1,
+      "effects": 0,
       "subject": {
         "scale": 1,
         "texture": null
@@ -3803,9 +3803,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.6",
     "createdTime": 1726171253472,
-    "modifiedTime": 1726171449026,
+    "modifiedTime": 1741111917393,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!lOYt73eaJojBDxAV"
