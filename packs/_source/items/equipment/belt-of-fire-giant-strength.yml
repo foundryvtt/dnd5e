@@ -1,0 +1,112 @@
+_id: bq9YKwEHLQ7p7ric
+name: Belt of Fire Giant Strength
+type: equipment
+img: icons/equipment/waist/belt-coiled-leather-steel.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While wearing this belt, your Strength score changes to 25. If your
+      Strength is already equal to or greater than the belt's score, the item
+      has no effect on you.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 12000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: belt-of-fire-giant-strength
+effects:
+  - origin: Compendium.dnd5e.items.bq9YKwEHLQ7p7ric
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: bOonopsHKkewV29S
+    changes:
+      - key: system.abilities.str.value
+        mode: 4
+        value: '25'
+        priority: null
+    tint: '#ffffff'
+    transfer: true
+    flags: {}
+    name: Belt of Fire Giant Strength
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/equipment/waist/belt-coiled-leather-steel.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!bq9YKwEHLQ7p7ric.bOonopsHKkewV29S'
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037228959
+  modifiedTime: 1725992526949
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!bq9YKwEHLQ7p7ric'

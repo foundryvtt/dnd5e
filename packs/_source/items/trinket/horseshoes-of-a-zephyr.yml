@@ -1,0 +1,76 @@
+_id: 2mvXGvDmHHhzbT04
+name: Horseshoes of a Zephyr
+type: consumable
+img: icons/tools/smithing/horseshoe-steel-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>These iron horseshoes come in a set of four. While all four shoes are
+      affixed to the hooves of a horse or similar creature, they allow the
+      creature to move normally while floating 4 inches above the ground. This
+      effect means the creature can cross or stand above non-solid or unstable
+      surfaces, such as water or lava. The creature leaves no tracks and ignores
+      difficult terrain. In addition, the creature can move at normal speed for
+      up to 12 hours a day without suffering exhaustion from a forced march.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 8
+    units: lb
+  price:
+    value: 1500
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: veryRare
+  identified: true
+  uses:
+    max: ''
+    autoDestroy: true
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities: {}
+  attuned: false
+  identifier: horseshoes-of-a-zephyr
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 600000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037090903
+  modifiedTime: 1725992480725
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!2mvXGvDmHHhzbT04'

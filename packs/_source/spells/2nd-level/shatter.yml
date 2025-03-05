@@ -1,0 +1,131 @@
+_id: wJKpSvSTbSkTjqyb
+name: Shatter
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>A sudden loud ringing noise, painfully intense, erupts from a point of
+      your choice within range. Each creature in a 10-foot-radius sphere
+      centered on that point must make a Constitution saving throw. A creature
+      takes 3d8 thunder damage on a failed save, or half as much damage on a
+      successful one. A creature made of inorganic material such as stone,
+      crystal, or metal has disadvantage on this saving throw.</p><p>A
+      nonmagical object that isn't being worn or carried also takes the damage
+      if it's in the spell's area.</p><p><strong>Higher Levels.</strong> When
+      you cast this spell using a 3 or higher level spell slot, the damage of
+      the spell increases by 1d8 for each level of higher spell slot 2.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '10'
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: evo
+  materials:
+    value: A chip of mica
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 3
+            denomination: 8
+            bonus: ''
+            types:
+              - thunder
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: shatter
+sort: 0
+flags: {}
+img: icons/magic/fire/explosion-fireball-medium-blue.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037366380
+  modifiedTime: 1725992723327
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!wJKpSvSTbSkTjqyb'

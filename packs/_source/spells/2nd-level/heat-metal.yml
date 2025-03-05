@@ -1,0 +1,134 @@
+_id: 2yHXEcrRbadZDr5M
+name: Heat Metal
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>Choose a manufactured metal object, such as a metal weapon or a suit of
+      heavy or medium metal armor, that you can see within range. You cause the
+      object to glow red-hot. Any creature in physical contact with the object
+      takes 2d8 fire damage when you cast the spell. Until the spell ends, you
+      can use a bonus action on each of your subsequent turns to cause this
+      damage again.</p><p>If a creature is holding or wearing the object and
+      takes the damage from it, the creature must succeed on a Constitution
+      saving throw or drop the object if it can. If it doesn't drop the object,
+      it has disadvantage on attack rolls and ability checks until the start of
+      your next turn.</p><p><strong>Higher Levels.</strong> When you cast this
+      spell using a spell slot of 3rd level or higher, the damage increases by
+      1d8 for each slot level above 2nd.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: object
+      count: '1'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '60'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: trs
+  materials:
+    value: A piece of iron and a flame.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 2
+            denomination: 8
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: heat-metal
+sort: 0
+flags: {}
+img: icons/magic/light/explosion-star-large-orange.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037346261
+  modifiedTime: 1725992716668
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!2yHXEcrRbadZDr5M'

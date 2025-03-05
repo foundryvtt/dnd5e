@@ -1,0 +1,160 @@
+_id: ejEt6hLQxOux04lS
+name: Demon Armor
+type: equipment
+img: icons/equipment/chest/breastplate-layered-leather-green.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>While wearing this plate armor, you gain a +1 bonus to AC, and you can
+      understand and speak Abyssal. In addition, the armor's clawed gauntlets
+      turn unarmed strikes with your hands into magic weapons that deal slashing
+      damage, with a +1 bonus to attack rolls and damage rolls and a damage die
+      of 1d8.</p>
+
+      <p><strong>Curse</strong>. Once you don this cursed armor, you can't doff
+      it unless you are targeted by the
+      @UUID[Compendium.dnd5e.spells.Item.XZhdgVK3cLoxNCQl]{Remove Curse} spell
+      or similar magic. While wearing the armor, you have disadvantage on attack
+      rolls against demons and on saving throws against their spells and special
+      abilities.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 65
+    units: lb
+  price:
+    value: 8000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 18
+    dex: 0
+    magicalBonus: 1
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: 15
+  proficient: null
+  type:
+    value: heavy
+    baseItem: plate
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+    - stealthDisadvantage
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: str
+        bonus: '1'
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: '8'
+            bonus: '@mod + 1'
+            types:
+              - slashing
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: demon-armor
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037243508
+  modifiedTime: 1725992531746
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!ejEt6hLQxOux04lS'

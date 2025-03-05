@@ -1,0 +1,392 @@
+_id: xEtBeZjJnkDXojQM
+name: Staff of Frost
+type: weapon
+img: icons/weapons/staves/staff-ornate-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a druid, sorcerer, warlock, or
+      wizard)</em></p><p>You have resistance to cold damage while you hold this
+      staff.</p><p>The staff has 10 charges. While holding it, you can use an
+      action to expend 1 or more of its charges to cast one of the following
+      spells from it, using your spell save DC:
+      @UUID[Compendium.dnd5e.spells.Item.RpKjTlYASrfqUPVA]{Cone of Cold} (5
+      charges), @UUID[Compendium.dnd5e.spells.Item.IBJmWjzbQGu7M4UX]{Fog Cloud}
+      (1 charge), @UUID[Compendium.dnd5e.spells.Item.WN2LWEljYU6QqnRH]{Ice
+      Storm} (4 charges), or
+      @UUID[Compendium.dnd5e.spells.Item.fzZnVKLmBMo2f5up]{Wall of Ice} (4
+      charges).</p><p>The staff regains 1d6 + 4 expended charges daily at dawn.
+      If you expend the last charge, roll a d20. On a 1, the staff turns to
+      water and is destroyed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 26000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ''
+    reach: null
+  uses:
+    max: '10'
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d6 + 4
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  type:
+    value: simpleM
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: null
+  activities:
+    t2bjgs4Rehoss7mc:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.RpKjTlYASrfqUPVA
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: t2bjgs4Rehoss7mc
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    3ozkXRFfpdGwx6zZ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.IBJmWjzbQGu7M4UX
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 3ozkXRFfpdGwx6zZ
+      sort: 300000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    BjnMyi8sdbu0Ybrr:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.WN2LWEljYU6QqnRH
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: BjnMyi8sdbu0Ybrr
+      sort: 400000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '4'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    LOde45eToutGhwC6:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.fzZnVKLmBMo2f5up
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '6'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: LOde45eToutGhwC6
+      sort: 500000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '4'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    IRwrNunMhdXwXXne:
+      type: attack
+      _id: IRwrNunMhdXwXXne
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+  attuned: false
+  ammunition: {}
+  identifier: staff-of-frost
+  mastery: ''
+effects:
+  - name: Staff of Frost
+    origin: Compendium.dnd5e.items.Item.xEtBeZjJnkDXojQM
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/weapons/staves/staff-ornate-blue.webp
+    _id: cY6gjrYWTbo4ezzH
+    type: base
+    system: {}
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    description: <p>You have resistance to cold damage while you hold this staff.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!items.effects!xEtBeZjJnkDXojQM.cY6gjrYWTbo4ezzH'
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037322364
+  modifiedTime: 1731019516799
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!xEtBeZjJnkDXojQM'

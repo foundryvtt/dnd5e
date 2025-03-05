@@ -1,0 +1,146 @@
+_id: oNLfJNRQgUHpU8c7
+name: Pipes of Haunting
+type: consumable
+img: icons/tools/instruments/flute-simple-wood.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>You must be proficient with wind instruments to use these pipes. They
+      have 3 charges. You can use an action to play them and expend 1 charge to
+      create an eerie, spellbinding tune. Each creature within 30 feet of you
+      that hears you play must succeed on a DC 15 Wisdom saving throw or become
+      frightened of you for 1 minute. If you wish, all creatures in the area
+      that aren't hostile toward you automatically succeed on the saving throw.
+      A creature that fails the saving throw can repeat it at the end of each of
+      its turns, ending the effect on itself on a success. A creature that
+      succeeds on its saving throw is immune to the effect of these pipes for 24
+      hours.</p>
+
+      <p>The pipes regain 1d3 expended charges daily at dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 6000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: '3'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d3
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: Proficiency with wind instruments.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: pipes-of-haunting
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 8600000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037286054
+  modifiedTime: 1725992546192
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!oNLfJNRQgUHpU8c7'
