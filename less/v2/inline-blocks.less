@@ -3,8 +3,72 @@
 /* ------------------------------------------- */
 :is(.dnd5e, .dnd5e2, .dnd5e2-journal) {
 
+  /* Positioning */
+  .left {
+    float: left;
+    clear: left;
+    margin-right: 0.5em;
+    max-width: var(--dnd5e-block-float-max);
+  }
+
+  .right {
+    float: right;
+    clear: right;
+    margin-left: 0.5em;
+    max-width: var(--dnd5e-block-float-max);
+  }
+
+  .clear-both {
+    clear: both;
+  }
+
+  .center {
+    margin: auto;
+  }
+
+  /* Sizing */
+  .four {
+    width: calc(4 * var(--dnd5e-block-width-base));
+  }
+
+  .three {
+    width: calc(3 * var(--dnd5e-block-width-base));
+  }
+
+  .two {
+    width: calc(2 * var(--dnd5e-block-width-base));
+  }
+
+  .one {
+    width: var(--dnd5e-block-width-base);
+  }
+
+  /* Layout */
+  .space-between,
+  .space-around {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    clear: both;
+  }
+
+  .space-around {
+    justify-content: space-around;
+    gap: 10px;
+  }
+
+  .wrap {
+    flex-wrap: wrap;
+  }
+
+  .top {
+    align-items:start;
+  }
+
   /* Common Typography for Callouts */
   :is(.notable, .quest, .advice, .narrative) {
+    display: flow-root;
 
     :is(h1, h2, h3, h4, h5) {
       border: none;
