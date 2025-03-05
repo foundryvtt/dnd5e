@@ -1,0 +1,150 @@
+_id: VwJjuNbBf2KHMPrY
+name: Cloak of Arachnida
+type: equipment
+img: icons/equipment/back/cloak-collared-blue-iron.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>This fine garment is made of black silk interwoven with faint silvery
+      threads. While wearing it, you gain the following benefits:</p>
+
+      <ul>
+
+      <li>You have resistance to poison damage.</li>
+
+      <li>You have a climbing speed equal to your walking speed.</li>
+
+      <li>You can move up, down, and across vertical surfaces and upside down
+      along ceilings, while leaving your hands free.</li>
+
+      <li>You can't be caught in webs of any sort and can move through webs as
+      if they were difficult terrain.</li>
+
+      <li>You can use an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.UJJu9c2UvCzVljiP]{Web} spell (save DC
+      13). The web created by the spell fills twice its normal area. Once used,
+      this property of the cloak can't be used again until the next dawn.</li>
+
+      </ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 5000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  uses:
+    max: '1'
+    recovery:
+      - period: dawn
+        type: recoverAll
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    ARmT21Y3mklDGsvO:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.UJJu9c2UvCzVljiP
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: ARmT21Y3mklDGsvO
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: cloak-of-arachnida
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037203028
+  modifiedTime: 1729015261227
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!VwJjuNbBf2KHMPrY'

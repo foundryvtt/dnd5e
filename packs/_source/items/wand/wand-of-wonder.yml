@@ -1,0 +1,598 @@
+_id: lPsueMv4ZoXqCYf9
+name: Wand of Wonder
+type: equipment
+img: icons/weapons/wands/wand-totem.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a spellcaster)</em></p>
+
+      <p>This wand has 7 charges. While holding it, you can use an action to
+      expend 1 of its charges and choose a target within 120 feet of you. The
+      target can be a creature, an object, or a point in space. Roll on the
+      @UUID[Compendium.dnd5e.tables.RollTable.X03rbSjVcNNJNqa8]{Wand of Wonder}
+      table to discover what happens.</p>
+
+      <p>If the effect causes you to cast a spell from the wand, the spell's
+      save DC is 15. If the spell normally has a range expressed in feet, its
+      range becomes 120 feet if it isn't already. If an effect covers an area,
+      you must center the spell on and include the target. If an effect has
+      multiple possible subjects, the GM randomly determines which ones are
+      affected.</p>
+
+      <p>The wand regains 1d6 + 1 expended charges daily at dawn. If you expend
+      the wand's last charge, roll a d20. On a 1, the wand crumbles into dust
+      and is destroyed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 24000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '7'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d6 + 1
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: wand
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - foc
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '120'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    MQiFj6kmbG849P2I:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.yqUDoxk4x0NWG5Bz
+        challenge:
+          attack: null
+          save: 15
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+      _id: MQiFj6kmbG849P2I
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Slow (1–5)
+      img: ''
+    6DZzvyzd46LbnfIL:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.nqBDWkVOfcGZt4YU
+        challenge:
+          attack: null
+          save: 15
+          override: true
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+      _id: 6DZzvyzd46LbnfIL
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Faerie Fire (6–10)
+      img: ''
+    CasBiIZXL54laOOx:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.FSMy6VAjDnXY9vWz
+        challenge:
+          attack: null
+          save: 15
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+      _id: CasBiIZXL54laOOx
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Gust of Wind (16–20)
+      img: ''
+    scEVZazoOleSrYw2:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er
+        challenge:
+          attack: null
+          save: 15
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+      _id: scEVZazoOleSrYw2
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Detect Thoughts (21–25)
+      img: ''
+    4xPLz74G1GRXtSmB:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.TwlD4PLcltv7Xh7j
+        challenge:
+          attack: null
+          save: 15
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+      _id: 4xPLz74G1GRXtSmB
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Stinking Cloud (26–30)
+      img: ''
+    mfe676QinSfB6v8H:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.IyikgTEOTv701jgQ
+        challenge:
+          attack: null
+          save: 15
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: mfe676QinSfB6v8H
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Lightning Bolt (37–46)
+      img: ''
+    V6TIchqdN8i6seVY:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.S7VbUetIfVT7B6Eq
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: false
+      _id: V6TIchqdN8i6seVY
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Darkness (54–58)
+      img: ''
+    3dSvQUQq9gxu0HSl:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0
+        challenge:
+          attack: null
+          save: 15
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: 3dSvQUQq9gxu0HSl
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '120'
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Fireball (70–79)
+      img: ''
+    fcFugwiJmL6UEXvv:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.1N8dDMMgZ1h1YJ3B
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+      _id: fcFugwiJmL6UEXvv
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Invisibility (80–84)
+      img: ''
+  attuned: false
+  identifier: wand-of-wonder
+effects: []
+folder: 1aDgsGVwDbPdxG2V
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037273704
+  modifiedTime: 1731016531254
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!lPsueMv4ZoXqCYf9'

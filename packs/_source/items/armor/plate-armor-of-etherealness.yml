@@ -1,0 +1,147 @@
+_id: dJjdWdaZU30r1zx4
+name: Plate Armor of Etherealness
+type: equipment
+img: icons/equipment/chest/breastplate-collared-steel.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>Plate consists of shaped, interlocking metal plates to cover the entire
+      body. A suit of plate includes gauntlets, heavy leather boots, a visored
+      helmet, and thick layers of padding underneath the armor. Buckles and
+      straps distribute the weight over the body. This particular armor has been
+      inscribed with certain magical runes or other means to imbue power upon
+      it.</p>
+
+      <p>While you're wearing this armor, you can speak its command word as an
+      action to gain the effect of the
+      @UUID[Compendium.dnd5e.spells.Item.PQuEgKyCdovOvhqN]{Etherealness} spell,
+      which last for 10 minutes or until you remove the armor or use an action
+      to speak the command word again. This property of the armor can't be used
+      again until the next dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 65
+    units: lb
+  price:
+    value: 48000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    spent: 0
+  armor:
+    value: 18
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: 15
+  proficient: null
+  type:
+    value: heavy
+    baseItem: plate
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+    - stealthDisadvantage
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: Command word.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '10'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: plate-armor-of-etherealness
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037233531
+  modifiedTime: 1725992528488
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!dJjdWdaZU30r1zx4'

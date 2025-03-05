@@ -1,0 +1,145 @@
+_id: DoSvjhRARhRqWZXg
+name: Wand of Fireballs
+type: equipment
+img: icons/weapons/staves/staff-obsidian.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a spellcaster)</em></p>
+
+      <p>This wand has 7 charges. While holding it, you can use an action to
+      expend 1 or more of its charges to cast the
+      @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{Fireball} spell (save
+      DC 15) from it. For 1 charge, you cast the 3rd-level version of the spell.
+      You can increase the spell slot level by one for each additional charge
+      you expend.</p>
+
+      <p>The wand regains 1d6 + 1 expended charges daily at dawn. If you expend
+      the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes
+      and is destroyed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 32000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '7'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d6 + 1
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: 8
+      denomination: 6
+      bonus: ''
+      types:
+        - fire
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: wand
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - foc
+    - mgc
+  magicalBonus: null
+  activities:
+    iBdnsohqpy6cLAm8:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0
+        challenge:
+          attack: null
+          save: 15
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: iBdnsohqpy6cLAm8
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: true
+          max: ''
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: wand-of-fireballs
+effects: []
+folder: 1aDgsGVwDbPdxG2V
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037134840
+  modifiedTime: 1731015872768
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!DoSvjhRARhRqWZXg'

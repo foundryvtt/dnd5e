@@ -1,0 +1,168 @@
+_id: 8dzaICjGy6mTUaUr
+name: Bless
+type: spell
+img: icons/magic/control/buff-flight-wings-blue.webp
+system:
+  description:
+    value: >-
+      <p>You bless up to three creatures of your choice within range. Whenever a
+      target makes an attack roll or a saving throw before the spell ends, the
+      target can roll 1d4 and add the number rolled to the attack roll or saving
+      throw.</p>
+
+      <p><strong>Higher Levels.</strong> When you cast this spell using a spell
+      slot of 2nd level or higher, you can target one additional creature for
+      each slot level above 1st.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      type: creature
+      count: '3'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 1
+  school: enc
+  materials:
+    value: A sprinkling of holy water
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: 8rP3gwmXVTgZqYZE
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: 1d4
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: bless
+effects:
+  - _id: 8rP3gwmXVTgZqYZE
+    flags: {}
+    changes:
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: 1d4
+        priority: null
+      - key: system.bonuses.mwak.attack
+        mode: 2
+        value: 1d4
+        priority: null
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: 1d4
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: 1d4
+        priority: null
+      - key: system.bonuses.rwak.attack
+        mode: 2
+        value: 1d4
+        priority: null
+    disabled: true
+    duration:
+      startTime: null
+      seconds: 60
+      rounds: 10
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Item.kZZAZ6kp9YzgPQEe
+    tint: '#ffffff'
+    transfer: false
+    name: Bless
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/magic/control/buff-flight-wings-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE'
+folder: ERuXllkhTQF51rDJ
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037349054
+  modifiedTime: 1725992717522
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!8dzaICjGy6mTUaUr'

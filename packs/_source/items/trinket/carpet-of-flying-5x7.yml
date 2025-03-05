@@ -1,0 +1,129 @@
+name: Carpet of Flying (5x7)
+type: consumable
+img: icons/commodities/cloth/cloth-bolt-embroidered-pink.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p><p>You can speak the carpet's command word as
+      an action to make the carpet hover and fly. It moves according to your
+      spoken directions, provided that you are within 30 feet of it.</p><p>This
+      carpet is 5 ft. x 7 ft. and has a speed of 40 feet carrying up to 600 lb,
+      or half that speed when carrying up to 1200 lb.</p>
+
+      <p>Four sizes of carpet of flying exist. The GM chooses the size of a
+      given carpet or determines it randomly from the
+      @UUID[Compendium.dnd5e.tables.RollTable.Z2OG7jt9R8zofxnJ]{Carpet of
+      Flying} table.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 10
+    units: lb
+  price:
+    value: 12000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: veryRare
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: Command word.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: carpet-of-flying-5x7
+effects: []
+flags: {}
+_id: XAr1SR4POx5BAArk
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037208119
+  modifiedTime: 1725992520083
+  lastModifiedBy: dnd5ebuilder0000
+folder: UnUwTG4YIgd0kaUJ
+sort: 6100000
+ownership:
+  default: 0
+_key: '!items!XAr1SR4POx5BAArk'
