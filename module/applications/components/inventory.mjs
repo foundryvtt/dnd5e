@@ -3,6 +3,7 @@ import {parseInputDelta} from "../../utils.mjs";
 import CurrencyManager from "../currency-manager.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import ItemSheet5e2 from "../item/item-sheet-2.mjs";
+import SplitStackDialog from "../item/split-stack-dialog.mjs";
 
 /**
  * Custom element that handles displaying actor & container inventories.
@@ -229,6 +230,13 @@ export default class InventoryElement extends HTMLElement {
         },
         condition: li => (item.type === "spell") && !item.getFlag("dnd5e", "cachedFor") && this.actor?.isOwner
           && !this.actor?.[game.release.generation < 13 ? "compendium" : "collection"]?.locked,
+        group: "action"
+      },
+      {
+        name: "DND5E.SplitStack.Title",
+        icon: '<i class="fa-solid fa-arrows-split-up-and-left"></i>',
+        callback: () => new SplitStackDialog({ document: item }).render({ force: true }),
+        condition: () => item.isOwner && !compendiumLocked && ((item.system.quantity ?? 0) > 1),
         group: "action"
       },
       {
