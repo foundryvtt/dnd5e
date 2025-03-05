@@ -1,0 +1,115 @@
+_id: 296Zgo9RhltWShE1
+name: Stone of Good Luck (Luckstone)
+type: equipment
+img: icons/commodities/gems/gem-rough-rectangle-red.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While this polished agate is on your person, you gain a +1 bonus to
+      ability checks and saving throws.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 4200
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: null
+    dex: null
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: stone-of-good-luck-luckstone
+effects:
+  - origin: Compendium.dnd5e.items.296Zgo9RhltWShE1
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: TghMVbmFnR0t0AoP
+    changes:
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '+1'
+        priority: null
+      - key: system.bonuses.abilities.check
+        mode: 2
+        value: '+1'
+        priority: null
+    tint: '#ffffff'
+    transfer: true
+    flags: {}
+    name: Stone of Good Luck
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/commodities/gems/gem-faceted-octagon-yellow.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!296Zgo9RhltWShE1.TghMVbmFnR0t0AoP'
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037087692
+  modifiedTime: 1725992479684
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!296Zgo9RhltWShE1'

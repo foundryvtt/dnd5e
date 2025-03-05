@@ -1,0 +1,142 @@
+_id: xjRSY2ECcc9viSz3
+name: Scarab of Protection
+type: consumable
+img: icons/environment/creatures/bug-larva-orange.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>If you hold this beetle-shaped medallion in your hand for 1 round, an
+      inscription appears on its surface revealing its magical nature. It
+      provides two benefits while it is on your person:</p>
+
+      <ul>
+
+      <li>You have advantage on saving throws against spells.</li>
+
+      <li>The scarab has 12 charges. If you fail a saving throw against a
+      necromancy spell or a harmful effect originating from an undead creature,
+      you can use your reaction to expend 1 charge and turn the failed save into
+      a successful one. The scarab crumbles into powder and is destroyed when
+      its last charge is expended.</li>
+
+      </ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 36000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: '12'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: reaction
+        value: 1
+        condition: Charges are consumed by necromancy spells or an undead caster.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: scarab-of-protection
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 10700000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037323702
+  modifiedTime: 1725992559102
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!xjRSY2ECcc9viSz3'

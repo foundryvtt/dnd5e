@@ -1,0 +1,6050 @@
+_id: kfzBL0q1Y7LgGs2x
+name: Akra (Dragonborn Cleric)
+type: character
+img: null
+system:
+  abilities:
+    str:
+      value: 16
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    dex:
+      value: 10
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    con:
+      value: 13
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    int:
+      value: 8
+      proficient: 0
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    wis:
+      value: 15
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+    cha:
+      value: 9
+      proficient: 1
+      max: null
+      bonuses:
+        check: ''
+        save: ''
+  attributes:
+    ac:
+      flat: null
+      calc: default
+      formula: ''
+    hp:
+      value: 9
+      max: null
+      temp: null
+      tempmax: null
+      bonuses:
+        level: ''
+        overall: ''
+    init:
+      ability: ''
+      bonus: '0'
+      roll:
+        min: null
+        max: null
+        mode: 0
+    movement:
+      burrow: null
+      climb: null
+      fly: null
+      swim: null
+      walk: null
+      units: null
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: null
+      blindsight: null
+      tremorsense: null
+      truesight: null
+      units: null
+      special: ''
+    spellcasting: wis
+    death:
+      success: 0
+      failure: 0
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    exhaustion: 0
+    inspiration: false
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+  details:
+    biography:
+      value: >-
+        <p>A devout follower of her deity and of her society's customs, Akra
+        feels somewhat out of place adventuring in foreign lands. But she feels
+        bound to do everything in her power to bring peace to the region.</p>
+      public: ''
+    alignment: Lawful Good
+    race: eRfgJRQJdRPFSbf5
+    background: UXJw0wVE7GCx6yzv
+    originalClass: PZNSd7pd1tmTdLmw
+    xp:
+      value: 0
+    appearance: ''
+    trait: ''
+    ideal: ''
+    bond: ''
+    flaw: ''
+    eyes: ''
+    height: ''
+    faith: ''
+    hair: ''
+    weight: ''
+    gender: ''
+    skin: ''
+    age: ''
+  traits:
+    size: med
+    di:
+      value: []
+      bypasses: []
+      custom: ''
+    dr:
+      value:
+        - cold
+      bypasses: []
+      custom: ''
+    dv:
+      value: []
+      bypasses: []
+      custom: ''
+    ci:
+      value: []
+      custom: ''
+    languages:
+      value:
+        - giant
+        - halfling
+        - common
+        - draconic
+      custom: ''
+    weaponProf:
+      value:
+        - sim
+      custom: ''
+      mastery:
+        value: []
+        bonus: []
+    armorProf:
+      value:
+        - lgt
+        - med
+        - shl
+        - hvy
+      custom: ''
+    dm:
+      amount: {}
+      bypasses: []
+  currency:
+    pp: 0
+    gp: 15
+    ep: 0
+    sp: 0
+    cp: 0
+  skills:
+    acr:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ani:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    arc:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ath:
+      value: 0
+      ability: str
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    dec:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    his:
+      value: 1
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ins:
+      value: 1
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    itm:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    inv:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    med:
+      value: 1
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    nat:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prc:
+      value: 1
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prf:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    per:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    rel:
+      value: 1
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    slt:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ste:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    sur:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+  tools: {}
+  spells:
+    spell1:
+      value: 2
+      override: null
+    spell2:
+      value: 0
+      override: null
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+    spell0:
+      value: 0
+      override: null
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  resources:
+    primary:
+      value: null
+      max: null
+      sr: false
+      lr: false
+      label: ''
+    secondary:
+      value: null
+      max: null
+      sr: false
+      lr: false
+      label: ''
+    tertiary:
+      value: null
+      max: null
+      sr: false
+      lr: false
+      label: ''
+  favorites:
+    - type: item
+      id: .Item.vWo0CO4uYJ8XRnRi
+      sort: 800000
+    - type: item
+      id: .Item.7LUJHpWpCzfMZI3D
+      sort: 900000
+    - type: item
+      id: .Item.HpjaVMLEU14tJG7y
+      sort: 1000000
+    - type: item
+      id: .Item.LjT1wf4D38c9Ieuo
+      sort: 1100000
+    - type: item
+      id: .Item.a7IlF5H2ZPsB4VWm
+      sort: 1200000
+    - type: item
+      id: .Item.pZMrJb3AXiRYO5E8
+      sort: 1300000
+    - type: item
+      id: .Item.aEmz3laQj2ZZiKSb
+      sort: 850000
+    - type: item
+      id: .Item.P97npemu7j70IZAQ
+      sort: 875000
+    - type: item
+      id: .Item.5yH69xkqge3u7to7
+      sort: 887500
+    - type: item
+      id: .Item.hutWJTfurJjNbSpG
+      sort: 1450000
+    - type: item
+      id: .Item.b4NGPmLUcMECcA3O
+      sort: 1500000
+    - type: item
+      id: .Item.iLKpfoGF7rGpvNWD
+      sort: 1400000
+  bastion:
+    name: ''
+    description: ''
+prototypeToken:
+  flags: {}
+  name: Akra
+  displayName: 30
+  width: 1
+  height: 1
+  lockRotation: false
+  rotation: 0
+  actorLink: true
+  disposition: 1
+  displayBars: 40
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: attributes.ac.value
+  randomImg: false
+  alpha: 1
+  light:
+    alpha: 1
+    angle: 360
+    bright: 0
+    coloration: 1
+    dim: 0
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      speed: 5
+      intensity: 5
+      type: null
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+    color: null
+    attenuation: 0.5
+    negative: false
+    priority: 0
+  texture:
+    src: null
+    tint: '#ffffff'
+    scaleX: 1
+    scaleY: 1
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    alphaThreshold: 0.75
+  sight:
+    angle: 360
+    enabled: true
+    range: 5
+    brightness: 0
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  appendNumber: false
+  prependAdjective: false
+  hexagonalShape: 0
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 0
+    subject:
+      scale: 1
+      texture: null
+items:
+  - _id: Ra2Z1ujre76weR0i
+    name: Holy Symbol
+    type: loot
+    system:
+      description:
+        value: >-
+          <p>This talisman serves as a spellcasting focus, helping the
+          practitioner to channel arcane, primal, or divine
+          energies.</p><p><strong>Spellcasting Focus. </strong>An arcane focus
+          is a special item designed to channel the power of arcane spells. A
+          sorcerer, warlock, or wizard can use such an item as a spellcasting
+          focus, using it in place of any material component which does not list
+          a cost.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 3
+        units: lb
+      price:
+        value: 20
+        denomination: gp
+      rarity: ''
+      identified: true
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      identifier: holy-symbol
+    sort: 0
+    flags: {}
+    img: icons/commodities/treasure/broach-jewel-gold-blue.webp
+    effects: []
+    folder: null
+    ownership:
+      default: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.Ra2Z1ujre76weR0i'
+  - name: Priest
+    type: background
+    system:
+      description:
+        value: >-
+          <ul><li><strong>Skill Proficiencies:</strong> Insight,
+          Religion</li><li><strong>Languages:</strong> Two of your
+          choice</li><li><strong>Equipment:</strong> A holy symbol, 5 sticks of
+          incense, prayer book, vestments, a set of common clothes, and a pouch
+          containing 15 gp.</li></ul>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      advancement: []
+      startingEquipment: []
+      identifier: priest
+    img: icons/sundries/documents/document-torn-diagram-tan.webp
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: UXJw0wVE7GCx6yzv
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.UXJw0wVE7GCx6yzv'
+  - _id: eRfgJRQJdRPFSbf5
+    name: Dragonborn
+    type: race
+    img: icons/creatures/eyes/lizard-single-slit-green.webp
+    system:
+      description:
+        value: >-
+          <p>Your draconic heritage manifests in a variety of traits you share
+          with other dragonborn.</p><p><em><strong>Ability Score
+          Increase.</strong></em> Your Strength score increases by 2, and your
+          Charisma score increases by 1.</p><p><em><strong>Age.</strong></em>
+          Young dragonborn grow quickly. They walk hours after hatching, attain
+          the size and development of a 10-­year-­old human child by the age of
+          3, and reach adulthood by 15. They live to be around
+          80.</p><p><em><strong>Alignment.</strong></em> Dragonborn tend to
+          extremes, making a conscious choice for one side or the other in the
+          cosmic war between good and evil. Most dragonborn are good, but those
+          who side with evil can be terrible
+          villains.</p><p><em><strong>Size.</strong></em> Dragonborn are taller
+          and heavier than humans, standing well over 6 feet tall and averaging
+          almost 250 pounds. Your size is
+          Medium.</p><p><em><strong>Speed.</strong></em> Your base walking speed
+          is 30 feet.</p><table><caption>Draconic
+          Ancestry</caption><thead><tr><td>Dragon</td><td>Damage
+          Type</td><td>Breath
+          Weapon</td></tr></thead><tbody><tr><td>Black</td><td>Acid</td><td>5 by
+          30 ft. line (Dex.
+          save)</td></tr><tr><td>Blue</td><td>Lightning</td><td>5 by 30 ft. line
+          (Dex. save)</td></tr><tr><td>Brass</td><td>Fire</td><td>5 by 30 ft.
+          line (Dex. save)</td></tr><tr><td>Bronze</td><td>Lightning</td><td>5
+          by 30 ft. line (Dex.
+          save)</td></tr><tr><td>Copper</td><td>Acid</td><td>5 by 30 ft. line
+          (Dex. save)</td></tr><tr><td>Gold</td><td>Fire</td><td>15 ft. cone
+          (Dex. save)</td></tr><tr><td>Green</td><td>Poison</td><td>15 ft. cone
+          (Con. save)</td></tr><tr><td>Red</td><td>Fire</td><td>15 ft. cone
+          (Dex. save)</td></tr><tr><td>Silver</td><td>Cold</td><td>15 ft. cone
+          (Con. save)</td></tr><tr><td>White</td><td>Cold</td><td>15 ft. cone
+          (Con. save)</td></tr></tbody></table><p><em><strong>Draconic
+          Ancestry.</strong></em> You have draconic ancestry. Choose one type of
+          dragon from the Draconic Ancestry table. Your breath weapon and damage
+          resistance are determined by the dragon type, as shown in the
+          table.</p><p><em><strong>Breath Weapon.</strong></em> You can use your
+          action to exhale destructive energy. Your draconic ancestry determines
+          the size, shape, and damage type of the exhalation.</p><p>When you use
+          your breath weapon, each creature in the area of the exhalation must
+          make a saving throw, the type of which is determined by your draconic
+          ancestry. The DC for this saving throw equals 8 + your Constitution
+          modifier + your proficiency bonus. A creature takes 2d6 damage on a
+          failed save, and half as much damage on a successful one. The damage
+          increases to 3d6 at 6th level, 4d6 at 11th level, and 5d6 at 16th
+          level.</p><p>After you use your breath weapon, you can't use it again
+          until you complete a short or long rest.</p><p><em><strong>Damage
+          Resistance.</strong></em> You have resistance to the damage type
+          associated with your draconic
+          ancestry.</p><p><em><strong>Languages.</strong></em> You can speak,
+          read, and write Common and Draconic. Draconic is thought to be one of
+          the oldest languages and is often used in the study of magic. The
+          language sounds harsh to most other creatures and includes numerous
+          hard consonants and sibilants.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      identifier: dragonborn
+      advancement:
+        - _id: QIrBmvSmNOTEJLWn
+          type: ItemChoice
+          configuration:
+            choices:
+              '0':
+                count: 1
+                replacement: false
+            allowDrops: false
+            type: feat
+            pool:
+              - uuid: Compendium.dnd5e.races.NnSZlrsHCFeH3cCq
+              - uuid: Compendium.dnd5e.races.KVgvW5yhKcmQUanz
+              - uuid: Compendium.dnd5e.races.JrUcwLR2aQC09iUM
+              - uuid: Compendium.dnd5e.races.pJzMSk9qYywYy65w
+              - uuid: Compendium.dnd5e.races.bFpLM0N3uTeHLdzu
+              - uuid: Compendium.dnd5e.races.YPQQBZAuRiSwuBfh
+              - uuid: Compendium.dnd5e.races.lXIxndsBaQglHBtO
+              - uuid: Compendium.dnd5e.races.kB61JPKQrDBbSNU7
+              - uuid: Compendium.dnd5e.races.pAYTdRGftNr8AitK
+              - uuid: Compendium.dnd5e.races.KL7wx9Q8XNJQir0k
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+            restriction:
+              type: race
+              subtype: ''
+              level: ''
+          value:
+            added:
+              '0':
+                vWo0CO4uYJ8XRnRi: Compendium.dnd5e.races.Item.KL7wx9Q8XNJQir0k
+            replaced: {}
+          title: Draconic Ancestry
+          hint: >-
+            You have draconic ancestry. Choose one type of dragon from the list.
+            Your breath weapon and damage resistance are determined by the
+            dragon type.
+        - _id: Z9hvZFkWUNvowbQX
+          type: AbilityScoreImprovement
+          configuration:
+            points: 0
+            fixed:
+              str: 2
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 1
+            cap: 2
+            locked: []
+          value:
+            type: asi
+            assignments:
+              str: 2
+              cha: 1
+          level: 0
+          title: ''
+        - _id: rXLC7smebN2zPOBT
+          type: ScaleValue
+          configuration:
+            identifier: breath-weapon
+            type: dice
+            distance:
+              units: ''
+            scale:
+              '0':
+                number: 2
+                faces: 6
+                modifiers: []
+              '6':
+                number: 3
+                faces: 6
+                modifiers: []
+              '11':
+                number: 4
+                faces: 6
+                modifiers: []
+              '16':
+                number: 5
+                faces: 6
+                modifiers: []
+          value: {}
+          title: Breath Weapon
+        - _id: 9D8XNnmTLWfzN32K
+          type: Size
+          configuration:
+            sizes:
+              - med
+          value:
+            size: med
+          level: 1
+          title: ''
+          hint: >-
+            Dragonborn are taller and heavier than humans, standing well over 6
+            feet tall and averaging almost 250 pounds. Your size is Medium.
+        - _id: 6WUcKNSLh5WJ3Q24
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - languages:standard:common
+              - languages:exotic:draconic
+            choices: []
+          level: 0
+          title: ''
+          value:
+            chosen:
+              - languages:standard:common
+              - languages:exotic:draconic
+        - _id: 2f4dkpTYlhOgRgxu
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants: []
+            choices:
+              - count: 1
+                pool:
+                  - dr:acid
+                  - dr:cold
+                  - dr:fire
+                  - dr:lightning
+                  - dr:poison
+          level: 0
+          title: ''
+          value:
+            chosen:
+              - dr:cold
+          hint: >-
+            You have resistance to the damage type associated with your draconic
+            ancestry.
+      movement:
+        burrow: null
+        climb: null
+        fly: null
+        swim: null
+        walk: 30
+        units: ft
+        hover: false
+      senses:
+        darkvision: null
+        blindsight: null
+        tremorsense: null
+        truesight: null
+        units: ft
+        special: ''
+      type:
+        value: humanoid
+        subtype: Dragonborn
+        custom: ''
+    effects: []
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.races.Item.K4DNDcR6vngbp0pf
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093997920
+      lastModifiedBy: dnd5ebuilder0000
+    sort: 0
+    folder: gpuhARM4UqdXSEto
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.eRfgJRQJdRPFSbf5'
+  - _id: vWo0CO4uYJ8XRnRi
+    name: Breath Weapon - White
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>You can use your action to exhale destructive energy. Your draconic
+          ancestry determines the size, shape, and damage type of the
+          exhalation.</p><p>When you use your breath weapon, each creature in
+          the area of the exhalation must make a Constitution saving throw, the
+          type of which is determined by your draconic ancestry. The DC for this
+          saving throw equals 8 + your Constitution modifier + your proficiency
+          bonus. A creature takes 2d6 cold damage on a failed save, and half as
+          much damage on a successful one. The damage increases to 3d6 at 6th
+          level, 4d6 at 11th level, and 5d6 at 16th level.</p><p>After you use
+          your breath weapon, you can't use it again until you complete a short
+          or long rest.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: '1'
+        recovery:
+          - period: sr
+            type: recoverAll
+        spent: 0
+      type:
+        value: race
+        subtype: ''
+      requirements: White Dragonborn
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: cone
+              size: '15'
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          damage:
+            onSave: half
+            parts:
+              - number: null
+                denomination: null
+                bonus: ''
+                types:
+                  - cold
+                custom:
+                  enabled: true
+                  formula: '@scale.dragonborn.breath-weapon'
+                scaling:
+                  mode: whole
+                  number: null
+                  formula: ''
+          save:
+            ability:
+              - con
+            dc:
+              calculation: con
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: breath-weapon-white
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.races.Item.KL7wx9Q8XNJQir0k
+        advancementOrigin: eRfgJRQJdRPFSbf5.QIrBmvSmNOTEJLWn
+        riders:
+          activity: []
+          effect: []
+    img: icons/magic/water/projectile-icecicle.webp
+    effects: []
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.races.Item.KL7wx9Q8XNJQir0k
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093815097
+      lastModifiedBy: dnd5ebuilder0000
+    sort: 0
+    folder: TAw7621pFkXOkuYI
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.vWo0CO4uYJ8XRnRi'
+  - _id: PZNSd7pd1tmTdLmw
+    name: Cleric
+    type: class
+    img: icons/magic/life/ankh-gold-blue.webp
+    system:
+      description:
+        value: >-
+          <p>As a cleric, you gain the following class features.</p><h3>Hit
+          Points</h3><p><strong>Hit Dice:</strong> 1d8 per cleric level<br
+          /><strong>Hit Points at 1st Level:</strong> 8 + your Constitution
+          modifier<br /><strong>Hit Points at Higher Levels:</strong> 1d8 (or 5)
+          + your Constitution modifier per cleric level after
+          1st</p><h3>Proficiencies</h3><p><strong>Armor:</strong> Light armor,
+          medium armor, shields<br /><strong>Weapons:</strong> Simple weapons<br
+          /><strong>Tools:</strong> None<br /><strong>Saving Throws:</strong>
+          Wisdom, Charisma<br /><strong>Skills:</strong> Choose two from
+          History, Insight, Medicine, Persuasion, and Religion</p><h1>Cleric
+          Advancement</h1><table><thead><tr><td>Level</td><td>Proficiency
+          Bonus</td><td>Features</td></tr></thead><tbody><tr><td>1st</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.v4gKwLhAq9vuqza7]{Spellcasting}
+          , @UUID[Compendium.dnd5e.classfeatures.Item.x637K2Icp2ZFM1TB]{Divine
+          Domain}</td></tr><tr><td>2nd</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.YpiLQEKGalROn7iJ]{Channel
+          Divinity (1/rest)}, Divine Domain
+          feature</td></tr><tr><td>3rd</td><td>+2</td><td>2nd Level Spell
+          Slot</td></tr><tr><td>4th</td><td>+2</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+          Score Improvement}</td></tr><tr><td>5th</td><td>+3</td><td>3rd Level
+          Spell Slot,
+          @UUID[Compendium.dnd5e.classfeatures.Item.NMy4piwXIpLjYbRE]{Destroy
+          Undead (CR
+          1/2)}</td></tr><tr><td>6th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.YpiLQEKGalROn7iJ]{Channel
+          Divinity (2/rest)}, Divine Domain
+          feature</td></tr><tr><td>7th</td><td>+3</td><td>4th Level Spell
+          Slot</td></tr><tr><td>8th</td><td>+3</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{ASI},
+          @UUID[Compendium.dnd5e.classfeatures.Item.NMy4piwXIpLjYbRE]{Destroy
+          Undead (CR 1)}, Divine Domain
+          feature</td></tr><tr><td>9th</td><td>+4</td><td>5th Level Spell
+          Slot</td></tr><tr><td>10th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.eVXqHn0ojWrEuYGU]{Divine
+          Intervention}</td></tr><tr><td>11th</td><td>+4</td><td>6th Level Spell
+          Slot,
+          @UUID[Compendium.dnd5e.classfeatures.Item.NMy4piwXIpLjYbRE]{Destroy
+          Undead (CR
+          2)}</td></tr><tr><td>12th</td><td>+4</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+          Score Improvement}</td></tr><tr><td>13th</td><td>+5</td><td>7th Level
+          Spell
+          Slot</td></tr><tr><td>14th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.NMy4piwXIpLjYbRE]{Destroy
+          Undead (CR 3)}</td></tr><tr><td>15th</td><td>+5</td><td>8th Level
+          Spell
+          Slot</td></tr><tr><td>16th</td><td>+5</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+          Score Improvement}</td></tr><tr><td>17th</td><td>+6</td><td>9th Level
+          Spell Slot,
+          @UUID[Compendium.dnd5e.classfeatures.Item.NMy4piwXIpLjYbRE]{Destroy
+          Undead (CR 4)}, Divine Domain
+          feature</td></tr><tr><td>18th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.YpiLQEKGalROn7iJ]{Channel
+          Divinity
+          (3/rest)}</td></tr><tr><td>19th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.s0Cc2zcX0JzIgam5]{Ability
+          Score
+          Improvement}</td></tr><tr><td>20th</td><td>+6</td><td>@UUID[Compendium.dnd5e.classfeatures.Item.eVXqHn0ojWrEuYGU]{Divine
+          Intervention (Automatic Success)}</td></tr></tbody></table><h1>Divine
+          Domains</h1><p>@UUID[Compendium.dnd5e.subclasses.Item.H3RYLGqCiqm8BP3q]{Life
+          Domain}</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      identifier: cleric
+      levels: 1
+      hitDice: d8
+      hitDiceUsed: 0
+      advancement:
+        - type: HitPoints
+          configuration: {}
+          value:
+            '1': max
+          title: Hit Points
+          icon: systems/dnd5e/icons/svg/hit-points.svg
+          _id: XqASCKr26BUOObF5
+        - _id: vLDkTMgod0IS4HJn
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - armor:lgt
+              - armor:med
+              - armor:shl
+            choices: []
+          level: 1
+          title: ''
+          value:
+            chosen:
+              - armor:lgt
+              - armor:med
+              - armor:shl
+        - _id: uyLXlhMnjMSHHdbs
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - weapon:sim
+            choices: []
+          level: 1
+          title: ''
+          classRestriction: primary
+          value:
+            chosen:
+              - weapon:sim
+        - _id: bcFNu9fM4o5He4J7
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - saves:wis
+              - saves:cha
+            choices: []
+          level: 1
+          title: ''
+          classRestriction: primary
+          value:
+            chosen:
+              - saves:wis
+              - saves:cha
+        - _id: 6YQrE9NkjbvhfN8F
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants: []
+            choices:
+              - count: 2
+                pool:
+                  - skills:his
+                  - skills:ins
+                  - skills:med
+                  - skills:per
+                  - skills:rel
+          level: 1
+          title: ''
+          classRestriction: primary
+          value:
+            chosen:
+              - skills:his
+              - skills:med
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.v4gKwLhAq9vuqza7
+                optional: false
+              - uuid: Compendium.dnd5e.classfeatures.x637K2Icp2ZFM1TB
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value:
+            added:
+              sYPnCIXmh7C72RMi: Compendium.dnd5e.classfeatures.Item.v4gKwLhAq9vuqza7
+              tUGnDwsGjGCMrxKX: Compendium.dnd5e.classfeatures.Item.x637K2Icp2ZFM1TB
+          level: 1
+          title: Features
+          _id: axeH6FmdvAfb3TnK
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.YpiLQEKGalROn7iJ
+                optional: false
+              - uuid: Compendium.dnd5e.classfeatures.r91UIgwFdHwkXdia
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 2
+          title: Features
+          _id: PpE7QUl3ZRdIwbSW
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.NMy4piwXIpLjYbRE
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 5
+          title: Features
+          _id: PwcMUZPMhGxn6JnJ
+        - type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.eVXqHn0ojWrEuYGU
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 10
+          title: Features
+          _id: RAGsl9ESVLpLfX5u
+        - type: ScaleValue
+          configuration:
+            identifier: channel-divinity
+            type: number
+            distance:
+              units: ''
+            scale:
+              '2':
+                value: 1
+              '6':
+                value: 2
+              '18':
+                value: 3
+          value: {}
+          title: Channel Divinity Uses
+          _id: oOvaOWkQdMJHHwzo
+        - type: ScaleValue
+          configuration:
+            identifier: destroy-undead
+            type: cr
+            distance:
+              units: ''
+            scale:
+              '5':
+                value: 0.5
+              '8':
+                value: 1
+              '11':
+                value: 2
+              '14':
+                value: 3
+              '17':
+                value: 4
+          value: {}
+          title: Destroy Undead CR
+          _id: bRWP2zsP33jeZcUY
+        - type: ScaleValue
+          configuration:
+            identifier: cantrips-known
+            type: number
+            distance:
+              units: ''
+            scale:
+              '1':
+                value: 3
+              '4':
+                value: 4
+              '10':
+                value: 5
+          value: {}
+          title: Cantrips Known
+          _id: b6vbDSfWTwxqyTke
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 4
+          title: Ability Score Improvement
+          _id: PrfXQ3yQP9js943H
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 8
+          title: Ability Score Improvement
+          _id: FLozwaTlMVqZKbaN
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 12
+          title: Ability Score Improvement
+          _id: yplB3bqCjEXkNAAq
+        - type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 16
+          title: Ability Score Improvement
+          _id: LoImJ16J7Sn1HXi2
+        - _id: puDaUsYrlks0z5gm
+          type: AbilityScoreImprovement
+          configuration:
+            points: 2
+            fixed:
+              str: 0
+              dex: 0
+              con: 0
+              int: 0
+              wis: 0
+              cha: 0
+            cap: 2
+            locked: []
+          value:
+            type: asi
+          level: 19
+          title: ''
+        - _id: 8k7cukgzwwl67h6c
+          type: Subclass
+          configuration: {}
+          value: {}
+          level: 1
+          title: Divine Domain
+      spellcasting:
+        progression: full
+        ability: wis
+        preparation:
+          formula: '@abilities.wis.mod + @classes.cleric.levels'
+      startingEquipment:
+        - type: OR
+          _id: 8YSDVdYvwcM9CZyn
+          group: ''
+          sort: 100000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.Ajyq6nGwF7FtLhDQ
+          _id: lomxiG4seGEODc0X
+          group: 8YSDVdYvwcM9CZyn
+          sort: 600000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.F0Df164Xv1gWcYt0
+          _id: oPqhjxGI22oLSbJU
+          group: 8YSDVdYvwcM9CZyn
+          sort: 700000
+          requiresProficiency: true
+        - type: OR
+          _id: kQ5WDegIiIjZ80F2
+          group: ''
+          sort: 200000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.XmnlF5fgIO3tg6TG
+          _id: pcfTItJqTlcXtDlH
+          group: kQ5WDegIiIjZ80F2
+          sort: 800000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.WwdpHLXGX5r8uZu5
+          _id: kSPggXc9mzhJoGt8
+          group: kQ5WDegIiIjZ80F2
+          sort: 900000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.rLMflzmxpe8JGTOA
+          _id: 0pHFdJtUUguvm8Ew
+          group: kQ5WDegIiIjZ80F2
+          sort: 1000000
+          requiresProficiency: true
+        - type: OR
+          _id: PxjFEJ3rFboYUkXJ
+          group: ''
+          sort: 300000
+          requiresProficiency: false
+        - type: AND
+          _id: JTXoh1m5OJ6A1Nsn
+          group: PxjFEJ3rFboYUkXJ
+          sort: 1100000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.ddWvQRLmnnIS0eLF
+          _id: mzsGhss9eFfp8Vr8
+          group: JTXoh1m5OJ6A1Nsn
+          sort: 1200000
+          requiresProficiency: false
+        - type: linked
+          count: 20
+          key: Compendium.dnd5e.items.Item.SItCnYBqhzqBoaWG
+          _id: pTcJ5DdfXPpuzG03
+          group: JTXoh1m5OJ6A1Nsn
+          sort: 1300000
+          requiresProficiency: false
+        - type: weapon
+          count: null
+          key: sim
+          _id: s7Vkg77JWlGWY1B7
+          group: PxjFEJ3rFboYUkXJ
+          sort: 1400000
+          requiresProficiency: false
+        - type: OR
+          _id: RtqG5F8t7K6hJSlc
+          group: ''
+          sort: 400000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.6BybWxK5GcEzqcOV
+          _id: pwn69DG4Fa6yosHE
+          group: RtqG5F8t7K6hJSlc
+          sort: 1500000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.8KWz5DJbWUpNWniP
+          _id: 3bdc9v8f5R9Hy23e
+          group: RtqG5F8t7K6hJSlc
+          sort: 1600000
+          requiresProficiency: false
+        - type: AND
+          _id: M69HsHoj2jxdBLBU
+          group: ''
+          sort: 500000
+          requiresProficiency: false
+        - type: linked
+          count: null
+          key: Compendium.dnd5e.items.Item.sSs3hSzkKBMNBgTs
+          _id: SUjHLQ6oJoxSW0CE
+          group: M69HsHoj2jxdBLBU
+          sort: 1700000
+          requiresProficiency: false
+        - type: focus
+          count: null
+          key: holy
+          _id: GGBx54GwIwyvPvA1
+          group: M69HsHoj2jxdBLBU
+          sort: 1800000
+          requiresProficiency: false
+      wealth: 5d4 * 10
+      primaryAbility:
+        value: []
+        all: true
+    effects: []
+    folder: m1NqJdyiVSU7ghF5
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classes.Item.tlwBnN8GmqJcTgub
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093997972
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.PZNSd7pd1tmTdLmw'
+  - _id: sYPnCIXmh7C72RMi
+    name: Spellcasting
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: "<p>As a conduit for divine power, you can cast cleric spells.</p>\n<h5>Cantrips</h5>\n<p>At 1st level, you know three cantrips of your choice from the cleric spell list. You learn additional cleric cantrips of your choice at higher levels, as shown in the Cantrips Known column of the Cleric table.</p>\n<h5>Preparing and Casting Spells</h5>\n<p>The Cleric table shows how many spell slots you have to cast your spells of 1st level and higher. To cast one of these spells, you must expend a slot of the spell's level or higher. You regain all expended spell slots when you finish a long rest.</p>\n<p>You prepare the list of cleric spells that are available for you to cast, choosing from the cleric spell list. When you do so, choose a number of cleric spells equal to your Wisdom modifier + your cleric level (minimum of one spell). The spells must be of a level for which you have spell slots.</p>\n<p>For example, if you are a 3rd-level cleric, you have four 1st-level and two 2nd-level spell slots. With a Wisdom of 16, your list of prepared spells can include six spells of 1st or 2nd level, in any combination. If you prepare the 1st-level spell cure wounds, you can cast it using a 1st-level or 2nd-level slot. Casting the spell doesn't remove it from your list of prepared spells.</p>\n<p>You can change your list of prepared spells when you finish a long rest. Preparing a new list of cleric spells requires time spent in prayer and meditation: at least 1 minute per spell level for each spell on your list.</p>\n<h5>Spellcasting Ability</h5>\n<p>Wisdom is your spellcasting ability for your cleric spells. The power of your spells comes from your devotion to your deity. You use your Wisdom whenever a cleric spell refers to your spellcasting ability. In addition, you use your Wisdom modifier when setting the saving throw DC for a cleric spell you cast and when making an attack roll with one.</p>\n<p><strong>Spell save DC</strong>= 8 + your proficiency bonus + your Wisdom modifier</p>\n<p><strong>Spell attack modifier</strong>\_= your proficiency bonus + your Wisdom modifier</p>\n<h5>Ritual Casting</h5>\n<p>You can cast a cleric spell as a ritual if that spell has the ritual tag and you have the spell prepared.</p>\n<h5>Spellcasting Focus</h5>\n<p>You can use a holy symbol (see @UUID[Compendium.dnd5e.rules.JournalEntry.BYFd9hiJGo9L5aOM.JournalEntryPage.AjavRU4yPfI9hfaI]{Adventuring Gear}) as a spellcasting focus for your cleric spells.</p>"
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      requirements: Cleric 1
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: spellcasting
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classfeatures.Item.v4gKwLhAq9vuqza7
+        advancementOrigin: PZNSd7pd1tmTdLmw.axeH6FmdvAfb3TnK
+        riders:
+          activity: []
+          effect: []
+    img: icons/magic/life/ankh-gold-blue.webp
+    effects: []
+    folder: hraxTGrJtk9MmXqT
+    sort: 0
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classfeatures.Item.gbNo5eVPaqr8IVKL
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093815145
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.sYPnCIXmh7C72RMi'
+  - _id: tUGnDwsGjGCMrxKX
+    name: Divine Domain
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>Choose one domain related to your deity, such as Life. Your choice
+          grants you domain spells and other features when you choose it at 1st
+          level. It also grants you additional ways to use Channel Divinity when
+          you gain that feature at 2nd level, and additional benefits at 6th,
+          8th, and 17th levels.</p>
+
+          <h5>Domain Spells</h5>
+
+          <p>Each domain has a list of spells—its domain spells—that you gain at
+          the cleric levels noted in the domain description. Once you gain a
+          domain spell, you always have it prepared, and it doesn't count
+          against the number of spells you can prepare each day.</p>
+
+          <p>If you have a domain spell that doesn't appear on the cleric spell
+          list, the spell is nonetheless a cleric spell for you.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      requirements: Cleric 1
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: divine-domain
+    sort: 0
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classfeatures.Item.x637K2Icp2ZFM1TB
+        advancementOrigin: PZNSd7pd1tmTdLmw.axeH6FmdvAfb3TnK
+        riders:
+          activity: []
+          effect: []
+    img: icons/magic/nature/tree-spirit-blue.webp
+    effects: []
+    folder: hraxTGrJtk9MmXqT
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classfeatures.Item.x637K2Icp2ZFM1TB
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093815195
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.tUGnDwsGjGCMrxKX'
+  - _id: AD9TpaN6zrfvZUwa
+    name: Life Domain
+    type: subclass
+    img: icons/magic/life/cross-yellow-green.webp
+    system:
+      description:
+        value: >-
+          <p>The Life domain focuses on the vibrant positive energy—one of the
+          fundamental forces of the universe—that sustains all life. The gods of
+          life promote vitality and health through healing the sick and wounded,
+          caring for those in need, and driving away the forces of death and
+          undeath. Almost any non-­evil deity can claim influence over this
+          domain, particularly agricultural deities (such as Chauntea, Arawai,
+          and Demeter), sun gods (such as Lathander, Pelor, and Re-­Horakhty),
+          gods of healing or endurance (such as Ilmater, Mishakal, Apollo, and
+          Diancecht), and gods of home and community (such as Hestia, Hathor,
+          and Boldrei).</p><table><caption>Life Domain
+          Spells</caption><thead><tr><td>Cleric
+          Level</td><td>Spells</td></tr></thead><tbody><tr><td>1st</td><td>@UUID[Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr]{Bless},
+          @UUID[Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP]{Cure
+          Wounds}</td></tr><tr><td>3rd</td><td>@UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser
+          Restoration},
+          @UUID[Compendium.dnd5e.spells.Item.JbxsYXxSOTZbf9I0]{Spiritual
+          Weapon}</td></tr><tr><td>5th</td><td>@UUID[Compendium.dnd5e.spells.Item.ZU9d6woBdUP8pIPt]{Beacon
+          of Hope},
+          @UUID[Compendium.dnd5e.spells.Item.LmRHHMtplpxr9fX6]{Revivify}</td></tr><tr><td>7th</td><td>@UUID[Compendium.dnd5e.spells.Item.VtCXMdyM6mAdIJZb]{Death
+          Ward}, @UUID[Compendium.dnd5e.spells.Item.TgHsuhNasPbhu8MO]{Guardian
+          of
+          Faith}</td></tr><tr><td>9th</td><td>@UUID[Compendium.dnd5e.spells.Item.Pyzmm8R7rVsNAPsd]{Mass
+          Cure Wounds},
+          @UUID[Compendium.dnd5e.spells.Item.AGFMPAmuzwWO6Dfz]{Raise
+          Dead}</td></tr></tbody></table>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      identifier: life-domain
+      classIdentifier: cleric
+      advancement:
+        - _id: bW7chouU8WIVH0Le
+          type: Trait
+          configuration:
+            mode: default
+            allowReplacements: false
+            grants:
+              - armor:hvy
+            choices: []
+          level: 1
+          title: ''
+          value:
+            chosen:
+              - armor:hvy
+        - _id: 9fyr5t01nhdg0u8n
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.68bYIOvx6rIqnlOW
+                optional: false
+              - uuid: Compendium.dnd5e.classfeatures.jF8AFfEMICIJnAkR
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value:
+            added:
+              BVZ0RopCWd4K0oQy: Compendium.dnd5e.classfeatures.Item.68bYIOvx6rIqnlOW
+              a9hkL9uYDaDoEx3U: Compendium.dnd5e.classfeatures.Item.jF8AFfEMICIJnAkR
+          level: 1
+          title: Features
+        - _id: 4qh4ejxpwugva6ma
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.hEymt45rICi4f9eL
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 2
+          title: Features
+        - _id: ihquu4r80mxr07qt
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.yv49QN6Bzqs0ecCs
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 6
+          title: Features
+        - _id: ayh4gqp9vxjo9yd3
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.T6u5z8ZTX6UftXqE
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 8
+          title: Features
+        - _id: m4m8xp6cabt71mdq
+          type: ItemGrant
+          configuration:
+            items:
+              - uuid: Compendium.dnd5e.classfeatures.4UOgxzr83vFuUash
+                optional: false
+            optional: false
+            spell:
+              ability: []
+              preparation: ''
+              uses:
+                max: ''
+                per: ''
+                requireSlot: false
+          value: {}
+          level: 17
+          title: Features
+        - _id: RYU9NFMQarGlfW23
+          type: ScaleValue
+          configuration:
+            identifier: divine-strike
+            type: dice
+            distance:
+              units: ''
+            scale:
+              '8':
+                number: 1
+                faces: 8
+                modifiers: []
+              '14':
+                number: 2
+                faces: 8
+                modifiers: []
+          value: {}
+          title: Divine Strike Damage
+      spellcasting:
+        progression: none
+        ability: ''
+        preparation:
+          formula: ''
+    effects: []
+    folder: m1NqJdyiVSU7ghF5
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.subclasses.Item.H3RYLGqCiqm8BP3q
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738094105363
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.AD9TpaN6zrfvZUwa'
+  - _id: BVZ0RopCWd4K0oQy
+    name: Bonus Proficiency
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>When you choose this domain at 1st level, you gain proficiency with
+          heavy armor.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      requirements: Life Domain 1
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: bonus-proficiency
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classfeatures.Item.68bYIOvx6rIqnlOW
+        advancementOrigin: AD9TpaN6zrfvZUwa.9fyr5t01nhdg0u8n
+        riders:
+          activity: []
+          effect: []
+    img: icons/equipment/chest/breastplate-layered-steel.webp
+    effects: []
+    folder: CTZ7zZ8ESNtr2IKz
+    sort: 0
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classfeatures.Item.68bYIOvx6rIqnlOW
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093815247
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.BVZ0RopCWd4K0oQy'
+  - _id: a9hkL9uYDaDoEx3U
+    name: Disciple of Life
+    ownership:
+      default: 0
+    type: feat
+    system:
+      description:
+        value: >-
+          <p>Starting at 1st level, your healing spells are more
+          effective.</p><p>Whenever you use a spell of 1st level or higher to
+          restore hit points to a creature, the creature regains additional hit
+          points equal to 2 + the spell's level.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: class
+        subtype: ''
+      requirements: Life Domain 1
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: disciple-of-life
+    flags:
+      dnd5e:
+        sourceId: Compendium.dnd5e.classfeatures.Item.jF8AFfEMICIJnAkR
+        advancementOrigin: AD9TpaN6zrfvZUwa.9fyr5t01nhdg0u8n
+        riders:
+          activity: []
+          effect: []
+    img: icons/magic/light/hand-sparks-smoke-teal.webp
+    effects: []
+    folder: CTZ7zZ8ESNtr2IKz
+    sort: 0
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.classfeatures.Item.jF8AFfEMICIJnAkR
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: 1738093815296
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.a9hkL9uYDaDoEx3U'
+  - name: Tinderbox
+    type: loot
+    img: icons/sundries/lights/torch-black.webp
+    system:
+      description:
+        value: >-
+          <p>This small container holds flint, fire steel, and tinder (usually
+          dry cloth soaked in light oil) used to kindle a fire. Using it to
+          light a torch - or anything else with abundant, exposed fuel - takes
+          an action. Lighting any other fire takes 1 minute.</p>
+
+          <p> </p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 5
+        denomination: sp
+      rarity: ''
+      identified: true
+      container: 8KWz5DJbWUpNWniP
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      properties: []
+      identifier: tinderbox
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.1FSubnBpSTDmVaYV
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _id: I4IpztlEmyuCZXPm
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.I4IpztlEmyuCZXPm'
+  - name: Waterskin
+    type: consumable
+    img: icons/sundries/survival/wetskin-leather-purple.webp
+    system:
+      description:
+        value: >-
+          <p>A leather hide sewn into an enclosed skin which can contain up to 4
+          pints of liquid. It weighs 5 pounds when full; a pint of water is
+          approximately 1 pound.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 2
+        denomination: sp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '4'
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      container: 6OYR11aJX2dEVtOj
+      properties: []
+      type:
+        value: food
+        subtype: ''
+      unidentified:
+        description: ''
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: touch
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: waterskin
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.1L5wkmbw0fmNAr38
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _id: VIRpMXIVAZvNtAkn
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.VIRpMXIVAZvNtAkn'
+  - name: Torch
+    type: consumable
+    img: icons/sundries/lights/torch-black.webp
+    system:
+      description:
+        value: >-
+          <p>A torch burns for 1 hour, providing bright light in a 20-foot
+          radius and dim light for an additional 20 feet. If you make a melee
+          attack with a burning torch and hit, it deals 1 fire damage.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 10
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 1
+        denomination: cp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '1'
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          bonus: ''
+          types:
+            - fire
+          custom:
+            enabled: true
+            formula: '1'
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        replace: false
+      container: 8KWz5DJbWUpNWniP
+      properties: []
+      type:
+        value: trinket
+        subtype: ''
+      unidentified:
+        description: ''
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: '1'
+            units: hour
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: radius
+              size: '40'
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: str
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - number: null
+                denomination: null
+                bonus: ''
+                types:
+                  - fire
+                custom:
+                  enabled: true
+                  formula: '1'
+                scaling:
+                  mode: whole
+                  number: null
+                  formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: torch
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.29ZLE8PERtFVD3QU
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _id: hnqo98S375ky0rb9
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.hnqo98S375ky0rb9'
+  - name: Stick of Incense
+    type: loot
+    img: icons/consumables/grains/breadsticks-crackers-wrapped-ration-brown.webp
+    system:
+      description:
+        value: >-
+          <p>When blocks of incense cannot be used or a cheaper alternative is
+          required, people often use these to perfume the air, whether for
+          pleasurable or religious purposes.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 5
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 2
+        denomination: sp
+      rarity: ''
+      identified: true
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      identifier: stick-of-incense
+    effects: []
+    folder: dlru9Hy74nSMv6fr
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.3b0RvGi0TnTYpIxn
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: oK8XqVbKjsEdFv2H
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.oK8XqVbKjsEdFv2H'
+  - name: Quiver
+    type: container
+    img: icons/containers/ammunition/arrows-quiver-simple-brown.webp
+    system:
+      description:
+        value: <p>A quiver can hold up to 20 arrows.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      capacity:
+        type: weight
+        value: 1
+      currency:
+        cp: 0
+        sp: 0
+        ep: 0
+        gp: 0
+        pp: 0
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      attuned: false
+      identifier: quiver
+    effects: []
+    folder: PgtyWdfkDTDbc0ov
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.4MtQKPn9qMWCFjDA
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: yeiFeV1OIIzABau4
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.yeiFeV1OIIzABau4'
+  - name: Common Clothes
+    type: equipment
+    img: icons/equipment/chest/shirt-collared-brown.webp
+    system:
+      description:
+        value: <p>Clothes worn by most commoners.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 3
+        units: lb
+      price:
+        value: 5
+        denomination: sp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      cover: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      armor:
+        value: null
+        dex: null
+        magicalBonus: null
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      speed:
+        value: null
+        conditions: ''
+      strength: null
+      proficient: null
+      type:
+        value: clothing
+        baseItem: ''
+      unidentified:
+        description: ''
+      container: null
+      crewed: false
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: ''
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: common-clothes
+    effects: []
+    folder: aJgMxnZED9XdoN2W
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.8RXjiddJ6VGyE7vB
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: PrQWPjULUVIaAgEC
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.PrQWPjULUVIaAgEC'
+  - name: Rations
+    type: consumable
+    img: icons/consumables/grains/bread-loaf-boule-rustic-brown.webp
+    system:
+      description:
+        value: >-
+          <p>Rations consist of dry foods suitable for extended travel,
+          including jerky, dried fruit, hardtack, and nuts.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 10
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 5
+        denomination: sp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '1'
+        recovery: []
+        autoDestroy: true
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      container: XY8b594Dn7plACLL
+      properties: []
+      type:
+        value: food
+        subtype: ''
+      unidentified:
+        description: ''
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: touch
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: '1'
+              type: creature
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: rations
+    effects: []
+    folder: Dx3K2y0J1wJUPP9m
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.8d95YV1jHcxPygJ9
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    ownership:
+      default: 0
+    _id: WZX5bXeFiAw2BEU9
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.WZX5bXeFiAw2BEU9'
+  - name: Pouch
+    type: container
+    img: icons/containers/bags/pouch-rounded-leather-gold-tan.webp
+    system:
+      description:
+        value: >-
+          <p>A cloth or leather pouch can hold up to 20 sling bullets or 50
+          blowgun needles, among other things. A compartmentalized pouch for
+          holding spell components is called a component pouch. A pouch can hold
+          up to ⅕ cubic foot or 6 pounds of gear.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 5
+        denomination: sp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      capacity:
+        type: weight
+        value: 6
+      currency:
+        cp: 0
+        sp: 0
+        ep: 0
+        gp: 0
+        pp: 0
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      attuned: false
+      identifier: pouch
+    effects: []
+    folder: PgtyWdfkDTDbc0ov
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.9bWTRRDym06PzSAf
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: 7LkXyfHK37OCjMp2
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.7LkXyfHK37OCjMp2'
+  - name: Bedroll
+    type: loot
+    img: icons/sundries/survival/bedroll-grey.webp
+    system:
+      description:
+        value: <p>Roll of cloth used by traveller to sleep in.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 7
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      rarity: ''
+      identified: true
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      identifier: bedroll
+    effects: []
+    folder: dlru9Hy74nSMv6fr
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.DVXmyetZuvxbzAwW
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: PQhZsZ0aknC54nku
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.PQhZsZ0aknC54nku'
+  - name: Backpack
+    type: container
+    img: icons/containers/bags/pack-leather-white-tan.webp
+    system:
+      description:
+        value: >-
+          <p>A backpack can hold one cubic foot or 30 pounds of gear. You can
+          also strap items, such as a bedroll or a coil of rope, to the outside
+          of a backpack.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 2
+        denomination: gp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      capacity:
+        type: weight
+        value: 30
+      currency:
+        cp: 0
+        sp: 0
+        ep: 0
+        gp: 0
+        pp: 0
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      attuned: false
+      identifier: backpack
+    effects: []
+    folder: PgtyWdfkDTDbc0ov
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.H8YCd689ezlD26aT
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: nIi8xVV1Mq39IvY6
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.nIi8xVV1Mq39IvY6'
+  - name: Hempen Rope (50 ft.)
+    type: consumable
+    img: icons/sundries/survival/rope-wrapped-brown.webp
+    system:
+      description:
+        value: >-
+          <p>Rope, whether made of hemp or silk, has 2 hit points and can be
+          burst with a DC 17 Strength check.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 10
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: '1'
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: null
+          types: []
+          custom:
+            enabled: false
+          scaling:
+            number: 1
+        replace: false
+      type:
+        value: trinket
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: check
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                scaling: {}
+                value: '1'
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          check:
+            ability: str
+            dc:
+              calculation: ''
+              formula: '17'
+            associated: []
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          name: Burst
+      attuned: false
+      identifier: hempen-rope-50-ft
+    effects: []
+    folder: UnUwTG4YIgd0kaUJ
+    ownership:
+      default: 0
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.QXmaarJ4X8P0C1HV
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: nnVoqKcxlTu9bRfL
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.nnVoqKcxlTu9bRfL'
+  - name: Crossbow Bolt
+    type: consumable
+    img: icons/weapons/ammunition/arrow-broadhead-white.webp
+    system:
+      description:
+        value: >-
+          <p>This ammunition is used for all varieties of crossbow and is
+          typically a short metal shaft with a narrow piercing tip.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 20
+      weight:
+        value: 0.075
+        units: lb
+      price:
+        value: 2
+        denomination: cp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      uses:
+        max: ''
+        recovery: []
+        autoDestroy: false
+        spent: 0
+      damage:
+        base:
+          number: null
+          denomination: 0
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        replace: false
+      type:
+        value: ammo
+        subtype: crossbowBolt
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      magicalBonus: null
+      activities: {}
+      attuned: false
+      identifier: crossbow-bolt
+    effects: []
+    folder: NdDvXSjfqlghXpQZ
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.SItCnYBqhzqBoaWG
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: b4NGPmLUcMECcA3O
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.b4NGPmLUcMECcA3O'
+  - name: Mess Kit
+    type: loot
+    img: icons/tools/cooking/fork-steel-tan.webp
+    system:
+      description:
+        value: >-
+          <p>This tin box contains a cup and simple cutlery. The box clamps
+          together, and one side can be used as a cooking pan and the other as a
+          plate or shallow bowl.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 2
+        denomination: sp
+      rarity: ''
+      identified: true
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      identifier: mess-kit
+    effects: []
+    folder: dlru9Hy74nSMv6fr
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.V13fjV5oSmvbRdgP
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: wFS05FaRyBFIbjmH
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.wFS05FaRyBFIbjmH'
+  - name: Scale Mail
+    type: equipment
+    img: icons/equipment/chest/breastplate-banded-steel.webp
+    system:
+      description:
+        value: >-
+          <p>This armor consists of a coat and leggings (and perhaps a separate
+          skirt) of leather covered with overlapping pieces of metal, much like
+          the scales of a fish. The suit includes gauntlets.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 45
+        units: lb
+      price:
+        value: 50
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      crewed: false
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      armor:
+        value: 14
+        dex: 2
+        magicalBonus: null
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      speed:
+        value: null
+        conditions: ''
+      strength: null
+      proficient: null
+      type:
+        value: medium
+        baseItem: scalemail
+      unidentified:
+        description: ''
+      container: null
+      properties:
+        - stealthDisadvantage
+      activities: {}
+      attuned: false
+      identifier: scale-mail
+    effects: []
+    folder: JqTP017wj3uxDJ8g
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.XmnlF5fgIO3tg6TG
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: WBL9RaW0MEEVU3fX
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.WBL9RaW0MEEVU3fX'
+  - name: Light Crossbow
+    type: weapon
+    img: icons/weapons/crossbows/crossbow-simple-brown.webp
+    system:
+      description:
+        value: >-
+          <p>A small crossbow with a wooden haft and a tense cord which is
+          capable of firing a single bolt which can puncture even heavy armor at
+          close range.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 25
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: 80
+        long: 320
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 8
+          bonus: ''
+          types:
+            - piercing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties:
+        - amm
+        - lod
+        - two
+      proficient: null
+      type:
+        value: simpleR
+        baseItem: lightcrossbow
+      unidentified:
+        description: ''
+      container: null
+      crewed: false
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '80'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      ammunition:
+        type: crossbowBolt
+      mastery: ''
+      identifier: light-crossbow
+    effects: []
+    folder: MLMTCAvKsuFE3vYA
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.ddWvQRLmnnIS0eLF
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: hutWJTfurJjNbSpG
+    sort: 300000
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.hutWJTfurJjNbSpG'
+  - name: Vestments
+    type: equipment
+    img: icons/equipment/back/mantle-collared-black.webp
+    system:
+      description:
+        value: >-
+          <p>Simple or ostentacious wear, often used by priests and other
+          religious figures for use in rituals and ceremonies.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 4
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      attunement: ''
+      equipped: false
+      rarity: ''
+      identified: true
+      cover: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      armor:
+        value: null
+        dex: null
+        magicalBonus: null
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      speed:
+        value: null
+        conditions: ''
+      strength: null
+      proficient: null
+      type:
+        value: clothing
+        baseItem: ''
+      unidentified:
+        description: ''
+      container: null
+      crewed: false
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: ''
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      attuned: false
+      identifier: vestments
+    effects: []
+    folder: aJgMxnZED9XdoN2W
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.irtqrzaUCeshmTZp
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: l3rWWzexDhcuyJO1
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.l3rWWzexDhcuyJO1'
+  - name: Prayer Book
+    type: loot
+    img: icons/sundries/books/book-purple-cross.webp
+    system:
+      description:
+        value: >-
+          <p>A book containing prayers and incantations dedicated to a specific
+          power for the faithful to follow.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 5
+        units: lb
+      price:
+        value: 25
+        denomination: gp
+      rarity: ''
+      identified: true
+      type:
+        value: ''
+        subtype: ''
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      identifier: prayer-book
+    effects: []
+    folder: dlru9Hy74nSMv6fr
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.odV5cq2HSLSCH69k
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: 5IL0OAFVk1aaLPBO
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.5IL0OAFVk1aaLPBO'
+  - name: Shield
+    type: equipment
+    img: icons/equipment/shield/round-wooden-boss-steel-brown.webp
+    system:
+      description:
+        value: >-
+          <p>A shield is made from wood or metal and is carried in one hand.
+          Wielding a shield increases your Armor Class by 2. You can benefit
+          from only one shield at a time.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 6
+        units: lb
+      price:
+        value: 10
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      crewed: false
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      armor:
+        value: 2
+        dex: null
+        magicalBonus: null
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      speed:
+        value: null
+        conditions: ''
+      strength: null
+      proficient: null
+      type:
+        value: shield
+        baseItem: shield
+      unidentified:
+        description: ''
+      container: null
+      properties: []
+      activities: {}
+      attuned: false
+      identifier: shield
+    effects: []
+    folder: JqTP017wj3uxDJ8g
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.sSs3hSzkKBMNBgTs
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: tnoOhcw37wWUhWzd
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.tnoOhcw37wWUhWzd'
+  - name: Detect Poison and Disease
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>For the duration, you can sense the presence and location of
+          poisons, poisonous creatures, and diseases within 30 feet of you. You
+          also identify the kind of poison, poisonous creature, or disease in
+          each case.</p><p>The spell can penetrate most barriers, but it is
+          blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of
+          lead, or 3 feet of wood or dirt.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: radius
+          size: '30'
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: div
+      materials:
+        value: A yew leaf
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: detect-poison-and-disease
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/air/air-burst-spiral-teal-green.webp
+    effects: []
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.2skfDtglk1mGrb3l
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: El1gUMDZlAqGpbJ8
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.El1gUMDZlAqGpbJ8'
+  - name: Guiding Bolt
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>A flash of light streaks toward a creature of your choice within
+          range. Make a ranged spell attack against the target. On a hit, the
+          target takes 4d6 radiant damage, and the next attack roll made against
+          this target before the end of your next turn has advantage, thanks to
+          the mystical dim light glittering on the target until
+          then.</p><p><strong>Higher Levels.</strong> When you cast this spell
+          using a spell slot of 2nd level or higher, the damage increases by 1d6
+          for each slot level above 1st.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: round
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '120'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: evo
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: spell
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - number: 4
+                denomination: 6
+                bonus: ''
+                types:
+                  - radiant
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: guiding-bolt
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/fire/projectile-fireball-smoke-large-blue.webp
+    effects: []
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.7buEm5KhI5lP8m1z
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: pZMrJb3AXiRYO5E8
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.pZMrJb3AXiRYO5E8'
+  - name: Bless
+    type: spell
+    img: icons/magic/control/buff-flight-wings-blue.webp
+    system:
+      description:
+        value: >-
+          <p>You bless up to three creatures of your choice within range.
+          Whenever a target makes an attack roll or a saving throw before the
+          spell ends, the target can roll 1d4 and add the number rolled to the
+          attack roll or saving throw.</p>
+
+          <p><strong>Higher Levels.</strong> When you cast this spell using a
+          spell slot of 2nd level or higher, you can target one additional
+          creature for each slot level above 1st.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '3'
+          choice: false
+          special: ''
+        template:
+          units: ''
+          contiguous: false
+          type: ''
+      range:
+        value: '30'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: enc
+      materials:
+        value: A sprinkling of holy water
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: always
+        prepared: false
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: 8rP3gwmXVTgZqYZE
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: 1d4
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: bless
+      sourceClass: cleric
+      ability: ''
+    effects:
+      - _id: 8rP3gwmXVTgZqYZE
+        flags: {}
+        changes:
+          - key: system.bonuses.abilities.save
+            mode: 2
+            value: 1d4
+            priority: null
+          - key: system.bonuses.mwak.attack
+            mode: 2
+            value: 1d4
+            priority: null
+          - key: system.bonuses.msak.attack
+            mode: 2
+            value: 1d4
+            priority: null
+          - key: system.bonuses.rsak.attack
+            mode: 2
+            value: 1d4
+            priority: null
+          - key: system.bonuses.rwak.attack
+            mode: 2
+            value: 1d4
+            priority: null
+        disabled: true
+        duration:
+          startTime: null
+          seconds: 60
+          rounds: 10
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        origin: Item.kZZAZ6kp9YzgPQEe
+        tint: '#ffffff'
+        transfer: false
+        name: Bless
+        description: ''
+        statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '12.331'
+          systemId: dnd5e
+          systemVersion: 4.1.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+        img: icons/magic/control/buff-flight-wings-blue.webp
+        type: base
+        system: {}
+        sort: 0
+        _key: >-
+          !actors.items.effects!kfzBL0q1Y7LgGs2x.7LUJHpWpCzfMZI3D.8rP3gwmXVTgZqYZE
+    folder: ERuXllkhTQF51rDJ
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: 7LUJHpWpCzfMZI3D
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.7LUJHpWpCzfMZI3D'
+  - name: Bane
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>Up to three creatures of your choice that you can see within range
+          must make Charisma saving throws. Whenever a target that fails this
+          saving throw makes an attack roll or a saving throw before the spell
+          ends, the target must roll a d4 and subtract the number rolled from
+          the attack roll or saving throw.</p>
+
+          <p><strong>Higher Levels.</strong> When you cast this spell using a
+          spell slot of 2nd level or higher, you can target one additional
+          creature for each slot level above 1st.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '3'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: enc
+      materials:
+        value: A drop of blood
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: potjmpJPeUA1U4oe
+              onSave: false
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - cha
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: bane
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/unholy/strike-beam-blood-red-purple.webp
+    effects:
+      - _id: potjmpJPeUA1U4oe
+        flags: {}
+        changes:
+          - key: system.bonuses.abilities.save
+            mode: 2
+            value: '-1d4'
+            priority: null
+          - key: system.bonuses.mwak.attack
+            mode: 2
+            value: '-1d4'
+            priority: null
+          - key: system.bonuses.msak.attack
+            mode: 2
+            value: '-1d4'
+            priority: null
+          - key: system.bonuses.rsak.attack
+            mode: 2
+            value: '-1d4'
+            priority: null
+          - key: system.bonuses.rwak.attack
+            mode: 2
+            value: '-1d4'
+            priority: null
+        disabled: true
+        duration:
+          startTime: null
+          seconds: 60
+          rounds: 10
+          turns: null
+          startRound: null
+          startTurn: null
+          combat: null
+        origin: Item.KkaQm4OQJxc6z3to
+        tint: '#ffffff'
+        transfer: false
+        name: Bane
+        description: >-
+          <p>Whenever the target makes an attack roll or a saving throw before
+          the spell ends, the target must roll a d4 and subtract the number
+          rolled from the attack roll or saving throw.</p>
+        statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '12.331'
+          systemId: dnd5e
+          systemVersion: 4.1.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+        img: icons/magic/unholy/strike-beam-blood-red-purple.webp
+        type: base
+        system: {}
+        sort: 0
+        _key: >-
+          !actors.items.effects!kfzBL0q1Y7LgGs2x.9FrgmKwWCYPhlZ5w.potjmpJPeUA1U4oe
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.95K2aUhAGV9qXjnf
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: 9FrgmKwWCYPhlZ5w
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.9FrgmKwWCYPhlZ5w'
+  - name: Purify Food and Drink
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>All nonmagical food and drink within a 5-foot-radius sphere
+          centered on a point of your choice within range is purified and
+          rendered free of poison and disease.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: sphere
+          size: '5'
+          contiguous: false
+      range:
+        value: '10'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: trs
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+        - somatic
+        - ritual
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: purify-food-and-drink
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/light/explosion-star-small-teal.webp
+    effects: []
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.Kn7K5PtYUJAKZTTp
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: BgMUGYECwuw8Ku7Z
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.BgMUGYECwuw8Ku7Z'
+  - name: Thaumaturgy
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You create one of the following magical effects within range:</p>
+
+          <ul>
+
+          <li>Your voice booms up to three times as loud as normal for 1
+          minute.</li>
+
+          <li>You cause flames to flicker, brighten, dim, or change color for 1
+          minute.</li>
+
+          <li>You cause harmless tremors in the ground for 1 minute.</li>
+
+          <li>You create a sound that originates from a point of your choice
+          within range.</li>
+
+          <li>You cause an unlocked door or window to fly open or slam
+          shut.</li>
+
+          <li>You alter the appearance of your eyes for 1 minute.</li>
+
+          </ul>
+
+          <p>If you cast this spell multiple times, you can have up to three of
+          its 1-minute effects active at a time, and you can dismiss such an
+          effect as an action.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: trs
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: thaumaturgy
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/fire/explosion-fireball-small-purple-orange.webp
+    effects: []
+    folder: Z8kZlnggh1PtuF3Y
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.MUO1uYN7JR1hm4dR
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: 5yH69xkqge3u7to7
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.5yH69xkqge3u7to7'
+  - name: Detect Evil and Good
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>For the duration, you know if there is an aberration, celestial,
+          elemental, fey, fiend, or undead within 30 feet of you, as well as
+          where the creature is located. Similarly, you know if there is a place
+          or object within 30 feet of you that has been magically consecrated or
+          desecrated.</p><p>The spell can penetrate most barriers, but it is
+          blocked by 1 foot of stone, 1 inch of common metal, a thin sheet of
+          lead, or 3 feet of wood or dirt.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: radius
+          size: '30'
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: div
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+        - somatic
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: detect-evil-and-good
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/air/air-burst-spiral-blue-gray.webp
+    effects: []
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.Mzh95utKDPIrjiH8
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: iJsjPtYrp8DFlyFe
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.iJsjPtYrp8DFlyFe'
+  - name: Guidance
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You touch one willing creature. Once before the spell ends, the
+          target can roll a d4 and add the number rolled to one ability check of
+          its choice. It can roll the die before or after making the ability
+          check. The spell then ends.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: div
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+        - somatic
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: 1d4
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: guidance
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/control/buff-flight-wings-blue.webp
+    effects: []
+    folder: Z8kZlnggh1PtuF3Y
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.P7mF2MxSuVJwHRRY
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: aEmz3laQj2ZZiKSb
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.aEmz3laQj2ZZiKSb'
+  - name: Create or Destroy Water
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: "<p>You either create or destroy water.</p><p><strong>Create Water.</strong> You create up to 10 gallons of clean water within range in an open container. Alternatively, the water falls as rain in a 30-foot cube within range.</p><p><strong>Destroy Water.</strong> You destroy up to 10 gallons of water in an open container within range. Alternatively, you destroy fog in a 30-foot cube within range.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a spell slot of 2nd level or higher, you create or destroy 10 additional gallons of water, or the size of the cube increases by 5 feet, for each slot level above 1st.</p>"
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: cube
+          size: '30'
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: trs
+      materials:
+        value: >-
+          A drop of water if creating water or a few grains of sand if
+          destroying it.
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+        - somatic
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: create-or-destroy-water
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/air/wind-swirl-purple-blue.webp
+    effects: []
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.a3XtAO5n2GrqiAh5
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: 4eIHKWEqjM8bgjZy
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.4eIHKWEqjM8bgjZy'
+  - name: Command
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p><p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p><p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p><p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p><p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>"
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: round
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: enc
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: command
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/fire/explosion-fireball-small-purple.webp
+    effects: []
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.arzCrMRgcNiQuh43
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: IoHq7xEZpwhTKlDd
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.IoHq7xEZpwhTKlDd'
+  - name: Detect Magic
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>For the duration, you sense the presence of magic within 30 feet of
+          you. If you sense magic in this way, you can use your action to see a
+          faint aura around any visible creature or object in the area that
+          bears magic, and you learn its school of magic, if any.</p><p>The
+          spell can penetrate most barriers, but it is blocked by 1 foot of
+          stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood
+          or dirt.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: radius
+          size: '30'
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: div
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - ritual
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: detect-magic
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/light/explosion-star-blue.webp
+    effects: []
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: a7IlF5H2ZPsB4VWm
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.a7IlF5H2ZPsB4VWm'
+  - name: Sanctuary
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You ward a creature within range against attack. Until the spell
+          ends, any creature who targets the warded creature with an attack or a
+          harmful spell must first make a Wisdom saving throw. On a failed save,
+          the creature must choose a new target or lose the attack or spell.
+          This spell doesn't protect the warded creature from area effects, such
+          as the explosion of a Fireball.</p><p>If the warded creature makes an
+          attack or casts a spell that affects an enemy creature, this spell
+          ends.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: bonus
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: abj
+      materials:
+        value: A small silver mirror
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+        - somatic
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - wis
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: sanctuary
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
+    effects: []
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.gvdA9nPuWLck4tBl
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: hQ1zxREvUlaNKQpz
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.hQ1zxREvUlaNKQpz'
+  - name: Shield of Faith
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>A shimmering field appears and surrounds a creature of your choice
+          within range, granting it a +2 bonus to AC for the duration.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: bonus
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: abj
+      materials:
+        value: A small parchment with a bit of holy text written on it.
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: FKDbXBUs6VJlf8ZY
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: shield-of-faith
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
+    effects:
+      - name: Shield of Faith
+        origin: Compendium.dnd5e.spells.Item.jZ6JNykRtdQ90MOo
+        duration:
+          startTime: null
+          seconds: 600
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        disabled: true
+        _id: FKDbXBUs6VJlf8ZY
+        changes:
+          - key: system.attributes.ac.bonus
+            mode: 2
+            value: '2'
+            priority: null
+        description: <p>The target gains it a +2 bonus to AC for the duration.</p>
+        transfer: false
+        statuses: []
+        flags: {}
+        tint: '#ffffff'
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '12.331'
+          systemId: dnd5e
+          systemVersion: 4.1.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+        img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
+        type: base
+        system: {}
+        sort: 0
+        _key: >-
+          !actors.items.effects!kfzBL0q1Y7LgGs2x.d56v9vczAXEgMhCY.FKDbXBUs6VJlf8ZY
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.jZ6JNykRtdQ90MOo
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: d56v9vczAXEgMhCY
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.d56v9vczAXEgMhCY'
+  - name: Inflict Wounds
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>Make a melee spell Attack against a creature you can reach. On a
+          hit, the target takes 3d10 necrotic damage.</p><p><strong>At Higher
+          Levels.</strong> When you cast this spell using a spell slot of 2nd
+          level or higher, the damage increases by 1d10 for each slot level
+          above 1st.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: nec
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: spell
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - number: 3
+                denomination: 10
+                bonus: ''
+                types:
+                  - necrotic
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: inflict-wounds
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/unholy/strike-beam-blood-red-teal.webp
+    effects: []
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.ksaaTxIbKx2sJfia
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: oTVKQSbPDSaAvYXx
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.oTVKQSbPDSaAvYXx'
+  - name: Sacred Flame
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>Flame-like radiance descends on a creature that you can see within
+          range. The target must succeed on a Dexterity saving throw or take 1d8
+          radiant damage. The target gains no benefit from cover for this saving
+          throw.</p><p>The spell's damage increases by 1d8 when you reach 5th
+          level (2d8), 11th level (3d8), and 17th level (4d8).</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: evo
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          damage:
+            onSave: none
+            parts:
+              - number: 1
+                denomination: 8
+                bonus: ''
+                types:
+                  - radiant
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: spellcasting
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: sacred-flame
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/light/beam-rays-orange.webp
+    effects: []
+    folder: Z8kZlnggh1PtuF3Y
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.n9pJzTDsAwQxJVRl
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: P97npemu7j70IZAQ
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.P97npemu7j70IZAQ'
+  - name: Healing Word
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>A creature of your choice that you can see within range regains hit
+          points equal to 1d4 + your spellcasting ability modifier. This spell
+          has no effect on undead or constructs.</p><p><strong>Higher
+          Levels.</strong> When you cast this spell using a spell slot of 2nd
+          level or higher, the healing increases by 1d4 for each slot level
+          above 1st.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: bonus
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: ''
+          contiguous: false
+          type: ''
+      range:
+        value: '60'
+        units: ft
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: evo
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: always
+        prepared: false
+      properties:
+        - vocal
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: heal
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          healing:
+            number: 1
+            denomination: 4
+            bonus: '@mod'
+            types:
+              - healing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: healing-word
+      sourceClass: cleric
+      ability: ''
+    flags: {}
+    img: icons/magic/life/heart-cross-green.webp
+    effects: []
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.o8Dh7fblk1d16tnO
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: HpjaVMLEU14tJG7y
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.HpjaVMLEU14tJG7y'
+  - name: Cure Wounds
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>A creature you touch regains a number of hit points equal to 1d8 +
+          your spellcasting ability modifier. This spell has no effect on undead
+          or constructs.</p><p><strong>Higher Levels.</strong> When you cast
+          this spell using a spell slot of 2nd level or higher, the healing
+          increases by 1d8 for each slot level above 1st.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: evo
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: heal
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          healing:
+            number: 1
+            denomination: 8
+            bonus: '@mod'
+            types:
+              - healing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: cure-wounds
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/life/heart-cross-green.webp
+    effects: []
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: LjT1wf4D38c9Ieuo
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.LjT1wf4D38c9Ieuo'
+  - name: Protection from Evil and Good
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>Until the spell ends, one willing creature you touch is protected
+          against certain types of creatures: aberrations, celestials,
+          elementals, fey, fiends, and undead.</p><p>The protection grants
+          several benefits. Creatures of those types have disadvantage on attack
+          rolls against the target. The target also can't be charmed,
+          frightened, or possessed by them. If the target is already charmed,
+          frightened, or possessed by such a creature, the target has advantage
+          on any new saving throw against the relevant effect.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: abj
+      materials:
+        value: Holy water or powdered silver and iron, which the spell consumes
+        consumed: true
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: false
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      identifier: protection-from-evil-and-good
+      sourceClass: cleric
+    flags: {}
+    img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
+    effects: []
+    folder: ERuXllkhTQF51rDJ
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.xmDBqZhRVrtLP8h2
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _id: 4u9a0tOYl5CJYyZI
+    sort: 0
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.4u9a0tOYl5CJYyZI'
+  - _id: iLKpfoGF7rGpvNWD
+    name: Mace
+    type: weapon
+    img: icons/weapons/maces/mace-flanged-steel.webp
+    system:
+      description:
+        value: >-
+          <p>A heavy metal head mounted to the end of a sturdy haft meant to
+          deliver powerful, crushing blows capable of shattering armor and bone
+          alike.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 4
+        units: lb
+      price:
+        value: 5
+        denomination: gp
+      attunement: ''
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: null
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 6
+          bonus: ''
+          types:
+            - bludgeoning
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties: []
+      proficient: null
+      type:
+        value: simpleM
+        baseItem: mace
+      unidentified:
+        description: ''
+      container: null
+      crewed: false
+      magicalBonus: null
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          uses:
+            spent: 0
+            recovery: []
+          sort: 0
+      ammunition: {}
+      identifier: mace
+      attuned: false
+      equipped: true
+    effects: []
+    folder: MLMTCAvKsuFE3vYA
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.items.Item.Ajyq6nGwF7FtLhDQ
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!kfzBL0q1Y7LgGs2x.iLKpfoGF7rGpvNWD'
+effects: []
+folder: null
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    showTokenPortrait: false
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725036842807
+  modifiedTime: 1738093116093
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!actors!kfzBL0q1Y7LgGs2x'

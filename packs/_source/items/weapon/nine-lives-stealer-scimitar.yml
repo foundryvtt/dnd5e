@@ -1,0 +1,251 @@
+_id: 9Mdes2tKt0cqsNTw
+name: Nine Lives Stealer Scimitar
+type: weapon
+img: icons/weapons/swords/scimitar-guard.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p><p>You gain a +2 bonus to attack and
+      damage rolls made with this magic weapon.</p><p>The sword has 1d8 + 1
+      charges. If you score a critical hit against a creature that has fewer
+      than 100 hit points, it must succeed on a DC 15 Constitution saving throw
+      or be slain instantly as the sword tears its life force from its body (a
+      construct or an undead is immune). The sword loses 1 charge if the
+      creature is slain. When the sword has no charges remaining, it loses this
+      property.</p><section class="secret foundry-note"
+      id="secret-njpOaQoYGXWt6oBj"><p><strong>Foundry Note</strong></p><p>The 9
+      charges reflect a fully charged blade. Please adjust accordingly as
+      required.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 8000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ft
+    reach: null
+  uses:
+    max: '9'
+    recovery: []
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 6
+      bonus: ''
+      types:
+        - slashing
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - fin
+    - lgt
+    - mgc
+  proficient: null
+  type:
+    value: martialM
+    baseItem: scimitar
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: 2
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: >-
+          Critical hit on a creature of 100 hit points or less. Undead and
+          constructs are immune.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    sFSTSSOvTZIlTaxs:
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: >-
+          Critical hit on a creature of 100 hit points or less. Undead and
+          constructs are immune.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability:
+          - con
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Save vs Death
+      _id: sFSTSSOvTZIlTaxs
+  attuned: false
+  ammunition: {}
+  identifier: nine-lives-stealer-scimitar
+  mastery: ''
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.3.0
+  createdTime: 1725037117635
+  modifiedTime: 1738530042954
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!9Mdes2tKt0cqsNTw'

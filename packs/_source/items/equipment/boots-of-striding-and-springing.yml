@@ -1,0 +1,114 @@
+_id: hSY1b8yi8JWw2blf
+name: Boots of Striding and Springing
+type: equipment
+img: icons/equipment/feet/boots-collared-leather-brown.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While you wear these boots, your walking speed becomes 30 feet, unless
+      your walking speed is higher, and your speed isn't reduced if you are
+      encumbered or wearing heavy armor. In addition, you can jump three times
+      the normal distance, though you can't jump farther than your remaining
+      movement would allow.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 5000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: boots-of-striding-and-springing
+effects:
+  - origin: Compendium.dnd5e.items.hSY1b8yi8JWw2blf
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: ewBIkUaBn4meKsK5
+    changes:
+      - key: system.attributes.movement.walk
+        mode: 4
+        value: '30'
+        priority: null
+    tint: '#ffffff'
+    transfer: true
+    flags: {}
+    name: Boots of Striding and Springing
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/equipment/feet/boots-collared-rounded-brown.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!hSY1b8yi8JWw2blf.ewBIkUaBn4meKsK5'
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037256752
+  modifiedTime: 1725992536041
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!hSY1b8yi8JWw2blf'

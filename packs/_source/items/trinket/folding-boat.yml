@@ -1,0 +1,145 @@
+_id: u4ewpAFZjLrWrmQv
+name: Folding Boat
+type: consumable
+img: icons/containers/boxes/crate-heavy-yellow.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This object appears as a wooden box that measures 12 inches long, 6
+      inches wide, and 6 inches deep. It weighs 4 pounds and floats. It can be
+      opened to store items inside. This item also has three command words, each
+      requiring you to use an action to speak it.</p>
+
+      <p>One command word causes the box to unfold into a boat 10 feet long, 4
+      feet wide, and 2 feet deep. The boat has one pair of oars, an anchor, a
+      mast, and a lateen sail. The boat can hold up to four Medium creatures
+      comfortably.</p>
+
+      <p>The second command word causes the box to unfold into a ship 24 feet
+      long, 8 feet wide, and 6 feet deep. The ship has a deck, rowing seats,
+      five sets of oars, a steering oar, an anchor, a deck cabin, and a mast
+      with a square sail. The ship can hold fifteen Medium creatures
+      comfortably.</p>
+
+      <p>When the box becomes a vessel, its weight becomes that of a normal
+      vessel its size, and anything that was stored in the box remains in the
+      boat.</p>
+
+      <p>The third command word causes the folding boat to fold back into a box,
+      provided that no creatures are aboard. Any objects in the vessel that
+      can't fit inside the box remain outside the box as it folds. Any objects
+      in the vessel that can fit inside the box do so.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 10000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: folding-boat
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 10300000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037310887
+  modifiedTime: 1725992554594
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!u4ewpAFZjLrWrmQv'

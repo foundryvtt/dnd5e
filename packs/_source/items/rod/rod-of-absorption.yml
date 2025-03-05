@@ -1,0 +1,149 @@
+_id: 6pjaQzbtxQTuQ4RW
+name: Rod of Absorption
+type: equipment
+img: icons/weapons/wands/wand-carved-fire.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p><p>While holding this rod, you can
+      use your reaction to absorb a spell that is targeting only you and not
+      with an area of effect. The absorbed spell's effect is canceled, and the
+      spell's energy not the spell itself - is stored in the rod. The energy has
+      the same level as the spell when it was cast. The rod can absorb and store
+      up to 50 levels of energy over the course of its existence. Once the rod
+      absorbs 50 levels of energy, it can't absorb more. If you are targeted by
+      a spell that the rod can't store, the rod has no effect on that
+      spell.</p><p>When you become attuned to the rod, you know how many levels
+      of energy the rod has absorbed over the course of its existence, and how
+      many levels of spell energy it currently has stored.</p><p>If you are a
+      spellcaster holding the rod, you can convert energy stored in it into
+      spell slots to cast spells you have prepared or know. You can create spell
+      slots only of a level equal to or lower than your own spell slots, up to a
+      maximum of 5th level. You use the stored levels in place of your slots,
+      but otherwise cast the spell as normal. For example, you can use 3 levels
+      stored in the rod as a 3rd-level spell slot.</p><p>A newly found rod has
+      1d10 levels of spell energy stored in it already. A rod that can no longer
+      absorb spell energy and has no energy remaining becomes
+      nonmagical.</p><section class="secret foundry-note"
+      id="secret-4moLuVa8eSuTndZO"><p><strong>Foundry Note</strong></p><p>The
+      rod currently has the maximum 10 charges for a newly found rod. Adjust as
+      required.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 50000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: '50'
+    recovery: []
+    autoDestroy: false
+    spent: 40
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: rod
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - foc
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: reaction
+        value: 1
+        condition: Spell slots created can be no higher than 5th level.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: rod-of-absorption
+effects: []
+folder: 609zLs23BLj5hyYp
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037107397
+  modifiedTime: 1730323609640
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!6pjaQzbtxQTuQ4RW'

@@ -1,0 +1,247 @@
+_id: mGIwk9FwTAJB6qTn
+name: Oathbow
+type: weapon
+img: icons/weapons/bows/longbow-recurve-leather-red.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>When you nock an arrow on this bow, it whispers in Elvish, "Swift
+      defeat to my enemies." When you use this weapon to make a ranged attack,
+      you can, as a command phrase, say, "Swift death to you who have wronged
+      me." The target of your attack becomes your sworn enemy until it dies or
+      until dawn seven days later. You can have only one such sworn enemy at a
+      time. When your sworn enemy dies, you can choose a new one after the next
+      dawn.</p>
+
+      <p>When you make a ranged attack roll with this weapon against your sworn
+      enemy, you have advantage on the roll. In addition, your target gains no
+      benefit from cover, other than total cover, and you suffer no disadvantage
+      due to long range. If the attack hits, your sworn enemy takes an extra 3d6
+      piercing damage.</p>
+
+      <p>While your sworn enemy lives, you have disadvantage on attack rolls
+      with all other weapons.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 3500
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  range:
+    value: 150
+    long: 600
+    units: ft
+    reach: null
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 8
+      bonus: ''
+      types:
+        - piercing
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - amm
+    - hvy
+    - mgc
+    - two
+  proficient: null
+  type:
+    value: martialR
+    baseItem: longbow
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: Command phrase.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '150'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    D5yTXUwcRcP6znlD:
+      type: damage
+      _id: D5yTXUwcRcP6znlD
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: '6'
+            bonus: ''
+            types:
+              - piercing
+      name: Damage vs Sworn Enemy
+      img: ''
+      appliedEffects: []
+  attuned: false
+  ammunition:
+    type: ''
+  identifier: oathbow
+  mastery: ''
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.3.0
+  createdTime: 1725037278188
+  modifiedTime: 1738530103864
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!mGIwk9FwTAJB6qTn'

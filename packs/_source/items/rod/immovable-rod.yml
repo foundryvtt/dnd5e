@@ -1,0 +1,126 @@
+_id: eQNXan0zp279jDtk
+name: Immovable Rod
+type: equipment
+img: icons/commodities/tech/pipe-lead-closed.webp
+system:
+  description:
+    value: >-
+      <p>This flat iron rod has a button on one end. You can use an action to
+      press the button, which causes the rod to become magically fixed in place.
+      Until you or another creature uses an action to push the button again, the
+      rod doesn't move, even if it is defying gravity. The rod can hold up to
+      8,000 pounds of weight. More weight causes the rod to deactivate and fall.
+      A creature can use an action to make a DC 30 Strength check, moving the
+      fixed rod up to 10 feet on a success.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 5000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: rod
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: immovable-rod
+effects: []
+folder: 609zLs23BLj5hyYp
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037240874
+  modifiedTime: 1730323606985
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!eQNXan0zp279jDtk'

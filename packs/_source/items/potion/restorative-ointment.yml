@@ -1,0 +1,148 @@
+_id: VmcgAIsRCyrjBguC
+name: Restorative Ointment
+type: consumable
+img: icons/commodities/materials/liquid-orange.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p><p>This glass jar, 3 inches in diameter,
+      contains 1d4 + 1 doses of a thick mixture that smells faintly of aloe. The
+      jar and its contents weigh 1/2 pound.</p><p>As an action, one dose of the
+      ointment can be swallowed or applied to the skin. The creature that
+      receives it regains 2d8 + 2 hit points, ceases to be poisoned, and is
+      cured of any disease.</p><section class="secret foundry-note"
+      id="secret-hzyPBoWppRXYnf9A"><p><strong>Foundry Note</strong></p><p>The 5
+      charges reflect the maximum number of doses possible. Similarly, the guide
+      price of 600 gp is calculated at 120 gp per dose. Adjust both as
+      required.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 600
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: '5'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: 2
+      denomination: 8
+      bonus: '2'
+      types:
+        - healing
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: potion
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: heal
+      activation:
+        type: action
+        value: 1
+        condition: The ointment needs to be swallowed or applied to the skin.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: touch
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      healing:
+        number: 2
+        denomination: 8
+        bonus: '2'
+        types:
+          - healing
+        custom:
+          enabled: false
+          formula: ''
+        scaling:
+          mode: whole
+          number: null
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: restorative-ointment
+effects: []
+folder: gyBZp72zKb56Da84
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037202727
+  modifiedTime: 1725992518246
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!VmcgAIsRCyrjBguC'

@@ -1,0 +1,143 @@
+_id: 9eyZY9tL3fXD1Mbm
+name: Dust of Sneezing and Choking
+type: consumable
+img: icons/magic/water/bubbles-air-water-light.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>Found in a small container, this powder resembles very fine sand. It
+      appears to be dust of disappearance, and an
+      <em>@UUID[Compendium.dnd5e.spells.Item.3OZnNhunvRtPOQmH]{Identify}
+      </em>spell reveals it to be such. There is enough of it for one use.</p>
+
+      <p>When you use an action to throw a handful of the dust into the air, you
+      and each creature that needs to breathe within 30 feet of you must succeed
+      on a DC 15 Constitution saving throw or become unable to breathe, while
+      sneezing uncontrollably. A creature affected in this way is incapacitated
+      and suffocating. As long as it is conscious, a creature can repeat the
+      saving throw at the end of each of its turns, ending the effect on it on a
+      success. The @UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser
+      Restoration} spell can also end the effect on a creature.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 480
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '30'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: dust-of-sneezing-and-choking
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 1900000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037119085
+  modifiedTime: 1725992490210
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!9eyZY9tL3fXD1Mbm'

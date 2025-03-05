@@ -1,0 +1,81 @@
+_id: LpD064ilKEeFzVI8
+name: Cloak of Displacement
+type: equipment
+img: icons/equipment/back/cloak-brown-accent-brown-layered-collared-fur.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While you wear this cloak, it projects an illusion that makes you
+      appear to be standing in a place near your actual location, causing any
+      creature to have disadvantage on attack rolls against you. If you take
+      damage, the property ceases to function until the start of your next
+      turn.</p>
+
+      <p>This property is suppressed while you are incapacitated, restrained, or
+      otherwise unable to move.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 60000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: cloak-of-displacement
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037167836
+  modifiedTime: 1725992506463
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!LpD064ilKEeFzVI8'

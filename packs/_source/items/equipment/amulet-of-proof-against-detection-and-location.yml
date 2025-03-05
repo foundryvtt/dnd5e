@@ -1,0 +1,74 @@
+_id: 50N8zf58FR4JWR05
+name: Amulet of Proof against Detection and Location
+type: equipment
+img: icons/equipment/neck/pendant-faceted-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous Item (requires attunement)</em></p><p>While wearing this
+      amulet, you are hidden from divination magic. You can't be targeted by
+      such magic or perceived through magical scrying sensors.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 20000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: amulet-of-proof-against-detection-and-location
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037099819
+  modifiedTime: 1725992483792
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!50N8zf58FR4JWR05'

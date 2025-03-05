@@ -1,0 +1,127 @@
+_id: OwqRt1pVLhdMQa0d
+name: Dwarven Plate
+type: equipment
+img: icons/equipment/chest/breastplate-layered-steel-green.webp
+system:
+  description:
+    value: >-
+      <p>While wearing this plate armor, you gain a +2 bonus to AC. In addition,
+      if an effect moves you against your will along the ground, you can use
+      your reaction to reduce the distance you are moved by up to 10 feet.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 65
+    units: lb
+  price:
+    value: 9000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 18
+    dex: 0
+    magicalBonus: 2
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: 15
+  proficient: null
+  type:
+    value: heavy
+    baseItem: plate
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+    - stealthDisadvantage
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: reaction
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: dwarven-plate
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037178763
+  modifiedTime: 1725992510195
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!OwqRt1pVLhdMQa0d'
