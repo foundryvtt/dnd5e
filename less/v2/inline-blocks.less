@@ -4,48 +4,52 @@
 :is(.dnd5e, .dnd5e2, .dnd5e2-journal) {
 
   /* Positioning */
-  .left {
+  .float-left {
     float: left;
     clear: left;
     margin-right: 0.5em;
     max-width: var(--dnd5e-block-float-max);
   }
 
-  .right {
+  .float-right {
     float: right;
     clear: right;
     margin-left: 0.5em;
     max-width: var(--dnd5e-block-float-max);
   }
 
-  .clear-both {
+  .float-clear {
     clear: both;
   }
 
-  .center {
+  .margin-center {
     margin: auto;
   }
 
   /* Sizing */
-  .four {
-    width: calc(4 * var(--dnd5e-block-width-base));
+  .size-four {
+    --local-width: calc(4 * var(--dnd5e-block-width-base));
+    width: var(--local-width);
   }
 
-  .three {
-    width: calc(3 * var(--dnd5e-block-width-base));
+  .size-three {
+    --local-width: calc(3 * var(--dnd5e-block-width-base));
+    width: var(--local-width);
   }
 
-  .two {
-    width: calc(2 * var(--dnd5e-block-width-base));
+  .size-two {
+    --local-width: calc(2 * var(--dnd5e-block-width-base));
+    width: var(--local-width);
   }
 
-  .one {
-    width: var(--dnd5e-block-width-base);
+  .size-one {
+    --local-width: var(--dnd5e-block-width-base);
+    width: var(--local-width);
   }
 
   /* Layout */
-  .space-between,
-  .space-around {
+  .flex-between,
+  .flex-around {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -53,16 +57,16 @@
     clear: both;
   }
 
-  .space-around {
+  .flex-around {
     justify-content: space-around;
     gap: 10px;
   }
 
-  .wrap {
+  .flex-wrap {
     flex-wrap: wrap;
   }
 
-  .top {
+  .align-start {
     align-items:start;
   }
 
