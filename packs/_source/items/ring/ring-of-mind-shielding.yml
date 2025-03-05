@@ -1,0 +1,147 @@
+_id: dGnkwePemh7ovuDv
+name: Ring of Mind Shielding
+type: equipment
+img: icons/equipment/finger/ring-cabochon-gold-purple.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>While wearing this ring, you are immune to magic that allows other
+      creatures to read your thoughts, determine whether you are lying, know
+      your alignment, or know your creature type. Creatures can telepathically
+      communicate with you only if you allow it.</p>
+
+      <p>You can use an action to cause the ring to become invisible until you
+      use another action to make it visible, until you remove the ring, or until
+      you die.</p>
+
+      <p>If you die while wearing the ring, your soul enters it, unless it
+      already houses a soul. You can remain in the ring or depart for the
+      afterlife. As long as your soul is in the ring, you can telepathically
+      communicate with any creature wearing it. A wearer can't prevent this
+      telepathic communication.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 16000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: ring
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Conceal Ring
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: ring-of-mind-shielding
+effects: []
+folder: 5jrDZJ1U23Q9jDqB
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037233243
+  modifiedTime: 1731017978357
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!dGnkwePemh7ovuDv'

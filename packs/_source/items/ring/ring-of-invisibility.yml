@@ -1,0 +1,171 @@
+_id: 1J0dsxyKRhVXYQf5
+name: Ring of Invisibility
+type: equipment
+img: icons/equipment/finger/ring-faceted-silver-orange.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>While wearing this ring, you can turn invisible as an action. Anything
+      you are wearing or carrying is invisible with you. You remain invisible
+      until the ring is removed, until you attack or cast a spell, or until you
+      use a bonus action to become visible again.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 10000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: ring
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects:
+        - _id: 7KHJyEznWKJ8rc5s
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Become Invisible
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: ring-of-invisibility
+effects:
+  - name: Invisibility
+    img: icons/equipment/finger/ring-faceted-silver-orange.webp
+    origin: Compendium.dnd5e.items.Item.1J0dsxyKRhVXYQf5
+    transfer: false
+    _id: 7KHJyEznWKJ8rc5s
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - invisible
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1731017665728
+      modifiedTime: 1731017671713
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!1J0dsxyKRhVXYQf5.7KHJyEznWKJ8rc5s'
+folder: 5jrDZJ1U23Q9jDqB
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037085047
+  modifiedTime: 1731017665769
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!1J0dsxyKRhVXYQf5'

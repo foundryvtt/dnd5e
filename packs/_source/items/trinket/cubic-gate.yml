@@ -1,0 +1,144 @@
+_id: 6ai1pEde3iQX30Fr
+name: Cubic Gate
+type: consumable
+img: icons/commodities/treasure/puzzle-box-glowing-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This cube is 3 inches across and radiates palpable magical energy. The
+      six sides of the cube are each keyed to a different plane of existence,
+      one of which is the Material Plane. The other sides are linked to planes
+      determined by the GM.</p>
+
+      <p>You can use an action to press one side of the cube to cast the
+      @UUID[Compendium.dnd5e.spells.Item.XbwGq5kDJNvAxNXV]{Gate} spell with it,
+      opening a portal to the plane keyed to that side. Alternatively, if you
+      use an action to press one side twice, you can cast the
+      @UUID[Compendium.dnd5e.spells.Item.J6Jpw5XzB5aTeqnz]{Plane Shift} spell
+      (save DC 17) with the cube and transport the targets to the plane keyed to
+      that side.</p>
+
+      <p>The cube has 3 charges. Each use of the cube expends 1 charge. The cube
+      regains 1d3 expended charges daily at dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 40000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: '3'
+    recovery:
+      - period: day
+        type: recoverAll
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: cubic-gate
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 1300000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037106205
+  modifiedTime: 1725992485912
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!6ai1pEde3iQX30Fr'

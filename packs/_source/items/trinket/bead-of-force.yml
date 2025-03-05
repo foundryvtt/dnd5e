@@ -1,0 +1,207 @@
+_id: SqTtbBCfiEsmZ36N
+name: Bead of Force
+type: consumable
+img: icons/magic/water/orb-water-bubbles-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This small black sphere measures 3/4 of an inch in diameter and weighs
+      an ounce. Typically, 1d4 + 4 Beads of Force are found together.</p>
+
+      <p>You can use an action to throw the bead up to 60 feet. The bead
+      explodes on impact and is destroyed. Each creature within a 10-foot radius
+      of where the bead landed must succeed on a DC 15 Dexterity saving throw or
+      take 5d4 force damage. A sphere of transparent force then encloses the
+      area for 1 minute. Any creature that failed the save and is completely
+      within the area is trapped inside this sphere. Creatures that succeeded on
+      the save, or are partially within the area, are pushed away from the
+      center of the sphere until they are no longer inside it. Only breathable
+      air can pass through the sphere's wall. No attack or other effect can.</p>
+
+      <p>An enclosed creature can use its action to push against the sphere's
+      wall, moving the sphere up to half the creature's walking speed. The
+      sphere can be picked up, and its magic causes it to weigh only 1 pound,
+      regardless of the weight of creatures inside.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.06
+    units: lb
+  price:
+    value: 960
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '10'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity300:
+      _id: dnd5eactivity300
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '10'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: 5d4
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: bead-of-force
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 5100000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037191006
+  modifiedTime: 1725992514389
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!SqTtbBCfiEsmZ36N'

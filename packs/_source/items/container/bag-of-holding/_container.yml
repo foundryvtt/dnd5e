@@ -1,0 +1,80 @@
+_id: aDHRuUs29SrumWfq
+name: Bag of Holding
+type: container
+img: icons/containers/bags/pack-engraved-leather-tan.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This bag has an interior space considerably larger than its outside
+      dimensions, roughly 2 feet in diameter at the mouth and 4 feet deep. The
+      bag can hold up to 500 pounds, not exceeding a volume of 64 cubic feet.
+      The bag weighs 15 pounds, regardless of its contents. Retrieving an item
+      from the bag requires an action.</p>
+
+      <p>If the bag is overloaded, pierced, or torn, it ruptures and is
+      destroyed, and its contents are scattered in the Astral Plane. If the bag
+      is turned inside out, its contents spill forth, unharmed, but the bag must
+      be put right before it can be used again.</p>
+
+      <p>Breathing creatures inside the bag can survive up to a number of
+      minutes equal to 10 divided by the number of creatures (minimum 1 minute),
+      after which time they begin to suffocate.</p>
+
+      <p>Placing a Bag of Holding inside an extradimensional space created by a
+      Handy Haversack, Portable Hole, or similar item instantly destroys both
+      items and opens a gate to the Astral Plane. The gate originates where the
+      one item was placed inside the other. Any creature within 10 feet of the
+      gate is sucked through it to a random location on the Astral Plane. The
+      gate then closes. The gate is one-way only and can't be reopened.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 15
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  capacity:
+    type: weight
+    value: 500
+  currency:
+    cp: 0
+    sp: 0
+    ep: 0
+    gp: 0
+    pp: 0
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+    - weightlessContents
+  attuned: false
+  identifier: bag-of-holding
+effects: []
+folder: PgtyWdfkDTDbc0ov
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037222092
+  modifiedTime: 1725992524729
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!aDHRuUs29SrumWfq'
