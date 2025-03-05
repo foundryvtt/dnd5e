@@ -76,7 +76,11 @@ export default class SubclassAdvancement extends Advancement {
   async restore(level, data) {
     if ( !data ) return;
     this.actor.updateSource({ items: [data] });
-    this.updateSource({ value: { document: data._id, uuid: data.flags.dnd5e.sourceId } });
+    this.updateSource({
+      value: {
+        document: data._id, uuid: data._stats?.compendiumSource ?? data.flags?.dnd5e?.sourceId
+      }
+    });
   }
 
   /* -------------------------------------------- */

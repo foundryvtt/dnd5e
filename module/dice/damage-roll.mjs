@@ -226,13 +226,18 @@ export default class DamageRoll extends BasicRoll {
         }
       }
 
-      // Multiply numeric terms
-      else if ( critical.multiplyNumeric && (term instanceof NumericTerm) ) {
-        term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
-        term.number = term.options.baseNumber;
-        if ( this.isCritical ) {
-          term.number *= (critical.multiplier ?? 2);
-          term.options.critical = true;
+      else if ( term instanceof NumericTerm ) {
+        // Remove previous flat critical bonuses
+        if ( term.options.criticalFlatBonus ) this.terms.splice(i - 1, 2);
+
+        // Multiply numeric terms
+        else if ( critical.multiplyNumeric ) {
+          term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
+          term.number = term.options.baseNumber;
+          if ( this.isCritical ) {
+            term.number *= (critical.multiplier ?? 2);
+            term.options.critical = true;
+          }
         }
       }
     }
@@ -240,8 +245,8 @@ export default class DamageRoll extends BasicRoll {
     // Add powerful critical bonus
     if ( critical.powerfulCritical && flatBonus.size ) {
       for ( const [type, number] of flatBonus.entries() ) {
-        this.terms.push(new OperatorTerm({operator: "+"}));
-        this.terms.push(new NumericTerm({number, options: {flavor: type}}));
+        this.terms.push(new OperatorTerm({ operator: "+" }));
+        this.terms.push(new NumericTerm({number, options: { flavor: type, criticalFlatBonus: true }}));
       }
     }
 

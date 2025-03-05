@@ -1,6 +1,7 @@
+import UsesField from "../../data/shared/uses-field.mjs";
+import ContextMenu5e from "../context-menu.mjs";
 import ItemSheet5e from "./item-sheet.mjs";
 import ItemSheetV2Mixin from "./sheet-v2-mixin.mjs";
-import ContextMenu5e from "../context-menu.mjs";
 
 /**
  * V2 Item sheet implementation.
@@ -128,7 +129,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
       fields: context.fields.uses.fields.recovery.element.fields,
       prefix: `system.uses.recovery.${index}.`,
       source: context.source.uses.recovery[index] ?? data,
-      formulaOptions: data.period === "recharge" ? data.recharge?.options : null
+      formulaOptions: data.period === "recharge" ? UsesField.rechargeOptions : null
     }));
 
     // Activities
