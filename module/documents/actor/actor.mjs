@@ -3271,12 +3271,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Add class to actor entry representing the primary group.
-   * @param {jQuery} jQuery
+   * @param {jQuery | HTMLElement } html
    */
-  static onRenderActorDirectory(jQuery) {
+  static onRenderActorDirectory(html) {
+    html = html instanceof HTMLElement ? html : html[0];
     const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
     if ( primaryParty ) {
-      const element = jQuery[0]?.querySelector(`[data-entry-id="${primaryParty.id}"]`);
+      const element = html?.querySelector(`[data-entry-id="${primaryParty.id}"]`);
       element?.classList.add("primary-party");
     }
   }
