@@ -1,0 +1,249 @@
+_id: 5KiRtMMSTnJmMtBr
+name: Crystal Ball of Telepathy
+type: consumable
+img: icons/commodities/gems/pearl-water.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>The crystal ball is about 6 inches in diameter. While touching it, you
+      can cast the @UUID[Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20]{Scrying}
+      spell (save DC 17) with it.</p>
+
+      <p>While Scrying with the Crystal Ball, you can communicate telepathically
+      with creatures you can see within 30 feet of the spell's sensor. You can
+      also use an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.zMAWdyc8UVb37BK4]{Suggestion} spell
+      (save DC 17) through the sensor on one of those creatures. You don't need
+      to concentrate on this Suggestion to maintain it during its duration, but
+      it ends if Scrying ends.</p>
+
+      <p>Once used, the Suggestion power of the Crystal Ball can't be used again
+      until the next dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 7
+    units: lb
+  price:
+    value: 60000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '10'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '17'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    gYpXMExP1crA0hHe:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: gYpXMExP1crA0hHe
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    5OrwGscvIsTh4piO:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.zMAWdyc8UVb37BK4
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 5OrwGscvIsTh4piO
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: true
+        condition: While you are Scrying with the Crystal Ball
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: spec
+        concentration: false
+        override: true
+        special: As long as the Scrying spell is active
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: crystal-ball-of-telepathy
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 1200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037100710
+  modifiedTime: 1729014834198
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!5KiRtMMSTnJmMtBr'

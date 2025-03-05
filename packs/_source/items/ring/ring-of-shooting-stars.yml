@@ -1,0 +1,317 @@
+_id: etA2SBgWwduCLgLT
+name: Ring of Shooting Stars
+type: equipment
+img: icons/equipment/finger/ring-cabochon-gold-orange.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement outdoors at night)</em></p><p>While wearing
+      this ring in dim light or darkness, you can cast
+      @UUID[Compendium.dnd5e.spells.Item.CAxSzHWizrafT033]{Dancing Lights} and
+      @UUID[Compendium.dnd5e.spells.Item.Bnn9Nzajixvow9xi]{Light} from the ring
+      at will. Casting either spell from the ring requires an action.</p><p>The
+      ring has 6 charges for the following other properties. The ring regains
+      1d6 expended charges daily at dawn.</p><p><strong>Faerie Fire</strong>.
+      You can expend 1 charge as an action to cast
+      @UUID[Compendium.dnd5e.spells.Item.nqBDWkVOfcGZt4YU]{Faerie Fire} from the
+      ring.</p><p><strong>Ball Lightning</strong>. You can expend 2 charges as
+      an action to create one to four 3-foot-diameter spheres of lightning. The
+      more spheres you create, the less powerful each sphere is
+      individually.</p><p>Each sphere appears in an unoccupied space you can see
+      within 120 feet of you. The spheres last as long as you concentrate (as if
+      concentrating on a spell), up to 1 minute. Each sphere sheds dim light in
+      a 30-foot radius.</p><p>As a bonus action, you can move each sphere up to
+      30 feet, but no farther than 120 feet away from you. When a creature other
+      than you comes within 5 feet of a sphere, the sphere discharges lightning
+      at that creature and disappears. That creature must make a DC 15 Dexterity
+      saving throw. On a failed save, the creature takes lightning damage based
+      on the number of spheres you
+      created.</p><table><thead><tr><td><strong>Spheres</strong></td><td><strong>Lightning
+      Damage</strong></td></tr></thead><tbody><tr><td>4</td><td>2d4</td></tr><tr><td>3</td><td>2d6</td></tr><tr><td>2</td><td>5d4</td></tr><tr><td>1</td><td>4d12</td></tr></tbody></table><p><strong>Shooting
+      Stars</strong>. You can expend 1 to 3 charges as an action. For every
+      charge you expend, you launch a glowing mote of light from the ring at a
+      point you can see within 60 feet of you. Each creature within a 15-foot
+      cube originating from that point is showered in sparks and must make a DC
+      15 Dexterity saving throw, taking 5d4 fire damage on a failed save, or
+      half as much damage on a successful one.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 14000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  uses:
+    max: '6'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d6
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: ring
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+        scaling:
+          allowed: true
+          max: '3'
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ft
+        special: ''
+        override: false
+        value: '60'
+      target:
+        template:
+          count: '@scaling'
+          contiguous: false
+          type: cube
+          size: '15'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 4
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              mode: ''
+              number: 1
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Shooting Star
+      img: ''
+      appliedEffects: []
+    BmdTWkjcU0ZkyCLr:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.CAxSzHWizrafT033
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: BmdTWkjcU0ZkyCLr
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    vbdZ39RG4LdxLH0a:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.Bnn9Nzajixvow9xi
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: vbdZ39RG4LdxLH0a
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    TkKZyzTSjdDD6a8i:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.nqBDWkVOfcGZt4YU
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: TkKZyzTSjdDD6a8i
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: ring-of-shooting-stars
+effects: []
+folder: 5jrDZJ1U23Q9jDqB
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037243774
+  modifiedTime: 1729015847372
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!etA2SBgWwduCLgLT'

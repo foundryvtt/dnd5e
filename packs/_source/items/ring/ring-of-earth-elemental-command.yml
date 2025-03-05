@@ -1,0 +1,320 @@
+_id: Zf7kBZa5f4WBepn1
+name: Ring of Earth Elemental Command
+type: equipment
+img: icons/equipment/finger/ring-band-engraved-scrolls-silver.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>This ring is linked to the Elemental Plane of Earth.</p>
+
+      <p>While wearing this ring, you have advantage on attack rolls against
+      @UUID[Compendium.dnd5e.monsters.Actor.sApYLZj9PTZ40wJr]{Earth Elemental}s,
+      and they have disadvantage on attack rolls against you. In addition, you
+      have access to properties based on the linked plane.</p>
+
+      <p>The ring has 5 charges. It regains 1d4 + 1 expended charges daily at
+      dawn. Spells cast from the ring have a save DC of 17.</p>
+
+      <p><strong>Ring of Earth Elemental Command</strong>. You can expend 2 of
+      the ring's charges to cast
+      @UUID[Compendium.dnd5e.spells.Item.eEpy1ONlXumKS1mp]{Dominate Monster} on
+      an Earth Elemental. In addition, you can move in difficult terrain that is
+      composed of rubble, rocks, or dirt as if it were normal terrain. You can
+      also speak and understand Terran.</p>
+
+      <p>If you help slay an Earth Elemental while attuned to the ring, you gain
+      access to the following additional properties:</p>
+
+      <ul>
+
+      <li>You have resistance to acid damage.</li>
+
+      <li>You can move through solid earth or rock as if those areas were
+      difficult terrain. If you end your turn there, you are shunted out to the
+      nearest unoccupied space you last occupied.</li>
+
+      <li>You can cast the following spells from the ring, expending the
+      necessary number of charges:
+      @UUID[Compendium.dnd5e.spells.Item.QvGcdRUSNRKEQJlK]{Stone Shape} (2
+      charges), @UUID[Compendium.dnd5e.spells.Item.ReMbjfeOKoSj3O79]{Stoneskin}
+      (3 charges), or @UUID[Compendium.dnd5e.spells.Item.NmoRmM1mhuM3pqnY]{Wall
+      of Stone} (3 charges).</li>
+
+      </ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 31000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  cover: null
+  uses:
+    max: '5'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d4 + 1
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: ring
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    2BmS0duA6cOAkzUW:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.eEpy1ONlXumKS1mp
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '8'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 2BmS0duA6cOAkzUW
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Only on Earth Elementals
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    d8GlId9yzDbJHrS7:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.QvGcdRUSNRKEQJlK
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: d8GlId9yzDbJHrS7
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    lsp1CkHeT5EWo09F:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ReMbjfeOKoSj3O79
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: lsp1CkHeT5EWo09F
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    KEqwUW6z1Hk9CyB2:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.NmoRmM1mhuM3pqnY
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: KEqwUW6z1Hk9CyB2
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: ring-of-earth-elemental-command
+effects: []
+folder: 5jrDZJ1U23Q9jDqB
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037219133
+  modifiedTime: 1729016818176
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!Zf7kBZa5f4WBepn1'

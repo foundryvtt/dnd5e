@@ -1,0 +1,238 @@
+_id: UxkP6FvDzPbsIY6o
+name: Manual of Golems
+type: consumable
+img: icons/sundries/books/book-eye-purple.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This tome contains information and incantations necessary to make a
+      particular type of golem. The GM chooses the type or determines it
+      randomly from the
+      @UUID[Compendium.dnd5e.tables.RollTable.htMPUPPABjI6fwck]{Manual of
+      Golems} table. Refer to the table below for a detailed description on each
+      golem. To decipher and use the manual, you must be a spellcaster with at
+      least two 5th-level spell slots. A creature that can't use a Manual of
+      Golems and attempts to read it takes 6d6 psychic damage.</p>
+
+      <table>
+
+      <thead>
+
+      <tr>
+
+      <th>d20</th>
+
+      <th>Golem</th>
+
+      <th>Time</th>
+
+      <th>Cost</th>
+
+      </tr>
+
+      </thead>
+
+      <tbody>
+
+      <tr>
+
+      <td>1-5</td>
+
+      <td>@UUID[Compendium.dnd5e.monsters.Actor.YOqhbf8WsX0jH9Fu]{Clay
+      Golem}</td>
+
+      <td>30 days</td>
+
+      <td>65,000 gp</td>
+
+      </tr>
+
+      <tr>
+
+      <td>6-17</td>
+
+      <td>@UUID[Compendium.dnd5e.monsters.Actor.Hm4o2FgPZsdbXjLq]{Flesh
+      Golem}</td>
+
+      <td>60 days</td>
+
+      <td>50,000 gp</td>
+
+      </tr>
+
+      <tr>
+
+      <td>18</td>
+
+      <td>@UUID[Compendium.dnd5e.monsters.Actor.h98AuPfomEPcCibP]{Iron
+      Golem}</td>
+
+      <td>120 days</td>
+
+      <td>100,000 gp</td>
+
+      </tr>
+
+      <tr>
+
+      <td>19-20</td>
+
+      <td>@UUID[Compendium.dnd5e.monsters.Actor.z3gSIXHHWYaHjfBT]{Stone
+      Golem}</td>
+
+      <td>90 days</td>
+
+      <td>80,000 gp</td>
+
+      </tr>
+
+      </tbody>
+
+      </table>
+
+      <p>To create a golem, you must spend the time shown on the table, working
+      without interruption with the manual at hand and resting no more than 8
+      hours per day. You must also pay the specified cost to purchase
+      supplies.</p>
+
+      <p>Once you finish creating the golem, the book is consumed in eldritch
+      flames. The golem becomes animate when the ashes of the manual are
+      sprinkled on it. It is under your control, and it understands and obeys
+      your spoken commands.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 35000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: veryRare
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: 6
+      denomination: 6
+      bonus: ''
+      types:
+        - psychic
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: special
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 6
+            denomination: 6
+            bonus: ''
+            types:
+              - psychic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: manual-of-golems
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 5900000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037199912
+  modifiedTime: 1725992517327
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!UxkP6FvDzPbsIY6o'

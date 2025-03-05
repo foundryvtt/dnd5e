@@ -1,0 +1,139 @@
+_id: TZggpdbOYqOCG7mY
+name: Alchemy Jug
+type: consumable
+img: icons/consumables/drinks/clay-jar-glowing-orange-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p><p>This ceramic jug appears to be able to
+      hold a gallon of liquid and weighs 12 pounds whether full or empty.
+      Sloshing sounds can be heard from within the jug when it is shaken, even
+      if the jug is empty.</p><p>You can use an action and name one liquid from
+      the table below to cause the jug to produce the chosen liquid. Afterward,
+      you can uncork the jug as an action and pour that liquid out, up to 2
+      gallons per minute. The maximum amount of liquid the jug can produce
+      depends on the liquid you named.</p><p>Once the jug starts producing a
+      liquid, it can't produce a different one, or more of one that has reached
+      its maximum, until the next
+      dawn.</p><table><thead><tr><th>Liquid</th><th>Max
+      Amount</th></tr></thead><tbody><tr><td>Acid</td><td>8
+      ounces</td></tr><tr><td>Basic poison</td><td>1/2
+      ounce</td></tr><tr><td>Beer</td><td>4
+      gallons</td></tr><tr><td>Honey</td><td>1
+      gallon</td></tr><tr><td>Mayonnaise</td><td>2
+      gallons</td></tr><tr><td>Oil</td><td>1
+      quart</td></tr><tr><td>Vinegar</td><td>2 gallons</td></tr><tr><td>Water,
+      fresh</td><td>8 gallons</td></tr><tr><td>Water, salt</td><td>12
+      gallons</td></tr><tr><td>Wine</td><td>1 gallon</td></tr></tbody></table>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 12
+    units: lb
+  price:
+    value: 6000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: alchemy-jug
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 5300000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037193569
+  modifiedTime: 1725992515243
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!TZggpdbOYqOCG7mY'

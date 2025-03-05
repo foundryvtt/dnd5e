@@ -1,0 +1,138 @@
+_id: gpHgWLsD8k2yzbfR
+name: Cape of the Mountebank
+type: equipment
+img: icons/equipment/head/hood-cloth-trimmed-pink-gold.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This cape smells faintly of brimstone. While wearing it, you can use it
+      to cast the @UUID[Compendium.dnd5e.spells.Item.A4RsPuSvB9wFtz1j]{Dimension
+      Door} spell as an action. This property of the cape can't be used again
+      until the next dawn.</p>
+
+      <p>When you disappear, you leave behind a cloud of smoke, and you appear
+      in a similar cloud of smoke at your destination. The smoke lightly
+      obscures the space you left and the space you appear in, and it dissipates
+      at the end of your next turn. A light or stronger wind disperses the
+      smoke.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 8000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: '1'
+    recovery:
+      - period: dawn
+        type: recoverAll
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    XfgWDmDHXWX4rREQ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.A4RsPuSvB9wFtz1j
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: XfgWDmDHXWX4rREQ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: cape-of-the-mountebank
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037253374
+  modifiedTime: 1729015234932
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!gpHgWLsD8k2yzbfR'

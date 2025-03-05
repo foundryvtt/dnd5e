@@ -1,0 +1,184 @@
+_id: GcpXNc4dKUNw0Tk6
+name: Wand of Paralysis
+type: equipment
+img: icons/weapons/wands/wand-gem-violet.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a spellcaster)</em></p>
+
+      <p>This wand has 7 charges. While holding it, you can use an action to
+      expend 1 of its charges to cause a thin blue ray to streak from the tip
+      toward a creature you can see within 60 feet of you. The target must
+      succeed on a DC 15 Constitution saving throw or be paralyzed for 1 minute.
+      At the end of each of the target's turns, it can repeat the saving throw,
+      ending the effect on itself on a success.</p>
+
+      <p>The wand regains 1d6 + 1 expended charges daily at dawn. If you expend
+      the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes
+      and is destroyed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 16000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '7'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d6 + 1
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: wand
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - foc
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects:
+        - _id: lgD1h0ioOsqz6jK8
+          onSave: false
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: wand-of-paralysis
+effects:
+  - name: Paralysis
+    img: icons/weapons/wands/wand-gem-violet.webp
+    origin: Compendium.dnd5e.items.Item.GcpXNc4dKUNw0Tk6
+    transfer: false
+    _id: lgD1h0ioOsqz6jK8
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    statuses:
+      - paralyzed
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1731015925049
+      modifiedTime: 1731015930528
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!GcpXNc4dKUNw0Tk6.lgD1h0ioOsqz6jK8'
+folder: 1aDgsGVwDbPdxG2V
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037147741
+  modifiedTime: 1731015947250
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!GcpXNc4dKUNw0Tk6'

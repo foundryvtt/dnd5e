@@ -1,0 +1,293 @@
+_id: s4fR8bxQGSt4wbH7
+name: Cube of Force
+type: consumable
+img: icons/sundries/gaming/dice-runed-brown.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>This cube is about an inch across. Each face has a distinct marking on
+      it that can be pressed. The cube starts with 36 charges, and it regains
+      1d20 expended charges daily at dawn.</p>
+
+      <p>You can use an action to press one of the cube's faces, expending a
+      number of charges based on the chosen face, as shown in the Cube of Force
+      Faces table. Each face has a different effect. If the cube has
+      insufficient charges remaining, nothing happens. Otherwise, a barrier of
+      invisible force springs into existence, forming a cube 15 feet on a side.
+      The barrier is centered on you, moves with you, and lasts for 1 minute,
+      until you use an action to press the cube's sixth face, or the cube runs
+      out of charges. You can change the barrier's effect by pressing a
+      different face of the cube and expending the requisite number of charges,
+      resetting the duration.</p>
+
+      <p>If your movement causes the barrier to come into contact with a solid
+      object that can't pass through the cube, you can't move any closer to that
+      object as long as the barrier remains.</p>
+
+      <table border="1">
+
+      <tbody>
+
+      <tr>
+
+      <td><strong>Face</strong></td>
+
+      <td><strong>Charges</strong></td>
+
+      <td><strong>Effect</strong></td>
+
+      </tr>
+
+      <tr>
+
+      <td>1</td>
+
+      <td>1</td>
+
+      <td>Gases, wind, and fog can't pass through the barrier.</td>
+
+      </tr>
+
+      <tr>
+
+      <td>2</td>
+
+      <td>2</td>
+
+      <td>Nonliving matter can't pass through the barrier. Walls, floors, and
+      ceilings can pass through at your discretion.</td>
+
+      </tr>
+
+      <tr>
+
+      <td>3</td>
+
+      <td>3</td>
+
+      <td>Living matter can't pass through the barrier.</td>
+
+      </tr>
+
+      <tr>
+
+      <td>4</td>
+
+      <td>4</td>
+
+      <td>Spell effects can't pass through the barrier.</td>
+
+      </tr>
+
+      <tr>
+
+      <td>5</td>
+
+      <td>5</td>
+
+      <td>Nothing can pass through the barrier. Walls, floors, and ceilings can
+      pass through at your discretion.</td>
+
+      </tr>
+
+      <tr>
+
+      <td>6</td>
+
+      <td>0</td>
+
+      <td>The barrier deactivates.</td>
+
+      </tr>
+
+      </tbody>
+
+      </table>
+
+      <p>The cube loses charges when the barrier is targeted by certain spells
+      or comes into contact with certain spell or magic item effects, as shown
+      in the table below.</p>
+
+      <table border="1">
+
+      <tbody>
+
+      <tr>
+
+      <td><strong>Spell or Item</strong></td>
+
+      <td><strong>Charges Lost</strong></td>
+
+      </tr>
+
+      <tr>
+
+      <td>@UUID[Compendium.dnd5e.spells.Item.HBHbOGKNVVprSlwn]{Disintegrate}</td>
+
+      <td>1d12</td>
+
+      </tr>
+
+      <tr>
+
+      <td>@UUID[Compendium.dnd5e.items.Item.t7GfyRp3dB3lqS9i]{Horn of
+      Blasting}</td>
+
+      <td>1d10</td>
+
+      </tr>
+
+      <tr>
+
+      <td>@UUID[Compendium.dnd5e.spells.Item.d9MwcXi7Il3HROXd]{Passwall}</td>
+
+      <td>1d6</td>
+
+      </tr>
+
+      <tr>
+
+      <td>@UUID[Compendium.dnd5e.spells.Item.eGMhwmuleAM46C6L]{Prismatic
+      Spray}</td>
+
+      <td>1d20</td>
+
+      </tr>
+
+      <tr>
+
+      <td>@UUID[Compendium.dnd5e.spells.Item.X3DrXgxjwI2dvkD6]{Wall of
+      Fire}</td>
+
+      <td>1d4</td>
+
+      </tr>
+
+      </tbody>
+
+      </table>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 16000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '36'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d20
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: >-
+          Must have enough charges for the face pressed otherwise the Action is
+          lost.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: cube
+          size: '15'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: cube-of-force
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 9500000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037301147
+  modifiedTime: 1725992551347
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!s4fR8bxQGSt4wbH7'

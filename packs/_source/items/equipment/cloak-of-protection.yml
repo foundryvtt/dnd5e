@@ -1,0 +1,115 @@
+_id: lvaMqEhfidfHDGf5
+name: Cloak of Protection
+type: equipment
+img: icons/equipment/back/cloak-heavy-fur-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>You gain a +1 bonus to AC and saving throws while you wear this
+      cloak.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 3500
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: cloak-of-protection
+effects:
+  - _id: jxfin1rh71p1xjjv
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '+1'
+        priority: null
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '+1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.items.lvaMqEhfidfHDGf5
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: +1 to AC & Saves
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/equipment/back/cloak-heavy-fur-blue.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!lvaMqEhfidfHDGf5.jxfin1rh71p1xjjv'
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037276814
+  modifiedTime: 1725992542923
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!lvaMqEhfidfHDGf5'

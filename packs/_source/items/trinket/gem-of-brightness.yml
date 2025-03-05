@@ -1,0 +1,157 @@
+_id: thkvJ5QBRORIwkkV
+name: Gem of Brightness
+type: consumable
+img: icons/commodities/gems/gem-faceted-octagon-yellow.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This prism has 50 charges. While you are holding it, you can use an
+      action to speak one of three command words to cause one of the following
+      effects:</p>
+
+      <ul>
+
+      <li>The first command word causes the gem to shed bright light in a
+      30-foot radius and dim light for an additional 30 feet. This effect
+      doesn't expend a charge. It lasts until you use a bonus action to repeat
+      the command word or until you use another function of the gem.</li>
+
+      <li>The second command word expends 1 charge and causes the gem to fire a
+      brilliant beam of light at one creature you can see within 60 feet of you.
+      The creature must succeed on a DC 15 Constitution saving throw or become
+      blinded for 1 minute. The creature can repeat the saving throw at the end
+      of each of its turns, ending the effect on itself on a success.</li>
+
+      <li>The third command word expends 5 charges and causes the gem to flare
+      with blinding light in a 30- foot cone originating from it. Each creature
+      in the cone must make a saving throw as if struck by the beam created with
+      the second command word.</li>
+
+      </ul>
+
+      <p>When all of the gem's charges are expended, the gem becomes a
+      nonmagical jewel worth 50 gp.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 5000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: '50'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: Command word.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: cone
+          size: '30'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: gem-of-brightness
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 10100000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037309513
+  modifiedTime: 1725992554120
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!thkvJ5QBRORIwkkV'
