@@ -284,11 +284,13 @@ export default class Bastion {
       if ( (trade.pending.value === null) && trade.pending.stocked ) updates["system.trade.stock.stocked"] = true;
 
       // Bought goods
-      else if ( trade.pending.value !== null && !trade.pending.creatures.length ) {
-        updates["system.trade.stock.value"] = Math.min(trade.stock.value + trade.pending.value, trade.stock.max);
+      else if ( trade.pending.value !== null ) {
+        if ( trade.pending.creatures.length ) {
+          updates["system.trade.creatures.value"] = trade.creatures.value.concat(trade.pending.creatures);
+        }
+        else updates["system.trade.stock.value"] = Math.min(trade.stock.value + trade.pending.value, trade.stock.max);
       }
     } else if ( trade.pending.value !== null ) {
-      // See OrderActivity#_finalizeTrade for creatures TODO
       // Sold goods
       let sold = trade.pending.value;
       if ( !trade.pending.creatures.length ) {
