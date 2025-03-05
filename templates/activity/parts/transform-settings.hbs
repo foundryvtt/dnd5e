@@ -1,0 +1,19 @@
+<section class="tab activity-{{ tab.id }} {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    <fieldset>
+        <legend>{{ localize "DND5E.TRANSFORM.FIELDS.transform.label" }}</legend>
+        {{ formField fields.transform.fields.preset value=source.transform.preset options=presetOptions rootId=partId }}
+        {{ formField fields.transform.fields.customize value=source.transform.customize input=inputs.createCheckboxInput
+                     rootId=partId }}
+    </fieldset>
+    {{#each categories}}
+    <fieldset {{~#unless ../source.transform.customize}} disabled{{/unless}}>
+        <legend>{{ localize title }}</legend>
+        {{#if hint}}
+        <div class="form-group">
+            <p class="hint">{{ localize hint }}</p>
+        </div>
+        {{/if}}
+        {{> "dnd5e.fieldlist" settings }}
+    </fieldset>
+    {{/each}}
+</section>

@@ -151,18 +151,7 @@ export default class TransformDialog extends Dialog5e {
    * @protected
    */
   async _prepareSettingsContext(context, options) {
-    context.categories = ["keep", "merge", "effects", "other"].map(cat => ({
-      category: cat,
-      title: `DND5E.TRANSFORM.Setting.${cat.capitalize()}.Title`,
-      hint: game.i18n.has(`DND5E.TRANSFORM.Setting.${cat.capitalize()}.Hint`)
-        ? `DND5E.TRANSFORM.Setting.${cat.capitalize()}.Hint` : "",
-      settings: Object.entries(CONFIG.DND5E.transformation[cat]).map(([name, config]) => ({
-        field: new BooleanField({ label: config.label, hint: config.hint }),
-        input: context.inputs.createCheckboxInput,
-        name: `${cat}.${name}`,
-        value: this.#settings[cat]?.has(name)
-      }))
-    }));
+    context.categories = this.#settings.createFormCategories();
     return context;
   }
 

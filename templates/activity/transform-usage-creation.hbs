@@ -1,0 +1,22 @@
+{{#if hasCreation}}
+<section>
+    {{> "dnd5e.activity-usage-notes" }}
+    <fieldset>
+        <legend>{{ localize "DND5E.USAGE.SECTION.Creation" }}</legend>
+        {{#each transformFields}}
+        {{ formField field name=name value=value options=options input=input }}
+        {{/each}}
+        {{#if transformProfile}}
+        <input type="hidden" name="transform.profile" value="{{ transformProfile }}">
+        {{/if}}
+        {{#if (and transformFields template)}}<hr>{{/if}}
+        {{#if template}}
+        {{ formField template.field name=template.name value=template.value input=inputs.createCheckboxInput }}
+        {{/if}}
+    </fieldset>
+</section>
+{{else if transformProfile}}
+<input type="hidden" name="transform.profile" value="{{ transformProfile }}">
+{{else}}
+<section></section>
+{{/if}}

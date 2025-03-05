@@ -123,7 +123,7 @@ export default class SummonSheet extends ActivitySheet {
 
   /**
    * Handle adding a new entry to the summoning profiles list.
-   * @this {ActivityConfig}
+   * @this {SummonSheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -135,7 +135,7 @@ export default class SummonSheet extends ActivitySheet {
 
   /**
    * Handle removing an entry from the summoning profiles list.
-   * @this {ActivityConfig}
+   * @this {SummonSheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */

@@ -1,3 +1,5 @@
+import { createCheckboxInput } from "../../applications/fields.mjs";
+
 const { BooleanField, SetField, StringField } = foundry.data.fields;
 
 /**
@@ -25,6 +27,14 @@ export default class TransformationSetting extends foundry.abstract.DataModel {
       transformTokens: new BooleanField({ initial: true })
     };
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Categories that define sets of booleans.
+   * @type {string[]}
+   */
+  static BOOLEAN_CATEGORIES = Object.seal(["keep", "merge", "effects", "other"]);
 
   /* -------------------------------------------- */
 
@@ -138,5 +148,42 @@ export default class TransformationSetting extends foundry.abstract.DataModel {
       ...Object.fromEntries(Array.from(other ?? []).map(k => [k, true])),
       ...remainder
     };
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Generate form categories populated with data from this settings object.
+   * @param {object} [options={}]
+   * @param {string} [options.prefix]  Prefix before the field name.
+   * @returns {{ category: string, title: string, hint: string, settings: object[] }[]}
+   */
+  createFormCategories({ prefix="" }={}) {
+    const disabledFields = TransformationSetting.BOOLEAN_CATEGORIES.reduce((fields, cat) => {
+      for ( const value of this[cat] ) {
+        for ( const disable of CONFIG.DND5E.transformation[cat][value]?.disables ?? [] ) {
+          if ( disable.includes("*") ) Object.keys(CONFIG.DND5E.transformation[disable.replace(".*", "")] ?? {})
+            .filter(k => k !== value).forEach(k => fields.add(`${cat}.${k}`));
+          else fields.add(disable);
+        }
+      }
+      return fields;
+    }, new Set());
+    const categories = TransformationSetting.BOOLEAN_CATEGORIES.map(cat => ({
+      category: cat,
+      title: `DND5E.TRANSFORM.Setting.${cat.capitalize()}.Title`,
+      hint: game.i18n.has(`DND5E.TRANSFORM.Setting.${cat.capitalize()}.Hint`)
+        ? `DND5E.TRANSFORM.Setting.${cat.capitalize()}.Hint` : "",
+      settings: Object.entries(CONFIG.DND5E.transformation[cat]).map(([name, config]) => ({
+        field: new BooleanField({ label: config.label, hint: config.hint }),
+        disabled: disabledFields.has(`${cat}.${name}`),
+        input: createCheckboxInput,
+        name: `${prefix}${cat}.${name}`,
+        value: this[cat]?.has(name)
+      }))
+    }));
+    return categories;
   }
 }

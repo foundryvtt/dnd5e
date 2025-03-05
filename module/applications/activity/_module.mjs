@@ -8,6 +8,7 @@ export {default as ForwardSheet} from "./forward-sheet.mjs";
 export {default as HealSheet} from "./heal-sheet.mjs";
 export {default as SaveSheet} from "./save-sheet.mjs";
 export {default as SummonSheet} from "./summon-sheet.mjs";
+export {default as TransformSheet} from "./transform-sheet.mjs";
 export {default as UtilitySheet} from "./utility-sheet.mjs";
 
 export {default as ActivityChoiceDialog} from "./activity-choice-dialog.mjs";
@@ -15,3 +16,4 @@ export {default as ActivityUsageDialog} from "./activity-usage-dialog.mjs";
 export {default as EnchantUsageDialog} from "./enchant-usage-dialog.mjs";
 export {default as OrderUsageDialog} from "./order-usage-dialog.mjs";
 export {default as SummonUsageDialog} from "./summon-usage-dialog.mjs";
+export {default as TransformUsageDialog} from "./transform-usage-dialog.mjs";

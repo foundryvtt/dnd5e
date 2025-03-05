@@ -2832,7 +2832,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {Actor5e} target                       The target Actor.
    * @param {TransformationSetting} [settings]     Options that determine how the transformation is performed.
    * @param {object} [options]
-   * @param {boolean} [options.renderSheet=true]   Render the sheet of the transformed actor after the polymorph.
+   * @param {boolean} [options.renderSheet]        Render the sheet of the transformed actor after the polymorph.
    * @returns {Promise<Array<Token>>|null}         Updated token if the transformation was performed.
    */
   async transformInto(target, settings=new TransformationSetting(), options={}) {
@@ -2843,8 +2843,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       );
       settings = TransformationSetting._fromDeprecatedConfig(settings);
     }
-
-    options.renderSheet ??= true;
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
@@ -3036,6 +3034,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const previousActorIds = this.getFlag("dnd5e", "previousActorIds") || [];
     previousActorIds.push(this._id);
     foundry.utils.setProperty(d.flags, "dnd5e.previousActorIds", previousActorIds);
+
+    // If `renderSheet` isn't specified, only render if non-transformed sheet is open
+    options.renderSheet ??= this.sheet?.rendered ?? false;
 
     // Update unlinked Tokens, and grab a copy of any actorData adjustments to re-apply
     if ( this.isToken ) {

@@ -10,4 +10,5 @@ export {default as HealActivity} from "./heal.mjs";
 export {default as OrderActivity} from "./order.mjs";
 export {default as SaveActivity} from "./save.mjs";
 export {default as SummonActivity} from "./summon.mjs";
+export {default as TransformActivity} from "./transform.mjs";
 export {default as UtilityActivity} from "./utility.mjs";
