@@ -1,0 +1,518 @@
+_id: oSarKEU8x1AupB6z
+name: Deck of Many Things
+type: consumable
+img: icons/sundries/gaming/playing-cards-grey.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>Usually found in a box or pouch, this deck contains a number of cards
+      made of ivory or vellum. Most (75 percent) of these decks have only
+      thirteen cards, but the rest have twenty-two.</p>
+
+      <p>Before you draw a card, you must declare how many cards you intend to
+      draw and then draw them randomly (you can use an altered deck of playing
+      cards to simulate the deck). Any cards drawn in excess of this number have
+      no effect. Otherwise, as soon as you draw a card from the deck, its magic
+      takes effect. You must draw each card no more than 1 hour after the
+      previous draw. If you fail to draw the chosen number, the remaining number
+      of cards fly from the deck on their own and take effect all at once.</p>
+
+      <p>Once a card is drawn, it fades from existence. Unless the card is the
+      Fool or the Jester, the card reappears in the deck, making it possible to
+      draw the same card twice.</p>
+
+      <table border="1">
+
+      <tbody>
+
+      <tr>
+
+      <td><strong>Playing Card</strong></td>
+
+      <td><strong>Card</strong></td>
+
+      </tr>
+
+      <tr>
+
+      <td>Ace of Diamonds</td>
+
+      <td>Vizier*</td>
+
+      </tr>
+
+      <tr>
+
+      <td>King of Diamonds</td>
+
+      <td>Sun</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Queen of Diamonds</td>
+
+      <td>Moon</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Jack of Diamonds</td>
+
+      <td>Star</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Two of Diamonds</td>
+
+      <td>Comet*</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Ace of Hearts</td>
+
+      <td>The Fates*</td>
+
+      </tr>
+
+      <tr>
+
+      <td>King of Hearts</td>
+
+      <td>Throne</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Queen of Hearts</td>
+
+      <td>Key</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Jack of Hearts</td>
+
+      <td>Knight</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Two of Hearts</td>
+
+      <td>Gem*</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Ace of Clubs</td>
+
+      <td>Talons*</td>
+
+      </tr>
+
+      <tr>
+
+      <td>King of Clubs</td>
+
+      <td>The Void</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Queen of Clubs</td>
+
+      <td>Flames</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Jack of Clubs</td>
+
+      <td>Skull</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Two of Clubs</td>
+
+      <td>Idiot*</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Ace of Spades</td>
+
+      <td>Donjon*</td>
+
+      </tr>
+
+      <tr>
+
+      <td>King of Spades</td>
+
+      <td>Ruin</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Queen of Spades</td>
+
+      <td>Euryale</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Jack of Spades</td>
+
+      <td>Rogue</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Two of Spades</td>
+
+      <td>Balance*</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Joker (with TM)</td>
+
+      <td>Fool*</td>
+
+      </tr>
+
+      <tr>
+
+      <td>Joker (without TM)</td>
+
+      <td>Jester</td>
+
+      </tr>
+
+      </tbody>
+
+      </table>
+
+      <p>*Found only in a deck with twenty-two cards</p>
+
+      <p><strong>Balance</strong>. Your mind suffers a wrenching alteration,
+      causing your alignment to change. Lawful becomes chaotic, good becomes
+      evil, and vice versa. If you are true neutral or unaligned, this card has
+      no effect on you.</p>
+
+      <p><strong>Comet</strong>. If you single-handedly defeat the next hostile
+      monster or group of monsters you encounter, you gain experience points
+      enough to gain one level. Otherwise, this card has no effect.</p>
+
+      <p><strong>Donjon</strong>. You disappear and become entombed in a state
+      of suspended animation in an extradimensional sphere. Everything you were
+      wearing and carrying stays behind in the space you occupied when you
+      disappeared. You remain imprisoned until you are found and removed from
+      the sphere. You can't be located by any divination magic, but a
+      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} can reveal the
+      location of your prison. You draw no more cards.</p>
+
+      <p><strong>Euryale</strong>. The card's medusa-like visage curses you. You
+      take a −2 penalty on saving throws while cursed in this way. Only a god or
+      the magic of <strong>The Fates</strong> card can end this curse.</p>
+
+      <p><strong>The Fates</strong>. Reality's fabric unravels and spins anew,
+      allowing you to avoid or erase one event as if it never happened. You can
+      use the card's magic as soon as you draw the card or at any other time
+      before you die.</p>
+
+      <p><strong>Flames</strong>. A powerful devil becomes your enemy. The devil
+      seeks your ruin and plagues your life, savoring your suffering before
+      attempting to slay you. This enmity lasts until either you or the devil
+      dies.</p>
+
+      <p><strong>Fool</strong>. You lose 10,000 XP, discard this card, and draw
+      from the deck again, counting both draws as one of your declared draws. If
+      losing that much XP would cause you to lose a level, you instead lose an
+      amount that leaves you with just enough XP to keep your level.</p>
+
+      <p><strong>Gem</strong>. Twenty-five pieces of jewelry worth 2,000 gp each
+      or fifty gems worth 1,000 gp each appear at your feet.</p>
+
+      <p><strong>Idiot</strong>. Permanently reduce your Intelligence by 1d4 + 1
+      (to a minimum score of 1). You can draw one additional card beyond your
+      declared draws.</p>
+
+      <p><strong>Jester</strong>. You gain 10,000 XP, or you can draw two
+      additional cards beyond your declared draws.</p>
+
+      <p><strong>Key</strong>. A rare or rarer magic weapon with which you are
+      proficient appears in your hands. The GM chooses the weapon.</p>
+
+      <p><strong>Knight</strong>. You gain the service of a 4th-level fighter
+      who appears in a space you choose within 30 feet of you. The fighter is of
+      the same race as you and serves you loyally until death, believing the
+      fates have drawn him or her to you. You control this character.</p>
+
+      <p><strong>Moon</strong>. You are granted the ability to cast the
+      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell 1d3
+      times.</p>
+
+      <p><strong>Rogue</strong>. A nonplayer character of the GM's choice
+      becomes hostile toward you. The identity of your new enemy isn't known
+      until the NPC or someone else reveals it. Nothing less than a
+      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell or divine
+      intervention can end the NPC's hostility toward you.</p>
+
+      <p><strong>Ruin</strong>. All forms of wealth that you carry or own, other
+      than magic items, are lost to you. Portable property vanishes. Businesses,
+      buildings, and land you own are lost in a way that alters reality the
+      least. Any documentation that proves you should own something lost to this
+      card also disappears.</p>
+
+      <p><strong>Skull</strong>. You summon an avatar of death - a ghostly
+      humanoid skeleton clad in a tattered black robe and carrying a spectral
+      scythe. It appears in a space of the GM's choice within 10 feet of you and
+      attacks you, warning all others that you must win the battle alone. The
+      avatar fights until you die or it drops to 0 hit points, whereupon it
+      disappears. If anyone tries to help you, the helper summons its own avatar
+      of death. A creature slain by an avatar of death can't be restored to
+      life.</p>
+
+      <h3 id="avatar-of-death"><strong>Avatar of Death</strong></h3>
+
+      <p><em>Medium undead, neutral evil</em></p>
+
+      <p><strong>Armor Class</strong> 20<br /><strong>Hit Points</strong> half
+      the hit point maximum of its summoner<br /><strong>Speed </strong>60 ft.,
+      fly 60 ft. (hover)</p>
+
+      <table>
+
+      <thead>
+
+      <tr>
+
+      <th>STR</th>
+
+      <th>DEX</th>
+
+      <th>CON</th>
+
+      <th>INT</th>
+
+      <th>WIS</th>
+
+      <th>CHA</th>
+
+      </tr>
+
+      </thead>
+
+      <tbody>
+
+      <tr>
+
+      <td>16 (+3)</td>
+
+      <td>16 (+3)</td>
+
+      <td>16 (+3)</td>
+
+      <td>16 (+3)</td>
+
+      <td>16 (+3)</td>
+
+      <td>16 (+3)</td>
+
+      </tr>
+
+      </tbody>
+
+      </table>
+
+      <p><strong>Damage Immunities</strong> necrotic, poison<br
+      /><strong>Condition Immunities</strong> charmed, frightened, paralyzed,
+      petrified, poisoned, unconscious<br /><strong>Senses</strong> darkvision
+      60 ft., truesight 60 ft., passive Perception 13<br /><strong>Languages
+      </strong>all languages known to its summoner<br /><strong>Challenge
+      </strong>-- (0 XP)</p>
+
+      <p><strong>Incorporeal Movement</strong>. The avatar can move through
+      other creatures and objects as if they were difficult terrain. It takes 5
+      (1d10) force damage if it ends its turn inside an object.<br
+      /><strong>Turning Immunity</strong>. The avatar is immune to features that
+      turn undead.</p>
+
+      <h4 id="actions">Actions</h4>
+
+      <p><strong>Reaping Scythe</strong>. The avatar sweeps its spectral scythe
+      through a creature within 5 feet of it, dealing 7 (1d8 + 3) slashing
+      damage plus 4 (1d8) necrotic damage.</p>
+
+      <p> </p>
+
+      <p><strong>Star</strong>. Increase one of your ability scores by 2. The
+      score can exceed 20 but can't exceed 24.</p>
+
+      <p><strong>Sun</strong>. You gain 50,000 XP, and a wondrous item (which
+      the GM determines randomly) appears in your hands.</p>
+
+      <p><strong>Talons</strong>. Every magic item you wear or carry
+      disintegrates. Artifacts in your possession aren't destroyed but do
+      vanish.</p>
+
+      <p><strong>Throne</strong>. You gain proficiency in the Persuasion skill,
+      and you double your proficiency bonus on checks made with that skill. In
+      addition, you gain rightful ownership of a small keep somewhere in the
+      world. However, the keep is currently in the hands of monsters, which you
+      must clear out before you can claim the keep as yours.</p>
+
+      <p><strong>Vizier</strong>. At any time you choose within one year of
+      drawing this card, you can ask a question in meditation and mentally
+      receive a truthful answer to that question. Besides information, the
+      answer helps you solve a puzzling problem or other dilemma. In other
+      words, the knowledge comes with wisdom on how to apply it.</p>
+
+      <p><strong>The Void</strong>. This black card spells disaster. Your soul
+      is drawn from your body and contained in an object in a place of the GM's
+      choice. One or more powerful beings guard the place. While your soul is
+      trapped in this way, your body is incapacitated. A
+      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish} spell can't
+      restore your soul, but the spell reveals the location of the object that
+      holds it. You draw no more cards.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 6120
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: '22'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: deck-of-many-things
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 11400000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037286639
+  modifiedTime: 1725992546385
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!oSarKEU8x1AupB6z'

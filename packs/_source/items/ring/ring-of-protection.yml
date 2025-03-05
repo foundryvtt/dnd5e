@@ -1,0 +1,115 @@
+_id: QtmVEreNIWEVOoLR
+name: Ring of Protection
+type: equipment
+img: icons/equipment/finger/ring-cabochon-silver-gold-red.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>You gain a +1 bonus to AC and saving throws while wearing this
+      ring.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 3500
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: ring
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: ring-of-protection
+effects:
+  - _id: q1wbe9ru251bfnhg
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '+1'
+        priority: null
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '+1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.items.QtmVEreNIWEVOoLR
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Protection
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: 1731017996752
+      lastModifiedBy: dnd5ebuilder0000
+    img: icons/equipment/finger/ring-cabochon-silver-gold-red.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!QtmVEreNIWEVOoLR.q1wbe9ru251bfnhg'
+folder: 5jrDZJ1U23Q9jDqB
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037185237
+  modifiedTime: 1725992512444
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!QtmVEreNIWEVOoLR'

@@ -1,0 +1,102 @@
+name: Feather Token
+img: icons/commodities/materials/feather-black-blue.webp
+description: >-
+  This tiny object looks like a feather. Different types of feather tokens
+  exist, each with a different single-use effect.
+results:
+  - type: pack
+    weight: 1
+    range:
+      - 1
+      - 20
+    drawn: false
+    documentCollection: dnd5e.items
+    _id: jsYDDFTOubEvuCtS
+    text: Feather Token Anchor
+    img: icons/commodities/materials/feather-blue.webp
+    documentId: DnlQkH6Bpwkd5n5Y
+    flags: {}
+    _key: '!tables.results!OEdr086W61t1DRJo.jsYDDFTOubEvuCtS'
+  - type: pack
+    weight: 1
+    range:
+      - 91
+      - 100
+    drawn: false
+    documentCollection: dnd5e.items
+    _id: yMjCpwgQ9iUdVbLU
+    text: Feather Token Whip
+    img: icons/commodities/materials/feather-colored-blue.webp
+    documentId: Fgkj11diTJJ7H3JC
+    flags: {}
+    _key: '!tables.results!OEdr086W61t1DRJo.yMjCpwgQ9iUdVbLU'
+  - type: pack
+    weight: 1
+    range:
+      - 21
+      - 35
+    drawn: false
+    documentCollection: dnd5e.items
+    _id: Vp4nAXa7C7DPlXgl
+    text: Feather Token Bird
+    img: icons/commodities/materials/feather-yellow.webp
+    documentId: hWqImieUaLo08l9l
+    flags: {}
+    _key: '!tables.results!OEdr086W61t1DRJo.Vp4nAXa7C7DPlXgl'
+  - type: pack
+    weight: 1
+    range:
+      - 36
+      - 50
+    drawn: false
+    documentCollection: dnd5e.items
+    _id: X8dN3QxCYSHZ0N4P
+    text: Feather Token Fan
+    img: icons/commodities/materials/feather-colored-red.webp
+    documentId: e98hfROZjztt7ccO
+    flags: {}
+    _key: '!tables.results!OEdr086W61t1DRJo.X8dN3QxCYSHZ0N4P'
+  - type: pack
+    weight: 1
+    range:
+      - 51
+      - 65
+    drawn: false
+    documentCollection: dnd5e.items
+    _id: o6r3K6XPZlTu0YS4
+    text: Feather Token Swan Boat
+    img: icons/commodities/materials/feather-blue-grey.webp
+    documentId: UgnUJhu0tW1tLt7g
+    flags: {}
+    _key: '!tables.results!OEdr086W61t1DRJo.o6r3K6XPZlTu0YS4'
+  - type: pack
+    weight: 1
+    range:
+      - 66
+      - 90
+    drawn: false
+    documentCollection: dnd5e.items
+    _id: s04A4UK1mru0AasT
+    text: Feather Token Tree
+    img: icons/commodities/materials/feather-colored-green.webp
+    documentId: NjTgPn2o0M1TGk93
+    flags: {}
+    _key: '!tables.results!OEdr086W61t1DRJo.s04A4UK1mru0AasT'
+formula: 1d100
+replacement: true
+displayRoll: true
+flags: {}
+_id: OEdr086W61t1DRJo
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037419128
+  modifiedTime: 1725037419128
+  lastModifiedBy: dnd5ebuilder0000
+sort: 0
+folder: null
+ownership:
+  default: 0
+_key: '!tables!OEdr086W61t1DRJo'

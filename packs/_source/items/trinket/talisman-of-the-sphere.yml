@@ -1,0 +1,130 @@
+_id: 46ikeR4RrSim6DsN
+name: Talisman of the Sphere
+type: consumable
+img: icons/commodities/treasure/broach-jeweled-pink.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>When you make an Intelligence (Arcana) check to control a Sphere of
+      Annihilation while you are holding this talisman, you double your
+      proficiency bonus on the check. In addition, when you start your turn with
+      control over a Sphere of Annihilation, you can use an action to levitate
+      it 10 feet plus a number of additional feet equal to 10 × your
+      Intelligence modifier.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 20000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: true
+        formula: 1d20 + @mod + @attributes.prof + @attributes.prof
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: check
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: object
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      check:
+        ability: int
+        dc: {}
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: talisman-of-the-sphere
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 1100000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037098121
+  modifiedTime: 1725992483211
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!46ikeR4RrSim6DsN'

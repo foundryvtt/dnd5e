@@ -1,0 +1,80 @@
+_id: BQw5lyopqLmf8B6u
+name: Chain Mail Armor of Resistance
+type: equipment
+img: icons/equipment/chest/breastplate-metal-scaled-grey.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>You have resistance to one type of damage while you wear this armor.
+      The GM chooses the type or determines it randomly from the
+      @UUID[Compendium.dnd5e.tables.RollTable.VRqG3F72ebgNHyVR]{Armor of
+      Resistance} table.
+
+      </p><p> </p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 55
+    units: lb
+  price:
+    value: 6075
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 16
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: 13
+  proficient: null
+  type:
+    value: heavy
+    baseItem: chainmail
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+    - stealthDisadvantage
+  activities: {}
+  attuned: false
+  identifier: chain-mail-armor-of-resistance
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037124072
+  modifiedTime: 1725992491841
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!BQw5lyopqLmf8B6u'

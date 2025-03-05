@@ -1,0 +1,75 @@
+_id: XXLznzi3rlanMhTM
+name: Crossbow Bolt +3
+type: consumable
+img: icons/weapons/ammunition/arrow-simple-grey.webp
+system:
+  description:
+    value: >-
+      <p>This ammunition is used for all varieties of crossbow and is typically
+      a short metal shaft with a narrow piercing tip. It has been imbued with
+      magic.</p>
+
+      <p>You have a bonus to attack and damage rolls made with this piece of
+      magic ammunition. Once it hits a target, the ammunition is no longer
+      magical.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.075
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: veryRare
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    replace: false
+  type:
+    value: ammo
+    subtype: crossbowBolt
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: 3
+  activities: {}
+  attuned: false
+  identifier: crossbow-bolt-3
+effects: []
+folder: NdDvXSjfqlghXpQZ
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037210402
+  modifiedTime: 1725992520853
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!XXLznzi3rlanMhTM'

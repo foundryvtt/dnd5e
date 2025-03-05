@@ -1,0 +1,115 @@
+_id: ORKf6RRcalrdD6Qp
+name: Belt of Frost Giant Strength
+type: equipment
+img: icons/equipment/waist/cloth-sash-purple.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While wearing this belt, your Strength score changes to 23. If your
+      Strength is already equal to or greater than the belt's score, the item
+      has no effect on you.</p>
+
+      <p>The Belt of Stone Giant Strength and the Belt of Frost Giant Strength
+      look different, but they have the same effect.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 8000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: belt-of-frost-giant-strength
+effects:
+  - origin: Compendium.dnd5e.items.ORKf6RRcalrdD6Qp
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: uTXTubfcSCEANSBh
+    changes:
+      - key: system.abilities.str.value
+        mode: 4
+        value: '23'
+        priority: null
+    tint: '#ffffff'
+    transfer: true
+    flags: {}
+    name: Belt of Frost Giant Strength
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/equipment/waist/cloth-sash-purple.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!ORKf6RRcalrdD6Qp.uTXTubfcSCEANSBh'
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037177048
+  modifiedTime: 1725992509592
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!ORKf6RRcalrdD6Qp'
