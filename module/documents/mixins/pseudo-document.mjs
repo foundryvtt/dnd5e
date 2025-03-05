@@ -265,10 +265,10 @@ export default function PseudoDocumentMixin(Base) {
      * @param {object} context
      * @param {Item5e} context.parent        A parent for the Activity.
      * @param {string[]|null} [context.types]  A list of types to restrict the choices to, or null for no restriction.
-     * @returns {Promise<Item5e|null>}
+     * @returns {Promise<PseudoDocument|null>}
      */
     static async createDialog(data={}, { parent, types=null, ...options }={}) {
-      types ??= Object.keys(this.documentConfig);
+      types ??= this._createDialogTypes(parent);
       if ( !types.length || !parent ) return null;
 
       const label = game.i18n.localize(`DOCUMENT.DND5E.${this.documentName}`);
@@ -278,15 +278,11 @@ export default function PseudoDocumentMixin(Base) {
       if ( !types.includes(type) ) type = types[0];
       const content = await renderTemplate("systems/dnd5e/templates/apps/document-create.hbs", {
         name, type,
-        types: types.reduce((arr, type) => {
-          const label = this.documentConfig[type]?.documentClass?.metadata?.title;
-          arr.push({
-            type,
-            label: game.i18n.has(label) ? game.i18n.localize(label) : type,
-            icon: this.documentConfig[type]?.documentClass?.metadata?.img
-          });
-          return arr;
-        }, []).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
+        types: types.map(t => {
+          const data = this._createDialogData(t, parent);
+          data.svg = data.icon?.endsWith(".svg");
+          return data;
+        }).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
       });
       return Dialog.prompt({
         title, content,
@@ -317,6 +313,36 @@ export default function PseudoDocumentMixin(Base) {
         rejectClose: false,
         options: { ...options, jQuery: false, width: 350, classes: ["dnd5e2", "create-document", "dialog"] }
       });
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Prepare the data needed for the creation dialog.
+     * @param {string} type  Specific type of the PseudoDocument to prepare.
+     * @param {Item5e} parent  Parent document within which this PseudoDocument will be created.
+     * @returns {{ type: string, label: string, icon: string, hint: [string], disabled: [boolean] }}
+     * @protected
+     */
+    static _createDialogData(type, parent) {
+      const label = this.documentConfig[type]?.documentClass?.metadata?.title;
+      return {
+        type,
+        label: game.i18n.has(label) ? game.i18n.localize(label) : type,
+        icon: this.documentConfig[type]?.documentClass?.metadata?.img
+      };
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Prepare default list of types if none are specified.
+     * @param {Item5e} parent  Parent document within which this PseudoDocument will be created.
+     * @returns {string[]}
+     * @protected
+     */
+    static _createDialogTypes(parent) {
+      return Object.keys(this.documentConfig);
     }
   }
   return PseudoDocument;
