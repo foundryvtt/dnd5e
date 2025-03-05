@@ -333,7 +333,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const level = this.system.attributes?.exhaustion ?? null;
     const imms = this.system.traits?.ci?.value ?? new Set();
     const applyExhaustion = (level !== null) && !imms.has("exhaustion")
-      && (game.settings.get("dnd5e", "rulesVersion") === "legacy");
+      && (game.settings.get("dnd5e", "rulesVersion") === "legacy")
+      && !game.settings.get("dnd5e", "disableExhaustion");
     const statuses = this.statuses;
     return props.some(k => {
       const l = Number(k.split("-").pop());
@@ -1068,7 +1069,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {object} data     Roll data.
    */
   addRollExhaustion(parts, data) {
-    if ( (game.settings.get("dnd5e", "rulesVersion") !== "modern") || !this.system.attributes?.exhaustion ) return;
+    if ( (game.settings.get("dnd5e", "rulesVersion") !== "modern")
+      || !this.system.attributes?.exhaustion
+      || game.settings.get("dnd5e", "disableExhaustion") ) return;
     const amount = this.system.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.rolls ?? 0);
     if ( amount ) {
       parts.push("@exhaustion");
