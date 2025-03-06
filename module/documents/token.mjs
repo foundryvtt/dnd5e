@@ -59,6 +59,16 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /* -------------------------------------------- */
 
   /**
+   * Get the current Movement Action
+   * @returns {string}
+   */
+  getMovementAction() {
+    return this.actor?.system.attributes.movement.current ?? "walk";
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get an Array of attribute choices which are suitable for being consumed by an item usage.
    * @param {object} data  The actor data.
    * @returns {string[]}

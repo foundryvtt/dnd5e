@@ -76,6 +76,10 @@ Hooks.once("init", function() {
   CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
+  if ( game.release.generation > 12 ) {
+    CONFIG.Token.movement.actions =
+      Object.fromEntries(Object.entries(CONFIG.DND5E.movementTypes).map(([k, v]) => ([k, {label: v}])));
+  }
   CONFIG.User.documentClass = documents.User5e;
   CONFIG.time.roundTime = 6;
   Roll.TOOLTIP_TEMPLATE = "systems/dnd5e/templates/chat/roll-breakdown.hbs";
