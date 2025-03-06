@@ -1418,6 +1418,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Add additional system-specific compendium context menu options for Item documents.
+   * TODO: Remove when v12 support is dropped (handled in ItemCompendium5eV13).
    * @param {jQuery} html            The compendium HTML.
    * @param {object{}} entryOptions  The default array of context menu options.
    */
@@ -1446,7 +1447,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Add additional system-specific sidebar directory context menu options for Item documents.
-   * @param {jQuery} html            The sidebar HTML.
+   * @param {jQuery | HTMLElement} html            The sidebar HTML.
    * @param {object[]} entryOptions  The default array of context menu options.
    */
   static addDirectoryContextOptions(html, entryOptions) {
@@ -1454,12 +1455,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       name: "DND5E.Scroll.CreateScroll",
       icon: '<i class="fa-solid fa-scroll"></i>',
       callback: async li => {
-        const spell = game.items.get(li.data("documentId"));
+        li = li instanceof HTMLElement ? li : li[0];
+        const spell = game.items.get(li.dataset.documentId ?? li.dataset.entryId);
         const scroll = await Item5e.createScrollFromSpell(spell);
         if ( scroll ) Item5e.create(scroll);
       },
       condition: li => {
-        const item = game.items.get(li.data("documentId"));
+        li = li instanceof HTMLElement ? li : li[0];
+        const item = game.items.get(li.dataset.documentId ?? li.dataset.entryId);
         return (item.type === "spell") && game.user.hasPermission("ITEM_CREATE");
       },
       group: "system"

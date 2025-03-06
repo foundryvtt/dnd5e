@@ -89,6 +89,33 @@ class ItemCompendium5eV13 extends DragDropApplicationMixin(foundry.applications.
     const mode = item.sheet?._mode ?? (this.collection.locked ? ItemSheet5e2.MODES.PLAY : ItemSheet5e2.MODES.EDIT);
     item.sheet.render(true, { mode });
   }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _getEntryContextOptions() {
+    const entryOptions = super._getEntryContextOptions();
+    const makeUuid = li => {
+      li = li instanceof HTMLElement ? li : li[0];
+      const pack = this.collection.metadata.id;
+      return `Compendium.${pack}.Item.${li.dataset.documentId ?? li.dataset.entryId}`;
+    };
+    entryOptions.push({
+      name: "DND5E.Scroll.CreateScroll",
+      icon: '<i class="fa-solid fa-scroll"></i>',
+      callback: async li => {
+        const spell = await fromUuid(makeUuid(li));
+        const scroll = await Item5e.createScrollFromSpell(spell);
+        if ( scroll ) Item5e.create(scroll);
+      },
+      condition: li => {
+        const item = fromUuidSync(makeUuid(li));
+        return (item?.type === "spell") && game.user.hasPermission("ITEM_CREATE");
+      },
+      group: "system"
+    });
+    return entryOptions;
+  }
 }
 
 /**

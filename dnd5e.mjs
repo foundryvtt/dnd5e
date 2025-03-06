@@ -556,14 +556,26 @@ Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners
 Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(message));
 
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
+
+// V13 context menu additions
+Hooks.on("getEntryContextDocumentDirectory", (app, entryOptions) => {
+  if ( app instanceof Compendium ) return;
+  if ( app.documentName === "Actor" ) {
+    documents.Actor5e.addDirectoryContextOptions(app, entryOptions);
+  } else if ( app.documentName === "Item" ) {
+    documents.Item5e.addDirectoryContextOptions(app, entryOptions);
+  }
+});
+
+// V12 context menu additions
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
+Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
+Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
 
 Hooks.on("renderCompendiumDirectory", (app, html) => {
   html = html instanceof HTMLElement ? html : html[0];
   applications.CompendiumBrowser.injectSidebarButton(html);
 });
-Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
-Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
 
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
 
