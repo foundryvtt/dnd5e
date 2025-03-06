@@ -10,7 +10,7 @@ export default class CurrencyManager extends Application5e {
     if ( options instanceof foundry.abstract.Document ) {
       foundry.utils.logCompatibilityWarning(
         "The `CurrencyManager` document should now be passed within the options object as `document`.",
-        { since: "DnD5e 4.3", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.3", until: "DnD5e 5.0" }
       );
       _options.document = options;
       options = _options;
