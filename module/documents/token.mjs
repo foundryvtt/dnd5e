@@ -63,7 +63,15 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @returns {string}
    */
   getMovementAction() {
-    return this.actor?.system.attributes.movement.current ?? "walk";
+    const movement = this.actor?.system.attributes.movement;
+    if ( !movement ) return "walk";
+    if ( movement.current?.length ) return movement.current;
+    const highestMovement = Object.keys(CONFIG.DND5E.movementTypes).reduce((obj, key) => {
+      const value = movement[key];
+      if ( value > obj.value ) Object.assign(obj, { value, key });
+      return obj;
+    }, { value: 0, key: "walk" });
+    return highestMovement.key;
   }
 
   /* -------------------------------------------- */
