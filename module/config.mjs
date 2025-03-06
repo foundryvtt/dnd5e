@@ -1497,7 +1497,7 @@ DND5E.limitedUsePeriods = {
     label: "DND5E.USES.Recovery.Period.Day.Label",
     abbreviation: "DND5E.USES.Recovery.Period.Day.Label"
   },
-  // TODO: Remove with DnD5e 4.5
+  // TODO: Remove with DnD5e 5.0
   charges: {
     label: "DND5E.UsesPeriods.Charges",
     abbreviation: "DND5E.UsesPeriods.ChargesAbbreviation",
