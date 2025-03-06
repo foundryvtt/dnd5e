@@ -97,7 +97,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     if ( "dnd5e.preRollFormula" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.preRollFormula` hook has been deprecated and replaced with `dnd5e.preRollFormulaV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
       );
       const hookData = {
         formula: rollConfig.rolls[0].parts[0], data: rollConfig.rolls[0].data, chatMessage: messageConfig.create
@@ -124,7 +124,7 @@ export default class UtilityActivity extends ActivityMixin(UtilityActivityData) 
     if ( "dnd5e.rollFormula" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.rollFormula` hook has been deprecated and replaced with `dnd5e.rollFormulaV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
       );
       Hooks.callAll("dnd5e.rollFormula", this.item, rolls[0]);
     }

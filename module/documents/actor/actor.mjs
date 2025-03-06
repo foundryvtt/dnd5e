@@ -918,7 +918,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( activity instanceof Item ) {
       foundry.utils.logCompatibilityWarning(
         "The `beginConcentrating` method on Actor5e now takes an Activity, rather than an Item.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
       );
       activity = activity.system.activities?.contents[0];
       if ( !activity ) return;
@@ -1154,7 +1154,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( foundry.utils.getType(config) !== "Object" ) {
       foundry.utils.logCompatibilityWarning(
         `The \`roll${name}\` method on Actor5e now takes roll, dialog, and message config objects as parameters.`,
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.1", until: "DnD5e 5.0" }
       );
       oldFormat = true;
       const oldConfig = dialog;
@@ -1222,7 +1222,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( `dnd5e.preRoll${name}` in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         `The \`dnd5e.preRoll${name}\` hook has been deprecated and replaced with \`dnd5e.preRoll${type.capitalize()}V2\`.`,
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.1", until: "DnD5e 5.0" }
       );
       const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
       if ( Hooks.call(`dnd5e.preRoll${name}`, this, oldConfig, config.skill) === false ) return null;
@@ -1248,7 +1248,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( `dnd5e.roll${name}` in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         `The \`dnd5e.roll${name}\` hook has been deprecated and replaced with \`dnd5e.roll${type.capitalize()}V2\`.`,
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.1", until: "DnD5e 5.0" }
       );
       Hooks.callAll(`dnd5e.roll${name}`, this, rolls[0], config.skill);
     }
@@ -1306,7 +1306,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( foundry.utils.getType(config) === "Object" ) abilityId = config.ability;
     else foundry.utils.logCompatibilityWarning(
       "The `rollAbility` method on Actor5e now takes roll, dialog, and message config objects as parameters.",
-      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      { since: "DnD5e 4.1", until: "DnD5e 5.0" }
     );
     const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
     new Dialog({
@@ -1357,7 +1357,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async rollAbilityTest(config={}, dialog={}, message={}) {
     foundry.utils.logCompatibilityWarning(
       "The `rollAbilityTest` method on Actor5e has been renamed `rollAbilityCheck`.",
-      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      { since: "DnD5e 4.1", until: "DnD5e 5.0" }
     );
     return this.rollAbilityCheck(config, dialog, message);
   }
@@ -1394,7 +1394,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async rollAbilitySave(config={}, dialog={}, message={}) {
     foundry.utils.logCompatibilityWarning(
       "The `rollAbilitySave` method on Actor5e has been renamed `rollSavingThrow`.",
-      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      { since: "DnD5e 4.1", until: "DnD5e 5.0" }
     );
     return this.rollSavingThrow(config, dialog, message);
   }
@@ -1423,7 +1423,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config && (foundry.utils.getType(config) !== "Object") ) {
       foundry.utils.logCompatibilityWarning(
         `The \`roll${oldName}\` method on Actor5e now takes roll, dialog, and message config objects as parameters.`,
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.1", until: "DnD5e 5.0" }
       );
       oldFormat = true;
       const oldConfig = dialog;
@@ -1479,7 +1479,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "dnd5e.preRollAbilityTest" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         `The \`dnd5e.preRoll${oldName}\` hook has been deprecated and replaced with \`dnd5e.preRoll${name}V2\`.`,
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.1", until: "DnD5e 5.0" }
       );
       const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
       if ( Hooks.call(`dnd5e.preRoll${oldName}`, this, oldConfig, config.ability) === false ) return null;
@@ -1504,7 +1504,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( `dnd5e.roll${name}` in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         `The \`dnd5e.roll${oldName}\` hook has been deprecated and replaced with \`dnd5e.roll${name}\`.`,
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.1", until: "DnD5e 5.0" }
       );
       Hooks.callAll(`dnd5e.roll${oldName}`, this, rolls[0], config.ability);
     }
@@ -1531,7 +1531,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       foundry.utils.logCompatibilityWarning(
         "The `rollDeathSave` method on Actor5e now takes roll, dialog, and message config objects as parameters. "
         + "Pass the `legacy: false` option to config object to suppress this warning once updates have been made.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.1", until: "DnD5e 5.0" }
       );
       oldFormat = true;
       const oldConfig = config;
@@ -1587,7 +1587,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "dnd5e.preRollDeathSave" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.preRollDeathSave` hook has been deprecated and replaced with `dnd5e.preRollDeathSaveV2`.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.1", until: "DnD5e 5.0" }
       );
       const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
       if ( Hooks.call("dnd5e.preRollDeathSave", this, oldConfig) === false ) return null;
@@ -1656,7 +1656,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "dnd5e.rollDeathSave" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.rollDeathSave` hook has been deprecated and replaced with `dnd5e.rollDeathSaveV2`.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.1", until: "DnD5e 5.0" }
       );
       if ( Hooks.call("dnd5e.rollDeathSave", this, rolls[0], details) === false ) return returnValue;
     }
@@ -1708,7 +1708,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       foundry.utils.logCompatibilityWarning(
         "The `rollConcentration` method on Actor5e now takes roll, dialog, and message config objects as parameters."
         + "Pass the `legacy: false` option to config object to suppress this warning once updates have been made.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.1", until: "DnD5e 5.0" }
       );
       oldFormat = true;
       const oldConfig = config;
@@ -1759,7 +1759,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "dnd5e.preRollConcentration" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.preRollConcentration` hook has been deprecated and replaced with `dnd5e.preRollConcentrationV2`.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.1", until: "DnD5e 5.0" }
       );
       const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
       if ( Hooks.call("dnd5e.preRollConcentration", this, oldConfig) === false ) return null;
@@ -1782,7 +1782,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "dnd5e.rollConcentration" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.rollConcentration` hook has been deprecated and replaced with `dnd5e.rollConcentrationV2`.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.1", until: "DnD5e 5.0" }
       );
       Hooks.callAll("dnd5e.rollConcentration", this, rolls[0]);
     }
@@ -1976,7 +1976,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( config && (foundry.utils.getType(config) !== "Object") ) {
       foundry.utils.logCompatibilityWarning(
         "Actor5e.rollHitDie now takes roll, dialog, and message config objects as parameters.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
       );
       oldFormat = true;
       formula = dialog.formula;
@@ -2043,7 +2043,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "dnd5e.preRollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.preRollHitDie` hook has been deprecated and replaced with `dnd5e.preRollHitDieV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
       );
       const hookData = {
         formula: rollConfig.rolls[0].parts[0], data: rollConfig.rolls[0].data,
@@ -2088,7 +2088,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "dnd5e.rollHitDie" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.rollHitDie` hook has been deprecated and replaced with `dnd5e.rollHitDieV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
       );
       if ( Hooks.call("dnd5e.rollHitDie", this, rolls[0], updates) === false ) return null;
     }
