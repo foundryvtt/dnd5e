@@ -252,7 +252,7 @@ export default class UsesField extends SchemaField {
     if ( "dnd5e.preRollRecharge" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.preRollRecharge` hook has been deprecated and replaced with `dnd5e.preRollRechargeV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
       );
       const hookData = {
         formula: rollConfig.rolls[0].parts[0], data: rollConfig.rolls[0].data,
@@ -296,7 +296,7 @@ export default class UsesField extends SchemaField {
     if ( "dnd5e.rollRecharge" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.rollRecharge` hook has been deprecated and replaced with `dnd5e.rollRechargeV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
       );
       if ( Hooks.call("dnd5e.rollRecharge", this, rolls[0]) === false ) return rolls;
     }
