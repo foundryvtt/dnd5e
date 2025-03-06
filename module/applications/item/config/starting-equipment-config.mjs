@@ -1,6 +1,6 @@
-import PhysicalItemTemplate from "../../data/item/templates/physical-item.mjs";
-import { EquipmentEntryData } from "../../data/item/templates/starting-equipment.mjs";
-import DocumentSheet5e from "../api/document-sheet.mjs";
+import PhysicalItemTemplate from "../../../data/item/templates/physical-item.mjs";
+import { EquipmentEntryData } from "../../../data/item/templates/starting-equipment.mjs";
+import DocumentSheet5e from "../../api/document-sheet.mjs";
 
 /**
  * Configuration application for Starting Equipment.

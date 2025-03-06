@@ -8,7 +8,7 @@ import EffectsElement from "../components/effects.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import SourceConfig from "../source-config.mjs";
-import StartingEquipmentConfig from "./starting-equipment-config.mjs";
+import StartingEquipmentConfig from "./config/starting-equipment-config.mjs";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
