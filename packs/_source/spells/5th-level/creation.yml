@@ -1,0 +1,106 @@
+_id: lnaGnxMzpYnbw1uU
+name: Creation
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: "<p>You pull wisps of shadow material from the Shadowfell to create a nonliving object of vegetable matter within 'range': soft goods, rope, wood, or something similar. You can also use this spell to create mineral objects such as stone, crystal, or metal. The object created must be no larger than a 5-foot cube, and the object must be of a form and material that you have seen before.</p><p>The duration depends on the object's material. If the object is composed of multiple materials, use the shortest duration.</p>\n<ul>\n<li>Vegetable matter\_- 1 day</li>\n<li>Stone or crystal\_- 12 hours</li>\n<li>Precious metals\_- 1 hour</li>\n<li>Gems\_- 10 minutes</li>\n<li>Adamantine or mithral\_- 1 minute</li>\n</ul>\n<p>Using any material created by this spell as another spell's material component causes that spell to fail.</p><p><strong>Higher Levels.</strong>\_When you cast this spell using a spell slot of 6th level or higher, the cube increases by 5 feet for each slot level above 5th.</p>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: spec
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: cube
+      size: '5'
+      contiguous: false
+  range:
+    value: '30'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 5
+  school: ill
+  materials:
+    value: A tiny piece of matter of the same type of the item you plan to create.
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: creation
+sort: 0
+flags: {}
+img: icons/magic/nature/vines-thorned-entwined-glow-teal-purple.webp
+effects: []
+folder: bG9QTayc46rfNkv2
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037364252
+  modifiedTime: 1725992722460
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!lnaGnxMzpYnbw1uU'

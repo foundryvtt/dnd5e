@@ -1,0 +1,86 @@
+_id: 7vqs5AqI4VCmuszx
+name: Handy Haversack
+type: container
+img: icons/containers/bags/pack-leather-tan.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This backpack has a central pouch and two side pouches, each of which
+      is an extradimensional space. Each side pouch can hold up to 20 pounds of
+      material, not exceeding a volume of 2 cubic feet. The large central pouch
+      can hold up to 8 cubic feet or 80 pounds of material. The backpack always
+      weighs 5 pounds, regardless of its contents.</p>
+
+      <p>Placing an object in the haversack follows the normal rules for
+      interacting with objects. Retrieving an item from the haversack requires
+      you to use an action. When you reach into the haversack for a specific
+      item, the item is always magically on top.</p>
+
+      <p>The haversack has a few limitations. If it is overloaded, or if a sharp
+      object pierces it or tears it, the haversack ruptures and is destroyed. If
+      the haversack is destroyed, its contents are lost forever, although an
+      artifact always turns up again somewhere. If the haversack is turned
+      inside out, its contents spill forth, unharmed, and the haversack must be
+      put right before it can be used again. If a breathing creature is placed
+      within the haversack, the creature can survive for up to 10 minutes, after
+      which time it begins to suffocate.</p>
+
+      <p>Placing the haversack inside an extradimensional space created by a bag
+      of holding, portable hole, or similar item instantly destroys both items
+      and opens a gate to the Astral Plane. The gate originates where the one
+      item was placed inside the other. Any creature within 10 feet of the gate
+      is sucked through it and deposited in a random location on the Astral
+      Plane. The gate then closes. The gate is one-way only and can't be
+      reopened.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  capacity:
+    type: weight
+    value: 120
+  currency:
+    cp: 0
+    sp: 0
+    ep: 0
+    gp: 0
+    pp: 0
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+    - weightlessContents
+  attuned: false
+  identifier: handy-haversack
+effects: []
+folder: PgtyWdfkDTDbc0ov
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037110111
+  modifiedTime: 1725992487221
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!7vqs5AqI4VCmuszx'

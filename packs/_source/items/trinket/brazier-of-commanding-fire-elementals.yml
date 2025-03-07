@@ -1,0 +1,139 @@
+_id: OcjcplcUWH07Kn9k
+name: Brazier of Commanding Fire Elementals
+type: consumable
+img: icons/tools/laboratory/bowl-liquid-orange.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>While a fire burns in this brazier, you can use an action to speak the
+      brazier's command word and summon a
+      @UUID[Compendium.dnd5e.monsters.Actor.8SMQl75HLjhuSeau]{Fire Elemental},
+      as if you had cast the
+      <em>@UUID[Compendium.dnd5e.spells.Item.1LkZvINag7KqBmDR]{Conjure
+      Elemental}</em> spell. The brazier can't be used this way again until the
+      next dawn.</p>
+
+      <p>The brazier weighs 5 pounds.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 8000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: Command word.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '90'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: square
+          size: '10'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: brazier-of-commanding-fire-elementals
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 4500000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037177644
+  modifiedTime: 1725992509809
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!OcjcplcUWH07Kn9k'

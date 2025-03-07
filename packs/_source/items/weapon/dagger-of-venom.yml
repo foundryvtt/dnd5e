@@ -1,0 +1,306 @@
+_id: 7i4s9msZWpAw4Ynv
+name: Dagger of Venom
+type: weapon
+img: icons/weapons/daggers/dagger-double-skull-pink.webp
+system:
+  description:
+    value: >-
+      <p>You gain a +1 bonus to attack and damage rolls made with this magic
+      weapon.</p>
+
+      <p>You can use an action to cause thick, black poison to coat the blade.
+      The poison remains for 1 minute or until an attack using this weapon hits
+      a creature. That creature must succeed on a DC 15 Constitution saving
+      throw or take 2d10 poison damage and become poisoned for 1 minute. The
+      dagger can't be used this way again until the next dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 2500
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  range:
+    value: 20
+    long: 60
+    units: ft
+    reach: null
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 4
+      bonus: ''
+      types:
+        - piercing
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - fin
+    - lgt
+    - mgc
+    - thr
+  proficient: null
+  type:
+    value: simpleM
+    baseItem: dagger
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: 1
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '20'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '20'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '10'
+            bonus: ''
+            types:
+              - poison
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+    dnd5eactivity300:
+      _id: dnd5eactivity300
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '20'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Poison Blade
+      img: ''
+      appliedEffects: []
+  attuned: false
+  ammunition: {}
+  mastery: ''
+  identifier: dagger-of-venom
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.3.0
+  createdTime: 1725037109200
+  modifiedTime: 1738528652910
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!7i4s9msZWpAw4Ynv'

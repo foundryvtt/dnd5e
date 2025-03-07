@@ -1,0 +1,145 @@
+_id: Mj8fTo5VZKJJ7uMv
+name: Sling Bullet of Slaying
+type: consumable
+img: icons/weapons/ammunition/bullet-ice-blue.webp
+system:
+  description:
+    value: >-
+      <p>A Bullet of Slaying is a magic weapon meant to slay a particular kind
+      of creature. Some are more focused than others; for example, there are
+      both Bullets of Dragon Slaying and Bullets of Blue Dragon Slaying. If a
+      creature belonging to the type, race, or group associated with a Bullet of
+      Slaying takes damage from the bullet, the creature must make a DC 17
+      Constitution saving throw, taking an extra 6d10 bludgeoning damage on a
+      failed save, or half as much extra damage on a successful one.</p>
+
+      <p>Once a Bullet of Slaying deals its extra damage to a creature, it
+      becomes a nonmagical bullet.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.075
+    units: lb
+  price:
+    value: 600
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: veryRare
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+    replace: false
+  type:
+    value: ammo
+    subtype: slingBullet
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 6
+            denomination: '10'
+            bonus: ''
+            types:
+              - piercing
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '17'
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: sling-bullet-of-slaying
+effects: []
+folder: NdDvXSjfqlghXpQZ
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037171579
+  modifiedTime: 1725992507771
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!Mj8fTo5VZKJJ7uMv'

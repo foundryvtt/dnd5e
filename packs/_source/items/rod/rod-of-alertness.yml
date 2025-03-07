@@ -1,0 +1,328 @@
+_id: Do3qeSHtBjUsmfvz
+name: Rod of Alertness
+type: equipment
+img: icons/weapons/staves/staff-ornate-wood-red.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>This rod has a flanged head and the following properties.</p>
+
+      <p><strong>Alertness</strong>. While holding the rod, you have advantage
+      on Wisdom (Perception) checks and on rolls for initiative.</p>
+
+      <p><strong>Spells</strong>. While holding the rod, you can use an action
+      to cast one of the following spells from it:
+      @UUID[Compendium.dnd5e.spells.Item.Mzh95utKDPIrjiH8]{Detect Evil and
+      Good}, @UUID[Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8]{Detect Magic},
+      @UUID[Compendium.dnd5e.spells.Item.2skfDtglk1mGrb3l]{Detect Poison and
+      Disease}, or @UUID[Compendium.dnd5e.spells.Item.DQzlB5Y3k791W5bH]{See
+      Invisibility}.</p>
+
+      <p><strong>Protective Aura</strong>. As an action, you can plant the haft
+      end of the rod in the ground, whereupon the rod's head sheds bright light
+      in a 60-foot radius and dim light for an additional 60 feet. While in that
+      bright light, you and any creature that is friendly to you gain a +1 bonus
+      to AC and saving throws and can sense the location of any invisible
+      hostile creature that is also in the bright light.</p>
+
+      <p>The rod's head stops glowing and the effect ends after 10 minutes, or
+      when a creature uses an action to pull the rod from the ground.. This
+      property can't be used again until the next dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 25000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  uses:
+    max: '1'
+    recovery:
+      - period: dawn
+        type: recoverAll
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: rod
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - foc
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: Rod must be planted in the ground.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '10'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      name: Protective Aura
+      img: ''
+      appliedEffects: []
+    oA9zbvC3W4wWhyp8:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.Mzh95utKDPIrjiH8
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: oA9zbvC3W4wWhyp8
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    IHSMR3HySfUImEHj:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: IHSMR3HySfUImEHj
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    5IazOhC4axC53B6B:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.2skfDtglk1mGrb3l
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 5IazOhC4axC53B6B
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    fJkRusyWDVH98JZF:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.DQzlB5Y3k791W5bH
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: fJkRusyWDVH98JZF
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+  attuned: false
+  identifier: rod-of-alertness
+effects: []
+folder: 609zLs23BLj5hyYp
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037134551
+  modifiedTime: 1730323612662
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!Do3qeSHtBjUsmfvz'

@@ -1,0 +1,243 @@
+_id: F3rQcaZvElNEiudk
+name: Giant Slayer Handaxe
+type: weapon
+img: icons/weapons/axes/axe-simple-jagged.webp
+system:
+  description:
+    value: >-
+      <p>You gain a +1 bonus to attack and damage rolls made with this magic
+      weapon.</p>
+
+      <p>When you hit a giant with it, the giant takes an extra 2d6 damage of
+      the weapon's type and must succeed on a DC 15 Strength saving throw or
+      fall prone. For the purpose of this weapon, "giant" refers to any creature
+      with the giant type, including ettins and trolls.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 7000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  range:
+    value: 20
+    long: 60
+    units: ft
+    reach: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 6
+      bonus: ''
+      types:
+        - slashing
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - lgt
+    - mgc
+    - thr
+  proficient: null
+  type:
+    value: simpleM
+    baseItem: handaxe
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: 1
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '20'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    LUhQwym7xlIj3uSJ:
+      type: save
+      activation:
+        type: ''
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: Giant
+        prompt: true
+        override: false
+      damage:
+        onSave: full
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: '6'
+            bonus: ''
+            types:
+              - slashing
+      save:
+        ability:
+          - str
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      _id: LUhQwym7xlIj3uSJ
+      img: ''
+      appliedEffects: []
+  attuned: false
+  ammunition: {}
+  identifier: giant-slayer-handaxe
+  mastery: ''
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.3.0
+  createdTime: 1725037140050
+  modifiedTime: 1738529139594
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!F3rQcaZvElNEiudk'

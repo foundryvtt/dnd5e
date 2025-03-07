@@ -1,0 +1,137 @@
+_id: vZdLYfHlLcZqQ8zc
+name: Chime of Opening
+type: consumable
+img: icons/commodities/tech/pipe-cylinder.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This hollow metal tube measures about 1 foot long and weighs 1 pound.
+      You can strike it as an action, pointing it at an object within 120 feet
+      of you that can be opened, such as a door, lid, or lock. The chime issues
+      a clear tone, and one lock or latch on the object opens unless the sound
+      can't reach the object. If no locks or latches remain, the object itself
+      opens.</p>
+
+      <p>The chime can be used ten times. After the tenth time, it cracks and
+      becomes useless.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 1500
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '10'
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: The sound must reach the target.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '120'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: chime-of-opening
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 10500000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037315479
+  modifiedTime: 1725992556217
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!vZdLYfHlLcZqQ8zc'

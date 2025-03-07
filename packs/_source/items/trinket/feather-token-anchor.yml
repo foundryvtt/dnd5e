@@ -1,0 +1,137 @@
+_id: DnlQkH6Bpwkd5n5Y
+name: Feather Token Anchor
+type: consumable
+img: icons/commodities/materials/feather-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This tiny object looks like a feather. Different types of feather
+      tokens exist, each with a different single-use effect. The GM chooses the
+      kind of token or determines it randomly from the
+      @UUID[Compendium.dnd5e.tables.RollTable.OEdr086W61t1DRJo]{Feather Token}
+      table.</p>
+
+      <p><strong>Anchor.</strong> You can use an action to touch the token to a
+      boat or ship. For the next 24 hours, the vessel can't be moved by any
+      means. Touching the token to the vessel again ends the effect. When the
+      effect ends, the token disappears.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 50
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '24'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: touch
+        affects:
+          count: ''
+          type: object
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: feather-token-anchor
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 2800000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037134233
+  modifiedTime: 1725992495226
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!DnlQkH6Bpwkd5n5Y'

@@ -1,0 +1,266 @@
+_id: LEC1wkaAUnWzDPDD
+name: Javelin of Lightning
+type: weapon
+img: icons/weapons/polearms/spear-barbed-silver.webp
+system:
+  description:
+    value: >-
+      <p>This javelin is a magic weapon. When you hurl it and speak its command
+      word, it transforms into a bolt of lightning, forming a line 5 feet wide
+      that extends out from you to a target within 120 feet. Each creature in
+      the line excluding you and the target must make a DC 13 Dexterity saving
+      throw, taking 4d6 lightning damage on a failed save, and half as much
+      damage on a successful one. The lightning bolt turns back into a javelin
+      when it reaches the target. Make a ranged weapon attack against the
+      target. On a hit, the target takes damage from the javelin plus 4d6
+      lightning damage.</p>
+
+      <p>The javelin's property can't be used again until the next dawn. In the
+      meantime, the javelin can still be used as a magic weapon.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 1500
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  range:
+    value: 120
+    long: null
+    units: ft
+    reach: null
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 6
+      bonus: ''
+      types:
+        - piercing
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - mgc
+    - thr
+  proficient: null
+  type:
+    value: simpleM
+    baseItem: javelin
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: Command word.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '120'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: line
+          size: '120'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: '6'
+            bonus: ''
+            types:
+              - lightning
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: Command word.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '120'
+        units: self
+        special: ''
+        override: true
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: line
+          size: '120'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 4
+            denomination: '6'
+            bonus: ''
+            types:
+              - lightning
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '13'
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+  attuned: false
+  ammunition: {}
+  identifier: javelin-of-lightning
+  mastery: ''
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.3.0
+  createdTime: 1725037166137
+  modifiedTime: 1738529748986
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!LEC1wkaAUnWzDPDD'

@@ -1,0 +1,469 @@
+_id: wqVSRfkcTjuhvDyx
+name: Necklace of Prayer Beads
+type: equipment
+img: icons/equipment/neck/necklace-runed-white-red.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement by a cleric, druid, or
+      paladin)</em></p><p>This necklace has 1d4 + 2 magic beads made from
+      aquamarine, black pearl, or topaz. It also has many nonmagical beads made
+      from stones such as amber, bloodstone, citrine, coral, jade, pearl, or
+      quartz. If a magic bead is removed from the necklace, that bead loses its
+      magic.</p><p>Six types of magic beads exist. The GM decides the type of
+      each bead on the necklace or determines it randomly. A necklace can have
+      more than one bead of the same type. To use one, you must be wearing the
+      necklace. Each bead contains a spell that you can cast from it as a bonus
+      action (using your spell save DC if a save is necessary). Once a magic
+      bead's spell is cast, that bead can't be used again until the next
+      dawn.</p><p>Use the
+      @UUID[Compendium.dnd5e.tables.RollTable.XHTUTUXdyzcPbodw]{Necklace of
+      Prayer Beads} table and refer to the table below for detailed descriptions
+      on each
+      bead</p><table><thead><tr><th><strong>d20</strong></th><th><strong>Bead
+      of…</strong></th><th><strong>Spell</strong></th><th><strong>Guide Price
+      per Bead
+      (gp)</strong></th></tr></thead><tbody><tr><td>1-6</td><td>Blessing</td><td>@UUID[Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr]{Bless}</td><td>2,000</td></tr><tr><td>7-12</td><td>Curing</td><td>@UUID[Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP]{Cure
+      Wounds} (2nd level) or
+      @UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser
+      Restoration}</td><td>4,000</td></tr><tr><td>13-16</td><td>Favor</td><td>@UUID[Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk]{Greater
+      Restoration}</td><td>32,000</td></tr><tr><td>17-18</td><td>Smiting</td><td>@UUID[Compendium.dnd5e.spells.Item.7UwUjJ6owIQkEPrs]{Branding
+      Smite}</td><td>1,500</td></tr><tr><td>19</td><td>Summons</td><td>@UUID[Compendium.dnd5e.spells.Item.fkREcytuZ8sngWtC]{Planar
+      Ally}</td><td>128,000</td></tr><tr><td>20</td><td>Wind
+      Walking</td><td>@UUID[Compendium.dnd5e.spells.Item.8PJAsHmbu6UgDHC0]{Wind
+      Walk}</td><td>96,000</td></tr></tbody></table><section class="secret
+      foundry-note" id="secret-7DOXr3q6fDOOCepZ"><p><strong>Foundry
+      Note</strong></p><p>Each activity uses correspond to the number of beads
+      of that type available, and should be adjusted to match the proper values.
+      The item's uses as a whole track the number of Beads of
+      Curing.</p><p>Additionally, the guide price is a guide only and should be
+      adjusted accordingly to reflect the Dungeon Master's world.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.01
+    units: lb
+  price:
+    value: 0
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: '1'
+    recovery:
+      - period: dawn
+        type: recoverAll
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    JEZSgGmMUnJjLZnY:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: JEZSgGmMUnJjLZnY
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Bead of Blessing (bless)
+      img: ''
+    N52T1PHwMzYlRrd9:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: N52T1PHwMzYlRrd9
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Bead of Curing (cure wounds)
+      img: ''
+    elE3WRvgeS74pI8C:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: elE3WRvgeS74pI8C
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: Bead of Curing (lesser restoration)
+      img: ''
+    Cgqj8eZR8ZiKtnsS:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.WzvJ7G3cqvIubsLk
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: Cgqj8eZR8ZiKtnsS
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: ''
+      name: Bead of Favor (greater restoration)
+      img: ''
+    PQtYreEqxAhDUIWZ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.7UwUjJ6owIQkEPrs
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: PQtYreEqxAhDUIWZ
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      name: Bead of Smiting (branding smite)
+      img: ''
+    6F2HhcDk94H0kGqV:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.fkREcytuZ8sngWtC
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '6'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 6F2HhcDk94H0kGqV
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      name: Bead of Summons (planar ally)
+      img: ''
+    zqkOXnnqsBvQTS9v:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.8PJAsHmbu6UgDHC0
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '6'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: zqkOXnnqsBvQTS9v
+      sort: 0
+      activation:
+        type: bonus
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      name: Bead of Wind Walking (wind walk)
+      img: ''
+  attuned: false
+  identifier: necklace-of-prayer-beads
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037320203
+  modifiedTime: 1729016659698
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!wqVSRfkcTjuhvDyx'

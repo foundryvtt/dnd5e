@@ -1,0 +1,844 @@
+_id: eM5gEe4SEOvA2Y9t
+name: Staff of Power
+type: weapon
+img: icons/weapons/staves/staff-ornate-banded-purple.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a sorcerer, warlock, or
+      wizard)</em></p><p>This staff can be wielded as a magic quarterstaff that
+      grants a +2 bonus to attack and damage rolls made with it. While holding
+      it, you gain a +2 bonus to Armor Class, saving throws, and spell attack
+      rolls.</p><p>The staff has 20 charges for the following properties. The
+      staff regains 2d8 + 4 expended charges daily at dawn. If you expend the
+      last charge, roll a d20. On a 1, the staff retains its +2 bonus to attack
+      and damage rolls but loses all other properties. On a 20, the staff
+      regains 1d8 + 2 charges.</p><p><strong>Power Strike</strong>. When you hit
+      with a melee attack using the staff, you can expend 1 charge to deal an
+      extra 1d6 force damage to the target.</p><p><strong>Spells</strong>. While
+      holding this staff, you can use an action to expend 1 or more of its
+      charges to cast one of the following spells from it, using your spell save
+      DC and spell attack bonus:
+      @UUID[Compendium.dnd5e.spells.Item.RpKjTlYASrfqUPVA]{Cone of Cold} (5
+      charges), @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{Fireball}
+      (5th-level version, 5 charges),
+      @UUID[Compendium.dnd5e.spells.Item.WmQpxfjZwF3MGUby]{Globe of
+      Invulnerability} (6 charges),
+      @UUID[Compendium.dnd5e.spells.Item.l9Ju5KE7bbn3WpTm]{Hold Monster} (5
+      charges), @UUID[Compendium.dnd5e.spells.Item.MRxldJd6C4bsBo3O]{Levitate}
+      (2 charges),
+      @UUID[Compendium.dnd5e.spells.Item.IyikgTEOTv701jgQ]{Lightning Bolt}
+      (5th-level version, 5 charges),
+      @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{Magic Missile} (1
+      charge), @UUID[Compendium.dnd5e.spells.Item.ODhLKBxLnvvLOnw1]{Ray of
+      Enfeeblement} (1 charge), or
+      @UUID[Compendium.dnd5e.spells.Item.o9ZCvuD2B1OTcubb]{Wall of Force} (5
+      charges).</p><p><strong>Retributive Strike</strong>. You can use an action
+      to break the staff over your knee or against a solid surface, performing a
+      retributive strike. The staff is destroyed and releases its remaining
+      magic in an explosion that expands to fill a 30-foot-radius sphere
+      centered on it.</p><p>You have a 50 percent chance to instantly travel to
+      a random plane of existence, avoiding the explosion. If you fail to avoid
+      the effect, you take force damage equal to 16 × the number of charges in
+      the staff. Every other creature in the area must make a DC 17 Dexterity
+      saving throw. On a failed save, a creature takes an amount of damage based
+      on how far away it is from the point of origin, as shown in the following
+      table. On a successful save, a creature takes half as much
+      damage.</p><table><thead><tr><td><strong>Distance from
+      Origin</strong></td><td><strong>Damage</strong></td></tr></thead><tbody><tr><td>10
+      ft. away or closer</td><td>8 x the number of charges in the
+      staff</td></tr><tr><td>11 to 20 ft. away</td><td>6 x the number of charges
+      in the staff</td></tr><tr><td>21 to 30 ft. away</td><td>4 x the number of
+      charges in the staff</td></tr></tbody></table>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 95500
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ft
+    reach: null
+  uses:
+    max: '20'
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 2d8 + 4
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: 0
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 6
+      bonus: ''
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - foc
+    - mgc
+    - ver
+  proficient: null
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: 2
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 100000
+    L1GZU5PNRP6yTTzv:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.RpKjTlYASrfqUPVA
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: L1GZU5PNRP6yTTzv
+      sort: 400000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    MPzQMc46FPOA0fOv:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: MPzQMc46FPOA0fOv
+      sort: 500000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    pYnqALTnXAWsBrFx:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.WmQpxfjZwF3MGUby
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '6'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: pYnqALTnXAWsBrFx
+      sort: 600000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '6'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    DlGnSXkbJ2GvX5Mq:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.l9Ju5KE7bbn3WpTm
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: DlGnSXkbJ2GvX5Mq
+      sort: 700000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    U6ZnqbAPuN6TLnmy:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.MRxldJd6C4bsBo3O
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: U6ZnqbAPuN6TLnmy
+      sort: 800000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    ARYvRDrR6qLC7bKF:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.IyikgTEOTv701jgQ
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: ARYvRDrR6qLC7bKF
+      sort: 900000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    GbPA5LNCN13UmsGZ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: GbPA5LNCN13UmsGZ
+      sort: 1000000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    NaBuO150m8H0tTyj:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ODhLKBxLnvvLOnw1
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: NaBuO150m8H0tTyj
+      sort: 1100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    cukAoZkQvzMEF4gI:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.o9ZCvuD2B1OTcubb
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: cukAoZkQvzMEF4gI
+      sort: 1200000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    ahU6uTAGGEVFyPfz:
+      type: damage
+      name: Power Strike
+      _id: ahU6uTAGGEVFyPfz
+      sort: 300000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you hit with a melee attack using the staff
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: true
+          bonus: ''
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 1
+            denomination: 6
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+      img: ''
+      appliedEffects: []
+    V1rkYRygV4mgJgMa:
+      type: save
+      _id: V1rkYRygV4mgJgMa
+      sort: 1300000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts:
+          - custom:
+              enabled: true
+              formula: 16 * @item.uses.value
+            number: null
+            denomination: 0
+            bonus: ''
+            types:
+              - force
+            scaling:
+              number: 1
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '17'
+      name: Retributive Strike
+      img: ''
+      appliedEffects: []
+  attuned: false
+  ammunition: {}
+  identifier: staff-of-power
+  mastery: ''
+effects:
+  - _id: 313kehq7ifkqiz2u
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.bonuses.abilities.save
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.items.eM5gEe4SEOvA2Y9t
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: Staff of Power
+    description: >-
+      <p>While holding this staff, you gain a +2 bonus to Armor Class, saving
+      throws, and spell attack rolls.</p>
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/weapons/staves/staff-ornate-banded-purple.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!eM5gEe4SEOvA2Y9t.313kehq7ifkqiz2u'
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037240031
+  modifiedTime: 1729013756957
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!eM5gEe4SEOvA2Y9t'

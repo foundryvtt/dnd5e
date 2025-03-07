@@ -1,0 +1,687 @@
+_id: caEn3ixCUFBnHTx6
+name: Staff of the Woodlands
+type: weapon
+img: icons/weapons/staves/staff-nature-spiral.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a druid)</em></p><p>This staff can be
+      wielded as a magic quarterstaff that grants a +2 bonus to attack and
+      damage rolls made with it. While holding it, you have a +2 bonus to spell
+      attack rolls.</p><p>The staff has 10 charges for the following properties.
+      It regains 1d6 + 4 expended charges daily at dawn. If you expend the last
+      charge, roll a d20. On a 1, the staff loses its properties and becomes a
+      nonmagical quarterstaff.</p><p><strong>Spells</strong>. You can use an
+      action to expend 1 or more of the staff's charges to cast one of the
+      following spells from it, using your spell save DC:
+      @UUID[Compendium.dnd5e.spells.Item.hDOENzjuj5WpLq7B]{Animal Friendship} (1
+      charge), @UUID[Compendium.dnd5e.spells.Item.MCEpGpvovcXagwQS]{Awaken} (5
+      charges), @UUID[Compendium.dnd5e.spells.Item.JPwIEfgUPVebr5AH]{Barkskin}
+      (2 charges), @UUID[Compendium.dnd5e.spells.Item.Iv2qqSAT7OkXKPFx]{Locate
+      Animals or Plants} (2 charges),
+      @UUID[Compendium.dnd5e.spells.Item.aL1F8fvYLtNzUbKu]{Speak with Animals}
+      (1 charge), @UUID[Compendium.dnd5e.spells.Item.2VXGS206tuChoeXy]{Speak
+      with Plants} (3 charges), or
+      @UUID[Compendium.dnd5e.spells.Item.AQsBc94ES7W7s7iG]{Wall of Thorns} (6
+      charges).</p><p>You can also use an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.pRMvmknwLf2tdMTj]{Pass without Trace}
+      spell from the staff without using any charges.</p><p><strong>Tree
+      Form</strong>. You can use an action to plant one end of the staff in
+      fertile earth and expend 1 charge to transform the staff into a healthy
+      tree. The tree is 60 feet tall and has a 5-foot-diameter trunk, and its
+      branches at the top spread out in a 20-foot radius. The tree appears
+      ordinary but radiates a faint aura of transmutation magic if targeted by
+      @UUID[Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8]{Detect Magic}. While
+      touching the tree and using another action to speak its command word, you
+      return the staff to its normal form. Any creature in the tree falls when
+      it reverts to a staff.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 44000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ft
+    reach: null
+  uses:
+    max: '10'
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d6 + 4
+    spent: 0
+  damage:
+    versatile:
+      number: 1
+      denomination: 8
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 6
+      bonus: ''
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - foc
+    - mgc
+    - ver
+  proficient: null
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: 2
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 100000
+    3NG2heM5F2MZC8jp:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.hDOENzjuj5WpLq7B
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 3NG2heM5F2MZC8jp
+      sort: 300000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    joTmq1XPNETQqiag:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.MCEpGpvovcXagwQS
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: joTmq1XPNETQqiag
+      sort: 400000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    5nuhAqCJUQrLA2Dl:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.JPwIEfgUPVebr5AH
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 5nuhAqCJUQrLA2Dl
+      sort: 500000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    xETqUC7cpESvgEeV:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.Iv2qqSAT7OkXKPFx
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: xETqUC7cpESvgEeV
+      sort: 600000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    Jddd8ljisRX31g8l:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.2VXGS206tuChoeXy
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: Jddd8ljisRX31g8l
+      sort: 700000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    8u2nn7PKK1PomSZA:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.AQsBc94ES7W7s7iG
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '6'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 8u2nn7PKK1PomSZA
+      sort: 900000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '6'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    iXNUoYwkgNbcwFJZ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.pRMvmknwLf2tdMTj
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: iXNUoYwkgNbcwFJZ
+      sort: 625000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+    SdJnKtMS2hnx9Yhf:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.aL1F8fvYLtNzUbKu
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: SdJnKtMS2hnx9Yhf
+      sort: 650000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    xxaouOqTNX24LNTz:
+      type: utility
+      name: Tree Form
+      _id: xxaouOqTNX24LNTz
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  attuned: false
+  ammunition: {}
+  identifier: staff-of-the-woodlands
+  mastery: ''
+effects:
+  - name: Staff of the Woodlands
+    origin: Compendium.dnd5e.items.Item.caEn3ixCUFBnHTx6
+    duration:
+      rounds: null
+      startTime: null
+      seconds: null
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: icons/weapons/staves/staff-nature-spiral.webp
+    _id: ySNgKEIdpRR6Eyc7
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '2'
+        priority: null
+    description: >-
+      <p>While holding this staff, you have a +2 bonus to spell attack
+      rolls.</p>
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!items.effects!caEn3ixCUFBnHTx6.ySNgKEIdpRR6Eyc7'
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037231207
+  modifiedTime: 1729014343709
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!caEn3ixCUFBnHTx6'

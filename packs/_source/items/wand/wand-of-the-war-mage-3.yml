@@ -1,0 +1,76 @@
+_id: IuVaBrq17AqxpXc4
+name: Wand of the War Mage +3
+type: equipment
+img: icons/weapons/wands/wand-carved-stone-shard.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a spellcaster)</em></p>
+
+      <p>While holding this wand, you gain a bonus to spell attack rolls of +3.
+      In addition, you ignore half cover when making a spell attack.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 19200
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: null
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - foc
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: wand-of-the-war-mage-3
+effects: []
+folder: 1aDgsGVwDbPdxG2V
+sort: 100000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037158041
+  modifiedTime: 1730323669596
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!IuVaBrq17AqxpXc4'

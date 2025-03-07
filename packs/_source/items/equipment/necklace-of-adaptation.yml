@@ -1,0 +1,131 @@
+_id: wwNpAz2KMukovewN
+name: Necklace of Adaptation
+type: equipment
+img: icons/equipment/neck/pendant-faceted-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While wearing this necklace, you can breathe normally in any
+      environment, and you have advantage on saving throws made against harmful
+      gases and vapors (such as
+      @UUID[Compendium.dnd5e.spells.Item.LkvI11Uue774QBKZ]{Cloudkill} and
+      @UUID[Compendium.dnd5e.spells.Item.TwlD4PLcltv7Xh7j]{Stinking Cloud}
+      effects, inhaled poisons, and the breath weapons of some dragons).</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.01
+    units: lb
+  price:
+    value: 1500
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: ''
+        value: null
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: necklace-of-adaptation
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037320734
+  modifiedTime: 1725992558060
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!wwNpAz2KMukovewN'

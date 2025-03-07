@@ -1,0 +1,144 @@
+_id: 2wxqnjpnPmkpPCC5
+name: Ring of Evasion
+type: equipment
+img: icons/equipment/finger/ring-eye-silver-green.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>This ring has 3 charges, and it regains 1d3 expended charges daily at
+      dawn. When you fail a Dexterity saving throw while wearing it, you can use
+      your reaction to expend 1 of its charges to succeed on that saving throw
+      instead.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 5000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: '3'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d3
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: ring
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: reaction
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Evade
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: ring-of-evasion
+effects: []
+folder: 5jrDZJ1U23Q9jDqB
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037091805
+  modifiedTime: 1731017280473
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!2wxqnjpnPmkpPCC5'

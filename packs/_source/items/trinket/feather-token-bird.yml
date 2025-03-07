@@ -1,0 +1,144 @@
+_id: hWqImieUaLo08l9l
+name: Feather Token Bird
+type: consumable
+img: icons/commodities/materials/feather-yellow.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p><p>This tiny object looks like a feather.
+      Different types of feather tokens exist, each with a different single-use
+      effect. The GM chooses the kind of token or determines it randomly from
+      the @UUID[Compendium.dnd5e.tables.RollTable.OEdr086W61t1DRJo]{Feather
+      Token} table.</p><p><strong>Bird.</strong> You can use an action to toss
+      the token 5 feet into the air. The token disappears and an enormous,
+      multicolored bird takes its place. The bird has the statistics of a
+      @UUID[Compendium.dnd5e.monsters.Actor.p980augbCIdpK9ZX]{Roc}, but it obeys
+      your simple commands and can't attack. It can carry up to 500 pounds while
+      flying at its maximum speed (16 miles an hour for a maximum of 144 miles
+      per day, with a one-hour rest for every 3 hours of flying), or 1,000
+      pounds at half that speed. The bird disappears after flying its maximum
+      distance for a day or if it drops to 0 hit points. You can dismiss the
+      bird as an action.</p><section class="secret foundry-note"
+      id="secret-MSLq8LtzkIiyNC0O"><p><strong>Foundry Note</strong></p><p>The
+      144 charges represent the 144 miles the bird can travel when being able to
+      travel at maximum speed to enable accurate distance-tracking as
+      required.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 3000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '144'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: feather-token-bird
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 7200000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037257011
+  modifiedTime: 1725992536134
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!hWqImieUaLo08l9l'

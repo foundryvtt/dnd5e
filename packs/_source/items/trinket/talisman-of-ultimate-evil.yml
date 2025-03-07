@@ -1,0 +1,237 @@
+_id: PAXfmZ2ErDlCVy0N
+name: Talisman of Ultimate Evil
+type: consumable
+img: icons/magic/death/skull-horned-goat-pentagram-red.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement by a creature of evil
+      alignment)</em></p>
+
+      <p>This item symbolizes unrepentant evil. A creature that is neither good
+      nor evil in alignment takes 6d6 necrotic damage upon touching the
+      talisman. A good creature takes 8d6 necrotic damage upon touching the
+      talisman. Either sort of creature takes the damage again each time it ends
+      its turn holding or carrying the talisman.</p>
+
+      <p>If you are an evil cleric or paladin, you can use the talisman as a
+      holy symbol, and you gain a +2 bonus to spell attack rolls while you wear
+      or hold it.</p>
+
+      <p>The talisman has 6 charges. If you are wearing or holding it, you can
+      use an action to expend 1 charge from the talisman and choose one creature
+      you can see on the ground within 120 feet of you. If the target is of good
+      alignment, a flaming fissure opens under it. The target must succeed on a
+      DC 20 Dexterity saving throw or fall into the fissure and be destroyed,
+      leaving no remains. The fissure then closes, leaving no trace of its
+      existence. When you expend the last charge, the talisman dissolves into
+      foul-smelling slime and is destroyed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 61440
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: '6'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: 6
+      denomination: 6
+      bonus: ''
+      types:
+        - necrotic
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '120'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 6
+            denomination: 6
+            bonus: ''
+            types:
+              - necrotic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '20'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity200:
+      _id: dnd5eactivity200
+      type: damage
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '120'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 8
+            denomination: 6
+            bonus: ''
+            types: []
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: talisman-of-ultimate-evil
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 4600000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037179912
+  modifiedTime: 1725992510604
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!PAXfmZ2ErDlCVy0N'

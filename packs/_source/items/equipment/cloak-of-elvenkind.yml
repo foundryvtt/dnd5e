@@ -1,0 +1,129 @@
+_id: Jvf1NWFxcjfHnMQ5
+name: Cloak of Elvenkind
+type: equipment
+img: icons/equipment/back/cloak-collared-feathers-green.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While you wear this cloak with its hood up, Wisdom (Perception) checks
+      made to see you have disadvantage, and you have advantage on Dexterity
+      (Stealth) checks made to hide, as the cloak's color shifts to camouflage
+      you. Pulling the hood up or down requires an action.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 5000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: Hood must be up.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: cloak-of-elvenkind
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037160362
+  modifiedTime: 1725992503974
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!Jvf1NWFxcjfHnMQ5'

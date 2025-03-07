@@ -1,0 +1,314 @@
+_id: bod1dKzbAkAm21Ho
+name: Staff of Swarming Insects
+type: weapon
+img: icons/weapons/staves/staff-spiked.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a bard, cleric, druid, sorcerer, warlock,
+      or wizard)</em></p><p>This staff has 10 charges and regains 1d6 + 4
+      expended charges daily at dawn. If you expend the last charge, roll a d20.
+      On a 1, a swarm of insects consumes and destroys the staff, then
+      disperses.</p><p><strong>Spells</strong>. While holding the staff, you can
+      use an action to expend some of its charges to cast one of the following
+      spells from it, using your spell save DC:
+      @UUID[Compendium.dnd5e.spells.Item.czXrVRx6XYRWsHAi]{Giant Insect} (4
+      charges) or @UUID[Compendium.dnd5e.spells.Item.OVikYmSdHliAG2YD]{Insect
+      Plague} (5 charges).</p><p><strong>Insect Cloud</strong>. While holding
+      the staff, you can use an action and expend 1 charge to cause a swarm of
+      harmless flying insects to spread out in a 30-foot radius from you. The
+      insects remain for 10 minutes, making the area heavily obscured for
+      creatures other than you. The swarm moves with you, remaining centered on
+      you. A wind of at least 10 miles per hour disperses the swarm and ends the
+      effect.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 16000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ''
+    reach: null
+  uses:
+    max: '10'
+    recovery:
+      - period: dawn
+        type: recoverAll
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  type:
+    value: simpleM
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: null
+  activities:
+    YYSStWx9ygrl41hI:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.czXrVRx6XYRWsHAi
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: YYSStWx9ygrl41hI
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '4'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    daXCQjAPpv1uGjw4:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.OVikYmSdHliAG2YD
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: daXCQjAPpv1uGjw4
+      sort: 300000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    330BsWHVJ4uVFg90:
+      type: utility
+      name: Insect Cloud
+      _id: 330BsWHVJ4uVFg90
+      sort: 400000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: false
+        value: '10'
+      effects: []
+      range:
+        override: true
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: radius
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    McIzoYjcpMDRnr7n:
+      type: attack
+      _id: McIzoYjcpMDRnr7n
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+  attuned: false
+  ammunition: {}
+  identifier: staff-of-swarming-insects
+  mastery: ''
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037228686
+  modifiedTime: 1731019487934
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!bod1dKzbAkAm21Ho'

@@ -1,0 +1,128 @@
+_id: JrUcwLR2aQC09iUM
+name: Breath Weapon - Brass
+ownership:
+  default: 0
+type: feat
+system:
+  description:
+    value: >-
+      <p>You can use your action to exhale destructive energy. Your draconic
+      ancestry determines the size, shape, and damage type of the
+      exhalation.</p><p>When you use your breath weapon, each creature in the
+      area of the exhalation must make a dexterity saving throw. The DC for this
+      saving throw equals 8 + your Constitution modifier + your proficiency
+      bonus. A creature takes 2d6 fire damage on a failed save, and half as much
+      damage on a successful one. The damage increases to 3d6 at 6th level, 4d6
+      at 11th level, and 5d6 at 16th level.</p><p>After you use your breath
+      weapon, you can't use it again until you complete a short or long
+      rest.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  uses:
+    max: '1'
+    recovery:
+      - period: sr
+        type: recoverAll
+    spent: 0
+  type:
+    value: race
+    subtype: ''
+  requirements: Brass Dragonborn
+  properties: []
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: line
+          size: '30'
+          width: '5'
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: null
+            denomination: null
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: true
+              formula: '@scale.dragonborn.breath-weapon'
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: con
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  enchant: {}
+  prerequisites:
+    level: null
+  identifier: breath-weapon-brass
+flags: {}
+img: icons/magic/fire/beam-jet-stream-trails-orange.webp
+effects: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037392695
+  modifiedTime: 1725992703339
+  lastModifiedBy: dnd5ebuilder0000
+sort: 0
+folder: TAw7621pFkXOkuYI
+_key: '!items!JrUcwLR2aQC09iUM'

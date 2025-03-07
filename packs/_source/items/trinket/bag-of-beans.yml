@@ -1,0 +1,163 @@
+_id: F8QpasPjLrw2POzE
+name: Bag of Beans
+type: consumable
+img: icons/containers/bags/coinpouch-simple-leather-tan.webp
+system:
+  description:
+    value: >-
+      <p>Inside this heavy cloth bag are [[/r 3d4 #Bag of Beans contents]] dry
+      beans. The bag weighs 1/2 pound plus 1/4 pound for each bean it
+      contains.</p><p>If you dump the bag's contents out on the ground, they
+      explode in a 10-foot radius, extending from the beans. Each creature in
+      the area, including you, must make a DC 15 Dexterity saving throw, taking
+      5d4 fire damage on a failed save, or half as much damage on a successful
+      one. The fire ignites flammable objects in the area that aren't being worn
+      or carried.</p><p>If you remove a bean from the bag, plant it in dirt or
+      sand, and then water it, the bean produces an effect 1 minute later from
+      the ground where it was planted. The GM can choose an effect from the
+      @UUID[Compendium.dnd5e.tables.RollTable.4ryVFV5LPHPzRKxl]{Bag of Beans}
+      table, determine it randomly, or create an
+      effect.</p><p>@Embed[Compendium.dnd5e.tables.RollTable.4ryVFV5LPHPzRKxl
+      rollable]</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 3.5
+    units: lb
+  price:
+    value: 3000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '12'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: 5
+      denomination: 4
+      bonus: ''
+      types:
+        - fire
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: circle
+          size: '10'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 5
+            denomination: 4
+            bonus: ''
+            types:
+              - fire
+            scaling:
+              number: 1
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: bag-of-beans
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 3100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.2
+  createdTime: 1725037141214
+  modifiedTime: 1726738255941
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!F8QpasPjLrw2POzE'

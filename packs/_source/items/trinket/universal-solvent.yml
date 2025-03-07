@@ -1,0 +1,131 @@
+_id: MAwoj2suj6cvb9Ti
+name: Universal Solvent
+type: consumable
+img: icons/consumables/potions/potion-bottle-corked-white.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This tube holds milky liquid with a strong alcohol smell. You can use
+      an action to pour the contents of the tube onto a surface within reach.
+      The liquid instantly dissolves up to 1 square foot of adhesive it touches,
+      including Sovereign Glue.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 300
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: touch
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: square
+          size: '1'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: universal-solvent
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 4200000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037169569
+  modifiedTime: 1725992507056
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!MAwoj2suj6cvb9Ti'

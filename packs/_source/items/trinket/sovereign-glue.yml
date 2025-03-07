@@ -1,0 +1,137 @@
+_id: zJ5LhDvTxYKzPIx4
+name: Sovereign Glue
+type: consumable
+img: icons/consumables/drinks/tea-jug-gourd-brown.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p><p>This viscous, milky-white substance can
+      form a permanent adhesive bond between any two objects. It must be stored
+      in a jar or flask that has been coated inside with oil of slipperiness.
+      When found, a container contains 1d6 + 1 ounces.</p><p>One ounce of the
+      glue can cover a 1-foot square surface. The glue takes 1 minute to set.
+      Once it has done so, the bond it creates can be broken only by the
+      application of universal solvent or oil of etherealness, or with a
+      @UUID[Compendium.dnd5e.spells.Item.3okM6Gn63zzEULkz]{Wish}
+      spell.</p><section class="secret foundry-note"
+      id="secret-s3MCPshCsEZEYTHn"><p><strong>Foundry Note</strong></p><p>The 7
+      charges reflect the maximum amount a character can find. Please adjust as
+      required.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.25
+    units: lb
+  price:
+    value: 400
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: '7'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: Takes 1 minute to set.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: touch
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: square
+          size: '1'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: sovereign-glue
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 11200000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037329958
+  modifiedTime: 1725992561360
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!zJ5LhDvTxYKzPIx4'

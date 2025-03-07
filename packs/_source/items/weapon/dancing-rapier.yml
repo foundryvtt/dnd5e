@@ -1,0 +1,187 @@
+_id: 6n8J07mFo8xs11vS
+name: Dancing Rapier
+type: weapon
+img: icons/skills/melee/strike-sword-gray.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>You can use a bonus action to toss this magic sword into the air and
+      speak the command word. When you do so, the sword begins to hover, flies
+      up to 30 feet, and attacks one creature of your choice within 5 feet of
+      it. The sword uses your attack roll and ability score modifier to damage
+      rolls.</p>
+
+      <p>While the sword hovers, you can use a bonus action to cause it to fly
+      up to 30 feet to another spot within 30 feet of you. As part of the same
+      bonus action, you can cause the sword to attack one creature within 5 feet
+      of it.</p>
+
+      <p>After the hovering sword attacks for the fourth time, it flies up to 30
+      feet and tries to return to your hand. If you have no hand free, it falls
+      to the ground at your feet. If the sword has no unobstructed path to you,
+      it moves as close to you as it can and then falls to the ground. It also
+      ceases to hover if you grasp it or move more than 30 feet away from
+      it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ft
+    reach: 30
+  uses:
+    max: '4'
+    recovery: []
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 8
+      bonus: ''
+      types:
+        - slashing
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - fin
+    - ret
+    - mgc
+  proficient: null
+  type:
+    value: martialM
+    baseItem: rapier
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: bonus
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  ammunition: {}
+  identifier: dancing-rapier
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037106819
+  modifiedTime: 1725992486139
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!6n8J07mFo8xs11vS'

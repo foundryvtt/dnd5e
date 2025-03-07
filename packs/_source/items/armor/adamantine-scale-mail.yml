@@ -1,0 +1,78 @@
+_id: LdAj2ES9EzfnWcA1
+name: Adamantine Scale Mail
+type: equipment
+img: icons/equipment/chest/breastplate-banded-steel.webp
+system:
+  description:
+    value: >-
+      <p>This armor is reinforced with adamantine, one of the hardest substances
+      in existence.</p>
+
+      <p>While you're wearing it, any critical hit against you becomes a normal
+      hit.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 45
+    units: lb
+  price:
+    value: 550
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 14
+    dex: 2
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: medium
+    baseItem: scalemail
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - ada
+    - mgc
+    - stealthDisadvantage
+  activities: {}
+  attuned: false
+  identifier: adamantine-scale-mail
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037167287
+  modifiedTime: 1728002224762
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!LdAj2ES9EzfnWcA1'

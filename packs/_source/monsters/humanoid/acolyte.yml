@@ -1,0 +1,1516 @@
+_id: CHEUjiYrVM9X0vIT
+name: Acolyte
+type: npc
+img: null
+system:
+  abilities:
+    str:
+      value: 10
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    dex:
+      value: 10
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    con:
+      value: 10
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    int:
+      value: 10
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    wis:
+      value: 14
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    cha:
+      value: 11
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+  attributes:
+    ac:
+      flat: 10
+      calc: natural
+      formula: ''
+    hp:
+      value: 9
+      max: 9
+      temp: 0
+      tempmax: 0
+      formula: 2d8
+    init:
+      ability: ''
+      bonus: '0'
+      roll:
+        min: null
+        max: null
+        mode: 0
+    movement:
+      burrow: 0
+      climb: 0
+      fly: 0
+      swim: 0
+      walk: 30
+      units: ft
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: 0
+      blindsight: 0
+      tremorsense: 0
+      truesight: 0
+      units: ft
+      special: ''
+    spellcasting: wis
+    exhaustion: 0
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+    hd:
+      spent: 0
+    death:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      success: 0
+      failure: 0
+  details:
+    biography:
+      value: ''
+      public: ''
+    alignment: Any
+    race: null
+    type:
+      value: humanoid
+      subtype: ''
+      swarm: ''
+      custom: ''
+    environment: ''
+    cr: 0.25
+    spellLevel: 1
+    ideal: ''
+    bond: ''
+    flaw: ''
+  traits:
+    size: med
+    di:
+      value: []
+      bypasses: []
+      custom: ''
+    dr:
+      value: []
+      bypasses: []
+      custom: ''
+    dv:
+      value: []
+      bypasses: []
+      custom: ''
+    ci:
+      value: []
+      custom: ''
+    languages:
+      value: []
+      custom: Any one language (usually common)
+    dm:
+      amount: {}
+      bypasses: []
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  skills:
+    acr:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ani:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    arc:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ath:
+      value: 0
+      ability: str
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    dec:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    his:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ins:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    itm:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    inv:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    med:
+      value: 1
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    nat:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prc:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prf:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    per:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    rel:
+      value: 1
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    slt:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ste:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    sur:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+  spells:
+    spell1:
+      value: 2
+      override: 2
+    spell2:
+      value: 0
+      override: null
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+    spell0:
+      value: 0
+      override: null
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  resources:
+    legact:
+      value: 0
+      max: 0
+    legres:
+      value: 0
+      max: 0
+    lair:
+      value: false
+      initiative: null
+  tools: {}
+  source:
+    custom: ''
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 1
+    rules: '2014'
+prototypeToken:
+  name: Acolyte
+  displayName: 20
+  actorLink: false
+  width: 1
+  height: 1
+  lockRotation: false
+  rotation: 0
+  alpha: 1
+  light:
+    alpha: 0.5
+    angle: 360
+    bright: 0
+    coloration: 1
+    dim: 0
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      speed: 5
+      intensity: 5
+      reverse: false
+      type: null
+    darkness:
+      min: 0
+      max: 1
+    color: null
+    attenuation: 0.3
+    negative: false
+    priority: 0
+  disposition: -1
+  displayBars: 0
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  flags: {}
+  randomImg: false
+  texture:
+    src: null
+    tint: '#ffffff'
+    scaleX: 1
+    scaleY: 1
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    alphaThreshold: 0.75
+  sight:
+    angle: 360
+    enabled: false
+    range: 0
+    brightness: 1
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  appendNumber: false
+  prependAdjective: false
+  hexagonalShape: 0
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
+items:
+  - _id: 38I6bGoguRRefN6W
+    name: Spellcasting
+    type: feat
+    img: icons/magic/light/projectiles-star-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The acolyte is a 1st-level spellcaster. Its spellcasting ability is
+          Wisdom (spell save DC 12, +4 to hit with spell attacks). The acolyte
+          has following cleric spells prepared:• Cantrips (at will): light,
+          sacred flame, thaumaturgy• 1st level (3 slots): bless, cure wounds,
+          sanctuary</p>
+        chat: >-
+          <p>The acolyte is a spellcaster. Its spellcasting ability is
+          Wisdom.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: spellcasting
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676539
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!CHEUjiYrVM9X0vIT.38I6bGoguRRefN6W'
+  - _id: swpThURVHnaQRjfY
+    name: Club
+    type: weapon
+    img: icons/weapons/clubs/club-simple-barbed.webp
+    system:
+      description:
+        value: >-
+          <p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5
+          ft.,</strong> one target. Hit: <strong>2 (1d4) <em>bludgeoning
+          damage</em></strong>.</p>
+        chat: <p>The Acolyte attacks with their Club.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 2
+        units: lb
+      price:
+        value: 1
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: null
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 4
+          bonus: ''
+          types:
+            - bludgeoning
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties:
+        - lgt
+      proficient: 1
+      unidentified:
+        description: ''
+      type:
+        value: simpleM
+        baseItem: club
+      container: null
+      crewed: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: str
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 0
+      attuned: false
+      ammunition: {}
+      magicalBonus: null
+      identifier: club
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.items.nfIRTECQIG81CvM4
+    _stats:
+      compendiumSource: Compendium.dnd5e.items.nfIRTECQIG81CvM4
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676539
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!CHEUjiYrVM9X0vIT.swpThURVHnaQRjfY'
+  - _id: Bnn9Nzajixvow9xi
+    name: Light
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You touch one object that is no larger than 10 feet in any
+          dimension. Until the spell ends, the object sheds bright light in a
+          20-foot radius and dim light for an additional 20 feet. The light can
+          be colored as you like. Completely covering the object with something
+          opaque blocks the light. The spell ends if you cast it again or
+          dismiss it as an action.</p><p>If you target an object held or worn by
+          a hostile creature, that creature must succeed on a Dexterity saving
+          throw to avoid the spell.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: object
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: evo
+      materials:
+        value: A firefly or phosphorescent moss.
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability: dex
+            dc:
+              calculation: spellcasting
+              formula: '12'
+          sort: 0
+      identifier: light
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
+    img: icons/magic/light/explosion-star-small-blue-yellow.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!CHEUjiYrVM9X0vIT.Bnn9Nzajixvow9xi'
+  - _id: n9pJzTDsAwQxJVRl
+    name: Sacred Flame
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>Flame-like radiance descends on a creature that you can see within
+          range. The target must succeed on a Dexterity saving throw or take 1d8
+          radiant damage. The target gains no benefit from cover for this saving
+          throw.</p><p>The spell's damage increases by 1d8 when you reach 5th
+          level (2d8), 11th level (3d8), and 17th level (4d8).</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: evo
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts:
+              - number: 1
+                denomination: 8
+                bonus: ''
+                types:
+                  - radiant
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          save:
+            ability: dex
+            dc:
+              calculation: spellcasting
+              formula: '12'
+          sort: 0
+      identifier: sacred-flame
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
+    img: icons/magic/light/beam-rays-orange.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!CHEUjiYrVM9X0vIT.n9pJzTDsAwQxJVRl'
+  - _id: MUO1uYN7JR1hm4dR
+    name: Thaumaturgy
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You create one of the following magical effects within range:</p>
+
+          <ul>
+
+          <li>Your voice booms up to three times as loud as normal for 1
+          minute.</li>
+
+          <li>You cause flames to flicker, brighten, dim, or change color for 1
+          minute.</li>
+
+          <li>You cause harmless tremors in the ground for 1 minute.</li>
+
+          <li>You create a sound that originates from a point of your choice
+          within range.</li>
+
+          <li>You cause an unlocked door or window to fly open or slam
+          shut.</li>
+
+          <li>You alter the appearance of your eyes for 1 minute.</li>
+
+          </ul>
+
+          <p>If you cast this spell multiple times, you can have up to three of
+          its 1-minute effects active at a time, and you can dismiss such an
+          effect as an action.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: trs
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: thaumaturgy
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
+    img: icons/magic/fire/explosion-fireball-small-purple-orange.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!CHEUjiYrVM9X0vIT.MUO1uYN7JR1hm4dR'
+  - _id: 8dzaICjGy6mTUaUr
+    name: Bless
+    type: spell
+    img: icons/magic/control/buff-flight-wings-blue.webp
+    system:
+      description:
+        value: >-
+          <p>You bless up to three creatures of your choice within range.
+          Whenever a target makes an attack roll or a saving throw before the
+          spell ends, the target can roll 1d4 and add the number rolled to the
+          attack roll or saving throw.</p>
+
+          <p><strong>Higher Levels.</strong> When you cast this spell using a
+          spell slot of 2nd level or higher, you can target one additional
+          creature for each slot level above 1st.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '3'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: enc
+      materials:
+        value: A sprinkling of holy water
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: 8rP3gwmXVTgZqYZE
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: 1d4
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: bless
+    effects:
+      - _id: 8rP3gwmXVTgZqYZE
+        flags: {}
+        changes:
+          - key: system.bonuses.abilities.save
+            mode: 2
+            value: +1d4
+            priority: null
+          - key: system.bonuses.mwak.attack
+            mode: 2
+            value: +1d4
+            priority: null
+          - key: system.bonuses.msak.attack
+            mode: 2
+            value: +1d4
+            priority: null
+          - key: system.bonuses.rsak.attack
+            mode: 2
+            value: +1d4
+            priority: null
+          - key: system.bonuses.rwak.attack
+            mode: 2
+            value: +1d4
+            priority: null
+        disabled: true
+        duration:
+          startTime: null
+          seconds: 60
+          rounds: 10
+          combat: null
+          turns: null
+          startRound: null
+          startTurn: null
+        origin: Item.kZZAZ6kp9YzgPQEe
+        tint: '#ffffff'
+        transfer: false
+        name: Bless
+        description: ''
+        statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '12.331'
+          systemId: dnd5e
+          systemVersion: 4.0.0
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+        img: icons/magic/control/buff-flight-wings-blue.webp
+        type: base
+        system: {}
+        sort: 0
+        _key: >-
+          !actors.items.effects!CHEUjiYrVM9X0vIT.8dzaICjGy6mTUaUr.8rP3gwmXVTgZqYZE
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.8dzaICjGy6mTUaUr
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.8dzaICjGy6mTUaUr
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!CHEUjiYrVM9X0vIT.8dzaICjGy6mTUaUr'
+  - _id: gvdA9nPuWLck4tBl
+    name: Sanctuary
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You ward a creature within range against attack. Until the spell
+          ends, any creature who targets the warded creature with an attack or a
+          harmful spell must first make a Wisdom saving throw. On a failed save,
+          the creature must choose a new target or lose the attack or spell.
+          This spell doesn't protect the warded creature from area effects, such
+          as the explosion of a Fireball.</p><p>If the warded creature makes an
+          attack or casts a spell that affects an enemy creature, this spell
+          ends.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: bonus
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: abj
+      materials:
+        value: A small silver mirror
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: wis
+            dc:
+              calculation: spellcasting
+              formula: '12'
+          sort: 0
+      identifier: sanctuary
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.gvdA9nPuWLck4tBl
+    img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.gvdA9nPuWLck4tBl
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!CHEUjiYrVM9X0vIT.gvdA9nPuWLck4tBl'
+  - _id: uUWb1wZgtMou0TVP
+    name: Cure Wounds
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>A creature you touch regains a number of hit points equal to 1d8 +
+          your spellcasting ability modifier. This spell has no effect on undead
+          or constructs.</p><p><strong>Higher Levels.</strong> When you cast
+          this spell using a spell slot of 2nd level or higher, the healing
+          increases by 1d8 for each slot level above 1st.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: evo
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: heal
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          healing:
+            number: 1
+            denomination: 8
+            bonus: '@mod'
+            types:
+              - healing
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+          sort: 0
+      identifier: cure-wounds
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.uUWb1wZgtMou0TVP
+    img: icons/magic/life/heart-cross-green.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.uUWb1wZgtMou0TVP
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!CHEUjiYrVM9X0vIT.uUWb1wZgtMou0TVP'
+effects: []
+folder: pEyqIq8DYb21xia3
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1726171212605
+  modifiedTime: 1726171441260
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!actors!CHEUjiYrVM9X0vIT'

@@ -1,0 +1,116 @@
+_id: ZYEqOSY9BLZs2GPx
+name: Bracers of Archery
+type: equipment
+img: icons/equipment/wrist/bracer-banded-leather.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While wearing these bracers, you have proficiency with the longbow and
+      shortbow, and you gain a +2 bonus to damage rolls on ranged attacks made
+      with such weapons.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 1500
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: bracers-of-archery
+effects:
+  - origin: Compendium.dnd5e.items.ZYEqOSY9BLZs2GPx
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: ChaLjlYldFzDgHHv
+    changes:
+      - key: system.traits.weaponProf.value
+        mode: 2
+        value: longbow
+        priority: null
+      - key: system.traits.weaponProf.value
+        mode: 2
+        value: shortbow
+        priority: null
+    tint: '#ffffff'
+    transfer: true
+    flags: {}
+    name: Bracers of Archery
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/equipment/wrist/bracer-studded-leather-steel.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!ZYEqOSY9BLZs2GPx.ChaLjlYldFzDgHHv'
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037218257
+  modifiedTime: 1725992523461
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!ZYEqOSY9BLZs2GPx'

@@ -1,0 +1,222 @@
+_id: 3ALOhh6JNInIK4o7
+name: Necklace of Fireballs
+type: consumable
+img: icons/equipment/neck/pendant-faceted-red.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p><p>This necklace has 1d6 + 3 beads hanging
+      from it. You can use an action to detach a bead and throw it up to 60 feet
+      away. When it reaches the end of its trajectory, the bead detonates as a
+      3rd-level @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{Fireball}
+      spell (save DC 15).</p><p>You can hurl multiple beads, or even the whole
+      necklace, as one action. When you do so, increase the level of the
+      fireball by 1 for each bead beyond the first.</p><section class="secret
+      foundry-note" id="secret-BPYFYGO4aUSbDiBj"><p><strong>Foundry
+      Note</strong></p><p>The 9 charges represent the maximum number of beads
+      possible to find; please adjust as required. The Other Formula button can
+      be used to roll the additional damage for extra beads
+      thrown.</p><p>Additionally, here is a price guide depending on the number
+      of beads still remaining. These prices are a guide only and should be
+      adjusted accordingly to reflect the Dungeon Master's
+      world:</p><table><thead><tr><td><strong>Number of
+      Beads</strong></td><td><strong>Price
+      (gp)</strong></td></tr></thead><tbody><tr><td>8</td><td>30,720</td></tr><tr><td>7</td><td>15,360</td></tr><tr><td>6</td><td>7680</td></tr><tr><td>5</td><td>3840</td></tr><tr><td>4</td><td>1600</td></tr><tr><td>3</td><td>960</td></tr><tr><td>2</td><td>480</td></tr><tr><td>1</td><td>300</td></tr></tbody></table></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.01
+    units: lb
+  price:
+    value: 61440
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '9'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: 8
+      denomination: 6
+      bonus: ''
+      types:
+        - fire
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '20'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 8
+            denomination: 6
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity300:
+      _id: dnd5eactivity300
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '20'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: 1d6
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: necklace-of-fireballs
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 700000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037092424
+  modifiedTime: 1725992481213
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!3ALOhh6JNInIK4o7'

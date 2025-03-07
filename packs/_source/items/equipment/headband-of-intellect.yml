@@ -1,0 +1,75 @@
+_id: a26LjC4QxP1oorXC
+name: Headband of Intellect
+type: equipment
+img: icons/equipment/finger/ring-cabochon-silver-gold-red.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>Your Intelligence score is 19 while you wear this headband. It has no
+      effect on you if your Intelligence is already 19 or higher.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.01
+    units: lb
+  price:
+    value: 8000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: headband-of-intellect
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037220656
+  modifiedTime: 1725992524246
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!a26LjC4QxP1oorXC'

@@ -1,0 +1,74 @@
+name: Manual of Golems
+img: icons/sundries/books/book-symbol-triangle-silver-blue.webp
+description: ''
+results:
+  - type: pack
+    weight: 1
+    range:
+      - 1
+      - 5
+    drawn: false
+    documentCollection: dnd5e.monsters
+    _id: IiSjf0idEypz8cx5
+    text: Clay Golem
+    img: systems/dnd5e/tokens/construct/ClayGolem.webp
+    documentId: YOqhbf8WsX0jH9Fu
+    flags: {}
+    _key: '!tables.results!htMPUPPABjI6fwck.IiSjf0idEypz8cx5'
+  - type: pack
+    weight: 1
+    range:
+      - 6
+      - 17
+    drawn: false
+    documentCollection: dnd5e.monsters
+    _id: QudkKiSsSl9eUJBu
+    text: Flesh Golem
+    img: icons/svg/mystery-man.svg
+    documentId: Hm4o2FgPZsdbXjLq
+    flags: {}
+    _key: '!tables.results!htMPUPPABjI6fwck.QudkKiSsSl9eUJBu'
+  - type: pack
+    weight: 1
+    range:
+      - 18
+      - 18
+    drawn: false
+    documentCollection: dnd5e.monsters
+    _id: 7uSrcciLe3oXFSui
+    text: Iron Golem
+    img: systems/dnd5e/tokens/construct/IronGolem.webp
+    documentId: h98AuPfomEPcCibP
+    flags: {}
+    _key: '!tables.results!htMPUPPABjI6fwck.7uSrcciLe3oXFSui'
+  - type: pack
+    weight: 1
+    range:
+      - 19
+      - 20
+    drawn: false
+    documentCollection: dnd5e.monsters
+    _id: sRgHiHl7d3sxL74G
+    text: Stone Golem
+    img: systems/dnd5e/tokens/construct/StoneGolem.webp
+    documentId: z3gSIXHHWYaHjfBT
+    flags: {}
+    _key: '!tables.results!htMPUPPABjI6fwck.sRgHiHl7d3sxL74G'
+formula: 1d20
+replacement: true
+displayRoll: true
+flags: {}
+_id: htMPUPPABjI6fwck
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037419526
+  modifiedTime: 1725037419526
+  lastModifiedBy: dnd5ebuilder0000
+sort: 0
+folder: null
+ownership:
+  default: 0
+_key: '!tables!htMPUPPABjI6fwck'

@@ -1,0 +1,170 @@
+name: Short-Term Madness
+img: icons/creatures/abilities/mouth-teeth-human.webp
+description: >-
+  <p>The character is afflicted with short-­term madness for [[/r 1d10]]
+  minutes.</p>
+results:
+  - _id: 11gmKaEIaMzlQbPJ
+    type: text
+    text: >-
+      The character retreats into his or her mind and becomes paralyzed. The
+      effect ends if the character takes any damage.
+    weight: 1
+    range:
+      - 1
+      - 20
+    drawn: false
+    flags: {}
+    img: icons/svg/d20-black.svg
+    documentCollection: ''
+    documentId: null
+    _key: '!tables.results!ypk2L9feVwTx0QVj.11gmKaEIaMzlQbPJ'
+  - _id: bqGX8s0fTVko5baU
+    type: text
+    text: >-
+      The character becomes incapacitated and spends the duration screaming,
+      laughing, or weeping.
+    weight: 1
+    range:
+      - 21
+      - 30
+    drawn: false
+    flags: {}
+    img: icons/svg/d20-black.svg
+    documentCollection: ''
+    documentId: null
+    _key: '!tables.results!ypk2L9feVwTx0QVj.bqGX8s0fTVko5baU'
+  - _id: U0Qg1YLAKphU5kth
+    type: text
+    text: >-
+      The character becomes frightened and must use his or her action and
+      movement each round to flee from the source of the fear.
+    weight: 1
+    range:
+      - 31
+      - 40
+    drawn: false
+    flags: {}
+    img: icons/svg/d20-black.svg
+    documentCollection: ''
+    documentId: null
+    _key: '!tables.results!ypk2L9feVwTx0QVj.U0Qg1YLAKphU5kth'
+  - _id: KehWVyHOeh1U5wNW
+    type: text
+    text: >-
+      The character begins babbling and is incapable of normal speech or
+      spellcasting.
+    weight: 1
+    range:
+      - 41
+      - 50
+    drawn: false
+    flags: {}
+    img: icons/svg/d20-black.svg
+    documentCollection: ''
+    documentId: null
+    _key: '!tables.results!ypk2L9feVwTx0QVj.KehWVyHOeh1U5wNW'
+  - _id: a3yyT0t1NsMgejTu
+    type: text
+    text: >-
+      The character must use his or her action each round to attack the nearest
+      creature.
+    weight: 1
+    range:
+      - 51
+      - 60
+    drawn: false
+    flags: {}
+    img: icons/svg/d20-black.svg
+    documentCollection: ''
+    documentId: null
+    _key: '!tables.results!ypk2L9feVwTx0QVj.a3yyT0t1NsMgejTu'
+  - _id: hanppRWYEVb64iUt
+    type: text
+    text: >-
+      The character experiences vivid hallucinations and has disadvantage on
+      ability checks.
+    weight: 1
+    range:
+      - 61
+      - 70
+    drawn: false
+    flags: {}
+    img: icons/svg/d20-black.svg
+    documentCollection: ''
+    documentId: null
+    _key: '!tables.results!ypk2L9feVwTx0QVj.hanppRWYEVb64iUt'
+  - _id: FnkRWI5RiPmRoxQs
+    type: text
+    text: >-
+      The character does whatever anyone tells him or her to do that isn’t
+      obviously self- destructive.
+    weight: 1
+    range:
+      - 71
+      - 75
+    drawn: false
+    flags: {}
+    img: icons/svg/d20-black.svg
+    documentCollection: ''
+    documentId: null
+    _key: '!tables.results!ypk2L9feVwTx0QVj.FnkRWI5RiPmRoxQs'
+  - _id: dswa3ZDK4ZIhw98a
+    type: text
+    text: >-
+      The character experiences an overpowering urge to eat something strange
+      such as dirt, slime, or offal.
+    weight: 1
+    range:
+      - 76
+      - 80
+    drawn: false
+    flags: {}
+    img: icons/svg/d20-black.svg
+    documentCollection: ''
+    documentId: null
+    _key: '!tables.results!ypk2L9feVwTx0QVj.dswa3ZDK4ZIhw98a'
+  - _id: zW1HUUNLqwmOfFgg
+    type: text
+    text: The character is stunned.
+    weight: 1
+    range:
+      - 81
+      - 90
+    drawn: false
+    flags: {}
+    img: icons/svg/d20-black.svg
+    documentCollection: ''
+    documentId: null
+    _key: '!tables.results!ypk2L9feVwTx0QVj.zW1HUUNLqwmOfFgg'
+  - _id: 0FNn7OzOX4DtlC4x
+    type: text
+    text: The character falls unconscious.
+    weight: 1
+    range:
+      - 91
+      - 100
+    drawn: false
+    flags: {}
+    img: icons/svg/d20-black.svg
+    documentCollection: ''
+    documentId: null
+    _key: '!tables.results!ypk2L9feVwTx0QVj.0FNn7OzOX4DtlC4x'
+formula: d100
+replacement: true
+displayRoll: true
+folder: null
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_id: ypk2L9feVwTx0QVj
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037419607
+  modifiedTime: 1727737463769
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!tables!ypk2L9feVwTx0QVj'

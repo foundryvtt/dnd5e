@@ -1,0 +1,83 @@
+_id: 8PI1EL8xHLq4tXKr
+name: Ring of Spell Turning
+type: equipment
+img: icons/equipment/finger/ring-band-engraved-scrolls-silver.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>While wearing this ring, you have advantage on saving throws against
+      any spell that targets only you (not in an area of effect). In addition,
+      if you roll a 20 for the save and the spell is 7th level or lower, the
+      spell has no effect on you and instead targets the caster, using the slot
+      level, spell save DC, attack bonus, and spellcasting ability of the
+      caster.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 30000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: ring
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: ring-of-spell-turning
+effects: []
+folder: 5jrDZJ1U23Q9jDqB
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037114117
+  modifiedTime: 1731018048579
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!8PI1EL8xHLq4tXKr'

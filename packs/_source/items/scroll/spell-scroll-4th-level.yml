@@ -1,0 +1,92 @@
+_id: DM7hzgL836ZyUFB1
+name: Spell Scroll 4th Level
+type: consumable
+img: icons/sundries/scrolls/scroll-bound-sealed-brown-grey.webp
+system:
+  description:
+    value: >-
+      <p>A spell scroll bears the words of a single spell, written in a mystical
+      cipher. If the spell is on your class's spell list, you can read the
+      scroll and cast its spell without providing any material components.
+      Otherwise, the scroll is unintelligible. Casting the spell by reading the
+      scroll requires the spell's normal casting time. Once the spell is cast,
+      the words on the scroll fade, and it crumbles to dust. If the casting is
+      interrupted, the scroll is not lost.</p>
+
+      <p>If the spell is on your class's spell list but of a higher level than
+      you can normally cast, you must make a DC 14 ability check using your
+      spellcasting ability to determine whether you cast it successfully. On a
+      failed check, the spell disappears from the scroll with no other
+      effect.</p>
+
+      <p>The level of the spell on the scroll determines the spell's saving
+      throw DC and attack bonus, as well as the scroll's rarity.</p>
+
+      <p><strong>Save DC</strong>: 15<br /><strong>Attack Bonus</strong>:
+      +7.</p>
+
+      <p>A wizard spell on a spell scroll can be copied just as spells in
+      spellbooks can be copied. When a spell is copied from a spell scroll, the
+      copier must succeed on a DC 14 Intelligence (Arcana) check. If the check
+      succeeds, the spell is successfully copied. Whether the check succeeds or
+      fails, the spell scroll is destroyed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 320
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: scroll
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities: {}
+  attuned: false
+  identifier: spell-scroll-4th-level
+effects: []
+folder: epDf8I2SD3cS6ctz
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037130829
+  modifiedTime: 1725992494041
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!DM7hzgL836ZyUFB1'

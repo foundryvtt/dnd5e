@@ -1,0 +1,121 @@
+_id: KeunEkg1JYbOCOhV
+name: Circle of Death
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: "<p>A sphere of negative energy ripples out in a 60-foot radius from a point within range. Each creature in that area must make a Constitution saving throw. A target takes 8d6 necrotic damage on a failed save, or half as much damage on a successful one.</p><p><strong>Higher Levels.</strong>\_When you cast this spell using a spell slot of 7th level or higher, the damage increases by 2d6 for each slot level above 6th.</p>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+    template:
+      units: ft
+      type: sphere
+      size: '60'
+      contiguous: false
+  range:
+    value: '150'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 6
+  school: nec
+  materials:
+    value: The powder of a crushed black pearl worth at least 500 gp.
+    consumed: false
+    cost: 500
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 8
+            denomination: 6
+            bonus: ''
+            types:
+              - necrotic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: 2
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: circle-of-death
+sort: 0
+flags: {}
+img: icons/magic/air/air-burst-spiral-large-teal-green.webp
+effects: []
+folder: 0pdesvXqKd55VOh2
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037353462
+  modifiedTime: 1725992718956
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!KeunEkg1JYbOCOhV'

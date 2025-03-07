@@ -1,0 +1,144 @@
+_id: 29e6gHwWKNLaRUoz
+name: Rope of Climbing
+type: consumable
+img: icons/sundries/survival/rope-wrapped-loops-grey.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This 60-foot length of silk rope weighs 3 pounds and can hold up to
+      3,000 pounds. If you hold one end of the rope and use an action to speak
+      the command word, the rope animates. As a bonus action, you can command
+      the other end to move toward a destination you choose. That end moves 10
+      feet on your turn when you first command it and 10 feet on each of your
+      turns until reaching its destination, up to its maximum length away, or
+      until you tell it to stop. You can also tell the rope to fasten itself
+      securely to an object or to unfasten itself, to knot or unknot itself, or
+      to coil itself for carrying.</p>
+
+      <p>If you tell the rope to knot, large knots appear at 1- foot intervals
+      along the rope. While knotted, the rope shortens to a 50-foot length and
+      grants advantage on checks made to climb it.</p>
+
+      <p>The rope has AC 20 and 20 hit points. It regains 1 hit point every 5
+      minutes as long as it has at least 1 hit point. If the rope drops to 0 hit
+      points, it is destroyed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: '20'
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: Command word. A bonus action to move one end 10 ft.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: rope-of-climbing
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 300000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037088284
+  modifiedTime: 1725992479886
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!29e6gHwWKNLaRUoz'

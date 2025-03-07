@@ -1,0 +1,233 @@
+_id: TwYeck6buBZ602mg
+name: Crystal Ball of Mind Reading
+type: consumable
+img: icons/commodities/gems/pearl-swirl-teal.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>The Crystal Ball is about 6 inches in diameter. While touching it, you
+      can cast the
+      @UUID[Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20]{Scrying}spell (save
+      DC 17) with it.</p>
+
+      <p>You can use an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er]{Detect Thoughts}
+      spell (save DC 17) while you are Scrying with the Crystal Ball, targeting
+      creatures you can see within 30 feet of the spell's sensor. You don't need
+      to concentrate on this Detect Thoughts to maintain it during its duration,
+      but it ends if Scrying ends.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 7
+    units: lb
+  price:
+    value: 60000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '10'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '17'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    tZv4jpd4zviSzUWu:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: tZv4jpd4zviSzUWu
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    fRkGCqgiCHP528xk:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: fRkGCqgiCHP528xk
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: true
+        condition: While you are Scrying with the Crystal Ball
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: spec
+        concentration: false
+        override: true
+        special: As long as the Scrying spell is active
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: crystal-ball-of-mind-reading
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 5600000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037195309
+  modifiedTime: 1729014839344
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!TwYeck6buBZ602mg'

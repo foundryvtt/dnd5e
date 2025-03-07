@@ -1,0 +1,136 @@
+_id: FkDyLSpiynKTQZdi
+name: Wings of Flying
+type: equipment
+img: icons/equipment/back/cloak-layered-white.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While wearing this cloak, you can use an action to speak its command
+      word. This turns the cloak into a pair of bat wings or bird wings on your
+      back for 1 hour or until you repeat the command word as an action. The
+      wings give you a flying speed of 60 feet. When they disappear, you can't
+      use them again for 1d12 hours.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 5000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: '1'
+    recovery: []
+    spent: 0
+  armor:
+    value: null
+    dex: null
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: wings-of-flying
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037144651
+  modifiedTime: 1725992498727
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!FkDyLSpiynKTQZdi'

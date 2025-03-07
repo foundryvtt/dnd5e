@@ -1,0 +1,233 @@
+_id: EJVaAvNfCq6gn6VG
+name: Helm of Telepathy
+type: equipment
+img: icons/equipment/head/helm-spangen.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While wearing this helm, you can use an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er]{Detect Thoughts}
+      spell (save DC 13) from it. As long as you maintain concentration on the
+      spell, you can use a bonus action to send a telepathic message to a
+      creature you are focused on. It can reply using a bonus action to do so
+      while your focus on it continues.<br />While focusing on a creature with
+      Detect Thoughts, you can use an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.zMAWdyc8UVb37BK4]{Suggestion} spell
+      (save DC 13) from the helm on that creature. Once used, the Suggestion
+      property can't be used again until the next dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 12000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    ojwSZNV7dBmpFdcC:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: ojwSZNV7dBmpFdcC
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    HG9ikbJ7bHYwKcug:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.zMAWdyc8UVb37BK4
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: HG9ikbJ7bHYwKcug
+      sort: 200000
+      activation:
+        type: action
+        value: null
+        override: true
+        condition: While focusing on a creature with Detect Thoughts
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      name: ''
+      img: ''
+    0KtYlJxRLKoAwU8R:
+      type: utility
+      _id: 0KtYlJxRLKoAwU8R
+      sort: 100000
+      activation:
+        type: bonus
+        value: null
+        override: false
+        condition: While focusing on a creature with Detect Thoughts
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Telepathic Message
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: helm-of-telepathy
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037137132
+  modifiedTime: 1729016158181
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!EJVaAvNfCq6gn6VG'

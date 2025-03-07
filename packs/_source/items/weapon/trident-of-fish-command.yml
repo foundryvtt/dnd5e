@@ -1,0 +1,234 @@
+_id: o4Irx3hHiD3FnPbL
+name: Trident of Fish Command
+type: weapon
+img: icons/weapons/polearms/trident-ice-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>This trident is a magic weapon. It has 3 charges. While you carry it,
+      you can use an action and expend 1 charge to cast
+      @UUID[Compendium.dnd5e.spells.Item.LrPvWHBPmiMQQsKB]{Dominate Beast} (save
+      DC 15) from it on a beast that has an innate swimming speed. The trident
+      regains 1d3 expended charges daily at dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 800
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  range:
+    value: 20
+    long: 60
+    units: ft
+    reach: null
+  uses:
+    max: '3'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d3
+    spent: 0
+  damage:
+    versatile:
+      number: 1
+      denomination: 8
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 6
+      bonus: ''
+      types:
+        - piercing
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - mgc
+    - thr
+    - ver
+  proficient: null
+  type:
+    value: martialM
+    baseItem: trident
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '20'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    jkhhrMO1QkMunxL3:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.LrPvWHBPmiMQQsKB
+        challenge:
+          attack: null
+          save: 15
+          override: true
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+        spellbook: true
+        ability: ''
+      _id: jkhhrMO1QkMunxL3
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  ammunition: {}
+  identifier: trident-of-fish-command
+  mastery: ''
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.3.0
+  createdTime: 1725037285209
+  modifiedTime: 1738530163351
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!o4Irx3hHiD3FnPbL'

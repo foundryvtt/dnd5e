@@ -1,0 +1,122 @@
+_id: rY9sRFQp5CFSfsat
+name: Helm of Comprehending Languages
+type: equipment
+img: icons/equipment/head/helm-spangen-ridged.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>While wearing this helm, you can use an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.4dSvfvTy2ZIJ3K4k]{Comprehend Languages}
+      spell from it at will.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 500
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 0
+    dex: null
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    IdB6TzhzjLfc2Zlt:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.4dSvfvTy2ZIJ3K4k
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: IdB6TzhzjLfc2Zlt
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+  attuned: false
+  identifier: helm-of-comprehending-languages
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 150000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037299729
+  modifiedTime: 1729015970591
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!rY9sRFQp5CFSfsat'

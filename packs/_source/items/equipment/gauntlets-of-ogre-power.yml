@@ -1,0 +1,111 @@
+name: Gauntlets of Ogre Power
+type: equipment
+img: icons/equipment/hand/gauntlet-armored-steel-grey.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>Your Strength score is 19 while you wear these gauntlets. They have no
+      effect on you if your Strength is already 19 or higher.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 8000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: gauntlets-of-ogre-power
+effects:
+  - origin: Compendium.dnd5e.items.3TWT5bv3z5zGUZCe
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: m7FoXVGKT7C9X7aq
+    changes:
+      - key: system.abilities.str.value
+        mode: 4
+        value: '19'
+        priority: null
+    tint: '#ffffff'
+    transfer: true
+    flags: {}
+    name: Gauntlets of Ogre Power
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/magic/unholy/strike-hand-glow-pink.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!3TWT5bv3z5zGUZCe.m7FoXVGKT7C9X7aq'
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037093565
+  modifiedTime: 1725992481610
+  lastModifiedBy: dnd5ebuilder0000
+folder: aJgMxnZED9XdoN2W
+sort: 0
+_id: 3TWT5bv3z5zGUZCe
+_key: '!items!3TWT5bv3z5zGUZCe'

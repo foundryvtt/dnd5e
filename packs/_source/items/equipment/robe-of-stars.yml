@@ -1,0 +1,145 @@
+_id: 66UkbfH0PVwo4HgA
+name: Robe of Stars
+type: equipment
+img: icons/equipment/back/cloak-plain-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>This black or dark blue robe is embroidered with small white or silver
+      stars. You gain a +1 bonus to saving throws while you wear it.</p>
+
+      <p>Six stars, located on the robe's upper front portion, are particularly
+      large. While wearing this robe, you can use an action to pull off one of
+      the stars and use it to cast
+      @UUID[Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs]{Magic Missile} as a
+      5th-level spell.</p>
+
+      <p>Daily at dusk, 1d6 removed stars reappear on the robe.</p>
+
+      <p>While you wear the robe, you can use an action to enter the Astral
+      Plane along with everything you are wearing and carrying. You remain there
+      until you use an action to return to the plane you were on. You reappear
+      in the last space you occupied, or if that space is occupied, the nearest
+      unoccupied space.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 60000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  uses:
+    max: '6'
+    recovery:
+      - period: dusk
+        type: formula
+        formula: 1d6
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    92G7MERyWhYbo63o:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.41JIhpDyM9Anm7cs
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 92G7MERyWhYbo63o
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: robe-of-stars
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037103368
+  modifiedTime: 1729015465163
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!66UkbfH0PVwo4HgA'

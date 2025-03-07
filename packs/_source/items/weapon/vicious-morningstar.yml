@@ -1,0 +1,165 @@
+_id: Vm6SuX6TkDvSIVGr
+name: Vicious Morningstar
+type: weapon
+img: icons/weapons/maces/mace-round-spiked-black.webp
+system:
+  description:
+    value: >-
+      <p>A viciously spiked metal orb mounted upon the end of a stout haft makes
+      for a deadly weapon which can puncture armor and flesh alike.</p>
+
+      <p>When you roll a 20 on your attack roll with this magic weapon, your
+      critical hit deals an extra 2d6 damage of the weapon's type.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 350
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ft
+    reach: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 8
+      bonus: ''
+      types:
+        - piercing
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - mgc
+  proficient: null
+  type:
+    value: martialM
+    baseItem: morningstar
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: 2d6
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  ammunition: {}
+  identifier: vicious-morningstar
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037202447
+  modifiedTime: 1725992518157
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!Vm6SuX6TkDvSIVGr'

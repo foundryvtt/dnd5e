@@ -1,0 +1,146 @@
+_id: tIwoSAGJlcuyiwaQ
+name: Dragon Scale Mail
+type: equipment
+img: icons/equipment/chest/breastplate-banded-steel.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p><p>Dragon Scale Mail is made of the
+      scales of one kind of dragon. Sometimes dragons collect their cast-off
+      scales and gift them to humanoids. Other times, hunters carefully skin and
+      preserve the hide of a dead dragon. In either case, dragon scale mail is
+      highly valued.</p><p>While wearing this armor, you gain a +1 bonus to AC,
+      you have advantage on saving throws against the Frightful Presence and
+      Breath Weapons of dragons, and you have resistance to one damage type that
+      is determined by the kind of dragon that provided the scales (see the
+      table).</p><p>Additionally, you can focus your senses as an action to
+      magically discern the distance and direction to the closest dragon within
+      30 miles of you that is of the same type as the armor. This special action
+      can't be used again until the next
+      dawn.</p><table><thead><tr><th><p><strong>Dragon</strong></p></th><th><p><strong>Resistance</strong></p></th></tr></thead><tbody><tr><td><p>Black</p></td><td><p>Acid</p></td></tr><tr><td><p>Blue</p></td><td><p>Lightning</p></td></tr><tr><td><p>Brass</p></td><td><p>Fire</p></td></tr><tr><td><p>Bronze</p></td><td><p>Lightning</p></td></tr><tr><td><p>Copper</p></td><td><p>Acid</p></td></tr><tr><td><p>Gold</p></td><td><p>Fire</p></td></tr><tr><td><p>Green</p></td><td><p>Poison</p></td></tr><tr><td><p>Red</p></td><td><p>Fire</p></td></tr><tr><td><p>Silver</p></td><td><p>Cold</p></td></tr><tr><td><p>White</p></td><td><p>Cold</p></td></tr></tbody></table>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 45
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    spent: 0
+  armor:
+    value: 14
+    dex: 2
+    magicalBonus: 1
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: medium
+    baseItem: scalemail
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+    - stealthDisadvantage
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '30'
+        units: mi
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: dragon-scale-mail
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037308134
+  modifiedTime: 1725992553656
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!tIwoSAGJlcuyiwaQ'

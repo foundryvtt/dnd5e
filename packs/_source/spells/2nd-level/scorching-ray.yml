@@ -1,0 +1,132 @@
+_id: 7u2obDvuvtZBkTfq
+name: Scorching Ray
+ownership:
+  default: 0
+type: spell
+system:
+  description:
+    value: >-
+      <p>You create three rays of fire and hurl them at targets within range.
+      You can hurl them at one target or several.</p><p>Make a ranged Spell
+      Attack for each ray. On a hit, the target takes 2d6 fire
+      damage.</p><p><strong>Higher Levels.</strong> When you cast this spell
+      using a spell slot of 3rd level or higher, you create one additional ray
+      for each slot level above 2nd.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  activation:
+    type: action
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      type: creature
+      count: '3'
+      choice: false
+    template:
+      units: ''
+      contiguous: false
+  range:
+    value: '120'
+    units: ft
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 2
+  school: evo
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: spell
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - number: 2
+            denomination: 6
+            bonus: ''
+            types:
+              - fire
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: scorching-ray
+sort: 0
+flags: {}
+img: icons/magic/light/beam-rays-red.webp
+effects: []
+folder: Qi4Se3we69ukl2V9
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037348508
+  modifiedTime: 1725992717362
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!7u2obDvuvtZBkTfq'

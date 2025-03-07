@@ -1,0 +1,416 @@
+_id: wGDDt17DpBcXPuUD
+name: Hammer of Thunderbolts
+type: weapon
+img: icons/weapons/hammers/hammer-double-glowing-yellow.webp
+system:
+  description:
+    value: >-
+      <p>You gain a +1 bonus to attack and damage rolls made with this magic
+      weapon (maul).</p>
+
+      <p><strong>Giant's Bane</strong> (<em>requires attunement</em>)</p>
+
+      <p>You must be wearing a Belt of Giant Strength (any variety) and
+      Gauntlets of Ogre Power to attune to this weapon. The attunement ends if
+      you take off either of those items. While you are attuned to this weapon
+      and holding it, your Strength score increases by 4 and can exceed 20, but
+      not 30.</p>
+
+      <p>When you roll a 20 on an attack roll made with this weapon against a
+      giant, the giant must succeed on a DC 17 Constitution saving throw or
+      die.</p>
+
+      <p>The hammer also has 5 charges. While attuned to it, you can expend 1
+      charge and make a ranged weapon attack with the hammer, hurling it as if
+      it had the thrown property with a normal range of 20 feet and a long range
+      of 60 feet. If the attack hits, the hammer unleashes a thunderclap audible
+      out to 300 feet. The target and every creature within 30 feet of it must
+      succeed on a DC 17 Constitution saving throw or be stunned until the end
+      of your next turn. The hammer regains 1d4 + 1 expended charges daily at
+      dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 10
+    units: lb
+  price:
+    value: 16000
+    denomination: gp
+  attunement: optional
+  equipped: false
+  rarity: legendary
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: 60
+    units: ft
+    reach: null
+  uses:
+    max: '5'
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d4 + 1
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 2
+      denomination: 6
+      bonus: ''
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - hvy
+    - mgc
+    - two
+  proficient: null
+  type:
+    value: martialM
+    baseItem: maul
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: 1
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: ''
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: special
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: A giant must succeed or die
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: ''
+        units: spec
+        special: ''
+        override: true
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '17'
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Giant's Bane (On Crit)
+      img: ''
+      appliedEffects: []
+    HUaufCvw2ISsEtbL:
+      type: attack
+      name: Hurl Hammer
+      _id: HUaufCvw2ISsEtbL
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '20'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: ''
+        ability: ''
+        bonus: ''
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      img: ''
+      appliedEffects: []
+    raoOPd1C5wdDhOed:
+      type: save
+      name: Thunderclap
+      _id: raoOPd1C5wdDhOed
+      sort: 0
+      activation:
+        type: special
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: Succeed or be stunned
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: spec
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: sphere
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '17'
+      img: ''
+      appliedEffects: []
+  attuned: false
+  ammunition: {}
+  identifier: hammer-of-thunderbolts
+  mastery: ''
+effects:
+  - name: Hammer of Thunderbolts
+    img: icons/weapons/hammers/hammer-double-glowing-yellow.webp
+    _id: 95tYhecAl2D69Gtv
+    type: base
+    system: {}
+    changes:
+      - key: system.abilities.str.value
+        mode: 2
+        value: '4'
+        priority: null
+      - key: system.abilities.str.max
+        mode: 4
+        value: '30'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>While attuned to the Hammer of Thunderbolts, your Strength score
+      increases by 4 and can exceed 20, but not 30.</p>
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.1.0
+      createdTime: 1727820504791
+      modifiedTime: 1727820574644
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!wGDDt17DpBcXPuUD.95tYhecAl2D69Gtv'
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037317730
+  modifiedTime: 1730938414461
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!wGDDt17DpBcXPuUD'

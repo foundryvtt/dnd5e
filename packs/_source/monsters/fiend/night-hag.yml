@@ -1,0 +1,1866 @@
+_id: xvh2UOKv1bh03Gih
+name: Night Hag
+type: npc
+img: null
+system:
+  abilities:
+    str:
+      value: 18
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    dex:
+      value: 15
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    con:
+      value: 16
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    int:
+      value: 16
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    wis:
+      value: 14
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    cha:
+      value: 16
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+  attributes:
+    ac:
+      flat: 17
+      calc: natural
+      formula: ''
+    hp:
+      value: 112
+      max: 112
+      temp: null
+      tempmax: 0
+      formula: 15d8 + 45
+    init:
+      ability: ''
+      bonus: '0'
+      roll:
+        min: null
+        max: null
+        mode: 0
+    movement:
+      burrow: 0
+      climb: 0
+      fly: 0
+      swim: 0
+      walk: 30
+      units: ft
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: 120
+      blindsight: 0
+      tremorsense: 0
+      truesight: 0
+      units: ft
+      special: ''
+    spellcasting: cha
+    exhaustion: 0
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+    hd:
+      spent: 0
+    death:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      success: 0
+      failure: 0
+  details:
+    biography:
+      value: ''
+      public: ''
+    alignment: Neutral Evil
+    race: null
+    type:
+      value: fiend
+      subtype: ''
+      swarm: ''
+      custom: ''
+    environment: ''
+    cr: 5
+    spellLevel: 0
+    ideal: ''
+    bond: ''
+    flaw: ''
+  traits:
+    size: med
+    di:
+      value: []
+      bypasses: []
+      custom: ''
+    dr:
+      value:
+        - bludgeoning
+        - cold
+        - fire
+        - piercing
+        - slashing
+      bypasses:
+        - mgc
+        - sil
+      custom: ''
+    dv:
+      value: []
+      bypasses: []
+      custom: ''
+    ci:
+      value:
+        - charmed
+      custom: ''
+    languages:
+      value:
+        - abyssal
+        - common
+        - infernal
+        - primordial
+      custom: ''
+    dm:
+      amount: {}
+      bypasses: []
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  skills:
+    acr:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ani:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    arc:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ath:
+      value: 0
+      ability: str
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    dec:
+      value: 1
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    his:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ins:
+      value: 1
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    itm:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    inv:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    med:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    nat:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prc:
+      value: 1
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prf:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    per:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    rel:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    slt:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ste:
+      value: 1
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    sur:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+  spells:
+    spell1:
+      value: 0
+      override: null
+    spell2:
+      value: 0
+      override: null
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+    spell0:
+      value: 0
+      override: null
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  resources:
+    legact:
+      value: 0
+      max: 0
+    legres:
+      value: 0
+      max: 0
+    lair:
+      value: false
+      initiative: null
+  tools: {}
+  source:
+    custom: ''
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 1
+    rules: '2014'
+prototypeToken:
+  name: Night Hag
+  displayName: 20
+  actorLink: false
+  width: 1
+  height: 1
+  lockRotation: false
+  rotation: 0
+  disposition: -1
+  displayBars: 40
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  flags: {}
+  randomImg: false
+  alpha: 1
+  light:
+    alpha: 1
+    angle: 360
+    bright: 0
+    coloration: 1
+    dim: 0
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      speed: 5
+      intensity: 5
+      type: null
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+    attenuation: 0.5
+    color: null
+    negative: false
+    priority: 0
+  texture:
+    src: null
+    tint: '#ffffff'
+    scaleX: 1
+    scaleY: 1
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    alphaThreshold: 0.75
+  sight:
+    angle: 360
+    enabled: false
+    range: 120
+    brightness: 0
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  appendNumber: false
+  prependAdjective: false
+  hexagonalShape: 0
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
+items:
+  - _id: bUkTkdnQ3XbRcXkD
+    name: Innate Spellcasting
+    type: feat
+    img: icons/magic/light/projectiles-star-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The hag's innate spellcasting ability is Charisma (spell save DC
+          14, +6 to hit with spell attacks). She can innately cast the following
+          spells, requiring no material components:</p>
+
+          <p>At will: detect magic, magic missile</p>
+
+          <p>2/day each: plane shift (self only), ray of enfeeblement, sleep</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: innate-spellcasting
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!xvh2UOKv1bh03Gih.bUkTkdnQ3XbRcXkD'
+  - _id: 9Gf1hal94HjuAHMN
+    name: Plane Shift (self only)
+    type: spell
+    img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
+    system:
+      description:
+        value: >-
+          <p>You and up to eight willing creatures who link hands in a circle
+          are transported to a different plane of existence. You can specify a
+          target destination in general terms, such as the City of Brass on the
+          Elemental Plane of Fire or the palace of Dispater on the second level
+          of the Nine Hells, and you appear in or near that destination. If you
+          are trying to reach the City of Brass, for example, you might arrive
+          in its Street of Steel, before its Gate of Ashes, or looking at the
+          city from across the Sea of Fire, at the DM's
+          discretion.</p><p>Alternatively, if you know the sigil sequence of a
+          teleportation circle on another plane of existence, this spell can
+          take you to that circle. If the teleportation circle is too small to
+          hold all the creatures you transported, they appear in the closest
+          unoccupied spaces next to the circle.</p><p>You can use this spell to
+          banish an unwilling creature to another plane. Choose a creature
+          within your reach and make a melee spell attack against it. On a hit,
+          the creature must make a Charisma saving throw. If the creature fails
+          this save, it is transported to a random location on the plane of
+          existence you specify. A creature so transported must find its own way
+          back to your current plane of existence.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '8'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: '2'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 7
+      school: con
+      materials:
+        value: ''
+        consumed: false
+        cost: 250
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: spell
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 0
+        dnd5eactivity100:
+          _id: dnd5eactivity100
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: cha
+            dc:
+              calculation: spellcasting
+              formula: '14'
+          sort: 0
+      identifier: plane-shift-self-only
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!xvh2UOKv1bh03Gih.9Gf1hal94HjuAHMN'
+  - _id: OMZ6qNK1bdpI8ryh
+    name: Magic Resistance
+    type: feat
+    img: icons/magic/defensive/shield-barrier-glowing-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The hag has<strong> advantage </strong>on saving throws against
+          spells and other magical effects.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: magic-resistance
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!xvh2UOKv1bh03Gih.OMZ6qNK1bdpI8ryh'
+  - _id: Um3cK4i4ZQSTqodb
+    name: Claws (Hag Form Only)
+    type: weapon
+    img: icons/skills/melee/strike-slashes-red.webp
+    system:
+      description:
+        value: >-
+          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
+          ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>slashing
+          damage</em></strong>.</p>
+        chat: <p>The Night Hag attacks with its Claws.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: 5
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 2
+          denomination: 8
+          bonus: ''
+          types:
+            - slashing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties: []
+      proficient: 1
+      unidentified:
+        description: ''
+      type:
+        value: natural
+        baseItem: ''
+      container: null
+      crewed: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: str
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 0
+      attuned: false
+      ammunition: {}
+      magicalBonus: null
+      identifier: claws-hag-form-only
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676758
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!xvh2UOKv1bh03Gih.Um3cK4i4ZQSTqodb'
+  - _id: ftmaVOSJXvHPhraJ
+    name: Change Shape
+    type: feat
+    img: icons/magic/control/silhouette-hold-change-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The hag magically <strong>polymorphs</strong> into a
+          <strong>Small</strong> or <strong>Medium female humanoid, or back into
+          her true form</strong>. Her statistics are the same in each form.
+          <strong>Any equipment she is wearing or carrying isn't
+          transformed</strong>. She reverts to her true form if she dies.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: change-shape
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!xvh2UOKv1bh03Gih.ftmaVOSJXvHPhraJ'
+  - _id: 0blKOND2AnsMsZa6
+    name: Etherealness
+    type: feat
+    img: icons/magic/unholy/barrier-shield-glowing-pink.webp
+    system:
+      description:
+        value: ''
+        chat: >-
+          <section class="secret"><p></p></section><p>The hag magically enters
+          the Ethereal Plane from the Material Plane, or vice versa. To do so,
+          the hag must have a heartstone in her possession.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: etherealness
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.rDoNJnKdY47x8MD4
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.rDoNJnKdY47x8MD4
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676758
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!xvh2UOKv1bh03Gih.0blKOND2AnsMsZa6'
+  - _id: tYZggJHgAbixP5rs
+    name: Nightmare Haunting
+    type: feat
+    img: icons/commodities/tech/smoke-bomb-purple.webp
+    system:
+      description:
+        value: >-
+          <p>While on the Ethereal Plane, the hag magically touches a sleeping
+          humanoid on the Material Plane. A protection from evil and good spell
+          cast on the target prevents this contact, as does a magic circle.
+          </p><p>As long as the contact persists, the target has dreadful
+          visions. If these visions last for at least 1 hour, the target gains
+          no benefit from its rest, and its hit point maximum is reduced by 5
+          (1d10). If this effect reduces the target's hit point maximum to 0,
+          the target dies, and if the target was evil, its soul is trapped in
+          the hag's soul bag. The reduction to the target's hit point maximum
+          lasts until removed by the greater restoration spell or similar
+          magic.</p>
+        chat: >-
+          <p>While on the Ethereal Plane, the hag magically touches a sleeping
+          humanoid on the Material Plane. As long as the contact persists, the
+          target has dreadful visions.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: '1'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: nightmare-haunting
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.VbBHypDc0eLWbsNE
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.VbBHypDc0eLWbsNE
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676758
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!xvh2UOKv1bh03Gih.tYZggJHgAbixP5rs'
+  - _id: ghXTfe7sgCbgf1Q8
+    name: Detect Magic
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>For the duration, you sense the presence of magic within 30 feet of
+          you. If you sense magic in this way, you can use your action to see a
+          faint aura around any visible creature or object in the area that
+          bears magic, and you learn its school of magic, if any.</p><p>The
+          spell can penetrate most barriers, but it is blocked by 1 foot of
+          stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood
+          or dirt.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: radius
+          size: '30'
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: div
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - ritual
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: detect-magic
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
+    img: icons/magic/light/explosion-star-blue.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!xvh2UOKv1bh03Gih.ghXTfe7sgCbgf1Q8'
+  - _id: 41JIhpDyM9Anm7cs
+    name: Magic Missile
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: "<p>You create three glowing darts of magical force. Each dart hits a creature of your choice that you can see within range. A dart deals 1d4 + 1 force damage to its target. The darts all strike simultaneously, and you can direct them to hit one creature or several.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a spell slot of 2nd level or higher, the spell creates one more dart for each slot level above 1st.</p>"
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '120'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: evo
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: damage
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            critical:
+              allow: false
+              bonus: ''
+            parts:
+              - number: 1
+                denomination: 4
+                bonus: '1'
+                types:
+                  - force
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: null
+                  formula: ''
+          sort: 0
+      identifier: magic-missile
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.41JIhpDyM9Anm7cs
+    img: icons/magic/fire/projectile-meteor-salvo-light-pink.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.41JIhpDyM9Anm7cs
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!xvh2UOKv1bh03Gih.41JIhpDyM9Anm7cs'
+  - _id: ODhLKBxLnvvLOnw1
+    name: Ray of Enfeeblement
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>A black beam of enervating energy springs from your finger toward a
+          creature within range. Make a ranged spell attack against the target.
+          On a hit, the target deals only half damage with weapon attacks that
+          use Strength until the spell ends.</p><p>At the end of each of the
+          target's turns, it can make a Constitution saving throw against the
+          spell. On a success, the spell ends.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: '2'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 2
+      school: nec
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: spell
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 0
+        dnd5eactivity100:
+          _id: dnd5eactivity100
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: con
+            dc:
+              calculation: spellcasting
+              formula: '14'
+          sort: 0
+      identifier: ray-of-enfeeblement
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.ODhLKBxLnvvLOnw1
+    img: icons/magic/light/beam-rays-teal.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.ODhLKBxLnvvLOnw1
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!xvh2UOKv1bh03Gih.ODhLKBxLnvvLOnw1'
+  - _id: KhwiSi9fwVfUPtku
+    name: Sleep
+    type: spell
+    img: icons/magic/light/explosion-star-small-pink.webp
+    system:
+      description:
+        value: >-
+          <p>This spell sends creatures into a magical slumber. Roll 5d8; the
+          total is how many hit points of creatures this spell can affect.
+          Creatures within 20 feet of a point you choose within range are
+          affected in ascending order of their current hit points (ignoring
+          unconscious creatures).</p><p>Starting with the creature that has the
+          lowest current hit points, each creature affected by this spell falls
+          unconscious until the spell ends, the sleeper takes damage, or someone
+          uses an action to shake or slap the sleeper awake. Subtract each
+          creature's hit points from the total before moving on to the creature
+          with the next lowest hit points. A creature's hit points must be equal
+          to or less than the remaining total for that creature to be
+          affected.</p><p>Undead and creatures immune to being charmed aren't
+          affected by this spell.</p><p><strong>Higher Levels.</strong> When you
+          cast this spell using a spell slot of 2nd level or higher, roll an
+          additional 2d8 for each slot level above 1st.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: sphere
+          size: '20'
+          contiguous: false
+      range:
+        value: '90'
+        units: ft
+      uses:
+        max: '2'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 1
+      school: enc
+      materials:
+        value: A pinch of fine sand, rose petals, or a cricket.
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: damage
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            critical:
+              allow: false
+              bonus: ''
+            parts:
+              - number: 5
+                denomination: 8
+                bonus: ''
+                types: []
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 2
+                  formula: ''
+          sort: 0
+      identifier: sleep
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!xvh2UOKv1bh03Gih.KhwiSi9fwVfUPtku'
+effects: []
+folder: P1YKVDd1IN7XXWWy
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1726171266109
+  modifiedTime: 1726171451880
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!actors!xvh2UOKv1bh03Gih'

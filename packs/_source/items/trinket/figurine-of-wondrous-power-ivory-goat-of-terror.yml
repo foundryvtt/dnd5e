@@ -1,0 +1,129 @@
+_id: 8CaODbNQtxHGuVjn
+name: Figurine of Wondrous Power (Ivory Goat of Terror)
+type: consumable
+img: icons/commodities/bones/horn-curved-worn-brown.webp
+system:
+  description:
+    value: "<p><em>Wondrous item</em></p>\n<p>A\_<em>figurine of wondrous power</em>\_is a statuette of a beast small enough to fit in a pocket. If you use an action to speak the command word and throw the figurine to a point on the ground within 60 feet of you, the figurine becomes a living creature. If the space where the creature would appear is occupied by other creatures or objects, or if there isn't enough space for the creature, the figurine doesn't become a creature.</p>\n<p>The creature is friendly to you and your companions. It understands your languages and obeys your spoken commands. If you issue no commands, the creature defends itself but takes no other actions.</p>\n<p>The creature exists for a duration specific to each figurine. At the end of the duration, the creature reverts to its figurine form. It reverts to a figurine early if it drops to 0 hit points or if you use an action to speak the command word again while touching it. When the creature becomes a figurine again, its property can't be used again until a certain amount of time has passed, as specified in the figurine's description.</p>\n<p><strong>Ivory Goats</strong>. These ivory statuettes of goats are always created in sets of three. Each goat looks unique and functions differently from the others.</p>\n<p>The Goat of Terror becomes a @UUID[Compendium.dnd5e.monsters.Actor.rjqk7ToMD8sGr3n4]{Giant Goat} for up to 3 hours. The goat can't attack, but you can remove its horns and use them as weapons. One horn becomes a @UUID[Compendium.dnd5e.items.Item.l88FXiodYofrJT8a]{Lance +1}, and the other becomes a @UUID[Compendium.dnd5e.items.Item.bcv7J9culilK68zp]{Longsword +2}. Removing a horn requires an action, and the weapons disappear and the horns return when the goat reverts to figurine form.</p>\n<p>In addition, the goat radiates a 30-foot-radius aura of terror while you are riding it. Any creature hostile to you that starts its turn in the aura must succeed on a DC 15 Wisdom saving throw or be frightened of the goat for 1 minute, or until the goat reverts to figurine form. The frightened creature can repeat the saving throw at the end of each of its turns, ending the effect on itself on a success. Once it successfully saves against the effect, a creature is immune to the goat's aura for the next 24 hours.</p>\n<p>Once the figurine has been used, it can't be used again until 15 days have passed.</p>"
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 20000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '3'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: '10'
+          type: space
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '15'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: figurine-of-wondrous-power-ivory-goat-of-terror
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 1600000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037111549
+  modifiedTime: 1725992487697
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!8CaODbNQtxHGuVjn'

@@ -1,0 +1,79 @@
+_id: W1kDsFekjroIywuz
+name: Studded Leather Armor of Resistance
+type: equipment
+img: icons/equipment/chest/breastplate-rivited-red.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>You have resistance to one type of damage while you wear this armor.
+      The GM chooses the type or determines it randomly from the
+      @UUID[Compendium.dnd5e.tables.RollTable.VRqG3F72ebgNHyVR]{Armor of
+      Resistance} table.
+
+      </p><p> </p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 13
+    units: lb
+  price:
+    value: 6045
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 12
+    dex: null
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: light
+    baseItem: studded
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: studded-leather-armor-of-resistance
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037203331
+  modifiedTime: 1725992518442
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!W1kDsFekjroIywuz'

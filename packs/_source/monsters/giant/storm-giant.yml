@@ -1,0 +1,2071 @@
+_id: 68bAMIpe4jvDeR9G
+name: Storm Giant
+type: npc
+img: null
+system:
+  abilities:
+    str:
+      value: 29
+      proficient: 1
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    dex:
+      value: 14
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    con:
+      value: 20
+      proficient: 1
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    int:
+      value: 16
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    wis:
+      value: 18
+      proficient: 1
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    cha:
+      value: 18
+      proficient: 1
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+  attributes:
+    ac:
+      flat: null
+      calc: default
+      formula: ''
+    hp:
+      value: 230
+      max: 230
+      temp: 0
+      tempmax: 0
+      formula: 20d12 + 100
+    init:
+      ability: ''
+      bonus: '0'
+      roll:
+        min: null
+        max: null
+        mode: 0
+    movement:
+      burrow: 0
+      climb: 0
+      fly: 0
+      swim: 50
+      walk: 50
+      units: ft
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: 0
+      blindsight: 0
+      tremorsense: 0
+      truesight: 0
+      units: ft
+      special: ''
+    spellcasting: cha
+    exhaustion: 0
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+    hd:
+      spent: 0
+    death:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      success: 0
+      failure: 0
+  details:
+    biography:
+      value: ''
+      public: ''
+    alignment: Chaotic Good
+    race: null
+    type:
+      value: giant
+      subtype: ''
+      swarm: ''
+      custom: ''
+    environment: Coastal
+    cr: 13
+    spellLevel: 0
+    ideal: ''
+    bond: ''
+    flaw: ''
+  traits:
+    size: huge
+    di:
+      value:
+        - lightning
+        - thunder
+      bypasses: []
+      custom: ''
+    dr:
+      value:
+        - cold
+      bypasses: []
+      custom: ''
+    dv:
+      value: []
+      bypasses: []
+      custom: ''
+    ci:
+      value: []
+      custom: ''
+    languages:
+      value:
+        - common
+        - giant
+      custom: ''
+    dm:
+      amount: {}
+      bypasses: []
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  skills:
+    acr:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ani:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    arc:
+      value: 1
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ath:
+      value: 1
+      ability: str
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    dec:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    his:
+      value: 1
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ins:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    itm:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    inv:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    med:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    nat:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prc:
+      value: 1
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prf:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    per:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    rel:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    slt:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ste:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    sur:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+  spells:
+    spell1:
+      value: 0
+      override: null
+    spell2:
+      value: 0
+      override: null
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+    spell0:
+      value: 0
+      override: null
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  resources:
+    legact:
+      value: 0
+      max: 0
+    legres:
+      value: 0
+      max: 0
+    lair:
+      value: false
+      initiative: null
+  tools: {}
+  source:
+    custom: ''
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 1
+    rules: '2014'
+prototypeToken:
+  name: Storm Giant
+  displayName: 20
+  actorLink: false
+  width: 3
+  height: 3
+  lockRotation: false
+  rotation: 0
+  disposition: -1
+  displayBars: 40
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  flags: {}
+  randomImg: false
+  alpha: 1
+  light:
+    alpha: 1
+    angle: 360
+    bright: 0
+    coloration: 1
+    dim: 0
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      speed: 5
+      intensity: 5
+      type: null
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+    attenuation: 0.5
+    color: null
+    negative: false
+    priority: 0
+  texture:
+    src: null
+    tint: '#ffffff'
+    scaleX: 1
+    scaleY: 1
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    alphaThreshold: 0.75
+  sight:
+    angle: 360
+    enabled: false
+    range: 0
+    brightness: 1
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  appendNumber: false
+  prependAdjective: false
+  hexagonalShape: 0
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
+items:
+  - _id: PMXLrGDWGu9amL2X
+    name: Scale Mail
+    type: equipment
+    img: icons/equipment/chest/breastplate-metal-scaled-grey.webp
+    system:
+      description:
+        value: >-
+          <p>This armor consists of a coat and leggings (and perhaps a separate
+          skirt) of leather covered with overlapping pieces of metal, much like
+          the scales of a fish. The suit includes gauntlets.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 45
+        units: lb
+      price:
+        value: 50
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      armor:
+        value: 14
+        dex: 2
+        magicalBonus: null
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      speed:
+        value: null
+        conditions: ''
+      strength: null
+      proficient: 1
+      properties:
+        - stealthDisadvantage
+      unidentified:
+        description: ''
+      type:
+        value: medium
+        baseItem: scalemail
+      container: null
+      crewed: false
+      activities: {}
+      attuned: false
+      identifier: scale-mail
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.items.XmnlF5fgIO3tg6TG
+    _stats:
+      compendiumSource: Compendium.dnd5e.items.XmnlF5fgIO3tg6TG
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!68bAMIpe4jvDeR9G.PMXLrGDWGu9amL2X'
+  - _id: 3vDo83oAycRGB85G
+    name: Amphibious
+    type: feat
+    img: icons/environment/creatures/frog-spotted-green.webp
+    system:
+      description:
+        value: <p>The giant can breathe air and water.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: amphibious
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!68bAMIpe4jvDeR9G.3vDo83oAycRGB85G'
+  - _id: iwN0z7f5LF9AAbRJ
+    name: Greatsword
+    type: weapon
+    img: icons/weapons/swords/greatsword-guard-gem-blue.webp
+    system:
+      description:
+        value: >-
+          <p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>,
+          <strong>10 ft.,</strong> one target. Hit: <strong>30 (6d6 + 9)
+          <em>slashing damage</em></strong>.</p>
+        chat: <p>The Storm Giant attacks with its Greatsword.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: null
+        long: null
+        units: ft
+        reach: 10
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 6
+          denomination: 6
+          bonus: ''
+          types:
+            - slashing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties: []
+      proficient: 1
+      unidentified:
+        description: ''
+      type:
+        value: martialM
+        baseItem: greatsword
+      container: null
+      crewed: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '10'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: str
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 0
+      attuned: false
+      ammunition: {}
+      magicalBonus: null
+      identifier: greatsword
+    effects: []
+    folder: null
+    sort: 100000
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.items.xMkP8BmFzElcsMaR
+    _stats:
+      compendiumSource: Compendium.dnd5e.items.xMkP8BmFzElcsMaR
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676843
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!68bAMIpe4jvDeR9G.iwN0z7f5LF9AAbRJ'
+  - _id: 2tzFjiAiXJLEpuCn
+    name: Innate Spellcasting
+    type: feat
+    img: icons/magic/light/projectiles-star-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The giant's innate spellcasting ability is Charisma (spell save DC
+          17). It can innately cast the following spells, requiring no material
+          components:</p>
+
+          <p><strong>At will:</strong> detect magic, feather fall, levitate,
+          light</p>
+
+          <p><strong>3/day each</strong>: control weather, water breathing</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: innate-spellcasting
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!68bAMIpe4jvDeR9G.2tzFjiAiXJLEpuCn'
+  - _id: k0g8uqoYdJ4LVxcn
+    name: Lightning Strike
+    type: weapon
+    img: icons/magic/lightning/bolt-forked-blue-yellow.webp
+    system:
+      description:
+        value: >-
+          <p>The giant hurls a magical lightning bolt at a point it can see
+          within 500 feet of it. </p><p>Each creature within 10 feet of that
+          point must make a  <strong>DC 17 Dexterity</strong> saving throw,
+          taking <strong>54 (12d8) <em>lightning damage</em></strong> on a
+          failed save, or half as much damage on a successful one.</p>
+        chat: >-
+          <p>The Storm Giant attacks with its Lightning Strike. Each creature
+          within 10 feet of that point must make a <strong>Dexterity</strong>
+          saving throw.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: 500
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 12
+          denomination: 8
+          bonus: ''
+          types:
+            - lightning
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties: []
+      proficient: 1
+      unidentified:
+        description: ''
+      type:
+        value: natural
+        baseItem: ''
+      container: null
+      crewed: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '500'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 12
+                denomination: 8
+                bonus: ''
+                types:
+                  - lightning
+                scaling:
+                  number: 1
+          save:
+            ability: dex
+            dc:
+              calculation: ''
+              formula: '17'
+          sort: 0
+          name: ''
+      attuned: false
+      ammunition: {}
+      magicalBonus: null
+      mastery: ''
+      identifier: lightning-strike
+    effects: []
+    folder: null
+    sort: 350000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676843
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!68bAMIpe4jvDeR9G.k0g8uqoYdJ4LVxcn'
+  - _id: KUffpBEiNWnVK3W6
+    name: Multiattack
+    type: feat
+    img: icons/skills/melee/blade-tips-triple-steel.webp
+    system:
+      description:
+        value: <p>The giant makes two greatsword attacks.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: multiattack
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!68bAMIpe4jvDeR9G.KUffpBEiNWnVK3W6'
+  - _id: bRdk2uZ6iTuNGUIL
+    name: Rock
+    type: weapon
+    img: icons/magic/earth/projectile-stone-ball-brown.webp
+    system:
+      description:
+        value: >-
+          <p>Ranged Weapon Attack: +14 to hit, range 60/240 ft., one target.
+          Hit: <strong>35 (4d12 + 9) <em>bludgeoning damage</em></strong>.</p>
+        chat: <p>The Storm Giant attacks with its Rock.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: 60
+        long: 240
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 4
+          denomination: 12
+          bonus: ''
+          types:
+            - bludgeoning
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties: []
+      proficient: 1
+      unidentified:
+        description: ''
+      type:
+        value: simpleR
+        baseItem: ''
+      container: null
+      crewed: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '60'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: str
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ranged
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 0
+      attuned: false
+      ammunition: {}
+      magicalBonus: null
+      mastery: ''
+      identifier: rock
+    effects: []
+    folder: null
+    sort: 300000
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676843
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!68bAMIpe4jvDeR9G.bRdk2uZ6iTuNGUIL'
+  - _id: ghXTfe7sgCbgf1Q8
+    name: Detect Magic
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>For the duration, you sense the presence of magic within 30 feet of
+          you. If you sense magic in this way, you can use your action to see a
+          faint aura around any visible creature or object in the area that
+          bears magic, and you learn its school of magic, if any.</p><p>The
+          spell can penetrate most barriers, but it is blocked by 1 foot of
+          stone, 1 inch of common metal, a thin sheet of lead, or 3 feet of wood
+          or dirt.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: radius
+          size: '30'
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: div
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - ritual
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: detect-magic
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
+    img: icons/magic/light/explosion-star-blue.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!68bAMIpe4jvDeR9G.ghXTfe7sgCbgf1Q8'
+  - _id: pub0OWVEB71XQx1n
+    name: Feather Fall
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>Choose up to five falling creatures within range. A falling
+          creature's rate of descent slows to 60 feet per round until the spell
+          ends. If the creature lands before the spell ends, it takes no falling
+          damage and can land on its feet, and the spell ends for that
+          creature.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: reaction
+        condition: which you take when you or a creature within 60 feet of you falls
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '5'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: trs
+      materials:
+        value: A small feather or piece of down
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: feather-fall
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.pub0OWVEB71XQx1n
+    img: icons/magic/air/wind-swirl-pink-purple.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.pub0OWVEB71XQx1n
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!68bAMIpe4jvDeR9G.pub0OWVEB71XQx1n'
+  - _id: MRxldJd6C4bsBo3O
+    name: Levitate
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>One creature or object of your choice that you can see within range
+          rises vertically, up to 20 feet, and remains suspended there for the
+          duration. The spell can levitate a target that weighs up to 500
+          pounds. An unwilling creature that succeeds on a Constitution saving
+          throw is unaffected.</p><p>The target can move only by pushing or
+          pulling against a fixed object or surface within reach (such as a wall
+          or a ceiling), which allows it to move as if it were climbing. You can
+          change the target's altitude by up to 20 feet in either direction on
+          your turn. If you are the target, you can move up or down as part of
+          your move. Otherwise, you can use your action to move the target,
+          which must remain within the spell's range.</p><p>When the spell ends,
+          the target floats gently to the ground if it is still aloft.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 2
+      school: trs
+      materials:
+        value: >-
+          Either a small leather loop or a piece of golden wire bent into a cup
+          shape with a long shank on one end
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: con
+            dc:
+              calculation: spellcasting
+              formula: '17'
+          sort: 0
+      identifier: levitate
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.MRxldJd6C4bsBo3O
+    img: icons/magic/control/debuff-energy-hold-levitate-pink.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.MRxldJd6C4bsBo3O
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!68bAMIpe4jvDeR9G.MRxldJd6C4bsBo3O'
+  - _id: Bnn9Nzajixvow9xi
+    name: Light
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You touch one object that is no larger than 10 feet in any
+          dimension. Until the spell ends, the object sheds bright light in a
+          20-foot radius and dim light for an additional 20 feet. The light can
+          be colored as you like. Completely covering the object with something
+          opaque blocks the light. The spell ends if you cast it again or
+          dismiss it as an action.</p><p>If you target an object held or worn by
+          a hostile creature, that creature must succeed on a Dexterity saving
+          throw to avoid the spell.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: object
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: evo
+      materials:
+        value: A firefly or phosphorescent moss.
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability: dex
+            dc:
+              calculation: spellcasting
+              formula: '17'
+          sort: 0
+      identifier: light
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
+    img: icons/magic/light/explosion-star-small-blue-yellow.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!68bAMIpe4jvDeR9G.Bnn9Nzajixvow9xi'
+  - _id: ZPd73HtKF3At11jh
+    name: Control Weather
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You take control of the weather within 5 miles of you for the
+          duration. You must be outdoors to cast this spell. Moving to a place
+          where you don't have a clear path to the sky ends the spell
+          early.</p><p>When you cast the spell, you change the current weather
+          conditions, which are determined by the DM based on the climate and
+          season. You can change precipitation, temperature, and wind. It takes
+          1d4 x 10 minutes for the new conditions to take effect. Once they do
+          so, you can change the conditions again. When the spell ends, the
+          weather gradually returns to normal.</p><p>When you change the weather
+          conditions, find a current condition on the following tables and
+          change its stage by one, up or down. When changing the wind, you can
+          change its direction.</p><p><strong>Conditions</strong></p>
+
+          <ol>
+
+          <li>Clear</li>
+
+          <li>Light clouds</li>
+
+          <li>Overcast or ground fog</li>
+
+          <li>Rain, hail, or snow</li>
+
+          <li>Torrential rain, driving hail, or blizzard</li>
+
+          </ol>
+
+          <p><strong>Temperature</strong></p>
+
+          <ol>
+
+          <li>Unbearable heat</li>
+
+          <li>Hot</li>
+
+          <li>Warm</li>
+
+          <li>Cool</li>
+
+          <li>Cold</li>
+
+          <li>Arctic cold</li>
+
+          </ol>
+
+          <p><strong>Wind</strong></p>
+
+          <ol>
+
+          <li>Calm</li>
+
+          <li>Moderate wind</li>
+
+          <li>Strong wind</li>
+
+          <li>Gale</li>
+
+          <li>Storm</li>
+
+          </ol>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: minute
+        condition: ''
+        value: 10
+      duration:
+        value: '8'
+        units: hour
+      target:
+        affects:
+          choice: false
+        template:
+          units: mi
+          type: radius
+          size: '5'
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: '3'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 8
+      school: trs
+      materials:
+        value: Burning incense and bits of earth and wood mixed in water.
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: control-weather
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.ZPd73HtKF3At11jh
+    img: icons/magic/air/wind-tornado-cyclone-white.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.ZPd73HtKF3At11jh
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!68bAMIpe4jvDeR9G.ZPd73HtKF3At11jh'
+  - _id: 13uVuBQP6VaiSPvC
+    name: Water Breathing
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>This spell grants up to ten willing creatures you can see within
+          range the ability to breathe underwater until the spell ends. Affected
+          creatures also retain their normal mode of respiration.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '24'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '10'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: '3'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 3
+      school: trs
+      materials:
+        value: A short reed or piece of straw
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - ritual
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: water-breathing
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.13uVuBQP6VaiSPvC
+    img: icons/magic/water/pseudopod-swirl-blue.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.13uVuBQP6VaiSPvC
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!68bAMIpe4jvDeR9G.13uVuBQP6VaiSPvC'
+effects: []
+folder: v8gFGdEluEFQdRQg
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1726171204245
+  modifiedTime: 1726171439860
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!actors!68bAMIpe4jvDeR9G'

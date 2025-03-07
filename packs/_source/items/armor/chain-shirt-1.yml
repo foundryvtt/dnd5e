@@ -1,0 +1,76 @@
+_id: MSO3JxK8578xSh6x
+name: Chain Shirt +1
+type: equipment
+img: icons/equipment/chest/breastplate-scale-grey.webp
+system:
+  description:
+    value: >-
+      <p><em>This armor has been embellished with powerful runes, crafted in
+      sorcerous fires, blessed by a powerful being, or some other event has seen
+      it bequeathed with enhanced protection for the wearer.</em></p>
+
+      <p>You have a bonus to AC while wearing this armor.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 20
+    units: lb
+  price:
+    value: 1550
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 13
+    dex: 2
+    magicalBonus: 1
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: medium
+    baseItem: chainshirt
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: chain-shirt-1
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037171038
+  modifiedTime: 1725992507528
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!MSO3JxK8578xSh6x'

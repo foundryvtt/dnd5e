@@ -1,0 +1,132 @@
+_id: mr96Z8YTI490ExhP
+name: Robe of the Archmagi
+type: equipment
+img: icons/equipment/back/cloak-plain-white.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement by a sorcerer, warlock, or
+      wizard)</em></p>
+
+      <p>This elegant garment is made from exquisite cloth of white, gray, or
+      black and adorned with silvery runes. The robe's color corresponds to the
+      alignment for which the item was created. A white robe was made for good,
+      gray for neutral, and black for evil. You can't attune to a robe of the
+      archmagi that doesn't correspond to your alignment. You gain these
+      benefits while wearing the robe:</p>
+
+      <ul>
+
+      <li>If you aren't wearing armor, your base Armor Class is 15 + your
+      Dexterity modifier.</li>
+
+      <li>You have advantage on saving throws against spells and other magical
+      effects.</li>
+
+      <li>Your spell save DC and spell attack bonus each increase by 2.</li>
+
+      </ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 34000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: robe-of-the-archmagi
+effects:
+  - _id: x6gy8sik893jvxea
+    changes:
+      - key: system.attributes.ac.armor
+        mode: 5
+        value: '15'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.items.mr96Z8YTI490ExhP
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: 15 base AC
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/magic/symbols/rune-sigil-black-pink.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!mr96Z8YTI490ExhP.x6gy8sik893jvxea'
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037279916
+  modifiedTime: 1731019271211
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!mr96Z8YTI490ExhP'

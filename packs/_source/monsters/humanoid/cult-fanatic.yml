@@ -1,0 +1,1948 @@
+_id: tYfQIxCJT0WaaKmc
+name: Cult Fanatic
+type: npc
+img: null
+system:
+  abilities:
+    str:
+      value: 11
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    dex:
+      value: 14
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    con:
+      value: 12
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    int:
+      value: 10
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    wis:
+      value: 13
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    cha:
+      value: 14
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+  attributes:
+    ac:
+      flat: null
+      calc: default
+      formula: ''
+    hp:
+      value: 33
+      max: 33
+      temp: 0
+      tempmax: 0
+      formula: 6d8 + 6
+    init:
+      ability: ''
+      bonus: '0'
+      roll:
+        min: null
+        max: null
+        mode: 0
+    movement:
+      burrow: 0
+      climb: 0
+      fly: 0
+      swim: 0
+      walk: 30
+      units: ft
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: 0
+      blindsight: 0
+      tremorsense: 0
+      truesight: 0
+      units: ft
+      special: ''
+    spellcasting: wis
+    exhaustion: 0
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+    hd:
+      spent: 0
+    death:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      success: 0
+      failure: 0
+  details:
+    biography:
+      value: ''
+      public: ''
+    alignment: Any Non-Good
+    race: null
+    type:
+      value: humanoid
+      subtype: Any Race
+      swarm: ''
+      custom: ''
+    environment: ''
+    cr: 2
+    spellLevel: 4
+    ideal: ''
+    bond: ''
+    flaw: ''
+  traits:
+    size: med
+    di:
+      value: []
+      bypasses: []
+      custom: ''
+    dr:
+      value: []
+      bypasses: []
+      custom: ''
+    dv:
+      value: []
+      bypasses: []
+      custom: ''
+    ci:
+      value: []
+      custom: ''
+    languages:
+      value: []
+      custom: any one language (usually Common)
+    dm:
+      amount: {}
+      bypasses: []
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  skills:
+    acr:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ani:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    arc:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ath:
+      value: 0
+      ability: str
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    dec:
+      value: 1
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    his:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ins:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    itm:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    inv:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    med:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    nat:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prc:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prf:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    per:
+      value: 1
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    rel:
+      value: 1
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    slt:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ste:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    sur:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+  spells:
+    spell1:
+      value: 4
+      override: 4
+    spell2:
+      value: 3
+      override: 3
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+    spell0:
+      value: 0
+      override: null
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  resources:
+    legact:
+      value: 0
+      max: 0
+    legres:
+      value: 0
+      max: 0
+    lair:
+      value: false
+      initiative: null
+  tools: {}
+  source:
+    custom: ''
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 1
+    rules: '2014'
+prototypeToken:
+  name: Cult Fanatic
+  displayName: 20
+  actorLink: false
+  width: 1
+  height: 1
+  lockRotation: false
+  rotation: 0
+  disposition: -1
+  displayBars: 40
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  flags: {}
+  randomImg: false
+  alpha: 1
+  light:
+    alpha: 1
+    angle: 360
+    bright: 0
+    coloration: 1
+    dim: 0
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      speed: 5
+      intensity: 5
+      type: null
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+    attenuation: 0.5
+    color: null
+    negative: false
+    priority: 0
+  texture:
+    src: null
+    tint: '#ffffff'
+    scaleX: 1
+    scaleY: 1
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    alphaThreshold: 0.75
+  sight:
+    angle: 360
+    enabled: false
+    range: 0
+    brightness: 1
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  appendNumber: false
+  prependAdjective: false
+  hexagonalShape: 0
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
+items:
+  - _id: vTb2KSllrajm88Ni
+    name: Leather Armor
+    type: equipment
+    img: icons/equipment/chest/breastplate-quilted-brown.webp
+    system:
+      description:
+        value: >-
+          <p>The breastplate and shoulder protectors of this armor are made of
+          leather that has been stiffened by being boiled in oil. The rest of
+          the armor is made of softer and more flexible materials.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 10
+        units: lb
+      price:
+        value: 10
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      armor:
+        value: 11
+        dex: null
+        magicalBonus: null
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      speed:
+        value: null
+        conditions: ''
+      strength: null
+      proficient: 1
+      unidentified:
+        description: ''
+      type:
+        value: light
+        baseItem: leather
+      container: null
+      crewed: false
+      properties: []
+      activities: {}
+      attuned: false
+      identifier: leather-armor
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
+    _stats:
+      compendiumSource: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.vTb2KSllrajm88Ni'
+  - _id: lSteE7vBmM70Jy3Z
+    name: Dark Devotion
+    type: feat
+    img: icons/magic/control/control-influence-rally-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The fanatic has<strong> advantage </strong>on saving throws against
+          being charmed or frightened.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: dark-devotion
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.XFvk6ywwZWTkMmQR
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.XFvk6ywwZWTkMmQR
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.lSteE7vBmM70Jy3Z'
+  - _id: KRbUbk5AkQOabBhO
+    name: Spellcasting
+    type: feat
+    img: icons/magic/light/projectiles-star-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The fanatic is a 4th-level spellcaster. Its spell casting ability
+          is Wisdom (spell save DC 11, +3 to hit with spell attacks).</p><p>The
+          fanatic has the following cleric spells
+          prepared:</p><p><strong>Cantrips</strong> (at will): light, sacred
+          flame, thaumaturgy</p><p><strong>1st level </strong>(4 slots):
+          command, inflict wounds, shield of faith</p><p><strong> 2nd level
+          </strong>(3 slots): hold person, spiritual weapon</p>
+        chat: >-
+          <p>The fanatic is a spellcaster. Its spell casting ability is
+          Wisdom.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: spellcasting
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676612
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.KRbUbk5AkQOabBhO'
+  - _id: WfqCnxOUS8aXxd7O
+    name: Multiattack
+    type: feat
+    img: icons/skills/melee/blade-tips-triple-steel.webp
+    system:
+      description:
+        value: <p>The fanatic makes two melee attacks.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: multiattack
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.WfqCnxOUS8aXxd7O'
+  - _id: zTX7ZTUkqUMSbGII
+    name: Dagger
+    type: weapon
+    img: icons/weapons/daggers/dagger-jeweled-purple.webp
+    system:
+      description:
+        value: >-
+          <p>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range
+          20/60 ft., one creature. Hit: <strong>4 (1d4 + 2) <em>piercing
+          damage</em></strong>.</p>
+        chat: <p>The Cult Fanatic attacks with their Dagger.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 1
+        units: lb
+      price:
+        value: 2
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: 20
+        long: 60
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 4
+          bonus: ''
+          types:
+            - piercing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties:
+        - fin
+        - lgt
+        - thr
+      proficient: 1
+      unidentified:
+        description: ''
+      type:
+        value: simpleM
+        baseItem: dagger
+      container: null
+      crewed: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '20'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: dex
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 0
+      attuned: false
+      ammunition: {}
+      magicalBonus: null
+      identifier: dagger
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.items.0E565kQUBmndJ1a2
+    _stats:
+      compendiumSource: Compendium.dnd5e.items.0E565kQUBmndJ1a2
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676612
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.zTX7ZTUkqUMSbGII'
+  - _id: Bnn9Nzajixvow9xi
+    name: Light
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You touch one object that is no larger than 10 feet in any
+          dimension. Until the spell ends, the object sheds bright light in a
+          20-foot radius and dim light for an additional 20 feet. The light can
+          be colored as you like. Completely covering the object with something
+          opaque blocks the light. The spell ends if you cast it again or
+          dismiss it as an action.</p><p>If you target an object held or worn by
+          a hostile creature, that creature must succeed on a Dexterity saving
+          throw to avoid the spell.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: object
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: evo
+      materials:
+        value: A firefly or phosphorescent moss.
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts: []
+          save:
+            ability: dex
+            dc:
+              calculation: spellcasting
+              formula: '11'
+          sort: 0
+      identifier: light
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
+    img: icons/magic/light/explosion-star-small-blue-yellow.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.Bnn9Nzajixvow9xi'
+  - _id: n9pJzTDsAwQxJVRl
+    name: Sacred Flame
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>Flame-like radiance descends on a creature that you can see within
+          range. The target must succeed on a Dexterity saving throw or take 1d8
+          radiant damage. The target gains no benefit from cover for this saving
+          throw.</p><p>The spell's damage increases by 1d8 when you reach 5th
+          level (2d8), 11th level (3d8), and 17th level (4d8).</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: evo
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: none
+            parts:
+              - number: 1
+                denomination: 8
+                bonus: ''
+                types:
+                  - radiant
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          save:
+            ability: dex
+            dc:
+              calculation: spellcasting
+              formula: '11'
+          sort: 0
+      identifier: sacred-flame
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
+    img: icons/magic/light/beam-rays-orange.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.n9pJzTDsAwQxJVRl'
+  - _id: MUO1uYN7JR1hm4dR
+    name: Thaumaturgy
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You create one of the following magical effects within range:</p>
+
+          <ul>
+
+          <li>Your voice booms up to three times as loud as normal for 1
+          minute.</li>
+
+          <li>You cause flames to flicker, brighten, dim, or change color for 1
+          minute.</li>
+
+          <li>You cause harmless tremors in the ground for 1 minute.</li>
+
+          <li>You create a sound that originates from a point of your choice
+          within range.</li>
+
+          <li>You cause an unlocked door or window to fly open or slam
+          shut.</li>
+
+          <li>You alter the appearance of your eyes for 1 minute.</li>
+
+          </ul>
+
+          <p>If you cast this spell multiple times, you can have up to three of
+          its 1-minute effects active at a time, and you can dismiss such an
+          effect as an action.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: trs
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: thaumaturgy
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
+    img: icons/magic/fire/explosion-fireball-small-purple-orange.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.MUO1uYN7JR1hm4dR'
+  - _id: arzCrMRgcNiQuh43
+    name: Command
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: "<p>You speak a one-word command to a creature you can see within range. The target must succeed on a Wisdom saving throw or follow the command on its next turn. The spell has no effect if the target is undead, if it doesn't understand your language, or if your command is directly harmful to it.</p><p>Some typical commands and their effects follow. You might issue a command other than one described here. If you do so, the DM determines how the target behaves. If the target can't follow your command, the spell ends.</p><p><strong>Approach.</strong> The target moves toward you by the shortest and most direct route, ending its turn if it moves within 5 feet of you.</p><p><strong>Drop.</strong> The target drops whatever it is holding and then ends its turn.</p><p><strong>Flee.</strong> The target spends its turn moving away from you by the fastest available means.</p><p><strong>Grovel.</strong> The target falls prone and then ends its turn.</p><p><strong>Halt.</strong> The target doesn't move and takes no actions. A flying creature stays aloft, provided that it is able to do so. If it must move to stay aloft, it flies the minimum distance needed to remain in the air.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a spell slot of 2nd level or higher, you can affect one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>"
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: round
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: enc
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: wis
+            dc:
+              calculation: spellcasting
+              formula: '11'
+          sort: 0
+      identifier: command
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.arzCrMRgcNiQuh43
+    img: icons/magic/fire/explosion-fireball-small-purple.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.arzCrMRgcNiQuh43
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.arzCrMRgcNiQuh43'
+  - _id: ksaaTxIbKx2sJfia
+    name: Inflict Wounds
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>Make a melee spell Attack against a creature you can reach. On a
+          hit, the target takes 3d10 necrotic damage.</p><p><strong>At Higher
+          Levels.</strong> When you cast this spell using a spell slot of 2nd
+          level or higher, the damage increases by 1d10 for each slot level
+          above 1st.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: nec
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: spell
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - number: 3
+                denomination: 10
+                bonus: ''
+                types:
+                  - necrotic
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          sort: 0
+      identifier: inflict-wounds
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.ksaaTxIbKx2sJfia
+    img: icons/magic/unholy/strike-beam-blood-red-teal.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.ksaaTxIbKx2sJfia
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.ksaaTxIbKx2sJfia'
+  - _id: jZ6JNykRtdQ90MOo
+    name: Shield of Faith
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>A shimmering field appears and surrounds a creature of your choice
+          within range, granting it a +2 bonus to AC for the duration.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: bonus
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 1
+      school: abj
+      materials:
+        value: A small parchment with a bit of holy text written on it.
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: shield-of-faith
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo
+    img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.jZ6JNykRtdQ90MOo'
+  - _id: 3Lo9boi7P2ro6QV4
+    name: Hold Person
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: "<p>Choose a humanoid that you can see within range. The target must succeed on a Wisdom saving throw or be paralyzed for the duration. At the end of each of its turns, the target can make another Wisdom saving throw. On a success, the spell ends on the target.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a spell slot of 3rd level or higher, you can target one additional humanoid for each slot level above 2nd. The humanoids must be within 30 feet of each other when you target them.</p>"
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 2
+      school: enc
+      materials:
+        value: A small, straight piece of iron
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: wis
+            dc:
+              calculation: spellcasting
+              formula: '11'
+          sort: 0
+      identifier: hold-person
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4
+    img: icons/magic/control/debuff-chains-ropes-purple.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.3Lo9boi7P2ro6QV4'
+  - _id: JbxsYXxSOTZbf9I0
+    name: Spiritual Weapon
+    type: spell
+    img: icons/magic/fire/dagger-rune-enchant-flame-purple.webp
+    system:
+      description:
+        value: >-
+          <p>You create a floating, spectral weapon within range that lasts for
+          the duration or until you cast this spell again. When you cast the
+          spell, you can make a melee spell attack against a creature within 5
+          feet of the weapon. On a hit, the target takes force damage equal to
+          1d8 + your spellcasting ability modifier.</p><p>As a bonus action on
+          your turn, you can move the weapon up to 20 feet and repeat the attack
+          against a creature within 5 feet of it.</p><p>The weapon can take
+          whatever form you choose. Clerics of deities who are associated with a
+          particular weapon (as St. Cuthbert is known for his mace and Thor for
+          his hammer) make this spell's effect resemble that
+          weapon.</p><p><strong>Higher Levels.</strong> When you cast this spell
+          using a spell slot of 3rd level or higher, the damage increases by 1d8
+          for every two slot levels above the 2nd.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: bonus
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: square
+          size: '5'
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 2
+      school: evo
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: ''
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: spell
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts:
+              - number: null
+                denomination: null
+                bonus: ''
+                types:
+                  - force
+                custom:
+                  enabled: true
+                  formula: (floor(@item.level / 2))d8 + @mod
+                scaling:
+                  mode: ''
+                  number: null
+                  formula: ''
+          sort: 0
+      identifier: spiritual-weapon
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!tYfQIxCJT0WaaKmc.JbxsYXxSOTZbf9I0'
+effects: []
+folder: pEyqIq8DYb21xia3
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1726171263677
+  modifiedTime: 1726171451358
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!actors!tYfQIxCJT0WaaKmc'

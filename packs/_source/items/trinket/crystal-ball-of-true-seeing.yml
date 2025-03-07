@@ -1,0 +1,125 @@
+_id: ADH0UZ8bf7Op0dgf
+name: Crystal Ball of True Seeing
+type: consumable
+img: icons/commodities/gems/pearl-fire-swirl.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>The Crystal Ball is about 6 inches in diameter. While touching it, you
+      can cast the @UUID[Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20]{Scrying}
+      spell (save DC 17) with it.</p>
+
+      <p>While Scrying with the Crystal Ball, you have Truesight with a radius
+      of 120 feet centered on the spell's sensor.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 7
+    units: lb
+  price:
+    value: 60000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    bUNsvbS9nKpNy3ER:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.fVbCxFRaORalHB20
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: bUNsvbS9nKpNy3ER
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: crystal-ball-of-true-seeing
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 2200000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037122058
+  modifiedTime: 1729014715400
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!ADH0UZ8bf7Op0dgf'

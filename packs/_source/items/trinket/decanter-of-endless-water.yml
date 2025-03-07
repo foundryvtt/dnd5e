@@ -1,0 +1,161 @@
+_id: qXcUKfCVxEvV3VU8
+name: Decanter of Endless Water
+type: consumable
+img: icons/consumables/potions/potion-flask-corked-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This stoppered flask sloshes when shaken, as if it contains water. The
+      decanter weighs 2 pounds.</p>
+
+      <p>You can use an action to remove the stopper and speak one of three
+      command words, whereupon an amount of fresh water or salt water (your
+      choice) pours out of the flask. The water stops pouring out at the start
+      of your next turn. Choose from the following options:</p>
+
+      <p>• "Stream" produces 1 gallon of water.</p>
+
+      <p>• "Fountain" produces 5 gallons of water.</p>
+
+      <p>• "Geyser" produces 30 gallons of water that gushes forth in a geyser
+      30 feet long and 1 foot wide. As a Bonus Action while holding the
+      decanter, you can aim the geyser at a creature you can see within 30 feet
+      of you. The target must succeed on a DC 13 Strength saving throw or take
+      1d4 bludgeoning damage and fall prone. Instead of a creature, you can
+      target an object that isn't being worn or carried and that weighs no more
+      than 200 pounds. The object is either knocked over or pushed up to 15 feet
+      away from you.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 135000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: 1
+      denomination: 4
+      bonus: ''
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: Command word.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: turn
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: line
+          size: '30'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 1
+            denomination: 4
+            bonus: ''
+            types:
+              - bludgeoning
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      save:
+        ability: str
+        dc:
+          calculation: ''
+          formula: '13'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: decanter-of-endless-water
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 9100000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037295363
+  modifiedTime: 1725992549437
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!qXcUKfCVxEvV3VU8'

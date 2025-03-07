@@ -1,0 +1,163 @@
+_id: qVuZznv0MnIjDU70
+name: Iron Horn of Valhalla
+type: consumable
+img: icons/tools/instruments/flute-simple-wood.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>You can use an action to blow this horn. In response, warrior spirits
+      from the Valhalla appear within 60 feet of you. They use the statistics of
+      a @UUID[Compendium.dnd5e.monsters.Actor.kz1t6xeXVwODpYb2]{Berserker}. They
+      return to Valhalla after 1 hour or when they drop to 0 hit points. Once
+      you use the horn, it can't be used again until 7 days have passed.</p>
+
+      <p>Four types of Horn of Valhalla are known to exist, each made of a
+      different metal. The horn's type determines how many berserkers answer its
+      summons, as well as the requirement for its use. The GM chooses the horn's
+      type or determines it randomly from the
+      @UUID[Compendium.dnd5e.tables.RollTable.RwerG95cIk2uRpsQ]{Horn of
+      Valhalla} table.</p>
+
+      <p><strong>Iron Horn of Valhalla.</strong>This iron horn summons [[/r 5d4
+      + 5]] berserkers when blown and requires proficiency with all martial
+      weapons to be used.</p>
+
+      <p>If you blow the horn without meeting its requirement, the summoned
+      berserkers attack you. If you meet the requirement, they are friendly to
+      you and your companions and follow your commands.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 14000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: 5
+      denomination: 4
+      bonus: '5'
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: 5
+            denomination: 4
+            bonus: '5'
+            types: []
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: iron-horn-of-valhalla
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 9000000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037294801
+  modifiedTime: 1725992549255
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!qVuZznv0MnIjDU70'

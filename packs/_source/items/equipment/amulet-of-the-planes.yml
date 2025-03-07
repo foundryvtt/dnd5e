@@ -1,0 +1,180 @@
+_id: 8ABk0XV76Hzq8Qul
+name: Amulet of the Planes
+type: equipment
+img: icons/equipment/neck/pendant-faceted-green.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous Item (requires attunement)</em></p><p>While wearing this
+      Amulet, you can use an action to name a location that you are familiar
+      with on another plane of existence. Then make a DC 15 Intelligence check.
+      On a successful check, you cast the
+      @UUID[Compendium.dnd5e.spells.Item.J6Jpw5XzB5aTeqnz]{Plane Shift} spell.
+      On a failure, you and each creature and object within 15 feet of you
+      travel to a random destination. Roll a d100. On a 1-60, you travel to a
+      random location on the plane you named. On a 61-100, you travel to a
+      randomly determined plane of existence.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 160000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    38pYKge1C3c2wPLF:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.J6Jpw5XzB5aTeqnz
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '7'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 38pYKge1C3c2wPLF
+      sort: 200000
+      activation:
+        type: special
+        value: null
+        override: true
+        condition: After a successful Intelligence check
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    eSIlVeLBgf8hdZCZ:
+      type: check
+      name: Name Location
+      _id: eSIlVeLBgf8hdZCZ
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      check:
+        associated: []
+        dc:
+          calculation: ''
+          formula: '15'
+        ability: int
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: amulet-of-the-planes
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037111223
+  modifiedTime: 1730325171275
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!8ABk0XV76Hzq8Qul'

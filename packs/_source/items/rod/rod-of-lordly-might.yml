@@ -1,0 +1,208 @@
+_id: d5HNCmLIPCpPoX2w
+name: Rod of Lordly Might
+type: equipment
+img: icons/weapons/staves/staff-ornate-gold-jeweled.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>This rod has a flanged head, and it functions as a magic mace that
+      grants a +3 bonus to attack and damage rolls made with it. The rod has
+      properties associated with six different buttons that are set in a row
+      along the haft. It has three other properties as well, detailed below.</p>
+
+      <p><strong>Six Buttons</strong>. You can press one of the rod's six
+      buttons as a bonus action. A button's effect lasts until you push a
+      different button or until you push the same button again, which causes the
+      rod to revert to its normal form.</p>
+
+      <p>If you press <strong>button 1</strong>, the rod becomes a flame tongue,
+      as a fiery blade sprouts from the end opposite the rod's flanged head.</p>
+
+      <p>If you press <strong>button 2</strong>, the rod's flanged head folds
+      down and two crescent-shaped blades spring out, transforming the rod into
+      a magic battleaxe that grants a +3 bonus to attack and damage rolls made
+      with it.</p>
+
+      <p>If you press <strong>button 3</strong>, the rod's flanged head folds
+      down, a spear point springs from the rod's tip, and the rod's handle
+      lengthens into a 6-foot haft, transforming the rod into a magic spear that
+      grants a +3 bonus to attack and damage rolls made with it.</p>
+
+      <p>If you press <strong>button 4</strong>, the rod transforms into a
+      climbing pole up to 50 feet long, as you specify. In surfaces as hard as
+      granite, a spike at the bottom and three hooks at the top anchor the pole.
+      Horizontal bars 3 inches long fold out from the sides, 1 foot apart,
+      forming a ladder. The pole can bear up to 4,000 pounds. More weight or
+      lack of solid anchoring causes the rod to revert to its normal form.</p>
+
+      <p>If you press <strong>button 5</strong>, the rod transforms into a
+      handheld battering ram and grants its user a +10 bonus to Strength checks
+      made to break through doors, barricades, and other barriers.</p>
+
+      <p>If you press <strong>button 6</strong>, the rod assumes or remains in
+      its normal form and indicates magnetic north. (Nothing happens if this
+      function of the rod is used in a location that has no magnetic north.) The
+      rod also gives you knowledge of your approximate depth beneath the ground
+      or your height above it.</p>
+
+      <p><strong>Drain Life</strong>. When you hit a creature with a melee
+      attack using the rod, you can force the target to make a DC 17
+      Constitution saving throw. On a failure, the target takes an extra 4d6
+      necrotic damage, and you regain a number of hit points equal to half that
+      necrotic damage. This property can't be used again until the next
+      dawn.</p>
+
+      <p><strong>Paralyze</strong>. When you hit a creature with a melee attack
+      using the rod, you can force the target to make a DC 17 Strength saving
+      throw. On a failure, the target is paralyzed for 1 minute. The target can
+      repeat the saving throw at the end of each of its turns, ending the effect
+      on a success. This property can't be used again until the next dawn.</p>
+
+      <p><strong>Terrify</strong>. While holding the rod, you can use an action
+      to force each creature you can see within 30 feet of you to make a DC 17
+      Wisdom saving throw. On a failure, a target is frightened of you for 1
+      minute. A frightened target can repeat the saving throw at the end of each
+      of its turns, ending the effect on itself on a success. This property
+      can't be used again until the next dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 28000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      bonus: ''
+      types:
+        - bludgeoning
+      custom:
+        enabled: true
+        formula: 1d6 +@mod +3
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: rod
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - foc
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: Button presses are a bonus action.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: str
+        bonus: '3'
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - number: null
+            denomination: null
+            bonus: ''
+            types:
+              - bludgeoning
+            custom:
+              enabled: true
+              formula: 1d6 +@mod +3
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: rod-of-lordly-might
+effects: []
+folder: 609zLs23BLj5hyYp
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037232621
+  modifiedTime: 1730323616099
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!d5HNCmLIPCpPoX2w'

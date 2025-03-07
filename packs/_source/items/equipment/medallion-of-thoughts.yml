@@ -1,0 +1,135 @@
+_id: skoUe223EvRYGPL6
+name: Medallion of Thoughts
+type: equipment
+img: icons/equipment/neck/pendant-bronze-gem-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>The medallion has 3 charges. While wearing it, you can use an action
+      and expend 1 charge to cast the
+      @UUID[Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er]{Detect Thoughts}
+      spell (save DC 13) from it. The medallion regains 1d3 expended charges
+      daily at dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.01
+    units: lb
+  price:
+    value: 3000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: '3'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d3
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    45QEWBV2pRgmI95c:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ppWAAEul0QHtm4er
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 45QEWBV2pRgmI95c
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: medallion-of-thoughts
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037304040
+  modifiedTime: 1729015940864
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!skoUe223EvRYGPL6'

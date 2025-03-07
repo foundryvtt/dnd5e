@@ -1,0 +1,128 @@
+_id: 18fbyArtidKzON01
+name: Wand of Magic Detection
+type: equipment
+img: icons/weapons/wands/wand-gem-purple.webp
+system:
+  description:
+    value: >-
+      <p>This wand has 3 charges. While holding it, you can expend 1 charge as
+      an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8]{Detect Magic} spell
+      from it. The wand regains 1d3 expended charges daily at dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 1500
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: '3'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d3
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: wand
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - foc
+    - mgc
+  magicalBonus: null
+  activities:
+    9eGDQXITSOdunKvj:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 9eGDQXITSOdunKvj
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: wand-of-magic-detection
+effects: []
+folder: 1aDgsGVwDbPdxG2V
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037084495
+  modifiedTime: 1731015893978
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!18fbyArtidKzON01'

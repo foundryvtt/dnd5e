@@ -1,0 +1,227 @@
+_id: p01JzD9RpIOkJiqK
+name: Rapier of Life Stealing
+type: weapon
+img: icons/weapons/swords/greatsword-crossguard-barbed.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>When you attack a creature with this magic weapon and roll a 20 on the
+      attack roll, that target takes an extra 3d6 necrotic damage, provided that
+      the target isn't a construct or an undead. You gain temporary hit points
+      equal to the extra damage dealt.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 1000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ft
+    reach: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 8
+      bonus: ''
+      types:
+        - piercing
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - fin
+    - mgc
+  proficient: null
+  type:
+    value: martialM
+    baseItem: rapier
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: Must roll a 20 and the target cannot be undead.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    tppFD0iK7mJ9AKYp:
+      type: damage
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: When you attack a creature and roll a 20 on the attack roll
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creatureOrObject
+          special: Not construct or undead
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: true
+          bonus: ''
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - necrotic
+            scaling:
+              number: 1
+      name: Natural 20 Damage
+      _id: tppFD0iK7mJ9AKYp
+  attuned: false
+  ammunition: {}
+  identifier: rapier-of-life-stealing
+  mastery: ''
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.3.0
+  createdTime: 1725037289487
+  modifiedTime: 1738529296597
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!p01JzD9RpIOkJiqK'

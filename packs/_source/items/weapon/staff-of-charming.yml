@@ -1,0 +1,419 @@
+_id: FeouSUPUlUhfgeRp
+name: Staff of Charming
+type: weapon
+img: icons/weapons/staves/staff-ornate-green.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a bard, cleric, druid, sorcerer, warlock,
+      or wizard)</em></p><p>While holding this staff, you can use an action to
+      expend 1 of its 10 charges to cast
+      @UUID[Compendium.dnd5e.spells.Item.eS7XnnApoxRxYXPs]{Charm Person},
+      @UUID[Compendium.dnd5e.spells.Item.arzCrMRgcNiQuh43]{Command}, or
+      @UUID[Compendium.dnd5e.spells.Item.4dSvfvTy2ZIJ3K4k]{Comprehend Languages}
+      from it using your spell save DC. The staff can also be used as a magic
+      quarterstaff.</p><p>If you are holding the staff and fail a saving throw
+      against an enchantment spell that targets only you, you can turn your
+      failed save into a successful one. You can't use this property of the
+      staff again until the next dawn. If you succeed on a save against an
+      enchantment spell that targets only you, with or without the staff's
+      intervention, you can use your reaction to expend 1 charge from the staff
+      and turn the spell back on its caster as if you had cast the
+      spell.</p><p>The staff regains 1d8 + 2 expended charges daily at dawn. If
+      you expend the last charge, roll a d20. On a 1, the staff becomes a
+      nonmagical quarterstaff.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 12000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ft
+    reach: null
+  uses:
+    max: '10'
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d8 + 2
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: 0
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 6
+      bonus: ''
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - mgc
+    - ver
+  proficient: null
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: null
+  activities:
+    jQpPiY9JypFhSabm:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.eS7XnnApoxRxYXPs
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: jQpPiY9JypFhSabm
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    kyu1xW3gkZI4gPRh:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.arzCrMRgcNiQuh43
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: kyu1xW3gkZI4gPRh
+      sort: 300000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    rkyJP9ExCzn3gY7I:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.4dSvfvTy2ZIJ3K4k
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: rkyJP9ExCzn3gY7I
+      sort: 400000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    m2ld3DGVjzh1mfvQ:
+      type: utility
+      name: Save Against Enchantment
+      _id: m2ld3DGVjzh1mfvQ
+      sort: 500000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          If you are holding the staff and fail a saving throw against an
+          enchantment spell that targets only you
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery:
+          - period: dawn
+            type: recoverAll
+        max: '1'
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+    qYGpiqu9mc8BzArx:
+      type: utility
+      _id: qYGpiqu9mc8BzArx
+      sort: 600000
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          If you succeed on a save against an enchantment spell that targets
+          only you, with or without the staff's intervention
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Turn Back Spell
+      img: ''
+      appliedEffects: []
+    5uagImprd2VO7ueb:
+      type: attack
+      _id: 5uagImprd2VO7ueb
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+  attuned: false
+  ammunition: {}
+  identifier: staff-of-charming
+  mastery: ''
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037143507
+  modifiedTime: 1731019499564
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!FeouSUPUlUhfgeRp'

@@ -1,0 +1,133 @@
+_id: 44XNWmMGnwXn7bNW
+name: Pearl of Power
+type: consumable
+img: icons/commodities/gems/pearl-natural.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement by a spellcaster)</em></p>
+
+      <p>While this pearl is on your person, you can use an action to speak its
+      command word and regain one expended spell slot. If the expended slot was
+      of 4th level or higher, the new slot is 3rd level. Once you use the pearl,
+      it can't be used again until the next dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 6000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: Command word.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: pearl-of-power
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 1000000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037097549
+  modifiedTime: 1725992483030
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!44XNWmMGnwXn7bNW'

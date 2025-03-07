@@ -1,0 +1,133 @@
+_id: 4ZiJsDTRA1GgcWKP
+name: Potion of Stone Giant Strength
+type: consumable
+img: icons/consumables/potions/bottle-bulb-corked-green.webp
+system:
+  description:
+    value: >-
+      <p><em>This potion's transparent liquid has floating in it a sliver of
+      fingernail from a giant of the appropriate type.</em></p>
+
+      <p>When you drink this potion, your Strength score changes to 23 for 1
+      hour.  The potion has no effect on you if your Strength is equal to or
+      greater than that score.</p>
+
+      <p> </p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 1200
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: potion
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: touch
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: potion-of-stone-giant-strength
+effects: []
+folder: gyBZp72zKb56Da84
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037099251
+  modifiedTime: 1725992483589
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!4ZiJsDTRA1GgcWKP'

@@ -1,0 +1,112 @@
+_id: NRj0lC3SM03s1YB3
+name: Belt of Cloud Giant Strength
+type: equipment
+img: icons/equipment/waist/belt-thick-gemmed-steel-grey.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While wearing this belt, your Strength score changes to 27. If your
+      Strength is already equal to or greater than the belt's score, the item
+      has no effect on you.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 18000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: belt-of-cloud-giant-strength
+effects:
+  - origin: Compendium.dnd5e.items.NRj0lC3SM03s1YB3
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: iGbcuTRYb2okyQeS
+    changes:
+      - key: system.abilities.str.value
+        mode: 4
+        value: '27'
+        priority: null
+    tint: '#ffffff'
+    transfer: true
+    flags: {}
+    name: Belt of Cloud Giant Strength
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/equipment/waist/belt-thick-gemmed-steel-grey.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!NRj0lC3SM03s1YB3.iGbcuTRYb2okyQeS'
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037173921
+  modifiedTime: 1725992508549
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!NRj0lC3SM03s1YB3'

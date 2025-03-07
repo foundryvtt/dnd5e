@@ -1,0 +1,132 @@
+_id: NG8BlE2nwYJxCjWO
+name: Animated Shield
+type: equipment
+img: icons/equipment/shield/heater-steel-sword-yellow-black.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>While holding this shield, you can speak its command word as a bonus
+      action to cause it to animate. The shield leaps into the air and hovers in
+      your space to protect you as if you were wielding it, leaving your hands
+      free. The shield remains animated for 1 minute, until you use a bonus
+      action to end this effect, or until you are incapacitated or die, at which
+      point the shield falls to the ground or into your hand if you have one
+      free.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 6000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 2
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: shield
+    baseItem: shield
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: bonus
+        value: 1
+        condition: Command Word
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: minute
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: animated-shield
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037173027
+  modifiedTime: 1725992508261
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!NG8BlE2nwYJxCjWO'

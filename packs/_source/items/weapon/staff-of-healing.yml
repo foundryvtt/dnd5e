@@ -1,0 +1,307 @@
+_id: WLVQJVpCWiPkCAtZ
+name: Staff of Healing
+type: weapon
+img: icons/weapons/staves/staff-ornate-cross.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a bard, cleric, or druid)</em></p><p>This
+      staff has 10 charges. While holding it, you can use an action to expend 1
+      or more of its charges to cast one of the following spells from it, using
+      your spell save DC and spellcasting ability modifier:
+      @UUID[Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP]{Cure Wounds} (1
+      charge per spell level, up to 4th),
+      @UUID[Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV]{Lesser Restoration}
+      (2 charges), or @UUID[Compendium.dnd5e.spells.Item.Pyzmm8R7rVsNAPsd]{Mass
+      Cure Wounds} (5 charges).</p><p>The staff regains 1d6 + 4 expended charges
+      daily at dawn. If you expend the last charge, roll a d20. On a 1, the
+      staff vanishes in a flash of light, lost forever.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 13000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ''
+    reach: null
+  uses:
+    max: '10'
+    recovery:
+      - period: dawn
+        type: formula
+        formula: 1d6 + 4
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  type:
+    value: simpleM
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: null
+  activities:
+    AcACbFOCPB59VKfz:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.uUWb1wZgtMou0TVP
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: AcACbFOCPB59VKfz
+      sort: 300000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: true
+          max: '4'
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    nn4geEXkhCgdAySL:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.F0GsG0SJzsIOacwV
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: nn4geEXkhCgdAySL
+      sort: 400000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    r4S7IfUpK5ccLGpa:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.Pyzmm8R7rVsNAPsd
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: r4S7IfUpK5ccLGpa
+      sort: 500000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    HySVJaepP2wG5nCg:
+      type: attack
+      _id: HySVJaepP2wG5nCg
+      sort: 200000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+  attuned: false
+  ammunition: {}
+  identifier: staff-of-healing
+  mastery: ''
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037204182
+  modifiedTime: 1731019528554
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!WLVQJVpCWiPkCAtZ'

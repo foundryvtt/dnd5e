@@ -1,0 +1,76 @@
+_id: kpDbCYgUivh7NApp
+name: Spellguard Shield
+type: equipment
+img: icons/equipment/shield/kite-wooden-sigil-purple.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>While holding this shield, you have advantage on saving throws against
+      spells and other magical effects, and spell attacks have disadvantage
+      against you.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 50000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 2
+    dex: null
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: shield
+    baseItem: shield
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: spellguard-shield
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037270294
+  modifiedTime: 1725992540668
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!kpDbCYgUivh7NApp'

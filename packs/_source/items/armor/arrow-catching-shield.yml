@@ -1,0 +1,128 @@
+_id: uWUD93jwuO2Jxkti
+name: Arrow-Catching Shield
+type: equipment
+img: icons/equipment/shield/wardoor-wooden-boss-brown.webp
+system:
+  description:
+    value: >-
+      <p>You gain a +2 bonus to AC against ranged attacks while you wield this
+      shield. This bonus is in addition to the shield's normal bonus to AC. In
+      addition, whenever an attacker makes a ranged attack against a target
+      within 5 feet of you, you can use your reaction to become the target of
+      the attack instead.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 6000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 2
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: shield
+    baseItem: shield
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: reaction
+        value: 1
+        condition: A ranged attack within 5 ft.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: arrow-catching-shield
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037312834
+  modifiedTime: 1725992555300
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!uWUD93jwuO2Jxkti'

@@ -1,0 +1,146 @@
+_id: 9kfMsSweOBui0SC4
+name: Rod of Security
+type: equipment
+img: icons/weapons/wands/wand-carved-pink.webp
+system:
+  description:
+    value: >-
+      <p>While holding this rod, you can use an action to activate it. The rod
+      then instantly transports you and up to 199 other willing creatures you
+      can see to a paradise that exists in an extraplanar space. You choose the
+      form that the paradise takes. It could be a tranquil garden, lovely glade,
+      cheery tavern, immense palace, tropical island, fantastic carnival, or
+      whatever else you can imagine. Regardless of its nature, the paradise
+      contains enough water and food to sustain its visitors. Everything else
+      that can be interacted with inside the extraplanar space can exist only
+      there. For example, a flower picked from a garden in the paradise
+      disappears if it is taken outside the extraplanar space.</p>
+
+      <p>For each hour spent in the paradise, a visitor regains hit points as if
+      it had spent 1 Hit Die. Also, creatures don't age while in the paradise,
+      although time passes normally. Visitors can remain in the paradise for up
+      to 200 days divided by the number of creatures present (round down).</p>
+
+      <p>When the time runs out or you use an action to end it, all visitors
+      reappear in the location they occupied when you activated the rod, or an
+      unoccupied space nearest that location. The rod can't be used again until
+      ten days have passed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 5
+    units: lb
+  price:
+    value: 90000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: veryRare
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: rod
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - foc
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '200'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: rod-of-security
+effects: []
+folder: 609zLs23BLj5hyYp
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037119652
+  modifiedTime: 1730323625191
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!9kfMsSweOBui0SC4'

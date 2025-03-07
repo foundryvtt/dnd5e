@@ -1,0 +1,2110 @@
+_id: L1w8yBkInMscfJ3F
+name: Oni
+type: npc
+img: null
+system:
+  abilities:
+    str:
+      value: 19
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    dex:
+      value: 11
+      proficient: 1
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    con:
+      value: 16
+      proficient: 1
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    int:
+      value: 14
+      proficient: 0
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    wis:
+      value: 12
+      proficient: 1
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+    cha:
+      value: 15
+      proficient: 1
+      bonuses:
+        check: ''
+        save: ''
+      max: null
+  attributes:
+    ac:
+      flat: null
+      calc: default
+      formula: ''
+    hp:
+      value: 110
+      max: 110
+      temp: 0
+      tempmax: 0
+      formula: 13d10 + 39
+    init:
+      ability: ''
+      bonus: '0'
+      roll:
+        min: null
+        max: null
+        mode: 0
+    movement:
+      burrow: 0
+      climb: 0
+      fly: 30
+      swim: 0
+      walk: 30
+      units: ft
+      hover: false
+    attunement:
+      max: 3
+    senses:
+      darkvision: 60
+      blindsight: 0
+      tremorsense: 0
+      truesight: 0
+      units: ft
+      special: ''
+    spellcasting: cha
+    exhaustion: 0
+    concentration:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      bonuses:
+        save: ''
+      limit: 1
+    hd:
+      spent: 0
+    death:
+      ability: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+      success: 0
+      failure: 0
+  details:
+    biography:
+      value: ''
+      public: ''
+    alignment: Lawful Evil
+    race: null
+    type:
+      value: giant
+      subtype: ''
+      swarm: ''
+      custom: ''
+    environment: Forest
+    cr: 7
+    spellLevel: 0
+    ideal: ''
+    bond: ''
+    flaw: ''
+  traits:
+    size: lg
+    di:
+      value: []
+      bypasses: []
+      custom: ''
+    dr:
+      value: []
+      bypasses: []
+      custom: ''
+    dv:
+      value: []
+      bypasses: []
+      custom: ''
+    ci:
+      value: []
+      custom: ''
+    languages:
+      value:
+        - common
+        - giant
+      custom: ''
+    dm:
+      amount: {}
+      bypasses: []
+  currency:
+    pp: 0
+    gp: 0
+    ep: 0
+    sp: 0
+    cp: 0
+  skills:
+    acr:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ani:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    arc:
+      value: 1
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ath:
+      value: 0
+      ability: str
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    dec:
+      value: 2
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    his:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ins:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    itm:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    inv:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    med:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    nat:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prc:
+      value: 1
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    prf:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    per:
+      value: 0
+      ability: cha
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    rel:
+      value: 0
+      ability: int
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    slt:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    ste:
+      value: 0
+      ability: dex
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+    sur:
+      value: 0
+      ability: wis
+      bonuses:
+        check: ''
+        passive: ''
+      roll:
+        min: null
+        max: null
+        mode: 0
+  spells:
+    spell1:
+      value: 0
+      override: null
+    spell2:
+      value: 0
+      override: null
+    spell3:
+      value: 0
+      override: null
+    spell4:
+      value: 0
+      override: null
+    spell5:
+      value: 0
+      override: null
+    spell6:
+      value: 0
+      override: null
+    spell7:
+      value: 0
+      override: null
+    spell8:
+      value: 0
+      override: null
+    spell9:
+      value: 0
+      override: null
+    pact:
+      value: 0
+      override: null
+    spell0:
+      value: 0
+      override: null
+  bonuses:
+    mwak:
+      attack: ''
+      damage: ''
+    rwak:
+      attack: ''
+      damage: ''
+    msak:
+      attack: ''
+      damage: ''
+    rsak:
+      attack: ''
+      damage: ''
+    abilities:
+      check: ''
+      save: ''
+      skill: ''
+    spell:
+      dc: ''
+  resources:
+    legact:
+      value: 0
+      max: 0
+    legres:
+      value: 0
+      max: 0
+    lair:
+      value: false
+      initiative: null
+  tools: {}
+  source:
+    custom: ''
+    book: ''
+    page: ''
+    license: CC-BY-4.0
+    revision: 1
+    rules: '2014'
+prototypeToken:
+  name: Oni
+  displayName: 20
+  actorLink: false
+  width: 2
+  height: 2
+  lockRotation: false
+  rotation: 0
+  disposition: -1
+  displayBars: 40
+  bar1:
+    attribute: attributes.hp
+  bar2:
+    attribute: null
+  flags: {}
+  randomImg: false
+  alpha: 1
+  light:
+    alpha: 1
+    angle: 360
+    bright: 0
+    coloration: 1
+    dim: 0
+    luminosity: 0.5
+    saturation: 0
+    contrast: 0
+    shadows: 0
+    animation:
+      speed: 5
+      intensity: 5
+      type: null
+      reverse: false
+    darkness:
+      min: 0
+      max: 1
+    attenuation: 0.5
+    color: null
+    negative: false
+    priority: 0
+  texture:
+    src: null
+    tint: '#ffffff'
+    scaleX: 1
+    scaleY: 1
+    offsetX: 0
+    offsetY: 0
+    rotation: 0
+    anchorX: 0.5
+    anchorY: 0.5
+    fit: contain
+    alphaThreshold: 0.75
+  sight:
+    angle: 360
+    enabled: false
+    range: 60
+    brightness: 0
+    visionMode: basic
+    color: null
+    attenuation: 0.1
+    saturation: 0
+    contrast: 0
+  detectionModes: []
+  appendNumber: false
+  prependAdjective: false
+  hexagonalShape: 1
+  occludable:
+    radius: 0
+  ring:
+    enabled: false
+    colors:
+      ring: null
+      background: null
+    effects: 1
+    subject:
+      scale: 1
+      texture: null
+items:
+  - _id: m65uENAa93Pz8lLl
+    name: Chain Mail
+    type: equipment
+    img: icons/equipment/chest/breastplate-metal-scaled-grey.webp
+    system:
+      description:
+        value: >-
+          <p>Made of interlocking metal rings, chain mail includes a layer of
+          quilted fabric worn underneath the mail to prevent chafing and to
+          cushion the impact of blows. The suit includes gauntlets.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 55
+        units: lb
+      price:
+        value: 75
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      armor:
+        value: 16
+        dex: 0
+        magicalBonus: null
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      speed:
+        value: null
+        conditions: ''
+      strength: 13
+      proficient: 1
+      properties:
+        - stealthDisadvantage
+      unidentified:
+        description: ''
+      type:
+        value: heavy
+        baseItem: chainmail
+      container: null
+      crewed: false
+      activities: {}
+      attuned: false
+      identifier: chain-mail
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.items.rLMflzmxpe8JGTOA
+    _stats:
+      compendiumSource: Compendium.dnd5e.items.rLMflzmxpe8JGTOA
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!L1w8yBkInMscfJ3F.m65uENAa93Pz8lLl'
+  - _id: FC0FNE8O4rnbth8s
+    name: Glaive
+    type: weapon
+    img: icons/weapons/polearms/halberd-crescent-glowing.webp
+    system:
+      description:
+        value: >-
+          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>,
+          <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d10 + 4)
+          <em>slashing damage</em></strong>, or <strong>9 (1d10 + 4)
+          <em>slashing damage</em></strong> in Small or Medium form.</p>
+        chat: <p>The Oni attacks with its Glaive.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 6
+        units: lb
+      price:
+        value: 20
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: null
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: 1
+          denomination: 10
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 2
+          denomination: 10
+          bonus: ''
+          types:
+            - slashing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties:
+        - hvy
+        - rch
+        - two
+      proficient: 1
+      unidentified:
+        description: ''
+      type:
+        value: martialM
+        baseItem: glaive
+      container: null
+      crewed: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '10'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: str
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 0
+      attuned: false
+      ammunition: {}
+      magicalBonus: null
+      identifier: glaive
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.items.rOG1OM2ihgPjOvFW
+    _stats:
+      compendiumSource: Compendium.dnd5e.items.rOG1OM2ihgPjOvFW
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676784
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!L1w8yBkInMscfJ3F.FC0FNE8O4rnbth8s'
+  - _id: q7J7PERrJb2vxtlt
+    name: Claw (Oni Form Only)
+    type: weapon
+    img: icons/skills/melee/strike-slashes-red.webp
+    system:
+      description:
+        value: >-
+          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
+          ft.,</strong> one target. Hit: <strong>8 (1d8 + 4) <em>slashing
+          damage</em></strong>.</p>
+        chat: <p>The Oni attacks with its Claw.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      quantity: 1
+      weight:
+        value: 0
+        units: lb
+      price:
+        value: 0
+        denomination: gp
+      attunement: ''
+      equipped: true
+      rarity: ''
+      identified: true
+      cover: null
+      range:
+        value: 5
+        long: null
+        units: ft
+        reach: null
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      damage:
+        versatile:
+          number: null
+          denomination: null
+          bonus: ''
+          types: []
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+        base:
+          number: 1
+          denomination: 8
+          bonus: ''
+          types:
+            - slashing
+          custom:
+            enabled: false
+            formula: ''
+          scaling:
+            mode: ''
+            number: null
+            formula: ''
+      armor:
+        value: 10
+      hp:
+        value: 0
+        max: 0
+        dt: null
+        conditions: ''
+      properties: []
+      proficient: 1
+      unidentified:
+        description: ''
+      type:
+        value: natural
+        baseItem: ''
+      container: null
+      crewed: false
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: attack
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            value: '5'
+            units: ft
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          attack:
+            ability: str
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          sort: 0
+      attuned: false
+      ammunition: {}
+      magicalBonus: null
+      identifier: claw-oni-form-only
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676784
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!L1w8yBkInMscfJ3F.q7J7PERrJb2vxtlt'
+  - _id: HiGvFK1bT8zkJA3r
+    name: Innate Spellcasting
+    type: feat
+    img: icons/magic/light/projectiles-star-purple.webp
+    system:
+      description:
+        value: >-
+          <p>The oni's innate spellcasting ability is Charisma (spell save DC
+          13). The oni can innately cast the following spells, requiring no
+          material components:</p>
+
+          <p>At will: darkness, invisibility</p>
+
+          <p>1/day each: charm person, cone of cold, gaseous form, sleep</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: innate-spellcasting
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!L1w8yBkInMscfJ3F.HiGvFK1bT8zkJA3r'
+  - _id: 7YSwI62Budsr6HzO
+    name: Multiattack
+    type: feat
+    img: icons/skills/melee/blade-tips-triple-steel.webp
+    system:
+      description:
+        value: <p>The oni makes two attacks, either with its claws or its glaive.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: multiattack
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!L1w8yBkInMscfJ3F.7YSwI62Budsr6HzO'
+  - _id: 8liUuXPhjNLKYMMx
+    name: Regeneration
+    type: feat
+    img: icons/skills/wounds/anatomy-organ-heart-red.webp
+    system:
+      description:
+        value: >-
+          <p>The oni regains <strong>10 hit points</strong> at the start of its
+          turn if it has at least <strong>1 hit point</strong>.</p>
+        chat: >-
+          <p>The oni regains <strong>10 hit points</strong> at the start of its
+          turn.</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: heal
+          activation:
+            type: ''
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          healing:
+            number: null
+            denomination: null
+            bonus: ''
+            types:
+              - healing
+            custom:
+              enabled: true
+              formula: '10'
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: regeneration
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: 1736804676784
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!L1w8yBkInMscfJ3F.8liUuXPhjNLKYMMx'
+  - _id: HJDOmnRX2zQuXraB
+    name: Magic Weapons
+    type: feat
+    img: icons/weapons/swords/sword-runed-glowing.webp
+    system:
+      description:
+        value: <p>the oni's weapon attacks are magical.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        spent: 0
+        recovery: []
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities: {}
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: magic-weapons
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!L1w8yBkInMscfJ3F.HJDOmnRX2zQuXraB'
+  - _id: QGNzJqfTHnbhjzFN
+    name: Change Shape
+    type: feat
+    img: icons/magic/control/silhouette-hold-change-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The oni magically <strong>polymorphs</strong> into a
+          <strong>Small</strong> or<strong> Medium humanoid</strong>, into
+          <strong>a Large giant</strong>, or <strong>back into its true
+          form</strong>. Other than its size, its statistics are the same in
+          each form.<strong> The only equipment that is transformed is its
+          glaive</strong>, which shrinks so that it can be wielded in humanoid
+          form. If the oni dies, it reverts to its true form, and its glaive
+          reverts to its normal size.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: ''
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      enchant: {}
+      prerequisites:
+        level: null
+      identifier: change-shape
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!L1w8yBkInMscfJ3F.QGNzJqfTHnbhjzFN'
+  - _id: S7VbUetIfVT7B6Eq
+    name: Darkness
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>Magical darkness spreads from a point you choose within range to
+          fill a 15-foot-radius sphere for the duration. The darkness spreads
+          around corners. A creature with darkvision can't see through this
+          darkness, and nonmagical light can't illuminate it.</p><p>If the point
+          you choose is on an object you are holding or one that isn't being
+          worn or carried, the darkness emanates from the object and moves with
+          it. Completely covering the source of the darkness with an opaque
+          object, such as a bowl or a helm, blocks the darkness.</p><p>If any of
+          this spell's area overlaps with an area of light created by a spell of
+          2nd level or lower, the spell that created the light is dispelled.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '10'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: sphere
+          size: '15'
+          contiguous: false
+      range:
+        value: '60'
+        units: ft
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 2
+      school: evo
+      materials:
+        value: Bat fur and a drop of pitch or piece of coal
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: darkness
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq
+    img: icons/magic/perception/eye-ringed-glow-angry-red.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!L1w8yBkInMscfJ3F.S7VbUetIfVT7B6Eq'
+  - _id: 1N8dDMMgZ1h1YJ3B
+    name: Invisibility
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>A creature you touch becomes invisible until the spell ends.
+          Anything the target is wearing or carrying is invisible as long as it
+          is on the target's person. The spell ends for a target that attacks or
+          casts a spell.</p><p><strong>At Higher Levels.</strong> When you cast
+          this spell using a spell slot of 3rd level or higher, you can target
+          one additional creature for each slot level above 2nd.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 2
+      school: ill
+      materials:
+        value: An eyelash encased in gum arabic
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: atwill
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: invisibility
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B
+    img: icons/magic/air/fog-gas-smoke-dense-gray.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!L1w8yBkInMscfJ3F.1N8dDMMgZ1h1YJ3B'
+  - _id: eS7XnnApoxRxYXPs
+    name: Charm Person
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You attempt to charm a humanoid you can see within range. It must
+          make a Wisdom saving throw, and does so with advantage if you or your
+          companions are fighting it. If it fails the saving throw, it is
+          charmed by you until the spell ends or until you or your companions do
+          anything harmful to it. The charmed creature regards you as a friendly
+          acquaintance. When the spell ends, the creature knows it was charmed
+          by you.</p>
+                  <p><strong>At Higher Levels.</strong> When you cast this spell using a spell slot of 2nd level or higher, you can target one additional creature for each slot level above 1st. The creatures must be within 30 feet of each other when you target them.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        value: '30'
+        units: ft
+      uses:
+        max: '1'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 1
+      school: enc
+      materials:
+        value: ''
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability: wis
+            dc:
+              calculation: spellcasting
+              formula: '13'
+          sort: 0
+      identifier: charm-person
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.eS7XnnApoxRxYXPs
+    img: icons/magic/fire/explosion-fireball-medium-purple-pink.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.eS7XnnApoxRxYXPs
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!L1w8yBkInMscfJ3F.eS7XnnApoxRxYXPs'
+  - _id: RpKjTlYASrfqUPVA
+    name: Cone of Cold
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: "<p>A blast of cold air erupts from your hands. Each creature in a 60-foot cone must make a Constitution saving throw. A creature takes 8d8 cold damage on a failed save, or half as much damage on a successful one.</p><p>A creature killed by this spell becomes a frozen statue until it thaws.</p><p><strong>Higher Levels.\_</strong>When you cast this spell using a spell slot of 6th level or higher, the damage increases by 1d8 for each slot level above 5th.</p>"
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: ''
+        units: inst
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: cone
+          size: '60'
+          contiguous: false
+      range:
+        units: self
+      uses:
+        max: '1'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 5
+      school: evo
+      materials:
+        value: A small crystal or glass cone
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: save
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts:
+              - number: 8
+                denomination: 8
+                bonus: ''
+                types:
+                  - cold
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 1
+                  formula: ''
+          save:
+            ability: con
+            dc:
+              calculation: spellcasting
+              formula: '13'
+          sort: 0
+      identifier: cone-of-cold
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.RpKjTlYASrfqUPVA
+    img: icons/magic/water/projectiles-ice-faceted-shard-salvo-blue.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.RpKjTlYASrfqUPVA
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!L1w8yBkInMscfJ3F.RpKjTlYASrfqUPVA'
+  - _id: 2IWiZAJtOGDoKjiz
+    name: Gaseous Form
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>You transform a willing creature you touch, along with everything
+          it's wearing and carrying, into a misty cloud for the duration. The
+          spell ends if the creature drops to 0 hit points. An incorporeal
+          creature isn't affected.</p><p>While in this form, the target's only
+          method of movement is a flying speed of 10 feet. The target can enter
+          and occupy the space of another creature. The target has resistance to
+          nonmagical damage, and it has advantage on Strength, Dexterity, and
+          Constitution saving throws. The target can pass through small holes,
+          narrow openings, and even mere cracks, though it treats liquids as
+          though they were solid surfaces. The target can't fall and remains
+          hovering in the air even when stunned or otherwise
+          incapacitated.</p><p>While in the form of a misty cloud, the target
+          can't talk or manipulate objects, and any objects it was carrying or
+          holding can't be dropped, used, or otherwise interacted with. The
+          target can't attack or cast spells.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: hour
+      target:
+        affects:
+          type: creature
+          count: '1'
+          choice: false
+        template:
+          units: ''
+          contiguous: false
+      range:
+        units: touch
+      uses:
+        max: '1'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 3
+      school: trs
+      materials:
+        value: A bit of gauze and a wisp of smoke
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+        - concentration
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: utility
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          roll:
+            formula: ''
+            name: ''
+            prompt: false
+            visible: false
+          sort: 0
+      identifier: gaseous-form
+    sort: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.2IWiZAJtOGDoKjiz
+    img: icons/magic/air/fog-gas-smoke-dense-green.webp
+    effects: []
+    folder: null
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.2IWiZAJtOGDoKjiz
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!L1w8yBkInMscfJ3F.2IWiZAJtOGDoKjiz'
+  - _id: KhwiSi9fwVfUPtku
+    name: Sleep
+    type: spell
+    img: icons/magic/light/explosion-star-small-pink.webp
+    system:
+      description:
+        value: >-
+          <p>This spell sends creatures into a magical slumber. Roll 5d8; the
+          total is how many hit points of creatures this spell can affect.
+          Creatures within 20 feet of a point you choose within range are
+          affected in ascending order of their current hit points (ignoring
+          unconscious creatures).</p><p>Starting with the creature that has the
+          lowest current hit points, each creature affected by this spell falls
+          unconscious until the spell ends, the sleeper takes damage, or someone
+          uses an action to shake or slap the sleeper awake. Subtract each
+          creature's hit points from the total before moving on to the creature
+          with the next lowest hit points. A creature's hit points must be equal
+          to or less than the remaining total for that creature to be
+          affected.</p><p>Undead and creatures immune to being charmed aren't
+          affected by this spell.</p><p><strong>Higher Levels.</strong> When you
+          cast this spell using a spell slot of 2nd level or higher, roll an
+          additional 2d8 for each slot level above 1st.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: action
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          choice: false
+        template:
+          units: ft
+          type: sphere
+          size: '20'
+          contiguous: false
+      range:
+        value: '90'
+        units: ft
+      uses:
+        max: '1'
+        recovery:
+          - period: day
+            type: recoverAll
+        spent: 0
+      level: 1
+      school: enc
+      materials:
+        value: A pinch of fine sand, rose petals, or a cricket.
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: innate
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: damage
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                target: ''
+                value: '1'
+                scaling:
+                  mode: ''
+                  formula: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+          target:
+            prompt: true
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            critical:
+              allow: false
+              bonus: ''
+            parts:
+              - number: 5
+                denomination: 8
+                bonus: ''
+                types: []
+                custom:
+                  enabled: false
+                  formula: ''
+                scaling:
+                  mode: whole
+                  number: 2
+                  formula: ''
+          sort: 0
+      identifier: sleep
+    effects: []
+    folder: null
+    sort: 0
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
+    _stats:
+      compendiumSource: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!actors.items!L1w8yBkInMscfJ3F.KhwiSi9fwVfUPtku'
+effects: []
+folder: v8gFGdEluEFQdRQg
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1726171223750
+  modifiedTime: 1726171443405
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!actors!L1w8yBkInMscfJ3F'

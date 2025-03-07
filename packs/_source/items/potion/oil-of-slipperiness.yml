@@ -1,0 +1,139 @@
+_id: FIDyR0kZnxGy7bj8
+name: Oil of Slipperiness
+type: consumable
+img: icons/consumables/potions/bottle-circular-corked-labeled-green.webp
+system:
+  description:
+    value: >-
+      <p><em>This sticky black unguent is thick and heavy in the container, but
+      it flows quickly when poured. </em></p>
+
+      <p>The oil can cover a Medium or smaller creature, along with the
+      equipment it's wearing and carrying (one additional vial is required for
+      each size category above Medium).  Applying the oil takes 10 minutes.  The
+      affected creature then gains the effect of a
+      @UUID[Compendium.dnd5e.spells.Item.da0a1t2FqaTjRZGT]{Freedom of Movement}
+      spell for 8 hours.</p>
+
+      <p>Alternatively, the oil can be poured on the ground as an action, where
+      it covers a 10‑foot square, duplicating the effect of the
+      @UUID[Compendium.dnd5e.spells.Item.etgcR9wqmrhyZ0tx]{Grease} spell in that
+      area for 8 hours.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 480
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: potion
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '8'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: touch
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: oil-of-slipperiness
+effects: []
+folder: gyBZp72zKb56Da84
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037142391
+  modifiedTime: 1725992497922
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!FIDyR0kZnxGy7bj8'

@@ -1,0 +1,315 @@
+_id: L9KBLub5vfb3mTDz
+name: Ring of Fire Elemental Command
+type: equipment
+img: icons/equipment/finger/ring-inlay-red.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>This ring is linked to the Elemental Plane of Fire.</p>
+
+      <p>While wearing this ring, you have advantage on attack rolls against
+      @UUID[Compendium.dnd5e.monsters.Actor.8SMQl75HLjhuSeau]{Fire Elemental}s,
+      and they have disadvantage on attack rolls against you. In addition, you
+      have access to properties based on the linked plane.</p>
+
+      <p>The ring has 5 charges. It regains 1d4 + 1 expended charges daily at
+      dawn. Spells cast from the ring have a save DC of 17.</p>
+
+      <p><strong>Ring of Fire Elemental Command</strong>. You can expend 2 of
+      the ring's charges to cast
+      @UUID[Compendium.dnd5e.spells.Item.eEpy1ONlXumKS1mp]{Dominate Monster} on
+      a Fire Elemental. In addition, you have resistance to fire damage. You can
+      also speak and understand Ignan.</p>
+
+      <p>If you help slay a Fire Elemental while attuned to the ring, you gain
+      access to the following additional properties:</p>
+
+      <ul>
+
+      <li>You are immune to fire damage.</li>
+
+      <li>You can cast the following spells from the ring, expending the
+      necessary number of charges:
+      @UUID[Compendium.dnd5e.spells.Item.5SuJewoa1CRWaj1F]{Burning Hands} (1
+      charge), @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{Fireball} (2
+      charges), or @UUID[Compendium.dnd5e.spells.Item.X3DrXgxjwI2dvkD6]{Wall of
+      Fire} (3 charges).</li>
+
+      </ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 17000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  cover: null
+  uses:
+    max: '5'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d4 + 1
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: ring
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dxaE4B2S9PJ692hU:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.eEpy1ONlXumKS1mp
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '8'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: dxaE4B2S9PJ692hU
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Only on Fire Elementals
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    rWInlhCUYFV0xFpU:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.5SuJewoa1CRWaj1F
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: rWInlhCUYFV0xFpU
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    MWSaqDybpLBn8R9V:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: MWSaqDybpLBn8R9V
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    Favmm3fyHI1GTOcN:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.X3DrXgxjwI2dvkD6
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: Favmm3fyHI1GTOcN
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: ring-of-fire-elemental-command
+effects: []
+folder: 5jrDZJ1U23Q9jDqB
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037164666
+  modifiedTime: 1729016853926
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!L9KBLub5vfb3mTDz'

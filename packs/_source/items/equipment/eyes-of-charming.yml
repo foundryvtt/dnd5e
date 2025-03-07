@@ -1,0 +1,134 @@
+_id: 8dfhaa1g3VDjhtm3
+name: Eyes of Charming
+type: equipment
+img: icons/tools/scribal/spectacles-glasses.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>These crystal lenses fit over the eyes. They have 3 charges. While
+      wearing them, you can expend 1 charge as an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.eS7XnnApoxRxYXPs]{Charm Person} spell
+      (save DC 13) on a humanoid within 30 feet of you, provided that you and
+      the target can see each other. The lenses regain all expended charges
+      daily at dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.01
+    units: lb
+  price:
+    value: 3000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: '3'
+    recovery:
+      - period: dawn
+        type: recoverAll
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    9rqbuaaYgPZZKVFJ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.eS7XnnApoxRxYXPs
+        challenge:
+          attack: null
+          save: 13
+          override: true
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 9rqbuaaYgPZZKVFJ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: eyes-of-charming
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037115295
+  modifiedTime: 1731019107334
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!8dfhaa1g3VDjhtm3'

@@ -1,0 +1,122 @@
+_id: dQxqcjDm0IxYusCV
+name: Hat of Disguise
+type: equipment
+img: icons/equipment/head/hat-belted-simple.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While wearing this hat, you can use an action to cast the
+      @UUID[Compendium.dnd5e.spells.Item.A3q2gTNqG6fvNGrv]{Disguise Self} spell
+      from it at will. The spell ends if the hat is removed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 5000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    wRay1ZVWKBGtk9mL:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.A3q2gTNqG6fvNGrv
+        challenge:
+          attack: null
+          save: null
+          override: false
+        level: null
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: wRay1ZVWKBGtk9mL
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+  attuned: false
+  identifier: hat-of-disguise
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037234437
+  modifiedTime: 1729015322129
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!dQxqcjDm0IxYusCV'

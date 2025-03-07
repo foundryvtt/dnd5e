@@ -1,0 +1,369 @@
+_id: HnIERWmmra74hSCw
+name: Ring of Water Elemental Command
+type: equipment
+img: icons/equipment/finger/ring-cabochon-gold-purple.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p>
+
+      <p>This ring is linked to the Elemental Plane of Water.</p>
+
+      <p>While wearing this ring, you have advantage on attack rolls against
+      @UUID[Compendium.dnd5e.monsters.Actor.namJz755U1EhvEJa]{Water Elemental}s,
+      and they have disadvantage on attack rolls against you. In addition, you
+      have access to properties based on the linked plane.</p>
+
+      <p>The ring has 5 charges. It regains 1d4 + 1 expended charges daily at
+      dawn. Spells cast from the ring have a save DC of 17.</p>
+
+      <p><strong>Ring of Water Elemental Command</strong>. You can expend 2 of
+      the ring's charges to cast
+      @UUID[Compendium.dnd5e.spells.Item.eEpy1ONlXumKS1mp]{Dominate Monster} on
+      a Water Elemental. In addition, you can stand on and walk across liquid
+      surfaces as if they were solid ground. You can also speak and understand
+      Aquan.</p>
+
+      <p>If you help slay a Water Elemental while attuned to the ring, you gain
+      access to the following additional properties:</p>
+
+      <ul>
+
+      <li>You can breathe underwater and have a swimming speed equal to your
+      walking speed.</li>
+
+      <li>You can cast the following spells from the ring, expending the
+      necessary number of charges:
+      @UUID[Compendium.dnd5e.spells.Item.a3XtAO5n2GrqiAh5]{Create or Destroy
+      Water} (1 charge),
+      @UUID[Compendium.dnd5e.spells.Item.7fFHlBk3UNX8gPKL]{Control Water} (3
+      charges), @UUID[Compendium.dnd5e.spells.Item.WN2LWEljYU6QqnRH]{Ice Storm}
+      (2 charges), or @UUID[Compendium.dnd5e.spells.Item.fzZnVKLmBMo2f5up]{Wall
+      of Ice} (3 charges).</li>
+
+      </ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 25000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  cover: null
+  uses:
+    max: '5'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d4 + 1
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: ring
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    UXQJwXpxp8Jg9y5Y:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.eEpy1ONlXumKS1mp
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '8'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: UXQJwXpxp8Jg9y5Y
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: Only on Water Elementals
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    5dYgpmrfsu4gThpP:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.a3XtAO5n2GrqiAh5
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '1'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 5dYgpmrfsu4gThpP
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    x44Euvr98lcnkosn:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.7fFHlBk3UNX8gPKL
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: x44Euvr98lcnkosn
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    rrDO95DYgnJAMlkX:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.WN2LWEljYU6QqnRH
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: rrDO95DYgnJAMlkX
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    RMqCV3LnQUBLFMq0:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.fzZnVKLmBMo2f5up
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '6'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: RMqCV3LnQUBLFMq0
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '3'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: ring-of-water-elemental-command
+effects: []
+folder: 5jrDZJ1U23Q9jDqB
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037152579
+  modifiedTime: 1729016694291
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!HnIERWmmra74hSCw'

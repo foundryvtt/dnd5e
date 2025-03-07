@@ -1,0 +1,173 @@
+_id: jvKmgJYL33E8gev5
+name: Ioun Stone of Reserve
+type: equipment
+img: icons/commodities/gems/gem-rough-cushion-purple-pink.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>An Ioun Stone is named after Ioun, a god of knowledge and prophecy
+      revered on some worlds. Many types of Ioun stone exist, each type a
+      distinct combination of shape and color.</p>
+
+      <p>When you use an action to toss one of these stones into the air, the
+      stone orbits your head at a distance of 1d3 feet and confers a benefit to
+      you. Thereafter, another creature must use an action to grasp or net the
+      stone to separate it from you, either by making a successful attack roll
+      against AC 24 or a successful DC 24 Dexterity (Acrobatics) check. You can
+      use an action to seize and stow the stone, ending its effect.</p>
+
+      <p>A stone has AC 24, 10 hit points, and resistance to all damage. It is
+      considered to be an object that is being worn while it orbits your
+      head.</p>
+
+      <p><strong>Stone of Reserve</strong>. This vibrant purple prism stores
+      spells cast into it, holding them until you use them. The stone can store
+      up to 3 levels worth of spells at a time. When found, it contains 1d4 − 1
+      levels of stored spells chosen by the GM.</p>
+
+      <p>Any creature can cast a spell of 1st through 3rd level into the stone
+      by touching it as the spell is cast. The spell has no effect, other than
+      to be stored in the stone. If the stone can't hold the spell, the spell is
+      expended without effect. The level of the slot used to cast the spell
+      determines how much space it uses.</p>
+
+      <p>While this stone orbits your head, you can cast any spell stored in it.
+      The spell uses the slot level, spell save DC, spell attack bonus, and
+      spellcasting ability of the original caster, but is otherwise treated as
+      if you cast the spell. The spell cast from the stone is no longer stored
+      in it, freeing up space.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 6000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: '3'
+    recovery: []
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: damage
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        critical:
+          allow: false
+          bonus: ''
+        parts:
+          - number: null
+            denomination: null
+            bonus: ''
+            types: []
+            custom:
+              enabled: true
+              formula: 1d3
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: ioun-stone-of-reserve
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037266673
+  modifiedTime: 1725992539440
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!jvKmgJYL33E8gev5'

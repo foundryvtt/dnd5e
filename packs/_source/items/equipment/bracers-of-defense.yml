@@ -1,0 +1,111 @@
+_id: DSHi7yT6OUyDoCcu
+name: Bracers of Defense
+type: equipment
+img: icons/equipment/wrist/bracer-yellow-fancy.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While wearing these bracers, you gain a +2 bonus to AC if you are
+      wearing no armor and using no shield.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 6000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: bracers-of-defense
+effects:
+  - _id: ul7rjl68p1kyv4z2
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    origin: Compendium.dnd5e.items.DSHi7yT6OUyDoCcu
+    transfer: true
+    flags: {}
+    tint: '#ffffff'
+    name: +2 to AC
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/equipment/wrist/bracer-segmented-leather.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!DSHi7yT6OUyDoCcu.ul7rjl68p1kyv4z2'
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037131688
+  modifiedTime: 1725992494326
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!DSHi7yT6OUyDoCcu'

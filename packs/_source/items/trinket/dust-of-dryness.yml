@@ -1,0 +1,160 @@
+_id: eMR6B4bIoJPUDJG8
+name: Dust of Dryness
+type: consumable
+img: icons/magic/air/air-wave-gust-smoke-yellow.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This small packet contains 1d6 + 4 pinches of dust. You can use an
+      action to sprinkle a pinch of it over water. The dust turns a cube of
+      water 15 feet on a side into one marble-sized pellet, which floats or
+      rests near where the dust was sprinkled. The pellet's weight is
+      negligible.</p>
+
+      <p>Someone can use an action to smash the pellet against a hard surface,
+      causing the pellet to shatter and release the water the dust absorbed.
+      Doing so ends that pellet's magic.</p>
+
+      <p>An elemental composed mostly of water that is exposed to a pinch of the
+      dust must make a DC 13 Constitution saving throw, taking 10d6 necrotic
+      damage on a failed save, or half as much damage on a successful one.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 1200
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: '10'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: 10
+      denomination: 6
+      bonus: ''
+      types:
+        - necrotic
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: cube
+          size: '15'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 10
+            denomination: 6
+            bonus: ''
+            types:
+              - necrotic
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      save:
+        ability: con
+        dc:
+          calculation: ''
+          formula: '13'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: dust-of-dryness
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 6900000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037240323
+  modifiedTime: 1725992530674
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!eMR6B4bIoJPUDJG8'

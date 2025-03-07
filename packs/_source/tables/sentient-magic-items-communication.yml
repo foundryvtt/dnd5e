@@ -1,0 +1,66 @@
+name: Sentient Magic Items Communication
+img: icons/weapons/polearms/spear-flared-silver-pink.webp
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 60
+    drawn: false
+    documentCollection: ''
+    _id: fHUcqEyH5hT8iqVk
+    text: >-
+      The item communicates by transmitting emotion to the creature carrying or
+      wielding it.
+    img: icons/svg/d20-black.svg
+    documentId: null
+    flags: {}
+    _key: '!tables.results!BHckoLKDwoL9d5p3.fHUcqEyH5hT8iqVk'
+  - type: text
+    weight: 1
+    range:
+      - 61
+      - 90
+    drawn: false
+    documentCollection: ''
+    _id: gukhzxpdk9xa4Ewy
+    text: The item can speak, read, and understand one or more languages.
+    img: icons/svg/d20-black.svg
+    documentId: null
+    flags: {}
+    _key: '!tables.results!BHckoLKDwoL9d5p3.gukhzxpdk9xa4Ewy'
+  - type: text
+    weight: 1
+    range:
+      - 91
+      - 100
+    drawn: false
+    documentCollection: ''
+    _id: PneqV9OL9QdLzSZR
+    text: >-
+      The item can speak, read, and understand one or more languages. In
+      addition, the item can communicate telepathically with any character that
+      carries or wields it.
+    img: icons/svg/d20-black.svg
+    documentId: null
+    flags: {}
+    _key: '!tables.results!BHckoLKDwoL9d5p3.PneqV9OL9QdLzSZR'
+formula: 1d100
+replacement: true
+displayRoll: true
+flags: {}
+_id: BHckoLKDwoL9d5p3
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037418732
+  modifiedTime: 1725037418732
+  lastModifiedBy: dnd5ebuilder0000
+sort: 0
+folder: null
+ownership:
+  default: 0
+_key: '!tables!BHckoLKDwoL9d5p3'

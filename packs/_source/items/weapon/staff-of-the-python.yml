@@ -1,0 +1,230 @@
+_id: MOeFq5MLAQzVQC7z
+name: Staff of the Python
+type: weapon
+img: icons/weapons/staves/staff-metal-mask.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a cleric, druid, or warlock)</em></p>
+
+      <p>You can use an action to speak this staff's command word and throw the
+      staff on the ground within 10 feet of you. The staff becomes a
+      @UUID[Compendium.dnd5e.monsters.Actor.NpvwE1feOHyEqAbP]{Giant Constrictor
+      Snake} under your control and acts on its own initiative count. By using a
+      bonus action to speak the command word again, you return the staff to its
+      normal form in a space formerly occupied by the snake.</p>
+
+      <p>On your turn, you can mentally command the snake if it is within 60
+      feet of you and you aren't incapacitated. You decide what action the snake
+      takes and where it moves during its next turn, or you can issue it a
+      general command, such as to attack your enemies or guard a location.</p>
+
+      <p>If the snake is reduced to 0 hit points, it dies and reverts to its
+      staff form. The staff then shatters and is destroyed. If the snake reverts
+      to staff form before losing all its hit points, it regains all of
+      them.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ft
+    reach: 10
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: null
+      denomination: 0
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+      bonus: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - foc
+    - mgc
+  proficient: null
+  type:
+    value: simpleM
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: null
+  activities:
+    FDe3XZW8D06mxf3q:
+      type: summon
+      _id: FDe3XZW8D06mxf3q
+      sort: 200000
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: Command word.
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: ''
+        value: '10'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: false
+        ability: ''
+      profiles:
+        - count: ''
+          name: ''
+          _id: deszxA0Rg213RXlx
+          uuid: Compendium.dnd5e.monsters.Actor.NpvwE1feOHyEqAbP
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: Transform
+      img: ''
+      appliedEffects: []
+    tJYJnIP5Zu0tGRsx:
+      type: attack
+      _id: tJYJnIP5Zu0tGRsx
+      sort: 100000
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description: {}
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+      attack:
+        critical:
+          threshold: null
+        flat: false
+        type: {}
+      damage:
+        critical: {}
+        includeBase: true
+        parts: []
+  attuned: false
+  ammunition: {}
+  identifier: staff-of-the-python
+  mastery: ''
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037170767
+  modifiedTime: 1731019471000
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!MOeFq5MLAQzVQC7z'

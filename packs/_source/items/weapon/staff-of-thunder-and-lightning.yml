@@ -1,0 +1,188 @@
+_id: F6v3Q7dz1SlpLTMf
+name: Staff of Thunder and Lightning
+type: weapon
+img: icons/weapons/staves/staff-ornate-teal.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p><p>This staff can be wielded as a
+      magic quarterstaff that grants a +2 bonus to attack and damage rolls made
+      with it. It also has the following additional properties. When one of
+      these properties is used, it can't be used again until the next
+      dawn.</p><p><strong>Lightning</strong>. When you hit with a melee attack
+      using the staff, you can cause the target to take an extra [[/damage 2d6
+      lightning]] damage.</p><p><strong>Thunder</strong>. When you hit with a
+      melee attack using the staff, you can cause the staff to emit a crack of
+      thunder, audible out to 300 feet. The target you hit must succeed on a
+      [[/save dc=17 con]] saving throw or become &amp;Reference[stunned] until
+      the end of your next turn.</p><p><strong>Lightning Strike</strong>. You
+      can use an action to cause a bolt of lightning to leap from the staff's
+      tip in a line that is 5 feet wide and 120 feet long. Each creature in that
+      line must make a [[/save dc=17 dex]] saving throw, taking [[/damage 9d6
+      lightning]] damage on a failed save, or half as much damage on a
+      successful one.</p><p><strong>Thunderclap</strong>. You can use an action
+      to cause the staff to issue a deafening thunderclap, audible out to 600
+      feet. Each creature within 60 feet of you (not including you) must make a
+      [[/save dc=17 con]] saving throw. On a failed save, a creature takes
+      [[/damage 2d6 thunder]] damage and becomes &amp;Reference[deafened] for 1
+      minute. On a successful save, a creature takes half damage and isn't
+      deafened.</p><p><strong>Thunder and Lightning</strong>. You can use an
+      action to use the Lightning Strike and Thunderclap properties at the same
+      time. Doing so doesn't expend the daily use of those properties, only the
+      use of this one.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 4
+    units: lb
+  price:
+    value: 10000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ft
+    reach: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  damage:
+    versatile:
+      number: 1
+      denomination: 8
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 1
+      denomination: 6
+      bonus: ''
+      types:
+        - bludgeoning
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - foc
+    - mgc
+    - ver
+  proficient: null
+  type:
+    value: simpleM
+    baseItem: quarterstaff
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: 2
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  ammunition: {}
+  identifier: staff-of-thunder-and-lightning
+  mastery: ''
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037140899
+  modifiedTime: 1729014368340
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!F6v3Q7dz1SlpLTMf'

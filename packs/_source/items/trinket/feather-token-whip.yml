@@ -1,0 +1,170 @@
+_id: Fgkj11diTJJ7H3JC
+name: Feather Token Whip
+type: consumable
+img: icons/commodities/materials/feather-colored-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This tiny object looks like a feather. Different types of feather
+      tokens exist, each with a different single-use effect. The GM chooses the
+      kind of token or determines it randomly from the
+      @UUID[Compendium.dnd5e.tables.RollTable.OEdr086W61t1DRJo]{Feather Token}
+      table.</p>
+
+      <p><strong>Whip.</strong> You can use an action to throw the token to a
+      point within 10 feet of you. The token disappears, and a floating whip
+      takes its place. You can then use a bonus action to make a melee spell
+      attack against a creature within 10 feet of the whip, with an attack bonus
+      of +9. On a hit, the target takes 1d6 + 5 force damage.</p>
+
+      <p>As a bonus action on your turn, you can direct the whip to fly up to 20
+      feet and repeat the attack against a creature within 10 feet of it. The
+      whip disappears after 1 hour, when you use an action to dismiss it, or
+      when you are incapacitated or die.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 250
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: 1
+      denomination: 6
+      bonus: '5'
+      types:
+        - force
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: A bonus action is used to control the whip.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '10'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: '5'
+          type: space
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: '9'
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - number: 1
+            denomination: 6
+            bonus: '5'
+            types:
+              - force
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: feather-token-whip
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 3200000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037143784
+  modifiedTime: 1725992498450
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!Fgkj11diTJJ7H3JC'

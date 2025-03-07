@@ -1,0 +1,148 @@
+_id: 9Ifr8fGvJ1bArzOW
+name: Bag of Tricks (Grey)
+type: consumable
+img: icons/containers/bags/coinpouch-leather-grey.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This ordinary bag, made from gray cloth, appears empty. Reaching inside
+      the bag, however, reveals the presence of a small, fuzzy object. The bag
+      weighs 1/2 pound.</p>
+
+      <p>You can use an action to pull the fuzzy object from the bag and throw
+      it up to 20 feet. When the object lands, it transforms into a creature you
+      determine by rolling on the
+      @UUID[Compendium.dnd5e.tables.RollTable.VPGP621PW7k03YfB]{Grey Bag of
+      Tricks} table.</p>
+
+      <p>The creature is friendly to you and your companions, and it acts on
+      your turn. You can use a bonus action to command how the creature moves
+      and what action it takes on its next turn, or to give it general orders,
+      such as to attack your enemies. In the absence of such orders, the
+      creature acts in a fashion appropriate to its nature.</p>
+
+      <p>Once three fuzzy objects have been pulled from the bag, the bag can't
+      be used again until the next dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.5
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: '3'
+    recovery:
+      - period: day
+        type: recoverAll
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '20'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: '5'
+          type: space
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: bag-of-tricks-grey
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 1800000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037117348
+  modifiedTime: 1725992489635
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!9Ifr8fGvJ1bArzOW'
