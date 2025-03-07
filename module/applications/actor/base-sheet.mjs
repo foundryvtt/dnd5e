@@ -249,15 +249,13 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     const movement = systemData.attributes.movement ?? {};
 
     // Prepare an array of available movement speeds
-    let speeds = [
-      [movement.burrow, `${game.i18n.localize("DND5E.MovementBurrow")} ${movement.burrow}`],
-      [movement.climb, `${game.i18n.localize("DND5E.MovementClimb")} ${movement.climb}`],
-      [movement.fly, `${game.i18n.localize("DND5E.MovementFly")} ${movement.fly}${movement.hover ? ` (${game.i18n.localize("DND5E.MovementHover")})` : ""}`],
-      [movement.swim, `${game.i18n.localize("DND5E.MovementSwim")} ${movement.swim}`]
-    ];
-    if ( largestPrimary ) {
-      speeds.push([movement.walk, `${game.i18n.localize("DND5E.MovementWalk")} ${movement.walk}`]);
-    }
+    let speeds = Object.entries(CONFIG.DND5E.movementTypes)
+      .filter(([k]) => largestPrimary || (k !== "walk"))
+      .map(([k, v]) => {
+        const speed = movement.types?.[k] ?? 0;
+        const hover = k === "fly" && movement.hover ? ` (${game.i18n.localize("DND5E.MovementHover")})` : "";
+        return [speed, `${game.i18n.localize(v)} ${speed}${hover}`];
+      });
 
     // Filter and sort speeds on their values
     speeds = speeds.filter(s => s[0]).sort((a, b) => b[0] - a[0]);
@@ -275,7 +273,7 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
     // Case 2: Walk as primary
     else {
       return {
-        primary: formatLength(movement.walk ?? 0, units),
+        primary: formatLength(movement.types.walk ?? 0, units),
         special: speeds.length ? speeds.map(s => s[1]).join(", ") : ""
       };
     }
@@ -291,10 +289,11 @@ export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
    */
   _getSenses(systemData) {
     const senses = systemData.attributes.senses ?? {};
+    senses.types ??= {};
     const tags = {};
     const units = senses.units ?? defaultUnits("length");
     for ( let [k, label] of Object.entries(CONFIG.DND5E.senses) ) {
-      const v = senses[k] ?? 0;
+      const v = senses.types[k] ?? 0;
       if ( v === 0 ) continue;
       tags[k] = `${game.i18n.localize(label)} ${formatLength(v, units)}`;
     }

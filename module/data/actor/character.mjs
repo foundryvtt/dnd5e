@@ -191,7 +191,7 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
-    AttributesFields._migrateInitiative(source.attributes);
+    AttributesFields._migrate(source.attributes);
   }
 
   /* -------------------------------------------- */
@@ -231,6 +231,7 @@ export default class CharacterData extends CreatureTemplate {
 
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
+    AttributesFields.shimMovementSenses(this.attributes);
   }
 
   /* -------------------------------------------- */
@@ -246,8 +247,8 @@ export default class CharacterData extends CreatureTemplate {
     } else {
       this.details.type = new CreatureTypeField({ swarm: false }).initialize({ value: "humanoid" }, this);
     }
-    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement[key] ??= 0;
-    for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses[key] ??= 0;
+    for ( const key of Object.keys(CONFIG.DND5E.movementTypes) ) this.attributes.movement.types[key] ??= 0;
+    for ( const key of Object.keys(CONFIG.DND5E.senses) ) this.attributes.senses.types[key] ??= 0;
     this.attributes.movement.units ??= defaultUnits("length");
     this.attributes.senses.units ??= defaultUnits("length");
   }

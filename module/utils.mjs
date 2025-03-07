@@ -1158,6 +1158,18 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
     label = game.i18n.format("DND5E.AbilityScoreL", { ability: CONFIG.DND5E.abilities[key].label });
   }
 
+  // Movement types.
+  else if ( attr.startsWith("attributes.movement.types") ) {
+    const key = attr.split(".")[3];
+    label = CONFIG.DND5E.movementTypes[key];
+  }
+
+  // Senses types.
+  else if ( attr.startsWith("attributes.senses.types") ) {
+    const key = attr.split(".")[3];
+    label = CONFIG.DND5E.senses[key];
+  }
+
   // Skills.
   else if ( attr.startsWith("skills.") ) {
     const [, key] = attr.split(".");
