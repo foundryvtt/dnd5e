@@ -36,6 +36,18 @@ export default function ApplicationV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Expanded states for collapsible sections to persist between renders.
+     * @type {Map<string, boolean>}
+     */
+    #expandedSections = new Map();
+
+    get expandedSections() {
+      return this.#expandedSections;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * A reference to the window subtitle.
      * @type {string}
      */
@@ -133,6 +145,19 @@ export default function ApplicationV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
+    _replaceHTML(result, content, options) {
+      for ( const part of Object.values(result) ) {
+        for ( const element of part.querySelectorAll("[data-expand-id]") ) {
+          element.querySelector(".collapsible")?.classList
+            .toggle("collapsed", !this.#expandedSections.get(element.dataset.expandId));
+        }
+      }
+      super._replaceHTML(result, content, options);
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
     _updateFrame(options) {
       super._updateFrame(options);
       if ( options.window && ("subtitle" in options.window) ) {
@@ -145,6 +170,10 @@ export default function ApplicationV2Mixin(Base) {
     /** @inheritDoc */
     _onRender(context, options) {
       super._onRender(context, options);
+
+      this.element.querySelectorAll("[data-context-menu]").forEach(control =>
+        control.addEventListener("click", dnd5e.applications.ContextMenu5e.triggerEvent)
+      );
 
       // Allow multi-select tags to be removed when the whole tag is clicked.
       this.element.querySelectorAll("multi-select").forEach(select => {
@@ -180,6 +209,33 @@ export default function ApplicationV2Mixin(Base) {
         if ( element.tagName === "TEXTAREA" ) element.readOnly = true;
         else element.disabled = true;
       }
+    }
+
+    /* -------------------------------------------- */
+    /*  Event Listeners and Handlers                */
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    _onClickAction(event, target) {
+      if ( target.dataset.action === "toggleCollapsed" ) this.#toggleCollapsed(event, target);
+      else super._onClickAction(event, target);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle toggling the collapsed state of collapsible sections.
+     * @this {BaseApplication5e}
+     * @param {Event} event         Triggering click event.
+     * @param {HTMLElement} target  Button that was clicked.
+     */
+    #toggleCollapsed(event, target) {
+      if ( event.target.closest(".collapsible-content") ) return;
+      target.classList.toggle("collapsed");
+      this.#expandedSections.set(
+        target.closest("[data-expand-id]")?.dataset.expandId,
+        !target.classList.contains("collapsed")
+      );
     }
   }
   return BaseApplication5e;
