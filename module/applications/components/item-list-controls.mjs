@@ -4,8 +4,10 @@
 export default class ItemListControlsElement extends HTMLElement {
   /** @override */
   connectedCallback() {
-    this.#app = ui.windows[this.closest(".app")?.dataset.appid];
-    this.#list = this.#app.form.querySelector(`[data-item-list="${this.getAttribute("for")}"]`);
+    this.#app = foundry.applications.instances.get(this.closest(".application")?.id)
+      ?? ui.windows[this.closest(".app")?.dataset.appid];
+    const element = this.#app.element instanceof HTMLElement ? this.#app.element : this.#app.element[0];
+    this.#list = element.querySelector(`[data-item-list="${this.getAttribute("for")}"]`);
     this.#state = this.#app._filters[this.getAttribute("for")];
     this.#tab = this.closest(".tab")?.dataset.tab;
     this.#buildHTML();
@@ -138,7 +140,7 @@ export default class ItemListControlsElement extends HTMLElement {
    * @type {TabPreferences5e}
    */
   get prefs() {
-    return game.user.getFlag("dnd5e", `sheetPrefs.${this.app.object.type}.tabs.${this.tab}`);
+    return game.user.getFlag("dnd5e", `sheetPrefs.${this.app.document.type}.tabs.${this.tab}`);
   }
 
   /**
@@ -387,7 +389,7 @@ export default class ItemListControlsElement extends HTMLElement {
    */
   async _onToggleMode(event) {
     const { action } = event.currentTarget.dataset;
-    const flag = `sheetPrefs.${this.app.object.type}.tabs.${this.tab}.${action}`;
+    const flag = `sheetPrefs.${this.app.document.type}.tabs.${this.tab}.${action}`;
     const current = game.user.getFlag("dnd5e", flag);
     let value;
     if ( action === "group" ) value = current === false;
