@@ -59,7 +59,7 @@ export function actorKeyPath(trait) {
  */
 export async function actorValues(actor, trait) {
   const keyPath = actorKeyPath(trait);
-  const data = foundry.utils.getProperty(actor, keyPath);
+  const data = foundry.utils.getProperty(actor._source, keyPath);
   if ( !data ) return {};
   const values = {};
   const traitChoices = await choices(trait, {prefixed: true});
