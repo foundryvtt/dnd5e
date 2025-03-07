@@ -84,6 +84,20 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
     }
   }
 
+  // Migrate World Messages
+  for ( const m of game.messages ) {
+    try {
+      const updateData = migrateMessageData(m.toObject(), migrationData);
+      if ( !foundry.utils.isEmpty(updateData) ) {
+        log(`Migrating Message document ${m.id}`);
+        await m.update(updateData, { enforceTypes: false, render: false });
+      }
+    } catch(err) {
+      err.message = `Failed dnd5e system migration for Message ${m.id}: ${err.message}`;
+      console.error(err);
+    }
+  }
+
   // Migrate World Roll Tables
   for ( const table of game.tables ) {
     try {
@@ -570,7 +584,7 @@ export function migrateEffects(parent, migrationData, itemUpdateData) {
  * @param {object} [options]             Additional options.
  * @param {string} [options.actorUuid]   UUID of the parent actor
  */
-export const migrateCopyActorTransferEffects = function(actor, effects, { actorUuid }={}) {
+export function migrateCopyActorTransferEffects(actor, effects, { actorUuid }={}) {
   if ( !actor.items ) return;
 
   for ( const item of actor.items ) {
@@ -586,7 +600,7 @@ export const migrateCopyActorTransferEffects = function(actor, effects, { actorU
       effects.push(newEffect);
     }
   }
-};
+}
 
 /* -------------------------------------------- */
 
@@ -598,7 +612,7 @@ export const migrateCopyActorTransferEffects = function(actor, effects, { actorU
  * @param {object} [options.parent]  Parent of this effect.
  * @returns {object}                 The updateData to apply.
  */
-export const migrateEffectData = function(effect, migrationData, { parent }={}) {
+export function migrateEffectData(effect, migrationData, { parent }={}) {
   const updateData = {};
   _migrateDocumentIcon(effect, updateData, {...migrationData, field: "img"});
   _migrateEffectArmorClass(effect, updateData);
@@ -606,7 +620,7 @@ export const migrateEffectData = function(effect, migrationData, { parent }={}) 
     _migrateTransferEffect(effect, parent, updateData);
   }
   return updateData;
-};
+}
 
 /* -------------------------------------------- */
 
@@ -616,12 +630,34 @@ export const migrateEffectData = function(effect, migrationData, { parent }={}) 
  * @param {object} [migrationData]  Additional data to perform the migration
  * @returns {object}                The updateData to apply
  */
-export const migrateMacroData = function(macro, migrationData) {
+export function migrateMacroData(macro, migrationData) {
   const updateData = {};
   _migrateDocumentIcon(macro, updateData, migrationData);
   _migrateMacroCommands(macro, updateData);
   return updateData;
-};
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate a single chat message document.
+ * @param {object} messageData  Message data to migrate.
+ * @returns {object}            The update data to apply.
+ */
+export function migrateMessageData(messageData) {
+  const updateData = {};
+  if ( (messageData.flags?.dnd5e?.messageType === "usage") && (messageData.type !== "usage") ) {
+    updateData.type = "usage";
+    updateData["flags.dnd5e.-=messageType"] = null;
+    updateData["system.cause"] = messageData.flags?.dnd5e?.use?.cause;
+    updateData["flags.dnd5e.use.-=cause"] = null;
+    updateData["system.effects"] = messageData.flags?.dnd5e?.use?.effects;
+    updateData["flags.dnd5e.use.-=effects"] = null;
+    updateData["system.deltas"] = messageData.flags?.dnd5e?.use?.consumed;
+    updateData["flags.dnd5e.use.-=consumed"] = null;
+  }
+  return updateData;
+}
 
 /* -------------------------------------------- */
 
@@ -657,7 +693,7 @@ export function migrateRollTableData(table, migrationData) {
  * @param {object} [migrationData]  Additional data to perform the migration
  * @returns {object}                The updateData to apply
  */
-export const migrateSceneData = function(scene, migrationData) {
+export function migrateSceneData(scene, migrationData) {
   const tokens = scene.tokens.reduce((arr, token) => {
     const t = token instanceof foundry.abstract.DataModel ? token.toObject() : token;
     const update = {};
@@ -668,7 +704,7 @@ export const migrateSceneData = function(scene, migrationData) {
   }, []);
   if ( tokens.length ) return { tokens };
   return {};
-};
+}
 
 /* -------------------------------------------- */
 
@@ -676,7 +712,7 @@ export const migrateSceneData = function(scene, migrationData) {
  * Fetch bundled data for large-scale migrations.
  * @returns {Promise<object>}  Object mapping original system icons to their core replacements.
  */
-export const getMigrationData = async function() {
+export async function getMigrationData() {
   const data = {};
   try {
     const icons = await fetch("systems/dnd5e/json/icon-migration.json");
@@ -686,7 +722,7 @@ export const getMigrationData = async function() {
     console.warn(`Failed to retrieve icon migration data: ${err.message}`);
   }
   return data;
-};
+}
 
 /* -------------------------------------------- */
 /*  Low level migration utilities
