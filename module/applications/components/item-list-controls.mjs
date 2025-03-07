@@ -29,6 +29,12 @@ export default class ItemListControlsElement extends HTMLElement {
   /* -------------------------------------------- */
 
   /**
+   * @typedef {object} FilterState5e
+   * @property {string} name             Filtering by name.
+   * @property {Set<string>} properties  Filtering by some property.
+   */
+
+  /**
    * @typedef {object} SortModeConfiguration5e
    * @property {string} icon
    * @property {string} label
