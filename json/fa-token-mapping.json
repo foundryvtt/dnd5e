@@ -310,13 +310,7 @@
     },
     "4EODJbmPlpnNGVR7": {
       "actor": "systems/dnd5e/tokens/beast/Deer.webp",
-      "token": {
-        "texture": {
-          "src": "systems/dnd5e/tokens/beast/Deer.webp",
-          "scaleX": 1.1,
-          "scaleY": 1.1
-        }
-      }
+      "token": "systems/dnd5e/tokens/beast/Deer.webp"
     },
     "EYiQZ3rFL25fEJY5": {
       "actor": "systems/dnd5e/tokens/beast/DireWolf.webp",
@@ -324,7 +318,13 @@
     },
     "Bupo3E9X5Ptx6XeT": {
       "actor": "systems/dnd5e/tokens/beast/DraftHorse.webp",
-      "token": "systems/dnd5e/tokens/beast/DraftHorse.webp"
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/beast/DraftHorse.webp",
+          "scaleX": 2.0,
+          "scaleY": 2.0
+        }
+      }
     },
     "EI8w6XjzCZICkox9": {
       "actor": "systems/dnd5e/tokens/beast/Eagle.webp",
@@ -348,13 +348,7 @@
     },
     "55PkbskG5iBZGrgR": {
       "actor": "systems/dnd5e/tokens/beast/Elk.webp",
-      "token": {
-        "texture": {
-          "src": "systems/dnd5e/tokens/beast/Elk.webp",
-          "scaleX": 1.5,
-          "scaleY": 1.5
-        }
-      }
+      "token": "systems/dnd5e/tokens/beast/Elk.webp"
     },
     "SMfgOsfPgf6rb01k": {
       "actor": "systems/dnd5e/tokens/beast/FlyingSnake.webp",
@@ -664,9 +658,7 @@
       "actor": "systems/dnd5e/tokens/beast/Mastiff.webp",
       "token": {
         "texture": {
-          "src": "systems/dnd5e/tokens/beast/Mastiff.webp",
-          "scaleX": 1.5,
-          "scaleY": 1.5
+          "src": "systems/dnd5e/tokens/beast/Mastiff.webp"
         }
       }
     },
@@ -727,8 +719,8 @@
       "token": {
         "texture": {
           "src": "systems/dnd5e/tokens/beast/Pony.webp",
-          "scaleX": 1.5,
-          "scaleY": 1.5
+          "scaleX": 3,
+          "scaleY": 3
         }
       }
     },
@@ -772,7 +764,13 @@
     },
     "rz8UTUnFT87BsAFR": {
       "actor": "systems/dnd5e/tokens/beast/RidingHorse.webp",
-      "token": "systems/dnd5e/tokens/beast/RidingHorse.webp"
+      "token": {
+        "texture": {
+          "src": "systems/dnd5e/tokens/beast/RidingHorse.webp",
+          "scaleX": 2,
+          "scaleY": 2
+        }
+      }
     },
     "tYYoifu9teGLetVI": {
       "actor": "systems/dnd5e/tokens/beast/SaberToothedTiger.webp",
@@ -926,13 +924,7 @@
     },
     "yawTeS8u2FCfzzZH": {
       "actor": "systems/dnd5e/tokens/beast/Wolf.webp",
-      "token": {
-        "texture": {
-          "src": "systems/dnd5e/tokens/beast/Wolf.webp",
-          "scaleX": 1.5,
-          "scaleY": 1.5
-        }
-      }
+      "token": "systems/dnd5e/tokens/beast/Wolf.webp"
     },
     "ZaP1H91t4FzbRqR5": {
       "actor": "systems/dnd5e/tokens/celestial/Couatl.webp",
@@ -994,9 +986,7 @@
       "actor": "systems/dnd5e/tokens/construct/Homonculus.webp",
       "token": {
         "texture": {
-          "src": "systems/dnd5e/tokens/construct/Homonculus.webp",
-          "scaleX": 0.8,
-          "scaleY": 0.8
+          "src": "systems/dnd5e/tokens/construct/Homonculus.webp"
         }
       }
     },
@@ -1861,8 +1851,8 @@
       "token": {
         "texture": {
           "src": "systems/dnd5e/tokens/monstrosity/Worg.webp",
-          "scaleX": 1.5,
-          "scaleY": 1.5
+          "scaleX": 2,
+          "scaleY": 2
         }
       }
     },
@@ -2006,6 +1996,18 @@
         }
       }
     },
+    "zjqjcRWKDMc59Tnx": {
+      "actor":"systems/dnd5e/tokens/dragon/GreenDragonancient.webp",
+      "token": {
+        "width": 13,
+        "height": 13,
+        "texture": {
+          "src": "systems/dnd5e/tokens/dragon/GreenDragonancient.webp",
+          "scaleX": 3,
+          "scaleY": 3
+        }
+      }
+    },
     "geM2F7HvVGhtk3h4": {
       "actor": "systems/dnd5e/tokens/dragon/SilverDragonAdult.webp",
       "token": {
@@ -2085,6 +2087,18 @@
           "src": "systems/dnd5e/tokens/dragon/WhiteDragonAdult.webp",
           "scaleX": 2.33,
           "scaleY": 2.33
+        }
+      }
+    },
+    "aTITHYYxthuZBPBn": {
+      "actor":"systems/dnd5e/tokens/dragon/WhiteDragonancient.webp",
+      "token": {
+        "width": 13,
+        "height": 13,
+        "texture": {
+          "src": "systems/dnd5e/tokens/dragon/WhiteDragonancient.webp",
+          "scaleX": 3,
+          "scaleY": 3
         }
       }
     },
