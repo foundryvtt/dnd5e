@@ -1,6 +1,6 @@
-<div class="tab activities" data-group="primary" data-tab="activities">
+<section class="activities tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
     {{#each activities}}
-    <div class="activity card" data-activity-id="{{ id }}">
+    <div class="activity card" data-activity-id="{{ id }}" data-uuid="{{ uuid }}">
 
         {{!-- Icon --}}
         <div class="icon {{#if img.svg}}svg{{/if}}">
@@ -12,14 +12,14 @@
         </div>
 
         {{!-- Name --}}
-        <div class="name">{{ name }}</div>
+        <div class="name" data-action="showDocument">{{ name }}</div>
 
         {{!-- Controls --}}
         <div class="controls">
 
             {{#if @root.editable}}
             {{!-- Delete --}}
-            <button type="button" class="unbutton control-button" data-action="deleteActivity"
+            <button type="button" class="unbutton control-button" data-action="deleteDocument"
                     data-tooltip="DND5E.ACTIVITY.Action.Delete"
                     aria-label="{{ localize "DND5E.ACTIVITY.Action.Delete" }}">
                 <i class="fas fa-trash" inert></i>
@@ -29,4 +29,4 @@
 
     </div>
     {{/each}}
-</div>
+</section>

@@ -1,0 +1,5 @@
+<section class="details tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    {{#each parts as |part|}}
+    {{> (part) @root }}
+    {{/each}}
+</section>

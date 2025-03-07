@@ -19,8 +19,8 @@
         <div class="form-fields">
 
             {{!-- Denomination --}}
-            {{ formField fields.hd.fields.denomination value=source.hd.denomination options=hitDieTypes label="DND5E.Denomination"
-                         localize=true classes="label-top" }}
+            {{ formField fields.hd.fields.denomination value=source.hd.denomination options=hitDieOptions
+                         label="DND5E.Denomination" localize=true classes="label-top" }}
 
             {{!-- Spent --}}
             {{ formField fields.hd.fields.spent value=source.hd.spent placeholder="0" localize=true label="DND5E.Spent"
@@ -29,7 +29,7 @@
     </div>
 
     {{#if source.hd.additional}}
-    {{ formGroup fields.hd.fields.additional value=source.hd.additional localize=true }}
+    {{ formField fields.hd.fields.additional value=source.hd.additional localize=true }}
     {{/if}}
 </fieldset>
 

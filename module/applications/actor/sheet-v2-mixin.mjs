@@ -3,7 +3,7 @@ import { formatLength, formatNumber, simplifyBonus, splitSemicolons, staticID } 
 import { createCheckboxInput } from "../fields.mjs";
 import Tabs5e from "../tabs.mjs";
 import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
-import ItemSheet5e2 from "../item/item-sheet-2.mjs";
+import ItemSheet5e from "../item/item-sheet.mjs";
 
 /**
  * Adds common V2 Actor sheet functionality.
@@ -711,8 +711,8 @@ export default function ActorSheetV2Mixin(Base) {
 
       switch ( action ) {
         case "delete": item?.deleteDialog(); break;
-        case "edit": item?.sheet.render(true, { mode: ItemSheet5e2.MODES.EDIT }); break;
-        case "view": item?.sheet.render(true, { mode: ItemSheet5e2.MODES.PLAY }); break;
+        case "edit": item?.sheet.render(true, { mode: ItemSheet5e.MODES.EDIT }); break;
+        case "view": item?.sheet.render(true, { mode: ItemSheet5e.MODES.PLAY }); break;
       }
     }
 

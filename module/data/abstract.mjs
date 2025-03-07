@@ -663,10 +663,11 @@ export class ItemDataModel extends SystemDataModel {
 
   /**
    * Prepare type-specific data for the Item sheet.
-   * @param {object} context  Sheet context data.
+   * @param {ApplicationRenderContext} context  Sheet context data.
+   * @param {string} partId                     ID of the part being rendered.
    * @returns {Promise<void>}
    */
-  async getSheetData(context) {}
+  async getSheetData(context, partId) {}
 
   /* -------------------------------------------- */
 

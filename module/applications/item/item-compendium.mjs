@@ -1,7 +1,7 @@
 /* eslint-disable no-constructor-return */
 import Item5e from "../../documents/item.mjs";
 import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
-import ItemSheet5e2 from "./item-sheet-2.mjs";
+import ItemSheet5e from "./item-sheet.mjs";
 
 export default class ItemCompendium5e extends (foundry.applications?.sidebar?.apps?.Compendium ?? Compendium) {
   constructor(...args) {
@@ -86,7 +86,7 @@ class ItemCompendium5eV13 extends DragDropApplicationMixin(foundry.applications.
     const { entryId } = event.target.closest("[data-entry-id]")?.dataset ?? {};
     const item = await this.collection.getDocument?.(entryId);
     if ( !item ) return;
-    const mode = item.sheet?._mode ?? (this.collection.locked ? ItemSheet5e2.MODES.PLAY : ItemSheet5e2.MODES.EDIT);
+    const mode = item.sheet?._mode ?? (this.collection.locked ? ItemSheet5e.MODES.PLAY : ItemSheet5e.MODES.EDIT);
     item.sheet.render(true, { mode });
   }
 }
@@ -171,7 +171,7 @@ class ItemCompendium5eV12 extends DragDropApplicationMixin(
     const { entryId } = event.target.closest("[data-entry-id]")?.dataset ?? {};
     const item = await this.collection.getDocument?.(entryId);
     if ( !item ) return;
-    const mode = item.sheet?._mode ?? (this.collection.locked ? ItemSheet5e2.MODES.PLAY : ItemSheet5e2.MODES.EDIT);
+    const mode = item.sheet?._mode ?? (this.collection.locked ? ItemSheet5e.MODES.PLAY : ItemSheet5e.MODES.EDIT);
     item.sheet.render(true, { mode });
   }
 }

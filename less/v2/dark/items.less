@@ -18,24 +18,22 @@
   .window-header slide-toggle { --slide-toggle-track-color-unchecked: var(--dnd5e-color-iron-gray); }
   .window-header .state-toggle.active { color: var(--dnd5e-color-gold); }
 
-  .sheet-body {
-    .item-descriptions .description .header button { color: var(--color-text-dark-5); }
+  .item-descriptions .description .header button { color: var(--color-text-dark-5); }
 
-    .tab.advancement {
-      .svg .item-image {
-        /* Converts black to gold */
-        filter: invert(64%) sepia(14%) saturate(563%) hue-rotate(3deg) brightness(89%) contrast(90%);
-      }
-
-      .item-name .summary .content-link {
-        color: var(--color-text-dark-5);
-        > i { color: var(--color-text-dark-5); }
-      }
+  .tab.advancement {
+    .svg .item-image {
+      /* Converts black to gold */
+      filter: invert(64%) sepia(14%) saturate(563%) hue-rotate(3deg) brightness(89%) contrast(90%);
     }
 
-    .activities .activity {
-      > .icon.svg { --icon-fill: var(--dnd5e-color-gold); }
+    .item-name .summary .content-link {
+      color: var(--color-text-dark-5);
+      > i { color: var(--color-text-dark-5); }
     }
+  }
+
+  .activities .activity {
+    > .icon.svg { --icon-fill: var(--dnd5e-color-gold); }
   }
 }
 
