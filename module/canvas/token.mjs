@@ -122,6 +122,29 @@ export default class Token5e extends (foundry.canvas?.placeables?.Token ?? Token
   /* -------------------------------------------- */
 
   /** @override */
+  _getDragWaypointProperties() {
+    return {
+      action: this.document.getMovementAction()
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _getKeyboardMovementAction() {
+    return this.document.getMovementAction();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  _getHUDMovementAction() {
+    return this.document.getMovementAction();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
   getRingColors() {
     return this.document.getRingColors();
   }
