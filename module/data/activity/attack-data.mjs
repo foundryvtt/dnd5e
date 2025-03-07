@@ -209,7 +209,7 @@ export default class AttackActivityData extends BaseActivityData {
 
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
-    this.prepareDamageLabel(this.damage.parts, rollData);
+    this.prepareDamageLabel(rollData);
 
     const { data, parts } = this.getAttackData();
     const roll = new Roll(parts.join("+"), data);
