@@ -34,7 +34,7 @@ export default class HealActivityData extends BaseActivityData {
   prepareFinalData(rollData) {
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
-    this.prepareDamageLabel([this.healing], rollData);
+    this.prepareDamageLabel(rollData);
   }
 
   /* -------------------------------------------- */
