@@ -8,7 +8,7 @@
             {{#if (and @root.editable noSpellcaster)}}
             <select name="system.attributes.spellcasting">
                 {{ selectOptions @root.abilities selected=ability.ability labelAttr="label" valueAttr="key"
-                                 valueAttr="key" }}
+                                 blank="" }}
             </select>
             {{else}}
             <span class="spellcasting-ability roboto-upper">{{ ability.label }}</span>
