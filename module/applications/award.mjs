@@ -18,7 +18,7 @@ export default class Award extends Application5e {
     if ( options instanceof foundry.abstract.Document ) {
       foundry.utils.logCompatibilityWarning(
         "The `Award` origin actor should now be passed within the options object as `origin`.",
-        { since: "DnD5e 4.3", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.3", until: "DnD5e 5.0" }
       );
       _options.origin = options;
       options = _options;
@@ -32,7 +32,7 @@ export default class Award extends Application5e {
       delete options[key];
       foundry.utils.logCompatibilityWarning(
         `The \`${key}\` option in \`Award\` has been moved to \`award.${key}\`.`,
-        { since: "DnD5e 4.3", until: "DnD5e 4.5" }
+        { since: "DnD5e 4.3", until: "DnD5e 5.0" }
       );
     }
 

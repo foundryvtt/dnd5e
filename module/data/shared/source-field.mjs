@@ -92,25 +92,4 @@ export default class SourceField extends SchemaField {
     }
     return null;
   }
-
-  /* -------------------------------------------- */
-  /*  Shims                                       */
-  /* -------------------------------------------- */
-
-  /**
-   * Add a shim for the old source path.
-   * @this {ActorDataModel}
-   */
-  static shimActor() {
-    const source = this.source;
-    Object.defineProperty(this.details, "source", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The source data for actors has been moved to `system.source`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-        );
-        return source;
-      }
-    });
-  }
 }

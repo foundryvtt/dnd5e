@@ -306,7 +306,7 @@ export default class D20Roll extends BasicRoll {
   }={}, options={}) {
     foundry.utils.logCompatibilityWarning(
       "The `configureDialog` on D20Roll has been deprecated and is now handled through `D20Roll.build`.",
-      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
+      { since: "DnD5e 4.1", until: "DnD5e 5.0" }
     );
     let DialogClass = this.constructor.DefaultConfigurationDialog;
     if ( chooseModifier ) DialogClass = SkillToolRollConfigurationDialog;

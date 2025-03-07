@@ -9,7 +9,7 @@ export default class ActorSheetFlags extends BaseConfigSheet {
   constructor(...args) {
     foundry.utils.logCompatibilityWarning(
       "The `ActorSheetFlags` application has been deprecated and replaced with a tab on the character sheet.",
-      { since: "DnD5e 4.3", until: "DnD5e 4.5" }
+      { since: "DnD5e 4.3", until: "DnD5e 5.0" }
     );
     super(...args);
   }

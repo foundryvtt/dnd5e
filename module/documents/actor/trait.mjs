@@ -145,6 +145,7 @@ export async function categories(trait) {
 
     // Fetch base items for all IDs
     const baseItems = await Promise.all(Object.entries(ids).map(async ([key, id]) => {
+      if ( foundry.utils.getType(id) === "Object" ) id = id.id;
       const index = await getBaseItem(id);
       return [key, index];
     }));
@@ -448,8 +449,9 @@ export function keyLabel(key, config={}) {
 
     // Base item (e.g. "Shortsword")
     for ( const idsKey of traitConfig.subtypes?.ids ?? [] ) {
-      const baseItemId = CONFIG.DND5E[idsKey]?.[lastKey];
+      let baseItemId = CONFIG.DND5E[idsKey]?.[lastKey];
       if ( !baseItemId ) continue;
+      if ( foundry.utils.getType(baseItemId) === "Object" ) baseItemId = baseItemId.id;
       const index = getBaseItem(baseItemId, { indexOnly: true });
       if ( index ) return index.name;
       break;
