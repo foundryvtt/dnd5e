@@ -70,7 +70,7 @@ export default class FeatData extends ItemDataModel.mixin(
   static get compendiumBrowserFilters() {
     return new Map([
       ["category", {
-        label: "DND5E.Item.Category.Label",
+        label: "DND5E.ITEM.Category.Label",
         type: "set",
         config: {
           choices: CONFIG.DND5E.featureTypes,
@@ -138,14 +138,25 @@ export default class FeatData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getSheetData(context) {
-    context.subtitles = [
-      { label: this.type.label },
-      { label: this.parent.labels.featType },
-      { label: this.requirements, value: this._source.requirements, field: this.schema.getField("requirements"),
-        placeholder: "DND5E.Requirements" }
-    ];
-    context.parts = ["dnd5e.details-feat", "dnd5e.field-uses"];
+  async getSheetData(context, partId) {
+    switch ( partId ) {
+      case "details":
+        context.parts = ["dnd5e.details-feat", "dnd5e.field-uses"];
+        const itemTypes = CONFIG.DND5E.featureTypes[this._source.type.value];
+        if ( itemTypes ) {
+          context.itemType = itemTypes.label;
+          context.itemSubtypes = itemTypes.subtypes;
+        }
+        break;
+      case "header":
+        context.subtitles = [
+          { label: this.type.label },
+          { label: this.parent.labels.featType },
+          { label: this.requirements, value: this._source.requirements, field: this.schema.getField("requirements"),
+            placeholder: "DND5E.Requirements" }
+        ];
+        break;
+    }
   }
 
   /* -------------------------------------------- */

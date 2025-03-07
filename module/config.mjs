@@ -1941,97 +1941,97 @@ preLocalize("featureTypes.supernaturalGift.subtypes", { sort: true });
  */
 DND5E.itemProperties = {
   ada: {
-    label: "DND5E.Item.Property.Adamantine",
+    label: "DND5E.ITEM.Property.Adamantine",
     isPhysical: true
   },
   amm: {
-    label: "DND5E.Item.Property.Ammunition"
+    label: "DND5E.ITEM.Property.Ammunition"
   },
   concentration: {
-    label: "DND5E.Item.Property.Concentration",
+    label: "DND5E.ITEM.Property.Concentration",
     abbreviation: "DND5E.ConcentrationAbbr",
     icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH",
     isTag: true
   },
   fin: {
-    label: "DND5E.Item.Property.Finesse"
+    label: "DND5E.ITEM.Property.Finesse"
   },
   fir: {
-    label: "DND5E.Item.Property.Firearm"
+    label: "DND5E.ITEM.Property.Firearm"
   },
   foc: {
-    label: "DND5E.Item.Property.Focus"
+    label: "DND5E.ITEM.Property.Focus"
   },
   hvy: {
-    label: "DND5E.Item.Property.Heavy"
+    label: "DND5E.ITEM.Property.Heavy"
   },
   lgt: {
-    label: "DND5E.Item.Property.Light"
+    label: "DND5E.ITEM.Property.Light"
   },
   lod: {
-    label: "DND5E.Item.Property.Loading"
+    label: "DND5E.ITEM.Property.Loading"
   },
   material: {
-    label: "DND5E.Item.Property.Material",
+    label: "DND5E.ITEM.Property.Material",
     abbreviation: "DND5E.ComponentMaterialAbbr",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.AeH5eDS4YeM9RETC"
   },
   mgc: {
-    label: "DND5E.Item.Property.Magical",
+    label: "DND5E.ITEM.Property.Magical",
     icon: "systems/dnd5e/icons/svg/properties/magical.svg",
     isPhysical: true
   },
   rch: {
-    label: "DND5E.Item.Property.Reach"
+    label: "DND5E.ITEM.Property.Reach"
   },
   rel: {
-    label: "DND5E.Item.Property.Reload"
+    label: "DND5E.ITEM.Property.Reload"
   },
   ret: {
-    label: "DND5E.Item.Property.Returning"
+    label: "DND5E.ITEM.Property.Returning"
   },
   ritual: {
-    label: "DND5E.Item.Property.Ritual",
+    label: "DND5E.ITEM.Property.Ritual",
     abbreviation: "DND5E.RitualAbbr",
     icon: "systems/dnd5e/icons/svg/items/spell.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.FjWqT5iyJ89kohdA",
     isTag: true
   },
   sil: {
-    label: "DND5E.Item.Property.Silvered",
+    label: "DND5E.ITEM.Property.Silvered",
     isPhysical: true
   },
   somatic: {
-    label: "DND5E.Item.Property.Somatic",
+    label: "DND5E.ITEM.Property.Somatic",
     abbreviation: "DND5E.ComponentSomaticAbbr",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.qwUNgUNilEmZkSC9"
   },
   spc: {
-    label: "DND5E.Item.Property.Special"
+    label: "DND5E.ITEM.Property.Special"
   },
   stealthDisadvantage: {
-    label: "DND5E.Item.Property.StealthDisadvantage"
+    label: "DND5E.ITEM.Property.StealthDisadvantage"
   },
   thr: {
-    label: "DND5E.Item.Property.Thrown"
+    label: "DND5E.ITEM.Property.Thrown"
   },
   trait: {
-    label: "DND5E.Item.Property.Trait"
+    label: "DND5E.ITEM.Property.Trait"
   },
   two: {
-    label: "DND5E.Item.Property.TwoHanded"
+    label: "DND5E.ITEM.Property.TwoHanded"
   },
   ver: {
-    label: "DND5E.Item.Property.Versatile"
+    label: "DND5E.ITEM.Property.Versatile"
   },
   vocal: {
-    label: "DND5E.Item.Property.Verbal",
+    label: "DND5E.ITEM.Property.Verbal",
     abbreviation: "DND5E.ComponentVerbalAbbr",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6UXTNWMCQ0nSlwwx"
   },
   weightlessContents: {
-    label: "DND5E.Item.Property.WeightlessContents"
+    label: "DND5E.ITEM.Property.WeightlessContents"
   }
 };
 preLocalize("itemProperties", { keys: ["label", "abbreviation"], sort: true });

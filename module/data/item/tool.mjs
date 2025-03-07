@@ -142,12 +142,18 @@ export default class ToolData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getSheetData(context) {
-    context.subtitles = [
-      { label: this.type.label },
-      ...this.physicalItemSheetFields
-    ];
-    context.parts = ["dnd5e.details-tool", "dnd5e.field-uses"];
+  async getSheetData(context, partId) {
+    switch ( partId ) {
+      case "details":
+        context.parts = ["dnd5e.details-tool", "dnd5e.field-uses"];
+        break;
+      case "header":
+        context.subtitles = [
+          { label: this.type.label },
+          ...this.physicalItemSheetFields
+        ];
+        break;
+    }
   }
 
   /* -------------------------------------------- */
