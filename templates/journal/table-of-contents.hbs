@@ -30,7 +30,7 @@
             {{#each chapters}}
             <div class="chapter" data-document-id="{{ id }}" data-entry-id="{{ id }}">
                 <h3><a class="journal-entry-link" data-action="activateEntry">{{ name }}</a></h3>
-                {{#if (and showPages pages.length)}}{{> "pages" }}{{/if}}
+                {{#if pages.length}}{{> "pages" }}{{/if}}
             </div>
             {{/each}}
         </section>
