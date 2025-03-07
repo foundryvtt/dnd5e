@@ -108,6 +108,21 @@
   }
 
   /* ---------------------------------- */
+  /*  Transform Dialog                  */
+  /* ---------------------------------- */
+
+  &.transformation {
+    [data-application-part="details"] {
+      --icon-fill: var(--dnd5e-color-gold);
+    }
+    [data-application-part="presets"] {
+      button[aria-pressed="true"] {
+        background: color-mix(in oklab, var(--dnd5e-background-card), var(--dnd5e-color-faint) 20%);
+      }
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Traits Config Sheet               */
   /* ---------------------------------- */
 
