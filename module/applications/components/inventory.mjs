@@ -9,7 +9,8 @@ import ItemSheet5e2 from "../item/item-sheet-2.mjs";
  */
 export default class InventoryElement extends HTMLElement {
   connectedCallback() {
-    this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+    this.#app = foundry.applications.instances.get(this.closest(".application")?.id)
+      ?? ui.windows[this.closest(".app")?.dataset.appid];
 
     this._initializeFilterLists();
 
@@ -69,11 +70,11 @@ export default class InventoryElement extends HTMLElement {
    */
   _initializeFilterLists() {
     const filterLists = this.querySelectorAll(".filter-list");
-    if ( !this._app._filters || !filterLists.length ) return;
+    if ( !this.app._filters || !filterLists.length ) return;
 
     // Activate the set of filters which are currently applied
     for ( const list of filterLists ) {
-      const state = this._app._filters[list.dataset.filter];
+      const state = this.app._filters[list.dataset.filter];
       if ( !state ) continue;
       const set = state.properties;
       const filters = list.querySelectorAll(".filter-item");
@@ -100,7 +101,7 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   _applyFilters(state) {
-    let items = this._app._filterItems?.(this._app.object.items, state.properties);
+    let items = this.app._filterItems?.(this.document.object.items, state.properties);
     if ( !items ) return;
     const elementMap = {};
     this.querySelectorAll(".inventory-list .item-list .item").forEach(el => {
@@ -128,7 +129,7 @@ export default class InventoryElement extends HTMLElement {
    * @type {Application}
    * @protected
    */
-  get _app() { return this.#app; }
+  get app() { return this.#app; }
 
   /* -------------------------------------------- */
 
@@ -158,7 +159,7 @@ export default class InventoryElement extends HTMLElement {
    * @type {Actor5e|Item5e}
    */
   get document() {
-    return this._app.document;
+    return this.app.document;
   }
 
   /* -------------------------------------------- */
@@ -304,8 +305,8 @@ export default class InventoryElement extends HTMLElement {
     }
 
     // Toggle Collapsed State
-    if ( this._app.canExpand?.(item) ) {
-      const expanded = this._app._expanded.has(item.id);
+    if ( this.app.canExpand?.(item) ) {
+      const expanded = this.app._expanded.has(item.id);
       options.push({
         name: expanded ? "Collapse" : "Expand",
         icon: `<i class="fas fa-${expanded ? "compress" : "expand"}"></i>`,
@@ -491,16 +492,16 @@ export default class InventoryElement extends HTMLElement {
    */
   async _onExpand(target, item) {
     const li = target.closest("[data-item-id]");
-    if ( this._app._expanded.has(item.id) ) {
+    if ( this.app._expanded.has(item.id) ) {
       const summary = $(li.querySelector(".item-summary"));
       summary.slideUp(200, () => summary.remove());
-      this._app._expanded.delete(item.id);
+      this.app._expanded.delete(item.id);
     } else {
       const chatData = await item.getChatData({secrets: this.document.isOwner});
       const summary = $(await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", chatData));
       $(li).append(summary.hide());
       summary.slideDown(200);
-      this._app._expanded.add(item.id);
+      this.app._expanded.add(item.id);
     }
   }
 
