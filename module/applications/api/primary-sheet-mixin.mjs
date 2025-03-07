@@ -80,20 +80,13 @@ export default function PrimarySheetMixin(Base) {
       let { mode, renderContext } = options;
       if ( (mode === undefined) && (renderContext === "createItem") ) mode = this.constructor.MODES.EDIT;
       this._mode = mode ?? this._mode ?? this.constructor.MODES.PLAY;
-
-      // Handle only rendering some parts in V12
-      if ( game.release.generation < 13 ) {
-        this.#partDescriptors ??= Object.freeze(this._configureRenderParts(options));
-        options.parts = options.parts.filter(p => p in this.#partDescriptors) ?? Object.keys(partDescriptors);
-      }
     }
 
     /* -------------------------------------------- */
 
     /** @inheritDoc */
     _configureRenderParts(options) {
-      const parts = game.release.generation < 13 ? foundry.utils.deepClone(this.constructor.PARTS)
-        : super._configureRenderParts(options);
+      const parts = super._configureRenderParts(options);
       for ( const key of Object.keys(parts) ) {
         const tab = this.constructor.TABS.find(t => t.tab === key);
         if ( tab?.condition && !tab.condition(this.document) ) delete parts[key];
@@ -239,8 +232,6 @@ export default function PrimarySheetMixin(Base) {
       this.element.classList.toggle("locked", !this.isEditable);
 
       // Add event listeners
-      this.element.querySelectorAll("[data-toggle-description]")
-        .forEach(e => e.addEventListener("click", this._onToggleDescription.bind(this)));
       this.element.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
 
       // Disable fields in play mode
@@ -323,76 +314,6 @@ export default function PrimarySheetMixin(Base) {
       if ( target.dataset.action === "addDocument" ) this._addDocument(event, target);
       else if ( target.dataset.action === "editImage" ) this._editImage(event, target);
       else super._onClickAction(event, target);
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Handle toggling an Item's description within an inventory list.
-     * @param {PointerEvent} event  The triggering event.
-     * @protected
-     */
-    async _onToggleDescription(event) {
-      const target = event.currentTarget;
-      const icon = target.querySelector(":scope > i");
-      const row = target.closest("[data-uuid]");
-      const summary = row.querySelector(":scope > .item-description > .wrapper");
-      const { uuid } = row.dataset;
-      const item = await fromUuid(uuid);
-      if ( !item ) return;
-
-      const expanded = this._expanded.has(item.id);
-      if ( expanded ) {
-        summary.parentElement.addEventListener("transitionend", () => {
-          if ( row.classList.contains("collapsed") ) summary.querySelector(".item-summary")?.remove();
-        }, { once: true });
-        this._expanded.delete(item.id);
-      } else {
-        const context = await item.getChatData({ secrets: item.isOwner });
-        const content = await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", context);
-        summary.querySelectorAll(".item-summary").forEach(el => el.remove());
-        summary.insertAdjacentHTML("beforeend", content);
-        await new Promise(resolve => requestAnimationFrame(resolve));
-        this._expanded.add(item.id);
-      }
-
-      row.classList.toggle("collapsed", expanded);
-      icon.classList.toggle("fa-compress", !expanded);
-      icon.classList.toggle("fa-expand", expanded);
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Handle editing an image.
-     * @param {Event} event         Triggering click event.
-     * @param {HTMLElement} target  Button that was clicked.
-     */
-    async _editImage(event, target) {
-      if ( target.nodeName !== "IMG" ) {
-        throw new Error("The editImage action is available only for IMG elements.");
-      }
-      const attr = target.dataset.edit;
-      const current = foundry.utils.getProperty(this.document._source, attr);
-      const defaultArtwork = this.document.constructor.getDefaultArtwork?.(this.document._source) ?? {};
-      const defaultImage = foundry.utils.getProperty(defaultArtwork, attr);
-      const fp = new FilePicker({
-        current,
-        type: "image",
-        redirectToRoot: defaultImage ? [defaultImage] : [],
-        callback: path => {
-          target.src = path;
-          if ( this.options.form.submitOnChange ) {
-            const submit = new Event("submit", {cancelable: true});
-            this.element.dispatchEvent(submit);
-          }
-        },
-        position: {
-          top: this.position.top + 40,
-          left: this.position.left + 10
-        }
-      });
-      await fp.browse();
     }
 
     /* -------------------------------------------- */
