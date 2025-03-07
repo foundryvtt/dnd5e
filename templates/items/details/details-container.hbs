@@ -18,7 +18,7 @@
             {{/if}}
 
             {{!-- Attunement --}}
-            {{ formInput fields.attunement value=source.attunement choices=config.attunementTypes
+            {{ formInput fields.attunement value=source.attunement choices=CONFIG.attunementTypes
                          blank="DND5E.AttunementNone" localize=true }}
 
         </div>
@@ -44,7 +44,7 @@
 
             {{!-- Units --}}
             {{ formField fields.capacity.fields.volume.fields.units value=source.capacity.volume.units
-                         label="DND5E.Unit" localize=true classes="label-top" choices=config.volumeUnits
+                         label="DND5E.Unit" localize=true classes="label-top" choices=CONFIG.volumeUnits
                          labelAttr="label" }}
 
         </div>
@@ -61,7 +61,7 @@
 
             {{!-- Units --}}
             {{ formField fields.capacity.fields.weight.fields.units value=source.capacity.weight.units
-                         label="DND5E.Unit" localize=true classes="label-top" choices=config.weightUnits
+                         label="DND5E.Unit" localize=true classes="label-top" choices=CONFIG.weightUnits
                          labelAttr="label" }}
 
         </div>

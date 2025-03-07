@@ -89,10 +89,18 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getSheetData(context) {
-    context.subtitles = [{ label: context.itemType }];
-    context.singleDescription = true;
-    context.parts = ["dnd5e.details-subclass", "dnd5e.details-spellcasting"];
+  async getSheetData(context, partId) {
+    switch ( partId ) {
+      case "description":
+        context.singleDescription = true;
+        break;
+      case "details":
+        context.parts = ["dnd5e.details-subclass", "dnd5e.details-spellcasting"];
+        break;
+      case "header":
+        context.subtitles = [{ label: context.itemType }];
+        break;
+    }
   }
 
   /* -------------------------------------------- */
