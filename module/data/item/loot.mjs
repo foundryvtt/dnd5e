@@ -85,12 +85,23 @@ export default class LootData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getSheetData(context) {
-    context.subtitles = [
-      { label: this.type.label },
-      ...this.physicalItemSheetFields
-    ];
-    context.parts = ["dnd5e.details-loot"];
+  async getSheetData(context, partId) {
+    switch ( partId ) {
+      case "details":
+        context.parts = ["dnd5e.details-loot"];
+        const itemTypes = CONFIG.DND5E.lootTypes[this._source.type.value];
+        if ( itemTypes ) {
+          context.itemType = itemTypes.label;
+          context.itemSubtypes = itemTypes.subtypes;
+        }
+        break;
+      case "header":
+        context.subtitles = [
+          { label: this.type.label },
+          ...this.physicalItemSheetFields
+        ];
+        break;
+    }
   }
 
   /* -------------------------------------------- */
