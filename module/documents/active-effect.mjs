@@ -663,8 +663,8 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Adjust exhaustion icon display to match current level.
-   * @param {Application} app  The TokenHUD application.
-   * @param {jQuery | HTMLElement} html      The TokenHUD HTML.
+   * @param {Application} app            The TokenHUD application.
+   * @param {jQuery | HTMLElement} html  The TokenHUD HTML.
    */
   static onTokenHUDRender(app, html) {
     html = html instanceof HTMLElement ? html : html[0];

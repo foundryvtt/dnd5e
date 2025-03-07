@@ -1447,8 +1447,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Add additional system-specific sidebar directory context menu options for Item documents.
-   * @param {jQuery | HTMLElement} html            The sidebar HTML.
-   * @param {object[]} entryOptions  The default array of context menu options.
+   * @param {jQuery | HTMLElement} html  The sidebar HTML.
+   * @param {object[]} entryOptions      The default array of context menu options.
    */
   static addDirectoryContextOptions(html, entryOptions) {
     entryOptions.push({

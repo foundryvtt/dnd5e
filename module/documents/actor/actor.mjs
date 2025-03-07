@@ -3221,8 +3221,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Add additional system-specific sidebar directory context menu options for Actor documents
-   * @param {jQuery | HTMLElement} html         The sidebar HTML
-   * @param {Array} entryOptions  The default array of context menu options
+   * @param {jQuery | HTMLElement} html  The sidebar HTML
+   * @param {Array} entryOptions         The default array of context menu options
    */
   static addDirectoryContextOptions(html, entryOptions) {
     entryOptions.push({
@@ -3276,7 +3276,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Add class to actor entry representing the primary group.
-   * @param {jQuery | HTMLElement } html
+   * @param {jQuery | HTMLElement} html
    */
   static onRenderActorDirectory(html) {
     html = html instanceof HTMLElement ? html : html[0];
