@@ -169,6 +169,7 @@ export default function ActorSheetV2Mixin(Base) {
           name, reference,
           id: k,
           icon: img ?? icon,
+          active: this.actor.statuses.has(k) && !this.actor.system.traits?.ci?.value?.has(k),
           disabled: existing ? disabled : true
         });
         return arr;
@@ -573,6 +574,11 @@ export default function ActorSheetV2Mixin(Base) {
       html.find("dialog.warnings").on("click", this._onCloseWarnings.bind(this));
       this.form.querySelectorAll("[data-reference-tooltip]").forEach(this._applyReferenceTooltips.bind(this));
 
+      for ( const element of html[0].querySelectorAll(".conditions-list .condition") ) {
+        element.addEventListener("pointerenter", this._onHoverCondition.bind(this));
+        element.addEventListener("pointerleave", this._onHoverCondition.bind(this));
+      }
+
       // Prevent default middle-click scrolling when locking a tooltip.
       this.form.addEventListener("pointerdown", event => {
         if ( (event.button === 1) && document.getElementById("tooltip")?.classList.contains("active") ) {
@@ -692,6 +698,20 @@ export default function ActorSheetV2Mixin(Base) {
         return this._onDragActivity(event);
       }
       return super._onDragStart(event);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Highlight effects imposing a condition if hovered on the actor sheet.
+     * @param {PointerEvent} event  The triggering event.
+     */
+    _onHoverCondition(event) {
+      const condition = event.target.dataset.conditionId;
+      const effects = this.actor.effects.filter(e => e.statuses.has(condition)).map(e => `[data-effect-id="${e.id}"]`);
+      for ( const element of this.element[0].querySelectorAll(`:is(${effects.join(",")})`) ) {
+        element.classList.toggle("highlighted", event.type === "pointerenter");
+      }
     }
 
     /* -------------------------------------------- */
