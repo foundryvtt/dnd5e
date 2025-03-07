@@ -18,6 +18,9 @@ export default function ApplicationV2Mixin(Base) {
   class BaseApplication5e extends HandlebarsApplicationMixin(Base) {
     /** @override */
     static DEFAULT_OPTIONS = {
+      actions: {
+        toggleCollapsed: BaseApplication5e.#toggleCollapsed
+      },
       classes: ["dnd5e2"],
       window: {
         subtitle: ""
@@ -215,21 +218,13 @@ export default function ApplicationV2Mixin(Base) {
     /*  Event Listeners and Handlers                */
     /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    _onClickAction(event, target) {
-      if ( target.dataset.action === "toggleCollapsed" ) this.#toggleCollapsed(event, target);
-      else super._onClickAction(event, target);
-    }
-
-    /* -------------------------------------------- */
-
     /**
      * Handle toggling the collapsed state of collapsible sections.
      * @this {BaseApplication5e}
      * @param {Event} event         Triggering click event.
      * @param {HTMLElement} target  Button that was clicked.
      */
-    #toggleCollapsed(event, target) {
+    static #toggleCollapsed(event, target) {
       if ( event.target.closest(".collapsible-content") ) return;
       target.classList.toggle("collapsed");
       this.#expandedSections.set(
