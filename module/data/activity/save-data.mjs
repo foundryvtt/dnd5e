@@ -110,7 +110,7 @@ export default class SaveActivityData extends BaseActivityData {
   prepareFinalData(rollData) {
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
-    this.prepareDamageLabel(this.damage.parts, rollData);
+    this.prepareDamageLabel(rollData);
 
     const bonus = this.save.dc.bonus ? simplifyBonus(this.save.dc.bonus, rollData) : 0;
 

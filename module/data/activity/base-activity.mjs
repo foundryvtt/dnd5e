@@ -613,20 +613,15 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /**
    * Prepare the label for a compiled and simplified damage formula.
-   * @param {DamageData[]} parts  Damage parts to create labels for.
-   * @param {object} rollData     Deterministic roll data from the item.
+   * @param {object} rollData  Deterministic roll data from the item.
    */
-  prepareDamageLabel(parts, rollData) {
-    this.labels.damage = parts.map((part, index) => {
+  prepareDamageLabel(rollData) {
+    const config = this.getDamageConfig();
+    this.labels.damage = (config.rolls ?? []).map((part, index) => {
       let formula;
       try {
-        formula = part.formula;
-        if ( part.base ) {
-          if ( this.item.system.magicAvailable ) formula += ` + ${this.item.system.magicalBonus ?? 0}`;
-          if ( (this.item.type === "weapon") && !/@mod\b/.test(formula) ) formula += " + @mod";
-        }
-        if ( !index && this.item.system.damageBonus ) formula += ` + ${this.item.system.damageBonus}`;
-        const roll = new CONFIG.Dice.BasicRoll(formula, rollData);
+        formula = part.parts.join(" + ");
+        const roll = new CONFIG.Dice.DamageRoll(formula, rollData);
         roll.simplify();
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       } catch(err) {
@@ -636,15 +631,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }
 
       let label = formula;
-      if ( part.types.size ) {
+      const types = part.options?.types ?? part.options?.type ? [part.options.type] : [];
+      if ( types.length ) {
         label = `${formula} ${game.i18n.getListFormatter({ type: "conjunction" }).format(
-          Array.from(part.types)
-            .map(p => CONFIG.DND5E.damageTypes[p]?.label ?? CONFIG.DND5E.healingTypes[p]?.label)
-            .filter(t => t)
+          types.map(p => CONFIG.DND5E.damageTypes[p]?.label ?? CONFIG.DND5E.healingTypes[p]?.label).filter(_ => _)
         )}`;
       }
 
-      return { formula, damageType: part.types.size === 1 ? part.types.first() : null, label, base: part.base };
+      return {
+        formula, label,
+        base: part.base,
+        damageType: part.options?.types.length === 1 ? part.options.types[0] : null
+      };
     });
   }
 
