@@ -134,8 +134,8 @@ function _simplifyNumericTerms(terms) {
     if ( staticBonus === 0 ) return [...annotated];
 
     // If the staticBonus is greater than 0, add a "+" operator so the formula remains valid.
-    if ( staticBonus > 0 ) simplified.push(new OperatorTerm({ operator: "+"}));
-    simplified.push(new NumericTerm({ number: staticBonus} ));
+    simplified.push(new OperatorTerm({ operator: staticBonus < 0 ? "-" : "+" }));
+    simplified.push(new NumericTerm({ number: Math.abs(staticBonus) }));
   }
   return [...simplified, ...annotated];
 }
