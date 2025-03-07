@@ -231,9 +231,6 @@ export default function PrimarySheetMixin(Base) {
 
       // Add event listeners
       this.element.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
-
-      // Disable fields in play mode
-      if ( this._mode === this.constructor.MODES.PLAY ) this._disableFields();
     }
 
     /* -------------------------------------------- */

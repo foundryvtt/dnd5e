@@ -1067,7 +1067,7 @@
     }
     > section:empty { display: none; }
   }
-  .window-content, .window-content > .column-container {
+  &:not(.minimized).window-content, .window-content > .column-container {
     display: flex;
     flex-direction: column;
     gap: 8px;

@@ -255,47 +255,53 @@ export default class WeaponData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getSheetData(context) {
-    context.subtitles = [
-      { label: context.itemType },
-      { label: this.type.label },
-      ...this.physicalItemSheetFields
-    ];
-    context.info = [{
-      label: "DND5E.ToHit",
-      classes: "info-lg",
-      value: dnd5e.utils.formatModifier(parseInt(this.parent.labels.modifier))
-    }];
-    if ( this.parent.labels.damages?.length ) {
-      const config = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
-      context.info.push({ value: this.parent.labels.damages.reduce((str, { formula, damageType }) => {
-        const type = config[damageType];
-        return `${str}
-          <span class="formula">${formula}</span>
-          ${type ? `<span class="damage-type" data-tooltip="${type.label}" aria-label="${type.label}">
-            <dnd5e-icon src="${type.icon}"></dnd5e-icon>
-          </span>` : ""}
-        `;
-      }, ""), classes: "info-grid damage" });
+  async getSheetData(context, partId) {
+    switch ( partId ) {
+      case "description":
+        context.info = [{
+          label: "DND5E.ToHit",
+          classes: "info-lg",
+          value: dnd5e.utils.formatModifier(parseInt(this.parent.labels.modifier))
+        }];
+        if ( this.parent.labels.damages?.length ) {
+          const config = { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes };
+          context.info.push({ value: this.parent.labels.damages.reduce((str, { formula, damageType }) => {
+            const type = config[damageType];
+            return `${str}
+              <span class="formula">${formula}</span>
+              ${type ? `<span class="damage-type" data-tooltip="${type.label}" aria-label="${type.label}">
+                <dnd5e-icon src="${type.icon}"></dnd5e-icon>
+              </span>` : ""}
+            `;
+          }, ""), classes: "info-grid damage" });
+        }
+        break;
+      case "details":
+        context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
+        context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
+          return {
+            value, label,
+            selected: context.source.damage.base.types.includes?.(value) ?? context.source.damage.base.types.has(value)
+          };
+        });
+        const makeDenomOptions = placeholder => [
+          { value: "", label: placeholder ? `d${placeholder}` : "" },
+          { rule: true },
+          ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
+        ];
+        context.denominationOptions = {
+          base: makeDenomOptions(),
+          versatile: makeDenomOptions(this.damage.base.denomination ? this.damage.base.steppedDenomination() : "")
+        };
+        break;
+      case "header":
+        context.subtitles = [
+          { label: context.itemType },
+          { label: this.type.label },
+          ...this.physicalItemSheetFields
+        ];
+        break;
     }
-    context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
-
-    // Damage
-    context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
-      return {
-        value, label,
-        selected: context.source.damage.base.types.includes?.(value) ?? context.source.damage.base.types.has(value)
-      };
-    });
-    const makeDenominationOptions = placeholder => [
-      { value: "", label: placeholder ? `d${placeholder}` : "" },
-      { rule: true },
-      ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
-    ];
-    context.denominationOptions = {
-      base: makeDenominationOptions(),
-      versatile: makeDenominationOptions(this.damage.base.denomination ? this.damage.base.steppedDenomination() : "")
-    };
   }
 
   /* -------------------------------------------- */

@@ -17,6 +17,7 @@
       --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
       --slide-toggle-track-color-unchecked: var(--dnd5e-color-light-gray);
       flex: none;
+      margin-inline-end: auto;
 
       .slide-toggle-thumb {
         line-height: 12px;
@@ -113,8 +114,13 @@
     position: absolute;
     inset: auto 16px 16px auto;
   }
+  &.standard-form .create-child {
+    height: 30px;
+    line-height: normal;
+  }
 
-  form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities) .create-child {
+  form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities) .create-child,
+  &:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities) .create-child {
     display: block;
   }
 }
