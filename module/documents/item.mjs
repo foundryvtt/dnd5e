@@ -1,6 +1,7 @@
 import ActivityChoiceDialog from "../applications/activity/activity-choice-dialog.mjs";
 import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
+import ContextMenu5e from "../applications/context-menu.mjs";
 import CreateScrollDialog from "../applications/item/create-scroll-dialog.mjs";
 import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
@@ -1112,15 +1113,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static chatListeners(html) {
     html = html instanceof HTMLElement ? html : html[0];
     html.addEventListener("click", event => {
-      if ( event.target.closest("[data-context-menu]") ) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.target.closest("[data-message-id]").dispatchEvent(new PointerEvent("contextmenu", {
-          view: window, bubbles: true, cancelable: true
-        }));
-      } else if ( event.target.closest(".collapsible") ) {
-        this._onChatCardToggleContent(event);
-      }
+      if ( event.target.closest("[data-context-menu]") ) ContextMenu5e.triggerEvent(event);
+      else if ( event.target.closest(".collapsible") ) this._onChatCardToggleContent(event);
     });
   }
 

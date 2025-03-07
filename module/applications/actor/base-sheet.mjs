@@ -34,6 +34,7 @@ import WeaponsConfig from "./config/weapons-config.mjs";
 
 /**
  * @import { DropEffectValue } from "../../drag-drop.mjs"
+ * @import { FilterState5e } from "../components/item-list-controls.mjs";
  */
 
 /**
@@ -41,12 +42,6 @@ import WeaponsConfig from "./config/weapons-config.mjs";
  * @abstract
  */
 export default class ActorSheet5e extends ActorSheetMixin(foundry.appv1?.sheets?.ActorSheet ?? ActorSheet) {
-
-  /**
-   * @typedef {object} FilterState5e
-   * @property {string} name             Filtering by name.
-   * @property {Set<string>} properties  Filtering by some property.
-   */
 
   /**
    * Track the set of item filters which are applied

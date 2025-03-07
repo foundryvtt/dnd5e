@@ -33,4 +33,21 @@ export default class ContextMenu5e extends (foundry.applications?.ui?.ContextMen
     const theme = target.closest("[data-theme]")?.dataset.theme ?? "";
     setTheme(html, theme);
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Trigger a context menu event in response to a normal click on a additional options button.
+   * @param {PointerEvent} event
+   */
+  static triggerEvent(event) {
+    event.preventDefault();
+    event.stopPropagation();
+    const { clientX, clientY } = event;
+    const selector = "[data-id],[data-effect-id],[data-item-id],[data-message-id]";
+    const target = event.target.closest(selector) ?? event.currentTarget.closest(selector);
+    target?.dispatchEvent(new PointerEvent("contextmenu", {
+      view: window, bubbles: true, cancelable: true, clientX, clientY
+    }));
+  }
 }
