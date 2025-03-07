@@ -171,23 +171,34 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getSheetData(context) {
-    context.subtitles = [
-      { label: this.type.label },
-      ...this.physicalItemSheetFields
-    ];
-    context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
-      return {
-        value, label,
-        selected: context.source.damage.base.types.includes?.(value) ?? context.source.damage.base.types.has(value)
-      };
-    });
-    context.denominationOptions = [
-      { value: "", label: "" },
-      { rule: true },
-      ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
-    ];
-    context.parts = ["dnd5e.details-consumable", "dnd5e.field-uses"];
+  async getSheetData(context, partId) {
+    switch ( partId ) {
+      case "details":
+        context.parts = ["dnd5e.details-consumable", "dnd5e.field-uses"];
+        context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
+          return {
+            value, label,
+            selected: context.source.damage.base.types.includes?.(value) ?? context.source.damage.base.types.has(value)
+          };
+        });
+        context.denominationOptions = [
+          { value: "", label: "" },
+          { rule: true },
+          ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
+        ];
+        const itemTypes = CONFIG.DND5E.consumableTypes[this._source.type.value];
+        if ( itemTypes ) {
+          context.itemType = itemTypes.label;
+          context.itemSubtypes = itemTypes.subtypes;
+        }
+        break;
+      case "header":
+        context.subtitles = [
+          { label: this.type.label },
+          ...this.physicalItemSheetFields
+        ];
+        break;
+    }
   }
 
   /* -------------------------------------------- */
