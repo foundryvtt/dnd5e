@@ -15,6 +15,8 @@ export {default as CommonTemplate} from "./templates/common.mjs";
 export {default as CreatureTemplate} from "./templates/creature.mjs";
 export {default as DetailsFields} from "./templates/details.mjs";
 export {default as TraitsFields} from "./templates/traits.mjs";
+export {default as DamageTraitField} from "./fields/damage-trait-field.mjs";
+export {default as SimpleTraitField} from "./fields/simple-trait-field.mjs";
 
 export const config = {
   character: CharacterData,
