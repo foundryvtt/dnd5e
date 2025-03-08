@@ -228,14 +228,7 @@ export default class ItemSheet5e2 extends ItemSheetV2Mixin(ItemSheet5e) {
     super.activateListeners(html);
 
     for ( const control of html[0].querySelectorAll(".tab.advancement [data-context-menu]") ) {
-      control.addEventListener("click", event => {
-        event.preventDefault();
-        event.stopPropagation();
-        const { clientX, clientY } = event;
-        event.currentTarget.closest("[data-id]").dispatchEvent(new PointerEvent("contextmenu", {
-          view: window, bubbles: true, cancelable: true, clientX, clientY
-        }));
-      });
+      control.addEventListener("click", ContextMenu5e.triggerEvent);
     }
 
     html.find(".activities .activity .name").on("click", this._onEditActivity.bind(this));
