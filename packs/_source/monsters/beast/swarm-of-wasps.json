@@ -69,8 +69,8 @@
       "hp": {
         "value": 22,
         "max": 22,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "5d8"
       },
       "init": {
@@ -687,7 +687,7 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>0 ft.,</strong> one target in the swarm's space. Hit: <strong>10 (4d4) <em>piercing damage</em></strong>, or <strong>5 (2d4) <em>piercing damage</em></strong> if the swarm has half of its hit points or fewer.</p>",
+          "value": "<p>Melee Weapon Attack: [[/attack]], 0 ft., one target in the swarm's space. Hit: [[/damage average]] damage, or [[/damage 2d4 piercing average]] damage if the swarm has half of its hit points or fewer.</p>",
           "chat": "<p>The Swarm of Wasps attacks with a flurry of Bites.</p>"
         },
         "source": {
@@ -716,7 +716,7 @@
           "value": null,
           "long": null,
           "units": "ft",
-          "reach": null
+          "reach": 0
         },
         "uses": {
           "max": "",
@@ -803,7 +803,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -838,8 +838,8 @@
               "recovery": []
             },
             "attack": {
-              "ability": "dex",
-              "bonus": "",
+              "ability": "none",
+              "bonus": "@abilities.dex.mod",
               "critical": {
                 "threshold": null
               },
@@ -856,13 +856,17 @@
               "includeBase": true,
               "parts": []
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "bites"
+        "identifier": "bites",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -870,15 +874,22 @@
       "ownership": {
         "default": 0
       },
-      "flags": {},
+      "flags": {
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676469,
+        "modifiedTime": 1741123709164,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!YUaprnengdFDNG8P.bmjRGkZH4lnTX72M"
@@ -895,9 +906,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171238465,
-    "modifiedTime": 1726171446064,
+    "modifiedTime": 1741123718268,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!YUaprnengdFDNG8P"

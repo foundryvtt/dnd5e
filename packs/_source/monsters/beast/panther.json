@@ -69,8 +69,8 @@
       "hp": {
         "value": 13,
         "max": 13,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "3d8"
       },
       "init": {
@@ -670,7 +670,7 @@
       "img": "icons/creatures/claws/claw-talons-glowing-orange.webp",
       "system": {
         "description": {
-          "value": "<p>If the panther moves at least <strong>20 ft.</strong> straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a <strong>DC 12 Strength saving throw</strong> or be knocked prone. </p><p>If the target is prone, the panther can make one bite attack against it as a bonus action.</p>",
+          "value": "<p>If the panther moves at least 20 ft. straight toward a creature and then hits it with a claw attack on the same turn, that target must succeed on a [[/save]] saving throw or be knocked &amp;Reference[prone].</p><p>If the target is prone, the panther can make one bite attack against it as a bonus action.</p>",
           "chat": "<p>If the panther moves at least <strong>20 ft.</strong> straight toward a creature and then hits it with a claw attack on the same turn, that target must make a <strong>Strength</strong> saving throw. </p>"
         },
         "source": {
@@ -853,9 +853,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676768,
+        "modifiedTime": 1741122459760,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!AijNdqMurWxDxUSl.6UmjtTyihpEERg1I"
@@ -867,7 +867,7 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Panther attacks with its Bite.</p>"
         },
         "source": {
@@ -893,7 +893,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -1041,7 +1041,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "bite"
+        "identifier": "bite",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -1059,9 +1060,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676768,
+        "modifiedTime": 1741122480428,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!AijNdqMurWxDxUSl.c7iYo6g3A6DP8V4w"
@@ -1073,7 +1074,7 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d4 + 2) <em>slashing damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Panther attacks with its Claw.</p>"
         },
         "source": {
@@ -1099,7 +1100,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -1247,7 +1248,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "claw"
+        "identifier": "claw",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -1261,9 +1263,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676768,
+        "modifiedTime": 1741122472472,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!AijNdqMurWxDxUSl.t4bERcqBVDvjJ2gx"
@@ -1280,9 +1282,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171209943,
-    "modifiedTime": 1726171440868,
+    "modifiedTime": 1741122484373,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!AijNdqMurWxDxUSl"

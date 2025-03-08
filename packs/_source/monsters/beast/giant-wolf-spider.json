@@ -69,8 +69,8 @@
       "hp": {
         "value": 11,
         "max": 11,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "2d8 + 2"
       },
       "init": {
@@ -674,7 +674,7 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>4 (1d6 + 1) <em>piercing damage</em></strong>.</p><p>The target must make a  <strong>DC 11 Constitution</strong> saving throw, taking <strong>7 (2d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one. If the <em>poison damage</em> reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p><p>The target must make a [[/save]] saving throw, taking [[/damage average activity=dnd5eactivity100]] damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>",
           "chat": "<p>The Giant Wolf Spider attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
@@ -700,7 +700,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -867,7 +867,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -906,21 +906,16 @@
               "onSave": "half",
               "parts": [
                 {
-                  "number": 1,
-                  "denomination": 6,
-                  "bonus": "@mod",
-                  "types": [
-                    "piercing"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 2,
+                  "denomination": "6",
+                  "bonus": "",
+                  "types": [
+                    "poison"
+                  ]
                 }
               ]
             },
@@ -931,13 +926,17 @@
                 "formula": "11"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "bite"
+        "identifier": "bite",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -948,6 +947,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -955,9 +960,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676483,
+        "modifiedTime": 1741121931174,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!f9JbhBfWucrY2eDA.Et0GP61ZnJkxxqvN"
@@ -1092,9 +1097,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171246091,
-    "modifiedTime": 1726171447485,
+    "modifiedTime": 1741121936831,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!f9JbhBfWucrY2eDA"

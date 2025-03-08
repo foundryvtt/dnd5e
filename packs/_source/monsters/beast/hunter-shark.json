@@ -69,8 +69,8 @@
       "hp": {
         "value": 45,
         "max": 45,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "6d10 + 12"
       },
       "init": {
@@ -733,7 +733,7 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>piercing damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Hunter Shark attacks with its Bite.</p>"
         },
         "source": {
@@ -759,7 +759,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -907,7 +907,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "bite"
+        "identifier": "bite",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -925,9 +926,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676515,
+        "modifiedTime": 1741122052326,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!siBUEAj4UVdaiH6p.KcQolnG6732GPN3o"
@@ -944,9 +945,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171262917,
-    "modifiedTime": 1726171451193,
+    "modifiedTime": 1741122054564,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!siBUEAj4UVdaiH6p"

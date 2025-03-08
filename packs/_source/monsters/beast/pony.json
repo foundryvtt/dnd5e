@@ -69,8 +69,8 @@
       "hp": {
         "value": 11,
         "max": 11,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "2d8 + 2"
       },
       "init": {
@@ -615,7 +615,7 @@
       "img": "icons/commodities/bones/hooves-cloven-brown.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (2d4 + 2) <em>bludgeoning damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Pony attacks with its Hooves.</p>"
         },
         "source": {
@@ -641,7 +641,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -789,7 +789,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "hooves"
+        "identifier": "hooves",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -807,9 +808,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676449,
+        "modifiedTime": 1741122676235,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!PHO4J98zK2p4KNyc.bDVZoB8Y0b3nkveO"
@@ -826,9 +827,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171229095,
-    "modifiedTime": 1726171444308,
+    "modifiedTime": 1741122678451,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!PHO4J98zK2p4KNyc"

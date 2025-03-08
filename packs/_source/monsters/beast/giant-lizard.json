@@ -69,8 +69,8 @@
       "hp": {
         "value": 19,
         "max": 19,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "3d10 + 3"
       },
       "init": {
@@ -615,7 +615,7 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Giant Lizard attacks with its Bite.</p>"
         },
         "source": {
@@ -641,7 +641,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -789,7 +789,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "bite"
+        "identifier": "bite",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -807,9 +808,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676502,
+        "modifiedTime": 1741121195032,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!pLzSh4dA517Tn73E.fLwfCY0GE5S7mMYv"
@@ -826,9 +827,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171258697,
-    "modifiedTime": 1726171450199,
+    "modifiedTime": 1741121198708,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!pLzSh4dA517Tn73E"

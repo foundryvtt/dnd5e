@@ -69,8 +69,8 @@
       "hp": {
         "value": 4,
         "max": 4,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "1d6 + 1"
       },
       "init": {
@@ -615,7 +615,7 @@
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+1 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: 2 (1d6 - 1) <em>slashing damage</em>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Giant Fire Beetle attacks with its Bite.</p>"
         },
         "source": {
@@ -641,7 +641,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -789,7 +789,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "bite"
+        "identifier": "bite",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -807,9 +808,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676471,
+        "modifiedTime": 1741118590092,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Z0GiAv3bJxTjUfjM.ytajTMHqbOxc0BvA"
@@ -821,7 +822,7 @@
       "img": "icons/magic/light/beam-strike-orange-gold.webp",
       "system": {
         "description": {
-          "value": "<p>The beetle sheds bright light in a <strong>10-foot radius</strong> and dim light for an additional <strong>10 feet</strong>.</p>",
+          "value": "<p>The beetle sheds bright light in a 10-foot radius and dim light for an additional 10 feet.</p>",
           "chat": ""
         },
         "source": {
@@ -866,10 +867,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1741118598461,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!Z0GiAv3bJxTjUfjM.t1I5Ss8xvBplViSy"
     }
@@ -885,9 +886,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171238619,
-    "modifiedTime": 1726171446099,
+    "modifiedTime": 1741118601480,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!Z0GiAv3bJxTjUfjM"

@@ -69,8 +69,8 @@
       "hp": {
         "value": 26,
         "max": 26,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "4d10 + 4"
       },
       "init": {
@@ -783,8 +783,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1741118472618,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!9bHoR8k5D2DKHaF3.QaRbm71tWEQzR4GK"
     },
@@ -795,7 +795,7 @@
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>piercing damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Giant Eagle attacks with its Beak.</p>"
         },
         "source": {
@@ -821,7 +821,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -971,11 +971,12 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "beak"
+        "identifier": "beak",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 100000,
       "ownership": {
         "default": 0
       },
@@ -985,9 +986,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676645,
+        "modifiedTime": 1741118495139,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!9bHoR8k5D2DKHaF3.vyI1tbobhrYMxj76"
@@ -999,7 +1000,7 @@
       "img": "icons/creatures/claws/claw-scaled-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>slashing damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Giant Eagle attacks with its Talons.</p>"
         },
         "source": {
@@ -1025,7 +1026,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -1175,11 +1176,12 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "talons"
+        "identifier": "talons",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 300000,
       "ownership": {
         "default": 0
       },
@@ -1189,9 +1191,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676645,
+        "modifiedTime": 1741118487761,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!9bHoR8k5D2DKHaF3.sh91NilUd5bUZyiG"
@@ -1208,9 +1210,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171209066,
-    "modifiedTime": 1726171440681,
+    "modifiedTime": 1741118496451,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!9bHoR8k5D2DKHaF3"

@@ -69,8 +69,8 @@
       "hp": {
         "value": 2,
         "max": 2,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "1d4"
       },
       "init": {
@@ -615,7 +615,7 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+0 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>slashing damage</em>.</strong></p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Cat attacks with its Claws.</p>"
         },
         "source": {
@@ -729,7 +729,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -765,12 +765,12 @@
               "recovery": []
             },
             "attack": {
-              "ability": "",
+              "ability": "none",
               "bonus": "",
               "critical": {
                 "threshold": null
               },
-              "flat": false,
+              "flat": true,
               "type": {
                 "value": "melee",
                 "classification": "weapon"
@@ -783,7 +783,10 @@
               "includeBase": true,
               "parts": []
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
@@ -797,15 +800,22 @@
       "ownership": {
         "default": 0
       },
-      "flags": {},
+      "flags": {
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676491,
+        "modifiedTime": 1741117128189,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!hIf83RD3ZVW4Egfi.QEiTKu95xZ1ovW5K"
@@ -1007,9 +1017,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171249141,
-    "modifiedTime": 1726171448133,
+    "modifiedTime": 1741117135353,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!hIf83RD3ZVW4Egfi"

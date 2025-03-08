@@ -69,8 +69,8 @@
       "hp": {
         "value": 5,
         "max": 5,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "1d8 + 1"
       },
       "init": {
@@ -670,7 +670,7 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>piercing damage</em></strong>.</p><p>If the target is a creature, it must succeed on a  <strong>DC 11 Strength</strong> saving throw or be knocked prone.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is a creature, it must succeed on a [[/save]] saving throw or be knocked &amp;Reference[prone].</p>",
           "chat": "<p>The Mastiff attacks with its Bite. If the target is a creature, it must succeed on a Strength saving throw or be knocked prone.</p>"
         },
         "source": {
@@ -696,7 +696,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -900,25 +900,7 @@
             },
             "damage": {
               "onSave": "half",
-              "parts": [
-                {
-                  "number": 1,
-                  "denomination": 6,
-                  "bonus": "@mod",
-                  "types": [
-                    "piercing"
-                  ],
-                  "custom": {
-                    "enabled": false,
-                    "formula": ""
-                  },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
-                }
-              ]
+              "parts": []
             },
             "save": {
               "ability": "str",
@@ -933,7 +915,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "bite"
+        "identifier": "bite",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -944,6 +927,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -951,9 +940,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676468,
+        "modifiedTime": 1741122373366,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!YTpL2c3NO4sOn2UA.QLJgy1aF5ijBEp4K"
@@ -970,9 +959,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171238245,
-    "modifiedTime": 1726171446028,
+    "modifiedTime": 1741122380029,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!YTpL2c3NO4sOn2UA"

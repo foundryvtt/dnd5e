@@ -69,8 +69,8 @@
       "hp": {
         "value": 26,
         "max": 26,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "4d10 + 4"
       },
       "init": {
@@ -792,7 +792,7 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong>.</p><p>The target must make a  <strong>DC 11 Constitution</strong> saving throw, taking <strong>9 (2d8) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one. If the <em>poison damage</em> reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p><p>The target must make a [[/save]] saving throw, taking [[/damage average activity=dnd5eactivity100]] damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>",
           "chat": "<p>The Giant Spider attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
@@ -818,7 +818,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -987,7 +987,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -1026,21 +1026,16 @@
               "onSave": "half",
               "parts": [
                 {
-                  "number": 1,
-                  "denomination": 8,
-                  "bonus": "@mod",
-                  "types": [
-                    "piercing"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 2,
+                  "denomination": "8",
+                  "bonus": "",
+                  "types": [
+                    "poison"
+                  ]
                 }
               ]
             },
@@ -1051,13 +1046,17 @@
                 "formula": "11"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "bite"
+        "identifier": "bite",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -1068,6 +1067,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -1075,9 +1080,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676616,
+        "modifiedTime": 1741121646752,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!v99wOosUJjUgcUNF.SuRAERXystPvC7Ci"
@@ -1089,7 +1094,7 @@
       "img": "icons/creatures/webs/web-spider-glowing-purple.webp",
       "system": {
         "description": {
-          "value": "<p>Ranged Weapon Attack: +5 to hit, range 30/60 ft., one creature. Hit: The target is restrained by webbing.</p><p>As an action, the restrained target can make a DC 12 Strength check, bursting the webbing on a success. The webbing can also be attacked and destroyed (AC 10; hp 5; vulnerability to <em>fire damage</em>; immunity to bludgeoning, poison, and <em>psychic damage</em>).</p>",
+          "value": "<p>[[/attack extended]]. <em>Hit:</em> The target is &amp;Reference[restrained] by webbing.</p><p>As an action, the restrained target can make a [[/check]] check, bursting the webbing on a success. The webbing can also be attacked and destroyed (AC 10; hp 5; vulnerability to fire damage; immunity to bludgeoning, poison, and psychic damage).</p>",
           "chat": "<p>The target is restrained by webbing. As an action, the restrained target can make a Strength check, bursting the webbing on a success.</p>"
         },
         "source": {
@@ -1207,86 +1212,66 @@
             },
             "sort": 0
           },
-          "dnd5eactivity100": {
-            "_id": "dnd5eactivity100",
-            "type": "save",
+          "2VqlhWfTutD2tVYA": {
+            "type": "check",
+            "_id": "2VqlhWfTutD2tVYA",
+            "sort": 0,
             "activation": {
               "type": "action",
-              "value": 1,
-              "condition": "",
-              "override": false
+              "value": null,
+              "override": false,
+              "condition": ""
             },
             "consumption": {
-              "targets": [
-                {
-                  "type": "itemUses",
-                  "target": "",
-                  "value": "1",
-                  "scaling": {
-                    "mode": "",
-                    "formula": ""
-                  }
-                }
-              ],
               "scaling": {
-                "allowed": false,
-                "max": ""
+                "allowed": false
               },
-              "spellSlot": true
+              "spellSlot": true,
+              "targets": []
             },
             "description": {
               "chatFlavor": ""
             },
             "duration": {
+              "units": "inst",
               "concentration": false,
-              "value": "",
-              "units": "",
-              "special": "",
               "override": false
             },
             "effects": [],
             "range": {
-              "value": "30",
-              "units": "ft",
-              "special": "",
-              "override": false
+              "override": false,
+              "units": "self",
+              "special": ""
             },
             "target": {
               "template": {
-                "count": "",
                 "contiguous": false,
-                "type": "",
-                "size": "",
-                "width": "",
-                "height": "",
-                "units": ""
+                "units": "ft",
+                "type": ""
               },
               "affects": {
-                "count": "",
-                "type": "",
                 "choice": false,
-                "special": ""
+                "type": ""
               },
-              "prompt": true,
-              "override": false
+              "override": false,
+              "prompt": true
             },
             "uses": {
               "spent": 0,
-              "max": "",
-              "recovery": []
+              "recovery": [],
+              "max": ""
             },
-            "damage": {
-              "onSave": "half",
-              "parts": []
-            },
-            "save": {
-              "ability": "str",
+            "check": {
+              "associated": [],
               "dc": {
                 "calculation": "",
                 "formula": "12"
-              }
+              },
+              "ability": "str"
             },
-            "sort": 0
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "enchant": {},
@@ -1304,6 +1289,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.monsterfeatures.i8WDjw4J1gJWQmqG"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -1311,9 +1302,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676616,
+        "modifiedTime": 1741121710947,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!v99wOosUJjUgcUNF.g7e60AxXarlQ9xQC"
@@ -1330,9 +1321,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171264897,
-    "modifiedTime": 1726171451611,
+    "modifiedTime": 1741121766147,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!v99wOosUJjUgcUNF"

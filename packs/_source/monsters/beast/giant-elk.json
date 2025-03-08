@@ -69,8 +69,8 @@
       "hp": {
         "value": 42,
         "max": 42,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "5d12 + 10"
       },
       "init": {
@@ -615,7 +615,7 @@
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
       "system": {
         "description": {
-          "value": "<p>If the elk moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra 7 (2d6) damage.</p><p>If the target is a creature, it must succeed on a  <strong>DC 14 Strength</strong> saving throw or be knocked prone.</p>",
+          "value": "<p>If the elk moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra [[/damage average]] damage.</p><p>If the target is a creature, it must succeed on a [[/save]] saving throw or be knocked prone.</p>",
           "chat": "<p>If the elk moves at least 20 ft. straight toward a target and then hits it with a ram attack on the same turn, the target takes an extra damage. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>"
         },
         "source": {
@@ -661,7 +661,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -698,28 +698,26 @@
             },
             "damage": {
               "critical": {
-                "allow": false,
+                "allow": true,
                 "bonus": ""
               },
               "parts": [
                 {
-                  "number": 2,
-                  "denomination": 6,
-                  "bonus": "",
-                  "types": [],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 2,
+                  "denomination": "6",
+                  "bonus": "",
+                  "types": []
                 }
               ]
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           },
           "dnd5eactivity100": {
             "_id": "dnd5eactivity100",
@@ -781,23 +779,7 @@
             },
             "damage": {
               "onSave": "half",
-              "parts": [
-                {
-                  "number": 2,
-                  "denomination": 6,
-                  "bonus": "",
-                  "types": [],
-                  "custom": {
-                    "enabled": false,
-                    "formula": ""
-                  },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
-                }
-              ]
+              "parts": []
             },
             "save": {
               "ability": "str",
@@ -824,6 +806,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -831,9 +819,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676813,
+        "modifiedTime": 1741118522196,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!hQt3qIahnB1Odb40.xSzDPptifNbKyf5N"
@@ -845,7 +833,7 @@
       "img": "icons/commodities/bones/hooves-cloven-brown.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one <strong>prone</strong> creature. Hit: <strong>22 (4d8 + 4) <em>bludgeoning damage</em></strong>.</p>",
+          "value": "<p><em>Melee Weapon Attack:</em> [[/attack]], 5 ft., one prone creature. <em>Hit:</em> [[/damage average]]<em> </em>damage.</p>",
           "chat": "<p>The Giant Elk attacks with its Hooves.</p>"
         },
         "source": {
@@ -871,7 +859,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -1019,11 +1007,12 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "hooves"
+        "identifier": "hooves",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 200000,
       "ownership": {
         "default": 0
       },
@@ -1037,9 +1026,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676813,
+        "modifiedTime": 1741118571016,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!hQt3qIahnB1Odb40.jDA6wujGF6L3tPBM"
@@ -1051,7 +1040,7 @@
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>bludgeoning damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Giant Elk attacks with its Ram.</p>"
         },
         "source": {
@@ -1077,7 +1066,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 10,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -1227,11 +1216,12 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "ram"
+        "identifier": "ram",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 100000,
       "ownership": {
         "default": 0
       },
@@ -1241,9 +1231,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676813,
+        "modifiedTime": 1741118565558,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!hQt3qIahnB1Odb40.epOt7fzXcBz9Hf0i"
@@ -1260,9 +1250,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171249318,
-    "modifiedTime": 1726171448175,
+    "modifiedTime": 1741118580607,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!hQt3qIahnB1Odb40"

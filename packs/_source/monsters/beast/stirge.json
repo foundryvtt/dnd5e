@@ -69,8 +69,8 @@
       "hp": {
         "value": 2,
         "max": 2,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "1d4"
       },
       "init": {
@@ -615,7 +615,7 @@
       "img": "icons/skills/wounds/blood-spurt-spray-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>5 (1d4 + 3) <em>piercing damage</em></strong>.</p><p>The stirge attaches to the target. While attached, the stirge doesn't attack. Instead, at the start of each of the stirge's turns, the target loses 5 (1d4 + 3) hit points due to blood loss.The stirge can detach itself by spending 5 feet of its movement. It does so after it drains 10 hit points of blood from the target or the target dies.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p><p>The stirge attaches to the target. While attached, the stirge doesn't attack. Instead, at the start of each of the stirge's turns, the target loses 5 (1d4 + 3) hit points due to blood loss.The stirge can detach itself by spending 5 feet of its movement. It does so after it drains 10 hit points of blood from the target or the target dies.</p>",
           "chat": "<p>The Stirge attacks with its Blood Drain. A creature, including the target, can use its action to detach the stirge.</p>"
         },
         "source": {
@@ -729,7 +729,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -750,8 +750,8 @@
                 "units": ""
               },
               "affects": {
-                "count": "",
-                "type": "",
+                "count": "1",
+                "type": "creature",
                 "choice": false,
                 "special": ""
               },
@@ -782,13 +782,17 @@
               "includeBase": true,
               "parts": []
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "blood-drain"
+        "identifier": "blood-drain",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -796,15 +800,22 @@
       "ownership": {
         "default": 0
       },
-      "flags": {},
+      "flags": {
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676488,
+        "modifiedTime": 1741122985601,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!gKRtiMNAjZiCVfwz.MEFgfFD6YUD9cE08"
@@ -821,9 +832,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171247697,
-    "modifiedTime": 1726171447865,
+    "modifiedTime": 1741123007495,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!gKRtiMNAjZiCVfwz"

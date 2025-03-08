@@ -69,8 +69,8 @@
       "hp": {
         "value": 22,
         "max": 22,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "3d10 + 6"
       },
       "init": {
@@ -842,8 +842,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1741121826545,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!4ZlUHt4xmB7GdPfk.5kigRXx2FSlzVUWm"
     },
@@ -854,7 +854,7 @@
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>7 (2d4 + 2) <em>piercing damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Giant Vulture attacks with its Beak.</p>"
         },
         "source": {
@@ -880,7 +880,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -1030,11 +1030,12 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "beak"
+        "identifier": "beak",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 100000,
       "ownership": {
         "default": 0
       },
@@ -1044,9 +1045,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676641,
+        "modifiedTime": 1741121839561,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!4ZlUHt4xmB7GdPfk.t6TG4rgkOXBefYZQ"
@@ -1058,7 +1059,7 @@
       "img": "icons/creatures/claws/claw-scaled-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>9 (2d6 + 2) <em>slashing damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Giant Vulture attacks with its Talons.</p>"
         },
         "source": {
@@ -1084,7 +1085,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -1234,11 +1235,12 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "talons"
+        "identifier": "talons",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 300000,
       "ownership": {
         "default": 0
       },
@@ -1248,9 +1250,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676641,
+        "modifiedTime": 1741121847737,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!4ZlUHt4xmB7GdPfk.AXKWmB2ZU1hebo5S"
@@ -1267,9 +1269,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171201989,
-    "modifiedTime": 1726171439458,
+    "modifiedTime": 1741121849455,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!4ZlUHt4xmB7GdPfk"

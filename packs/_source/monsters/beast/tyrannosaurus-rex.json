@@ -69,8 +69,8 @@
       "hp": {
         "value": 136,
         "max": 136,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "13d12 + 52"
       },
       "init": {
@@ -615,7 +615,7 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>33 (4d12 + 7) <em>piercing damage</em></strong>. </p><p>If the target is a Medium or smaller creature, it is grappled (escape DC 17). Until this grapple ends, the target is restrained, and the tyrannosaurus can't bite another target.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is a Medium or smaller creature, it is &amp;Reference[grappled] (escape DC 17). Until this grapple ends, the target is &amp;Reference[restrained], and the tyrannosaurus can't bite another target.</p>",
           "chat": "<p>The Tyrannosaurus Rex attacks with its Bite. If the target is a Medium or smaller creature, it is grappled. Until this grapple ends, the target is restrained, and the tyrannosaurus can't bite another target.</p>"
         },
         "source": {
@@ -641,7 +641,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 10,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -694,7 +694,9 @@
           "dt": null,
           "conditions": ""
         },
-        "properties": [],
+        "properties": [
+          "rch"
+        ],
         "proficient": 1,
         "unidentified": {
           "description": ""
@@ -789,11 +791,12 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "bite"
+        "identifier": "bite",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 100000,
       "ownership": {
         "default": 0
       },
@@ -807,9 +810,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676662,
+        "modifiedTime": 1741123874342,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!HlddcPm4cWptj3ka.O8pEyHMhxCwROJ6O"
@@ -934,8 +937,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1741123839715,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!HlddcPm4cWptj3ka.Fi45qe2ncVZHNq43"
     },
@@ -946,7 +949,7 @@
       "img": "icons/skills/wounds/injury-pain-impaled-hand-blood.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>, <strong>10 ft.,</strong> one target. Hit: <strong>20 (3d8 + 7) <em>bludgeoning damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Tyrannosaurus Rex attacks with its Tail.</p>"
         },
         "source": {
@@ -972,7 +975,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 10,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -1025,7 +1028,9 @@
           "dt": null,
           "conditions": ""
         },
-        "properties": [],
+        "properties": [
+          "rch"
+        ],
         "proficient": 1,
         "unidentified": {
           "description": ""
@@ -1120,11 +1125,12 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "tail"
+        "identifier": "tail",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 300000,
       "ownership": {
         "default": 0
       },
@@ -1134,9 +1140,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676662,
+        "modifiedTime": 1741123889768,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!HlddcPm4cWptj3ka.jw9SyNUWRzgHe37B"
@@ -1153,9 +1159,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171218926,
-    "modifiedTime": 1726171442440,
+    "modifiedTime": 1741123894634,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!HlddcPm4cWptj3ka"

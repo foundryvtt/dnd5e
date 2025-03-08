@@ -69,8 +69,8 @@
       "hp": {
         "value": 2,
         "max": 2,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "1d4"
       },
       "init": {
@@ -615,7 +615,7 @@
       "img": "icons/skills/melee/strike-slashes-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+0 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>bludgeoning damage</em>.</strong></p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Crab attacks with its Claw.</p>"
         },
         "source": {
@@ -641,7 +641,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -729,7 +729,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -765,12 +765,12 @@
               "recovery": []
             },
             "attack": {
-              "ability": "str",
+              "ability": "none",
               "bonus": "",
               "critical": {
                 "threshold": null
               },
-              "flat": false,
+              "flat": true,
               "type": {
                 "value": "melee",
                 "classification": "weapon"
@@ -783,13 +783,17 @@
               "includeBase": true,
               "parts": []
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "claw"
+        "identifier": "claw",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -797,15 +801,22 @@
       "ownership": {
         "default": 0
       },
-      "flags": {},
+      "flags": {
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676411,
+        "modifiedTime": 1741117285974,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!8RgUhb31VvjUNZU1.gvfgesIscW0VALbY"
@@ -881,9 +892,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171207812,
-    "modifiedTime": 1726171440422,
+    "modifiedTime": 1741117214821,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!8RgUhb31VvjUNZU1"

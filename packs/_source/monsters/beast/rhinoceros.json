@@ -69,8 +69,8 @@
       "hp": {
         "value": 45,
         "max": 45,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "6d10 + 12"
       },
       "init": {
@@ -615,7 +615,7 @@
       "img": "icons/creatures/mammals/ox-bull-horned-glowing-orange.webp",
       "system": {
         "description": {
-          "value": "<p>If the rhinoceros moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra <strong>9 (2d8) <em>bludgeoning damage</em></strong>.</p><p>If the target is a creature, it must succeed on a  <strong>DC 15 Strength</strong> saving throw or be knocked prone.</p>",
+          "value": "<p>If the rhinoceros moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes an extra [[/damage average]] damage.</p><p>If the target is a creature, it must succeed on a [[/save]] saving throw or be knocked prone.</p>",
           "chat": "<p>If the rhinoceros moves at least 20 ft. straight toward a target and then hits it with a gore attack on the same turn, the target takes extra <em>bludgeoning damage</em>. If the target is a creature, it must make a <strong>Strength</strong> saving throw or be knocked prone.</p>"
         },
         "source": {
@@ -661,7 +661,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -698,30 +698,28 @@
             },
             "damage": {
               "critical": {
-                "allow": false,
+                "allow": true,
                 "bonus": ""
               },
               "parts": [
                 {
-                  "number": 2,
-                  "denomination": 8,
-                  "bonus": "",
-                  "types": [
-                    "bludgeoning"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 2,
+                  "denomination": "8",
+                  "bonus": "",
+                  "types": [
+                    "bludgeoning"
+                  ]
                 }
               ]
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           },
           "dnd5eactivity100": {
             "_id": "dnd5eactivity100",
@@ -783,25 +781,7 @@
             },
             "damage": {
               "onSave": "half",
-              "parts": [
-                {
-                  "number": 2,
-                  "denomination": 8,
-                  "bonus": "",
-                  "types": [
-                    "bludgeoning"
-                  ],
-                  "custom": {
-                    "enabled": false,
-                    "formula": ""
-                  },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
-                }
-              ]
+              "parts": []
             },
             "save": {
               "ability": "str",
@@ -828,6 +808,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -835,9 +821,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676573,
+        "modifiedTime": 1741122761194,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!SBCe2BSa6opTS5M4.e1ZjZT7dyExUSEOu"
@@ -849,7 +835,7 @@
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>14 (2d8 + 5) <em>bludgeoning damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Rhinoceros attacks with its Gore.</p>"
         },
         "source": {
@@ -875,7 +861,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -1023,7 +1009,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "gore"
+        "identifier": "gore",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -1037,9 +1024,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676573,
+        "modifiedTime": 1741122781475,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!SBCe2BSa6opTS5M4.uFv78t6CwySS1gio"
@@ -1056,9 +1043,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171231795,
-    "modifiedTime": 1726171444778,
+    "modifiedTime": 1741122784621,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!SBCe2BSa6opTS5M4"

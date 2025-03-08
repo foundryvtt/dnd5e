@@ -69,8 +69,8 @@
       "hp": {
         "value": 1,
         "max": 1,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "1d4 - 1"
       },
       "init": {
@@ -729,7 +729,7 @@
       "img": "icons/creatures/claws/claw-scaled-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>slashing damage</em>.</strong></p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Owl attacks with its Talons.</p>"
         },
         "source": {
@@ -755,7 +755,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -903,7 +903,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "talons"
+        "identifier": "talons",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -917,9 +918,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676480,
+        "modifiedTime": 1741122444317,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!d0prpsGSAorDadec.c3NnWQRHnaBpqtbe"
@@ -936,9 +937,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171243940,
-    "modifiedTime": 1726171446987,
+    "modifiedTime": 1741122446228,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!d0prpsGSAorDadec"

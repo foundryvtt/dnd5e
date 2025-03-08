@@ -69,8 +69,8 @@
       "hp": {
         "value": 52,
         "max": 52,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "8d10 + 8"
       },
       "init": {
@@ -932,7 +932,7 @@
       "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>15 ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong>.</p><p>If the target is a creature, it is grappled (escape DC 16). Until this grapple ends, the target is restrained, and the octopus can't use its tentacles on another target.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is a creature, it is &amp;Reference[grappled] (escape DC 16). Until this grapple ends, the target is &amp;Reference[restrained], and the octopus can't use its tentacles on another target.</p>",
           "chat": "<p>The Giant Octopus attacks with its Tentacles. If the target is a creature, it is grappled. Until this grapple ends, the target is restrained, and the octopus can't use its tentacles on another target.</p>"
         },
         "source": {
@@ -958,10 +958,10 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 15,
+          "value": null,
           "long": null,
           "units": "ft",
-          "reach": null
+          "reach": 15
         },
         "uses": {
           "max": "",
@@ -1108,7 +1108,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "tentacles"
+        "identifier": "tentacles",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -1126,9 +1127,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676607,
+        "modifiedTime": 1741121241899,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!p9Xnr820UAZBOIVN.yOZK7sWcCRFmuAxz"
@@ -1145,9 +1146,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171258232,
-    "modifiedTime": 1726171450104,
+    "modifiedTime": 1741121257640,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!p9Xnr820UAZBOIVN"

@@ -69,8 +69,8 @@
       "hp": {
         "value": 3,
         "max": 3,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "1d6"
       },
       "init": {
@@ -615,7 +615,7 @@
       "img": "icons/creatures/tentacles/tentacles-thing-green.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>bludgeoning damage</em>.</strong></p><p>The target is grappled (escape DC 10). Until this grapple ends, the octopus can't use its tentacles on another target.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p><p>The target is &amp;Reference[grappled] (escape DC 10). Until this grapple ends, the octopus can't use its tentacles on another target.</p>",
           "chat": "<p>The Octopus attacks with its Tentacles. The target is grappled . Until this grapple ends, the octopus can't use its tentacles on another target.</p>"
         },
         "source": {
@@ -641,7 +641,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -789,7 +789,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "tentacles"
+        "identifier": "tentacles",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -807,9 +808,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676522,
+        "modifiedTime": 1741122417975,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!3UUNbGiG2Yf1ZPxM.SLnyx0Ta2ksVM9QL"
@@ -1143,9 +1144,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171200368,
-    "modifiedTime": 1726171439159,
+    "modifiedTime": 1741122420299,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!3UUNbGiG2Yf1ZPxM"

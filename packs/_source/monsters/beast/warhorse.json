@@ -69,8 +69,8 @@
       "hp": {
         "value": 19,
         "max": 19,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "3d10 + 3"
       },
       "init": {
@@ -812,7 +812,7 @@
       "img": "icons/commodities/bones/hooves-cloven-brown.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>bludgeoning damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Warhorse attacks with its Hooves.</p>"
         },
         "source": {
@@ -838,7 +838,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -986,7 +986,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "hooves"
+        "identifier": "hooves",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -1004,9 +1005,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676574,
+        "modifiedTime": 1741123934411,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!T1xZTDCGuvMBSq8d.7MiLYgDyM2Rm3nEb"
@@ -1023,9 +1024,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171233148,
-    "modifiedTime": 1726171445097,
+    "modifiedTime": 1741123935710,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!T1xZTDCGuvMBSq8d"

@@ -69,8 +69,8 @@
       "hp": {
         "value": 13,
         "max": 13,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "3d8"
       },
       "init": {
@@ -615,7 +615,7 @@
       "img": "icons/creatures/abilities/fang-tooth-venomous.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p><p>The target must make a  <strong>DC 11 Constitution</strong> saving throw, taking <strong>10 (3d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one. If the <em>poison damage</em> reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p><p>The target must make a [[/save]] saving throw, taking [[/damage average activity=dnd5eactivity100]] damage on a failed save, or half as much damage on a successful one. If the poison damage reduces the target to 0 hit points, the target is stable but poisoned for 1 hour, even after regaining hit points, and is paralyzed while poisoned in this way.</p>",
           "chat": "<p>The Giant Wasp attacks with its Sting. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
@@ -641,7 +641,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -810,7 +810,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -849,21 +849,16 @@
               "onSave": "half",
               "parts": [
                 {
-                  "number": 1,
-                  "denomination": 6,
-                  "bonus": "@mod",
-                  "types": [
-                    "piercing"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 3,
+                  "denomination": "6",
+                  "bonus": "",
+                  "types": [
+                    "poison"
+                  ]
                 }
               ]
             },
@@ -874,13 +869,17 @@
                 "formula": "11"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "sting"
+        "identifier": "sting",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -888,15 +887,22 @@
       "ownership": {
         "default": 0
       },
-      "flags": {},
+      "flags": {
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676403,
+        "modifiedTime": 1741121882633,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!4tl0s2SnaLjkoDiI.L1TmhBXd2UrVxExn"
@@ -913,9 +919,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171202163,
-    "modifiedTime": 1726171439498,
+    "modifiedTime": 1741121890621,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!4tl0s2SnaLjkoDiI"

@@ -69,8 +69,8 @@
       "hp": {
         "value": 3,
         "max": 3,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "1d6"
       },
       "init": {
@@ -729,7 +729,7 @@
       "img": "icons/skills/wounds/bone-broken-tooth-fang-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+1 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: 1 (1d4 - 1) <em>piercing damage</em>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Jackal attacks with its Bite.</p>"
         },
         "source": {
@@ -755,7 +755,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -903,7 +903,8 @@
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "bite"
+        "identifier": "bite",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -921,9 +922,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676446,
+        "modifiedTime": 1741122077294,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!MZYCPIVoBs918qGZ.ggHLjL39tb62Bwxy"
@@ -940,9 +941,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171226101,
-    "modifiedTime": 1726171443778,
+    "modifiedTime": 1741122079927,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!MZYCPIVoBs918qGZ"

@@ -69,8 +69,8 @@
       "hp": {
         "value": 1,
         "max": 1,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "1d4 - 1"
       },
       "init": {
@@ -670,7 +670,7 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+0 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit:<strong> 1 <em>piercing damage</em>.</strong></p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Rat attacks with its Bite.</p>"
         },
         "source": {
@@ -784,7 +784,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -820,12 +820,12 @@
               "recovery": []
             },
             "attack": {
-              "ability": "",
+              "ability": "none",
               "bonus": "",
               "critical": {
                 "threshold": null
               },
-              "flat": false,
+              "flat": true,
               "type": {
                 "value": "melee",
                 "classification": "weapon"
@@ -838,13 +838,17 @@
               "includeBase": true,
               "parts": []
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "bite"
+        "identifier": "bite",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -855,6 +859,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -862,9 +872,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.4.0",
         "createdTime": null,
-        "modifiedTime": 1736804676503,
+        "modifiedTime": 1741122699538,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!pozQUPTnLZW8epox.QpysqgoHq9LXsShc"
@@ -881,9 +891,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.4.0",
     "createdTime": 1726171259028,
-    "modifiedTime": 1726171450278,
+    "modifiedTime": 1741122704283,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!pozQUPTnLZW8epox"
