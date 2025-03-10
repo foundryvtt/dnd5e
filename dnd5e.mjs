@@ -578,6 +578,10 @@ Hooks.on("renderCompendiumDirectory", (app, html) => {
 });
 
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
+Hooks.on(
+  "renderJournalEntryPageProseMirrorSheet",
+  applications.journal.JournalSheet5e.onRenderJournalEntryPageProseMirrorSheet
+);
 
 Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffectConfig);
 

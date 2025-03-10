@@ -59,4 +59,19 @@ export default class JournalSheet5e extends JournalSheet {
       element?.classList.add("dnd5e2-journal");
     }
   }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add class to journal ProseMirror editor.
+   * @param {JournalEntryPageProseMirrorSheet} page  The journal page application.
+   * @param {HTMLElement} element                    The rendered Application HTML.
+   * @param {object} context                         Rendering context provided.
+   * @param {object} options                         Rendering options provided.
+   */
+  static onRenderJournalEntryPageProseMirrorSheet(page, element, context, options) {
+    if ( page.document.parent.sheet instanceof JournalSheet5e ) {
+      element.classList.add("dnd5e2-journal");
+    }
+  }
 }

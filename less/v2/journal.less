@@ -485,3 +485,25 @@
     .editor-container { overflow-y: auto; }
   }
 }
+
+.dnd5e2-journal.app .editable {
+  .journal-header {
+    flex: 0;
+    flex-wrap: nowrap;
+    .title {
+      height: 50px;
+      background: rgb(0 0 0 / .1);
+      border-radius: 4px;
+      font-size: var(--font-size-32);
+      line-height: 50px;
+    }
+    .page-level {
+      flex: 0 0 110px;
+      align-items: flex-end;
+    }
+    .heading-level {
+      width: 100%;
+      align-items: center;
+    }
+  }
+}
