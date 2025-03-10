@@ -956,8 +956,10 @@
   }
 
   &.minimized .window-header {
+    h1 { all: revert-layer; }
     h2 { display: none; }
     .header-control {
+      all: revert-layer;
       &:hover, &:focus { background: transparent; }
     }
   }
