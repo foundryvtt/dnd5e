@@ -512,6 +512,8 @@ Hooks.on("renderSettings", (app, html) => applications.settings.sidebar.renderSe
 /*  Other Hooks                                 */
 /* -------------------------------------------- */
 
+Hooks.on("applyCompendiumArt", (documentClass, ...args) => documentClass.applyCompendiumArt?.(...args));
+
 Hooks.on("renderChatPopout", documents.ChatMessage5e.onRenderChatPopout);
 Hooks.on("getChatLogEntryContext", documents.ChatMessage5e.addChatMessageContextOptions);
 
