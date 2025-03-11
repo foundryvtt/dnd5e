@@ -21,6 +21,7 @@
 
 "TYPES.ChatMessage": {
   "rest": "Rest Message",
+  "restRequest": "Rest Request Message",
   "turn": "Combat Turn Message"
 },
 
@@ -1071,6 +1072,10 @@
   "Activities": "Activities",
   "Deltas": {
     "Recovery": "Recovery"
+  },
+  "RESTREQUEST": {
+    "Complete": "Rest Complete",
+    "PartyMembers": "Party Members"
   },
   "TURN": {
     "NoCombatant": "Combatant no longer exists!"
@@ -3091,6 +3096,13 @@
   "NewDay": {
     "Hint": "Recover limited use abilities which recharge at dusk, dawn, or on a new day.",
     "Label": "New Day"
+  },
+  "Request": {
+    "AutoRest": {
+      "Hint": "Automatically perform the rest for selected party actors, rather than sending a rest request to players.",
+      "Label": "Auto Rest"
+    },
+    "Label": "Rest Request"
   },
   "Short": {
     "Abbreviation": "SR",
