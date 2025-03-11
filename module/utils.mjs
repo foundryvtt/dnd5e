@@ -1226,7 +1226,7 @@ export function localizeSchema(schema, prefixes) {
  * @param {string} input
  * @returns {string[]}
  */
-export function splitSemicolons(input) {
+export function splitSemicolons(input="") {
   return input.split(";").map(t => t.trim()).filter(t => t);
 }
 
