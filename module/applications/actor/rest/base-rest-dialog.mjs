@@ -1,3 +1,4 @@
+import { filteredKeys } from "../../../utils.mjs";
 import Dialog5e from "../../api/dialog.mjs";
 
 const { BooleanField } = foundry.data.fields;
@@ -52,6 +53,16 @@ export default class BaseRestDialog extends Dialog5e {
   /* -------------------------------------------- */
 
   /**
+   * Is the resting actor a party?
+   * @type {boolean}
+   */
+  get isPartyGroup() {
+    return (this.actor.type === "group") && (this.actor.system.type.value === "party");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Should the user be prompted as to whether a new day has occurred?
    * @type {boolean}
    */
@@ -93,6 +104,7 @@ export default class BaseRestDialog extends Dialog5e {
       variant: game.settings.get("dnd5e", "restVariant")
     };
     if ( this.promptNewDay ) context.fields.push({
+      disabled: !!this.config.request,
       field: new BooleanField({
         label: game.i18n.localize("DND5E.REST.NewDay.Label"),
         hint: game.i18n.localize("DND5E.REST.NewDay.Hint")
@@ -121,6 +133,32 @@ export default class BaseRestDialog extends Dialog5e {
       value: rest.recoverTempMax
     });
 
+    if ( this.isPartyGroup ) {
+      const restSettings = this.actor.getFlag("dnd5e", "restSettings") ?? {};
+      context.request = [
+        {
+          field: new BooleanField({
+            label: game.i18n.localize("DND5E.REST.Request.AutoRest.Label"),
+            hint: game.i18n.localize("DND5E.REST.Request.AutoRest.Hint")
+          }),
+          name: "autoRest",
+          input: context.inputs.createCheckboxInput,
+          value: restSettings.autoRest
+        },
+        ...this.actor.system.members
+          .filter(m => ["character", "npc"].includes(m.actor?.type))
+          .map(m => ({
+            field: new BooleanField({
+              label: m.actor.name
+            }),
+            name: `targets.${m.actor.id}`,
+            input: context.inputs.createCheckboxInput,
+            value: restSettings.targets ? restSettings.targets?.has(m.actor.id) : true
+          }))
+      ];
+      await loadTemplates(["systems/dnd5e/templates/actors/rest/rest-request.hbs"]);
+    }
+
     return context;
   }
 
@@ -136,7 +174,12 @@ export default class BaseRestDialog extends Dialog5e {
    * @param {FormDataExtended} formData  Data from the dialog.
    */
   static async #handleFormSubmission(event, form, formData) {
-    foundry.utils.mergeObject(this.config, formData.object);
+    const data = foundry.utils.expandObject(formData.object);
+    if ( this.isPartyGroup ) {
+      data.targets = filteredKeys(data.targets ?? {});
+      this.actor.setFlag("dnd5e", "restSettings", data);
+    }
+    foundry.utils.mergeObject(this.config, data);
     this.#rested = true;
     await this.close();
   }

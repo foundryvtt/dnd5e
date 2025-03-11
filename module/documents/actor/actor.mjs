@@ -2047,6 +2047,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @property {boolean} [autoHD]              Should hit dice be spent automatically during a short rest?
    * @property {number} [autoHDThreshold]      How many hit points should be missing before hit dice are
    *                                           automatically spent during a short rest.
+   * @property {ChatMessage5e} [request]       Rest request chat message for which this rest was performed.
    */
 
   /**
@@ -2185,10 +2186,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         hitPoints: 0,
         hitDice: 0
       },
-      updateData: {},
-      updateItems: [],
       newDay: config.newDay === true,
-      rolls: []
+      request: config.request,
+      rolls: [],
+      updateData: {},
+      updateItems: []
     }, result);
     result.clone ??= this.clone();
     if ( "dhp" in result ) result.deltas.hitPoints = result.dhp;
@@ -2253,18 +2255,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   async _displayRestResultMessage(config, result) {
-    let { dhd, dhp, newDay } = result;
+    let { dhd, dhp } = result;
     if ( config.type === "short" ) dhd *= -1;
     const diceRestored = dhd !== 0;
     const healthRestored = dhp !== 0;
     const longRest = config.type === "long";
     const length = longRest ? "Long" : "Short";
-
     const typeConfig = CONFIG.DND5E.restTypes[config.type] ?? {};
-    const duration = convertTime(config.duration, "minute");
-    const parts = [formatTime(duration.value, duration.unit)];
-    if ( newDay ) parts.push(game.i18n.localize("DND5E.REST.NewDay.Label").toLowerCase());
-    const restFlavor = `${typeConfig.label} (${game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
 
     // Determine the chat message to display
     let message;
@@ -2281,18 +2278,35 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         dice: game.i18n.format(`DND5E.HITDICE.Counted.${pr.select(dhd)}`, { number: formatNumber(dhd) }),
         health: game.i18n.format(`DND5E.HITPOINTS.Counted.${pr.select(dhp)}`, { number: formatNumber(dhp) })
       }),
-      flavor: game.i18n.localize(restFlavor),
+      flavor: this.createRestFlavor(config, result),
       type: "rest",
       rolls: result.rolls,
       speaker: ChatMessage.getSpeaker({ actor: this, alias: this.name }),
       system: {
         activations: ActivationsField.getActivations(this, typeConfig?.activationPeriods ?? []),
         deltas: ActorDeltasField.getDeltas(result.clone, { actor: result.updateData, item: result.updateItems }),
+        request: config.request,
         type: result.type
       }
     };
     ChatMessage.applyRollMode(chatData, game.settings.get("core", "rollMode"));
     return ChatMessage.create(chatData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Generate rest flavor text based on the provided configuration.
+   * @param {RestConfiguration} config  Rest configuration.
+   * @param {RestResult} [result]       Result of the rest operation.
+   * @returns {string}
+   */
+  createRestFlavor(config, result) {
+    const typeConfig = CONFIG.DND5E.restTypes[config.type] ?? {};
+    const duration = convertTime(config.duration, "minute");
+    const parts = [formatTime(duration.value, duration.unit)];
+    if ( result?.newDay ?? config.newDay ) parts.push(game.i18n.localize("DND5E.REST.NewDay.Label").toLowerCase());
+    return `${typeConfig.label} (${game.i18n.getListFormatter({ type: "unit" }).format(parts)})`;
   }
 
   /* -------------------------------------------- */
