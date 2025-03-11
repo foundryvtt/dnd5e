@@ -2,7 +2,7 @@ import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
 import ActivationsField from "./fields/activations-field.mjs";
 import { ActorDeltasField } from "./fields/deltas-field.mjs";
 
-const { StringField } = foundry.data.fields;
+const { ForeignDocumentField, StringField } = foundry.data.fields;
 
 /**
  * @import ActivationsData from "./fields/activations-field.mjs";
@@ -14,6 +14,7 @@ const { StringField } = foundry.data.fields;
  *
  * @property {ActivationsData} activations  Activities that can be used after this rest, stored as relative UUIDs.
  * @property {ActorDeltasData} deltas       Actor/item recovery from this turn change.
+ * @property {ChatMessage5e} [request]      Rest request chat message for which this rest was performed.
  * @property {string} type                  Type of rest performed.
  */
 export default class RestMessageData extends ChatMessageDataModel {
@@ -27,6 +28,7 @@ export default class RestMessageData extends ChatMessageDataModel {
     return {
       activations: new ActivationsField(),
       deltas: new ActorDeltasField(),
+      request: new ForeignDocumentField(foundry.documents.BaseChatMessage),
       type: new StringField()
     };
   }
