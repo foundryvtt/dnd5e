@@ -364,6 +364,7 @@ export default class NPCActorSheet extends BaseActorSheet {
         }];
         return data;
       }),
+      ...attributes.movement.custom,
       ...splitSemicolons(attributes.movement.special).map(label => ({ label }))
     ].filter(_ => _);
 
