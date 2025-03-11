@@ -7,12 +7,16 @@ import BaseConfigSheet from "../actor/api/base-config-sheet.mjs";
 export default class MovementSensesConfig extends BaseConfigSheet {
   /** @override */
   static DEFAULT_OPTIONS = {
-    type: null,
+    actions: {
+      addCustom: MovementSensesConfig.#addCustom,
+      deleteCustom: MovementSensesConfig.#deleteCustom
+    },
     keyPath: null,
     position: {
       width: 420
     },
-    withResolution: false
+    withResolution: false,
+    type: null
   };
 
   /* -------------------------------------------- */
@@ -84,6 +88,11 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       value: context.data[key],
       placeholder: placeholderData?.[key] ?? ""
     }));
+    if ( context.fields.custom ) context.custom = (context.data.custom ?? []).map((data, index) => ({
+      data,
+      fields: context.fields.custom.element.fields,
+      prefix: `system.${this.keyPath}.custom.${index}`
+    }));
 
     context.unitsOptions = Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label, travelResolution }]) => {
       if ( !this.options.withResolution || !travelResolution ) return { value, label };
@@ -143,5 +152,38 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       localize: true
     });
     return extras;
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle adding a new custom entry.
+   * @this {MovementSensesConfig}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #addCustom(event, target) {
+    const custom = foundry.utils.getProperty(this.document.system.toObject(), `${this.keyPath}.custom`) ?? [];
+    this.submit({ updateData: {
+      [`system.${this.keyPath}.custom`]: [...custom, {}]
+    } });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle removing a custom entry.
+   * @this {MovementSensesConfig}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static #deleteCustom(event, target) {
+    const custom = foundry.utils.getProperty(this.document.system.toObject(), `${this.keyPath}.custom`) ?? [];
+    custom.splice(target.closest("[data-index]").dataset.index, 1);
+    this.submit({ updateData: {
+      [`system.${this.keyPath}.custom`]: custom
+    } });
   }
 }

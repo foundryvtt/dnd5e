@@ -28,7 +28,7 @@ export default class RaceData extends ItemDataModel.mixin(AdvancementTemplate, I
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      movement: new MovementField({ special: false }, { initialUnits: defaultUnits("length") }),
+      movement: new MovementField({ custom: false, special: false }, { initialUnits: defaultUnits("length") }),
       senses: new SensesField({}, { initialUnits: defaultUnits("length") }),
       type: new CreatureTypeField({ swarm: false }, { initial: { value: "humanoid" } })
     });

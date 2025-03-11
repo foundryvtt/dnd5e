@@ -1,6 +1,6 @@
 import { convertLength } from "../../utils.mjs";
 
-const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields;
+const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * @typedef {"slow"|"normal"|"fast"} TravelPace5e
@@ -13,10 +13,17 @@ const { BooleanField, NumberField, SetField, StringField } = foundry.data.fields
  * @property {number} fly                           Actor flying speed.
  * @property {number} swim                          Actor swimming speed.
  * @property {number} walk                          Actor walking speed.
+ * @property {CustomMovementData[]} custom          Custom movement types.
  * @property {string} special                       Semi-colon separated list of special movement information.
  * @property {string} units                         Movement used to measure the various speeds.
  * @property {boolean} hover                        This flying creature able to hover in place.
  * @property {Set<string>} ignoredDifficultTerrain  Types of difficult terrain ignored.
+ */
+
+/**
+ * @typedef CustomMovementData
+ * @property {string} label  Label for custom movement.
+ * @property {number} value  Movement speed.
  */
 
 /**
@@ -31,6 +38,10 @@ export default class MovementField extends foundry.data.fields.SchemaField {
       fly: new NumberField({ ...numberConfig, label: "DND5E.MOVEMENT.Type.Fly", speed: true }),
       swim: new NumberField({ ...numberConfig, label: "DND5E.MOVEMENT.Type.Swim", speed: true }),
       walk: new NumberField({ ...numberConfig, label: "DND5E.MOVEMENT.Type.Walk", speed: true }),
+      custom: new ArrayField(new SchemaField({
+        label: new StringField(),
+        value: new NumberField({ ...numberConfig })
+      })),
       special: new StringField({ label: "DND5E.MOVEMENT.FIELDS.special.label" }),
       units: new StringField({
         required: true, nullable: true, blank: false, initial: initialUnits, label: "DND5E.MOVEMENT.FIELDS.units.label"

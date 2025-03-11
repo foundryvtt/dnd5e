@@ -1,5 +1,6 @@
 <section class="flexcol">
     <fieldset class="card">
+        {{!-- Standard Types --}}
         {{#each types}}
         {{#if (eq field.name "fly")}}
         <div class="form-group split-group">
@@ -15,6 +16,29 @@
         {{ formField field value=value placeholder=placeholder localize=true }}
         {{/if}}
         {{/each}}
+
+        {{!-- Custom Types --}}
+        {{#if fields.custom}}
+        {{#each custom}}
+        <div class="form-group" data-index="{{ @index }}">
+            <div class="form-label-field">
+                {{ formInput fields.label name=(concat prefix ".label") value=data.label }}
+            </div>
+            <div class="form-fields">
+                {{ formInput fields.value name=(concat prefix ".value") value=data.value }}
+                <button type="button" class="control-button middle unbutton" data-action="deleteCustom" data-tooltip
+                        aria-label="{{ localize 'DND5E.MOVEMENT.Action.DeleteCustom' }}">
+                    <i class="fa-solid fa-trash" inert></i>
+                </button>
+            </div>
+        </div>
+        {{/each}}
+        <button type="button" class="gold-button" data-action="addCustom" data-tooltip
+                aria-label="{{ localize 'DND5E.MOVEMENT.Action.AddCustom' }}">
+            <i class="fa-solid fa-plus" inert></i>
+        </button>
+        {{/if}}
+
         {{#if (or fields.units extras.length)}}<hr>{{/if}}
         {{#if fields.units}}
         {{ formField fields.units value=data.units options=unitsOptions localize=true blank=unitsOptions.blank }}
