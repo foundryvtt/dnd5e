@@ -93,6 +93,16 @@ export default class MovementSensesConfig extends BaseConfigSheet {
       );
     }
 
+    context.currentOptions = Object.entries(CONFIG.DND5E.movementTypes).map(([value, label]) => ({value, label}));
+    const highestMovement = Object.keys(CONFIG.DND5E.movementTypes).reduce((obj, key) => {
+      const value = context.data[key];
+      if ( value > obj.value ) Object.assign(obj, { value, key });
+      return obj;
+    }, { value: 0, key: "walk" });
+    context.currentOptions.unshift(
+      { value: "", label: game.i18n.format("DND5E.DefaultSpecific", { default: highestMovement.key })}
+    );
+
     return context;
   }
 

@@ -132,11 +132,18 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     }
 
     // Speed
-    context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
-      const value = attributes.movement[k];
-      if ( value > obj.value ) Object.assign(obj, { value, label });
-      return obj;
-    }, { value: 0, label: CONFIG.DND5E.movementTypes.walk });
+    if ( attributes.movement.current?.length ) {
+      context.speed = {
+        value: attributes.movement[attributes.movement.current],
+        label: CONFIG.DND5E.movementTypes[attributes.movement.current]
+      };
+    } else {
+      context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
+        const value = attributes.movement[k];
+        if ( value > obj.value ) Object.assign(obj, { value, label });
+        return obj;
+      }, { value: 0, label: CONFIG.DND5E.movementTypes.walk });
+    }
 
     // Death Saves
     context.death.open = this._deathTrayOpen;

@@ -59,6 +59,24 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   /* -------------------------------------------- */
 
   /**
+   * Get the current Movement Action
+   * @returns {string}
+   */
+  getMovementAction() {
+    const movement = this.actor?.system.attributes.movement;
+    if ( !movement ) return "walk";
+    if ( movement.current?.length ) return movement.current;
+    const highestMovement = Object.keys(CONFIG.DND5E.movementTypes).reduce((obj, key) => {
+      const value = movement[key];
+      if ( value > obj.value ) Object.assign(obj, { value, key });
+      return obj;
+    }, { value: 0, key: "walk" });
+    return highestMovement.key;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get an Array of attribute choices which are suitable for being consumed by an item usage.
    * @param {object} data  The actor data.
    * @returns {string[]}
