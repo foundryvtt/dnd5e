@@ -42,14 +42,6 @@ export default function PrimarySheetMixin(Base) {
     };
 
     /* -------------------------------------------- */
-
-    /**
-     * Dynamically configured part descriptors, backported from V13.
-     * @type {Readonly<Record<string, HandlebarsTemplatePart>>}
-     */
-    #partDescriptors;
-
-    /* -------------------------------------------- */
     /*  Properties                                  */
     /* -------------------------------------------- */
 
@@ -99,15 +91,20 @@ export default function PrimarySheetMixin(Base) {
     /** @inheritDoc */
     async _renderFrame(options) {
       const html = await super._renderFrame(options);
-      const header = html.querySelector(".window-header");
+      if ( !game.user.isGM && this.document.limited ) html.classList.add("limited");
+      return html;
+    }
 
-      if ( !game.user.isGM && this.document.limited ) {
-        html.classList.add("limited");
-        return html;
-      }
+    /* -------------------------------------------- */
 
-      // Add edit <-> play slide toggle.
-      if ( this.isEditable ) {
+    /**
+     * Handle re-rendering the mode toggle on ownership changes.
+     * @protected
+     */
+    _renderModeToggle() {
+      const header = this.element.querySelector(".window-header");
+      const toggle = header.querySelector(".mode-slider");
+      if ( this.isEditable && !toggle ) {
         const toggle = document.createElement("slide-toggle");
         toggle.checked = this._mode === this.constructor.MODES.EDIT;
         toggle.classList.add("mode-slider");
@@ -116,9 +113,11 @@ export default function PrimarySheetMixin(Base) {
         toggle.addEventListener("change", this._onChangeSheetMode.bind(this));
         toggle.addEventListener("dblclick", event => event.stopPropagation());
         header.prepend(toggle);
+      } else if ( this.isEditable ) {
+        toggle.checked = this._mode === this.constructor.MODES.EDIT;
+      } else if ( !this.isEditable && toggle ) {
+        toggle.remove();
       }
-
-      return html;
     }
 
     /* -------------------------------------------- */
@@ -192,9 +191,9 @@ export default function PrimarySheetMixin(Base) {
         if ( !condition || condition(this.document) ) tabs[tab] = {
           ...config,
           id: tab,
-          group: "sheet",
-          active: this.tabGroups.sheet === tab,
-          cssClass: this.tabGroups.sheet === tab ? "active" : ""
+          group: "primary",
+          active: this.tabGroups.primary === tab,
+          cssClass: this.tabGroups.primary === tab ? "active" : ""
         };
         return tabs;
       }, {});
@@ -207,7 +206,7 @@ export default function PrimarySheetMixin(Base) {
     /** @inheritDoc */
     async _onFirstRender(context, options) {
       await super._onFirstRender(context, options);
-      this.element.classList.add(`tab-${this.tabGroups.sheet}`);
+      if ( this.tabGroups.primary ) this.element.classList.add(`tab-${this.tabGroups.primary}`);
 
       // Create child button
       const button = document.createElement("button");
@@ -225,8 +224,7 @@ export default function PrimarySheetMixin(Base) {
       await super._onRender(context, options);
 
       // Set toggle state and add status class to frame
-      const toggle = this.element.querySelector(".window-header .mode-slider");
-      if ( toggle ) toggle.checked = this._mode === this.constructor.MODES.EDIT;
+      this._renderModeToggle();
       this.element.classList.toggle("editable", this.isEditable && (this._mode === this.constructor.MODES.EDIT));
       this.element.classList.toggle("interactable", this.isEditable && (this._mode === this.constructor.MODES.PLAY));
       this.element.classList.toggle("locked", !this.isEditable);
@@ -284,7 +282,7 @@ export default function PrimarySheetMixin(Base) {
     /** @inheritDoc */
     changeTab(tab, group, options) {
       super.changeTab(tab, group, options);
-      if ( group !== "sheet" ) return;
+      if ( group !== "primary" ) return;
       this.element.className = this.element.className.replace(/tab-\w+/g, "");
       this.element.classList.add(`tab-${tab}`);
     }
@@ -312,7 +310,6 @@ export default function PrimarySheetMixin(Base) {
     /** @inheritDoc */
     _onClickAction(event, target) {
       if ( target.dataset.action === "addDocument" ) this._addDocument(event, target);
-      else if ( target.dataset.action === "editImage" ) this._editImage(event, target);
       else super._onClickAction(event, target);
     }
 
