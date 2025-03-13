@@ -394,19 +394,6 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _replaceHTML(result, content, options) {
-    for ( const part of Object.values(result) ) {
-      for ( const element of part.querySelectorAll("[data-expand-id]") ) {
-        element.querySelector(".collapsible")?.classList
-          .toggle("collapsed", !this.#expandedSections.get(element.dataset.expandId));
-      }
-    }
-    super._replaceHTML(result, content, options);
-  }
-
-  /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
   /* -------------------------------------------- */
 
