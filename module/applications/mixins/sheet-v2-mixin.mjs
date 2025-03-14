@@ -6,6 +6,10 @@ import DragDropApplicationMixin from "./drag-drop-mixin.mjs";
  * @returns {typeof DocumentSheetV2}
  */
 export default function DocumentSheetV2Mixin(Base) {
+  foundry.utils.logCompatibilityWarning(
+    "The `DocumentSheetV2Mixin` application has been deprecated and replaced with `PrimarySheetMixin`.",
+    { since: "DnD5e 5.0", until: "DnD5e 5.2", once: true }
+  );
   return class DocumentSheetV2 extends DragDropApplicationMixin(Base) {
     /**
      * @typedef {object} SheetTabDescriptor5e

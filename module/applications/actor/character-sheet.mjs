@@ -1,7 +1,7 @@
 import { formatNumber } from "../../utils.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
-import ActorSheet5e from "./base-sheet.mjs";
+import ActorSheet5e from "./deprecated/base-sheet.mjs";
 
 /**
  * An Actor sheet for player character type actors.
