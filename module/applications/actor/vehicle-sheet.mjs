@@ -1,4 +1,4 @@
-import ActorSheet5e from "./base-sheet.mjs";
+import ActorSheet5e from "./deprecated/base-sheet.mjs";
 
 /**
  * An Actor sheet for Vehicle type actors.

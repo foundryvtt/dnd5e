@@ -436,6 +436,60 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static onDropCreate(event, actor, itemData) {
+    if ( !["npc", "character"].includes(actor.type) ) return;
+
+    // Determine the section it is dropped on, if any.
+    let header = event.target.closest(".items-header"); // Dropped directly on the header.
+    if ( !header ) {
+      const list = event.target.closest(".item-list"); // Dropped inside an existing list.
+      header = list?.previousElementSibling;
+    }
+    const { level, preparationMode } = header?.closest("[data-level]")?.dataset ?? {};
+
+    // Determine the actor's spell slot progressions, if any.
+    const spellcastKeys = Object.keys(CONFIG.DND5E.spellcastingTypes);
+    const progs = Object.values(actor.classes).reduce((acc, cls) => {
+      const type = cls.spellcasting?.type;
+      if ( spellcastKeys.includes(type) ) acc.add(type);
+      return acc;
+    }, new Set());
+
+    const prep = itemData.system.preparation;
+
+    // Case 1: Drop a cantrip.
+    if ( itemData.system.level === 0 ) {
+      const modes = CONFIG.DND5E.spellPreparationModes;
+      if ( modes[preparationMode]?.cantrips ) {
+        prep.mode = "prepared";
+      } else if ( !preparationMode ) {
+        const isCaster = actor.system.attributes.spell?.level || progs.size;
+        prep.mode = isCaster ? "prepared" : "innate";
+      } else {
+        prep.mode = preparationMode;
+      }
+      if ( modes[prep.mode]?.prepares ) prep.prepared = true;
+    }
+
+    // Case 2: Drop a leveled spell in a section without a mode.
+    else if ( (level === "0") || !preparationMode ) {
+      if ( actor.type === "npc" ) {
+        prep.mode = actor.system.attributes.spell.level ? "prepared" : "innate";
+      } else {
+        const m = progs.has("leveled") ? "prepared" : (progs.first() ?? "innate");
+        prep.mode = progs.has(prep.mode) ? prep.mode : m;
+      }
+    }
+
+    // Case 3: Drop a leveled spell in a specific section.
+    else prep.mode = preparationMode;
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
