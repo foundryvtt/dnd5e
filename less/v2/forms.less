@@ -389,7 +389,7 @@
   /* Form Fields */
   textarea, select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
     --input-border-color: transparent;
-    transition: all 250ms ease;
+    transition: all 250ms ease, block-size, inline-size;
     line-height: normal;
     outline: none;
 
@@ -558,7 +558,7 @@
   }
 
   /* Control buttons */
-  button.control-button {
+  button.control-button, button.config-button {
     padding: 0;
     width: unset;
     display: inline-block;
@@ -577,7 +577,7 @@
   }
 
   /* Pips */
-  .pips {
+  .pips, &.standard-form .pips {
     display: flex;
     gap: 5px;
     padding: 10px 12px;

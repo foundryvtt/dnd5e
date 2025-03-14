@@ -1,9 +1,9 @@
-import * as Trait from "../../documents/actor/trait.mjs";
-import { formatLength, formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../utils.mjs";
-import { createCheckboxInput } from "../fields.mjs";
-import Tabs5e from "../tabs.mjs";
-import DocumentSheetV2Mixin from "../mixins/sheet-v2-mixin.mjs";
-import ItemSheet5e from "../item/item-sheet.mjs";
+import * as Trait from "../../../documents/actor/trait.mjs";
+import { formatLength, formatNumber, simplifyBonus, splitSemicolons, staticID } from "../../../utils.mjs";
+import { createCheckboxInput } from "../../fields.mjs";
+import Tabs5e from "../../tabs.mjs";
+import DocumentSheetV2Mixin from "../../mixins/sheet-v2-mixin.mjs";
+import ItemSheet5e from "../../item/item-sheet.mjs";
 
 /**
  * Adds common V2 Actor sheet functionality.
@@ -12,6 +12,10 @@ import ItemSheet5e from "../item/item-sheet.mjs";
  * @mixin
  */
 export default function ActorSheetV2Mixin(Base) {
+  foundry.utils.logCompatibilityWarning(
+    "The `ActorSheetV2Mixin` application has been deprecated and integrated into `BaseActorSheet`.",
+    { since: "DnD5e 5.0", until: "DnD5e 5.2", once: true }
+  );
   return class ActorSheetV2 extends DocumentSheetV2Mixin(Base) {
     constructor(object, options={}) {
       const key = `${object.type}${object.limited ? ":limited" : ""}`;
