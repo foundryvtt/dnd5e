@@ -2,7 +2,7 @@ import Item5e from "../../documents/item.mjs";
 import { formatCR, formatNumber } from "../../utils.mjs";
 import Award from "../award.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
-import ActorSheetMixin from "./sheet-mixin.mjs";
+import ActorSheetMixin from "./deprecated/sheet-mixin.mjs";
 
 /**
  * A character sheet for group-type Actors.
