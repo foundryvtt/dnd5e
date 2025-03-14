@@ -1,4 +1,4 @@
-import ActiveEffect5e from "../../documents/active-effect.mjs";
+import ActiveEffect5e from "../../../documents/active-effect.mjs";
 
 /**
  * An abstract class containing common functionality between actor sheet configuration apps.
@@ -6,6 +6,13 @@ import ActiveEffect5e from "../../documents/active-effect.mjs";
  * @abstract
  */
 export default class BaseConfigSheet extends DocumentSheet {
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning(
+      "The `BaseConfigSheet` application has been deprecated and replaced with `BaseConfigSheet`.",
+      { since: "DnD5e 5.0", until: "DnD5e 5.2", once: true }
+    );
+    super(...args);
+  }
 
   /** @inheritDoc */
   static get defaultOptions() {

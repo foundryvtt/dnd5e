@@ -1,0 +1,87 @@
+<div class="sidebar">
+
+    {{!-- HD --}}
+    {{#if important}}
+    {{#with system.attributes.hd}}
+    <div class="pills-group empty">
+        {{!-- TODO: Allow clicking this to roll a hit die --}}
+        <h3 class="icon">
+            <i class="fa-solid fa-dice-d{{ denomination }}"></i>
+            <span class="roboto-upper">{{ localize "DND5E.HitDice" }}</span>
+            <span class="counter">{{ value }} &sol; {{ max }}</span>
+        </h3>
+    </div>
+    {{/with}}
+    {{/if}}
+
+    {{!-- Speed --}}
+    {{> "dnd5e.actor-trait-pills" values=speed key="speed" icon="fas fa-shoe-prints"
+        label="DND5E.Speed" configAction="movement" }}
+
+    {{!-- Skills --}}
+    <div class="pills-group {{#unless skills}}empty{{/unless}}">
+        <h3 class="icon">
+            <i class="fas fa-briefcase" inert></i>
+            <span class="roboto-upper">{{ localize "DND5E.Skills" }}</span>
+            {{#if editable}}
+            <button type="button" class="config-button unbutton" data-action="showConfiguration" data-config="skills"
+                    data-tooltip="DND5E.SkillsConfig" aria-label="{{ localize 'DND5E.SkillsConfig' }}">
+                <i class="fas fa-cog" inert></i>
+            </button>
+            {{/if}}
+        </h3>
+        <ul class="pills">
+            {{#each skills}}
+            <li class="pill">
+                <a class="{{ @root.rollableClass }} skill-name" data-key="{{ key }}"
+                   data-action="roll" data-type="skill">
+                    <span class="label">{{ label }}</span>
+                    <span class="separator">&vert;</span>
+                    <span class="value">{{ dnd5e-numberFormat total signDisplay="always" }}</span>
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    {{!-- Senses --}}
+    {{> "dnd5e.actor-trait-pills" values=senses key="senses" icon="fas fa-eye"
+        label="DND5E.Senses" configAction="senses" }}
+
+    {{!-- Resistances --}}
+    {{> "dnd5e.actor-trait-pills" values=traits.dr key="dr" color="green" icon="fas fa-shield-halved"
+        label="DND5E.Resistances" }}
+
+    {{!-- Immunities --}}
+    {{#if editable}}
+        {{> "dnd5e.actor-trait-pills" values=traits.di key="di" color="green" icon="fas fa-shield"
+            label="DND5E.DamImm" }}
+    {{else}}
+        {{> "dnd5e.actor-trait-pills" values=traits.di key="di" color="green" icon="fas fa-shield"
+            label="DND5E.Immunities" }}
+    {{/if}}
+    {{> "dnd5e.actor-trait-pills" values=traits.ci key="ci" color="green" svg="rosa-shield"
+        label="DND5E.ConImm" }}
+
+    {{!-- Vulnerabilities --}}
+    {{> "dnd5e.actor-trait-pills" values=traits.dv key="dv" color="maroon" icon="fas fa-heart-crack"
+        label="DND5E.Vulnerabilities" }}
+
+    {{!-- Damage Modification --}}
+    {{> "dnd5e.actor-trait-pills" values=traits.dm key="dm" icon="fas fa-heart-circle-plus"
+        label="DND5E.DamageModification.Label" }}
+
+    {{!-- Languages --}}
+    {{> "dnd5e.actor-trait-pills" values=traits.languages key="languages" icon="fas fa-flag"
+        label="DND5E.Languages" }}
+
+    {{!-- Habitat --}}
+    {{> "dnd5e.actor-trait-pills" values=habitat configAction="habitat" icon="fa-solid fa-mountain-sun"
+        label="DND5E.Habitat.Configuration.Label" }}
+
+    {{!-- Treasure --}}
+    {{!-- TODO: Allow clicking a treasure category pill to roll appropriately for random treasure --}}
+    {{> "dnd5e.actor-trait-pills" values=treasure configAction="treasure" icon="fa-solid fa-gem"
+        label="DND5E.Treasure.Configuration.Label" }}
+
+</div>
