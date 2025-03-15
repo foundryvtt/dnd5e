@@ -418,8 +418,8 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getCardData(enrichmentOptions={}) {
-    const context = await super.getCardData(enrichmentOptions);
+  async getCardData(options) {
+    const context = await super.getCardData(options);
     context.isSpell = true;
     const { activation, components, duration, range, target } = this.parent.labels;
     context.properties = [components?.vsm, activation, duration, range, target].filter(_ => _);

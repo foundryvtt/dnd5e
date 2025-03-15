@@ -335,6 +335,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       value: context.source.target.prompt,
       input: context.inputs.createCheckboxInput
     });
+    context.enriched = await TextEditor.enrichHTML(this.activity.description.value, {
+      relativeTo: this.activity, rollData: this.activity.getRollData(), secrets: this.activity.item.isOwner
+    });
     context.placeholder = {
       name: game.i18n.localize(this.activity.metadata.title),
       img: this.activity.metadata.img
