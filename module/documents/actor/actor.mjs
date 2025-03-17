@@ -318,7 +318,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     data.name = this.name;
     data.statuses = {};
     for ( const status of this.statuses ) {
-      data.statuses[status] = status === "exhaustion" ? this.system.attributes?.exhaustion ?? 1 : 1;
+      data.statuses[status] = status === "exhaustion" ? this.system.attributes?.exhaustion?.value ?? 1 : 1;
     }
     return data;
   }
@@ -332,7 +332,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   hasConditionEffect(key) {
     const props = CONFIG.DND5E.conditionEffects[key] ?? new Set();
-    const level = this.system.attributes?.exhaustion ?? null;
+    const level = this.system.attributes?.exhaustion?.value ?? null;
     const imms = this.system.traits?.ci?.value ?? new Set();
     const applyExhaustion = (level !== null) && !imms.has("exhaustion")
       && (game.settings.get("dnd5e", "rulesVersion") === "legacy");
@@ -626,8 +626,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Record previous exhaustion level.
-    if ( Number.isFinite(foundry.utils.getProperty(changed, "system.attributes.exhaustion")) ) {
-      foundry.utils.setProperty(options, "dnd5e.originalExhaustion", this.system.attributes.exhaustion);
+    if ( Number.isFinite(foundry.utils.getProperty(changed, "system.attributes.exhaustion.value")) ) {
+      foundry.utils.setProperty(options, "dnd5e.originalExhaustion", this.system.attributes.exhaustion.value);
     }
   }
 
@@ -1061,8 +1061,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {object} data     Roll data.
    */
   addRollExhaustion(parts, data) {
-    if ( (game.settings.get("dnd5e", "rulesVersion") !== "modern") || !this.system.attributes?.exhaustion ) return;
-    const amount = this.system.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.rolls ?? 0);
+    if ( (game.settings.get("dnd5e", "rulesVersion") !== "modern") || !this.system.attributes?.exhaustion?.value ) return;
+    const amount = this.system.attributes.exhaustion.value
+      * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.rolls ?? 0);
     if ( amount ) {
       parts.push("@exhaustion");
       data.exhaustion = -amount;
@@ -2181,6 +2182,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     result.dhp = result.deltas.hitPoints;
     result.dhd = result.deltas.hitDice;
     result.longRest = result.type === "long";
+    if ( result.longRest ) {
+      const path = "system.attributes.exhaustion.value";
+      const value = foundry.utils.getProperty(result.clone, path) ?? 0;
+      const delta = foundry.utils.getProperty(result.clone, "system.attributes.exhaustion.delta") ?? 1;
+      foundry.utils.mergeObject(result.updateData, { [path]: Math.max(0, value - delta) });
+    }
 
     /**
      * A hook event that fires after rest result is calculated, but before any updates are performed.
@@ -2678,7 +2685,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     // Specific additional adjustments
     d.system.details.alignment = o.system.details.alignment; // Don't change alignment
-    d.system.attributes.exhaustion = o.system.attributes.exhaustion; // Keep your prior exhaustion level
+    d.system.attributes.exhaustion.value = o.system.attributes.exhaustion.value; // Keep your prior exhaustion level
     d.system.attributes.inspiration = o.system.attributes.inspiration; // Keep inspiration
     d.system.spells = o.system.spells; // Keep spell slots
     d.system.attributes.ac.flat = source.system.attributes.ac.value; // Override AC
@@ -3255,7 +3262,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   async _onUpdateExhaustion(data, options) {
-    const level = foundry.utils.getProperty(data, "system.attributes.exhaustion");
+    const level = foundry.utils.getProperty(data, "system.attributes.exhaustion.value");
     if ( !Number.isFinite(level) ) return;
     let effect = this.effects.get(ActiveEffect5e.ID.EXHAUSTION);
     if ( level < 1 ) return effect?.delete();

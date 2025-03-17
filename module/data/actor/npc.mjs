@@ -257,6 +257,7 @@ export default class NPCData extends CreatureTemplate {
     NPCData.#migrateSource(source);
     NPCData.#migrateSpellLevel(source);
     NPCData.#migrateTypeData(source);
+    AttributesFields._migrateExhaustion(source.attributes);
     AttributesFields._migrateInitiative(source.attributes);
   }
 
@@ -365,6 +366,7 @@ export default class NPCData extends CreatureTemplate {
   prepareBaseData() {
     this.details.level = 0;
     this.attributes.attunement.value = 0;
+    this.attributes.exhaustion.delta = 1;
 
     // Determine hit dice denomination & max from hit points formula
     const [, max, denomination] = this.attributes.hp.formula?.match(/(\d*)d(\d+)/i) ?? [];

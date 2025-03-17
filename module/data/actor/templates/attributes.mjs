@@ -71,7 +71,8 @@ export default class AttributesFields {
    * @property {number} attunement.max              Maximum number of attuned items.
    * @property {SensesData} senses
    * @property {string} spellcasting                Primary spellcasting ability.
-   * @property {number} exhaustion                  Creature's exhaustion level.
+   * @property {object} exhaustion                  Exhaustion data.
+   * @property {number} exhaustion.value            Creature's exhaustion level.
    * @property {RollConfigData} concentration
    * @property {string} concentration.ability       The ability used for concentration saving throws.
    * @property {object} concentration.bonuses
@@ -89,8 +90,10 @@ export default class AttributesFields {
       }, { label: "DND5E.Attunement" }),
       senses: new SensesField(),
       spellcasting: new StringField({ required: true, blank: true, label: "DND5E.SpellAbility" }),
-      exhaustion: new NumberField({
-        required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
+      exhaustion: new SchemaField({
+        value: new NumberField({
+          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.Exhaustion"
+        })
       }),
       concentration: new RollConfigField({
         ability: "",
@@ -107,6 +110,19 @@ export default class AttributesFields {
 
   /* -------------------------------------------- */
   /*  Data Migration                              */
+  /* -------------------------------------------- */
+
+  /**
+   * Migrate exhaustion into an object.
+   * @param {object} source  The source attributes object.
+   * @internal
+   */
+  static _migrateExhaustion(source) {
+    const exh = source?.exhaustion;
+    if ( !(typeof exh === "number") ) return;
+    foundry.utils.setProperty(source, "exhaustion", { value: exh });
+  }
+
   /* -------------------------------------------- */
 
   /**
@@ -330,7 +346,7 @@ export default class AttributesFields {
   static prepareExhaustionLevel() {
     const exhaustion = this.parent.effects.get(ActiveEffect5e.ID.EXHAUSTION);
     const level = exhaustion?.getFlag("dnd5e", "exhaustionLevel");
-    this.attributes.exhaustion = Number.isFinite(level) ? level : 0;
+    this.attributes.exhaustion.value = Number.isFinite(level) ? level : 0;
   }
 
   /* -------------------------------------------- */
@@ -405,7 +421,7 @@ export default class AttributesFields {
     const crawl = this.parent.hasConditionEffect("crawl");
     const units = this.attributes.movement.units ??= defaultUnits("length");
     let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
-      ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
+      ? (this.attributes.exhaustion?.value ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     for ( const type in CONFIG.DND5E.movementTypes ) {
       let speed = Math.max(0, this.attributes.movement[type] - reduction);
