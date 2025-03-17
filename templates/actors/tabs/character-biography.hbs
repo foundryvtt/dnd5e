@@ -1,4 +1,4 @@
-<div class="tab biography" data-group="primary" data-tab="biography">
+<section class="tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
 
     {{!-- Characteristics --}}
     <div class="top">
@@ -43,8 +43,14 @@
             <dnd5e-icon src="systems/dnd5e/icons/svg/ink-pot.svg"></dnd5e-icon>
             <span class="roboto-upper">{{ localize "DND5E.Biography" }}</span>
         </h3>
-        {{ editor biographyHTML target="system.details.biography.value" button=false editable=@root.editable
-                  engine="prosemirror" collaborate=false }}
+        {{#if editable}}
+        <prose-mirror name="system.details.biography.value" value="{{ source.details.biography.value }}"
+                      document-u-u-i-d="{{ actor.uuid }}"></prose-mirror>
+        {{else}}
+        <div class="editor">
+            <div class="editor-content">{{{ enriched.value }}}</div>
+        </div>
+        {{/if}}
     </div>
 
-</div>
+</section>
