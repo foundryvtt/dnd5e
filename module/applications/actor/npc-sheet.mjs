@@ -472,20 +472,8 @@ export default class NPCActorSheet extends BaseActorSheet {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  _prepareItem(item, ctx) {
-    super._prepareItem(item, ctx);
-
-    // Classes & Subclasses
-    if ( ["class", "subclass"].includes(item.type) ) {
-      ctx.prefixedImage = item.img ? foundry.utils.getRoute(item.img) : null;
-      if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => {
-        const value = level - item.system.levels;
-        const label = value ? `${level} (${formatNumber(value, { signDisplay: "always" })})` : `${level}`;
-        return { label, value, disabled: value > (CONFIG.DND5E.maxLevel - (this.actor.system.details.level ?? 0)) };
-      });
-    }
-
-    // Grouping
+  async _prepareItem(item, ctx) {
+    await super._prepareItem(item, ctx);
     const isPassive = item.system.properties?.has("trait")
       || CONFIG.DND5E.activityActivationTypes[item.system.activities?.contents[0]?.activation.type]?.passive;
     ctx.group = isPassive ? "passive" : item.system.activities?.contents[0]?.activation.type || "passive";
