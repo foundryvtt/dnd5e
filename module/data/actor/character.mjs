@@ -205,7 +205,7 @@ export default class CharacterData extends CreatureTemplate {
     this.attributes.hd = new HitDice(this.parent);
     this.details.level = 0;
     this.attributes.attunement.value = 0;
-    this.attributes.exhaustion.delta = 1;
+    this.attributes.exhaustion.delta = null;
 
     for ( const item of this.parent.items ) {
       if ( item.system.attuned ) this.attributes.attunement.value += 1;
