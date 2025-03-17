@@ -44,7 +44,8 @@ const {
  * @property {string} attributes.death.bonuses.save       Numeric or dice bonus to death saving throws.
  * @property {number} attributes.death.success            Number of successful death saves.
  * @property {number} attributes.death.failure            Number of failed death saves.
- * @property {number} attributes.exhaustion               Number of levels of exhaustion.
+ * @property {object} attributes.exhaustion
+ * @property {number} attributes.exhaustion.value         Number of levels of exhaustion.
  * @property {number} attributes.inspiration              Does this character have inspiration?
  * @property {object} bastion
  * @property {string} bastion.name                        The name of the character's bastion.
@@ -191,6 +192,7 @@ export default class CharacterData extends CreatureTemplate {
   /** @inheritDoc */
   static _migrateData(source) {
     super._migrateData(source);
+    AttributesFields._migrateExhaustion(source.attributes);
     AttributesFields._migrateInitiative(source.attributes);
   }
 
@@ -203,6 +205,7 @@ export default class CharacterData extends CreatureTemplate {
     this.attributes.hd = new HitDice(this.parent);
     this.details.level = 0;
     this.attributes.attunement.value = 0;
+    this.attributes.exhaustion.delta = 1;
 
     for ( const item of this.parent.items ) {
       if ( item.system.attuned ) this.attributes.attunement.value += 1;

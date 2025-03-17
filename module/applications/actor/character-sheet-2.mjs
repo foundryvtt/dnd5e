@@ -120,7 +120,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       context.exhaustion = Array.fromRange(max, 1).reduce((acc, n) => {
         const label = game.i18n.format("DND5E.ExhaustionLevel", { n });
         const classes = ["pip"];
-        const filled = attributes.exhaustion >= n;
+        const filled = attributes.exhaustion.value >= n;
         if ( filled ) classes.push("filled");
         if ( n === max ) classes.push("death");
         const pip = { n, label, filled, tooltip: label, classes: classes.join(" ") };
