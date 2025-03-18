@@ -3523,7 +3523,7 @@ preLocalize("cover");
  * @deprecated since v10
  */
 DND5E.trackableAttributes = [
-  "attributes.ac.value", "attributes.init.bonus", "attributes.movement", "attributes.senses",
+  "attributes.ac.value", "attributes.init.bonus", "attributes.movement.types", "attributes.senses.types",
   "attributes.spell.attack", "attributes.spell.dc", "attributes.spell.level", "details.cr",
   "details.xp.value", "skills.*.passive", "abilities.*.value"
 ];
