@@ -559,14 +559,8 @@ Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(m
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 
 // V13 context menu additions
-Hooks.on("getEntryContextDocumentDirectory", (app, entryOptions) => {
-  if ( app instanceof Compendium ) return;
-  if ( app.documentName === "Actor" ) {
-    documents.Actor5e.addDirectoryContextOptions(app, entryOptions);
-  } else if ( app.documentName === "Item" ) {
-    documents.Item5e.addDirectoryContextOptions(app, entryOptions);
-  }
-});
+Hooks.on("getActorContextOptions", documents.Actor5e.addDirectoryContextOptions);
+Hooks.on("getItemContextOptions", documents.Item5e.addDirectoryContextOptions);
 
 // V12 context menu additions
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);

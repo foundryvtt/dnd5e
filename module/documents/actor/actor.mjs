@@ -3252,7 +3252,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         li = li instanceof HTMLElement ? li : li[0];
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
         const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
-        return game.user.isGM && (actor.type === "group")
+        return game.user.isGM && (actor?.type === "group")
           && (actor.system.type.value === "party") && (actor !== primary);
       },
       group: "system"
