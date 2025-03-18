@@ -7,7 +7,7 @@
  * Extension of core's DragDrop class to provide additional information used by the system. Will replace core's
  * version in the global namespace.
  */
-export default class DragDrop5e extends DragDrop {
+export default class DragDrop5e extends (foundry.applications?.ux?.DragDrop ?? DragDrop) {
 
   /**
    * Drop effect used for current drag operation.
