@@ -71,7 +71,7 @@ export default class JournalSheet5e extends JournalSheet {
    */
   static onRenderJournalEntryPageProseMirrorSheet(page, element, context, options) {
     if ( page.document.parent.sheet instanceof JournalSheet5e ) {
-      element.classList.add("dnd5e2-journal");
+      element.classList.add("dnd5e2-journal", "themed", "theme-light");
     }
   }
 }
