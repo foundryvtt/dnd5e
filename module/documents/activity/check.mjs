@@ -45,7 +45,7 @@ export default class CheckActivity extends ActivityMixin(CheckActivityData) {
       const ability = CONFIG.DND5E.abilities[abilityKey]?.label;
       const checkType = (associated in CONFIG.DND5E.skills) ? "skill"
         : (associated in CONFIG.DND5E.toolIds) ? "tool": "ability";
-      const dataset = { ability: abilityKey, action: "rollCheck", visibility: "all" };
+      const dataset = { ability: abilityKey, action: "rollCheck", visibility: this.check.visible ? "all" : undefined };
       if ( dc ) dataset.dc = dc;
       if ( checkType !== "ability" ) dataset[checkType] = associated;
 
