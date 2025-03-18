@@ -318,7 +318,15 @@ export default function ItemSheetV2Mixin(Base) {
      */
     _onShowIcon() {
       const title = this.item.system.identified === false ? this.item.system.unidentified.name : this.item.name;
-      new ImagePopout(this.item.img, { title, uuid: this.item.uuid }).render(true);
+      if ( game.release.generation < 13 ) {
+        new ImagePopout(this.item.img, { title, uuid: this.item.uuid }).render(true);
+      } else {
+        new foundry.applications.apps.ImagePopout({
+          src: this.item.img,
+          uuid: this.item.uuid,
+          window: { title }
+        }).render({ force: true });
+      }
     }
 
     /* -------------------------------------------- */

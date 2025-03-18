@@ -769,7 +769,15 @@ export default function ActorSheetV2Mixin(Base) {
       const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
       const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
       const img = showTokenPortrait ? token.texture.src : this.actor.img;
-      new ImagePopout(img, { title: this.actor.name, uuid: this.actor.uuid }).render(true);
+      if ( game.release.generation < 13 ) {
+        new ImagePopout(img, { title: this.actor.name, uuid: this.actor.uuid }).render(true);
+      } else {
+        new foundry.applications.apps.ImagePopout({
+          src: img,
+          uuid: this.actor.uuid,
+          window: { title: this.actor.name }
+        }).render({ force: true });
+      }
     }
 
     /* -------------------------------------------- */
