@@ -1,7 +1,7 @@
 import SparseDataModel from "../abstract/sparse-data-model.mjs";
 import AdvancementDataField from "../fields/advancement-data-field.mjs";
 
-const { DocumentIdField, FilePathField, NumberField, StringField } = foundry.data.fields;
+const { DocumentIdField, FilePathField, HTMLField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * Base data model for advancement.
@@ -33,18 +33,18 @@ export default class BaseAdvancement extends SparseDataModel {
   /** @override */
   static defineSchema() {
     return {
-      _id: new DocumentIdField({initial: () => foundry.utils.randomID()}),
+      _id: new DocumentIdField({ initial: () => foundry.utils.randomID() }),
       type: new StringField({
         required: true, initial: this.typeName, validate: v => v === this.typeName,
         validationError: `must be the same as the Advancement type name ${this.typeName}`
       }),
-      configuration: new AdvancementDataField(this, {required: true}),
-      value: new AdvancementDataField(this, {required: true}),
+      configuration: new AdvancementDataField(this, { required: true }),
+      value: new AdvancementDataField(this, { required: true }),
       level: new NumberField({
         integer: true, initial: this.metadata?.multiLevel ? undefined : 0, min: 0, label: "DND5E.Level"
       }),
-      title: new StringField({initial: undefined, label: "DND5E.AdvancementCustomTitle"}),
-      hint: new StringField({label: "DND5E.AdvancementHint"}),
+      title: new StringField({ initial: undefined, label: "DND5E.AdvancementCustomTitle" }),
+      hint: new HTMLField({ label: "DND5E.AdvancementHint" }),
       icon: new FilePathField({
         initial: undefined, categories: ["IMAGE"], label: "DND5E.AdvancementCustomIcon", base64: true
       }),

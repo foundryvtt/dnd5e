@@ -98,7 +98,9 @@ export default class TraitAdvancement extends Advancement {
   /** @inheritDoc */
   summaryForLevel(level, { configMode=false }={}) {
     if ( configMode ) {
-      if ( this.hint ) return `<p>${this.hint}</p>`;
+      if ( this.hint ) return foundry.applications.ux.TextEditor.implementation.enrichHTML(this.hint, {
+        relativeTo: this.item, rollData: this.item.getRollData()
+      });
       return `<p>${Trait.localizedList({
         grants: this.configuration.grants, choices: this.configuration.choices
       })}</p>`;

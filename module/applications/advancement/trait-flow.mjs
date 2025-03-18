@@ -60,7 +60,7 @@ export default class TraitFlow extends AdvancementFlow {
   /** @inheritDoc */
   async _prepareHeaderContext(context, options) {
     context = await super._prepareHeaderContext(context, options);
-    context.hint = this.advancement.hint ? this.advancement.hint : Trait.localizedList({
+    context.hint = this.advancement.hint ? context.hint : Trait.localizedList({
       grants: this.advancement.configuration.grants, choices: this.advancement.configuration.choices
     });
     return context;
