@@ -143,7 +143,9 @@ class TableOfContentsCompendiumV13 extends (foundry.applications.sidebar?.apps?.
     }
 
     for ( const chapter of context.chapters ) {
-      chapter.pages.sort((lhs, rhs) => lhs.sort - rhs.sort);
+      chapter.pages = chapter.pages
+        .filter(p => !p.flags.tocHidden && (chapter.showPages || p.entry))
+        .sort((lhs, rhs) => lhs.sort - rhs.sort);
       for ( const page of chapter.pages ) {
         if ( page.pages ) page.pages.sort((lhs, rhs) => lhs.sort - rhs.sort);
       }
@@ -279,7 +281,9 @@ class TableOfContentsCompendiumV12 extends (foundry.applications?.sidebar?.apps?
     }
 
     for ( const chapter of context.chapters ) {
-      chapter.pages.sort((lhs, rhs) => lhs.sort - rhs.sort);
+      chapter.pages = chapter.pages
+        .filter(p => !p.flags.tocHidden && (chapter.showPages || p.entry))
+        .sort((lhs, rhs) => lhs.sort - rhs.sort);
       for ( const page of chapter.pages ) {
         if ( page.pages ) page.pages.sort((lhs, rhs) => lhs.sort - rhs.sort);
       }
