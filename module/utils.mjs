@@ -691,17 +691,19 @@ export function defaultUnits(type) {
 /*  Validators                                  */
 /* -------------------------------------------- */
 
+const IDENTIFIER_REGEX = /^([a-zA-Z0-9_\-]+)$/i;
+
 /**
  * Ensure the provided string contains only the characters allowed in identifiers.
  * @param {string} identifier
  * @returns {boolean}
  */
 function isValidIdentifier(identifier) {
-  return /^([a-z0-9_-]+)$/i.test(identifier);
+  return IDENTIFIER_REGEX.test(identifier);
 }
 
 export const validators = {
-  isValidIdentifier: isValidIdentifier
+  IDENTIFIER_REGEX, isValidIdentifier
 };
 
 /* -------------------------------------------- */

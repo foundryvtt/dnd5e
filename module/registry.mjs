@@ -127,6 +127,18 @@ class ItemRegistry {
   /* -------------------------------------------- */
 
   /**
+   * Label for this item type.
+   * @type {string}
+   */
+  get label() {
+    let key = CONFIG.Item.typeLabels[this.#itemType];
+    if ( game.i18n.has(`${key}Pl`) ) key = `${key}Pl`;
+    return game.i18n.localize(key);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * All items formatted for a select input.
    * @type {FormSelectOption[]}
    */
@@ -134,6 +146,15 @@ class ItemRegistry {
     return Array.from(this.#items.entries())
       .map(([value, data]) => ({ value, label: data.name }))
       .sort((lhs, rhs) => lhs.label.localeCompare(rhs.label, game.i18n.lang));
+  }
+
+  /**
+   * All items formatted for a select input with grouping.
+   * @type {FormSelectOption[]}
+   */
+  get groupedOptions() {
+    // TODO: Group subclasses by parent class
+    return this.options.map(o => ({ ...o, group: this.label }));
   }
 
   /* -------------------------------------------- */
@@ -376,7 +397,9 @@ export class SpellList {
    * @enum {string}
    */
   static #REGISTRIES = {
+    background: "backgrounds",
     class: "classes",
+    race: "species",
     subclass: "subclasses"
   };
 
@@ -605,10 +628,12 @@ const RegistryStatus = new class extends Map {
 /* -------------------------------------------- */
 
 export default {
+  backgrounds: new ItemRegistry("background"),
   classes: new ItemRegistry("class"),
   enchantments: EnchantmentRegisty,
   messages: MessageRegistry,
   ready: RegistryStatus.ready,
+  species: new ItemRegistry("race"),
   spellLists: SpellListRegistry,
   subclasses: new ItemRegistry("subclass"),
   summons: SummonRegistry

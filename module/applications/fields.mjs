@@ -17,6 +17,27 @@ export function createCheckboxInput(field, config) {
 /* -------------------------------------------- */
 
 /**
+ * @typedef IdentifierInputConfig
+ * @property {string[]} types
+ */
+
+/**
+ * Create an identifier input for an IdentifierField.
+ * @param {FormInputConfig<string> & IdentifierInputConfig} config
+ * @returns {IdentifierInputElement}
+ */
+export function createIdentifierInput(config) {
+  const input = document.createElement("identifier-input");
+  input.name = config.name;
+  foundry.applications.fields.setInputAttributes(input, config);
+  input.setAttribute("value", config.value ?? "");
+  if ( config.types?.length ) input.setAttribute("types", config.types.join(","));
+  return input;
+}
+
+/* -------------------------------------------- */
+
+/**
  * Create a grid of checkboxes.
  * @param {DataField} field         The field.
  * @param {FormInputConfig} config  The input configuration.
