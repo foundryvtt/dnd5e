@@ -267,7 +267,7 @@ export default class ActorSheet5e extends ActorSheetMixin(foundry.appv1?.sheets?
     if ( largestPrimary ) {
       let primary = speeds.shift();
       return {
-        primary: `${primary?.[1]} ${units}`,
+        primary: primary ? `${primary?.[1]} ${units}` : formatLength(movement.walk ?? 0, units),
         special: speeds.map(s => s[1]).join(", ")
       };
     }
