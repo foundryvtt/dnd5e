@@ -716,6 +716,18 @@ export function isValidUnit(unit) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Test if a given string is serialized JSON, and parse it if so.
+ * @param {string} raw  The raw value.
+ * @returns {any}       The parsed value, or the original value if it was not serialized JSON.
+ */
+export function parseOrString(raw) {
+  try { return JSON.parse(raw); } catch {}
+  return raw;
+}
+
+/* -------------------------------------------- */
 /*  Handlebars Template Helpers                 */
 /* -------------------------------------------- */
 

@@ -1,6 +1,6 @@
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
-import { staticID } from "../utils.mjs";
+import { parseOrString, staticID } from "../utils.mjs";
 
 const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -212,7 +212,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     // Parse any JSON provided when targeting an object
     if ( (field instanceof ObjectField) || (field instanceof SchemaField) ) {
-      change = { ...change, value: this.prototype._parseOrString(change.value) };
+      change = { ...change, value: parseOrString(change.value) };
     }
 
     return super.applyField(model, change, field);
