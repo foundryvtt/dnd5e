@@ -748,6 +748,8 @@ export function defaultUnits(type) {
 /*  Validators                                  */
 /* -------------------------------------------- */
 
+const IDENTIFIER_REGEX = /^([a-zA-Z0-9_\-]+)$/i;
+
 /**
  * Ensure the provided string contains only the characters allowed in identifiers.
  * @param {string} identifier
@@ -762,11 +764,11 @@ function isValidIdentifier(identifier, { allowType=false }={}) {
     if ( split.length > 2 ) return false;
     identifier = split[1];
   }
-  return /^([a-z0-9_-]+)$/i.test(identifier);
+  return IDENTIFIER_REGEX.test(identifier);
 }
 
 export const validators = {
-  isValidIdentifier: isValidIdentifier
+  IDENTIFIER_REGEX, isValidIdentifier
 };
 
 /* -------------------------------------------- */

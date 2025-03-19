@@ -547,7 +547,9 @@ Hooks.once("ready", function() {
   game.actors.forEach(a => a.sourcedItems._redirectKeys());
 
   // Register items by type
+  dnd5e.registry.backgrounds.initialize();
   dnd5e.registry.classes.initialize();
+  dnd5e.registry.species.initialize();
   dnd5e.registry.subclasses.initialize();
 
   // Chat message listeners
