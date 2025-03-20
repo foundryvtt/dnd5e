@@ -1,4 +1,3 @@
-import parseUuid from "../../parse-uuid.mjs";
 import { linkForUuid, sortObjectEntries } from "../../utils.mjs";
 import Items5e from "../../data/collection/items-collection.mjs";
 import SpellsUnlinkedConfig from "./spells-unlinked-config.mjs";
@@ -6,7 +5,7 @@ import SpellsUnlinkedConfig from "./spells-unlinked-config.mjs";
 /**
  * Journal entry page the displays a list of spells for a class, subclass, background, or something else.
  */
-export default class JournalSpellListPageSheet extends (foundry.appv1?.sheets?.JournalPageSheet ?? JournalPageSheet) {
+export default class JournalSpellListPageSheet extends foundry.appv1.sheets.JournalPageSheet {
 
   /** @inheritDoc */
   static get defaultOptions() {
@@ -126,7 +125,7 @@ export default class JournalSpellListPageSheet extends (foundry.appv1?.sheets?.J
     let collections = new Collection();
     const remappedUuids = new Set();
     for ( const baseUuid of uuids ) {
-      const { collection, uuid } = parseUuid(baseUuid);
+      const { collection, uuid } = foundry.utils.parseUuid(baseUuid);
       remappedUuids.add(uuid);
       if ( collection && !collections.has(collection) ) {
         if ( collection instanceof Items5e ) collections.set(collection, collection);

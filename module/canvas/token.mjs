@@ -1,7 +1,7 @@
 /**
  * Extend the base Token class to implement additional system-specific logic.
  */
-export default class Token5e extends (foundry.canvas?.placeables?.Token ?? Token) {
+export default class Token5e extends foundry.canvas.placeables.Token {
 
   /**
    * Update the token ring when this token is targeted.
@@ -54,22 +54,11 @@ export default class Token5e extends (foundry.canvas?.placeables?.Token ?? Token
     const c = CONFIG.DND5E.tokenHPColors;
 
     // Determine the container size (logic borrowed from core)
-    let s = 1;
+    let s = canvas.dimensions.uiScale;
     const bw = this.w;
-    let bh;
-    let bs;
-    let bs1;
-    if ( game.release.generation > 12 ) {
-      s = canvas.dimensions.uiScale;
-      bh = 8 * (this.document.height >= 2 ? 1.5 : 1) * s;
-      bs = s;
-      bs1 = bs + s;
-    } else {
-      bh = Math.max(canvas.dimensions.size / 12, 8);
-      if ( this.document.height >= 2 ) bh *= 1.6;
-      bs = Math.clamp(bh / 8, 1, 2);
-      bs1 = bs + 1;
-    }
+    const bh = 8 * (this.document.height >= 2 ? 1.5 : 1) * s;
+    const bs = s;
+    const bs1 = bs + s;
 
     // Overall bar container
     bar.clear();

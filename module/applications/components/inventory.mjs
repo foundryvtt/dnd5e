@@ -188,7 +188,7 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   _getContextOptions(item, element) {
-    const compendiumLocked = item[game.release.generation < 13 ? "compendium" : "collection"]?.locked;
+    const compendiumLocked = item.collection?.locked;
     // TODO: Move away from using jQuery in callbacks once V12 support is dropped
 
     // Standard Options
@@ -229,7 +229,7 @@ export default class InventoryElement extends HTMLElement {
           if ( scroll ) Item5e.create(scroll, { parent: this.actor });
         },
         condition: li => (item.type === "spell") && !item.getFlag("dnd5e", "cachedFor") && this.actor?.isOwner
-          && !this.actor?.[game.release.generation < 13 ? "compendium" : "collection"]?.locked,
+          && !this.actor?.collection?.locked,
         group: "action"
       },
       {

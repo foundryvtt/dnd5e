@@ -571,16 +571,14 @@ export function registerDeferredSettings() {
   });
 
   // Hook into core color scheme setting.
-  const isV13 = game.release.generation >= 13;
-  const settingKey = isV13 ? "uiConfig" : "colorScheme";
-  const setting = game.settings.get("core", settingKey);
-  const settingConfig = game.settings.settings.get(`core.${settingKey}`);
+  const setting = game.settings.get("core", "uiConfig");
+  const settingConfig = game.settings.settings.get("core.uiConfig");
   const { onChange } = settingConfig ?? {};
   if ( onChange ) settingConfig.onChange = (s, ...args) => {
     onChange(s, ...args);
-    setTheme(document.body, isV13 ? s.colorScheme : s);
+    setTheme(document.body, s.colorScheme);
   };
-  setTheme(document.body, isV13 ? setting.colorScheme : setting);
+  setTheme(document.body, setting.colorScheme);
 }
 
 /* -------------------------------------------- */

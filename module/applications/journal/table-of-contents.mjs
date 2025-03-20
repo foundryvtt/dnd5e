@@ -1,16 +1,7 @@
-/* eslint-disable no-constructor-return */
-export default class TableOfContentsCompendium extends (foundry.applications?.sidebar?.apps?.Compendium ?? Compendium) {
-  constructor(...args) {
-    super(...args);
-    if ( game.release.version < 13 ) return new TableOfContentsCompendiumV12(...args);
-    return new TableOfContentsCompendiumV13(...args);
-  }
-}
-
 /**
  * Compendium that renders pages as a table of contents.
  */
-class TableOfContentsCompendiumV13 extends (foundry.applications.sidebar?.apps?.Compendium ?? class {}) {
+export default class TableOfContentsCompendium extends foundry.applications.sidebar.apps.Compendium {
   /** @override */
   static DEFAULT_OPTIONS = {
     classes: ["table-of-contents"],
@@ -132,7 +123,7 @@ class TableOfContentsCompendiumV13 extends (foundry.applications.sidebar?.apps?.
     for ( const entry of specialEntries ) {
       const append = entry.flags.append;
       const order = entry.flags.order;
-      if ( append ) {
+      if ( append && (append <= context.chapters.length) ) {
         context.chapters[append - 1].pages.push({ ...entry, sort: order, entry: true });
       } else {
         context.chapters.push(entry);
@@ -176,143 +167,6 @@ class TableOfContentsCompendiumV13 extends (foundry.applications.sidebar?.apps?.
     const entry = await this.collection.getDocument(entryId);
     entry?.sheet.render(true, {
       pageId: target.closest("[data-page-id]")?.dataset.pageId
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _onDragStart(event) {
-    let dragData;
-    if ( ui.context ) ui.context.close({animate: false});
-    dragData = this._getEntryDragData(event.target.dataset.documentId);
-    if ( !dragData ) return;
-    event.dataTransfer.setData("text/plain", JSON.stringify(dragData));
-  }
-}
-
-/**
- * Compendium that renders pages as a table of contents.
- * TODO: Remove when v12 support is dropped.
- */
-class TableOfContentsCompendiumV12 extends (foundry.applications?.sidebar?.apps?.Compendium ?? Compendium) {
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      classes: ["table-of-contents"],
-      template: "systems/dnd5e/templates/journal/table-of-contents.hbs",
-      width: 800,
-      height: 950,
-      resizable: true,
-      contextMenuSelector: "[data-entry-id]",
-      dragDrop: [{dragSelector: "[data-document-id]", dropSelector: "article"}]
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Position of pages based on type.
-   * @enum {number}
-   */
-  static TYPES = {
-    chapter: 0,
-    appendix: 100
-  };
-
-  /* -------------------------------------------- */
-  /*  Rendering                                   */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getData(options) {
-    const context = await super.getData(options);
-    const documents = await this.collection.getDocuments();
-
-    context.chapters = [];
-    const specialEntries = [];
-    for ( const entry of documents ) {
-      const flags = entry.flags?.dnd5e;
-      if ( !flags ) continue;
-      const type = flags.type ?? "chapter";
-
-      if ( type === "header" ) {
-        const page = entry.pages.contents[0];
-        context.header = {
-          title: flags.title ?? page?.name,
-          content: page?.text.content
-        };
-        continue;
-      }
-
-      const data = {
-        type, flags,
-        id: entry.id,
-        name: flags.title ?? entry.name,
-        pages: Array.from(entry.pages).map(({ flags, id, name, sort }) => ({
-          id, sort, flags,
-          name: flags.dnd5e?.title ?? name,
-          entryId: entry.id
-        }))
-      };
-
-      if ( type === "special" ) {
-        data.showPages = flags.showPages ?? !flags.append;
-        specialEntries.push(data);
-      } else {
-        data.order = (this.constructor.TYPES[type] ?? 200) + (flags.position ?? 0);
-        data.showPages = (flags.showPages !== false) && ((flags.showPages === true) || (type === "chapter"));
-        context.chapters.push(data);
-      }
-    }
-
-    context.chapters.sort((lhs, rhs) => lhs.order - rhs.order);
-    for ( const entry of specialEntries ) {
-      const append = entry.flags.append;
-      const order = entry.flags.order;
-      if ( append && (append <= context.chapters.length) ) {
-        context.chapters[append - 1].pages.push({ ...entry, sort: order, entry: true });
-      } else {
-        context.chapters.push(entry);
-      }
-    }
-
-    for ( const chapter of context.chapters ) {
-      chapter.pages = chapter.pages
-        .filter(p => !p.flags.tocHidden && (chapter.showPages || p.entry))
-        .sort((lhs, rhs) => lhs.sort - rhs.sort);
-      for ( const page of chapter.pages ) {
-        if ( page.pages ) page.pages.sort((lhs, rhs) => lhs.sort - rhs.sort);
-      }
-    }
-
-    return context;
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Handlers                              */
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html.find("a").on("click", this._onClickLink.bind(this));
-    this.element[0].dataset.compendiumId = this.collection.metadata.id;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle clicking a link to a journal entry or page.
-   * @param {PointerEvent} event  The triggering click event.
-   * @protected
-   */
-  async _onClickLink(event) {
-    const entryId = event.currentTarget.closest("[data-entry-id]")?.dataset.entryId;
-    if ( !entryId ) return;
-    const entry = await this.collection.getDocument(entryId);
-    entry?.sheet.render(true, {
-      pageId: event.currentTarget.closest("[data-page-id]")?.dataset.pageId
     });
   }
 

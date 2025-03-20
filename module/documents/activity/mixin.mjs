@@ -53,7 +53,7 @@ export default function ActivityMixin(Base) {
      * Perform the pre-localization of this data model.
      */
     static localize() {
-      Localization.localizeDataModel(this);
+      foundry.helpers.Localization.localizeDataModel(this);
       const fields = this.schema.fields;
       if ( fields.damage?.fields.parts ) {
         localizeSchema(fields.damage.fields.parts.element, ["DND5E.DAMAGE.FIELDS.damage.parts"]);
@@ -959,7 +959,7 @@ export default function ActivityMixin(Base) {
       const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
       if ( !rolls?.length ) return;
 
-      const canUpdate = this.item.isOwner && !this.item[game.release.generation < 13 ? "compendium" : "inCompendium"];
+      const canUpdate = this.item.isOwner && !this.item.inCompendium;
       const lastDamageTypes = rolls.reduce((obj, roll, index) => {
         if ( roll.options.type ) obj[index] = roll.options.type;
         return obj;
@@ -1007,7 +1007,7 @@ export default function ActivityMixin(Base) {
      */
     getContextMenuOptions() {
       const entries = [];
-      const compendiumLocked = this.item[game.release.generation < 13 ? "compendium" : "collection"]?.locked;
+      const compendiumLocked = this.item.collection?.locked;
 
       if ( this.item.isOwner && !compendiumLocked ) {
         entries.push({
