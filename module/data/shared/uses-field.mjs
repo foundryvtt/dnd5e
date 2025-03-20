@@ -198,8 +198,7 @@ export default class UsesField extends SchemaField {
 
   /**
    * @typedef {BasicRollProcessConfiguration} RechargeRollProcessConfiguration
-   * @property {boolean} [apply]  Apply the uses updates back to the item or activity. If set to `false`, then the
-   *                              `dnd5e.postRollRecharge` hook won't be called.
+   * @property {boolean} [apply=true]  Apply the uses updates back to the item or activity.
    */
 
   /**
@@ -215,15 +214,6 @@ export default class UsesField extends SchemaField {
     const uses = this.system ? this.system.uses : this.uses;
     const recharge = uses?.recovery.find(({ period }) => period === "recharge");
     if ( !recharge || !uses?.spent ) return;
-
-    let oldReturn = false;
-    if ( config.apply === undefined ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `apply` parameter should be passed to `rollRecharge` to opt-in to the new return behavior.",
-        { since: "DnD5e 4.3", until: "DnD5e 5.0" }
-      );
-      oldReturn = config.apply = true;
-    }
 
     const rollConfig = foundry.utils.mergeObject({
       rolls: [{
@@ -249,22 +239,6 @@ export default class UsesField extends SchemaField {
       rollMode: game.settings.get("core", "rollMode")
     }, message);
 
-    if ( "dnd5e.preRollRecharge" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.preRollRecharge` hook has been deprecated and replaced with `dnd5e.preRollRechargeV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-      );
-      const hookData = {
-        formula: rollConfig.rolls[0].parts[0], data: rollConfig.rolls[0].data,
-        target: rollConfig.rolls[0].options.target, chatMessage: messageConfig.create
-      };
-      if ( Hooks.call("dnd5e.preRollRecharge", this, hookData) === false ) return;
-      rollConfig.rolls[0].parts[0] = hookData.formula;
-      rollConfig.rolls[0].data = hookData.data;
-      rollConfig.rolls[0].options.target = hookData.target;
-      messageConfig.create = hookData.chatMessage;
-    }
-
     const rolls = await CONFIG.Dice.BasicRoll.buildConfigure(rollConfig, dialogConfig, messageConfig);
     await CONFIG.Dice.BasicRoll.buildEvaluate(rolls, rollConfig, messageConfig);
     if ( !rolls.length ) return;
@@ -283,7 +257,7 @@ export default class UsesField extends SchemaField {
     /**
      * A hook event that fires after an Item or Activity has rolled to recharge, but before any usage changes have
      * been made.
-     * @function dnd5e.rollRechargeV2
+     * @function dnd5e.rollRecharge
      * @memberof hookEvents
      * @param {BasicRoll[]} rolls             The resulting rolls.
      * @param {object} data
@@ -291,17 +265,10 @@ export default class UsesField extends SchemaField {
      * @param {object} data.updates           Updates to be applied to the subject.
      * @returns {boolean}                     Explicitly return `false` to prevent updates from being performed.
      */
+    if ( Hooks.call("dnd5e.rollRecharge", rolls, { subject: this, updates }) === false ) return rolls;
     if ( Hooks.call("dnd5e.rollRechargeV2", rolls, { subject: this, updates }) === false ) return rolls;
 
-    if ( "dnd5e.rollRecharge" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.rollRecharge` hook has been deprecated and replaced with `dnd5e.rollRechargeV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-      );
-      if ( Hooks.call("dnd5e.rollRecharge", this, rolls[0]) === false ) return rolls;
-    }
-
-    if ( rollConfig.apply && !foundry.utils.isEmpty(updates) ) await this.update(updates);
+    if ( (rollConfig.apply !== false) && !foundry.utils.isEmpty(updates) ) await this.update(updates);
 
     /**
      * A hook event that fires after an Item or Activity has rolled recharge and usage updates have been performed.
@@ -313,6 +280,6 @@ export default class UsesField extends SchemaField {
      */
     Hooks.callAll("dnd5e.postRollRecharge", rolls, { subject: this });
 
-    return oldReturn ? rolls : { rolls, updates };
+    return { rolls, updates };
   }
 }
