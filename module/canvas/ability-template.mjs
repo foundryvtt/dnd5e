@@ -1,7 +1,7 @@
 /**
  * A helper class for building MeasuredTemplates for 5e spells and abilities
  */
-export default class AbilityTemplate extends (foundry.canvas?.placeables?.MeasuredTemplate ?? MeasuredTemplate) {
+export default class AbilityTemplate extends foundry.canvas.placeables.MeasuredTemplate {
 
   /**
    * Track the timestamp when the last mouse move event was captured.

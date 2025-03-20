@@ -23,7 +23,6 @@ import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
 import ModuleArt from "./module/module-art.mjs";
 import { registerModuleData, setupModulePacks } from "./module/module-registration.mjs";
-import parseUuid from "./module/parse-uuid.mjs";
 import { default as registry } from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
 import * as utils from "./module/utils.mjs";
@@ -56,12 +55,6 @@ extendDragDrop();
 Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
   utils.log(`Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
-
-  if ( game.release.generation < 13 ) patchFromUuid();
-  CONFIG.compatibility.excludePatterns.push(
-    /now namespaced under/, /V1 Application framework/, /Set#isSubset/, /ChatMessage#getHTML/, /renderChatMessage/,
-    /_onClickEntry/
-  );
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
@@ -152,37 +145,30 @@ Hooks.once("init", function() {
   _configureFonts();
 
   // Register sheet application classes
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eCharacter, {
-    types: ["character"],
-    label: "DND5E.SheetClassCharacterLegacy"
-  });
+  const DocumentSheetConfig = foundry.applications.apps.DocumentSheetConfig;
+  DocumentSheetConfig.unregisterSheet(Actor, "core", foundry.appv1.sheets.ActorSheet);
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eCharacter2, {
     types: ["character"],
     makeDefault: true,
     label: "DND5E.SheetClassCharacter"
-  });
-  Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eNPC, {
-    types: ["npc"],
-    label: "DND5E.SheetClassNPCLegacy"
   });
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eNPC2, {
     types: ["npc"],
     makeDefault: true,
     label: "DND5E.SheetClassNPC"
   });
-  Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eVehicle, {
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eVehicle, {
     types: ["vehicle"],
     makeDefault: true,
     label: "DND5E.SheetClassVehicle"
   });
-  Actors.registerSheet("dnd5e", applications.actor.GroupActorSheet, {
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.GroupActorSheet, {
     types: ["group"],
     makeDefault: true,
     label: "DND5E.SheetClassGroup"
   });
 
-  DocumentSheetConfig.unregisterSheet(Item, "core", ItemSheet);
+  DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
   DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ItemSheet5e2, {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
@@ -216,10 +202,8 @@ Hooks.once("init", function() {
     types: ["spells"]
   });
 
-  CONFIG.Token.prototypeSheetClass = game.release.generation < 13
-    ? applications.TokenConfig5e
-    : applications.PrototypeTokenConfig5e;
-  DocumentSheetConfig.unregisterSheet(TokenDocument, "core", TokenConfig);
+  CONFIG.Token.prototypeSheetClass = applications.PrototypeTokenConfig5e;
+  DocumentSheetConfig.unregisterSheet(TokenDocument, "core", foundry.applications.sheets.TokenConfig);
   DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
     label: "DND5E.SheetClassToken"
   });
@@ -537,11 +521,7 @@ Hooks.on("renderPause", (app, [html]) => {
   img.className = "";
 });
 
-Hooks.on("renderSettings", (app, html) => {
-  html = html instanceof HTMLElement ? html : html[0];
-  if ( game.release.generation > 12 ) applications.settings.sidebar.renderSettings(html);
-  else applications.settings.sidebar.renderSettingsLegacy(html);
-});
+Hooks.on("renderSettings", (app, html) => applications.settings.sidebar.renderSettings(html));
 
 /* -------------------------------------------- */
 /*  Other Hooks                                 */
@@ -560,19 +540,10 @@ Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(m
 
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
 
-// V13 context menu additions
 Hooks.on("getActorContextOptions", documents.Actor5e.addDirectoryContextOptions);
 Hooks.on("getItemContextOptions", documents.Item5e.addDirectoryContextOptions);
 
-// V12 context menu additions
-Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
-Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
-Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
-
-Hooks.on("renderCompendiumDirectory", (app, html) => {
-  html = html instanceof HTMLElement ? html : html[0];
-  applications.CompendiumBrowser.injectSidebarButton(html);
-});
+Hooks.on("renderCompendiumDirectory", (app, html) => applications.CompendiumBrowser.injectSidebarButton(html));
 
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
 Hooks.on(
@@ -584,7 +555,7 @@ Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffe
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
-Hooks.on("renderCombatTracker", (app, html, data) => app.renderGroups(html instanceof HTMLElement ? html : html[0]));
+Hooks.on("renderCombatTracker", (app, html, data) => app.renderGroups(html));
 
 Hooks.on("preCreateScene", (doc, createData, options, userId) => {
   // Set default grid units based on metric length setting
@@ -600,46 +571,6 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
     });
   }
 });
-
-/* -------------------------------------------- */
-/*  Backported Fixes                            */
-/* -------------------------------------------- */
-
-/**
- * FIXME: Remove when v12 support dropped or https://github.com/foundryvtt/foundryvtt/issues/12023 backported.
- * @ignore
- */
-function patchFromUuid() {
-  const _resolveEmbedded = function(parent, parts, {invalid=false}={}) {
-    let doc = parent;
-    while ( doc && (parts.length > 1) ) {
-      const [embeddedName, embeddedId] = parts.splice(0, 2);
-      doc = doc.getEmbeddedDocument(embeddedName, embeddedId, {invalid});
-    }
-    return doc;
-  };
-
-  // Patch fromUuid to call our wrapped parseUuid in order to correctly resolve relative UUIDs on grandchild embedded
-  // Documents.
-  window.fromUuid = async function(uuid, options={}) {
-    if ( !uuid ) return null;
-    /** @deprecated since v11 */
-    if ( foundry.utils.getType(options) !== "Object" ) {
-      foundry.utils.logCompatibilityWarning("Passing a relative document as the second parameter to fromUuid is "
-        + "deprecated. Please pass it within an options object instead.", {since: 11, until: 13});
-      options = {relative: options};
-    }
-    const {relative, invalid=false} = options;
-    let {type, id, primaryId, collection, embedded, doc} = parseUuid(uuid, {relative});
-    if ( collection instanceof CompendiumCollection ) {
-      if ( type === "Folder" ) return collection.folders.get(id);
-      doc = await collection.getDocument(primaryId ?? id);
-    }
-    else doc = doc ?? collection?.get(primaryId ?? id, {invalid});
-    if ( embedded.length ) doc = _resolveEmbedded(doc, embedded, {invalid});
-    return doc || null;
-  };
-}
 
 /* -------------------------------------------- */
 /*  Bundled Module Exports                      */

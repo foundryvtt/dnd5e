@@ -1,7 +1,7 @@
 /**
  * The detection mode for Blindsight.
  */
-export class DetectionModeBlindsight extends (foundry.canvas?.perception?.DetectionMode ?? DetectionMode) {
+export class DetectionModeBlindsight extends foundry.canvas.perception.DetectionMode {
   constructor() {
     super({
       id: "blindsight",
@@ -12,6 +12,8 @@ export class DetectionModeBlindsight extends (foundry.canvas?.perception?.Detect
     });
   }
 
+  /* -------------------------------------------- */
+
   /** @override */
   static getDetectionFilter() {
     return this._detectionFilter ??= OutlineOverlayFilter.create({
@@ -21,6 +23,8 @@ export class DetectionModeBlindsight extends (foundry.canvas?.perception?.Detect
     });
   }
 
+  /* -------------------------------------------- */
+
   /** @override */
   _canDetect(visionSource, target) {
     if ( visionSource.object.document.hasStatusEffect(CONFIG.specialStatusEffects.BURROW) ) return false;
@@ -29,6 +33,8 @@ export class DetectionModeBlindsight extends (foundry.canvas?.perception?.Detect
     }
     return true;
   }
+
+  /* -------------------------------------------- */
 
   /** @override */
   _testLOS(visionSource, mode, target, test) {

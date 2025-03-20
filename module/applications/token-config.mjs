@@ -3,7 +3,7 @@ import { getHumanReadableAttributeLabel } from "../utils.mjs";
 /**
  * Custom token configuration application for handling dynamic rings & resource labels.
  */
-export class TokenConfig5e extends (foundry.applications?.sheets?.TokenConfig ?? TokenConfig) {
+export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
   /** @inheritDoc */
   async _render(...args) {
     await super._render(...args);
@@ -97,7 +97,7 @@ export class TokenConfig5e extends (foundry.applications?.sheets?.TokenConfig ??
   }
 }
 
-export class PrototypeTokenConfig5e extends (foundry.applications?.sheets?.PrototypeTokenConfig ?? class {}) {
+export class PrototypeTokenConfig5e extends foundry.applications.sheets.PrototypeTokenConfig {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);

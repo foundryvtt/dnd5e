@@ -40,7 +40,7 @@ export default class ScaleValueAdvancement extends Advancement {
   /** @inheritDoc */
   static localize() {
     super.localize();
-    Object.values(TYPES).forEach(v => Localization.localizeDataModel(v));
+    Object.values(TYPES).forEach(v => foundry.helpers.Localization.localizeDataModel(v));
   }
 
   /* -------------------------------------------- */

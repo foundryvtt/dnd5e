@@ -667,7 +667,7 @@ export default class ActorSheet5e extends ActorSheetMixin(foundry.appv1?.sheets?
     }
 
     // Owner Only Listeners, for non-compendium actors.
-    if ( this.actor.isOwner && !this.actor[game.release.generation < 13 ? "compendium" : "inCompendium"] ) {
+    if ( this.actor.isOwner && !this.actor.inCompendium ) {
       // Ability Checks
       html.find(".ability-name").click(this._onRollAbilityTest.bind(this));
 

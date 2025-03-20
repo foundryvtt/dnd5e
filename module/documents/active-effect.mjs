@@ -637,7 +637,6 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @param {jQuery|HTMLElement} html  The ActiveEffect config element.
    */
   static onRenderActiveEffectConfig(app, html) {
-    if ( game.release.generation < 13 ) html = html[0];
     const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {}).toFormGroup({
       label: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.label"),
       hint: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.hint")
@@ -646,17 +645,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       value: app.document.getFlag("dnd5e", "riders.statuses") ?? [],
       options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name }))
     });
-    // TODO: Temporary fix to work around https://github.com/foundryvtt/foundryvtt/issues/11567
-    // Replace with `after` when switched to V13-only
-    html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")
-      ?.insertAdjacentHTML("afterend", element.outerHTML);
-
-    if ( game.release.generation < 13 ) {
-      html.querySelector(".form-fields:has([name=statuses])").insertAdjacentHTML("afterend", `
-        <p class="hint">${app.document.schema.fields.statuses.hint}</p>
-      `);
-      app.setPosition();
-    }
+    html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")?.after(element);
   }
 
   /* -------------------------------------------- */
@@ -664,10 +653,9 @@ export default class ActiveEffect5e extends ActiveEffect {
   /**
    * Adjust exhaustion icon display to match current level.
    * @param {Application} app            The TokenHUD application.
-   * @param {jQuery | HTMLElement} html  The TokenHUD HTML.
+   * @param {HTMLElement} html  The TokenHUD HTML.
    */
   static onTokenHUDRender(app, html) {
-    html = html instanceof HTMLElement ? html : html[0];
     const actor = app.object.actor;
     const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
     if ( Number.isFinite(level) && (level > 0) ) {

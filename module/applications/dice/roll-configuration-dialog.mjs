@@ -255,7 +255,7 @@ export default class RollConfigurationDialog extends Dialog5e {
       name: "rollMode",
       value: this.message.rollMode ?? this.options.default?.rollMode ?? game.settings.get("core", "rollMode"),
       options: Object.entries(CONFIG.Dice.rollModes)
-        .map(([value, l]) => ({ value, label: game.i18n.localize(`${game.release.generation < 13 ? l : l.label}`) }))
+        .map(([value, l]) => ({ value, label: game.i18n.localize(l.label) }))
     }];
     return context;
   }
