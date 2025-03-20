@@ -101,14 +101,6 @@ export default class AbilityTemplate extends (foundry.canvas?.placeables?.Measur
      */
     if ( Hooks.call("dnd5e.preCreateActivityTemplate", activity, templateData) === false ) return null;
 
-    if ( "dnd5e.preCreateItemTemplate" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.preCreateItemTemplate` hook has been deprecated and replaced with `dnd5e.preCreateActivityTemplate`.",
-        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-      );
-      if ( Hooks.call("dnd5e.preCreateItemTemplate", activity.item, templateData) === false ) return null;
-    }
-
     // Construct the templates from activity data
     const cls = CONFIG.MeasuredTemplate.documentClass;
     const created = Array.fromRange(target.count || 1).map(() => {
@@ -129,34 +121,7 @@ export default class AbilityTemplate extends (foundry.canvas?.placeables?.Measur
      */
     Hooks.callAll("dnd5e.createActivityTemplate", activity, created);
 
-    if ( "dnd5e.createItemTemplate" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.createItemTemplate` hook has been deprecated and replaced with `dnd5e.createActivityTemplate`.",
-        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-      );
-      Hooks.callAll("dnd5e.createItemTemplate", activity.item, created[0]);
-    }
-
     return created;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * A factory method to create an AbilityTemplate instance using provided data from an Item5e instance
-   * @param {Item5e} item               The Item object for which to construct the template
-   * @param {object} [options={}]       Options to modify the created template.
-   * @returns {AbilityTemplate|null}    The template object, or null if the item does not produce a template
-   * @deprecated since DnD5e 4.0, available until DnD5e 5.0
-   */
-  static fromItem(item, options={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `AbilityTemplate#fromItem` method has been deprecated and replaced with `fromActivity`.",
-      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-    );
-    const activity = this.system.activities?.contents[0];
-    if ( activity ) return this.fromActivity(activity, options)?.[0] ?? null;
-    return null;
   }
 
   /* -------------------------------------------- */
