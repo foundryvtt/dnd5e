@@ -614,8 +614,17 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /**
    * Prepare the label for a compiled and simplified damage formula.
    * @param {object} rollData  Deterministic roll data from the item.
+   * @param {object} _rollData
    */
-  prepareDamageLabel(rollData) {
+  prepareDamageLabel(rollData, _rollData=rollData) {
+    if ( foundry.utils.getType(rollData) === "Array" ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `BaseActivityData#prepareDamageLabel` no longer takes damage parts as an input.",
+        { since: "DnD5e 4.4", until: "DnD5e 5.1" }
+      );
+      rollData = _rollData;
+    }
+
     const config = this.getDamageConfig();
     this.labels.damage = (config.rolls ?? []).map((part, index) => {
       let formula;
@@ -631,7 +640,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }
 
       let label = formula;
-      const types = part.options?.types ?? part.options?.type ? [part.options.type] : [];
+      const types = part.options?.types ?? (part.options?.type ? [part.options.type] : []);
       if ( types.length ) {
         label = `${formula} ${game.i18n.getListFormatter({ type: "conjunction" }).format(
           types.map(p => CONFIG.DND5E.damageTypes[p]?.label ?? CONFIG.DND5E.healingTypes[p]?.label).filter(_ => _)
