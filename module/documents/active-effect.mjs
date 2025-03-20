@@ -579,14 +579,6 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {object}           Created data for the ActiveEffect.
    */
   static createConcentrationEffectData(activity, data={}) {
-    if ( activity instanceof Item ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `createConcentrationEffectData` method on ActiveEffect5e now takes an Activity, rather than an Item.",
-        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-      );
-      activity = activity.system.activities?.contents[0];
-    }
-
     const item = activity?.item;
     if ( !item?.isEmbedded || !activity.duration.concentration ) {
       throw new Error("You may not begin concentrating on this item!");
@@ -693,21 +685,6 @@ export default class ActiveEffect5e extends ActiveEffect {
     const ext = split.pop();
     const path = split.join(".");
     return `${path}-${level}.${ext}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Map the duration of an item to an active effect duration.
-   * @param {Item5e} item           An item with a duration.
-   * @returns {EffectDurationData}  The active effect duration.
-   */
-  static getEffectDurationFromItem(item) {
-    foundry.utils.logCompatibilityWarning(
-      "The `getEffectDurationFromItem` method on ActiveEffect5e has been deprecated and replaced with `getEffectData` within Item or Activity duration.",
-      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-    );
-    return item.system.duration?.getEffectData?.() ?? {};
   }
 
   /* -------------------------------------------- */
