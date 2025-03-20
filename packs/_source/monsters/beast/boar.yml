@@ -54,8 +54,8 @@ system:
     hp:
       value: 11
       max: 11
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d8 + 2
     init:
       ability: ''
@@ -483,10 +483,7 @@ items:
     img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Boar attacks with its Tusk.</p>
       source:
         custom: ''
@@ -508,7 +505,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -626,6 +623,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tusk
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -637,9 +635,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676738
+      modifiedTime: 1741117003939
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lZR4lhNmYSf89s4Q.ypnf9maxKh66ucMe'
   - _id: TSmET06nE61H6HC2
@@ -651,9 +649,9 @@ items:
         value: >-
           <p>If the boar moves at least 20 ft. straight toward a target and then
           hits it with a tusk attack on the same turn, the target takes an extra
-          <strong>3 (1d6) <em>slashing damage</em></strong>.</p><p>If the target
-          is a creature, it must succeed on a  <strong>DC 11 Strength</strong>
-          saving throw or be knocked prone.</p>
+          [[/damage average]] damage.</p><p>If the target is a creature, it must
+          succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone].</p>
         chat: >-
           <p>If the boar moves at least 20 ft. straight toward a target and then
           hits it with a tusk attack on the same turn, the target takes extra
@@ -695,7 +693,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -726,22 +724,21 @@ items:
             recovery: []
           damage:
             critical:
-              allow: false
+              allow: true
               bonus: ''
             parts:
-              - number: 1
-                denomination: 6
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: '6'
                 bonus: ''
                 types:
                   - slashing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -792,19 +789,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 1
-                denomination: 6
-                bonus: ''
-                types:
-                  - slashing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
@@ -823,14 +808,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676738
+      modifiedTime: 1741118127951
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lZR4lhNmYSf89s4Q.TSmET06nE61H6HC2'
   - _id: U66PTM15QvmkenvW
@@ -957,8 +946,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171253780
-  modifiedTime: 1726171449080
+  modifiedTime: 1741117009204
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!lZR4lhNmYSf89s4Q'

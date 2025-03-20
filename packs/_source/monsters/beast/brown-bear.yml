@@ -54,8 +54,8 @@ system:
     hp:
       value: 34
       max: 34
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 4d10 + 12
     init:
       ability: ''
@@ -483,7 +483,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: "<p><em>Melee Weapon Attack: </em><strong>+6 to hit,</strong>\_<strong>5 ft.,</strong> one target. Hit: <strong>9 (1d8 + 4) <em>piercing damage</em></strong>.</p>"
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Brown Bear attacks with its Bite.</p>
       source:
         custom: ''
@@ -505,7 +505,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -623,9 +623,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -636,9 +637,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676701
+      modifiedTime: 1741117039307
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!omcDpBoB69esCXeM.tOPVA2liaPY9pwgO'
   - _id: MozRn0kqcm5IG3WI
@@ -647,10 +648,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack: </em><strong>+6 to hit</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Brown Bear attacks with its Claws.</p>
       source:
         custom: ''
@@ -672,7 +670,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -790,9 +788,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -801,9 +800,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676701
+      modifiedTime: 1741117049292
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!omcDpBoB69esCXeM.MozRn0kqcm5IG3WI'
   - _id: D3rgzM9PCR2iXku5
@@ -952,8 +951,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741117023858
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!omcDpBoB69esCXeM.AVusgSNjauFD9XnU'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -965,8 +964,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171257893
-  modifiedTime: 1726171450018
+  modifiedTime: 1741117051210
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!omcDpBoB69esCXeM'

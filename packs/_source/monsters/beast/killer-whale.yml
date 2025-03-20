@@ -54,8 +54,8 @@ system:
     hp:
       value: 90
       max: 90
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 12d12 + 12
     init:
       ability: ''
@@ -624,10 +624,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>21 (5d6 + 4) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Killer Whale attacks with its Bite.</p>
       source:
         custom: ''
@@ -649,7 +646,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -767,6 +764,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -780,9 +778,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676478
+      modifiedTime: 1741122089913
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ciLSItjCpwT7nMmk.2JDxekOVx1NSUwuP'
 effects: []
@@ -795,8 +793,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171243449
-  modifiedTime: 1726171446894
+  modifiedTime: 1741122103560
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!ciLSItjCpwT7nMmk'

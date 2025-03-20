@@ -54,8 +54,8 @@ system:
     hp:
       value: 1
       max: 1
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 1d4 - 1
     init:
       ability: ''
@@ -534,10 +534,7 @@ items:
     img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit:<strong> 1 <em>piercing
-          damage</em>.</strong></p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Raven attacks with its Beak.</p>
       source:
         custom: ''
@@ -559,7 +556,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -600,7 +597,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - fin
       proficient: 1
       unidentified:
         description: ''
@@ -677,6 +675,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: beak
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -688,9 +687,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676444
+      modifiedTime: 1741122721938
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!LPdX5YLlwci0NDZx.p8JmuP7pndzbZVzj'
 effects: []
@@ -703,8 +702,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171224025
-  modifiedTime: 1726171443447
+  modifiedTime: 1741122724866
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!LPdX5YLlwci0NDZx'

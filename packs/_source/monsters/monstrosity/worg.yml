@@ -54,8 +54,8 @@ system:
     hp:
       value: 26
       max: 26
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 4d10 + 4
     init:
       ability: ''
@@ -533,11 +533,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>piercing
-          damage</em></strong>.</p><p>If the target is a creature, it must
-          succeed on a  <strong>DC 13 Strength</strong> saving throw or be
-          knocked prone.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone].</p>
         chat: >-
           <p>The Worg attacks with its Bite. If the target is a creature, it
           must make a <strong>Strength</strong> saving throw or be knocked
@@ -562,7 +560,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -726,19 +724,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
@@ -749,6 +735,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -757,14 +744,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676460
+      modifiedTime: 1741124088537
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!VBkp2rGQKvMcCOus.UnONIXYgZcE3Jya0'
 effects: []
@@ -777,8 +768,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171235437
-  modifiedTime: 1726171445488
+  modifiedTime: 1741124092684
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!VBkp2rGQKvMcCOus'

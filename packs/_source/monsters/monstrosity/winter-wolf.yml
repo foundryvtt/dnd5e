@@ -54,8 +54,8 @@ system:
     hp:
       value: 75
       max: 75
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 10d10 + 20
     init:
       ability: ''
@@ -634,11 +634,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>piercing
-          damage</em></strong>. If the target is a creature, it must succeed on
-          a <strong>DC 14 Strength saving throw</strong> or be knocked
-          prone.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone].</p>
         chat: >-
           <p>The Winter Wolf attacks with its Bite. If the target is a creature,
           it must make a <strong>Strength</strong> saving throw or be knocked
@@ -663,7 +661,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -827,19 +825,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
@@ -850,6 +836,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -858,14 +845,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676623
+      modifiedTime: 1741124014456
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!yGTh874etxUckmAf.5PmQuifZGbPWxAYz'
   - _id: Rj3oSInoQMIfHrPc
@@ -876,10 +867,9 @@ items:
       description:
         value: >-
           <p>The wolf exhales a blast of freezing wind in a 15-foot cone. Each
-          creature in that area must make a  <strong>DC 12 Dexterity</strong>
-          saving throw, taking <strong>18 (4d8) <em>cold damage</em></strong> on
-          a failed save, or half as much damage on a successful one. Recharge
-          5-6.</p>
+          creature in that area must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
           <p>The wolf exhales a blast of freezing wind in a 15-foot cone. Each
           creature in that area must make a <strong>Dexterity</strong> saving
@@ -893,7 +883,10 @@ items:
         revision: 1
       uses:
         max: '1'
-        recovery: []
+        recovery:
+          - period: recharge
+            formula: '5'
+            type: recoverAll
         spent: 0
       type:
         value: ''
@@ -901,95 +894,6 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: attack
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-              - type: activityUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: cone
-              size: '15'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: '1'
-            recovery:
-              - period: recharge
-                type: recoverAll
-                formula: '5'
-          attack:
-            ability: ''
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: ranged
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts:
-              - number: 4
-                denomination: 8
-                bonus: ''
-                types:
-                  - cold
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -1085,14 +989,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676623
+      modifiedTime: 1741124061365
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!yGTh874etxUckmAf.Rj3oSInoQMIfHrPc'
 effects: []
@@ -1105,8 +1013,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171266486
-  modifiedTime: 1726171451968
+  modifiedTime: 1741124065912
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!yGTh874etxUckmAf'

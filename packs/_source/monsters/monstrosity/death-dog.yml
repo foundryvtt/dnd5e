@@ -54,8 +54,8 @@ system:
     hp:
       value: 39
       max: 39
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 6d8 + 12
     init:
       ability: ''
@@ -484,15 +484,13 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing
-          damage</em></strong>.</p><p>If the target is a creature, it must
-          succeed on a  <strong>DC 12 Constitution</strong> saving throw against
-          disease or become poisoned until the disease is cured. Every 24 hours
-          that elapse, the creature must repeat the saving throw, reducing its
-          hit point maximum by 5 (1d10) on a failure. This reduction lasts until
-          the disease is cured. The creature dies if the disease reduces its hit
-          point maximum to 0.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. If the target is a
+          creature, it must succeed on a [[/save]] saving throw against disease
+          or become &amp;Reference[poisoned] until the disease is cured. Every
+          24 hours that elapse, the creature must repeat the saving throw,
+          reducing its hit point maximum by 5 (1d10) on a failure. This
+          reduction lasts until the disease is cured. The creature dies if the
+          disease reduces its hit point maximum to 0.</p>
         chat: >-
           <p>The Death Dog attacks with its Bite. If the target is a creature,
           it must make a <strong>Constitution</strong> saving throw. Every 24
@@ -517,7 +515,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -681,19 +679,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 1
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -704,22 +690,27 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676448
+      modifiedTime: 1741117372468
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!PH78NBdvoaszAb61.TKV9mS1lvqMAyCaB'
   - _id: xpakQFJhIVCQz3Si
@@ -856,7 +847,7 @@ items:
       identifier: multiattack
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -869,8 +860,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741117308382
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!PH78NBdvoaszAb61.EHX3CeEnlmzwnnK5'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -882,8 +873,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171228934
-  modifiedTime: 1726171444273
+  modifiedTime: 1741117376314
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!PH78NBdvoaszAb61'

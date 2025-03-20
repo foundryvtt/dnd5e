@@ -54,8 +54,8 @@ system:
     hp:
       value: 1
       max: 1
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 1d4 - 1
     init:
       ability: ''
@@ -584,8 +584,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171215794
-  modifiedTime: 1726171441842
+  modifiedTime: 1741117970171
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!EZgiprHXA2D7Uyb3'

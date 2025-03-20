@@ -54,8 +54,8 @@ system:
     hp:
       value: 126
       max: 126
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 11d12 + 55
     init:
       ability: ''
@@ -580,10 +580,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>22 (3d10 + 6) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Giant Shark attacks with its Bite.</p>
       source:
         custom: ''
@@ -605,7 +602,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -723,6 +720,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -736,9 +734,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676445
+      modifiedTime: 1741121588795
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MWlwLlKXh8jUUxOL.fGIh2Vq3XhIzacIg'
 effects: []
@@ -751,8 +749,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171225932
-  modifiedTime: 1726171443740
+  modifiedTime: 1741121598504
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!MWlwLlKXh8jUUxOL'
