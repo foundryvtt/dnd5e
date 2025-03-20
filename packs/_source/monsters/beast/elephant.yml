@@ -54,8 +54,8 @@ system:
     hp:
       value: 76
       max: 76
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 8d12 + 24
     init:
       ability: ''
@@ -484,11 +484,11 @@ items:
     system:
       description:
         value: >-
-          <p>If the elephant moves at least <strong>20 ft.</strong> straight
-          toward a creature and then hits it with a gore attack on the same
-          turn, that target must succeed on a <strong>DC 12 Strength saving
-          throw</strong> or be knocked prone. If the target is prone, the
-          elephant can make one stomp attack against it as a bonus action.</p>
+          <p>If the elephant moves at least 20 ft. straight toward a creature
+          and then hits it with a gore attack on the same turn, that target must
+          succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone]. If the target is prone, the elephant can make
+          one stomp attack against it as a bonus action.</p>
         chat: >-
           <p>If the elephant moves at least <strong>20 ft.</strong> straight
           toward a creature and then hits it with a gore attack on the same
@@ -510,60 +510,6 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '20'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -633,14 +579,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.yD51x4dihnbHwfsj
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yD51x4dihnbHwfsj
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676820
+      modifiedTime: 1741124531918
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!jLPhaBnMtAbB5dp1.TtrZUBPjTrxKxoFn'
   - _id: r6mBkCtL5j6Y6sBr
@@ -649,10 +599,7 @@ items:
     img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>19 (3d8 + 6) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Elephant attacks with its Gore.</p>
       source:
         custom: ''
@@ -674,7 +621,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -792,6 +739,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: gore
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -803,9 +751,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676820
+      modifiedTime: 1741117449785
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!jLPhaBnMtAbB5dp1.r6mBkCtL5j6Y6sBr'
   - _id: ZHBbc5K4n6sU17rC
@@ -815,9 +763,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5
-          ft.,</strong> one <strong>prone</strong> creature. Hit: <strong>22
-          (3d10 + 6) <em>bludgeoning damage</em></strong>.</p>
+          <p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one prone
+          creature. <em>Hit:</em><strong> </strong>[[/damage average]]
+          damage.</p>
         chat: <p>The Elephant attacks with its Stomp.</p>
       source:
         custom: ''
@@ -839,7 +787,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -957,6 +905,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: stomp
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -968,9 +917,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676820
+      modifiedTime: 1741117593594
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!jLPhaBnMtAbB5dp1.ZHBbc5K4n6sU17rC'
 effects: []
@@ -983,8 +932,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171251661
-  modifiedTime: 1726171448680
+  modifiedTime: 1741117534138
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!jLPhaBnMtAbB5dp1'

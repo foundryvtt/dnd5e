@@ -54,8 +54,8 @@ system:
     hp:
       value: 39
       max: 39
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 6d10 + 6
     init:
       ability: ''
@@ -581,12 +581,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d10 + 2) <em>piercing
-          damage</em></strong> plus <strong>5 (1d10) <em>poison
-          damage</em></strong>.</p><p>The target is grappled (escape DC 13).
-          Until this grapple ends, the target is restrained, and the toad can't
-          bite another target.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
+          &amp;Reference[grappled] (escape DC 13). Until this grapple ends, the
+          target is &amp;Reference[restrained], and the toad can't bite another
+          target.</p>
         chat: >-
           <p>The Giant Toad attacks with its Bite. The target is grappled. Until
           this grapple ends, the target is restrained, and the toad can't bite
@@ -611,7 +609,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -741,6 +739,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -754,9 +753,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676549
+      modifiedTime: 1741121794121
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Ixo5shumxy4I9qyD.lYSWskOMRCVLyWLZ'
   - _id: 6aBDwlIsxceFMXxL
@@ -770,11 +769,11 @@ items:
           it is grappling. If the attack hits, the target is swallowed, and the
           grapple ends.</p><p>The swallowed target is blinded and restrained, it
           has total cover against attacks and other effects outside the toad,
-          and it takes <strong>10 (3d6) <em>acid damage</em></strong> at the
-          start of each of the toad's turns. The toad can have only one target
-          swallowed at a time. If the toad dies, a swallowed creature is no
-          longer restrained by it and can escape from the corpse using 5 ft. of
-          movement, exiting prone.</p>
+          and it takes [[/damage average]] damage at the start of each of the
+          toad's turns. The toad can have only one target swallowed at a time.
+          If the toad dies, a swallowed creature is no longer restrained by it
+          and can escape from the corpse using 5 ft. of movement, exiting
+          prone.</p>
         chat: <p>The Giant Toad attacks with its Swallow.</p>
       source:
         custom: ''
@@ -875,9 +874,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676549
+      modifiedTime: 1741121814614
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Ixo5shumxy4I9qyD.6aBDwlIsxceFMXxL'
 effects: []
@@ -890,8 +889,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171219941
-  modifiedTime: 1726171442669
+  modifiedTime: 1741121823304
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!Ixo5shumxy4I9qyD'

@@ -54,8 +54,8 @@ system:
     hp:
       value: 45
       max: 45
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 6d10 + 12
     init:
       ability: ''
@@ -486,10 +486,9 @@ items:
         value: >-
           <p>If the rhinoceros moves at least 20 ft. straight toward a target
           and then hits it with a gore attack on the same turn, the target takes
-          an extra <strong>9 (2d8) <em>bludgeoning
-          damage</em></strong>.</p><p>If the target is a creature, it must
-          succeed on a  <strong>DC 15 Strength</strong> saving throw or be
-          knocked prone.</p>
+          an extra [[/damage average]] damage.</p><p>If the target is a
+          creature, it must succeed on a [[/save]] saving throw or be knocked
+          prone.</p>
         chat: >-
           <p>If the rhinoceros moves at least 20 ft. straight toward a target
           and then hits it with a gore attack on the same turn, the target takes
@@ -532,7 +531,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -563,22 +562,21 @@ items:
             recovery: []
           damage:
             critical:
-              allow: false
+              allow: true
               bonus: ''
             parts:
-              - number: 2
-                denomination: 8
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: '8'
                 bonus: ''
                 types:
                   - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -629,19 +627,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 8
-                bonus: ''
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
@@ -660,14 +646,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676573
+      modifiedTime: 1741122761194
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!SBCe2BSa6opTS5M4.e1ZjZT7dyExUSEOu'
   - _id: uFv78t6CwySS1gio
@@ -676,10 +666,7 @@ items:
     img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>14 (2d8 + 5) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Rhinoceros attacks with its Gore.</p>
       source:
         custom: ''
@@ -701,7 +688,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -819,6 +806,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: gore
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -830,9 +818,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676573
+      modifiedTime: 1741122781475
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!SBCe2BSa6opTS5M4.uFv78t6CwySS1gio'
 effects: []
@@ -845,8 +833,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171231795
-  modifiedTime: 1726171444778
+  modifiedTime: 1741122784621
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!SBCe2BSa6opTS5M4'

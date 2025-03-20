@@ -54,8 +54,8 @@ system:
     hp:
       value: 19
       max: 19
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 3d8 + 6
     init:
       ability: ''
@@ -623,8 +623,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741116900995
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!D5WjGwKskeUT8HXa.ZBWu2XGwEnsaVNsH'
   - _id: 8VdhUFhUE9m12piC
     name: Bite
@@ -632,10 +632,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Black Bear attacks with its Bite.</p>
       source:
         custom: ''
@@ -657,7 +654,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -727,7 +724,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -757,7 +754,7 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
@@ -771,26 +768,34 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676657
+      modifiedTime: 1741116900067
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!D5WjGwKskeUT8HXa.8VdhUFhUE9m12piC'
   - _id: gaxofmkFqQG1zqK9
@@ -799,10 +804,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (2d4 + 2) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Black Bear attacks with its Claws.</p>
       source:
         custom: ''
@@ -824,7 +826,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -942,9 +944,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -953,9 +956,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676657
+      modifiedTime: 1741116910167
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!D5WjGwKskeUT8HXa.gaxofmkFqQG1zqK9'
 effects: []
@@ -968,8 +971,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171213778
-  modifiedTime: 1726171441455
+  modifiedTime: 1741116914702
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!D5WjGwKskeUT8HXa'

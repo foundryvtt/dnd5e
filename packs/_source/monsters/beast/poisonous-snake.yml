@@ -54,8 +54,8 @@ system:
     hp:
       value: 2
       max: 2
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 1d4
     init:
       ability: ''
@@ -484,12 +484,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit:<strong> 1 <em>piercing
-          damage</em>.</strong></p><p>The target must make a  <strong>DC 10
-          Constitution</strong> saving throw, taking <strong>5 (2d4) <em>poison
-          damage</em></strong> on a failed save, or half as much damage on a
-          successful one.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          make a [[/save]] saving throw, taking [[/damage average
+          activity=dnd5eactivity100]] damage on a failed save, or half as much
+          damage on a successful one.</p>
         chat: >-
           <p>The Poisonous Snake attacks with its Bite. The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -646,7 +644,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -678,28 +676,28 @@ items:
           damage:
             onSave: half
             parts:
-              - number: null
-                denomination: null
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: '4'
                 bonus: ''
                 types:
-                  - piercing
-                custom:
-                  enabled: true
-                  formula: '1'
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  - poison
           save:
             ability: con
             dc:
               calculation: ''
               formula: '10'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -708,14 +706,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676423
+      modifiedTime: 1741122627468
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!D5rwVIxmfFrdyyxT.obYv0JJqJiMTsoIF'
 effects: []
@@ -728,8 +730,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171213950
-  modifiedTime: 1726171441491
+  modifiedTime: 1741122636020
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!D5rwVIxmfFrdyyxT'
