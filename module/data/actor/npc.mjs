@@ -397,22 +397,6 @@ export default class NPCData extends CreatureTemplate {
 
     // Spellcaster Level
     const attributes = this.attributes;
-    Object.defineProperty(this.details, "spellLevel", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `details.spellLevel` property on NPCs have moved to `attributes.spell.level`.",
-          { since: "DnD5e 4.3", until: "DnD5e 5.0" }
-        );
-        return attributes.spell.level;
-      },
-      set(value) {
-        foundry.utils.logCompatibilityWarning(
-          "The `details.spellLevel` property on NPCs have moved to `attributes.spell.level`.",
-          { since: "DnD5e 4.3", until: "DnD5e 5.0" }
-        );
-        attributes.spell.level = value;
-      }
-    });
     if ( this.attributes.spellcasting && !Number.isNumeric(this.attributes.spell.level) ) {
       this.attributes.spell.level = Math.max(this.details.cr, 1);
     }

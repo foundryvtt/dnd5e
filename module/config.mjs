@@ -834,7 +834,7 @@ DND5E.toolIds = new Proxy(DND5E.tools, {
   get(target, prop) {
     foundry.utils.logCompatibilityWarning(
       "`CONFIG.DND5E.toolIds` is deprecated, use `CONFIG.DND5E.tools` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
     );
     return target[prop]?.id ?? target[prop];
   }
@@ -1497,13 +1497,6 @@ DND5E.limitedUsePeriods = {
   day: {
     label: "DND5E.USES.Recovery.Period.Day.Label",
     abbreviation: "DND5E.USES.Recovery.Period.Day.Label"
-  },
-  // TODO: Remove with DnD5e 5.0
-  charges: {
-    label: "DND5E.UsesPeriods.Charges",
-    abbreviation: "DND5E.UsesPeriods.ChargesAbbreviation",
-    formula: true,
-    deprecated: true
   },
   dawn: {
     label: "DND5E.USES.Recovery.Period.Dawn.Label",

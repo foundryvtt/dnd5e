@@ -8,7 +8,6 @@ import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
-import { _applyDeprecatedD20Configs } from "../dice/d20-roll.mjs";
 import { staticID } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
@@ -154,18 +153,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     return this.system.criticalThreshold ?? null;
   }
 
-  /* --------------------------------------------- */
-
-  /**
-   * Does the Item implement an ability check as part of its usage?
-   * @type {boolean}
-   * @see {@link ActionTemplate#hasAbilityCheck}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
-   */
-  get hasAbilityCheck() {
-    return this.system.hasAbilityCheck ?? false;
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -179,48 +166,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item have an area of effect target?
-   * @type {boolean}
-   * @see {@link ActivatedEffectTemplate#hasAreaTarget}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
-   */
-  get hasAreaTarget() {
-    return this.system.hasAreaTarget ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Does the Item implement an attack roll as part of its usage?
    * @type {boolean}
    * @see {@link ActionTemplate#hasAttack}
    */
   get hasAttack() {
     return this.system.hasAttack ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item implement a damage roll as part of its usage?
-   * @type {boolean}
-   * @see {@link ActionTemplate#hasDamage}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
-   */
-  get hasDamage() {
-    return this.system.hasDamage ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item target one or more distinct targets?
-   * @type {boolean}
-   * @see {@link ActivatedEffectTemplate#hasIndividualTarget}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
-   */
-  get hasIndividualTarget() {
-    return this.system.hasIndividualTarget ?? false;
   }
 
   /* -------------------------------------------- */
@@ -238,48 +189,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Does this Item draw from a resource?
-   * @type {boolean}
-   * @see {@link ActivatedEffectTemplate#hasResource}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
-   */
-  get hasResource() {
-    return this.system.hasResource ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does this Item draw from ammunition?
-   * @type {boolean}
-   * @see {@link ActivatedEffectTemplate#hasAmmo}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
-   */
-  get hasAmmo() {
-    return this.system.hasAmmo ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Does the Item implement a saving throw as part of its usage?
    * @type {boolean}
    * @see {@link ActionTemplate#hasSave}
    */
   get hasSave() {
     return this.system.hasSave ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item have a target?
-   * @type {boolean}
-   * @see {@link ActivatedEffectTemplate#hasTarget}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
-   */
-  get hasTarget() {
-    return this.system.hasTarget ?? false;
   }
 
   /* -------------------------------------------- */
@@ -707,28 +622,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Update a label to the Item detailing its total to hit bonus from the following sources:
-   * - item's actor's proficiency bonus if applicable
-   * - item's actor's global bonuses to the given item type
-   * - item document's innate & magical attack bonuses
-   * - item's ammunition if applicable
-   * @returns {{rollData: object, parts: string[]}|null}  Data used in the item's Attack roll.
-   */
-  getAttackToHit() {
-    foundry.utils.logCompatibilityWarning(
-      "The `getAttackToHit` method on `Item5e` has moved to `getAttackData` on `AttackActivity`.",
-      { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true }
-    );
-
-    const activity = this.system.activities?.getByType("attack")[0];
-    if ( !activity ) return null;
-    const { data: rollData, parts } = activity.getAttackData();
-    return { rollData, parts };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Render a rich tooltip for this item.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
    * @returns {Promise<{content: string, classes: string[]}>|null}
@@ -772,7 +665,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /**
    * Trigger an Item usage, optionally creating a chat message with followup actions.
    * @param {ActivityUseConfiguration} config       Configuration info for the activation.
-   * @param {boolean} [config.legacy=true]          Whether this is a legacy invocation, using the old signature.
    * @param {boolean} [config.chooseActivity=false] Force the activity selection prompt unless the fast-forward modifier
    *                                                is held.
    * @param {ActivityDialogConfiguration} dialog    Configuration info for the usage dialog.
@@ -785,19 +677,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( this.pack ) return;
 
     let event = config.event;
-    if ( config.legacy !== false ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `Item5e#use` method has a different signature. Pass the `legacy: false` option to suppress this warning "
-        + " once the appropriate updates have been made.",
-        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-      );
-      event = dialog?.event;
-    }
     const activities = this.system.activities?.filter(a =>
       !this.getFlag("dnd5e", "riders.activity")?.includes(a.id) && a.canUse
     );
     if ( activities?.length ) {
-      const { legacy, chooseActivity, ...activityConfig } = config;
+      const { chooseActivity, ...activityConfig } = config;
       let usageConfig = activityConfig;
       let dialogConfig = dialog;
       let messageConfig = message;
@@ -806,43 +690,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         activity = await ActivityChoiceDialog.create(this);
       }
       if ( !activity ) return;
-      if ( legacy !== false ) {
-        usageConfig = {};
-        dialogConfig = {};
-        messageConfig = {};
-        activity._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, activityConfig, dialog);
-      }
       return activity.use(usageConfig, dialogConfig, messageConfig);
     }
     if ( this.actor ) return this.displayCard(message);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle item's consumption.
-   * @param {Item5e} item  Item or clone to use when calculating updates.
-   * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
-   * @param {ItemUseOptions} options       Additional options used for configuring item usage.
-   * @returns {false|void}                 Returns `false` if any further usage should be canceled.
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
-   */
-  async consume(item, config, options) {
-    foundry.utils.logCompatibilityWarning(
-      "The `Item5e#consume` method has been deprecated and should now be called directly on the activity.",
-      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-    );
-    if ( this.system.activities ) {
-      const activity = this.system.activities.contents[0];
-      if ( activity ) {
-        const usageConfig = {};
-        const dialogConfig = {};
-        const messageConfig = {};
-        activity._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options);
-        return activity.consume(usageConfig, messageConfig);
-      }
-    }
-    return false;
   }
 
   /* -------------------------------------------- */
@@ -883,23 +733,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     /**
      * A hook event that fires before an item chat card is created without using an activity.
-     * @function dnd5e.preDisplayCardV2
+     * @function dnd5e.preDisplayCard
      * @memberof hookEvents
      * @param {Item5e} item                           Item for which the card will be created.
      * @param {ActivityMessageConfiguration} message  Configuration for the roll message.
      * @returns {boolean}                             Return `false` to prevent the card from being displayed.
      */
+    if ( Hooks.call("dnd5e.preDisplayCard", this, messageConfig) === false ) return;
     if ( Hooks.call("dnd5e.preDisplayCardV2", this, messageConfig) === false ) return;
-
-    if ( "dnd5e.preDisplayCard" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.preDisplayCard` hook has been deprecated and replaced with `dnd5e.preDisplayCardV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-      );
-      const hookData = { createMessage: messageConfig.create };
-      Hooks.callAll("dnd5e.preDisplayCard", this, messageConfig.data, hookData);
-      messageConfig.create = hookData.createMessage;
-    }
 
     ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
     const card = messageConfig.create === false ? messageConfig.data : await ChatMessage.create(messageConfig.data);
@@ -951,117 +792,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /* -------------------------------------------- */
   /*  Item Rolls - Attack, Damage, Saves, Checks  */
-  /* -------------------------------------------- */
-
-  /**
-   * Place an attack roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the d20Roll logic for the core implementation
-   *
-   * @param {D20RollConfiguration} options  Roll options which are configured and provided to the d20Roll function
-   * @returns {Promise<D20Roll|null>}       A Promise which resolves to the created Roll instance
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
-   */
-  async rollAttack({ spellLevel, ...options }={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `Item5e#rollAttack` method has been deprecated and should now be called directly on the attack activity.",
-      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-    );
-
-    let item = this;
-    if ( spellLevel && (this.type === "spell") ) {
-      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, spellLevel - item.system.level) }, { keepId: true });
-    }
-
-    const activity = item.system.activities?.getByType("attack")[0];
-    if ( !activity ) throw new Error("This Item does not have an Attack activity to roll!");
-
-    const rollConfig = {};
-    const dialogConfig = {};
-    const messageConfig = {};
-    _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, options);
-
-    const rolls = await activity.rollAttack(rollConfig, dialogConfig, messageConfig);
-    return rolls?.[0] ?? null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Place a damage roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the damageRoll logic for the core implementation.
-   * @param {object} [config]
-   * @param {MouseEvent} [config.event]    An event which triggered this roll, if any
-   * @param {boolean} [config.critical]    Should damage be rolled as a critical hit?
-   * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
-   * @param {boolean} [config.versatile]   If the item is a weapon, roll damage using the versatile formula
-   * @param {DamageRollConfiguration} [config.options]  Additional options passed to the damageRoll function
-   * @returns {Promise<DamageRoll[]>}      A Promise which resolves to the created Roll instances, or null if the action
-   *                                       cannot be performed.
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
-   */
-  async rollDamage({ spellLevel, ...options }={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `Item5e#rollDamage` method has been deprecated and should now be called directly on an activity.",
-      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-    );
-
-    let item = this;
-    if ( spellLevel && (this.type === "spell") ) {
-      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, spellLevel - item.system.level) }, { keepId: true });
-    }
-
-    const activity = item.system.activities?.getByType("attack")[0] || item.system.activities?.getByType("damage")[0]
-      || item.system.activities?.getByType("save")[0] || item.system.activities?.getByType("heal")[0];
-    if ( !activity ) throw new Error("This Item does not have a damaging activity to roll!");
-
-    const returnMultiple = options.returnMultiple;
-    const rolls = await activity.rollDamage(options);
-    return returnMultiple ? rolls : rolls?.[0];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare data needed to roll an attack using an item (weapon, feat, spell, or equipment)
-   * and then pass it off to `d20Roll`.
-   * @param {object} [options]
-   * @param {boolean} [options.spellLevel]  Level at which a spell is cast.
-   * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
-   */
-  async rollFormula({spellLevel}={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `Item5e#rollFormula` method has been deprecated and should now be called directly on the utility activity.",
-      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-    );
-
-    let item = this;
-    if ( spellLevel && (this.type === "spell") ) {
-      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, spellLevel - item.system.level) }, { keepId: true });
-    }
-
-    const activity = item.system.activities?.getByType("utility")[0];
-    if ( !activity ) throw new Error("This Item does not have a Utility activity to roll!");
-
-    const rolls = await activity.rollFormula({}, { configure: false });
-    return rolls?.[0];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Perform an ability recharge test for an item which uses the d6 recharge mechanic.
-   * @returns {Promise<Roll|void>}   A Promise which resolves to the created Roll instance
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
-   */
-  async rollRecharge() {
-    foundry.utils.logCompatibilityWarning(
-      "The `rollRecharge` method on `Item5e` has been moved to `system.uses.rollRecharge`.",
-      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-    );
-    return (await this.system.uses?.rollRecharge())?.[0];
-  }
-
   /* -------------------------------------------- */
 
   /**

@@ -9,7 +9,6 @@ export {default as GroupActorSheet} from "./group-sheet.mjs";
 export {default as BaseConfigSheet} from "./base-config.mjs";
 export {default as BaseConfigSheetV2} from "./api/base-config-sheet.mjs";
 
-export {default as ActorSheetFlags} from "./sheet-flags.mjs";
 export {default as ActorSheetMixin} from "./sheet-mixin.mjs";
 export {default as ActorSheetV2Mixin} from "./sheet-v2-mixin.mjs";
 export {default as TransformDialog} from "./transform-dialog.mjs";

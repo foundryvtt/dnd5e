@@ -98,7 +98,6 @@ export default class FeatData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
-    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
 
@@ -124,32 +123,6 @@ export default class FeatData extends ItemDataModel.mixin(
   /** @inheritDoc */
   prepareFinalData() {
     this.prepareFinalActivityData(this.parent.getRollData({ deterministic: true }));
-
-    const uses = this.uses;
-    this.recharge ??= {};
-    Object.defineProperty(this.recharge, "value", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "Recharge data has been merged into uses data. Recharge state can now be determined by checking"
-          + " `system.uses.recovery` for a profile with a `period` of 'recharge', and checking its `formula` for the"
-          + " recharge formula.",
-          { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-        );
-        return uses.period === "recharge" ? Number(uses.formula) : null;
-      },
-      configurable: true
-    });
-    Object.defineProperty(this.recharge, "charged", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "Recharge data has been merged into uses data. Determining charged state can now be done by determining"
-          + " whether `system.uses.value` is greater than `0`.",
-          { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-        );
-        return uses.value > 0;
-      },
-      configurable: true
-    });
   }
 
   /* -------------------------------------------- */
