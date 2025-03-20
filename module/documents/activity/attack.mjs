@@ -185,7 +185,7 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
     const flags = {};
     let ammoUpdate = null;
 
-    const canUpdate = this.item.isOwner && !this.item[game.release.generation < 13 ? "compendium" : "inCompendium"];
+    const canUpdate = this.item.isOwner && !this.item.inCompendium;
     if ( rolls[0].options.ammunition ) {
       const ammo = this.actor?.items.get(rolls[0].options.ammunition);
       if ( ammo ) {

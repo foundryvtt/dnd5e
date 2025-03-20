@@ -50,30 +50,3 @@ export function renderSettings(html) {
   if ( pip ) section.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
   html.querySelector(".info").insertAdjacentElement("afterend", section);
 }
-
-/* -------------------------------------------- */
-
-/**
- * Render a custom entry for game details in the settings sidebar.
- * @param {HTMLElement} html  The settings sidebar HTML.
- */
-export function renderSettingsLegacy(html) {
-  const details = html.querySelector("#game-details");
-  const pip = details.querySelector(".system-info .update");
-  details.querySelector(".system").remove();
-
-  const heading = document.createElement("div");
-  heading.classList.add("dnd5e2", "sidebar-heading");
-  heading.innerHTML = `<h2>${game.i18n.localize("WORLD.GameSystem")}</h2>`;
-  heading.append(_generateLinks());
-  details.insertAdjacentElement("afterend", heading);
-
-  const badge = document.createElement("div");
-  badge.classList.add("dnd5e2", "system-badge");
-  badge.innerHTML = `
-    <img src="systems/dnd5e/ui/official/dnd-badge-32.webp" data-tooltip="${dnd5e.title}" alt="${dnd5e.title}">
-    <span class="system-info">${dnd5e.version}</span>
-  `;
-  if ( pip ) badge.querySelector(".system-info").insertAdjacentElement("beforeend", pip);
-  heading.insertAdjacentElement("afterend", badge);
-}

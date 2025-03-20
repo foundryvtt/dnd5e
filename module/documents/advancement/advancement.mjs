@@ -104,12 +104,12 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
    * Perform the pre-localization of this data model.
    */
   static localize() {
-    Localization.localizeDataModel(this);
+    foundry.helpers.Localization.localizeDataModel(this);
     if ( this.metadata.dataModels?.configuration ) {
-      Localization.localizeDataModel(this.metadata.dataModels.configuration);
+      foundry.helpers.Localization.localizeDataModel(this.metadata.dataModels.configuration);
     }
     if ( this.metadata.dataModels?.value ) {
-      Localization.localizeDataModel(this.metadata.dataModels.value);
+      foundry.helpers.Localization.localizeDataModel(this.metadata.dataModels.value);
     }
   }
 
@@ -324,7 +324,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
    * @returns {ContextMenuEntry[]}
    */
   getContextMenuOptions() {
-    if ( this.item.isOwner && !this.item[game.release.generation < 13 ? "compendium" : "collection"]?.locked ) return [
+    if ( this.item.isOwner && !this.item.collection?.locked ) return [
       {
         name: "DND5E.ADVANCEMENT.Action.Edit",
         icon: "<i class='fas fa-edit fa-fw'></i>",

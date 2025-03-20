@@ -2,7 +2,7 @@
  * A specialized subclass of Tabs that handles tabs which exist outside an Application's inner HTML.
  * @extends {Tabs}
  */
-export default class Tabs5e extends (foundry.applications?.ux?.Tabs ?? Tabs) {
+export default class Tabs5e extends foundry.applications.ux.Tabs {
   /** @override */
   bind(html) {
     if ( !this._nav ) {
