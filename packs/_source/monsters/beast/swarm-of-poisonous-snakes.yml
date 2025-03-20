@@ -54,8 +54,8 @@ system:
     hp:
       value: 36
       max: 36
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 8d8
     init:
       ability: ''
@@ -546,14 +546,12 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>0
-          ft.,</strong> one creature in the swarm's space. Hit: <strong>7 (2d6)
-          <em>piercing damage</em></strong>, or <strong>3 (1d6) <em>piercing
-          damage</em></strong> if the swarm has half of its hit points or
-          fewer.</p><p>The target must make a  <strong>DC 10
-          Constitution</strong> saving throw, taking <strong>14 (4d6) <em>poison
-          damage</em></strong> on a failed save, or half as much damage on a
-          successful one.</p>
+          <p>Melee Weapon Attack: [[/attack]], 0 ft., one creature in the
+          swarm's space. Hit: [[/damage average]] damage, or [[/damage 1d6
+          piercing average]] damage if the swarm has half of its hit points or
+          fewer.</p><p>The target must make a [[/save]] saving throw, taking
+          [[/damage average activity=dnd5eactivity100]] damage on a failed save,
+          or half as much damage on a successful one.</p>
         chat: >-
           <p>The Swarm of Poisonous Snakes attacks with a flurry of Bites. The
           target must make a <strong>Constitution</strong> saving throw.</p>
@@ -580,7 +578,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 0
       uses:
         max: ''
         recovery: []
@@ -648,7 +646,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -677,8 +675,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
-            bonus: ''
+            ability: none
+            bonus: '@abilities.dex.mod'
             critical:
               threshold: null
             flat: false
@@ -691,6 +689,9 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -710,7 +711,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -741,95 +742,46 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 2
-                denomination: 6
-                bonus: ''
-                types:
-                  - piercing
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                number: 4
+                denomination: '6'
+                bonus: ''
+                types:
+                  - poison
           save:
             ability: con
             dc:
               calculation: ''
               formula: '10'
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 4d6
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bites
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676466
+      modifiedTime: 1741123471464
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!XfQMBoTh892XSnCX.OyLoUiIl3p2j4p59'
 effects: []
@@ -842,8 +794,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171237545
-  modifiedTime: 1726171445882
+  modifiedTime: 1741123477918
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!XfQMBoTh892XSnCX'

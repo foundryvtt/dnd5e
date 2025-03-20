@@ -54,8 +54,8 @@ system:
     hp:
       value: 18
       max: 18
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 4d8
     init:
       ability: ''
@@ -581,11 +581,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>piercing
-          damage</em></strong>.</p><p>The target is grappled (escape DC 11).
-          Until this grapple ends, the target is restrained, and the frog can't
-          bite another target.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
+          &amp;Reference[grappled] (escape DC 11). Until this grapple ends, the
+          target is restrained, and the frog can't bite another target.</p>
         chat: >-
           <p>The Giant Frog attacks with its Bite. If successful, the target is
           grappled. Until this grapple ends, the target is restrained, and the
@@ -610,7 +608,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -728,6 +726,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -741,9 +740,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676595
+      modifiedTime: 1741121035332
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!kSAi2KRonL4G4JpO.2y826IUSIAgmYf2c'
   - _id: 37M4eUyS3kovXqdr
@@ -755,13 +754,13 @@ items:
         value: >-
           <p>The frog makes one bite attack against a Small or smaller target it
           is grappling. If the attack hits, the target is swallowed, and the
-          grapple ends.</p><p>The swallowed target is blinded and restrained, it
-          has total cover against attacks and other effects outside the frog,
-          and it takes <strong>5 (2d4) <em>acid damage</em></strong> at the
-          start of each of the frog's turns. The frog can have only one target
-          swallowed at a time. If the frog dies, a swallowed creature is no
-          longer restrained by it and can escape from the corpse using 5 ft. of
-          movement, exiting prone.</p>
+          grapple ends.</p><p>The swallowed target is &amp;Reference[blinded]
+          and &amp;Reference[restrained], it has total cover against attacks and
+          other effects outside the frog, and it takes [[/damage average]]
+          damage at the start of each of the frog's turns. The frog can have
+          only one target swallowed at a time.</p><p>If the frog dies, a
+          swallowed creature is no longer restrained by it and can escape from
+          the corpse using 5 ft. of movement, exiting prone.</p>
         chat: <p>The Giant Frog attacks with its Swallow.</p>
       source:
         custom: ''
@@ -775,7 +774,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -862,9 +861,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676595
+      modifiedTime: 1741121102713
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!kSAi2KRonL4G4JpO.37M4eUyS3kovXqdr'
 effects: []
@@ -877,8 +876,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171252242
-  modifiedTime: 1726171448809
+  modifiedTime: 1741121107858
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!kSAi2KRonL4G4JpO'

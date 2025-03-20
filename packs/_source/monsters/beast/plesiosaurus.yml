@@ -54,8 +54,8 @@ system:
     hp:
       value: 68
       max: 68
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 8d10 + 24
     init:
       ability: ''
@@ -483,10 +483,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>14 (3d6 + 4)
-          <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Plesiosaurus attacks with its Bite.</p>
       source:
         custom: ''
@@ -508,7 +505,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 10
+        value: null
         long: null
         units: ft
         reach: null
@@ -627,6 +624,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -640,9 +638,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676402
+      modifiedTime: 1741123023212
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!4OeZZguYgJcsZoM9.RbcK5H5JO9EnIiCA'
   - _id: PtGDikGuH6rHkITy
@@ -702,8 +700,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171201790
-  modifiedTime: 1726171439422
+  modifiedTime: 1741123026052
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!4OeZZguYgJcsZoM9'
