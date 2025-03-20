@@ -54,8 +54,8 @@ system:
     hp:
       value: 95
       max: 95
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 10d12 + 30
     init:
       ability: ''
@@ -483,10 +483,7 @@ items:
     img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>24 (4d8 + 6) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Triceratops attacks with its Gore.</p>
       source:
         custom: ''
@@ -625,6 +622,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: gore
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -636,9 +634,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676803
+      modifiedTime: 1741123788739
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!e5IQxSJO7ySEDdSH.h5lGnMKW65NWIi2W'
   - _id: 6UWSefP0BqnmYwAz
@@ -648,9 +646,8 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5
-          ft.,</strong> one prone creature. Hit: <strong>22 (3d10 + 6)
-          <em>bludgeoning damage</em></strong>.</p>
+          <p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one prone
+          creature. Hit: [[/damage average]] damage.</p>
         chat: <p>The Triceratops attacks with its Stomp.</p>
       source:
         custom: ''
@@ -789,6 +786,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: stomp
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -800,9 +798,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676803
+      modifiedTime: 1741123830633
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!e5IQxSJO7ySEDdSH.6UWSefP0BqnmYwAz'
   - _id: 4jztSrWQNxc4q55u
@@ -812,12 +810,11 @@ items:
     system:
       description:
         value: >-
-          <p>If the triceratops moves at least <strong>20 ft.</strong> straight
-          toward a creature and then hits it with a gore attack on the same
-          turn, that target must succeed on a <strong>DC 13 Strength saving
-          throw</strong> or be knocked prone. If the target is prone, the
-          triceratops can make one stomp attack against it as a bonus
-          action.</p>
+          <p>If the triceratops moves at least 20 ft. straight toward a creature
+          and then hits it with a gore attack on the same turn, that target must
+          succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone]. If the target is prone, the triceratops can
+          make one stomp attack against it as a bonus action.</p>
         chat: >-
           <p>If the triceratops moves at least <strong>20 ft.</strong> straight
           toward a creature and then hits it with a gore attack on the same
@@ -912,9 +909,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676803
+      modifiedTime: 1741123777625
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!e5IQxSJO7ySEDdSH.4jztSrWQNxc4q55u'
 effects: []
@@ -927,8 +924,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171244487
-  modifiedTime: 1726171447112
+  modifiedTime: 1741123835698
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!e5IQxSJO7ySEDdSH'

@@ -54,8 +54,8 @@ system:
     hp:
       value: 22
       max: 22
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 5d8
     init:
       ability: ''
@@ -495,10 +495,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>0
-          ft.,</strong> one creature in the swarm's space. Hit: <strong>5 (2d4)
-          <em>piercing damage</em></strong>, or <strong>2 (1d4) <em>piercing
-          damage</em></strong> if the swarm has half of its hit points or
+          <p>Melee Weapon Attack: [[/attack]], 0 ft., one creature in the
+          swarm's space. Hit: [[/damage average]] damage, or [[/damage 1d4
+          piercing average]] damage if the swarm has half of its hit points or
           fewer.</p>
         chat: <p>The Swarm of Bats attacks with a flurry of Bites.</p>
       source:
@@ -524,7 +523,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 0
       uses:
         max: ''
         recovery: []
@@ -591,7 +590,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -620,8 +619,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
-            bonus: ''
+            ability: none
+            bonus: '@abilities.dex.mod'
             critical:
               threshold: null
             flat: false
@@ -634,24 +633,32 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bites
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676451
+      modifiedTime: 1741123130838
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!PcZ0QjIG6bHpffp9.0NpX1YUDTXjgIm23'
   - _id: cBVltbg8hNBBuTZ7
@@ -689,7 +696,7 @@ items:
       identifier: swarm
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -702,8 +709,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741123040007
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!PcZ0QjIG6bHpffp9.cBVltbg8hNBBuTZ7'
   - _id: AKRFqSGc4D9j3Mhl
     name: Keen Hearing
@@ -783,7 +790,7 @@ items:
       identifier: echolocation
     effects: []
     folder: null
-    sort: 0
+    sort: -100000
     ownership:
       default: 0
     flags:
@@ -796,8 +803,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741123042944
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!PcZ0QjIG6bHpffp9.tRdXVBesxDaXdhqP'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -809,8 +816,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171229635
-  modifiedTime: 1726171444389
+  modifiedTime: 1741123137805
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!PcZ0QjIG6bHpffp9'

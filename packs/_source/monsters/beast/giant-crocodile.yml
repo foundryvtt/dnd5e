@@ -54,8 +54,8 @@ system:
     hp:
       value: 85
       max: 85
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 9d12 + 27
     init:
       ability: ''
@@ -625,8 +625,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741118368431
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!3YwmvDupMwycWNCO.YSeYSzU3P0FooGIw'
   - _id: u7eurp95tuW3tYGl
     name: Bite
@@ -635,11 +635,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>21 (3d10 + 5) <em>piercing
-          damage</em></strong>.</p><p>The target is grappled (escape DC 16).
-          Until this grapple ends, the target is restrained, and the crocodile
-          can't bite another target.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
+          &amp;Reference[grappled] (escape DC 16). Until this grapple ends, the
+          target is restrained, and the crocodile can't bite another target.</p>
         chat: >-
           <p>The Giant Crocodile attacks with its Bite. If successful, the
           target is grappled. Until this grapple ends, the target is restrained,
@@ -664,7 +662,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -782,9 +780,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -795,9 +794,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676637
+      modifiedTime: 1741118396110
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!3YwmvDupMwycWNCO.u7eurp95tuW3tYGl'
   - _id: VkCVMF2SvsuYWWYg
@@ -807,12 +806,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>,
-          <strong>10 ft.,</strong> one target <strong>not grappled by the
-          crocodile</strong>. Hit: <strong>14 (2d8 + 5) <em>bludgeoning
-          damage</em></strong>.</p><p>If the target is a creature, it must
-          succeed on a  <strong>DC 16 Strength</strong> saving throw or be
-          knocked prone.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone].</p>
         chat: >-
           <p>The Giant Crocodile attacks with its Tail. If the target is a
           creature, it must make a <strong>Strength</strong> saving throw.</p>
@@ -836,7 +832,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 10
+        value: null
         long: null
         units: ft
         reach: null
@@ -1001,19 +997,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 8
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
@@ -1024,20 +1008,25 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tail
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676637
+      modifiedTime: 1741118452325
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!3YwmvDupMwycWNCO.VkCVMF2SvsuYWWYg'
 effects: []
@@ -1050,8 +1039,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171200554
-  modifiedTime: 1726171439196
+  modifiedTime: 1741118469898
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!3YwmvDupMwycWNCO'

@@ -54,8 +54,8 @@ system:
     hp:
       value: 37
       max: 37
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 5d10 + 10
     init:
       ability: ''
@@ -581,11 +581,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>piercing
-          damage</em></strong>.</p><p>If the target is a creature, it must
-          succeed on a  <strong>DC 13 Strength</strong> saving throw or be
-          knocked prone.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone].</p>
         chat: >-
           <p>The Dire Wolf attacks with its Bite. If the target is a creature,
           it must make a <strong>Strength</strong> saving throw or be knocked
@@ -610,7 +608,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -774,19 +772,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
@@ -797,6 +783,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -805,14 +792,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676428
+      modifiedTime: 1741124505165
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!EYiQZ3rFL25fEJY5.tx9xPDEQ8osJq6ZQ'
 effects: []
@@ -825,8 +816,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171215639
-  modifiedTime: 1726171441806
+  modifiedTime: 1741117411427
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!EYiQZ3rFL25fEJY5'

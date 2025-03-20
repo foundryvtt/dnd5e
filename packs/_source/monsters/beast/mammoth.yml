@@ -54,8 +54,8 @@ system:
     hp:
       value: 126
       max: 126
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 11d12 + 55
     init:
       ability: ''
@@ -484,11 +484,11 @@ items:
     system:
       description:
         value: >-
-          <p>If the mammoth moves at least <strong>20 ft.</strong> straight
-          toward a creature and then hits it with a gore attack on the same
-          turn, that target must succeed on a <strong>DC 18 Strength saving
-          throw</strong> or be knocked prone. If the target is prone, the
-          mammoth can make one stomp attack against it as a bonus action.</p>
+          <p>If the mammoth moves at least 20 ft. straight toward a creature and
+          then hits it with a gore attack on the same turn, that target must
+          succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone].</p><p>If the target is prone, the mammoth can
+          make one stomp attack against it as a bonus action.</p>
         chat: >-
           <p>If the mammoth moves at least <strong>20 ft.</strong> straight
           toward a creature and then hits it with a gore attack on the same
@@ -638,9 +638,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676786
+      modifiedTime: 1741122303693
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MiYRAIHwm9It1in8.4LYRJH02EsSnZUNc'
   - _id: S7i3GTdoo6tyc2wL
@@ -649,10 +649,7 @@ items:
     img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>25 (4d8 + 7)
-          <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Mammoth attacks with its Gore.</p>
       source:
         custom: ''
@@ -793,6 +790,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: gore
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -804,9 +802,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676786
+      modifiedTime: 1741122313887
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MiYRAIHwm9It1in8.S7i3GTdoo6tyc2wL'
   - _id: Hx541foatcQiMSZj
@@ -816,9 +814,8 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>,
-          <strong>5 ft.,</strong> one <strong>prone</strong> creature. Hit:
-          <strong>29 (4d10 + 7) <em>bludgeoning damage</em></strong>.</p>
+          <p><em>Melee Weapon Attack: </em>[[/attack]], 5 ft., one prone
+          creature. <em>Hit:</em> [[/damage average]]<em> </em>damage.</p>
         chat: <p>The Mammoth attacks with its Stomp.</p>
       source:
         custom: ''
@@ -958,6 +955,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: stomp
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -969,9 +967,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676786
+      modifiedTime: 1741122342968
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MiYRAIHwm9It1in8.Hx541foatcQiMSZj'
 effects: []
@@ -984,8 +982,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171226268
-  modifiedTime: 1726171443818
+  modifiedTime: 1741122351458
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!MiYRAIHwm9It1in8'

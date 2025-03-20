@@ -54,8 +54,8 @@ system:
     hp:
       value: 10
       max: 10
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 3d6
     init:
       ability: ''
@@ -485,10 +485,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+1 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: 1 (1d4 - 1) <em>slashing
-          damage</em>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Awakened Shrub attacks with its Rake.</p>
       source:
         custom: ''
@@ -639,9 +636,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676490
+      modifiedTime: 1741116544844
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gaSTr7DFZJLmgI2J.Vdk7dsybx2iYlKVx'
   - _id: cfgn9yboSN7jIsDC
@@ -703,8 +700,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171247847
-  modifiedTime: 1726171447908
+  modifiedTime: 1741116553216
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!gaSTr7DFZJLmgI2J'

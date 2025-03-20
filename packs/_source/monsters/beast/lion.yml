@@ -54,8 +54,8 @@ system:
     hp:
       value: 26
       max: 26
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 4d10 + 4
     init:
       ability: ''
@@ -510,7 +510,7 @@ items:
       identifier: keen-smell
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
@@ -521,8 +521,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741122224466
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hjhERRzafCiFFVLA.ZFsvhBgKXqgf17TZ'
   - _id: Kztga4jBHZCUjO3A
     name: Pack Tactics
@@ -558,7 +558,7 @@ items:
       identifier: pack-tactics
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags:
@@ -571,8 +571,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741122224466
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hjhERRzafCiFFVLA.Kztga4jBHZCUjO3A'
   - _id: pQdtHaxlArSTjbqb
     name: Pounce
@@ -581,10 +581,10 @@ items:
     system:
       description:
         value: >-
-          <p>If the lion moves at least <strong>20 ft.</strong> straight toward
-          a creature and then hits it with a claw attack on the same turn, that
-          target must succeed on a <strong>DC 13 Strength saving throw</strong>
-          or be knocked prone.</p><p>If the target is prone, the lion can make
+          <p>If the lion moves at least 20 ft. straight toward a creature and
+          then hits it with a claw attack on the same turn, that target must
+          succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone].</p><p>If the target is prone, the lion can make
           one bite attack against it as a bonus action.</p>
         chat: >-
           <p>If the lion moves at least <strong>20 ft.</strong> straight toward
@@ -724,7 +724,7 @@ items:
       identifier: pounce
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -735,9 +735,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676816
+      modifiedTime: 1741122291080
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hjhERRzafCiFFVLA.pQdtHaxlArSTjbqb'
   - _id: 3dmAdKAVc8JqLgIj
@@ -773,7 +773,7 @@ items:
       identifier: running-leap
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
@@ -786,8 +786,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741122224466
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hjhERRzafCiFFVLA.3dmAdKAVc8JqLgIj'
   - _id: gKj1TlVfDhLp5WIk
     name: Bite
@@ -795,10 +795,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Lion attacks with its Bite.</p>
       source:
         custom: ''
@@ -820,7 +817,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -938,6 +935,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -951,9 +949,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676816
+      modifiedTime: 1741122245145
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hjhERRzafCiFFVLA.gKj1TlVfDhLp5WIk'
   - _id: CHIayoaCAZj0GBkM
@@ -962,10 +960,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Lion attacks with its Claw.</p>
       source:
         custom: ''
@@ -987,7 +982,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -1106,6 +1101,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1117,9 +1113,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676816
+      modifiedTime: 1741122241114
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hjhERRzafCiFFVLA.CHIayoaCAZj0GBkM'
 effects: []
@@ -1132,8 +1128,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171249889
-  modifiedTime: 1726171448316
+  modifiedTime: 1741122246651
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!hjhERRzafCiFFVLA'

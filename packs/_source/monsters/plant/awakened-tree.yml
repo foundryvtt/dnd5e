@@ -54,8 +54,8 @@ system:
     hp:
       value: 59
       max: 59
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 7d12 + 14
     init:
       ability: ''
@@ -535,10 +535,7 @@ items:
     img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>14 (3d6 + 4)
-          <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Awakened Tree attacks with its Slam.</p>
       source:
         custom: ''
@@ -690,9 +687,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676459
+      modifiedTime: 1741116564017
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!UR2gWLFHmFwG7ReH.WEesSpitzLnaCknL'
 effects: []
@@ -705,8 +702,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171234693
-  modifiedTime: 1726171445344
+  modifiedTime: 1741116567041
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!UR2gWLFHmFwG7ReH'

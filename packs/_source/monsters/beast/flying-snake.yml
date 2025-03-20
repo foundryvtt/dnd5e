@@ -54,8 +54,8 @@ system:
     hp:
       value: 5
       max: 5
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d4
     init:
       ability: ''
@@ -532,10 +532,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit:<strong> 1 <em>piercing damage</em>
-          </strong>plus <strong>7 (3d4) <em>poison damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Flying Snake attacks with its Bite.</p>
       source:
         custom: ''
@@ -557,7 +554,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -598,7 +595,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - fin
       proficient: 1
       unidentified:
         description: ''
@@ -627,7 +625,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -670,23 +668,23 @@ items:
               bonus: ''
             includeBase: true
             parts:
-              - number: 3
-                denomination: 4
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
+                denomination: '4'
                 bonus: ''
                 types:
                   - poison
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -695,14 +693,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676453
+      modifiedTime: 1741117888824
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!SMfgOsfPgf6rb01k.ITtDDLuoOyJbDQpA'
 effects: []
@@ -715,8 +717,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171231941
-  modifiedTime: 1726171444817
+  modifiedTime: 1741117886831
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!SMfgOsfPgf6rb01k'

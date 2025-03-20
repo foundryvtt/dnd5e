@@ -54,8 +54,8 @@ system:
     hp:
       value: 16
       max: 16
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 3d10
     init:
       ability: ''
@@ -486,9 +486,8 @@ items:
         value: >-
           <p>If the sea horse moves at least 20 ft. straight toward a target and
           then hits it with a ram attack on the same turn, the target takes an
-          extra <strong>7 (2d6) <em>bludgeoning damage</em></strong>.</p><p>If
-          the target is a creature, it must succeed on a  <strong>DC 11
-          Strength</strong> saving throw or be knocked prone.</p>
+          extra [[/damage average]] damage.</p><p>If the target is a creature,
+          it must succeed on a [[/save]] saving throw or be knocked prone.</p>
         chat: >-
           <p>If the sea horse moves at least 20 ft. straight toward a target and
           then hits it with a ram attack on the same turn, the target takes
@@ -512,72 +511,6 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '20'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            critical:
-              allow: false
-              bonus: ''
-            parts:
-              - number: 2
-                denomination: 6
-                bonus: ''
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -597,7 +530,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -628,25 +561,71 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 6
-                bonus: ''
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
+          sort: 200000
+          name: ''
+          img: ''
+          appliedEffects: []
+        djeuuB0KX1WtfTRV:
+          type: damage
+          _id: djeuuB0KX1WtfTRV
+          sort: 100000
+          activation:
+            type: ''
+            value: null
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            override: false
+            units: self
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            critical:
+              allow: true
+              bonus: ''
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: '6'
+                bonus: ''
+                types:
+                  - bludgeoning
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -659,14 +638,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676581
+      modifiedTime: 1741121563161
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!c9XDGsTJRy9HUaxQ.MB7KUNGnxz6mw1J5'
   - _id: yCZ6sgHxxIr0zIxO
@@ -722,10 +705,7 @@ items:
     img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Giant Sea Horse attacks with its Ram.</p>
       source:
         custom: ''
@@ -747,7 +727,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -865,6 +845,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: ram
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -876,9 +857,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676581
+      modifiedTime: 1741121595669
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!c9XDGsTJRy9HUaxQ.tTZCmbeeSHXXFZGJ'
 effects: []
@@ -891,8 +872,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171242626
-  modifiedTime: 1726171446710
+  modifiedTime: 1741121578595
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!c9XDGsTJRy9HUaxQ'

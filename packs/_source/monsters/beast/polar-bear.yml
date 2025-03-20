@@ -54,8 +54,8 @@ system:
     hp:
       value: 42
       max: 42
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 5d10 + 15
     init:
       ability: ''
@@ -623,8 +623,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741122652177
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hb6pjvdCNYmLLp8V.hJyurwicMrRIt2TC'
   - _id: c8cisRQ7Ki3qiXgL
     name: Bite
@@ -632,10 +632,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>9 (1d8 + 5) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Polar Bear attacks with its Bite.</p>
       source:
         custom: ''
@@ -657,7 +654,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -775,9 +772,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -788,9 +786,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676696
+      modifiedTime: 1741122659644
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hb6pjvdCNYmLLp8V.c8cisRQ7Ki3qiXgL'
   - _id: jFBgpP0EO1Y2HRL0
@@ -799,10 +797,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>12 (2d6 + 5) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Polar Bear attacks with its Claws.</p>
       source:
         custom: ''
@@ -824,7 +819,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -942,9 +937,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -953,9 +949,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676696
+      modifiedTime: 1741122666920
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hb6pjvdCNYmLLp8V.jFBgpP0EO1Y2HRL0'
 effects: []
@@ -968,8 +964,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171249697
-  modifiedTime: 1726171448273
+  modifiedTime: 1741122668745
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!hb6pjvdCNYmLLp8V'
