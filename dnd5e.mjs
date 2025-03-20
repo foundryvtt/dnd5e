@@ -18,16 +18,16 @@ import * as canvas from "./module/canvas/_module.mjs";
 import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
-import DragDrop5e from "./module/drag-drop.mjs";
 import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
 import ModuleArt from "./module/module-art.mjs";
-import {registerModuleData, setupModulePacks} from "./module/module-registration.mjs";
+import { registerModuleData, setupModulePacks } from "./module/module-registration.mjs";
 import parseUuid from "./module/parse-uuid.mjs";
-import {default as registry} from "./module/registry.mjs";
+import { default as registry } from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
 import * as utils from "./module/utils.mjs";
+import { extendDragDrop } from "./module/drag-drop.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -47,7 +47,7 @@ globalThis.dnd5e = {
   utils
 };
 
-DragDrop = DragDrop5e;
+extendDragDrop();
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
