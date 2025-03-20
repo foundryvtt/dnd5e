@@ -103,7 +103,6 @@ export default class ChatMessage5e extends ChatMessage {
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    this._shimFlags();
     if ( !this.flags.dnd5e?.item?.data && this.flags.dnd5e?.item?.id ) {
       const itemData = this.getFlag("dnd5e", "use.consumed.deleted")?.find(i => i._id === this.flags.dnd5e.item.id);
       if ( itemData ) Object.defineProperty(this.flags.dnd5e.item, "data", { value: itemData });
@@ -1024,79 +1023,5 @@ export default class ChatMessage5e extends ChatMessage {
    */
   getOriginatingMessage() {
     return game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
-  }
-
-  /* -------------------------------------------- */
-  /*  Shims                                       */
-  /* -------------------------------------------- */
-
-  /**
-   * Apply shims to maintain access to the old `use` and `itemData` flags.
-   * @internal
-   */
-  _shimFlags() {
-    const flags = foundry.utils.getProperty(this, "flags.dnd5e");
-    if ( (flags?.messageType === "usage") && flags?.use ) {
-      const message = "The item data in the `dnd5e.use` flag on `ChatMessage` is now `dnd5e.item.type`, "
-      + "`dnd5e.item.id`, and `dnd5e.item.uuid`. Checking for usage can now be done using the "
-      + "`dnd5e.messageType` flag.";
-      Object.defineProperty(flags.use, "type", {
-        get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true });
-          return flags.item?.type;
-        },
-        configurable: true,
-        enumerable: false
-      });
-      Object.defineProperty(flags.use, "itemId", {
-        get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true });
-          return flags.item?.id;
-        },
-        configurable: true,
-        enumerable: false
-      });
-      Object.defineProperty(flags.use, "itemUuid", {
-        get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true });
-          return flags.item?.uuid;
-        },
-        configurable: true,
-        enumerable: false
-      });
-    }
-
-    else if ( (flags?.messageType === "roll") && flags?.roll ) {
-      const message = "The item data in the `dnd5e.roll` flag on `ChatMessage` is now `dnd5e.item.id` and "
-      + "`dnd5e.item.uuid`.";
-      Object.defineProperty(flags.roll, "itemId", {
-        get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true });
-          return flags.item?.id;
-        },
-        configurable: true,
-        enumerable: false
-      });
-      Object.defineProperty(flags.roll, "itemUuid", {
-        get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true });
-          return flags.item?.uuid;
-        },
-        configurable: true,
-        enumerable: false
-      });
-    }
-
-    if ( flags?.item?.data ) Object.defineProperty(flags, "itemData", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `dnd5e.itemData` flag on `ChatMessage` is now `dnd5e.item.data`.",
-          { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true }
-        );
-        return this.item.data;
-      },
-      configurable: true,
-      enumerable: false
-    });
   }
 }
