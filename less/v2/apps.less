@@ -823,6 +823,44 @@
   }
 
   /* ---------------------------------- */
+  /*  ProseMirror                       */
+  /* ---------------------------------- */
+
+  .editor.prosemirror {
+    .editor-content {
+      font-family: var(--dnd5e-font-roboto-condensed);
+      font-size: var(--font-size-14);
+      scrollbar-width: thin;
+      scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
+
+      &::-webkit-scrollbar-track {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border: none;
+        background: var(--dnd5e-color-scrollbar);
+      }
+    }
+
+    code-mirror .cm-scroller {
+      scrollbar-width: thin;
+      scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
+
+      &::-webkit-scrollbar-track {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border: none;
+        background: var(--dnd5e-color-scrollbar);
+      }
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Bastions                          */
   /* ---------------------------------- */
 
