@@ -6,7 +6,6 @@ import ActivationsField from "../../data/chat-message/fields/activations-field.m
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
 import TransformationSetting from "../../data/settings/transformation-setting.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
-import parseUuid from "../../parse-uuid.mjs";
 import { convertTime, defaultUnits, formatNumber, formatTime, simplifyBonus, staticID } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
@@ -3012,20 +3011,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Add additional system-specific sidebar directory context menu options for Actor documents
-   * @param {jQuery | HTMLElement} html  The sidebar HTML
-   * @param {Array} entryOptions         The default array of context menu options
+   * @param {ApplicationV2} app   The application being displayed.
+   * @param {Array} entryOptions  The default array of context menu options
    */
-  static addDirectoryContextOptions(html, entryOptions) {
+  static addDirectoryContextOptions(app, entryOptions) {
+    if ( app instanceof foundry.applications.sidebar.apps.Compendium ) return;
     entryOptions.push({
       name: "DND5E.TRANSFORM.Action.Restore",
       icon: '<i class="fa-solid fa-backward"></i>',
       callback: li => {
-        li = li instanceof HTMLElement ? li : li[0];
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
         return actor.revertOriginalForm();
       },
       condition: li => {
-        li = li instanceof HTMLElement ? li : li[0];
         const allowed = game.settings.get("dnd5e", "allowPolymorphing");
         if ( !allowed && !game.user.isGM ) return false;
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
@@ -3036,11 +3034,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       name: "DND5E.Group.Primary.Set",
       icon: '<i class="fa-solid fa-star"></i>',
       callback: li => {
-        li = li instanceof HTMLElement ? li : li[0];
         game.settings.set("dnd5e", "primaryParty", { actor: game.actors.get(li.dataset.documentId ?? li.dataset.entryId) });
       },
       condition: li => {
-        li = li instanceof HTMLElement ? li : li[0];
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
         const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
         return game.user.isGM && (actor?.type === "group")
@@ -3054,7 +3050,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         game.settings.set("dnd5e", "primaryParty", { actor: null });
       },
       condition: li => {
-        li = li instanceof HTMLElement ? li : li[0];
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
         const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
         return game.user.isGM && (actor === primary);
@@ -3067,10 +3062,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Add class to actor entry representing the primary group.
-   * @param {jQuery | HTMLElement} html
+   * @param {HTMLElement} html
    */
   static onRenderActorDirectory(html) {
-    html = html instanceof HTMLElement ? html : html[0];
     const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
     if ( primaryParty ) {
       const element = html?.querySelector(`[data-entry-id="${primaryParty.id}"]`);
@@ -3356,7 +3350,7 @@ class SourcedItemsMap extends Map {
   /** @inheritDoc */
   get(key, { remap=true }={}) {
     if ( !key ) return;
-    if ( remap ) ({ uuid: key } = parseUuid(key) ?? {});
+    if ( remap ) ({ uuid: key } = foundry.utils.parseUuid(key) ?? {});
     return super.get(key);
   }
 
@@ -3364,7 +3358,7 @@ class SourcedItemsMap extends Map {
 
   /** @inheritDoc */
   set(key, value) {
-    const { uuid } = parseUuid(key);
+    const { uuid } = foundry.utils.parseUuid(key);
     if ( !this.has(uuid) ) super.set(uuid, new Set());
     this.get(uuid, { remap: false }).add(value);
     return this;
@@ -3377,7 +3371,7 @@ class SourcedItemsMap extends Map {
    */
   _redirectKeys() {
     for ( const [key, value] of this.entries() ) {
-      const { uuid } = parseUuid(key);
+      const { uuid } = foundry.utils.parseUuid(key);
       if ( key !== uuid ) {
         this.set(uuid, value);
         this.delete(key);

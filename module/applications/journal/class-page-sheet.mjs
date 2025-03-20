@@ -7,7 +7,7 @@ import JournalEditor from "./journal-editor.mjs";
 /**
  * Journal entry page that displays an automatically generated summary of a class along with additional description.
  */
-export default class JournalClassPageSheet extends (foundry.appv1?.sheets?.JournalPageSheet ?? JournalPageSheet) {
+export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalPageSheet {
 
   /** @inheritDoc */
   static get defaultOptions() {
