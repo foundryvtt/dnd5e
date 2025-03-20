@@ -1,7 +1,7 @@
 /**
  * Journal entry page that displays a controls for editing rule page tooltip & type.
  */
-export default class JournalRulePageSheet extends (foundry.appv1?.sheets?.JournalTextPageSheet ?? JournalTextPageSheet) {
+export default class JournalRulePageSheet extends foundry.appv1.sheets.JournalTextPageSheet {
 
   /** @inheritDoc */
   static get defaultOptions() {
