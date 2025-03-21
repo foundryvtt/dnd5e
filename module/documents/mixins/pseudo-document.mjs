@@ -321,7 +321,7 @@ export default function PseudoDocumentMixin(Base) {
      * Prepare the data needed for the creation dialog.
      * @param {string} type  Specific type of the PseudoDocument to prepare.
      * @param {Item5e} parent  Parent document within which this PseudoDocument will be created.
-     * @returns {{ type: string, label: string, icon: string, hint: [string], disabled: [boolean] }}
+     * @returns {{ type: string, label: string, icon: string, [hint]: string, [disabled]: boolean }}
      * @protected
      */
     static _createDialogData(type, parent) {
