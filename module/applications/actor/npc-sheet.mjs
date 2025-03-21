@@ -24,7 +24,6 @@ export default class NPCActorSheet extends BaseActorSheet {
 
   /** @override */
   static PARTS = {
-    // TODO: Add limited sheet parts
     header: {
       template: "systems/dnd5e/templates/actors/npc-header.hbs"
     },
@@ -160,6 +159,8 @@ export default class NPCActorSheet extends BaseActorSheet {
    * @protected
    */
   async _prepareBiographyContext(context, options) {
+    if ( this.actor.limited ) return context;
+
     const enrichmentOptions = {
       secrets: this.actor.isOwner, relativeTo: this.actor, rollData: context.rollData
     };
@@ -251,9 +252,18 @@ export default class NPCActorSheet extends BaseActorSheet {
    * @protected
    */
   async _prepareHeaderContext(context, options) {
+    context.portrait = this._preparePortrait(context);
+
+    if ( this.actor.limited ) {
+      const enrichmentOptions = { relativeTo: this.actor, rollData: context.rollData };
+      context.enriched = {
+        public: await TextEditor.enrichHTML(this.actor.system.details.biography.public, enrichmentOptions)
+      };
+      return context;
+    }
+
     context.abilities = this._prepareAbilities(context);
     context.classes = context.itemCategories.classes;
-    context.portrait = this._preparePortrait(context);
 
     // Legendary Actions & Resistances
     const plurals = getPluralRules({ type: "ordinal" });
