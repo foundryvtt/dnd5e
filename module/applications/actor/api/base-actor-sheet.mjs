@@ -92,6 +92,23 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /* -------------------------------------------- */
 
   /**
+   * Application parts used when rendering the sheet in limited mode.
+   * @type {Record<string, HandlebarsTemplatePart>}
+   */
+  static LIMITED_PARTS = {
+    header: {
+      template: "systems/dnd5e/templates/actors/limited-header.hbs"
+    },
+    biography: {
+      container: { classes: ["tab-body"], id: "tabs" },
+      template: "systems/dnd5e/templates/actors/limited-body.hbs",
+      scrollable: [""]
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /**
    * A set of item types that should be prevented from being dropped on this type of actor sheet.
    * @type {Set<string>}
    */
@@ -145,6 +162,14 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _configureRenderParts(options) {
+    if ( this.actor.limited ) return foundry.utils.deepClone(this.constructor.LIMITED_PARTS);
+    return super._configureRenderParts(options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _prepareContext(options) {
     const context = {
       ...await super._prepareContext(options),
@@ -155,6 +180,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         damageAndHealing: { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes },
         ...this.actor.labels
       },
+      limited: this.actor.limited,
       modernRules: this.actor.system.source?.rules
         ? this.actor.system.source.rules === "2024"
         : game.settings.get("dnd5e", "rulesVersion") === "modern",
@@ -958,7 +984,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   _onFirstRender(context, options) {
     super._onFirstRender(context, options);
 
-    const mainContent = this.element.querySelector(".main-content");
+    let mainContent = this.element.querySelector(".main-content");
+    if ( !mainContent && this.element.querySelector(".tab-body") ) {
+      mainContent = document.createElement("div");
+      mainContent.classList.add("main-content");
+      mainContent.dataset.containerId = "main";
+      this.element.querySelector(".tab-body").after(mainContent);
+    }
     if ( mainContent ) {
       // Move .main-content into .sheet-body
       const sheetBody = document.createElement("div");
