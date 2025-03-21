@@ -2,7 +2,7 @@
 /*  Advancement Config Sheet                 */
 /* ----------------------------------------- */
 
-.dnd5e2.advancement.sheet {
+.dnd5e2.advancement.sheet, .dnd5e2.advancement-migration {
   &.grid-columns {
     --grid-column-left-size: 1fr;
     --grid-column-center-size: 1fr;
@@ -347,5 +347,21 @@
     display: grid;
     > .form-group { grid-column: 1 / -1; }
     .traits li.category { gap: 0; }
+  }
+}
+
+/* ----------------------------------------- */
+/*  Advancement Migration                    */
+/* ----------------------------------------- */
+
+.dnd5e2.advancement-migration {
+  --icon-size: 32px;
+  --gold-icon-size: 32px;
+  .items {
+    grid-template-columns: [name] 1fr [controls] 30px;
+    .item, .item-name { gap: 8px; }
+  }
+  .form-group.hint {
+    padding: 0 8px 8px;
   }
 }

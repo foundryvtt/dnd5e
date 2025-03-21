@@ -646,6 +646,7 @@ export default class ItemSheet5e extends (foundry.appv1?.sheets?.ItemSheet ?? It
      */
     const allowed = Hooks.call("dnd5e.dropItemSheetData", item, this, data);
     if ( allowed === false ) return;
+    event.stopPropagation();
 
     switch ( data.type ) {
       case "ActiveEffect":
