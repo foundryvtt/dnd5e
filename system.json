@@ -2,7 +2,7 @@
   "id": "dnd5e",
   "title": "Dungeons & Dragons Fifth Edition",
   "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "4.3.6",
+  "version": "4.4.0",
   "compatibility": {
     "minimum": "12.331",
     "verified": "13.338"
@@ -350,6 +350,12 @@
   "primaryTokenAttribute": "attributes.hp",
   "background": "systems/dnd5e/ui/official/dnd5e-background.webp",
   "flags": {
+    "compendiumArtMappings": {
+      "dnd5e": {
+        "mapping": "systems/dnd5e/json/fa-token-mapping.json",
+        "credit": "<em>Token artwork by <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a>.</em>"
+      }
+    },
     "dnd5e": {
       "sourceBooks": {
         "SRD 5.1": "SOURCE.BOOK.SRD"
