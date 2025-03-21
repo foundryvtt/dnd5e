@@ -857,12 +857,14 @@
   /* ---------------------------------- */
 
   &.limited {
-    min-width: 600px;
-    min-height: 550px;
+    &:not(.minimized, .minimizing, .maximizing) {
+      min-width: 600px;
+      min-height: 550px;
+    }
 
     .sheet-header {
       display: block;
-      padding: 38px 20px 16px;
+      padding: 0 20px 16px;
 
       .document-name { margin-top: -12px; }
 

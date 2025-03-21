@@ -264,13 +264,15 @@ export default function PrimarySheetMixin(Base) {
       if ( this.tabGroups.primary ) this.element.classList.add(`tab-${this.tabGroups.primary}`);
 
       // Create child button
-      const button = document.createElement("button");
-      button.type = "button";
-      button.ariaLabel = game.i18n.localize("CONTROLS.CommonCreate");
-      button.classList.add("create-child", "gold-button", "always-interactive");
-      button.dataset.action = "addDocument";
-      button.innerHTML = '<i class="fas fa-plus" inert></i>';
-      this.element.querySelector(".window-content").append(button);
+      if ( this.isEditable ) {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.ariaLabel = game.i18n.localize("CONTROLS.CommonCreate");
+        button.classList.add("create-child", "gold-button", "always-interactive");
+        button.dataset.action = "addDocument";
+        button.innerHTML = '<i class="fas fa-plus" inert></i>';
+        this.element.querySelector(".window-content").append(button);
+      }
     }
 
     /* -------------------------------------------- */

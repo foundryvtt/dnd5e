@@ -31,7 +31,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
   /** @override */
   static PARTS = {
-    // TODO: Add limited sheet parts
     header: {
       template: "systems/dnd5e/templates/actors/character-header.hbs"
     },
@@ -449,6 +448,11 @@ export default class CharacterActorSheet extends BaseActorSheet {
    * @protected
    */
   async _prepareHeaderContext(context, options) {
+    if ( this.actor.limited ) {
+      context.portrait = this._preparePortrait(context);
+      return context;
+    }
+
     // Classes Label
     context.labels.class = Object.values(this.actor.classes).sort((a, b) => {
       return b.system.levels - a.system.levels;
