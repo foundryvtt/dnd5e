@@ -10,7 +10,9 @@
 
 // Import Configuration
 import DND5E from "./module/config.mjs";
-import { registerSystemKeybindings, registerSystemSettings, registerDeferredSettings } from "./module/settings.mjs";
+import {
+  applyLegacyRules, registerDeferredSettings, registerSystemKeybindings, registerSystemSettings
+} from "./module/settings.mjs";
 
 // Import Submodules
 import * as applications from "./module/applications/_module.mjs";
@@ -112,30 +114,7 @@ Hooks.once("init", function() {
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
 
   // Legacy rules.
-  if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
-
-    // Set half-casters to round down.
-    delete DND5E.spellcastingTypes.leveled.progression.half.roundUp;
-
-    // Adjust Wild Shape and Polymorph presets.
-    for ( const preset of ["polymorph", "wildshape"] ) {
-      DND5E.transformation.presets[preset].settings.keep.delete("hp");
-      DND5E.transformation.presets[preset].settings.keep.delete("type");
-      delete DND5E.transformation.presets[preset].settings.tempFormula;
-    }
-
-    // Adjust language categories.
-    delete DND5E.languages.standard.children.sign;
-    DND5E.languages.exotic.children.draconic = DND5E.languages.standard.children.draconic;
-    delete DND5E.languages.standard.children.draconic;
-    DND5E.languages.cant = DND5E.languages.exotic.children.cant;
-    delete DND5E.languages.exotic.children.cant;
-    DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
-    delete DND5E.languages.exotic.children.druidic;
-
-    // Stunned stops movement in legacy.
-    DND5E.conditionEffects.noMovement.add("stunned");
-  }
+  if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) applyLegacyRules();
 
   // Register Roll Extensions
   CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];
