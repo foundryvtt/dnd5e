@@ -23,7 +23,7 @@ export default class AdvancementMigrationDialog extends Dialog5e {
 
   /**
    * Result of the migration dialog.
-   * @type {Advancement[]}
+   * @type {Advancement[]|null}
    */
   result = null;
 
@@ -55,6 +55,7 @@ export default class AdvancementMigrationDialog extends Dialog5e {
    * @throws
    */
   static async createDialog(item, advancements) {
+    console.log("AdvancementMigrationDialog#createDialog", advancements);
     const advancementContext = advancements.map(a => ({
       id: a.id, icon: a.icon, svg: a.icon?.endsWith(".svg"), title: a.title,
       summary: a.levels.length === 1 ? a.summaryForLevel(a.levels[0]) : ""
