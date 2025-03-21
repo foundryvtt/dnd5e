@@ -178,7 +178,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   _initializeSource(source, options={}) {
     source = super._initializeSource(source, options);
     const pack = game.packs.get(options.pack);
-    if ( !source._id || !pack || dnd5e.moduleArt.suppressArt ) return source;
+    if ( !source._id || !pack || !game.compendiumArt.enabled ) return source;
     const uuid = pack.getUuid(source._id);
     const art = game.dnd5e.moduleArt.map.get(uuid);
     if ( art?.actor || art?.token ) {
