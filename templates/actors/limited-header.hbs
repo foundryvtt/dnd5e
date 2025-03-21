@@ -1,0 +1,17 @@
+<header class="sheet-header">
+
+    {{!-- Portrait --}}
+    <div class="portrait {{#if portrait.token}}token{{/if}}">
+        <img src="{{ portrait.src }}" alt="{{ actor.name }}">
+    </div>
+
+    {{!-- Name --}}
+    <div class="document-name">{{ actor.name }}</div>
+
+    {{#if enriched.public}}
+    <div class="editor">
+        <div class="editor-content">{{{ enriched.public }}}</div>
+    </div>
+    {{/if}}
+
+</header>
