@@ -3522,7 +3522,7 @@ DND5E.transformation = {
       settings: {
         effects: new Set(["otherOrigin", "origin", "spell"]),
         keep: new Set(["hp", "type"]),
-        addTemp: true
+        other: new Set(["addTemp"])
       }
     },
     polymorphSelf: {
