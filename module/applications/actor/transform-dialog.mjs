@@ -191,7 +191,10 @@ export default class TransformDialog extends Dialog5e {
       if ( !config?.disables?.length ) return;
       const names = config.disables.map(d => d.includes("*") ? `[name^="${d.replace("*", "")}"]` : `[name="${d}"]`);
       const selector = `dnd5e-checkbox:is(${names.join(",")}):not([name="${field.name}"])`;
-      this.element.querySelectorAll(selector).forEach(element => element.disabled = field.value);
+      this.element.querySelectorAll(selector).forEach(element => {
+        element.disabled = field.value;
+        if ( element.disabled ) element.checked = false;
+      });
     };
     if ( changed ) handleDisable(changed);
     else this.element.querySelectorAll("dnd5e-checkbox").forEach(e => handleDisable(e));
