@@ -2889,7 +2889,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
     if ( !allowed && !game.user.isGM ) {
-      ui.notifications.warn("DND5E.PolymorphWarn", {localize: true});
+      ui.notifications.warn("DND5E.TRANSFORM.Warning.NoPermission", { localize: true });
       return null;
     }
 
@@ -2901,7 +2901,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     if ( keepSelf ) {
       o.img = source.img;
-      o.name = `${o.name} (${game.i18n.localize("DND5E.PolymorphSelf")})`;
+      o.name = `${o.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
     }
 
     // Prepare new data to merge from the source
@@ -3003,7 +3003,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           const cls = new dnd5e.dataModels.item.ClassData({ levels: d.system.details.cr });
           d.items.push({
             type: "class",
-            name: game.i18n.localize("DND5E.PolymorphTmpClass"),
+            name: game.i18n.localize("DND5E.TRANSFORM.TemporaryClass"),
             system: cls.toObject()
           });
         }
@@ -3130,7 +3130,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async revertOriginalForm({renderSheet=true}={}) {
     if ( !this.isPolymorphed ) return;
     if ( !this.isOwner ) {
-      ui.notifications.warn("DND5E.PolymorphRevertWarn", {localize: true});
+      ui.notifications.warn("DND5E.TRANSFORM.Warning.NoOwnership", { localize: true });
       return null;
     }
 
@@ -3153,7 +3153,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.isToken ) {
       const baseActor = original ? original : game.actors.get(this.token.actorId);
       if ( !baseActor ) {
-        ui.notifications.warn(game.i18n.format("DND5E.PolymorphRevertNoOriginalActorWarn", {
+        ui.notifications.warn(game.i18n.format("DND5E.TRANSFORM.Warning.OriginalActor", {
           reference: this.getFlag("dnd5e", "originalActor")
         }));
         return;
@@ -3189,7 +3189,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     if ( !original ) {
-      ui.notifications.warn(game.i18n.format("DND5E.PolymorphRevertNoOriginalActorWarn", {
+      ui.notifications.warn(game.i18n.format("DND5E.TRANSFORM.Warning.OriginalActor", {
         reference: this.getFlag("dnd5e", "originalActor")
       }));
       return;
@@ -3239,7 +3239,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   static addDirectoryContextOptions(html, entryOptions) {
     entryOptions.push({
-      name: "DND5E.PolymorphRestoreTransformation",
+      name: "DND5E.TRANSFORM.Action.Restore",
       icon: '<i class="fa-solid fa-backward"></i>',
       callback: li => {
         li = li instanceof HTMLElement ? li : li[0];

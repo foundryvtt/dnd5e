@@ -1494,6 +1494,67 @@ dialog.dnd5e2.application {
 }
 
 /* ---------------------------------- */
+/*  Transform Dialog                  */
+/* ---------------------------------- */
+
+.dnd5e2.transformation {
+  --section-gap: 8px;
+
+  .window-content {
+    display: grid;
+    gap: var(--section-gap);
+  }
+  [data-application-part="details"] {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-18);
+
+    > div {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      &.source { flex-direction: row-reverse; }
+      img {
+        block-size: 48px;
+        inline-size: 48px;
+        border: none;
+      }
+    }
+  }
+  [data-container-id="settings-area"] {
+    display: grid;
+    grid-template-columns: [presets] 200px [settings] auto;
+    gap: var(--section-gap);
+  }
+  [data-application-part="presets"] {
+    button {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      span { text-align: start; }
+      &[aria-pressed="true"] {
+        background: color-mix(in oklab, var(--dnd5e-background-card), var(--dnd5e-color-gold) 10%);
+        box-shadow: inset 0 0 8px var(--dnd5e-shadow-15);
+      }
+    }
+  }
+  [data-application-part="settings"] {
+    display: grid;
+    grid-template-areas:
+      "keep merge"
+      "keep effects"
+      "keep others";
+    gap: var(--section-gap);
+    .category-effects { grid-area: effects; }
+    .category-keep { grid-area: keep; }
+    .category-merge { grid-area: merge; }
+    .category-others { grid-area: others; }
+  }
+}
+
+/* ---------------------------------- */
 /*  Treasure Config Sheet             */
 /* ---------------------------------- */
 

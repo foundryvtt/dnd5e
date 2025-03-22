@@ -2929,43 +2929,6 @@
 "DND5E.PassivePerception": "Passive Perception",
 "DND5E.Period": "Period",
 "DND5E.PersonalityTraits": "Personality Traits",
-"DND5E.Polymorph": "Polymorph",
-"DND5E.PolymorphAcceptSettings": "Custom Settings",
-"DND5E.PolymorphAddTemp": "Add the target's HP as temporary HP",
-"DND5E.PolymorphCustomTransformation": "Custom Transformation",
-"DND5E.PolymorphEffectTransformation": "Effect Transformation",
-"DND5E.PolymorphKeepAE": "Keep all effects (overrides other effect retention options).",
-"DND5E.PolymorphKeepBackgroundAE": "Keep effects that originate from your background?",
-"DND5E.PolymorphKeepBio": "Keep biography",
-"DND5E.PolymorphKeepClass": "Keep proficiency bonus (leaves class items in sheet)",
-"DND5E.PolymorphKeepClassAE": "Keep effects that originate from your class or subclass?",
-"DND5E.PolymorphKeepEquipmentAE": "Keep effects that originate from your equipment?",
-"DND5E.PolymorphKeepFeats": "Keep features",
-"DND5E.PolymorphKeepFeatureAE": "Keep effects that originate from your features?",
-"DND5E.PolymorphKeepHP": "Keep HP & HD",
-"DND5E.PolymorphKeepItems": "Keep equipment",
-"DND5E.PolymorphKeepMental": "Keep mental ability scores (Int, Wis, Cha)",
-"DND5E.PolymorphKeepOriginAE": "Keep effects that originate from this actor (i.e. effects not attached to features, items, spells)",
-"DND5E.PolymorphKeepOtherOriginAE": "Keep effects that originate from a different actor?",
-"DND5E.PolymorphKeepPhysical": "Keep physical ability scores (Str, Dex, Con)",
-"DND5E.PolymorphKeepSaves": "Keep saving throw proficiencies",
-"DND5E.PolymorphKeepSelf": "Keep self (just change image and size i.e. for spells like Disguise Self)",
-"DND5E.PolymorphKeepSkills": "Keep skill proficiencies",
-"DND5E.PolymorphKeepSpellAE": "Keep effects that originate from your spells?",
-"DND5E.PolymorphKeepSpells": "Keep spells",
-"DND5E.PolymorphKeepType": "Keep creature type",
-"DND5E.PolymorphKeepVision": "Keep vision (character and token)",
-"DND5E.PolymorphMergeSaves": "Merge saving throw proficiencies (take the highest)",
-"DND5E.PolymorphMergeSkills": "Merge skill proficiencies (take the highest)",
-"DND5E.PolymorphPromptTitle": "Transforming Actor",
-"DND5E.PolymorphRestoreTransformation": "Restore Transformation",
-"DND5E.PolymorphRevertNoOriginalActorWarn": "No original actor was found with reference '{reference}'",
-"DND5E.PolymorphRevertWarn": "You do not have permission to revert this Actor's polymorphed state.",
-"DND5E.PolymorphSelf": "Appearance Only",
-"DND5E.PolymorphTmpClass": "Temporary Class",
-"DND5E.PolymorphTokens": "Transform all linked tokens?",
-"DND5E.PolymorphWarn": "You are not allowed to polymorph this actor!",
-"DND5E.PolymorphWildShape": "Wild Shape",
 "DND5E.Portrait": "Portrait",
 "DND5E.Prepared": "Prepared",
 "DND5E.Prerequisites": {
@@ -4013,6 +3976,131 @@
 "DND5E.TraitWeaponProf": "Weapon Proficiencies",
 "DND5E.Traits": "Traits",
 "DND5E.TraitsChosen": "Chosen Traits",
+
+"DND5E.TRANSFORM": {
+  "Action": {
+    "Restore": "Restore Transformation",
+    "Transform": "Transform"
+  },
+  "Dialog": {
+    "Title": "Configure Transformation"
+  },
+  "Preset": {
+    "Appearance": {
+      "Label": "Appearance Only"
+    },
+    "Default": "Default",
+    "Label": "Presets",
+    "Polymorph": {
+      "Label": "Polymorph"
+    },
+    "WildShape": {
+      "Label": "Wild Shape"
+    }
+  },
+  "Setting": {
+    "Effects": {
+      "All": {
+        "Hint": "Keep all effects, ignoring any other effects settings.",
+        "Label": "All Effects"
+      },
+      "Background": {
+        "Label": "Background Effects"
+      },
+      "Class": {
+        "Label": "Class Effects"
+      },
+      "Equipment": {
+        "Label": "Equipment Effects"
+      },
+      "Feature": {
+        "Label": "Feature Effects"
+      },
+      "Origin": {
+        "Hint": "Keep any effects created directly on this source actor.",
+        "Label": "This Actor"
+      },
+      "OtherOrigin": {
+        "Hint": "Keep any effects imposed by an outside actor.",
+        "Label": "Other Actors"
+      },
+      "Spell": {
+        "Label": "Spell Effects"
+      },
+      "Title": "Active Effects"
+    },
+    "Keep": {
+      "Biography": {
+        "Label": "Biography"
+      },
+      "CreatureType": {
+        "Label": "Creature Type"
+      },
+      "Equipment": {
+        "Label": "Equipment"
+      },
+      "Features": {
+        "Label": "Features"
+      },
+      "Health": {
+        "Label": "Hit Points & Hit Dice"
+      },
+      "Hint": "These details will be retained from the source actor.",
+      "Mental": {
+        "Hint": "Keep intelligence, wisdom, and charisma scores.",
+        "Label": "Mental Abilities"
+      },
+      "Physical": {
+        "Hint": "Keep strength, dexterity, and constitution scores.",
+        "Label": "Physical Abilities"
+      },
+      "Proficiency": {
+        "Label": "Proficiency Bonus"
+      },
+      "Saves": {
+        "Label": "Save Proficiencies"
+      },
+      "Self": {
+        "Hint": "Only change portrait and token artwork, other settings will be ignored.",
+        "Label": "Self"
+      },
+      "Skills": {
+        "Label": "Skill Proficiencies"
+      },
+      "Spells": {
+        "Label": "Spells"
+      },
+      "Title": "Keep",
+      "Vision": {
+        "Label": "Vision"
+      }
+    },
+    "Merge": {
+      "Hint": "Merge these proficiencies, keeping whichever has the higher modifier.",
+      "Saves": {
+        "Label": "Save Proficiencies"
+      },
+      "Skills": {
+        "Label": "Skill Proficiencies"
+      },
+      "Title": "Merge"
+    },
+    "Other": {
+      "AddTemp": {
+        "Hint": "Add the target's current HP as temporary HP",
+        "Label": "Add Temp HP"
+      },
+      "Title": "Other Options"
+    }
+  },
+  "TemporaryClass": "Temporary Class",
+  "Warning": {
+    "NoOwnership": "You do not have permission to transform this actor.",
+    "NoPermission": "Transformation permission haven't been granted to players.",
+    "OriginalActor": "No original actor was found with ID '{reference}'."
+  }
+},
+
 "DND5E.Treasure": {
   "Categories": {
     "Any": "Any",
