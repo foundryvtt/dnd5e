@@ -2784,6 +2784,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         }
       }
 
+      // Keep armor, weapon, & tool proficiencies
+      if ( settings.keep.has("gearProf") ) {
+        d.system.traits.armorProf = o.system.traits.armorProf;
+        d.system.traits.weaponProf = o.system.traits.weaponProf;
+        d.system.tools = o.system.tools;
+      }
+
+      // Keep languages
+      if ( settings.keep.has("languages") ) d.system.traits.languages = o.system.traits.languages;
+
       // Keep specific items from the original data
       d.items = d.items.concat(o.items.filter(i => {
         switch ( i.type ) {
@@ -2833,6 +2843,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       // Keep HP & HD
       if ( settings.keep.has("hp") ) d.system.attributes.hp = { ...this.system.attributes.hp };
+
+      // Keep damage resistances
+      if ( settings.keep.has("resistances") ) {
+        d.system.traits.di = o.system.traits.di;
+        d.system.traits.dr = o.system.traits.dr;
+        d.system.traits.dv = o.system.traits.dv;
+        d.system.traits.dm = o.system.traits.dm;
+      }
 
       // Add temporary hit points
       const tempHp = simplifyBonus(settings.tempFormula, rollData);
