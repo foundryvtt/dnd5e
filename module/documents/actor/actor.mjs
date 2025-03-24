@@ -2829,6 +2829,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           default: return true;
         }
       });
+
+      // Copy favorites
+      if ( "favorites" in o.system ) d.system.favorites = o.system.favorites.filter(f => {
+        if ( !["activity", "item"].includes(f.type) ) return true;
+        const [, itemId] = foundry.utils.parseUuid(f.id, { relative: this, strict: false })?.embedded ?? [];
+        return d.items.find(i => i._id === itemId);
+      });
     }
 
     // Set a random image if source is configured that way
