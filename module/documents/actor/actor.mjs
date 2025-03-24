@@ -3049,6 +3049,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       delete d.prototypeToken;
       tokenData.delta = d;
       tokenData.elevation = this.token.elevation;
+      tokenData.hidden = this.token.hidden;
       tokenData.rotation = this.token.rotation;
       const previousActorData = this.token.delta.toObject();
       foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
@@ -3093,6 +3094,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       newTokenData.actorId = newActor.id;
       newTokenData.actorLink = true;
       newTokenData.elevation = t.document.elevation;
+      newTokenData.hidden = t.document.hidden;
       newTokenData.rotation = t.document.rotation;
 
       const dOriginalActor = foundry.utils.getProperty(d, "flags.dnd5e.originalActor");
@@ -3192,6 +3194,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         const update = foundry.utils.deepClone(tokenData);
         update._id = t.id;
         update.elevation = t.document.elevation;
+        update.hidden = t.document.hidden;
         update.rotation = t.document.rotation;
         delete update.x;
         delete update.y;
