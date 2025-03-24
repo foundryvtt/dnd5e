@@ -4268,6 +4268,10 @@
         "hint": "Merge these proficiencies, keeping whichever has the higher modifier.",
         "label": "Merge"
       },
+      "minimumAC": {
+        "hint": "Formula defining the armor class for the transformed creature, if the target actor's AC is not already higher.",
+        "label": "Minimum Armor Class"
+      },
       "other": {
         "label": "Other Options"
       },

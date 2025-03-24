@@ -2871,6 +2871,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       const tempHp = simplifyBonus(settings.tempFormula, rollData);
       if ( tempHp ) d.system.attributes.hp.temp = tempHp;
 
+      // Set armor class
+      const minimumAC = simplifyBonus(settings.minimumAC, rollData);
+      if ( minimumAC > target.system.attributes.ac.value ) {
+        d.system.attributes.ac.calc = "natural";
+        d.system.attributes.ac.flat = minimumAC;
+      }
+
       // Remove active effects
       const oEffects = foundry.utils.deepClone(d.effects);
       const originEffectIds = new Set(oEffects.filter(effect => {
