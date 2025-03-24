@@ -274,40 +274,16 @@ export default class CreatureTemplate extends CommonTemplate {
   /** @inheritDoc */
   getRollData({ deterministic=false }={}) {
     const data = super.getRollData({ deterministic });
-
-    const ItemData = class {
-      constructor(data) {
-        this.#exists = !!data;
-        Object.assign(this, data);
+    data.classes = {};
+    data.subclasses = {};
+    for ( const [identifier, cls] of Object.entries(this.parent.classes) ) {
+      data.classes[identifier] = {...cls.system};
+      data.classes[identifier].hitDice = cls.system.hd.denomination; // Backwards compatibility
+      if ( cls.subclass ) {
+        data.classes[identifier].subclass = cls.subclass.system;
+        data.subclasses[cls.subclass.identifier] = { levels: cls.system.levels };
       }
-
-      #exists = false;
-
-      toString() { return this.#exists ? "1" : "0"; }
-    };
-
-    data.classes = new Proxy(this.parent, {
-      get(target, prop, receiver) {
-        const cls = target.classes[prop];
-        if ( !cls ) return new ItemData();
-        const data = { ...cls.system, hitDice: cls.system.hd.denomination };
-        if ( cls.subclass ) data.subclass = cls.subclass.system;
-        return new ItemData(data);
-      },
-      has(target, prop) {
-        return true;
-      }
-    });
-
-    data.subclasses = new Proxy(this.parent, {
-      get(target, prop, receiver) {
-        const subclass = target.subclasses[prop];
-        return subclass ? new ItemData({ levels: subclass.class?.system.levels }) : new ItemData();
-      },
-      has(target, prop) {
-        return true;
-      }
-    });
+    }
     return data;
   }
 }
