@@ -2845,13 +2845,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Transform this Actor into another one.
    *
-   * @param {Actor5e} target                       The target Actor.
+   * @param {Actor5e} source                       The actor being transformed into.
    * @param {TransformationSetting} [settings]     Options that determine how the transformation is performed.
    * @param {object} [options]
    * @param {boolean} [options.renderSheet=true]   Render the sheet of the transformed actor after the polymorph.
    * @returns {Promise<Array<Token>>|null}         Updated token if the transformation was performed.
    */
-  async transformInto(target, settings=new TransformationSetting(), options={}) {
+  async transformInto(source, settings=new TransformationSetting(), options={}) {
     if ( !(settings instanceof TransformationSetting) ) {
       foundry.utils.logCompatibilityWarning(
         "The `transformInto` method now requires a `TransformationSetting` configuration object.",
@@ -2877,26 +2877,26 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       mergeSaves: settings.merge.has("saves"),
       mergeSkills: settings.merge.has("skills")
     };
-    const source = target.toObject();
-    const rollData = { ...this.getRollData(), source: target.getRollData() };
+    const sourceData = source.toObject();
+    const rollData = { ...this.getRollData(), source: source.getRollData() };
 
     if ( settings.keep.has("self") ) {
-      o.img = source.img;
+      o.img = sourceData.img;
       o.name = `${o.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
     }
 
     // Prepare new data to merge from the source
     const d = foundry.utils.mergeObject(foundry.utils.deepClone({
       type: o.type, // Remain the same actor type
-      name: `${o.name} (${source.name})`, // Append the new shape to your old name
-      system: source.system, // Get the systemdata model of your new form
-      items: source.items, // Get the items of your new form
-      effects: o.effects.concat(source.effects), // Combine active effects from both forms
-      img: source.img, // New appearance
+      name: `${o.name} (${sourceData.name})`, // Append the new shape to your old name
+      system: sourceData.system, // Get the systemdata model of your new form
+      items: sourceData.items, // Get the items of your new form
+      effects: o.effects.concat(sourceData.effects), // Combine active effects from both forms
+      img: sourceData.img, // New appearance
       ownership: o.ownership, // Use the original actor permissions
       folder: o.folder, // Be displayed in the same sidebar folder
       flags: o.flags, // Use the original actor flags
-      prototypeToken: { name: `${o.name} (${source.name})`, texture: {}, sight: {}, detectionModes: [] } // Set a new empty token
+      prototypeToken: { name: `${o.name} (${sourceData.name})`, texture: {}, sight: {}, detectionModes: [] } // Set a new empty token
     }), settings.keep.has("self") ? o : {}); // Keeps most of original actor
 
     // Specifically delete some data attributes
@@ -2910,22 +2910,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     d.system.attributes.exhaustion = o.system.attributes.exhaustion; // Keep your prior exhaustion level
     d.system.attributes.inspiration = o.system.attributes.inspiration; // Keep inspiration
     d.system.spells = o.system.spells; // Keep spell slots
-    d.system.attributes.ac.flat = target.system.attributes.ac.value; // Override AC
+    d.system.attributes.ac.flat = source.system.attributes.ac.value; // Override AC
 
     // Token appearance updates
     for ( const k of ["width", "height", "alpha", "lockRotation"] ) {
-      d.prototypeToken[k] = source.prototypeToken[k];
+      d.prototypeToken[k] = sourceData.prototypeToken[k];
     }
     for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
-      d.prototypeToken.texture[k] = source.prototypeToken.texture[k];
+      d.prototypeToken.texture[k] = sourceData.prototypeToken.texture[k];
     }
-    d.prototypeToken.ring = source.prototypeToken.ring;
+    d.prototypeToken.ring = sourceData.prototypeToken.ring;
     for ( const k of ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"] ) {
       d.prototypeToken[k] = o.prototypeToken[k];
     }
 
     if ( !settings.keep.has("self") ) {
-      const sightSource = settings.keep.has("vision") ? o.prototypeToken : source.prototypeToken;
+      const sightSource = settings.keep.has("vision") ? o.prototypeToken : sourceData.prototypeToken;
       for ( const k of ["range", "angle", "visionMode", "color", "attenuation", "brightness", "saturation", "contrast"] ) {
         d.prototypeToken.sight[k] = sightSource.sight[k];
       }
@@ -2944,7 +2944,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         // Set saving throw proficiencies.
         if ( settings.keep.has("saves") && oa ) abilities[k].proficient = oa.proficient;
         else if ( settings.merge.has("saves") && oa ) abilities[k].proficient = Math.max(prof, oa.proficient);
-        else abilities[k].proficient = source.system.abilities[k].proficient;
+        else abilities[k].proficient = sourceData.system.abilities[k].proficient;
       }
 
       // Transfer skills
@@ -2980,7 +2980,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           profOverride.changes = [{
             key: "system.attributes.prof",
             mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-            value: target.system.attributes.prof
+            value: source.system.attributes.prof
           }];
           d.effects.push(profOverride);
         } else {
@@ -3041,8 +3041,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }
 
     // Set a random image if source is configured that way
-    if ( source.prototypeToken.randomImg ) {
-      const images = await target.getTokenImages();
+    if ( sourceData.prototypeToken.randomImg ) {
+      const images = await source.getTokenImages();
       d.prototypeToken.texture.src = images[Math.floor(Math.random() * images.length)];
     }
 
@@ -3077,20 +3077,20 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * A hook event that fires just before the actor is transformed.
      * @function dnd5e.transformActor
      * @memberof hookEvents
-     * @param {Actor5e} actor                   The original actor before transformation.
-     * @param {Actor5e} target                  The target actor into which to transform.
+     * @param {Actor5e} host                    The original actor before transformation.
+     * @param {Actor5e} source                  The source actor into which to transform.
      * @param {object} data                     The data that will be used to create the new transformed actor.
      * @param {TransformationSetting} settings  Settings that determine how the transformation is performed.
      * @param {object} options                  Rendering options passed to the actor creation.
      */
-    Hooks.callAll("dnd5e.transformActorV2", this, target, d, settings, options);
+    Hooks.callAll("dnd5e.transformActorV2", this, source, d, settings, options);
 
     if ( "dnd5e.transformActor" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.transformActor` hook has been deprecated and replaced with `dnd5e.transformActorV2`.",
         { since: "DnD5e 4.4", until: "DnD5e 5.0" }
       );
-      Hooks.callAll("dnd5e.transformActor", this, target, d, settings._toDeprecatedConfig(), options);
+      Hooks.callAll("dnd5e.transformActor", this, source, d, settings._toDeprecatedConfig(), options);
     }
 
     // Create new Actor with transformed data

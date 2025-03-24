@@ -35,9 +35,9 @@ export default class TransformDialog extends Dialog5e {
       width: 1000
     },
     transform: {
+      host: null,
       settings: null,
-      source: null,
-      target: null
+      source: null
     },
     window: {
       title: "DND5E.TRANSFORM.Dialog.Title",
@@ -116,7 +116,7 @@ export default class TransformDialog extends Dialog5e {
    */
   async _prepareDetailsContext(context, options) {
     context.sourceActor = this.options.transform.source;
-    context.targetActor = this.options.transform.target;
+    context.hostActor = this.options.transform.host;
     return context;
   }
 
@@ -269,15 +269,15 @@ export default class TransformDialog extends Dialog5e {
 
   /**
    * Display the transform dialog.
-   * @param {Actor5e} target                         Actor that will be transformed.
-   * @param {Actor5e} source                         Actor whose data will be applied to the target.
+   * @param {Actor5e} host                           Actor that will be transformed.
+   * @param {Actor5e} source                         Actor whose data will be applied to the host.
    * @param {object} [options={}]                    Additional options for the application.
    * @returns {Promise<TransformationSetting|null>}  Transformation settings to apply.
    */
-  static async promptSettings(target, source, options={}) {
+  static async promptSettings(host, source, options={}) {
     return new Promise(resolve => {
       options.transform ??= {};
-      options.transform.target = target;
+      options.transform.host = host;
       options.transform.source = source;
       const dialog = new this(options);
       dialog.addEventListener("close", event =>
