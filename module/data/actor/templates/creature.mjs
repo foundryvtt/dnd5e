@@ -223,9 +223,6 @@ export default class CreatureTemplate extends CommonTemplate {
     skillData.ability = ability;
     const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
 
-    // Polymorph Skill Proficiencies
-    if ( originalSkills ) skillData.value = Math.max(skillData.value, originalSkills[skillId].value);
-
     // Compute modifier
     const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
     skillData.effectValue = skillData.value;
@@ -235,6 +232,14 @@ export default class CreatureTemplate extends CommonTemplate {
     skillData.value = skillData.proficient = skillData.prof.multiplier;
     skillData.total = skillData.mod + skillData.bonus;
     if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
+
+    // If we merged skills when transforming, take the highest bonus
+    const difference = (originalSkills?.[skillId].total ?? 0) - skillData.total;
+    if ( originalSkills && (difference > 0) ) {
+      skillData.bonuses.check = `${skillData.bonuses.check ?? ""} + ${difference}`;
+      skillData.bonus += difference;
+      skillData.total += difference;
+    }
 
     // Compute passive bonus
     const passive = flags.observantFeat && CONFIG.DND5E.characterFlags.observantFeat.skills.includes(skillId) ? 5 : 0;
