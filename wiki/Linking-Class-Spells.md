@@ -61,12 +61,25 @@ Once you've saved your `module.json`, you can start foundry back up and the head
 
 ## Troubleshooting
 
-If the above guide isn't working, try the following steps:
+If the above guide isn't working for *any* of your spells, try the following steps:
 
 - Refresh (f5) Foundry. The spell list register is initialized on world load.
 - Restart Foundry. Updates to module.json are not read while a world is open.
 - Double check that you grabbed *all* of the spell list UUIDs you want and put them in your module.json.
 - Make sure that the `flags` you've added to are at the *top* level of your module.json and not nested somewhere, like inside of a pack. Foundry uses the name "flags" frequently, and in this case you probably have to define it for yourself.
+
+If only *some* of your spells aren't working, it's likely that their `_stats.compendiumSource` is set incorrectly. This can occur from importing spells into the compendium on older versions on dnd5e. The following macro will fix it; all you have to do is copy the UUID from one of the spells in your compendium and paste it into the script where it says "PASTE_HERE".
+
+```js
+// Replace with the full UUID, e.g. "Compendium.dnd5e.spells.Item.JLTQyqXEaJDrTXyW"
+const sampleSpell = "PASTE_HERE"
+
+const notif = ui.notifications.warn("Beginning Updates")
+const parse = foundry.utils.parseUuid(sampleSpell);
+await parse.collection.updateAll({ '_stats.compendiumSource': null })
+ui.notifications.remove(notif)
+ui.notifications.info("Updates complete")
+```
 
 If all else fails, you can try to debug by accessing the actual spell registry at `dnd5e.registry.spellLists` in world. It has two relevant methods, `forType` and `forSpell`, whose signatures are copied below.
 
