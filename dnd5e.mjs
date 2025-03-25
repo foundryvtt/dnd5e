@@ -366,7 +366,7 @@ function _configureStatusEffects() {
     if ( data.icon ) {
       foundry.utils.logCompatibilityWarning(
         "The `icon` property of status conditions has been deprecated in place of using `img`.",
-        { since: "DnD5e 4.4", until: "DnD5e 4.6" }
+        { since: "DnD5e 4.4", until: "DnD5e 5.2" }
       );
       data.img = data.icon;
       delete data.icon;
@@ -374,7 +374,7 @@ function _configureStatusEffects() {
     if ( data.label ) {
       foundry.utils.logCompatibilityWarning(
         "The `label` property of status conditions has been deprecated in place of using `name`.",
-        { since: "DnD5e 4.4", until: "DnD5e 4.6" }
+        { since: "DnD5e 4.4", until: "DnD5e 5.2" }
       );
       data.name = data.label;
       delete data.label;
