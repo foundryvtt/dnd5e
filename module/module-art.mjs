@@ -23,13 +23,7 @@ export default class ModuleArt {
    * Set to true to temporarily prevent actors from loading module art.
    * @type {boolean}
    */
-  get suppressArt() {
-    return !game.compendiumArt.enabled;
-  }
-
-  set suppressArt(value) {
-    game.compendiumArt.enabled = !value;
-  }
+  suppressArt = false;
 
   /* -------------------------------------------- */
 
@@ -41,10 +35,6 @@ export default class ModuleArt {
     this.map.clear();
     // Load art modules in reverse order so that higher-priority modules overwrite lower-priority ones.
     for ( const { id, mapping, credit } of this.constructor.getArtModules().reverse() ) {
-      foundry.utils.logCompatibilityWarning(
-        "The dnd5e `ModuleArt` system has been deprecated and replaced with core's `CompendiumArt` system.",
-        { since: "DnD5e 4.4", until: "DnD5e 6.0", once: true }
-      );
       try {
         const json = await foundry.utils.fetchJsonWithTimeout(mapping);
         await this.#parseArtMapping(id, json, credit);
@@ -77,9 +67,9 @@ export default class ModuleArt {
         else delete info.actor;
         if ( !settings.tokens ) delete info.token;
         if ( credit ) info.credit = credit;
-        const uuid = pack.getUuid(actorId);
+        const uuid = `Compendium.${packName}.${actorId}`;
         info = foundry.utils.mergeObject(this.map.get(uuid) ?? {}, info, {inplace: false});
-        this.map.set(uuid, info);
+        this.map.set(`Compendium.${packName}.${actorId}`, info);
       }
     }
   }
@@ -130,7 +120,18 @@ export default class ModuleArt {
   static getArtModules() {
     const settings = game.settings.get("dnd5e", "moduleArtConfiguration");
     const unsorted = [];
-    const configs = [];
+    const configs = [{
+      id: game.system.id,
+      label: game.system.title,
+      mapping: "systems/dnd5e/json/fa-token-mapping.json",
+      priority: settings.dnd5e?.priority ?? CONST.SORT_INTEGER_DENSITY,
+      credit: `
+        <em>
+          Token artwork by
+          <a href="https://www.forgotten-adventures.net/" target="_blank" rel="noopener">Forgotten Adventures</a>.
+        </em>
+      `
+    }];
 
     for ( const module of game.modules ) {
       const flags = module.flags?.[module.id];
