@@ -39,7 +39,9 @@ export default class TransformActivity extends ActivityMixin(TransformActivityDa
   /** @inheritDoc */
   static localize() {
     super.localize();
-    this._localizeSchema(this.schema.fields.profiles.element, ["DND5E.TRANSFORM.FIELDS.profiles"]);
+    if ( game.release.generation < 13 ) {
+      this._localizeSchema(this.schema.fields.profiles.element, ["DND5E.TRANSFORM.FIELDS.profiles"]);
+    }
   }
 
   /* -------------------------------------------- */
@@ -60,7 +62,7 @@ export default class TransformActivity extends ActivityMixin(TransformActivityDa
 
   /**
    * @typedef {ActivityUseConfiguration} TransformUseConfiguration
-   * @property {Partial<TransformationConfiguration>} summons  Options for configuring transformation behavior.
+   * @property {Partial<TransformationConfiguration>} transform  Options for configuring transformation behavior.
    */
 
   /**
