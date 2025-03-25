@@ -84,6 +84,13 @@ export default class TransformActivity extends ActivityMixin(TransformActivityDa
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _requiresConfigurationDialog(config) {
+    return super._requiresConfigurationDialog(config) || (this.availableProfiles.length > 1);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _finalizeMessageConfig(usageConfig, messageConfig, results) {
     await super._finalizeMessageConfig(usageConfig, messageConfig, results);
     if ( usageConfig.transform?.profile ) {
