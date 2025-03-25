@@ -30,9 +30,7 @@
   .notable {
     --dnd5e-block-background: var(--dnd5e-color-blue-gray-4);
     --dnd5e-block-border-color: #212121;
-    // TODO this filter is not applying to the svg elements.
-    // consider converting to border clip paths
-    //&::before, &::after { filter: grayscale(100%); }
+    &::before, &::after { filter: grayscale(100%); }
   }
 
   .statblock.npc {
