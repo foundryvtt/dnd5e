@@ -199,7 +199,7 @@ export default class TransformationSetting extends foundry.abstract.DataModel {
           disabled: disabledFields.has(`${cat}.${name}`),
           input: createCheckboxInput,
           name: `${prefix}${cat}.${name}`,
-          value: this[cat]?.has(name)
+          value: disabledFields.has(`${cat}.${name}`) ? undefined : this[cat]?.has(name)
         })),
         ...(cat === "other" ? otherSettings : [])
       ]
