@@ -1,3 +1,4 @@
+import { formatCR, simplifyBonus } from "../../utils.mjs";
 import ActivityUsageDialog from "./activity-usage-dialog.mjs";
 
 const { StringField } = foundry.data.fields;
