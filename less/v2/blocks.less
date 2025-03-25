@@ -18,13 +18,8 @@
     max-width: var(--dnd5e-block-float-max);
   }
 
-  .float-clear {
-    clear: both;
-  }
-
-  .margin-center {
-    margin: auto;
-  }
+  .float-clear { clear: both; }
+  .margin-center { margin: auto; }
 
   /* Sizing */
   .size-four {
@@ -62,13 +57,8 @@
     gap: 10px;
   }
 
-  .flex-wrap {
-    flex-wrap: wrap;
-  }
-
-  .align-start {
-    align-items:start;
-  }
+  .flex-wrap { flex-wrap: wrap; }
+  .align-start { align-items:start; }
 
   /* Common Typography for Callouts */
   :is(.notable, .quest, .advice, .narrative) {
@@ -105,22 +95,15 @@
       z-index: -1;
     }
 
-    &::before {
-      top: -13px;
-    }
+    &::before { top: -13px; }
 
     &::after {
       bottom: -13px;
       transform: scaleY(-1);
     }
 
-    > :first-child {
-      margin-block-start: 0;
-    }
-
-    > :last-child {
-      margin-block-end: 0;
-    }
+    > :first-child { margin-block-start: 0; }
+    > :last-child { margin-block-end: 0; }
   }
 
   /* Narrative Callout */
@@ -181,9 +164,7 @@
     margin: 1rem 1rem 1rem calc(var(--img-size) / 2);
     padding: 0.75rem 0.75rem 0.75rem calc(var(--img-size) / 2 + 0.75rem);
 
-    article > :last-child {
-      margin-block-end: 0;
-    }
+    article > :last-child { margin-block-end: 0; }
 
     > figure {
       position: absolute;
@@ -200,9 +181,7 @@
         border: 4px solid var(--dnd5e-block-border-color);
         box-shadow: 0 0 4px var(--dnd5e-shadow-45);
 
-        &.round {
-          border-radius: 100%;
-        }
+        &.round { border-radius: 100%; }
       }
     }
   }
