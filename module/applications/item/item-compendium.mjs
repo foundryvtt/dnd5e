@@ -63,8 +63,8 @@ class ItemCompendium5eV13 extends DragDropApplicationMixin(foundry.applications.
     if ( (behavior === "copy") || !this._entryAlreadyExists(item) ) {
       const contents = await item.system.contents;
       const toCreate = contents?.size
-        ? await Item5e.createWithContents([item], { transformAll: item => item.toCompendium(item) })
-        : [{ ...item.toObject(), _id: null, "system.container": null }];
+        ? await Item5e.createWithContents([item], { transformAll: item => item.toCompendium() })
+        : [{ ...item.toCompendium(), "system.container": null }];
       if ( toCreate.length ) {
         const folder = target?.closest("[data-folder-id]")?.dataset.folderId;
         if ( folder ) toCreate.map(d => d.folder = folder);
@@ -148,8 +148,8 @@ class ItemCompendium5eV12 extends DragDropApplicationMixin(
     if ( (behavior === "copy") || !this._entryAlreadyExists(item) ) {
       const contents = await item.system.contents;
       const toCreate = contents?.size
-        ? await Item5e.createWithContents([item], { transformAll: item => item.toCompendium(item) })
-        : [{ ...item.toObject(), _id: null, "system.container": null }];
+        ? await Item5e.createWithContents([item], { transformAll: item => item.toCompendium() })
+        : [{ ...item.toCompendium(), "system.container": null }];
       if ( toCreate.length ) {
         const folder = target?.closest("[data-folder-id]")?.dataset.folderId;
         if ( folder ) toCreate.map(d => d.folder = folder);
