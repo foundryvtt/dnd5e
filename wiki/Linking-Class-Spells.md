@@ -1,12 +1,12 @@
 ![Up to date as of 4.3.4](https://img.shields.io/static/v1?label=dnd5e&message=4.3.4&color=informational)
 
-Unlike most information listed on a spell, there is no field even in edit mode to list the eligible classes. This guide provides a walkthrough for how to define eligible classes for a spell, either for a new spell or for new classes. (This also works for any Subclass, Background, or Species that may want a spell list.)
+Unlike most information listed on a spell, there is no field even in edit mode to list the eligible classes. This guide provides a walkthrough for how to define eligible classes for a spell, either for a new spell or for new classes. (This also works for any Subclass, Background, or Species that may want a spell list, however those will only be visible in the Compendium Browser and will not appear on the spell sheet.)
 
 [Mage Hand Class Spells](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/spell-class-header.jpg)
 
 ## Step 1: Setup your Personal Module
 
-You can create a Personal Module by following the first steps of [this guide](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/module_guide_create.md) by Flix. While we do not need to add scripts, we *will* need to edit the module.json in later steps. Go until the guide asks you to hit "Create Module", then pause and continue back here.
+If you don't have a personal module, you can create one by following [this guide](https://foundryvtt.com/article/module-maker/) from the official Knowledge Base. This module will be primarily used to hold the spell list journals, but you can use it for any other custom content, such as an Item compendium to hold spells.
 
 ### Step 1.1: Add a Journal Compendium
 
@@ -34,7 +34,9 @@ Once the spell list pages are filled in, copy the UUID for *each* of them to som
 
 ## Step 3: Module Registration
 
-The final step is to [register](Module-Registration.md#spell-lists) the spell list UUIDs in your `module.json`. The earlier [guide by Flix](https://github.com/GamerFlix/foundryvtt-api-guide/blob/main/module_guide_create.md) can help you locate that if you aren't sure where that is. Unlike that guide, we are adding `flags` to the ***root*** of our module manifest. If you have not already, shut down foundry.
+The final step is to [register](Module-Registration.md#spell-lists) the spell list UUIDs in your `module.json`. If you don't know where that is, the [Application Configuration](https://foundryvtt.com/article/configuration/#where-user-data) form will tell you the location of your Foundry Data folder. From there, navigate to `modules/your-module-id`; this folder will have the `module.json` file. You can edit this with any text editor, such as Notepad++.
+
+We are adding `flags` to the ***root*** of our module manifest. If you have not already, shut down foundry.
 
 Within the spellLists array, copy and paste each of the UUIDs you copied in Step 2.2. It will look something like the following - note that this `flags` is *not* within any pack or other structure within the file, it is a top-level, root property.
 
