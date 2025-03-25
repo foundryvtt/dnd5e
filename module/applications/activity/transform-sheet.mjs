@@ -53,9 +53,10 @@ export default class TransformSheet extends ActivitySheet {
   async _prepareEffectContext(context) {
     context = await super._prepareEffectContext(context);
 
-    const settings = this.activity.transform.customize ? this.activity.settings : new TransformationSetting({
-      ...(CONFIG.DND5E.transformation.presets[this.activity.transform.preset]?.settings ?? {}),
-      preset: this.activity.transform.preset
+    const settings = new TransformationSetting({
+      ...(context.source.transform.customize ? context.source.settings
+        : CONFIG.DND5E.transformation.presets[context.source.transform.preset]?.settings ?? {}),
+      preset: context.source.transform.preset
     });
     context.categories = settings.createFormCategories({ prefix: "settings." });
     context.presetOptions = [
@@ -72,7 +73,7 @@ export default class TransformSheet extends ActivitySheet {
     context.movementTypeOptions = Object.entries(CONFIG.DND5E.movementTypes)
       .map(([value, label]) => ({ value, label }));
 
-    context.profiles = this.activity.profiles.map((data, index) => ({
+    context.profiles = context.source.profiles.map((data, index) => ({
       data, index,
       collapsed: this.expandedSections.get(`profiles.${data._id}`) ? "" : "collapsed",
       fields: this.activity.schema.fields.profiles.element.fields,
@@ -151,7 +152,7 @@ export default class TransformSheet extends ActivitySheet {
   /** @inheritDoc */
   async _processSubmitData(event, submitData) {
     // If customize is set but no settings set, save defaults
-    if ( submitData.transform?.customize && !this.activity.settings ) {
+    if ( submitData.transform?.customize && !this.activity._source.settings ) {
       const preset = submitData.transform.preset ?? this.activity.transform.preset;
       submitData.settings = new TransformationSetting(foundry.utils.mergeObject({
         ...(CONFIG.DND5E.transformation.presets[preset]?.settings ?? {}),
