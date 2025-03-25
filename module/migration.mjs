@@ -193,7 +193,7 @@ export async function migrateCompendium(pack, { bypassVersionCheck=false, strict
   const wasLocked = pack.locked;
   try {
     await pack.configure({locked: false});
-    game.compendiumArt.enabled = false;
+    dnd5e.moduleArt.suppressArt = true;
 
     // Begin by requesting server-side data model migration and get the migrated content
     const documents = await pack.getDocuments();
@@ -243,7 +243,7 @@ export async function migrateCompendium(pack, { bypassVersionCheck=false, strict
   } finally {
     // Apply the original locked status for the pack
     await pack.configure({locked: wasLocked});
-    game.compendiumArt.enabled = true;
+    dnd5e.moduleArt.suppressArt = false;
   }
 }
 
@@ -322,7 +322,7 @@ export async function refreshCompendium(pack, { bypassVersionCheck, migrate=true
     }
   }
 
-  game.compendiumArt.enabled = false;
+  dnd5e.moduleArt.suppressArt = true;
   const DocumentClass = CONFIG[pack.documentName].documentClass;
   const wasLocked = pack.locked;
   await pack.configure({locked: false});
@@ -335,7 +335,7 @@ export async function refreshCompendium(pack, { bypassVersionCheck, migrate=true
     await DocumentClass.create(data, {keepId: true, keepEmbeddedIds: true, pack: pack.collection});
   }
   await pack.configure({locked: wasLocked});
-  game.compendiumArt.enabled = true;
+  dnd5e.moduleArt.suppressArt = false;
   ui.notifications.info(`Refreshed all documents from Compendium ${pack.collection}`);
 }
 
