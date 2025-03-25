@@ -128,16 +128,19 @@ export default class ActorSheet5eNPC2 extends ActorSheetV2Mixin(ActorSheet5eNPC)
     }
 
     // Speed
-    context.speed = Object.entries(CONFIG.DND5E.movementTypes).reduce((obj, [k, label]) => {
-      const value = attributes.movement[k];
-      if ( value ) {
-        obj[k] = { label, value };
+    context.speed = [
+      ...Object.entries(CONFIG.DND5E.movementTypes).map(([k, label]) => {
+        const value = attributes.movement[k];
+        if ( !value ) return null;
+        const data = { label, value };
         if ( (k === "fly") && attributes.movement.hover ) obj.fly.icons = [{
           icon: "fas fa-cloud", label: game.i18n.localize("DND5E.MovementHover")
         }];
-      }
-      return obj;
-    }, {});
+        return data;
+      }),
+      ...attributes.movement.custom,
+      ...splitSemicolons(attributes.movement.special).map(label => ({ label }))
+    ].filter(_ => _);
 
     // Skills & Tools
     const skillSetting = new Set(game.settings.get("dnd5e", "defaultSkills"));
