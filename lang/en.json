@@ -1867,6 +1867,31 @@
             "hint": "These additional items will be added to the creature when one of its items is enchanted, and will be removed if the enchantment is ever removed."
           }
         }
+      },
+      "level": {
+        "label": "Level Limit",
+        "hint": "Range of levels required to use this enchantment.",
+        "max": {
+          "label": "Maximum Level"
+        },
+        "min": {
+          "label": "Minimum Level"
+        }
+      },
+      "riders": {
+        "label": "Attached",
+        "activity": {
+          "label": "Additional Activities",
+          "hint": "These additional activities will be added to the enchanted item when this enchantment is applied, and removed when the enchantment is removed."
+        },
+        "effect": {
+          "label": "Additional Effects",
+          "hint": "These additional effects will be added to the enchanted item when this enchantment is applied, and removed when the enchantment is removed."
+        },
+        "item": {
+          "label": "Additional Items",
+          "hint": "These additional items will be added to the creature when one of its items is enchanted, and will be removed if the enchantment is ever removed."
+        }
       }
     },
     "enchant": {
@@ -3531,7 +3556,14 @@
       }
     },
     "profiles": {
-      "label": "Summons Profiles",
+      "count": {
+        "label": "Count"
+      },
+      "cr": {
+        "label": "Challenge Rating",
+        "abbr": "CR",
+        "hint": "Maximum CR of the summoned creature."
+      },
       "FIELDS": {
         "count": {
           "label": "Count"
@@ -3562,6 +3594,28 @@
         "uuid": {
           "label": "Linked Creature"
         }
+      },
+      "label": "Summons Profiles",
+      "level": {
+        "label": "Level Limit",
+        "hint": "Range of levels required to use this profile.",
+        "max": {
+          "label": "Maximum Level"
+        },
+        "min": {
+          "label": "Minimum Level"
+        }
+      },
+      "name": {
+        "label": "Display Name",
+        "hint": "Name of the profile displayed in the usage dialog."
+      },
+      "types": {
+        "label": "Creature Types",
+        "hint": "List of creature types from which the summoned creature can be selected."
+      },
+      "uuid": {
+        "label": "Linked Creature"
       }
     },
     "summon": {
@@ -3985,6 +4039,96 @@
   "Dialog": {
     "Title": "Configure Transformation"
   },
+  "FIELDS": {
+    "profiles": {
+      "cr": {
+        "label": "Challenge Rating",
+        "abbr": "CR",
+        "hint": "Maximum CR of the source creature."
+      },
+      "FIELDS": {
+        "cr": {
+          "label": "Challenge Rating",
+          "abbr": "CR",
+          "hint": "Maximum CR of the source creature."
+        },
+        "level": {
+          "label": "Level Limit",
+          "hint": "Range of levels required to use this profile.",
+          "max": {
+            "label": "Maximum Level"
+          },
+          "min": {
+            "label": "Minimum Level"
+          }
+        },
+        "movement": {
+          "hint": "Movement types that are not allowed on source creatures.",
+          "label": "Restricted Movement Types"
+        },
+        "name": {
+          "hint": "Name of the profile displayed in the usage dialog.",
+          "label": "Display Name"
+        },
+        "sizes": {
+          "hint": "List of creature sizes from which the source creature can be selected.",
+          "label": "Creature Sizes"
+        },
+        "types": {
+          "hint": "List of creature types from which the source creature can be selected.",
+          "label": "Creature Types"
+        }
+      },
+      "label": "Transform Profiles",
+      "level": {
+        "label": "Level Limit",
+        "hint": "Range of levels required to use this profile.",
+        "max": {
+          "label": "Maximum Level"
+        },
+        "min": {
+          "label": "Minimum Level"
+        }
+      },
+      "movement": {
+        "hint": "Movement types that are not allowed on source creatures.",
+        "label": "Restricted Movement Types"
+      },
+      "name": {
+        "hint": "Name of the profile displayed in the usage dialog.",
+        "label": "Display Name"
+      },
+      "sizes": {
+        "hint": "List of creature sizes from which the source creature can be selected.",
+        "label": "Creature Sizes"
+      },
+      "types": {
+        "hint": "List of creature types from which the source creature can be selected.",
+        "label": "Creature Types"
+      }
+    },
+    "transform": {
+      "label": "Transformation Details",
+      "customize": {
+        "label": "Customize",
+        "hint": "Use custom transformation settings rather than the defaults provided by the selected preset."
+      },
+      "identifier": {
+        "label": "Class Identifier",
+        "hint": "Identifier used to determine whether the character level or a specific class level should be used for profile level limits."
+      },
+      "mode": {
+        "label": "Mode",
+        "hint": "Sets how the transformation source creatures are selected.",
+        "Appearance": "Appearance Only",
+        "Default": "Compendium Browser",
+        "Direct": "Direct Link"
+      },
+      "preset": {
+        "label": "Preset"
+      }
+    }
+  },
   "Preset": {
     "Appearance": {
       "Label": "Appearance Only"
@@ -3997,6 +4141,20 @@
     "WildShape": {
       "Label": "Wild Shape"
     }
+  },
+  "Profile": {
+    "Action": {
+      "Create": "Create Profile",
+      "Delete": "Delete Profile"
+    },
+    "ChallengeRatingLabel": "Challenge Rating of {cr} or lower",
+    "Empty": "Click the <i class=\"fas fa-plus\"></i> button above to create a profile.",
+    "Label": "Transform Profile"
+  },
+  "SECTIONS": {
+    "Profiles": "Profiles",
+    "Settings": "Settings",
+    "Transformation": "Transformation"
   },
   "Setting": {
     "Effects": {
@@ -4105,10 +4263,12 @@
     }
   },
   "TemporaryClass": "Temporary Class",
+  "Title": "Transform",
   "Warning": {
     "NoOwnership": "You do not have permission to transform this actor.",
     "NoPermission": "Transformation permission haven't been granted to players.",
-    "OriginalActor": "No original actor was found with ID '{reference}'."
+    "OriginalActor": "No original actor was found with ID '{reference}'.",
+    "SourceActor": "No actor found to transform into."
   }
 },
 
