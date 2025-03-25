@@ -408,6 +408,10 @@
         flex-direction: column;
         gap: .25rem;
         overflow: hidden;
+
+        /* Immediate children vert margins
+         * are handled by the column gap */
+        > * { margin-block: 0; }
       }
 
       p {
