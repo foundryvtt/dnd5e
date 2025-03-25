@@ -1938,6 +1938,37 @@ dialog.dnd5e2.application {
   li.divider { border-color: var(--color-border-light-1); }
 }
 
+:is(.dnd5e2, .dnd5e2-journal) .prosemirror menu {
+  --color-hover-bg: var(--dnd5e-background-card);
+
+  .pm-dropdown {
+    background: none;
+    &:hover { background: var(--color-hover-bg); }
+  }
+
+  button {
+    display: unset;
+    text-transform: unset;
+    width: unset;
+    box-shadow: none;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-14);
+    font-weight: normal;
+    height: var(--menu-height);
+    line-height: var(--menu-height);
+    background: transparent;
+    border: none;
+    padding: 0 5px;
+    margin: 0;
+
+    &:hover, &.active {
+      box-shadow: none;
+      background: var(--color-hover-bg);
+      color: var(--color-form-label-hover);
+    }
+  }
+}
+
 /* ---------------------------------- */
 /*  Window Handles                    */
 /* ---------------------------------- */
