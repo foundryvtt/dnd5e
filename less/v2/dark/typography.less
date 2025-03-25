@@ -3,8 +3,7 @@
 .dnd5e2.dnd5e-theme-dark {
   --dnd5e-color-table-row-odd: var(--dnd5e-color-iron-gray);
   --dnd5e-color-table-row-even: color-mix(in oklab, var(--dnd5e-color-table-row-odd), black 10%);
-  --dnd5e-block-notable-color: var(--dnd5e-color-blue-gray-4);
-  --dnd5e-block-notable-border: #212121;
+  --dnd5e-block-background: var(--dnd5e-color-blue-gray-4);
 
   --dnd5e-statblock-background: rgb(0 0 0 / .35);
   --dnd5e-statblock-ability-border: black;
@@ -28,10 +27,10 @@
 
   .roll-link > i.fa-dice-d20, a.inline-roll > i.fa-dice-d20 { filter: invert(1); }
 
-  .fvtt:is(.advice, .narrative, .quest) { background: var(--dnd5e-color-blue-gray-4); }
-
   .notable {
-    &::before, &::after { filter: grayscale(1); }
+    --dnd5e-block-background: var(--dnd5e-color-blue-gray-4);
+    --dnd5e-block-border-color: #212121;
+    &::before, &::after { filter: grayscale(100%); }
   }
 
   .statblock.npc {
