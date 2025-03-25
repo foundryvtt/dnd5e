@@ -3882,7 +3882,7 @@ DND5E.conditionTypes = {
     riders: ["prone"]
   }
 };
-preLocalize("conditionTypes", { keys: ["name", "label"], sort: true }); // TODO: Remove 'label' in 4.6.
+preLocalize("conditionTypes", { keys: ["name", "label"], sort: true }); // TODO: Remove 'label' in 5.2.
 
 /* -------------------------------------------- */
 
