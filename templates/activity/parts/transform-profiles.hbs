@@ -33,7 +33,7 @@
 
             {{!-- CR --}}
             {{ formField fields.cr name=(concat prefix "cr") value=data.cr localize=true hint=false classes="label-top"
-                         label="DND5E.TRANSFORM.FIELDS.profiles.FIELDS.cr.abbr" }}
+                         label="DND5E.TRANSFORM.FIELDS.profiles.cr.abbr" }}
 
             {{!-- Name --}}
             {{ formField fields.name name=(concat prefix "name") value=data.name hint=false classes="label-top"
@@ -63,7 +63,7 @@
                 {{ formField fields.movement name=(concat prefix "movement") value=data.movement
                              options=@root.movementTypeOptions }}
                 <div class="form-group">
-                    <label>{{ localize "DND5E.TRANSFORM.FIELDS.profiles.FIELDS.level.label" }}</label>
+                    <label>{{ localize "DND5E.TRANSFORM.FIELDS.profiles.level.label" }}</label>
                     <div class="form-fields range-fields">
                         {{ formInput fields.level.fields.min name=(concat prefix "level.min") value=data.level.min
                                      placeholder="0" ariaLabel=(localize "DND5E.LevelLimit.Min")
@@ -73,7 +73,7 @@
                                      placeholder="∞" ariaLabel=(localize "DND5E.LevelLimit.Max")
                                      input=@root.inputs.createNumberInput }}
                     </div>
-                    <p class="hint">{{ localize "DND5E.TRANSFORM.FIELDS.profiles.FIELDS.level.hint" }}</p>
+                    <p class="hint">{{ localize "DND5E.TRANSFORM.FIELDS.profiles.level.hint" }}</p>
                 </div>
             </div>
         </div>
