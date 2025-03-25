@@ -182,33 +182,20 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   _initializeSource(source, options={}) {
     source = super._initializeSource(source, options);
-    const pack = game.packs.get(options.pack);
-    if ( !source._id || !pack || !game.compendiumArt.enabled ) return source;
-    const uuid = pack.getUuid(source._id);
+    if ( !source._id || !options.pack || dnd5e.moduleArt.suppressArt ) return source;
+    const uuid = `Compendium.${options.pack}.${source._id}`;
     const art = game.dnd5e.moduleArt.map.get(uuid);
     if ( art?.actor || art?.token ) {
       if ( art.actor ) source.img = art.actor;
       if ( typeof art.token === "string" ) source.prototypeToken.texture.src = art.token;
       else if ( art.token ) foundry.utils.mergeObject(source.prototypeToken, art.token);
-      Actor5e.applyCompendiumArt(source, pack, art);
+      const biography = source.system.details?.biography;
+      if ( art.credit && biography ) {
+        if ( typeof biography.value !== "string" ) biography.value = "";
+        biography.value += `<p>${art.credit}</p>`;
+      }
     }
     return source;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Apply package-provided art to a compendium Document.
-   * @param {object} source                  The Document's source data.
-   * @param {CompendiumCollection} pack      The Document's compendium.
-   * @param {CompendiumArtInfo} art          The art being applied.
-   */
-  static applyCompendiumArt(source, pack, art) {
-    const biography = source.system.details?.biography;
-    if ( art.credit && biography ) {
-      if ( typeof biography.value !== "string" ) biography.value = "";
-      biography.value += `<p>${art.credit}</p>`;
-    }
   }
 
   /* -------------------------------------------- */
