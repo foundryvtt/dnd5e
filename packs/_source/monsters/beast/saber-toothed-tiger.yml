@@ -54,8 +54,8 @@ system:
     hp:
       value: 52
       max: 52
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 7d10 + 14
     init:
       ability: ''
@@ -531,10 +531,10 @@ items:
     system:
       description:
         value: >-
-          <p>If the tiger moves at least <strong>20 ft.</strong> straight toward
-          a creature and then hits it with a claw attack on the same turn, that
-          target must succeed on a <strong>DC 14 Strength saving throw</strong>
-          or be knocked prone.</p><p>If the target is prone, the lion can make
+          <p>If the tiger moves at least 20 ft. straight toward a creature and
+          then hits it with a claw attack on the same turn, that target must
+          succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone].</p><p>If the target is prone, the lion can make
           one bite attack against it as a bonus action.</p>
         chat: >-
           <p>If the tiger moves at least <strong>20 ft.</strong> straight toward
@@ -685,9 +685,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676832
+      modifiedTime: 1741122804994
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!tYYoifu9teGLetVI.6f3yWYLcONtKe72e'
   - _id: npiswgaiGzupcEmw
@@ -696,10 +696,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (1d10 + 5) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Saber-Toothed Tiger attacks with its Bite.</p>
       source:
         custom: ''
@@ -721,7 +718,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -839,6 +836,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -852,9 +850,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676832
+      modifiedTime: 1741122814476
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!tYYoifu9teGLetVI.npiswgaiGzupcEmw'
   - _id: I9zJprscDFYpwwJR
@@ -863,10 +861,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>12 (2d6 + 5) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Saber-Toothed Tiger attacks with its Claw.</p>
       source:
         custom: ''
@@ -888,7 +883,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -1007,6 +1002,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1018,9 +1014,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676832
+      modifiedTime: 1741122838509
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!tYYoifu9teGLetVI.I9zJprscDFYpwwJR'
 effects: []
@@ -1033,8 +1029,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171263421
-  modifiedTime: 1726171451318
+  modifiedTime: 1741122842960
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!tYYoifu9teGLetVI'

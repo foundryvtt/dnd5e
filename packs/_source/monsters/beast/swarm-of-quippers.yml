@@ -54,8 +54,8 @@ system:
     hp:
       value: 28
       max: 28
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 8d8 - 8
     init:
       ability: ''
@@ -643,10 +643,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>0
-          ft.,</strong> one creature in the swarm's space. Hit: <strong>14 (4d6)
-          <em>piercing damage</em></strong>, or <strong>7 (2d6) <em>piercing
-          damage</em></strong> if the swarm has half of its hit points or
+          <p>Melee Weapon Attack: [[/attack]], 0 ft., one creature in the
+          swarm's space. Hit: [[/damage average]] damage, or [[/damage 2d6
+          piercing average]] damage if the swarm has half of its hit points or
           fewer.</p>
         chat: <p>The Swarm of Quippers attacks with a flurry of Bites.</p>
       source:
@@ -672,7 +671,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 0
       uses:
         max: ''
         recovery: []
@@ -740,7 +739,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -769,8 +768,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
-            bonus: ''
+            ability: none
+            bonus: '@abilities.dex.mod'
             critical:
               threshold: null
             flat: false
@@ -783,24 +782,32 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bites
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676443
+      modifiedTime: 1741123546450
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!KXG5XLIwKhn1V0Y5.hZiOYQNCqAFq0sD6'
 effects: []
@@ -813,8 +820,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171223227
-  modifiedTime: 1726171443332
+  modifiedTime: 1741123498123
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!KXG5XLIwKhn1V0Y5'

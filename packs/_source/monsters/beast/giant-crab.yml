@@ -54,8 +54,8 @@ system:
     hp:
       value: 13
       max: 13
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 3d8
     init:
       ability: ''
@@ -531,10 +531,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>bludgeoning
-          damage</em></strong>.</p><p>The target is grappled (escape DC 11). The
-          crab has two claws, each of which can grapple only one target.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
+          &amp;Reference[grappled] (escape DC 11). The crab has two claws, each
+          of which can grapple only one target.</p>
         chat: <p>The Giant Crab attacks with its Claw. The target is grappled.</p>
       source:
         custom: ''
@@ -674,6 +673,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -685,9 +685,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676420
+      modifiedTime: 1741118408615
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!AOJvmk1IchxNxQzP.7qDtYuaBNQ3zOnBC'
 effects: []
@@ -700,8 +700,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171209774
-  modifiedTime: 1726171440833
+  modifiedTime: 1741118365628
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!AOJvmk1IchxNxQzP'

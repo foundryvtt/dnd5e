@@ -54,8 +54,8 @@ system:
     hp:
       value: 1
       max: 1
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 1d4 - 1
     init:
       ability: ''
@@ -530,10 +530,7 @@ items:
     img: icons/creatures/claws/claw-talons-glowing-orange.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit:<strong> 1 <em>slashing
-          damage</em>.</strong></p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Hawk attacks with its Talons.</p>
       source:
         custom: ''
@@ -596,7 +593,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - fin
       proficient: 1
       unidentified:
         description: ''
@@ -673,6 +671,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: talons
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -684,9 +683,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676486
+      modifiedTime: 1741122026485
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fnkPNfIpS62LqOu4.0Di3cqTRD7ot8ZCa'
 effects: []
@@ -699,8 +698,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171246620
-  modifiedTime: 1726171447614
+  modifiedTime: 1741122040112
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!fnkPNfIpS62LqOu4'

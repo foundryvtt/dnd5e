@@ -54,8 +54,8 @@ system:
     hp:
       value: 45
       max: 45
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 6d10 + 12
     init:
       ability: ''
@@ -500,10 +500,11 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -575,10 +576,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741121174035
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!aAqfEHPiVbhMwZ6j.QY2OI39oNi9VUuAY'
   - _id: X9XQ405Nx5lHP20E
     name: Bite
@@ -586,10 +587,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Giant Hyena attacks with its Bite.</p>
       source:
         custom: ''
@@ -611,7 +609,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -729,6 +727,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -742,9 +741,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676474
+      modifiedTime: 1741121184241
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!aAqfEHPiVbhMwZ6j.X9XQ405Nx5lHP20E'
 effects: []
@@ -757,8 +756,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171240373
-  modifiedTime: 1726171446379
+  modifiedTime: 1741121185657
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!aAqfEHPiVbhMwZ6j'

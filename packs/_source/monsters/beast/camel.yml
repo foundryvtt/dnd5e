@@ -54,8 +54,8 @@ system:
     hp:
       value: 15
       max: 15
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d10 + 4
     init:
       ability: ''
@@ -483,10 +483,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>2 (1d4) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Camel attacks with its Bite.</p>
       source:
         custom: ''
@@ -578,7 +575,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -608,8 +605,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: ''
-            bonus: ''
+            ability: none
+            bonus: '3'
             critical:
               threshold: null
             flat: false
@@ -622,10 +619,14 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -634,14 +635,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676431
+      modifiedTime: 1741117095299
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!FQMFuzzSh73d0Nrd.XY89jRSGIvqLmLmw'
 effects: []
@@ -654,8 +659,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171216420
-  modifiedTime: 1726171441992
+  modifiedTime: 1741117101470
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!FQMFuzzSh73d0Nrd'

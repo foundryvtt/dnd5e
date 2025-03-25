@@ -54,8 +54,8 @@ system:
     hp:
       value: 13
       max: 13
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d10 + 2
     init:
       ability: ''
@@ -483,10 +483,7 @@ items:
     img: icons/commodities/bones/hooves-cloven-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>8 (2d4 + 3) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Riding Horse attacks with its Hooves.</p>
       source:
         custom: ''
@@ -508,7 +505,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -626,6 +623,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: hooves
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -639,9 +637,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676512
+      modifiedTime: 1741122792075
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!rz8UTUnFT87BsAFR.CwpmLFcikAet169F'
 effects: []
@@ -654,8 +652,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171261917
-  modifiedTime: 1726171450964
+  modifiedTime: 1741122793490
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!rz8UTUnFT87BsAFR'

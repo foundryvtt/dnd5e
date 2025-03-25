@@ -54,8 +54,8 @@ system:
     hp:
       value: 19
       max: 19
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 3d8 + 6
     init:
       ability: ''
@@ -574,8 +574,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741116506863
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!K5cKmPoFkpuOotis.hbxC3Wg3H8cSIvM0'
   - _id: jxC1VNaCf2VXlD6C
     name: Fist
@@ -583,10 +583,7 @@ items:
     img: icons/magic/fire/flame-burning-fist-strike.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ape attacks with its Fist.</p>
       source:
         custom: ''
@@ -608,7 +605,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -726,9 +723,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: fist
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
@@ -737,9 +735,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676663
+      modifiedTime: 1741116921784
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!K5cKmPoFkpuOotis.jxC1VNaCf2VXlD6C'
   - _id: NsTx3MUaYkEI2t8M
@@ -748,9 +746,7 @@ items:
     img: icons/magic/earth/projectile-stone-ball-brown.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +5 to hit, range 25/50 ft., one target. Hit:
-          <strong>6 (1d6 + 3) <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ape attacks with its Rock.</p>
       source:
         custom: ''
@@ -893,7 +889,7 @@ items:
       identifier: rock
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -902,9 +898,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676663
+      modifiedTime: 1741116505945
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!K5cKmPoFkpuOotis.NsTx3MUaYkEI2t8M'
 effects: []
@@ -917,8 +913,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171221697
-  modifiedTime: 1726171443008
+  modifiedTime: 1741116511713
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!K5cKmPoFkpuOotis'

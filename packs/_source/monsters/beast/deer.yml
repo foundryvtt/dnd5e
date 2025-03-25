@@ -54,8 +54,8 @@ system:
     hp:
       value: 4
       max: 4
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 1d8
     init:
       ability: ''
@@ -483,10 +483,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>2 (1d4) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Deer attacks with its Bite.</p>
       source:
         custom: ''
@@ -508,7 +505,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -626,6 +623,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -639,9 +637,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676400
+      modifiedTime: 1741117272047
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!4EODJbmPlpnNGVR7.EyXnPvAdgwKZz6LT'
 effects: []
@@ -654,8 +652,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171201639
-  modifiedTime: 1726171439386
+  modifiedTime: 1741117299688
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!4EODJbmPlpnNGVR7'
