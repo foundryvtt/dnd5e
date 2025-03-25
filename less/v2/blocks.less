@@ -1,0 +1,188 @@
+/* ------------------------------------------- */
+/* Inline Rich Text Formatting Utility Classes */
+/* ------------------------------------------- */
+:is(.dnd5e, .dnd5e2, .dnd5e2-journal) {
+
+  /* Positioning */
+  .float-left {
+    float: left;
+    clear: left;
+    margin-right: 0.5em;
+    max-width: var(--dnd5e-block-float-max);
+  }
+
+  .float-right {
+    float: right;
+    clear: right;
+    margin-left: 0.5em;
+    max-width: var(--dnd5e-block-float-max);
+  }
+
+  .float-clear { clear: both; }
+  .margin-center { margin: auto; }
+
+  /* Sizing */
+  .size-four {
+    --local-width: calc(4 * var(--dnd5e-block-width-base));
+    width: var(--local-width);
+  }
+
+  .size-three {
+    --local-width: calc(3 * var(--dnd5e-block-width-base));
+    width: var(--local-width);
+  }
+
+  .size-two {
+    --local-width: calc(2 * var(--dnd5e-block-width-base));
+    width: var(--local-width);
+  }
+
+  .size-one {
+    --local-width: var(--dnd5e-block-width-base);
+    width: var(--local-width);
+  }
+
+  /* Layout */
+  .flex-between,
+  .flex-around {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    clear: both;
+  }
+
+  .flex-around {
+    justify-content: space-around;
+    gap: 10px;
+  }
+
+  .flex-wrap { flex-wrap: wrap; }
+  .align-start { align-items:start; }
+
+  /* Common Typography for Callouts */
+  :is(.notable, .quest, .advice, .narrative) {
+    display: flow-root;
+
+    :is(h1, h2, h3, h4, h5) {
+      border: none;
+      font-variant: small-caps;
+      font-weight: bold;
+      font-family: var(--dnd5e-block-header-font);
+    }
+  }
+
+  /* Notable Callout */
+  .notable {
+    --dnd5e-block-background: rgb(216 227 227);
+    --dnd5e-block-border-color: #231f20 #b3b3b3;
+    background: var(--dnd5e-block-background);
+    margin: 1.4em;
+    padding: 1.4em;
+    border-width: 3px 1px;
+    border-style: solid;
+    border-color: var(--dnd5e-block-border-color);
+    filter: drop-shadow(0 5px 8px var(--dnd5e-shadow-15));
+
+    &::before,
+    &::after {
+      content: "";
+      background: var(--dnd5e-notable-decor);
+      height: 11px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      z-index: -1;
+    }
+
+    &::before { top: -13px; }
+
+    &::after {
+      bottom: -13px;
+      transform: scaleY(-1);
+    }
+
+    > :first-child { margin-block-start: 0; }
+    > :last-child { margin-block-end: 0; }
+  }
+
+  /* Narrative Callout */
+  .narrative {
+    --dot-size: 0.6em;
+    --offset: calc(var(--dot-size) / -2);
+
+    position: relative;
+    margin: 1.5em 1em;
+    padding: 1em 1.5em;
+    background: var(--dnd5e-block-background);
+    border-left: 1px solid var(--dnd5e-block-border-color);
+    border-right: 1px solid var(--dnd5e-block-border-color);
+    text-align: justify;
+
+    /* Adding dots to corner of block */
+    &::after,
+    &::before,
+    > :last-child::after,
+    > :last-child::before {
+      content: "";
+      display: block;
+      position: absolute;
+      background-color: var(--dnd5e-block-border-color);
+      border-radius: 100%;
+      width: var(--dot-size);
+      height: var(--dot-size);
+    }
+
+    &::before {
+      top: var(--offset);
+      left: var(--offset);
+    }
+
+    &::after {
+      top: var(--offset);
+      right: var(--offset);
+    }
+
+    > :last-child::before {
+      bottom: var(--offset);
+      left: var(--offset);
+    }
+
+    > :last-child::after {
+      bottom: var(--offset);
+      right: var(--offset);
+    }
+  }
+
+  /* Quest/Advice Callout */
+  :is(.quest, .advice) {
+    --img-size: 64px;
+    position: relative;
+    background: var(--dnd5e-block-background);
+    border: 2px solid var(--dnd5e-block-border-color);
+    box-shadow: 1px 3px 5px var(--dnd5e-shadow-15);
+    margin: 1rem 1rem 1rem calc(var(--img-size) / 2);
+    padding: 0.75rem 0.75rem 0.75rem calc(var(--img-size) / 2 + 0.75rem);
+
+    article > :last-child { margin-block-end: 0; }
+
+    > figure {
+      position: absolute;
+      width: var(--img-size);
+      height: var(--img-size);
+      margin: 0;
+      left: calc(var(--img-size) / -2);
+      top: calc(50% - var(--img-size) / 2);
+
+      img {
+        width: 100%;
+        height: 100%;
+        background: var(--dnd5e-color-light-gray);
+        border: 4px solid var(--dnd5e-block-border-color);
+        box-shadow: 0 0 4px var(--dnd5e-shadow-45);
+
+        &.round { border-radius: 100%; }
+      }
+    }
+  }
+}
