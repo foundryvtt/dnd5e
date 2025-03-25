@@ -35,9 +35,9 @@ export default class TransformDialog extends Dialog5e {
       width: 1000
     },
     transform: {
+      host: null,
       settings: null,
-      source: null,
-      target: null
+      source: null
     },
     window: {
       title: "DND5E.TRANSFORM.Dialog.Title",
@@ -116,7 +116,7 @@ export default class TransformDialog extends Dialog5e {
    */
   async _prepareDetailsContext(context, options) {
     context.sourceActor = this.options.transform.source;
-    context.targetActor = this.options.transform.target;
+    context.hostActor = this.options.transform.host;
     return context;
   }
 
@@ -153,9 +153,9 @@ export default class TransformDialog extends Dialog5e {
   async _prepareSettingsContext(context, options) {
     context.categories = ["keep", "merge", "effects", "other"].map(cat => ({
       category: cat,
-      title: `DND5E.TRANSFORM.Setting.${cat.capitalize()}.Title`,
-      hint: game.i18n.has(`DND5E.TRANSFORM.Setting.${cat.capitalize()}.Hint`)
-        ? `DND5E.TRANSFORM.Setting.${cat.capitalize()}.Hint` : "",
+      title: `DND5E.TRANSFORM.Setting.FIELDS.${cat}.label`,
+      hint: game.i18n.has(`DND5E.TRANSFORM.Setting.FIELDS.${cat}.hint`)
+        ? `DND5E.TRANSFORM.Setting.FIELDS.${cat}.hint` : "",
       settings: Object.entries(CONFIG.DND5E.transformation[cat]).map(([name, config]) => ({
         field: new BooleanField({ label: config.label, hint: config.hint }),
         input: context.inputs.createCheckboxInput,
@@ -163,6 +163,20 @@ export default class TransformDialog extends Dialog5e {
         value: this.#settings[cat]?.has(name)
       }))
     }));
+    const fields = TransformationSetting.schema.fields;
+    context.categories[3].settings.push(
+      {
+        field: fields.tempFormula,
+        name: "tempFormula",
+        value: this.#settings.tempFormula
+      },
+      {
+        field: fields.transformTokens,
+        input: context.inputs.createCheckboxInput,
+        name: "transformTokens",
+        value: this.#settings.transformTokens
+      }
+    );
     return context;
   }
 
@@ -218,11 +232,12 @@ export default class TransformDialog extends Dialog5e {
    */
   static async #setPreset(event, target) {
     const preset = CONFIG.DND5E.transformation.presets[target.dataset.preset];
-    if ( preset ) {
-      this.#settings = new TransformationSetting({ ...preset.settings, preset: target.dataset.preset });
-    } else {
-      this.#settings = new TransformationSetting();
-    }
+    if ( preset ) this.#settings = new TransformationSetting({
+      ...preset.settings,
+      preset: target.dataset.preset,
+      transformTokens: this.element.querySelector('[name="transformTokens"]').checked
+    });
+    else this.#settings = new TransformationSetting();
     this.render({ parts: ["presets", "settings"] });
   }
 
@@ -254,15 +269,15 @@ export default class TransformDialog extends Dialog5e {
 
   /**
    * Display the transform dialog.
-   * @param {Actor5e} target                         Actor that will be transformed.
-   * @param {Actor5e} source                         Actor whose data will be applied to the target.
+   * @param {Actor5e} host                           Actor that will be transformed.
+   * @param {Actor5e} source                         Actor whose data will be applied to the host.
    * @param {object} [options={}]                    Additional options for the application.
    * @returns {Promise<TransformationSetting|null>}  Transformation settings to apply.
    */
-  static async promptSettings(target, source, options={}) {
+  static async promptSettings(host, source, options={}) {
     return new Promise(resolve => {
       options.transform ??= {};
-      options.transform.target = target;
+      options.transform.host = host;
       options.transform.source = source;
       const dialog = new this(options);
       dialog.addEventListener("close", event =>

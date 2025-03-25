@@ -275,10 +275,14 @@ export default class CreatureTemplate extends CommonTemplate {
   getRollData({ deterministic=false }={}) {
     const data = super.getRollData({ deterministic });
     data.classes = {};
+    data.subclasses = {};
     for ( const [identifier, cls] of Object.entries(this.parent.classes) ) {
       data.classes[identifier] = {...cls.system};
       data.classes[identifier].hitDice = cls.system.hd.denomination; // Backwards compatibility
-      if ( cls.subclass ) data.classes[identifier].subclass = cls.subclass.system;
+      if ( cls.subclass ) {
+        data.classes[identifier].subclass = cls.subclass.system;
+        data.subclasses[cls.subclass.identifier] = { levels: cls.system.levels };
+      }
     }
     return data;
   }
