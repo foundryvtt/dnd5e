@@ -66,6 +66,13 @@ export default class FeatData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: true
+  }, { inplace: false }));
+
+  /* -------------------------------------------- */
+
   /** @override */
   static get compendiumBrowserFilters() {
     return new Map([

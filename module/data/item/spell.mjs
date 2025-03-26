@@ -72,6 +72,13 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    enchantable: true
+  }, { inplace: false }));
+
+  /* -------------------------------------------- */
+
   /** @override */
   static get compendiumBrowserFilters() {
     return new Map([
