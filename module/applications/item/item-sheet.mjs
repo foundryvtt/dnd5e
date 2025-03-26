@@ -454,7 +454,7 @@ export default class ItemSheet5e extends (foundry.appv1?.sheets?.ItemSheet ?? It
     // Check class identifier
     if ( formData.system?.identifier && !dnd5e.utils.validators.isValidIdentifier(formData.system.identifier) ) {
       formData.system.identifier = this.item._source.system.identifier;
-      this.form.querySelector("input[name='system.identifier']").value = formData.system.identifier;
+      this.form.querySelector("[name='system.identifier']").value = formData.system.identifier;
       ui.notifications.error("DND5E.IdentifierError", {localize: true});
       return {};
     }
