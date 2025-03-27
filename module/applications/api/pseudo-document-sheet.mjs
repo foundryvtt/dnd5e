@@ -147,7 +147,7 @@ export default class PseudoDocumentSheet extends Application5e {
     // Add document ID copy
     const copyLabel = game.i18n.localize("SHEETS.CopyUuid");
     const copyId = `<button type="button" class="header-control fa-solid fa-passport icon" data-action="copyUuid"
-                            data-tooltip="${copyLabel}" aria-label="${copyLabel}"></button>`;
+                            data-tooltip aria-label="${copyLabel}"></button>`;
     this.window.close.insertAdjacentHTML("beforebegin", copyId);
 
     return frame;

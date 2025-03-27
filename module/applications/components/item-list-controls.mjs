@@ -189,7 +189,7 @@ export default class ItemListControlsElement extends HTMLElement {
       <ul class="unlist controls">
         <li>
           <button type="button" class="unbutton filter-control interface-only" data-action="clear"
-                  data-tooltip="DND5E.FilterClear" aria-label="${game.i18n.localize("DND5E.FilterClear")}">
+                  data-tooltip aria-label="${game.i18n.localize("DND5E.FilterClear")}">
             <i class="fas fa-xmark"></i>
           </button>
         </li>
@@ -229,7 +229,7 @@ export default class ItemListControlsElement extends HTMLElement {
       const item = document.createElement("li");
       item.innerHTML = `
         <button type="button" class="unbutton filter-control active interface-only" data-action="sort"
-                data-tooltip="SIDEBAR.SortModeManual" aria-label="${game.i18n.localize("SIDEBAR.SortModeManual")}">
+                data-tooltip aria-label="${game.i18n.localize("SIDEBAR.SortModeManual")}">
           <i class="fas fa-arrow-down-short-wide"></i>
         </button>
       `;
@@ -242,7 +242,7 @@ export default class ItemListControlsElement extends HTMLElement {
       const item = document.createElement("li");
       item.innerHTML = `
         <button type="button" class="unbutton filter-control active interface-only" data-action="group"
-                data-tooltip="${groupLabel}" aria-label="${groupLabel}">
+                data-tooltip aria-label="${groupLabel}">
           <i class="fas fa-layer-group"></i>
         </button>
       `;

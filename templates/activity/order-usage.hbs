@@ -30,8 +30,7 @@
                     {{{ value.contentLink }}}
                     <div class="list-controls flexrow">
                         <button type="button" class="unbutton control-button" data-action="removeCraft"
-                                data-tooltip="DND5E.FACILITY.Action.RemoveCraft"
-                                aria-label="{{ localize "DND5E.FACILITY.Action.RemoveCraft" }}">
+                                data-tooltip aria-label="{{ localize "DND5E.FACILITY.Action.RemoveCraft" }}">
                             <i class="fas fa-trash"></i>
                         </button>
                     </div>
@@ -100,7 +99,7 @@
                 <img src="{{ img }}" alt="{{ name }}">
                 {{#if removable}}
                 <a class="deletion-control" data-action="deleteOccupant"
-                   aria-label="{{ localize "DND5E.FACILITY.Action.DeleteOccupant" }}">
+                   data-tooltip aria-label="{{ localize "DND5E.FACILITY.Action.DeleteOccupant" }}">
                     <i class="fas fa-circle-xmark"></i>
                 </a>
                 <input type="hidden" name="trade.creatures.buy.{{ @key }}" value="{{ uuid }}">

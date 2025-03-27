@@ -1,11 +1,9 @@
 {{#if item.isOnCooldown}}
-<div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip="{{ item.labels.recharge }}"
-     aria-label="{{ item.labels.recharge }}">
+<div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip aria-label="{{ item.labels.recharge }}">
     <a class="item-action" data-action="recharge"><i class="fa-solid fa-arrows-rotate"></i></a>
 </div>
 {{else if ctx.hasRecharge}}
-<div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip="{{ item.labels.recharge }}"
-     aria-label="{{ item.labels.recharge }}">
+<div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip aria-label="{{ item.labels.recharge }}">
     <i class="fa-solid fa-bolt"></i>
 </div>
 {{else if ctx.hasUses}}

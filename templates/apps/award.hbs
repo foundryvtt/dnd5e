@@ -13,7 +13,7 @@
     <section class="currency">
         {{#each currency}}
         <label>
-            <i class="currency {{ @key }}" data-tooltip="{{ label }}" aria-label="{{ label }}"></i>
+            <i class="currency {{ @key }}" data-tooltip aria-label="{{ label }}"></i>
             {{ numberInput value name=(concat "amount." @key) class="uninput" min=0 step=1 }}
         </label>
         {{/each}}

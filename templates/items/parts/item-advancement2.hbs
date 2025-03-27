@@ -21,19 +21,18 @@
                 <div class="item-header item-controls">
                     {{#if (and @root.editable configured (ne @key "unconfigured"))}}
                     <a class="item-control config-button" data-action="modify-choices"
-                       data-tooltip="DND5E.AdvancementModifyChoices"
-                       aria-label="{{ localize "DND5E.AdvancementModifyChoices" }}">
+                       data-tooltip aria-label="{{ localize "DND5E.AdvancementModifyChoices" }}">
                         <i class="fas fa-cog"></i>
                     </a>
                     {{else}}
 
                     {{#if (eq configured "full")}}
-                    <a class="info-control" data-tooltip="DND5E.AdvancementConfiguredComplete"
+                    <a class="info-control" data-tooltip
                        aria-label="{{ localize "DND5E.AdvancementConfiguredComplete" }}">
                         <i class="fas fa-check-circle"></i>
                     </a>
                     {{else if (eq configured "partial")}}
-                    <a class="info-control" data-tooltip="DND5E.AdvancementConfiguredIncomplete"
+                    <a class="info-control" data-tooltip
                        aria-label="{{ localize "DND5E.AdvancementConfiguredIncomplete" }}">
                         <i class="fas fa-exclamation-triangle"></i>
                     </a>
@@ -60,7 +59,7 @@
                             </div>
                             <div class="tags">
                                 {{#each tags}}
-                                <span data-tooltip="{{ label }}" aria-label="{{ localize label }}">
+                                <span data-tooltip aria-label="{{ localize label }}">
                                     <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
                                 </span>
                                 {{/each}}
@@ -78,15 +77,13 @@
                             {{#if @root.editable}}
                             {{!-- Editing --}}
                             <a class="item-control item-action" data-action="edit"
-                               data-tooltip="DND5E.ADVANCEMENT.Action.Edit"
-                               aria-label="{{ localize "DND5E.DND5E.ADVANCEMENT.Action.Edit" }}">
+                               data-tooltip aria-label="{{ localize "DND5E.DND5E.ADVANCEMENT.Action.Edit" }}">
                                 <i class="fas fa-pen-to-square" inert></i>
                             </a>
 
                             {{!-- Deleting --}}
                             <a class="item-control item-action" data-action="delete"
-                               data-tooltip="DND5E.ADVANCEMENT.Action.Delete"
-                               aria-label="{{ localize "DND5E.ADVANCEMENT.Action.Delete" }}">
+                               data-tooltip aria-label="{{ localize "DND5E.ADVANCEMENT.Action.Delete" }}">
                                 <i class="fas fa-trash" inert></i>
                             </a>
                             {{/if}}
