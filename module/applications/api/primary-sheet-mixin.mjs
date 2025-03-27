@@ -1,12 +1,16 @@
-import DragDropApplicationMixin from "./drag-drop-mixin.mjs";
+import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
 
 /**
- * Adds common V2 sheet functionality.
- * @param {typeof DocumentSheet} Base  The base class being mixed.
- * @returns {typeof DocumentSheetV2}
+ * @import { FilterState5e } from "../components/item-list-controls.mjs";
  */
-export default function DocumentSheetV2Mixin(Base) {
-  return class DocumentSheetV2 extends DragDropApplicationMixin(Base) {
+
+/**
+ * Adds V2 sheet functionality shared between primary document sheets (Actors & Items).
+ * @param {typeof DocumentSheet5e} Base  The base class being mixed.
+ * @returns {typeof PrimarySheet5e}
+ */
+export default function PrimarySheetMixin(Base) {
+  return class PrimarySheet5e extends DragDropApplicationMixin(Base) {
     /**
      * @typedef {object} SheetTabDescriptor5e
      * @property {string} tab                       The tab key.
@@ -37,56 +41,70 @@ export default function DocumentSheetV2Mixin(Base) {
       EDIT: 2
     };
 
+    /* -------------------------------------------- */
+    /*  Properties                                  */
+    /* -------------------------------------------- */
+
     /**
-     * The mode the sheet is currently in.
-     * @type {ActorSheetV2.MODES|null}
-     * @protected
+     * Filters for applied inventory sections.
+     * @type {Record<string, FilterState5e>}
      */
-    _mode = null;
+    _filters = {};
 
     /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    static _customElements = super._customElements.concat(["dnd5e-checkbox", "proficiency-cycle", "slide-toggle"]);
+    /**
+     * The mode the sheet is currently in.
+     * @type {PrimarySheet5e.MODES|null}
+     * @protected
+     */
+    _mode = null;
 
     /* -------------------------------------------- */
     /*  Rendering                                   */
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    async _render(force, { mode, ...options }={}) {
-      if ( (mode === undefined) && (options.renderContext === "createItem") ) mode = this.constructor.MODES.EDIT;
+    _configureRenderOptions(options) {
+      super._configureRenderOptions(options);
+
+      // Set initial mode
+      let { mode, renderContext } = options;
+      if ( (mode === undefined) && (renderContext === "createItem") ) mode = this.constructor.MODES.EDIT;
       this._mode = mode ?? this._mode ?? this.constructor.MODES.PLAY;
-      if ( this.rendered ) {
-        const toggle = this.element[0].querySelector(".window-header .mode-slider");
-        toggle.checked = this._mode === this.constructor.MODES.EDIT;
-      }
-      return super._render(force, options);
     }
 
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    async _renderOuter() {
-      const html = await super._renderOuter();
-      const header = html[0].querySelector(".window-header");
-
-      // Adjust header buttons.
-      header.querySelectorAll(".header-button").forEach(btn => {
-        const label = btn.querySelector(":scope > i").nextSibling;
-        btn.dataset.tooltip = label.textContent;
-        btn.setAttribute("aria-label", label.textContent);
-        btn.addEventListener("dblclick", event => event.stopPropagation());
-        label.remove();
-      });
-
-      if ( !game.user.isGM && this.document.limited ) {
-        html[0].classList.add("limited");
-        return html;
+    _configureRenderParts(options) {
+      const parts = super._configureRenderParts(options);
+      for ( const key of Object.keys(parts) ) {
+        const tab = this.constructor.TABS.find(t => t.tab === key);
+        if ( tab?.condition && !tab.condition(this.document) ) delete parts[key];
       }
+      return parts;
+    }
 
-      // Add edit <-> play slide toggle.
-      if ( this.isEditable ) {
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    async _renderFrame(options) {
+      const html = await super._renderFrame(options);
+      if ( !game.user.isGM && this.document.limited ) html.classList.add("limited");
+      return html;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Handle re-rendering the mode toggle on ownership changes.
+     * @protected
+     */
+    _renderModeToggle() {
+      const header = this.element.querySelector(".window-header");
+      const toggle = header.querySelector(".mode-slider");
+      if ( this.isEditable && !toggle ) {
         const toggle = document.createElement("slide-toggle");
         toggle.checked = this._mode === this.constructor.MODES.EDIT;
         toggle.classList.add("mode-slider");
@@ -94,42 +112,35 @@ export default function DocumentSheetV2Mixin(Base) {
         toggle.setAttribute("aria-label", game.i18n.localize("DND5E.SheetModeEdit"));
         toggle.addEventListener("change", this._onChangeSheetMode.bind(this));
         toggle.addEventListener("dblclick", event => event.stopPropagation());
-        header.insertAdjacentElement("afterbegin", toggle);
+        header.prepend(toggle);
+      } else if ( this.isEditable ) {
+        toggle.checked = this._mode === this.constructor.MODES.EDIT;
+      } else if ( !this.isEditable && toggle ) {
+        toggle.remove();
       }
-
-      // Document UUID link.
-      const firstButton = header.querySelector(".header-button");
-      const idLink = header.querySelector(".document-id-link");
-      if ( idLink ) {
-        firstButton?.insertAdjacentElement("beforebegin", idLink);
-        idLink.classList.add("pseudo-header-button");
-        idLink.dataset.tooltipDirection = "DOWN";
-      }
-
-      return html;
     }
 
     /* -------------------------------------------- */
 
     /**
      * Render source information in the Document's title bar.
-     * @param {jQuery} html  The outer frame HTML.
+     * @param {HTMLElement} html  The outer frame HTML.
      * @protected
      */
-    _renderSourceOuter([html]) {
+    _renderSourceFrame(html) {
       const elements = document.createElement("div");
       elements.classList.add("header-elements");
       elements.innerHTML = `
         <div class="source-book">
-          <a class="config-button" data-action="source" data-tooltip="DND5E.SOURCE.Action.Configure"
-             aria-label="${game.i18n.localize("DND5E.SOURCE.Action.Configure")}">
-            <i class="fas fa-cog"></i>
-          </a>
+          <button type="button" class="unbutton control-button" data-action="showConfiguration" data-config="source"
+                  data-tooltip="DND5E.SOURCE.Action.Configure"
+                  aria-label="${game.i18n.localize("DND5E.SOURCE.Action.Configure")}">
+            <i class="fas fa-cog" inert></i>
+          </button>
           <span></span>
         </div>
       `;
-      html.querySelector(".window-title")?.insertAdjacentElement("afterend", elements);
-      elements.querySelector(".config-button").addEventListener("click", this._onConfigMenu.bind(this));
+      html.querySelector(".window-subtitle")?.after(elements);
     }
 
     /* -------------------------------------------- */
@@ -139,12 +150,12 @@ export default function DocumentSheetV2Mixin(Base) {
      * @protected
      */
     _renderSource() {
-      const [elements] = this.element.find(".header-elements");
+      const elements = this.element.querySelector(".header-elements .source-book");
       const source = this.document?.system.source;
       if ( !elements || !source ) return;
       const editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
-      elements.querySelector(".config-button")?.toggleAttribute("hidden", !editable);
-      elements.querySelector(".source-book > span").innerText = editable
+      elements.querySelector("button")?.toggleAttribute("hidden", !editable);
+      elements.querySelector("span").innerText = editable
         ? (source.label || game.i18n.localize("DND5E.SOURCE.FIELDS.source.label"))
         : source.label;
     }
@@ -152,31 +163,92 @@ export default function DocumentSheetV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    async getData(options) {
-      const context = await super.getData(options);
+    async _prepareContext(options) {
+      const context = await super._prepareContext(options);
       context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
-      context.cssClass = context.editable ? "editable" : this.isEditable ? "interactable" : "locked";
+      context.tabs = this._getTabs();
       return context;
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    async _preparePartContext(partId, options) {
+      const context = await super._preparePartContext(partId, options);
+      context.tab = context.tabs[partId];
+      return context;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Prepare the tab information for the sheet.
+     * @returns {Record<string, Partial<ApplicationTab>>}
+     * @protected
+     */
+    _getTabs() {
+      return this.constructor.TABS.reduce((tabs, { tab, condition, ...config }) => {
+        if ( !condition || condition(this.document) ) tabs[tab] = {
+          ...config,
+          id: tab,
+          group: "primary",
+          active: this.tabGroups.primary === tab,
+          cssClass: this.tabGroups.primary === tab ? "active" : ""
+        };
+        return tabs;
+      }, {});
+    }
+
+    /* -------------------------------------------- */
+    /*  Life-Cycle Handlers                         */
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    async _onFirstRender(context, options) {
+      await super._onFirstRender(context, options);
+      if ( this.tabGroups.primary ) this.element.classList.add(`tab-${this.tabGroups.primary}`);
+
+      // Create child button
+      const button = document.createElement("button");
+      button.ariaLabel = game.i18n.localize("CONTROLS.CommonCreate");
+      button.classList.add("create-child", "gold-button", "interface-only");
+      button.dataset.action = "addDocument";
+      button.innerHTML = '<i class="fas fa-plus" inert></i>';
+      this.element.querySelector(".window-content").append(button);
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    async _onRender(context, options) {
+      await super._onRender(context, options);
+
+      // Set toggle state and add status class to frame
+      this._renderModeToggle();
+      this.element.classList.toggle("editable", this.isEditable && (this._mode === this.constructor.MODES.EDIT));
+      this.element.classList.toggle("interactable", this.isEditable && (this._mode === this.constructor.MODES.PLAY));
+      this.element.classList.toggle("locked", !this.isEditable);
+
+      // Add event listeners
+      this.element.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
+
+      // Disable fields in play mode
+      if ( this._mode === this.constructor.MODES.PLAY ) this._disableFields();
     }
 
     /* -------------------------------------------- */
     /*  Event Listeners & Handlers                  */
     /* -------------------------------------------- */
 
-    /** @inheritDoc */
-    activateListeners(html) {
-      super.activateListeners(html);
-      html.find("[data-toggle-description]").on("click", this._onToggleDescription.bind(this));
-      this.form.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
-
-      if ( this.isEditable ) {
-        this.form.querySelectorAll("multi-select .tag").forEach(tag => {
-          tag.classList.add("remove");
-          tag.querySelector(":scope > span")?.classList.add("remove");
-        });
-        html.find(".create-child").on("click", this._onCreateChild.bind(this));
-      }
-    }
+    /**
+     * Handle creating a new embedded child.
+     * @param {Event} event         Triggering click event.
+     * @param {HTMLElement} target  Button that was clicked.
+     * @returns {any}
+     * @protected
+     * @abstract
+     */
+    _addDocument(event, target) {}
 
     /* -------------------------------------------- */
 
@@ -208,10 +280,11 @@ export default function DocumentSheetV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    _disableFields(form) {
-      super._disableFields(form);
-      form.querySelectorAll(".interface-only").forEach(input => input.disabled = false);
-      form.querySelectorAll("dnd5e-checkbox:not(.interface-only)").forEach(input => input.disabled = true);
+    changeTab(tab, group, options) {
+      super.changeTab(tab, group, options);
+      if ( group !== "primary" ) return;
+      this.element.className = this.element.className.replace(/tab-\w+/g, "");
+      this.element.classList.add(`tab-${tab}`);
     }
 
     /* -------------------------------------------- */
@@ -235,56 +308,9 @@ export default function DocumentSheetV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
-    _onChangeTab(event, tabs, active) {
-      super._onChangeTab(event, tabs, active);
-      this.form.className = this.form.className.replace(/tab-\w+/g, "");
-      this.form.classList.add(`tab-${active}`);
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Handle creating a new embedded child.
-     * @returns {any}
-     * @protected
-     * @abstract
-     */
-    _onCreateChild() {}
-
-    /* -------------------------------------------- */
-
-    /**
-     * Handle toggling an Item's description.
-     * @param {PointerEvent} event  The triggering event.
-     * @protected
-     */
-    async _onToggleDescription(event) {
-      const target = event.currentTarget;
-      const icon = target.querySelector(":scope > i");
-      const row = target.closest("[data-uuid]");
-      const summary = row.querySelector(":scope > .item-description > .wrapper");
-      const { uuid } = row.dataset;
-      const item = await fromUuid(uuid);
-      if ( !item ) return;
-
-      const expanded = this._expanded.has(item.id);
-      if ( expanded ) {
-        summary.parentElement.addEventListener("transitionend", () => {
-          if ( row.classList.contains("collapsed") ) summary.querySelector(".item-summary")?.remove();
-        }, { once: true });
-        this._expanded.delete(item.id);
-      } else {
-        const context = await item.getChatData({ secrets: item.isOwner });
-        const content = await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", context);
-        summary.querySelectorAll(".item-summary").forEach(el => el.remove());
-        summary.insertAdjacentHTML("beforeend", content);
-        await new Promise(resolve => requestAnimationFrame(resolve));
-        this._expanded.add(item.id);
-      }
-
-      row.classList.toggle("collapsed", expanded);
-      icon.classList.toggle("fa-compress", !expanded);
-      icon.classList.toggle("fa-expand", expanded);
+    _onClickAction(event, target) {
+      if ( target.dataset.action === "addDocument" ) this._addDocument(event, target);
+      else super._onClickAction(event, target);
     }
 
     /* -------------------------------------------- */
