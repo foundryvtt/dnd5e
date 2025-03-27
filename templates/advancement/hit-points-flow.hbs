@@ -18,8 +18,7 @@
         </label>
         <input class="roll-result" type="number" name="value" value="{{ data.value }}" {{ disabled data.useAverage }}>
         <button class="roll-button dice-button" type="button" name="roll" {{ disabled data.useAverage }}
-                data-tooltip="{{ localize "DND5E.ADVANCEMENT.HitPoints.Action.Roll" die=hitDie }}"
-                aria-label="{{ localize "DND5E.ADVANCEMENT.HitPoints.Action.Roll" die=hitDie }}">
+                data-tooltip aria-label="{{ localize "DND5E.ADVANCEMENT.HitPoints.Action.Roll" die=hitDie }}">
             <i class="fas fa-dice-{{ hitDie }}" inert></i>
         </button>
     </div>

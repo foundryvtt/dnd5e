@@ -9,7 +9,7 @@
         <div class="effect-source">{{localize "DND5E.Duration"}}</div>
         <div class="item-controls effect-controls flexrow">
             {{#if @root.editable}}
-            <a class="effect-control" data-action="create" data-tooltip="{{ section.localizationPrefix }}Create"
+            <a class="effect-control" data-action="create" data-tooltip
                aria-label="{{ localize (concat section.localizationPrefix 'Create') }}">
                 <i class="fas fa-plus" aria-hidden="true"></i> {{localize "DND5E.Add"}}
             </a>
@@ -39,17 +39,16 @@
                 {{#if @root.editable}}
                 {{#unless (eq section.type "enchantment")}}
                 <a class="effect-control" data-action="toggle"
-                   data-tooltip="{{ section.localizationPrefix }}{{ ifThen effect.disabled 'Enable' 'Disable' }}"
-                   aria-label="{{ localize (concat section.localizationPrefix
+                   data-tooltip aria-label="{{ localize (concat section.localizationPrefix
                    (ifThen effect.disabled 'Enable' 'Disable')) }}">
                     <i class="fas {{#if effect.disabled}}fa-check{{else}}fa-times{{/if}}" aria-hidden="true"></i>
                 </a>
                 {{/unless}}
-                <a class="effect-control" data-action="edit" data-tooltip="{{ section.localizationPrefix }}Edit"
+                <a class="effect-control" data-action="edit" data-tooltip
                    aria-label="{{ localize (concat section.localizationPrefix 'Edit') }}">
                     <i class="fas fa-edit" aria-hidden="true"></i>
                 </a>
-                <a class="effect-control" data-action="delete" data-tooltip="{{ section.localizationPrefix }}Delete"
+                <a class="effect-control" data-action="delete" data-tooltip
                    aria-label="{{ localize (concat section.localizationPrefix 'Delete') }}">
                     <i class="fas fa-trash" aria-hidden="true"></i>
                 </a>

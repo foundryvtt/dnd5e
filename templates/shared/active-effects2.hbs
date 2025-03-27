@@ -17,8 +17,8 @@
                 <div class="item-header effect-source">{{ localize "DND5E.SOURCE.FIELDS.source.label" }}</div>
                 <div class="item-header item-controls effect-controls">
                     {{#if info}}
-                    <a class="info-control" data-tooltip="{{ info }}" aria-label="{{ info }}">
-                        <i class="fas fa-circle-question"></i>
+                    <a class="info-control" data-tooltip aria-label="{{ info }}">
+                        <i class="fas fa-circle-question" inert></i>
                     </a>
                     {{/if}}
                 </div>
@@ -68,21 +68,21 @@
 
                         {{#if @root.editable}}
                         {{!-- Editing --}}
-                        <a class="effect-control item-control" data-action="edit" data-tooltip="DND5E.EffectEdit"
+                        <a class="effect-control item-control" data-action="edit" data-tooltip
                            aria-label="{{ localize "DND5E.EffectEdit" }}">
                             <i class="fas fa-pen-to-square"></i>
                         </a>
 
                         {{!-- Deleting --}}
-                        <a class="effect-control item-control" data-action="delete" data-tooltip="DND5E.EffectDelete"
+                        <a class="effect-control item-control" data-action="delete" data-tooltip
                            aria-label="{{ localize "DND5E.EffectDelete" }}">
                             <i class="fas fa-trash"></i>
                         </a>
                         {{else if toggleable}}
                         <a class="effect-control item-control {{#unless disabled}}active{{/unless}}"
                            data-action="toggle"
-                           data-tooltip="{{#if disabled}}DND5E.EffectEnable{{else}}DND5E.EffectDisable{{/if}}"
-                           aria-label="{{#if disabled}}{{ localize "DND5E.EffectEnable" }}{{else}}{{ localize "DND5E.EffectDisable" }}{{/if}}">
+                           data-tooltip aria-label="{{#if disabled}}{{ localize "DND5E.EffectEnable" }}
+                           {{~else}}{{ localize "DND5E.EffectDisable" }}{{/if}}">
                             {{#if disabled}}
                             <i class="fas fa-toggle-off"></i>
                             {{else}}

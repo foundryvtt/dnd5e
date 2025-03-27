@@ -2,8 +2,7 @@
     <label>{{ label }}</label>
     {{#if canAdjust}}
     <a class="adjustment-button" {{~#if canDecrease}}data-action="decrease"{{else}}aria-disabled="true"{{/if}}
-       data-tooltip="DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.decrease"
-       aria-label="{{ localize 'DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.decrease' }}">
+       data-tooltip aria-label="{{ localize 'DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.decrease' }}">
         <i class="fas fa-minus" inert></i>
     </a>
     {{/if}}
@@ -12,8 +11,7 @@
            {{#if isLocked}}readonly aria-readonly="true"{{/if}} {{ disabled isDisabled }}>
     {{#if canAdjust}}
     <a class="adjustment-button" {{~#if canIncrease}} data-action="increase"{{else}} aria-disabled="true"{{/if}}
-       data-tooltip="DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.increase"
-       aria-label="{{ localize 'DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.increase' }}">
+       data-tooltip aria-label="{{ localize 'DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.points.increase' }}">
         <i class="fas fa-plus" inert></i>
     </a>
     {{/if}}
@@ -27,7 +25,7 @@
     <div class="delta">
         {{#if delta}}{{delta}}{{else}}&nbsp;{{/if}}
         {{#if isLocked}}
-        <i class="fa-solid fa-lock" data-tooltip="DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.fixed.label"
+        <i class="fa-solid fa-lock" data-tooltip
            aria-label="{{ localize 'DND5E.ADVANCEMENT.AbilityScoreImprovement.FIELDS.fixed.label' }}"></i>
         {{/if}}
     </div>

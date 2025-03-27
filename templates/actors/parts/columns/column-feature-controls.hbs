@@ -2,13 +2,12 @@
 
     {{#if @root.editable}}
     {{!-- Editing --}}
-    <a class="item-control item-action" data-action="edit" data-tooltip="DND5E.ItemEdit"
-       aria-label="{{ localize "DND5E.ItemEdit" }}">
+    <a class="item-control item-action" data-action="edit" data-tooltip aria-label="{{ localize "DND5E.ItemEdit" }}">
         <i class="fas fa-pen-to-square"></i>
     </a>
 
     {{!-- Deleting --}}
-    <a class="item-control item-action" data-action="delete" data-tooltip="DND5E.ItemDelete"
+    <a class="item-control item-action" data-action="delete" data-tooltip
        aria-label="{{ localize "DND5E.ItemDelete" }}">
         <i class="fas fa-trash"></i>
     </a>

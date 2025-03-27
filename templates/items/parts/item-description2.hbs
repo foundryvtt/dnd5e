@@ -37,8 +37,7 @@
             <div class="label">
                 <span>{{ localize label }}</span>
                 {{#if (and @root.editable config)}}
-                <a class="config-button" data-action="{{ config }}" data-tooltip="{{ tooltip }}"
-                   aria-label="{{ localize tooltip }}">
+                <a class="config-button" data-action="{{ config }}" data-tooltip aria-label="{{ localize tooltip }}">
                     <i class="fas fa-cog"></i>
                 </a>
                 {{/if}}
