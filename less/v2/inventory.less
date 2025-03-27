@@ -118,7 +118,7 @@
         &:not(h3) { padding: .25rem; }
 
         &.rollable {
-          cursor: pointer;
+          cursor: var(--cursor-pointer);
           &:hover .title { text-shadow: 0 0 8px var(--color-shadow-primary); }
         }
 
@@ -592,7 +592,7 @@
       margin: 0;
       padding: 4px;
       align-items: center;
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
     }
     input {
       flex: unset;
