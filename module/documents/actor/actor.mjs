@@ -763,9 +763,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     await this.update(updates);
 
+    // Determine if concentration check should be made
     if ( !game.settings.get("dnd5e", "disableConcentration") 
       && (updates.deltaTotal > 0)
       && (options.dnd5e?.concentrationCheck !== false)) {
+    // Make the check using the deltaTotal as input for the concentration DC.
     this.challengeConcentration({ dc: this.getConcentrationDC(updates.deltaTotal) });
   }
 
