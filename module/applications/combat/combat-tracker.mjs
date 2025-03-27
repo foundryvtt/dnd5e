@@ -13,17 +13,6 @@ import { formatNumber, getPluralRules } from "../../utils.mjs";
 export default class CombatTracker5e extends foundry.applications.sidebar.tabs.CombatTracker {
 
   /** @inheritDoc */
-  async getData(options={}) {
-    const context = await super.getData(options);
-    context.turns.forEach(turn => {
-      turn.initiative = formatNumber(Number(turn.initiative), { maximumFractionDigits: 0 });
-    });
-    return context;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
   async _prepareTrackerContext(context, options) {
     await super._prepareTrackerContext(context, options);
     context.turns?.forEach(turn => {

@@ -35,16 +35,6 @@ export default class TransformActivity extends ActivityMixin(TransformActivityDa
   );
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static localize() {
-    super.localize();
-    if ( game.release.generation < 13 ) {
-      this._localizeSchema(this.schema.fields.profiles.element, ["DND5E.TRANSFORM.FIELDS.profiles"]);
-    }
-  }
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
