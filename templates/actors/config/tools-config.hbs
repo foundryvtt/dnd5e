@@ -19,15 +19,14 @@
 {{#*inline ".tool-entry"}}
 <li {{~#if category}} class="category"{{/if}} data-key="{{ @key }}">
     <proficiency-cycle type="skill" name="system.tools.{{ @key }}.value" value="{{ value }}"
-                       data-tooltip="{{ tooltip }}" aria-label="{{ localize tooltip }}"></proficiency-cycle>
+                       data-tooltip aria-label="{{ localize tooltip }}"></proficiency-cycle>
     <label class="name">{{ label }}</label>
     {{#if children}}
     {{> ".tool-list" choices=children topLevel=false }}
     {{/if}}
     {{#if hasEntry}}
     <div class="bonus">{{ dnd5e-formatModifier total }}</div>
-    <a class="config-button" data-action="configure" data-tooltip="DND5E.ToolConfigure"
-       aria-label="{{ localize "DND5E.ToolConfigure" }}">
+    <a class="config-button" data-action="configure" data-tooltip aria-label="{{ localize "DND5E.ToolConfigure" }}">
         <i class="fa-solid fa-cog" inert></i>
     </a>
     {{/if}}
