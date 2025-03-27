@@ -5,7 +5,7 @@
 copyable-text {
   text-decoration: underline;
   text-decoration-style: dashed;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   &:hover, &:has(:focus-visible) {
     text-decoration-color: var(--color-shadow-primary);
     button { text-shadow: 0 0 4px var(--color-shadow-primary); }
@@ -71,7 +71,7 @@ filter-state {
   }
 
   &:not(:disabled) .indicator {
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
   }
   &:focus-visible .indicator {
     outline: 2px solid var(--filter-state-focus-color);
@@ -96,7 +96,7 @@ slide-toggle {
   display: inline-block;
   width: var(--slide-toggle-width);
   height: var(--slide-toggle-height);
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
 
   .slide-toggle-track {
     width: 100%;
@@ -246,7 +246,7 @@ dnd5e-icon.fa-fw {
 
 .dnd5e multi-select .tags {
   flex-wrap: wrap;
-  .tag { cursor: pointer; }
+  .tag { cursor: var(--cursor-pointer); }
 }
 
 /* ---------------------------------- */
