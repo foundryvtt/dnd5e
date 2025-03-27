@@ -41,7 +41,7 @@
         > input { display: none; }
 
         &:has(input:not([disabled])) {
-          cursor: pointer;
+          cursor: var(--cursor-pointer);
           &:hover, &:focus-visible {
             text-shadow: 0 0 4px color-mix(in oklab, var(--color-shadow-primary), transparent);
           }
@@ -612,7 +612,7 @@
     margin-block-start: 8px;
 
     > label {
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
       display: flex;
       justify-content: center;
       gap: .25rem;

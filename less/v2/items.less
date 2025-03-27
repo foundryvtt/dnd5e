@@ -359,7 +359,7 @@
 
       &.collapsible {
         > .header {
-          cursor: pointer;
+          cursor: var(--cursor-pointer);
 
           &::before {
             content: "\f078";
@@ -658,7 +658,7 @@
       inset-block: 0;
       inset-inline-end: 0;
       inline-size: 16px;
-      cursor: grab;
+      cursor: var(--cursor-grab);
       color: var(--dnd5e-color-faint);
     }
     [data-action="delete-entry"] {
