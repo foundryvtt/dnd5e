@@ -288,7 +288,7 @@ export default class WeaponData extends ItemDataModel.mixin(
         const type = config[damageType];
         return `${str}
           <span class="formula">${formula}</span>
-          ${type ? `<span class="damage-type" data-tooltip="${type.label}" aria-label="${type.label}">
+          ${type ? `<span class="damage-type" data-tooltip aria-label="${type.label}">
             <dnd5e-icon src="${type.icon}"></dnd5e-icon>
           </span>` : ""}
         `;

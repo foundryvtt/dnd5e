@@ -300,7 +300,7 @@ export default class Award extends Application5e {
         const label = CONFIG.DND5E.currencies[key].label;
         entries.push(`
           <span class="award-entry">
-            ${formatNumber(amount)} <i class="currency ${key}" data-tooltip="${label}" aria-label="${label}"></i>
+            ${formatNumber(amount)} <i class="currency ${key}" data-tooltip aria-label="${label}"></i>
           </span>
         `);
       }
