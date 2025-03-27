@@ -297,7 +297,7 @@ export default function DocumentSheetV2Mixin(Base) {
 
     /** @override */
     _allowedDropBehaviors(event, data) {
-      if ( !data.uuid ) return new Set(["copy", "link"]);
+      if ( !data?.uuid ) return new Set(["copy", "link"]);
       const allowed = new Set(["copy", "move", "link"]);
       const s = foundry.utils.parseUuid(data.uuid);
       const t = foundry.utils.parseUuid(this.document.uuid);
