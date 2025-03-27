@@ -1,7 +1,6 @@
 import AttackSheet from "../../applications/activity/attack-sheet.mjs";
 import AttackRollConfigurationDialog from "../../applications/dice/attack-configuration-dialog.mjs";
 import AttackActivityData from "../../data/activity/attack-data.mjs";
-import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
 import { getTargetDescriptors } from "../../utils.mjs";
 import ActivityMixin from "./mixin.mjs";
 import BasicRoll from "../../dice/basic-roll.mjs";
@@ -174,16 +173,6 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
       }
     }, message);
 
-    if ( "dnd5e.preRollAttack" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.preRollAttack` hook has been deprecated and replaced with `dnd5e.preRollAttackV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-      );
-      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
-      if ( Hooks.call("dnd5e.preRollAttack", this.item, oldConfig) === false ) return null;
-      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
-    }
-
     const rolls = await CONFIG.Dice.D20Roll.buildConfigure(rollConfig, dialogConfig, messageConfig);
     await CONFIG.Dice.D20Roll.buildEvaluate(rolls, rollConfig, messageConfig);
     if ( !rolls.length ) return null;
@@ -220,27 +209,15 @@ export default class AttackActivity extends ActivityMixin(AttackActivityData) {
 
     /**
      * A hook event that fires after an attack has been rolled but before any ammunition is consumed.
-     * @function dnd5e.rollAttackV2
+     * @function dnd5e.rollAttack
      * @memberof hookEvents
      * @param {D20Roll[]} rolls                        The resulting rolls.
      * @param {object} data
      * @param {AttackActivity|null} data.subject       The Activity that performed the attack.
      * @param {AmmunitionUpdate|null} data.ammoUpdate  Any updates related to ammo consumption for this attack.
      */
+    Hooks.callAll("dnd5e.rollAttack", rolls, { subject: this, ammoUpdate });
     Hooks.callAll("dnd5e.rollAttackV2", rolls, { subject: this, ammoUpdate });
-
-    if ( "dnd5e.rollAttack" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.rollAttack` hook has been deprecated and replaced with `dnd5e.rollAttackV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-      );
-      const oldAmmoUpdate = ammoUpdate ? [{ _id: ammoUpdate.id, "system.quantity": ammoUpdate.quantity }] : [];
-      Hooks.callAll("dnd5e.rollAttack", this.item, rolls[0], oldAmmoUpdate);
-      if ( oldAmmoUpdate[0] ) {
-        ammoUpdate.id = oldAmmoUpdate[0]._id;
-        ammoUpdate.quantity = foundry.utils.getProperty(oldAmmoUpdate[0], "system.quantity");
-      }
-    }
 
     // Commit ammunition consumption on attack rolls resource consumption if the attack roll was made
     if ( canUpdate && ammoUpdate?.destroy ) {

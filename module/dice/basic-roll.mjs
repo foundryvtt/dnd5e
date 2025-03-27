@@ -135,9 +135,9 @@ export default class BasicRoll extends Roll {
 
     /**
      * A hook event that fires before a roll is performed. Multiple hooks may be called depending on the rolling
-     * method (e.g. `dnd5e.preRollSkillV2`, `dnd5e.preRollAbilityCheckV2`, `dnd5e.preRollV2`). Exact contents of the
+     * method (e.g. `dnd5e.preRollSkill`, `dnd5e.preRollAbilityCheck`, `dnd5e.preRoll`). Exact contents of the
      * configuration object will also change based on the roll type, but the same objects will always be present.
-     * @function dnd5e.preRollV2
+     * @function dnd5e.preRoll
      * @memberof hookEvents
      * @param {BasicRollProcessConfiguration} config   Configuration data for the pending roll.
      * @param {BasicRollDialogConfiguration} dialog    Presentation data for the roll configuration dialog.
@@ -145,6 +145,7 @@ export default class BasicRoll extends Roll {
      * @returns {boolean}                              Explicitly return `false` to prevent the roll.
      */
     for ( const hookName of config.hookNames ) {
+      if ( Hooks.call(`dnd5e.preRoll${hookName.capitalize()}`, config, dialog, message) === false ) return [];
       if ( Hooks.call(`dnd5e.preRoll${hookName.capitalize()}V2`, config, dialog, message) === false ) return [];
     }
 
