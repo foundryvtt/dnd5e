@@ -30,16 +30,6 @@ export default class EnchantActivity extends ActivityMixin(EnchantActivityData) 
   );
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static localize() {
-    super.localize();
-    if ( game.release.generation < 13 ) {
-      this._localizeSchema(this.schema.fields.effects.element, ["DND5E.ENCHANT.FIELDS.effects"]);
-    }
-  }
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
