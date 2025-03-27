@@ -27,13 +27,14 @@ export default class DragDrop5e extends (foundry.applications?.ux?.DragDrop ?? D
 
   /** @override */
   bind(html) {
+    // TODO: No longer need this override when v12 support is dropped.
     // Identify and activate draggable targets
     const canDrag = !!this.dragSelector && this.can("dragstart", this.dragSelector);
     const draggables = this.dragSelector ? html.querySelectorAll(this.dragSelector) : [];
     for ( const element of draggables ) {
       element.setAttribute("draggable", canDrag);
-      element.ondragstart = canDrag ? DragDrop5e.prototype._handleDragStart.bind(this) : null;
-      element.ondragend = DragDrop5e.prototype._handleDragEnd.bind(this);
+      element.ondragstart = canDrag ? this._handleDragStart.bind(this) : null;
+      element.ondragend = this._handleDragEnd.bind(this);
     }
 
     // Identify and activate drop targets
@@ -41,8 +42,8 @@ export default class DragDrop5e extends (foundry.applications?.ux?.DragDrop ?? D
     const droppables = !this.dropSelector || html.matches(this.dropSelector) ? [html]
       : html.querySelectorAll(this.dropSelector);
     for ( const element of droppables ) {
-      element.ondragover = canDrop ? DragDrop5e.prototype._handleDragOver.bind(this) : null;
-      element.ondrop = canDrop ? DragDrop5e.prototype._handleDrop.bind(this) : null;
+      element.ondragover = canDrop ? this._handleDragOver.bind(this) : null;
+      element.ondrop = canDrop ? this._handleDrop.bind(this) : null;
     }
     return this;
   }
@@ -123,8 +124,8 @@ export default class DragDrop5e extends (foundry.applications?.ux?.DragDrop ?? D
 
 /**
  * Extend native DragDrop with functionality for storing payloads.
- * TODO: Remove when payload functionality is incorporated into core DragDrop.
  */
 export function extendDragDrop() {
-  (foundry.applications?.ux?.DragDrop ?? DragDrop).prototype.bind = DragDrop5e.prototype.bind;
+  if ( "ux" in CONFIG ) CONFIG.ux.DragDrop = DragDrop5e;
+  else window.DragDrop = DragDrop5e;
 }
