@@ -272,7 +272,7 @@
           display: grid;
           place-content: center;
           background: var(--dnd5e-color-iron-gray);
-          cursor: pointer;
+          cursor: var(--cursor-pointer);
           box-shadow: 0 0 6px var(--color-shadow-dark);
 
           &:hover, &:focus { box-shadow: 0 0 6px var(--color-shadow-dark); }
@@ -308,7 +308,7 @@
         .portrait {
           position: relative;
           width: 100%;
-          cursor: pointer;
+          cursor: var(--cursor-pointer);
 
           > img {
             display: block;
@@ -421,7 +421,7 @@
               &:nth-child(2) { margin-top: 24px; }
 
               &.rollable:hover .value {
-                cursor: pointer;
+                cursor: var(--cursor-pointer);
 
                 > span { display: none; }
 
@@ -558,7 +558,7 @@
 
             &.effect {
               &:not(.suppressed){
-                cursor: pointer;
+                cursor: var(--cursor-pointer);
                 &:hover {
                   .title { text-shadow: 0 0 8px var(--color-shadow-primary); }
                   .primary i { text-shadow: 0 0 8px var(--color-shadow-primary); }
@@ -601,7 +601,7 @@
             .title { font-size: var(--font-size-13); }
 
             &.rollable {
-              cursor: pointer;
+              cursor: var(--cursor-pointer);
               &:hover .title { text-shadow: 0 0 8px var(--color-shadow-primary); }
             }
           }
@@ -824,12 +824,12 @@
       transition: box-shadow 250ms ease;
 
       &.race, &.background {
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         &:hover:not(:has(a:hover)) { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
       }
 
       &.empty:not(.disabled) {
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         transition: opacity 250ms ease;
         &:hover { opacity: .5; }
       }
@@ -1163,7 +1163,7 @@
     }
   }
 
-  .spells-list .items-header .item-name { cursor: pointer; }
+  .spells-list .items-header .item-name { cursor: var(--cursor-pointer); }
 
   /* ---------------------------------- */
   /*  Biography                         */
@@ -1304,7 +1304,7 @@
     .roster ul li {
       width: 48px;
       height: 48px;
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
 
       &.empty {
         width: 100%;
@@ -1340,7 +1340,7 @@
       &.empty {
         min-height: 50px;
         color: var(--dnd5e-color-gold);
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         border-style: dashed;
         opacity: .5;
         transition: all 250ms ease;
@@ -1381,7 +1381,7 @@
         .title { font-size: var(--font-size-13); }
         .slots { flex: none; }
         .name-stacked.rollable {
-          cursor: pointer;
+          cursor: var(--cursor-pointer);
           &:hover .title { text-shadow: 0 0 8px var(--color-shadow-primary); }
         }
       }
@@ -1431,7 +1431,7 @@
       .deletion-control {
         width: unset;
         height: unset;
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         position: absolute;
         inset: -3px -3px 0 0;
       }

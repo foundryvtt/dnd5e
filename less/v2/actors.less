@@ -89,7 +89,7 @@
         position: relative;
         display: flex;
         align-items: center;
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
 
         > input { position: relative; }
       }
@@ -135,7 +135,7 @@
         gap: .375rem;
 
         img {
-          cursor: pointer;
+          cursor: var(--cursor-pointer);
           flex: 0 0 32px;
           width: 32px;
           height: 32px;
@@ -332,6 +332,6 @@
   /* ---------------------------------- */
 
   &.locked {
-    .meter.sectioned > .hit-points { cursor: default; }
+    .meter.sectioned > .hit-points { cursor: var(--cursor-default); }
   }
 }
