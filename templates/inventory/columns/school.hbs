@@ -1,5 +1,5 @@
 {{#if isItem}}
-<div class="item-detail item-school" data-tooltip="{{ entry.labels.school }}" aria-label="{{ entry.labels.school }}"
+<div class="item-detail item-school" data-tooltip aria-label="{{ entry.labels.school }}"
      data-column-id="school">
     {{#with (lookup @root.config.spellSchools entry.system.school) as |schoolConfig|}}
     <dnd5e-icon src="{{ schoolConfig.icon }}"></dnd5e-icon>

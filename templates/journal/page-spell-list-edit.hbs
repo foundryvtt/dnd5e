@@ -42,7 +42,7 @@
     <div class="right spell-list">
         <h3 class="flexrow">
             {{ localize "TYPES.Item.spellPl" }}
-            <a data-action="add-unlinked" data-tooltip="JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Add"
+            <a data-action="add-unlinked" data-tooltip
                aria-label="{{ localize 'JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Add' }}">
                 <i class="fa-solid fa-plus" inert></i>
             </a>
@@ -54,12 +54,11 @@
                 <div class="item-controls flexrow">
                     {{#if unlinked}}
                     <a class="item-control" data-action="edit-unlinked"
-                       data-tooltip="JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Edit"
-                       aria-label="{{ localize 'JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Edit' }}">
+                       data-tooltip aria-label="{{ localize 'JOURNALENTRYPAGE.DND5E.SpellList.UnlinkedSpells.Edit' }}">
                         <i class="fa-solid fa-cog" inert></i>
                     </a>
                     {{/if}}
-                    <a class="item-control" data-action="delete" data-tooltip="DND5E.ItemDelete"
+                    <a class="item-control" data-action="delete" data-tooltip
                        aria-label="{{ localize 'DND5E.ItemDelete' }}">
                         <i class="fa-solid fa-trash" inert></i>
                     </a>

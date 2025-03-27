@@ -3,10 +3,10 @@
         {{#each skills}}
         <li class="skill-row" data-key="{{ @key }}">
             <proficiency-cycle type="skill" name="system.skills.{{ @key }}.value" value="{{ value }}"
-                               data-tooltip="{{ tooltip }}" aria-label="{{ localize tooltip }}"></proficiency-cycle>
+                               data-tooltip aria-label="{{ localize tooltip }}"></proficiency-cycle>
             <span class="name">{{ label }}</span>
             <div class="bonus">{{ dnd5e-formatModifier total }}</div>
-            <a class="config-button" data-action="configure" data-tooltip="DND5E.SkillConfigure"
+            <a class="config-button" data-action="configure" data-tooltip
                aria-label="{{ localize "DND5E.SkillConfigure" }}">
                 <i class="fa-solid fa-cog" inert></i>
             </a>
