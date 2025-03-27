@@ -736,8 +736,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       "system.attributes.hp.value": hp.value - deltaHP
     };
 
-    updates.deltaTotal = deltaHP + deltaTemp;
-
     if ( temp > updates["system.attributes.hp.temp"] ) updates["system.attributes.hp.temp"] = temp;
 
     /**
@@ -762,14 +760,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }, updates) === false ) return this;
 
     await this.update(updates);
-
-    // Determine if concentration check should be made
-    if ( !game.settings.get("dnd5e", "disableConcentration") 
-      && (updates.deltaTotal > 0)
-      && (options.dnd5e?.concentrationCheck !== false)) {
-    // Make the check using the deltaTotal as input for the concentration DC.
-    this.challengeConcentration({ dc: this.getConcentrationDC(updates.deltaTotal) });
-  }
 
     /**
      * A hook event that fires after damage has been applied to an actor.
@@ -3353,6 +3343,15 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       if ( Number.isInteger(changes.total) && (changes.total !== 0) ) {
         this._displayTokenEffect(changes);
+
+        // Determine if concentration check should be made
+        if ( !game.settings.get("dnd5e", "disableConcentration") 
+              && (userId === game.userId) 
+              && (changes.total < 0)
+              && (options.dnd5e?.concentrationCheck !== false)) {
+                // Make the check using the total as input for the concentration DC.
+                this.challengeConcentration({ dc: this.getConcentrationDC(-changes.total) });
+          }
 
         /**
          * A hook event that fires when an actor is damaged or healed by any means. The actual name
