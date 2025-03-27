@@ -121,7 +121,7 @@ export default class DamageApplicationElement extends TargetedApplicationMixin(C
       const { label, pressed } = this.getChangeSourceOptions(type, change, targetOptions);
       acc += `
         <button class="change-source unbutton" type="button" data-type="${type}" data-change="${change}"
-                data-tooltip="${label}" aria-label="${label}" aria-pressed="${pressed}">
+                data-tooltip aria-label="${label}" aria-pressed="${pressed}">
           <dnd5e-icon src="${icon}" inert></dnd5e-icon>
           <i class="fa-solid fa-slash" inert></i>
           <i class="fa-solid fa-arrow-turn-down" inert></i>

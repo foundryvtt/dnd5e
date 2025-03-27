@@ -1,10 +1,10 @@
 {{#if ctx.uses.isOnCooldown}}
-<div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip="{{ entry.labels.recharge }}"
+<div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip
      aria-label="{{ entry.labels.recharge }}" data-column-id="{{ id }}">
     <a class="item-action" data-action="recharge"><i class="fa-solid fa-arrows-rotate" inert></i></a>
 </div>
 {{else if ctx.uses.hasRecharge}}
-<div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip="{{ entry.labels.recharge }}"
+<div class="item-detail item-uses" data-tooltip-direction="LEFT" data-tooltip
      aria-label="{{ entry.labels.recharge }}" data-column-id="{{ id }}">
     <i class="fa-solid fa-bolt" inert></i>
 </div>
