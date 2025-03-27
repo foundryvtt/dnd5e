@@ -275,7 +275,7 @@
 }
 
 .dice-roll {
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
 
   .dice-flavor { display: none; }
 
@@ -428,7 +428,7 @@
       }
     }
 
-    &.collapsible .summary { cursor: pointer; }
+    &.collapsible .summary { cursor: var(--cursor-pointer); }
     &.collapsed {
       .summary > i { transform: rotate(-90deg); }
       .details {
@@ -489,7 +489,7 @@
   }
 
   > label {
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -630,7 +630,7 @@
         padding: 2px;
         font-size: inherit;
         line-height: unset;
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
 
         &::after {
           content: "";
@@ -733,7 +733,7 @@ enchantment-application {
     align-items: center;
     gap: .5rem;
     padding: 0 8px;
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
 
     > i { font-size: var(--font-size-14); }
 

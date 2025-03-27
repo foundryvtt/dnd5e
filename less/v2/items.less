@@ -371,7 +371,7 @@
 
         &.collapsible {
           > .header {
-            cursor: pointer;
+            cursor: var(--cursor-pointer);
 
             &::before {
               content: "\f078";
@@ -560,7 +560,7 @@
         font-weight: bold;
         flex: 1;
         font-size: var(--font-size-14);
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         text-align: center;
 
         &:hover { text-shadow: 0 0 6px var(--color-shadow-primary); }
@@ -671,7 +671,7 @@
       inset-block: 0;
       inset-inline-end: 0;
       inline-size: 16px;
-      cursor: grab;
+      cursor: var(--cursor-grab);
       color: var(--dnd5e-color-faint);
     }
     [data-action="delete-entry"] {

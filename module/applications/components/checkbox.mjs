@@ -33,14 +33,14 @@ export default class CheckboxElement extends AdoptedStyleSheetMixin(
   /** @override */
   static CSS = `
     :host {
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
       display: inline-block;
       width: var(--checkbox-size, 18px);
       height: var(--checkbox-size, 18px);
       aspect-ratio: 1;
     }
 
-    :host(:disabled) { cursor: default; }
+    :host(:disabled) { cursor: var(--cursor-default); }
 
     :host > div {
       width: 100%;

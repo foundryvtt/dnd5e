@@ -638,7 +638,7 @@
       .deletion-control {
         width: unset;
         height: unset;
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         position: absolute;
         inset: -3px -3px 0 0;
       }
@@ -646,7 +646,7 @@
 
     .occupant-slot {
       overflow: visible;
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
 
       &.empty, &.pending {
         display: inline-grid;
@@ -935,7 +935,7 @@
 
 .dnd5e2.sheet {
   .locked a:not(.interface-only) {
-    cursor: default;
+    cursor: var(--cursor-default);
     &:hover { text-shadow: unset; }
   }
 }
@@ -1382,7 +1382,7 @@ dialog.dnd5e2.application {
       justify-content: space-between;
       padding: 6px 10px;
       &:hover {
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         background: var(--dnd5e-background-parchment);
       }
     }
@@ -1717,7 +1717,7 @@ dialog.dnd5e2.application {
       display: flex;
       align-items: center;
       gap: 1rem;
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
 
       > span {
         flex: 1;
@@ -1781,7 +1781,7 @@ dialog.dnd5e2.application {
       gap: .5rem;
       padding: .5625rem .75rem;
       align-items: center;
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
       border: none;
       border-bottom: var(--border-style);
       border-right: var(--border-style);
@@ -1840,7 +1840,7 @@ dialog.dnd5e2.application {
     &.active:not(.collapsed)::after { border-color: color-mix(in oklab, var(--color-warm-2), transparent); }
 
     .group-children { padding: 0; }
-    .group-header { cursor: pointer; }
+    .group-header { cursor: var(--cursor-pointer); }
     .group-numbers {
       flex: 0 0 20px;
       color: var(--color-text-light-5);
@@ -1871,7 +1871,7 @@ dialog.dnd5e2.application {
     border: none;
     padding: 0 .75rem;
     margin: 0;
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
     display: flex;
     align-items: baseline;
     line-height: 32px;
