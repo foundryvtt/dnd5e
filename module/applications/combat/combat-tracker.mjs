@@ -10,18 +10,7 @@ import { formatNumber, getPluralRules } from "../../utils.mjs";
  * An extension of the base CombatTracker class to provide some 5e-specific functionality.
  * @extends {CombatTracker}
  */
-export default class CombatTracker5e extends (foundry.applications?.sidebar?.tabs?.CombatTracker ?? CombatTracker) {
-
-  /** @inheritDoc */
-  async getData(options={}) {
-    const context = await super.getData(options);
-    context.turns.forEach(turn => {
-      turn.initiative = formatNumber(Number(turn.initiative), { maximumFractionDigits: 0 });
-    });
-    return context;
-  }
-
-  /* -------------------------------------------- */
+export default class CombatTracker5e extends foundry.applications.sidebar.tabs.CombatTracker {
 
   /** @inheritDoc */
   async _prepareTrackerContext(context, options) {
@@ -50,7 +39,6 @@ export default class CombatTracker5e extends (foundry.applications?.sidebar?.tab
 
   /** @inheritdoc */
   _contextMenu(html) {
-    if ( !(html instanceof HTMLElement) ) html = html[0];
     new ContextMenu5e(
       html.querySelector(".directory-list"), ".directory-item:not(.combatant-group)", this._getEntryContextOptions()
     );
@@ -63,10 +51,7 @@ export default class CombatTracker5e extends (foundry.applications?.sidebar?.tab
     const options = super._getEntryContextOptions();
     options.forEach(o => {
       const condition = o.condition ?? (function() { return true; });
-      o.condition = li => {
-        const el = li instanceof HTMLElement ? li : li[0];
-        return condition(li) && !el.matches(".combatant-group");
-      };
+      o.condition = li => condition(li) && !li.matches(".combatant-group");
     });
     return options;
   }
@@ -80,14 +65,12 @@ export default class CombatTracker5e extends (foundry.applications?.sidebar?.tab
   renderGroups(html) {
     if ( !this.viewed ) return;
     const groups = this.viewed.createGroups();
-    const V13 = game.release.generation >= 13;
     const list = html.querySelector(".directory-list, .combat-tracker");
     for ( const [key, { combatants, expanded }] of groups.entries() ) {
       const children = list.querySelectorAll(Array.from(combatants).map(c => `[data-combatant-id="${c.id}"]`).join(", "));
       if ( !children.length ) continue;
       const groupContainer = document.createElement("li");
       groupContainer.classList.add("combatant", "combatant-group", "collapsible", "dnd5e2-collapsible");
-      if ( !V13 ) groupContainer.classList.add("directory-item");
       if ( !expanded ) groupContainer.classList.add("collapsed");
 
       // Determine the count
@@ -111,7 +94,7 @@ export default class CombatTracker5e extends (foundry.applications?.sidebar?.tab
         <div class="group-header flexrow">
           <img class="token-image" alt="${img.alt}" src="${img.src || img.dataset.src}">
           <div class="token-name flexcol">
-            <${V13 ? "strong" : "h4"} class="name"></${V13 ? "strong" : "h4"}>
+            <strong class="name"></strong>
             <div class="group-numbers">${count}</div>
           </div>
           <div class="token-initiative">
@@ -120,7 +103,7 @@ export default class CombatTracker5e extends (foundry.applications?.sidebar?.tab
         </div>
         <div class="collapsible-content">
           <div class="wrapper">
-            <ol class="group-children ${V13 ? "" : "directory-list"}"></ol>
+            <ol class="group-children"></ol>
           </div>
         </div>
       `;
