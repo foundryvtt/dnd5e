@@ -97,7 +97,7 @@
         align-items: center;
 
         label {
-          cursor: pointer;
+          cursor: var(--cursor-pointer);
           display: flex;
           gap: 4px;
           align-items: center;
@@ -114,7 +114,7 @@
       [data-action="toggleCollapse"] {
         width: 20px;
         margin-inline-start: auto;
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         text-align: center;
       }
     }
@@ -122,7 +122,7 @@
     [data-application-part="filters"] { gap: 8px; }
 
     .filter-header > label {
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
       display: flex;
       justify-content: center;
       gap: 4px;
@@ -161,7 +161,7 @@
 
       &.filter-set:has(> .collapsible-content > .wrapper:empty) { display: none; }
 
-      &.filter-set .filter-choice, &.filter-boolean > label { cursor: pointer; }
+      &.filter-set .filter-choice, &.filter-boolean > label { cursor: var(--cursor-pointer); }
 
       &.filter-set .wrapper {
         display: flex;
@@ -325,7 +325,7 @@
       font-family: var(--dnd5e-font-roboto-condensed);
       border: none;
       padding: 0;
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
 
       &:hover { text-shadow: 0 0 6px var(--color-shadow-primary); }
 

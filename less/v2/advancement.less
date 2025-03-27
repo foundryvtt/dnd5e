@@ -277,7 +277,7 @@
     .pill-lg {
       max-width: unset;
       &.empty:not(.disabled) {
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         transition: opacity 250ms ease;
         &:hover { opacity: .5; }
       }
@@ -285,7 +285,7 @@
       .name-stacked { flex: 1; }
       .control-button { padding-inline: 4px; }
       img[data-action] {
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         &:hover { box-shadow: 0 0 12px var(--dnd5e-color-gold); }
       }
     }
@@ -337,7 +337,7 @@
       align-items: baseline;
       &.selected { font-weight: bold; }
       &:not(.selected) {
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         &:hover { text-shadow: 0 0 8px var(--color-shadow-primary); }
       }
     }
