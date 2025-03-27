@@ -64,7 +64,7 @@ Hooks.once("init", function() {
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
   CONFIG.Combatant.documentClass = documents.Combatant5e;
-  if ( game.release.generation > 12 ) CONFIG.CombatantGroup.documentClass = documents.CombatantGroup5e;
+  CONFIG.CombatantGroup.documentClass = documents.CombatantGroup5e;
   CONFIG.Item.collection = dataModels.collection.Items5e;
   CONFIG.Item.compendiumIndexFields.push("system.container");
   CONFIG.Item.documentClass = documents.Item5e;
