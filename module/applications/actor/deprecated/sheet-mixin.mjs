@@ -62,7 +62,7 @@ export default function ActorSheetMixin(Base) {
 
     /** @override */
     _allowedDropBehaviors(event, data) {
-      if ( !data.uuid ) return new Set(["copy"]);
+      if ( !data?.uuid ) return new Set(["copy"]);
       const allowed = new Set(["copy", "move"]);
       const s = foundry.utils.parseUuid(data.uuid);
       const t = foundry.utils.parseUuid(this.document.uuid);
@@ -79,7 +79,7 @@ export default function ActorSheetMixin(Base) {
 
     /** @override */
     _defaultDropBehavior(event, data) {
-      if ( !data.uuid ) return "copy";
+      if ( !data?.uuid ) return "copy";
       const d = foundry.utils.parseUuid(data.uuid);
       const t = foundry.utils.parseUuid(this.document.uuid);
       const base = d.embedded?.length ? "document" : "primary";

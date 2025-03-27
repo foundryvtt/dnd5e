@@ -26,7 +26,7 @@ import { registerModuleData, setupModulePacks } from "./module/module-registrati
 import { default as registry } from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
 import * as utils from "./module/utils.mjs";
-import { extendDragDrop } from "./module/drag-drop.mjs";
+import DragDrop5e from "./module/drag-drop.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -45,8 +45,6 @@ globalThis.dnd5e = {
   registry,
   utils
 };
-
-extendDragDrop();
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -83,6 +81,7 @@ Hooks.once("init", function() {
   CONFIG.ui.chat = applications.ChatLog5e;
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
   CONFIG.ui.items = applications.item.ItemDirectory5e;
+  CONFIG.ux.DragDrop = DragDrop5e;
 
   // Register System Settings
   registerSystemSettings();
