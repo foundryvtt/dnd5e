@@ -26,7 +26,7 @@ export default class ItemCompendium5e extends DragDropApplicationMixin(foundry.a
   /** @override */
   _allowedDropBehaviors(event, data) {
     const allowed = new Set(["copy"]);
-    if ( !data.uuid ) return allowed;
+    if ( !data?.uuid ) return allowed;
     const s = foundry.utils.parseUuid(data.uuid);
     if ( s.collection === this.collection ) allowed.add("move");
     return allowed;
@@ -36,7 +36,7 @@ export default class ItemCompendium5e extends DragDropApplicationMixin(foundry.a
 
   /** @override */
   _defaultDropBehavior(event, data) {
-    if ( !data.uuid ) return "copy";
+    if ( !data?.uuid ) return "copy";
     if ( (data.type !== "Folder") && (data.type !== "Item") ) return "none";
     return foundry.utils.parseUuid(data.uuid).collection === this.collection ? "move" : "copy";
   }
