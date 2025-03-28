@@ -1,4 +1,5 @@
 import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
+import ContextMenu5e from "../context-menu.mjs";
 
 /**
  * @import { FilterState5e } from "../components/item-list-controls.mjs";
@@ -65,6 +66,17 @@ export default function PrimarySheetMixin(Base) {
     /* -------------------------------------------- */
 
     /** @inheritDoc */
+    _attachFrameListeners() {
+      new ContextMenu5e(this.element, '.header-control[data-action="toggleControls"]', [], {
+        eventName: "click", fixed: true, jQuery: false,
+        onOpen: () => ui.context.menuItems = Array.from(this._getHeaderControlContextEntries())
+      });
+      super._attachFrameListeners();
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
     _configureRenderOptions(options) {
       super._configureRenderOptions(options);
 
@@ -84,6 +96,32 @@ export default function PrimarySheetMixin(Base) {
         if ( tab?.condition && !tab.condition(this.document) ) delete parts[key];
       }
       return parts;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Translate header controls to context menu entries.
+     * @returns {Generator<ContextMenuEntry>}
+     * @yields {ContextMenuEntry}
+     * @protected
+     */
+    *_getHeaderControlContextEntries() {
+      for ( const { icon, label, action } of this._headerControlButtons() ) {
+        let handler = this.options.actions[action];
+        if ( typeof handler === "object" ) {
+          if ( handler.buttons && !handler.buttons.includes(0) ) continue;
+          handler = handler.handler;
+        }
+        yield {
+          name: label,
+          icon: `<i class="${icon}" inert></i>`,
+          callback: li => {
+            if ( handler ) handler.call(this, window.event, li);
+            else this._onClickAction(window.event, li);
+          }
+        };
+      }
     }
 
     /* -------------------------------------------- */
@@ -112,6 +150,7 @@ export default function PrimarySheetMixin(Base) {
         toggle.setAttribute("aria-label", game.i18n.localize("DND5E.SheetModeEdit"));
         toggle.addEventListener("change", this._onChangeSheetMode.bind(this));
         toggle.addEventListener("dblclick", event => event.stopPropagation());
+        toggle.addEventListener("pointerdown", event => event.stopPropagation());
         header.prepend(toggle);
       } else if ( this.isEditable ) {
         toggle.checked = this._mode === this.constructor.MODES.EDIT;
@@ -165,6 +204,7 @@ export default function PrimarySheetMixin(Base) {
     /** @inheritDoc */
     async _prepareContext(options) {
       const context = await super._prepareContext(options);
+      context.owner = this.document.isOwner;
       context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
       context.tabs = this._getTabs();
       return context;
@@ -211,7 +251,7 @@ export default function PrimarySheetMixin(Base) {
       // Create child button
       const button = document.createElement("button");
       button.ariaLabel = game.i18n.localize("CONTROLS.CommonCreate");
-      button.classList.add("create-child", "gold-button", "interface-only");
+      button.classList.add("create-child", "gold-button", "always-interactive");
       button.dataset.action = "addDocument";
       button.innerHTML = '<i class="fas fa-plus" inert></i>';
       this.element.querySelector(".window-content").append(button);
@@ -320,8 +360,8 @@ export default function PrimarySheetMixin(Base) {
       const allowed = new Set(["copy", "move", "link"]);
       const s = foundry.utils.parseUuid(data.uuid);
       const t = foundry.utils.parseUuid(this.document.uuid);
-      const sCompendium = s.collection instanceof CompendiumCollection;
-      const tCompendium = t.collection instanceof CompendiumCollection;
+      const sCompendium = s.collection instanceof foundry.documents.collections.CompendiumCollection;
+      const tCompendium = t.collection instanceof foundry.documents.collections.CompendiumCollection;
 
       // If either source or target are within a compendium, but not inside the same compendium, move not allowed
       if ( (sCompendium || tCompendium) && (s.collection !== t.collection) ) allowed.delete("move");

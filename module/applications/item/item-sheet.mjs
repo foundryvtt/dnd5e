@@ -518,12 +518,13 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
         id: "equipped", property: "system.equipped", classes: [...classes, "fa-shield-halved", "toggle-equipped"]
       });
 
-      const title = html.querySelector(".window-subtitle");
+      const sibling = html.querySelector('[data-action="copyUuid"], [data-action="close"]');
       for ( const { id, property, classes } of buttons ) {
         const button = document.createElement("button");
+        button.type = "button";
         button.classList.add("header-control", "pseudo-header-control", "state-toggle", ...classes);
         Object.assign(button.dataset, { action: "toggleState", property, tooltipDirection: "DOWN" });
-        title.after(button);
+        sibling.before(button);
         this._headerToggles[id] = button;
       }
     }
@@ -1054,6 +1055,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @returns {boolean}
    */
   static itemHasEffects(item) {
-    return this.isItemIdentified(item) && ("activation" in item.system);
+    return this.isItemIdentified(item) && item.system.constructor.metadata.hasEffects;
   }
 }
