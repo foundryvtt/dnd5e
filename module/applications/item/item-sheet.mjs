@@ -1,3 +1,4 @@
+import UsesField from "../../data/shared/uses-field.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import { filteredKeys } from "../../utils.mjs";
 import AdvancementManager from "../advancement/advancement-manager.mjs";
@@ -149,8 +150,8 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   async _configureRenderOptions(options) {
     await super._configureRenderOptions(options);
     if ( options.isFirstRender ) {
-      this.expandedSections.set("system.description.chat", true);
-      if ( game.user.isGM ) this.expandedSections.set("system.unidentified.description", true);
+      this.expandedSections.set("system.description.value", true);
+      if ( !game.user.isGM ) this.expandedSections.set("system.unidentified.description", true);
     }
   }
 
@@ -196,6 +197,8 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       ...this.item.system.equippableItemCardProperties ?? []
     );
 
+    await this.item.system.getSheetData?.(context);
+
     return context;
   }
 
@@ -213,7 +216,6 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       case "header": context = await this._prepareHeaderContext(context, options); break;
     }
 
-    await this.item.system.getSheetData?.(context, partId);
     if ( context.properties?.active ) context.properties.active = context.properties.active.filter(_ => _);
 
     return context;
@@ -267,8 +269,8 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    * @protected
    */
   async _prepareDescriptionContext(context, options) {
-    context.collapsed = this.expandedSections.entries().reduce((obj, [k, v]) => {
-      obj[k] = !v;
+    context.expanded = this.expandedSections.entries().reduce((obj, [k, v]) => {
+      obj[k] = v;
       return obj;
     }, {});
 
@@ -299,7 +301,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    */
   async _prepareDetailsContext(context, options) {
     context.tab = context.tabs.details;
-    context.parts = [];
+    context.parts ??= [];
 
     context.baseItemOptions = await this._getBaseItemOptions();
     context.coverOptions = Object.entries(CONFIG.DND5E.cover).map(([value, label]) => ({ value, label }));
@@ -692,7 +694,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
    */
   static #modifyAdvancementChoices(event, target) {
     const level = target.closest("[data-level]")?.dataset.level;
-    manager = AdvancementManager.forModifyChoices(this.actor, this.item.id, Number(level));
+    const manager = AdvancementManager.forModifyChoices(this.actor, this.item.id, Number(level));
     if ( manager.steps.length ) manager.render({ force: true });
   }
 
