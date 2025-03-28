@@ -1,0 +1,9 @@
+<nav class="tabs" data-group="primary" aria-roledescription="{{localize 'SHEETS.FormNavLabel'}}">
+    {{#each tabs}}
+    <a class="item control {{#if active}}active{{/if}} {{ cssClass }}" data-action="tab" data-group="primary"
+       data-tab="{{ tab }}" data-tooltip="{{ label }}" aria-label="{{ localize label }}">
+        {{#if icon}}<i class="{{ icon }}"></i>{{/if}}
+        {{#if svg}}<dnd5e-icon src="{{ svg }}"></dnd5e-icon>{{/if}}
+    </a>
+    {{/each}}
+</nav>

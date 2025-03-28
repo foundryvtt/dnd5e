@@ -29,8 +29,8 @@
                 {{#each effects}}
 
                 {{!-- Effects --}}
-                <li class="item effect" data-effect-id="{{ id }}" data-entry-id="{{ id }}" data-item-name="{{ name }}"
-                    {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}>
+                <li class="item effect draggable" data-effect-id="{{ id }}" data-entry-id="{{ id }}"
+                    data-item-name="{{ name }}" {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}>
 
                     {{!-- Effect Name --}}
                     <div class="item-name item-tooltip effect-name">

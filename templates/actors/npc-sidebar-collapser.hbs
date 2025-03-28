@@ -1,0 +1,5 @@
+<button type="button" class="sidebar-collapser unbutton always-interactive" data-action="toggleSidebar"
+    {{~#if sidebarCollapsed}} data-tooltip="JOURNAL.ViewExpand" aria-label="{{ localize 'JOURNAL.ViewExpand' }}"
+    {{~else}} data-tooltip="JOURNAL.ViewCollapse" aria-label="{{ localize 'JOURNAL.ViewCollapse' }}"{{/if}}>
+    <i class="fas fa-caret-{{#if sidebarCollapsed}}right{{else}}left{{/if}}" inert></i>
+</button>

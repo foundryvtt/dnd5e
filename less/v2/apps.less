@@ -111,7 +111,9 @@
       }
 
       &.tabs-left {
+        contain: content;
         right: 100%;
+        align-items: flex-end;
 
         > .item {
           padding-inline-start: 12px;
@@ -130,7 +132,9 @@
       }
 
       &.tabs-right {
+        contain: content;
         left: 100%;
+        align-items: flex-start;
 
         > .item {
           padding-inline-end: 12px;
@@ -186,6 +190,7 @@
         border: none;
         margin: 0;
         padding: .5rem;
+        color: inherit;
         font-family: var(--dnd5e-font-roboto-slab);
         font-size: var(--font-size-13);
         font-weight: bold;
@@ -273,7 +278,7 @@
         --icon-fill: var(--color-text-dark-primary);
       }
 
-      > a {
+      > a, > button {
         margin-left: auto;
         font-size: var(--font-size-12);
         color: var(--color-text-light-6);
@@ -344,7 +349,7 @@
       gap: .25rem;
       margin: 0;
 
-      &.green, &.maroon { color: var(--color-text-light-0); }
+      &.green, &.maroon { color: var(--color-light-1); }
       &.green { background-color: var(--dnd5e-color-green); }
       &.maroon { background-color: var(--dnd5e-color-maroon); }
 
@@ -602,7 +607,7 @@
       position: relative;
       padding-inline-start: 8px;
       padding-inline-end: 12px;
-      color: var(--color-text-light-0);
+      color: var(--color-light-1);
 
       &[hidden] { display: none; }
       .value, .max { text-shadow: 0 0 4px var(--dnd5e-color-gold); }

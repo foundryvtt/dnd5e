@@ -1,4 +1,4 @@
-<section class="flexcol">
+<section class="tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
     <fieldset class="card">
         <legend>{{ localize "TYPES.Item.class" }}</legend>
         <div class="form-group">
@@ -6,7 +6,7 @@
             <select name="system.details.originalClass" {{ disabled flags.disabled }}>
                 {{ selectOptions flags.classes selected=system.details.originalClass }}
             </select>
-            <p class="notes">{{ localize "DND5E.ClassMakeOriginalHint" }}</p>
+            <p class="hint">{{ localize "DND5E.ClassMakeOriginalHint" }}</p>
         </div>
     </fieldset>
 

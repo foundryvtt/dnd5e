@@ -1,5 +1,5 @@
-import { parseInputDelta } from "../../utils.mjs";
-import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
+import { parseInputDelta } from "../../../utils.mjs";
+import DragDropApplicationMixin from "../../mixins/drag-drop-mixin.mjs";
 
 /**
  * Mixin method for common uses between all actor sheets.
@@ -8,6 +8,10 @@ import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
  * @mixin
  */
 export default function ActorSheetMixin(Base) {
+  foundry.utils.logCompatibilityWarning(
+    "The `ActorSheetMixin` application has been deprecated and integrated into `BaseActorSheet`.",
+    { since: "DnD5e 5.0", until: "DnD5e 5.2", once: true }
+  );
   return class ActorSheet extends DragDropApplicationMixin(Base) {
 
     /**

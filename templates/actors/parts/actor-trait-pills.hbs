@@ -1,16 +1,17 @@
-{{#if (or @root.editable values)}}
-<div class="pills-group {{#unless values}}empty{{/unless}}">
+{{#if (or @root.editable values.length)}}
+<div class="pills-group {{#unless values.length}}empty{{/unless}}">
     <h3 class="icon">
         {{#if icon}}<i class="{{ icon }}"></i>
         {{~else if svg}}<dnd5e-icon src="systems/dnd5e/icons/svg/{{ svg }}.svg"></dnd5e-icon>{{/if}}
         <span class="roboto-upper">{{ localize label }}</span>
         {{#if @root.editable}}
-        <a {{#if configAction}}class="config-button" data-action="{{ configAction }}"
-           {{else}}class="trait-selector" data-trait="{{ key }}"{{/if}}
-           data-tooltip="{{ localize "DND5E.TraitConfig" trait=(localize label) }}"
-           aria-label="{{ localize "DND5E.TraitConfig" trait=(localize label) }}">
-            <i class="fas fa-cog"></i>
-        </a>
+        <button type="button" class="config-button unbutton"
+                {{~#if configAction}} data-action="showConfiguration" data-config="{{ configAction }}"
+                {{~else}} data-action="showConfiguration" data-trait="{{ key }}"{{/if}}
+                data-tooltip="{{ localize 'DND5E.TraitConfig' trait=(localize label) }}"
+                aria-label="{{ localize 'DND5E.TraitConfig' trait=(localize label) }}">
+            <i class="fas fa-cog" inert></i>
+        </button>
         {{/if}}
     </h3>
     <ul class="pills">
