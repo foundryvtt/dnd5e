@@ -145,24 +145,19 @@ export default class FeatData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getSheetData(context, partId) {
-    switch ( partId ) {
-      case "details":
-        context.parts = ["dnd5e.details-feat", "dnd5e.field-uses"];
-        const itemTypes = CONFIG.DND5E.featureTypes[this._source.type.value];
-        if ( itemTypes ) {
-          context.itemType = itemTypes.label;
-          context.itemSubtypes = itemTypes.subtypes;
-        }
-        break;
-      case "header":
-        context.subtitles = [
-          { label: this.type.label },
-          { label: this.parent.labels.featType },
-          { label: this.requirements, value: this._source.requirements, field: this.schema.getField("requirements"),
-            placeholder: "DND5E.Requirements" }
-        ];
-        break;
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: this.type.label },
+      { label: this.parent.labels.featType },
+      { label: this.requirements, value: this._source.requirements, field: this.schema.getField("requirements"),
+        placeholder: "DND5E.Requirements" }
+    ];
+
+    context.parts = ["dnd5e.details-feat", "dnd5e.field-uses"];
+    const itemTypes = CONFIG.DND5E.featureTypes[this._source.type.value];
+    if ( itemTypes ) {
+      context.itemType = itemTypes.label;
+      context.itemSubtypes = itemTypes.subtypes;
     }
   }
 

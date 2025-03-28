@@ -2,7 +2,7 @@
          data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
     {{#if editingDescription}}
     <prose-mirror name="{{ editingDescription.target }}" value="{{ editingDescription.value }}"
-                  document-u-u-i-d="{{ item.uuid }}" compact></prose-mirror>
+                  document-uuid="{{ item.uuid }}" compact></prose-mirror>
     {{else}}
 
     {{#if (eq item.type "spell")}}
@@ -33,7 +33,7 @@
     {{#if singleDescription}}
     {{#if editable}}
     <prose-mirror name="system.description.value" value="{{ source.description.value }}"
-                  document-u-u-i-d="{{ item.uuid }}" compact>{{{ enriched.description }}}</prose-mirror>
+                  document-uuid="{{ item.uuid }}" compact>{{{ enriched.description }}}</prose-mirror>
     {{else}}
     <div class="editor">
         {{{ enriched.description }}}
@@ -91,7 +91,7 @@
 
 {{#*inline ".description"}}
 <div class="card description {{#if collapsible}}collapsible{{/if}}
-     {{~#if (lookup @root.collapsed target)}} collapsed{{/if}}
+     {{~#unless (lookup @root.expanded target)}} collapsed{{/unless}}
      {{~#unless enriched}} empty{{/unless}}" data-target="{{ target }}"
      {{~#if collapsible}} data-action="toggleCollapsed" data-expand-id="{{ target }}"{{/if}}>
     <div class="header">

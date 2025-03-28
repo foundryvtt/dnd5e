@@ -233,53 +233,46 @@ export default class FacilityData extends ItemDataModel.mixin(ActivitiesTemplate
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getSheetData(context, partId) {
-    switch ( partId ) {
-      case "description":
-        context.singleDescription = true;
-        break;
-      case "details":
-        context.parts = ["dnd5e.details-facility"];
-        context.facilitySubtypes = CONFIG.DND5E.facilities.types[this.type.value]?.subtypes ?? {};
-        context.orders = Object.entries(CONFIG.DND5E.facilities.orders).reduce((obj, [value, config]) => {
-          const { label, basic, hidden } = config;
-          if ( hidden ) return obj;
-          // TODO: More hard-coding that we can potentially avoid.
-          if ( value === "build" ) {
-            if ( !this.building.built ) obj.executable.push({ value, label });
-            return obj;
-          }
-          if ( value === "change" ) {
-            if ( this.type.subtype === "garden" ) obj.executable.push({ value, label });
-            return obj;
-          }
-          if ( this.type.value === "basic" ) {
-            if ( !this.building.built ) return obj;
-            if ( basic ) obj.executable.push({ value, label });
-          } else if ( (this.type.value === "special") && !basic ) {
-            obj.available.push({ value, label });
-            if ( (value === this.order) || (value === "maintain") ) obj.executable.push({ value, label });
-          }
-          return obj;
-        }, { available: [], executable: [] });
+  async getSheetData(context) {
+    context.singleDescription = true;
+    context.subtitles = [
+      { label: this.type.label },
+      { label: CONFIG.DND5E.facilities.sizes[this.size].label }
+    ];
 
-        if ( (this.type.value === "special") && ((this.order === "craft") || (this.order === "harvest")) ) {
-          context.canCraft = true;
-          context.isHarvesting = this.order === "harvest";
-          const crafting = await fromUuid(this.craft.item);
-          if ( crafting ) context.craft = {
-            img: crafting.img,
-            name: crafting.name,
-            contentLink: crafting.toAnchor().outerHTML
-          };
-        }
-        break;
-      case "header":
-        context.subtitles = [
-          { label: this.type.label },
-          { label: CONFIG.DND5E.facilities.sizes[this.size].label }
-        ];
-        break;
+    context.parts = ["dnd5e.details-facility"];
+    context.facilitySubtypes = CONFIG.DND5E.facilities.types[this.type.value]?.subtypes ?? {};
+    context.orders = Object.entries(CONFIG.DND5E.facilities.orders).reduce((obj, [value, config]) => {
+      const { label, basic, hidden } = config;
+      if ( hidden ) return obj;
+      // TODO: More hard-coding that we can potentially avoid.
+      if ( value === "build" ) {
+        if ( !this.building.built ) obj.executable.push({ value, label });
+        return obj;
+      }
+      if ( value === "change" ) {
+        if ( this.type.subtype === "garden" ) obj.executable.push({ value, label });
+        return obj;
+      }
+      if ( this.type.value === "basic" ) {
+        if ( !this.building.built ) return obj;
+        if ( basic ) obj.executable.push({ value, label });
+      } else if ( (this.type.value === "special") && !basic ) {
+        obj.available.push({ value, label });
+        if ( (value === this.order) || (value === "maintain") ) obj.executable.push({ value, label });
+      }
+      return obj;
+    }, { available: [], executable: [] });
+
+    if ( (this.type.value === "special") && ((this.order === "craft") || (this.order === "harvest")) ) {
+      context.canCraft = true;
+      context.isHarvesting = this.order === "harvest";
+      const crafting = await fromUuid(this.craft.item);
+      if ( crafting ) context.craft = {
+        img: crafting.img,
+        name: crafting.name,
+        contentLink: crafting.toAnchor().outerHTML
+      };
     }
   }
 
