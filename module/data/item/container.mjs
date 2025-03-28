@@ -164,7 +164,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async getSheetData(context) {
     context.subtitles = [
-      { label: context.itemType },
+      { label: game.i18n.localize(CONFIG.Item.typeLabels.container) },
       ...this.physicalItemSheetFields
     ];
     context.parts = ["dnd5e.details-container"];
