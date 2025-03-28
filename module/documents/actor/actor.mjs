@@ -3345,13 +3345,20 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         this._displayTokenEffect(changes);
 
         // Determine if concentration check should be made
-        if ( !game.settings.get("dnd5e", "disableConcentration") 
-              && (userId === game.userId) 
-              && (changes.total < 0)
-              && (options.dnd5e?.concentrationCheck !== false)) {
-                // Make the check using the total as input for the concentration DC.
-                this.challengeConcentration({ dc: this.getConcentrationDC(-changes.total) });
-          }
+        const isConcentrationEnabled = !game.settings.get("dnd5e", "disableConcentration");
+        const isUserInitiated = userId === game.userId;
+        const isDamageTaken = changes.total < 0;
+        const isConcentrationCheckAllowed = options.dnd5e?.concentrationCheck !== false;
+        const isHpReduced = changes.temp < 0 || curr.value < curr.effectiveMax;
+        
+        if (isConcentrationEnabled 
+            && isUserInitiated 
+            && isDamageTaken 
+            && isConcentrationCheckAllowed 
+            && isHpReduced) {
+          // Make the check using the total as input for the concentration DC.
+          this.challengeConcentration({ dc: this.getConcentrationDC(-changes.total) });
+        }
 
         /**
          * A hook event that fires when an actor is damaged or healed by any means. The actual name
