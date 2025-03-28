@@ -235,6 +235,8 @@
     list-style: none;
     padding: 0;
     margin: 0;
+
+    li { margin: 0; }
   }
 
   h1, h2, h3 {
@@ -934,7 +936,7 @@
 /* ---------------------------------- */
 
 .dnd5e2.sheet {
-  .locked a:not(.interface-only) {
+  .locked a:not(.always-interactive) {
     cursor: default;
     &:hover { text-shadow: unset; }
   }
@@ -1066,7 +1068,7 @@
     }
     > section:empty { display: none; }
   }
-  &:not(.minimized).window-content, .window-content > .column-container {
+  &:not(.minimized) .window-content, .window-content > .column-container {
     display: flex;
     flex-direction: column;
     gap: 8px;

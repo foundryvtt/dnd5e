@@ -92,6 +92,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    hasEffects: true,
     enchantable: true,
     inventoryItem: true,
     inventoryOrder: 100
