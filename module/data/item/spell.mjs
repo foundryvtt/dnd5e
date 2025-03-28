@@ -283,79 +283,71 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getSheetData(context, partId) {
-    switch ( partId ) {
-      case "description":
-        context.properties.active = this.parent.labels?.components?.tags;
-        break;
-      case "details":
-        context.parts = ["dnd5e.details-spell", "dnd5e.field-uses"];
+  async getSheetData(context) {
+    context.properties.active = this.parent.labels?.components?.tags;
+    context.subtitles = [
+      { label: context.labels.level },
+      { label: context.labels.school },
+      { label: CONFIG.DND5E.spellPreparationModes[this.preparation.mode]?.label },
+      { label: context.labels.classes, classes: "full-width" }
+    ];
 
-        // Default Ability & Spellcasting Classes
-        if ( this.parent.actor ) {
-          const ability = CONFIG.DND5E.abilities[
-            this.parent.actor.spellcastingClasses[this.sourceClass]?.spellcasting.ability
-              ?? this.parent.actor.system.attributes?.spellcasting
-          ]?.label?.toLowerCase();
-          if ( ability ) context.defaultAbility = game.i18n.format("DND5E.DefaultSpecific", { default: ability });
-          else context.defaultAbility = game.i18n.localize("DND5E.Default");
-          context.spellcastingClasses = Object.entries(this.parent.actor.spellcastingClasses ?? {})
-            .map(([value, cls]) => ({ value, label: cls.name }));
-        }
+    context.parts = ["dnd5e.details-spell", "dnd5e.field-uses"];
 
-        // Activation
-        context.activationTypes = [
-          ...Object.entries(CONFIG.DND5E.activityActivationTypes).map(([value, { label, group }]) => {
-            return { value, label, group };
-          }),
-          { value: "", label: "DND5E.NoneActionLabel" }
-        ];
-
-        // Duration
-        context.durationUnits = [
-          ...Object.entries(CONFIG.DND5E.specialTimePeriods).map(([value, label]) => ({ value, label })),
-          ...Object.entries(CONFIG.DND5E.scalarTimePeriods).map(([value, label]) => {
-            return { value, label, group: "DND5E.DurationTime" };
-          }),
-          ...Object.entries(CONFIG.DND5E.permanentTimePeriods).map(([value, label]) => {
-            return { value, label, group: "DND5E.DurationPermanent" };
-          })
-        ];
-
-        // Targets
-        context.targetTypes = [
-          ...Object.entries(CONFIG.DND5E.individualTargetTypes).map(([value, { label }]) => {
-            return { value, label, group: "DND5E.TargetTypeIndividual" };
-          }),
-          ...Object.entries(CONFIG.DND5E.areaTargetTypes).map(([value, { label }]) => {
-            return { value, label, group: "DND5E.TargetTypeArea" };
-          })
-        ];
-        context.scalarTarget = this.target.affects.type
-          && (CONFIG.DND5E.individualTargetTypes[this.target.affects.type]?.scalar !== false);
-        context.affectsPlaceholder = game.i18n.localize(`DND5E.TARGET.Count.${
-          this.target?.template?.type ? "Every" : "Any"}`);
-        context.dimensions = this.target.template.dimensions;
-        // TODO: Ensure this behaves properly with enchantments, will probably need source target data
-
-        // Range
-        context.rangeTypes = [
-          ...Object.entries(CONFIG.DND5E.rangeTypes).map(([value, label]) => ({ value, label })),
-          ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => {
-            return { value, label, group: "DND5E.RangeDistance" };
-          })
-        ];
-
-        break;
-      case "header":
-        context.subtitles = [
-          { label: context.labels.level },
-          { label: context.labels.school },
-          { label: CONFIG.DND5E.spellPreparationModes[this.preparation.mode]?.label },
-          { label: context.labels.classes, classes: "full-width" }
-        ];
-        break;
+    // Default Ability & Spellcasting Classes
+    if ( this.parent.actor ) {
+      const ability = CONFIG.DND5E.abilities[
+        this.parent.actor.spellcastingClasses[this.sourceClass]?.spellcasting.ability
+          ?? this.parent.actor.system.attributes?.spellcasting
+      ]?.label?.toLowerCase();
+      if ( ability ) context.defaultAbility = game.i18n.format("DND5E.DefaultSpecific", { default: ability });
+      else context.defaultAbility = game.i18n.localize("DND5E.Default");
+      context.spellcastingClasses = Object.entries(this.parent.actor.spellcastingClasses ?? {})
+        .map(([value, cls]) => ({ value, label: cls.name }));
     }
+
+    // Activation
+    context.activationTypes = [
+      ...Object.entries(CONFIG.DND5E.activityActivationTypes).map(([value, { label, group }]) => {
+        return { value, label, group };
+      }),
+      { value: "", label: "DND5E.NoneActionLabel" }
+    ];
+
+    // Duration
+    context.durationUnits = [
+      ...Object.entries(CONFIG.DND5E.specialTimePeriods).map(([value, label]) => ({ value, label })),
+      ...Object.entries(CONFIG.DND5E.scalarTimePeriods).map(([value, label]) => {
+        return { value, label, group: "DND5E.DurationTime" };
+      }),
+      ...Object.entries(CONFIG.DND5E.permanentTimePeriods).map(([value, label]) => {
+        return { value, label, group: "DND5E.DurationPermanent" };
+      })
+    ];
+
+    // Targets
+    context.targetTypes = [
+      ...Object.entries(CONFIG.DND5E.individualTargetTypes).map(([value, { label }]) => {
+        return { value, label, group: "DND5E.TargetTypeIndividual" };
+      }),
+      ...Object.entries(CONFIG.DND5E.areaTargetTypes).map(([value, { label }]) => {
+        return { value, label, group: "DND5E.TargetTypeArea" };
+      })
+    ];
+    context.scalarTarget = this.target.affects.type
+      && (CONFIG.DND5E.individualTargetTypes[this.target.affects.type]?.scalar !== false);
+    context.affectsPlaceholder = game.i18n.localize(`DND5E.TARGET.Count.${
+      this.target?.template?.type ? "Every" : "Any"}`);
+    context.dimensions = this.target.template.dimensions;
+    // TODO: Ensure this behaves properly with enchantments, will probably need source target data
+
+    // Range
+    context.rangeTypes = [
+      ...Object.entries(CONFIG.DND5E.rangeTypes).map(([value, label]) => ({ value, label })),
+      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => {
+        return { value, label, group: "DND5E.RangeDistance" };
+      })
+    ];
   }
 
   /* -------------------------------------------- */

@@ -118,8 +118,10 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
 
   /** @inheritDoc */
   async getSheetData(context) {
-    context.subtitles = [{ label: context.itemType }];
+    context.subtitles = [{ label: game.i18n.localize(CONFIG.Item.typeLabels.race) }];
     context.singleDescription = true;
+
+    context.parts = ["dnd5e.details-species"];
     context.info = [{
       label: "DND5E.CreatureType",
       classes: "info-sm",
@@ -155,7 +157,6 @@ export default class RaceData extends ItemDataModel.mixin(ItemDescriptionTemplat
         `;
       }, "")
     }];
-    context.parts = ["dnd5e.details-species"];
   }
 
   /* -------------------------------------------- */
