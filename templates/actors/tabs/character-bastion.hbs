@@ -1,4 +1,4 @@
-<div class="tab bastion" data-group="primary" data-tab="bastion">
+<section class="tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
 
     {{!-- Name --}}
     <section class="name">
@@ -15,12 +15,12 @@
         {{!-- Roster --}}
         <section class="roster">
             <h3 class="icon">
-                <i class="fas fa-shield"></i>
+                <i class="fas fa-shield" inert></i>
                 <span class="roboto-upper">{{ localize "DND5E.FACILITY.FIELDS.defenders.max.label" }}</span>
             </h3>
             <ul class="unlist">
             {{#each defenders}}
-            <li class="defender" data-action="viewOccupant" data-actor-uuid="{{ uuid }}" data-tooltip="{{ name }}"
+            <li class="defender" data-action="showDocument" data-uuid="{{ uuid }}" data-tooltip="{{ name }}"
                 data-facility-id="{{ facility }}" data-prop="system.defenders" data-index="{{ @key }}">
                 <img src="{{ img }}" alt="{{ name }}">
                 {{#if @root.editable}}
@@ -41,7 +41,7 @@
         {{!-- Basic Facilities --}}
         <section class="facilities basic">
             <h3 class="icon">
-                <i class="fas fa-chess-rook"></i>
+                <i class="fas fa-chess-rook" inert></i>
                 <span class="roboto-upper">{{ localize "DND5E.FACILITY.Types.Basic.Label.other" }}</span>
             </h3>
             <ul class="unlist">
@@ -49,7 +49,8 @@
                     {{> ".facility" }}
                 {{/each}}
                 {{#each facilities.basic.available}}
-                <li class="facility empty roboto-upper" data-action="addFacility" data-type="basic">
+                <li class="facility empty roboto-upper" data-action="findItem" data-item-type="facility"
+                    data-facility-type="basic">
                     {{ localize label }}
                 </li>
                 {{/each}}
@@ -60,7 +61,7 @@
         {{#with facilities.special}}
         <section class="facilities special">
             <h3 class="icon">
-                <i class="fas fa-building-columns"></i>
+                <i class="fas fa-building-columns" inert></i>
                 <span class="roboto-upper">{{ localize "DND5E.FACILITY.Types.Special.Label.other" }}</span>
                 <span class="counter">{{ value }} &sol; {{ max }}</span>
             </h3>
@@ -69,7 +70,8 @@
                     {{> ".facility" }}
                 {{/each}}
                 {{#each available}}
-                <li class="facility empty roboto-upper" data-action="addFacility" data-type="special">
+                <li class="facility empty roboto-upper" data-action="findItem" data-item-type="facility"
+                    data-facility-type="special">
                     {{ localize label }}
                 </li>
                 {{/each}}
@@ -90,7 +92,7 @@
                   engine="prosemirror" collaborate=false }}
     </section>
 
-</div>
+</section>
 
 {{#*inline ".facility"}}
 <li class="facility {{#unless building.built}}building{{/unless}} {{#if disabled}}disabled{{/if}}"
@@ -151,7 +153,7 @@
 {{/inline}}
 
 {{#*inline ".occupant"}}
-<div {{#if actor}}data-actor-uuid="{{ actor.uuid }}" data-action="viewOccupant"{{/if}}
+<div {{#if actor}}data-uuid="{{ actor.uuid }}" data-action="showDocument"{{/if}}
       class="slot occupant-slot {{ type }} {{#if empty}}empty{{/if}} {{#if pending}}pending{{/if}}"
       data-index="{{ index }}" {{#if pending}}data-tooltip="{{ localize "DND5E.Bastion.Trade.Pending" }}"{{/if}}>
     {{#if actor}}
