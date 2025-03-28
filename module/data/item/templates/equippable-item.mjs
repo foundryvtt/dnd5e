@@ -84,6 +84,7 @@ export default class EquippableItemTemplate extends SystemDataModel {
    */
   prepareFinalEquippableData() {
     if ( !this.attunement ) this.attuned = false;
+    if ( this.parent.container?.system.equipped === false ) this.equipped = false;
   }
 
   /* -------------------------------------------- */
