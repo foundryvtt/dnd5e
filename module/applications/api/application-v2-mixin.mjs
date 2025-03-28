@@ -201,14 +201,15 @@ export default function ApplicationV2Mixin(Base) {
     /* -------------------------------------------- */
 
     /**
-     * Disable form fields that aren't marked with the `interface-only` class.
+     * Disable form fields that aren't marked with the `always-interactive` class.
      */
     _disableFields() {
       const selector = `.window-content :is(${[
         "INPUT", "SELECT", "TEXTAREA", "BUTTON", "DND5E-CHECKBOX", "COLOR-PICKER", "DOCUMENT-TAGS",
         "FILE-PICKER", "HUE-SLIDER", "MULTI-SELECT", "PROSE-MIRROR", "RANGE-PICKER", "STRING-TAGS"
-      ].join(", ")}):not(.interface-only)`;
+      ].join(", ")}):not(.always-interactive)`;
       for ( const element of this.element.querySelectorAll(selector) ) {
+        if ( element.closest("prose-mirror[open]") ) continue; // Skip active ProseMirror editors
         if ( element.tagName === "TEXTAREA" ) element.readOnly = true;
         else element.disabled = true;
       }

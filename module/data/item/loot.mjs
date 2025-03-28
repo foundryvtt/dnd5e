@@ -90,7 +90,13 @@ export default class LootData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+
     context.parts = ["dnd5e.details-loot"];
+    const itemTypes = CONFIG.DND5E.lootTypes[this._source.type.value];
+    if ( itemTypes ) {
+      context.itemType = itemTypes.label;
+      context.itemSubtypes = itemTypes.subtypes;
+    }
   }
 
   /* -------------------------------------------- */

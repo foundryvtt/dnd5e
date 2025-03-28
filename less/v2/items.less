@@ -18,15 +18,13 @@
     font-family: var(--dnd5e-font-roboto-condensed);
     line-height: 1;
 
-    > * { margin-top: 4px; }
-
     .source-book {
       display: flex;
       align-items: center;
       gap: 4px;
     }
 
-    a {
+    button {
       margin: 0;
       display: grid;
       place-content: center;
@@ -42,17 +40,11 @@
 
   .window-header .state-toggle.active { color: var(--color-text-dark-primary); }
 
-  .window-content {
-    background: url("ui/texture-gray1.webp") no-repeat top left,
-      url("ui/texture-gray2.webp") no-repeat bottom right,
-      var(--dnd5e-color-parchment);
-
-    > form {
-      display: flex;
-      flex-direction: column;
-      padding: 38px 12px 8px;
-      gap: 8px;
-    }
+  &:not(.minimized) .window-content {
+    display: flex;
+    flex-direction: column;
+    padding: 0 12px 8px;
+    gap: 8px;
   }
 
   &.minimized {
@@ -60,12 +52,9 @@
     background: url("../../ui/denim075.png");
     border: unset;
 
-    .window-header .header-elements { display: none; }
-
-    > header {
-      align-items: center;
-      .header-button, .pseudo-header-button { margin-top: 0; }
+    .window-header {
       .window-title { visibility: visible; }
+      :is(slide-toggle, .header-elements) { display: none; }
     }
   }
 
@@ -235,368 +224,368 @@
   /*  Sheet Body                        */
   /* ---------------------------------- */
 
-  .sheet-body {
-    .tab {
-      max-height: ~"calc(min(max(70vh, 1000px), 95vh) - var(--dnd5e-sheet-header-height))";
-      overflow: auto;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin: -6px -11px -6px -6px;
-      padding: 6px 2px 6px 6px;
-      scrollbar-width: thin;
-      scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
-      scrollbar-gutter: stable;
+  .tab {
+    max-height: ~"calc(min(max(70vh, 1000px), 95vh) - var(--dnd5e-sheet-header-height))";
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: -6px -11px -6px -6px;
+    padding: 6px 2px 6px 6px;
+    scrollbar-width: thin;
+    scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
+    scrollbar-gutter: stable;
 
-      &:not(.active) { display: none; }
-      &.effects, &.activities { padding: 12px 2px 58px 6px; }
+    &:not(.active) { display: none; }
+    &.effects, &.activities { padding: 12px 2px 58px 6px; }
 
-      > .pills .pill {
-        font-size: var(--font-size-10);
-        padding: 3px 6px;
-        line-height: 1;
-      }
-
-      &.single-description {
-        padding-right: 5px;
-        scrollbar-gutter: auto;
-
-        > .editor {
-          padding-right: 6px;
-          scrollbar-width: thin;
-          scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
-        }
-      }
+    > .pills .pill {
+      font-size: var(--font-size-10);
+      padding: 3px 6px;
+      line-height: 1;
     }
 
-    .spell-block {
-      width: 250px;
-      margin: 4px auto 4px;
-    }
+    &.single-description {
+      padding-right: 5px;
+      scrollbar-gutter: auto;
 
-    .info-block {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: center;
-      gap: 16px;
-
-      > div {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        .label {
-          font-family: var(--dnd5e-font-roboto-condensed);
-          font-size: var(--font-size-11);
-          color: var(--color-text-dark-5);
-          text-transform: uppercase;
-
-          .config-button { color: var(--color-text-light-6); }
-        }
-
-        div.value {
-          font-size: var(--font-size-14);
-          font-family: var(--dnd5e-font-roboto);
-        }
-
-        &.info-sm div.value {
-          margin-top: 4px;
-          font-size: var(--font-size-11);
-        }
-
-        &.info-lg div.value {
-          font-family: var(--dnd5e-font-roboto-slab);
-          font-weight: bold;
-          font-size: var(--font-size-24);
-        }
-
-        .sign {
-          color: var(--color-text-light-6);
-          font-size: var(--font-size-18);
-        }
-
-        &.info-grid div.value {
-          display: grid;
-          grid-template-columns: auto auto;
-          gap: 4px;
-        }
-
-        &.damage div.value {
-          --icon-fill: var(--color-text-dark-5);
-          color: var(--color-text-dark-5);
-        }
+      > .editor {
+        padding-right: 6px;
+        scrollbar-width: thin;
+        scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
       }
     }
+  }
 
-    /* Descriptions */
-    .item-descriptions {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
+  .spell-block {
+    width: 250px;
+    margin: 4px auto 4px;
+  }
 
-      .description {
-        padding: 8px;
-        font-family: var(--dnd5e-font-roboto-condensed);
-        box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+  .info-block {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    gap: 16px;
 
-        > .header {
-          background: none;
-          border: none;
-          color: var(--color-text-dark-primary);
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-
-          > span {
-            flex: 1;
-            font-family: var(--dnd5e-font-roboto-slab);
-            font-weight: bold;
-            text-align: center;
-            font-size: var(--font-size-14);
-          }
-
-          > button {
-            flex: none;
-            width: unset;
-
-            &:hover, &:focus-visible {
-              box-shadow: none;
-              text-shadow: 0 0 8px var(--color-shadow-primary);
-            }
-          }
-        }
-
-        &:not(.collapsible) > .header { padding-left: 14px; }
-
-        &.collapsible {
-          > .header {
-            cursor: pointer;
-
-            &::before {
-              content: "\f078";
-              font-family: var(--font-awesome);
-              font-weight: bold;
-              color: var(--color-text-dark-5);
-              transition: all 250ms ease;
-            }
-          }
-
-          &.empty > .header {
-            cursor: unset;
-            &::before { visibility: hidden; }
-          }
-
-          &.collapsed > .header::before { transform: rotate(-90deg); }
-
-          .editor { overflow: hidden; }
-        }
-
-        .editor { padding: 0 6px; }
-      }
-    }
-
-    .editor.prosemirror {
+    > div {
       flex: 1;
-      overflow: hidden;
-
-      .editor-container {
-        overflow: hidden auto;
-        margin-right: 0;
-      }
-
-      .editor-content {
-        position: unset;
-        min-height: 300px;
-      }
-
-      code-mirror {
-        min-height: 300px;
-        display: flex;
-        flex-direction: column;
-
-        .cm-editor { overflow: auto; }
-        .cm-scroller { position: relative; }
-      }
-
-      > textarea {
-        flex: none;
-        min-height: 300px;
-      }
-    }
-
-    /* Container Contents */
-    .inventory-element {
-      .top .containers { justify-content: end; }
-
-      .items-section {
-        .item-uses { display: none; }
-        .item-price { display: flex; }
-      }
-
-      .bottom {
-        position: sticky;
-        bottom: -6px;
-
-        .encumbrance {
-          border: var(--dnd5e-border-gold);
-          border-radius: 3px;
-          box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-          width: unset;
-
-          .meter { border-radius: 3px; }
-        }
-      }
-    }
-
-    /* Advancements */
-    .tab.advancement {
-      padding: 12px 2px 58px 6px;
-
-      .items-header {
-        .item-controls {
-          align-items: center;
-          justify-content: end;
-          padding-right: 12px;
-        }
-
-        .info-control, .item-control {
-          position: unset;
-          color: var(--dnd5e-color-gold);
-        }
-      }
-
-      .item-name {
-        .name {
-          display: flex;
-          flex-direction: column;
-          gap: 2px;
-        }
-
-        .tags { --icon-size: 18px; }
-
-        .title {
-          font-family: var(--dnd5e-font-roboto-slab);
-          font-size: var(--font-size-13);
-          font-weight: bold;
-        }
-
-        .summary {
-          font-size: var(--font-size-10);
-          color: var(--color-text-dark-5);
-
-          p { margin: 0; }
-
-          .content-link {
-            color: var(--color-text-dark-primary);
-            text-decoration-style: dotted;
-            > i { color: var(--color-text-dark-primary); }
-          }
-
-          .tag {
-            padding: 0 3px;
-            text-decoration: underline dotted;
-          }
-        }
-      }
-
-      .advancement-value { width: 50px; }
-
-      .item-detail.advancement-value { font-size: var(--font-size-13); }
-
-      .svg .item-image {
-        border: none;
-        background: none;
-        box-shadow: none;
-      }
-    }
-
-    /* Details */
-    .tab.details {
-      .starting-equipment {
-        font-family: var(--dnd5e-font-roboto-condensed);
-
-        &.empty {
-          padding: 8px;
-          text-align: center;
-          font-style: italic;
-          color: var(--color-text-dark-5);
-        }
-
-        li { line-height: 1.5; }
-      }
-
-      .form-group .sep.unit {
-        margin-inline: 4px;
-        font-weight: bold;
-      }
-    }
-
-    /* Activities */
-    .activities { gap: 0; }
-
-    .activities .activity {
-      padding: 6px;
       display: flex;
-      gap: 8px;
+      flex-direction: column;
       align-items: center;
-      box-shadow: 0 0 6px var(--dnd5e-shadow-15);
 
-      > .icon {
-        --icon-size: 24px;
-        --icon-fill: var(--color-text-dark-primary);
-        flex: 0 0 50px;
-        height: 24px;
+      .label {
+        font-family: var(--dnd5e-font-roboto-condensed);
+        font-size: var(--font-size-11);
+        color: var(--color-text-dark-5);
+        text-transform: uppercase;
 
-        .gold-icon {
-          border-width: 1px;
-          width: 24px;
-          height: 24px;
-        }
+        .config-button { color: var(--color-text-light-6); }
       }
 
-      > .name {
+      div.value {
+        font-size: var(--font-size-14);
+        font-family: var(--dnd5e-font-roboto);
+      }
+
+      &.info-sm div.value {
+        margin-top: 4px;
+        font-size: var(--font-size-11);
+      }
+
+      &.info-lg div.value {
         font-family: var(--dnd5e-font-roboto-slab);
         font-weight: bold;
-        flex: 1;
-        font-size: var(--font-size-14);
-        cursor: pointer;
-        text-align: center;
-
-        &:hover { text-shadow: 0 0 6px var(--color-shadow-primary); }
+        font-size: var(--font-size-24);
       }
 
-      > .controls {
-        flex: 0 0 50px;
+      .sign {
+        color: var(--color-text-light-6);
+        font-size: var(--font-size-18);
+      }
+
+      &.info-grid div.value {
+        display: grid;
+        grid-template-columns: auto auto;
+        gap: 4px;
+      }
+
+      &.damage div.value {
+        --icon-fill: var(--color-text-dark-5);
+        color: var(--color-text-dark-5);
+      }
+    }
+  }
+
+  /* Descriptions */
+  .item-descriptions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .description {
+      padding: 8px;
+      font-family: var(--dnd5e-font-roboto-condensed);
+      box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+
+      > .header {
+        background: none;
+        border: none;
+        color: var(--color-text-dark-primary);
         display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        > span {
+          flex: 1;
+          font-family: var(--dnd5e-font-roboto-slab);
+          font-weight: bold;
+          text-align: center;
+          font-size: var(--font-size-14);
+        }
+
+        > button {
+          flex: none;
+          width: unset;
+
+          &:hover, &:focus-visible {
+            box-shadow: none;
+            text-shadow: 0 0 8px var(--color-shadow-primary);
+          }
+        }
+      }
+
+      &:not(.collapsible) > .header { padding-left: 14px; }
+
+      &.collapsible {
+        > .header {
+          cursor: pointer;
+
+          &::before {
+            content: "\f078";
+            font-family: var(--font-awesome);
+            font-weight: bold;
+            color: var(--color-text-dark-5);
+            transition: all 250ms ease;
+          }
+        }
+
+        &.empty > .header {
+          cursor: unset;
+          &::before { visibility: hidden; }
+        }
+
+        &.collapsed > .header::before { transform: rotate(-90deg); }
+
+        .editor { overflow: hidden; }
+      }
+
+      .editor { padding: 0 6px; }
+    }
+  }
+
+  .editor.prosemirror {
+    flex: 1;
+    overflow: hidden;
+
+    .editor-container {
+      overflow: hidden auto;
+      margin-right: 0;
+    }
+
+    .editor-content {
+      position: unset;
+      min-height: 300px;
+    }
+
+    code-mirror {
+      min-height: 300px;
+      display: flex;
+      flex-direction: column;
+
+      .cm-editor { overflow: auto; }
+      .cm-scroller { position: relative; }
+    }
+
+    > textarea {
+      flex: none;
+      min-height: 300px;
+    }
+  }
+
+  /* Container Contents */
+  .inventory-element {
+    .top .containers { justify-content: end; }
+
+    .items-section {
+      .item-uses { display: none; }
+      .item-price { display: flex; }
+    }
+
+    .bottom {
+      position: sticky;
+      bottom: -6px;
+
+      .encumbrance {
+        border: var(--dnd5e-border-gold);
+        border-radius: 3px;
+        box-shadow: 0 0 6px var(--dnd5e-shadow-45);
+        width: unset;
+
+        .breakpoint { display: none; }
+        .meter { border-radius: 3px; }
+      }
+    }
+  }
+
+  /* Advancements */
+  .tab.advancement {
+    padding: 12px 2px 58px 6px;
+
+    .items-header {
+      .item-controls {
         align-items: center;
         justify-content: end;
-        gap: 2px;
-        padding-right: 4px;
+        padding-right: 12px;
       }
 
-      + .activity { margin-top: 8px; }
+      .info-control, .item-control {
+        position: unset;
+        color: var(--dnd5e-color-gold);
+      }
     }
 
-    /* Facilities */
-    fieldset.harvesting {
-      display: grid;
-      grid-template: "a a" "b c" / 1fr 60px;
-      column-gap: 8px;
-
-      > .form-group { grid-area: a; }
-      .facility-craft { grid-area: b; }
-
-      .quantity {
-        grid-area: c;
+    .item-name {
+      .name {
         display: flex;
-        align-items: center;
-        gap: 8px;
+        flex-direction: column;
+        gap: 2px;
+      }
 
-        .separator { color: var(--color-text-dark-5); }
+      .tags { --icon-size: 18px; }
+
+      .title {
+        font-family: var(--dnd5e-font-roboto-slab);
+        font-size: var(--font-size-13);
+        font-weight: bold;
+      }
+
+      .summary {
+        font-size: var(--font-size-10);
+        color: var(--color-text-dark-5);
+
+        p { margin: 0; }
+
+        .content-link {
+          color: var(--color-text-dark-primary);
+          text-decoration-style: dotted;
+          > i { color: var(--color-text-dark-primary); }
+        }
+
+        .tag {
+          padding: 0 3px;
+          text-decoration: underline dotted;
+        }
       }
     }
 
+    .advancement-value { width: 50px; }
+
+    .item-detail.advancement-value { font-size: var(--font-size-13); }
+
+    .svg .item-image {
+      border: none;
+      background: none;
+      box-shadow: none;
+    }
+  }
+
+  /* Details */
+  .tab.details {
+    .starting-equipment {
+      font-family: var(--dnd5e-font-roboto-condensed);
+
+      &.empty {
+        padding: 8px;
+        text-align: center;
+        font-style: italic;
+        color: var(--color-text-dark-5);
+      }
+
+      li { line-height: 1.5; }
+    }
+
+    .form-group .sep.unit {
+      margin-inline: 4px;
+      font-weight: bold;
+    }
+
+    legend .control-button { font-size: var(--font-size-11); }
+  }
+
+  /* Activities */
+  .activities { gap: 0; }
+
+  .activities .activity {
+    padding: 6px;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    box-shadow: 0 0 6px var(--dnd5e-shadow-15);
+
+    > .icon {
+      --icon-size: 24px;
+      --icon-fill: var(--color-text-dark-primary);
+      flex: 0 0 50px;
+      height: 24px;
+
+      .gold-icon {
+        border-width: 1px;
+        width: 24px;
+        height: 24px;
+      }
+    }
+
+    > .name {
+      font-family: var(--dnd5e-font-roboto-slab);
+      font-weight: bold;
+      flex: 1;
+      font-size: var(--font-size-14);
+      cursor: pointer;
+      text-align: center;
+
+      &:hover { text-shadow: 0 0 6px var(--color-shadow-primary); }
+    }
+
+    > .controls {
+      flex: 0 0 50px;
+      display: flex;
+      align-items: center;
+      justify-content: end;
+      gap: 2px;
+      padding-right: 4px;
+    }
+
+    + .activity { margin-top: 8px; }
+  }
+
+  /* Facilities */
+  fieldset.harvesting {
+    display: grid;
+    grid-template: "a a" "b c" / 1fr 60px;
+    column-gap: 8px;
+
+    > .form-group { grid-area: a; }
+    .facility-craft { grid-area: b; }
+
+    .quantity {
+      grid-area: c;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      .separator { color: var(--color-text-dark-5); }
+    }
   }
 
   /* ---------------------------------- */
@@ -621,9 +610,7 @@
   /* ---------------------------------- */
 
   form.locked {
-    .sheet-body {
-      .item-descriptions .description:not(.collapsible) > .header { display: none; }
-    }
+    .item-descriptions .description:not(.collapsible) > .header { display: none; }
   }
 
 }

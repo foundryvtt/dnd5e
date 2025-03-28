@@ -68,6 +68,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    hasEffects: true,
     enchantable: true,
     inventoryItem: true,
     inventoryOrder: 200
@@ -222,6 +223,13 @@ export default class EquipmentData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+
+    context.parts = ["dnd5e.details-equipment", "dnd5e.field-uses"];
+    context.equipmentTypeOptions = [
+      ...Object.entries(CONFIG.DND5E.miscEquipmentTypes).map(([value, label]) => ({ value, label })),
+      ...Object.entries(CONFIG.DND5E.armorTypes).map(([value, label]) => ({ value, label, group: "DND5E.Armor" }))
+    ];
+    context.hasDexModifier = this.isArmor && (this.type.value !== "shield");
     if ( this.armor.value && (this.isArmor || (this.type.value === "shield")) ) {
       context.properties.active.shift();
       context.info = [{
@@ -230,7 +238,6 @@ export default class EquipmentData extends ItemDataModel.mixin(
         value: this.type.value === "shield" ? dnd5e.utils.formatModifier(this.armor.value) : this.armor.value
       }];
     }
-    context.parts = ["dnd5e.details-equipment", "dnd5e.field-uses"];
   }
 
   /* -------------------------------------------- */
@@ -245,7 +252,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
     return [
       this.type.label,
       (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.Property.StealthDisadvantage") : null
+      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.ITEM.Property.StealthDisadvantage") : null
     ];
   }
 
@@ -258,7 +265,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   get cardProperties() {
     return [
       (this.isArmor || this.isMountable) ? (this.parent.labels?.armor ?? null) : null,
-      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.Item.Property.StealthDisadvantage") : null
+      this.properties.has("stealthDisadvantage") ? game.i18n.localize("DND5E.ITEM.Property.StealthDisadvantage") : null
     ];
   }
 

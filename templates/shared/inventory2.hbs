@@ -65,7 +65,7 @@
 
     {{!-- Currency --}}
     <section class="currency">
-        <button type="button" class="item-action unbutton" data-action="currency"
+        <button type="button" class="item-action unbutton always-interactive" data-action="currency"
                 data-tooltip="DND5E.CurrencyManager.Title" aria-label="{{ localize "DND5E.CurrencyManager.Title" }}">
             <i class="fas fa-coins"></i>
         </button>
@@ -73,8 +73,8 @@
         {{#with (lookup @root.config.currencies @key) as |currency|}}
         <label aria-label="{{ lookup currency 'label' }}">
             <i class="currency {{ @key }}" data-tooltip="{{ lookup currency "label" }}"></i>
-            <input type="text" class="uninput" name="system.currency.{{ @key }}" value="{{ ../this }}"
-                   data-dtype="Number" inputmode="numeric" pattern="[0-9+=\-]*">
+            <input type="text" class="uninput always-interactive" name="system.currency.{{ @key }}"
+                   value="{{ ../this }}" data-dtype="Number" inputmode="numeric" pattern="[0-9+=\-]*">
         </label>
         {{/with}}
         {{/each}}
@@ -91,7 +91,7 @@
                 <option value="bonus">{{ localize "DND5E.BonusAction" }}</option>
                 <option value="reaction">{{ localize "DND5E.Reaction" }}</option>
                 <option value="equipped">{{ localize "DND5E.Equipped" }}</option>
-                <option value="mgc">{{ localize "DND5E.Item.Property.Magical" }}</option>
+                <option value="mgc">{{ localize "DND5E.ITEM.Property.Magical" }}</option>
             </datalist>
         </item-list-controls>
 
@@ -209,15 +209,18 @@
                         {{!-- Item Quantity --}}
                         <div class="item-detail item-quantity">
                             {{#if @root.owner}}
-                            <a class="adjustment-button" data-action="decrease" data-property="system.quantity">
-                                <i class="fas fa-minus"></i>
+                            <a class="adjustment-button always-interactive" data-action="decrease"
+                               data-property="system.quantity">
+                                <i class="fas fa-minus" inert></i>
                             </a>
                             {{/if}}
-                            <input type="text" value="{{ item.system.quantity }}" placeholder="0" data-dtype="Number"
-                                   data-name="system.quantity" inputmode="numeric" pattern="[0-9+=\-]*" min="0">
+                            <input type="text" class="always-interactive" value="{{ item.system.quantity }}"
+                                   placeholder="0" data-dtype="Number" data-name="system.quantity" inputmode="numeric"
+                                   pattern="[0-9+=\-]*" min="0">
                             {{#if @root.owner}}
-                            <a class="adjustment-button" data-action="increase" data-property="system.quantity">
-                                <i class="fas fa-plus"></i>
+                            <a class="adjustment-button always-interactive" data-action="increase"
+                               data-property="system.quantity">
+                                <i class="fas fa-plus" inert></i>
                             </a>
                             {{/if}}
                         </div>
@@ -267,7 +270,7 @@
                             {{/if}}
 
                             {{!-- Expand/Collapse --}}
-                            <a class="item-control interface-only" data-toggle-description
+                            <a class="item-control always-interactive" data-toggle-description
                                aria-label="{{ localize "DND5E.ToggleDescription" }}">
                                 {{#if ctx.isExpanded}}
                                 <i class="fas fa-compress"></i>
@@ -277,7 +280,7 @@
                             </a>
 
                             {{!-- Context Menu --}}
-                            <a class="item-control interface-only" data-context-menu
+                            <a class="item-control always-interactive" data-context-menu
                                aria-label="{{ localize "DND5E.AdditionalControls" }}">
                                 <i class="fas fa-ellipsis-vertical"></i>
                             </a>

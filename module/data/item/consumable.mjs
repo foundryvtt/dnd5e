@@ -69,6 +69,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    hasEffects: true,
     enchantable: true,
     inventoryItem: true,
     inventoryOrder: 300
@@ -176,6 +177,8 @@ export default class ConsumableData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+
+    context.parts = ["dnd5e.details-consumable", "dnd5e.field-uses"];
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
       return {
         value, label,
@@ -187,7 +190,11 @@ export default class ConsumableData extends ItemDataModel.mixin(
       { rule: true },
       ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
     ];
-    context.parts = ["dnd5e.details-consumable", "dnd5e.field-uses"];
+    const itemTypes = CONFIG.DND5E.consumableTypes[this._source.type.value];
+    if ( itemTypes ) {
+      context.itemType = itemTypes.label;
+      context.itemSubtypes = itemTypes.subtypes;
+    }
   }
 
   /* -------------------------------------------- */

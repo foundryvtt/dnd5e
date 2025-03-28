@@ -92,6 +92,7 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    hasEffects: true,
     enchantable: true,
     inventoryItem: true,
     inventoryOrder: 100
@@ -257,10 +258,11 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async getSheetData(context) {
     context.subtitles = [
-      { label: context.itemType },
+      { label: game.i18n.localize(CONFIG.Item.typeLabels.weapon) },
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+
     context.info = [{
       label: "DND5E.ToHit",
       classes: "info-lg",
@@ -278,9 +280,8 @@ export default class WeaponData extends ItemDataModel.mixin(
         `;
       }, ""), classes: "info-grid damage" });
     }
-    context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
 
-    // Damage
+    context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
       return {
         value, label,

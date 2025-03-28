@@ -66,11 +66,18 @@ export default class FeatData extends ItemDataModel.mixin(
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    hasEffects: true
+  }, { inplace: false }));
+
+  /* -------------------------------------------- */
+
   /** @override */
   static get compendiumBrowserFilters() {
     return new Map([
       ["category", {
-        label: "DND5E.Item.Category.Label",
+        label: "DND5E.ITEM.Category.Label",
         type: "set",
         config: {
           choices: CONFIG.DND5E.featureTypes,
@@ -145,7 +152,13 @@ export default class FeatData extends ItemDataModel.mixin(
       { label: this.requirements, value: this._source.requirements, field: this.schema.getField("requirements"),
         placeholder: "DND5E.Requirements" }
     ];
+
     context.parts = ["dnd5e.details-feat", "dnd5e.field-uses"];
+    const itemTypes = CONFIG.DND5E.featureTypes[this._source.type.value];
+    if ( itemTypes ) {
+      context.itemType = itemTypes.label;
+      context.itemSubtypes = itemTypes.subtypes;
+    }
   }
 
   /* -------------------------------------------- */

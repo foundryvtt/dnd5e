@@ -1,0 +1,119 @@
+<section class="sheet-header">
+
+    {{!-- Image --}}
+    <div class="left">
+
+        <img class="item-image" src="{{ifThen editable img.editable img.value }}" alt="{{ name.value }}"
+             {{~#if editable}} data-action="editImage" data-edit="img"{{else}} data-action="showIcon"{{/if}}>
+
+    </div>
+
+    {{!-- Name & Subtitles --}}
+    <div class="middle identity-info">
+
+        {{!-- Name --}}
+        {{#if editable}}
+        {{ formInput name.field value=name.editable input=inputs.createTextInput classes="document-name uninput" }}
+        {{else}}
+        <div class="document-name">{{ item.name }}</div>
+        {{/if}}
+
+        {{!-- Type-Specific Subtitles --}}
+        <ul class="subtitles unlist">
+            {{~#each subtitles}}
+            {{#unless (and requiresIdentification @root.concealDetails)}}
+            {{#if @root.editable}}
+            {{#if field}}
+            <li {{#if classes}}class="{{ classes }}"{{/if}}>
+                {{ formInput field value=value choices=choices blank=blank placeholder=(localize placeholder)
+                             localize=true }}
+            </li>
+            {{/if}}
+            {{else}}
+            {{#if label}}
+            <li {{#if classes}}class="{{ classes }}"{{/if}}><span>{{ label }}</span></li>
+            {{/if}}
+            {{/if}}
+            {{/unless}}
+            {{/each~}}
+        </ul>
+
+    </div>
+
+    {{!-- Weight, Price, Quantity, Level, & School --}}
+    <div class="right common-fields {{#if isPhysical}}physical{{/if}}">
+
+        {{#if isPhysical}}
+
+        {{!-- Quantity --}}
+        <div class="quantity">
+            <span class="separator">&times;</span>
+            {{#if editable}}
+            {{ formInput fields.quantity value=source.quantity }}
+            {{else}}
+            <span class="value">{{ dnd5e-numberFormat system.quantity }}</span>
+            {{/if}}
+        </div>
+
+        {{!-- Weight --}}
+        <div class="weight">
+            {{#if editable}}
+            {{ formInput fields.weight.fields.value value=source.weight.value }}
+            {{ formInput fields.weight.fields.units value=source.weight.units choices=CONFIG.weightUnits
+                         labelAttr="abbreviation" }}
+            {{else}}
+            <span class="value">{{ dnd5e-numberFormat system.weight.value }}</span>
+            <i class="fas fa-weight-hanging"
+               aria-label="{{ lookup (lookup CONFIG.weightUnits system.weight.units) 'label' }}"></i>
+            {{/if}}
+        </div>
+
+        {{!-- Price --}}
+        {{#if (or isIdentified user.isGM)}}
+        <div class="price">
+            {{#if editable}}
+            {{ formInput fields.price.fields.value value=source.price.value }}
+            {{ formInput fields.price.fields.denomination value=source.price.denomination choices=CONFIG.currencies
+                         labelAttr="abbreviation" }}
+            {{else}}
+            <span class="value">{{ dnd5e-numberFormat system.price.value }}</span>
+            <i class="currency {{ system.price.denomination }}"
+               aria-label="{{ lookup (lookup CONFIG.currencies system.price.denomination) 'label' }}"></i>
+            {{/if}}
+        </div>
+        {{/if}}
+
+        {{/if}}
+
+        {{!-- Facilities --}}
+        {{#if (eq item.type "facility")}}
+        <div class="quantity">
+            <span class="value">{{ localize "DND5E.FACILITY.Squares" squares=system.squares }}</span>
+        </div>
+        {{#if (eq system.type.value "basic")}}
+        <div class="price">
+            <span class="value">{{ dnd5e-numberFormat system.price.value }}</span>
+            <i class="currency gp" aria-label="{{ CONFIG.currencies.gp.label }}"></i>
+        </div>
+        {{/if}}
+        {{/if}}
+
+        {{!-- School --}}
+        {{#if (eq item.type "spell")}}
+        <div class="school" aria-label="{{ labels.school }}">
+            {{#with (lookup @root.CONFIG.spellSchools system.school) as |schoolConfig|}}
+            <dnd5e-icon src="{{ schoolConfig.icon }}"></dnd5e-icon>
+            {{/with}}
+        </div>
+        {{/if}}
+
+        {{!-- Level --}}
+        {{#if (eq item.type "class")}}
+        <div class="level-badge badge" aria-label="{{ localize "DND5E.LevelNumber" level=system.levels }}">
+            {{ system.levels }}
+        </div>
+        {{/if}}
+
+    </div>
+
+</section>
