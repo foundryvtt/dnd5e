@@ -3349,7 +3349,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         const isUserInitiated = userId === game.userId;
         const isDamageTaken = changes.total < 0;
         const isConcentrationCheckAllowed = options.dnd5e?.concentrationCheck !== false;
-        const isHpReduced = changes.temp < 0 || curr.value < curr.effectiveMax;
+        const isHpReduced = (changes.temp < 0) || (curr.value < curr.effectiveMax);
         
         if (isConcentrationEnabled 
             && isUserInitiated 
