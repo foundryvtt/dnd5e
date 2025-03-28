@@ -185,10 +185,10 @@ export default class ItemListControlsElement extends HTMLElement {
     const search = document.createElement("search");
     search.setAttribute("aria-label", this.getAttribute("label"));
     search.innerHTML = `
-      <input type="text" class="interface-only" placeholder="${this.getAttribute("label")}">
+      <input type="text" class="always-interactive" placeholder="${this.getAttribute("label")}">
       <ul class="unlist controls">
         <li>
-          <button type="button" class="unbutton filter-control interface-only" data-action="clear"
+          <button type="button" class="unbutton filter-control always-interactive" data-action="clear"
                   data-tooltip="DND5E.FilterClear" aria-label="${game.i18n.localize("DND5E.FilterClear")}">
             <i class="fas fa-xmark"></i>
           </button>
@@ -203,7 +203,7 @@ export default class ItemListControlsElement extends HTMLElement {
       const item = document.createElement("li");
       item.classList.add("dropdown");
       item.innerHTML = `
-        <button type="button" class="unbutton filter-control filter interface-only" data-action="filter"
+        <button type="button" class="unbutton filter-control filter always-interactive" data-action="filter"
                 aria-label="${game.i18n.localize("DND5E.Filter")}">
           <i class="fas fa-filter"></i>
         </button>
@@ -215,7 +215,7 @@ export default class ItemListControlsElement extends HTMLElement {
       options.forEach(option => {
         const item = document.createElement("li");
         item.innerHTML = `
-          <button type="button" class="filter-item interface-only" data-filter="${option.value}">
+          <button type="button" class="filter-item always-interactive" data-filter="${option.value}">
             ${option.innerText}
           </button>
         `;
@@ -228,7 +228,7 @@ export default class ItemListControlsElement extends HTMLElement {
     if ( ["toggle", "multi"].includes(sortMode) ) {
       const item = document.createElement("li");
       item.innerHTML = `
-        <button type="button" class="unbutton filter-control active interface-only" data-action="sort"
+        <button type="button" class="unbutton filter-control active always-interactive" data-action="sort"
                 data-tooltip="SIDEBAR.SortModeManual" aria-label="${game.i18n.localize("SIDEBAR.SortModeManual")}">
           <i class="fas fa-arrow-down-short-wide"></i>
         </button>
@@ -241,7 +241,7 @@ export default class ItemListControlsElement extends HTMLElement {
       const groupLabel = this.getAttribute("group-label");
       const item = document.createElement("li");
       item.innerHTML = `
-        <button type="button" class="unbutton filter-control active interface-only" data-action="group"
+        <button type="button" class="unbutton filter-control active always-interactive" data-action="group"
                 data-tooltip="${groupLabel}" aria-label="${groupLabel}">
           <i class="fas fa-layer-group"></i>
         </button>
