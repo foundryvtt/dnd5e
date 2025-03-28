@@ -412,7 +412,8 @@
   }
 
   :is(.form-group, fieldset) :is(select, input):not([type="range"]) {
-    color: var(--color-text-dark-primary);
+    --input-text-color: var(--color-text-dark-primary);
+    color: var(--input-text-color);
     border: 1px solid var(--input-border-color);
     font-size: var(--font-size-11);
   }
@@ -629,6 +630,8 @@
 
   fieldset { padding: revert; }
   .hint { line-height: 16px; }
+
+  :is(select, input):not([type="range"]) { --input-text-color: var(--color-text-dark-primary); }
 
   button:not(.icon, .fa-solid, .fas) {
     height: unset;
