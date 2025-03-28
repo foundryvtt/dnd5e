@@ -201,7 +201,7 @@ export default class AbilityTemplate extends (foundry.canvas?.placeables?.Measur
 
       // Activate listeners
       canvas.stage.on("mousemove", this.#events.move);
-      canvas.stage.on("mousedown", this.#events.confirm);
+      canvas.stage.on("mouseup", this.#events.confirm);
       canvas.app.view.oncontextmenu = this.#events.cancel;
       canvas.app.view.onwheel = this.#events.rotate;
     });
@@ -216,7 +216,7 @@ export default class AbilityTemplate extends (foundry.canvas?.placeables?.Measur
   async _finishPlacement(event) {
     this.layer._onDragLeftCancel(event);
     canvas.stage.off("mousemove", this.#events.move);
-    canvas.stage.off("mousedown", this.#events.confirm);
+    canvas.stage.off("mouseup", this.#events.confirm);
     canvas.app.view.oncontextmenu = null;
     canvas.app.view.onwheel = null;
     if ( this.#hoveredToken ) {

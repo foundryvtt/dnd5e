@@ -1,6 +1,6 @@
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
-import { staticID } from "../utils.mjs";
+import { parseOrString, staticID } from "../utils.mjs";
 
 const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
@@ -212,7 +212,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     // Parse any JSON provided when targeting an object
     if ( (field instanceof ObjectField) || (field instanceof SchemaField) ) {
-      change = { ...change, value: this.prototype._parseOrString(change.value) };
+      change = { ...change, value: parseOrString(change.value) };
     }
 
     return super.applyField(model, change, field);
@@ -663,18 +663,20 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Adjust exhaustion icon display to match current level.
-   * @param {Application} app  The TokenHUD application.
-   * @param {jQuery} html      The TokenHUD HTML.
+   * @param {Application} app            The TokenHUD application.
+   * @param {jQuery | HTMLElement} html  The TokenHUD HTML.
    */
   static onTokenHUDRender(app, html) {
+    html = html instanceof HTMLElement ? html : html[0];
     const actor = app.object.actor;
     const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
     if ( Number.isFinite(level) && (level > 0) ) {
       const img = ActiveEffect5e._getExhaustionImage(level);
-      html.find('[data-status-id="exhaustion"]').css({
-        objectPosition: "-100px",
-        background: `url('${img}') no-repeat center / contain`
-      });
+      const elem = html.querySelector('[data-status-id="exhaustion"]');
+      if ( elem ) {
+        elem.style.objectPosition = "-100px";
+        elem.style.background = `url('${img}') no-repeat center / contain`;
+      }
     }
   }
 

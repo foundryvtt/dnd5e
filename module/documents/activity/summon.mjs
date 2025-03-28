@@ -40,7 +40,9 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
   /** @inheritDoc */
   static localize() {
     super.localize();
-    this._localizeSchema(this.schema.fields.profiles.element, ["DND5E.SUMMON.FIELDS.profiles"]);
+    if ( game.release.generation < 13 ) {
+      this._localizeSchema(this.schema.fields.profiles.element, ["DND5E.SUMMON.FIELDS.profiles"]);
+    }
   }
 
   /* -------------------------------------------- */

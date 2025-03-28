@@ -7,11 +7,11 @@
  * Extension of core's DragDrop class to provide additional information used by the system. Will replace core's
  * version in the global namespace.
  */
-export default class DragDrop5e extends DragDrop {
+export default class DragDrop5e extends (foundry.applications?.ux?.DragDrop ?? DragDrop) {
 
   /**
    * Drop effect used for current drag operation.
-   * @type {DropEffectValue}
+   * @type {DropEffectValue|null}
    */
   static dropEffect = null;
 
@@ -25,24 +25,36 @@ export default class DragDrop5e extends DragDrop {
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /** @override */
   bind(html) {
-    super.bind(html);
-
-    // Add dragend event handler to the existing dragstart event
-    if ( this.can("dragstart", this.dragSelector) ) {
-      const draggables = html.querySelectorAll(this.dragSelector);
-      for ( const el of draggables ) {
-        el.ondragend = this._handleDragEnd.bind(this);
-      }
+    // TODO: No longer need this override when v12 support is dropped.
+    // Identify and activate draggable targets
+    const canDrag = !!this.dragSelector && this.can("dragstart", this.dragSelector);
+    const draggables = this.dragSelector ? html.querySelectorAll(this.dragSelector) : [];
+    for ( const element of draggables ) {
+      element.setAttribute("draggable", canDrag);
+      element.ondragstart = canDrag ? this._handleDragStart.bind(this) : null;
+      element.ondragend = this._handleDragEnd.bind(this);
     }
 
+    // Identify and activate drop targets
+    const canDrop = this.can("drop", this.dropSelector);
+    const droppables = !this.dropSelector || html.matches(this.dropSelector) ? [html]
+      : html.querySelectorAll(this.dropSelector);
+    for ( const element of droppables ) {
+      element.ondragover = canDrop ? this._handleDragOver.bind(this) : null;
+      element.ondrop = canDrop ? this._handleDrop.bind(this) : null;
+    }
     return this;
   }
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
+  /**
+   * Handle the start of a drag workflow.
+   * @param {DragEvent} event  The drag event.
+   * @protected
+   */
   async _handleDragStart(event) {
     await this.callback(event, "dragstart");
     if ( event.dataTransfer.items.length ) {
@@ -60,7 +72,7 @@ export default class DragDrop5e extends DragDrop {
   /**
    * Handle the end of a drag workflow
    * @param {DragEvent} event   The drag event being handled
-   * @private
+   * @protected
    */
   async _handleDragEnd(event) {
     await this.callback(event, "dragend");
@@ -71,12 +83,49 @@ export default class DragDrop5e extends DragDrop {
   /* -------------------------------------------- */
 
   /**
+   * Handle a dragged element moving over a droppable target.
+   * @param {DragEvent} event  The drag event.
+   * @returns {false}
+   * @protected
+   */
+  _handleDragOver(event) {
+    event.preventDefault();
+    this.callback(event, "dragover");
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle a dragged element being dropped on a droppable target.
+   * @param {DragEvent} event  The drag event.
+   * @returns {any}
+   * @protected
+   */
+  _handleDrop(event) {
+    event.preventDefault();
+    return this.callback(event, "drop");
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Get the data payload for the current drag event.
    * @param {DragEvent} event
-   * @returns {object|string|null}
+   * @returns {any}
    */
   static getPayload(event) {
     if ( !DragDrop5e.#payload?.data ) return null;
     return DragDrop5e.#payload.data;
   }
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Extend native DragDrop with functionality for storing payloads.
+ */
+export function extendDragDrop() {
+  if ( "ux" in CONFIG ) CONFIG.ux.DragDrop = DragDrop5e;
+  else window.DragDrop = DragDrop5e;
 }

@@ -39,7 +39,7 @@ import WeaponsConfig from "./config/weapons-config.mjs";
  * Extend the basic ActorSheet class to suppose system-specific logic and functionality.
  * @abstract
  */
-export default class ActorSheet5e extends ActorSheetMixin(ActorSheet) {
+export default class ActorSheet5e extends ActorSheetMixin(foundry.appv1?.sheets?.ActorSheet ?? ActorSheet) {
 
   /**
    * @typedef {object} FilterState5e

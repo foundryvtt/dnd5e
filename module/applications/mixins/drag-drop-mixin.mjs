@@ -1,4 +1,5 @@
 import { areKeysPressed } from "../../utils.mjs";
+import DragDrop5e from "../../drag-drop.mjs";
 
 /**
  * @import { DropEffectValue } from "../../drag-drop.mjs"
@@ -13,8 +14,8 @@ export default function DragDropApplicationMixin(Base) {
   return class DragDropApplication extends Base {
     /** @override */
     _onDragOver(event) {
-      const data = DragDrop.getPayload(event);
-      DragDrop.dropEffect = event.dataTransfer.dropEffect = (foundry.utils.getType(data) === "Object")
+      const data = DragDrop5e.getPayload(event);
+      DragDrop5e.dropEffect = event.dataTransfer.dropEffect = (foundry.utils.getType(data) === "Object")
         ? this._dropBehavior(event, data) : "copy";
     }
 
@@ -29,7 +30,7 @@ export default function DragDropApplicationMixin(Base) {
      */
     _dropBehavior(event, data) {
       const allowed = this._allowedDropBehaviors(event, data);
-      let behavior = DragDrop.dropEffect ?? event.dataTransfer?.dropEffect;
+      let behavior = DragDrop5e.dropEffect ?? event.dataTransfer?.dropEffect;
 
       if ( event.type === "dragover" ) {
         if ( areKeysPressed(event, "dragMove") ) behavior = "move";

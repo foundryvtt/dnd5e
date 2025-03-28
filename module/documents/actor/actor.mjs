@@ -3221,21 +3221,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Add additional system-specific sidebar directory context menu options for Actor documents
-   * @param {jQuery} html         The sidebar HTML
-   * @param {Array} entryOptions  The default array of context menu options
+   * @param {jQuery | HTMLElement} html  The sidebar HTML
+   * @param {Array} entryOptions         The default array of context menu options
    */
   static addDirectoryContextOptions(html, entryOptions) {
     entryOptions.push({
       name: "DND5E.PolymorphRestoreTransformation",
       icon: '<i class="fa-solid fa-backward"></i>',
       callback: li => {
-        const actor = game.actors.get(li.data("documentId"));
+        li = li instanceof HTMLElement ? li : li[0];
+        const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
         return actor.revertOriginalForm();
       },
       condition: li => {
+        li = li instanceof HTMLElement ? li : li[0];
         const allowed = game.settings.get("dnd5e", "allowPolymorphing");
         if ( !allowed && !game.user.isGM ) return false;
-        const actor = game.actors.get(li.data("documentId"));
+        const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
         return actor && actor.isPolymorphed;
       },
       group: "system"
@@ -3243,12 +3245,14 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       name: "DND5E.Group.Primary.Set",
       icon: '<i class="fa-solid fa-star"></i>',
       callback: li => {
-        game.settings.set("dnd5e", "primaryParty", { actor: game.actors.get(li[0].dataset.documentId) });
+        li = li instanceof HTMLElement ? li : li[0];
+        game.settings.set("dnd5e", "primaryParty", { actor: game.actors.get(li.dataset.documentId ?? li.dataset.entryId) });
       },
       condition: li => {
-        const actor = game.actors.get(li[0].dataset.documentId);
+        li = li instanceof HTMLElement ? li : li[0];
+        const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
         const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
-        return game.user.isGM && (actor.type === "group")
+        return game.user.isGM && (actor?.type === "group")
           && (actor.system.type.value === "party") && (actor !== primary);
       },
       group: "system"
@@ -3259,7 +3263,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         game.settings.set("dnd5e", "primaryParty", { actor: null });
       },
       condition: li => {
-        const actor = game.actors.get(li[0].dataset.documentId);
+        li = li instanceof HTMLElement ? li : li[0];
+        const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
         const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
         return game.user.isGM && (actor === primary);
       },
@@ -3271,12 +3276,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Add class to actor entry representing the primary group.
-   * @param {jQuery} jQuery
+   * @param {jQuery | HTMLElement} html
    */
-  static onRenderActorDirectory(jQuery) {
+  static onRenderActorDirectory(html) {
+    html = html instanceof HTMLElement ? html : html[0];
     const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
     if ( primaryParty ) {
-      const element = jQuery[0]?.querySelector(`[data-entry-id="${primaryParty.id}"]`);
+      const element = html?.querySelector(`[data-entry-id="${primaryParty.id}"]`);
       element?.classList.add("primary-party");
     }
   }

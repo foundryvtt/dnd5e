@@ -3,7 +3,7 @@ import { setTheme } from "../settings.mjs";
 /**
  * Sheet config with extra options.
  */
-export default class SheetConfig5e extends DocumentSheetConfig {
+export default class SheetConfig5e extends (foundry.applications?.apps?.DocumentSheetConfig ?? DocumentSheetConfig) {
 
   /** @inheritDoc */
   static get defaultOptions() {

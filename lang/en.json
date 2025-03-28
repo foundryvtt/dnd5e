@@ -1857,6 +1857,31 @@
             "hint": "These additional items will be added to the creature when one of its items is enchanted, and will be removed if the enchantment is ever removed."
           }
         }
+      },
+      "level": {
+        "label": "Level Limit",
+        "hint": "Range of levels required to use this enchantment.",
+        "max": {
+          "label": "Maximum Level"
+        },
+        "min": {
+          "label": "Minimum Level"
+        }
+      },
+      "riders": {
+        "label": "Attached",
+        "activity": {
+          "label": "Additional Activities",
+          "hint": "These additional activities will be added to the enchanted item when this enchantment is applied, and removed when the enchantment is removed."
+        },
+        "effect": {
+          "label": "Additional Effects",
+          "hint": "These additional effects will be added to the enchanted item when this enchantment is applied, and removed when the enchantment is removed."
+        },
+        "item": {
+          "label": "Additional Items",
+          "hint": "These additional items will be added to the creature when one of its items is enchanted, and will be removed if the enchantment is ever removed."
+        }
       }
     },
     "enchant": {
@@ -3558,7 +3583,14 @@
       }
     },
     "profiles": {
-      "label": "Summons Profiles",
+      "count": {
+        "label": "Count"
+      },
+      "cr": {
+        "label": "Challenge Rating",
+        "abbr": "CR",
+        "hint": "Maximum CR of the summoned creature."
+      },
       "FIELDS": {
         "count": {
           "label": "Count"
@@ -3589,6 +3621,28 @@
         "uuid": {
           "label": "Linked Creature"
         }
+      },
+      "label": "Summons Profiles",
+      "level": {
+        "label": "Level Limit",
+        "hint": "Range of levels required to use this profile.",
+        "max": {
+          "label": "Maximum Level"
+        },
+        "min": {
+          "label": "Minimum Level"
+        }
+      },
+      "name": {
+        "label": "Display Name",
+        "hint": "Name of the profile displayed in the usage dialog."
+      },
+      "types": {
+        "label": "Creature Types",
+        "hint": "List of creature types from which the summoned creature can be selected."
+      },
+      "uuid": {
+        "label": "Linked Creature"
       }
     },
     "summon": {
@@ -4250,11 +4304,11 @@
       },
       "TurnEnd": {
         "Label": "End of Turn",
-        "Abbreviation": "Turn Start"
+        "Abbreviation": "Turn End"
       },
       "TurnStart": {
         "Label": "Start of Turn",
-        "Abbreviation": "Turn End"
+        "Abbreviation": "Turn Start"
       }
     },
     "Recharge": {

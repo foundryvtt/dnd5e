@@ -1,7 +1,7 @@
 /**
  * Variant of the standard journal sheet to handle custom TOC numbering.
  */
-export default class JournalSheet5e extends JournalSheet {
+export default class JournalSheet5e extends (foundry.appv1?.sheets?.JournalSheet ?? JournalSheet) {
   /** @inheritDoc */
   static get defaultOptions() {
     const options = super.defaultOptions;
@@ -57,6 +57,21 @@ export default class JournalSheet5e extends JournalSheet {
       if ( context.editable ) element = jQuery[0];
       else element = jQuery[0].parentElement;
       element?.classList.add("dnd5e2-journal");
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Add class to journal ProseMirror editor.
+   * @param {JournalEntryPageProseMirrorSheet} page  The journal page application.
+   * @param {HTMLElement} element                    The rendered Application HTML.
+   * @param {object} context                         Rendering context provided.
+   * @param {object} options                         Rendering options provided.
+   */
+  static onRenderJournalEntryPageProseMirrorSheet(page, element, context, options) {
+    if ( page.document.parent.sheet instanceof JournalSheet5e ) {
+      element.classList.add("dnd5e2-journal", "themed", "theme-light");
     }
   }
 }

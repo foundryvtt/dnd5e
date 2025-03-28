@@ -62,10 +62,7 @@ class TableOfContentsCompendiumV13 extends (foundry.applications.sidebar?.apps?.
 
   /** @override */
   _createContextMenus() {
-    foundry.applications.ui.ContextMenu.create(this, this.element, "[data-entry-id]", this._getEntryContextOptions(), {
-      jQuery: false,
-      fixed: true
-    });
+    this._createContextMenu(this._getEntryContextOptions, "[data-entry-id]", { fixed: true });
   }
 
   /* -------------------------------------------- */
@@ -73,7 +70,7 @@ class TableOfContentsCompendiumV13 extends (foundry.applications.sidebar?.apps?.
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    new DragDrop({
+    new foundry.applications.ux.DragDrop({
       dragSelector: "[data-document-id]",
       dropSelector: "article",
       permissions: {

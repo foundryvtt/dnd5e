@@ -35,6 +35,30 @@ export default class Combat5e extends Combat {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  async rollAll(options) {
+    const ids = new Set();
+    for ( let combatant of this.combatants ) {
+      if ( combatant.group ) combatant = combatant.group.activeCombatant;
+      if ( combatant.isOwner && (combatant.initiative === null) ) ids.add(combatant.id);
+    }
+    return this.rollInitiative(Array.from(ids), options);
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  async rollNPC(options={}) {
+    const ids = new Set();
+    for ( let combatant of this.combatants ) {
+      if ( combatant.group ) combatant = combatant.group.activeCombatant;
+      if ( combatant.isOwner && combatant.isNPC && (combatant.initiative === null) ) ids.add(combatant.id);
+    }
+    return this.rollInitiative(Array.from(ids), options);
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async rollInitiative(ids, options={}) {
     await super.rollInitiative(ids, options);

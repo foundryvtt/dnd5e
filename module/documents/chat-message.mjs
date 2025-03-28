@@ -940,8 +940,9 @@ export default class ChatMessage5e extends ChatMessage {
    * @param {boolean} [options.releaseAll=false]  Force all modifiers to be considered released.
    */
   static toggleModifiers({ releaseAll=false }={}) {
+    const MODIFIER_KEYS = (foundry.helpers?.interaction?.KeyboardManager ?? KeyboardManager).MODIFIER_KEYS;
     document.querySelectorAll(".chat-sidebar > ol, #chat .chat-scroll > ol").forEach(chatlog => {
-      for ( const key of Object.values(KeyboardManager.MODIFIER_KEYS) ) {
+      for ( const key of Object.values(MODIFIER_KEYS) ) {
         if ( game.keyboard.isModifierActive(key) && !releaseAll ) chatlog.dataset[`modifier${key}`] = "";
         else delete chatlog.dataset[`modifier${key}`];
       }

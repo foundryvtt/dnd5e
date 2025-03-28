@@ -13,7 +13,7 @@ import StartingEquipmentConfig from "./starting-equipment-config.mjs";
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
  */
-export default class ItemSheet5e extends ItemSheet {
+export default class ItemSheet5e extends (foundry.appv1?.sheets?.ItemSheet ?? ItemSheet) {
   constructor(...args) {
     super(...args);
 

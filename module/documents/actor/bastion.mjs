@@ -546,8 +546,9 @@ export default class Bastion {
     }
 
     if ( !turnButton ) {
-      document.getElementById("controls")?.insertAdjacentHTML("afterend", `
-        <button type="button" id="bastion-turn" data-action="bastionTurn" class="dnd5e2">
+      const v12 = game.release.generation < 13 ? "v12" : "faded-ui";
+      document.querySelector("#controls, #scene-controls")?.insertAdjacentHTML("afterend", `
+        <button type="button" id="bastion-turn" data-action="bastionTurn" class="dnd5e2 ${v12}">
           <i class="fas fa-chess-rook"></i>
           <span>${game.i18n.localize("DND5E.Bastion.Action.BastionTurn")}</span>
         </button>

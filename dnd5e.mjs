@@ -18,16 +18,16 @@ import * as canvas from "./module/canvas/_module.mjs";
 import * as dataModels from "./module/data/_module.mjs";
 import * as dice from "./module/dice/_module.mjs";
 import * as documents from "./module/documents/_module.mjs";
-import DragDrop5e from "./module/drag-drop.mjs";
 import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
 import ModuleArt from "./module/module-art.mjs";
-import {registerModuleData, setupModulePacks} from "./module/module-registration.mjs";
+import { registerModuleData, setupModulePacks } from "./module/module-registration.mjs";
 import parseUuid from "./module/parse-uuid.mjs";
-import {default as registry} from "./module/registry.mjs";
+import { default as registry } from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
 import * as utils from "./module/utils.mjs";
+import { extendDragDrop } from "./module/drag-drop.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -47,7 +47,7 @@ globalThis.dnd5e = {
   utils
 };
 
-DragDrop = DragDrop5e;
+extendDragDrop();
 
 /* -------------------------------------------- */
 /*  Foundry VTT Initialization                  */
@@ -59,7 +59,8 @@ Hooks.once("init", function() {
 
   if ( game.release.generation < 13 ) patchFromUuid();
   CONFIG.compatibility.excludePatterns.push(
-    /now namespaced under/, /V1 Application framework/, /Set#isSubset/, /ChatMessage#getHTML/, /renderChatMessage/
+    /now namespaced under/, /V1 Application framework/, /Set#isSubset/, /ChatMessage#getHTML/, /renderChatMessage/,
+    /_onClickEntry/
   );
 
   // Record Configuration Values
@@ -70,6 +71,7 @@ Hooks.once("init", function() {
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
   CONFIG.Combatant.documentClass = documents.Combatant5e;
+  if ( game.release.generation > 12 ) CONFIG.CombatantGroup.documentClass = documents.CombatantGroup5e;
   CONFIG.Item.collection = dataModels.collection.Items5e;
   CONFIG.Item.compendiumIndexFields.push("system.container");
   CONFIG.Item.documentClass = documents.Item5e;
@@ -556,16 +558,26 @@ Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners
 Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(message));
 
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
+
+// V13 context menu additions
+Hooks.on("getActorContextOptions", documents.Actor5e.addDirectoryContextOptions);
+Hooks.on("getItemContextOptions", documents.Item5e.addDirectoryContextOptions);
+
+// V12 context menu additions
 Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
+Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
+Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
 
 Hooks.on("renderCompendiumDirectory", (app, html) => {
   html = html instanceof HTMLElement ? html : html[0];
   applications.CompendiumBrowser.injectSidebarButton(html);
 });
-Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
-Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
 
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
+Hooks.on(
+  "renderJournalEntryPageProseMirrorSheet",
+  applications.journal.JournalSheet5e.onRenderJournalEntryPageProseMirrorSheet
+);
 
 Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffectConfig);
 
