@@ -209,6 +209,7 @@ export default function ApplicationV2Mixin(Base) {
         "FILE-PICKER", "HUE-SLIDER", "MULTI-SELECT", "PROSE-MIRROR", "RANGE-PICKER", "STRING-TAGS"
       ].join(", ")}):not(.always-interactive)`;
       for ( const element of this.element.querySelectorAll(selector) ) {
+        if ( element.closest("prose-mirror[open]") ) continue; // Skip active ProseMirror editors
         if ( element.tagName === "TEXTAREA" ) element.readOnly = true;
         else element.disabled = true;
       }
