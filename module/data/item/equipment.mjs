@@ -218,30 +218,25 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getSheetData(context, partId) {
-    switch ( partId ) {
-      case "details":
-        context.parts = ["dnd5e.details-equipment", "dnd5e.field-uses"];
-        context.equipmentTypeOptions = [
-          ...Object.entries(CONFIG.DND5E.miscEquipmentTypes).map(([value, label]) => ({ value, label })),
-          ...Object.entries(CONFIG.DND5E.armorTypes).map(([value, label]) => ({ value, label, group: "DND5E.Armor" }))
-        ];
-        context.hasDexModifier = this.isArmor && (this.type.value !== "shield");
-        if ( this.armor.value && (this.isArmor || (this.type.value === "shield")) ) {
-          context.properties.active.shift();
-          context.info = [{
-            label: "DND5E.ArmorClass",
-            classes: "info-lg",
-            value: this.type.value === "shield" ? dnd5e.utils.formatModifier(this.armor.value) : this.armor.value
-          }];
-        }
-        break;
-      case "header":
-        context.subtitles = [
-          { label: this.type.label },
-          ...this.physicalItemSheetFields
-        ];
-        break;
+  async getSheetData(context) {
+    context.subtitles = [
+      { label: this.type.label },
+      ...this.physicalItemSheetFields
+    ];
+
+    context.parts = ["dnd5e.details-equipment", "dnd5e.field-uses"];
+    context.equipmentTypeOptions = [
+      ...Object.entries(CONFIG.DND5E.miscEquipmentTypes).map(([value, label]) => ({ value, label })),
+      ...Object.entries(CONFIG.DND5E.armorTypes).map(([value, label]) => ({ value, label, group: "DND5E.Armor" }))
+    ];
+    context.hasDexModifier = this.isArmor && (this.type.value !== "shield");
+    if ( this.armor.value && (this.isArmor || (this.type.value === "shield")) ) {
+      context.properties.active.shift();
+      context.info = [{
+        label: "DND5E.ArmorClass",
+        classes: "info-lg",
+        value: this.type.value === "shield" ? dnd5e.utils.formatModifier(this.armor.value) : this.armor.value
+      }];
     }
   }
 
