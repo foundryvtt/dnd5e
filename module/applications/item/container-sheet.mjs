@@ -1,4 +1,5 @@
 import ItemSheet5e from "./item-sheet.mjs";
+import Item5e from "../../documents/item.mjs";
 
 /**
  * Extended version of item sheet to handle containers.
@@ -34,7 +35,7 @@ export default class ContainerSheet extends ItemSheet5e {
 
   /** @override */
   tabGroups = {
-    sheet: "contents"
+    primary: "contents"
   };
 
   /* -------------------------------------------- */

@@ -97,8 +97,9 @@
     <div class="header">
         <span>{{ localize label }}</span>
         {{#if @root.item.isOwner}}
-        <button type="button" class="unbutton control-button" data-action="editDescription" data-target="{{ target }}"
-                aria-label="{{ localize 'DND5E.DescriptionEdit' description=(localize label) }}">
+        <button type="button" class="unbutton control-button always-interactive" data-action="editDescription"
+                aria-label="{{ localize 'DND5E.DescriptionEdit' description=(localize label) }}"
+                data-target="{{ target }}">
             <i class="fas fa-feather" inert></i>
         </button>
         {{/if}}
