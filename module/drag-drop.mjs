@@ -127,5 +127,5 @@ export default class DragDrop5e extends (foundry.applications?.ux?.DragDrop ?? D
  */
 export function extendDragDrop() {
   if ( "ux" in CONFIG ) CONFIG.ux.DragDrop = DragDrop5e;
-  else window.DragDrop = DragDrop5e;
+  else DragDrop = DragDrop5e;
 }
