@@ -67,21 +67,46 @@ export default class BaseSettingsConfig extends Application5e {
     return data;
   }
 
-  /* -------------------------------------------- */
-  /*  Event Listeners & Handlers                  */
-  /* -------------------------------------------- */
-
   /**
-   * Commit settings changes.
-   * @this {BaseSettingsConfig}
-   * @param {SubmitEvent} event          The submission event.
-   * @param {HTMLFormElement} form       The submitted form element.
-   * @param {FormDataExtended} formData  The submitted form data.
-   * @returns {Promise}
-   */
+ * Commit settings changes.
+ * This method processes the submitted form data, updates the settings, and determines if a reload is required.
+ * 
+ * @this {BaseSettingsConfig}
+ * @param {SubmitEvent} event          The submission event.
+ * @param {HTMLFormElement} form       The submitted form element.
+ * @param {FormDataExtended} formData  The submitted form data.
+ * @returns {Promise<void>}            Resolves once the settings are updated, or prompts for a reload if required.
+ */
   static async #onCommitChanges(event, form, formData) {
-    for ( const [key, value] of Object.entries(foundry.utils.expandObject(formData.object)) ) {
+    let shouldReload = false; // Tracks if a reload is required
+  
+    // Expand the submitted form data into an object
+    const expandedData = foundry.utils.expandObject(formData.object);
+  
+    // Iterate over each setting in the submitted data
+    for (const [key, value] of Object.entries(expandedData)) {
+      // Retrieve the current value of the setting
+      const currentValue = game.settings.get("dnd5e", key);
+    
+      // Retrieve the setting's metadata
+      const setting = game.settings.settings.get(`dnd5e.${key}`);
+      if (!setting) {
+        console.warn(`Setting "dnd5e.${key}" is not registered.`);
+        continue;
+      }
+    
+      // Check if the value has changed and if the setting requires a reload
+      if (currentValue !== value && setting.requiresReload) {
+        shouldReload = true;
+      }
+    
+      // Update the setting with the new value
       await game.settings.set("dnd5e", key, value);
+    }
+  
+    // If any setting that requires a reload has changed, prompt the user for confirmation
+    if (shouldReload) {
+      return SettingsConfig.reloadConfirm({ world: true });
     }
   }
 }
