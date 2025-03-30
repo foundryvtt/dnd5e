@@ -70,8 +70,8 @@ export default class BaseSettingsConfig extends Application5e {
   /* -------------------------------------------- */
   /*  Event Listeners & Handlers                  */
   /* -------------------------------------------- */
+  
   /**
-
  * Commit settings changes.
  * This method processes the submitted form data, updates the settings, and determines if a reload is required.
  * @this {BaseSettingsConfig}
