@@ -70,18 +70,37 @@ export default class BaseSettingsConfig extends Application5e {
   /* -------------------------------------------- */
   /*  Event Listeners & Handlers                  */
   /* -------------------------------------------- */
-
+  
   /**
-   * Commit settings changes.
-   * @this {BaseSettingsConfig}
-   * @param {SubmitEvent} event          The submission event.
-   * @param {HTMLFormElement} form       The submitted form element.
-   * @param {FormDataExtended} formData  The submitted form data.
-   * @returns {Promise}
-   */
+ * Commit settings changes.
+ * This method processes the submitted form data, updates the settings, and determines if a reload is required.
+ * @this {BaseSettingsConfig}
+ * @param {SubmitEvent} event          The submission event.
+ * @param {HTMLFormElement} form       The submitted form element.
+ * @param {FormDataExtended} formData  The submitted form data.
+ * @returns {Promise<void>}            Resolves once the settings are updated, or prompts for a reload if required.
+ */
   static async #onCommitChanges(event, form, formData) {
-    for ( const [key, value] of Object.entries(foundry.utils.expandObject(formData.object)) ) {
+    let shouldReload = false;
+  
+    const expandedData = foundry.utils.expandObject(formData.object);
+  
+    // Iterate over each setting in the submitted data
+    for ( const [key, value] of Object.entries(expandedData) ) {
+      const currentValue = game.settings.get("dnd5e", key);
+    
+      // Retrieve the setting's metadata
+      const setting = game.settings.settings.get(`dnd5e.${key}`);
+    
+      if ( (currentValue !== value) && (setting.requiresReload) ) {
+        shouldReload = true;
+      }
+    
       await game.settings.set("dnd5e", key, value);
+    }
+
+    if ( shouldReload ) {
+      return SettingsConfig.reloadConfirm({ world: true });
     }
   }
 }
