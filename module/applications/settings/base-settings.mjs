@@ -71,6 +71,7 @@ export default class BaseSettingsConfig extends Application5e {
   /*  Event Listeners & Handlers                  */
   /* -------------------------------------------- */
   /**
+
  * Commit settings changes.
  * This method processes the submitted form data, updates the settings, and determines if a reload is required.
  * @this {BaseSettingsConfig}
@@ -82,7 +83,6 @@ export default class BaseSettingsConfig extends Application5e {
   static async #onCommitChanges(event, form, formData) {
     let shouldReload = false;
   
-    // Expand the submitted form data into an object
     const expandedData = foundry.utils.expandObject(formData.object);
   
     // Iterate over each setting in the submitted data
@@ -92,15 +92,13 @@ export default class BaseSettingsConfig extends Application5e {
       // Retrieve the setting's metadata
       const setting = game.settings.settings.get(`dnd5e.${key}`);
     
-      // Check if the value has changed and if the setting requires a reload
       if ( (currentValue !== value) && (setting.requiresReload) ) {
         shouldReload = true;
       }
     
-      // Update the setting with the new value
       await game.settings.set("dnd5e", key, value);
     }
-    // If any setting that requires a reload has changed, prompt the user for confirmation
+
     if ( shouldReload ) {
       return SettingsConfig.reloadConfirm({ world: true });
     }
