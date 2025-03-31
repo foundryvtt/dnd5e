@@ -175,6 +175,11 @@ export default class AttributesFields {
       return obj;
     }, { armors: [], shields: [] });
 
+    // Set stealth disadvantage
+    if ( armors[0]?.system.properties.has("stealthDisadvantage") ) {
+      AdvantageModeField.setMode(this, "skills.ste.roll.mode", -1);
+    }
+
     // Determine base AC
     switch ( ac.calc ) {
 
