@@ -400,7 +400,7 @@ export default class AttributesFields {
     init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
       + (flags.initiativeAlert && isLegacy ? 5 : 0)
       + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
-    init.score = 10 + init.total + (init.roll.mode * 5);
+    init.score = CONFIG.DND5E.skillPassive.base + init.total + (init.roll.mode * CONFIG.DND5E.skillPassive.modifier);
   }
 
   /* -------------------------------------------- */
