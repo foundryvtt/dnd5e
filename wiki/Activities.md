@@ -30,7 +30,12 @@ There are a variety of activity types offered by the DnD5e system, and modules c
 
 ## Configuring Activities
 
-While parts of the activity sheet change based on the selected activity type, many parts are shared.
+While parts of the activity sheet change based on the selected activity type, many parts are shared. Some configurations, such as those in the **Consumption** or **Effect** tabs, allow for the use of scaling to dynamically adjust an activity's behavior based on contextual factors like spell level or item properties.
+
+For more information and examples of how scaling can be used, see:
+- [Roll Formulas - Scaling](Roll-Formulas.md#scale)
+- [Roll Formulas - Item Properties](Roll-Formulas.md#item-properties)
+- [Scale Value Advancements](Advancement-Type-Scale-Value.md)
 
 ### Identity
 
