@@ -273,6 +273,14 @@ preLocalize("skills", { key: "label", sort: true });
 /* -------------------------------------------- */
 
 /**
+ * Amount by which the passive skill scores are modified when that skill has advantage or disadvantage.
+ * @type {number}
+ */
+DND5E.skillAdvantageModifier = 5;
+
+/* -------------------------------------------- */
+
+/**
  * Character alignment options.
  * @enum {string}
  */
