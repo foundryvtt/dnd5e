@@ -8,11 +8,11 @@
         <label class="slide-toggle">
             <input type="checkbox" name="flags.dnd5e.showTokenPortrait" {{ checked portrait.token }}>
             {{#if portrait.token}}
-                {{ localize "DOCUMENT.Token" }}
-                <i class="fas fa-toggle-on" inert></i>
+            {{ localize "DOCUMENT.Token" }}
+            <i class="fas fa-toggle-on" inert></i>
             {{else}}
-                {{ localize "DND5E.Portrait" }}
-                <i class="fas fa-toggle-off" inert></i>
+            {{ localize "DND5E.Portrait" }}
+            <i class="fas fa-toggle-off" inert></i>
             {{/if}}
         </label>
         {{/if}}

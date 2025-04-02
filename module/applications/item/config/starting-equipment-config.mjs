@@ -74,7 +74,7 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    new DragDrop({
+    new CONFIG.ux.DragDrop({
       dragSelector: ".drag-bar",
       dropSelector: null,
       callbacks: {

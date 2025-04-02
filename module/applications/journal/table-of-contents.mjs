@@ -61,7 +61,7 @@ export default class TableOfContentsCompendium extends foundry.applications.side
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    new foundry.applications.ux.DragDrop({
+    new CONFIG.ux.DragDrop({
       dragSelector: "[data-document-id]",
       dropSelector: "article",
       permissions: {
