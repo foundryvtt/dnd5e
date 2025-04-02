@@ -1079,7 +1079,7 @@
     }
     > section:empty { display: none; }
   }
-  &:not(.minimized) .window-content, .window-content > .column-container {
+  &:where(:not(.minimized)) .window-content, .window-content > .column-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
