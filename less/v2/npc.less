@@ -5,8 +5,6 @@
 .dnd5e2.sheet.actor.npc {
   --dnd5e-sheet-header-height: 68px;
   --dnd5e-sheet-sidebar-width: 180px;
-  min-width: 700px;
-  min-height: 700px;
 
   background: url("ui/texture1.webp") no-repeat top center / auto 770px,
     var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
@@ -14,6 +12,11 @@
   &.minimized {
     box-shadow: 0 0 20px var(--color-shadow-dark);
     .window-header .header-elements { display: none; }
+    .window-content { display: none; }
+  }
+  &:not(.minimized, .minimizing, .maximizing) {
+    min-width: 700px;
+    min-height: 700px;
   }
 
   /* ---------------------------------- */
@@ -24,7 +27,7 @@
 
   .window-header .header-elements {
     flex: none;
-    color: var(--color-text-primary);
+    color: var(--color-text-dark-primary);
     font-family: var(--dnd5e-font-roboto-condensed);
     display: flex;
     align-items: center;
@@ -48,7 +51,7 @@
 
     i {
       font-size: var(--font-size-11);
-      color: var(--color-light-6);
+      color: var(--color-text-light-6);
       margin: 0;
     }
   }
@@ -117,7 +120,7 @@
         text-shadow: 0 0 4px var(--dnd5e-color-gold);
         cursor: pointer;
         border-radius: 100%;
-        color: var(--color-light-1);
+        color: var(--color-text-light-0);
         border: 2px solid var(--dnd5e-color-gold);
         clip-path: polygon(48.5% 0, 91% 25%, 92% 75%, 49% 100%, 6% 75%, 7% 25%);
 
@@ -320,7 +323,7 @@
     /* Proficiency */
     .proficiency {
       text-align: right;
-      .sign { color: var(--color-light-6); }
+      .sign { color: var(--color-text-light-6); }
       > span { font-family: var(--dnd5e-font-roboto-condensed); }
     }
 
@@ -370,7 +373,7 @@
         }
       }
 
-      .sign { color: var(--color-light-6); }
+      .sign { color: var(--color-text-light-6); }
 
       .label {
         text-transform: uppercase;
@@ -413,7 +416,7 @@
           &:hover .save { text-shadow: 0 0 8px var(--color-shadow-primary); }
         }
 
-        > i { color: var(--color-light-6); }
+        > i { color: var(--color-text-light-6); }
       }
     }
 
@@ -432,7 +435,7 @@
         gap: 4px;
 
         > span.label {
-          color: var(--color-dark-5);
+          color: var(--color-text-dark-5);
           font-size: var(--font-size-10);
           font-weight: normal;
         }
@@ -697,7 +700,7 @@
           border: none;
           background: none;
 
-          option { color: var(--color-text-primary); }
+          option { color: var(--color-text-dark-primary); }
         }
 
         .config-button {
@@ -740,7 +743,7 @@
             position: absolute;
             inset: auto auto -3px 100%;
             font-size: var(--font-size-18);
-            color: var(--color-text-primary);
+            color: var(--color-text-dark-primary);
           }
         }
 
@@ -762,7 +765,7 @@
   &.editable {
     .sheet-header {
       .labels, > .left {
-        color: var(--color-text-primary);
+        color: var(--color-text-dark-primary);
 
         li + li::before { content: "" }
         > li {
