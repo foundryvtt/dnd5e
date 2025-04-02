@@ -10,6 +10,9 @@ export default class ItemListControlsElement extends HTMLElement {
     this.#list = element.querySelector(`[data-item-list="${this.getAttribute("for")}"]`);
     this.#state = this.#app._filters[this.getAttribute("for")];
     this.#tab = this.closest(".tab")?.dataset.tab;
+
+    if ( this.querySelector("search") ) return;
+
     this.#buildHTML();
 
     const debouncedFilter = foundry.utils.debounce(this._onFilterName.bind(this), this.constructor.FILTER_DEBOUNCE_MS);
