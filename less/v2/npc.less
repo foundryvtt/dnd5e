@@ -5,8 +5,11 @@
 .dnd5e2.sheet.actor.npc {
   --dnd5e-sheet-header-height: 68px;
   --dnd5e-sheet-sidebar-width: 180px;
-  // min-width: 700px;
-  // min-height: 700px;
+  min-width: 700px;
+  min-height: 700px;
+
+  background: url("ui/texture1.webp") no-repeat top center / auto 770px,
+    var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
 
   &.minimized {
     box-shadow: 0 0 20px var(--color-shadow-dark);
@@ -26,7 +29,6 @@
     display: flex;
     align-items: center;
     line-height: 1;
-    margin-top: 6px;
     gap: 4px;
 
     > div:has(> span:not(:empty)) + div:not(:empty)::before { content: " • "; }
@@ -54,6 +56,9 @@
   .window-content {
     display: flex;
     flex-direction: column;
+    overflow: visible;
+    padding-block: 4px 0;
+    gap: 0;
   }
 
   /* ---------------------------------- */
@@ -64,6 +69,7 @@
     gap: 12px;
     padding-inline: 12px;
     align-items: stretch;
+    z-index: 1;
 
     > .left { flex: 0 0 var(--dnd5e-sheet-sidebar-width); }
 
@@ -592,12 +598,12 @@
         flex: 0 0 var(--dnd5e-sheet-sidebar-width);
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 12px;
         transition: margin-left 450ms ease;
 
         .pills-group {
           h3.icon {
-            padding-bottom: 0;
+            padding-bottom: 2px;
             margin-bottom: 4px;
 
             > i, > span { font-size: var(--font-size-11); }
@@ -643,15 +649,13 @@
         .bottom {
           width: 100%;
           position: sticky;
-          bottom: 2px;
-          margin-bottom: -5px;
+          bottom: 0;
           margin-top: auto;
           display: flex;
-          gap: 8px;
+          gap: 6px;
 
           .encumbrance {
             block-size: 28px;
-            margin-inline-end: 38px;
             border: var(--dnd5e-border-gold);
             border-radius: 3px;
             box-shadow: 0 0 6px var(--dnd5e-shadow-45);
@@ -749,7 +753,7 @@
   /*  Child Creation                    */
   /* ---------------------------------- */
 
-  &.tab-inventory > .create-child { display: none; }
+  &.tab-inventory .window-content > .create-child { display: none; }
 
   /* ---------------------------------- */
   /*  Edit Mode                         */
@@ -810,6 +814,7 @@
         width: 45px;
         text-align: center;
         font-size: var(--font-size-18);
+        border-color: transparent;
 
         &:hover, &:focus {
           border-color: transparent;
