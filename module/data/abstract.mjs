@@ -521,7 +521,6 @@ export class ItemDataModel extends SystemDataModel {
    * @param {DragEvent} event  The concluding DragEvent which provided the drop data.
    * @param {Actor5e} actor    Actor onto which the item was dropped.
    * @param {object} itemData  The item data requested for creation. **Will be mutated.**
-   * @abstract
    */
   static onDropCreate(event, actor, itemData) {}
 

@@ -27,6 +27,7 @@ import SpellSlotsConfig from "../config/spell-slots-config.mjs";
 import ToolsConfig from "../config/tools-config.mjs";
 import TraitsConfig from "../config/traits-config.mjs";
 import WeaponsConfig from "../config/weapons-config.mjs";
+import TransformDialog from "../transform-dialog.mjs";
 
 const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -56,7 +57,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   static DEFAULT_OPTIONS = {
     actions: {
-      closeWarnings: BaseActorSheet.#closeWarnings,
       inspectWarning: BaseActorSheet.#inspectWarning,
       openWarnings: BaseActorSheet.#openWarnings,
       rest: BaseActorSheet.#rest,
@@ -80,8 +80,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         {
           action: "restoreTransformation",
           icon: "fa-solid fa-backward",
-          label: "DND5E.PolymorphRestoreTransformation",
-          ownership: "OWNDER"
+          label: "ND5E.TRANSFORM.Action.Restore",
+          ownership: "OWNER",
+          visible: BaseActorSheet.#canRestoreTransformation
         }
       ],
       resizable: true
@@ -138,23 +139,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @inheritDoc */
   async _configureRenderOptions(options) {
     await super._configureRenderOptions(options);
-    if ( options.isFirstRender ) {
-      if ( options.tab ) this.tabGroups.primary = options.tab;
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _getHeaderControls() {
-    const controls = super._getHeaderControls();
-
-    // Restore transformation
-    if ( !this.isEditable || !this.actor.isPolymorphed ) {
-      controls.findSplice(c => c.action === "restoreTransformation");
-    }
-
-    return controls;
+    if ( options.isFirstRender && options.tab ) this.tabGroups.primary = options.tab;
   }
 
   /* -------------------------------------------- */
@@ -539,7 +524,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Level-based spellcasters have cantrips and leveled slots
     if ( maxLevel > 0 ) {
       registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
-      for (let lvl = 1; lvl <= maxLevel; lvl++) {
+      for ( let lvl = 1; lvl <= maxLevel; lvl++ ) {
         const sl = `spell${lvl}`;
         registerSection(sl, lvl, CONFIG.DND5E.spellLevels[lvl], levels[sl]);
       }
@@ -824,7 +809,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /* -------------------------------------------- */
 
   /**
-   * Prepare context for a features. Called in addition to the standard `_prepareItem` for this item.
+   * Prepare context for a feature. Called in addition to the standard `_prepareItem` for this item.
    * @param {Item5e} item  Item being prepared for display.
    * @param {object} ctx   Item specific context.
    * @protected
@@ -1116,26 +1101,13 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /* -------------------------------------------- */
 
   /**
-   * Handle closing the preparation warnings dialog.
-   * @this {BaseActorSheet}
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
-   */
-  static async #closeWarnings(event, target) {
-    if ( target instanceof HTMLDialogElement ) target.close();
-    if ( target instanceof HTMLAnchorElement ) target.closest("dialog")?.close();
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Handle following a warning link.
    * @this {BaseActorSheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #inspectWarning(event, target) {
-    if ( this._inspectWarning(event, target) !== false ) return;
+    if ( this._inspectWarning(event, target) === false ) return;
     switch ( target.dataset.target ) {
       case "armor":
         new ArmorClassConfig({ document: this.actor }).render({ force: true });
@@ -1147,16 +1119,16 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Handle following a warning link.
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
-   * @returns {any}               Return `false` to continue with base sheet's options.
+   * @returns {any}               Return `false` to prevent default behavior.
    * @protected
    */
-  _inspectWarning(event, target) {
-    return false;
-  }
+  _inspectWarning(event, target) {}
 
   /* -------------------------------------------- */
 
@@ -1212,7 +1184,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   static #roll(event, target) {
     if ( !target.classList.contains("rollable") ) return;
-    if ( this._roll(event, target) !== false ) return;
+    if ( this._roll(event, target) === false ) return;
     switch ( target.dataset.type ) {
       case "ability":
         const ability = target.closest("[data-ability]")?.dataset.ability;
@@ -1228,16 +1200,16 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Handle rolling from the sheet.
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
-   * @returns {any}               Return `false` to continue with base sheet's options.
+   * @returns {any}               Return `false` to prevent default behavior.
    * @protected
    */
-  _roll(event, target) {
-    return false;
-  }
+  _roll(event, target) {}
 
   /* -------------------------------------------- */
 
@@ -1263,7 +1235,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const showTokenPortrait = this.actor.getFlag("dnd5e", "showTokenPortrait") === true;
     const token = this.actor.isToken ? this.actor.token : this.actor.prototypeToken;
     const img = showTokenPortrait ? token.texture.src : this.actor.img;
-    new ImagePopout(img, { title: this.actor.name, uuid: this.actor.uuid }).render(true);
+    new foundry.applications.apps.ImagePopout({
+      src: img,
+      uuid: this.actor.uuid,
+      window: { title: this.actor.name }
+    }).render({ force: true });
   }
 
   /* -------------------------------------------- */
@@ -1276,7 +1252,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @returns {any}
    */
   static #showConfiguration(event, target) {
-    if ( this._showConfiguration(event, target) !== false ) return;
+    if ( this._showConfiguration(event, target) === false ) return;
     const config = { document: this.actor };
 
     if ( target.dataset.trait ) {
@@ -1328,16 +1304,16 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Handle opening a configuration application.
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
-   * @returns {any}               Return `false` to continue with base sheet's options.
+   * @returns {any}               Return `false` to prevent default behavior.
    * @abstract
    */
-  _showConfiguration(event, target) {
-    return false;
-  }
+  _showConfiguration(event, target) {}
 
   /* -------------------------------------------- */
 
@@ -1386,6 +1362,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const collapsed = this._toggleSidebar();
     game.user.setFlag("dnd5e", this._sidebarCollapsedKeyPath, collapsed);
   }
+
+  /* -------------------------------------------- */
 
   /**
    * Toggle the sidebar collapsed state.
@@ -1502,69 +1480,16 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @override */
   async _onDropActor(event, actor) {
     const canPolymorph = game.user.isGM || (this.actor.isOwner && game.settings.get("dnd5e", "allowPolymorphing"));
-    if ( !canPolymorph || (this._tabs[0].active === "bastion") ) return;
+    if ( !canPolymorph || (this.tabGroups.primary === "bastion") ) return;
 
-    // Define a function to record polymorph settings for future use
-    const rememberOptions = html => {
-      const options = {};
-      html.find("input").each((i, el) => {
-        options[el.name] = el.checked;
-      });
-      const settings = foundry.utils.mergeObject(game.settings.get("dnd5e", "polymorphSettings") ?? {}, options);
-      game.settings.set("dnd5e", "polymorphSettings", settings);
-      return settings;
-    };
+    // Configure the transformation
+    const settings = await TransformDialog.promptSettings(this.actor, actor, {
+      transform: { settings: game.settings.get("dnd5e", "transformationSettings") }
+    });
+    if ( !settings ) return;
+    await game.settings.set("dnd5e", "transformationSettings", settings.toObject());
 
-    // Create and render the Dialog
-    return new Dialog({
-      title: game.i18n.localize("DND5E.PolymorphPromptTitle"),
-      content: {
-        options: game.settings.get("dnd5e", "polymorphSettings"),
-        settings: CONFIG.DND5E.polymorphSettings,
-        effectSettings: CONFIG.DND5E.polymorphEffectSettings,
-        isToken: this.actor.isToken
-      },
-      default: "accept",
-      buttons: {
-        accept: {
-          icon: '<i class="fas fa-check"></i>',
-          label: game.i18n.localize("DND5E.PolymorphAcceptSettings"),
-          callback: html => this.actor.transformInto(actor, rememberOptions(html))
-        },
-        wildshape: {
-          icon: CONFIG.DND5E.transformationPresets.wildshape.icon,
-          label: CONFIG.DND5E.transformationPresets.wildshape.label,
-          callback: html => this.actor.transformInto(actor, foundry.utils.mergeObject(
-            CONFIG.DND5E.transformationPresets.wildshape.options,
-            { transformTokens: rememberOptions(html).transformTokens }
-          ))
-        },
-        polymorph: {
-          icon: CONFIG.DND5E.transformationPresets.polymorph.icon,
-          label: CONFIG.DND5E.transformationPresets.polymorph.label,
-          callback: html => this.actor.transformInto(actor, foundry.utils.mergeObject(
-            CONFIG.DND5E.transformationPresets.polymorph.options,
-            { transformTokens: rememberOptions(html).transformTokens }
-          ))
-        },
-        self: {
-          icon: CONFIG.DND5E.transformationPresets.polymorphSelf.icon,
-          label: CONFIG.DND5E.transformationPresets.polymorphSelf.label,
-          callback: html => this.actor.transformInto(actor, foundry.utils.mergeObject(
-            CONFIG.DND5E.transformationPresets.polymorphSelf.options,
-            { transformTokens: rememberOptions(html).transformTokens }
-          ))
-        },
-        cancel: {
-          icon: '<i class="fas fa-times"></i>',
-          label: game.i18n.localize("Cancel")
-        }
-      }
-    }, {
-      classes: ["dialog", "dnd5e", "polymorph"],
-      width: 900,
-      template: "systems/dnd5e/templates/apps/polymorph-prompt.hbs"
-    }).render(true);
+    return this.actor.transformInto(actor, settings);
   }
 
   /* -------------------------------------------- */
@@ -1840,5 +1765,16 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   canExpand(item) {
     return !["class", "subclass"].includes(item.type);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Control whether the restore transformation button is visible.
+   * @this {BaseActorSheet}
+   * @returns {boolean}
+   */
+  static #canRestoreTransformation() {
+    return this.isEditable && this.actor.isPolymorphed;
   }
 }

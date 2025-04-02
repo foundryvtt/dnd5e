@@ -228,13 +228,6 @@ export default class NPCActorSheet extends BaseActorSheet {
       return obj;
     }, {});
 
-    // Organize Features
-    for ( const item of context.itemCategories.features ?? [] ) {
-      if ( item.type === "weapon" ) sections.weapons.items.push(item);
-      else if ( item.system.activities?.size ) sections.actions.items.push(item);
-      else sections.passive.items.push(item);
-    }
-
     context.filters = [
       { key: "action", label: "DND5E.Action" },
       { key: "bonus", label: "DND5E.BonusAction" },
@@ -243,6 +236,7 @@ export default class NPCActorSheet extends BaseActorSheet {
       { key: "lair", label: "DND5E.LAIR.Action.Label" }
     ];
     context.sections = Object.values(sections);
+    context.sections[0].items = context.itemCategories.features ?? [];
 
     return context;
   }
@@ -319,12 +313,8 @@ export default class NPCActorSheet extends BaseActorSheet {
       };
       return obj;
     }, {});
-
-    for ( const item of context.itemCategories.inventory ?? [] ) {
-      sections[item.type]?.items.push(item);
-    }
-
     context.sections = Object.values(sections);
+    context.sections[0].items = context.itemCategories.inventory ?? [];
     return context;
   }
 
@@ -555,14 +545,20 @@ export default class NPCActorSheet extends BaseActorSheet {
 
   /** @override */
   _showConfiguration(event, target) {
+    let app;
     const config = { document: this.actor };
     switch ( target.dataset.config ) {
       case "habitat":
-        return new HabitatConfig(config).render({ force: true });
+        app = new HabitatConfig(config);
+        break;
       case "treasure":
-        return new TreasureConfig(config).render({ force: true });
+        app = new TreasureConfig(config);
+        break;
     }
-    return false;
+    if ( app ) {
+      app.render({ force: true });
+      return false;
+    }
   }
 
   /* -------------------------------------------- */
