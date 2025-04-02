@@ -29,7 +29,7 @@ export default function DragDropApplicationMixin(Base) {
      * @returns {DropEffectValue}
      */
     _dropBehavior(event, data) {
-      data ??= DragDrop.getPayload(event);
+      data ??= DragDrop5e.getPayload(event);
       const allowed = this._allowedDropBehaviors(event, data);
       let behavior = DragDrop5e.dropEffect ?? event.dataTransfer?.dropEffect;
 
