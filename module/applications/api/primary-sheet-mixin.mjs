@@ -265,6 +265,7 @@ export default function PrimarySheetMixin(Base) {
 
       // Create child button
       const button = document.createElement("button");
+      button.type = "button";
       button.ariaLabel = game.i18n.localize("CONTROLS.CommonCreate");
       button.classList.add("create-child", "gold-button", "always-interactive");
       button.dataset.action = "addDocument";
