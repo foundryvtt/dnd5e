@@ -101,7 +101,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
-    new DragDrop({
+    new CONFIG.ux.DragDrop({
       dragSelector: ".draggable",
       dropSelector: null,
       callbacks: {
