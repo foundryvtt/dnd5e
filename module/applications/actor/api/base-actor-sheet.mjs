@@ -706,6 +706,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Preparation warnings
     const warnings = document.createElement("button");
+    warnings.type = "button";
     warnings.classList.add(
       "header-control", "preparation-warnings", "icon", "fa-solid", "fa-triangle-exclamation"
     );
@@ -1172,7 +1173,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const dialog = this.form.querySelector("dialog.warnings");
     Object.assign(dialog.style, { top: `${top + height}px`, left: `${Math.min(left - 16, clientWidth - 300)}px` });
     dialog.showModal();
-    dialog.addEventListener("click", e => dialog.close(), { once: true });
+    dialog.addEventListener("click", () => dialog.close(), { once: true });
   }
 
   /* -------------------------------------------- */

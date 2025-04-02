@@ -71,7 +71,7 @@
 
     nav.tabs {
       --tab-full-width: 44px;
-      --tab-inactive-width: 34px;
+      --tab-inactive-width: 38px;
       position: absolute;
       display: flex;
       flex-direction: column;
@@ -94,7 +94,10 @@
 
         &:not([hidden]) { display: flex; }
 
-        i { font-size: var(--font-size-14); }
+        i {
+          font-size: var(--font-size-14);
+          margin: 0;
+        }
 
         &.active, &:hover {
           text-shadow: none;
@@ -959,6 +962,7 @@
     var(--dnd5e-color-parchment);
   border: var(--dnd5e-border-gold);
   color: var(--color-text-dark-primary);
+  line-height: normal;
 
   &:not(.minimized) .window-header {
     position: relative;
@@ -1027,6 +1031,7 @@
     }
 
     dnd5e-icon.window-icon { display: block; }
+    slide-toggle { transform: scale(.9); }
   }
 
   .window-content {
@@ -1100,7 +1105,7 @@
       &.active {
         color: var(--color-text-dark-primary);
         text-shadow: none;
-        label { border-bottom: 3px solid var(--dnd5e-color-gold); }
+        label, span { border-bottom: 3px solid var(--dnd5e-color-gold); }
       }
     }
 
