@@ -358,21 +358,21 @@ export default function PrimarySheetMixin(Base) {
      * @param {HTMLElement} target  Button that was clicked.
      */
     static async #deleteDocument(event, target) {
-      if ( await this._deleteDocument(event, target) !== false ) return;
-      const uuid = target.closest("[data-uuid]").dataset?.uuid;
+      if ( await this._deleteDocument(event, target) === false ) return;
+      const uuid = target.closest("[data-uuid]")?.dataset.uuid;
       const doc = await fromUuid(uuid);
       doc?.deleteDialog();
     }
+
+    /* -------------------------------------------- */
 
     /**
      * Handle removing an document.
      * @param {Event} event         Triggering click event.
      * @param {HTMLElement} target  Button that was clicked.
-     * @returns {any}               Return `false` to continue with base sheet's options.
+     * @returns {any}               Return `false` to prevent default behavior.
      */
-    async _deleteDocument(event, target) {
-      return false;
-    }
+    async _deleteDocument(event, target) {}
 
     /* -------------------------------------------- */
 
@@ -433,22 +433,22 @@ export default function PrimarySheetMixin(Base) {
      * @param {HTMLElement} target  Button that was clicked.
      */
     static async #showDocument(event, target) {
-      if ( await this._showDocument(event, target) !== false ) return;
+      if ( await this._showDocument(event, target) === false ) return;
       const uuid = target.closest("[data-uuid]")?.dataset.uuid;
       const doc = await fromUuid(uuid);
       const mode = target.dataset.action === "showDocument" ? "PLAY" : "EDIT";
-      doc?.sheet?.render({ force: true, mode: ItemSheet5e2.MODES[mode] });
+      doc?.sheet?.render({ force: true, mode: ItemSheet5e.MODES[mode] });
     }
+
+    /* -------------------------------------------- */
 
     /**
      * Handle opening a document sheet.
      * @param {Event} event         Triggering click event.
      * @param {HTMLElement} target  Button that was clicked.
-     * @returns {any}               Return `false` to continue with base sheet's options.
+     * @returns {any}               Return `false` to prevent default behavior.
      */
-    async _showDocument(event, target) {
-      return false;
-    }
+    async _showDocument(event, target) {}
 
     /* -------------------------------------------- */
     /*  Drag & Drop                                 */

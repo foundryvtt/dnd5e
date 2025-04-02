@@ -550,7 +550,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       onOpen: target => dnd5e.documents.activity.UtilityActivity.onContextMenu(this.item, target), jQuery: false
     });
 
-    new DragDrop({
+    new CONFIG.ux.DragDrop({
       dragSelector: ":is(.advancement-item, [data-activity-id], [data-effect-id], [data-item-id])",
       dropSelector: null,
       callbacks: {
