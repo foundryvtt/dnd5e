@@ -344,6 +344,14 @@
             {{/with}}
         </div>
 
+        {{#if isNPC}}
+        {{!-- Child Creation --}}
+        <button type="button" class="create-child gold-button" data-action="addDocument"
+                aria-label="{{ "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
+            <i class="fas fa-plus"></i>
+        </button>
+        {{/if}}
+
     </div>
     {{/if}}
 </{{ elements.inventory }}>

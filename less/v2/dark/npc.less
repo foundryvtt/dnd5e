@@ -9,13 +9,12 @@
     border-radius: 5px 5px 0 0;
     opacity: .2;
     background: url("ui/official/banner-npc-dark.webp") no-repeat top center / cover;
-    -webkit-mask-image: linear-gradient(to bottom, black, transparent);
     mask-image: linear-gradient(to bottom, black, transparent);
   }
 
   &.editable .sheet-header {
     .document-name,
-    .labels :is(.creature-size select, .creature-type a, .creature-alignment input),
+    .labels :is(.creature-size select, .creature-type button, .creature-alignment input),
     > .left label.slide-toggle {
       background: rgb(0 0 0 / 45%);
     }
