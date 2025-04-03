@@ -605,7 +605,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
     }
 
     if ( this.tabGroups.primary === "advancement" ) {
-      return dnd5e.applications.advancement.AdvancementSelection.createDialog({}, { parent: this.item });
+      return dnd5e.documents.advancement.Advancement.createDialog({}, { parent: this.item });
     }
 
     if ( this.tabGroups.primary === "effects" ) {
