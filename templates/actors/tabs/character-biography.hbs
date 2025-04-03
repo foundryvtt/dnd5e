@@ -45,7 +45,7 @@
         </h3>
         {{#if editable}}
         <prose-mirror name="system.details.biography.value" value="{{ source.details.biography.value }}"
-                      document-u-u-i-d="{{ actor.uuid }}"></prose-mirror>
+                      document-uuid="{{ actor.uuid }}"></prose-mirror>
         {{else}}
         <div class="editor">
             <div class="editor-content">{{{ enriched.value }}}</div>

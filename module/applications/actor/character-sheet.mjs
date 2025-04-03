@@ -1029,6 +1029,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
     this._toggleDeathTray();
   }
 
+  /* -------------------------------------------- */
+
   /**
    * Toggle the death save tray.
    * @param {boolean} [open]  Force a particular open state.
