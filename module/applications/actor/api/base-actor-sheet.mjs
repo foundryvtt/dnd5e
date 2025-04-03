@@ -80,7 +80,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         {
           action: "restoreTransformation",
           icon: "fa-solid fa-backward",
-          label: "ND5E.TRANSFORM.Action.Restore",
+          label: "DND5E.TRANSFORM.Action.Restore",
           ownership: "OWNER",
           visible: BaseActorSheet.#canRestoreTransformation
         }
