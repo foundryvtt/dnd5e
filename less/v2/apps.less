@@ -468,6 +468,7 @@
       background: none;
       box-shadow: none;
       color: var(--dnd5e-color-red);
+      text-shadow: 0 0 8px var(--color-shadow-primary);
     }
   }
 
@@ -1625,13 +1626,19 @@ dialog.dnd5e2.application {
       grid-template-columns: subgrid;
     }
     .name { grid-column: name; }
+    .trait-list { gap: 4px; }
     .proficiency {
       grid-column: proficiency;
-      text-align: end;
+      display: flex;
+      justify-content: end;
+      align-items: center;
     }
     li {
       align-items: center;
-      &:not(:last-of-type) { border-bottom: var(--dnd5e-border-dotted); }
+      &:not(:last-of-type) {
+        border-bottom: var(--dnd5e-border-dotted);
+        padding-bottom: 4px;
+      }
       &.category { gap: 4px; }
       li {
         position: relative;
@@ -1668,9 +1675,12 @@ dialog.dnd5e2.application {
 .dnd5e2.weapons.trait-selector {
   .traits {
     grid-template-columns: [name] 2fr [proficiency] 1fr [mastery] 1fr;
+    .header .proficiency i { margin-right: 2px; }
     .mastery {
       grid-column: mastery;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
