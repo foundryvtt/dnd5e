@@ -5,13 +5,18 @@
 .dnd5e2.sheet.actor.npc {
   --dnd5e-sheet-header-height: 68px;
   --dnd5e-sheet-sidebar-width: 180px;
-  min-width: 700px;
-  min-height: 700px;
-  box-shadow: none;
+
+  background: url("ui/texture1.webp") no-repeat top center / auto 770px,
+    var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
 
   &.minimized {
     box-shadow: 0 0 20px var(--color-shadow-dark);
     .window-header .header-elements { display: none; }
+    .window-content { display: none; }
+  }
+  &:not(.minimized, .minimizing, .maximizing) {
+    min-width: 700px;
+    min-height: 700px;
   }
 
   /* ---------------------------------- */
@@ -27,7 +32,6 @@
     display: flex;
     align-items: center;
     line-height: 1;
-    margin-top: 6px;
     gap: 4px;
 
     > div:has(> span:not(:empty)) + div:not(:empty)::before { content: " • "; }
@@ -53,13 +57,12 @@
   }
 
   .window-content {
-    background: url("ui/texture1.webp") no-repeat top center / auto 770px,
-      var(--dnd5e-color-parchment) url("ui/texture2.webp") no-repeat bottom center / auto 704px;
-
-    > form {
-      display: flex;
-      flex-direction: column;
-    }
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    padding-block: 4px 0;
+    gap: 0;
+    margin-top: -26px;
   }
 
   /* ---------------------------------- */
@@ -68,8 +71,9 @@
 
   .sheet-header {
     gap: 12px;
-    padding: 38px 12px 0;
+    padding-inline: 12px;
     align-items: stretch;
+    z-index: 1;
 
     > .left { flex: 0 0 var(--dnd5e-sheet-sidebar-width); }
 
@@ -120,6 +124,11 @@
         color: var(--color-text-light-0);
         border: 2px solid var(--dnd5e-color-gold);
         clip-path: polygon(48.5% 0, 91% 25%, 92% 75%, 49% 100%, 6% 75%, 7% 25%);
+
+        .config-button {
+          color: inherit;
+          font-size: inherit;
+        }
       }
 
       .initiative-score {
@@ -562,6 +571,7 @@
     overflow: hidden auto;
     scrollbar-gutter: stable;
     scrollbar-color: var(--dnd5e-color-gold) transparent;
+    mask-image: linear-gradient(to bottom, transparent, black 8px);
 
     .main-content {
       --sidebar-padding: 8px;
@@ -593,12 +603,12 @@
         flex: 0 0 var(--dnd5e-sheet-sidebar-width);
         display: flex;
         flex-direction: column;
-        gap: 8px;
+        gap: 12px;
         transition: margin-left 450ms ease;
 
         .pills-group {
           h3.icon {
-            padding-bottom: 0;
+            padding-bottom: 2px;
             margin-bottom: 4px;
 
             > i, > span { font-size: var(--font-size-11); }
@@ -624,10 +634,10 @@
           padding: 8px 4px 8px 16px;
           gap: 8px;
 
-          &.spells, &.biography { flex-direction: column; }
+          &[data-tab="spells"], &[data-tab="biography"] { flex-direction: column; }
           &:not(.active) { display: none; }
 
-          &:not(.biography, .inventory) {
+          &:not([data-tab="biography"], [data-tab="inventory"], [data-tab="specialTraits"]) {
             // enough room that the "create new" button doesn't overlap when scrolled all the way down
             padding-bottom: calc(1.5rem + 30px);
           }
@@ -636,6 +646,7 @@
 
       /* Inventory */
       .inventory-element {
+        flex: 1;
         width: 100%;
 
         .spells-list { gap: 12px; }
@@ -646,9 +657,10 @@
           bottom: 0;
           margin-top: auto;
           display: flex;
-          gap: 8px;
+          gap: 6px;
 
           .encumbrance {
+            block-size: 28px;
             border: var(--dnd5e-border-gold);
             border-radius: 3px;
             box-shadow: 0 0 6px var(--dnd5e-shadow-45);
@@ -686,6 +698,7 @@
         }
 
         select {
+          width: unset;
           border: none;
           background: none;
 
@@ -717,7 +730,7 @@
       }
 
       /* Biography */
-      .tab.biography {
+      [data-tab="biography"] {
         .top {
           display: flex;
           align-items: stretch;
@@ -729,13 +742,10 @@
           position: relative;
 
           .editor-edit {
-            background: transparent;
-            border: none;
-            box-shadow: none;
+            position: absolute;
             inset: auto auto -3px 100%;
             font-size: var(--font-size-18);
             color: var(--color-text-dark-primary);
-            padding: 0;
           }
         }
 
@@ -748,19 +758,22 @@
   /*  Child Creation                    */
   /* ---------------------------------- */
 
-  form.tab-inventory > .create-child { display: none; }
+  &.tab-inventory .window-content > .create-child { display: none; }
 
   /* ---------------------------------- */
   /*  Edit Mode                         */
   /* ---------------------------------- */
 
-  form.editable {
+  &.editable {
     .sheet-header {
       .labels, > .left {
         color: var(--color-text-dark-primary);
 
         li + li::before { content: "" }
-        > li { flex: 1; }
+        > li {
+          flex: 1;
+          margin: 0;
+        }
 
         li.creature-size {
           display: grid;
@@ -770,7 +783,7 @@
           }
         }
 
-        li.creature-type > a, label.slide-toggle {
+        li.creature-type > button, label.slide-toggle {
           width: 100%;
           height: 100%;
           display: flex;
@@ -788,6 +801,12 @@
             text-shadow: none;
           }
         }
+        li.creature-type > button {
+          color: inherit;
+          font-family: inherit;
+          font-weight: inherit;
+          text-transform: inherit;
+        }
 
         label.slide-toggle {
           font-family: var(--dnd5e-font-roboto-condensed);
@@ -800,6 +819,7 @@
         width: 45px;
         text-align: center;
         font-size: var(--font-size-18);
+        border-color: transparent;
 
         &:hover, &:focus {
           border-color: transparent;
@@ -811,6 +831,7 @@
         padding-inline-end: 6px;
 
         .config-button {
+          color: inherit;
           font-size: var(--font-size-10);
           margin-left: auto;
         }
@@ -826,7 +847,7 @@
   /*  Collapsed                         */
   /* ---------------------------------- */
 
-  form.collapsed {
+  &.sidebar-collapsed {
     .sheet-body .main-content .sidebar-collapser { left: 0; }
     .sidebar { margin-left: calc(var(--sidebar-size) * -1); }
   }

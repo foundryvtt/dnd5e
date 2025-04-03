@@ -1,39 +1,39 @@
-import * as Trait from "../../documents/actor/trait.mjs";
-import Item5e from "../../documents/item.mjs";
-import { defaultUnits, formatLength, splitSemicolons } from "../../utils.mjs";
-import EffectsElement from "../components/effects.mjs";
-import MovementSensesConfig from "../shared/movement-senses-config.mjs";
-import CreatureTypeConfig from "../shared/creature-type-config.mjs";
+import * as Trait from "../../../documents/actor/trait.mjs";
+import Item5e from "../../../documents/item.mjs";
+import { defaultUnits, formatLength, splitSemicolons } from "../../../utils.mjs";
+import EffectsElement from "../../components/effects.mjs";
+import MovementSensesConfig from "../../shared/movement-senses-config.mjs";
+import CreatureTypeConfig from "../../shared/creature-type-config.mjs";
 
-import SourceConfig from "../source-config.mjs";
+import SourceConfig from "../../source-config.mjs";
 
-import AdvancementConfirmationDialog from "../advancement/advancement-confirmation-dialog.mjs";
-import AdvancementManager from "../advancement/advancement-manager.mjs";
+import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
+import AdvancementManager from "../../advancement/advancement-manager.mjs";
 
 import ActorSheetMixin from "./sheet-mixin.mjs";
-import TransformDialog from "./transform-dialog.mjs";
+import TransformDialog from "../transform-dialog.mjs";
 
-import AbilityConfig from "./config/ability-config.mjs";
-import ArmorClassConfig from "./config/armor-class-config.mjs";
-import ConcentrationConfig from "./config/concentration-config.mjs";
-import DeathConfig from "./config/death-config.mjs";
-import DamagesConfig from "./config/damages-config.mjs";
-import HabitatConfig from "./config/habitat-config.mjs";
-import HitDiceConfig from "./config/hit-dice-config.mjs";
-import HitPointsConfig from "./config/hit-points-config.mjs";
-import InitiativeConfig from "./config/initiative-config.mjs";
-import LanguagesConfig from "./config/languages-config.mjs";
-import SkillToolConfig from "./config/skill-tool-config.mjs";
-import SkillsConfig from "./config/skills-config.mjs";
-import SpellSlotsConfig from "./config/spell-slots-config.mjs";
-import ToolsConfig from "./config/tools-config.mjs";
-import TraitsConfig from "./config/traits-config.mjs";
-import TreasureConfig from "./config/treasure-config.mjs";
-import WeaponsConfig from "./config/weapons-config.mjs";
+import AbilityConfig from "../config/ability-config.mjs";
+import ArmorClassConfig from "../config/armor-class-config.mjs";
+import ConcentrationConfig from "../config/concentration-config.mjs";
+import DeathConfig from "../config/death-config.mjs";
+import DamagesConfig from "../config/damages-config.mjs";
+import HabitatConfig from "../config/habitat-config.mjs";
+import HitDiceConfig from "../config/hit-dice-config.mjs";
+import HitPointsConfig from "../config/hit-points-config.mjs";
+import InitiativeConfig from "../config/initiative-config.mjs";
+import LanguagesConfig from "../config/languages-config.mjs";
+import SkillToolConfig from "../config/skill-tool-config.mjs";
+import SkillsConfig from "../config/skills-config.mjs";
+import SpellSlotsConfig from "../config/spell-slots-config.mjs";
+import ToolsConfig from "../config/tools-config.mjs";
+import TraitsConfig from "../config/traits-config.mjs";
+import TreasureConfig from "../config/treasure-config.mjs";
+import WeaponsConfig from "../config/weapons-config.mjs";
 
 /**
- * @import { DropEffectValue } from "../../drag-drop.mjs"
- * @import { FilterState5e } from "../components/item-list-controls.mjs";
+ * @import { DropEffectValue } from "../../../drag-drop.mjs"
+ * @import { FilterState5e } from "../../components/item-list-controls.mjs";
  */
 
 /**
@@ -41,6 +41,13 @@ import WeaponsConfig from "./config/weapons-config.mjs";
  * @abstract
  */
 export default class ActorSheet5e extends ActorSheetMixin(foundry.appv1?.sheets?.ActorSheet ?? ActorSheet) {
+  constructor(...args) {
+    foundry.utils.logCompatibilityWarning(
+      "The `ActorSheet5e` application has been deprecated and replaced with `BaseActorSheet`.",
+      { since: "DnD5e 5.0", until: "DnD5e 5.2", once: true }
+    );
+    super(...args);
+  }
 
   /**
    * Track the set of item filters which are applied

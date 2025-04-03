@@ -5,7 +5,7 @@
   /*  Outer Window                      */
   /* ---------------------------------- */
 
-  > header {
+  &:where(:not(.minimized)) > header {
     background: transparent;
     position: relative;
     z-index: 1;
@@ -38,13 +38,18 @@
   }
   &.minimized slide-toggle { display: none; }
 
-  .window-content { margin-top: -30px; }
+  .window-content {
+    margin-top: -30px;
+    padding-inline: 0;
+  }
 
   /* ---------------------------------- */
   /*  Sheet Header                      */
   /* ---------------------------------- */
 
   .sheet-header {
+    display: flex;
+
     input, select {
       --input-placeholder-color: var(--color-text-light-6);
       --input-height: var(--form-field-height, 26px);
@@ -115,8 +120,9 @@
     inset: auto 16px 16px auto;
   }
   &.standard-form .create-child {
-    height: 30px;
-    line-height: normal;
+    height: 28px;
+    width: 28px;
+    line-height: 24px;
   }
 
   form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities) .create-child,

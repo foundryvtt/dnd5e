@@ -71,7 +71,7 @@
 
     nav.tabs {
       --tab-full-width: 44px;
-      --tab-inactive-width: 34px;
+      --tab-inactive-width: 38px;
       position: absolute;
       display: flex;
       flex-direction: column;
@@ -94,7 +94,10 @@
 
         &:not([hidden]) { display: flex; }
 
-        i { font-size: var(--font-size-14); }
+        i {
+          font-size: var(--font-size-14);
+          margin: 0;
+        }
 
         &.active, &:hover {
           text-shadow: none;
@@ -111,7 +114,9 @@
       }
 
       &.tabs-left {
+        contain: content;
         right: 100%;
+        align-items: flex-end;
 
         > .item {
           padding-inline-start: 12px;
@@ -130,7 +135,9 @@
       }
 
       &.tabs-right {
+        contain: content;
         left: 100%;
+        align-items: flex-start;
 
         > .item {
           padding-inline-end: 12px;
@@ -186,6 +193,7 @@
         border: none;
         margin: 0;
         padding: .5rem;
+        color: inherit;
         font-family: var(--dnd5e-font-roboto-slab);
         font-size: var(--font-size-13);
         font-weight: bold;
@@ -273,7 +281,7 @@
         --icon-fill: var(--color-text-dark-primary);
       }
 
-      > a {
+      > a, > button {
         margin-left: auto;
         font-size: var(--font-size-12);
         color: var(--color-text-light-6);
@@ -954,6 +962,7 @@
     var(--dnd5e-color-parchment);
   border: var(--dnd5e-border-gold);
   color: var(--color-text-dark-primary);
+  line-height: normal;
 
   &:not(.minimized) .window-header {
     position: relative;
@@ -1022,6 +1031,7 @@
     }
 
     dnd5e-icon.window-icon { display: block; }
+    slide-toggle { transform: scale(.9); }
   }
 
   .window-content {
@@ -1068,7 +1078,7 @@
     }
     > section:empty { display: none; }
   }
-  &:not(.minimized) .window-content, .window-content > .column-container {
+  &:where(:not(.minimized)) .window-content, .window-content > .column-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -1095,7 +1105,7 @@
       &.active {
         color: var(--color-text-dark-primary);
         text-shadow: none;
-        label { border-bottom: 3px solid var(--dnd5e-color-gold); }
+        label, span { border-bottom: 3px solid var(--dnd5e-color-gold); }
       }
     }
 
@@ -1799,7 +1809,13 @@ dialog.dnd5e2.application {
 
       &:hover { background: var(--dnd5e-color-parchment); }
       .icon { display: grid; }
-      > i { font-size: unset; }
+
+      > i {
+        --content-link-icon-color: currentcolor;
+        font-size: unset;
+        margin: 0;
+        line-height: normal;
+      }
 
       .name-stacked {
         flex: 1;

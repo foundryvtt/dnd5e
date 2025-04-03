@@ -5,7 +5,7 @@ import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import SheetConfig5e from "../sheet-config.mjs";
 import ActorSheet5eCharacter from "./character-sheet.mjs";
-import ActorSheetV2Mixin from "./sheet-v2-mixin.mjs";
+import ActorSheetV2Mixin from "./deprecated/sheet-v2-mixin.mjs";
 
 /**
  * An Actor sheet for player character type actors.

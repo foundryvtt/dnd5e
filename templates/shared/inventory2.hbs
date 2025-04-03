@@ -45,7 +45,7 @@
         {{!-- Containers --}}
         <ul class="containers unlist">
             {{#each containers}}
-            <li class="container" data-item-id="{{ id }}">
+            <li class="container draggable" data-item-id="{{ id }}">
                 <a class="item-action" data-action="view" data-tooltip="{{ name }}" aria-label="{{ name }}">
                     {{#dnd5e-itemContext this as |ctx|}}
                     {{#with ctx.capacity}}
@@ -143,7 +143,7 @@
                     data-entry-id="{{ item.id }}" data-item-name="{{ item.name }}" data-item-sort="{{ item.sort }}"
                     data-ungrouped="all" data-grouped="{{ item.type }}" data-uuid="{{ item.uuid }}">
 
-                    <div class="item-row">
+                    <div class="item-row draggable">
 
                         {{!-- Item Name --}}
                         <div class="item-name item-action item-tooltip {{ @root.rollableClass }}" role="button"
@@ -344,11 +344,13 @@
             {{/with}}
         </div>
 
+        {{#if isNPC}}
         {{!-- Child Creation --}}
-        <button type="button" class="create-child gold-button"
+        <button type="button" class="create-child gold-button" data-action="addDocument"
                 aria-label="{{ "SIDEBAR.Create" type=(localize "DOCUMENT.Item") }}">
             <i class="fas fa-plus"></i>
         </button>
+        {{/if}}
 
     </div>
     {{/if}}

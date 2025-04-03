@@ -249,6 +249,7 @@
     font-family: var(--dnd5e-font-roboto);
     font-size: var(--font-size-12);
     padding: .375rem;
+    width: 100%;
     height: 60px;
     scrollbar-width: thin;
     scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
@@ -340,7 +341,7 @@
   /*  Locked                            */
   /* ---------------------------------- */
 
-  form.locked {
+  &.locked {
     .meter.sectioned > .hit-points { cursor: default; }
   }
 }
