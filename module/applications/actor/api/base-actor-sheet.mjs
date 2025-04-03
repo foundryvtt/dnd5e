@@ -1,6 +1,6 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
 import Item5e from "../../../documents/item.mjs";
-import { formatLength, getPluralRules, splitSemicolons, staticID } from "../../../utils.mjs";
+import { formatLength, formatNumber, getPluralRules, splitSemicolons, staticID } from "../../../utils.mjs";
 
 import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../../advancement/advancement-manager.mjs";
@@ -152,12 +152,14 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       elements: this.options.elements,
       fields: this.actor.system.schema.fields,
       labels: {
-        damageAndHealing: { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes }
+        damageAndHealing: { ...CONFIG.DND5E.damageTypes, ...CONFIG.DND5E.healingTypes },
+        ...this.actor.labels
       },
       modernRules: this.actor.system.source?.rules
         ? this.actor.system.source.rules === "2024"
         : game.settings.get("dnd5e", "rulesVersion") === "modern",
       rollableClass: this.isEditable ? "rollable" : "",
+      sidebarCollapsed: !!game.user.getFlag("dnd5e", this._sidebarCollapsedKeyPath),
       system: this.actor.system,
       user: game.user,
       warnings: foundry.utils.deepClone(this.actor._preparationWarnings)
@@ -262,7 +264,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   async _prepareSpecialTraitsContext(context, options) {
     const sections = [];
-    const source = context.editable ? this.document : this.document._source;
+    const source = context.editable ? this.document._source : this.document;
     const flags = context.flags = {
       classes: Object.values(this.document.classes)
         .map(cls => ({ value: cls.id, label: cls.name }))
@@ -815,6 +817,16 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   async _prepareItemFeature(item, ctx) {
+    // Classes & Subclasses
+    if ( ["class", "subclass"].includes(item.type) ) {
+      ctx.prefixedImage = item.img ? foundry.utils.getRoute(item.img) : null;
+      if ( item.type === "class" ) ctx.availableLevels = Array.fromRange(CONFIG.DND5E.maxLevel, 1).map(level => {
+        const value = level - item.system.levels;
+        const label = value ? `${level} (${formatNumber(value, { signDisplay: "always" })})` : `${level}`;
+        return { label, value, disabled: value > (CONFIG.DND5E.maxLevel - (this.actor.system.details?.level ?? 0)) };
+      });
+    }
+
     ctx.subtitle = [item.system.type?.label, item.isActive ? item.labels.activation : null].filterJoin(" &bull; ");
   }
 
