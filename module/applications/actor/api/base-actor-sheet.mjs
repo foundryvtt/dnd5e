@@ -264,7 +264,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   async _prepareSpecialTraitsContext(context, options) {
     const sections = [];
-    const source = context.editable ? this.document : this.document._source;
+    const source = context.editable ? this.document._source : this.document;
     const flags = context.flags = {
       classes: Object.values(this.document.classes)
         .map(cls => ({ value: cls.id, label: cls.name }))
