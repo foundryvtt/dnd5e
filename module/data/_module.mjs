@@ -10,6 +10,7 @@ export * as chatMessage from "./chat-message/_module.mjs";
 export * as collection from "./collection/_module.mjs";
 export * as item from "./item/_module.mjs";
 export * as journal from "./journal/_module.mjs";
+export * as regionBehavior from "./region-behavior/_module.mjs";
 export * as settings from "./settings/_module.mjs";
 export * as shared from "./shared/_module.mjs";
 export * as user from "./user/_module.mjs";
