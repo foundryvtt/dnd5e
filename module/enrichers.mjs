@@ -1294,6 +1294,7 @@ async function applyAction(event) {
   const status = target?.dataset.status;
   if ( !status ) return;
   event.stopPropagation();
+  window.getSelection().empty();
   const actors = new Set();
   for ( const { actor } of canvas.tokens.controlled ) {
     if ( !actor || actors.has(actor) ) continue;
@@ -1314,6 +1315,7 @@ async function awardAction(event) {
   const command = target?.closest("[data-award-command]")?.dataset.awardCommand;
   if ( !command ) return;
   event.stopPropagation();
+  window.getSelection().empty();
   Award.handleAward(command);
 }
 
@@ -1328,6 +1330,7 @@ async function rollAction(event) {
   const target = event.target.closest('.roll-link-group, [data-action="rollRequest"], [data-action="concentration"]');
   if ( !target ) return;
   event.stopPropagation();
+  window.getSelection().empty();
 
   const dataset = {
     ...((event.target.closest(".roll-link-group") ?? target)?.dataset ?? {}),
