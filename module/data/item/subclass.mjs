@@ -30,7 +30,7 @@ export default class SubclassData extends ItemDataModel.mixin(ItemDescriptionTem
     return this.mergeSchema(super.defineSchema(), {
       advancement: new ArrayField(new AdvancementField(), { label: "DND5E.AdvancementTitle" }),
       classIdentifier: new IdentifierField({
-        required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint"
+        required: true, label: "DND5E.ClassIdentifier", hint: "DND5E.ClassIdentifierHint", types: ["class"]
       }),
       spellcasting: new SpellcastingField()
     });
