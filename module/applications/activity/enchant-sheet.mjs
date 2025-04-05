@@ -64,6 +64,7 @@ export default class EnchantSheet extends ActivitySheet {
     const enchantableTypes = this.activity.enchantableTypes;
     context.typeOptions = [
       { value: "", label: game.i18n.localize("DND5E.ENCHANT.FIELDS.restrictions.type.Any") },
+      { rule: true },
       ...Object.keys(CONFIG.Item.dataModels)
         .filter(t => enchantableTypes.has(t))
         .map(value => ({ value, label: game.i18n.localize(CONFIG.Item.typeLabels[value]) }))
