@@ -134,8 +134,11 @@ Hooks.once("init", function() {
     DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
     delete DND5E.languages.exotic.children.druidic;
 
-    // Stunned stops movement in legacy.
+    // Stunned stops movement in legacy & surprised doesn't provide initiative disadvantage
     DND5E.conditionEffects.noMovement.add("stunned");
+    DND5E.conditionEffects.initiativeAdvantage.delete("invisible");
+    DND5E.conditionEffects.initiativeDisadvantage.delete("incapacitated");
+    DND5E.conditionEffects.initiativeDisadvantage.delete("surprised");
   }
 
   // Register Roll Extensions
