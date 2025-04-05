@@ -54,8 +54,8 @@ system:
     hp:
       value: 52
       max: 52
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 7d10 + 14
     init:
       ability: ''
@@ -576,8 +576,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1741121391002
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!GxgIVRX5GbVTifiF.wpqra38jsZPRAuov'
   - _id: OJ2b64O3e1nni21W
     name: Claw
@@ -586,10 +586,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (1d8 + 2) <em>bludgeoning
-          damage</em></strong>.</p><p>The target is grappled (escape DC 12). The
-          scorpion has two claws, each of which can grapple only one target.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
+          &amp;Reference[grappled] (escape DC 12). The scorpion has two claws,
+          each of which can grapple only one target.</p>
         chat: >-
           <p>The Giant Scorpion attacks with its Claw. The target is
           grappled.</p>
@@ -613,7 +612,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -731,9 +730,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
@@ -742,9 +742,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676659
+      modifiedTime: 1741121402908
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!GxgIVRX5GbVTifiF.OJ2b64O3e1nni21W'
   - _id: q6uVUHWyzht5OpwV
@@ -754,12 +754,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>7 (1d10 + 2) <em>piercing
-          damage</em></strong>.</p><p>The target must make a  <strong>DC 12
-          Constitution</strong> saving throw, taking <strong>22 (4d10)
-          <em>poison damage</em></strong> on a failed save, or half as much
-          damage on a successful one.</p>
+          <p>&amp;Reference[grappled]</p><p>The target must make a [[/save]]
+          saving throw, taking [[/damage average activity=dnd5eactivity100]]
+          damage on a failed save, or half as much damage on a successful
+          one.</p>
         chat: >-
           <p>The Giant Scorpion attacks with its Sting. The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -783,7 +781,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -916,7 +914,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -948,96 +946,46 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 1
-                denomination: 10
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                number: 4
+                denomination: '10'
+                bonus: ''
+                types:
+                  - poison
           save:
             ability: con
             dc:
               calculation: ''
               formula: '12'
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 4d10
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: sting
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676659
+      modifiedTime: 1741121453770
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!GxgIVRX5GbVTifiF.q6uVUHWyzht5OpwV'
 effects: []
@@ -1050,8 +998,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171218252
-  modifiedTime: 1726171442322
+  modifiedTime: 1741121465576
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!GxgIVRX5GbVTifiF'

@@ -54,8 +54,8 @@ system:
     hp:
       value: 19
       max: 19
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 3d10 + 3
     init:
       ability: ''
@@ -483,10 +483,7 @@ items:
     img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (1d8 + 2) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Axe Beak attacks with its Beak.</p>
       source:
         custom: ''
@@ -508,7 +505,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -626,6 +623,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: beak
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -637,9 +635,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676455
+      modifiedTime: 1741116927233
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!SXXvwaLBNuzBymp3.FsSMPLEC46UKCf7T'
 effects: []
@@ -652,8 +650,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171232558
-  modifiedTime: 1726171444937
+  modifiedTime: 1741116605497
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!SXXvwaLBNuzBymp3'

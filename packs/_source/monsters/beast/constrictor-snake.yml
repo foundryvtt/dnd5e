@@ -54,8 +54,8 @@ system:
     hp:
       value: 13
       max: 13
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d10 + 2
     init:
       ability: ''
@@ -483,10 +483,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>5 (1d6 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Constrictor Snake attacks with its Bite.</p>
       source:
         custom: ''
@@ -508,7 +505,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -626,6 +623,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -639,9 +637,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676684
+      modifiedTime: 1741117147873
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!UTuKdTah1DKfPwWe.hZOM2L6WMmk8QOfO'
   - _id: haXdYCAfGXo0iVqC
@@ -651,11 +649,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>6 (1d8 + 2) <em>bludgeoning
-          damage</em></strong>. The target is grappled (escape DC 14). Until
-          this grapple ends, the creature is restrained, and the snake can't
-          constrict another target.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
+          &amp;Reference[grappled] (escape DC 14). Until this grapple ends, the
+          creature is restrained, and the snake can't constrict another
+          target.</p>
         chat: >-
           <p>The Constrictor Snake attacks with its Constrict. The target is
           grappled. Until this grapple ends, the creature is restrained, and the
@@ -680,7 +677,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -798,6 +795,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: constrict
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -809,9 +807,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676684
+      modifiedTime: 1741124468636
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!UTuKdTah1DKfPwWe.haXdYCAfGXo0iVqC'
 effects: []
@@ -824,8 +822,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171234874
-  modifiedTime: 1726171445378
+  modifiedTime: 1741117185131
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!UTuKdTah1DKfPwWe'

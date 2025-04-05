@@ -54,8 +54,8 @@ system:
     hp:
       value: 7
       max: 7
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d6
     init:
       ability: ''
@@ -484,14 +484,12 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>3 (1d4 + 2) <em>piercing
-          damage</em></strong>.</p><p>If the target is a creature, it must
-          succeed on a  <strong>DC 10 Constitution</strong> saving throw or
-          contract a disease. Until the disease is cured, the target can't
-          regain hit points except by magical means, and the target's hit point
-          maximum decreases by 3 (1d6) every 24 hours. If the target's hit point
-          maximum drops to 0 as a result of this disease, the target dies.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a [[/save]] saving throw or contract a
+          disease. Until the disease is cured, the target can't regain hit
+          points except by magical means, and the target's hit point maximum
+          decreases by 3 (1d6) every 24 hours. If the target's hit point maximum
+          drops to 0 as a result of this disease, the target dies.</p>
         chat: >-
           <p>The Giant Rat (Diseased) attacks with its Bite. If the target is a
           creature, it must make a <strong>Constitution</strong> saving
@@ -516,7 +514,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -681,19 +679,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 1
-                denomination: 4
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -704,6 +690,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -712,14 +699,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676517
+      modifiedTime: 1741121382111
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!z0zvgcIugizwcuxJ.52m3BQ2wpXvT0jOM'
   - _id: uQpDpdmzlAyQKbRu
@@ -829,8 +820,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171266989
-  modifiedTime: 1726171452111
+  modifiedTime: 1741121387159
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!z0zvgcIugizwcuxJ'
