@@ -38,6 +38,8 @@ export default class AbilityConfig extends BaseProficiencyConfig {
       { value: 0, label: CONFIG.DND5E.proficiencyLevels[0] },
       { value: 1, label: CONFIG.DND5E.proficiencyLevels[1] }
     ];
+    context.checkLabel = game.i18n.format("DND5E.ABILITY.Configure.CheckLabel", { ability: context.label });
+    context.saveLabel = game.i18n.format("DND5E.ABILITY.Configure.SaveLabel", { ability: context.label });
     return context;
   }
 }
