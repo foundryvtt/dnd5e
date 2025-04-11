@@ -440,17 +440,15 @@ export class ItemDataModel extends SystemDataModel {
    * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
    * @property {boolean} enchantable    Can this item be modified by enchantment effects?
    * @property {boolean} hasEffects     Display the effects tab on this item's sheet.
-   * @property {boolean} inventoryItem  Should this item be listed with an actor's inventory?
-   * @property {number} inventoryOrder  Order this item appears in the actor's inventory, smaller numbers are earlier.
    * @property {boolean} singleton      Should only a single item of this type be allowed on an actor?
+   * @property {InventorySectionDescriptor} [inventory]  Configuration for displaying this item type in its own section
+   *                                                     in creature inventories.
    */
 
   /** @type {ItemDataModelMetadata} */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: false,
     hasEffects: false,
-    inventoryItem: false,
-    inventoryOrder: Infinity,
     singleton: false
   }, {inplace: false}));
 

@@ -70,8 +70,13 @@ export default class EquipmentData extends ItemDataModel.mixin(
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     hasEffects: true,
     enchantable: true,
-    inventoryItem: true,
-    inventoryOrder: 200
+    inventory: {
+      id: "equipment",
+      order: 200,
+      label: "TYPES.Item.equipmentPl",
+      groups: { type: "equipment" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    }
   }, {inplace: false}));
 
   /* -------------------------------------------- */

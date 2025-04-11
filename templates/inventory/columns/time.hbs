@@ -1,0 +1,13 @@
+{{#if isItem}}
+<div class="item-detail item-time {{#unless ctx.activation}}empty{{/unless}}" data-column-id="time">
+    {{#if ctx.activation}}
+    <span class="condensed">{{ ctx.activation }}</span>
+    {{/if}}
+</div>
+{{else}}
+<div class="item-detail item-time {{#unless labels.activation}}empty{{/unless}}" data-column-id="time">
+    {{#if labels.activation}}
+    <span class="condensed">{{ ctx.activation }}</span>
+    {{/if}}
+</div>
+{{/if}}

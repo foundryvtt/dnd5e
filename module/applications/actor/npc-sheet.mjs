@@ -37,12 +37,14 @@ export default class NPCActorSheet extends BaseActorSheet {
     },
     features: {
       container: { classes: ["tab-body"], id: "tabs" },
-      template: "systems/dnd5e/templates/actors/tabs/creature-features.hbs",
+      template: "systems/dnd5e/templates/actors/tabs/actor-features.hbs",
+      templates: ["systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs"],
       scrollable: [""]
     },
     inventory: {
       container: { classes: ["tab-body"], id: "tabs" },
       template: "systems/dnd5e/templates/actors/tabs/actor-inventory.hbs",
+      templates: ["systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs"],
       scrollable: [""]
     },
     spells: {
@@ -112,11 +114,18 @@ export default class NPCActorSheet extends BaseActorSheet {
     features: { name: "", properties: new Set() },
     effects: { name: "", properties: new Set() },
     inventory: { name: "", properties: new Set() },
-    spellbook: { name: "", properties: new Set() }
+    spells: { name: "", properties: new Set() }
   };
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _configureInventorySections(sections) {
+    sections.forEach(s => s.minWidth = 200);
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -195,50 +204,39 @@ export default class NPCActorSheet extends BaseActorSheet {
    * @protected
    */
   async _prepareFeaturesContext(context, options) {
-    const sections = [
-      ["weapons", "DND5E.AttackPl", true, { type: "weapon", "weapon-type": "natural" }],
-      ["actions", "DND5E.ActionPl", true, { type: "feat", "activation.type": "action" }],
-      ["passive", "DND5E.Features", false, { type: "passive" }],
-      ...Object.entries(CONFIG.DND5E.activityActivationTypes)
-        // TODO: These labels should be pluralized
-        .map(([type, { label }]) => [type, label, true, { type }])
-    ].reduce((obj, [id, label, hasActions, dataset]) => {
-      obj[id] = {
-        dataset, hasActions,
-        categories: [
-          {
-            classes: "item-uses", label: "DND5E.Uses", itemPartial: "dnd5e.column-uses",
-            activityPartial: "dnd5e.activity-column-uses"
-          },
-          {
-            classes: "item-roll", label: "DND5E.SpellHeader.Roll", itemPartial: "dnd5e.column-roll",
-            activityPartial: "dnd5e.activity-column-roll"
-          },
-          {
-            classes: "item-formula", label: "DND5E.SpellHeader.Formula", itemPartial: "dnd5e.column-formula",
-            activityPartial: "dnd5e.activity-column-formula"
-          },
-          {
-            classes: "item-controls", itemPartial: "dnd5e.column-feature-controls",
-            activityPartial: "dnd5e.activity-column-controls"
-          }
-        ],
-        items: [],
-        label: game.i18n.localize(label)
+    const sections = Object.entries(CONFIG.DND5E.activityActivationTypes).reduce((obj, [id, config], i) => {
+      const { plural: label, passive } = config;
+      if ( passive ) return obj;
+      obj[id] ??= {
+        id, label, order: (i + 1) * 100, items: [], minWidth: 210,
+        columns: ["recovery", "uses", "roll", "formula", "controls"]
       };
       return obj;
     }, {});
-
-    context.filters = [
-      { key: "action", label: "DND5E.Action" },
-      { key: "bonus", label: "DND5E.BonusAction" },
-      { key: "reaction", label: "DND5E.Reaction" },
-      { key: "legendary", label: "DND5E.LegendaryAction.Label" },
-      { key: "lair", label: "DND5E.LAIR.Action.Label" }
-    ];
-    context.sections = Object.values(sections);
-    context.sections[0].items = context.itemCategories.features ?? [];
-
+    sections.passive = {
+      id: "passive", label: "DND5E.Features", order: 0, items: [], minWidth: 210,
+      columns: ["recovery", "uses", "roll", "formula", "controls"]
+    };
+    context.itemCategories.features.forEach(i => {
+      const ctx = context.itemContext[i.id];
+      sections[ctx.group]?.items.push(i);
+    });
+    context.sections = customElements.get(this.options.elements.inventory).prepareSections(Object.values(sections));
+    context.listControls = {
+      label: "DND5E.FeatureSearch",
+      list: "features",
+      filters: [
+        { key: "action", label: "DND5E.ACTIVATION.Type.Action.Label.one" },
+        { key: "bonus", label: "DND5E.ACTIVATION.Type.BonusAction.Label.one" },
+        { key: "reaction", label: "DND5E.ACTIVATION.Type.Reaction.Label.one" },
+        { key: "legendary", label: "DND5E.ACTIVATION.Type.LegendaryAction.Label.one" },
+        { key: "lair", label: "DND5E.ACTIVATION.Type.LairAction.Label.one" }
+      ],
+      sorting: [
+        { key: "m", label: "SIDEBAR.SortModeManual", dataset: { icon: "fa-solid fa-arrow-down-short-wide" } },
+        { key: "a", label: "SIDEBAR.SortModeAlpha", dataset: { icon: "fa-solid fa-arrow-down-a-z" } }
+      ]
+    };
     return context;
   }
 
@@ -302,29 +300,6 @@ export default class NPCActorSheet extends BaseActorSheet {
   async _prepareInventoryContext(context, options) {
     context = await super._prepareInventoryContext(context, options);
     context.encumbrance = context.system.attributes.encumbrance;
-
-    const sections = [
-      ...Object.entries(CONFIG.Item.dataModels)
-        .filter(([type, model]) => model.metadata?.inventoryItem)
-        .sort(([, lhs], [, rhs]) => (lhs.metadata.inventoryOrder - rhs.metadata.inventoryOrder))
-        .map(([type]) => [type, `${CONFIG.Item.typeLabels[type]}Pl`, { type }]),
-      ["contents", "DND5E.Contents", { type: "all" }]
-    ].reduce((obj, [id, label, dataset]) => {
-      obj[id] = {
-        dataset,
-        categories: [
-          { activityPartial: "dnd5e.activity-column-price" },
-          { activityPartial: "dnd5e.activity-column-weight" },
-          { activityPartial: "dnd5e.activity-column-quantity" },
-          { activityPartial: "dnd5e.activity-column-uses" }
-        ],
-        items: [],
-        label: game.i18n.localize(label)
-      };
-      return obj;
-    }, {});
-    context.sections = Object.values(sections);
-    context.sections[0].items = context.itemCategories.inventory ?? [];
     return context;
   }
 
@@ -459,6 +434,23 @@ export default class NPCActorSheet extends BaseActorSheet {
 
   /* -------------------------------------------- */
 
+  /**
+   * Render a button for creating items in the inventory tab.
+   * @protected
+   */
+  _renderCreateInventory() {
+    const button = document.createElement("button");
+    Object.assign(button, {
+      type: "button", className: "create-child gold-button",
+      ariaLabel: game.i18n.format("SIDEBAR.Create", { type: game.i18n.localize("DOCUMENT.Item") })
+    });
+    button.dataset.action = "addDocument";
+    button.insertAdjacentHTML("beforeend", '<i class="fa-solid fa-plus" inert></i>');
+    this.element.querySelector('[data-application-part="inventory"] .bottom').append(button);
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async _renderFrame(options) {
     const html = await super._renderFrame(options);
@@ -487,7 +479,6 @@ export default class NPCActorSheet extends BaseActorSheet {
     const isPassive = item.system.properties?.has("trait")
       || CONFIG.DND5E.activityActivationTypes[item.system.activities?.contents[0]?.activation.type]?.passive;
     ctx.group = isPassive ? "passive" : item.system.activities?.contents[0]?.activation.type || "passive";
-    ctx.ungroup = item.type === "weapon" ? "weapon" : ctx.group === "passive" ? "passive" : "feat";
   }
 
   /* -------------------------------------------- */
@@ -498,6 +489,7 @@ export default class NPCActorSheet extends BaseActorSheet {
   async _onRender(context, options) {
     await super._onRender(context, options);
     this._renderSource();
+    this._renderCreateInventory();
 
     const elements = this.element.querySelector(".header-elements .cr-xp");
     if ( !elements || this.actor.limited ) return;

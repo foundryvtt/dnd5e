@@ -71,8 +71,13 @@ export default class ConsumableData extends ItemDataModel.mixin(
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     hasEffects: true,
     enchantable: true,
-    inventoryItem: true,
-    inventoryOrder: 300
+    inventory: {
+      id: "consumables",
+      order: 300,
+      label: "TYPES.Item.consumablePl",
+      groups: { type: "consumable" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    }
   }, {inplace: false}));
 
   /* -------------------------------------------- */

@@ -58,6 +58,18 @@ export default function PrimarySheetMixin(Base) {
     };
 
     /* -------------------------------------------- */
+
+    /**
+     * Methods for sorting child embedded items.
+     * @type {Record<string, ItemListComparator5e>}
+     */
+    static SORT_MODES = {
+      a: this.sortItemsAlphabetical,
+      m: this.sortItemsManual,
+      p: this.sortItemsPriority
+    };
+
+    /* -------------------------------------------- */
     /*  Properties                                  */
     /* -------------------------------------------- */
 
@@ -451,6 +463,88 @@ export default function PrimarySheetMixin(Base) {
      * @returns {any}               Return `false` to prevent default behavior.
      */
     async _showDocument(event, target) {}
+
+    /* -------------------------------------------- */
+    /*  Sorting                                     */
+    /* -------------------------------------------- */
+
+    /**
+     * Sort child embedded documents by the given sort mode.
+     * @param {string} collection  The embedded collection name.
+     * @param {string} mode        The sort mode.
+     * @returns {Document[]}
+     * @protected
+     */
+    _sortChildren(collection, mode) {
+      return [];
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Sort Active Effects by the given sort mode.
+     * @param {ActiveEffect5e[]} effects  The effects to sort.
+     * @param {string} mode               The sort mode.
+     * @returns {ActiveEffect5e[]}
+     * @protected
+     */
+    _sortEffects(effects, mode) {
+      return effects;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Sort Items by the given sort mode.
+     * @param {Item5e[]} items  The items to sort.
+     * @param {string} mode     The sort mode.
+     * @returns {Item5e[]}
+     * @protected
+     */
+    _sortItems(items, mode) {
+      const comparator = this.constructor.SORT_MODES[mode] ?? ((a, b) => a.sort - b.sort);
+      return items.sort(comparator);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Sort Items alphabetically.
+     * @param {Item5e} a
+     * @param {Item5e} b
+     * @returns {number}
+     */
+    static sortItemsAlphabetical(a, b) {
+      return a.name.localeCompare(b.name, game.i18n.lang);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Sort Items the way the user arranged them.
+     * @param {Item5e} a
+     * @param {Item5e} b
+     * @returns {number}
+     */
+    static sortItemsManual(a, b) {
+      return a.sort - b.sort;
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Sort Items by priority
+     * @param {Item5e} a
+     * @param {Item5e} b
+     * @returns {number}
+     */
+    static sortItemsPriority(a, b) {
+      return a.system.linkedActivity?.item?.name.localeCompare(b.system.linkedActivity?.item?.name, game.i18n.lang)
+        || ((a.system.level ?? 0) - (b.system.level ?? 0))
+        || ((a.system.preparation?.mode ?? 0) - (b.system.preparation?.mode ?? 0))
+        || ((a.system.preparation?.prepared ?? 0) - (b.system.preparation?.prepared ?? 0))
+        || a.name.localeCompare(b.name, game.i18n.lang);
+    }
 
     /* -------------------------------------------- */
     /*  Drag & Drop                                 */

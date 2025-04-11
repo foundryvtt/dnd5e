@@ -626,7 +626,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
     }
 
     const config = this.getDamageConfig();
-    this.labels.damage = (config.rolls ?? []).map((part, index) => {
+    this.labels.damage = this.labels.damages = (config.rolls ?? []).map((part, index) => {
       let formula;
       try {
         formula = part.parts.join(" + ");

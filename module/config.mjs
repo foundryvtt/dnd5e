@@ -1007,29 +1007,35 @@ preLocalize("abilityActivationTypes");
  */
 DND5E.activityActivationTypes = {
   action: {
-    label: "DND5E.Action",
+    label: "DND5E.ACTIVATION.Type.Action.Label.one",
+    plural: "DND5E.ACTIVATION.Type.Action.Label.other",
     group: "DND5E.ACTIVATION.Category.Standard"
   },
   bonus: {
-    label: "DND5E.BonusAction",
+    label: "DND5E.ACTIVATION.Type.BonusAction.Label.one",
+    plural: "DND5E.ACTIVATION.Type.BonusAction.Label.other",
     group: "DND5E.ACTIVATION.Category.Standard"
   },
   reaction: {
-    label: "DND5E.Reaction",
+    label: "DND5E.ACTIVATION.Type.Reaction.Label.one",
+    plural: "DND5E.ACTIVATION.Type.Reaction.Label.other",
     group: "DND5E.ACTIVATION.Category.Standard"
   },
   minute: {
-    label: "DND5E.TimeMinute",
+    label: "DND5E.ACTIVATION.Type.Minute.Label.one",
+    plural: "DND5E.ACTIVATION.Type.Minute.Label.other",
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
   hour: {
-    label: "DND5E.TimeHour",
+    label: "DND5E.ACTIVATION.Type.Hour.Label.one",
+    plural: "DND5E.ACTIVATION.Type.Hour.Label.other",
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
   day: {
-    label: "DND5E.TimeDay",
+    label: "DND5E.ACTIVATION.Type.Day.Label.one",
+    plural: "DND5E.ACTIVATION.Type.Day.Label.other",
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
@@ -1059,21 +1065,25 @@ DND5E.activityActivationTypes = {
     passive: true
   },
   legendary: {
-    label: "DND5E.LegendaryAction.Label",
+    label: "DND5E.ACTIVATION.Type.LegendaryAction.Label.one",
+    plural: "DND5E.ACTIVATION.Type.LegendaryAction.Label.plural",
     group: "DND5E.ACTIVATION.Category.Monster",
     scalar: true
   },
   mythic: {
-    label: "DND5E.MythicActionLabel",
+    label: "DND5E.ACTIVATION.Type.MythicAction.Label.one",
+    plural: "DND5E.ACTIVATION.Type.MythicAction.Label.other",
     group: "DND5E.ACTIVATION.Category.Monster",
     scalar: true
   },
   lair: {
-    label: "DND5E.LAIR.Action.Label",
+    label: "DND5E.ACTIVATION.Type.Lair.Label.one",
+    plural: "DND5E.ACTIVATION.Type.Lair.Label.plural",
     group: "DND5E.ACTIVATION.Category.Monster"
   },
   crew: {
-    label: "DND5E.VehicleCrewAction",
+    label: "DND5E.ACTIVATION.Type.Crew.Label.one",
+    plural: "DND5E.ACTIVATION.Type.Crew.Label.other",
     group: "DND5E.ACTIVATION.Category.Vehicle",
     scalar: true
   },

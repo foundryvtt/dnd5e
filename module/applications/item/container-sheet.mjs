@@ -1,5 +1,7 @@
 import ItemSheet5e from "./item-sheet.mjs";
 import Item5e from "../../documents/item.mjs";
+import ItemListControlsElement from "../components/item-list-controls.mjs";
+import ContainerData from "../../data/item/container.mjs";
 
 /**
  * Extended version of item sheet to handle containers.
@@ -19,6 +21,7 @@ export default class ContainerSheet extends ItemSheet5e {
     ...super.PARTS,
     contents: {
       template: "systems/dnd5e/templates/items/contents.hbs",
+      templates: ["systems/dnd5e/templates/inventory/inventory.hbs"],
       scrollable: [""]
     }
   };
@@ -42,15 +45,6 @@ export default class ContainerSheet extends ItemSheet5e {
   /*  Properties                                  */
   /* -------------------------------------------- */
 
-  /**
-   * IDs for items on the sheet that have been expanded.
-   * @type {Set<string>}
-   * @protected
-   */
-  _expanded = new Set();
-
-  /* -------------------------------------------- */
-
   /** @override */
   _filters = {
     inventory: { name: "", properties: new Set() }
@@ -67,6 +61,18 @@ export default class ContainerSheet extends ItemSheet5e {
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  _configureRenderParts(options) {
+    const parts = super._configureRenderParts(options);
+    if ( "contents" in parts ) {
+      parts.contents.templates ??= [];
+      parts.contents.templates.push(...customElements.get(this.options.elements.inventory).templates);
+    }
+    return parts;
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -91,41 +97,43 @@ export default class ContainerSheet extends ItemSheet5e {
     context.items = [];
     context.itemContext = {};
     context.isContainer = true;
-
+    context.rollableClass = this.isEditable ? "rollable" : "";
     context.encumbrance = await this.item.system.computeCapacity();
     if ( !Number.isFinite(context.encumbrance.max) ) context.encumbrance.maxLabel = "&infin;";
 
     // Contents
+    const Inventory = customElements.get(this.options.elements.inventory);
     for ( const item of await this.item.system.contents ) {
       const ctx = context.itemContext[item.id] ??= {};
       ctx.totalWeight = (await item.system.totalWeight).toNearest(0.1);
-      ctx.isExpanded = this._expanded.has(item.id);
+      ctx.isExpanded = this.expandedSections.get(item.id);
       ctx.isStack = item.system.quantity > 1;
-      ctx.expanded = this._expanded.has(item.id) ? await item.getChatData({ secrets: this.item.isOwner }) : null;
+      ctx.expanded = this.expandedSections.get(item.id) ? await item.getChatData({ secrets: this.item.isOwner }) : null;
+      ctx.groups = { contents: "contents", type: item.type };
+      ctx.dataset = { groupContents: "contents", groupType: item.type };
       context.items.push(item);
-    }
-    context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
-    context.rollableClass = this.isEditable ? "rollable" : "";
 
-    const inventory = {};
-    const inventoryTypes = Object.entries(CONFIG.Item.dataModels)
-      .filter(([, model]) => model.metadata?.inventoryItem)
-      .sort(([, lhs], [, rhs]) => lhs.metadata.inventoryOrder - rhs.metadata.inventoryOrder);
-
-    for ( const [type] of inventoryTypes ) {
-      inventory[type] = { label: `${CONFIG.Item.typeLabels[type]}Pl`, items: [], dataset: { type } };
+      if ( item.type === "container" ) {
+        ctx.capacity = await item.system.computeCapacity();
+        ctx.capacity.maxLabel = Number.isFinite(ctx.capacity.max) ? ctx.capacity.max : "&infin;";
+        ctx.columns = Inventory.mapColumns(["capacity", "controls"]);
+        ctx.clickAction = "view";
+      }
     }
 
-    delete inventory.containers;
-    [context.items, context.containers] = context.items.partition(item => item.type === "container");
-    context.inventory = Object.values(inventory);
-    context.inventory.push({ label: "DND5E.Contents", items: context.items, dataset: { type: "all" } });
-
-    for ( const container of context.containers ) {
-      const ctx = context.itemContext[container.id];
-      ctx.capacity = await container.system.computeCapacity();
-    }
-
+    const inventory = Object.values(CONFIG.Item.dataModels)
+      .filter(model => "inventory" in (model.metadata ?? {}))
+      .map(model => {
+        const section = foundry.utils.deepClone(model.metadata.inventory);
+        if ( foundry.utils.isSubclass(model, ContainerData) ) return section;
+        return { ...section, columns: ["price", "weight", "quantity", "controls"] };
+      });
+    inventory.push(foundry.utils.deepClone(Inventory.SECTIONS.contents));
+    inventory.at(-1).items = context.items;
+    inventory.forEach(s => s.minWidth = 190);
+    context.inventory = Inventory.prepareSections(inventory);
+    context.listControls = foundry.utils.deepClone(ItemListControlsElement.CONFIG.inventory);
+    context.showCurrency = true;
     this._items = context.items;
 
     // TODO: Remove this temporary path to `config` when actors have converted to AppV2
@@ -359,7 +367,15 @@ export default class ContainerSheet extends ItemSheet5e {
    * @returns {boolean|void}
    * @protected
    */
-  _filterItem(item, filters) {
-    if ( item.type === "container" ) return true;
+  _filterItem(item, filters) {}
+
+  /* -------------------------------------------- */
+  /*  Sorting                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _sortChildren(collection, mode) {
+    if ( collection === "items" ) return this._sortItems(this._items, mode);
+    return [];
   }
 }

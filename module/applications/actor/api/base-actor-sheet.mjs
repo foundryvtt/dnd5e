@@ -28,6 +28,7 @@ import ToolsConfig from "../config/tools-config.mjs";
 import TraitsConfig from "../config/traits-config.mjs";
 import WeaponsConfig from "../config/weapons-config.mjs";
 import TransformDialog from "../transform-dialog.mjs";
+import ItemListControlsElement from "../../components/item-list-controls.mjs";
 
 const { BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
@@ -135,11 +136,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /* -------------------------------------------- */
 
-  // TODO: Temporary patch to prevent inventory element context menu from breaking until expansion is reimplemented.
-  _expanded = new Set();
-
-  /* -------------------------------------------- */
-
   /**
    * Key path to the sidebar collapsed flag for the current tab.
    * @type {string}
@@ -153,6 +149,16 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
+  /**
+   * Allow subclasses to make adjustments to inventory section configuration.
+   * @param {InventorySectionDescriptor[]} sections  The inventory sections.
+   * @returns {Promise<void>}
+   * @protected
+   */
+  async _configureInventorySections(sections) {}
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async _configureRenderOptions(options) {
     await super._configureRenderOptions(options);
@@ -164,7 +170,16 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /** @inheritDoc */
   _configureRenderParts(options) {
     if ( this.actor.limited ) return foundry.utils.deepClone(this.constructor.LIMITED_PARTS);
-    return super._configureRenderParts(options);
+    const parts = super._configureRenderParts(options);
+    if ( "inventory" in parts ) {
+      parts.inventory.templates ??= [];
+      parts.inventory.templates.push(...customElements.get(this.options.elements.inventory).templates);
+    }
+    if ( "features" in parts ) {
+      parts.features.templates ??= [];
+      parts.features.templates.push(...customElements.get(this.options.elements.inventory).templates);
+    }
+    return parts;
   }
 
   /* -------------------------------------------- */
@@ -196,6 +211,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Cache concentration data and prepare items
     this._concentration = this.actor.concentration;
     await this._prepareItems(context);
+    context.spellbook = this._prepareSpellbook(context);
 
     return context;
   }
@@ -267,6 +283,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   async _prepareInventoryContext(context, options) {
+    const Inventory = customElements.get(this.options.elements.inventory);
+
     // Containers
     context.itemContext ??= {};
     context.containers = context.itemCategories.containers ?? [];
@@ -274,7 +292,23 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       const ctx = context.itemContext[container.id];
       ctx.capacity = await container.system.computeCapacity();
       ctx.capacity.maxLabel = Number.isFinite(ctx.capacity.max) ? ctx.capacity.max : "&infin;";
+      ctx.columns = Inventory.mapColumns(["capacity", "controls"]);
+      ctx.clickAction = "view";
     }
+
+    // Inventory
+    const sections = Object.values(CONFIG.Item.dataModels)
+      .filter(model => "inventory" in (model.metadata ?? {}))
+      .map(model => foundry.utils.deepClone(model.metadata.inventory));
+    sections.push(foundry.utils.deepClone(Inventory.SECTIONS.contents));
+    await this._configureInventorySections(sections);
+    // Add hidden section that renders the union of columns.
+    sections.push({ items: context.itemCategories.inventory ?? [], columns: Inventory.unionColumns(sections) });
+    context.sections = Inventory.prepareSections(sections);
+    context.showCurrency = true;
+
+    // Filtering, Grouping, & Sorting
+    context.listControls = foundry.utils.deepClone(ItemListControlsElement.CONFIG.inventory);
 
     return context;
   }
@@ -338,7 +372,26 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   async _prepareSpellsContext(context, options) {
-    context.spellbook = this._prepareSpellbook(context);
+    const Inventory = customElements.get(this.options.elements.inventory);
+    context.sections = Inventory.prepareSections(Object.values(context.spellbook));
+    context.listControls = {
+      label: "DND5E.SpellsSearch",
+      list: "spells",
+      filters: [
+        { key: "action", label: "DND5E.Action" },
+        { key: "bonus", label: "DND5E.BonusAction" },
+        { key: "reaction", label: "DND5E.Reaction" },
+        { key: "concentration", label: "DND5E.Concentration" },
+        { key: "ritual", label: "DND5E.Ritual" },
+        { key: "prepared", label: "DND5E.Prepared" },
+        ...Object.entries(CONFIG.DND5E.spellSchools).map(([key, { label }]) => ({ key, label }))
+      ],
+      sorting: [
+        { key: "a", label: "SIDEBAR.SortModeAlpha", dataset: { icon: "fa-solid fa-arrow-down-a-z" } },
+        { key: "p", label: "SIDEBAR.SortModePriority", dataset: { icon: "fa-solid fa-arrow-down-1-9" } },
+        { key: "m", label: "SIDEBAR.SortModeManual", dataset: { icon: "fa-solid fa-arrow-down-short-wide" } }
+      ]
+    };
     return context;
   }
 
@@ -389,35 +442,30 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   async _prepareItems(context) {
     context.itemCategories = {};
     context.itemContext = {};
-    context.items = Array.from(this.actor.items)
-      .filter(i => !this.actor.items.has(i.system.container))
-      .forEach(async item => {
-        // Prepare item context
-        const ctx = context.itemContext[item.id] ??= {};
-        this._prepareItem(item, ctx);
-        if ( item.type === "spell" ) await this._prepareItemSpell(item, ctx);
-        else if ( "quantity" in item.system ) await this._prepareItemPhysical(item, ctx);
-        else await this._prepareItemFeature(item, ctx);
+    context.items = Array.from(this.actor.items).filter(i => !this.actor.items.has(i.system.container));
+    await Promise.all(context.items.map(async item => {
+      // Prepare item context
+      const ctx = context.itemContext[item.id] ??= {};
+      ctx.clickAction = "use";
+      this._prepareItem(item, ctx);
+      if ( item.type === "spell" ) await this._prepareItemSpell(item, ctx);
+      else if ( "quantity" in item.system ) await this._prepareItemPhysical(item, ctx);
+      else await this._prepareItemFeature(item, ctx);
 
-        // Handle expanded data
-        ctx.isExpanded = this.expandedSections.get(item.id) === true;
-        // TODO: Prepare expanded data
-        // context.expandedData = {};
-        // for ( const id of this._expanded ) {
-        //   const item = this.actor.items.get(id);
-        //   if ( item ) {
-        //     context.expandedData[id] = await item.getChatData({secrets: this.actor.isOwner});
-        //     if ( context.itemContext[id] ) context.itemContext[id].expanded = context.expandedData[id];
-        //   }
-        // }
+      // Handle expanded data
+      ctx.isExpanded = this.expandedSections.get(item.id) === true;
+      if ( ctx.isExpanded ) context.itemContext[item.id] = await item.getChatData({ secrets: this.actor.isOwner });
 
-        // Place the item into a specific categories
-        const categories = this._assignItemCategories(item) ?? [];
-        for ( const category of categories ) {
-          context.itemCategories[category] ??= [];
-          context.itemCategories[category].push(item);
-        }
-      });
+      // Place the item into a specific categories
+      const categories = this._assignItemCategories(item) ?? [];
+      for ( const category of categories ) {
+        context.itemCategories[category] ??= [];
+        context.itemCategories[category].push(item);
+      }
+
+      // Grouping
+      ctx.dataset = Object.fromEntries(Object.entries(ctx.groups ?? {}).map(([k, v]) => [`group-${k}`, v]));
+    }));
   }
 
   /* -------------------------------------------- */
@@ -490,7 +538,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   /**
    * Prepare spells sections for display.
    * @param {ApplicationRenderContext} context  Context being prepared.
-   * @returns {object[]}
+   * @returns {object}
    * @protected
    */
   _prepareSpellbook(context) {
@@ -503,25 +551,21 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }, {});
 
     const levels = context.actor.system.spells;
+    const columns = customElements.get(this.options.elements.inventory).mapColumns([
+      "school", "time", "range", "target", "roll", { id: "uses", order: 650, priority: 300 },
+      { id: "formula", priority: 200 }, "controls"
+    ]);
 
     // Format a spellbook entry for a certain indexed level
-    const registerSection = (slot, i, label, { prepMode="prepared", value, max, override, config }={}) => {
+    const registerSection = (slot, i, label, { prepMode="prepared" }={}) => {
       const section = spellbook[i] = {
-        label, slot,
-        categories: [
-          { activityPartial: "dnd5e.activity-column-school" },
-          { activityPartial: "dnd5e.activity-column-time" },
-          { activityPartial: "dnd5e.activity-column-range" },
-          { activityPartial: "dnd5e.activity-column-target" },
-          { activityPartial: "dnd5e.activity-column-roll" },
-          { activityPartial: "dnd5e.activity-column-uses" },
-          { activityPartial: "dnd5e.activity-column-formula" },
-          { activityPartial: "dnd5e.activity-column-controls" }
-        ],
+        label, slot, columns,
+        id: slot,
         dataset: { type: "spell", level: prepMode in sections ? 1 : i, preparationMode: prepMode },
         order: i,
-        spells: [],
-        usesSlots: i > 0
+        items: [],
+        usesSlots: i > 0,
+        minWidth: 220
       };
       if ( !section.usesSlots ) return;
 
@@ -561,18 +605,11 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Create spellbook sections for all alternative spell preparation modes that have spell slots.
     for ( const [k, v] of Object.entries(CONFIG.DND5E.spellPreparationModes) ) {
       if ( !(k in levels) || !v.upcast || !levels[k].max ) continue;
-
       if ( !spellbook["0"] && v.cantrips ) registerSection("spell0", 0, CONFIG.DND5E.spellLevels[0]);
       const l = levels[k];
       const level = game.i18n.localize(`DND5E.SpellLevel${l.level}`);
       const label = `${v.label} — ${level}`;
-      registerSection(k, sections[k], label, {
-        prepMode: k,
-        value: l.value,
-        max: l.max,
-        override: l.override,
-        config: v
-      });
+      registerSection(k, sections[k], label, { prepMode: k });
     }
 
     // Iterate over every spell item, adding spells to the spellbook by section
@@ -595,31 +632,20 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       else if ( mode in sections ) {
         s = sections[mode];
         if ( !spellbook[s] ) {
-          const l = levels[mode] || {};
           const config = CONFIG.DND5E.spellPreparationModes[mode];
-          registerSection(mode, s, config.label, {
-            prepMode: mode,
-            value: l.value,
-            max: l.max,
-            override: l.override,
-            config: config
-          });
+          registerSection(mode, s, config.label, { prepMode: mode });
         }
       }
 
-      // Sections for higher-level spells which the caster "should not" have, but spell items exist for
-      else if ( !spellbook[s] ) {
-        registerSection(sl, s, CONFIG.DND5E.spellLevels[s], {levels: levels[sl]});
-      }
+      // Sections for higher-level spells which the caster does not have any slots for.
+      else if ( !spellbook[s] ) registerSection(sl, s, CONFIG.DND5E.spellLevels[s]);
 
       // Add the spell to the relevant heading
-      spellbook[s].spells.push(spell);
+      spellbook[s].items.push(spell);
     });
 
     // Sort the spellbook by section level
-    const sorted = Object.values(spellbook);
-    sorted.sort((a, b) => a.order - b.order);
-    return sorted;
+    return spellbook;
   }
 
   /* -------------------------------------------- */
@@ -743,7 +769,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   _assignItemCategories(item) {
     if ( item.type === "container" ) return new Set(["containers", "inventory"]);
     if ( item.type === "spell" ) return new Set(["spells"]);
-    if ( item.system.metadata?.inventoryItem ) return new Set(["inventory"]);
+    if ( "inventory" in (item.system.metadata ?? {}) ) return new Set(["inventory"]);
     return new Set(["features"]);
   }
 
@@ -775,6 +801,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     uses = { ...(uses ?? {}) };
     uses.hasRecharge = uses.max && (uses.recovery?.[0]?.period === "recharge");
     uses.isOnCooldown = uses.hasRecharge && (uses.value < 1);
+    uses.hasUses = uses.max;
 
     return {
       _id, labels, name, range, uses,
@@ -807,6 +834,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _prepareItem(item, ctx) {
+    ctx.groups = {};
+
     // Activities
     ctx.activities = item.system.activities
       ?.filter(a => !item.getFlag("dnd5e", "riders.activity")?.includes(a.id))
@@ -830,8 +859,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     if ( cachedFor ) ctx.linkedUses = cachedFor.consumption?.targets.find(t => t.type === "activityUses")
       ? cachedFor.uses : cachedFor.consumption?.targets.find(t => t.type === "itemUses")
         ? cachedFor.item.system.uses : null;
-    ctx.hasRecharge = item.hasRecharge;
-    ctx.hasUses = item.hasLimitedUses;
+    ctx.uses = { ...(item.system.uses ?? {}) };
+    ctx.uses.hasRecharge = item.hasRecharge;
+    ctx.uses.hasUses = item.hasLimitedUses;
+    ctx.uses.isOnCooldown = item.isOnCooldown;
   }
 
   /* -------------------------------------------- */
@@ -887,6 +918,9 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Weight
     ctx.totalWeight = item.system.totalWeight?.toNearest(0.1);
+
+    // Grouping
+    Object.assign(ctx.groups, { contents: "contents", type: item.type });
   }
 
   /* -------------------------------------------- */
@@ -949,15 +983,80 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       linked ? linked.name : this.actor.classes[item.system.sourceClass]?.name,
       item.labels.components.vsm
     ].filterJoin(" &bull; ");
+  }
 
-    ctx.dataset = {
-      itemLevel: item.system.level,
-      itemName: item.name,
-      itemSort: item.sort,
-      itemPreparationMode: item.system.preparation.mode,
-      itemPreparationPrepared: item.system.preparation.prepared,
-      linkedName: linked?.name
-    };
+  /* -------------------------------------------- */
+
+  /**
+   * Augment inventory display with attunement indicator.
+   * @param {ApplicationRenderContext} context
+   * @param {ApplicationRenderOptions} options
+   * @protected
+   */
+  _renderAttunement(context, options) {
+    const { attunement } = context.system.attributes;
+    const element = document.createElement("div");
+    element.classList.add("attunement");
+    element.innerHTML = `
+      <i class="fa-solid fa-sun" data-tooltip="DND5E.Attunement"
+         aria-label="${game.i18n.localize("DND5E.Attunement")}"></i>
+      <span class="value"></span>
+      <span class="separator">&sol;</span>
+    `;
+    element.querySelector(".value").append(attunement.value);
+    if ( context.editable ) {
+      const input = document.createElement("input");
+      Object.assign(input, {
+        type: "number", name: "system.attributes.attunement.max", className: "max", min: "0", step: "1",
+        value: context.source.attributes.attunement.max
+      });
+      element.append(input);
+    } else {
+      element.insertAdjacentHTML("beforeend", '<span class="max"></span>');
+      element.querySelector(".max").append(attunement.max);
+    }
+    this.element.querySelector('[data-application-part="inventory"] .middle').append(element);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Augment spellbook display.
+   * @param {ApplicationRenderContext} context
+   * @param {ApplicationRenderOptions} options
+   * @protected
+   */
+  _renderSpellbook(context, options) {
+    for ( const [id, { usesSlots, pips, slot }] of Object.entries(context.spellbook) ) {
+      if ( !usesSlots ) continue;
+      const query = `[data-application-part="spells"] .items-section[data-level="${id}"] .items-header`;
+      const header = this.element.querySelector(query);
+      if ( !header ) continue;
+      if ( context.editable ) {
+        const config = document.createElement("button");
+        Object.assign(config, {
+          type: "button", className: "unbutton config-button", ariaLabel: game.i18n.localize("DND5E.SpellSlotsConfig")
+        });
+        Object.assign(config.dataset, {
+          action: "showConfiguration", config: "spellSlots", tooltip: "DND5E.SpellSlotsConfig"
+        });
+        config.insertAdjacentHTML("afterbegin", '<i class="fa-solid fa-cog" inert></i>');
+        header.append(config);
+        continue;
+      }
+      const slots = document.createElement("div");
+      slots.classList.add("pips");
+      slots.dataset.prop = `system.spells.${slot}.value`;
+      pips.forEach(({ classes, n, tooltip, label, filled}) => {
+        const button = document.createElement("button");
+        Object.assign(button, { type: "button", className: classes, ariaLabel: label, ariaPressed: filled });
+        Object.assign(button.dataset, { n, tooltip, action: "togglePip" });
+        const icon = '<dnd5e-icon src="systems/dnd5e/icons/svg/spell-slot.svg"></dnd5e-icon>';
+        button.insertAdjacentHTML("afterbegin", icon);
+        slots.append(button);
+      });
+      header.insertAdjacentElement("afterend", slots);
+    }
   }
 
   /* -------------------------------------------- */
@@ -1028,6 +1127,12 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       this.element.classList.toggle("sidebar-collapsed", sidebarCollapsed);
     }
 
+    // Attunement
+    this._renderAttunement(context, options);
+
+    // Spellbook
+    this._renderSpellbook(context, options);
+
     // Display warnings
     const warnings = this.element.querySelector(".window-header .preparation-warnings");
     warnings?.toggleAttribute("hidden", (!game.user.isGM && this.actor.limited)
@@ -1088,7 +1193,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     switch ( tab ) {
       case "features": return ["feat", "race", "background", "class", "subclass"];
       case "inventory": return Object.entries(CONFIG.Item.dataModels)
-        .filter(([type, model]) => model.metadata?.inventoryItem && (type !== "backpack"))
+        .filter(([type, model]) => ("inventory" in (model.metadata ?? {})) && (type !== "backpack"))
         .map(([type]) => type);
       case "spells": return ["spell"];
       default: return [];
@@ -1731,7 +1836,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
   /**
    * Filter items based on the current set of filters.
-   * @param {Item5e[]} items       Copies of item data to be filtered.
+   * @param {Item5e[]} items       The items to be filtered.
    * @param {Set<string>} filters  Filters applied to the item list.
    * @returns {Item5e[]}           Subset of input items limited by the provided filters.
    * @protected
@@ -1759,7 +1864,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
           continue;
         }
         if ( !item.system.activities?.size ) return false;
-        if ( item.system.activities.every(a => a.activation.type !== f) ) return false;
+        if ( item.system.activities.every(a => a.activation?.type !== f) ) return false;
       }
 
       // Spell-specific filters
@@ -1797,6 +1902,19 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _filterItem(item, filters) {}
+
+  /* -------------------------------------------- */
+  /*  Sorting                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _sortChildren(collection, mode) {
+    switch ( collection ) {
+      case "items": return this._sortItems(this.actor.items.contents, mode);
+      case "effects": return this._sortEffects(Array.from(this.actor.allApplicableEffects()), mode);
+    }
+    return [];
+  }
 
   /* -------------------------------------------- */
   /*  Helpers                                     */

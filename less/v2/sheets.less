@@ -70,6 +70,66 @@
   }
 
   /* ---------------------------------- */
+  /*  Sheet Body                        */
+  /* ---------------------------------- */
+
+  .meter.progress::before {
+    // Becomes more red the closer it is to 100% encumbrance.
+    --bar-color-2: color-mix(in oklab, var(--dnd5e-color-blue), var(--dnd5e-color-maroon) var(--bar-percentage));
+    --bar-color-1: color-mix(in oklab, var(--bar-color-2), black 33%);
+    --bar-color-3: color-mix(in oklab, var(--bar-color-2), black 20%);
+    background: linear-gradient(to right, var(--bar-color-1), var(--bar-color-2));
+    border-right: var(--border-width) solid var(--bar-color-3);
+  }
+
+  /* Encumbrance */
+  .encumbrance {
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+
+    .meter {
+      --encumbrance-low: 33%;
+      --encumbrance-high: 66%;
+      border-radius: 3px 3px 0 0;
+      height: 25px;
+      border: none;
+      border-bottom: var(--dnd5e-border-gold);
+
+      .label {
+        display: flex;
+        align-items: center;
+        gap: .1875rem;
+
+        i {
+          font-size: var(--font-size-9);
+          margin-right: .1875rem;
+        }
+      }
+
+      .breakpoint {
+        display: block;
+        position: absolute;
+        block-size: 0;
+        inline-size: 0;
+        border-inline: 3px solid transparent;
+        &.encumbrance-low { inset-inline-start: var(--encumbrance-low); }
+        &.encumbrance-high { inset-inline-start: var(--encumbrance-high); }
+        &.arrow-up {
+          inset-block-end: 0;
+          border-block-end: 3px solid var(--dnd5e-color-gold);
+        }
+        &.arrow-down {
+          inset-block-start: 0;
+          border-top: 3px solid var(--dnd5e-color-gold);
+        }
+        transform: translateX(-50%);
+        z-index: 1;
+      }
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Badges                            */
   /* ---------------------------------- */
 

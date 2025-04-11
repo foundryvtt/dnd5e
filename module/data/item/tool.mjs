@@ -64,8 +64,13 @@ export default class ToolData extends ItemDataModel.mixin(
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     hasEffects: true,
     enchantable: true,
-    inventoryItem: true,
-    inventoryOrder: 400
+    inventory: {
+      id: "tool",
+      order: 400,
+      label: "TYPES.Item.toolPl",
+      groups: { type: "tool" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    }
   }, {inplace: false}));
 
   /* -------------------------------------------- */
