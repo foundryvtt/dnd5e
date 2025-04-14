@@ -49,9 +49,6 @@ export default function DocumentSheetV2Mixin(Base) {
     /** @inheritDoc */
     static _customElements = super._customElements.concat(["dnd5e-checkbox", "proficiency-cycle", "slide-toggle"]);
 
-    /** @inheritDoc */
-    static _customElements = super._customElements.concat(["dnd5e-checkbox"]);
-
     /* -------------------------------------------- */
     /*  Rendering                                   */
     /* -------------------------------------------- */
