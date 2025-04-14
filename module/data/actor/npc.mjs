@@ -297,7 +297,9 @@ export default class NPCData extends CreatureTemplate {
    */
   static #migrateSpellLevel(source) {
     if ( source.details?.spellLevel !== undefined ) {
-      foundry.utils.setProperty(source, "attributes.spell.level", source.details.spellLevel);
+      source.attributes ??= {};
+      source.attributes.spell ??= {};
+      source.attributes.spell.level ??= source.details.spellLevel;
     }
   }
 
