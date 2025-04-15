@@ -705,7 +705,9 @@ export default function ActivityMixin(Base) {
 
       if ( usageConfig.scaling ) {
         foundry.utils.setProperty(messageConfig, "data.flags.dnd5e.scaling", usageConfig.scaling);
+        item.actor._embeddedPreparation = true;
         item.updateSource({ "flags.dnd5e.scaling": usageConfig.scaling });
+        delete item.actor._embeddedPreparation;
         item.prepareFinalAttributes();
       }
     }
