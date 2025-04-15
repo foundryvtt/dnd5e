@@ -994,8 +994,9 @@ preLocalize("abilityActivationTypes");
 /* -------------------------------------------- */
 
 /**
- * @typedef {ActivityActivationTypeConfig}
+ * @typedef ActivityActivationTypeConfig
  * @property {string} label             Localized label for the activation type.
+ * @property {string} [header]          Localized label for the activation type header.
  * @property {string} [group]           Localized label for the presentational group.
  * @property {boolean} [passive=false]  Classify this item as a passive feature on NPC sheets.
  * @property {boolean} [scalar=false]   Does this activation type have a numeric value attached?
@@ -1007,35 +1008,35 @@ preLocalize("abilityActivationTypes");
  */
 DND5E.activityActivationTypes = {
   action: {
-    label: "DND5E.ACTIVATION.Type.Action.Label.one",
-    plural: "DND5E.ACTIVATION.Type.Action.Label.other",
+    label: "DND5E.ACTIVATION.Type.Action.Label",
+    header: "DND5E.ACTIVATION.Type.Action.Header",
     group: "DND5E.ACTIVATION.Category.Standard"
   },
   bonus: {
-    label: "DND5E.ACTIVATION.Type.BonusAction.Label.one",
-    plural: "DND5E.ACTIVATION.Type.BonusAction.Label.other",
+    label: "DND5E.ACTIVATION.Type.BonusAction.Label",
+    header: "DND5E.ACTIVATION.Type.BonusAction.Header",
     group: "DND5E.ACTIVATION.Category.Standard"
   },
   reaction: {
-    label: "DND5E.ACTIVATION.Type.Reaction.Label.one",
-    plural: "DND5E.ACTIVATION.Type.Reaction.Label.other",
+    label: "DND5E.ACTIVATION.Type.Reaction.Label",
+    header: "DND5E.ACTIVATION.Type.Reaction.Header",
     group: "DND5E.ACTIVATION.Category.Standard"
   },
   minute: {
-    label: "DND5E.ACTIVATION.Type.Minute.Label.one",
-    plural: "DND5E.ACTIVATION.Type.Minute.Label.other",
+    label: "DND5E.ACTIVATION.Type.Minute.Label",
+    header: "DND5E.ACTIVATION.Type.Minute.Header",
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
   hour: {
-    label: "DND5E.ACTIVATION.Type.Hour.Label.one",
-    plural: "DND5E.ACTIVATION.Type.Hour.Label.other",
+    label: "DND5E.ACTIVATION.Type.Hour.Label",
+    header: "DND5E.ACTIVATION.Type.Hour.Header",
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
   day: {
-    label: "DND5E.ACTIVATION.Type.Day.Label.one",
-    plural: "DND5E.ACTIVATION.Type.Day.Label.other",
+    label: "DND5E.ACTIVATION.Type.Day.Label",
+    header: "DND5E.ACTIVATION.Type.Day.Header",
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
@@ -1065,25 +1066,25 @@ DND5E.activityActivationTypes = {
     passive: true
   },
   legendary: {
-    label: "DND5E.ACTIVATION.Type.LegendaryAction.Label.one",
-    plural: "DND5E.ACTIVATION.Type.LegendaryAction.Label.plural",
+    label: "DND5E.ACTIVATION.Type.Legendary.Label",
+    header: "DND5E.ACTIVATION.Type.Legendary.Header",
     group: "DND5E.ACTIVATION.Category.Monster",
     scalar: true
   },
   mythic: {
-    label: "DND5E.ACTIVATION.Type.MythicAction.Label.one",
-    plural: "DND5E.ACTIVATION.Type.MythicAction.Label.other",
+    label: "DND5E.ACTIVATION.Type.Mythic.Label",
+    header: "DND5E.ACTIVATION.Type.Mythic.Header",
     group: "DND5E.ACTIVATION.Category.Monster",
     scalar: true
   },
   lair: {
-    label: "DND5E.ACTIVATION.Type.Lair.Label.one",
-    plural: "DND5E.ACTIVATION.Type.Lair.Label.plural",
+    label: "DND5E.ACTIVATION.Type.Lair.Label",
+    header: "DND5E.ACTIVATION.Type.Lair.Header",
     group: "DND5E.ACTIVATION.Category.Monster"
   },
   crew: {
-    label: "DND5E.ACTIVATION.Type.Crew.Label.one",
-    plural: "DND5E.ACTIVATION.Type.Crew.Label.other",
+    label: "DND5E.ACTIVATION.Type.Crew.Label",
+    header: "DND5E.ACTIVATION.Type.Crew.Header",
     group: "DND5E.ACTIVATION.Category.Vehicle",
     scalar: true
   },

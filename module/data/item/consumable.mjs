@@ -70,14 +70,7 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     hasEffects: true,
-    enchantable: true,
-    inventory: {
-      id: "consumables",
-      order: 300,
-      label: "TYPES.Item.consumablePl",
-      groups: { type: "consumable" },
-      columns: ["price", "weight", "quantity", "charges", "controls"]
-    }
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -97,6 +90,22 @@ export default class ConsumableData extends ItemDataModel.mixin(
       ...this.compendiumBrowserPhysicalItemFilters,
       ["properties", this.compendiumBrowserPropertiesFilter("consumable")]
     ]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "consumables",
+      order: 300,
+      label: "TYPES.Item.consumablePl",
+      groups: { type: "consumable" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    };
   }
 
   /* -------------------------------------------- */

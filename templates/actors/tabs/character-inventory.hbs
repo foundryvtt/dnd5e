@@ -5,22 +5,7 @@
 
         {{!-- Encumbrance --}}
         <div class="encumbrance card">
-            {{#with system.attributes.encumbrance}}
-            <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
-                 aria-valuetext="{{ value }}" aria-valuemax="{{ max }}"
-                 style="--bar-percentage: {{ pct }}%; --encumbrance-low: {{ stops.encumbered }}%; --encumbrance-high: {{ stops.heavilyEncumbered }}%;">
-                <div class="label">
-                    <i class="fa-solid fa-weight-hanging" inert></i>
-                    <span class="value">{{ value }}</span>
-                    <span class="separator">&sol;</span>
-                    <span class="max">{{ max }}</span>
-                </div>
-                <i class="breakpoint encumbrance-low arrow-up" role="presentation"></i>
-                <i class="breakpoint encumbrance-low arrow-down" role="presentation"></i>
-                <i class="breakpoint encumbrance-high arrow-up" role="presentation"></i>
-                <i class="breakpoint encumbrance-high arrow-down" role="presentation"></i>
-            </div>
-            {{/with}}
+            {{> "systems/dnd5e/templates/inventory/encumbrance.hbs" encumbrance=system.attributes.encumbrance }}
             <div class="info">
                 <div class="strength">
                     <span class="label">{{ localize "DND5E.AbilityStr" }}</span>

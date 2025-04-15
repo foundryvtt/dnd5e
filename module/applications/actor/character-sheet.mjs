@@ -48,7 +48,10 @@ export default class CharacterActorSheet extends BaseActorSheet {
     inventory: {
       container: { classes: ["tab-body"], id: "tabs" },
       template: "systems/dnd5e/templates/actors/tabs/character-inventory.hbs",
-      templates: ["systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs"],
+      templates: [
+        "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs",
+        "systems/dnd5e/templates/inventory/encumbrance.hbs"
+      ],
       scrollable: [""]
     },
     features: {
@@ -168,13 +171,15 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
   /** @inheritDoc */
   async _prepareContext(options) {
-    return {
+    const context = {
       ...await super._prepareContext(options),
       abilityRows: {
         bottom: [], top: [], optional: Object.keys(CONFIG.DND5E.abilities).length - 6
       },
       isCharacter: true
     };
+    context.spellbook = this._prepareSpellbook(context);
+    return context;
   }
 
   /* -------------------------------------------- */
@@ -884,11 +889,16 @@ export default class CharacterActorSheet extends BaseActorSheet {
   async _onRender(context, options) {
     await super._onRender(context, options);
 
+    if ( !this.actor.limited ) {
+      this._renderAttunement(context, options);
+      this._renderSpellbook(context, options);
+    }
+
     // Apply special context menus for items outside inventory elements
     const featuresElement = this.element.querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
     if ( featuresElement ) new ContextMenu5e(
       this.element, ".pills-lg [data-item-id], .favorites [data-item-id], .facility[data-item-id]", [],
-      { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: true }
+      { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: false }
     );
 
     // Show death tray at 0 HP

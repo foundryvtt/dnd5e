@@ -211,7 +211,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     // Cache concentration data and prepare items
     this._concentration = this.actor.concentration;
     await this._prepareItems(context);
-    context.spellbook = this._prepareSpellbook(context);
 
     return context;
   }
@@ -298,8 +297,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Inventory
     const sections = Object.values(CONFIG.Item.dataModels)
-      .filter(model => "inventory" in (model.metadata ?? {}))
-      .map(model => foundry.utils.deepClone(model.metadata.inventory));
+      .filter(model => "inventorySection" in model)
+      .map(model => model.inventorySection);
     sections.push(foundry.utils.deepClone(Inventory.SECTIONS.contents));
     await this._configureInventorySections(sections);
     // Add hidden section that renders the union of columns.
@@ -769,7 +768,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
   _assignItemCategories(item) {
     if ( item.type === "container" ) return new Set(["containers", "inventory"]);
     if ( item.type === "spell" ) return new Set(["spells"]);
-    if ( "inventory" in (item.system.metadata ?? {}) ) return new Set(["inventory"]);
+    if ( "inventorySection" in item.system.constructor ) return new Set(["inventory"]);
     return new Set(["features"]);
   }
 
@@ -1127,12 +1126,6 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       this.element.classList.toggle("sidebar-collapsed", sidebarCollapsed);
     }
 
-    // Attunement
-    this._renderAttunement(context, options);
-
-    // Spellbook
-    this._renderSpellbook(context, options);
-
     // Display warnings
     const warnings = this.element.querySelector(".window-header .preparation-warnings");
     warnings?.toggleAttribute("hidden", (!game.user.isGM && this.actor.limited)
@@ -1193,7 +1186,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     switch ( tab ) {
       case "features": return ["feat", "race", "background", "class", "subclass"];
       case "inventory": return Object.entries(CONFIG.Item.dataModels)
-        .filter(([type, model]) => ("inventory" in (model.metadata ?? {})) && (type !== "backpack"))
+        .filter(([type, model]) => ("inventorySection" in model) && (type !== "backpack"))
         .map(([type]) => type);
       case "spells": return ["spell"];
       default: return [];
@@ -1238,7 +1231,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
     // Adjust create child tooltip
     const createChild = this.element.querySelector(".create-child");
-    createChild.setAttribute("aria-label", game.i18n.format("SIDEBAR.Create", {
+    createChild?.setAttribute("aria-label", game.i18n.format("SIDEBAR.Create", {
       type: game.i18n.localize(`DOCUMENT.${tab === "effects" ? "ActiveEffect" : "Item"}`)
     }));
 

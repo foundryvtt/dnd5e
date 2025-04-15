@@ -21,7 +21,9 @@ export default class ContainerSheet extends ItemSheet5e {
     ...super.PARTS,
     contents: {
       template: "systems/dnd5e/templates/items/contents.hbs",
-      templates: ["systems/dnd5e/templates/inventory/inventory.hbs"],
+      templates: [
+        "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/encumbrance.hbs"
+      ],
       scrollable: [""]
     }
   };
@@ -122,9 +124,9 @@ export default class ContainerSheet extends ItemSheet5e {
     }
 
     const inventory = Object.values(CONFIG.Item.dataModels)
-      .filter(model => "inventory" in (model.metadata ?? {}))
+      .filter(model => "inventorySection" in model)
       .map(model => {
-        const section = foundry.utils.deepClone(model.metadata.inventory);
+        const section = model.inventorySection;
         if ( foundry.utils.isSubclass(model, ContainerData) ) return section;
         return { ...section, columns: ["price", "weight", "quantity", "controls"] };
       });

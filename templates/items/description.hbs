@@ -96,13 +96,13 @@
      {{~#if collapsible}} data-action="toggleCollapsed" data-expand-id="{{ target }}"{{/if}}>
     <div class="header">
         <span>{{ localize label }}</span>
-        {{#if @root.item.isOwner}}
+        {{#unless @root.locked}}
         <button type="button" class="unbutton control-button always-interactive" data-action="editDescription"
                 aria-label="{{ localize 'DND5E.DescriptionEdit' description=(localize label) }}"
                 data-target="{{ target }}">
             <i class="fas fa-feather" inert></i>
         </button>
-        {{/if}}
+        {{/unless}}
     </div>
     <div class="details collapsible-content">
         <div class="editor wrapper">

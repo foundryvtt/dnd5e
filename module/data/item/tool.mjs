@@ -63,14 +63,7 @@ export default class ToolData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     hasEffects: true,
-    enchantable: true,
-    inventory: {
-      id: "tool",
-      order: 400,
-      label: "TYPES.Item.toolPl",
-      groups: { type: "tool" },
-      columns: ["price", "weight", "quantity", "charges", "controls"]
-    }
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -90,6 +83,22 @@ export default class ToolData extends ItemDataModel.mixin(
       ...this.compendiumBrowserPhysicalItemFilters,
       ["properties", this.compendiumBrowserPropertiesFilter("tool")]
     ]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "tool",
+      order: 400,
+      label: "TYPES.Item.toolPl",
+      groups: { type: "tool" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    };
   }
 
   /* -------------------------------------------- */

@@ -1,0 +1,20 @@
+{{#with encumbrance}}
+<div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
+     aria-valuetext="{{ value }}" aria-valuemax="{{ max }}"
+     style="--bar-percentage: {{ pct }}%; --encumbrance-low: {{ stops.encumbered }}%; --encumbrance-high: {{ stops.heavilyEncumbered }}%;">
+    <div class="label">
+        {{#if (eq units "Items")}}
+        <i class="fa-solid fa-briefcase" inert></i>
+        {{else}}
+        <i class="fa-solid fa-weight-hanging" inert></i>
+        {{/if}}
+        <span class="value">{{ value }}</span>
+        <span class="separator">&sol;</span>
+        <span class="max">{{{ ifThen maxLabel maxLabel max }}}</span>
+    </div>
+    <i class="breakpoint encumbrance-low arrow-up" role="presentation"></i>
+    <i class="breakpoint encumbrance-low arrow-down" role="presentation"></i>
+    <i class="breakpoint encumbrance-high arrow-up" role="presentation"></i>
+    <i class="breakpoint encumbrance-high arrow-down" role="presentation"></i>
+</div>
+{{/with}}

@@ -44,7 +44,10 @@ export default class NPCActorSheet extends BaseActorSheet {
     inventory: {
       container: { classes: ["tab-body"], id: "tabs" },
       template: "systems/dnd5e/templates/actors/tabs/actor-inventory.hbs",
-      templates: ["systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs"],
+      templates: [
+        "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs",
+        "systems/dnd5e/templates/inventory/encumbrance.hbs"
+      ],
       scrollable: [""]
     },
     spells: {
@@ -136,6 +139,7 @@ export default class NPCActorSheet extends BaseActorSheet {
       isNPC: true
     };
     context.hasClasses = context.itemCategories.classes?.length;
+    context.spellbook = this._prepareSpellbook(context);
     return context;
   }
 
@@ -205,7 +209,7 @@ export default class NPCActorSheet extends BaseActorSheet {
    */
   async _prepareFeaturesContext(context, options) {
     const sections = Object.entries(CONFIG.DND5E.activityActivationTypes).reduce((obj, [id, config], i) => {
-      const { plural: label, passive } = config;
+      const { header: label, passive } = config;
       if ( passive ) return obj;
       obj[id] ??= {
         id, label, order: (i + 1) * 100, items: [], minWidth: 210,
@@ -217,7 +221,7 @@ export default class NPCActorSheet extends BaseActorSheet {
       id: "passive", label: "DND5E.Features", order: 0, items: [], minWidth: 210,
       columns: ["recovery", "uses", "roll", "formula", "controls"]
     };
-    context.itemCategories.features.forEach(i => {
+    context.itemCategories.features?.forEach(i => {
       const ctx = context.itemContext[i.id];
       sections[ctx.group]?.items.push(i);
     });
@@ -226,11 +230,11 @@ export default class NPCActorSheet extends BaseActorSheet {
       label: "DND5E.FeatureSearch",
       list: "features",
       filters: [
-        { key: "action", label: "DND5E.ACTIVATION.Type.Action.Label.one" },
-        { key: "bonus", label: "DND5E.ACTIVATION.Type.BonusAction.Label.one" },
-        { key: "reaction", label: "DND5E.ACTIVATION.Type.Reaction.Label.one" },
-        { key: "legendary", label: "DND5E.ACTIVATION.Type.LegendaryAction.Label.one" },
-        { key: "lair", label: "DND5E.ACTIVATION.Type.LairAction.Label.one" }
+        { key: "action", label: "DND5E.ACTIVATION.Type.Action.Label" },
+        { key: "bonus", label: "DND5E.ACTIVATION.Type.BonusAction.Label" },
+        { key: "reaction", label: "DND5E.ACTIVATION.Type.Reaction.Label" },
+        { key: "legendary", label: "DND5E.ACTIVATION.Type.LegendaryAction.Label" },
+        { key: "lair", label: "DND5E.ACTIVATION.Type.LairAction.Label" }
       ],
       sorting: [
         { key: "m", label: "SIDEBAR.SortModeManual", dataset: { icon: "fa-solid fa-arrow-down-short-wide" } },
@@ -489,7 +493,12 @@ export default class NPCActorSheet extends BaseActorSheet {
   async _onRender(context, options) {
     await super._onRender(context, options);
     this._renderSource();
-    this._renderCreateInventory();
+
+    if ( !this.actor.limited ) {
+      this._renderCreateInventory();
+      this._renderAttunement(context, options);
+      this._renderSpellbook(context, options);
+    }
 
     const elements = this.element.querySelector(".header-elements .cr-xp");
     if ( !elements || this.actor.limited ) return;

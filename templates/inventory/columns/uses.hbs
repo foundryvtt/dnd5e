@@ -10,9 +10,13 @@
 </div>
 {{else if ctx.uses.hasUses}}
 <div class="item-detail item-uses" data-column-id="{{ id }}">
+    {{#if @root.locked}}
+    <span class="value">{{ ctx.uses.value }}</span>
+    {{else}}
     <input type="text" value="{{ ctx.uses.value }}" placeholder="0" data-dtype="Number"
            data-name="system.uses.value" inputmode="numeric" pattern="[+=\-]?\d*"
            aria-label="{{ localize "DND5E.Remaining" }}">
+    {{/if}}
     <span class="separator">&sol;</span>
     <span class="max">{{ ctx.uses.max }}</span>
 </div>

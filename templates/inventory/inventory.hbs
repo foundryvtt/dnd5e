@@ -3,16 +3,19 @@
     {{!-- Currency --}}
     {{#if showCurrency}}
     <section class="currency">
+        {{#unless @root.locked}}
         <button type="button" class="item-action unbutton always-interactive" data-action="currency"
                 data-tooltip="DND5E.CurrencyManager.Title" aria-label="{{ localize "DND5E.CurrencyManager.Title" }}">
             <i class="fa-solid fa-coins" inert></i>
         </button>
+        {{/unless}}
         {{#each system.currency}}
         {{#with (lookup @root.config.currencies @key) as |currency|}}
         <label aria-label="{{ lookup currency 'label' }}">
             <i class="currency {{ @key }}" data-tooltip="{{ lookup currency "label" }}"></i>
             <input type="text" class="uninput always-interactive" name="system.currency.{{ @key }}"
-                   value="{{ ../this }}" data-dtype="Number" inputmode="numeric" pattern="[+=\-]?\d*">
+                   value="{{ ../this }}" data-dtype="Number" inputmode="numeric" pattern="[+=\-]?\d*"
+                   {{#if @root.locked}}readonly{{/if}}>
         </label>
         {{/with}}
         {{/each}}
@@ -172,31 +175,12 @@
     </section>
 
     {{!-- Encumbrance --}}
-    {{#with encumbrance}}
+    {{#if encumbrance}}
     <div class="bottom">
-
         <div class="encumbrance">
-            <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
-                 aria-valuetext="{{ value }}" aria-valuemax="{{ max }}"
-                 style="--bar-percentage: {{ pct }}%; --encumbrance-low: {{ stops.encumbered }}%; --encumbrance-high: {{ stops.heavilyEncumbered }}%;">
-                <div class="label">
-                    {{#if (eq units "Items")}}
-                    <i class="fa-solid fa-briefcase" inert></i>
-                    {{else}}
-                    <i class="fa-solid fa-weight-hanging" inert></i>
-                    {{/if}}
-                    <span class="value">{{ value }}</span>
-                    <span class="separator">&sol;</span>
-                    <span class="max">{{{ ifThen maxLabel maxLabel max }}}</span>
-                </div>
-                <i class="breakpoint encumbrance-low arrow-up" role="presentation"></i>
-                <i class="breakpoint encumbrance-low arrow-down" role="presentation"></i>
-                <i class="breakpoint encumbrance-high arrow-up" role="presentation"></i>
-                <i class="breakpoint encumbrance-high arrow-down" role="presentation"></i>
-            </div>
+            {{> "systems/dnd5e/templates/inventory/encumbrance.hbs" }}
         </div>
-
     </div>
-    {{/with}}
+    {{/if}}
 
 </{{ elements.inventory }}>

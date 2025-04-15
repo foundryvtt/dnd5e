@@ -46,14 +46,7 @@ export default class LootData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-    enchantable: true,
-    inventory: {
-      id: "loot",
-      order: 600,
-      label: "TYPES.Item.lootPl",
-      groups: { type: "loot" },
-      columns: ["price", "weight", "quantity", "charges", "controls"]
-    }
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -72,6 +65,22 @@ export default class LootData extends ItemDataModel.mixin(
       ...this.compendiumBrowserPhysicalItemFilters,
       ["properties", this.compendiumBrowserPropertiesFilter("loot")]
     ]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "loot",
+      order: 600,
+      label: "TYPES.Item.lootPl",
+      groups: { type: "loot" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    };
   }
 
   /* -------------------------------------------- */

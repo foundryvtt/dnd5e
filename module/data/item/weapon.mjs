@@ -93,14 +93,7 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     hasEffects: true,
-    enchantable: true,
-    inventory: {
-      id: "weapons",
-      order: 100,
-      label: "TYPES.Item.weaponPl",
-      groups: { type: "weapon" },
-      columns: ["price", "weight", "quantity", "charges", "controls"]
-    }
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -128,6 +121,22 @@ export default class WeaponData extends ItemDataModel.mixin(
       ...this.compendiumBrowserPhysicalItemFilters,
       ["properties", this.compendiumBrowserPropertiesFilter("weapon")]
     ]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "weapons",
+      order: 100,
+      label: "TYPES.Item.weaponPl",
+      groups: { type: "weapon" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    };
   }
 
   /* -------------------------------------------- */

@@ -322,6 +322,8 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   _getContextOptions(item, element) {
+    const compendiumLocked = game.packs.get(item.pack)?.locked;
+
     // Standard options.
     const options = [{
       name: "DND5E.ItemView",
@@ -330,18 +332,18 @@ export default class InventoryElement extends HTMLElement {
     }, {
       name: "DND5E.ContextMenuActionEdit",
       icon: '<i class="fa-solid fa-edit fa-fw"></i>',
-      condition: () => item.isOwner && !item.collection.locked,
+      condition: () => item.isOwner && !compendiumLocked,
       callback: li => this._onAction(li, "edit")
     }, {
       name: "DND5E.ContextMenuActionDuplicate",
       icon: '<i class="fa-solid fa-copy fa-fw"></i>',
-      condition: () => item.canDuplicate && item.isOwner && !item.collection.locked,
+      condition: () => item.canDuplicate && item.isOwner && !compendiumLocked,
       callback: li => this._onAction(li, "duplicate")
     }, {
       id: "delete",
       name: "DND5E.ContextMenuActionDelete",
       icon: '<i class="fa-solid fa-trash fa-fw"></i>',
-      condition: () => item.canDelete && item.isOwner && !item.collection.locked,
+      condition: () => item.canDelete && item.isOwner && !compendiumLocked,
       callback: li => this._onAction(li, "delete")
     }, {
       name: "DND5E.DisplayCard",
@@ -376,19 +378,19 @@ export default class InventoryElement extends HTMLElement {
     }, {
       name: `DND5E.ContextMenuAction${item.system.attuned ? "Unattune" : "Attune"}`,
       icon: '<i class="fa-solid fa-sun fa-fw"></i>',
-      condition: () => item.system.attunemed && item.isOwner && !item.collection.locked,
+      condition: () => item.system.attunemed && item.isOwner && !compendiumLocked,
       callback: li => this._onAction(li, "attune"),
       group: "state"
     }, {
       name: `DND5E.ContextMenuAction${item.system.equipped ? "Unequip" : "Equip"}`,
       icon: '<i class="fa-solid fa-shield-alt fa-fw"></i>',
-      condition: () => ("equipped" in item.system) && item.isOwner && !item.collection.locked,
+      condition: () => ("equipped" in item.system) && item.isOwner && !compendiumLocked,
       callback: li => this._onAction(li, "equip"),
       group: "state"
     }, {
       name: `DND5E.ContextMenuAction${item.isOnCooldown ? "Charge" : "ExpendCharge"}`,
       icon: '<i class="fa-solid fa-bolt"></i>',
-      condition: () => item.hasRecharge && item.isOwner && !item.collection.locked,
+      condition: () => item.hasRecharge && item.isOwner && !compendiumLocked,
       callback: li => this._onAction(li, "toggleCharge"),
       group: "state"
     }, {
@@ -396,7 +398,7 @@ export default class InventoryElement extends HTMLElement {
       icon: '<i class="fa-solid fa-sun fa-fw"></i>',
       condition: () => {
         const isPrepared = ("preparation" in item.system) && (item.system.preparation.mode === "prepared");
-        const canEdit = item.isOwner && !item.collection.locked;
+        const canEdit = item.isOwner && !compendiumLocked;
         return !item.hasRecharge && isPrepared && canEdit && !item.getFlag("dnd5e", "cachedFor");
       },
       callback: li => this._onAction(li, "prepare"),
@@ -406,7 +408,7 @@ export default class InventoryElement extends HTMLElement {
       icon: '<i class="fa-solid fa-magnifying-glass"></i>',
       condition: () => {
         const canIdentify = ("identified" in item.system) && !item.system.identified;
-        const canEdit = item.isOwner && !item.collection.locked;
+        const canEdit = item.isOwner && !compendiumLocked;
         return canIdentify && canEdit;
       },
       callback: li => this._onAction(li, "identify"),
@@ -414,7 +416,7 @@ export default class InventoryElement extends HTMLElement {
     }, {
       name: favorited ? "DND5E.FavoriteRemove" : "DND5E.Favorite",
       icon: '<i class="fa-solid fa-bookmark fa-fw"></i>',
-      condition: () => ("favorites" in this.actor.system) && item.isOwner && !item.collection.locked,
+      condition: () => ("favorites" in this.actor.system) && item.isOwner && !compendiumLocked,
       callback: li => this._onAction(li, "toggleFavorite"),
       group: "state"
     }, {
@@ -770,7 +772,7 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   _onUseItem(item, { event }={}) {
-    return item.use({ legacy: false, event });
+    return item.use({ event });
   }
 
   /* -------------------------------------------- */

@@ -232,6 +232,7 @@ export default function PrimarySheetMixin(Base) {
     async _prepareContext(options) {
       const context = await super._prepareContext(options);
       context.owner = this.document.isOwner;
+      context.locked = !this.isEditable;
       context.editable = this.isEditable && (this._mode === this.constructor.MODES.EDIT);
       context.tabs = this._getTabs();
       return context;
@@ -264,6 +265,14 @@ export default function PrimarySheetMixin(Base) {
         };
         return tabs;
       }, {});
+    }
+
+    /* -------------------------------------------- */
+
+    /** @inheritDoc */
+    _toggleDisabled(disabled) {
+      super._toggleDisabled(disabled);
+      this.element.querySelectorAll(".always-interactive").forEach(input => input.disabled = false);
     }
 
     /* -------------------------------------------- */
