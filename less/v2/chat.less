@@ -309,19 +309,21 @@
     padding: 7px 6px 0 0;
     background: none;
 
-    a.header-button, .header-control {
+    :is(a, button).header-button, .header-control {
       height: 15px;
       border-radius: 100%;
       background: rgb(0 0 0 / 25%);
       font-size: var(--font-size-10);
+      min-height: unset;
     }
 
-    a.header-button {
+    :is(a, button):is(.header-button, .header-control) {
       width: 15px;
       display: inline-grid;
       place-content: center;
       color: var(--color-text-light-highlight);
       margin: 0;
+      padding: 0;
 
       > i { margin: 0; }
     }

@@ -4,7 +4,7 @@ import { setTheme } from "../settings.mjs";
  * A specialized subclass of ContextMenu that places the menu in a fixed position.
  * @extends {ContextMenu}
  */
-export default class ContextMenu5e extends (foundry.applications?.ui?.ContextMenu ?? ContextMenu) {
+export default class ContextMenu5e extends (foundry.applications?.ux?.ContextMenu ?? ContextMenu) {
   /** @override */
   _setPosition(html, target, options={}) {
     if ( game.release.generation > 12 ) {
