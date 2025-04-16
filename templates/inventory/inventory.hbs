@@ -65,7 +65,7 @@
         <div class="items-section card" {{ dnd5e-dataset dataset }}>
 
             {{!-- Section Header --}}
-            <div class="items-header header">
+            <div class="items-header header {{~#if draggable}} draggable{{/if}}">
                 <h3 class="item-name">{{ localize label }}</h3>
                 {{#each columns}}
                 <div class="item-header item-{{ id }}" data-column-id="{{ id }}" data-column-width="{{ width }}"
