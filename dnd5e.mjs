@@ -388,6 +388,8 @@ Hooks.once("setup", function() {
     }
   `;
   document.head.append(style);
+
+  _migrateInventoryMetadata();
 });
 
 /* --------------------------------------------- */
@@ -555,6 +557,35 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
     });
   }
 });
+
+/* -------------------------------------------- */
+/*  Deprecations                                */
+/* -------------------------------------------- */
+
+/**
+ * Migrate legacy inventory metadata.
+ */
+function _migrateInventoryMetadata() {
+  Object.entries(CONFIG.Item.dataModels).forEach(([type, model]) => {
+    if ( ("inventorySection" in model) || (model.metadata.inventoryItem === false) ) return;
+    if ( !("inventoryItem" in model.metadata) && !("inventoryOrder" in model.metadata) ) return;
+    const { inventoryOrder=Infinity } = model.metadata;
+    foundry.utils.logCompatibilityWarning("ItemDataModel.metadata.inventoryItem and "
+      + "ItemDataModel.metadata.inventoryOrder are deprecated. Please define an inventorySection getter on the model "
+      + "instead.", { since: "dnd5e 5.0", until: "dnd5e 5.2" });
+    Object.defineProperty(model, "inventorySection", {
+      get() {
+        return {
+          id: type,
+          order: inventoryOrder,
+          label: `${CONFIG.Item.typeLabels[type]}Pl`,
+          groups: { type },
+          columns: ["price", "weight", "quantity", "charges", "controls"]
+        };
+      }
+    });
+  });
+}
 
 /* -------------------------------------------- */
 /*  Bundled Module Exports                      */

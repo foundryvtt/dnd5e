@@ -3,122 +3,6 @@
   flex-direction: column;
   gap: 8px;
 
-  /* ---------------------------------- */
-  /*  Common Styles                     */
-  /* ---------------------------------- */
-
-  .meter.progress::before {
-    // Becomes more red the closer it is to 100% encumbrance.
-    --bar-color-2: color-mix(in oklab, var(--dnd5e-color-blue), var(--dnd5e-color-maroon) var(--bar-percentage));
-    --bar-color-1: color-mix(in oklab, var(--bar-color-2), black 33%);
-    --bar-color-3: color-mix(in oklab, var(--bar-color-2), black 20%);
-    background: linear-gradient(to right, var(--bar-color-1), var(--bar-color-2));
-    border-right: var(--border-width) solid var(--bar-color-3);
-  }
-
-  /* ---------------------------------- */
-  /*  Encumbrance & Containers          */
-  /* ---------------------------------- */
-
-  .top {
-    display: flex;
-    align-items: start;
-    gap: 1rem;
-  }
-
-  /* Encumbrance */
-  .encumbrance {
-    display: flex;
-    flex-direction: column;
-    width: 230px;
-
-    .meter {
-      --encumbrance-low: 33%;
-      --encumbrance-high: 66%;
-      border-radius: 3px 3px 0 0;
-      height: 25px;
-      border: none;
-      border-bottom: var(--dnd5e-border-gold);
-
-      .label {
-        display: flex;
-        align-items: center;
-        gap: .1875rem;
-
-        i {
-          font-size: var(--font-size-9);
-          margin-right: .1875rem;
-        }
-      }
-
-      .breakpoint {
-        display: block;
-        position: absolute;
-        block-size: 0;
-        inline-size: 0;
-        border-inline: 3px solid transparent;
-        &.encumbrance-low { inset-inline-start: var(--encumbrance-low); }
-        &.encumbrance-high { inset-inline-start: var(--encumbrance-high); }
-        &.arrow-up {
-          inset-block-end: 0;
-          border-block-end: 3px solid var(--dnd5e-color-gold);
-        }
-        &.arrow-down {
-          inset-block-start: 0;
-          border-top: 3px solid var(--dnd5e-color-gold);
-        }
-        transform: translateX(-50%);
-        z-index: 1;
-      }
-    }
-  }
-
-  /* Containers */
-  .containers {
-    flex: 1;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(39px, max-content));
-    gap: .5rem;
-
-    .container {
-      max-width: 78px;
-      max-height: 78px;
-      aspect-ratio: 1;
-      border: var(--dnd5e-border-gold);
-      border-radius: 4px;
-      box-shadow: 0 0 6px var(--dnd5e-shadow-45);
-      background-color: var(--dnd5e-color-light-gray);
-
-      a {
-        display: flex;
-        flex-direction: column;
-        height: 100%;
-
-        &:hover { text-shadow: none; }
-
-        .meter {
-          flex: 0 0 6px;
-          border: none;
-          border-radius: 3px 3px 0 0;
-
-          &.progress::before {
-            --border-width: 1px;
-            box-shadow: none;
-            clip-path: none;
-          }
-        }
-
-        img {
-          flex: 1;
-          border: none;
-          object-fit: cover;
-          border-radius: 0 0 3px 3px;
-          min-height: 0;
-        }
-      }
-    }
-  }
-
   /* ------------------------------------ */
   /*  Searching & Filtering, & Attunement */
   /* ------------------------------------ */
@@ -188,7 +72,11 @@
         }
         &.tmp:hover { filter: drop-shadow(0 0 2px var(--dnd5e-color-sc-2)); }
         &.filled { --icon-fill: var(--dnd5e-color-gold); }
-        &:hover { filter: drop-shadow(0 0 2px var(--dnd5e-color-gold)); }
+        &:focus { background: none; }
+        &:hover {
+          background: none;
+          filter: drop-shadow(0 0 2px var(--dnd5e-color-gold));
+        }
       }
     }
   }
@@ -276,6 +164,10 @@
         align-items: center;
         justify-content: center;
         text-align: center;
+
+        &.hidden-width, &.hidden-column {
+          &:not(.always-visible) { display: none; }
+        }
       }
 
       .item-detail.empty::after {
@@ -319,13 +211,12 @@
 
       .item-price {
         width: 80px;
-        display: none;
         justify-content: end;
         padding-right: .5rem;
       }
 
       /* Item Quantity & Uses */
-      .item-quantity, .item-uses {
+      .item-quantity, .item-uses, .item-charges {
         width: 70px;
         justify-content: space-evenly;
 
@@ -347,7 +238,7 @@
         width: 30px;
       }
 
-      .item-uses {
+      .item-uses, .item-charges {
         gap: unset;
         &.item-detail { font-weight: bold; }
         .max, input { width: 20px; }
@@ -359,13 +250,12 @@
         input { text-align: end; }
         i.fa-bolt { color: var(--dnd5e-color-gold); }
       }
-      .spell-uses { display: none; }
 
       /* Item Recovery */
       .item-recovery { width: 60px; }
 
       /* Spell School, Cast Time, & To Hit / DC */
-      .item-school, .item-usage, .item-roll { width: 40px; }
+      .item-school, .item-time, .item-roll { width: 40px; }
 
       /* Capacity */
       .item-capacity {
@@ -382,7 +272,6 @@
       .item-school {
         --icon-fill: var(--dnd5e-color-gold);
         --icon-size: 18px;
-        display: none;
       }
 
       .item-roll {
@@ -420,9 +309,9 @@
       }
 
       /* Spell Target & Formula */
-      .item-target, .item-formula, .spell-formula { width: 80px; }
+      .item-target, .item-formula { width: 80px; }
 
-      .item-formula, .spell-formula {
+      .item-formula {
         flex-direction: column;
 
         dnd5e-icon {
@@ -437,7 +326,6 @@
       }
 
       .item-formula { display: flex; }
-      .spell-formula { display: none; }
 
       /* Effect Duration */
       .effect-name {
@@ -471,6 +359,8 @@
         .item-control {
           display: flex;
           align-items: center;
+          font-size: var(--font-size-11);
+          color: var(--color-text-light-6);
         }
         .item-control.active { color: var(--dnd5e-color-black); }
 
@@ -504,28 +394,12 @@
 
       /* Item Description */
       .item-description .item-summary {
+        font-family: var(--dnd5e-font-roboto);
         font-size: var(--font-size-11);
         padding: 1px 8px 8px;
         background: var(--dnd5e-color-parchment);
         .item-properties { padding-top: 7px; }
         > * + .item-properties { padding-top: 0; }
-      }
-
-      @container (min-width: 580px) {
-        .spell-uses { display: flex; }
-        .subtitle-uses { display: none; }
-      }
-
-      @container (min-width: 600px) {
-        .item-price { display: flex; }
-      }
-
-      @container (min-width: 640px) {
-        .spell-formula { display: flex; }
-      }
-
-      @container (min-width: 660px) {
-        .item-school { display: flex; }
       }
     }
 
@@ -641,7 +515,7 @@
 /* ---------------------------------- */
 
 .dnd5e2 .locked .inventory-element {
-  .item :is(.item-quantity, .item-uses) input:is(:focus-visible, :hover) { box-shadow: none; }
+  .item :is(.item-quantity, .item-uses, .item-charges) input:is(:focus-visible, :hover) { box-shadow: none; }
 }
 
 /* ---------------------------------- */

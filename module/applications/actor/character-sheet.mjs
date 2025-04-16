@@ -3,6 +3,7 @@ import AdvancementManager from "../advancement/advancement-manager.mjs";
 import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
+import Item5e from "../../documents/item.mjs";
 
 /**
  * Extension of base actor sheet for characters.
@@ -46,17 +47,23 @@ export default class CharacterActorSheet extends BaseActorSheet {
     },
     inventory: {
       container: { classes: ["tab-body"], id: "tabs" },
-      template: "systems/dnd5e/templates/actors/tabs/actor-inventory.hbs",
+      template: "systems/dnd5e/templates/actors/tabs/character-inventory.hbs",
+      templates: [
+        "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs",
+        "systems/dnd5e/templates/inventory/encumbrance.hbs"
+      ],
       scrollable: [""]
     },
     features: {
       container: { classes: ["tab-body"], id: "tabs" },
-      template: "systems/dnd5e/templates/actors/tabs/creature-features.hbs",
+      template: "systems/dnd5e/templates/actors/tabs/character-features.hbs",
+      templates: ["systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs"],
       scrollable: [""]
     },
     spells: {
       container: { classes: ["tab-body"], id: "tabs" },
       template: "systems/dnd5e/templates/actors/tabs/creature-spells.hbs",
+      templates: ["systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/activity.hbs"],
       scrollable: [""]
     },
     effects: {
@@ -145,11 +152,21 @@ export default class CharacterActorSheet extends BaseActorSheet {
     features: { name: "", properties: new Set() },
     effects: { name: "", properties: new Set() },
     inventory: { name: "", properties: new Set() },
-    spellbook: { name: "", properties: new Set() }
+    spells: { name: "", properties: new Set() }
   };
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  async _configureInventorySections(sections) {
+    sections.forEach(s => {
+      s.minWidth = 250;
+      if ( s.id === "weapons" ) s.columns = ["price", "weight", "quantity", "charges", "roll", "formula", "controls"];
+    });
+  }
+
   /* -------------------------------------------- */
 
   /** @inheritDoc */
@@ -161,6 +178,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       },
       isCharacter: true
     };
+    context.spellbook = this._prepareSpellbook(context);
     return context;
   }
 
@@ -361,49 +379,6 @@ export default class CharacterActorSheet extends BaseActorSheet {
    * @protected
    */
   async _prepareFeaturesContext(context, options) {
-    const sections = [
-      ["active", "DND5E.FeatureActive", true, { type: "active" }],
-      ["passive", "DND5E.FeaturePassive", false, { type: "passive" }],
-      ...Object.values(this.actor.classes ?? {})
-        .sort((a, b) => b.system.levels - a.system.levels)
-        .map(cls => [
-          cls.identifier, game.i18n.format("DND5E.FeaturesClass", { class: cls.name }), true, { type: cls.identifier }
-        ]),
-      this.actor.system.details.race instanceof Item ? [
-        "species", "DND5E.Species.Features", true, { type: "race" }
-      ] : null,
-      this.actor.system.details.background instanceof Item ? [
-        "background", "DND5E.FeaturesBackground", true, { type: "background" }
-      ] : null,
-      ["other", "DND5E.FeaturesOther", true, { type: "other" }]
-    ].filter(_ => _).reduce((obj, [id, label, hasActions, dataset]) => {
-      obj[id] = {
-        dataset, hasActions,
-        categories: [
-          {
-            classes: "item-uses", label: "DND5E.Uses", itemPartial: "dnd5e.column-uses",
-            activityPartial: "dnd5e.activity-column-uses"
-          },
-          {
-            classes: "item-recovery", label: "DND5E.Recovery", itemPartial: "dnd5e.column-recovery",
-            activityPartial: "dnd5e.activity-column-recovery"
-          },
-          {
-            classes: "item-controls", itemPartial: "dnd5e.column-feature-controls",
-            activityPartial: "dnd5e.activity-column-controls"
-          }
-        ],
-        items: [],
-        label: game.i18n.localize(label)
-      };
-      return obj;
-    }, {});
-
-    for ( const item of context.itemCategories.features ?? [] ) {
-      if ( item.system.activities?.size && !item.system.properties?.has("trait") ) sections.active.items.push(item);
-      else sections.passive.items.push(item);
-    }
-
     // Classes
     context.subclasses = context.itemCategories.subclasses ?? [];
     context.classes = (context.itemCategories.classes ?? [])
@@ -416,25 +391,63 @@ export default class CharacterActorSheet extends BaseActorSheet {
         if ( subclassAdvancement && (subclassAdvancement.level <= cls.system.levels) ) ctx.needsSubclass = true;
       }
     }
-    sections.passive.items.push(...context.subclasses);
+
+    // List
+    const Inventory = customElements.get(this.options.elements.inventory);
+    const columns = Inventory.mapColumns([{ id: "uses", order: 200 }, "recovery", "controls"]);
+    const sections = [
+      { columns, id: "active", label: "DND5E.FeatureActive", order: 100, groups: { activation: "active" }, items: [] },
+      { columns, id: "passive", label: "DND5E.FeaturePassive", order: 200, groups: { activation: "passive" } },
+      ...Object.values(this.actor.classes ?? {})
+        .sort((a, b) => b.system.levels - a.system.levels)
+        .map((cls, i) => {
+          return {
+            columns, id: cls.identifier, order: i * 100, groups: { origin: cls.identifier },
+            label: game.i18n.format("DND5E.FeaturesClass", { class: cls.name })
+          };
+        }),
+      this.actor.system.details.race instanceof Item5e ? {
+        columns, id: "species", label: "DND5E.Species.Features", order: 1000, groups: { origin: "species" }
+      } : null,
+      this.actor.system.details.background instanceof Item5e ? {
+        columns, id: "background", label: "DND5E.FeaturesBackground", order: 2000, groups: { origin: "background" }
+      } : null,
+      { columns, id: "other", label: "DND5E.FeaturesOther", order: 3000, groups: { origin: "other" } }
+    ].filter(_ => _);
+    sections[0].items = [...(context.itemCategories.features ?? []), ...context.subclasses];
+    context.sections = Inventory.prepareSections(sections);
+    context.listControls = {
+      label: "DND5E.FeatureSearch",
+      list: "features",
+      filters: [
+        { key: "action", label: "DND5E.Action" },
+        { key: "bonus", label: "DND5E.BonusAction" },
+        { key: "reaction", label: "DND5E.Reaction" },
+        { key: "sr", label: "DND5E.REST.Short.Label" },
+        { key: "lr", label: "DND5E.REST.Long.Label" },
+        { key: "concentration", label: "DND5E.Concentration" },
+        { key: "mgc", label: "DND5E.ITEM.Property.Magical" }
+      ],
+      sorting: [
+        { key: "m", label: "SIDEBAR.SortModeManual", dataset: { icon: "fa-solid fa-arrow-down-short-wide" } },
+        { key: "a", label: "SIDEBAR.SortModeAlpha", dataset: { icon: "fa-solid fa-arrow-down-a-z" } }
+      ],
+      grouping: [
+        {
+          key: "origin",
+          label: "DND5E.FilterGroupOrigin",
+          dataset: { icon: "fa-solid fa-layer-group", classes: "active" }
+        },
+        { key: "activation", label: "DND5E.FilterGroupOrigin", dataset: { icon: "fa-solid fa-layer-group" } }
+      ]
+    };
+
     // TODO: Add this warning during data preparation instead
     // const message = game.i18n.format("DND5E.SubclassMismatchWarn", {
     //   name: subclass.name, class: subclass.system.classIdentifier
     // });
     // context.warnings.push({ message, type: "warning" });
     context.showClassDrop = !context.classes.length || (this._mode === this.constructor.MODES.EDIT);
-
-    context.filters = [
-      { key: "action", label: "DND5E.Action" },
-      { key: "bonus", label: "DND5E.BonusAction" },
-      { key: "reaction", label: "DND5E.Reaction" },
-      { key: "sr", label: "DND5E.REST.Short.Label" },
-      { key: "lr", label: "DND5E.REST.Long.Label" },
-      { key: "concentration", label: "DND5E.Concentration" },
-      { key: "mgc", label: "DND5E.ITEM.Property.Magical" }
-    ];
-    context.sections = Object.values(sections);
-
     return context;
   }
 
@@ -475,42 +488,13 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
   /** @inheritDoc */
   async _prepareInventoryContext(context, options) {
+    context.itemCategories.inventory = context.itemCategories.inventory?.filter(i => i.type !== "container");
     context = await super._prepareInventoryContext(context, options);
-    context.encumbrance = context.system.attributes.encumbrance;
-
-    const sections = [
-      ...Object.entries(CONFIG.Item.dataModels)
-        .filter(([type, model]) => model.metadata?.inventoryItem && (type !== "container"))
-        .sort(([, lhs], [, rhs]) => (lhs.metadata.inventoryOrder - rhs.metadata.inventoryOrder))
-        .map(([type]) => [type, `${CONFIG.Item.typeLabels[type]}Pl`, { type }]),
-      ["contents", "DND5E.Contents", { type: "all" }]
-    ].reduce((obj, [id, label, dataset]) => {
-      obj[id] = {
-        dataset,
-        categories: [
-          { activityPartial: "dnd5e.activity-column-price" },
-          { activityPartial: "dnd5e.activity-column-weight" },
-          { activityPartial: "dnd5e.activity-column-quantity" },
-          { activityPartial: "dnd5e.activity-column-uses" },
-          { activityPartial: "dnd5e.activity-column-controls" }
-        ],
-        items: [],
-        label: game.i18n.localize(label)
-      };
-      return obj;
-    }, {});
-
-    for ( const item of context.itemCategories.inventory ?? [] ) {
-      sections[item.type]?.items.push(item);
-    }
-
-    context.sections = Object.values(sections);
     context.size = {
       label: CONFIG.DND5E.actorSizes[this.actor.system.traits.size]?.label ?? this.actor.system.traits.size,
       abbr: CONFIG.DND5E.actorSizes[this.actor.system.traits.size]?.abbreviation ?? "—",
       mod: this.actor.system.attributes.encumbrance.mod
     };
-
     return context;
   }
 
@@ -603,6 +587,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
         primary: this.actor.system.attributes.spellcasting === sc.ability,
         save: sc.save
       });
+      const key = item.system.spellcasting.progression === sc.progression ? item.identifier : item.subclass?.identifier;
+      context.listControls.filters.push({ key, label: name });
     }
 
     return context;
@@ -862,15 +848,17 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
     const [originId] = item.getFlag("dnd5e", "advancementOrigin")?.split(".") ?? [];
     const group = this.actor.items.get(originId);
+    ctx.groups.origin = "other";
     switch ( group?.type ) {
-      case "race": ctx.group = "race"; break;
-      case "background": ctx.group = "background"; break;
-      case "class": ctx.group = group.identifier; break;
-      case "subclass": ctx.group = group.class?.identifier ?? "other"; break;
-      default: ctx.group = "other";
+      case "race": ctx.groups.origin = "species"; break;
+      case "background": ctx.groups.origin = "background"; break;
+      case "class": ctx.groups.origin = group.identifier; break;
+      case "subclass": ctx.groups.origin = group.class?.identifier ?? "other"; break;
     }
 
-    ctx.ungroup = item.system.properties?.has("trait") || !item.system.activities?.size ? "passive" : "active";
+    ctx.groups.activation = item.system.properties?.has("trait") || !item.system.activities?.size
+      ? "passive"
+      : "active";
   }
 
   /* -------------------------------------------- */
@@ -901,11 +889,16 @@ export default class CharacterActorSheet extends BaseActorSheet {
   async _onRender(context, options) {
     await super._onRender(context, options);
 
+    if ( !this.actor.limited ) {
+      this._renderAttunement(context, options);
+      this._renderSpellbook(context, options);
+    }
+
     // Apply special context menus for items outside inventory elements
     const featuresElement = this.element.querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
     if ( featuresElement ) new ContextMenu5e(
       this.element, ".pills-lg [data-item-id], .favorites [data-item-id], .facility[data-item-id]", [],
-      { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: true }
+      { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: false }
     );
 
     // Show death tray at 0 HP
