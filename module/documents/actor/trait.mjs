@@ -209,7 +209,7 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
     if ( !label ) label = key;
     if ( prefixed ) key = `${prefix}:${key}`;
     result[key] = {
-      label: game.i18n.localize(label),
+      label,
       chosen: data.selectable !== false ? chosen.has(key) : false,
       selectable: data.selectable !== false,
       sorting: topLevel ? traitConfig.sortCategories === true : true
