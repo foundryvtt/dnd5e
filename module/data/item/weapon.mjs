@@ -489,7 +489,7 @@ export default class WeaponData extends ItemDataModel.mixin(
    * @type {FormSelectOption[]|null}
    */
   get masteryOptions() {
-    if ( !this.parent.actor?.system.traits?.weaponProf?.mastery?.value.has(this.type.baseItem) || !this.mastery ) {
+    if ( !this.parent.actor?.system.traits?.weaponProf?.mastery?.value?.has?.(this.type.baseItem) || !this.mastery ) {
       return null;
     }
     const extras = [];
