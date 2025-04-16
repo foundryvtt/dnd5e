@@ -1105,7 +1105,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     const modes = CONFIG.DND5E.spellPreparationModes;
     const { key } = event.target.closest("[data-key]")?.dataset ?? {};
     const { level, preparationMode } = event.target.closest("[data-level]")?.dataset ?? {};
-    const isSlots = event.target.closest("[data-favorite-id]") || event.target.classList.contains("spell-header");
+    const isSlots = event.target.closest("[data-favorite-id]") || event.target.classList.contains("items-header");
     let type;
     if ( key in CONFIG.DND5E.skills ) type = "skill";
     else if ( key in CONFIG.DND5E.tools ) type = "tool";

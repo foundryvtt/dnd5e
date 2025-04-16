@@ -561,6 +561,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         label, slot, columns,
         id: slot,
         dataset: { type: "spell", level: prepMode in sections ? 1 : i, preparationMode: prepMode },
+        draggable: true,
         order: i,
         items: [],
         usesSlots: i > 0,
