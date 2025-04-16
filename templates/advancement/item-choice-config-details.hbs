@@ -17,6 +17,8 @@
     {{#if @root.showSpellConfig}}
     {{ formGroup fields.level name="configuration.restriction.level" value=data.level
                  options=@root.levelRestrictionOptions rootId=@root.partId }}
+    {{ formGroup fields.list name="configuration.restriction.list" value=data.list options=@root.listRestrictionOptions
+                 rootId=@root.partId }}
     {{/if}}
     {{/with}}
     {{/with}}
