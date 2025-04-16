@@ -48,7 +48,7 @@ export default function DragDropApplicationMixin(Base) {
     /**
      * Types of allowed drop behaviors based on the origin & target of a drag event.
      * @param {DragEvent} event  The drag event.
-     * @param {object} data      The drag payload.
+     * @param {object} [data]    The drag payload.
      * @returns {Set<DropEffectValue>}
      * @protected
      */
@@ -61,7 +61,7 @@ export default function DragDropApplicationMixin(Base) {
     /**
      * Determine the default drop behavior for the provided operation.
      * @param {DragEvent} event  The drag event.
-     * @param {object} data      The drag payload.
+     * @param {object} [data]    The drag payload.
      * @returns {DropEffectValue}
      * @protected
      */
