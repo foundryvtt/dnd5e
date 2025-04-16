@@ -1,0 +1,7 @@
+<div class="item-detail item-price {{#unless entry.system.price.value}}empty{{/unless}}" data-column-id="price">
+    {{#if entry.system.price.value}}
+    {{ifThen ctx.concealDetails "—" (dnd5e-numberFormat entry.system.price.value)}}
+    <i class="currency {{ entry.system.price.denomination }}"
+       aria-label="{{ lookup (lookup @root.config.currencies entry.system.price.denomination) "label" }}"></i>
+    {{/if}}
+</div>

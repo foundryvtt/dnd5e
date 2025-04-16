@@ -170,17 +170,55 @@
     "Vehicle": "Vehicle"
   },
   "Type": {
+    "Action": {
+      "Header": "Actions",
+      "Label": "Action"
+    },
+    "BonusAction": {
+      "Header": "Bonus Actions",
+      "Label": "Bonus Action"
+    },
+    "Crew": {
+      "Header": "Crew Actions",
+      "Label": "Crew Action"
+    },
+    "Day": {
+      "Header": "Days",
+      "Label": "Day"
+    },
     "Encounter": {
       "Label": "Start of Encounter"
+    },
+    "Hour": {
+      "Header": "Hours",
+      "Label": "Hour"
+    },
+    "Lair": {
+      "Header": "Lair Actions",
+      "Label": "Lair Action"
     },
     "Legendary": {
       "Counted": {
         "one": "{number} legendary action",
         "other": "{number} legendary actions"
-      }
+      },
+      "Header": "Legendary Actions",
+      "Label": "Legendary Action"
     },
     "LongRest": {
       "Label": "End of a Long Rest"
+    },
+    "Minute": {
+      "Header": "Minutes",
+      "Label": "Minute"
+    },
+    "Mythic": {
+      "Header": "Mythic Actions",
+      "Label": "Mythic Action"
+    },
+    "Reaction": {
+      "Header": "Reactions",
+      "Label": "Reaction"
     },
     "ShortRest": {
       "Label": "End of a Short Rest"
@@ -3032,6 +3070,7 @@
 "DND5E.RechargeShort": "Recharge after a Short or Long Rest",
 "DND5E.Recovery": "Recovery",
 "DND5E.RecoveryFormula": "Recovery Formula",
+"DND5E.Remaining": "Remaining",
 "DND5E.RequiredMaterials": "Required Materials",
 "DND5E.Requirements": "Requirements",
 "DND5E.Resistances": "Resistances",
