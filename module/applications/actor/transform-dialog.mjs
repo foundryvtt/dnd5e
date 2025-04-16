@@ -2,8 +2,6 @@ import TransformationSetting from "../../data/settings/transformation-setting.mj
 import { filteredKeys } from "../../utils.mjs";
 import Dialog5e from "../api/dialog.mjs";
 
-const { BooleanField } = foundry.data.fields;
-
 /**
  * Dialog that controls transforming an actor using another actor.
  */
