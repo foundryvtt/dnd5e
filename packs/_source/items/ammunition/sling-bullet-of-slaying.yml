@@ -112,7 +112,7 @@ system:
             denomination: '10'
             bonus: ''
             types:
-              - piercing
+              - bludgeoning
       save:
         ability: con
         dc:
@@ -133,13 +133,17 @@ folder: NdDvXSjfqlghXpQZ
 sort: 0
 ownership:
   default: 0
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
 _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1725037171579
-  modifiedTime: 1725992507771
+  modifiedTime: 1744841206906
   lastModifiedBy: dnd5ebuilder0000
 _key: '!items!Mj8fTo5VZKJJ7uMv'

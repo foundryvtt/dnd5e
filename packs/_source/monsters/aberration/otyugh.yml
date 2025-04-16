@@ -54,8 +54,8 @@ system:
     hp:
       value: 114
       max: 114
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 12d10 + 48
     init:
       ability: ''
@@ -139,6 +139,10 @@ system:
     languages:
       value: []
       custom: Otyugh
+      communication:
+        telepathy:
+          value: null
+          units: ft
     dm:
       amount: {}
       bypasses: []
@@ -485,9 +489,9 @@ items:
       description:
         value: >-
           <p>The otyugh can magically transmit simple messages and images to any
-          creature within <strong>120 ft.</strong> of it that can understand a
-          language. This form of telepathy doesn't allow the receiving creature
-          to telepathically respond.</p>
+          creature within 120 ft. of it that can understand a language. This
+          form of telepathy doesn't allow the receiving creature to
+          telepathically respond.</p>
         chat: ''
       source:
         custom: ''
@@ -523,10 +527,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1744841524123
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!jcZblJ6lqtW0ePxe.z8zfieQSSbMtBNQz'
   - _id: CCawltKiVU4Mup9i
     name: Bite
@@ -535,16 +539,14 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>12 (2d8 + 3) <em>piercing
-          damage</em></strong>.</p><p>If the target is a creature, it must
-          succeed on a  <strong>DC 15 Constitution</strong> saving throw against
-          disease or become poisoned until the disease is cured. Every 24 hours
-          that elapse, the target must repeat the saving throw, reducing its hit
-          point maximum by 5 (1d10) on a failure. The disease is cured on a
-          success. The target dies if the disease reduces its hit point maximum
-          to 0. This reduction to the target's hit point maximum lasts until the
-          disease is cured.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a [[/save]] saving throw against
+          disease or become &amp;Reference[poisoned apply=false] until the
+          disease is cured. Every 24 hours that elapse, the target must repeat
+          the saving throw, reducing its hit point maximum by 5 ([[/r 1d10]]) on
+          a failure. The disease is cured on a success. The target dies if the
+          disease reduces its hit point maximum to 0. This reduction to the
+          target's hit point maximum lasts until the disease is cured.</p>
         chat: >-
           <p>The Otyugh attacks with its Bite. If the target is a creature, it
           must make a <strong>Constitution</strong> saving throw. Every 24 hours
@@ -687,7 +689,7 @@ items:
           _id: dnd5eactivity100
           type: save
           activation:
-            type: action
+            type: ''
             value: 1
             condition: ''
             override: false
@@ -702,7 +704,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -721,8 +723,8 @@ items:
               height: ''
               units: ''
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -733,45 +735,41 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 8
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
               calculation: ''
               formula: '15'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676821
+      modifiedTime: 1744841657749
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!jcZblJ6lqtW0ePxe.CCawltKiVU4Mup9i'
   - _id: BPYsBEkmZMcGYZDh
@@ -781,12 +779,11 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>7 (1d8 + 3)
-          <em>bludgeoning damage</em></strong> plus <strong>4 (1d8) <em>piercing
-          damage</em></strong>.</p><p>If the target is Medium or smaller, it is
-          grappled (escape DC 13) and restrained until the grapple ends. The
-          otyugh has two tentacles, each of which can grapple one target.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          Medium or smaller, it is &amp;Reference[grappled apply=false] (escape
+          DC 13) and &amp;Reference[restrained apply=false] until the grapple
+          ends. The otyugh has two tentacles, each of which can grapple one
+          target.</p>
         chat: >-
           <p>The Otyugh attacks with its Tentacle. If the target is Medium or
           smaller, it is grappled, and restrained until the grapple ends. The
@@ -811,7 +808,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 10
+        value: null
         long: null
         units: ft
         reach: null
@@ -942,9 +939,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tentacle
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -953,9 +951,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676821
+      modifiedTime: 1744841714189
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!jcZblJ6lqtW0ePxe.BPYsBEkmZMcGYZDh'
   - _id: 9d1ZhvT1vIJsNnN1
@@ -966,11 +964,11 @@ items:
       description:
         value: >-
           <p>The otyugh slams creatures grappled by it into each other or a
-          solid surface. Each creature must succeed on a  <strong>DC 14
-          Constitution</strong> saving throw or take <strong>10 (2d6 + 3)
-          <em>bludgeoning damage</em></strong> and be stunned until the end of
-          the otyugh's next turn. </p><p>On a successful save, the target takes
-          half the <em>bludgeoning damage</em> and isn't stunned.</p>
+          solid surface. Each creature must succeed on a [[/save]] saving throw
+          or take [[/damage average]] damage and be &amp;Reference[stunned
+          apply=false] until the end of the otyugh's next turn.</p><p>On a
+          successful save, the target takes half the bludgeoning damage and
+          isn't stunned.</p>
         chat: >-
           <p>The otyugh slams creatures grappled by it into each other or a
           solid surface. Each creature must make a <strong>Constitution</strong>
@@ -992,80 +990,6 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: attack
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: str
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts:
-              - number: 2
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -1085,12 +1009,12 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1116,44 +1040,47 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 2
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                number: 2
+                denomination: '6'
+                bonus: '@abilities.str.mod'
+                types:
+                  - bludgeoning
           save:
             ability: con
             dc:
               calculation: ''
               formula: '14'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
       identifier: tentacle-slam
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.QiM1nbPzbLzKnfmP
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.QiM1nbPzbLzKnfmP
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676821
+      modifiedTime: 1744841784193
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!jcZblJ6lqtW0ePxe.9d1ZhvT1vIJsNnN1'
   - _id: O9otNESvCCUdwYhc
@@ -1255,8 +1182,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1744841553395
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!jcZblJ6lqtW0ePxe.O9otNESvCCUdwYhc'
 effects: []
 folder: cHmylff3tHTzhvyb
@@ -1268,8 +1195,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171252040
-  modifiedTime: 1726171448766
+  modifiedTime: 1744841548355
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!jcZblJ6lqtW0ePxe'
