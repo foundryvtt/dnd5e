@@ -39,7 +39,7 @@ export default class UserSystemFlags extends foundry.abstract.DataModel {
         height: new NumberField({ integer: true, positive: true }),
         tabs: new MappingField(new SchemaField({
           collapseSidebar: new BooleanField({ required: false }),
-          group: new BooleanField({ required: false, initial: true }),
+          group: new StringField({ required: false }),
           sort: new StringField({ required: false, initial: "m", choices: [...foundry.documents.BaseFolder.SORTING_MODES, "p"] })
         }))
       }))
