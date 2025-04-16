@@ -320,12 +320,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     data.name = this.name;
     data.statuses = {};
     for ( const status of this.statuses ) {
-      data.statuses[status] = 
-        status === "exhaustion" 
-        ? this.system.attributes?.exhaustion ?? 1 
-        : status === "concentrating" 
-          ? this.concentration.effects.size
-          : 1;
+      data.statuses[status] = status === "exhaustion"
+        ? this.system.attributes?.exhaustion ?? 1
+        : status === "concentrating" ? this.concentration.effects.size : 1;
     }
     return data;
   }

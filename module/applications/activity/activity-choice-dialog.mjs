@@ -2,16 +2,16 @@ import Application5e from "../api/application.mjs";
 
 /**
  * Dialog for choosing an activity to use on an Item.
+ * @param {Item5e} item                         The Item whose activities are being chosen.
+ * @param {ApplicationConfiguration} [options]  Application configuration options.
  */
 export default class ActivityChoiceDialog extends Application5e {
-  /**
-   * @param {Item5e} item                         The Item whose activities are being chosen.
-   * @param {ApplicationConfiguration} [options]  Application configuration options.
-   */
   constructor(item, options={}) {
     super(options);
     this.#item = item;
   }
+
+  /* -------------------------------------------- */
 
   /** @override */
   static DEFAULT_OPTIONS = {
@@ -23,6 +23,8 @@ export default class ActivityChoiceDialog extends Application5e {
       width: 350
     }
   };
+
+  /* -------------------------------------------- */
 
   static PARTS = {
     activities: {
