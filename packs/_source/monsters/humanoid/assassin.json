@@ -70,7 +70,7 @@
         "value": 78,
         "max": 78,
         "temp": null,
-        "tempmax": 0,
+        "tempmax": null,
         "formula": "12d8 + 24"
       },
       "init": {
@@ -728,11 +728,13 @@
           "recovery": []
         },
         "type": {
-          "value": "",
+          "value": "monster",
           "subtype": ""
         },
         "requirements": "",
-        "properties": [],
+        "properties": [
+          "trait"
+        ],
         "activities": {},
         "enchant": {},
         "prerequisites": {
@@ -756,10 +758,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1744049608086,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!EMvcuOpu7ABCmBWi.Ld00NpZe8Zl4J4Pi"
     },
@@ -787,11 +789,13 @@
           "recovery": []
         },
         "type": {
-          "value": "",
+          "value": "monster",
           "subtype": ""
         },
         "requirements": "",
-        "properties": [],
+        "properties": [
+          "trait"
+        ],
         "activities": {},
         "enchant": {},
         "prerequisites": {
@@ -815,10 +819,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1744049652244,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!EMvcuOpu7ABCmBWi.crRphULq6iIdlq88"
     },
@@ -829,8 +833,8 @@
       "img": "icons/skills/melee/blade-tip-chipped-blood-red.webp",
       "system": {
         "description": {
-          "value": "",
-          "chat": "<p>The assassin deals an extra 13 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the assassin that isn't incapacitated and the assassin doesn't have disadvantage on the attack roll.</p>"
+          "value": "<p>The assassin deals an extra 13 (4d6) damage when it hits a target with a weapon attack and has advantage on the attack roll, or when the target is within 5 ft. of an ally of the assassin that isn't incapacitated and the assassin doesn't have disadvantage on the attack roll.</p>",
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -846,11 +850,13 @@
           "spent": 0
         },
         "type": {
-          "value": "",
+          "value": "monster",
           "subtype": ""
         },
         "requirements": "",
-        "properties": [],
+        "properties": [
+          "trait"
+        ],
         "activities": {
           "dnd5eactivity000": {
             "_id": "dnd5eactivity000",
@@ -875,13 +881,13 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
             "effects": [],
             "range": {
-              "units": "",
+              "units": "self",
               "special": "",
               "override": false
             },
@@ -916,23 +922,23 @@
               },
               "parts": [
                 {
-                  "number": 4,
-                  "denomination": 6,
-                  "bonus": "",
-                  "types": [],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 4,
+                  "denomination": "6",
+                  "bonus": "",
+                  "types": [
+                    "piercing"
+                  ]
                 }
               ]
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "enchant": {},
@@ -950,6 +956,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.monsterfeatures.9uKShqfuA73duQsT"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -957,9 +969,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": 1736804676773,
+        "modifiedTime": 1744049774607,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!EMvcuOpu7ABCmBWi.EcECOhaJIpCtN2o7"
@@ -971,7 +983,7 @@
       "img": "icons/skills/melee/blade-tips-triple-steel.webp",
       "system": {
         "description": {
-          "value": "<p>The assassin makes two shortsword attacks.</p>",
+          "value": "<p>The assassin makes two [[/item .Kbg12IJ0YW79vP06]] attacks.</p>",
           "chat": ""
         },
         "source": {
@@ -1082,10 +1094,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1744050115773,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!EMvcuOpu7ABCmBWi.zaYTSI1nKtzBnQwf"
     },
@@ -1096,8 +1108,8 @@
       "img": "icons/weapons/swords/sword-guard-brown.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>piercing damage</em></strong>.</p><p>The target must make a  <strong>DC 15 Constitution</strong> saving throw, taking <strong>24 (7d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>",
-          "chat": "<p>The Assassin attacks with their Shortsword. The target must make a <strong>Constitution</strong> saving throw.</p>"
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p><p>The target must make a [[/save]] saving throw, taking [[/damage activity=dnd5eactivity100]] damage on a failed save, or half as much damage on a successful one.</p>",
+          "chat": ""
         },
         "source": {
           "custom": "",
@@ -1213,7 +1225,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -1249,14 +1261,14 @@
               "recovery": []
             },
             "attack": {
-              "ability": "dex",
+              "ability": "",
               "bonus": "",
               "critical": {
                 "threshold": null
               },
               "flat": false,
               "type": {
-                "value": "melee",
+                "value": "",
                 "classification": "weapon"
               }
             },
@@ -1267,7 +1279,10 @@
               "includeBase": true,
               "parts": []
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           },
           "dnd5eactivity100": {
             "_id": "dnd5eactivity100",
@@ -1292,7 +1307,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -1331,21 +1346,16 @@
               "onSave": "half",
               "parts": [
                 {
-                  "number": 1,
-                  "denomination": 6,
-                  "bonus": "@mod",
-                  "types": [
-                    "piercing"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
+                  "number": 7,
+                  "denomination": "6",
+                  "bonus": "",
+                  "types": [
+                    "poison"
+                  ]
                 }
               ]
             },
@@ -1356,73 +1366,10 @@
                 "formula": "15"
               }
             },
-            "sort": 0
-          },
-          "dnd5eactivity300": {
-            "_id": "dnd5eactivity300",
-            "type": "utility",
-            "activation": {
-              "type": "action",
-              "value": 1,
-              "condition": "",
-              "override": false
-            },
-            "consumption": {
-              "targets": [],
-              "scaling": {
-                "allowed": false,
-                "max": ""
-              },
-              "spellSlot": true
-            },
-            "description": {
-              "chatFlavor": ""
-            },
-            "duration": {
-              "concentration": false,
-              "value": "",
-              "units": "",
-              "special": "",
-              "override": false
-            },
-            "effects": [],
-            "range": {
-              "value": "5",
-              "units": "ft",
-              "special": "",
-              "override": false
-            },
-            "target": {
-              "template": {
-                "count": "",
-                "contiguous": false,
-                "type": "",
-                "size": "",
-                "width": "",
-                "height": "",
-                "units": ""
-              },
-              "affects": {
-                "count": "",
-                "type": "",
-                "choice": false,
-                "special": ""
-              },
-              "prompt": true,
-              "override": false
-            },
-            "uses": {
-              "spent": 0,
-              "max": "",
-              "recovery": []
-            },
-            "roll": {
-              "formula": "7d6",
-              "name": "",
-              "prompt": false,
-              "visible": false
-            },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
@@ -1432,13 +1379,19 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 100000,
       "ownership": {
         "default": 0
       },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.items.osLzOwQdPtrK3rQH"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -1446,9 +1399,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": 1736804676773,
+        "modifiedTime": 1744050091759,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!EMvcuOpu7ABCmBWi.Kbg12IJ0YW79vP06"
@@ -1460,7 +1413,7 @@
       "img": "icons/weapons/crossbows/crossbow-simple-brown.webp",
       "system": {
         "description": {
-          "value": "<p>Ranged Weapon Attack: +6 to hit, range 80/320 ft., one target. Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong>.</p><p>The target must make a  <strong>DC 15 Constitution</strong> saving throw, taking <strong>24 (7d6) <em>poison damage</em></strong> on a failed save, or half as much damage on a successful one.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p><p>The target must make a [[/save]] saving throw, taking [[/damage activity=qt3tGFCRiYgaiWQ3]] damage on a failed save, or half as much damage on a successful one.</p>",
           "chat": "<p>The Assassin attacks with its Light Crossbow. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
@@ -1540,9 +1493,9 @@
           "conditions": ""
         },
         "properties": [
-          "lgt",
-          "two",
-          "amm"
+          "amm",
+          "lod",
+          "two"
         ],
         "proficient": 1,
         "unidentified": {
@@ -1555,8 +1508,7 @@
         "container": null,
         "crewed": false,
         "activities": {
-          "dnd5eactivity000": {
-            "_id": "dnd5eactivity000",
+          "FOPIJT58E21wGaqM": {
             "type": "attack",
             "activation": {
               "type": "action",
@@ -1578,13 +1530,13 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
             "effects": [],
             "range": {
-              "value": "80",
+              "value": "5",
               "units": "ft",
               "special": "",
               "override": false
@@ -1614,14 +1566,14 @@
               "recovery": []
             },
             "attack": {
-              "ability": "dex",
+              "ability": "",
               "bonus": "",
               "critical": {
                 "threshold": null
               },
               "flat": false,
               "type": {
-                "value": "ranged",
+                "value": "",
                 "classification": "weapon"
               }
             },
@@ -1632,10 +1584,11 @@
               "includeBase": true,
               "parts": []
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "_id": "FOPIJT58E21wGaqM"
           },
-          "dnd5eactivity100": {
-            "_id": "dnd5eactivity100",
+          "qt3tGFCRiYgaiWQ3": {
             "type": "save",
             "activation": {
               "type": "action",
@@ -1657,13 +1610,13 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
             "effects": [],
             "range": {
-              "value": "80",
+              "value": "5",
               "units": "ft",
               "special": "",
               "override": false
@@ -1696,114 +1649,59 @@
               "onSave": "half",
               "parts": [
                 {
-                  "number": 1,
-                  "denomination": 8,
-                  "bonus": "@mod",
-                  "types": [
-                    "piercing"
-                  ],
                   "custom": {
                     "enabled": false,
                     "formula": ""
                   },
+                  "number": 7,
+                  "denomination": 6,
+                  "bonus": "",
+                  "types": [
+                    "poison"
+                  ],
                   "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
+                    "number": 1
                   }
                 }
               ]
             },
             "save": {
-              "ability": "con",
+              "ability": [
+                "con"
+              ],
               "dc": {
                 "calculation": "",
                 "formula": "15"
               }
             },
-            "sort": 0
-          },
-          "dnd5eactivity300": {
-            "_id": "dnd5eactivity300",
-            "type": "utility",
-            "activation": {
-              "type": "action",
-              "value": 1,
-              "condition": "",
-              "override": false
-            },
-            "consumption": {
-              "targets": [],
-              "scaling": {
-                "allowed": false,
-                "max": ""
-              },
-              "spellSlot": true
-            },
-            "description": {
-              "chatFlavor": ""
-            },
-            "duration": {
-              "concentration": false,
-              "value": "",
-              "units": "",
-              "special": "",
-              "override": false
-            },
-            "effects": [],
-            "range": {
-              "value": "80",
-              "units": "ft",
-              "special": "",
-              "override": false
-            },
-            "target": {
-              "template": {
-                "count": "",
-                "contiguous": false,
-                "type": "",
-                "size": "",
-                "width": "",
-                "height": "",
-                "units": ""
-              },
-              "affects": {
-                "count": "",
-                "type": "",
-                "choice": false,
-                "special": ""
-              },
-              "prompt": true,
-              "override": false
-            },
-            "uses": {
-              "spent": 0,
-              "max": "",
-              "recovery": []
-            },
-            "roll": {
-              "formula": "7d6",
-              "name": "",
-              "prompt": false,
-              "visible": false
-            },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "_id": "qt3tGFCRiYgaiWQ3"
           }
         },
         "attuned": false,
-        "ammunition": {},
+        "ammunition": {
+          "type": "crossbowBolt"
+        },
         "magicalBonus": null,
-        "identifier": "light-crossbow"
+        "identifier": "light-crossbow",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 300000,
       "ownership": {
         "default": 0
       },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.items.ddWvQRLmnnIS0eLF"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -1811,9 +1709,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": 1736804676773,
+        "modifiedTime": 1744050413943,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!EMvcuOpu7ABCmBWi.rNQK7okIBNZ2zDvD"
@@ -1830,9 +1728,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.8",
     "createdTime": 1726171214988,
-    "modifiedTime": 1726171441681,
+    "modifiedTime": 1744051382560,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!EMvcuOpu7ABCmBWi"

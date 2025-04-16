@@ -34,19 +34,15 @@
         "activation": {
           "type": "special",
           "value": null,
-          "condition": "",
+          "condition": "fails a saving throw",
           "override": false
         },
         "consumption": {
           "targets": [
             {
               "type": "attribute",
-              "target": "",
               "value": "1",
-              "scaling": {
-                "mode": "",
-                "formula": ""
-              }
+              "target": "resources.legres.value"
             }
           ],
           "scaling": {
@@ -61,13 +57,13 @@
         "duration": {
           "concentration": false,
           "value": "",
-          "units": "",
+          "units": "inst",
           "special": "",
           "override": false
         },
         "effects": [],
         "range": {
-          "units": "",
+          "units": "self",
           "special": "",
           "override": false
         },
@@ -83,7 +79,7 @@
           },
           "affects": {
             "count": "",
-            "type": "",
+            "type": "self",
             "choice": false,
             "special": ""
           },
@@ -101,17 +97,29 @@
           "prompt": false,
           "visible": false
         },
-        "sort": 0
+        "sort": 0,
+        "name": "Expend Use",
+        "img": "systems/dnd5e/icons/svg/monster.svg",
+        "appliedEffects": []
       }
     },
     "enchant": {},
     "prerequisites": {
       "level": null
     },
-    "properties": [],
+    "properties": [
+      "trait"
+    ],
     "identifier": "legendary-resistance"
   },
-  "flags": {},
+  "flags": {
+    "dnd5e": {
+      "riders": {
+        "activity": [],
+        "effect": []
+      }
+    }
+  },
   "img": "icons/equipment/shield/kite-wooden-oak-glow.webp",
   "effects": [],
   "folder": null,
@@ -120,9 +128,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.8",
     "createdTime": 1725304968656,
-    "modifiedTime": 1725992571943,
+    "modifiedTime": 1744318649828,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!items!J1NxNTJ2qi05iAFF"

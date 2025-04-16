@@ -70,7 +70,7 @@
         "value": 97,
         "max": 97,
         "temp": null,
-        "tempmax": 0,
+        "tempmax": null,
         "formula": "13d8 + 39"
       },
       "init": {
@@ -480,7 +480,7 @@
     },
     "bonuses": {
       "mwak": {
-        "attack": "",
+        "attack": "1",
         "damage": ""
       },
       "rwak": {
@@ -624,7 +624,7 @@
       "img": "icons/creatures/abilities/mouth-teeth-long-red.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5 ft.,</strong> one creature. Hit: <strong>8 (1d6 + 5) <em>piercing damage</em></strong>.</p><p>The target must succeed on a  <strong>DC 13 Constitution</strong> saving throw or be poisoned for 24 hours. Until this poison ends, the target is unconscious. Another creature can use an action to shake the target awake.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p><p>The target must succeed on a [[/save]] saving throw or be &amp;Reference[poisoned apply=false] for 24 hours. Until this poison ends, the target is &amp;Reference[unconscious apply=false]. Another creature can use an action to shake the target awake.</p>",
           "chat": "<p>The Couatl attacks with its Bite. The target must make a <strong>Constitution</strong> saving throw.</p>"
         },
         "source": {
@@ -650,7 +650,7 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
           "reach": null
@@ -704,7 +704,8 @@
           "conditions": ""
         },
         "properties": [
-          "fin"
+          "fin",
+          "mgc"
         ],
         "proficient": 1,
         "unidentified": {
@@ -740,7 +741,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -776,14 +777,14 @@
               "recovery": []
             },
             "attack": {
-              "ability": "dex",
+              "ability": "",
               "bonus": "",
               "critical": {
                 "threshold": null
               },
               "flat": false,
               "type": {
-                "value": "melee",
+                "value": "",
                 "classification": "weapon"
               }
             },
@@ -794,13 +795,16 @@
               "includeBase": true,
               "parts": []
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           },
           "dnd5eactivity100": {
             "_id": "dnd5eactivity100",
             "type": "save",
             "activation": {
-              "type": "action",
+              "type": "special",
               "value": 1,
               "condition": "",
               "override": false
@@ -819,11 +823,15 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
-            "effects": [],
+            "effects": [
+              {
+                "_id": "GLxzcYW1p5BO6Tdt"
+              }
+            ],
             "range": {
               "value": "5",
               "units": "ft",
@@ -855,43 +863,77 @@
               "recovery": []
             },
             "damage": {
-              "onSave": "half",
-              "parts": [
-                {
-                  "number": 1,
-                  "denomination": 6,
-                  "bonus": "@mod",
-                  "types": [
-                    "piercing"
-                  ],
-                  "custom": {
-                    "enabled": false,
-                    "formula": ""
-                  },
-                  "scaling": {
-                    "mode": "whole",
-                    "number": null,
-                    "formula": ""
-                  }
-                }
-              ]
+              "onSave": "none",
+              "parts": []
             },
             "save": {
               "ability": "con",
               "dc": {
-                "calculation": "",
+                "calculation": "con",
                 "formula": "13"
               }
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": [
+              "GLxzcYW1p5BO6Tdt"
+            ]
           }
         },
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "bite"
+        "identifier": "bite",
+        "mastery": ""
       },
-      "effects": [],
+      "effects": [
+        {
+          "name": "Poisoned",
+          "img": "systems/dnd5e/icons/svg/statuses/unconscious.svg",
+          "origin": "Compendium.dnd5e.monsters.Actor.ZaP1H91t4FzbRqR5.Item.7M1OrMoMMTCEKxta",
+          "transfer": false,
+          "_id": "GLxzcYW1p5BO6Tdt",
+          "type": "base",
+          "system": {},
+          "changes": [],
+          "disabled": false,
+          "duration": {
+            "startTime": null,
+            "seconds": 86400,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "description": "<p>Until this poison ends, the target is unconscious. Another creature can use an action to shake the target awake.</p>",
+          "tint": "#ffffff",
+          "statuses": [
+            "poisoned",
+            "unconscious"
+          ],
+          "sort": 0,
+          "flags": {
+            "dnd5e": {
+              "riders": {
+                "statuses": []
+              }
+            }
+          },
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "dnd5e",
+            "systemVersion": "4.3.8",
+            "createdTime": 1744076654091,
+            "modifiedTime": 1744076734676,
+            "lastModifiedBy": "dnd5ebuilder0000"
+          },
+          "_key": "!actors.items.effects!ZaP1H91t4FzbRqR5.7M1OrMoMMTCEKxta.GLxzcYW1p5BO6Tdt"
+        }
+      ],
       "folder": null,
       "sort": 0,
       "ownership": {
@@ -900,6 +942,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -907,9 +955,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": 1736804676688,
+        "modifiedTime": 1744076855445,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.7M1OrMoMMTCEKxta"
@@ -921,7 +969,7 @@
       "img": "icons/creatures/reptiles/serpent-horned-green.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>10 ft.,</strong> one Medium or smaller creature. Hit: <strong>10 (2d6 + 3) <em>bludgeoning damage</em></strong>.</p><p>The target is grappled (escape DC 15). Until this grapple ends, the target is restrained, and the couatl can't constrict another target.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p><p>The target is grappled (escape [[/check]]). Until this grapple ends, the target is restrained, and the [[lookup @name lowercase]] can't constrict another target.</p>",
           "chat": "<p>The Couatl attacks with its Constrict. The target is grappled. Until this grapple ends, the target is restrained, and the couatl can't constrict another target.</p>"
         },
         "source": {
@@ -947,10 +995,10 @@
         "identified": true,
         "cover": null,
         "range": {
-          "value": 5,
+          "value": null,
           "long": null,
           "units": "ft",
-          "reach": null
+          "reach": 10
         },
         "uses": {
           "max": "",
@@ -1001,7 +1049,7 @@
           "conditions": ""
         },
         "properties": [
-          "fin"
+          "mgc"
         ],
         "proficient": 1,
         "unidentified": {
@@ -1037,11 +1085,15 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
-            "effects": [],
+            "effects": [
+              {
+                "_id": "bT77MKZEyBFGGrrW"
+              }
+            ],
             "range": {
               "value": "5",
               "units": "ft",
@@ -1073,7 +1125,7 @@
               "recovery": []
             },
             "attack": {
-              "ability": "str",
+              "ability": "",
               "bonus": "",
               "critical": {
                 "threshold": null
@@ -1091,29 +1143,148 @@
               "includeBase": true,
               "parts": []
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
+          },
+          "qSVi3BwrAoCnPpjk": {
+            "type": "check",
+            "name": "Escape Check",
+            "_id": "qSVi3BwrAoCnPpjk",
+            "sort": 0,
+            "activation": {
+              "type": "",
+              "value": null,
+              "override": false,
+              "condition": ""
+            },
+            "consumption": {
+              "scaling": {
+                "allowed": false
+              },
+              "spellSlot": true,
+              "targets": []
+            },
+            "description": {
+              "chatFlavor": ""
+            },
+            "duration": {
+              "units": "inst",
+              "concentration": false,
+              "override": false
+            },
+            "effects": [],
+            "range": {
+              "override": false
+            },
+            "target": {
+              "template": {
+                "contiguous": false,
+                "units": "ft",
+                "type": ""
+              },
+              "affects": {
+                "choice": false,
+                "type": ""
+              },
+              "override": false,
+              "prompt": true
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "max": ""
+            },
+            "check": {
+              "associated": [
+                "acr",
+                "ath"
+              ],
+              "dc": {
+                "calculation": "dex",
+                "formula": ""
+              },
+              "ability": ""
+            },
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "constrict"
+        "identifier": "constrict",
+        "mastery": ""
       },
-      "effects": [],
+      "effects": [
+        {
+          "name": "Restrained",
+          "img": "systems/dnd5e/icons/svg/statuses/restrained.svg",
+          "origin": "Compendium.dnd5e.monsters.Actor.ZaP1H91t4FzbRqR5.Item.8LkzioyaScFxfst7",
+          "transfer": false,
+          "_id": "bT77MKZEyBFGGrrW",
+          "type": "base",
+          "system": {},
+          "changes": [],
+          "disabled": false,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": null,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "description": "<p>Until this grapple ends, the target is restrained.</p>",
+          "tint": "#ffffff",
+          "statuses": [
+            "grappled",
+            "restrained"
+          ],
+          "sort": 0,
+          "flags": {
+            "dnd5e": {
+              "riders": {
+                "statuses": []
+              }
+            }
+          },
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "dnd5e",
+            "systemVersion": "4.3.8",
+            "createdTime": 1744077355795,
+            "modifiedTime": 1744077412495,
+            "lastModifiedBy": "dnd5ebuilder0000"
+          },
+          "_key": "!actors.items.effects!ZaP1H91t4FzbRqR5.8LkzioyaScFxfst7.bT77MKZEyBFGGrrW"
+        }
+      ],
       "folder": null,
       "sort": 0,
       "ownership": {
         "default": 0
       },
-      "flags": {},
+      "flags": {
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
+        }
+      },
       "_stats": {
         "compendiumSource": null,
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": 1736804676688,
+        "modifiedTime": 1744077425336,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.8LkzioyaScFxfst7"
@@ -1250,7 +1421,7 @@
       "img": "icons/magic/light/projectiles-star-purple.webp",
       "system": {
         "description": {
-          "value": "<p>The couatl's spellcasting ability is Charisma (spell save DC 14). It can innately cast the following spells, requiring only verbal components:</p>\n<p>At will: detect evil and good, detect magic, detect thoughts</p>\n<p>3/day each: bless, create food and water, cure wounds, lesser restoration, protection from poison, sanctuary, shield</p>\n<p>1/day each: dream, greater restoration, scrying</p>",
+          "value": "<p>The [[lookup @name lowercase]]'s spellcasting ability is Charisma (spell save DC [[lookup @abilities.cha.dc]]). It can innately cast the following spells, requiring only verbal components:</p><p>At will:  [[/item .Mzh95utKDPIrjiH8]]{detect evil and good}, [[/item .ghXTfe7sgCbgf1Q8]]{detect magic}, [[/item .ppWAAEul0QHtm4er]]{detect thoughts}</p><p>3/day each: [[/item .8dzaICjGy6mTUaUr]]{bless}, [[/item .BV0mpbHh29IbbIj5]]{create food and water}, [[/item .uUWb1wZgtMou0TVP]]{cure wounds}, [[/item .F0GsG0SJzsIOacwV]]{lesser restoration}, [[/item .MAxM77CDUu8dgIRQ]]{protection from poison}, [[/item .gvdA9nPuWLck4tBl]]{sanctuary}, [[/item .z1mx84ONwkXKUZd7]]{shield}</p><p>1/day each: [[/item .kSPRpeIx3w3nihrF]]{dream}, [[/item .WzvJ7G3cqvIubsLk]]{greater restoration}, [[/item .fVbCxFRaORalHB20]]{scrying}</p>",
           "chat": ""
         },
         "source": {
@@ -1267,11 +1438,13 @@
           "recovery": []
         },
         "type": {
-          "value": "",
+          "value": "monster",
           "subtype": ""
         },
         "requirements": "",
-        "properties": [],
+        "properties": [
+          "trait"
+        ],
         "activities": {},
         "enchant": {},
         "prerequisites": {
@@ -1295,10 +1468,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1744076493164,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.J40yeoOnwpvtVpHt"
     },
@@ -1326,11 +1499,13 @@
           "recovery": []
         },
         "type": {
-          "value": "",
+          "value": "monster",
           "subtype": ""
         },
         "requirements": "",
-        "properties": [],
+        "properties": [
+          "trait"
+        ],
         "activities": {},
         "enchant": {},
         "prerequisites": {
@@ -1354,10 +1529,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1744076521424,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.3qE2LLHPANSEPmIN"
     },
@@ -1389,7 +1564,9 @@
           "subtype": ""
         },
         "requirements": "",
-        "properties": [],
+        "properties": [
+          "trait"
+        ],
         "activities": {},
         "enchant": {},
         "prerequisites": {
@@ -1413,10 +1590,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1744076561380,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!ZaP1H91t4FzbRqR5.MGh9IkfXNn7FmwL5"
     },
@@ -3598,9 +3775,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.8",
     "createdTime": 1726171239772,
-    "modifiedTime": 1726171446294,
+    "modifiedTime": 1744077277605,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!ZaP1H91t4FzbRqR5"

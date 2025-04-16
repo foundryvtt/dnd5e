@@ -69,8 +69,8 @@
       "hp": {
         "value": 16,
         "max": 16,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "3d8 + 3"
       },
       "init": {
@@ -723,11 +723,13 @@
           "recovery": []
         },
         "type": {
-          "value": "",
+          "value": "monster",
           "subtype": ""
         },
         "requirements": "",
-        "properties": [],
+        "properties": [
+          "trait"
+        ],
         "activities": {},
         "enchant": {},
         "prerequisites": {
@@ -747,10 +749,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1744052052908,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!O3ABqI55Ir1du1Xa.PQGwUNCJ7EkJAE8V"
     },
@@ -874,8 +876,8 @@
         "systemId": "dnd5e",
         "systemVersion": "4.0.0",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1744132986913,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!O3ABqI55Ir1du1Xa.YO57HtdvpuGxJANB"
     },
@@ -886,7 +888,7 @@
       "img": "icons/weapons/swords/sword-guard-brown.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Scout attacks with their Shortsword.</p>"
         },
         "source": {
@@ -1003,7 +1005,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -1039,14 +1041,14 @@
               "recovery": []
             },
             "attack": {
-              "ability": "dex",
+              "ability": "",
               "bonus": "",
               "critical": {
                 "threshold": null
               },
               "flat": false,
               "type": {
-                "value": "melee",
+                "value": "",
                 "classification": "weapon"
               }
             },
@@ -1057,7 +1059,10 @@
               "includeBase": true,
               "parts": []
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
@@ -1067,13 +1072,19 @@
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 100000,
       "ownership": {
         "default": 0
       },
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.items.osLzOwQdPtrK3rQH"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -1081,9 +1092,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": 1736804676671,
+        "modifiedTime": 1744132985302,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!O3ABqI55Ir1du1Xa.YDoOa6D6QDoR2Htu"
@@ -1095,7 +1106,7 @@
       "img": "icons/weapons/bows/longbow-leather-green.webp",
       "system": {
         "description": {
-          "value": "<p>Ranged Weapon Attack: +4 to hit, ranged 150/600 ft., one target. Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Scout attacks with their Longbow.</p>"
         },
         "source": {
@@ -1271,13 +1282,16 @@
           }
         },
         "attuned": false,
-        "ammunition": {},
+        "ammunition": {
+          "type": "arrow"
+        },
         "magicalBonus": null,
-        "identifier": "longbow"
+        "identifier": "longbow",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
-      "sort": 0,
+      "sort": 300000,
       "ownership": {
         "default": 0
       },
@@ -1291,9 +1305,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": 1736804676671,
+        "modifiedTime": 1744132985302,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!O3ABqI55Ir1du1Xa.E2fYrhLigMeVH09l"
@@ -1310,9 +1324,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.8",
     "createdTime": 1726171227806,
-    "modifiedTime": 1726171444090,
+    "modifiedTime": 1744052139226,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!O3ABqI55Ir1du1Xa"

@@ -69,8 +69,8 @@
       "hp": {
         "value": 19,
         "max": 19,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "3d8 + 6"
       },
       "init": {
@@ -132,7 +132,7 @@
     },
     "details": {
       "biography": {
-        "value": "",
+        "value": "<p><em>Token artwork by </em><a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\"><em>Forgotten Adventures</em></a><em>.</em></p>",
         "public": ""
       },
       "alignment": "Unaligned",
@@ -1151,9 +1151,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.8",
     "createdTime": 1726171221697,
-    "modifiedTime": 1726171443008,
+    "modifiedTime": 1744056508684,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!K5cKmPoFkpuOotis"

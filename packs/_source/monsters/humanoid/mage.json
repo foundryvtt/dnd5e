@@ -69,8 +69,8 @@
       "hp": {
         "value": 40,
         "max": 40,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "9d8"
       },
       "init": {
@@ -615,7 +615,7 @@
       "img": "icons/magic/light/projectiles-star-purple.webp",
       "system": {
         "description": {
-          "value": "<p>The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks). The mage has the following wizard spells prepared:</p><p>Cantrips (at will): fire bolt, light, mage hand, prestidigitation</p><p>1st level (4 slots): detect magic, mage armor, magic missile, shield</p><p>2nd level (3 slots): misty step, suggestion</p><p>3rd level (3 slots): counterspell, fireball, fly</p><p>4th level (3 slots): greater invisibility, ice storm</p><p>5th level (1 slot): cone of cold</p>",
+          "value": "<p>The mage is a 9th-level spellcaster. Its spellcasting ability is Intelligence (spell save DC 14, +6 to hit with spell attacks). The mage has the following wizard spells prepared:</p><p>Cantrip (at will): [[/item .EOmsUcFQJTfG2oio]]{fire bolt}, [[/item .Bnn9Nzajixvow9xi]]{light}, [[/item .Utk1OQRwYkMkFRD3]]{mage hand}, [[/item .udsLtG0BugXHR2JQ]]{prestidigitation}</p><p>1st level (4 slots): [[/item .ghXTfe7sgCbgf1Q8]]{detect magic}, [[/item .CKZTpZlxj7hjjo2H]]{mage armor}, [[/item .41JIhpDyM9Anm7cs]]{magic missile}, [[/item .z1mx84ONwkXKUZd7]]{shield}</p><p>2nd level (3 slots): [[/item .wqfAVANuQonNBgnL]]{misty step}, [[/item .zMAWdyc8UVb37BK4]]{suggestion}</p><p>3rd level (3 slots): [[/item .Ek45cBpVXvJdv1Qy]]{counterspell}, [[/item .ztgcdrWPshKRpFd0]]{fireball}, [[/item .yfbK8gZqESlaoY5t]]{fly}</p><p>4th level (3 slots): [[/item .tEpDmYZNGc9f5OhJ]]{greater invisibility}, [[/item .WN2LWEljYU6QqnRH]]{ice storm}</p><p>5th level (1 slots): [[/item .RpKjTlYASrfqUPVA]]{cone of cold}</p>",
           "chat": "<p>The mage is a spellcaster. Its spellcasting ability is Intelligence.</p>"
         },
         "source": {
@@ -632,11 +632,13 @@
           "recovery": []
         },
         "type": {
-          "value": "",
+          "value": "monster",
           "subtype": ""
         },
         "requirements": "",
-        "properties": [],
+        "properties": [
+          "trait"
+        ],
         "activities": {},
         "enchant": {},
         "prerequisites": {
@@ -660,222 +662,12 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": 1736804676601,
+        "modifiedTime": 1744060239778,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!mQnsXanewsPiV7QE.tbKbwgcprUBciliF"
-    },
-    {
-      "_id": "LcMdsxbtVEhUDXju",
-      "name": "Dagger",
-      "type": "weapon",
-      "img": "icons/weapons/daggers/dagger-jeweled-purple.webp",
-      "system": {
-        "description": {
-          "value": "<p>Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range 20/60 ft., one target. Hit: <strong>4 (1d4 + 2) <em>piercing damage</em></strong>.</p>",
-          "chat": "<p>The Mage attacks with its Dagger.</p>"
-        },
-        "source": {
-          "custom": "",
-          "book": "",
-          "page": "",
-          "license": "CC-BY-4.0",
-          "rules": "2014",
-          "revision": 1
-        },
-        "quantity": 1,
-        "weight": {
-          "value": 1,
-          "units": "lb"
-        },
-        "price": {
-          "value": 2,
-          "denomination": "gp"
-        },
-        "attunement": "",
-        "equipped": true,
-        "rarity": "",
-        "identified": true,
-        "cover": null,
-        "range": {
-          "value": 5,
-          "long": null,
-          "units": "ft",
-          "reach": null
-        },
-        "uses": {
-          "max": "",
-          "recovery": [],
-          "spent": 0
-        },
-        "damage": {
-          "versatile": {
-            "number": null,
-            "denomination": null,
-            "bonus": "",
-            "types": [],
-            "custom": {
-              "enabled": false,
-              "formula": ""
-            },
-            "scaling": {
-              "mode": "",
-              "number": null,
-              "formula": ""
-            }
-          },
-          "base": {
-            "number": 1,
-            "denomination": 4,
-            "bonus": "",
-            "types": [
-              "piercing"
-            ],
-            "custom": {
-              "enabled": false,
-              "formula": ""
-            },
-            "scaling": {
-              "mode": "",
-              "number": null,
-              "formula": ""
-            }
-          }
-        },
-        "armor": {
-          "value": 10
-        },
-        "hp": {
-          "value": 0,
-          "max": 0,
-          "dt": null,
-          "conditions": ""
-        },
-        "properties": [
-          "fin",
-          "lgt",
-          "thr"
-        ],
-        "proficient": 1,
-        "unidentified": {
-          "description": ""
-        },
-        "type": {
-          "value": "simpleM",
-          "baseItem": "dagger"
-        },
-        "container": null,
-        "crewed": false,
-        "activities": {
-          "dnd5eactivity000": {
-            "_id": "dnd5eactivity000",
-            "type": "attack",
-            "activation": {
-              "type": "action",
-              "value": 1,
-              "condition": "",
-              "override": false
-            },
-            "consumption": {
-              "targets": [],
-              "scaling": {
-                "allowed": false,
-                "max": ""
-              },
-              "spellSlot": true
-            },
-            "description": {
-              "chatFlavor": ""
-            },
-            "duration": {
-              "concentration": false,
-              "value": "",
-              "units": "",
-              "special": "",
-              "override": false
-            },
-            "effects": [],
-            "range": {
-              "value": "5",
-              "units": "ft",
-              "special": "",
-              "override": false
-            },
-            "target": {
-              "template": {
-                "count": "",
-                "contiguous": false,
-                "type": "",
-                "size": "",
-                "width": "",
-                "height": "",
-                "units": ""
-              },
-              "affects": {
-                "count": "",
-                "type": "",
-                "choice": false,
-                "special": ""
-              },
-              "prompt": true,
-              "override": false
-            },
-            "uses": {
-              "spent": 0,
-              "max": "",
-              "recovery": []
-            },
-            "attack": {
-              "ability": "dex",
-              "bonus": "",
-              "critical": {
-                "threshold": null
-              },
-              "flat": false,
-              "type": {
-                "value": "melee",
-                "classification": "weapon"
-              }
-            },
-            "damage": {
-              "critical": {
-                "bonus": ""
-              },
-              "includeBase": true,
-              "parts": []
-            },
-            "sort": 0
-          }
-        },
-        "attuned": false,
-        "ammunition": {},
-        "magicalBonus": null,
-        "identifier": "dagger"
-      },
-      "effects": [],
-      "folder": null,
-      "sort": 0,
-      "ownership": {
-        "default": 0
-      },
-      "flags": {
-        "core": {
-          "sourceId": "Compendium.dnd5e.items.0E565kQUBmndJ1a2"
-        }
-      },
-      "_stats": {
-        "compendiumSource": "Compendium.dnd5e.items.0E565kQUBmndJ1a2",
-        "duplicateSource": null,
-        "coreVersion": "12.331",
-        "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
-        "createdTime": null,
-        "modifiedTime": 1736804676601,
-        "lastModifiedBy": "dnd5ebuilder0000"
-      },
-      "_key": "!actors.items!mQnsXanewsPiV7QE.LcMdsxbtVEhUDXju"
     },
     {
       "_id": "EOmsUcFQJTfG2oio",
@@ -3383,6 +3175,222 @@
         "lastModifiedBy": null
       },
       "_key": "!actors.items!mQnsXanewsPiV7QE.RpKjTlYASrfqUPVA"
+    },
+    {
+      "_id": "rG6fb3lkjuxqEaDd",
+      "name": "Dagger",
+      "type": "weapon",
+      "img": "icons/weapons/daggers/dagger-straight-blue.webp",
+      "system": {
+        "description": {
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
+          "chat": ""
+        },
+        "source": {
+          "custom": "",
+          "book": "SRD 5.1",
+          "page": "",
+          "license": "CC-BY-4.0",
+          "rules": "2014",
+          "revision": 1
+        },
+        "quantity": 1,
+        "weight": {
+          "value": 1,
+          "units": "lb"
+        },
+        "price": {
+          "value": 2,
+          "denomination": "gp"
+        },
+        "attunement": "",
+        "rarity": "",
+        "identified": true,
+        "cover": null,
+        "range": {
+          "value": 20,
+          "long": 60,
+          "units": "ft",
+          "reach": null
+        },
+        "uses": {
+          "max": "",
+          "recovery": [],
+          "spent": 0
+        },
+        "damage": {
+          "versatile": {
+            "number": null,
+            "denomination": null,
+            "bonus": "",
+            "types": [],
+            "custom": {
+              "enabled": false,
+              "formula": ""
+            },
+            "scaling": {
+              "mode": "",
+              "number": null,
+              "formula": ""
+            }
+          },
+          "base": {
+            "number": 1,
+            "denomination": 4,
+            "bonus": "",
+            "types": [
+              "piercing"
+            ],
+            "custom": {
+              "enabled": false,
+              "formula": ""
+            },
+            "scaling": {
+              "mode": "",
+              "number": null,
+              "formula": ""
+            }
+          }
+        },
+        "armor": {
+          "value": 10
+        },
+        "hp": {
+          "value": 0,
+          "max": 0,
+          "dt": null,
+          "conditions": ""
+        },
+        "properties": [
+          "fin",
+          "lgt",
+          "thr"
+        ],
+        "proficient": null,
+        "type": {
+          "value": "simpleM",
+          "baseItem": "dagger"
+        },
+        "unidentified": {
+          "description": ""
+        },
+        "container": null,
+        "crewed": false,
+        "magicalBonus": null,
+        "activities": {
+          "dnd5eactivity000": {
+            "_id": "dnd5eactivity000",
+            "type": "attack",
+            "activation": {
+              "type": "action",
+              "value": 1,
+              "condition": "",
+              "override": false
+            },
+            "consumption": {
+              "targets": [],
+              "scaling": {
+                "allowed": false,
+                "max": ""
+              },
+              "spellSlot": true
+            },
+            "description": {
+              "chatFlavor": ""
+            },
+            "duration": {
+              "concentration": false,
+              "value": "",
+              "units": "inst",
+              "special": "",
+              "override": false
+            },
+            "effects": [],
+            "range": {
+              "value": "20",
+              "units": "ft",
+              "special": "",
+              "override": false
+            },
+            "target": {
+              "template": {
+                "count": "",
+                "contiguous": false,
+                "type": "",
+                "size": "",
+                "width": "",
+                "height": "",
+                "units": ""
+              },
+              "affects": {
+                "count": "",
+                "type": "",
+                "choice": false,
+                "special": ""
+              },
+              "prompt": true,
+              "override": false
+            },
+            "attack": {
+              "ability": "",
+              "bonus": "",
+              "critical": {
+                "threshold": null
+              },
+              "flat": false,
+              "type": {
+                "value": "",
+                "classification": "weapon"
+              }
+            },
+            "damage": {
+              "critical": {
+                "bonus": ""
+              },
+              "includeBase": true,
+              "parts": []
+            },
+            "uses": {
+              "spent": 0,
+              "recovery": [],
+              "max": ""
+            },
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
+          }
+        },
+        "ammunition": {},
+        "identifier": "dagger",
+        "attuned": false,
+        "equipped": true
+      },
+      "effects": [],
+      "folder": "MLMTCAvKsuFE3vYA",
+      "sort": 0,
+      "ownership": {
+        "default": 0
+      },
+      "flags": {
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
+        }
+      },
+      "_stats": {
+        "duplicateSource": null,
+        "compendiumSource": "Compendium.dnd5e.items.Item.0E565kQUBmndJ1a2",
+        "coreVersion": "12.331",
+        "systemId": "dnd5e",
+        "systemVersion": "4.3.8",
+        "createdTime": 1744060295689,
+        "modifiedTime": 1744060344403,
+        "lastModifiedBy": "dnd5ebuilder0000"
+      },
+      "_key": "!actors.items!mQnsXanewsPiV7QE.rG6fb3lkjuxqEaDd"
     }
   ],
   "effects": [],
@@ -3396,9 +3404,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.8",
     "createdTime": 1726171254943,
-    "modifiedTime": 1726171449301,
+    "modifiedTime": 1744060372156,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!mQnsXanewsPiV7QE"

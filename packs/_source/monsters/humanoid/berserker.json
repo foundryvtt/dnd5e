@@ -69,8 +69,8 @@
       "hp": {
         "value": 67,
         "max": 67,
-        "temp": 0,
-        "tempmax": 0,
+        "temp": null,
+        "tempmax": null,
         "formula": "9d8 + 27"
       },
       "init": {
@@ -723,11 +723,13 @@
           "recovery": []
         },
         "type": {
-          "value": "",
+          "value": "monster",
           "subtype": ""
         },
         "requirements": "",
-        "properties": [],
+        "properties": [
+          "trait"
+        ],
         "activities": {},
         "enchant": {},
         "prerequisites": {
@@ -735,7 +737,50 @@
         },
         "identifier": "reckless"
       },
-      "effects": [],
+      "effects": [
+        {
+          "name": "Reckless",
+          "img": "icons/skills/social/intimidation-impressing.webp",
+          "origin": "Compendium.dnd5e.monsters.Actor.kz1t6xeXVwODpYb2.Item.Qzj9HKnvRGhYoggC",
+          "_id": "WqXUqzRbXoMjF2MJ",
+          "type": "base",
+          "system": {},
+          "changes": [],
+          "disabled": true,
+          "duration": {
+            "startTime": null,
+            "seconds": null,
+            "combat": null,
+            "rounds": 1,
+            "turns": null,
+            "startRound": null,
+            "startTurn": null
+          },
+          "description": "<p>Attack rolls against it have advantage until the start of its next turn.</p>",
+          "tint": "#ffffff",
+          "transfer": true,
+          "statuses": [],
+          "sort": 0,
+          "flags": {
+            "dnd5e": {
+              "riders": {
+                "statuses": []
+              }
+            }
+          },
+          "_stats": {
+            "compendiumSource": null,
+            "duplicateSource": null,
+            "coreVersion": "12.331",
+            "systemId": "dnd5e",
+            "systemVersion": "4.3.8",
+            "createdTime": 1744135358115,
+            "modifiedTime": 1744135431645,
+            "lastModifiedBy": "dnd5ebuilder0000"
+          },
+          "_key": "!actors.items.effects!kz1t6xeXVwODpYb2.Qzj9HKnvRGhYoggC.WqXUqzRbXoMjF2MJ"
+        }
+      ],
       "folder": null,
       "sort": 0,
       "ownership": {
@@ -751,10 +796,10 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.0.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": null,
-        "lastModifiedBy": null
+        "modifiedTime": 1744135320648,
+        "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!kz1t6xeXVwODpYb2.Qzj9HKnvRGhYoggC"
     },
@@ -765,7 +810,7 @@
       "img": "icons/weapons/axes/axe-double.webp",
       "system": {
         "description": {
-          "value": "<p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5 ft.,</strong> one target. Hit: <strong>9 (1d12 + 3) <em>slashing damage</em></strong>.</p>",
+          "value": "<p>[[/attack extended]]. [[/damage extended]].</p>",
           "chat": "<p>The Berserker attacks with their Greataxe.</p>"
         },
         "source": {
@@ -882,7 +927,7 @@
             "duration": {
               "concentration": false,
               "value": "",
-              "units": "",
+              "units": "inst",
               "special": "",
               "override": false
             },
@@ -918,14 +963,14 @@
               "recovery": []
             },
             "attack": {
-              "ability": "str",
+              "ability": "",
               "bonus": "",
               "critical": {
                 "threshold": null
               },
               "flat": false,
               "type": {
-                "value": "melee",
+                "value": "",
                 "classification": "weapon"
               }
             },
@@ -936,13 +981,17 @@
               "includeBase": true,
               "parts": []
             },
-            "sort": 0
+            "sort": 0,
+            "name": "",
+            "img": "",
+            "appliedEffects": []
           }
         },
         "attuned": false,
         "ammunition": {},
         "magicalBonus": null,
-        "identifier": "greataxe"
+        "identifier": "greataxe",
+        "mastery": ""
       },
       "effects": [],
       "folder": null,
@@ -953,6 +1002,12 @@
       "flags": {
         "core": {
           "sourceId": "Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u"
+        },
+        "dnd5e": {
+          "riders": {
+            "activity": [],
+            "effect": []
+          }
         }
       },
       "_stats": {
@@ -960,9 +1015,9 @@
         "duplicateSource": null,
         "coreVersion": "12.331",
         "systemId": "dnd5e",
-        "systemVersion": "4.2.0",
+        "systemVersion": "4.3.8",
         "createdTime": null,
-        "modifiedTime": 1736804676494,
+        "modifiedTime": 1744135489725,
         "lastModifiedBy": "dnd5ebuilder0000"
       },
       "_key": "!actors.items!kz1t6xeXVwODpYb2.RrHhFZOd6QT75V3W"
@@ -979,9 +1034,9 @@
     "duplicateSource": null,
     "coreVersion": "12.331",
     "systemId": "dnd5e",
-    "systemVersion": "4.0.0",
+    "systemVersion": "4.3.8",
     "createdTime": 1726171252938,
-    "modifiedTime": 1726171448945,
+    "modifiedTime": 1744135509959,
     "lastModifiedBy": "dnd5ebuilder0000"
   },
   "_key": "!actors!kz1t6xeXVwODpYb2"
