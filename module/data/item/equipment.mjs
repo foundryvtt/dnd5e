@@ -69,9 +69,7 @@ export default class EquipmentData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     hasEffects: true,
-    enchantable: true,
-    inventoryItem: true,
-    inventoryOrder: 200
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -91,6 +89,22 @@ export default class EquipmentData extends ItemDataModel.mixin(
       ...this.compendiumBrowserPhysicalItemFilters,
       ["properties", this.compendiumBrowserPropertiesFilter("equipment")]
     ]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "equipment",
+      order: 200,
+      label: "TYPES.Item.equipmentPl",
+      groups: { type: "equipment" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    };
   }
 
   /* -------------------------------------------- */

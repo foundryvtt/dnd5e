@@ -47,7 +47,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static compendiumBrowserTypes({ chosen=new Set() }={}) {
     const [generalTypes, physicalTypes] = Item.TYPES.reduce(([g, p], t) => {
       if ( ![CONST.BASE_DOCUMENT_TYPE, "backpack"].includes(t) ) {
-        if ( CONFIG.Item.dataModels[t]?.metadata?.inventoryItem ) p.push(t);
+        if ( "inventorySection" in (CONFIG.Item.dataModels[t] ?? {}) ) p.push(t);
         else g.push(t);
       }
       return [g, p];

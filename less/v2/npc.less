@@ -17,6 +17,8 @@
   &:not(.minimized, .minimizing, .maximizing) {
     min-width: 700px;
     min-height: 700px;
+
+    .window-content { overflow: visible; }
   }
 
   /* ---------------------------------- */
@@ -59,7 +61,6 @@
   .window-content {
     display: flex;
     flex-direction: column;
-    overflow: visible;
     padding-block: 4px 0;
     gap: 0;
     margin-top: -26px;
