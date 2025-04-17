@@ -29,7 +29,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
           updateData = foundry.utils.mergeObject(source, updateData, {inplace: false});
         }
         await actor.update(updateData, {
-          enforceTypes: false, diff: valid && !flags.persistSourceMigration, render: false
+          enforceTypes: false, diff: valid && !flags.persistSourceMigration, recursive: false, render: false
         });
       }
       if ( actor.effects && actor.items && foundry.utils.isNewerVersion("3.0.3", version) ) {
@@ -61,7 +61,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
           updateData = foundry.utils.mergeObject(source, updateData, { inplace: false, performDeletions: true });
         }
         await item.update(updateData, {
-          enforceTypes: false, diff: valid && !flags.persistSourceMigration, render: false
+          enforceTypes: false, diff: valid && !flags.persistSourceMigration, recursive: false, render: false
         });
       }
     } catch(err) {
@@ -132,7 +132,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
             });
           }
           await token.actor.update(updateData, {
-            enforceTypes: false, diff: !flags.persistSourceMigration, render: false
+            enforceTypes: false, diff: !flags.persistSourceMigration, recursive: false, render: false
           });
         }
       } catch(err) {
