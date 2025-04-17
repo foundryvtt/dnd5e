@@ -55,7 +55,7 @@ system:
       value: 180
       max: 180
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 19d10 + 76
     init:
       ability: ''
@@ -148,7 +148,11 @@ system:
     languages:
       value:
         - infernal
-      custom: Telepathy 120 ft.
+      custom: ''
+      communication:
+        telepathy:
+          value: 120
+          units: ft
     dm:
       amount: {}
       bypasses: []
@@ -1509,8 +1513,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171199419
-  modifiedTime: 1726171439005
+  modifiedTime: 1744916171006
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!1zzRQps9jZdLZGqI'

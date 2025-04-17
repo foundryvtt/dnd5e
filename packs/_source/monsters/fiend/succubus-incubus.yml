@@ -149,7 +149,11 @@ system:
         - abyssal
         - common
         - infernal
-      custom: Telepathy 60 ft.
+      custom: ''
+      communication:
+        telepathy:
+          value: 60
+          units: ft
     dm:
       amount: {}
       bypasses: []
@@ -1270,8 +1274,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.3.8
+  systemVersion: 4.4.0
   createdTime: 1726171236478
-  modifiedTime: 1744059282250
+  modifiedTime: 1744916157149
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!VmdyZDjqAc8vdncY'

@@ -55,7 +55,7 @@ system:
       value: 157
       max: 157
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 15d10 + 75
     init:
       ability: ''
@@ -148,7 +148,11 @@ system:
     languages:
       value:
         - abyssal
-      custom: Telepathy 120 ft.
+      custom: ''
+      communication:
+        telepathy:
+          value: 120
+          units: ft
     dm:
       amount: {}
       bypasses: []
@@ -1816,8 +1820,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171228239
-  modifiedTime: 1726171444162
+  modifiedTime: 1744916188683
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!OGPHF4sCVOAi87TU'

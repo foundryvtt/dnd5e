@@ -54,8 +54,8 @@ system:
     hp:
       value: 67
       max: 67
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 9d10 + 18
     init:
       ability: ''
@@ -145,7 +145,11 @@ system:
         - celestial
         - elvish
         - sylvan
-      custom: Telepathy 60 ft.
+      custom: ''
+      communication:
+        telepathy:
+          value: 60
+          units: ft
     dm:
       amount: {}
       bypasses: []
@@ -2809,8 +2813,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171217295
-  modifiedTime: 1726171442151
+  modifiedTime: 1744916037687
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!G9PENY6nw0xRxCJW'
