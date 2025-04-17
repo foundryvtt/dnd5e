@@ -261,6 +261,16 @@ export function registerSystemSettings() {
     })
   });
 
+  // Allow Player use of Damage Application Tray
+  game.settings.register("dnd5e", "allowPlayerDamageTray", {
+    name: "SETTINGS.DND5E.PERMISSIONS.AllowDamage.Name",
+    hint: "SETTINGS.DND5E.PERMISSIONS.AllowDamage.Hint",
+    scope: "world",
+    config: true,
+    default: false,
+    type: Boolean
+  });
+
   // Allow Player use of Effect Application Tray
   game.settings.register("dnd5e", "allowPlayerEffectsTray", {
     name: "SETTINGS.DND5E.PERMISSIONS.AllowEffects.Name",
