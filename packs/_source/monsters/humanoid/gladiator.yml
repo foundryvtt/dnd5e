@@ -54,8 +54,8 @@ system:
     hp:
       value: 112
       max: 112
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 15d8 + 45
     init:
       ability: ''
@@ -652,10 +652,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -674,10 +675,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1744043376665
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fsPruAIDOg4tVrgb.YbB6EsBwNaEzVlxU'
   - _id: NPTnV9YupSeKJrQ0
     name: Brute
@@ -701,10 +702,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -723,10 +725,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1744043390559
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fsPruAIDOg4tVrgb.NPTnV9YupSeKJrQ0'
   - _id: QuVUb9i809rjJWcL
     name: Multiattack
@@ -734,7 +736,10 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The gladiator makes three melee attacks or two ranged attacks.</p>
+        value: >-
+          <p>The gladiator makes three melee attacks or two ranged
+          attacks.</p><p>Melee: [[/item .eL15erXXE9EuXWSB]], [[/item
+          .GrUneCbXCYngdpjf]]</p><p>Ranged: [[/item .eL15erXXE9EuXWSB]]</p>
         chat: ''
       source:
         custom: ''
@@ -748,7 +753,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -823,10 +828,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1744044307584
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fsPruAIDOg4tVrgb.QuVUb9i809rjJWcL'
   - _id: eL15erXXE9EuXWSB
     name: Spear
@@ -834,12 +839,7 @@ items:
     img: icons/weapons/polearms/spear-flared-worn-grey.webp
     system:
       description:
-        value: >-
-          <p>Melee or Ranged Weapon Attack: +7 to hit, reach 5 ft. and range
-          20/60 ft., one target. Hit: <strong>11 (2d6 + 4) <em>piercing
-          damage</em></strong>, or <strong>13 (2d8 + 4) <em>piercing
-          damage</em></strong> if used with two hands to make a melee
-          attack.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Gladiator attacks with their Spear.</p>
       source:
         custom: ''
@@ -933,7 +933,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -963,13 +963,13 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
+              value: ''
               classification: weapon
           damage:
             critical:
@@ -977,26 +977,33 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: spear
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
       core:
         sourceId: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676808
+      modifiedTime: 1744044179160
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fsPruAIDOg4tVrgb.eL15erXXE9EuXWSB'
   - _id: GrUneCbXCYngdpjf
@@ -1006,11 +1013,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>9 (2d4 + 4) <em>bludgeoning
-          damage</em></strong>.</p><p>If the target is a Medium or smaller
-          creature, it must succeed on a  <strong>DC 15 Strength</strong> saving
-          throw or be knocked prone.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a Medium or smaller creature, it must succeed on a [[/save]] saving
+          throw or be knocked &amp;Reference[prone].</p><p></p>
         chat: >-
           <p>The Gladiator attacks with their Shield Bash. If the target is a
           Medium or smaller creature, it must make a <strong>Strength</strong>
@@ -1081,7 +1086,7 @@ items:
       unidentified:
         description: ''
       type:
-        value: martialM
+        value: natural
         baseItem: ''
       container: null
       crewed: false
@@ -1105,7 +1110,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1124,8 +1129,8 @@ items:
               height: ''
               units: ''
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1135,13 +1140,13 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
+              value: ''
               classification: weapon
           damage:
             critical:
@@ -1149,13 +1154,16 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
           activation:
-            type: action
+            type: ''
             value: 1
-            condition: ''
+            condition: On hit
             override: false
           consumption:
             targets: []
@@ -1168,10 +1176,11 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: e0KniuDngw2shi5N
           range:
             value: '5'
             units: ft
@@ -1187,8 +1196,8 @@ items:
               height: ''
               units: ''
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1198,44 +1207,77 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
-            parts:
-              - number: 2
-                denomination: 4
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            onSave: none
+            parts: []
           save:
             ability: str
             dc:
-              calculation: ''
+              calculation: str
               formula: '15'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: shield-bash
-    effects: []
+      mastery: ''
+    effects:
+      - name: Prone
+        img: systems/dnd5e/icons/svg/statuses/prone.svg
+        origin: Compendium.dnd5e.monsters.Actor.fsPruAIDOg4tVrgb.Item.GrUneCbXCYngdpjf
+        transfer: false
+        _id: e0KniuDngw2shi5N
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        statuses:
+          - prone
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '12.331'
+          systemId: dnd5e
+          systemVersion: 4.3.8
+          createdTime: 1744043946552
+          modifiedTime: 1744043988419
+          lastModifiedBy: dnd5ebuilder0000
+        _key: >-
+          !actors.items.effects!fsPruAIDOg4tVrgb.GrUneCbXCYngdpjf.e0KniuDngw2shi5N
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676808
+      modifiedTime: 1744044179160
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fsPruAIDOg4tVrgb.GrUneCbXCYngdpjf'
   - _id: AwP14Hu6dPdnSbQt
@@ -1263,7 +1305,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -1274,7 +1316,7 @@ items:
           activation:
             type: reaction
             value: 1
-            condition: ''
+            condition: when a melee attack would hit this creature
             override: false
           consumption:
             targets: []
@@ -1292,7 +1334,7 @@ items:
             override: false
           effects: []
           range:
-            units: none
+            units: self
             special: ''
             override: false
           target:
@@ -1321,6 +1363,9 @@ items:
             prompt: false
             visible: false
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -1333,14 +1378,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676808
+      modifiedTime: 1744044417544
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fsPruAIDOg4tVrgb.AwP14Hu6dPdnSbQt'
 effects: []
@@ -1353,8 +1402,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.3.8
   createdTime: 1726171246985
-  modifiedTime: 1726171447697
+  modifiedTime: 1744044640004
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!fsPruAIDOg4tVrgb'
