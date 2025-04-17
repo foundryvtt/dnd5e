@@ -141,6 +141,7 @@ export default class GroupActorSheet extends ActorSheetMixin(foundry.appv1?.shee
     const displayXP = game.settings.get("dnd5e", "levelingMode") !== "noxp";
     for ( const [index, memberData] of this.object.system.members.entries() ) {
       const member = memberData.actor;
+      if ( !member ) continue;
       const multiplier = type === "encounter" ? (memberData.quantity.value ?? 1) : 1;
 
       const m = {
@@ -247,7 +248,7 @@ export default class GroupActorSheet extends ActorSheetMixin(foundry.appv1?.shee
   /** @inheritDoc */
   async _render(force, options={}) {
     for ( const member of this.object.system.members) {
-      member.actor.apps[this.id] = this;
+      if ( member.actor ) member.actor.apps[this.id] = this;
     }
     return super._render(force, options);
   }
@@ -257,7 +258,7 @@ export default class GroupActorSheet extends ActorSheetMixin(foundry.appv1?.shee
   /** @inheritDoc */
   async close(options={}) {
     for ( const member of this.object.system.members ) {
-      delete member.actor.apps[this.id];
+      delete member.actor?.apps[this.id];
     }
     return super.close(options);
   }
