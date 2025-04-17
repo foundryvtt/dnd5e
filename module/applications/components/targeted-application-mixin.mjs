@@ -120,7 +120,8 @@ export default function TargetedApplicationMixin(Base) {
     buildTargetsList() {
       if ( this.shouldBuildTargetList === false ) return;
       const targetedTokens = new Map();
-      switch ( this.targetingMode ) {
+      const mode = game.user.isGM ? this.targetingMode : "selected";
+      switch ( mode ) {
         case "targeted":
           for ( const descriptor of this.chatMessage?.system?.targets ?? [] ) {
             const { actor, token } = TargetsField.resolve(descriptor);
