@@ -782,7 +782,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -967,9 +967,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676965
+      modifiedTime: 1744916839235
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!kVg37NlPcACAzjCT.r51OovswZTVF8Yna'
   - _id: lfg28JvVAru30yJ4
@@ -1008,10 +1008,10 @@ items:
       identified: true
       cover: null
       range:
-        value: 30
+        value: null
         long: null
         units: ft
-        reach: null
+        reach: 30
       uses:
         max: ''
         recovery: []
@@ -1127,6 +1127,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tentacle
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1138,9 +1139,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676965
+      modifiedTime: 1744916871340
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!kVg37NlPcACAzjCT.lfg28JvVAru30yJ4'
   - _id: bwwyMBn4QwiNd4SM

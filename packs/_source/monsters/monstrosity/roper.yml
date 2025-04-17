@@ -54,8 +54,8 @@ system:
     hp:
       value: 93
       max: 93
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 11d10 + 33
     init:
       ability: ''
@@ -663,7 +663,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -794,9 +794,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676899
+      modifiedTime: 1744916839737
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qZyLwdx7lj5d1wfD.mBRjMwEitGrPDm5I'
   - _id: bTiw89tDx64zTqDk
@@ -837,10 +837,10 @@ items:
       identified: true
       cover: null
       range:
-        value: 50
+        value: null
         long: null
         units: ft
-        reach: null
+        reach: 50
       uses:
         max: ''
         recovery: []
@@ -860,12 +860,13 @@ items:
             formula: ''
         base:
           number: null
-          denomination: null
+          denomination: 0
           types: []
           custom:
             enabled: false
           scaling:
             number: 1
+          bonus: ''
       armor:
         value: 10
       hp:
@@ -873,7 +874,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - rch
       proficient: 1
       unidentified:
         description: ''
@@ -950,6 +952,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tendril
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -961,9 +964,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676899
+      modifiedTime: 1744916856996
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qZyLwdx7lj5d1wfD.bTiw89tDx64zTqDk'
   - _id: iGuyFLbKazqPCcXY
@@ -1180,8 +1183,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171260236
-  modifiedTime: 1726171450520
+  modifiedTime: 1744916858530
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!qZyLwdx7lj5d1wfD'
