@@ -1,18 +1,17 @@
 _id: 46ikeR4RrSim6DsN
 name: Talisman of the Sphere
-type: consumable
+type: equipment
 img: icons/commodities/treasure/broach-jeweled-pink.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item, (requires attunement)</em></p>
-
-      <p>When you make an Intelligence (Arcana) check to control a Sphere of
-      Annihilation while you are holding this talisman, you double your
-      proficiency bonus on the check. In addition, when you start your turn with
-      control over a Sphere of Annihilation, you can use an action to levitate
-      it 10 feet plus a number of additional feet equal to 10 × your
-      Intelligence modifier.</p>
+      <p><em>Wondrous item, (requires attunement)</em></p><p>When you make an
+      Intelligence (Arcana) check to control a Sphere of Annihilation while you
+      are holding this talisman, you double your proficiency bonus on the check.
+      In addition, when you start your turn with control over a Sphere of
+      Annihilation, you can use an action to levitate it 10 feet plus a number
+      of additional feet equal to 10 × your Intelligence modifier.</p><p>[[10 +
+      10 * @abilities.int.mod]]{Total distance} feet</p>
     chat: ''
   source:
     custom: ''
@@ -51,7 +50,7 @@ system:
         formula: ''
     replace: false
   type:
-    value: trinket
+    value: wondrous
     subtype: ''
   unidentified:
     description: ''
@@ -79,7 +78,7 @@ system:
       duration:
         concentration: false
         value: ''
-        units: ''
+        units: inst
         special: ''
         override: false
       effects: []
@@ -106,11 +105,19 @@ system:
         override: false
       check:
         ability: int
-        dc: {}
+        dc:
+          calculation: ''
+          formula: '25'
+        associated:
+          - arc
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: Control Check
+      img: ''
+      appliedEffects: []
   attuned: false
   identifier: talisman-of-the-sphere
 effects: []
@@ -118,13 +125,17 @@ folder: UnUwTG4YIgd0kaUJ
 sort: 1100000
 ownership:
   default: 0
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
 _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.3.8
   createdTime: 1725037098121
-  modifiedTime: 1725992483211
+  modifiedTime: 1744317421044
   lastModifiedBy: dnd5ebuilder0000
 _key: '!items!46ikeR4RrSim6DsN'

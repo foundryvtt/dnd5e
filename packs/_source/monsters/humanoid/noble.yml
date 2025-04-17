@@ -54,8 +54,8 @@ system:
     hp:
       value: 9
       max: 9
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d8
     init:
       ability: ''
@@ -561,10 +561,7 @@ items:
     img: icons/weapons/swords/sword-guard-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d8 + 1) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Noble attacks with its Rapier.</p>
       source:
         custom: ''
@@ -657,7 +654,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -687,13 +684,13 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
+              value: ''
               classification: weapon
           damage:
             critical:
@@ -701,10 +698,14 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: rapier
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -713,14 +714,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.items.Tobce1hexTnDk4sV
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.Tobce1hexTnDk4sV
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676544
+      modifiedTime: 1744048714751
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!GlaCGcgIP6YjBjGc.f12lOXuMaI21HDrz'
   - _id: HhLmdqeivyDnsemN
@@ -838,8 +843,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.3.8
   createdTime: 1726171217891
-  modifiedTime: 1726171442247
+  modifiedTime: 1744048738286
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!GlaCGcgIP6YjBjGc'

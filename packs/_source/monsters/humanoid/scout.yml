@@ -54,8 +54,8 @@ system:
     hp:
       value: 16
       max: 16
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 3d8 + 3
     init:
       ability: ''
@@ -576,10 +576,11 @@ items:
         spent: 0
         recovery: []
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -596,10 +597,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1744052052908
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!O3ABqI55Ir1du1Xa.PQGwUNCJ7EkJAE8V'
   - _id: YO57HtdvpuGxJANB
     name: Multiattack
@@ -698,8 +699,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1744132986913
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!O3ABqI55Ir1du1Xa.YO57HtdvpuGxJANB'
   - _id: YDoOa6D6QDoR2Htu
     name: Shortsword
@@ -707,10 +708,7 @@ items:
     img: icons/weapons/swords/sword-guard-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Scout attacks with their Shortsword.</p>
       source:
         custom: ''
@@ -804,7 +802,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -834,13 +832,13 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
+              value: ''
               classification: weapon
           damage:
             critical:
@@ -848,26 +846,33 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: shortsword
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
       core:
         sourceId: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676671
+      modifiedTime: 1744132985302
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!O3ABqI55Ir1du1Xa.YDoOa6D6QDoR2Htu'
   - _id: E2fYrhLigMeVH09l
@@ -876,9 +881,7 @@ items:
     img: icons/weapons/bows/longbow-leather-green.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +4 to hit, ranged 150/600 ft., one target.
-          Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Scout attacks with their Longbow.</p>
       source:
         custom: ''
@@ -1018,12 +1021,14 @@ items:
             parts: []
           sort: 0
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: arrow
       magicalBonus: null
       identifier: longbow
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -1034,9 +1039,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676671
+      modifiedTime: 1744132985302
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!O3ABqI55Ir1du1Xa.E2fYrhLigMeVH09l'
 effects: []
@@ -1049,8 +1054,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.3.8
   createdTime: 1726171227806
-  modifiedTime: 1726171444090
+  modifiedTime: 1744052139226
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!O3ABqI55Ir1du1Xa'
