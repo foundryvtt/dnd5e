@@ -55,7 +55,7 @@ system:
       value: 120
       max: 120
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 16d8 + 48
     init:
       ability: ''
@@ -510,7 +510,7 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
       properties: []
@@ -574,7 +574,7 @@ items:
       identifier: shapechanger
     effects: []
     folder: null
-    sort: 0
+    sort: 600000
     ownership:
       default: 0
     flags:
@@ -585,9 +585,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676953
+      modifiedTime: 1744075307516
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.EjU9p4Wh1U2wsnFK'
   - _id: 2iPYXoxM2ZReuhSL
@@ -615,7 +615,8 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities: {}
       enchant: {}
       prerequisites:
@@ -632,25 +633,25 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1744074944805
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.2iPYXoxM2ZReuhSL'
   - _id: jW4qHQ761qRLeWM8
-    name: Pounce (Tiger or Hybrid Form Only)
+    name: Pounce
     type: feat
     img: icons/creatures/abilities/cougar-pounce-stalk-black.webp
     system:
       description:
         value: >-
-          <p>If the weretiger moves at <strong>least 15 feet</strong> straight
-          toward a creature and then hits it with a claw attack on the same
-          turn, that target must succeed on a <strong>DC 14 Strength saving
-          throw</strong> or be knocked prone. If the target is prone, the
-          weretiger can make one bite attack against it as a bonus
-          action.</p><p>If the target is prone, the panther can make one bite
-          attack against it as a bonus action.</p>
+          <p>If the [[lookup @name lowercase]] moves at <strong>least 15
+          feet</strong> straight toward a creature and then hits it with a
+          [[/item .HPmjVRKpG08bgohb]]{claw} attack on the same turn, that target
+          must succeed on a [[/save]] saving throw or be knocked
+          &amp;Reference[prone]. If the target is prone, the weretiger can make
+          one [[/item .FOkSL18gU0Sli5ZA]]{bite} attack against it as a bonus
+          action.</p>
         chat: >-
           <p>If the weretiger moves at <strong>least 15 feet</strong> straight
           toward a creature and then hits it with a claw attack on the same
@@ -668,72 +669,19 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
-      requirements: ''
-      properties: []
+      requirements: Tiger or Hybrid Form
+      properties:
+        - trait
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '15'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
           activation:
             type: ''
             value: null
-            condition: ''
+            condition: moves 15 feet and hits with a claw attack
             override: false
           consumption:
             targets: []
@@ -746,10 +694,11 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: xx5oDVvttzxBUXpQ
           range:
             value: '15'
             units: ft
@@ -776,7 +725,7 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts: []
           save:
             ability: str
@@ -784,36 +733,82 @@ items:
               calculation: ''
               formula: '14'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
       identifier: pounce-tiger-or-hybrid-form-only
-    effects: []
+    effects:
+      - name: Prone
+        img: systems/dnd5e/icons/svg/statuses/prone.svg
+        origin: Compendium.dnd5e.monsters.Actor.zIr3NaNF0mWz5Ahq.Item.jW4qHQ761qRLeWM8
+        transfer: false
+        _id: xx5oDVvttzxBUXpQ
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        tint: '#ffffff'
+        statuses:
+          - prone
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '12.331'
+          systemId: dnd5e
+          systemVersion: 4.3.8
+          createdTime: 1744074885146
+          modifiedTime: 1744074906625
+          lastModifiedBy: dnd5ebuilder0000
+        _key: >-
+          !actors.items.effects!zIr3NaNF0mWz5Ahq.jW4qHQ761qRLeWM8.xx5oDVvttzxBUXpQ
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676953
+      modifiedTime: 1744074929043
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.jW4qHQ761qRLeWM8'
   - _id: SmUCt79LtakgTJoa
-    name: Multiattack (Humanoid or Hybrid Form Only)
+    name: Multiattack
     type: feat
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
         value: >-
-          <p>In humanoid form, the weretiger makes two scimitar attacks or two
-          longbow attacks. In hybrid form, it can attack like a humanoid or make
-          two claw attacks.</p>
+          <p>In humanoid form, the weretiger makes two [[/item
+          .vtnEGCOptmp2bcqG]]{scimitar} attacks or two [[/item
+          .onmNGMiE4AyvYxDQ]]{longbow} attacks.</p><p>In hybrid form, it can
+          attack like a humanoid or make two [[/item .HPmjVRKpG08bgohb]]{claw}
+          attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -827,9 +822,9 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
-      requirements: ''
+      requirements: Humanoid or Hybrid Form
       properties: []
       activities:
         dnd5eactivity000:
@@ -900,10 +895,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1744075424301
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.SmUCt79LtakgTJoa'
   - _id: FOkSL18gU0Sli5ZA
     name: Bite (Tiger or Hybrid Form Only)
@@ -912,11 +907,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>8 (1d10 + 3) <em>piercing
-          damage</em></strong>. </p><p>If the target is a humanoid, it must
-          succeed on a  <strong>DC 13 Constitution</strong> saving throw or be
-          cursed with weretiger lycanthropy.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a humanoid, it must succeed on a [[/save]] saving throw or be cursed
+          with weretiger lycanthropy.</p>
         chat: >-
           <p>The Weretiger attacks with its Bite. If the target is a humanoid,
           it must make a <strong>Constitution</strong> saving throw.</p>
@@ -940,7 +933,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -1010,7 +1003,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1040,13 +1033,13 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
+              value: ''
               classification: weapon
           damage:
             critical:
@@ -1054,11 +1047,14 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
           activation:
-            type: action
+            type: special
             value: 1
             condition: ''
             override: false
@@ -1112,6 +1108,8 @@ items:
               formula: '13'
           sort: 0
           name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1119,18 +1117,22 @@ items:
       identifier: bite-tiger-or-hybrid-form-only
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676953
+      modifiedTime: 1744075307516
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.FOkSL18gU0Sli5ZA'
   - _id: HPmjVRKpG08bgohb
@@ -1139,10 +1141,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Weretiger attacks with its Claw.</p>
       source:
         custom: ''
@@ -1164,7 +1163,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -1234,7 +1233,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1264,13 +1263,13 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: melee
+              value: ''
               classification: weapon
           damage:
             critical:
@@ -1278,24 +1277,32 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claw-tiger-or-hybrid-form-only
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676953
+      modifiedTime: 1744075307516
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.HPmjVRKpG08bgohb'
   - _id: vtnEGCOptmp2bcqG
@@ -1304,10 +1311,7 @@ items:
     img: icons/weapons/swords/sword-katana.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Weretiger attacks with its Scimitar.</p>
       source:
         custom: ''
@@ -1378,7 +1382,7 @@ items:
         description: ''
       type:
         value: martialM
-        baseItem: ''
+        baseItem: scimitar
       container: null
       crewed: false
       activities:
@@ -1449,9 +1453,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: scimitar-humanoid-or-hybrid-form-only
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
@@ -1460,9 +1465,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676953
+      modifiedTime: 1744075307516
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.vtnEGCOptmp2bcqG'
   - _id: onmNGMiE4AyvYxDQ
@@ -1471,9 +1476,7 @@ items:
     img: icons/weapons/bows/longbow-leather-green.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +4 to hit, range 150/600 ft., one target.
-          Hit: <strong>6 (1d8 + 2) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Weretiger attacks with its Longbow.</p>
       source:
         custom: ''
@@ -1545,7 +1548,7 @@ items:
         description: ''
       type:
         value: martialR
-        baseItem: ''
+        baseItem: longbow
       container: null
       crewed: false
       activities:
@@ -1568,7 +1571,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1598,13 +1601,13 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
             flat: false
             type:
-              value: ranged
+              value: ''
               classification: weapon
           damage:
             critical:
@@ -1612,24 +1615,33 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: arrow
       magicalBonus: null
       identifier: longbow-humanoid-or-hybrid-form-only
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676953
+      modifiedTime: 1744075307516
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zIr3NaNF0mWz5Ahq.onmNGMiE4AyvYxDQ'
 effects: []
@@ -1642,8 +1654,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.3.8
   createdTime: 1726171267537
-  modifiedTime: 1726171452250
+  modifiedTime: 1744075486015
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!zIr3NaNF0mWz5Ahq'

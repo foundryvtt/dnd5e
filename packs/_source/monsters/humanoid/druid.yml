@@ -54,8 +54,8 @@ system:
     hp:
       value: 27
       max: 27
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 5d8 + 5
     init:
       ability: ''
@@ -106,7 +106,7 @@ system:
     biography:
       value: ''
       public: ''
-    alignment: any
+    alignment: any alignment
     race: null
     type:
       value: humanoid
@@ -488,11 +488,14 @@ items:
         value: >-
           <p>The druid is a 4th-level spellcaster. Its spellcasting ability is
           Wisdom (spell save DC 12, +4 to hit with spell attacks).</p><p>It has
-          the following druid spells prepared:</p><p><strong>Cantrips
-          </strong>(at will): druidcraft, produce flame,
-          shillelagh</p><p><strong> 1st level</strong> (4 slots): entangle,
-          longstrider, speak with animals, thunderwave</p><p><strong>2nd
-          level</strong> (3 slots): animal messenger, barkskin</p>
+          the following druid spells prepared:</p><p>Cantrips (at will): [[/item
+          .SbSvZKkJASyk8jKo]]{druidcraft}, [[/item .eCPQuQkIabFKTl9u]]{produce
+          flame}, [[/item .VzgFzcmocr1X1cp4]]{shillelagh}</p><p>1st level (4
+          slots): [[/item .gMrWeG8fMDPRFiVe]]{entangle}, [[/item
+          .B0pnIcc52O6G8hi8]]{longstrider}, [[/item .aL1F8fvYLtNzUbKu]]{speak
+          with animals}, [[/item .WTbOQBsarsL1LuXJ]]{thunderwave}</p><p>2nd
+          level (3 slots): [[/item .X8w9EzYLGc4vQ1H2]]{animal messenger},
+          [[/item .JPwIEfgUPVebr5AH]]{barkskin}</p>
         chat: <p>The druid is a spellcaster. Its spellcasting ability is Wisdom.</p>
       source:
         custom: ''
@@ -528,9 +531,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676552
+      modifiedTime: 1744141612084
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!K15Yl8JmB5iPircc.07sdy4qaaW4MaB8W'
   - _id: KUP8WEfLxlcY7K2x
@@ -540,10 +543,11 @@ items:
     system:
       description:
         value: >-
-          <p>Melee Weapon Attack: +2 to hit (+4 to hit with shillelagh), reach 5
-          ft., one target. Hit: <strong>3 (1d6) <em>bludgeoning
-          damage</em></strong>, or <strong>6 (1d8 + 2) <em>bludgeoning
-          damage</em></strong> with shillelagh or if wielded with two hands.</p>
+          <p>[[/attack extended]]. [[/damage extended]] or [[/damage twoHanded]]
+          if wielded with two hands.</p><p>With
+          @UUID[.udSiVp4nSrGBSvG1]{shillelagh}, [[/attack extended
+          activity=J8RgDbtkXvXUJDuD]]. [[/damage extended
+          activity=J8RgDbtkXvXUJDuD]].</p>
         chat: <p>The Druid attacks with its Quarterstaff.</p>
       source:
         custom: ''
@@ -607,6 +611,7 @@ items:
         dt: null
         conditions: ''
       properties:
+        - foc
         - ver
       proficient: 1
       unidentified:
@@ -636,7 +641,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -666,7 +671,7 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: str
             bonus: ''
             critical:
               threshold: null
@@ -679,12 +684,145 @@ items:
               bonus: ''
             includeBase: true
             parts: []
-          sort: 0
+          sort: -200000
+          name: ''
+          img: ''
+          appliedEffects: []
+        J8RgDbtkXvXUJDuD:
+          type: attack
+          activation:
+            type: action
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            value: ''
+            units: inst
+            special: ''
+            override: false
+            concentration: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: spellcasting
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: ''
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: '8'
+                bonus: '@mod'
+                types:
+                  - bludgeoning
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: -100000
+          _id: J8RgDbtkXvXUJDuD
+          name: Spellcasting Attack
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: quarterstaff
-    effects: []
+      mastery: ''
+    effects:
+      - type: enchantment
+        name: Shillelagh
+        img: icons/magic/fire/dagger-rune-enchant-teal.webp
+        disabled: true
+        _id: siLjGctswI3gx3B2
+        system: {}
+        changes:
+          - key: name
+            mode: 2
+            value: ', Shillelagh'
+            priority: null
+          - key: system.damage.base.number
+            mode: 5
+            value: '1'
+            priority: null
+          - key: system.damage.base.denomination
+            mode: 5
+            value: '8'
+            priority: null
+          - key: system.properties
+            mode: 2
+            value: mgc
+            priority: null
+        duration:
+          startTime: null
+          seconds: 60
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: Compendium.dnd5e.monsters.Actor.K15Yl8JmB5iPircc.Item.udSiVp4nSrGBSvG1
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        flags:
+          dnd5e:
+            dependents:
+              - uuid: >-
+                  Compendium.dnd5e.monsters.Actor.K15Yl8JmB5iPircc.Item.KUP8WEfLxlcY7K2x.Activity.J8RgDbtkXvXUJDuD
+            riders:
+              statuses: []
+        _stats:
+          compendiumSource: >-
+            Compendium.dnd5e.monsters.Actor.K15Yl8JmB5iPircc.Item.udSiVp4nSrGBSvG1.ActiveEffect.QPsqj6jfS0iXSrTs
+          duplicateSource: null
+          coreVersion: '12.331'
+          systemId: dnd5e
+          systemVersion: 4.3.8
+          createdTime: 1744141902433
+          modifiedTime: 1744142295936
+          lastModifiedBy: dnd5ebuilder0000
+        _key: >-
+          !actors.items.effects!K15Yl8JmB5iPircc.KUP8WEfLxlcY7K2x.siLjGctswI3gx3B2
     folder: null
     sort: 0
     ownership:
@@ -692,14 +830,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.items.g2dWN7PQiMRYWzyk
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.g2dWN7PQiMRYWzyk
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.3.8
       createdTime: null
-      modifiedTime: 1736804676552
+      modifiedTime: 1744142941675
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!K15Yl8JmB5iPircc.KUP8WEfLxlcY7K2x'
   - _id: SbSvZKkJASyk8jKo
@@ -1587,134 +1729,6 @@ items:
       modifiedTime: null
       lastModifiedBy: null
     _key: '!actors.items!K15Yl8JmB5iPircc.X8w9EzYLGc4vQ1H2'
-  - _id: VzgFzcmocr1X1cp4
-    name: Shillelagh
-    ownership:
-      default: 0
-    type: spell
-    system:
-      description:
-        value: >-
-          <p>The wood of a club or quarterstaff you are holding is imbued with
-          nature's power. For the duration, you can use your spellcasting
-          ability instead of Strength for the attack and damage rolls of melee
-          attacks using that weapon, and the weapon's damage die becomes a d8.
-          The weapon also becomes magical, if it isn't already. The spell ends
-          if you cast it again or if you let go of the weapon.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      activation:
-        type: bonus
-        condition: ''
-        value: 1
-      duration:
-        value: '1'
-        units: minute
-      target:
-        affects:
-          type: object
-          count: '1'
-          choice: false
-        template:
-          units: spec
-          contiguous: false
-      range:
-        units: touch
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      level: 0
-      school: trs
-      materials:
-        value: A shamrock leaf, and a club or quarterstaff
-        consumed: false
-        cost: 0
-        supply: 0
-      preparation:
-        mode: prepared
-        prepared: true
-      properties:
-        - vocal
-        - somatic
-        - material
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
-          activation:
-            type: action
-            value: null
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            units: inst
-            concentration: false
-            override: false
-          effects: []
-          range:
-            override: false
-          target:
-            prompt: true
-            template:
-              contiguous: false
-              units: ft
-            affects:
-              choice: false
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            critical:
-              allow: false
-              bonus: ''
-            parts:
-              - number: 1
-                denomination: 8
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: ''
-                  number: null
-                  formula: ''
-          sort: 0
-      identifier: shillelagh
-    sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.VzgFzcmocr1X1cp4
-    img: icons/magic/fire/dagger-rune-enchant-teal.webp
-    effects: []
-    folder: null
-    _stats:
-      compendiumSource: Compendium.dnd5e.spells.VzgFzcmocr1X1cp4
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-    _key: '!actors.items!K15Yl8JmB5iPircc.VzgFzcmocr1X1cp4'
   - _id: JPwIEfgUPVebr5AH
     name: Barkskin
     type: spell
@@ -1870,6 +1884,251 @@ items:
       modifiedTime: null
       lastModifiedBy: null
     _key: '!actors.items!K15Yl8JmB5iPircc.JPwIEfgUPVebr5AH'
+  - _id: udSiVp4nSrGBSvG1
+    name: Shillelagh
+    ownership:
+      default: 0
+    type: spell
+    system:
+      description:
+        value: >-
+          <p>The wood of a club or quarterstaff you are holding is imbued with
+          nature's power. For the duration, you can use your spellcasting
+          ability instead of Strength for the attack and damage rolls of melee
+          attacks using that weapon, and the weapon's damage die becomes a d8.
+          The weapon also becomes magical, if it isn't already. The spell ends
+          if you cast it again or if you let go of the weapon.</p>
+        chat: ''
+      source:
+        custom: ''
+        book: SRD 5.1
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      activation:
+        type: bonus
+        condition: ''
+        value: 1
+      duration:
+        value: '1'
+        units: minute
+      target:
+        affects:
+          type: object
+          count: '1'
+          choice: false
+          special: ''
+        template:
+          units: spec
+          contiguous: false
+          type: ''
+      range:
+        units: touch
+        special: ''
+      uses:
+        max: ''
+        recovery: []
+        spent: 0
+      level: 0
+      school: trs
+      materials:
+        value: A shamrock leaf, and a club or quarterstaff
+        consumed: false
+        cost: 0
+        supply: 0
+      preparation:
+        mode: prepared
+        prepared: true
+      properties:
+        - vocal
+        - somatic
+        - material
+      activities:
+        dnd5eactivity000:
+          _id: dnd5eactivity000
+          type: enchant
+          sort: 0
+          activation:
+            type: action
+            value: null
+            override: false
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects:
+            - _id: QPsqj6jfS0iXSrTs
+              level:
+                min: null
+                max: null
+              riders:
+                activity:
+                  - ONVab5lmTqJwwMBC
+                effect: []
+                item: []
+          range:
+            override: false
+          target:
+            template:
+              contiguous: false
+              units: ft
+            affects:
+              choice: false
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          enchant: {}
+          restrictions:
+            allowMagical: true
+            categories:
+              - simpleM
+            properties: []
+            type: weapon
+          name: Imbue Weapon
+        ONVab5lmTqJwwMBC:
+          type: attack
+          activation:
+            type: action
+            value: null
+            condition: ''
+            override: false
+          consumption:
+            targets: []
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            value: ''
+            units: ''
+            special: ''
+            override: false
+            concentration: false
+          effects: []
+          range:
+            units: ''
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: ''
+              size: ''
+              width: ''
+              height: ''
+              units: ''
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          attack:
+            ability: spellcasting
+            bonus: ''
+            critical:
+              threshold: null
+            flat: false
+            type:
+              value: melee
+              classification: weapon
+          damage:
+            critical:
+              bonus: ''
+            includeBase: true
+            parts: []
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          sort: 0
+          _id: ONVab5lmTqJwwMBC
+          name: Spellcasting Attack
+      identifier: shillelagh
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          activity:
+            - ONVab5lmTqJwwMBC
+          effect: []
+    img: icons/magic/fire/dagger-rune-enchant-teal.webp
+    effects:
+      - type: enchantment
+        name: Shillelagh
+        img: icons/magic/fire/dagger-rune-enchant-teal.webp
+        disabled: false
+        _id: QPsqj6jfS0iXSrTs
+        system: {}
+        changes:
+          - key: name
+            mode: 2
+            value: ', Shillelagh'
+            priority: null
+          - key: system.damage.base.number
+            mode: 5
+            value: '1'
+            priority: null
+          - key: system.damage.base.denomination
+            mode: 5
+            value: '8'
+            priority: null
+          - key: system.properties
+            mode: 2
+            value: mgc
+            priority: null
+        duration:
+          startTime: null
+          seconds: 60
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: ''
+        origin: null
+        tint: '#ffffff'
+        transfer: false
+        statuses: []
+        sort: 0
+        flags: {}
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '12.331'
+          systemId: dnd5e
+          systemVersion: 4.3.8
+          createdTime: null
+          modifiedTime: null
+          lastModifiedBy: null
+        _key: >-
+          !actors.items.effects!K15Yl8JmB5iPircc.udSiVp4nSrGBSvG1.QPsqj6jfS0iXSrTs
+    folder: Z8kZlnggh1PtuF3Y
+    _stats:
+      duplicateSource: null
+      compendiumSource: Compendium.dnd5e.spells.Item.VzgFzcmocr1X1cp4
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.3.8
+      createdTime: 1744141670539
+      modifiedTime: 1744141670539
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!K15Yl8JmB5iPircc.udSiVp4nSrGBSvG1'
 effects: []
 folder: pEyqIq8DYb21xia3
 sort: 0
@@ -1880,8 +2139,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.3.8
   createdTime: 1726171221276
-  modifiedTime: 1726171442924
+  modifiedTime: 1744141765490
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!K15Yl8JmB5iPircc'
