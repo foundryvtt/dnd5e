@@ -54,8 +54,8 @@ system:
     hp:
       value: 19
       max: 19
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 3d10 + 3
     init:
       ability: ''
@@ -579,10 +579,7 @@ items:
     img: icons/creatures/claws/claw-scaled-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>8 (2d6 + 1) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Giant Owl attacks with its Talons.</p>
       source:
         custom: ''
@@ -604,7 +601,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -722,6 +719,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: talons
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -733,9 +731,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676462
+      modifiedTime: 1741121277920
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!VVXly3ue0i3YgGrB.6jw1NtpZQXIesO4Y'
 effects: []
@@ -748,8 +746,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171236134
-  modifiedTime: 1726171445608
+  modifiedTime: 1741121280035
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!VVXly3ue0i3YgGrB'

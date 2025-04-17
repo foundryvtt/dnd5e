@@ -54,8 +54,8 @@ system:
     hp:
       value: 24
       max: 24
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 7d8 - 7
     init:
       ability: ''
@@ -593,11 +593,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>0
-          ft.,</strong> one target in the swarm's space. Hit: <strong>7 (2d6)
-          <em>piercing damage</em></strong>, or <strong>3 (1d6) <em>piercing
-          damage</em></strong> if the swarm has half of its hit points or
-          fewer.</p>
+          <p>Melee Weapon Attack: [[/attack]], 0 ft., one target in the swarm's
+          space. Hit: [[/damage average]] damage, or [[/damage 1d6 piercing
+          average]] damage if the swarm has half of its hit points or fewer.</p>
         chat: <p>The Swarm of Rats attacks with a flurry of Bites.</p>
       source:
         custom: ''
@@ -622,7 +620,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: null
+        reach: 0
       uses:
         max: ''
         recovery: []
@@ -690,7 +688,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -719,8 +717,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
-            bonus: ''
+            ability: none
+            bonus: '@abilities.dex.mod'
             critical:
               threshold: null
             flat: false
@@ -733,24 +731,32 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bites
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676415
+      modifiedTime: 1741123586612
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8ihbbjkaOFTPbI73.ESv9NuVeZhnEW1ua'
 effects: []
@@ -763,8 +769,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171208469
-  modifiedTime: 1726171440565
+  modifiedTime: 1741123588306
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!8ihbbjkaOFTPbI73'

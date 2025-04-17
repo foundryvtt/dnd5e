@@ -54,8 +54,8 @@ system:
     hp:
       value: 3
       max: 3
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 1d6
     init:
       ability: ''
@@ -530,10 +530,7 @@ items:
     img: icons/creatures/claws/claw-scaled-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>4 (1d4 + 2) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Eagle attacks with its Talons.</p>
       source:
         custom: ''
@@ -555,7 +552,7 @@ items:
       identified: true
       cover: null
       range:
-        value: 5
+        value: null
         long: null
         units: ft
         reach: null
@@ -673,6 +670,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: talons
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -684,9 +682,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676426
+      modifiedTime: 1741117433523
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!EI8w6XjzCZICkox9.FeybcW5pMzYjWRqq'
 effects: []
@@ -699,8 +697,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171214628
-  modifiedTime: 1726171441605
+  modifiedTime: 1741117436253
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!EI8w6XjzCZICkox9'
