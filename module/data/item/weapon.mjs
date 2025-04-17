@@ -497,12 +497,11 @@ export default class WeaponData extends ItemDataModel.mixin(
       if ( mastery === this.mastery ) continue;
       extras.push({ value: mastery, label: CONFIG.DND5E.weaponMasteries[mastery]?.label ?? mastery });
     }
-    const mastery = { value: this.mastery, label: CONFIG.DND5E.weaponMasteries[this.mastery]?.label ?? this.mastery };
-    if ( extras.length ) mastery.rule = true;
-    return [
-      mastery,
-      ...extras
-    ];
+    return [{
+      value: this.mastery,
+      label: CONFIG.DND5E.weaponMasteries[this.mastery]?.label ?? this.mastery,
+      rule: !!extras.length
+    }, ...extras];
   }
 
   /* -------------------------------------------- */
