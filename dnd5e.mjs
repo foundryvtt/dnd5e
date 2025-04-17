@@ -581,6 +581,8 @@ Hooks.on(
 
 Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffectConfig);
 
+Hooks.on("renderActiveEffectConfig", (app, html, data) => app.document.onRenderActiveEffectConfig(html));
+
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
 
 Hooks.on("renderCombatTracker", (app, html, data) => app.renderGroups(html instanceof HTMLElement ? html : html[0]));
