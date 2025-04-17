@@ -100,7 +100,7 @@ export default class DamageMessageData extends RollMessageData {
           label: "DND5E.CHATMESSAGE.Row.Properties"
         }
       },
-      showTray: game.user.isGM && !isPrivate,
+      showTray: (game.user.isGM || dnd5e.settings.allowPlayerDamageTray) && !isPrivate,
       total: rolls.reduce((total, roll) => total + Math.max(0, roll.total), 0)
     };
 
