@@ -554,7 +554,7 @@ export default class ChatMessage5e extends ChatMessage {
       html.querySelector(".chat-card, .message-content")?.appendChild(p);
     }
 
-    if ( game.user.isGM ) {
+    if ( game.user.isGM || game.settings.get("dnd5e", "allowPlayerDamageApplication") ) {
       const damageApplication = document.createElement("damage-application");
       damageApplication.damages = aggregateDamageRolls(rolls, { respectProperties: true }).map(roll => ({
         value: Math.max(0, roll.total),
