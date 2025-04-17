@@ -56,7 +56,8 @@ export default class ShortRestDialog extends BaseRestDialog {
         denomination: `d${hd.denomination}`,
         options: [{
           value: `d${hd.denomination}`,
-          label: `d${hd.denomination} (${game.i18n.format("DND5E.HITDICE.Available", { number: hd.value })})`
+          label: `d${hd.denomination} (${game.i18n.format("DND5E.HITDICE.Available", { number: hd.value })})`,
+          number: hd.value
         }]
       };
     }
@@ -68,7 +69,7 @@ export default class ShortRestDialog extends BaseRestDialog {
           value, label: `${value} (${game.i18n.format("DND5E.HITDICE.Available", { number })})`, number
         }))
       };
-      context.denomination = (this.actor.system.attributes.hd.bySize[this.#denom] > 0)
+      context.hitDice.denomination = (this.actor.system.attributes.hd.bySize[this.#denom] > 0)
         ? this.#denom : context.hitDice.options.find(o => o.number > 0)?.value;
     }
 
@@ -78,6 +79,24 @@ export default class ShortRestDialog extends BaseRestDialog {
       name: "autoHD",
       value: context.config.autoHD
     });
+
+    const numericalDenom = Number(context.hitDice.denomination?.slice(1));
+    if ( numericalDenom ) {
+      const { value: currHP, max: maxHP } = this.actor.system.attributes.hp;
+      context.progressBar = 100 * currHP / maxHP;
+      const conMod = this.actor.system.abilities.con.mod;
+      let minRegain = Math.max(1 + conMod, 1);
+      let maxRegain = Math.max(numericalDenom + conMod, 1);
+      if (context.config.autoHD) {
+        minRegain = minRegain * context.hd.value;
+        maxRegain = context.hitDice.options.reduce((acc, hd) => {
+          return acc + (Math.max(Number(hd.value.slice(1)) + conMod, 1) * hd.number);
+        }, 0);
+      }
+      context.potentialMin = 100 * minRegain / maxHP;
+      context.potentialMax = 100 * maxRegain / maxHP;
+      context.maxLeft = context.potentialMin + context.progressBar;
+    }
 
     return context;
   }
@@ -95,6 +114,18 @@ export default class ShortRestDialog extends BaseRestDialog {
   static async #rollHitDie(event, target) {
     this.#denom = this.form.denom.value;
     await this.actor.rollHitDie({ denomination: this.#denom });
+    foundry.utils.mergeObject(this.config, new FormDataExtended(this.form).object);
+    this.render();
+  }
+
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  _onChangeForm(formConfig, event) {
+    super._onChangeForm(formConfig, event);
+    this.#denom = this.form.denom.value;
     foundry.utils.mergeObject(this.config, new FormDataExtended(this.form).object);
     this.render();
   }
