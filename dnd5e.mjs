@@ -445,7 +445,7 @@ Hooks.once("i18nInit", () => {
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
   Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
-  Localization.localizeDataModel(dataModels.settings.TransformationSetting);
+  foundry.helpers.Localization.localizeDataModel(dataModels.settings.TransformationSetting);
 });
 
 /* -------------------------------------------- */
