@@ -55,7 +55,7 @@ system:
       value: 136
       max: 136
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 16d8 + 64
     init:
       ability: ''
@@ -145,8 +145,13 @@ system:
         - frightened
       custom: ''
     languages:
-      value: []
-      custom: All; Telepathy 120 ft.
+      value:
+        - ALL
+      custom: ''
+      communication:
+        telepathy:
+          value: 120
+          units: ft
     dm:
       amount: {}
       bypasses: []
@@ -1552,8 +1557,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171254414
-  modifiedTime: 1726171449210
+  modifiedTime: 1744916078303
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!m4H3hjamBNMH09S9'

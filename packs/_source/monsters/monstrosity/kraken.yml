@@ -1,7 +1,7 @@
 _id: kVg37NlPcACAzjCT
 name: Kraken
 type: npc
-img: null
+img: ''
 system:
   abilities:
     str:
@@ -55,7 +55,7 @@ system:
       value: 472
       max: 472
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 27d20 + 189
     init:
       ability: ''
@@ -145,9 +145,11 @@ system:
       custom: ''
     languages:
       value: []
-      custom: >-
-        understands Abyssal, Celestial, Infernal, and Primordial but can't
-        speak;telepathy 120 ft.
+      custom: understands Abyssal, Celestial, Infernal, and Primordial but can't speak
+      communication:
+        telepathy:
+          value: 120
+          units: ft
     dm:
       amount: {}
       bypasses: []
@@ -449,7 +451,7 @@ prototypeToken:
     negative: false
     priority: 0
   texture:
-    src: null
+    src: ''
     tint: '#ffffff'
     scaleX: 1
     scaleY: 1
@@ -1901,8 +1903,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171252481
-  modifiedTime: 1726171448852
+  modifiedTime: 1744916293114
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!kVg37NlPcACAzjCT'

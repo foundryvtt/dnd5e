@@ -54,8 +54,8 @@ system:
     hp:
       value: 135
       max: 135
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 18d10 + 36
     init:
       ability: ''
@@ -139,7 +139,11 @@ system:
     languages:
       value:
         - deep
-      custom: Telepathy 120 ft.
+      custom: ''
+      communication:
+        telepathy:
+          value: 120
+          units: ft
     dm:
       amount: {}
       bypasses: []
@@ -2058,8 +2062,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171262716
-  modifiedTime: 1726171451148
+  modifiedTime: 1744916011550
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!shhHtE7b92PefCWB'

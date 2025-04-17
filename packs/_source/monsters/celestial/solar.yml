@@ -148,8 +148,13 @@ system:
         - poisoned
       custom: ''
     languages:
-      value: []
-      custom: All; Telepathy 120 ft.
+      value:
+        - ALL
+      custom: ''
+      communication:
+        telepathy:
+          value: 120
+          units: ft
     dm:
       amount: {}
       bypasses: []
@@ -3147,8 +3152,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.3.6
+  systemVersion: 4.4.0
   createdTime: 1726171253472
-  modifiedTime: 1741111917393
+  modifiedTime: 1744916056968
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!lOYt73eaJojBDxAV'

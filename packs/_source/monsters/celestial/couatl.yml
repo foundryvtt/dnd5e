@@ -143,8 +143,13 @@ system:
       value: []
       custom: ''
     languages:
-      value: []
-      custom: All; Telepathy 120 ft.
+      value:
+        - ALL
+      custom: ''
+      communication:
+        telepathy:
+          value: 120
+          units: ft
     dm:
       amount: {}
       bypasses: []
@@ -3176,8 +3181,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.3.8
+  systemVersion: 4.4.0
   createdTime: 1726171239772
-  modifiedTime: 1744077277605
+  modifiedTime: 1744916100204
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!ZaP1H91t4FzbRqR5'
