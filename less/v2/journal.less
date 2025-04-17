@@ -74,6 +74,18 @@
 
     > i::before { content: "\f52d"; }
   }
+
+  /* ProseMirror */
+  &.journal-entry-page prose-mirror {
+    margin: 0;
+    menu { border-radius: 0; }
+
+    .editor-content {
+      scrollbar-gutter: stable;
+      margin: 0 4px 0 16px;
+      padding-right: 4px;
+    }
+  }
 }
 
 :is(.dnd5e, .dnd5e2, .dnd5e2-journal) {
@@ -451,18 +463,20 @@
     }
 
     button {
-      display: unset;
       text-transform: unset;
+      width: unset;
       box-shadow: none;
       font-family: var(--font-primary);
       font-size: var(--font-size-14);
       font-weight: normal;
       height: var(--menu-height);
       line-height: var(--menu-height);
+      min-height: unset;
       background: transparent;
       border: none;
       padding: 0 5px;
       margin: 0;
+      gap: 8px;
 
       &:hover, &.active {
         box-shadow: none;

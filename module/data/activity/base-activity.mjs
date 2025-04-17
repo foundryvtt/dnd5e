@@ -121,7 +121,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {string}
    */
   get actionType() {
-    return this.metadata.data;
+    return this.metadata.type;
   }
 
   /* -------------------------------------------- */
