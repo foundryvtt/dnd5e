@@ -304,17 +304,6 @@ export default class RollConfigurationDialog extends Dialog5e {
   _buildConfig(config, formData, index) {
     config = foundry.utils.mergeObject({ parts: [], data: {}, options: {} }, config);
 
-    /**
-     * A hook event that fires when a roll config is built using the roll prompt.
-     * @function dnd5e.buildRollConfig
-     * @memberof hookEvents
-     * @param {RollConfigurationDialog} app    Roll configuration dialog.
-     * @param {BasicRollConfiguration} config  Roll configuration data.
-     * @param {FormDataExtended} [formData]    Any data entered into the rolling prompt.
-     * @param {number} index                   Index of the roll within all rolls being prepared.
-     */
-    Hooks.callAll("dnd5e.buildRollConfig", this, config, formData, index);
-
     const situational = formData?.get(`roll.${index}.situational`);
     if ( situational && (config.situational !== false) ) {
       config.parts.push("@situational");
@@ -324,6 +313,21 @@ export default class RollConfigurationDialog extends Dialog5e {
     }
 
     this.options.buildConfig?.(this.config, config, formData, index);
+
+    /**
+     * A hook event that fires when a roll config is built using the roll prompt. Multiple hooks may be called depending
+     * on the rolling method (e.g. `dnd5e.buildSkillRollConfig`, `dnd5e.buildAbilityCheckRollConfig`,
+     * `dnd5e.buildRollConfig`).
+     * @function dnd5e.buildRollConfig
+     * @memberof hookEvents
+     * @param {RollConfigurationDialog|object} app  Roll configuration dialog or object that simulates it.
+     * @param {BasicRollConfiguration} config       Roll configuration data.
+     * @param {FormDataExtended} [formData]         Any data entered into the rolling prompt.
+     * @param {number} index                        Index of the roll within all rolls being prepared.
+     */
+    for ( const hookName of this.#config.hookNames ?? [""] ) {
+      Hooks.callAll(`dnd5e.build${hookName.capitalize()}RollConfig`, this, config, formData, index);
+    }
 
     return config;
   }
