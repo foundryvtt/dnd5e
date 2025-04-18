@@ -234,7 +234,8 @@ export default class InventoryElement extends HTMLElement {
   /** @override */
   connectedCallback() {
     if ( this.#app ) return;
-    this.#app = foundry.applications.instances.get(this.closest(".application")?.id);
+    this.#app = foundry.applications.instances.get(this.closest(".application")?.id)
+      ?? ui.windows[this.closest(".app")?.dataset.appid]; // TODO: Remove when V1 sheets are gone
 
     if ( !this.canUse ) {
       for ( const element of this.querySelectorAll('[data-action="use"]') ) {
@@ -353,7 +354,8 @@ export default class InventoryElement extends HTMLElement {
 
     if ( !this.actor || (this.actor.type === "group") ) return options;
     const favorited = this.actor.system.hasFavorite?.(item.getRelativeUUID(this.actor));
-    const expanded = this.app.expandedSections.get(item.id);
+    const expanded = this.app.expandedSections ? this.app.expandedSections.get(item.id)
+      : this.app._expanded.has(item.id); // TODO: Remove when V1 sheets are gone
 
     // Owned item options.
     options.push({
@@ -692,6 +694,23 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   async _onToggleExpand(target, { item }={}) {
+    // TODO: Remove when V1 sheets are gone
+    if ( !this.app.expandedSections ) {
+      const li = target.closest("[data-item-id]");
+      if ( this.app._expanded.has(item.id) ) {
+        const summary = $(li.querySelector(".item-summary"));
+        summary.slideUp(200, () => summary.remove());
+        this.app._expanded.delete(item.id);
+      } else {
+        const chatData = await item.getChatData({secrets: this.document.isOwner});
+        const summary = $(await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", chatData));
+        $(li).append(summary.hide());
+        summary.slideDown(200);
+        this.app._expanded.add(item.id);
+      }
+      return;
+    }
+
     const icon = target.querySelector(":scope > i");
     const row = target.closest("[data-uuid]");
     const summary = row.querySelector(":scope > .item-description > .wrapper");
