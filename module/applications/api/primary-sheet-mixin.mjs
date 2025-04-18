@@ -134,7 +134,7 @@ export default function PrimarySheetMixin(Base) {
      * @protected
      */
     *_getHeaderControlContextEntries() {
-      for ( const { icon, label, action } of this._headerControlButtons() ) {
+      for ( const { icon, label, action, onClick } of this._headerControlButtons() ) {
         let handler = this.options.actions[action];
         if ( typeof handler === "object" ) {
           if ( handler.buttons && !handler.buttons.includes(0) ) continue;
@@ -144,7 +144,8 @@ export default function PrimarySheetMixin(Base) {
           name: label,
           icon: `<i class="${icon}" inert></i>`,
           callback: li => {
-            if ( handler ) handler.call(this, window.event, li);
+            if ( onClick ) onClick(window.event);
+            else if ( handler ) handler.call(this, window.event, li);
             else this._onClickAction(window.event, li);
           }
         };
