@@ -59,8 +59,7 @@ Hooks.once("init", function() {
 
   if ( game.release.generation < 13 ) patchFromUuid();
   CONFIG.compatibility.excludePatterns.push(
-    /now namespaced under/, /V1 Application framework/, /Set#isSubset/, /ChatMessage#getHTML/, /renderChatMessage/,
-    /_onClickEntry/
+    /now namespaced under/, /V1 Application framework/, /Set#isSubset/, /ChatMessage#getHTML/, /renderChatMessage/
   );
 
   // Record Configuration Values
