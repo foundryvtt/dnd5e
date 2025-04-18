@@ -105,7 +105,7 @@ export default class CombatTracker5e extends (foundry.applications?.sidebar?.tab
         });
       }
 
-      const name = combatants[0].token?.baseActor.prototypeToken.name ?? combatants[0].name;
+      const name = combatants[0].token?.name ?? combatants[0].name;
       const img = children[0].querySelector("img");
       groupContainer.innerHTML = `
         <div class="group-header flexrow">
