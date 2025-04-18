@@ -1,6 +1,8 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
 import Item5e from "../../../documents/item.mjs";
-import { formatLength, formatNumber, getPluralRules, splitSemicolons, staticID } from "../../../utils.mjs";
+import {
+  formatLength, formatNumber, getPluralRules, simplifyBonus, splitSemicolons, staticID
+} from "../../../utils.mjs";
 
 import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
 import AdvancementManager from "../../advancement/advancement-manager.mjs";
