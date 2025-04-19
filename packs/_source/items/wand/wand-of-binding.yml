@@ -1,0 +1,243 @@
+_id: 7jEKkA9qbwJ3IuCb
+name: Wand of Binding
+type: equipment
+img: icons/weapons/wands/wand-gem-green.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a spellcaster)</em></p>
+
+      <p>This wand has 7 charges for the following properties. It regains 1d6 +
+      1 expended charges daily at dawn. If you expend the wand's last charge,
+      roll a d20. On a 1, the wand crumbles into ashes and is destroyed.</p>
+
+      <p><strong>Spells</strong>. While holding the wand, you can use an action
+      to expend some of its charges to cast one of the following spells (save DC
+      17): @UUID[Compendium.dnd5e.spells.Item.l9Ju5KE7bbn3WpTm]{Hold Monster} (5
+      charges) or @UUID[Compendium.dnd5e.spells.Item.3Lo9boi7P2ro6QV4]{Hold
+      Person} (2 charges).</p>
+
+      <p><strong>Assisted Escape</strong>. While holding the wand, you can use
+      your reaction to expend 1 charge and gain advantage on a saving throw you
+      make to avoid being paralyzed or restrained, or you can expend 1 charge
+      and gain advantage on any check you make to escape a grapple.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 10000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '7'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d6 + 1
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: wand
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - foc
+    - mgc
+  magicalBonus: null
+  activities:
+    yAh2VKsLWwGagH4w:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.l9Ju5KE7bbn3WpTm
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '5'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: yAh2VKsLWwGagH4w
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '5'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    T4OTnHCe9gEtxKtc:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.3Lo9boi7P2ro6QV4
+        challenge:
+          attack: null
+          save: 17
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: T4OTnHCe9gEtxKtc
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '2'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+    zlPilAc3Tg3RVZyG:
+      type: utility
+      name: Assisted Escape
+      _id: zlPilAc3Tg3RVZyG
+      sort: 0
+      activation:
+        type: reaction
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: wand-of-binding
+effects: []
+folder: 1aDgsGVwDbPdxG2V
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037109504
+  modifiedTime: 1730323638379
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!7jEKkA9qbwJ3IuCb'

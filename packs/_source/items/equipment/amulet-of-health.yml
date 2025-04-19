@@ -1,0 +1,75 @@
+_id: iiQxTvDOhPGW5spF
+name: Amulet of Health
+type: equipment
+img: icons/equipment/neck/pendant-faceted-red.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item (requires attunement)</em></p>
+
+      <p>Your Constitution score is 19 while you wear this amulet. It has no
+      effect on you if your Constitution is already 19 or higher without it.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 8000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: amulet-of-health
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037262170
+  modifiedTime: 1725992537919
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!iiQxTvDOhPGW5spF'

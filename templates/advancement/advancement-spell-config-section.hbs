@@ -6,9 +6,14 @@
         {{#with @root.configuration.data as |data|}}
         {{ formGroup fields.ability name="configuration.spell.ability" value=data.spell.ability
                      options=@root.abilityOptions rootId=@root.partId }}
+        {{#if @root.showPreparationState}}
+        {{ formGroup fields.prepared name="configuration.spell.prepared"
+                     value=data.spell.prepared labelAttr="label" valueAttr="value" blank=false
+                     rootId=@root.partId localize=true }}
+        {{/if}}
         {{ formGroup fields.preparation name="configuration.spell.preparation"
-                     value=data.spell.preparation choices=@root.CONFIG.spellPreparationModes
-                     labelAttr="label" blank="" rootId=@root.partId }}
+                     value=data.spell.preparation options=@root.preparationOptions
+                     blank="" rootId=@root.partId }}
         <div class="form-group split-group">
             <label>{{ localize "DND5E.LimitedUses" }}</label>
             <div class="form-fields">

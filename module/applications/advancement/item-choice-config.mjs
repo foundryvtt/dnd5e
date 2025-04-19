@@ -69,14 +69,21 @@ export default class ItemChoiceConfig extends AdvancementConfig {
     ];
     context.showContainerWarning = context.items.some(i => i.index?.type === "container");
     context.showSpellConfig = this.advancement.configuration.type === "spell";
-    context.showRequireSpellSlot = !this.advancement.configuration.spell?.preparation
-      || CONFIG.DND5E.spellPreparationModes[this.advancement.configuration.spell?.preparation]?.upcast;
     context.typeOptions = [
       { value: "", label: game.i18n.localize("DND5E.ADVANCEMENT.ItemChoice.FIELDS.type.Any") },
       { rule: true },
       ...this.advancement.constructor.VALID_TYPES
         .map(value => ({ value, label: game.i18n.localize(CONFIG.Item.typeLabels[value]) }))
     ];
+
+    if ( context.showSpellConfig ) {
+      const config = CONFIG.DND5E.spellcasting[this.advancement.configuration.spell?.preparation];
+      context.showRequireSpellSlot = !this.advancement.configuration.spell?.preparation || !config?.isStatic;
+      context.showPreparationState = config?.prepares ?? false;
+      context.preparationOptions = Object.values(CONFIG.DND5E.spellcasting).map(s =>
+        ({ value: s.key, label: s.label })
+      );
+    }
 
     if ( this.advancement.configuration.type === "feat" ) {
       const selectedType = CONFIG.DND5E.featureTypes[this.advancement.configuration.restriction.type];

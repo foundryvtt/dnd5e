@@ -391,13 +391,13 @@ export default class ActivityUsageDialog extends Dialog5e {
       let spellSlotValue = this.actor.system.spells[this.config.spell?.slot]?.value || !consumeSlot
         ? this.config.spell.slot : null;
       const spellSlotOptions = Object.entries(this.actor.system.spells).map(([value, slot]) => {
-        if ( (slot.level < minimumLevel) || (slot.level > maximumLevel) || !slot.type ) return null;
-        let label;
-        if ( slot.type === "leveled" ) {
-          label = game.i18n.format("DND5E.SpellLevelSlot", { level: slot.label, n: slot.value });
-        } else {
-          label = game.i18n.format(`DND5E.SpellLevel${slot.type.capitalize()}`, { level: slot.level, n: slot.value });
-        }
+        if ( !slot.max || (slot.level < minimumLevel) || (slot.level > maximumLevel) || !slot.type ) return null;
+        const isSeparate = CONFIG.DND5E.spellcasting[slot.type]?.separate;
+        const label = game.i18n.format(
+          `DND5E.SpellLevel${slot.type.capitalize()}`,
+          { level: isSeparate ? slot.label : slot.level, n: slot.value }
+        );
+
         // Set current value if applicable.
         const disabled = (slot.value === 0) && consumeSlot;
         if ( !disabled && !spellSlotValue ) spellSlotValue = value;

@@ -389,7 +389,7 @@
   /* Form Fields */
   textarea, select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
     --input-border-color: transparent;
-    transition: all 250ms ease;
+    transition: all 250ms ease, block-size, inline-size;
     line-height: normal;
     outline: none;
 
@@ -412,7 +412,8 @@
   }
 
   :is(.form-group, fieldset) :is(select, input):not([type="range"]) {
-    color: var(--color-text-dark-primary);
+    --input-text-color: var(--color-text-dark-primary);
+    color: var(--input-text-color);
     border: 1px solid var(--input-border-color);
     font-size: var(--font-size-11);
   }
@@ -557,7 +558,7 @@
   }
 
   /* Control buttons */
-  button.control-button {
+  button.control-button, button.config-button {
     padding: 0;
     width: unset;
     display: inline-block;
@@ -576,7 +577,7 @@
   }
 
   /* Pips */
-  .pips {
+  .pips, &.standard-form .pips {
     display: flex;
     gap: 5px;
     padding: 10px 12px;
@@ -625,11 +626,14 @@
 
     > .form-fields { flex: 3; }
   }
+  .form-group.checkbox-grid > .form-fields { flex: 0 0 100%; }
 
   fieldset { padding: revert; }
   .hint { line-height: 16px; }
 
-  button:not(.icon, .fa-solid, .fas) {
+  :is(select, input):not([type="range"]) { --input-text-color: var(--color-text-dark-primary); }
+
+  :where(button:not(.icon, .fa-solid, .fas)) {
     height: unset;
     &:not(.copy-button, .unbutton) { line-height: 28px; }
   }

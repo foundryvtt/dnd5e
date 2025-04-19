@@ -2,10 +2,10 @@
     <legend>{{ localize "DND5E.SpellDetails" }}</legend>
 
     {{!-- Spell Level --}}
-    {{ formField fields.level value=source.level choices=config.spellLevels localize=true }}
+    {{ formField fields.level value=source.level choices=CONFIG.spellLevels localize=true }}
 
     {{!-- Spell School --}}
-    {{ formField fields.school value=source.school choices=config.spellSchools labelAttr="label" blank=""
+    {{ formField fields.school value=source.school choices=CONFIG.spellSchools labelAttr="label" blank=""
                  localize=true }}
 
     {{!-- Spell Components --}}
@@ -49,15 +49,14 @@
         <div class="form-fields">
 
             {{!-- Prepared --}}
-            {{#if (eq source.preparation.mode "prepared")}}
-            {{ formInput fields.preparation.fields.prepared value=source.preparation.prepared
-                         dataset=(dnd5e-object tooltip="DND5E.Prepared") input=inputs.createCheckboxInput
-                         ariaLabel=(localize "DND5E.Prepared") }}
+            {{#if spellPreparation.prepares}}
+            {{ formGroup fields.preparation.fields.prepared value=source.preparation.prepared
+                         ariaLabel=(localize "DND5E.Prepared") classes="label-top" localize=true }}
             {{/if}}
 
             {{!-- Mode --}}
-            {{ formInput fields.preparation.fields.mode value=source.preparation.mode
-                         choices=config.spellPreparationModes labelAttr="label" }}
+            {{ formGroup fields.preparation.fields.mode value=source.preparation.mode blank=false
+                         options=spellPreparation.mode.choices classes="label-top" localize=true }}
         </div>
     </div>
 
@@ -65,7 +64,7 @@
     {{#if isEmbedded}}
     {{ formField fields.sourceClass value=source.sourceClass localize=true options=spellcastingClasses blank="" }}
 
-    {{ formField fields.ability value=source.ability localize=true choices=config.abilities
+    {{ formField fields.ability value=source.ability localize=true choices=CONFIG.abilities
                  labelAttr="label" blank=defaultAbility }}
     {{/if}}
 </fieldset>

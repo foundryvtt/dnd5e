@@ -1,0 +1,235 @@
+_id: qw05Om9XWqTMoio2
+name: Ring of the Ram
+type: equipment
+img: icons/equipment/finger/ring-band-engraved-scrolls-silver.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement)</em></p><p>This ring has 3 charges, and it
+      regains 1d3 expended charges daily at dawn. While wearing the ring, you
+      can use an action to expend 1 to 3 of its charges to attack one creature
+      you can see within 60 feet of you. The ring produces a spectral ram's head
+      and makes its attack roll with a +7 bonus. On a hit, for each charge you
+      spend, the target takes 2d10 force damage and is pushed 5 feet away from
+      you.</p><p>Alternatively, you can expend 1 to 3 of the ring's charges as
+      an action to try to break an object you can see within 60 feet of you that
+      isn't being worn or carried. The ring makes a Strength check with a +5
+      bonus for each charge you spend.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 5000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: '3'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d3
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: ring
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+        scaling:
+          allowed: true
+          max: '3'
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: '7'
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: ranged
+          classification: spell
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 10
+            bonus: ''
+            types:
+              - force
+            scaling:
+              mode: whole
+              number: 2
+              formula: ''
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: ''
+      img: ''
+      appliedEffects: []
+    dnd5eactivity300:
+      _id: dnd5eactivity300
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: amount
+              formula: ''
+        scaling:
+          allowed: true
+          max: '3'
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: inst
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: 1d20 + @scaling * 5
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      name: Break Object
+      img: ''
+      appliedEffects: []
+  attuned: false
+  identifier: ring-of-the-ram
+effects: []
+folder: 5jrDZJ1U23Q9jDqB
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037296791
+  modifiedTime: 1731017453958
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!qw05Om9XWqTMoio2'

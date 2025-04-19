@@ -21,8 +21,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       deleteDamagePart: ActivitySheet.#deleteDamagePart,
       deleteEffect: ActivitySheet.#deleteEffect,
       deleteRecovery: ActivitySheet.#deleteRecovery,
-      dissociateEffect: ActivitySheet.#dissociateEffect,
-      toggleCollapsed: ActivitySheet.#toggleCollapsed
+      dissociateEffect: ActivitySheet.#dissociateEffect
     },
     position: {
       width: 500,
@@ -85,18 +84,6 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    */
   get activity() {
     return this.document;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Expanded states for additional settings sections.
-   * @type {Map<string, boolean>}
-   */
-  #expandedSections = new Map();
-
-  get expandedSections() {
-    return this.#expandedSections;
   }
 
   /* -------------------------------------------- */
@@ -204,7 +191,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         ] : null,
         showTargets: "validTargets" in typeConfig,
         selectedTarget: ("validTargets" in typeConfig) && ((data.type === "Item") && data.target?.includes("."))
-          ? (this.activity.actor?.sourcedItems?.get(data.target, { legacy: false })?.first()?.id ?? data.target)
+          ? (this.activity.actor?.sourcedItems?.get(data.target)?.first()?.id ?? data.target)
           : data.target,
         targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : null,
         validTargets: showTextTarget ? null : target.validTargets
@@ -403,10 +390,6 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /** @inheritDoc */
   _onRender(context, options) {
     super._onRender(context, options);
-    for ( const element of this.element.querySelectorAll("[data-expand-id]") ) {
-      element.querySelector(".collapsible")?.classList
-        .toggle("collapsed", !this.#expandedSections.get(element.dataset.expandId));
-    }
     this.#toggleNestedTabs();
   }
 
@@ -596,32 +579,10 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Handle toggling the collapsed state of an additional settings section.
-   * @this {ActivitySheet}
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
-   */
-  static #toggleCollapsed(event, target) {
-    if ( event.target.closest(".collapsible-content") ) return;
-    target.classList.toggle("collapsed");
-    this.#expandedSections.set(
-      target.closest("[data-expand-id]")?.dataset.expandId,
-      !target.classList.contains("collapsed")
-    );
-  }
-
-  /* -------------------------------------------- */
   /*  Form Handling                               */
   /* -------------------------------------------- */
 
-  /**
-   * Perform any pre-processing of the form data to prepare it for updating.
-   * @param {SubmitEvent} event          Triggering submit event.
-   * @param {FormDataExtended} formData  Data from the submitted form.
-   * @returns {object}
-   */
+  /** @inheritDoc */
   _prepareSubmitData(event, formData) {
     const submitData = super._prepareSubmitData(event, formData);
     for ( const keyPath of this.constructor.CLEAN_ARRAYS ) {

@@ -6,19 +6,6 @@ import Application5e from "./api/application.mjs";
  * Application for performing currency conversions & transfers.
  */
 export default class CurrencyManager extends Application5e {
-  constructor(options, _options={}) {
-    if ( options instanceof foundry.abstract.Document ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `CurrencyManager` document should now be passed within the options object as `document`.",
-        { since: "DnD5e 4.3", until: "DnD5e 4.5" }
-      );
-      _options.document = options;
-      options = _options;
-    }
-    super(options);
-  }
-
-  /* -------------------------------------------- */
 
   /** @override */
   static DEFAULT_OPTIONS = {

@@ -1,71 +1,145 @@
-import Item5e from "../../documents/item.mjs";
 import ItemSheet5e from "./item-sheet.mjs";
+import Item5e from "../../documents/item.mjs";
+import ItemListControlsElement from "../components/item-list-controls.mjs";
+import ContainerData from "../../data/item/container.mjs";
 
+/**
+ * Extended version of item sheet to handle containers.
+ */
 export default class ContainerSheet extends ItemSheet5e {
-
-  /** @inheritDoc */
-  static get defaultOptions() {
-    return foundry.utils.mergeObject(super.defaultOptions, {
-      width: 600,
-      height: 540,
-      scrollY: ["dnd5e-inventory .inventory-list"],
-      tabs: [{navSelector: ".tabs", contentSelector: ".sheet-body", initial: "contents"}],
-      dragDrop: [
-        {dragSelector: "[data-effect-id]", dropSelector: ".effects-list"},
-        {dragSelector: ".advancement-item", dropSelector: ".advancement"},
-        {dragSelector: ".items-list .item", dropSelector: null},
-        {dragSelector: ".containers .container", dropSelector: null}
-      ],
-      elements: {
-        inventory: "dnd5e-inventory"
-      }
-    });
-  }
+  /** @override */
+  static DEFAULT_OPTIONS = {
+    elements: {
+      inventory: "dnd5e-inventory"
+    }
+  };
 
   /* -------------------------------------------- */
 
-  /** @inheritDoc */
-  get template() {
-    return "systems/dnd5e/templates/items/container.hbs";
-  }
+  /** @override */
+  static PARTS = {
+    ...super.PARTS,
+    contents: {
+      template: "systems/dnd5e/templates/items/contents.hbs",
+      templates: [
+        "systems/dnd5e/templates/inventory/inventory.hbs", "systems/dnd5e/templates/inventory/encumbrance.hbs"
+      ],
+      scrollable: [""]
+    }
+  };
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static TABS = [
+    { tab: "contents", label: "DND5E.ITEM.SECTIONS.Contents" },
+    ...super.TABS
+  ];
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  tabGroups = {
+    primary: "contents"
+  };
+
+  /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _filters = {
+    inventory: { name: "", properties: new Set() }
+  };
 
   /* -------------------------------------------- */
 
   /**
-   * IDs for items on the sheet that have been expanded.
-   * @type {Set<string>}
+   * The container's cached contents.
+   * @type {Item5e[]}
    * @protected
    */
-  _expanded = new Set();
+  _items;
 
   /* -------------------------------------------- */
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getData(options={}) {
-    const context = await super.getData(options);
+  _configureRenderParts(options) {
+    const parts = super._configureRenderParts(options);
+    if ( "contents" in parts ) {
+      parts.contents.templates ??= [];
+      parts.contents.templates.push(...customElements.get(this.options.elements.inventory).templates);
+    }
+    return parts;
+  }
 
-    context.items = Array.from(await this.item.system.contents);
-    context.capacity = await this.item.system.computeCapacity();
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _preparePartContext(partId, context, options) {
+    context = await super._preparePartContext(partId, context, options);
+    switch ( partId ) {
+      case "contents": context = await this._prepareContentsContext(context, options); break;
+    }
+    return context;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare rendering context for the contents tab.
+   * @param {ApplicationRenderContext} context  Context being prepared.
+   * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
+   * @returns {ApplicationRenderContext}
+   * @protected
+   */
+  async _prepareContentsContext(context, options) {
+    context.items = [];
     context.itemContext = {};
+    context.isContainer = true;
+    context.rollableClass = this.isEditable ? "rollable" : "";
+    context.encumbrance = await this.item.system.computeCapacity();
+    if ( !Number.isFinite(context.encumbrance.max) ) context.encumbrance.maxLabel = "&infin;";
 
-    for ( const item of context.items ) {
+    // Contents
+    const Inventory = customElements.get(this.options.elements.inventory);
+    for ( const item of await this.item.system.contents ) {
       const ctx = context.itemContext[item.id] ??= {};
       ctx.totalWeight = (await item.system.totalWeight).toNearest(0.1);
-      ctx.isExpanded = this._expanded.has(item.id);
+      ctx.isExpanded = this.expandedSections.get(item.id);
       ctx.isStack = item.system.quantity > 1;
-      ctx.expanded = this._expanded.has(item.id) ? await item.getChatData({secrets: this.item.isOwner}) : null;
-    }
-    context.isContainer = true;
-    context.inventory = {
-      contents: {
-        label: "DND5E.Contents",
-        items: context.items
-      }
-    };
+      ctx.expanded = this.expandedSections.get(item.id) ? await item.getChatData({ secrets: this.item.isOwner }) : null;
+      ctx.groups = { contents: "contents", type: item.type };
+      ctx.dataset = { groupContents: "contents", groupType: item.type };
+      context.items.push(item);
 
-    context.items = context.items.sort((a, b) => (a.sort || 0) - (b.sort || 0));
+      if ( item.type === "container" ) {
+        ctx.capacity = await item.system.computeCapacity();
+        ctx.capacity.maxLabel = Number.isFinite(ctx.capacity.max) ? ctx.capacity.max : "&infin;";
+        ctx.columns = Inventory.mapColumns(["capacity", "controls"]);
+        ctx.clickAction = "view";
+      }
+    }
+
+    const inventory = Object.values(CONFIG.Item.dataModels)
+      .filter(model => "inventorySection" in model)
+      .map(model => {
+        const section = model.inventorySection;
+        if ( foundry.utils.isSubclass(model, ContainerData) ) return section;
+        return { ...section, columns: ["price", "weight", "quantity", "controls"] };
+      });
+    inventory.push(foundry.utils.deepClone(Inventory.SECTIONS.contents));
+    inventory.at(-1).items = context.items;
+    inventory.forEach(s => s.minWidth = 190);
+    context.inventory = Inventory.prepareSections(inventory);
+    context.listControls = foundry.utils.deepClone(ItemListControlsElement.CONFIG.inventory);
+    context.showCurrency = true;
+    this._items = context.items;
+
+    // TODO: Remove this temporary path to `config` when actors have converted to AppV2
+    context.config = context.CONFIG;
 
     return context;
   }
@@ -245,5 +319,65 @@ export default class ContainerSheet extends ItemSheet5e {
 
     // Perform the update
     Item.updateDocuments(updateData, {pack: this.item.pack, parent: this.item.actor});
+  }
+
+  /* -------------------------------------------- */
+  /*  Filtering                                   */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _filterChildren(collection, filters) {
+    if ( collection === "items" ) return this._filterItems(this._items, filters);
+    return [];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Filter the container's contents based on the current set of filters.
+   * @param {Item5e[]} items       The Items to filter.
+   * @param {Set<string>} filters  Filters applied to the Item list.
+   * @returns {Item5e[]}
+   * @protected
+   */
+  _filterItems(items, filters) {
+    const actions = ["action", "bonus", "reaction"];
+    return items.filter(item => {
+      // Subclass-specific logic.
+      const filtered = this._filterItem(item, filters);
+      if ( filtered !== undefined ) return filtered;
+
+      // Action usage.
+      for ( const action of actions ) {
+        if ( filters.has(action) && (item.system.activation?.type !== action) ) return false;
+      }
+
+      // Equipment-specific filters.
+      if ( filters.has("equipped") && (item.system.equipped !== true) ) return false;
+      if ( filters.has("mgc") && !item.system.properties?.has("mgc") ) return false;
+
+      return true;
+    });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Determine whether an Item will be shown based on the current set of filters.
+   * @param {Item5e} item          The Item.
+   * @param {Set<string>} filters  Filters applied to the Item.
+   * @returns {boolean|void}
+   * @protected
+   */
+  _filterItem(item, filters) {}
+
+  /* -------------------------------------------- */
+  /*  Sorting                                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  _sortChildren(collection, mode) {
+    if ( collection === "items" ) return this._sortItems(this._items, mode);
+    return [];
   }
 }

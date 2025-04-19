@@ -1,0 +1,76 @@
+_id: 00BggOkChWztQx6R
+name: Studded Leather Armor +3
+type: equipment
+img: icons/equipment/chest/breastplate-rivited-red.webp
+system:
+  description:
+    value: >-
+      <p><em>This armor has been embellished with powerful runes, crafted in
+      sorcerous fires, blessed by a powerful being, or some other event has seen
+      it bequeathed with enhanced protection for the wearer.</em></p>
+
+      <p>You have a bonus to AC while wearing this armor.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 13
+    units: lb
+  price:
+    value: 24045
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: legendary
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 12
+    dex: null
+    magicalBonus: 3
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: light
+    baseItem: studded
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: studded-leather-armor-3
+effects: []
+folder: JqTP017wj3uxDJ8g
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037080752
+  modifiedTime: 1725992477317
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!00BggOkChWztQx6R'

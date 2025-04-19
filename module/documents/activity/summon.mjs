@@ -36,16 +36,6 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
   );
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  static localize() {
-    super.localize();
-    if ( game.release.generation < 13 ) {
-      this._localizeSchema(this.schema.fields.profiles.element, ["DND5E.SUMMON.FIELDS.profiles"]);
-    }
-  }
-
-  /* -------------------------------------------- */
   /*  Properties                                  */
   /* -------------------------------------------- */
 
@@ -81,35 +71,6 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
    * @typedef {ActivityUsageResults} SummonUsageResults
    * @property {Token5e[]} summoned  Summoned tokens.
    */
-
-  /** @inheritDoc */
-  _createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig) {
-    const config = super._createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig);
-    config.createSummons = usageConfig.create?.summons ?? null;
-    config.summonsProfile = usageConfig.summons?.profile ?? null;
-    config.summonsOptions = {
-      creatureSize: usageConfig.summons?.creatureSize,
-      creatureType: usageConfig.summons?.creatureType
-    };
-    return config;
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  _applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options) {
-    super._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options);
-    const set = (config, keyPath, value) => {
-      if ( value === undefined ) return;
-      foundry.utils.setProperty(config, keyPath, value);
-    };
-    set(usageConfig, "create.summons", config.createSummons);
-    set(usageConfig, "summons.profile", config.summonsProfile);
-    set(usageConfig, "summons.creatureSize", config.summonsOptions?.creatureSize);
-    set(usageConfig, "summons.creatureType", config.summonsOptions?.creatureType);
-  }
-
-  /* -------------------------------------------- */
 
   /** @inheritDoc */
   _prepareUsageConfig(config) {

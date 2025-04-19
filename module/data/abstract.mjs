@@ -439,16 +439,16 @@ export class ItemDataModel extends SystemDataModel {
   /**
    * @typedef {SystemDataModelMetadata} ItemDataModelMetadata
    * @property {boolean} enchantable    Can this item be modified by enchantment effects?
-   * @property {boolean} inventoryItem  Should this item be listed with an actor's inventory?
-   * @property {number} inventoryOrder  Order this item appears in the actor's inventory, smaller numbers are earlier.
+   * @property {boolean} hasEffects     Display the effects tab on this item's sheet.
    * @property {boolean} singleton      Should only a single item of this type be allowed on an actor?
+   * @property {InventorySectionDescriptor} [inventory]  Configuration for displaying this item type in its own section
+   *                                                     in creature inventories.
    */
 
   /** @type {ItemDataModelMetadata} */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
     enchantable: false,
-    inventoryItem: false,
-    inventoryOrder: Infinity,
+    hasEffects: false,
     singleton: false
   }, {inplace: false}));
 
@@ -509,6 +509,18 @@ export class ItemDataModel extends SystemDataModel {
       if ( sourceId ) this.parent.actor.sourcedItems?.set(sourceId, this.parent);
     }
   }
+
+  /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
+  /* -------------------------------------------- */
+
+  /**
+   * Handle any specific item changes when an item is dropped onto an actor.
+   * @param {DragEvent} event  The concluding DragEvent which provided the drop data.
+   * @param {Actor5e} actor    Actor onto which the item was dropped.
+   * @param {object} itemData  The item data requested for creation. **Will be mutated.**
+   */
+  static onDropCreate(event, actor, itemData) {}
 
   /* -------------------------------------------- */
   /*  Helpers                                     */
@@ -663,7 +675,7 @@ export class ItemDataModel extends SystemDataModel {
 
   /**
    * Prepare type-specific data for the Item sheet.
-   * @param {object} context  Sheet context data.
+   * @param {ApplicationRenderContext} context  Sheet context data.
    * @returns {Promise<void>}
    */
   async getSheetData(context) {}

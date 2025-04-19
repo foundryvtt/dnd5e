@@ -1,5 +1,6 @@
 import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import { ConsumptionTargetData } from "./data/activity/fields/consumption-targets-field.mjs";
+import TransformationSetting from "./data/settings/transformation-setting.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
@@ -831,16 +832,11 @@ DND5E.tools = {
  */
 DND5E.toolIds = new Proxy(DND5E.tools, {
   get(target, prop) {
-    return target[prop]?.id ?? target[prop];
-  },
-  set(target, prop, value) {
     foundry.utils.logCompatibilityWarning(
-      "Appending to CONFIG.DND5E.toolIds is deprecated, use CONFIG.DND5E.tools instead.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.2", once: true }
+      "`CONFIG.DND5E.toolIds` is deprecated, use `CONFIG.DND5E.tools` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
     );
-    target[prop] ??= { ability: "int" };
-    target[prop].id = value;
-    return true;
+    return target[prop]?.id ?? target[prop];
   }
 });
 
@@ -922,14 +918,6 @@ DND5E.scalarTimePeriods = new Proxy(DND5E.timeUnits, {
   has(target, key) {
     return target[key] && target[key].option !== false;
   },
-  set(target, prop, value) {
-    foundry.utils.logCompatibilityWarning(
-      "Appending to CONFIG.DND5E.scalarTimePeriods is deprecated, use CONFIG.DND5E.timeUnits instead.",
-      { since: "DnD5e 4.2", until: "DnD5e 4.4", once: true }
-    );
-    target[prop] ??= {};
-    target[prop].label = value;
-  },
   ownKeys(target) {
     return Object.keys(target).filter(k => target[k]?.option !== false);
   }
@@ -1006,8 +994,9 @@ preLocalize("abilityActivationTypes");
 /* -------------------------------------------- */
 
 /**
- * @typedef {ActivityActivationTypeConfig}
+ * @typedef ActivityActivationTypeConfig
  * @property {string} label             Localized label for the activation type.
+ * @property {string} [header]          Localized label for the activation type header.
  * @property {string} [group]           Localized label for the presentational group.
  * @property {boolean} [passive=false]  Classify this item as a passive feature on NPC sheets.
  * @property {boolean} [scalar=false]   Does this activation type have a numeric value attached?
@@ -1019,29 +1008,35 @@ preLocalize("abilityActivationTypes");
  */
 DND5E.activityActivationTypes = {
   action: {
-    label: "DND5E.Action",
+    label: "DND5E.ACTIVATION.Type.Action.Label",
+    header: "DND5E.ACTIVATION.Type.Action.Header",
     group: "DND5E.ACTIVATION.Category.Standard"
   },
   bonus: {
-    label: "DND5E.BonusAction",
+    label: "DND5E.ACTIVATION.Type.BonusAction.Label",
+    header: "DND5E.ACTIVATION.Type.BonusAction.Header",
     group: "DND5E.ACTIVATION.Category.Standard"
   },
   reaction: {
-    label: "DND5E.Reaction",
+    label: "DND5E.ACTIVATION.Type.Reaction.Label",
+    header: "DND5E.ACTIVATION.Type.Reaction.Header",
     group: "DND5E.ACTIVATION.Category.Standard"
   },
   minute: {
-    label: "DND5E.TimeMinute",
+    label: "DND5E.ACTIVATION.Type.Minute.Label",
+    header: "DND5E.ACTIVATION.Type.Minute.Header",
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
   hour: {
-    label: "DND5E.TimeHour",
+    label: "DND5E.ACTIVATION.Type.Hour.Label",
+    header: "DND5E.ACTIVATION.Type.Hour.Header",
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
   day: {
-    label: "DND5E.TimeDay",
+    label: "DND5E.ACTIVATION.Type.Day.Label",
+    header: "DND5E.ACTIVATION.Type.Day.Header",
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true
   },
@@ -1071,21 +1066,25 @@ DND5E.activityActivationTypes = {
     passive: true
   },
   legendary: {
-    label: "DND5E.LegendaryAction.Label",
+    label: "DND5E.ACTIVATION.Type.Legendary.Label",
+    header: "DND5E.ACTIVATION.Type.Legendary.Header",
     group: "DND5E.ACTIVATION.Category.Monster",
     scalar: true
   },
   mythic: {
-    label: "DND5E.MythicActionLabel",
+    label: "DND5E.ACTIVATION.Type.Mythic.Label",
+    header: "DND5E.ACTIVATION.Type.Mythic.Header",
     group: "DND5E.ACTIVATION.Category.Monster",
     scalar: true
   },
   lair: {
-    label: "DND5E.LAIR.Action.Label",
+    label: "DND5E.ACTIVATION.Type.Lair.Label",
+    header: "DND5E.ACTIVATION.Type.Lair.Header",
     group: "DND5E.ACTIVATION.Category.Monster"
   },
   crew: {
-    label: "DND5E.VehicleCrewAction",
+    label: "DND5E.ACTIVATION.Type.Crew.Label",
+    header: "DND5E.ACTIVATION.Type.Crew.Header",
     group: "DND5E.ACTIVATION.Category.Vehicle",
     scalar: true
   },
@@ -1509,13 +1508,6 @@ DND5E.limitedUsePeriods = {
   day: {
     label: "DND5E.USES.Recovery.Period.Day.Label",
     abbreviation: "DND5E.USES.Recovery.Period.Day.Label"
-  },
-  // TODO: Remove with DnD5e 4.4
-  charges: {
-    label: "DND5E.UsesPeriods.Charges",
-    abbreviation: "DND5E.UsesPeriods.ChargesAbbreviation",
-    formula: true,
-    deprecated: true
   },
   dawn: {
     label: "DND5E.USES.Recovery.Period.Dawn.Label",
@@ -1960,97 +1952,97 @@ preLocalize("featureTypes.supernaturalGift.subtypes", { sort: true });
  */
 DND5E.itemProperties = {
   ada: {
-    label: "DND5E.Item.Property.Adamantine",
+    label: "DND5E.ITEM.Property.Adamantine",
     isPhysical: true
   },
   amm: {
-    label: "DND5E.Item.Property.Ammunition"
+    label: "DND5E.ITEM.Property.Ammunition"
   },
   concentration: {
-    label: "DND5E.Item.Property.Concentration",
+    label: "DND5E.ITEM.Property.Concentration",
     abbreviation: "DND5E.ConcentrationAbbr",
     icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.ow58p27ctAnr4VPH",
     isTag: true
   },
   fin: {
-    label: "DND5E.Item.Property.Finesse"
+    label: "DND5E.ITEM.Property.Finesse"
   },
   fir: {
-    label: "DND5E.Item.Property.Firearm"
+    label: "DND5E.ITEM.Property.Firearm"
   },
   foc: {
-    label: "DND5E.Item.Property.Focus"
+    label: "DND5E.ITEM.Property.Focus"
   },
   hvy: {
-    label: "DND5E.Item.Property.Heavy"
+    label: "DND5E.ITEM.Property.Heavy"
   },
   lgt: {
-    label: "DND5E.Item.Property.Light"
+    label: "DND5E.ITEM.Property.Light"
   },
   lod: {
-    label: "DND5E.Item.Property.Loading"
+    label: "DND5E.ITEM.Property.Loading"
   },
   material: {
-    label: "DND5E.Item.Property.Material",
+    label: "DND5E.ITEM.Property.Material",
     abbreviation: "DND5E.ComponentMaterialAbbr",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.AeH5eDS4YeM9RETC"
   },
   mgc: {
-    label: "DND5E.Item.Property.Magical",
+    label: "DND5E.ITEM.Property.Magical",
     icon: "systems/dnd5e/icons/svg/properties/magical.svg",
     isPhysical: true
   },
   rch: {
-    label: "DND5E.Item.Property.Reach"
+    label: "DND5E.ITEM.Property.Reach"
   },
   rel: {
-    label: "DND5E.Item.Property.Reload"
+    label: "DND5E.ITEM.Property.Reload"
   },
   ret: {
-    label: "DND5E.Item.Property.Returning"
+    label: "DND5E.ITEM.Property.Returning"
   },
   ritual: {
-    label: "DND5E.Item.Property.Ritual",
+    label: "DND5E.ITEM.Property.Ritual",
     abbreviation: "DND5E.RitualAbbr",
     icon: "systems/dnd5e/icons/svg/items/spell.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.FjWqT5iyJ89kohdA",
     isTag: true
   },
   sil: {
-    label: "DND5E.Item.Property.Silvered",
+    label: "DND5E.ITEM.Property.Silvered",
     isPhysical: true
   },
   somatic: {
-    label: "DND5E.Item.Property.Somatic",
+    label: "DND5E.ITEM.Property.Somatic",
     abbreviation: "DND5E.ComponentSomaticAbbr",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.qwUNgUNilEmZkSC9"
   },
   spc: {
-    label: "DND5E.Item.Property.Special"
+    label: "DND5E.ITEM.Property.Special"
   },
   stealthDisadvantage: {
-    label: "DND5E.Item.Property.StealthDisadvantage"
+    label: "DND5E.ITEM.Property.StealthDisadvantage"
   },
   thr: {
-    label: "DND5E.Item.Property.Thrown"
+    label: "DND5E.ITEM.Property.Thrown"
   },
   trait: {
-    label: "DND5E.Item.Property.Trait"
+    label: "DND5E.ITEM.Property.Trait"
   },
   two: {
-    label: "DND5E.Item.Property.TwoHanded"
+    label: "DND5E.ITEM.Property.TwoHanded"
   },
   ver: {
-    label: "DND5E.Item.Property.Versatile"
+    label: "DND5E.ITEM.Property.Versatile"
   },
   vocal: {
-    label: "DND5E.Item.Property.Verbal",
+    label: "DND5E.ITEM.Property.Verbal",
     abbreviation: "DND5E.ComponentVerbalAbbr",
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.6UXTNWMCQ0nSlwwx"
   },
   weightlessContents: {
-    label: "DND5E.Item.Property.WeightlessContents"
+    label: "DND5E.ITEM.Property.WeightlessContents"
   }
 };
 preLocalize("itemProperties", { keys: ["label", "abbreviation"], sort: true });
@@ -2559,7 +2551,6 @@ DND5E.movementUnits = {
     type: "metric"
   }
 };
-patchConfig("movementUnits", "label", { since: "DnD5e 4.2", until: "DnD5e 4.4" });
 preLocalize("movementUnits", { keys: ["label", "abbreviation"] });
 
 /* -------------------------------------------- */
@@ -2784,7 +2775,6 @@ DND5E.individualTargetTypes = {
     counted: "DND5E.TARGET.Type.WillingCreature.Counted"
   }
 };
-patchConfig("individualTargetTypes", "label", { from: "DnD5e 4.2", until: "DnD5e 4.4" });
 preLocalize("individualTargetTypes", { key: "label" });
 
 /* -------------------------------------------- */
@@ -2951,7 +2941,7 @@ DND5E.restTypes = {
     recoverHitDice: true,
     recoverHitPoints: true,
     recoverPeriods: ["lr", "sr"],
-    recoverSpellSlotTypes: new Set(["leveled", "pact"])
+    recoverSpellSlotTypes: new Set(["spell", "pact"])
   }
 };
 preLocalize("restTypes", { key: "label" });
@@ -3040,9 +3030,188 @@ preLocalize("attackTypes", { key: "label" });
 /* -------------------------------------------- */
 
 /**
+ * @typedef {object} SpellcastingData
+ * @property {string} label                           Human-readable label.
+ * @property {"static"|"progression"} type            A static spellcasting mode is considered one that
+ *                                                    does not make use of spell slots of any kind, and
+ *                                                    cannot upcast, such as innate or at-will spells.
+ * @property {string} [table]                         A table to use from `DND5E.spellcastingTables`.
+ * @property {string} [img]                           The icon to use if these slots are favorited.
+ * @property {boolean} [separate]                     Are the slots all of the same level or separate levels?
+ * @property {number} order                           Order in which this is shown on the actor sheet spellbook tab.
+ * @property {boolean} [cantrips]                     If `true`, and if a progression, cantrips section will be shown.
+ * @property {boolean} [prepares]                     Can spells be prepared and unprepared?
+ * @property {Record<SpellcastingProgression>} [progression]  The progression subtypes for this spellcasting.
+ */
+
+/**
+ * @typedef {object} SpellcastingProgression
+ * @property {string} label       Human-readable label.
+ * @property {number} divisor     A divisor to determine how much this contributes to the progression.
+ * @property {boolean} [roundUp]  If `true`, division rounds up instead of down.
+ */
+
+/**
+ * Types of spellcasting preparations and progressions.
+ * @enum {SpellcastingData}
+ */
+DND5E.spellcasting = {
+  atwill: {
+    label: "DND5E.SPELLCASTING.MODES.AtWill.label",
+    order: -30,
+    type: "static"
+  },
+  innate: {
+    label: "DND5E.SPELLCASTING.MODES.Innate.label",
+    order: -20,
+    type: "static"
+  },
+  ritual: {
+    label: "DND5E.SPELLCASTING.MODES.Ritual.label",
+    order: -10,
+    type: "static"
+  },
+  spell: {
+    label: "DND5E.SPELLCASTING.MODES.Spell.label",
+    cantrips: true,
+    img: "systems/dnd5e/icons/spell-tiers/{id}.webp",
+    order: 20,
+    type: "progression",
+    prepares: true,
+    separate: true,
+    table: "spell",
+    progression: {
+      full: {
+        label: "DND5E.SPELLCASTING.MODES.Spell.Full.label",
+        divisor: 1
+      },
+      half: {
+        label: "DND5E.SPELLCASTING.MODES.Spell.Half.label",
+        divisor: 2,
+        roundUp: true
+      },
+      third: {
+        label: "DND5E.SPELLCASTING.MODES.Spell.Third.label",
+        divisor: 3
+      },
+      artificer: {
+        label: "DND5E.SPELLCASTING.MODES.Spell.Artificer.label",
+        divisor: 2,
+        roundUp: true
+      }
+    }
+  },
+  pact: {
+    label: "DND5E.SPELLCASTING.MODES.Pact.label",
+    cantrips: true,
+    img: "icons/magic/unholy/silhouette-robe-evil-power.webp",
+    order: 10,
+    type: "progression",
+    prepares: false,
+    separate: false,
+    table: "pact",
+    progression: {
+      pact: {
+        label: "DND5E.SPELLCASTING.MODES.Pact.Full.label",
+        divisor: 1
+      }
+    }
+  }
+};
+preLocalize("spellcasting", { key: "label" });
+preLocalize("spellcasting.spell.progression", { key: "label" });
+preLocalize("spellcasting.pact.progression", { key: "label" });
+
+// Spell progressions (for class/subclass item sheet).
+Object.defineProperty(DND5E.spellcasting, "progressionChoices", {
+  get() {
+    const choices = [{ value: "none", label: "DND5E.None" }];
+    for ( const v of Object.values(this) ) {
+      if ( v.isStatic ) continue;
+      for ( const [p, q] of Object.entries(v.progression) ) {
+        choices.push({ value: p, label: q.label, group: v.label });
+      }
+    }
+    return choices;
+  },
+  enumerable: false
+});
+
+/* -------------------------------------------- */
+
+/**
+ * Configuration data for spellcasting progressions.
+ * @type {object}
+ */
+DND5E.spellcastingTables = {
+  spell: {
+    1: { 1: 2 },
+    2: { 1: 1 },
+    3: { 1: 1, 2: 2 },
+    4: { 2: 1 },
+    5: { 3: 2 },
+    6: { 3: 1 },
+    7: { 4: 1 },
+    8: { 4: 1 },
+    9: { 4: 1, 5: 1 },
+    10: { 5: 1 },
+    11: { 6: 1 },
+    12: {},
+    13: { 7: 1 },
+    14: {},
+    15: { 8: 1 },
+    16: {},
+    17: { 9: 1 },
+    18: { 5: 1 },
+    19: { 6: 1 },
+    20: { 7: 1 }
+  },
+  pact: {
+    1: { slots: 1, level: 1 },
+    2: { slots: 1 },
+    3: { level: 1 },
+    5: { level: 1 },
+    7: { level: 1 },
+    9: { level: 1 },
+    11: { slots: 1 },
+    17: { slots: 1 }
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
+ * @typedef {object} SpellPreparationState
+ * @property {string} label     Human-readable label.
+ * @property {number} value     Unique number representing this state.
+ */
+
+/**
+ * The various states of preparation a spell can be in.
+ * @enum {SpellPreparationState}
+ */
+DND5E.spellPreparationStates = {
+  unprepared: {
+    label: "DND5E.SPELLCASTING.STATES.Unprepared",
+    value: 0
+  },
+  prepared: {
+    label: "DND5E.SPELLCASTING.STATES.Prepared",
+    value: 1
+  },
+  always: {
+    label: "DND5E.SPELLCASTING.STATES.AlwaysPrepared",
+    value: 2
+  }
+};
+
+/* -------------------------------------------- */
+
+/**
  * Define the standard slot progression by character level.
  * The entries of this array represent the spell slot progression for a full spell-caster.
  * @type {number[][]}
+ * @deprecated since 5.0
  */
 DND5E.SPELL_SLOT_TABLE = [
   [2],
@@ -3080,6 +3249,7 @@ DND5E.SPELL_SLOT_TABLE = [
 /**
  * Define the pact slot & level progression by pact caster level.
  * @enum {PactProgressionConfig}
+ * @deprecated since 5.0
  */
 DND5E.pactCastingProgression = {
   1: { slots: 1, level: 1 },
@@ -3108,38 +3278,17 @@ DND5E.pactCastingProgression = {
 /**
  * Various different ways a spell can be prepared.
  * @enum {SpellPreparationModeConfiguration}
+ * @deprecated since 5.0
  */
-DND5E.spellPreparationModes = {
-  prepared: {
-    label: "DND5E.SpellPrepPrepared",
-    upcast: true,
-    prepares: true
-  },
-  pact: {
-    label: "DND5E.PactMagic",
-    upcast: true,
-    cantrips: true,
-    order: 0.5
-  },
-  always: {
-    label: "DND5E.SpellPrepAlways",
-    upcast: true,
-    prepares: true
-  },
-  atwill: {
-    label: "DND5E.SpellPrepAtWill",
-    order: -30
-  },
-  innate: {
-    label: "DND5E.SpellPrepInnate",
-    order: -20
-  },
-  ritual: {
-    label: "DND5E.SpellPrepRitual",
-    order: -10
+DND5E.spellPreparationModes = new Proxy(DND5E.spellcasting, {
+  get(target, prop) {
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.spellPreparationModes` is deprecated, use `CONFIG.DND5E.spellcasting` instead.",
+      { since: "DnD5e 5.0", until: "DnD5e 5.4", once: true }
+    );
+    return target[prop];
   }
-};
-preLocalize("spellPreparationModes", { key: "label" });
+});
 
 /* -------------------------------------------- */
 
@@ -3165,56 +3314,34 @@ preLocalize("spellPreparationModes", { key: "label" });
 /**
  * Different spellcasting types and their progression.
  * @type {SpellcastingTypeConfiguration}
+ * @deprecated since 5.0
  */
-DND5E.spellcastingTypes = {
-  leveled: {
-    label: "DND5E.SpellProgLeveled",
-    img: "systems/dnd5e/icons/spell-tiers/{id}.webp",
-    progression: {
-      full: {
-        label: "DND5E.SpellProgFull",
-        divisor: 1
-      },
-      half: {
-        label: "DND5E.SpellProgHalf",
-        divisor: 2,
-        roundUp: true
-      },
-      third: {
-        label: "DND5E.SpellProgThird",
-        divisor: 3
-      },
-      artificer: {
-        label: "DND5E.SpellProgArt",
-        divisor: 2,
-        roundUp: true
-      }
-    }
-  },
-  pact: {
-    label: "DND5E.SpellProgPact",
-    img: "icons/magic/unholy/silhouette-robe-evil-power.webp",
-    shortRest: true
+DND5E.spellcastingTypes = new Proxy(DND5E.spellcasting, {
+  get(target, prop) {
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.spellcastingTypes` is deprecated, use `CONFIG.DND5E.spellcasting` instead.",
+      { since: "DnD5e 5.0", until: "DnD5e 5.4", once: true }
+    );
+    return target[prop];
   }
-};
-preLocalize("spellcastingTypes", { key: "label", sort: true });
-preLocalize("spellcastingTypes.leveled.progression", { key: "label" });
+});
 
 /* -------------------------------------------- */
 
 /**
  * Ways in which a class can contribute to spellcasting levels.
  * @enum {string}
+ * @deprecated since 5.0
  */
-DND5E.spellProgression = {
-  none: "DND5E.SpellNone",
-  full: "DND5E.SpellProgFull",
-  half: "DND5E.SpellProgHalf",
-  third: "DND5E.SpellProgThird",
-  pact: "DND5E.SpellProgPact",
-  artificer: "DND5E.SpellProgArt"
-};
-preLocalize("spellProgression", { key: "label" });
+DND5E.spellProgression = new Proxy(DND5E.spellcasting, {
+  get(target, prop) {
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.spellProgression` is deprecated, use `CONFIG.DND5E.spellcasting.progressionChoices` instead.",
+      { since: "DnD5e 5.0", until: "DnD5e 5.4", once: true }
+    );
+    return target[prop];
+  }
+});
 
 /* -------------------------------------------- */
 
@@ -3388,90 +3515,266 @@ DND5E.sourcePacks = {
 /* -------------------------------------------- */
 
 /**
+ * @import { TransformationSettingData } from "./data/settings/transformation-setting.mjs";
+ */
+
+/**
+ * @typedef TransformationConfiguration
+ * @property {Record<string, TransformationFlagConfiguration>} effects
+ * @property {Record<string, TransformationFlagConfiguration>} keep
+ * @property {Record<string, TransformationFlagConfiguration>} merge
+ * @property {Record<string, TransformationFlagConfiguration>} others
+ * @property {Record<string, TransformationPresetConfiguration} presets
+ */
+
+/**
+ * @typedef TransformationFlagConfiguration
+ * @property {string} label         Localized label for the flag.
+ * @property {string} [hint]        Localized hint for the flag.
+ * @property {boolean} [default]    This should be part of the default transformation settings.
+ * @property {string[]} [disables]  Names of specific settings to disable, or whole categories if an `*` is used.
+ */
+
+/**
+ * @typedef TransformationPresetConfiguration
+ * @property {string} icon                         Icon representing this preset on the button.
+ * @property {string} label                        Localized label for the preset.
+ * @property {TransformationSettingData} settings  Options that will be set for the preset.
+ */
+
+/**
+ * Settings that configuration how actors are changed when transformation is applied.
+ * @typedef {TransformationConfiguration}
+ */
+DND5E.transformation = {
+  effects: {
+    all: {
+      label: "DND5E.TRANSFORM.Setting.Effects.All.Label",
+      hint: "DND5E.TRANSFORM.Setting.Effects.All.Hint",
+      disables: ["effects.*"]
+    },
+    origin: {
+      label: "DND5E.TRANSFORM.Setting.Effects.Origin.Label",
+      hint: "DND5E.TRANSFORM.Setting.Effects.Origin.Hint",
+      default: true
+    },
+    otherOrigin: {
+      label: "DND5E.TRANSFORM.Setting.Effects.OtherOrigin.Label",
+      hint: "DND5E.TRANSFORM.Setting.Effects.OtherOrigin.Hint",
+      default: true
+    },
+    background: {
+      label: "DND5E.TRANSFORM.Setting.Effects.Background.Label",
+      default: true
+    },
+    class: {
+      label: "DND5E.TRANSFORM.Setting.Effects.Class.Label",
+      default: true
+    },
+    feat: {
+      label: "DND5E.TRANSFORM.Setting.Effects.Feature.Label",
+      default: true
+    },
+    equipment: {
+      label: "DND5E.TRANSFORM.Setting.Effects.Equipment.Label",
+      default: true
+    },
+    spell: {
+      label: "DND5E.TRANSFORM.Setting.Effects.Spell.Label",
+      default: true
+    }
+  },
+  keep: {
+    physical: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Physical.Label",
+      hint: "DND5E.TRANSFORM.Setting.Keep.Physical.Hint"
+    },
+    mental: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Mental.Label",
+      hint: "DND5E.TRANSFORM.Setting.Keep.Mental.Hint"
+    },
+    saves: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Saves.Label",
+      disables: ["merge.saves"]
+    },
+    skills: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Skills.Label",
+      disables: ["merge.skills"]
+    },
+    class: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Proficiency.Label"
+    },
+    feats: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Features.Label"
+    },
+    items: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Equipment.Label"
+    },
+    spells: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Spells.Label"
+    },
+    bio: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Biography.Label"
+    },
+    type: {
+      label: "DND5E.TRANSFORM.Setting.Keep.CreatureType.Label"
+    },
+    hp: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Health.Label"
+    },
+    vision: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Vision.Label",
+      default: true
+    },
+    self: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Self.Label",
+      hint: "DND5E.TRANSFORM.Setting.Keep.Self.Hint",
+      disables: ["keep.*", "merge.*"]
+    }
+  },
+  merge: {
+    saves: {
+      label: "DND5E.TRANSFORM.Setting.Merge.Saves.Label",
+      disables: ["keep.saves"]
+    },
+    skills: {
+      label: "DND5E.TRANSFORM.Setting.Merge.Skills.Label",
+      disables: ["keep.skills"]
+    }
+  },
+  other: {},
+  presets: {
+    wildshape: {
+      icon: '<i class="fas fa-paw" inert></i>',
+      label: "DND5E.TRANSFORM.Preset.WildShape.Label",
+      settings: {
+        effects: new Set(["otherOrigin", "origin", "feat", "spell", "class", "background"]),
+        keep: new Set(["bio", "class", "feats", "hp", "mental", "type"]),
+        merge: new Set(["saves", "skills"]),
+        tempFormula: "max(@classes.druid.levels, @subclasses.moon.levels * 3)"
+      }
+    },
+    polymorph: {
+      icon: '<i class="fas fa-pastafarianism" inert></i>',
+      label: "DND5E.TRANSFORM.Preset.Polymorph.Label",
+      settings: {
+        effects: new Set(["otherOrigin", "origin", "spell"]),
+        keep: new Set(["hp", "type"]),
+        tempFormula: "@source.attributes.hp.max"
+      }
+    },
+    polymorphSelf: {
+      icon: '<i class="fas fa-eye" inert></i>',
+      label: "DND5E.TRANSFORM.Preset.Appearance.Label",
+      settings: {
+        effects: new Set(["all"]),
+        keep: new Set(["self"])
+      }
+    }
+  }
+};
+preLocalize("transformation.effects", { keys: ["label", "hint"] });
+preLocalize("transformation.keep", { keys: ["label", "hint"] });
+preLocalize("transformation.merge", { keys: ["label", "hint"] });
+preLocalize("transformation.other", { keys: ["label", "hint"], sort: true });
+preLocalize("transformation.presets", { key: "label", sort: true });
+
+/**
  * Settings to configure how actors are merged when polymorphing is applied.
  * @enum {string}
+ * @deprecated since DnD5e 4.4, available until DnD5e 5.0
  */
-DND5E.polymorphSettings = {
-  keepPhysical: "DND5E.PolymorphKeepPhysical",
-  keepMental: "DND5E.PolymorphKeepMental",
-  keepSaves: "DND5E.PolymorphKeepSaves",
-  keepSkills: "DND5E.PolymorphKeepSkills",
-  mergeSaves: "DND5E.PolymorphMergeSaves",
-  mergeSkills: "DND5E.PolymorphMergeSkills",
-  keepClass: "DND5E.PolymorphKeepClass",
-  keepFeats: "DND5E.PolymorphKeepFeats",
-  keepSpells: "DND5E.PolymorphKeepSpells",
-  keepItems: "DND5E.PolymorphKeepItems",
-  keepBio: "DND5E.PolymorphKeepBio",
-  keepVision: "DND5E.PolymorphKeepVision",
-  keepSelf: "DND5E.PolymorphKeepSelf",
-  keepType: "DND5E.PolymorphKeepType",
-  keepHP: "DND5E.PolymorphKeepHP",
-  addTemp: "DND5E.PolymorphAddTemp"
-};
-preLocalize("polymorphSettings", { sort: true });
+DND5E.polymorphSettings = new Proxy(DND5E.transformation, {
+  get(target, prop) {
+    if ( typeof prop !== "string" ) return target[prop];
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.polymorphSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+    );
+    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
+    return target[category]?.[key]?.label;
+  },
+  set(target, prop, value) {
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.polymorphSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+    );
+    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
+    if ( !category ) return false;
+    target[category][key] = { label: value };
+    return true;
+  }
+});
 
 /**
  * Settings to configure how actors are effects are merged when polymorphing is applied.
  * @enum {string}
+ * @deprecated since DnD5e 4.4, available until DnD5e 5.0
  */
-DND5E.polymorphEffectSettings = {
-  keepAE: "DND5E.PolymorphKeepAE",
-  keepOtherOriginAE: "DND5E.PolymorphKeepOtherOriginAE",
-  keepOriginAE: "DND5E.PolymorphKeepOriginAE",
-  keepEquipmentAE: "DND5E.PolymorphKeepEquipmentAE",
-  keepFeatAE: "DND5E.PolymorphKeepFeatureAE",
-  keepSpellAE: "DND5E.PolymorphKeepSpellAE",
-  keepClassAE: "DND5E.PolymorphKeepClassAE",
-  keepBackgroundAE: "DND5E.PolymorphKeepBackgroundAE"
-};
-preLocalize("polymorphEffectSettings", { sort: true });
+DND5E.polymorphEffectSettings = new Proxy(DND5E.transformation, {
+  get(target, prop) {
+    if ( typeof prop !== "string" ) return target[prop];
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.polymorphEffectSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+    );
+    if ( prop === "keepAE" ) return target.effects.all?.label;
+    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
+    return target[category]?.[key]?.label;
+  },
+  set(target, prop, value) {
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.polymorphEffectSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+    );
+    if ( prop === "keepAE" ) {
+      target.effects.all = { label: value };
+      return true;
+    }
+    const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
+    if ( !category ) return false;
+    target[category][key] = { label: value };
+    return true;
+  }
+});
 
 /**
  * Settings to configure how actors are merged when preset polymorphing is applied.
  * @enum {object}
  */
-DND5E.transformationPresets = {
-  wildshape: {
-    icon: '<i class="fas fa-paw"></i>',
-    label: "DND5E.PolymorphWildShape",
-    options: {
-      keepBio: true,
-      keepClass: true,
-      keepFeats: true,
-      keepHP: true,
-      keepMental: true,
-      keepType: true,
-      mergeSaves: true,
-      mergeSkills: true,
-      keepEquipmentAE: false,
-      preset: "wildshape"
-    }
+DND5E.transformationPresets = new Proxy(DND5E.transformation, {
+  get(target, prop) {
+    if ( typeof prop !== "string" ) return target[prop];
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.transformationPresets` is deprecated, use `CONFIG.DND5E.transformation.presets` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+    );
+    const preset = target.presets[prop];
+    if ( !preset ) return;
+    const setting = new TransformationSetting(preset.settings);
+    return {
+      icon: preset.icon,
+      label: preset.label,
+      options: {
+        ...setting._toDeprecatedConfig(),
+        preset: prop
+      }
+    };
   },
-  polymorph: {
-    icon: '<i class="fas fa-pastafarianism"></i>',
-    label: "DND5E.Polymorph",
-    options: {
-      addTemp: true,
-      keepHP: true,
-      keepType: true,
-      keepEquipmentAE: false,
-      keepClassAE: false,
-      keepFeatAE: false,
-      keepBackgroundAE: false,
-      preset: "polymorph"
-    }
-  },
-  polymorphSelf: {
-    icon: '<i class="fas fa-eye"></i>',
-    label: "DND5E.PolymorphSelf",
-    options: {
-      keepSelf: true,
-      preset: "polymorphSelf"
-    }
+  set(target, prop, value) {
+    foundry.utils.logCompatibilityWarning(
+      "`CONFIG.DND5E.transformationPresets` is deprecated, use `CONFIG.DND5E.transformation.presets` instead.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+    );
+    const preset = {
+      label: value.label,
+      icon: value.icon,
+      settings: TransformationSetting._fromDeprecatedConfig(value.options ?? {})
+    };
+    target.presets[prop] = preset.toObject();
+    return true;
   }
-};
-preLocalize("transformationPresets", { sort: true, keys: ["label"] });
+});
 
 /* -------------------------------------------- */
 
@@ -4118,7 +4421,7 @@ DND5E.traits = {
     icon: "icons/skills/trades/smithing-anvil-silver-red.webp",
     actorKeyPath: "system.tools",
     configKey: "toolProficiencies",
-    subtypes: { keyPath: "toolType", ids: ["toolIds"] },
+    subtypes: { keyPath: "toolType", ids: ["tools"] },
     children: { vehicle: "vehicleTypes" },
     sortCategories: true,
     expertise: true
@@ -4373,6 +4676,9 @@ DND5E.activityTypes = {
   },
   summon: {
     documentClass: activities.SummonActivity
+  },
+  transform: {
+    documentClass: activities.TransformActivity
   },
   utility: {
     documentClass: activities.UtilityActivity

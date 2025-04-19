@@ -3,15 +3,19 @@ import { ItemDataModel } from "../abstract.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
 import DamageField from "../shared/damage-field.mjs";
 import UsesField from "../shared/uses-field.mjs";
+import ItemTypeField from "./fields/item-type-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";
 import ItemTypeTemplate from "./templates/item-type.mjs";
 import PhysicalItemTemplate from "./templates/physical-item.mjs";
-import ItemTypeField from "./fields/item-type-field.mjs";
 
 const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+
+/**
+ * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ */
 
 /**
  * Data definition for Consumable items.
@@ -23,10 +27,11 @@ const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundr
  * @mixes EquippableItemTemplate
  *
  * @property {object} damage
- * @property {DamageData} damage.base    Damage caused by this ammunition.
- * @property {string} damage.replace     Should ammunition damage replace the base weapon's damage?
- * @property {number} magicalBonus       Magical bonus added to attack & damage rolls by ammunition.
- * @property {Set<string>} properties    Ammunition properties.
+ * @property {DamageData} damage.base               Damage caused by this ammunition.
+ * @property {string} damage.replace                Should ammunition damage replace the base weapon's damage?
+ * @property {number} magicalBonus                  Magical bonus added to attack & damage rolls by ammunition.
+ * @property {Set<string>} properties               Ammunition properties.
+ * @property {Omit<ItemTypeData, "baseItem">} type  Ammunition type and subtype.
  * @property {object} uses
  * @property {boolean} uses.autoDestroy  Should this item be destroyed when it runs out of uses.
  */
@@ -47,13 +52,13 @@ export default class ConsumableData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({ baseItem: false }, { label: "DND5E.ItemConsumableType" }),
       damage: new SchemaField({
         base: new DamageField(),
         replace: new BooleanField()
       }),
       magicalBonus: new NumberField({ min: 0, integer: true }),
       properties: new SetField(new StringField()),
+      type: new ItemTypeField({ baseItem: false }, { label: "DND5E.ItemConsumableType" }),
       uses: new UsesField({
         autoDestroy: new BooleanField({ required: true })
       })
@@ -64,9 +69,8 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-    enchantable: true,
-    inventoryItem: true,
-    inventoryOrder: 300
+    hasEffects: true,
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -86,6 +90,22 @@ export default class ConsumableData extends ItemDataModel.mixin(
       ...this.compendiumBrowserPhysicalItemFilters,
       ["properties", this.compendiumBrowserPropertiesFilter("consumable")]
     ]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "consumables",
+      order: 300,
+      label: "TYPES.Item.consumablePl",
+      groups: { type: "consumable" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    };
   }
 
   /* -------------------------------------------- */
@@ -131,7 +151,6 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
-    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
     this.prepareIdentifiable();
@@ -172,6 +191,8 @@ export default class ConsumableData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+
+    context.parts = ["dnd5e.details-consumable", "dnd5e.field-uses"];
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
       return {
         value, label,
@@ -183,7 +204,11 @@ export default class ConsumableData extends ItemDataModel.mixin(
       { rule: true },
       ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
     ];
-    context.parts = ["dnd5e.details-consumable", "dnd5e.field-uses"];
+    const itemTypes = CONFIG.DND5E.consumableTypes[this._source.type.value];
+    if ( itemTypes ) {
+      context.itemType = itemTypes.label;
+      context.itemSubtypes = itemTypes.subtypes;
+    }
   }
 
   /* -------------------------------------------- */

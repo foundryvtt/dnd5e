@@ -2,7 +2,7 @@
     <ul class="unlist">
         {{#each warnings}}
         <li class="{{ type }}">
-            {{#if link}}<a data-target="{{ link }}">{{/if}}
+            {{#if link}}<a data-action="inspectWarning" data-target="{{ link }}">{{/if}}
             {{ message }}
             {{#if link}}</a>{{/if}}
         </li>

@@ -3,10 +3,10 @@
 
     {{!-- Spellcasting Progression --}}
     {{ formField fields.spellcasting.fields.progression value=source.spellcasting.progression localize=true
-                 options=spellProgression }}
+                 options=spellProgression blank=false }}
 
     {{!-- Spellcasting Ability --}}
-    {{ formField fields.spellcasting.fields.ability value=source.spellcasting.ability choices=config.abilities
+    {{ formField fields.spellcasting.fields.ability value=source.spellcasting.ability choices=CONFIG.abilities
                  labelAttr="label" blank="" localize=true }}
 
     {{!-- Preparation Formula --}}

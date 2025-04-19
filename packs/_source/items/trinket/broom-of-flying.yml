@@ -1,0 +1,133 @@
+_id: hFAVm9pTJDm0nu3g
+name: Broom of Flying
+type: consumable
+img: icons/tools/hand/broom-straw-brown.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This wooden broom, which weighs 3 pounds, functions like a mundane
+      broom until you stand astride it and speak its command word. It then
+      hovers beneath you and can be ridden in the air. It has a flying speed of
+      50 feet. It can carry up to 400 pounds, but its flying speed becomes 30
+      feet while carrying over 200 pounds. The broom stops hovering when you
+      land.</p>
+
+      <p>You can send the broom to travel alone to a destination within 1 mile
+      of you if you speak the command word, name the location, and are familiar
+      with that place. The broom comes back to you when you speak another
+      command word, provided that the broom is still within 1 mile of you.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 8000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: Command word.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '1'
+        units: mi
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: broom-of-flying
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 7100000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037255100
+  modifiedTime: 1725992535476
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!hFAVm9pTJDm0nu3g'

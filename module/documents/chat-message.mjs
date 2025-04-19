@@ -103,7 +103,6 @@ export default class ChatMessage5e extends ChatMessage {
   /** @inheritDoc */
   prepareData() {
     super.prepareData();
-    this._shimFlags();
     if ( !this.flags.dnd5e?.item?.data && this.flags.dnd5e?.item?.id ) {
       const itemData = this.getFlag("dnd5e", "use.consumed.deleted")?.find(i => i._id === this.flags.dnd5e.item.id);
       if ( itemData ) Object.defineProperty(this.flags.dnd5e.item, "data", { value: itemData });
@@ -116,25 +115,24 @@ export default class ChatMessage5e extends ChatMessage {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
-  async getHTML(options={}) {
-    const html = await super.getHTML(options);
-    const element = (html instanceof HTMLElement) ? html : html[0];
+  async renderHTML(options={}) {
+    const html = await super.renderHTML(options);
 
     if ( foundry.utils.getType(this.system?.getHTML) === "function" ) {
-      await this.system.getHTML(element, options);
+      await this.system.getHTML(html, options);
       return html;
     }
 
     this._displayChatActionButtons(html);
     this._highlightCriticalSuccessFailure(html);
     if ( game.settings.get("dnd5e", "autoCollapseItemCards") ) {
-      html.find(".description.collapsible").each((i, el) => el.classList.add("collapsed"));
+      html.querySelectorAll(".description.collapsible").forEach(el => el.classList.add("collapsed"));
     }
 
-    this._enrichChatCard(element);
-    this._collapseTrays(element);
-    this._activateActivityListeners(element);
-    dnd5e.bastion._activateChatListeners(this, element);
+    this._enrichChatCard(html);
+    this._collapseTrays(html);
+    this._activateActivityListeners(html);
+    dnd5e.bastion._activateChatListeners(this, html);
 
     /**
      * A hook event that fires after dnd5e-specific chat message modifications have completed.
@@ -143,7 +141,7 @@ export default class ChatMessage5e extends ChatMessage {
      * @param {ChatMessage5e} message  Chat message being rendered.
      * @param {HTMLElement} html       HTML contents of the message.
      */
-    Hooks.callAll("dnd5e.renderChatMessage", this, element);
+    Hooks.callAll("dnd5e.renderChatMessage", this, html);
 
     return html;
   }
@@ -174,20 +172,20 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Optionally hide the display of chat card action buttons which cannot be performed by the user
-   * @param {jQuery} html     Rendered contents of the message.
+   * @param {HTMLElement} html  Rendered contents of the message.
    * @protected
    */
   _displayChatActionButtons(html) {
-    const chatCard = html.find(".dnd5e.chat-card, .dnd5e2.chat-card");
-    if ( chatCard.length > 0 ) {
-      const flavor = html.find(".flavor-text");
-      if ( flavor.text() === html.find(".item-name").text() ) flavor.remove();
+    const chatCard = html.querySelector(".dnd5e.chat-card, .dnd5e2.chat-card");
+    if ( chatCard ) {
+      const flavor = html.querySelector(".flavor-text");
+      if ( flavor?.innerText === html.querySelector(".item-name")?.innerText ) flavor?.remove();
 
-      if ( this.shouldDisplayChallenge ) chatCard[0].dataset.displayChallenge = "";
+      if ( this.shouldDisplayChallenge ) chatCard.dataset.displayChallenge = "";
 
       const actor = game.actors.get(this.speaker.actor);
       const isCreator = game.user.isGM || actor?.isOwner || (this.author.id === game.user.id);
-      for ( const button of html[0].querySelectorAll(".card-buttons button") ) {
+      for ( const button of html.querySelectorAll(".card-buttons button") ) {
         if ( button.dataset.visibility === "all" ) continue;
 
         // GM buttons should only be visible to GMs, otherwise button should only be visible to message's creator
@@ -201,7 +199,7 @@ export default class ChatMessage5e extends ChatMessage {
 
   /**
    * Highlight critical success or failure on d20 rolls.
-   * @param {jQuery} html     Rendered contents of the message.
+   * @param {HTMLElement} html  Rendered contents of the message.
    * @protected
    */
   _highlightCriticalSuccessFailure(html) {
@@ -224,6 +222,7 @@ export default class ChatMessage5e extends ChatMessage {
     }
 
     // Highlight rolls where the first part is a d20 roll
+    const totals = html.querySelectorAll(".dice-total");
     for ( let [index, d20Roll] of this.rolls.entries() ) {
 
       const d0 = d20Roll.dice[0];
@@ -236,7 +235,7 @@ export default class ChatMessage5e extends ChatMessage {
       if ( isModifiedRoll ) continue;
 
       // Highlight successes and failures
-      const total = html.find(".dice-total")[index];
+      const total = totals[index];
       if ( !total ) continue;
       // Only attack rolls and death saves can crit or fumble.
       const canCrit = ["attack", "death"].includes(this.getFlag("dnd5e", "roll.type"));
@@ -309,6 +308,7 @@ export default class ChatMessage5e extends ChatMessage {
     const metadata = html.querySelector(".message-metadata");
     const deleteButton = metadata.querySelector(".message-delete");
     if ( !game.user.isGM ) deleteButton?.remove();
+    else deleteButton?.querySelector("i").classList.add("fa-fw");
     const anchor = document.createElement("a");
     anchor.setAttribute("aria-label", game.i18n.localize("DND5E.AdditionalControls"));
     anchor.classList.add("chat-control");
@@ -910,7 +910,6 @@ export default class ChatMessage5e extends ChatMessage {
    * @param {HTMLElement|jQuery} html
    */
   static onRenderChatLog(html) {
-    if ( game.release.generation < 13 ) [html] = html;
     if ( game.user.isGM ) html.dataset.gmUser = "";
     if ( !game.settings.get("dnd5e", "autoCollapseItemCards") ) {
       requestAnimationFrame(() => {
@@ -1023,79 +1022,5 @@ export default class ChatMessage5e extends ChatMessage {
    */
   getOriginatingMessage() {
     return game.messages.get(this.getFlag("dnd5e", "originatingMessage")) ?? this;
-  }
-
-  /* -------------------------------------------- */
-  /*  Shims                                       */
-  /* -------------------------------------------- */
-
-  /**
-   * Apply shims to maintain access to the old `use` and `itemData` flags.
-   * @internal
-   */
-  _shimFlags() {
-    const flags = foundry.utils.getProperty(this, "flags.dnd5e");
-    if ( (flags?.messageType === "usage") && flags?.use ) {
-      const message = "The item data in the `dnd5e.use` flag on `ChatMessage` is now `dnd5e.item.type`, "
-      + "`dnd5e.item.id`, and `dnd5e.item.uuid`. Checking for usage can now be done using the "
-      + "`dnd5e.messageType` flag.";
-      Object.defineProperty(flags.use, "type", {
-        get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true });
-          return flags.item?.type;
-        },
-        configurable: true,
-        enumerable: false
-      });
-      Object.defineProperty(flags.use, "itemId", {
-        get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true });
-          return flags.item?.id;
-        },
-        configurable: true,
-        enumerable: false
-      });
-      Object.defineProperty(flags.use, "itemUuid", {
-        get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true });
-          return flags.item?.uuid;
-        },
-        configurable: true,
-        enumerable: false
-      });
-    }
-
-    else if ( (flags?.messageType === "roll") && flags?.roll ) {
-      const message = "The item data in the `dnd5e.roll` flag on `ChatMessage` is now `dnd5e.item.id` and "
-      + "`dnd5e.item.uuid`.";
-      Object.defineProperty(flags.roll, "itemId", {
-        get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true });
-          return flags.item?.id;
-        },
-        configurable: true,
-        enumerable: false
-      });
-      Object.defineProperty(flags.roll, "itemUuid", {
-        get() {
-          foundry.utils.logCompatibilityWarning(message, { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true });
-          return flags.item?.uuid;
-        },
-        configurable: true,
-        enumerable: false
-      });
-    }
-
-    if ( flags?.item?.data ) Object.defineProperty(flags, "itemData", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `dnd5e.itemData` flag on `ChatMessage` is now `dnd5e.item.data`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
-        );
-        return this.item.data;
-      },
-      configurable: true,
-      enumerable: false
-    });
   }
 }

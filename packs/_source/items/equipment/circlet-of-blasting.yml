@@ -1,0 +1,133 @@
+_id: 9UvWQTY5yIgkJmmb
+name: Circlet of Blasting
+type: equipment
+img: icons/equipment/finger/ring-cabochon-notched-gold-green.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>While wearing this circlet, you can use an action to cast the
+      <em>@UUID[Compendium.dnd5e.spells.Item.7u2obDvuvtZBkTfq]{Scorching
+      Ray}</em> spell with it. When you make the spell's attacks, you do so with
+      an attack bonus of +5. The circlet can't be used this way again until the
+      next dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 1500
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: '1'
+    recovery:
+      - period: dawn
+        type: recoverAll
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: trinket
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    4JwrimevYN6xmgJV:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.7u2obDvuvtZBkTfq
+        challenge:
+          attack: 5
+          save: null
+          override: true
+        level: '2'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: 4JwrimevYN6xmgJV
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      name: ''
+      img: ''
+  attuned: false
+  identifier: circlet-of-blasting
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037117921
+  modifiedTime: 1729015238060
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!9UvWQTY5yIgkJmmb'

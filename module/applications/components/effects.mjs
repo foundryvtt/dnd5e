@@ -7,7 +7,8 @@ import ContextMenu5e from "../context-menu.mjs";
  */
 export default class EffectsElement extends HTMLElement {
   connectedCallback() {
-    this.#app = ui.windows[this.closest(".app")?.dataset.appid];
+    this.#app = foundry.applications.instances.get(this.closest(".application")?.id)
+      ?? ui.windows[this.closest(".app")?.dataset.appid];
 
     for ( const control of this.querySelectorAll("[data-action]") ) {
       control.addEventListener("click", event => {
@@ -20,14 +21,7 @@ export default class EffectsElement extends HTMLElement {
     }
 
     for ( const control of this.querySelectorAll("[data-context-menu]") ) {
-      control.addEventListener("click", event => {
-        event.preventDefault();
-        event.stopPropagation();
-        const { clientX, clientY } = event;
-        event.currentTarget.closest("[data-effect-id]").dispatchEvent(new PointerEvent("contextmenu", {
-          view: window, bubbles: true, cancelable: true, clientX, clientY
-        }));
-      });
+      control.addEventListener("click", ContextMenu5e.triggerEvent);
     }
 
     const MenuCls = this.hasAttribute("v2") ? ContextMenu5e : ContextMenu;
@@ -54,7 +48,7 @@ export default class EffectsElement extends HTMLElement {
    * @type {Application}
    * @protected
    */
-  get _app() { return this.#app; }
+  get app() { return this.#app; }
 
   /* -------------------------------------------- */
 
@@ -63,7 +57,7 @@ export default class EffectsElement extends HTMLElement {
    * @type {Actor5e|Item5e}
    */
   get document() {
-    return this._app.document;
+    return this.app.document;
   }
 
   /* -------------------------------------------- */
@@ -158,7 +152,7 @@ export default class EffectsElement extends HTMLElement {
    * @protected
    */
   _getContextOptions(effect) {
-    const isConcentrationEffect = (this.document instanceof Actor5e) && this._app._concentration?.effects.has(effect);
+    const isConcentrationEffect = (this.document instanceof Actor5e) && this.app._concentration?.effects.has(effect);
     const options = [
       {
         name: "DND5E.ContextMenuActionEdit",

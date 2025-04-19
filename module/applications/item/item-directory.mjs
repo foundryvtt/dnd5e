@@ -1,6 +1,6 @@
 import Item5e from "../../documents/item.mjs";
 import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
-import ItemSheet5e2 from "./item-sheet-2.mjs";
+import ItemSheet5e from "./item-sheet.mjs";
 
 /**
  * Items sidebar with added support for item containers.
@@ -12,7 +12,7 @@ export default class ItemDirectory5e extends DragDropApplicationMixin(
   /** @override */
   _allowedDropBehaviors(event, data) {
     const allowed = new Set(["copy"]);
-    if ( !data.uuid ) return allowed;
+    if ( !data?.uuid ) return allowed;
     const fromCompendium = foundry.utils.parseUuid(data.uuid).collection instanceof CompendiumCollection;
     if ( data.type === "Folder" ) return fromCompendium ? allowed : new Set(["move"]);
     else if ( !fromCompendium ) allowed.add("move");
@@ -23,7 +23,7 @@ export default class ItemDirectory5e extends DragDropApplicationMixin(
 
   /** @override */
   _defaultDropBehavior(event, data) {
-    if ( !data.uuid ) return "copy";
+    if ( !data?.uuid ) return "copy";
     if ( (data.type !== "Folder") && (data.type !== "Item") ) return "none";
     const collection = foundry.utils.parseUuid(data.uuid).collection;
     return ((data.type === "Folder") && (collection instanceof Folder))
@@ -79,7 +79,7 @@ export default class ItemDirectory5e extends DragDropApplicationMixin(
     const { entryId } = event.target.closest("[data-entry-id]")?.dataset ?? {};
     const item = this.collection.get(entryId);
     if ( !item ) return;
-    const mode = item.sheet?._mode ?? (this.collection.locked ? ItemSheet5e2.MODES.PLAY : ItemSheet5e2.MODES.EDIT);
+    const mode = item.sheet?._mode ?? (this.collection.locked ? ItemSheet5e.MODES.PLAY : ItemSheet5e.MODES.EDIT);
     item.sheet.render(true, { mode });
   }
 }

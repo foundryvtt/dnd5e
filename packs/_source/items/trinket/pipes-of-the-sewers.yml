@@ -1,0 +1,217 @@
+_id: nvhk1quD0Dg1ZtSH
+name: Pipes of the Sewers
+type: consumable
+img: icons/tools/instruments/flute-simple-wood.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>You must be proficient with wind instruments to use these pipes. While
+      you are attuned to the pipes, ordinary rats and giant rats are indifferent
+      toward you and will not attack you unless you threaten or harm them.</p>
+
+      <p>The pipes have 3 charges. If you play the pipes as an action, you can
+      use a bonus action to expend 1 to 3 charges, calling forth one
+      @UUID[Compendium.dnd5e.monsters.Actor.8ihbbjkaOFTPbI73]{Swarm of Rats}
+      with each expended charge, provided that enough rats are within half a
+      mile of you to be called in this fashion (as determined by the GM). If
+      there aren't enough rats to form a swarm, the charge is wasted. Called
+      swarms move toward the music by the shortest available route but aren't
+      under your control otherwise. The pipes regain 1d3 expended charges daily
+      at dawn.</p>
+
+      <p>Whenever a swarm of rats that isn't under another creature's control
+      comes within 30 feet of you while you are playing the pipes, you can make
+      a Charisma check contested by the swarm's Wisdom check. If you lose the
+      contest, the swarm behaves as it normally would and can't be swayed by the
+      pipes' music for the next 24 hours. If you win the contest, the swarm is
+      swayed by the pipes' music and becomes friendly to you and your companions
+      for as long as you continue to play the pipes each round as an action. A
+      friendly swarm obeys your commands. If you issue no commands to a friendly
+      swarm, it defends itself but otherwise takes no actions. If a friendly
+      swarm starts its turn and can't hear the pipes' music, your control over
+      that swarm ends, and the swarm behaves as it normally would and can't be
+      swayed by the pipes' music for the next 24 hours.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 2000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: '3'
+    recovery:
+      - period: lr
+        type: formula
+        formula: 1d3
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: check
+      activation:
+        type: bonus
+        value: 1
+        condition: Proficiency with wind instruments.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '0.5'
+        units: mi
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      check:
+        ability: ''
+        dc: {}
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    dnd5eactivity100:
+      _id: dnd5eactivity100
+      type: save
+      activation:
+        type: bonus
+        value: 1
+        condition: Proficiency with wind instruments.
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '0.5'
+        units: mi
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: cha
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: pipes-of-the-sewers
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 8400000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037284913
+  modifiedTime: 1725992545750
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!nvhk1quD0Dg1ZtSH'

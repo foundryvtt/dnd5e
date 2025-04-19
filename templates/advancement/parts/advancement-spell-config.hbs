@@ -13,11 +13,16 @@
     <label>{{ localize "DND5E.SpellPreparation.Mode" }}</label>
     <div class="form-fields">
         <select name="configuration.spell.preparation">
-            {{ selectOptions CONFIG.spellPreparationModes selected=configuration.spell.preparation
+            {{ selectOptions CONFIG.spellcasting selected=configuration.spell.preparation
                              labelAttr="label" blank="—" }}
         </select>
     </div>
 </div>
+
+{{#if showPreparationState}}
+{{ formGroup configuration.spell.schema.fields.prepared
+    value=configuration.spell.prepared localize=true name="configuration.spell.prepared" }}
+{{/if}}
 
 <div class="form-group">
     <label>{{ localize "DND5E.LimitedUses" }}</label>

@@ -1,0 +1,133 @@
+_id: CvzjhUy9ekRieR1A
+name: Eversmoking Bottle
+type: consumable
+img: icons/commodities/tech/smoke-bomb-purple.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>Smoke leaks from the lead-stoppered mouth of this brass bottle, which
+      weighs 1 pound. When you use an action to remove the stopper, a cloud of
+      thick smoke pours out in a 60-foot radius from the bottle. The cloud's
+      area is heavily obscured. Each minute the bottle remains open and within
+      the cloud, the radius increases by 10 feet until it reaches its maximum
+      radius of 120 feet.</p>
+
+      <p>The cloud persists as long as the bottle is open. Closing the bottle
+      requires you to speak its command word as an action. Once the bottle is
+      closed, the cloud disperses after 10 minutes. A moderate wind (11 to 20
+      miles per hour) can also disperse the smoke after 1 minute, and a strong
+      wind (21 or more miles per hour) can do so after 1 round.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 1000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '60'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: eversmoking-bottle
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 2600000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037129892
+  modifiedTime: 1725992493758
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!CvzjhUy9ekRieR1A'

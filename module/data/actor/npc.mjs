@@ -239,7 +239,7 @@ export default class NPCData extends CreatureTemplate {
         createFilter: (filters, value, def) => {
           for ( const [k, v] of Object.entries(value ?? {}) ) {
             if ( v === 1 ) filters.push({ k: `system.attributes.movement.${k}`, o: "gt", v: 0 });
-            if ( v === -1 ) filters.push({ k: `system.attributes.movement.${k}`, v: 0 });
+            if ( v === -1 ) filters.push({ o: "NOT", v: { k: `system.attributes.movement.${k}`, o: "gt", v: 0 } });
           }
         }
       }]
@@ -399,29 +399,12 @@ export default class NPCData extends CreatureTemplate {
 
     // Spellcaster Level
     const attributes = this.attributes;
-    Object.defineProperty(this.details, "spellLevel", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `details.spellLevel` property on NPCs have moved to `attributes.spell.level`.",
-          { since: "DnD5e 4.3", until: "DnD5e 5.0" }
-        );
-        return attributes.spell.level;
-      },
-      set(value) {
-        foundry.utils.logCompatibilityWarning(
-          "The `details.spellLevel` property on NPCs have moved to `attributes.spell.level`.",
-          { since: "DnD5e 4.3", until: "DnD5e 5.0" }
-        );
-        attributes.spell.level = value;
-      }
-    });
     if ( this.attributes.spellcasting && !Number.isNumeric(this.attributes.spell.level) ) {
       this.attributes.spell.level = Math.max(this.details.cr, 1);
     }
 
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
-    SourceField.shimActor.call(this);
   }
 
   /* -------------------------------------------- */

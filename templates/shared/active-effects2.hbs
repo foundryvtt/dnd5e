@@ -29,8 +29,8 @@
                 {{#each effects}}
 
                 {{!-- Effects --}}
-                <li class="item effect" data-effect-id="{{ id }}" data-entry-id="{{ id }}" data-item-name="{{ name }}"
-                    {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}>
+                <li class="item effect draggable" data-effect-id="{{ id }}" data-entry-id="{{ id }}"
+                    data-item-name="{{ name }}" {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}>
 
                     {{!-- Effect Name --}}
                     <div class="item-name item-tooltip effect-name">
@@ -92,7 +92,7 @@
                         {{/if}}
 
                         {{!-- Context Menu --}}
-                        <a class="effect-control item-control interface-only" data-context-menu
+                        <a class="effect-control item-control always-interactive" data-context-menu
                            aria-label="{{ localize "DND5E.AdditionalControls" }}">
                             <i class="fas fa-ellipsis-vertical"></i>
                         </a>

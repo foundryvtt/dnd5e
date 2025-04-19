@@ -1,6 +1,7 @@
 <section>
+    {{#each overrides}}
     <ol class="unlist form-grid form-grid-20">
-        {{#each overrides}}
+        {{#each this}}
         <li>
             <label class="input-stack">
                 <span class="roboto-upper">{{ label }}</span>
@@ -9,4 +10,6 @@
         </li>
         {{/each}}
     </ol>
+    {{#unless @last}}<hr>{{/unless}}
+    {{/each}}
 </section>

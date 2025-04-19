@@ -6,6 +6,10 @@ import DragDropApplicationMixin from "./drag-drop-mixin.mjs";
  * @returns {typeof DocumentSheetV2}
  */
 export default function DocumentSheetV2Mixin(Base) {
+  foundry.utils.logCompatibilityWarning(
+    "The `DocumentSheetV2Mixin` application has been deprecated and replaced with `PrimarySheetMixin`.",
+    { since: "DnD5e 5.0", until: "DnD5e 5.2", once: true }
+  );
   return class DocumentSheetV2 extends DragDropApplicationMixin(Base) {
     /**
      * @typedef {object} SheetTabDescriptor5e
@@ -210,8 +214,8 @@ export default function DocumentSheetV2Mixin(Base) {
     /** @inheritDoc */
     _disableFields(form) {
       super._disableFields(form);
-      form.querySelectorAll(".interface-only").forEach(input => input.disabled = false);
-      form.querySelectorAll("dnd5e-checkbox:not(.interface-only)").forEach(input => input.disabled = true);
+      form.querySelectorAll(".always-interactive").forEach(input => input.disabled = false);
+      form.querySelectorAll("dnd5e-checkbox:not(.always-interactive)").forEach(input => input.disabled = true);
     }
 
     /* -------------------------------------------- */
@@ -293,7 +297,7 @@ export default function DocumentSheetV2Mixin(Base) {
 
     /** @override */
     _allowedDropBehaviors(event, data) {
-      if ( !data.uuid ) return new Set(["copy", "link"]);
+      if ( !data?.uuid ) return new Set(["copy", "link"]);
       const allowed = new Set(["copy", "move", "link"]);
       const s = foundry.utils.parseUuid(data.uuid);
       const t = foundry.utils.parseUuid(this.document.uuid);
@@ -323,8 +327,7 @@ export default function DocumentSheetV2Mixin(Base) {
     /** @inheritDoc */
     async _onDragStart(event) {
       await super._onDragStart(event);
-      if ( !this.document.isOwner
-        || this.document[game.release.generation < 13 ? "compendium" : "collection"]?.locked ) {
+      if ( !this.document.isOwner || this.document.collection?.locked ) {
         event.dataTransfer.effectAllowed = "copyLink";
       }
     }

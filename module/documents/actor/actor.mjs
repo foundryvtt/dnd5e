@@ -4,9 +4,8 @@ import SkillToolRollConfigurationDialog from "../../applications/dice/skill-tool
 import PropertyAttribution from "../../applications/property-attribution.mjs";
 import ActivationsField from "../../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../../data/chat-message/fields/deltas-field.mjs";
-import { _applyDeprecatedD20Configs, _createDeprecatedD20Config } from "../../dice/d20-roll.mjs";
+import TransformationSetting from "../../data/settings/transformation-setting.mjs";
 import { createRollLabel } from "../../enrichers.mjs";
-import parseUuid from "../../parse-uuid.mjs";
 import { convertTime, defaultUnits, formatNumber, formatTime, simplifyBonus, staticID } from "../../utils.mjs";
 import ActiveEffect5e from "../active-effect.mjs";
 import Item5e from "../item.mjs";
@@ -22,18 +21,12 @@ import BasicRoll from "../../dice/basic-roll.mjs";
 export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
-   * The data source for Actor5e.classes allowing it to be lazily computed.
-   * @type {Record<string, Item5e>}
-   * @private
+   * Lazily computed store of classes, subclasses, background, and species.
+   * @type {Record<string, Record<string, Item5e|Item5e[]>>}
    */
-  _classes;
+  _lazy = {};
 
-  /**
-   * Cached spellcasting classes.
-   * @type {Record<string, Item5e>}
-   * @private
-   */
-  _spellcastingClasses;
+  /* -------------------------------------------- */
 
   /**
    * Mapping of item compendium source UUIDs to the items.
@@ -68,9 +61,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Record<string, Item5e>}
    */
   get classes() {
-    if ( this._classes !== undefined ) return this._classes;
-    if ( !["character", "npc"].includes(this.type) ) return this._classes = {};
-    return this._classes = Object.fromEntries(this.itemTypes.class.map(cls => [cls.identifier, cls]));
+    if ( this._lazy?.classes !== undefined ) return this._lazy.classes;
+    return this._lazy.classes = Object.fromEntries(this.itemTypes.class.map(cls => [cls.identifier, cls]));
   }
 
   /* -------------------------------------------- */
@@ -93,11 +85,22 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @type {Record<string, Item5e>}
    */
   get spellcastingClasses() {
-    if ( this._spellcastingClasses !== undefined ) return this._spellcastingClasses;
-    return this._spellcastingClasses = Object.entries(this.classes).reduce((obj, [identifier, cls]) => {
+    if ( this._lazy.spellcastingClasses !== undefined ) return this._lazy.spellcastingClasses;
+    return this._lazy.spellcastingClasses = Object.entries(this.classes).reduce((obj, [identifier, cls]) => {
       if ( cls.spellcasting && (cls.spellcasting.progression !== "none") ) obj[identifier] = cls;
       return obj;
     }, {});
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * A mapping of subclasses belonging to this Actor.
+   * @type {Record<string, Item5e>}
+   */
+  get subclasses() {
+    if ( this._lazy?.subclasses !== undefined ) return this._lazy.subclasses;
+    return this._lazy.subclasses = Object.fromEntries(this.itemTypes.subclass.map(i => [i.identifier, i]));
   }
 
   /* -------------------------------------------- */
@@ -212,8 +215,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @internal
    */
   _clearCachedValues() {
-    this._classes = undefined;
-    this._spellcastingClasses = undefined;
+    this._lazy = {};
   }
 
   /* --------------------------------------------- */
@@ -369,7 +371,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !this.system.spells ) return;
 
     // Translate the list of classes into spellcasting progression
-    const progression = { slot: 0, pact: 0 };
+    const progression = Object.entries(CONFIG.DND5E.spellcasting).reduce((acc, [k, v]) => {
+      if ( !v.isStatic ) acc[k] = 0;
+      return acc;
+    }, {});
     const types = {};
 
     // Grab all classes with spellcasting
@@ -386,12 +391,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     );
 
     if ( this.type === "npc" ) {
-      if ( progression.slot || progression.pact ) {
-        this.system.attributes.spell.level = progression.slot || progression.pact;
-      } else progression.slot = this.system.attributes.spell.level ?? 0;
+      const level = Object.values(progression).find(v => v);
+      if ( level ) this.system.attributes.spell.level = level;
+      else progression.spell = this.system.attributes.spell.level ?? 0;
     }
 
-    for ( const type of Object.keys(CONFIG.DND5E.spellcastingTypes) ) {
+    for ( const [type, v] of Object.entries(CONFIG.DND5E.spellcasting) ) {
+      if ( v.isStatic ) continue;
       this.constructor.prepareSpellcastingSlots(this.system.spells, type, progression, { actor: this });
     }
   }
@@ -427,10 +433,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       `dnd5e.compute${type.capitalize()}Progression`, progression, actor, cls, spellcasting, count
     );
 
-    if ( allowed && (type === "pact") ) {
-      this.computePactProgression(progression, actor, cls, spellcasting, count);
-    } else if ( allowed && (type === "leveled") ) {
-      this.computeLeveledProgression(progression, actor, cls, spellcasting, count);
+    if ( allowed && CONFIG.DND5E.spellcasting[type].separate ) {
+      this.computeLeveledProgression(progression, actor, cls, spellcasting, count, type);
+    } else if ( allowed ) {
+      this.computeUnleveledProgression(progression, actor, cls, spellcasting, count, type);
     }
   }
 
@@ -443,37 +449,39 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {Item5e} cls                            Class for whom this progression is being computed.
    * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
    * @param {number} count                          Number of classes with this type of spellcasting.
+   * @param {string} [type]                         The configuration key for the spellcasting type.
    */
-  static computeLeveledProgression(progression, actor, cls, spellcasting, count) {
-    const prog = CONFIG.DND5E.spellcastingTypes.leveled.progression[spellcasting.progression];
+  static computeLeveledProgression(progression, actor, cls, spellcasting, count, type="spell") {
+    const prog = CONFIG.DND5E.spellcasting[type].progression[spellcasting.progression];
     if ( !prog ) return;
     const rounding = prog.roundUp ? Math.ceil : Math.floor;
-    progression.slot += rounding(spellcasting.levels / prog.divisor ?? 1);
+    progression[type] += rounding(spellcasting.levels / prog.divisor ?? 1);
     // Single-classed, non-full progression rounds up, rather than down.
-    if ( (count === 1) && (prog.divisor > 1) && progression.slot ) {
-      progression.slot = Math.ceil(spellcasting.levels / prog.divisor);
+    if ( (count === 1) && (prog.divisor > 1) && progression[type] ) {
+      progression[type] = Math.ceil(spellcasting.levels / prog.divisor);
     }
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Contribute to the actor's spellcasting progression for a class with pact spellcasting.
+   * Contribute to the actor's spellcasting progression for a class with single-level spellcasting.
    * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
    * @param {Actor5e} actor                         Actor for whom the data is being prepared.
    * @param {Item5e} cls                            Class for whom this progression is being computed.
    * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
    * @param {number} count                          Number of classes with this type of spellcasting.
+   * @param {string} [type]                         The configuration key for the spellcasting type.
    */
-  static computePactProgression(progression, actor, cls, spellcasting, count) {
-    progression.pact += spellcasting.levels;
+  static computeUnleveledProgression(progression, actor, cls, spellcasting, count, type="pact") {
+    progression[type] += spellcasting.levels;
   }
 
   /* -------------------------------------------- */
 
   /**
    * Prepare actor's spell slots using progression data.
-   * @param {object} spells           The `data.spells` object within actor's data. *Will be mutated.*
+   * @param {object} spells           The `system.spells` object within actor's data. *Will be mutated.*
    * @param {string} type             Type of spellcasting slots being prepared.
    * @param {object} progression      Spellcasting progression data.
    * @param {object} [config]
@@ -483,7 +491,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     /**
      * A hook event that fires to convert the provided spellcasting progression into spell slots.
      * The actual hook names include the spellcasting type (e.g. `dnd5e.prepareLeveledSlots`).
-     * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+     * @param {object} spells        The `system.spells` object within actor's data. *Will be mutated.*
      * @param {Actor5e} actor        Actor for whom the data is being prepared.
      * @param {object} progression   Spellcasting progression data.
      * @returns {boolean}            Explicitly return false to prevent default preparation from being performed.
@@ -492,27 +500,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      */
     const allowed = Hooks.call(`dnd5e.prepare${type.capitalize()}Slots`, spells, actor, progression);
 
-    if ( allowed && (type === "pact") ) this.preparePactSlots(spells, actor, progression);
-    else if ( allowed && (type === "leveled") ) this.prepareLeveledSlots(spells, actor, progression);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare leveled spell slots using progression data.
-   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-   * @param {Actor5e} actor        Actor for whom the data is being prepared.
-   * @param {object} progression   Spellcasting progression data.
-   */
-  static prepareLeveledSlots(spells, actor, progression) {
-    const levels = Math.clamp(progression.slot, 0, CONFIG.DND5E.maxLevel);
-    const slots = CONFIG.DND5E.SPELL_SLOT_TABLE[Math.min(levels, CONFIG.DND5E.SPELL_SLOT_TABLE.length) - 1] ?? [];
-    for ( const level of Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1) ) {
-      const slot = spells[`spell${level}`] ??= { value: 0 };
-      slot.label = CONFIG.DND5E.spellLevels[level];
-      slot.level = level;
-      slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level - 1] ?? 0;
-      slot.type = "leveled";
+    if ( allowed && CONFIG.DND5E.spellcasting[type].separate ) {
+      this.prepareLeveledSlots(spells, actor, progression, type);
+    } else if ( allowed ) {
+      this.prepareAltSlots(spells, actor, progression, type);
     }
   }
 
@@ -520,13 +511,23 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Prepare non-leveled spell slots using progression data.
-   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+   * @param {object} spells        The `system.spells` object within actor's data. *Will be mutated.*
    * @param {Actor5e} actor        Actor for whom the data is being prepared.
    * @param {object} progression   Spellcasting progression data.
    * @param {string} key           The internal key for these spell slots on the actor.
-   * @param {object} table         The table used for determining the progression of slots.
+   * @param {object} [table]       A progression table to use to determine spell slots, for backwards compatibility.
    */
   static prepareAltSlots(spells, actor, progression, key, table) {
+    if ( table ) {
+      foundry.utils.logCompatibilityWarning("When preparing spell slots, a table should be registered in DND5E.spellcasting.", {
+        since: "5.0", until: "5.4", once: true
+      });
+
+      // Workaround for deprecation and assigning table to the spellcasting on i18nInit.
+      if ( actor._id === "dnd5eDeprecation" ) actor._table = table;
+      return;
+    }
+
     // Spell data:
     // - x.level: Slot level for casting
     // - x.max: Total number of slots
@@ -536,6 +537,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let keyLevel = Math.clamp(progression[key], 0, CONFIG.DND5E.maxLevel);
     spells[key] ??= {};
     spells[key].type = key;
+    spells[key].label = game.i18n.localize(CONFIG.DND5E.spellcasting[key]?.label ?? "");
     const override = Number.isNumeric(spells[key].override) ? parseInt(spells[key].override) : null;
 
     // Slot override
@@ -543,31 +545,34 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       keyLevel = actor.system.attributes.spell.level;
     }
 
-    const [, keyConfig] = Object.entries(table).reverse().find(([l]) => Number(l) <= keyLevel) ?? [];
-    if ( keyConfig ) {
-      spells[key].level = keyConfig.level;
-      if ( override === null ) spells[key].max = keyConfig.slots;
-      else spells[key].max = Math.max(override, 1);
-      spells[key].value = Math.min(spells[key].value, spells[key].max);
-    }
-
-    else {
-      spells[key].max = override || 0;
-      spells[key].level = (spells[key].max > 0) ? 1 : 0;
-    }
+    // Apply slots
+    const configuration = CONFIG.DND5E.spellcasting[key].calculateSlots(keyLevel);
+    if ( foundry.utils.isEmpty(configuration) && !override ) return;
+    const [[level, amount]=[]] = Object.entries(configuration);
+    spells[key].max = Number.isNumeric(override) ? Math.max(parseInt(override), 0) : (amount || 0);
+    spells[key].level = (spells[key].max > 0) ? (level ? parseInt(level) : 1) : 0;
+    spells[key].value = Math.clamp(spells[key].value, 0, spells[key].max) || 0;
   }
 
   /* -------------------------------------------- */
 
   /**
-   * Convenience method for preparing pact slots specifically.
-   * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
+   * Prepare alternative leveled spell slots using progression data.
+   * @param {object} spells        The `system.spells` object within actor's data. *Will be mutated.*
    * @param {Actor5e} actor        Actor for whom the data is being prepared.
    * @param {object} progression   Spellcasting progression data.
+   * @param {string} key           The internal key for these spell slots on the actor.
    */
-  static preparePactSlots(spells, actor, progression) {
-    this.prepareAltSlots(spells, actor, progression, "pact", CONFIG.DND5E.pactCastingProgression);
-    spells.pact.label = game.i18n.localize("DND5E.PactMagic");
+  static prepareLeveledSlots(spells, actor, progression, key) {
+    const config = CONFIG.DND5E.spellcasting[key];
+    const slots = config.calculateSlots(progression[key]);
+    for ( const level of Array.fromRange(Object.keys(CONFIG.DND5E.spellLevels).length - 1, 1) ) {
+      const slot = spells[config.spellSlotKey(level)] ??= { value: 0 };
+      slot.label = config.spellSlotLabel(level);
+      slot.level = level;
+      slot.max = Number.isNumeric(slot.override) ? Math.max(parseInt(slot.override), 0) : slots[level] ?? 0;
+      slot.type = key;
+    }
   }
 
   /* -------------------------------------------- */
@@ -915,15 +920,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<ActiveEffect5e|void>}     A promise that resolves to the created effect.
    */
   async beginConcentrating(activity, effectData={}) {
-    if ( activity instanceof Item ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `beginConcentrating` method on Actor5e now takes an Activity, rather than an Item.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-      );
-      activity = activity.system.activities?.contents[0];
-      if ( !activity ) return;
-    }
-
     effectData = ActiveEffect5e.createConcentrationEffectData(activity, effectData);
 
     /**
@@ -1150,21 +1146,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let oldFormat = false;
     const name = type === "skill" ? "Skill" : "ToolCheck";
 
-    // Handle deprecated calling pattern
-    if ( foundry.utils.getType(config) !== "Object" ) {
-      foundry.utils.logCompatibilityWarning(
-        `The \`roll${name}\` method on Actor5e now takes roll, dialog, and message config objects as parameters.`,
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-      );
-      oldFormat = true;
-      const oldConfig = dialog;
-      config = { [type]: config };
-      if ( oldConfig.ability ) config.ability = oldConfig.ability;
-      if ( oldConfig.bonus ) config.bonus = oldConfig.bonus;
-      dialog = {};
-      _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
-    }
-
     const skillConfig = CONFIG.DND5E.skills[config.skill];
     const toolConfig = CONFIG.DND5E.tools[config.tool];
     if ( ((type === "skill") && !skillConfig) || ((type === "tool") && !toolConfig) ) {
@@ -1219,23 +1200,13 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }, message);
 
-    if ( `dnd5e.preRoll${name}` in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        `The \`dnd5e.preRoll${name}\` hook has been deprecated and replaced with \`dnd5e.preRoll${type.capitalize()}V2\`.`,
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-      );
-      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
-      if ( Hooks.call(`dnd5e.preRoll${name}`, this, oldConfig, config.skill) === false ) return null;
-      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
-    }
-
     const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
     if ( !rolls.length ) return null;
 
     /**
      * A hook event that fires after a skill or tool check has been rolled.
-     * @function dnd5e.rollSkillV2
-     * @function dnd5e.rollToolCheckV2
+     * @function dnd5e.rollSkill
+     * @function dnd5e.rollToolCheck
      * @memberof hookEvents
      * @param {D20Roll[]} rolls       The resulting rolls.
      * @param {object} data
@@ -1243,15 +1214,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {string} [data.tool]    ID of the tool that was rolled as defined in `CONFIG.DND5E.tools`.
      * @param {Actor5e} data.subject  Actor for which the roll has been performed.
      */
+    Hooks.callAll(`dnd5e.roll${name}`, rolls, { [type]: config[type], subject: this });
     Hooks.callAll(`dnd5e.roll${name}V2`, rolls, { [type]: config[type], subject: this });
-
-    if ( `dnd5e.roll${name}` in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        `The \`dnd5e.roll${name}\` hook has been deprecated and replaced with \`dnd5e.roll${type.capitalize()}V2\`.`,
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-      );
-      Hooks.callAll(`dnd5e.roll${name}`, this, rolls[0], config.skill);
-    }
 
     return oldFormat ? rolls[0] : rolls;
   }
@@ -1302,12 +1266,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
    */
   rollAbility(config={}, dialog={}, message={}) {
-    let abilityId = config;
-    if ( foundry.utils.getType(config) === "Object" ) abilityId = config.ability;
-    else foundry.utils.logCompatibilityWarning(
-      "The `rollAbility` method on Actor5e now takes roll, dialog, and message config objects as parameters.",
-      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-    );
+    const abilityId = config.ability;
     const label = CONFIG.DND5E.abilities[abilityId]?.label ?? "";
     new Dialog({
       title: `${game.i18n.format("DND5E.AbilityPromptTitle", { ability: label })}: ${this.name}`,
@@ -1347,21 +1306,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     return this.#rollD20Test("check", config, dialogConfig, message);
   }
 
-  /**
-   * Roll an Ability Test.
-   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
-   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
-   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
-   * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instance.
-   */
-  async rollAbilityTest(config={}, dialog={}, message={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `rollAbilityTest` method on Actor5e has been renamed `rollAbilityCheck`.",
-      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-    );
-    return this.rollAbilityCheck(config, dialog, message);
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -1384,21 +1328,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     return this.#rollD20Test("save", config, dialogConfig, message);
   }
 
-  /**
-   * Roll an Ability Saving Throw.
-   * @param {Partial<AbilityRollProcessConfiguration>} config  Configuration information for the roll.
-   * @param {Partial<BasicRollDialogConfiguration>} dialog     Configuration for the roll dialog.
-   * @param {Partial<BasicRollMessageConfiguration>} message   Configuration for the roll message.
-   * @returns {Promise<D20Roll[]|null>}                        A Promise which resolves to the created Roll instances.
-   */
-  async rollAbilitySave(config={}, dialog={}, message={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `rollAbilitySave` method on Actor5e has been renamed `rollSavingThrow`.",
-      { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-    );
-    return this.rollSavingThrow(config, dialog, message);
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -1417,20 +1346,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   async #rollD20Test(type, config={}, dialog={}, message={}) {
     let oldFormat = false;
     const name = type === "check" ? "AbilityCheck" : "SavingThrow";
-    const oldName = type === "check" ? "AbilityTest" : "AbilitySave";
-
-    // Handle deprecated calling pattern
-    if ( config && (foundry.utils.getType(config) !== "Object") ) {
-      foundry.utils.logCompatibilityWarning(
-        `The \`roll${oldName}\` method on Actor5e now takes roll, dialog, and message config objects as parameters.`,
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-      );
-      oldFormat = true;
-      const oldConfig = dialog;
-      config = { ability: config };
-      dialog = {};
-      _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
-    }
 
     const ability = this.system.abilities?.[config.ability];
     const abilityConfig = CONFIG.DND5E.abilities[config.ability];
@@ -1476,16 +1391,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }, message);
 
-    if ( "dnd5e.preRollAbilityTest" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        `The \`dnd5e.preRoll${oldName}\` hook has been deprecated and replaced with \`dnd5e.preRoll${name}V2\`.`,
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-      );
-      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
-      if ( Hooks.call(`dnd5e.preRoll${oldName}`, this, oldConfig, config.ability) === false ) return null;
-      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
-    }
-
     const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
     if ( !rolls.length ) return null;
 
@@ -1500,14 +1405,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {Actor5e} data.subject  Actor for which the roll has been performed.
      */
     Hooks.callAll(`dnd5e.roll${name}`, rolls, { ability: config.ability, subject: this });
-
-    if ( `dnd5e.roll${name}` in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        `The \`dnd5e.roll${oldName}\` hook has been deprecated and replaced with \`dnd5e.roll${name}\`.`,
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-      );
-      Hooks.callAll(`dnd5e.roll${oldName}`, this, rolls[0], config.ability);
-    }
 
     return oldFormat ? rolls[0] : rolls;
   }
@@ -1525,19 +1422,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let oldFormat = false;
     const death = this.system.attributes?.death;
     if ( !death ) throw new Error(`Actors of the type '${this.type}' don't support death saves.`);
-
-    // Handle deprecated config object
-    if ( config.legacy !== false ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `rollDeathSave` method on Actor5e now takes roll, dialog, and message config objects as parameters. "
-        + "Pass the `legacy: false` option to config object to suppress this warning once updates have been made.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-      );
-      oldFormat = true;
-      const oldConfig = config;
-      config = {};
-      _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
-    }
 
     // Display a warning if we are not at zero HP or if we already have reached 3
     if ( (this.system.attributes.hp.value > 0) || (death.failure >= 3) || (death.success >= 3) ) {
@@ -1583,16 +1467,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         flavor: game.i18n.localize("DND5E.DeathSavingThrow")
       }
     }, message);
-
-    if ( "dnd5e.preRollDeathSave" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.preRollDeathSave` hook has been deprecated and replaced with `dnd5e.preRollDeathSaveV2`.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-      );
-      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
-      if ( Hooks.call("dnd5e.preRollDeathSave", this, oldConfig) === false ) return null;
-      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
-    }
 
     const rolls = await this.rollSavingThrow(rollConfig, dialogConfig, messageConfig);
     if ( !rolls?.length ) return null;
@@ -1651,15 +1525,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {Actor5e} data.subject    Actor for which the death saving throw has been rolled.
      * @returns {boolean}               Explicitly return `false` to prevent updates from being performed.
      */
+    if ( Hooks.call("dnd5e.rollDeathSave", rolls, { ...details, subject: this }) === false ) return returnValue;
     if ( Hooks.call("dnd5e.rollDeathSaveV2", rolls, { ...details, subject: this }) === false ) return returnValue;
-
-    if ( "dnd5e.rollDeathSave" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.rollDeathSave` hook has been deprecated and replaced with `dnd5e.rollDeathSaveV2`.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-      );
-      if ( Hooks.call("dnd5e.rollDeathSave", this, rolls[0], details) === false ) return returnValue;
-    }
 
     if ( !foundry.utils.isEmpty(details.updates) ) await this.update(details.updates);
 
@@ -1703,19 +1570,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const conc = this.system.attributes?.concentration;
     if ( !conc ) throw new Error("You may not make a Concentration Saving Throw with this Actor.");
 
-    // Handle deprecated config object
-    if ( config.legacy !== false ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `rollConcentration` method on Actor5e now takes roll, dialog, and message config objects as parameters."
-        + "Pass the `legacy: false` option to config object to suppress this warning once updates have been made.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-      );
-      oldFormat = true;
-      const oldConfig = config;
-      config = {};
-      _applyDeprecatedD20Configs(config, dialog, message, oldConfig);
-    }
-
     let data = {};
     const parts = [];
     const options = {
@@ -1748,24 +1602,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     const messageConfig = foundry.utils.deepClone(message);
 
-    /**
-     * A hook event that fires before a saving throw to maintain concentration is rolled for an Actor.
-     * @function dnd5e.preRollConcentration
-     * @memberof hookEvents
-     * @param {Actor5e} actor                   Actor for which the saving throw is being rolled.
-     * @param {D20RollConfiguration} options    Configuration data for the pending roll.
-     * @returns {boolean}                       Explicitly return `false` to prevent the save from being performed.
-     */
-    if ( "dnd5e.preRollConcentration" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.preRollConcentration` hook has been deprecated and replaced with `dnd5e.preRollConcentrationV2`.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-      );
-      const oldConfig = _createDeprecatedD20Config(rollConfig, dialogConfig, messageConfig);
-      if ( Hooks.call("dnd5e.preRollConcentration", this, oldConfig) === false ) return null;
-      _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, oldConfig);
-    }
-
     const rolls = await this.rollSavingThrow(rollConfig, dialogConfig, messageConfig);
     if ( !rolls?.length ) return null;
 
@@ -1777,15 +1613,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {object} data
      * @param {Actor5e} data.actor  Actor for which the saving throw has been rolled.
      */
+    Hooks.callAll("dnd5e.rollConcentration", rolls, { subject: this });
     Hooks.callAll("dnd5e.rollConcentrationV2", rolls, { subject: this });
-
-    if ( "dnd5e.rollConcentration" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.rollConcentration` hook has been deprecated and replaced with `dnd5e.rollConcentrationV2`.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.5" }
-      );
-      Hooks.callAll("dnd5e.rollConcentration", this, rolls[0]);
-    }
 
     return oldFormat ? rolls[0] : rolls;
   }
@@ -1972,19 +1801,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     let formula;
     let oldFormat = false;
 
-    // Handle deprecated calling pattern
-    if ( config && (foundry.utils.getType(config) !== "Object") ) {
-      foundry.utils.logCompatibilityWarning(
-        "Actor5e.rollHitDie now takes roll, dialog, and message config objects as parameters.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-      );
-      oldFormat = true;
-      formula = dialog.formula;
-      config = { denomination: config, data: dialog.data };
-      message = { create: dialog.chatMessage, data: dialog.messageData };
-      dialog = {};
-    }
-
     let cls = null;
 
     // NPCs only have one denomination
@@ -2040,22 +1856,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       }
     }, message);
 
-    if ( "dnd5e.preRollHitDie" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.preRollHitDie` hook has been deprecated and replaced with `dnd5e.preRollHitDieV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-      );
-      const hookData = {
-        formula: rollConfig.rolls[0].parts[0], data: rollConfig.rolls[0].data,
-        chatMessage: messageConfig.create, messageData: messageConfig.data
-      };
-      if ( Hooks.call("dnd5e.preRollHitDie", this, hookData, rollConfig.denomination) === false ) return null;
-      rollConfig.rolls[0].parts[0] = hookData.formula;
-      rollConfig.rolls[0].data = hookData.data;
-      messageConfig.create = hookData.chatMessage;
-      messageConfig.data = hookData.messageData;
-    }
-
     const rolls = await CONFIG.Dice.BasicRoll.build(rollConfig, dialogConfig, messageConfig);
     if ( !rolls.length ) return null;
     const returnValue = oldFormat && rolls?.length ? rolls[0] : rolls;
@@ -2073,7 +1873,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     /**
      * A hook event that fires after a hit die has been rolled for an Actor, but before updates have been performed.
-     * @function dnd5e.rollHitDieV2
+     * @function dnd5e.rollHitDie
      * @memberof hookEvents
      * @param {BasicRoll[]} rolls          The resulting rolls.
      * @param {object} data
@@ -2083,15 +1883,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {object} data.updates.class  Updates that will be applied to the class.
      * @returns {boolean}                  Explicitly return `false` to prevent updates from being performed.
      */
+    if ( Hooks.call("dnd5e.rollHitDie", rolls, { subject: this, updates }) === false ) return returnValue;
     if ( Hooks.call("dnd5e.rollHitDieV2", rolls, { subject: this, updates }) === false ) return returnValue;
-
-    if ( "dnd5e.rollHitDie" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.rollHitDie` hook has been deprecated and replaced with `dnd5e.rollHitDieV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-      );
-      if ( Hooks.call("dnd5e.rollHitDie", this, rolls[0], updates) === false ) return null;
-    }
 
     // Perform updates
     if ( !foundry.utils.isEmpty(updates.actor) ) await this.update(updates.actor);
@@ -2600,13 +2393,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const restConfig = CONFIG.DND5E.restTypes[config.type];
     if ( !this.system.spells ) return;
 
-    let types = restConfig.recoverSpellSlotTypes;
-    if ( !types ) {
-      types = new Set();
-      for ( const [key, { shortRest }] of Object.entries(CONFIG.DND5E.spellcastingTypes) ) {
-        if ( recoverLong || (recoverShort && shortRest) ) types.add(key);
-      }
-    }
+    const types = restConfig.recoverSpellSlotTypes;
+    if ( !types?.size ) return;
+
     for ( const [key, slot] of Object.entries(this.system.spells) ) {
       if ( !types.has(slot.type) ) continue;
       result.updateData[`system.spells.${key}.value`] = slot.max;
@@ -2826,112 +2615,87 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /* -------------------------------------------- */
 
   /**
-   * Options that determine what properties of the original actor are kept and which are replaced with
-   * the target actor.
-   *
-   * @typedef {object} TransformationOptions
-   * @property {boolean} [keepPhysical=false]       Keep physical abilities (str, dex, con)
-   * @property {boolean} [keepMental=false]         Keep mental abilities (int, wis, cha)
-   * @property {boolean} [keepSaves=false]          Keep saving throw proficiencies
-   * @property {boolean} [keepSkills=false]         Keep skill proficiencies
-   * @property {boolean} [mergeSaves=false]         Take the maximum of the save proficiencies
-   * @property {boolean} [mergeSkills=false]        Take the maximum of the skill proficiencies
-   * @property {boolean} [keepClass=false]          Keep proficiency bonus
-   * @property {boolean} [keepFeats=false]          Keep features
-   * @property {boolean} [keepSpells=false]         Keep spells and spellcasting ability
-   * @property {boolean} [keepItems=false]          Keep items
-   * @property {boolean} [keepBio=false]            Keep biography
-   * @property {boolean} [keepVision=false]         Keep vision
-   * @property {boolean} [keepSelf=false]           Keep self
-   * @property {boolean} [keepAE=false]             Keep all effects
-   * @property {boolean} [keepOriginAE=true]        Keep effects which originate on this actor
-   * @property {boolean} [keepOtherOriginAE=true]   Keep effects which originate on another actor
-   * @property {boolean} [keepSpellAE=true]         Keep effects which originate from actors spells
-   * @property {boolean} [keepFeatAE=true]          Keep effects which originate from actors features
-   * @property {boolean} [keepEquipmentAE=true]     Keep effects which originate on actors equipment
-   * @property {boolean} [keepClassAE=true]         Keep effects which originate from actors class/subclass
-   * @property {boolean} [keepBackgroundAE=true]    Keep effects which originate from actors background
-   * @property {boolean} [keepHP=false]             Keep HP & HD
-   * @property {boolean} [keepType=false]           Keep creature type
-   * @property {boolean} [addTemp=false]            Add temporary hit points equal to the target's max HP
-   * @property {boolean} [transformTokens=true]     Transform linked tokens too
-   * @property {string} [preset]                    The transformation preset used (if any).
-   */
-
-  /**
    * Transform this Actor into another one.
    *
-   * @param {Actor5e} target                           The target Actor.
-   * @param {TransformationOptions} [options={}]       Options that determine how the transformation is performed.
-   * @param {object} [sheetOptions]
-   * @param {boolean} [sheetOptions.renderSheet=true]  Render the sheet of the transformed actor after the polymorph
-   * @returns {Promise<Array<Token>>|null}             Updated token if the transformation was performed.
+   * @param {Actor5e} source                       The actor being transformed into.
+   * @param {TransformationSetting} [settings]     Options that determine how the transformation is performed.
+   * @param {object} [options]
+   * @param {boolean} [options.renderSheet]        Render the sheet of the transformed actor after the polymorph.
+   * @returns {Promise<Array<Token>>|null}         Updated token if the transformation was performed.
    */
-  async transformInto(target, { keepPhysical=false, keepMental=false, keepSaves=false, keepSkills=false,
-    mergeSaves=false, mergeSkills=false, keepClass=false, keepFeats=false, keepSpells=false, keepItems=false,
-    keepBio=false, keepVision=false, keepSelf=false, keepAE=false, keepOriginAE=true, keepOtherOriginAE=true,
-    keepSpellAE=true, keepEquipmentAE=true, keepFeatAE=true, keepClassAE=true, keepBackgroundAE=true,
-    keepHP=false, keepType=false, addTemp=false, transformTokens=true, preset}={}, {renderSheet=true}={}) {
+  async transformInto(source, settings=new TransformationSetting(), options={}) {
+    if ( !(settings instanceof TransformationSetting) ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `transformInto` method now requires a `TransformationSetting` configuration object.",
+        { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+      );
+      settings = TransformationSetting._fromDeprecatedConfig(settings);
+    }
 
     // Ensure the player is allowed to polymorph
     const allowed = game.settings.get("dnd5e", "allowPolymorphing");
     if ( !allowed && !game.user.isGM ) {
-      ui.notifications.warn("DND5E.PolymorphWarn", {localize: true});
+      ui.notifications.warn("DND5E.TRANSFORM.Warning.NoPermission", { localize: true });
       return null;
     }
 
     // Get the original Actor data and the new source data
     const o = this.toObject();
     o.flags.dnd5e = o.flags.dnd5e || {};
-    o.flags.dnd5e.transformOptions = {mergeSkills, mergeSaves};
-    const source = target.toObject();
+    o.flags.dnd5e.transformOptions = {
+      ...settings.toObject(),
+      mergeSaves: settings.merge.has("saves"),
+      mergeSkills: settings.merge.has("skills")
+    };
+    const sourceData = source.toObject();
+    const rollData = { ...this.getRollData(), source: source.getRollData() };
 
-    if ( keepSelf ) {
-      o.img = source.img;
-      o.name = `${o.name} (${game.i18n.localize("DND5E.PolymorphSelf")})`;
+    if ( settings.keep.has("self") ) {
+      o.img = sourceData.img;
+      o.name = `${o.name} (${game.i18n.localize("DND5E.TRANSFORM.Preset.Appearance.Label")})`;
     }
 
     // Prepare new data to merge from the source
     const d = foundry.utils.mergeObject(foundry.utils.deepClone({
       type: o.type, // Remain the same actor type
-      name: `${o.name} (${source.name})`, // Append the new shape to your old name
-      system: source.system, // Get the systemdata model of your new form
-      items: source.items, // Get the items of your new form
-      effects: o.effects.concat(source.effects), // Combine active effects from both forms
-      img: source.img, // New appearance
+      name: `${o.name} (${sourceData.name})`, // Append the new shape to your old name
+      system: sourceData.system, // Get the systemdata model of your new form
+      items: sourceData.items, // Get the items of your new form
+      effects: o.effects.concat(sourceData.effects), // Combine active effects from both forms
+      img: sourceData.img, // New appearance
       ownership: o.ownership, // Use the original actor permissions
       folder: o.folder, // Be displayed in the same sidebar folder
       flags: o.flags, // Use the original actor flags
-      prototypeToken: { name: `${o.name} (${source.name})`, texture: {}, sight: {}, detectionModes: [] } // Set a new empty token
-    }), keepSelf ? o : {}); // Keeps most of original actor
+      prototypeToken: { name: `${o.name} (${sourceData.name})`, texture: {}, sight: {}, detectionModes: [] } // Set a new empty token
+    }), settings.keep.has("self") ? o : {}); // Keeps most of original actor
 
     // Specifically delete some data attributes
     delete d.system.resources; // Don't change your resource pools
     delete d.system.currency; // Don't lose currency
     delete d.system.bonuses; // Don't lose global bonuses
-    if ( keepSpells ) delete d.system.attributes.spellcasting; // Keep spellcasting ability if retaining spells.
+    if ( settings.keep.has("spells") ) delete d.system.attributes.spellcasting; // Keep spellcasting ability if retaining spells.
 
     // Specific additional adjustments
     d.system.details.alignment = o.system.details.alignment; // Don't change alignment
     d.system.attributes.exhaustion = o.system.attributes.exhaustion; // Keep your prior exhaustion level
     d.system.attributes.inspiration = o.system.attributes.inspiration; // Keep inspiration
     d.system.spells = o.system.spells; // Keep spell slots
-    d.system.attributes.ac.flat = target.system.attributes.ac.value; // Override AC
+    d.system.attributes.ac.flat = source.system.attributes.ac.value; // Override AC
 
     // Token appearance updates
     for ( const k of ["width", "height", "alpha", "lockRotation"] ) {
-      d.prototypeToken[k] = source.prototypeToken[k];
+      d.prototypeToken[k] = sourceData.prototypeToken[k];
     }
     for ( const k of ["offsetX", "offsetY", "scaleX", "scaleY", "src", "tint"] ) {
-      d.prototypeToken.texture[k] = source.prototypeToken.texture[k];
+      d.prototypeToken.texture[k] = sourceData.prototypeToken.texture[k];
     }
-    d.prototypeToken.ring = source.prototypeToken.ring;
+    d.prototypeToken.ring = sourceData.prototypeToken.ring;
     for ( const k of ["bar1", "bar2", "displayBars", "displayName", "disposition", "rotation", "elevation"] ) {
       d.prototypeToken[k] = o.prototypeToken[k];
     }
 
-    if ( !keepSelf ) {
-      const sightSource = keepVision ? o.prototypeToken : source.prototypeToken;
+    if ( !settings.keep.has("self") ) {
+      const sightSource = settings.keep.has("vision") ? o.prototypeToken : sourceData.prototypeToken;
       for ( const k of ["range", "angle", "visionMode", "color", "attenuation", "brightness", "saturation", "contrast"] ) {
         d.prototypeToken.sight[k] = sightSource.sight[k];
       }
@@ -2944,18 +2708,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         const oa = o.system.abilities[k];
         const prof = abilities[k].proficient;
         const type = CONFIG.DND5E.abilities[k]?.type;
-        if ( keepPhysical && (type === "physical") ) abilities[k] = oa;
-        else if ( keepMental && (type === "mental") ) abilities[k] = oa;
+        if ( settings.keep.has("physical") && (type === "physical") ) abilities[k] = oa;
+        else if ( settings.keep.has("mental") && (type === "mental") ) abilities[k] = oa;
 
         // Set saving throw proficiencies.
-        if ( keepSaves && oa ) abilities[k].proficient = oa.proficient;
-        else if ( mergeSaves && oa ) abilities[k].proficient = Math.max(prof, oa.proficient);
-        else abilities[k].proficient = source.system.abilities[k].proficient;
+        if ( settings.keep.has("saves") && oa ) abilities[k].proficient = oa.proficient;
+        else if ( settings.merge.has("saves") && oa ) abilities[k].proficient = Math.max(prof, oa.proficient);
+        else abilities[k].proficient = sourceData.system.abilities[k].proficient;
       }
 
       // Transfer skills
-      if ( keepSkills ) d.system.skills = o.system.skills;
-      else if ( mergeSkills ) {
+      if ( settings.keep.has("skills") ) d.system.skills = o.system.skills;
+      else if ( settings.merge.has("skills") ) {
         for ( let [k, s] of Object.entries(d.system.skills) ) {
           s.value = Math.max(s.value, o.system.skills[k]?.value ?? 0);
         }
@@ -2963,16 +2727,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
       // Keep specific items from the original data
       d.items = d.items.concat(o.items.filter(i => {
-        if ( ["class", "subclass"].includes(i.type) ) return keepClass || keepHP;
-        else if ( i.type === "feat" ) return keepFeats;
-        else if ( i.type === "spell" ) return keepSpells;
-        else if ( i.type === "race" ) return keepType;
-        else return keepItems;
+        switch ( i.type ) {
+          case "class":
+          case "subclass": return settings.keep.has("class") || settings.keep.has("hp");
+          case "feat": return settings.keep.has("feats");
+          case "spell": return settings.keep.has("spells");
+          case "race": return settings.keep.has("type");
+          default: return settings.keep.has("items");
+        }
       }));
 
       // Transfer classes for NPCs
-      if ( !keepClass && ("cr" in d.system.details) ) {
-        if ( keepHP ) {
+      if ( !settings.keep.has("class") && ("cr" in d.system.details) ) {
+        if ( settings.keep.has("hp") ) {
           let profOverride = d.effects.findSplice(e => e._id === staticID("dnd5eTransformProf"));
           if ( !profOverride ) profOverride = new ActiveEffect.implementation({
             _id: staticID("dnd5eTransformProf"),
@@ -2983,33 +2750,34 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
           profOverride.changes = [{
             key: "system.attributes.prof",
             mode: CONST.ACTIVE_EFFECT_MODES.OVERRIDE,
-            value: target.system.attributes.prof
+            value: source.system.attributes.prof
           }];
           d.effects.push(profOverride);
         } else {
           const cls = new dnd5e.dataModels.item.ClassData({ levels: d.system.details.cr });
           d.items.push({
             type: "class",
-            name: game.i18n.localize("DND5E.PolymorphTmpClass"),
+            name: game.i18n.localize("DND5E.TRANSFORM.TemporaryClass"),
             system: cls.toObject()
           });
         }
       }
 
       // Keep biography
-      if ( keepBio ) d.system.details.biography = o.system.details.biography;
+      if ( settings.keep.has("bio") ) d.system.details.biography = o.system.details.biography;
 
       // Keep senses
-      if ( keepVision ) d.system.traits.senses = o.system.traits.senses;
+      if ( settings.keep.has("vision") ) d.system.traits.senses = o.system.traits.senses;
 
       // Keep creature type
-      if ( keepType ) d.system.details.type = o.system.details.type;
+      if ( settings.keep.has("type") ) d.system.details.type = o.system.details.type;
 
       // Keep HP & HD
-      if ( keepHP ) d.system.attributes.hp = { ...this.system.attributes.hp };
+      if ( settings.keep.has("hp") ) d.system.attributes.hp = { ...this.system.attributes.hp };
 
       // Add temporary hit points
-      if ( addTemp ) d.system.attributes.hp.temp = target.system.attributes.hp.max;
+      const tempHp = simplifyBonus(settings.tempFormula, rollData);
+      if ( tempHp ) d.system.attributes.hp.temp = tempHp;
 
       // Remove active effects
       const oEffects = foundry.utils.deepClone(d.effects);
@@ -3017,25 +2785,34 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         return !effect.origin || effect.origin === this.uuid;
       }).map(e => e._id));
       d.effects = d.effects.filter(e => {
-        if ( keepAE ) return true;
-        if ( keepHP && !keepClass && (e._id === staticID("dnd5eTransformProf")) ) return true;
+        if ( settings.effects.has("all") ) return true;
+        if ( settings.keep.has("hp") && !settings.keep.has("class") && (e._id === staticID("dnd5eTransformProf")) ) {
+          return true;
+        }
         const origin = e.origin?.startsWith("Actor") || e.origin?.startsWith("Item") ? fromUuidSync(e.origin) : {};
         const originIsSelf = origin?.parent?.uuid === this.uuid;
         const isOriginEffect = originEffectIds.has(e._id);
-        if ( isOriginEffect ) return keepOriginAE;
-        if ( !isOriginEffect && !originIsSelf ) return keepOtherOriginAE;
-        if ( origin.type === "spell" ) return keepSpellAE;
-        if ( origin.type === "feat" ) return keepFeatAE;
-        if ( origin.type === "background" ) return keepBackgroundAE;
-        if ( ["subclass", "class"].includes(origin.type) ) return keepClassAE;
-        if ( ["equipment", "weapon", "tool", "loot", "container"].includes(origin.type) ) return keepEquipmentAE;
-        return true;
+        if ( isOriginEffect ) return settings.effects.has("origin");
+        if ( !isOriginEffect && !originIsSelf ) return settings.effects.has("otherOrigin");
+        switch ( origin.type ) {
+          case "spell": return settings.effects.has("spell");
+          case "feat": return settings.effects.has("feat");
+          case "background": return settings.effects.has("background");
+          case "class":
+          case "subclass": return settings.effects.has("class");
+          case "equipment":
+          case "weapon":
+          case "tool":
+          case "loot":
+          case "container": return settings.effects.has("equipment");
+          default: return true;
+        }
       });
     }
 
     // Set a random image if source is configured that way
-    if ( source.prototypeToken.randomImg ) {
-      const images = await target.getTokenImages();
+    if ( sourceData.prototypeToken.randomImg ) {
+      const images = await source.getTokenImages();
       d.prototypeToken.texture.src = images[Math.floor(Math.random() * images.length)];
     }
 
@@ -3048,6 +2825,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     previousActorIds.push(this._id);
     foundry.utils.setProperty(d.flags, "dnd5e.previousActorIds", previousActorIds);
 
+    // If `renderSheet` isn't specified, only render if non-transformed sheet is open
+    options.renderSheet ??= this.sheet?.rendered ?? false;
+
     // Update unlinked Tokens, and grab a copy of any actorData adjustments to re-apply
     if ( this.isToken ) {
       const tokenData = d.prototypeToken;
@@ -3059,7 +2839,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
       await this.sheet?.close();
       const update = await this.token.update(tokenData);
-      if ( renderSheet ) this.sheet?.render(true);
+      if ( options.renderSheet ) this.sheet?.render(true);
       return update;
     }
 
@@ -3070,23 +2850,27 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * A hook event that fires just before the actor is transformed.
      * @function dnd5e.transformActor
      * @memberof hookEvents
-     * @param {Actor5e} actor                  The original actor before transformation.
-     * @param {Actor5e} target                 The target actor into which to transform.
-     * @param {object} data                    The data that will be used to create the new transformed actor.
-     * @param {TransformationOptions} options  Options that determine how the transformation is performed.
-     * @param {object} [options]
+     * @param {Actor5e} host                    The original actor before transformation.
+     * @param {Actor5e} source                  The source actor into which to transform.
+     * @param {object} data                     The data that will be used to create the new transformed actor.
+     * @param {TransformationSetting} settings  Settings that determine how the transformation is performed.
+     * @param {object} options                  Rendering options passed to the actor creation.
      */
-    Hooks.callAll("dnd5e.transformActor", this, target, d, {
-      keepPhysical, keepMental, keepSaves, keepSkills, mergeSaves, mergeSkills, keepClass, keepFeats, keepSpells,
-      keepItems, keepBio, keepVision, keepSelf, keepAE, keepOriginAE, keepOtherOriginAE, keepSpellAE,
-      keepEquipmentAE, keepFeatAE, keepClassAE, keepBackgroundAE, keepHP, keepType, addTemp, transformTokens, preset
-    }, {renderSheet});
+    Hooks.callAll("dnd5e.transformActorV2", this, source, d, settings, options);
+
+    if ( "dnd5e.transformActor" in Hooks.events ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `dnd5e.transformActor` hook has been deprecated and replaced with `dnd5e.transformActorV2`.",
+        { since: "DnD5e 4.4", until: "DnD5e 5.0" }
+      );
+      Hooks.callAll("dnd5e.transformActor", this, source, d, settings._toDeprecatedConfig(), options);
+    }
 
     // Create new Actor with transformed data
-    const newActor = await this.constructor.create(d, {renderSheet});
+    const newActor = await this.constructor.create(d, options);
 
     // Update placed Token instances
-    if ( !transformTokens ) return;
+    if ( !settings.transformTokens ) return;
     const tokens = this.getActiveTokens(true);
     const updates = tokens.map(t => {
       const newTokenData = foundry.utils.deepClone(d.prototypeToken);
@@ -3114,21 +2898,24 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {boolean} [options.renderSheet=true]  Render Sheet after revert the transformation.
    * @returns {Promise<Actor>|null}  Original actor if it was reverted.
    */
-  async revertOriginalForm({renderSheet=true}={}) {
+  async revertOriginalForm(options={}) {
     if ( !this.isPolymorphed ) return;
     if ( !this.isOwner ) {
-      ui.notifications.warn("DND5E.PolymorphRevertWarn", {localize: true});
+      ui.notifications.warn("DND5E.TRANSFORM.Warning.NoOwnership", { localize: true });
       return null;
     }
+
+    options.renderSheet ??= true;
 
     /**
      * A hook event that fires just before the actor is reverted to original form.
      * @function dnd5e.revertOriginalForm
      * @memberof hookEvents
-     * @param {Actor} this                 The original actor before transformation.
-     * @param {object} [options]
+     * @param {Actor} actor                  The original actor before transformation.
+     * @param {object} options
+     * @param {boolean} options.renderSheet  Render the reverted actor sheet.
      */
-    Hooks.callAll("dnd5e.revertOriginalForm", this, {renderSheet});
+    Hooks.callAll("dnd5e.revertOriginalForm", this, options);
     const previousActorIds = this.getFlag("dnd5e", "previousActorIds") ?? [];
     const isOriginalActor = !previousActorIds.length;
     const isRendered = this.sheet.rendered;
@@ -3140,7 +2927,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( this.isToken ) {
       const baseActor = original ? original : game.actors.get(this.token.actorId);
       if ( !baseActor ) {
-        ui.notifications.warn(game.i18n.format("DND5E.PolymorphRevertNoOriginalActorWarn", {
+        ui.notifications.warn(game.i18n.format("DND5E.TRANSFORM.Warning.OriginalActor", {
           reference: this.getFlag("dnd5e", "originalActor")
         }));
         return;
@@ -3171,12 +2958,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         await this.unsetFlag("dnd5e", "previousActorIds");
         await this.token.unsetFlag("dnd5e", "previousActorData");
       }
-      if ( isRendered && renderSheet ) token.actor?.sheet?.render(true);
+      if ( isRendered && options.renderSheet ) token.actor?.sheet?.render(true);
       return token;
     }
 
     if ( !original ) {
-      ui.notifications.warn(game.i18n.format("DND5E.PolymorphRevertNoOriginalActorWarn", {
+      ui.notifications.warn(game.i18n.format("DND5E.TRANSFORM.Warning.OriginalActor", {
         reference: this.getFlag("dnd5e", "originalActor")
       }));
       return;
@@ -3213,7 +3000,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     } else if ( isRendered ) {
       this.sheet?.close();
     }
-    if ( isRendered && renderSheet ) original.sheet?.render(isRendered);
+    if ( isRendered && options.renderSheet ) original.sheet?.render(isRendered);
     return original;
   }
 
@@ -3221,20 +3008,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Add additional system-specific sidebar directory context menu options for Actor documents
-   * @param {jQuery | HTMLElement} html  The sidebar HTML
-   * @param {Array} entryOptions         The default array of context menu options
+   * @param {ApplicationV2} app   The application being displayed.
+   * @param {Array} entryOptions  The default array of context menu options
    */
-  static addDirectoryContextOptions(html, entryOptions) {
+  static addDirectoryContextOptions(app, entryOptions) {
+    if ( app instanceof foundry.applications.sidebar.apps.Compendium ) return;
     entryOptions.push({
-      name: "DND5E.PolymorphRestoreTransformation",
+      name: "DND5E.TRANSFORM.Action.Restore",
       icon: '<i class="fa-solid fa-backward"></i>',
       callback: li => {
-        li = li instanceof HTMLElement ? li : li[0];
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
         return actor.revertOriginalForm();
       },
       condition: li => {
-        li = li instanceof HTMLElement ? li : li[0];
         const allowed = game.settings.get("dnd5e", "allowPolymorphing");
         if ( !allowed && !game.user.isGM ) return false;
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
@@ -3245,11 +3031,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       name: "DND5E.Group.Primary.Set",
       icon: '<i class="fa-solid fa-star"></i>',
       callback: li => {
-        li = li instanceof HTMLElement ? li : li[0];
         game.settings.set("dnd5e", "primaryParty", { actor: game.actors.get(li.dataset.documentId ?? li.dataset.entryId) });
       },
       condition: li => {
-        li = li instanceof HTMLElement ? li : li[0];
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
         const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
         return game.user.isGM && (actor?.type === "group")
@@ -3263,7 +3047,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         game.settings.set("dnd5e", "primaryParty", { actor: null });
       },
       condition: li => {
-        li = li instanceof HTMLElement ? li : li[0];
         const actor = game.actors.get(li.dataset.documentId ?? li.dataset.entryId);
         const primary = game.settings.get("dnd5e", "primaryParty")?.actor;
         return game.user.isGM && (actor === primary);
@@ -3276,10 +3059,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /**
    * Add class to actor entry representing the primary group.
-   * @param {jQuery | HTMLElement} html
+   * @param {HTMLElement} html
    */
   static onRenderActorDirectory(html) {
-    html = html instanceof HTMLElement ? html : html[0];
     const primaryParty = game.settings.get("dnd5e", "primaryParty")?.actor;
     if ( primaryParty ) {
       const element = html?.querySelector(`[data-entry-id="${primaryParty.id}"]`);
@@ -3563,16 +3345,9 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
  */
 class SourcedItemsMap extends Map {
   /** @inheritDoc */
-  get(key, { remap=true, legacy=true }={}) {
+  get(key, { remap=true }={}) {
     if ( !key ) return;
-    if ( remap ) ({ uuid: key } = parseUuid(key) ?? {});
-    if ( legacy ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `sourcedItems` data on actor has changed from storing individual items to storing Sets of items. Pass `legacy: false` to retrieve the new Set data.",
-        { since: "DnD5e 4.1", until: "DnD5e 4.3", once: true }
-      );
-      return super.get(key)?.first();
-    }
+    if ( remap ) ({ uuid: key } = foundry.utils.parseUuid(key) ?? {});
     return super.get(key);
   }
 
@@ -3580,9 +3355,9 @@ class SourcedItemsMap extends Map {
 
   /** @inheritDoc */
   set(key, value) {
-    const { uuid } = parseUuid(key);
+    const { uuid } = foundry.utils.parseUuid(key);
     if ( !this.has(uuid) ) super.set(uuid, new Set());
-    this.get(uuid, { remap: false, legacy: false }).add(value);
+    this.get(uuid, { remap: false }).add(value);
     return this;
   }
 
@@ -3593,7 +3368,7 @@ class SourcedItemsMap extends Map {
    */
   _redirectKeys() {
     for ( const [key, value] of this.entries() ) {
-      const { uuid } = parseUuid(key);
+      const { uuid } = foundry.utils.parseUuid(key);
       if ( key !== uuid ) {
         this.set(uuid, value);
         this.delete(key);

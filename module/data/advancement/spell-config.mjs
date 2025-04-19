@@ -1,6 +1,6 @@
 import FormulaField from "../fields/formula-field.mjs";
 
-const { BooleanField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 export default class SpellConfigurationData extends foundry.abstract.DataModel {
   /** @inheritDoc */
@@ -8,6 +8,17 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
     return {
       ability: new SetField(new StringField()),
       preparation: new StringField(),
+      prepared: new NumberField({
+        label: "DND5E.SpellPrepared",
+        nullable: false,
+        initial: CONFIG.DND5E.spellPreparationStates.unprepared.value,
+        choices: () => {
+          return Object.values(CONFIG.DND5E.spellPreparationStates).reduce((acc, v) => {
+            if ( v.value !== 1 ) acc[v.value] = v.label;
+            return acc;
+          }, {});
+        }
+      }),
       uses: new SchemaField({
         max: new FormulaField({ deterministic: true }),
         per: new StringField(),
@@ -25,6 +36,11 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
     if ( foundry.utils.getType(source.ability) === "string" ) {
       source.ability = source.ability ? [source.ability] : [];
     }
+
+    if ( ["prepared", "always"].includes(source.preparation) ) {
+      source.prepared = (source.preparation === "always") ? 2 : 0;
+      source.preparation = "spell";
+    }
   }
 
   /* -------------------------------------------- */
@@ -40,15 +56,20 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
   applySpellChanges(itemData, { ability }={}) {
     ability = this.ability.size ? this.ability.has(ability) ? ability : this.ability.first() : null;
     if ( ability ) foundry.utils.setProperty(itemData, "system.ability", ability);
-    if ( this.preparation ) foundry.utils.setProperty(itemData, "system.preparation.mode", this.preparation);
+    if ( this.preparation ) {
+      foundry.utils.mergeObject(itemData, {
+        "system.preparation.mode": this.preparation,
+        "system.preparation.prepared": this.prepared
+      });
+    }
 
     if ( this.uses.max && this.uses.per ) {
       foundry.utils.setProperty(itemData, "system.uses.max", this.uses.max);
       itemData.system.uses.recovery ??= [];
       itemData.system.uses.recovery.push({ period: this.uses.per, type: "recoverAll" });
 
-      const preparationConfig = CONFIG.DND5E.spellPreparationModes[itemData.system.preparation?.mode];
-      const createForwardActivity = !this.uses.requireSlot && preparationConfig?.upcast;
+      const preparationConfig = CONFIG.DND5E.spellcasting[itemData.system.preparation?.mode];
+      const createForwardActivity = !this.uses.requireSlot && !preparationConfig?.isStatic;
 
       for ( const activity of Object.values(itemData.system.activities ?? {}) ) {
         if ( !activity.consumption?.spellSlot ) continue;
@@ -81,30 +102,5 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
         }
       }
     }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Changes that this spell configuration indicates should be performed on spells.
-   * @param {object} data  Data for the advancement process.
-   * @returns {object}
-   * @deprecated since DnD5e 4.0, available until DnD5e 4.4
-   */
-  getSpellChanges(data={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `getSpellChanges` method on `SpellConfigurationData` has been deprecated and replaced with `applySpellChanges`.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-    );
-    const updates = {};
-    if ( this.ability.size ) {
-      updates["system.ability"] = this.ability.has(data.ability) ? data.ability : this.ability.first();
-    }
-    if ( this.preparation ) updates["system.preparation.mode"] = this.preparation;
-    if ( this.uses.max && this.uses.per ) {
-      updates["system.uses.max"] = this.uses.max;
-      updates["system.uses.per"] = this.uses.per;
-    }
-    return updates;
   }
 }

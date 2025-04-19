@@ -466,25 +466,5 @@ export default class AttributesFields {
     this.attributes.spell.attack = ability ? ability.attack : this.attributes.prof;
     this.attributes.spell.dc = ability ? ability.dc : 8 + this.attributes.prof;
     this.attributes.spell.mod = ability ? ability.mod : 0;
-    Object.defineProperty(this.attributes, "spelldc", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `attributes.spelldc` property on actors has been moved to `attributes.spell.dc`.",
-          { since: "DnD5e 4.3", until: "DnD5e 5.0" }
-        );
-        return this.spell.dc;
-      },
-      enumerable: true
-    });
-    Object.defineProperty(this.attributes, "spellmod", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `attributes.spellmod` property on actors has been moved to `attributes.spell.mod`.",
-          { since: "DnD5e 4.3", until: "DnD5e 5.0" }
-        );
-        return this.spell.mod;
-      },
-      enumerable: true
-    });
   }
 }

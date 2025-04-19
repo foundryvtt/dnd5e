@@ -1,0 +1,151 @@
+_id: lvLrkAR7k8DS7J3W
+name: Iron Flask
+type: consumable
+img: icons/consumables/potions/bottle-round-empty-glass.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This iron bottle has a brass stopper. You can use an action to speak
+      the flask's command word, targeting a creature that you can see within 60
+      feet of you. If the target is native to a plane of existence other than
+      the one you're on, the target must succeed on a DC 17 Wisdom saving throw
+      or be trapped in the flask. If the target has been trapped by the flask
+      before, it has advantage on the saving throw. Once trapped, a creature
+      remains in the flask until released. The flask can hold only one creature
+      at a time. A creature trapped in the flask doesn't need to breathe, eat,
+      or drink and doesn't age.</p>
+
+      <p>You can use an action to remove the flask's stopper and release the
+      creature the flask contains. The creature is friendly to you and your
+      companions for 1 hour and obeys your commands for that duration. If you
+      give no commands or give it a command that is likely to result in its
+      death, it defends itself but otherwise takes no actions. At the end of the
+      duration, the creature acts in accordance with its normal disposition and
+      alignment.</p>
+
+      <p>An @UUID[Compendium.dnd5e.spells.Item.3OZnNhunvRtPOQmH]{Identify} spell
+      reveals that a creature is inside the flask, but the only way to determine
+      the type of creature is to open the flask. A newly discovered bottle might
+      already contain a creature chosen by the GM or determined randomly from
+      the @UUID[Compendium.dnd5e.tables.RollTable.JDtZNDaAirupdm2O]{Iron Flask}
+      table.
+
+      </p><p> </p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0.1
+    units: lb
+  price:
+    value: 31000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: creature
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts: []
+      save:
+        ability: wis
+        dc:
+          calculation: ''
+          formula: '17'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: iron-flask
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 8000000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037276543
+  modifiedTime: 1725992542817
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!lvLrkAR7k8DS7J3W'

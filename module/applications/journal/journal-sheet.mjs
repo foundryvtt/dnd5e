@@ -1,7 +1,7 @@
 /**
  * Variant of the standard journal sheet to handle custom TOC numbering.
  */
-export default class JournalSheet5e extends (foundry.appv1?.sheets?.JournalSheet ?? JournalSheet) {
+export default class JournalSheet5e extends foundry.appv1.sheets.JournalSheet {
   /** @inheritDoc */
   static get defaultOptions() {
     const options = super.defaultOptions;

@@ -121,7 +121,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {string}
    */
   get actionType() {
-    return this.metadata.data;
+    return this.metadata.type;
   }
 
   /* -------------------------------------------- */
@@ -163,8 +163,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {boolean}
    */
   get canScale() {
-    return this.consumption.scaling.allowed || (this.isSpell && this.item.system.level > 0
-      && CONFIG.DND5E.spellPreparationModes[this.item.system.preparation.mode]?.upcast);
+    return this.consumption.scaling.allowed || (this.isSpell && (this.item.system.level > 0)
+      && !this.item.system.preparation.static);
   }
 
   /* -------------------------------------------- */
@@ -595,7 +595,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
       // Re-link UUIDs in consumption fields to explicit items on the actor
       if ( target.target.includes(".") ) {
-        const item = actor.sourcedItems?.get(target.target, { legacy: false })?.first();
+        const item = actor.sourcedItems?.get(target.target)?.first();
         if ( item ) target.target = item.id;
       }
 
@@ -613,20 +613,24 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /**
    * Prepare the label for a compiled and simplified damage formula.
-   * @param {DamageData[]} parts  Damage parts to create labels for.
-   * @param {object} rollData     Deterministic roll data from the item.
+   * @param {object} rollData  Deterministic roll data from the item.
+   * @param {object} _rollData
    */
-  prepareDamageLabel(parts, rollData) {
-    this.labels.damage = parts.map((part, index) => {
+  prepareDamageLabel(rollData, _rollData=rollData) {
+    if ( foundry.utils.getType(rollData) === "Array" ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `BaseActivityData#prepareDamageLabel` no longer takes damage parts as an input.",
+        { since: "DnD5e 4.4", until: "DnD5e 5.1" }
+      );
+      rollData = _rollData;
+    }
+
+    const config = this.getDamageConfig();
+    this.labels.damage = this.labels.damages = (config.rolls ?? []).map((part, index) => {
       let formula;
       try {
-        formula = part.formula;
-        if ( part.base ) {
-          if ( this.item.system.magicAvailable ) formula += ` + ${this.item.system.magicalBonus ?? 0}`;
-          if ( (this.item.type === "weapon") && !/@mod\b/.test(formula) ) formula += " + @mod";
-        }
-        if ( !index && this.item.system.damageBonus ) formula += ` + ${this.item.system.damageBonus}`;
-        const roll = new CONFIG.Dice.BasicRoll(formula, rollData);
+        formula = part.parts.join(" + ");
+        const roll = new CONFIG.Dice.DamageRoll(formula, rollData);
         roll.simplify();
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       } catch(err) {
@@ -636,15 +640,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }
 
       let label = formula;
-      if ( part.types.size ) {
+      const types = part.options?.types ?? (part.options?.type ? [part.options.type] : []);
+      if ( types.length ) {
         label = `${formula} ${game.i18n.getListFormatter({ type: "conjunction" }).format(
-          Array.from(part.types)
-            .map(p => CONFIG.DND5E.damageTypes[p]?.label ?? CONFIG.DND5E.healingTypes[p]?.label)
-            .filter(t => t)
+          types.map(p => CONFIG.DND5E.damageTypes[p]?.label ?? CONFIG.DND5E.healingTypes[p]?.label).filter(_ => _)
         )}`;
       }
 
-      return { formula, damageType: part.types.size === 1 ? part.types.first() : null, label, base: part.base };
+      return {
+        formula, label,
+        base: part.base,
+        damageType: part.options?.types.length === 1 ? part.options.types[0] : null
+      };
     });
   }
 

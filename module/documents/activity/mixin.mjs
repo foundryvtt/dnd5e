@@ -53,7 +53,7 @@ export default function ActivityMixin(Base) {
      * Perform the pre-localization of this data model.
      */
     static localize() {
-      Localization.localizeDataModel(this);
+      foundry.helpers.Localization.localizeDataModel(this);
       const fields = this.schema.fields;
       if ( fields.damage?.fields.parts ) {
         localizeSchema(fields.damage.fields.parts.element, ["DND5E.DAMAGE.FIELDS.damage.parts"]);
@@ -255,16 +255,6 @@ export default function ActivityMixin(Base) {
        */
       if ( Hooks.call("dnd5e.preUseActivity", activity, usageConfig, dialogConfig, messageConfig) === false ) return;
 
-      if ( "dnd5e.preUseItem" in Hooks.events ) {
-        foundry.utils.logCompatibilityWarning(
-          "The `dnd5e.preUseItem` hook has been deprecated and replaced with `dnd5e.preUseActivity`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-        );
-        const { config, options } = this._createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig);
-        if ( Hooks.call("dnd5e.preUseItem", item, config, options) === false ) return;
-        this._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options);
-      }
-
       // Display configuration window if necessary
       if ( dialogConfig.configure && activity._requiresConfigurationDialog(usageConfig) ) {
         try {
@@ -298,7 +288,7 @@ export default function ActivityMixin(Base) {
       }
 
       // Create chat message
-      messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
+      activity._finalizeMessageConfig(usageConfig, messageConfig, results);
       results.message = await activity._createUsageMessage(messageConfig);
 
       // Perform any final usage steps
@@ -314,15 +304,6 @@ export default function ActivityMixin(Base) {
        * @returns {boolean}  Explicitly return `false` to prevent any subsequent actions from being triggered.
        */
       if ( Hooks.call("dnd5e.postUseActivity", activity, usageConfig, results) === false ) return results;
-
-      if ( "dnd5e.useItem" in Hooks.events ) {
-        foundry.utils.logCompatibilityWarning(
-          "The `dnd5e.useItem` hook has been deprecated and replaced with `dnd5e.postUseActivity`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-        );
-        const { config, options } = this._createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig);
-        Hooks.callAll("dnd5e.itemUsageConsumption", item, config, options, results.templates, results.effects, null);
-      }
 
       // Trigger any primary action provided by this activity
       if ( usageConfig.subsequentActions !== false ) {
@@ -352,16 +333,6 @@ export default function ActivityMixin(Base) {
        */
       if ( Hooks.call("dnd5e.preActivityConsumption", this, usageConfig, messageConfig) === false ) return false;
 
-      if ( "dnd5e.preItemUsageConsumption" in Hooks.events ) {
-        foundry.utils.logCompatibilityWarning(
-          "The `dnd5e.preItemUsageConsumption` hook has been deprecated and replaced with `dnd5e.preActivityConsumption`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-        );
-        const { config, options } = this._createDeprecatedConfigs(usageConfig, {}, messageConfig);
-        if ( Hooks.call("dnd5e.preItemUsageConsumption", this.item, config, options) === false ) return false;
-        this._applyDeprecatedConfigs(usageConfig, {}, messageConfig, config, options);
-      }
-
       const updates = await this._prepareUsageUpdates(usageConfig);
       if ( !updates ) return false;
 
@@ -377,26 +348,6 @@ export default function ActivityMixin(Base) {
        * @returns {boolean}  Explicitly return `false` to prevent activity from being activated.
        */
       if ( Hooks.call("dnd5e.activityConsumption", this, usageConfig, messageConfig, updates) === false ) return false;
-
-      if ( "dnd5e.itemUsageConsumption" in Hooks.events ) {
-        foundry.utils.logCompatibilityWarning(
-          "The `dnd5e.itemUsageConsumption` hook has been deprecated and replaced with `dnd5e.activityConsumption`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-        );
-        const { config, options } = this._createDeprecatedConfigs(usageConfig, {}, messageConfig);
-        const usage = {
-          actorUpdates: updates.actor,
-          deleteIds: updates.delete,
-          itemUpdates: updates.item.find(i => i._id === this.item.id),
-          resourceUpdates: updates.item.filter(i => i._id !== this.item.id)
-        };
-        if ( Hooks.call("dnd5e.itemUsageConsumption", this.item, config, options, usage) === false ) return false;
-        this._applyDeprecatedConfigs(usageConfig, {}, messageConfig, config, options);
-        updates.actor = usage.actorUpdates;
-        updates.delete = usage.deleteIds;
-        updates.item = usage.resourceUpdates;
-        if ( !foundry.utils.isEmpty(usage.itemUpdates) ) updates.item.push({ _id: this.item.id, ...usage.itemUpdates });
-      }
 
       const consumed = await this.#applyUsageUpdates(updates);
       if ( !foundry.utils.isEmpty(consumed) ) {
@@ -512,95 +463,6 @@ export default function ActivityMixin(Base) {
       if ( !foundry.utils.isEmpty(updates.item) ) await this.actor.updateEmbeddedDocuments("Item", updates.item);
 
       return consumed;
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Translate new config objects back into old config objects for deprecated hooks.
-     * @param {ActivityUseConfiguration} usageConfig
-     * @param {ActivityDialogConfiguration} dialogConfig
-     * @param {ActivityMessageConfiguration} messageConfig
-     * @returns {{ config: ItemUseConfiguration, options: ItemUseOptions }}
-     * @internal
-     */
-    _createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig) {
-      let consumeResource;
-      let consumeUsage;
-      if ( (usageConfig.consume === true) || (usageConfig.consume?.resources === true) ) {
-        consumeResource = consumeUsage = true;
-      } else if ( (usageConfig.consume === false) || (usageConfig.comsume?.resources === false) ) {
-        consumeResource = consumeUsage = false;
-      } else if ( foundry.utils.getType(usageConfig.consume?.resources) === "Array" ) {
-        for ( const index of usageConfig.consume.resources ) {
-          if ( ["activityUses", "itemUses"].includes(this.consumption.targets[index]?.type) ) consumeUsage = true;
-          else consumeResource = true;
-        }
-      }
-      return {
-        config: {
-          createMeasuredTemplate: usageConfig.create?.measuredTemplate ?? null,
-          consumeResource,
-          consumeSpellSlot: usageConfig.consume?.spellSlot !== false ?? null,
-          consumeUsage,
-          slotLevel: usageConfig.spell?.slot ?? null,
-          resourceAmount: usageConfig.scaling ?? null,
-          beginConcentrating: usageConfig.concentration?.begin ?? false,
-          endConcentration: usageConfig.concentration?.end ?? null
-        },
-        options: {
-          configureDialog: dialogConfig.configure,
-          rollMode: messageConfig.rollMode,
-          createMessage: messageConfig.create,
-          flags: messageConfig.data?.flags,
-          event: usageConfig.event
-        }
-      };
-    }
-
-    /* -------------------------------------------- */
-
-    /**
-     * Apply changes from old config objects back onto new config objects.
-     * @param {ActivityUseConfiguration} usageConfig
-     * @param {ActivityDialogConfiguration} dialogConfig
-     * @param {ActivityMessageConfiguration} messageConfig
-     * @param {ItemUseConfiguration} config
-     * @param {ItemUseOptions} options
-     * @internal
-     */
-    _applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options) {
-      const { resourceIndices, usageIndices } = this.consumption.targets.reduce((o, data, index) => {
-        if ( ["activityUses", "itemUses"].includes(data.type) ) o.usageIndices.push(index);
-        else o.resourceIndices.push(index);
-        return o;
-      }, { resourceIndices: [], usageIndices: [] });
-      let resources;
-      if ( config.consumeResource && config.consumeUsage ) resources = true;
-      else if ( config.consumeResource && (config.consumeUsage === false) ) resources = resourceIndices;
-      else if ( (config.consumeResource === false) && config.consumeUsage ) resources = usageIndices;
-
-      // Set property so long as the value is not undefined
-      // Avoids problems with `mergeObject` overwriting values with `undefined`
-      const set = (config, keyPath, value) => {
-        if ( value === undefined ) return;
-        foundry.utils.setProperty(config, keyPath, value);
-      };
-
-      set(usageConfig, "create.measuredTemplate", config.createMeasuredTemplate);
-      set(usageConfig, "concentration.begin", config.beginConcentrating);
-      set(usageConfig, "concentration.end", config.endConcentration);
-      set(usageConfig, "consume.resources", resources);
-      set(usageConfig, "consume.spellSlot", config.consumeSpellSlot);
-      set(usageConfig, "scaling", config.resourceAmount);
-      set(usageConfig, "spell.slot", config.slotLevel);
-      set(dialogConfig, "configure", options.configureDialog);
-      set(messageConfig, "create", options.createMessage);
-      set(messageConfig, "rollMode", options.rollMode);
-      if ( options.flags ) {
-        messageConfig.data ??= {};
-        messageConfig.data.flags = foundry.utils.mergeObject(messageConfig.data.flags ?? {}, options.flags);
-      }
     }
 
     /* -------------------------------------------- */
@@ -810,9 +672,9 @@ export default function ActivityMixin(Base) {
       else if ( ((config.consume === true) || config.consume.spellSlot)
         && this.requiresSpellSlot && this.consumption.spellSlot ) {
         const mode = this.item.system.preparation.mode;
-        const isLeveled = ["always", "prepared"].includes(mode);
+        const spellcasting = CONFIG.DND5E.spellcasting[mode];
         const effectiveLevel = this.item.system.level + (config.scaling ?? 0);
-        const slot = config.spell?.slot ?? (isLeveled ? `spell${effectiveLevel}` : mode);
+        const slot = config.spell?.slot ?? spellcasting?.spellSlotKey?.(effectiveLevel) ?? mode;
         const slotData = this.actor.system.spells?.[slot];
         if ( slotData ) {
           if ( slotData.value ) {
@@ -904,6 +766,19 @@ export default function ActivityMixin(Base) {
         subtitle: this.description.chatFlavor || data.subtitle,
         supplements
       };
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Apply any final modifications to message config immediately before message is created.
+     * @param {ActivityUseConfiguration} usageConfig        Configuration data for the activation.
+     * @param {ActivityMessageConfiguration} messageConfig  Configuration data for the chat message.
+     * @param {ActivityUsageResults} results                Final details on the activation.
+     * @protected
+     */
+    _finalizeMessageConfig(usageConfig, messageConfig, results) {
+      messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
     }
 
     /* -------------------------------------------- */
@@ -1081,68 +956,10 @@ export default function ActivityMixin(Base) {
         }
       }, message);
 
-      let returnMultiple = rollConfig.returnMultiple ?? true;
-      if ( "dnd5e.preRollDamage" in Hooks.events ) {
-        foundry.utils.logCompatibilityWarning(
-          "The `dnd5e.preRollDamage` hook has been deprecated and replaced with `dnd5e.preRollDamageV2`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-        );
-        const oldRollConfig = {
-          actor: this.actor,
-          rollConfigs: rollConfig.rolls.map((r, _index) => ({
-            _index,
-            parts: r.parts,
-            type: r.options?.type,
-            types: r.options?.types,
-            properties: r.options?.properties
-          })),
-          data: rollConfig.rolls[0]?.data ?? {},
-          event: rollConfig.event,
-          returnMultiple,
-          allowCritical: rollConfig.rolls[0]?.critical?.allow ?? rollConfig.critical?.allow ?? true,
-          critical: rollConfig.rolls[0]?.isCritical,
-          criticalBonusDice: rollConfig.rolls[0]?.critical?.bonusDice ?? rollConfig.critical?.bonusDice,
-          criticalMultiplier: rollConfig.rolls[0]?.critical?.multiplier ?? rollConfig.critical?.multiplier,
-          multiplyNumeric: rollConfig.rolls[0]?.critical?.multiplyNumeric ?? rollConfig.critical?.multiplyNumeric,
-          powerfulCritical: rollConfig.rolls[0]?.critical?.powerfulCritical ?? rollConfig.critical?.powerfulCritical,
-          criticalBonusDamage: rollConfig.rolls[0]?.critical?.bonusDamage ?? rollConfig.critical?.bonusDamage,
-          title: `${this.item.name} - ${this.damageFlavor}`,
-          dialogOptions: dialogConfig.options,
-          chatMessage: messageConfig.create,
-          messageData: messageConfig.data,
-          rollMode: messageConfig.rollMode,
-          flavor: messageConfig.data.flavor
-        };
-        if ( "configure" in dialogConfig ) oldRollConfig.fastForward = !dialogConfig.configure;
-        if ( Hooks.call("dnd5e.preRollDamage", this.item, oldRollConfig) === false ) return;
-        rollConfig.rolls = rollConfig.rolls.map((roll, index) => {
-          const otherConfig = oldRollConfig.rollConfigs.find(r => r._index === index);
-          if ( !otherConfig ) return null;
-          roll.data = oldRollConfig.data;
-          roll.parts = otherConfig.parts;
-          roll.isCritical = oldRollConfig.critical;
-          roll.options.type = otherConfig.type;
-          roll.options.types = otherConfig.types;
-          roll.options.properties = otherConfig.properties;
-          return roll;
-        }, [])
-          .filter(_ => _)
-          .concat(oldRollConfig.rollConfigs.filter(r => r._index === undefined));
-        returnMultiple = oldRollConfig.returnMultiple;
-        rollConfig.critical ??= {};
-        rollConfig.critical.allow = oldRollConfig.allowCritical;
-        if ( "fastForward" in oldRollConfig ) dialogConfig.configure = !oldRollConfig.fastForward;
-        dialogConfig.options = oldRollConfig.dialogOptions;
-        messageConfig.create = oldRollConfig.chatMessage;
-        messageConfig.data = oldRollConfig.messageData;
-        messageConfig.rollMode = oldRollConfig.rollMode;
-        messageConfig.data.flavor = oldRollConfig.flavor;
-      }
-
       const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, dialogConfig, messageConfig);
       if ( !rolls?.length ) return;
 
-      const canUpdate = this.item.isOwner && !this.item[game.release.generation < 13 ? "compendium" : "inCompendium"];
+      const canUpdate = this.item.isOwner && !this.item.inCompendium;
       const lastDamageTypes = rolls.reduce((obj, roll, index) => {
         if ( roll.options.type ) obj[index] = roll.options.type;
         return obj;
@@ -1154,21 +971,14 @@ export default function ActivityMixin(Base) {
 
       /**
        * A hook event that fires after damage has been rolled.
-       * @function dnd5e.rollDamageV2
+       * @function dnd5e.rollDamage
        * @memberof hookEvents
        * @param {DamageRoll[]} rolls       The resulting rolls.
        * @param {object} [data]
        * @param {Activity} [data.subject]  The activity that performed the roll.
        */
+      Hooks.callAll("dnd5e.rollDamage", rolls, { subject: this });
       Hooks.callAll("dnd5e.rollDamageV2", rolls, { subject: this });
-
-      if ( "dnd5e.rollDamage" in Hooks.events ) {
-        foundry.utils.logCompatibilityWarning(
-          "The `dnd5e.rollDamage` hook has been deprecated and replaced with `dnd5e.rollDamageV2`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-        );
-        Hooks.callAll("dnd5e.rollDamage", this.item, returnMultiple ? rolls : rolls[0]);
-      }
 
       return rolls;
     }
@@ -1197,7 +1007,7 @@ export default function ActivityMixin(Base) {
      */
     getContextMenuOptions() {
       const entries = [];
-      const compendiumLocked = this.item[game.release.generation < 13 ? "compendium" : "collection"]?.locked;
+      const compendiumLocked = this.item.collection?.locked;
 
       if ( this.item.isOwner && !compendiumLocked ) {
         entries.push({
@@ -1429,6 +1239,17 @@ export default function ActivityMixin(Base) {
       const activityUpdates = foundry.utils.expandObject(updates.activity);
       if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
       else updates.item[itemIndex][keyPath] = activityUpdates;
+    }
+
+    /* -------------------------------------------- */
+    /*  Importing and Exporting                     */
+    /* -------------------------------------------- */
+
+    /** @override */
+    static _createDialogTypes(parent) {
+      return Object.entries(CONFIG.DND5E.activityTypes)
+        .filter(([, { configurable }]) => configurable !== false)
+        .map(([k]) => k);
     }
   }
   return Activity;

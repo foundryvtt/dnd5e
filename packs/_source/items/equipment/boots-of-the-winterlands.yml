@@ -1,0 +1,122 @@
+_id: RDPFmUR9exTEXFc8
+name: Boots of the Winterlands
+type: equipment
+img: icons/equipment/feet/boots-leather-banded-furred.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>These furred boots are snug and feel quite warm. While you wear them,
+      you gain the following benefits:</p>
+
+      <ul>
+
+      <li>You have resistance to cold damage.</li>
+
+      <li>You ignore difficult terrain created by ice or snow. You can tolerate
+      temperatures as low as −50 degrees Fahrenheit without any additional
+      protection. If you wear heavy clothes, you can tolerate temperatures as
+      low as −100 degrees Fahrenheit.</li>
+
+      </ul>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 10000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  crewed: false
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: boots-of-the-winterlands
+effects:
+  - origin: Compendium.dnd5e.items.RDPFmUR9exTEXFc8
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    _id: 6PXhI0qCk64LuoXO
+    changes:
+      - key: system.traits.dr.value
+        mode: 2
+        value: cold
+        priority: null
+    tint: '#ffffff'
+    transfer: true
+    flags: {}
+    name: Boots of the Winterlands
+    description: ''
+    statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    img: icons/equipment/feet/boots-leather-banded-furred.webp
+    type: base
+    system: {}
+    sort: 0
+    _key: '!items.effects!RDPFmUR9exTEXFc8.6PXhI0qCk64LuoXO'
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037185849
+  modifiedTime: 1725992512629
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!RDPFmUR9exTEXFc8'

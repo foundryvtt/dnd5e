@@ -1,0 +1,233 @@
+_id: FCxG64QUxsnF4Lis
+name: Holy Avenger Greatsword
+type: weapon
+img: icons/weapons/swords/greatsword-guard-gem-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>(Requires attunement by a paladin)</em></p>
+
+      <p>You gain a +3 bonus to attack and damage rolls made with this magic
+      weapon. When you hit a fiend or an undead with it, that creature takes an
+      extra 2d10 radiant damage.</p>
+
+      <p>While you hold the drawn sword, it creates an aura in a 10-foot radius
+      around you. You and all creatures friendly to you in the aura have
+      advantage on saving throws against spells and other magical effects. If
+      you have 17 or more levels in the paladin class, the radius of the aura
+      increases to 30 feet.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 6
+    units: lb
+  price:
+    value: 165000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: legendary
+  identified: true
+  cover: null
+  range:
+    value: null
+    long: null
+    units: ft
+    reach: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  damage:
+    versatile:
+      number: null
+      denomination: null
+      bonus: ''
+      types: []
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    base:
+      number: 2
+      denomination: 6
+      bonus: ''
+      types:
+        - slashing
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+  armor:
+    value: 10
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  properties:
+    - hvy
+    - mgc
+    - two
+  proficient: null
+  type:
+    value: martialM
+    baseItem: greatsword
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  magicalBonus: 3
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: attack
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '5'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      attack:
+        ability: ''
+        bonus: ''
+        critical:
+          threshold: null
+        flat: false
+        type:
+          value: melee
+          classification: weapon
+      damage:
+        critical:
+          bonus: ''
+        includeBase: true
+        parts: []
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+    k1SyyiaNeZ22K7fd:
+      type: damage
+      sort: 0
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: any
+          special: Fiend or undead
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: true
+          bonus: ''
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 2
+            denomination: 0
+            bonus: ''
+            types:
+              - radiant
+            scaling:
+              number: 1
+      name: ''
+      _id: k1SyyiaNeZ22K7fd
+  attuned: false
+  ammunition: {}
+  identifier: holy-avenger-greatsword
+  mastery: ''
+effects: []
+folder: MLMTCAvKsuFE3vYA
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.3.0
+  createdTime: 1725037141512
+  modifiedTime: 1738529659406
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!FCxG64QUxsnF4Lis'
