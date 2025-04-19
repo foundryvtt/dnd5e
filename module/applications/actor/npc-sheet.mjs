@@ -233,8 +233,8 @@ export default class NPCActorSheet extends BaseActorSheet {
         { key: "action", label: "DND5E.ACTIVATION.Type.Action.Label" },
         { key: "bonus", label: "DND5E.ACTIVATION.Type.BonusAction.Label" },
         { key: "reaction", label: "DND5E.ACTIVATION.Type.Reaction.Label" },
-        { key: "legendary", label: "DND5E.ACTIVATION.Type.LegendaryAction.Label" },
-        { key: "lair", label: "DND5E.ACTIVATION.Type.LairAction.Label" }
+        { key: "legendary", label: "DND5E.ACTIVATION.Type.Legendary.Label" },
+        { key: "lair", label: "DND5E.ACTIVATION.Type.Lair.Label" }
       ],
       sorting: [
         { key: "m", label: "SIDEBAR.SortModeManual", dataset: { icon: "fa-solid fa-arrow-down-short-wide" } },
