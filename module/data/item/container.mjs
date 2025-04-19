@@ -340,6 +340,14 @@ export default class ContainerData extends ItemDataModel.mixin(
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  async _preCreate(data, options, user) {
+    if ( (await super._preCreate(data, options, user)) === false ) return false;
+    if ( this.parent.isEmbedded ) this.parent.updateSource({ "system.equipped": true });
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _preUpdate(changed, options, user) {
     if ( (await super._preUpdate(changed, options, user)) === false ) return false;
     await this.preUpdateIdentifiable(changed, options, user);
