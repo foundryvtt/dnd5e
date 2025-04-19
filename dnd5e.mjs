@@ -99,9 +99,6 @@ Hooks.once("init", function() {
   // Configure tooltips
   game.dnd5e.tooltips = new Tooltips5e();
 
-  // Set up status effects
-  _configureStatusEffects();
-
   // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
@@ -333,8 +330,22 @@ function _configureStatusEffects() {
   const addEffect = (effects, {special, ...data}) => {
     data = foundry.utils.deepClone(data);
     data._id = utils.staticID(`dnd5e${data.id}`);
-    data.img = data.icon ?? data.img;
-    delete data.icon;
+    if ( data.icon ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `icon` property of status conditions has been deprecated in place of using `img`.",
+        { since: "DnD5e 5.0", until: "DnD5e 5.2" }
+      );
+      data.img = data.icon;
+      delete data.icon;
+    }
+    if ( data.label ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `label` property of status conditions has been deprecated in place of using `name`.",
+        { since: "DnD5e 5.0", until: "DnD5e 5.2" }
+      );
+      data.name = data.label;
+      delete data.label;
+    }
     effects.push(data);
     if ( special ) CONFIG.specialStatusEffects[special] = data.id;
   };
@@ -343,8 +354,8 @@ function _configureStatusEffects() {
     addEffect(arr, foundry.utils.mergeObject(original ?? {}, { id, ...data }, { inplace: false }));
     return arr;
   }, []);
-  for ( const [id, {label: name, ...data}] of Object.entries(CONFIG.DND5E.conditionTypes) ) {
-    addEffect(CONFIG.statusEffects, { id, name, ...data });
+  for ( const [id, data] of Object.entries(CONFIG.DND5E.conditionTypes) ) {
+    addEffect(CONFIG.statusEffects, { id, ...data });
   }
   for ( const [id, data] of Object.entries(CONFIG.DND5E.encumbrance.effects) ) {
     addEffect(CONFIG.statusEffects, { id, ...data, hud: false });
@@ -411,6 +422,9 @@ function expandAttributeList(attributes) {
  * Perform one-time pre-localization and sorting of some configuration objects
  */
 Hooks.once("i18nInit", () => {
+  // Set up status effects. Explicitly performed after init and before prelocalization.
+  _configureStatusEffects();
+
   if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
     const { translations, _fallback } = game.i18n;
     foundry.utils.mergeObject(translations, {

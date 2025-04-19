@@ -669,7 +669,9 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {string}
    */
   static _getExhaustionImage(level) {
-    const split = CONFIG.DND5E.conditionTypes.exhaustion.icon.split(".");
+    // TODO: Only use `img` in 5.2.
+    const { img, icon } = CONFIG.DND5E.conditionTypes.exhaustion;
+    const split = img ? img.split(".") : icon.split(".");
     const ext = split.pop();
     const path = split.join(".");
     return `${path}-${level}.${ext}`;
