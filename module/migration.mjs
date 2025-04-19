@@ -146,6 +146,8 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
   for ( let p of game.packs ) {
     if ( _shouldMigrateCompendium(p) ) await migrateCompendium(p);
   }
+  const legacyFolder = game.folders.find(f => f.type === "Compendium" && f.name === "D&D SRD Content");
+  if ( legacyFolder ) legacyFolder.update({ name: "D&D Legacy SRD Content" });
 
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);

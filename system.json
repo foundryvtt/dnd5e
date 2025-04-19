@@ -275,11 +275,127 @@
       "type": "RollTable",
       "private": false,
       "flags": {}
+    },
+    {
+      "name": "content24",
+      "label": "Rules",
+      "path": "packs/content24",
+      "type": "JournalEntry",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e",
+      "flags": {
+        "display": "table-of-contents"
+      }
+    },
+    {
+      "name": "classes24",
+      "label": "Character Classes",
+      "path": "packs/classes24",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "origins24",
+      "label": "Character Origins",
+      "path": "packs/origins24",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "feats24",
+      "label": "Feats",
+      "path": "packs/feats24",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "spells24",
+      "label": "Spells",
+      "path": "packs/spells24",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "sorting": "m"
+        }
+      }
+    },
+    {
+      "name": "equipment24",
+      "label": "Equipment",
+      "path": "packs/equipment24",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "tables24",
+      "label": "Roll Tables",
+      "path": "packs/tables24",
+      "type": "RollTable",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "actors24",
+      "label": "Actors",
+      "path": "packs/actors24",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "sorting": "m"
+        }
+      }
     }
   ],
   "packFolders": [
     {
-      "name": "D&D SRD Content",
+      "name": "D&D Modern SRD Content",
+      "color": "#cd2c1e",
+      "sorting": "m",
+      "packs": [
+        "content24",
+        "classes24",
+        "origins24",
+        "feats24",
+        "spells24",
+        "tables24",
+        "actors24",
+        "equipment24"
+      ]
+    },
+    {
+      "name": "D&D Legacy SRD Content",
       "sorting": "m",
       "color": "#cd2c1e",
       "packs": [
@@ -365,7 +481,7 @@
         "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.k7Rs5EyXeA0SFTXD"
       ]
     },
-    "needsMigrationVersion": "4.0.1",
+    "needsMigrationVersion": "4.4.0",
     "compatibleMigrationVersion": "0.8",
     "hotReload": {
       "extensions": ["css", "hbs", "json"],
