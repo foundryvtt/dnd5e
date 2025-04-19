@@ -164,15 +164,32 @@ export default function ActorSheetV2Mixin(Base) {
       const conditionIds = new Set();
       context.conditions = Object.entries(CONFIG.DND5E.conditionTypes).reduce((arr, [k, c]) => {
         if ( c.pseudo ) return arr; // Filter out pseudo-conditions.
-        const { label: name, icon, reference } = c;
+        let { name, img, reference, label, icon } = c;
+        if ( label ) {
+          foundry.utils.logCompatibilityWarning(
+            "The `label` property of status conditions has been deprecated in place of using `name`.",
+            { since: "DnD5e 5.0", until: "DnD5e 5.2" }
+          );
+          name = label;
+        }
+
         const id = staticID(`dnd5e${k}`);
         conditionIds.add(id);
         const existing = this.actor.effects.get(id);
-        const { disabled, img } = existing ?? {};
+        const { disabled } = existing ?? {};
+
+        if ( icon ) {
+          foundry.utils.logCompatibilityWarning(
+            "The `icon` property of status conditions has been deprecated in place of using `img`.",
+            { since: "DnD5e 5.0", until: "DnD5e 5.2" }
+          );
+          img = icon;
+        }
+
         arr.push({
           name, reference,
           id: k,
-          icon: img ?? icon,
+          img: existing?.img ?? img,
           disabled: existing ? disabled : true
         });
         return arr;
@@ -253,7 +270,7 @@ export default function ActorSheetV2Mixin(Base) {
       addBonus(this.document.system.schema.fields.bonuses);
       if ( globals.length ) sections[game.i18n.localize("DND5E.BONUSES.FIELDS.bonuses.label")] = globals;
 
-      flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }))
+      flags.sections = Object.entries(sections).map(([label, fields]) => ({ label, fields }));
       return flags;
     }
 

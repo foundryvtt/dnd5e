@@ -2670,15 +2670,15 @@ DND5E.encumbrance = {
   effects: {
     encumbered: {
       name: "EFFECT.DND5E.StatusEncumbered",
-      icon: "systems/dnd5e/icons/svg/statuses/encumbered.svg"
+      img: "systems/dnd5e/icons/svg/statuses/encumbered.svg"
     },
     heavilyEncumbered: {
       name: "EFFECT.DND5E.StatusHeavilyEncumbered",
-      icon: "systems/dnd5e/icons/svg/statuses/heavily-encumbered.svg"
+      img: "systems/dnd5e/icons/svg/statuses/heavily-encumbered.svg"
     },
     exceedingCarryingCapacity: {
       name: "EFFECT.DND5E.StatusExceedingCarryingCapacity",
-      icon: "systems/dnd5e/icons/svg/statuses/exceeding-carrying-capacity.svg"
+      img: "systems/dnd5e/icons/svg/statuses/exceeding-carrying-capacity.svg"
     }
   },
   threshold: {
@@ -3708,7 +3708,7 @@ DND5E.consumableResources = [
 
 /**
  * @typedef {object} _StatusEffectConfig5e
- * @property {string} icon              Icon used to represent the condition on the token.
+ * @property {string} img               Image used to represent the condition on the token.
  * @property {number} [order]           Order status to the start of the token HUD, rather than alphabetically.
  * @property {string} [reference]       UUID of a journal entry with details on this condition.
  * @property {string} [special]         Set this condition as a special status effect under this name.
@@ -3726,7 +3726,7 @@ DND5E.consumableResources = [
 
 /**
  * @typedef {object} _ConditionConfiguration
- * @property {string} label        Localized label for the condition.
+ * @property {string} name         Localized name for the condition.
  * @property {boolean} [pseudo]    Is this a pseudo-condition, i.e. one that does not appear in the conditions appendix
  *                                 but acts as a status effect?
  * @property {number} [levels]     The number of levels of exhaustion an actor can obtain.
@@ -3747,146 +3747,146 @@ DND5E.consumableResources = [
  */
 DND5E.conditionTypes = {
   bleeding: {
-    label: "EFFECT.DND5E.StatusBleeding",
-    icon: "systems/dnd5e/icons/svg/statuses/bleeding.svg",
+    name: "EFFECT.DND5E.StatusBleeding",
+    img: "systems/dnd5e/icons/svg/statuses/bleeding.svg",
     pseudo: true
   },
   blinded: {
-    label: "DND5E.ConBlinded",
-    icon: "systems/dnd5e/icons/svg/statuses/blinded.svg",
+    name: "DND5E.ConBlinded",
+    img: "systems/dnd5e/icons/svg/statuses/blinded.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.0b8N4FymGGfbZGpJ",
     special: "BLIND"
   },
   burning: {
-    label: "EFFECT.DND5E.StatusBurning",
-    icon: "systems/dnd5e/icons/svg/statuses/burning.svg",
+    name: "EFFECT.DND5E.StatusBurning",
+    img: "systems/dnd5e/icons/svg/statuses/burning.svg",
     pseudo: true
   },
   charmed: {
-    label: "DND5E.ConCharmed",
-    icon: "systems/dnd5e/icons/svg/statuses/charmed.svg",
+    name: "DND5E.ConCharmed",
+    img: "systems/dnd5e/icons/svg/statuses/charmed.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.zZaEBrKkr66OWJvD"
   },
   cursed: {
-    label: "EFFECT.DND5E.StatusCursed",
-    icon: "systems/dnd5e/icons/svg/statuses/cursed.svg",
+    name: "EFFECT.DND5E.StatusCursed",
+    img: "systems/dnd5e/icons/svg/statuses/cursed.svg",
     pseudo: true
   },
   dehydration: {
-    label: "EFFECT.DND5E.StatusDehydration",
-    icon: "systems/dnd5e/icons/svg/statuses/dehydration.svg",
+    name: "EFFECT.DND5E.StatusDehydration",
+    img: "systems/dnd5e/icons/svg/statuses/dehydration.svg",
     pseudo: true
   },
   deafened: {
-    label: "DND5E.ConDeafened",
-    icon: "systems/dnd5e/icons/svg/statuses/deafened.svg",
+    name: "DND5E.ConDeafened",
+    img: "systems/dnd5e/icons/svg/statuses/deafened.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.6G8JSjhn701cBITY"
   },
   diseased: {
-    label: "DND5E.ConDiseased",
-    icon: "systems/dnd5e/icons/svg/statuses/diseased.svg",
+    name: "DND5E.ConDiseased",
+    img: "systems/dnd5e/icons/svg/statuses/diseased.svg",
     pseudo: true,
     reference: "Compendium.dnd5e.rules.JournalEntry.NizgRXLNUqtdlC1s.JournalEntryPage.oNQWvyRZkTOJ8PBq"
   },
   exhaustion: {
-    label: "DND5E.ConExhaustion",
-    icon: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
+    name: "DND5E.ConExhaustion",
+    img: "systems/dnd5e/icons/svg/statuses/exhaustion.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cspWveykstnu3Zcv",
     levels: 6,
     reduction: { rolls: 2, speed: 5 }
   },
   falling: {
-    label: "EFFECT.DND5E.StatusFalling",
-    icon: "systems/dnd5e/icons/svg/statuses/falling.svg",
+    name: "EFFECT.DND5E.StatusFalling",
+    img: "systems/dnd5e/icons/svg/statuses/falling.svg",
     pseudo: true
   },
   frightened: {
-    label: "DND5E.ConFrightened",
-    icon: "systems/dnd5e/icons/svg/statuses/frightened.svg",
+    name: "DND5E.ConFrightened",
+    img: "systems/dnd5e/icons/svg/statuses/frightened.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.oreoyaFKnvZCrgij"
   },
   grappled: {
-    label: "DND5E.ConGrappled",
-    icon: "systems/dnd5e/icons/svg/statuses/grappled.svg",
+    name: "DND5E.ConGrappled",
+    img: "systems/dnd5e/icons/svg/statuses/grappled.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.gYDAhd02ryUmtwZn"
   },
   incapacitated: {
-    label: "DND5E.ConIncapacitated",
-    icon: "systems/dnd5e/icons/svg/statuses/incapacitated.svg",
+    name: "DND5E.ConIncapacitated",
+    img: "systems/dnd5e/icons/svg/statuses/incapacitated.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.TpkZgLfxCmSndmpb"
   },
   invisible: {
-    label: "DND5E.ConInvisible",
-    icon: "systems/dnd5e/icons/svg/statuses/invisible.svg",
+    name: "DND5E.ConInvisible",
+    img: "systems/dnd5e/icons/svg/statuses/invisible.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.3UU5GCTVeRDbZy9u"
   },
   malnutrition: {
-    label: "EFFECT.DND5E.StatusMalnutrition",
-    icon: "systems/dnd5e/icons/svg/statuses/malnutrition.svg",
+    name: "EFFECT.DND5E.StatusMalnutrition",
+    img: "systems/dnd5e/icons/svg/statuses/malnutrition.svg",
     pseudo: true
   },
   paralyzed: {
-    label: "DND5E.ConParalyzed",
-    icon: "systems/dnd5e/icons/svg/statuses/paralyzed.svg",
+    name: "DND5E.ConParalyzed",
+    img: "systems/dnd5e/icons/svg/statuses/paralyzed.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xnSV5hLJIMaTABXP",
     statuses: ["incapacitated"]
   },
   petrified: {
-    label: "DND5E.ConPetrified",
-    icon: "systems/dnd5e/icons/svg/statuses/petrified.svg",
+    name: "DND5E.ConPetrified",
+    img: "systems/dnd5e/icons/svg/statuses/petrified.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.xaNDaW6NwQTgHSmi",
     statuses: ["incapacitated"]
   },
   poisoned: {
-    label: "DND5E.ConPoisoned",
-    icon: "systems/dnd5e/icons/svg/statuses/poisoned.svg",
+    name: "DND5E.ConPoisoned",
+    img: "systems/dnd5e/icons/svg/statuses/poisoned.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx"
   },
   prone: {
-    label: "DND5E.ConProne",
-    icon: "systems/dnd5e/icons/svg/statuses/prone.svg",
+    name: "DND5E.ConProne",
+    img: "systems/dnd5e/icons/svg/statuses/prone.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.y0TkcdyoZlOTmAFT"
   },
   restrained: {
-    label: "DND5E.ConRestrained",
-    icon: "systems/dnd5e/icons/svg/statuses/restrained.svg",
+    name: "DND5E.ConRestrained",
+    img: "systems/dnd5e/icons/svg/statuses/restrained.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.cSVcyZyNe2iG1fIc"
   },
   silenced: {
-    label: "EFFECT.DND5E.StatusSilenced",
-    icon: "systems/dnd5e/icons/svg/statuses/silenced.svg",
+    name: "EFFECT.DND5E.StatusSilenced",
+    img: "systems/dnd5e/icons/svg/statuses/silenced.svg",
     pseudo: true
   },
   stunned: {
-    label: "DND5E.ConStunned",
-    icon: "systems/dnd5e/icons/svg/statuses/stunned.svg",
+    name: "DND5E.ConStunned",
+    img: "systems/dnd5e/icons/svg/statuses/stunned.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.ZyZMUwA2rboh4ObS",
     statuses: ["incapacitated"]
   },
   suffocation: {
-    label: "EFFECT.DND5E.StatusSuffocation",
-    icon: "systems/dnd5e/icons/svg/statuses/suffocation.svg",
+    name: "EFFECT.DND5E.StatusSuffocation",
+    img: "systems/dnd5e/icons/svg/statuses/suffocation.svg",
     pseudo: true
   },
   surprised: {
-    label: "EFFECT.DND5E.StatusSurprised",
-    icon: "systems/dnd5e/icons/svg/statuses/surprised.svg",
+    name: "EFFECT.DND5E.StatusSurprised",
+    img: "systems/dnd5e/icons/svg/statuses/surprised.svg",
     pseudo: true
   },
   transformed: {
-    label: "EFFECT.DND5E.StatusTransformed",
-    icon: "systems/dnd5e/icons/svg/statuses/transformed.svg",
+    name: "EFFECT.DND5E.StatusTransformed",
+    img: "systems/dnd5e/icons/svg/statuses/transformed.svg",
     pseudo: true
   },
   unconscious: {
-    label: "DND5E.ConUnconscious",
-    icon: "systems/dnd5e/icons/svg/statuses/unconscious.svg",
+    name: "DND5E.ConUnconscious",
+    img: "systems/dnd5e/icons/svg/statuses/unconscious.svg",
     reference: "Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.UWw13ISmMxDzmwbd",
     statuses: ["incapacitated"],
     riders: ["prone"]
   }
 };
-preLocalize("conditionTypes", { key: "label", sort: true });
+preLocalize("conditionTypes", { keys: ["name", "label"], sort: true }); // TODO: Remove 'label' in 5.2.
 
 /* -------------------------------------------- */
 
@@ -3913,74 +3913,74 @@ DND5E.conditionEffects = {
 DND5E.statusEffects = {
   burrowing: {
     name: "EFFECT.DND5E.StatusBurrowing",
-    icon: "systems/dnd5e/icons/svg/statuses/burrowing.svg",
+    img: "systems/dnd5e/icons/svg/statuses/burrowing.svg",
     special: "BURROW"
   },
   concentrating: {
     name: "EFFECT.DND5E.StatusConcentrating",
-    icon: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
+    img: "systems/dnd5e/icons/svg/statuses/concentrating.svg",
     special: "CONCENTRATING"
   },
   coverHalf: {
     name: "EFFECT.DND5E.StatusHalfCover",
-    icon: "systems/dnd5e/icons/svg/statuses/cover-half.svg",
+    img: "systems/dnd5e/icons/svg/statuses/cover-half.svg",
     order: 2,
     exclusiveGroup: "cover",
     coverBonus: 2
   },
   coverThreeQuarters: {
     name: "EFFECT.DND5E.StatusThreeQuartersCover",
-    icon: "systems/dnd5e/icons/svg/statuses/cover-three-quarters.svg",
+    img: "systems/dnd5e/icons/svg/statuses/cover-three-quarters.svg",
     order: 3,
     exclusiveGroup: "cover",
     coverBonus: 5
   },
   coverTotal: {
     name: "EFFECT.DND5E.StatusTotalCover",
-    icon: "systems/dnd5e/icons/svg/statuses/cover-total.svg",
+    img: "systems/dnd5e/icons/svg/statuses/cover-total.svg",
     order: 4,
     exclusiveGroup: "cover"
   },
   dead: {
     name: "EFFECT.DND5E.StatusDead",
-    icon: "systems/dnd5e/icons/svg/statuses/dead.svg",
+    img: "systems/dnd5e/icons/svg/statuses/dead.svg",
     special: "DEFEATED",
     order: 1
   },
   dodging: {
     name: "EFFECT.DND5E.StatusDodging",
-    icon: "systems/dnd5e/icons/svg/statuses/dodging.svg"
+    img: "systems/dnd5e/icons/svg/statuses/dodging.svg"
   },
   ethereal: {
     name: "EFFECT.DND5E.StatusEthereal",
-    icon: "systems/dnd5e/icons/svg/statuses/ethereal.svg"
+    img: "systems/dnd5e/icons/svg/statuses/ethereal.svg"
   },
   flying: {
     name: "EFFECT.DND5E.StatusFlying",
-    icon: "systems/dnd5e/icons/svg/statuses/flying.svg",
+    img: "systems/dnd5e/icons/svg/statuses/flying.svg",
     special: "FLY"
   },
   hiding: {
     name: "EFFECT.DND5E.StatusHiding",
-    icon: "systems/dnd5e/icons/svg/statuses/hiding.svg"
+    img: "systems/dnd5e/icons/svg/statuses/hiding.svg"
   },
   hovering: {
     name: "EFFECT.DND5E.StatusHovering",
-    icon: "systems/dnd5e/icons/svg/statuses/hovering.svg",
+    img: "systems/dnd5e/icons/svg/statuses/hovering.svg",
     special: "HOVER"
   },
   marked: {
     name: "EFFECT.DND5E.StatusMarked",
-    icon: "systems/dnd5e/icons/svg/statuses/marked.svg"
+    img: "systems/dnd5e/icons/svg/statuses/marked.svg"
   },
   sleeping: {
     name: "EFFECT.DND5E.StatusSleeping",
-    icon: "systems/dnd5e/icons/svg/statuses/sleeping.svg",
+    img: "systems/dnd5e/icons/svg/statuses/sleeping.svg",
     statuses: ["incapacitated", "unconscious"]
   },
   stable: {
     name: "EFFECT.DND5E.StatusStable",
-    icon: "systems/dnd5e/icons/svg/statuses/stable.svg"
+    img: "systems/dnd5e/icons/svg/statuses/stable.svg"
   }
 };
 
@@ -3992,7 +3992,7 @@ DND5E.statusEffects = {
  */
 DND5E.bloodied = {
   name: "EFFECT.DND5E.StatusBloodied",
-  icon: "systems/dnd5e/icons/svg/statuses/bloodied.svg",
+  img: "systems/dnd5e/icons/svg/statuses/bloodied.svg",
   threshold: .5
 };
 
