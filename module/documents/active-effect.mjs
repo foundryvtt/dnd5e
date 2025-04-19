@@ -117,6 +117,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( data.flags?.dnd5e?.type === "enchantment" ) {
       data.type = "enchantment";
       delete data.flags.dnd5e.type;
+      foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
     }
 
     return super._initializeSource(data, options);
