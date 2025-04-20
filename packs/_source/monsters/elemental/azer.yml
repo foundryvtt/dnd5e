@@ -782,11 +782,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>bludgeoning
-          damage</em></strong>, or <strong>8 (1d10 + 3) <em>bludgeoning
-          damage</em></strong> if used with two hands to make a melee attack,
-          plus <strong>3 (1d6) <em>fire damage</em></strong>.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or <strong>8 (1d10 + 3)
+          <em>bludgeoning damage</em></strong> if used with two hands to make a
+          melee attack, plus <strong>3 (1d6) <em>fire damage</em></strong>.</p>
         chat: >-
           <section>
 
@@ -960,9 +958,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676547
+      modifiedTime: 1745173385299
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!IiEDPMWqBlzkggYD.YvzdCGQeCV1XOcUt'
 effects: []

@@ -54,8 +54,8 @@ system:
     hp:
       value: 5
       max: 5
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d4
     init:
       ability: ''
@@ -487,12 +487,11 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit:<strong> 1 <em>piercing
-          damage</em>.</strong></p><p>The target must succeed on a  <strong>DC
-          10 Constitution</strong> saving throw or be poisoned for 1 minute. If
-          the saving throw fails by 5 or more, the target is instead poisoned
-          for 5 (1d10) minutes and unconscious while poisoned in this way.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          succeed on a [[/save]] saving throw or be &amp;Reference[poisoned] for
+          1 minute. If the saving throw fails by 5 or more, the target is
+          instead poisoned for 5 ([[/r 1d10]]) minutes and
+          &amp;Reference[unconscious] while poisoned in this way.</p>
         chat: >-
           <p>The Homunculus attacks with its Bite.The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -680,19 +679,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: null
-                denomination: null
-                bonus: ''
-                types:
-                  - piercing
-                custom:
-                  enabled: true
-                  formula: '1'
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -703,6 +690,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -711,6 +699,10 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
@@ -718,7 +710,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838435
+      modifiedTime: 1745175030016
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ZQTCZfTV9ZoTjNCU.1uXv78I9YByiz6rV'
   - _id: 5bFYYcQnfN1KtOwr
@@ -781,8 +773,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171239288
-  modifiedTime: 1726171446207
+  modifiedTime: 1745175034570
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!ZQTCZfTV9ZoTjNCU'

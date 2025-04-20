@@ -54,8 +54,8 @@ system:
     hp:
       value: 97
       max: 97
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 13d10 + 26
     init:
       ability: ''
@@ -766,10 +766,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>14 (2d10 + 3) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Lamia attacks with its Claws.</p>
       source:
         custom: ''
@@ -922,7 +919,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837846
+      modifiedTime: 1745107551447
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MnoL59nOOfYatAkQ.lqr5NeudKmKQfSpZ'
   - _id: jMTZfqYRB58CwXyw
@@ -931,10 +928,7 @@ items:
     img: icons/weapons/daggers/dagger-jeweled-purple.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d4 + 3) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Lamia attacks with its Dagger.</p>
       source:
         custom: ''
@@ -1089,9 +1083,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676789
+      modifiedTime: 1745107551447
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MnoL59nOOfYatAkQ.jMTZfqYRB58CwXyw'
   - _id: cd8MN5gJkmUn1RTE
@@ -1101,10 +1095,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Spell Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: The target is magically cursed for 1
-          hour. Until the curse ends, the target has disadvantage on Wisdom
-          saving throws and all ability checks.</p>
+          <p>[[/attack extended]]. <em>Hit:</em> The target is magically cursed
+          for 1 hour. Until the curse ends, the target has disadvantage on
+          Wisdom saving throws and all ability checks.</p>
         chat: >-
           <p>The target has disadvantage on Wisdom saving throws and all ability
           checks.</p>
@@ -1144,7 +1137,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1163,8 +1156,8 @@ items:
               height: ''
               units: ''
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1188,6 +1181,9 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -1200,14 +1196,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.qfWKOH5AawhmNSwl
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.qfWKOH5AawhmNSwl
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676789
+      modifiedTime: 1745174731942
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MnoL59nOOfYatAkQ.cd8MN5gJkmUn1RTE'
   - _id: nslx2nT3p4lNkmdp
@@ -2134,8 +2134,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171226544
-  modifiedTime: 1726171443855
+  modifiedTime: 1745174751132
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!MnoL59nOOfYatAkQ'

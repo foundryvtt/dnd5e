@@ -775,10 +775,7 @@ items:
     img: icons/weapons/axes/axe-double.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>17 (2d12 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Minotaur attacks with its Greataxe.</p>
       source:
         custom: ''
@@ -933,9 +930,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676897
+      modifiedTime: 1745107553527
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!pOPQU4UnR27zA0jf.lZ5YdCcXmEDR6vhb'
   - _id: zTqVT0QztTuMOv0e
@@ -944,10 +941,7 @@ items:
     img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Minotaur attacks with its Gore.</p>
       source:
         custom: ''
@@ -1100,7 +1094,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839554
+      modifiedTime: 1745107553527
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!pOPQU4UnR27zA0jf.zTqVT0QztTuMOv0e'
 effects: []

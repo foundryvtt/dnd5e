@@ -937,9 +937,7 @@ items:
     img: icons/commodities/bones/hooves-cloven-brown.webp
     system:
       description:
-        value: >-
-          <p>Melee Weapon Attack: +7 to hit, reach 5 ft ., one target. Hit:
-          <strong>11 (2d6 + 4) <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Unicorn attacks with its Hooves.</p>
       source:
         custom: ''
@@ -1079,6 +1077,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: hooves
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1094,7 +1093,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837345
+      modifiedTime: 1745174322780
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.f7m44y4TqYYcunMj'
   - _id: ORrGdhTLKLTKK3BH
@@ -1103,9 +1102,7 @@ items:
     img: icons/commodities/bones/horn-simple-grey.webp
     system:
       description:
-        value: >-
-          <p>Melee Weapon Attack: +7 to hit, reach 5 ft ., one target. Hit:
-          <strong>8 (1d8 + 4) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Unicorn attacks with its Horn.</p>
       source:
         custom: ''
@@ -1245,6 +1242,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: horn
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1260,7 +1258,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837345
+      modifiedTime: 1745174347012
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.ORrGdhTLKLTKK3BH'
   - _id: uCaHWOOBeJEyR1ay

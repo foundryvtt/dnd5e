@@ -54,8 +54,8 @@ system:
     hp:
       value: 481
       max: 481
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 26d20+208
     init:
       ability: ''
@@ -693,11 +693,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+16 to hit,</strong>,
-          <strong>15 ft.,</strong> one target. Hit: <strong>20 (2d10 + 9)
-          <em>piercing damage</em></strong> plus <strong>10 (2d10) <em>lightning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ancient Blue Dragon attacks with its Bite.</p>
       source:
         custom: ''
@@ -864,7 +860,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838150
+      modifiedTime: 1745107551825
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!SNT0JNVSngUTsj4m.F29wEcjTlpKWcfO3'
   - _id: uDd2aKkvwMwZfncQ
@@ -1083,10 +1079,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+16 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>16 (2d6 + 9)
-          <em>slashing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ancient Blue Dragon attacks with its Claw.</p>
       source:
         custom: ''
@@ -1111,7 +1104,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: 10
+        reach: null
       uses:
         max: ''
         recovery: []
@@ -1130,7 +1123,7 @@ items:
             number: null
             formula: ''
         base:
-          number: 4
+          number: 2
           denomination: 6
           bonus: ''
           types:
@@ -1149,7 +1142,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - rch
       proficient: 1
       unidentified:
         description: ''
@@ -1226,6 +1220,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1239,7 +1234,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838150
+      modifiedTime: 1745108256158
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!SNT0JNVSngUTsj4m.Hoc6KiovAZiBi5HV'
   - _id: NhYVY7hHFu2YsFpN
@@ -1498,10 +1493,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+16 to hit,</strong>,
-          <strong>20 ft.,</strong> one target. Hit: <strong>18 (2d8 + 9)
-          <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ancient Blue Dragon attacks with its Tail.</p>
       source:
         custom: ''
@@ -1654,7 +1646,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838150
+      modifiedTime: 1745107551825
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!SNT0JNVSngUTsj4m.rwLwUWCVufdiKDaK'
   - _id: qUJb6VyY5ITDA0TL
@@ -2042,8 +2034,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171232180
-  modifiedTime: 1726171444855
+  modifiedTime: 1745108297853
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!SNT0JNVSngUTsj4m'

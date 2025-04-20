@@ -632,10 +632,7 @@ items:
     img: icons/skills/wounds/bone-broken-tooth-fang-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>10 (1d10 + 5) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Owlbear attacks with its Beak.</p>
       source:
         custom: ''
@@ -788,7 +785,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916840163
+      modifiedTime: 1745107554237
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zY3W5MG7FjssENf6.CwKQlVkFc2uJW0HL'
   - _id: FpbBzMs3wu1NK3Zu
@@ -797,10 +794,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>14 (2d8 + 5) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Owlbear attacks with its Claws.</p>
       source:
         custom: ''
@@ -953,7 +947,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916840163
+      modifiedTime: 1745107554237
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zY3W5MG7FjssENf6.FpbBzMs3wu1NK3Zu'
 effects: []

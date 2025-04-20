@@ -609,10 +609,7 @@ items:
     img: icons/weapons/swords/sword-katana.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>4 (1d6 + 1) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Cultist attacks with their Scimitar.</p>
       source:
         custom: ''
@@ -767,9 +764,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676511
+      modifiedTime: 1745107553629
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qkLNA1lKMMJpxuWg.dldXP9XwjVIdIj5U'
 effects: []

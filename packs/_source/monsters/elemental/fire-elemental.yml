@@ -827,12 +827,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>fire
-          damage</em></strong>. </p><p>If the target is a creature or a
-          flammable object, it ignites. Until a creature takes an action to
-          douse the fire, the target takes <strong>5 (1d10) <em>fire
-          damage</em></strong> at the start of each of its turns.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a creature or a flammable object, it ignites. Until a creature takes
+          an action to douse the fire, the target takes <strong>5 (1d10)
+          <em>fire damage</em></strong> at the start of each of its turns.</p>
         chat: >-
           <p>The Fire Elemental attacks with its Touch. If the target is a
           creature or a flammable object, it ignites. Until a creature takes an
@@ -1043,7 +1041,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836935
+      modifiedTime: 1745107550437
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8SMQl75HLjhuSeau.fdt2FIirmBRCpRBm'
 effects: []

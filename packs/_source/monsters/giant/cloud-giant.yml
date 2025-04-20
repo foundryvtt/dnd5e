@@ -688,10 +688,7 @@ items:
     img: icons/weapons/maces/mace-round-spiked-black.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>21 (3d8 + 8)
-          <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Cloud Giant attacks with its Morningstar.</p>
       source:
         custom: ''
@@ -845,9 +842,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676653
+      modifiedTime: 1745107550546
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Aw2wmqGIatxe2ImI.Jr0CfxY8xuFT6hoa'
   - _id: NXgSHbDNtVbxsItU
@@ -856,9 +853,7 @@ items:
     img: icons/magic/earth/projectile-stone-ball-brown.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +12 to hit, range 60/240 ft., one target.
-          Hit: <strong>30 (4d10 + 8) <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Cloud Giant attacks with its Rock.</p>
       source:
         custom: ''
@@ -1011,9 +1006,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676653
+      modifiedTime: 1745173385099
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Aw2wmqGIatxe2ImI.NXgSHbDNtVbxsItU'
   - _id: ghXTfe7sgCbgf1Q8

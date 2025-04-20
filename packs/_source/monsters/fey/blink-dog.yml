@@ -530,10 +530,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Blink Dog attacks with its Bite.</p>
       source:
         custom: ''
@@ -688,7 +685,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839157
+      modifiedTime: 1745107552951
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!jOANE6M0My6UJF4e.DcZYdK2iycSJzamK'
   - _id: 1IE8rHcJIihDWCda

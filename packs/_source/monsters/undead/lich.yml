@@ -55,7 +55,7 @@ system:
       value: 135
       max: 135
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 18d8 + 54
     init:
       ability: ''
@@ -621,74 +621,53 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: attack
+        yqpsTgbctXS8iVIQ:
+          type: utility
+          _id: yqpsTgbctXS8iVIQ
+          sort: 0
           activation:
             type: legendary
-            value: 2
-            condition: ''
+            value: null
             override: false
+            condition: ''
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
           range:
-            units: ''
-            special: ''
             override: false
+            units: self
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          attack:
-            ability: ''
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -701,15 +680,19 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.ebcmg4M5LsUYCqee
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ebcmg4M5LsUYCqee
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745175210887
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!bfh29vIEoGzI240e.dJLqLsCek3uxbzuX'
   - _id: Uox2GEp5GMXOOXOc
     name: Frightening Gaze
@@ -1240,12 +1223,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Spell Attack:</em><strong>+12 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>10 (3d6) <em>cold
-          damage</em></strong>. </p><p>The target must succeed on a  <strong>DC
-          18 Constitution</strong> saving throw or be paralyzed for 1 minute.
-          The target can repeat the saving throw at the end of each of its
-          turns, ending the effect on itself on a success.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          succeed on a [[/save]] saving throw or be &amp;Reference[paralyzed]
+          for 1 minute. The target can repeat the saving throw at the end of
+          each of its turns, ending the effect on itself on a success.</p>
         chat: >-
           <p>The Lich attacks with its Paralyzing Touch. The target must make a
           <strong>Constitution</strong> saving throw. The target can repeat the
@@ -1341,7 +1322,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1360,8 +1341,8 @@ items:
               height: ''
               units: ''
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1371,8 +1352,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: int
-            bonus: ''
+            ability: none
+            bonus: '@abilities.int.mod'
             critical:
               threshold: null
             flat: false
@@ -1385,6 +1366,9 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -1435,19 +1419,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 3
-                denomination: 6
-                bonus: ''
-                types:
-                  - cold
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -1458,6 +1430,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: paralyzing-touch
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1466,6 +1439,10 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.ebcmg4M5LsUYCqee
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ebcmg4M5LsUYCqee
       duplicateSource: null
@@ -1473,7 +1450,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838561
+      modifiedTime: 1745175170431
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!bfh29vIEoGzI240e.KDSrdpdFPDKnh80y'
   - _id: Rry67emsoMMjvQQz
@@ -5252,8 +5229,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171242041
-  modifiedTime: 1726171446616
+  modifiedTime: 1745175220804
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!bfh29vIEoGzI240e'

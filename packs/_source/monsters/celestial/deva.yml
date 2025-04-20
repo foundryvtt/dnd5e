@@ -984,11 +984,7 @@ items:
     img: icons/weapons/maces/mace-round-spiked-black.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d6 + 4) <em>bludgeoning
-          damage</em></strong> plus <strong>18 (4d8) <em>radiant
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Deva attacks with its Mace.</p>
       source:
         custom: ''
@@ -1153,9 +1149,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676597
+      modifiedTime: 1745107553138
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!m4H3hjamBNMH09S9.qADu4OS68yINJCnZ'
   - _id: Mzh95utKDPIrjiH8

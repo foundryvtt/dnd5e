@@ -811,10 +811,7 @@ items:
     img: icons/magic/fire/flame-burning-fist-strike.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Shield Guardian attacks with its Fist.</p>
       source:
         custom: ''
@@ -964,9 +961,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676760
+      modifiedTime: 1745107554230
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!z85EsGS2GVWj46qE.r6GQ1TwNK7pinX0a'
   - _id: EjeLsaCua7yjgxax

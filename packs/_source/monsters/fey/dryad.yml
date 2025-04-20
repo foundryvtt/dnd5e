@@ -54,8 +54,8 @@ system:
     hp:
       value: 22
       max: 22
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 5d8
     init:
       ability: ''
@@ -746,10 +746,9 @@ items:
     system:
       description:
         value: >-
-          <p>Melee Weapon Attack: +2 to hit (+6 to hit with shillelagh), reach 5
-          ft., one target. Hit: <strong>2 (1d4) <em>bludgeoning
-          damage</em></strong>, or <strong>8 (1d8 + 4) <em>bludgeoning
-          damage</em></strong> with shillelagh.</p>
+          <p><em>Melee Weapon Attack:</em> [[/attack]] (or [[/attack +6]] with
+          shillelagh), reach 5 ft., one target. [[/damage extended]], or
+          [[/damage 1d8 + 4 bludgeoning average]] with shillelagh.</p>
         chat: <p>The Dryad attacks with its Club.</p>
       source:
         custom: ''
@@ -795,7 +794,7 @@ items:
         base:
           number: 1
           denomination: 4
-          bonus: '4'
+          bonus: ''
           types:
             - bludgeoning
           custom:
@@ -842,7 +841,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -872,7 +871,7 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
@@ -886,10 +885,14 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: club
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -898,14 +901,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.items.nfIRTECQIG81CvM4
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.nfIRTECQIG81CvM4
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676559
+      modifiedTime: 1745174477994
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.DNPx6Myd5rHTGu4a'
   - _id: OdzhvEDeD06BWsZS
@@ -1909,8 +1916,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171222835
-  modifiedTime: 1726171443232
+  modifiedTime: 1745174485279
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!KOHVWl5RU9XBR8Jb'

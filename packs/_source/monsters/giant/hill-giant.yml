@@ -584,10 +584,7 @@ items:
     img: icons/weapons/clubs/club-simple-barbed.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>18 (3d8 + 5)
-          <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Hill Giant attacks with its Greatclub.</p>
       source:
         custom: ''
@@ -741,9 +738,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676647
+      modifiedTime: 1745107550523
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!9g4N9sjyh8Ql46to.250gOq5bpqIHb7rw'
   - _id: lpyNJHYnhFtpLgo9
@@ -752,9 +749,7 @@ items:
     img: icons/magic/earth/projectile-stone-ball-brown.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +8 to hit, range 60/240 ft., one target. Hit:
-          <strong>21 (3d10 + 5) <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Hill Giant attacks with its Rock.</p>
       source:
         custom: ''
@@ -905,9 +900,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676647
+      modifiedTime: 1745173385091
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!9g4N9sjyh8Ql46to.lpyNJHYnhFtpLgo9'
 effects: []

@@ -748,11 +748,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>15 (2d10 + 4) <em>piercing
-          damage</em></strong>. </p><p>If the target is a humanoid, it must
-          succeed on a  <strong>DC 14 Constitution</strong> saving throw or be
-          cursed with were bear lycanthropy.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a humanoid, it must succeed on a  <strong>DC 14 Constitution</strong>
+          saving throw or be cursed with were bear lycanthropy.</p>
         chat: >-
           <p>The Werebear attacks with its Bite. If the target is a humanoid, it
           must make a <strong>Constitution</strong> saving throw.</p>
@@ -966,7 +964,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839463
+      modifiedTime: 1745107553437
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!oRBnO5OHoOZzlCOr.h9XO0f5Un3EhJqHm'
   - _id: pEYcOjAF2fovrXRP
@@ -975,10 +973,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Werebear attacks with its Claw.</p>
       source:
         custom: ''
@@ -1131,7 +1126,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839463
+      modifiedTime: 1745107553437
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!oRBnO5OHoOZzlCOr.pEYcOjAF2fovrXRP'
   - _id: UeXfHUO5RZp72PIs
@@ -1140,10 +1135,7 @@ items:
     img: icons/weapons/axes/axe-double.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (1d12 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Werebear attacks with its Greataxe.</p>
       source:
         custom: ''
@@ -1296,9 +1288,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676923
+      modifiedTime: 1745107553437
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!oRBnO5OHoOZzlCOr.UeXfHUO5RZp72PIs'
 effects: []

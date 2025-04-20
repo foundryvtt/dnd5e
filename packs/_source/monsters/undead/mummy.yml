@@ -595,16 +595,14 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>bludgeoning
-          damage</em></strong> plus <strong>10 (3d6) <em>necrotic
-          damage</em></strong>. </p><p>If the target is a creature, it must
-          succeed on a  <strong>DC 12 Constitution</strong> saving throw or be
-          cursed with mummy rot. The cursed target can't regain hit points, and
-          its hit point maximum decreases by 10 (3d6) for every 24 hours that
-          elapse. If the curse reduces the target's hit point maximum to 0, the
-          target dies, and its body turns to dust. The curse lasts until removed
-          by the remove curse spell or other magic.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a creature, it must succeed on a  <strong>DC 12 Constitution</strong>
+          saving throw or be cursed with mummy rot. The cursed target can't
+          regain hit points, and its hit point maximum decreases by 10 (3d6) for
+          every 24 hours that elapse. If the curse reduces the target's hit
+          point maximum to 0, the target dies, and its body turns to dust. The
+          curse lasts until removed by the remove curse spell or other
+          magic.</p>
         chat: >-
           <p>The Mummy attacks with its Rotting Fist. If the target is a
           creature, it must make a <strong>Constitution</strong> saving
@@ -841,7 +839,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839939
+      modifiedTime: 1745107553847
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!t8WYD7ak07X7xpx8.ik1IkSZi4fpiGbB3'
   - _id: 8Jju4CVZaIDab6Ju

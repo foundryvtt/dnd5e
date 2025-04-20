@@ -54,8 +54,8 @@ system:
     hp:
       value: 36
       max: 36
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 8d8
     init:
       ability: ''
@@ -649,10 +649,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>12 (2d8 + 3) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ghast attacks with its Bite.</p>
       source:
         custom: ''
@@ -807,7 +804,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837525
+      modifiedTime: 1745107551051
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!IyIybE5t2adMEVUM.nSgLkorv2oln5BIt'
   - _id: ricjyd1SKzeQ5gQE
@@ -817,13 +814,11 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>slashing
-          damage</em></strong>. </p><p>If the target is a creature other than an
-          undead, it must succeed on a  <strong>DC 10 Constitution</strong>
-          saving throw or be paralyzed for 1 minute. The target can repeat the
-          saving throw at the end of each of its turns, ending the effect on
-          itself on a success.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a creature other than an undead, it must succeed on a  <strong>DC 10
+          Constitution</strong> saving throw or be paralyzed for 1 minute. The
+          target can repeat the saving throw at the end of each of its turns,
+          ending the effect on itself on a success.</p>
         chat: >-
           <p>The Ghast attacks with its Claws. If the target is a creature other
           than an undead, it must make a <strong>Constitution</strong> saving
@@ -980,7 +975,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837525
+      modifiedTime: 1745107551051
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!IyIybE5t2adMEVUM.ricjyd1SKzeQ5gQE'
 effects: []
@@ -993,8 +988,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171220120
-  modifiedTime: 1726171442706
+  modifiedTime: 1745108067923
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!IyIybE5t2adMEVUM'

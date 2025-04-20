@@ -950,10 +950,7 @@ items:
     img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (2d4 + 1) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Satyr attacks with its Ram.</p>
       source:
         custom: ''
@@ -1103,9 +1100,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676417
+      modifiedTime: 1745107550515
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8xhuJXYMnlQD7LF6.2btvWgv8WIkadZjh'
 effects: []

@@ -487,10 +487,7 @@ items:
     img: icons/commodities/bones/hooves-cloven-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Warhorse Skeleton attacks with its Hooves.</p>
       source:
         custom: ''
@@ -642,9 +639,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676409
+      modifiedTime: 1745107550241
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!7KJ5vjnp0FJrdu6T.sIgV1p8nM1z4VZgY'
 effects: []

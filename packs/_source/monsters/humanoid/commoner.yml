@@ -483,10 +483,7 @@ items:
     img: icons/weapons/clubs/club-simple-barbed.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>2 (1d4) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Commoner attacks with their Club.</p>
       source:
         custom: ''
@@ -640,9 +637,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676457
+      modifiedTime: 1745107551849
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!SqZRuJ8lt2KGJBbq.HwktDnB8qdr0BYGZ'
 effects: []

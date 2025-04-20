@@ -483,10 +483,7 @@ items:
     img: icons/commodities/bones/beak-hooked-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+13 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>27 (4d8 + 9)
-          <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Roc attacks with its Beak.</p>
       source:
         custom: ''
@@ -640,7 +637,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839537
+      modifiedTime: 1745107553446
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!p980augbCIdpK9ZX.PZWkwOa8C0Y2tSCR'
   - _id: 1Ocl9VqVtWFu97Ua
@@ -799,11 +796,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+13 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>23 (4d6 + 9)
-          <em>slashing damage</em></strong>.</p><p>The target is grappled
-          (escape DC 19). Until this grapple ends, the target is restrained, and
-          the roc can't use its talons on another target.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
+          grappled (escape DC 19). Until this grapple ends, the target is
+          restrained, and the roc can't use its talons on another target.</p>
         chat: >-
           <p>The Roc attacks with its Talons. The target is grappled. Until this
           grapple ends, the target is restrained, and the roc can't use its
@@ -959,7 +954,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839537
+      modifiedTime: 1745107553446
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!p980augbCIdpK9ZX.XMiiDwLIMYWFqxyv'
 effects: []

@@ -1036,11 +1036,7 @@ items:
     img: icons/weapons/swords/greatsword-guard-gem-blue.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+15 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>22 (4d6 + 8)
-          <em>slashing damage</em></strong> plus <strong>27 (6d8) <em>radiant
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Solar attacks with its Greatsword.</p>
       source:
         custom: ''
@@ -1207,9 +1203,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676969
+      modifiedTime: 1745107553048
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.QssrfCioglFdfd8I'
   - _id: BSLTe0yfltAnguOT
@@ -1219,10 +1215,8 @@ items:
     system:
       description:
         value: >-
-          <p>Ranged Weapon Attack: +13 to hit, range 150/600 ft., one target.
-          Hit: <strong>15 (2d8 + 6) <em>piercing damage</em></strong> plus
-          <strong>27 (6d8) <em>radiant damage</em></strong>.</p><p>If the target
-          is a creature that has 190 hit points or fewer, it must succeed on a 
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature that has 190 hit points or fewer, it must succeed on a 
           <strong>DC 15 Constitution</strong> saving throw or die.</p>
         chat: >-
           <p>The Solar attacks with its Slaying Longbow. If the target is a
@@ -1461,9 +1455,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676969
+      modifiedTime: 1745173385613
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.BSLTe0yfltAnguOT'
   - _id: sZjcCRCNcf6m4VoK

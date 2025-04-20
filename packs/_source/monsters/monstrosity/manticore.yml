@@ -637,10 +637,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Manticore attacks with its Bite.</p>
       source:
         custom: ''
@@ -795,7 +792,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837755
+      modifiedTime: 1745107551422
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MAoCGF5VkQwhmgvI.thSJXAlyfHGmVWN5'
   - _id: 4WFf0M2tCPwiLPxG
@@ -804,10 +801,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Manticore attacks with its Claw.</p>
       source:
         custom: ''
@@ -960,7 +954,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837755
+      modifiedTime: 1745107551422
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MAoCGF5VkQwhmgvI.4WFf0M2tCPwiLPxG'
   - _id: bYJjJPKhiDOTMlmS
@@ -969,9 +963,7 @@ items:
     img: icons/commodities/bones/horn-worn-white.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +5 to hit, range 100/200 ft., one target.
-          Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Manticore attacks with its Tail Spike.</p>
       source:
         custom: ''
@@ -1130,9 +1122,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676852
+      modifiedTime: 1745173385393
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MAoCGF5VkQwhmgvI.bYJjJPKhiDOTMlmS'
 effects: []

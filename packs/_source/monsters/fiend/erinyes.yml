@@ -550,11 +550,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>8 (1d8 + 4) <em>slashing
-          damage</em></strong>, or <strong>9 (1d10 + 4) <em>slashing
-          damage</em></strong> if used with two hands, plus <strong>13 (3d8)
-          <em>poison damage</em></strong>.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
+          attackMode=twoHanded]] damage if used with two hands, plus <strong>13
+          (3d8) <em>poison damage</em></strong>.</p>
         chat: <p>The Erinyes attacks with its Longsword.</p>
       source:
         custom: ''
@@ -720,9 +718,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676883
+      modifiedTime: 1745173384699
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!3o2rQBqpzjIHmrBW.dvoOA7jzBnq2Lxza'
   - _id: W7sEr3m8MBrzYq2v
@@ -965,11 +963,9 @@ items:
     system:
       description:
         value: >-
-          <p>Ranged Weapon Attack: +7 to hit, range 150/600 ft., one target.
-          Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong> plus
-          <strong>13 (3d8) <em>poison damage</em></strong>.</p><p>The target
-          must succeed on a  <strong>DC 14 Constitution</strong> saving throw or
-          be poisoned. The poison lasts until it is removed by the lesser
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          succeed on a  <strong>DC 14 Constitution</strong> saving throw or be
+          poisoned. The poison lasts until it is removed by the lesser
           restoration spell or similar magic.</p>
         chat: >-
           <p>The Erinyes attacks with its Longbow. The target must make a
@@ -1209,9 +1205,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676883
+      modifiedTime: 1745173384699
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!3o2rQBqpzjIHmrBW.CElneYmOXIzyfv2a'
   - _id: Fp0Jye7Qwk8KOvH7

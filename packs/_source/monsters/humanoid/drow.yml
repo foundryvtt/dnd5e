@@ -54,8 +54,8 @@ system:
     hp:
       value: 13
       max: 13
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 3d8
     init:
       ability: ''
@@ -638,10 +638,7 @@ items:
     img: icons/weapons/swords/sword-guard-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Drow attacks with its Shortsword.</p>
       source:
         custom: ''
@@ -794,9 +791,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676633
+      modifiedTime: 1745107549815
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1vaBSMUfOy6JPJ14.G2nFsJdp1Q3gshyr'
   - _id: LqnhZjRtRqhLIFTm
@@ -806,13 +803,12 @@ items:
     system:
       description:
         value: >-
-          <p>Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit:
-          <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p><p>The
-          target must succeed on a  <strong>DC 13 Constitution</strong> saving
-          throw or be poisoned for 1 hour. If the saving throw fails by 5 or
-          more, the target is also unconscious while poisoned in this way. The
-          target wakes up if it takes damage or if another creature takes an
-          action to shake it awake.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          succeed on a  <strong>DC 13 Constitution</strong> saving throw or be
+          poisoned for 1 hour. If the saving throw fails by 5 or more, the
+          target is also unconscious while poisoned in this way. The target
+          wakes up if it takes damage or if another creature takes an action to
+          shake it awake.</p>
         chat: >-
           <p>The Drow attacks with its Hand Crossbow. The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -836,7 +832,7 @@ items:
       identified: true
       cover: null
       range:
-        value: null
+        value: 30
         long: 120
         units: ft
         reach: 30
@@ -877,12 +873,15 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - amm
+        - lgt
+        - lod
       proficient: 1
       unidentified:
         description: ''
       type:
-        value: simpleM
+        value: martialR
         baseItem: handcrossbow
       container: null
       crewed: false
@@ -1000,19 +999,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 1
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -1020,9 +1007,11 @@ items:
               formula: '13'
           sort: 0
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: hand-crossbow
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1031,14 +1020,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.items.qaSro7kFhxD6INbZ
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.qaSro7kFhxD6INbZ
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676633
+      modifiedTime: 1745173487038
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1vaBSMUfOy6JPJ14.LqnhZjRtRqhLIFTm'
   - _id: S684g3gtaxOsMxME
@@ -1506,8 +1499,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171199159
-  modifiedTime: 1726171438965
+  modifiedTime: 1745173511182
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!1vaBSMUfOy6JPJ14'

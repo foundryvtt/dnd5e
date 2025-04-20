@@ -910,11 +910,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>36 (4d12 + 10)
-          <em>piercing damage</em></strong>. </p><p>If the target is a creature,
-          it is grappled (escape DC 20). Until this grapple ends, the target is
-          restrained, and the tarrasque can't bite another target.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a creature, it is grappled (escape DC 20). Until this grapple ends,
+          the target is restrained, and the tarrasque can't bite another
+          target.</p>
         chat: >-
           <p>The Tarrasque attacks with its Bite. If the target is a creature,
           it is grappled. Until this grapple ends, the target is restrained, and
@@ -1073,7 +1072,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837624
+      modifiedTime: 1745107551149
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.suUr7bJqBqE7xk2F'
   - _id: 7DRko62ztr6FjZLA
@@ -1082,10 +1081,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>,
-          <strong>15 ft.,</strong> one target. Hit: <strong>28 (4d8 + 10)
-          <em>slashing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Tarrasque attacks with its Claw.</p>
       source:
         custom: ''
@@ -1239,7 +1235,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837624
+      modifiedTime: 1745107551149
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.7DRko62ztr6FjZLA'
   - _id: E1RZdzEY2qnG2jLn
@@ -1248,10 +1244,7 @@ items:
     img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>32 (4d10 + 10)
-          <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Tarrasque attacks with its Horns.</p>
       source:
         custom: ''
@@ -1405,7 +1398,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837624
+      modifiedTime: 1745107551149
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.E1RZdzEY2qnG2jLn'
   - _id: Lo4LU9FBxez1Nzqm
@@ -1415,11 +1408,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+19 to hit,</strong>,
-          <strong>20 ft.,</strong> one target. Hit: <strong>24 (4d6 + 10)
-          <em>bludgeoning damage</em></strong>. </p><p>If the target is a
-          creature, it must succeed on a  <strong>DC 20 Strength</strong> saving
-          throw or be knocked prone.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a creature, it must succeed on a  <strong>DC 20 Strength</strong>
+          saving throw or be knocked prone.</p>
         chat: >-
           <p>The Tarrasque attacks with its Tail. If the target is a creature,
           it must make a <strong>Strength</strong> saving throw or be knocked
@@ -1645,7 +1636,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837624
+      modifiedTime: 1745107551149
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.Lo4LU9FBxez1Nzqm'
   - _id: 3mtn5D2GoD19WDVW

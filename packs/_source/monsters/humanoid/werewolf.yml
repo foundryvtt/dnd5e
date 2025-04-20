@@ -490,11 +490,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (1d8 + 2) <em>piercing
-          damage</em></strong>. </p><p>If the target is a humanoid, it must
-          succeed on a  <strong>DC 12 Constitution</strong> saving throw or be
-          cursed with werewolf lycanthropy.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a humanoid, it must succeed on a  <strong>DC 12 Constitution</strong>
+          saving throw or be cursed with werewolf lycanthropy.</p>
         chat: >-
           <p>The Werewolf attacks with its Bite. If the target is a humanoid, it
           must make a <strong>Constitution</strong> saving throw.</p>
@@ -708,7 +706,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836823
+      modifiedTime: 1745107550248
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!7tRhrxuknTpHpYcA.tWfR8uJNnQxpXgDw'
   - _id: abhGXKzA0XGprXED
@@ -818,11 +816,9 @@ items:
     system:
       description:
         value: >-
-          <p>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range
-          20/60 ft., one creature. Hit: <strong>5 (1d6 + 2) <em>piercing
-          damage</em></strong>, or <strong>6 (1d8 + 2) <em>piercing
-          damage</em></strong> if used with two hands to make a melee
-          attack.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or <strong>6 (1d8 + 2)
+          <em>piercing damage</em></strong> if used with two hands to make a
+          melee attack.</p>
         chat: <p>The Werewolf attacks with its Spear.</p>
       source:
         custom: ''
@@ -975,9 +971,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676915
+      modifiedTime: 1745173385019
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!7tRhrxuknTpHpYcA.TiKtAuqd6urQ45Ds'
   - _id: 36H4LGNMMEYS1Irm
@@ -986,10 +982,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>7 (2d4 + 2) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Werewolf attacks with its Claws.</p>
       source:
         custom: ''
@@ -1142,7 +1135,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836823
+      modifiedTime: 1745107550248
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!7tRhrxuknTpHpYcA.36H4LGNMMEYS1Irm'
   - _id: 2kHNI1T4gg879fDv

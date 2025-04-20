@@ -54,8 +54,8 @@ system:
     hp:
       value: 22
       max: 22
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 5d8
     init:
       ability: ''
@@ -488,10 +488,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>9 (2d6 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ghoul attacks with its Bite.</p>
       source:
         custom: ''
@@ -554,7 +551,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - fin
       proficient: 1
       unidentified:
         description: ''
@@ -583,7 +581,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -613,7 +611,7 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
@@ -627,10 +625,14 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -639,6 +641,10 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
@@ -646,7 +652,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837947
+      modifiedTime: 1745108166128
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!OBujQLLPSmlJiZnL.E5cmqIqRIwyTkhgp'
   - _id: ArxzPC3rsBztgUvI
@@ -656,13 +662,11 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (2d4 + 2) <em>slashing
-          damage</em></strong>. </p><p>If the target is a creature other than an
-          elf or undead, it must succeed on a  <strong>DC 10
-          Constitution</strong> saving throw or be paralyzed for 1 minute. The
-          target can repeat the saving throw at the end of each of its turns,
-          ending the effect on itself on a success.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a creature other than an elf or undead, it must succeed on a 
+          <strong>DC 10 Constitution</strong> saving throw or be paralyzed for 1
+          minute. The target can repeat the saving throw at the end of each of
+          its turns, ending the effect on itself on a success.</p>
         chat: >-
           <p>The Ghoul attacks with its Claws. If the target is a creature other
           than an elf or undead, it must make a <strong>Constitution</strong>
@@ -729,7 +733,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - fin
       proficient: 1
       unidentified:
         description: ''
@@ -758,7 +763,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -788,7 +793,7 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
+            ability: ''
             bonus: ''
             critical:
               threshold: null
@@ -802,16 +807,24 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -819,7 +832,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837947
+      modifiedTime: 1745108147352
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!OBujQLLPSmlJiZnL.ArxzPC3rsBztgUvI'
 effects: []
@@ -832,8 +845,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171227997
-  modifiedTime: 1726171444127
+  modifiedTime: 1745108154333
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!OBujQLLPSmlJiZnL'

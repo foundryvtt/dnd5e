@@ -54,8 +54,8 @@ system:
     hp:
       value: 44
       max: 44
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 8d8 + 8
     init:
       ability: ''
@@ -731,13 +731,11 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>6 (1d8 + 2) <em>piercing
-          damage</em></strong> plus <strong>4 (1d8) <em>poison
-          damage</em></strong>. </p><p>The target must succeed on a  <strong>DC
-          11 Constitution</strong> saving throw or be poisoned for 1 minute. The
-          creature can repeat the saving throw at the end of each of its turns,
-          ending the effect on itself on a success.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>The target must
+          succeed on a  <strong>DC 11 Constitution</strong> saving throw or be
+          poisoned for 1 minute. The creature can repeat the saving throw at the
+          end of each of its turns, ending the effect on itself on a
+          success.</p>
         chat: >-
           <p>The Ettercap attacks with its Bite. The target must make a
           <strong>Constitution</strong> saving throw. The creature can repeat
@@ -908,7 +906,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838460
+      modifiedTime: 1745107552251
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!aKt7vFAS1J0x3FQm.qpUx52QbFUCSPSln'
   - _id: T8XMTiCIOQP4dYEp
@@ -917,10 +915,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (2d4 + 2) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ettercap attacks with its Claws.</p>
       source:
         custom: ''
@@ -1073,7 +1068,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838460
+      modifiedTime: 1745107552251
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!aKt7vFAS1J0x3FQm.T8XMTiCIOQP4dYEp'
   - _id: Sv5UJkCfY00yfFOE
@@ -1083,13 +1078,13 @@ items:
     system:
       description:
         value: >-
-          <p>Ranged Weapon Attack: +4 to hit, range 30/60 ft., one Large or
-          smaller creature. Hit: The creature is restrained by webbing.
-          </p><p>As an action, the restrained creature can make a DC 11 Strength
-          check, escaping from the webbing on a success. The effect ends if the
-          webbing is destroyed. The webbing has AC 10, 5 hit points, is
-          vulnerable to <em>fire damage</em> and immune to <em>bludgeoning
-          damage</em>.</p>
+          <p><em>Ranged Weapon Attack:</em> [[/attack]], range 30/60 ft., one
+          Large or smaller creature. <em>Hit:</em> The creature is
+          &amp;Reference[restrained] by webbing.</p><p>As an action, the
+          restrained creature can make a [[/check]] check, escaping from the
+          webbing on a success. The effect ends if the webbing is destroyed. The
+          webbing has AC 10, 5 hit points, is vulnerable to fire damage and
+          immune to bludgeoning damage.</p>
         chat: >-
           <p>The creature is restrained by webbing. As an action, the restrained
           creature can make a Strength check, escaping from the webbing on a
@@ -1183,69 +1178,54 @@ items:
             includeBase: true
             parts: []
           sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
+        wMfteroFHIaBtBYL:
+          type: check
+          _id: wMfteroFHIaBtBYL
+          sort: 0
           activation:
             type: action
-            value: 1
-            condition: ''
+            value: null
             override: false
+            condition: ''
           consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
           range:
-            value: '30'
-            units: ft
-            special: ''
             override: false
+            units: self
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: '1'
-              type: creature
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          damage:
-            onSave: half
-            parts: []
-          save:
-            ability: str
+            max: ''
+          check:
+            associated: []
             dc:
               calculation: ''
               formula: '11'
-          sort: 0
+            ability: str
+          name: Escape Web
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -1258,14 +1238,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.i8WDjw4J1gJWQmqG
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.i8WDjw4J1gJWQmqG
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676798
+      modifiedTime: 1745175106120
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!aKt7vFAS1J0x3FQm.Sv5UJkCfY00yfFOE'
 effects: []
@@ -1278,8 +1262,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171240568
-  modifiedTime: 1726171446414
+  modifiedTime: 1745175110156
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!aKt7vFAS1J0x3FQm'

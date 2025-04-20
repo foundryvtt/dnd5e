@@ -662,10 +662,7 @@ items:
     img: icons/weapons/swords/sword-katana.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Bandit Captain attacks with their Scimitar.</p>
       source:
         custom: ''
@@ -820,9 +817,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676704
+      modifiedTime: 1745107553733
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!rb7OJt822wIO52qY.tSPkVJScEndipsFU'
   - _id: mBUKIzY6aUW5Fnlm
@@ -831,10 +828,7 @@ items:
     img: icons/weapons/daggers/dagger-jeweled-purple.webp
     system:
       description:
-        value: >-
-          <p>Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range
-          20/60 ft., one target. Hit: <strong>5 (1d4 + 3) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Bandit Captain attacks with their Dagger.</p>
       source:
         custom: ''
@@ -990,9 +984,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676704
+      modifiedTime: 1745173385725
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!rb7OJt822wIO52qY.mBUKIzY6aUW5Fnlm'
   - _id: mGcPB4SMyYkHFK9N

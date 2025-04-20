@@ -54,8 +54,8 @@ system:
     hp:
       value: 11
       max: 11
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d8 + 2
     init:
       ability: ''
@@ -533,11 +533,9 @@ items:
     system:
       description:
         value: >-
-          <p>Melee or Ranged Weapon Attack: +2 to hit, reach 5 ft. or range
-          20/60 ft., one target. Hit: <strong>3 (1d6) <em>piercing
-          damage</em></strong>, or <strong>4 (1d8) <em>piercing
-          damage</em></strong> if used with two hands to make a melee
-          attack.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or <strong>4 (1d8)
+          <em>piercing damage</em></strong> if used with two hands to make a
+          melee attack.</p>
         chat: <p>The Merfolk attacks with its Spear.</p>
       source:
         custom: ''
@@ -559,8 +557,8 @@ items:
       identified: true
       cover: null
       range:
-        value: null
-        long: null
+        value: 20
+        long: 60
         units: ft
         reach: null
       uses:
@@ -679,6 +677,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: spear
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -694,7 +693,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837640
+      modifiedTime: 1745173587773
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!KUpbXdn1XmHEeOPk.sN28gnBGF2TVdd53'
 effects: []
@@ -707,8 +706,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171223067
-  modifiedTime: 1726171443294
+  modifiedTime: 1745173601333
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!KUpbXdn1XmHEeOPk'

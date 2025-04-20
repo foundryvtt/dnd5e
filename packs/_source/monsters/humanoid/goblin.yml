@@ -688,10 +688,7 @@ items:
     img: icons/weapons/swords/sword-katana.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Goblin attacks with its Scimitar.</p>
       source:
         custom: ''
@@ -846,9 +843,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676681
+      modifiedTime: 1745107551927
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!TjWQOgI3A4UAl7lC.S6UTTLu0bEB32HNG'
   - _id: YqS3dsIlpWb2Q2UI
@@ -857,9 +854,7 @@ items:
     img: icons/weapons/bows/shortbow-recurve.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit:
-          <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Goblin attacks with its Shortbow.</p>
       source:
         custom: ''
@@ -1014,9 +1009,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676681
+      modifiedTime: 1745173385493
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!TjWQOgI3A4UAl7lC.YqS3dsIlpWb2Q2UI'
 effects: []

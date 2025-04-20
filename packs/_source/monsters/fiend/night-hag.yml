@@ -792,10 +792,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Night Hag attacks with its Claws.</p>
       source:
         custom: ''
@@ -948,7 +945,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916840149
+      modifiedTime: 1745107554139
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!xvh2UOKv1bh03Gih.Um3cK4i4ZQSTqodb'
   - _id: ftmaVOSJXvHPhraJ

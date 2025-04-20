@@ -485,9 +485,7 @@ items:
     img: icons/magic/earth/projectile-stone-ball-brown.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +9 to hit, range 60/240 ft., one target. Hit:
-          <strong>28 (4d10 + 6) <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Frost Giant attacks with its Rock.</p>
       source:
         custom: ''
@@ -640,9 +638,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676655
+      modifiedTime: 1745173385190
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Buxe6dDK5Mw7kxe6.gCi538awNcOfcZf7'
   - _id: 9LXx1CaY98oYrwWK
@@ -726,10 +724,7 @@ items:
     img: icons/weapons/axes/axe-double.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>25 (3d12 + 6)
-          <em>slashing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Frost Giant attacks with its Greataxe.</p>
       source:
         custom: ''
@@ -884,9 +879,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676655
+      modifiedTime: 1745107550648
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Buxe6dDK5Mw7kxe6.LVOGKiIm4UTD4fpj'
   - _id: i49lwJ84vB720EPW

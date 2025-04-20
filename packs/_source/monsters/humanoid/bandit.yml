@@ -54,8 +54,8 @@ system:
     hp:
       value: 11
       max: 11
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d8 + 2
     init:
       ability: ''
@@ -483,10 +483,7 @@ items:
     img: icons/weapons/swords/sword-katana.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Bandit attacks with their Scimitar.</p>
       source:
         custom: ''
@@ -641,9 +638,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676697
+      modifiedTime: 1745107553231
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!n4TEv7inVUkyZviN.4oIyAj7rN5JbTjDZ'
   - _id: hSxEhrT9CFdLG40m
@@ -652,9 +649,7 @@ items:
     img: icons/weapons/crossbows/crossbow-simple-brown.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +3 to hit, range 80 ft./320 ft., one target.
-          Hit: <strong>5 (1d8 + 1) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Bandit attacks with their Light Crossbow.</p>
       source:
         custom: ''
@@ -718,9 +713,9 @@ items:
         dt: null
         conditions: ''
       properties:
+        - amm
         - lgt
         - two
-        - amm
       proficient: 1
       unidentified:
         description: ''
@@ -794,9 +789,11 @@ items:
             parts: []
           sort: 0
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: light-crossbow
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -810,9 +807,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676697
+      modifiedTime: 1745175518556
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!n4TEv7inVUkyZviN.hSxEhrT9CFdLG40m'
   - _id: pByEnV0Y7QOI0ndA
@@ -902,8 +899,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171255392
-  modifiedTime: 1726171449401
+  modifiedTime: 1745175524938
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!n4TEv7inVUkyZviN'

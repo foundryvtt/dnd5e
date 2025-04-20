@@ -601,10 +601,7 @@ items:
     img: icons/magic/unholy/strike-hand-glow-pink.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>17 (4d6 + 3) <em>necrotic
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ghost attacks with its Withering Touch.</p>
       source:
         custom: ''
@@ -757,7 +754,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839744
+      modifiedTime: 1745107553635
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qoFEjfrANBdrCP6m.wdOqdYfLb2Nu1Uud'
   - _id: WyxVuCp4iU10bA7m

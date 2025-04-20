@@ -698,14 +698,12 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>9 (2d6 + 2) <em>slashing
-          damage</em></strong>, and the target is cursed if it is a creature.
-          </p><p>The magical curse takes effect whenever the target takes a
-          short or long rest, filling the target's thoughts with horrible images
-          and dreams. The cursed target gains no benefit from finishing a short
-          or long rest. The curse lasts until it is lifted by a remove curse
-          spell or similar magic.</p>
+          <p>[[/attack extended]]. [[/damage extended]], and the target is
+          cursed if it is a creature. </p><p>The magical curse takes effect
+          whenever the target takes a short or long rest, filling the target's
+          thoughts with horrible images and dreams. The cursed target gains no
+          benefit from finishing a short or long rest. The curse lasts until it
+          is lifted by a remove curse spell or similar magic.</p>
         chat: <p>The Rakshasa attacks with its Claw.</p>
       source:
         custom: ''
@@ -858,7 +856,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839662
+      modifiedTime: 1745173385709
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qXzMsRTHEodqO8l2.pHBLWUN5VKEjSBh6'
   - _id: ppWAAEul0QHtm4er

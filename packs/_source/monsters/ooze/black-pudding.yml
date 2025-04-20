@@ -716,13 +716,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>bludgeoning
-          damage</em></strong> plus <strong>18 (4d8) <em>acid
-          damage</em></strong>.</p><p>In addition, nonmagical armor worn by the
-          target is partly dissolved and takes a permanent and cumulative -1
-          penalty to the AC it offers. The armor is destroyed if the penalty
-          reduces its AC to 10.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>In addition,
+          nonmagical armor worn by the target is partly dissolved and takes a
+          permanent and cumulative -1 penalty to the AC it offers. The armor is
+          destroyed if the penalty reduces its AC to 10.</p>
         chat: >-
           <p>The Black Pudding attacks with its Pseudopod. In addition,
           nonmagical armor worn by the target is partly dissolved and takes a
@@ -890,7 +887,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837941
+      modifiedTime: 1745107551533
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!NwQpeeaMxAC3fRft.v6ZspnPr8G5hApkL'
   - _id: VcVWWSlfTBeXWh3T

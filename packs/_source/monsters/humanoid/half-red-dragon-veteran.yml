@@ -54,8 +54,8 @@ system:
     hp:
       value: 65
       max: 65
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 10d8 + 20
     init:
       ability: ''
@@ -668,10 +668,8 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>slashing
-          damage</em></strong>, or <strong>8 (1d10 + 3) <em>slashing
-          damage</em></strong> if used with two hands.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
+          attackMode=twoHanded]] damage if used with two hands.</p>
         chat: <p>The Half-Red Dragon Veteran attacks with its Longsword.</p>
       source:
         custom: ''
@@ -825,9 +823,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676911
+      modifiedTime: 1745173384809
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!5TmstVMURpVtmNR3.93eWZ75LncoC5U8d'
   - _id: pl7hO2z20EnTaPZt
@@ -836,10 +834,7 @@ items:
     img: icons/weapons/swords/sword-guard-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Half-Red Dragon Veteran attacks with its Shortsword.</p>
       source:
         custom: ''
@@ -933,7 +928,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -963,7 +958,7 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
@@ -977,6 +972,9 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -989,14 +987,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676911
+      modifiedTime: 1745107818097
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!5TmstVMURpVtmNR3.pl7hO2z20EnTaPZt'
   - _id: Jt9HuwZdYUCmEH5q
@@ -1005,9 +1007,7 @@ items:
     img: icons/weapons/crossbows/crossbow-blue.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +3 to hit, range 100/400 ft., one target.
-          Hit: <strong>6 (1d10 + 1) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Half-Red Dragon Veteran attacks with its Heavy Crossbow.</p>
       source:
         custom: ''
@@ -1029,7 +1029,7 @@ items:
       identified: true
       cover: null
       range:
-        value: null
+        value: 100
         long: 400
         units: ft
         reach: 100
@@ -1079,7 +1079,7 @@ items:
       unidentified:
         description: ''
       type:
-        value: martialM
+        value: martialR
         baseItem: heavycrossbow
       container: null
       crewed: false
@@ -1148,9 +1148,11 @@ items:
             parts: []
           sort: 0
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: heavy-crossbow
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1164,9 +1166,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676911
+      modifiedTime: 1745173440006
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!5TmstVMURpVtmNR3.Jt9HuwZdYUCmEH5q'
   - _id: 68Y4sNHbVetQN3wa
@@ -1309,8 +1311,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171203560
-  modifiedTime: 1726171439742
+  modifiedTime: 1745107827692
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!5TmstVMURpVtmNR3'

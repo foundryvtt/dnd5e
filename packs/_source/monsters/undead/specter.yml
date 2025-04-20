@@ -55,7 +55,7 @@ system:
       value: 22
       max: 22
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 5d8
     init:
       ability: ''
@@ -621,10 +621,8 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Spell Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>10 (3d6) <em>necrotic
-          damage</em></strong>. </p><p>The target must succeed on a  <strong>DC
-          10 Constitution</strong> saving throw or its hit point maximum is
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          succeed on a [[/save]] saving throw or its hit point maximum is
           reduced by an amount equal to the damage taken. This reduction lasts
           until the creature finishes a long rest. The target dies if this
           effect reduces its hit point maximum to 0.</p>
@@ -653,7 +651,7 @@ items:
       range:
         value: null
         long: null
-        units: ''
+        units: ft
         reach: null
       uses:
         max: ''
@@ -721,7 +719,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -739,8 +737,8 @@ items:
               height: ''
               units: ''
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -750,8 +748,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
-            bonus: ''
+            ability: none
+            bonus: '@abilities.dex.mod'
             critical:
               threshold: null
             flat: false
@@ -764,6 +762,9 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -813,19 +814,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 3
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - necrotic
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -836,20 +825,25 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: life-drain
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676568
+      modifiedTime: 1745174819557
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!PuPo4H4Dcxigf0fY.pxm7rAqI5ackW8Oy'
   - _id: 1FbU02rRuNLnEDXC
@@ -912,8 +906,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171230022
-  modifiedTime: 1726171444458
+  modifiedTime: 1745174823824
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!PuPo4H4Dcxigf0fY'

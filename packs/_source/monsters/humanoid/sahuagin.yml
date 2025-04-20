@@ -652,10 +652,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>3 (1d4 + 1) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Sahuagin attacks with its Bite.</p>
       source:
         custom: ''
@@ -807,9 +804,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676825
+      modifiedTime: 1745107553129
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lyNBFmJdbh4NLRzz.NSdAR332o65ZE3hC'
   - _id: uyWDYVSAJuCfayLE
@@ -868,10 +865,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>3 (1d4 + 1) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Sahuagin attacks with its Claws.</p>
       source:
         custom: ''
@@ -1021,9 +1015,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676825
+      modifiedTime: 1745107553129
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lyNBFmJdbh4NLRzz.VJlDAg21VwBOjbuR'
   - _id: lH49mvA2g5C44yM4

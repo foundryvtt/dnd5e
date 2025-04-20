@@ -769,10 +769,7 @@ items:
     img: icons/magic/fire/flame-burning-fist-strike.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Shambling Mound attacks with its Slam.</p>
       source:
         custom: ''
@@ -925,7 +922,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838856
+      modifiedTime: 1745107552654
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gGeLeV411iQ5Yijs.lOIA9YKQU8xSx7Lj'
 effects: []

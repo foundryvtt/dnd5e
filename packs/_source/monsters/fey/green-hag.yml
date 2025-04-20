@@ -638,10 +638,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Green Hag attacks with its Claws.</p>
       source:
         custom: ''
@@ -794,7 +791,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839854
+      modifiedTime: 1745107553825
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!saq6WM959pKHuaqP.gtixTr9i63RtsSCv'
   - _id: cvdyEyn0s7hKwIcN

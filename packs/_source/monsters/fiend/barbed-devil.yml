@@ -807,9 +807,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p>Melee Weapon Attack: +6 to hit, reach 5 ft ., one target. Hit:
-          <strong>6 (1d6 + 3) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Barbed Devil attacks with its Claw.</p>
       source:
         custom: ''
@@ -950,6 +948,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -963,7 +962,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839842
+      modifiedTime: 1745175641118
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!sLdpiuaZF8lujJQy.pya9jchjLkwMedEr'
   - _id: mlWql992zSZ6hvl6
@@ -972,10 +971,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Barbed Devil attacks with its Tail.</p>
       source:
         custom: ''
@@ -1128,7 +1124,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839842
+      modifiedTime: 1745107553753
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!sLdpiuaZF8lujJQy.mlWql992zSZ6hvl6'
   - _id: syCZDlwGoyT1GvJv
@@ -1138,10 +1134,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Ranged Spell Attack:</em><strong>+5 to hit,</strong>,
-          <strong>150 ft.,</strong> one target. Hit: <strong>10 (3d6) <em>fire
-          damage</em></strong>.</p><p>If the target is a flammable object that
-          isn't being worn or carried, it also catches fire.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. If the target is a
+          flammable object that isn't being worn or carried, it also catches
+          fire.</p>
         chat: >-
           <p>The Barbed Devil attacks with its Hurl Flame. If the target is a
           flammable object that isn't being worn or carried, it also catches
@@ -1237,7 +1232,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1267,8 +1262,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: cha
-            bonus: ''
+            ability: none
+            bonus: '@abilities.cha.mod'
             critical:
               threshold: null
             flat: false
@@ -1281,24 +1276,32 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: hurl-flame
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676857
+      modifiedTime: 1745175668889
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!sLdpiuaZF8lujJQy.syCZDlwGoyT1GvJv'
 effects: []

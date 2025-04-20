@@ -664,10 +664,7 @@ items:
     img: icons/weapons/swords/greatsword-guard-gem-blue.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+11 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>28 (6d6 + 7)
-          <em>slashing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Fire Giant attacks with its Greatsword.</p>
       source:
         custom: ''
@@ -823,9 +820,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676639
+      modifiedTime: 1745107549926
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!45Z5kogZEhawX1Ey.c8b8jy3sM3Z8gxm0'
   - _id: DgNvJ2F0HSMya3hp
@@ -834,9 +831,7 @@ items:
     img: icons/magic/earth/projectile-stone-ball-brown.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +11 to hit, range 60/240 ft., one target.
-          Hit: <strong>29 (4d10 + 7) <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Fire Giant attacks with its Rock.</p>
       source:
         custom: ''
@@ -989,9 +984,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676639
+      modifiedTime: 1745173384716
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!45Z5kogZEhawX1Ey.DgNvJ2F0HSMya3hp'
 effects: []

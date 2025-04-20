@@ -54,8 +54,8 @@ system:
     hp:
       value: 172
       max: 172
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 15d12 + 75
     init:
       ability: ''
@@ -483,9 +483,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p>Melee Weapon Attack: +11 to hit, reach,.0 ft., one target. Hit:
-          <strong>17 (2d10 + 6) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Adult Brass Dragon attacks with its Bite.</p>
       source:
         custom: ''
@@ -510,7 +508,7 @@ items:
         value: null
         long: null
         units: ft
-        reach: 10
+        reach: null
       uses:
         max: ''
         recovery: []
@@ -548,7 +546,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - rch
       proficient: 1
       unidentified:
         description: ''
@@ -641,7 +640,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836832
+      modifiedTime: 1745173910925
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!7vswgicsiMfS4ZTS.Rr34cx78OgioMSHH'
   - _id: HOTavLfsvvI26Ele
@@ -779,10 +778,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+11 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d6 + 6)
-          <em>slashing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Adult Brass Dragon attacks with its Claw.</p>
       source:
         custom: ''
@@ -935,7 +931,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836832
+      modifiedTime: 1745107550318
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!7vswgicsiMfS4ZTS.Gx6DVWF7D9lzZjse'
   - _id: jM7XLTjt7QeJ8B7U
@@ -1425,10 +1421,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+11 to hit,</strong>,
-          <strong>15 ft.,</strong> one target. Hit: <strong>15 (2d8 + 6)
-          <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Adult Brass Dragon attacks with its Tail.</p>
       source:
         custom: ''
@@ -1581,7 +1574,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836832
+      modifiedTime: 1745107550318
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!7vswgicsiMfS4ZTS.rR1dMvZqWVQTgCVw'
   - _id: StCQbn2czecQteRM
@@ -2277,8 +2270,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171206347
-  modifiedTime: 1726171440186
+  modifiedTime: 1745173916910
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!7vswgicsiMfS4ZTS'

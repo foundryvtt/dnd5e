@@ -765,10 +765,7 @@ items:
     img: icons/weapons/daggers/dagger-jeweled-purple.webp
     system:
       description:
-        value: >-
-          <p>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range
-          20/60 ft., one creature. Hit: <strong>4 (1d4 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Cult Fanatic attacks with their Dagger.</p>
       source:
         custom: ''
@@ -924,9 +921,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676612
+      modifiedTime: 1745173385801
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!tYfQIxCJT0WaaKmc.zTX7ZTUkqUMSbGII'
   - _id: Bnn9Nzajixvow9xi

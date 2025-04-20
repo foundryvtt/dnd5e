@@ -609,11 +609,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>piercing
-          damage</em></strong> plus <strong>7 (2d6) <em>poison
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Basilisk attacks with its Bite.</p>
       source:
         custom: ''
@@ -780,7 +776,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839049
+      modifiedTime: 1745107552834
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hqj2yXtgwt64v3Lj.atyoFYgU32nJ9kPK'
 effects: []

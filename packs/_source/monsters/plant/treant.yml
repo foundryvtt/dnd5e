@@ -751,9 +751,7 @@ items:
     img: icons/magic/earth/projectile-boulder-yellow.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +10 to hit, range 60/180 ft., one target.
-          Hit: <strong>28 (4d10 + 6) <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Treant attacks with its Rock.</p>
       source:
         custom: ''
@@ -904,9 +902,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676791
+      modifiedTime: 1745173385401
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!NB6wUgVqeOQtsQKu.eTROJriR9B5abIZy'
   - _id: RMsSkfIx97Hnqf37
@@ -962,10 +960,7 @@ items:
     img: icons/magic/nature/tree-animated-strike.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>16 (3d6 + 6)
-          <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Treant attacks with its Slam.</p>
       source:
         custom: ''
@@ -1115,9 +1110,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676791
+      modifiedTime: 1745107551521
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!NB6wUgVqeOQtsQKu.lisZZTaupqInGEi1'
 effects: []

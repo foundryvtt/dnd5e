@@ -489,12 +489,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>,
-          <strong>10 ft.,</strong> one creature. Hit: <strong>7 (1d6 + 4)
-          <em>piercing damage</em></strong>.</p><p>The target must make a 
-          <strong>DC 13 Constitution</strong> saving throw, taking <strong>31
-          (7d8) <em>poison damage</em></strong> on a failed save, or half as
-          much damage on a successful one.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          make a  <strong>DC 13 Constitution</strong> saving throw, taking
+          <strong>31 (7d8) <em>poison damage</em></strong> on a failed save, or
+          half as much damage on a successful one.</p>
         chat: >-
           <p>The Spirit Naga attacks with its Bite. The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -732,7 +730,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837054
+      modifiedTime: 1745107550626
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!BAT6ld8qJZetpycL.aap2fFb4b7uX3XAO'
   - _id: WqOflwn1ubAMkGdQ

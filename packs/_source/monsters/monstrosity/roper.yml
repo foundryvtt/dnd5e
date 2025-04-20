@@ -638,10 +638,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>22 (4d8 + 4) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Roper attacks with its Bite.</p>
       source:
         custom: ''
@@ -796,7 +793,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839737
+      modifiedTime: 1745107553551
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qZyLwdx7lj5d1wfD.mBRjMwEitGrPDm5I'
   - _id: bTiw89tDx64zTqDk
@@ -806,11 +803,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>,
-          <strong>50 ft.,</strong> one target. Hit: The target is
-          <strong>Grappled (escape DC 15)</strong>. Until the grapple ends, the
-          target is Restrained and has <strong>disadvantage on Strength Checks
-          and Strength Saving Throws</strong> , and the roper can't use the same
+          <p>[[/attack extended]]. <em>Hit:</em> The target is
+          &amp;Reference[grappled] (escape DC 15). Until the grapple ends, the
+          target is &amp;Reference[restrained] and has disadvantage on Strength
+          Checks and Strength Saving Throws , and the roper can't use the same
           tendril on another target.</p>
         chat: >-
           <p>The Roper attacks with its Tendril. The target is grappled. Until
@@ -966,7 +962,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916856996
+      modifiedTime: 1745175622958
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qZyLwdx7lj5d1wfD.bTiw89tDx64zTqDk'
   - _id: iGuyFLbKazqPCcXY

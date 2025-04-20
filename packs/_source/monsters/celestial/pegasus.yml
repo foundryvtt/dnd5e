@@ -483,10 +483,7 @@ items:
     img: icons/commodities/bones/hooves-cloven-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Pegasus attacks with its Hooves.</p>
       source:
         custom: ''
@@ -641,7 +638,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837234
+      modifiedTime: 1745107550836
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!EIgAW1dWVPpyWLUh.1HxBbZFsegOJ0cgu'
 effects: []

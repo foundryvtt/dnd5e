@@ -758,10 +758,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>15 (2d10 + 4) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Hezrou attacks with its Bite.</p>
       source:
         custom: ''
@@ -916,7 +913,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838737
+      modifiedTime: 1745107552533
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ec3lhsNv1ZRu7Qaq.UNNl5XqsXZuKOm69'
   - _id: HEQqPUsmmNs178Mj
@@ -925,10 +922,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Hezrou attacks with its Claws.</p>
       source:
         custom: ''
@@ -1081,7 +1075,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838737
+      modifiedTime: 1745107552533
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ec3lhsNv1ZRu7Qaq.HEQqPUsmmNs178Mj'
 effects: []

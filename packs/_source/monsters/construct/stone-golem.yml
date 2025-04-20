@@ -741,10 +741,7 @@ items:
     img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>19 (3d8 + 6)
-          <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Stone Golem attacks with its Slam.</p>
       source:
         custom: ''
@@ -894,9 +891,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676625
+      modifiedTime: 1745107554155
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!z3gSIXHHWYaHjfBT.DelAxHnRbNHC6OoV'
   - _id: 9aTwUWuZQLhMxjcD

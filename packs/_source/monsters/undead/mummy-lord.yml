@@ -54,8 +54,8 @@ system:
     hp:
       value: 97
       max: 97
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 13d8 + 39
     init:
       ability: ''
@@ -1098,13 +1098,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>14 (3d6 + 4) <em>bludgeoning
-          damage</em></strong> plus <strong>21 (6d6) <em>necrotic
-          damage</em></strong>. </p><p>If the target is a creature, it must
-          succeed on a  <strong>DC 16 Constitution</strong> saving throw or be
-          cursed with mummy rot. The cursed target can't regain hit points, and
-          its hit point maximum decreases by 10 (3d6) for every 24 hours that
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a [[/save]] saving throw or be cursed
+          with mummy rot. The cursed target can't regain hit points, and its hit
+          point maximum decreases by 10 ([[/r 3d6]]) for every 24 hours that
           elapse. If the curse reduces the target's hit point maximum to 0, the
           target dies, and its body turns to dust. The curse lasts until removed
           by the remove curse spell or other magic.</p>
@@ -1308,19 +1305,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 3
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -1331,12 +1316,17 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: rotting-fist
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -1344,7 +1334,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838238
+      modifiedTime: 1745176292793
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!UFW8M3JHzHkxUEGM.M6t9H8pMhzQxM9qv'
   - _id: yHydHrxw4vlDlyjf
@@ -3791,8 +3781,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171234382
-  modifiedTime: 1726171445294
+  modifiedTime: 1745176301381
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!UFW8M3JHzHkxUEGM'

@@ -54,8 +54,8 @@ system:
     hp:
       value: 5
       max: 5
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d6 - 2
     init:
       ability: ''
@@ -585,10 +585,7 @@ items:
     img: icons/weapons/daggers/dagger-jeweled-purple.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>4 (1d4 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Kobold attacks with its Dagger.</p>
       source:
         custom: ''
@@ -743,9 +740,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676642
+      modifiedTime: 1745107550028
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!5ngbctIMeEnuC1p1.io78wguVwNy9VfZ4'
   - _id: 0yHcZm2TzgOyt3fI
@@ -754,9 +751,7 @@ items:
     img: icons/weapons/slings/slingshot-wood.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit:
-          <strong>4 (1d4 + 2) <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Kobold attacks with its Sling.</p>
       source:
         custom: ''
@@ -778,7 +773,7 @@ items:
       identified: true
       cover: null
       range:
-        value: null
+        value: 30
         long: 120
         units: ft
         reach: 30
@@ -825,7 +820,7 @@ items:
       unidentified:
         description: ''
       type:
-        value: simpleM
+        value: simpleR
         baseItem: sling
       container: null
       crewed: false
@@ -894,9 +889,11 @@ items:
             parts: []
           sort: 0
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: sling
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -910,9 +907,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676642
+      modifiedTime: 1745173529433
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!5ngbctIMeEnuC1p1.0yHcZm2TzgOyt3fI'
 effects: []
@@ -925,8 +922,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171203985
-  modifiedTime: 1726171439822
+  modifiedTime: 1745173602627
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!5ngbctIMeEnuC1p1'

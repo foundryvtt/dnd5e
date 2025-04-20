@@ -532,10 +532,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>8 (1d10 + 3) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Bronze Dragon Wyrmling attacks with its Bite.</p>
       source:
         custom: ''
@@ -690,7 +687,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839043
+      modifiedTime: 1745107552828
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hY9ptpO5Xl2tfkcj.Vq0dUbodqBggQAVQ'
   - _id: Bl0NweDKcGjwVdPu

@@ -929,11 +929,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>slashing
-          damage</em></strong>. </p><p>If the target is a humanoid, it must
-          succeed on a  <strong>DC 12 Constitution</strong> saving throw or be
-          cursed with wereboar lycanthropy.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a humanoid, it must succeed on a  <strong>DC 12 Constitution</strong>
+          saving throw or be cursed with wereboar lycanthropy.</p>
         chat: >-
           <p>The Wereboar attacks with its Tusks. If the target is a humanoid,
           it must make a <strong>Constitution</strong> saving throw.</p>
@@ -1147,7 +1145,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837538
+      modifiedTime: 1745107551134
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!J9hgSaZODGjrNl9B.3TD2NpdjIDJxeLl9'
   - _id: dtdXnvp5cptFkGPu
@@ -1156,10 +1154,7 @@ items:
     img: icons/weapons/maces/mace-spiked-wood-grey.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Wereboar attacks with its Maul.</p>
       source:
         custom: ''
@@ -1312,9 +1307,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676932
+      modifiedTime: 1745107551134
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!J9hgSaZODGjrNl9B.dtdXnvp5cptFkGPu'
 effects: []

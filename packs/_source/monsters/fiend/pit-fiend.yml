@@ -863,12 +863,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>22 (4d6 + 8)
-          <em>piercing damage</em></strong>.</p><p>The target must succeed on a 
-          <strong>DC 21 Constitution</strong> saving throw or become poisoned.
-          While poisoned in this way, the target can't regain hit points, and it
-          takes <strong>21 (6d6) <em>poison damage</em></strong> at the start of
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          succeed on a [[/save]] saving throw or become poisoned. While poisoned
+          in this way, the target can't regain hit points, and it takes
+          [[/damage average activity=dnd5eactivity100]] damage at the start of
           each of its turns. The poisoned target can repeat the saving throw at
           the end of each of its turns, ending the effect on itself on a
           success.</p>
@@ -1030,7 +1028,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1062,82 +1060,28 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 4
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                number: 6
+                denomination: '6'
+                bonus: ''
+                types:
+                  - poison
           save:
             ability: con
             dc:
               calculation: ''
               formula: '21'
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 6d6
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1146,6 +1090,10 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
@@ -1153,7 +1101,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838139
+      modifiedTime: 1745174970089
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!RCv5y7iWlfNxkinx.GjIQl7UOQUtsrj2v'
   - _id: RkuPEGbAXHhxfNWJ
@@ -1162,9 +1110,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p>Melee Weapon Attack: +14 to hit, reach 10 ft. , one target. Hit:
-          <strong>17 (2d8 + 8) <em>slashing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Pit Fiend attacks with its Claw.</p>
       source:
         custom: ''
@@ -1305,6 +1251,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1318,7 +1265,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838139
+      modifiedTime: 1745174923823
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!RCv5y7iWlfNxkinx.RkuPEGbAXHhxfNWJ'
   - _id: gpjBebqxqbQA35st
@@ -1327,11 +1274,7 @@ items:
     img: icons/weapons/maces/mace-round-spiked-black.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d6 + 8)
-          <em>bludgeoning damage</em></strong> plus <strong>21 (6d6) <em>fire
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Pit Fiend attacks with its Mace.</p>
       source:
         custom: ''
@@ -1497,9 +1440,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676943
+      modifiedTime: 1745107551751
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!RCv5y7iWlfNxkinx.gpjBebqxqbQA35st'
   - _id: Gh1DbMpJiaTlTwWp
@@ -1508,10 +1451,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>24 (3d10 + 8)
-          <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Pit Fiend attacks with its Tail.</p>
       source:
         custom: ''
@@ -1665,7 +1605,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838139
+      modifiedTime: 1745107551751
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!RCv5y7iWlfNxkinx.Gh1DbMpJiaTlTwWp'
   - _id: ghXTfe7sgCbgf1Q8

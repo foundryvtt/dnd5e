@@ -583,11 +583,7 @@ items:
     img: icons/commodities/bones/hooves-cloven-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>bludgeoning
-          damage</em></strong> plus <strong>7 (2d6) <em>fire
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Nightmare attacks with its Hooves.</p>
       source:
         custom: ''
@@ -754,7 +750,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836630
+      modifiedTime: 1745107549944
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!5SgVGhQBswgWRwsF.lzv29dS3tAUUuVlI'
   - _id: XtK73VCT1s8abvjs

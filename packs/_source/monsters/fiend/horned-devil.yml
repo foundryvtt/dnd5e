@@ -497,10 +497,7 @@ items:
     img: icons/tools/cooking/fork-steel-grey.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d8 + 6)
-          <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Horned Devil attacks with its Fork.</p>
       source:
         custom: ''
@@ -653,9 +650,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676850
+      modifiedTime: 1745107551413
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MADGs8pWMVyyFOf1.g8r9DZeHyfNzerHP'
   - _id: smHERNgdj5yGNQuD
@@ -759,16 +756,15 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>10 (1d8 + 6)
-          <em>piercing damage</em></strong>. </p><p>If the target is a creature
-          other than an undead or a construct, it must succeed on a  <strong>DC
-          17 Constitution</strong> saving throw or lose 10 (3d6) hit points at
-          the start of each of its turns due to an infernal wound. Each time the
-          devil hits the wounded target with this attack, the damage dealt by
-          the wound increases by 10 (3d6). Any creature can take an action to
-          stanch the wound with a successful DC 12 Wisdom (Medicine) check. The
-          wound also closes if the target receives magical healing.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a creature other than an undead or a construct, it must succeed on a 
+          <strong>DC 17 Constitution</strong> saving throw or lose 10 (3d6) hit
+          points at the start of each of its turns due to an infernal wound.
+          Each time the devil hits the wounded target with this attack, the
+          damage dealt by the wound increases by 10 (3d6). Any creature can take
+          an action to stanch the wound with a successful DC 12 Wisdom
+          (Medicine) check. The wound also closes if the target receives magical
+          healing.</p>
         chat: >-
           <p>The Horned Devil attacks with its Tail. If the target is a creature
           other than an undead or a construct, it must make a
@@ -1048,7 +1044,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837748
+      modifiedTime: 1745107551413
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MADGs8pWMVyyFOf1.VpvOoT7mbR0XNZiL'
   - _id: 9FAl5YGUTmt1RnEF
@@ -1160,10 +1156,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Ranged Spell Attack:</em><strong>+7 to hit,</strong>,
-          <strong>150 ft.,</strong> one target. Hit: <strong>14 (4d6) <em>fire
-          damage</em></strong>.</p><p>If the target is a flammable object that
-          isn't being worn or carried, it also catches fire.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a flammable object that isn't being worn or carried, it also catches
+          fire.</p>
         chat: >-
           <p>The Horned Devil attacks with its Hurl Flame. If the target is a
           flammable object that isn't being worn or carried, it also catches
@@ -1258,7 +1253,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1288,8 +1283,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: cha
-            bonus: ''
+            ability: none
+            bonus: '@abilities.cha.mod'
             critical:
               threshold: null
             flat: false
@@ -1302,24 +1297,32 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: hurl-flame
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676850
+      modifiedTime: 1745174543613
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MADGs8pWMVyyFOf1.GFYzWSyeuW9O4a0I'
 effects: []

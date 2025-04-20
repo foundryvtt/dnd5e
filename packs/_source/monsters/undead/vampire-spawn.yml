@@ -55,7 +55,7 @@ system:
       value: 82
       max: 82
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 11d8 + 33
     init:
       ability: ''
@@ -489,15 +489,13 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one willing creature, or a creature that is grappled by
-          the vampire, incapacitated, or restrained. Hit: <strong>6 (1d6 + 3)
-          <em>piercing damage</em></strong> plus <strong>7 (2d6) <em>necrotic
-          damage</em></strong>.</p><p>The target's hit point maximum is reduced
-          by an amount equal to the <em>necrotic damage</em> taken, and the
-          vampire regains hit points equal to that amount. The reduction lasts
-          until the target finishes a long rest. The target dies if this effect
-          reduces its hit point maximum to 0.</p>
+          <p><em>Melee Weapon Attack:</em> [[/attack]], 5 ft., one willing
+          creature, or a creature that is grappled by the vampire,
+          incapacitated, or restrained. [[/damage extended]].</p><p>The target's
+          hit point maximum is reduced by an amount equal to the necrotic damage
+          taken, and the vampire regains hit points equal to that amount. The
+          reduction lasts until the target finishes a long rest. The target dies
+          if this effect reduces its hit point maximum to 0.</p>
         chat: <p>The Vampire Spawn attacks with its Bite.</p>
       source:
         custom: ''
@@ -649,6 +647,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -664,7 +663,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916840262
+      modifiedTime: 1745175966453
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zpaZb7I8alY32vWV.HebvJc2NqYvdR79s'
   - _id: DY9MW3aTF5T5zhpo
@@ -673,10 +672,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>8 (2d4 + 3) <em>slashing
-          damage</em></strong>. </p>
+        value: <p>[[/attack extended]]. [[/damage extended]]. </p>
         chat: >-
           <p>The Vampire Spawn attacks with its Claws. Instead of dealing
           damage, the vampire can grapple the target.</p>
@@ -831,7 +827,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916840262
+      modifiedTime: 1745107554337
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zpaZb7I8alY32vWV.DY9MW3aTF5T5zhpo'
   - _id: Q9tHfkUiN6f1sguc
@@ -1174,8 +1170,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171268360
-  modifiedTime: 1726171452429
+  modifiedTime: 1745175970498
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!zpaZb7I8alY32vWV'

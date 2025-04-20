@@ -54,8 +54,8 @@ system:
     hp:
       value: 22
       max: 22
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 5d6 + 5
     init:
       ability: ''
@@ -710,10 +710,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p>Melee Weapon Attack: +3 to hit, reach 5 ft ., one creature. Hit:
-          <strong>3 (1d4 + 1) <em>slashing damage</em></strong> plus <strong>2
-          (1d4) <em>fire damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Magma Mephit attacks with its Claws.</p>
       source:
         custom: ''
@@ -805,7 +802,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -824,8 +821,8 @@ items:
               height: ''
               units: ''
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -848,29 +845,33 @@ items:
               bonus: ''
             includeBase: true
             parts:
-              - number: 1
-                denomination: 4
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: '4'
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: claws
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -878,7 +879,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839455
+      modifiedTime: 1745175546348
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!oJCOB9X2BPsBkWW5.BiAfcjq7C9Wf8R9b'
   - _id: iXhbFt7gCj3FBM2r
@@ -1169,8 +1170,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171257349
-  modifiedTime: 1726171449877
+  modifiedTime: 1745175554406
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!oJCOB9X2BPsBkWW5'

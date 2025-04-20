@@ -54,8 +54,8 @@ system:
     hp:
       value: 18
       max: 18
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 4d8
     init:
       ability: ''
@@ -486,10 +486,7 @@ items:
     img: icons/creatures/claws/claw-curved-poison-purple.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>,
-          <strong>10 ft.,</strong> one creature. Hit: <strong>4 (1d8)
-          <em>necrotic damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Violet Fungus attacks with its Rotting Touch.</p>
       source:
         custom: ''
@@ -552,7 +549,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - fin
       proficient: 1
       unidentified:
         description: ''
@@ -581,7 +579,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -611,7 +609,7 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: ''
+            ability: none
             bonus: ''
             critical:
               threshold: null
@@ -625,16 +623,24 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: rotting-touch
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -642,7 +648,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836753
+      modifiedTime: 1745107870469
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!7EmUVycEASn7SFL0.OEx9iy4HDipiYsPt'
   - _id: wjDktLNTUnueuX2X
@@ -804,8 +810,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171205645
-  modifiedTime: 1726171440071
+  modifiedTime: 1745107876945
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!7EmUVycEASn7SFL0'

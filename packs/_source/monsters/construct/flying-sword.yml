@@ -594,10 +594,7 @@ items:
     img: icons/weapons/swords/greatsword-crossguard-steel.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d8 + 1) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Flying Sword attacks!</p>
       source:
         custom: ''
@@ -751,9 +748,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676541
+      modifiedTime: 1745107550923
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!EqJUA3Z3181RSSFU.D2cJQHQa8UQp99Wt'
 effects: []

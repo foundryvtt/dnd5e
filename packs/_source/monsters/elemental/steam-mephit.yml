@@ -488,11 +488,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>2 (1d4) <em>slashing
-          damage</em></strong> plus <strong>2 (1d4) <em>fire
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Steam Mephit attacks with its Claws.</p>
       source:
         custom: ''
@@ -654,9 +650,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676728
+      modifiedTime: 1745107551952
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!UthHOT7QfZfEIUue.QrN7UxINx4UCaPIC'
   - _id: QWi0q0cSzHEp8VqB

@@ -54,8 +54,8 @@ system:
     hp:
       value: 247
       max: 247
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 15d20 + 90
     init:
       ability: ''
@@ -635,10 +635,8 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>22 (3d8 + 9)
-          <em>piercing damage</em></strong>. </p><p>If the target is a Large or
-          smaller creature, it must succeed on a  <strong>DC 19
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a Large or smaller creature, it must succeed on a  <strong>DC 19
           Dexterity</strong> saving throw or be swallowed by the worm. A
           swallowed creature is blinded and restrained, it has total cover
           against attacks and other effects outside the worm, and it takes
@@ -931,7 +929,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838043
+      modifiedTime: 1745107551645
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!PtotS52HpHX596cZ.dlzFJ5UjbMAfJ6Sb'
   - _id: yOjkK3f9jt2fYu3M
@@ -941,12 +939,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>,
-          <strong>10 ft.,</strong> one creature. Hit: <strong>19 (3d6 + 9)
-          <em>piercing damage</em></strong>.</p><p>The target must make a 
-          <strong>DC 19 Constitution</strong> saving throw, taking <strong>42
-          (12d6) <em>poison damage</em></strong> on a failed save, or half as
-          much damage on a successful one.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          make a  <strong>DC 19 Constitution</strong> saving throw, taking
+          <strong>42 (12d6) <em>poison damage</em></strong> on a failed save, or
+          half as much damage on a successful one.</p>
         chat: >-
           <p>The Purple Worm attacks with its Tail Stinger. The target must make
           a <strong>Constitution</strong> saving throw.</p>
@@ -1225,7 +1221,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838043
+      modifiedTime: 1745107551645
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!PtotS52HpHX596cZ.yOjkK3f9jt2fYu3M'
 effects: []
@@ -1238,8 +1234,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171229828
-  modifiedTime: 1726171444423
+  modifiedTime: 1745108211664
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!PtotS52HpHX596cZ'

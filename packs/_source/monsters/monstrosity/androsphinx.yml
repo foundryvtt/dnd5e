@@ -648,10 +648,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>17 (2d10 + 6)
-          <em>slashing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Androsphinx attacks with its Claw.</p>
       source:
         custom: ''
@@ -804,7 +801,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839343
+      modifiedTime: 1745107553238
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!nEC1BRwM8Lx9hLXW.yotsIj19d5spOVGb'
   - _id: gddHh6xWKLMmCT1J

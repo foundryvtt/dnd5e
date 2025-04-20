@@ -740,10 +740,8 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>bludgeoning
-          damage</em></strong>. </p><p>If the mimic is in object form, the
-          target is subjected to its Adhesive trait.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the mimic is
+          in object form, the target is subjected to its Adhesive trait.</p>
         chat: <p>The Mimic attacks with its Pseudopod.</p>
       source:
         custom: ''
@@ -896,7 +894,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839061
+      modifiedTime: 1745107552842
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hx240PG5r5qpRet3.qHJyEXRC7oExTjES'
   - _id: HgNW3DcqMvGVXO7s
@@ -905,11 +903,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>piercing
-          damage</em></strong> plus <strong>4 (1d8) <em>acid
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Mimic attacks with its Bite.</p>
       source:
         custom: ''
@@ -1076,7 +1070,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839061
+      modifiedTime: 1745107552842
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hx240PG5r5qpRet3.HgNW3DcqMvGVXO7s'
 effects: []

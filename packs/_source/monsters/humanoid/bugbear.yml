@@ -54,8 +54,8 @@ system:
     hp:
       value: 27
       max: 27
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 5d8 + 5
     init:
       ability: ''
@@ -485,12 +485,7 @@ items:
     img: icons/weapons/maces/mace-round-spiked-black.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d8 + 2) <em>piercing
-          damage</em></strong>.</p><p>NOTE: the stats of this weapon have
-          changed reflecting it being wielded by a creature with the "Brute"
-          feature.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Bugbear attacks with its Morningstar.</p>
       source:
         custom: ''
@@ -630,6 +625,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: morningstar
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -643,9 +639,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676677
+      modifiedTime: 1745174894448
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!QtJairF0h18BRhEM.0ZKRgrkQppv6MYIq'
   - _id: CgwJLpd3sHn21cUQ
@@ -973,10 +969,8 @@ items:
     system:
       description:
         value: >-
-          <p>Melee or Ranged Weapon Attack: +4 to hit, reach 5 ft. or range
-          30/120 ft., one target. Hit: <strong>9 (2d6 + 2) <em>piercing
-          damage</em></strong> in melee or <strong>5 (1d6 + 2) <em>piercing
-          damage</em></strong> at range.</p>
+          <p>[[/attack extended]]. [[/damage extended]] in melee or [[/damage
+          1d6 + 2 piercing average]] at range.</p>
         chat: <p>The Bugbear attacks with its Javelin.</p>
       source:
         custom: ''
@@ -1070,7 +1064,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1106,18 +1100,22 @@ items:
               threshold: null
             flat: false
             type:
-              value: melee
-              classification: weapon
+              value: ''
+              classification: ''
           damage:
             critical:
               bonus: ''
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: javelin
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1126,14 +1124,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.items.DWLMnODrnHn8IbAG
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.DWLMnODrnHn8IbAG
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676677
+      modifiedTime: 1745174878816
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!QtJairF0h18BRhEM.xwZYlJUYOv2J044p'
 effects: []
@@ -1146,8 +1148,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171230689
-  modifiedTime: 1726171444578
+  modifiedTime: 1745174909100
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!QtJairF0h18BRhEM'

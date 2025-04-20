@@ -486,11 +486,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>16 (2d10 + 5)
-          <em>piercing damage</em></strong> plus <strong>5 (1d10) <em>lightning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Young Blue Dragon attacks with its Bite.</p>
       source:
         custom: ''
@@ -657,7 +653,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839259
+      modifiedTime: 1745107553147
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!mNijwXPMhwR7yYfc.42AGHJQzJZfUYxF9'
   - _id: YSVencwrBzRdfm62
@@ -666,10 +662,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>12 (2d6 + 5) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Young Blue Dragon attacks with its Claw.</p>
       source:
         custom: ''
@@ -822,7 +815,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839259
+      modifiedTime: 1745107553147
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!mNijwXPMhwR7yYfc.YSVencwrBzRdfm62'
   - _id: 7XDStiwr5cRAODjk

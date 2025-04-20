@@ -55,7 +55,7 @@ system:
       value: 52
       max: 52
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 7d8 + 21
     init:
       ability: ''
@@ -644,10 +644,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Gargoyle attacks with its Bite.</p>
       source:
         custom: ''
@@ -802,7 +799,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836327
+      modifiedTime: 1745107549636
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!0m8QyDN52qw9zzOM.A6GBvah75Y7fGjc5'
   - _id: ipJwA0j2zfzmq5GW
@@ -811,10 +808,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Gargoyle attacks with its Claws.</p>
       source:
         custom: ''
@@ -967,7 +961,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836327
+      modifiedTime: 1745107549636
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!0m8QyDN52qw9zzOM.ipJwA0j2zfzmq5GW'
 effects: []
@@ -980,8 +974,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171198010
-  modifiedTime: 1726171438760
+  modifiedTime: 1745107599287
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!0m8QyDN52qw9zzOM'

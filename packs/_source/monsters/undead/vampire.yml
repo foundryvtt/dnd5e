@@ -55,7 +55,7 @@ system:
       value: 144
       max: 144
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 17d8 + 68
     init:
       ability: ''
@@ -1051,10 +1051,8 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>8 (1d8 + 4) <em>bludgeoning
-          damage</em></strong>. </p><p>Instead of dealing damage, the vampire
-          can grapple the target (escape DC 18).</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>Instead of
+          dealing damage, the vampire can grapple the target (escape DC 18).</p>
         chat: <p>The Vampire attacks with its Unarmed Strike.</p>
       source:
         custom: ''
@@ -1207,7 +1205,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837224
+      modifiedTime: 1745107550823
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!DDO9lDCDtNHkfShP.jYBYvv9EF1UnOvqZ'
   - _id: uqHuj7Pjf2sjny21
@@ -1217,17 +1215,15 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5
-          ft.,</strong> one willing creature, or a creature that is grappled by
-          the vampire, incapacitated, or restrained. Hit: <strong>7 (1d6 + 4)
-          <em>piercing damage</em></strong> plus <strong>10 (3d6) <em>necrotic
-          damage</em></strong>. </p><p>The target's hit point maximum is reduced
-          by an amount equal to the <em>necrotic damage</em> taken, and the
-          vampire regains hit points equal to that amount. The reduction lasts
-          until the target finishes a long rest. The target dies if this effect
-          reduces its hit point maximum to 0. A humanoid slain in this way and
-          then buried in the ground rises the following night as a vampire spawn
-          under the vampire's control.</p>
+          <p><em>Melee Weapon Attack: </em>[[/attack]], reach 5 ft., one willing
+          creature, or a creature that is grappled by the vampire,
+          incapacitated, or restrained. [[/damage extended]].</p><p>The target's
+          hit point maximum is reduced by an amount equal to the <em>necrotic
+          damage</em> taken, and the vampire regains hit points equal to that
+          amount. The reduction lasts until the target finishes a long rest. The
+          target dies if this effect reduces its hit point maximum to 0. A
+          humanoid slain in this way and then buried in the ground rises the
+          following night as a vampire spawn under the vampire's control.</p>
         chat: <p>The Vampire attacks with its Bite.</p>
       source:
         custom: ''
@@ -1319,7 +1315,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1338,10 +1334,10 @@ items:
               height: ''
               units: ''
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
-              special: ''
+              special: ' one willing creature, or a creature that is grappled by the vampire, incapacitated, or restrained'
             prompt: true
             override: false
           uses:
@@ -1362,29 +1358,33 @@ items:
               bonus: ''
             includeBase: true
             parts:
-              - number: 3
-                denomination: 6
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
+                denomination: '6'
                 bonus: ''
                 types:
                   - necrotic
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite-bat-or-vampire-form-only
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -1392,7 +1392,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837224
+      modifiedTime: 1745174258292
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!DDO9lDCDtNHkfShP.uqHuj7Pjf2sjny21'
   - _id: RHezeN7HzNf2oKYP
@@ -2116,8 +2116,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171214189
-  modifiedTime: 1726171441526
+  modifiedTime: 1745174265686
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!DDO9lDCDtNHkfShP'

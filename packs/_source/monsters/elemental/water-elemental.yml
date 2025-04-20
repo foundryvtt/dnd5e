@@ -700,10 +700,7 @@ items:
     img: icons/magic/water/wave-water-blue.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Water Elemental attacks with its Slam.</p>
       source:
         custom: ''
@@ -856,7 +853,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839444
+      modifiedTime: 1745107553358
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!namJz755U1EhvEJa.7xDGPsWicxgP6feT'
   - _id: 5XUFTldfE6mtRUfd

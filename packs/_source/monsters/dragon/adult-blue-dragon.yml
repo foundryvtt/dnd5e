@@ -533,11 +533,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>18 (2d10 + 7)
-          <em>piercing damage</em></strong> plus <strong>5 (1d10) <em>lightning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Adult Blue Dragon attacks with its Bite.</p>
       source:
         custom: ''
@@ -704,7 +700,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838635
+      modifiedTime: 1745107552426
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!cGM3iVYTtCsYXjzO.tz3vYeFf3GLouPGC'
   - _id: kYySllKlNPBsT7Ho
@@ -713,10 +709,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>14 (2d6 + 7)
-          <em>slashing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Adult Blue Dragon attacks with its Claw.</p>
       source:
         custom: ''
@@ -869,7 +862,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838635
+      modifiedTime: 1745107552426
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!cGM3iVYTtCsYXjzO.kYySllKlNPBsT7Ho'
   - _id: wpVgm5eOdM9j3C3N
@@ -1546,10 +1539,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>,
-          <strong>15 ft.,</strong> one target. Hit: <strong>16 (2d8 + 7)
-          <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Adult Blue Dragon attacks with its Tail.</p>
       source:
         custom: ''
@@ -1702,7 +1692,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838635
+      modifiedTime: 1745107552426
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!cGM3iVYTtCsYXjzO.JRgWoRDlExmKqNVa'
   - _id: ANMZzr2n2EpU41eg

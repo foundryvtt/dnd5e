@@ -485,10 +485,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d10 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Brass Dragon Wyrmling attacks with its Bite.</p>
       source:
         custom: ''
@@ -643,7 +640,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838540
+      modifiedTime: 1745107552334
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!azCbLQt5LAYwTI7U.K4qz0HVrX4JxcUvf'
   - _id: JmVLjWM4G6OOQxl4

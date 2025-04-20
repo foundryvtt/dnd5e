@@ -55,7 +55,7 @@ system:
       value: 22
       max: 22
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 9d4
     init:
       ability: ''
@@ -839,10 +839,7 @@ items:
     img: icons/magic/lightning/bolt-forked-teal.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Spell Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>9 (2d8) <em>lightning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Will-o'-Wisp attacks with its Shock.</p>
       source:
         custom: ''
@@ -934,7 +931,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -964,8 +961,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: wis
-            bonus: ''
+            ability: none
+            bonus: '@abilities.wis.mod'
             critical:
               threshold: null
             flat: false
@@ -978,16 +975,24 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: shock
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -995,7 +1000,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836923
+      modifiedTime: 1745174130753
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8KSVpQZyzius93ko.np6oHDOwHQFsSn5B'
   - _id: vJR81iEOZYNMuAdz
@@ -1111,8 +1116,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171207290
-  modifiedTime: 1726171440311
+  modifiedTime: 1745174143582
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!8KSVpQZyzius93ko'

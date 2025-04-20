@@ -801,10 +801,7 @@ items:
     img: icons/weapons/swords/sword-guard-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Spy attacks with their Shortsword.</p>
       source:
         custom: ''
@@ -959,9 +956,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676631
+      modifiedTime: 1745107549714
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!13K3XK2A3wwxVKLD.BhYnUUBoU3ESkl1B'
   - _id: q6pfCQyaPQSw2waZ
@@ -970,9 +967,7 @@ items:
     img: icons/weapons/crossbows/crossbow-simple-brown.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit:
-          <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Spy attacks with their Hand Crossbow.</p>
       source:
         custom: ''
@@ -1127,9 +1122,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676631
+      modifiedTime: 1745173384495
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!13K3XK2A3wwxVKLD.q6pfCQyaPQSw2waZ'
 effects: []

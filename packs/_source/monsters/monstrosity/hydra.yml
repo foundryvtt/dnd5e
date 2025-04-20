@@ -786,10 +786,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>10 (1d10 + 5)
-          <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Hydra attacks with its Bite.</p>
       source:
         custom: ''
@@ -945,7 +942,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837545
+      modifiedTime: 1745107551141
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!K4vsSlHqbBAHUDHY.fYE4f0Oa2I0MetId'
 effects: []

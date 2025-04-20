@@ -644,13 +644,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>4 (1d6 + 1) <em>bludgeoning
-          damage</em></strong> plus <strong>7 (2d6) <em>acid
-          damage</em></strong>.</p><p>If the target is wearing nonmagical metal
-          armor, its armor is partly corroded and takes a permanent and
-          cumulative -1 penalty to the AC it offers. The armor is destroyed if
-          the penalty reduces its AC to 10.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          wearing nonmagical metal armor, its armor is partly corroded and takes
+          a permanent and cumulative -1 penalty to the AC it offers. The armor
+          is destroyed if the penalty reduces its AC to 10.</p>
         chat: >-
           <p>The Gray Ooze attacks with its Pseudopod. If the target is wearing
           nonmagical metal armor, its armor is partly corroded and takes a
@@ -818,7 +815,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838845
+      modifiedTime: 1745107552634
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fqbFYtbtkrL53FOC.KO4qRywgiEQ3F004'
 effects: []

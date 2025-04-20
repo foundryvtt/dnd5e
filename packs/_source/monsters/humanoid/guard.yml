@@ -54,8 +54,8 @@ system:
     hp:
       value: 11
       max: 11
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d8 + 2
     init:
       ability: ''
@@ -639,10 +639,8 @@ items:
     system:
       description:
         value: >-
-          <p>Melee or Ranged Weapon Attack: +3 to hit, reach 5 ft. or range
-          20/60 ft., one target. Hit: <strong>4 (1d6 + 1) <em>piercing
-          damage</em></strong> or <strong>5 (1d8 + 1) <em>piercing
-          damage</em></strong> if used with two hands to make a melee
+          <p>[[/attack extended]]. [[/damage extended]] or [[/damage average
+          attackMode=twoHanded]] damage if used with two hands to make a melee
           attack.</p>
         chat: <p>The Guard attacks with its Spear.</p>
       source:
@@ -785,6 +783,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: spear
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -798,9 +797,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676425
+      modifiedTime: 1745174302801
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!E9CvDPDg5dFEpVjS.92uVNexE43Z8D18r'
 effects: []
@@ -813,8 +812,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171214428
-  modifiedTime: 1726171441570
+  modifiedTime: 1745174309885
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!E9CvDPDg5dFEpVjS'

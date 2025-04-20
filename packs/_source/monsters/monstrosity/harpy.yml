@@ -586,10 +586,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (2d4 + 1) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Harpy attacks with its Claws.</p>
       source:
         custom: ''
@@ -742,7 +739,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837134
+      modifiedTime: 1745107550732
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!CqQ6pXQA5WXZNOm3.WqD5jsrWCeNHoD9O'
   - _id: ywVQhULZvd4Jn51c
@@ -751,10 +748,7 @@ items:
     img: icons/weapons/clubs/club-simple-barbed.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>3 (1d4 + 1) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Harpy attacks with its Club.</p>
       source:
         custom: ''
@@ -908,9 +902,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676769
+      modifiedTime: 1745107550732
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!CqQ6pXQA5WXZNOm3.ywVQhULZvd4Jn51c'
   - _id: QeobH0xuWk2yWmsb

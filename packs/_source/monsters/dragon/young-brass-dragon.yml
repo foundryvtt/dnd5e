@@ -486,10 +486,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d10 + 4)
-          <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Young Brass Dragon attacks with its Bite.</p>
       source:
         custom: ''
@@ -644,7 +641,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837336
+      modifiedTime: 1745107550928
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!FzvZ6xl3U9GoL9ju.dYJy66Ftt58qpTUi'
   - _id: h8ocFdixa3iZVj0m
@@ -1017,10 +1014,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Young Brass Dragon attacks with its Claw.</p>
       source:
         custom: ''
@@ -1173,7 +1167,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837336
+      modifiedTime: 1745107550928
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!FzvZ6xl3U9GoL9ju.YHom7FFObzrKEBLQ'
   - _id: oyNvUJRyGRVF22t8

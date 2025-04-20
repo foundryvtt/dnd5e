@@ -564,9 +564,7 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d10 + 4)
-          <em>slashing damage</em></strong>, or <strong>9 (1d10 + 4)
+          <p>[[/attack extended]]. [[/damage extended]], or <strong>9 (1d10 + 4)
           <em>slashing damage</em></strong> in Small or Medium form.</p>
         chat: <p>The Oni attacks with its Glaive.</p>
       source:
@@ -723,9 +721,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676784
+      modifiedTime: 1745173385319
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!L1w8yBkInMscfJ3F.FC0FNE8O4rnbth8s'
   - _id: q7J7PERrJb2vxtlt
@@ -734,10 +732,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>8 (1d8 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Oni attacks with its Claw.</p>
       source:
         custom: ''
@@ -890,7 +885,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837652
+      modifiedTime: 1745107551323
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!L1w8yBkInMscfJ3F.q7J7PERrJb2vxtlt'
   - _id: HiGvFK1bT8zkJA3r

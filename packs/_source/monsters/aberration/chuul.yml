@@ -486,11 +486,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4)
-          <em>bludgeoning damage</em></strong>.</p><p>The target is grappled
-          (escape DC 14) if it is a Large or smaller creature and the chuul
-          doesn't have two other creatures grappled.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
+          grappled (escape DC 14) if it is a Large or smaller creature and the
+          chuul doesn't have two other creatures grappled.</p>
         chat: >-
           <p>The Chuul attacks with its Pincer. The target is grappled if it is
           a Large or smaller creature.</p>
@@ -646,7 +644,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838037
+      modifiedTime: 1745107551628
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!P6qC8jB3pnEH0tIE.7lnXqe8AnWhtnQh7'
   - _id: XUzROtGqVZS61Ofm

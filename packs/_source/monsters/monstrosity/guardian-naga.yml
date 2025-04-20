@@ -54,8 +54,8 @@ system:
     hp:
       value: 127
       max: 127
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 15d10 + 45
     init:
       ability: ''
@@ -650,12 +650,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>,
-          <strong>10 ft.,</strong> one creature. Hit: <strong>8 (1d8 + 4)
-          <em>piercing damage</em></strong>.</p><p>The target must make a 
-          <strong>DC 15 Constitution</strong> saving throw, taking <strong>45
-          (10d8) <em>poison damage</em></strong> on a failed save, or half as
-          much damage on a successful one.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          make a [[/save]] saving throw, taking [[/damage average
+          activity=dnd5eactivity100]] damage on a failed save, or half as much
+          damage on a successful one.</p>
         chat: >-
           <p>The Guardian Naga attacks with its Bite. The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -813,7 +811,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -845,82 +843,28 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 1
-                denomination: 8
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                number: 10
+                denomination: '8'
+                bonus: ''
+                types:
+                  - poison
           save:
             ability: con
             dc:
               calculation: ''
               formula: '15'
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '10'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 10d8
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -929,6 +873,10 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
@@ -936,7 +884,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836857
+      modifiedTime: 1745174086849
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8ExSFCar5Lbhdo7u.hQFQz2LiNGpxcRvw'
   - _id: PtPZ5aBQPEfbbvla
@@ -946,11 +894,9 @@ items:
     system:
       description:
         value: >-
-          <p>Ranged Weapon Attack: +8 to hit, range 15/30 ft., one creature.
-          Hit: </p><p>The target must make a  <strong>DC 15
-          Constitution</strong> saving throw, taking <strong>45 (10d8)
-          <em>poison damage</em></strong> on a failed save, or half as much
-          damage on a successful one.</p>
+          <p>[[/attack extended]]. <em>Hit: </em>The target must make a
+          [[/save]] saving throw, taking [[/damage average]] on a failed save,
+          or half as much damage on a successful one.</p>
         chat: >-
           <p>The Guardian Naga attacks with its Spit Poison. The target must
           make a <strong>Constitution</strong> saving throw.</p>
@@ -996,11 +942,10 @@ items:
             number: null
             formula: ''
         base:
-          number: 10
-          denomination: 8
+          number: null
+          denomination: 0
           bonus: ''
-          types:
-            - poison
+          types: []
           custom:
             enabled: false
             formula: ''
@@ -1161,6 +1106,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: spit-poison
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1172,9 +1118,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676888
+      modifiedTime: 1745173990484
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8ExSFCar5Lbhdo7u.PtPZ5aBQPEfbbvla'
   - _id: kjmjY0zlE6IEiQVL
@@ -3079,8 +3025,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171206978
-  modifiedTime: 1726171440265
+  modifiedTime: 1745174093731
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!8ExSFCar5Lbhdo7u'

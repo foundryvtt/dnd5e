@@ -668,11 +668,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d10 + 4)
-          <em>piercing damage</em></strong> plus <strong>4 (1d8) <em>acid
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Young Black Dragon attacks with its Bite.</p>
       source:
         custom: ''
@@ -839,7 +835,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838553
+      modifiedTime: 1745107552418
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!bcapsJdIhY5WktpT.kuTDtAq2QL2Tmr4h'
   - _id: gy0FMKec2tea9YI1
@@ -848,10 +844,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Young Black Dragon attacks with its Claw.</p>
       source:
         custom: ''
@@ -1004,7 +997,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838553
+      modifiedTime: 1745107552418
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!bcapsJdIhY5WktpT.gy0FMKec2tea9YI1'
   - _id: ApR7vtoU4ec7UulE

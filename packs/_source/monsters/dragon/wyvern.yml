@@ -586,10 +586,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>,
-          <strong>10 ft.,</strong> one creature. Hit: <strong>11 (2d6 + 4)
-          <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Wyvern attacks with its Bite.</p>
       source:
         custom: ''
@@ -745,7 +742,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836745
+      modifiedTime: 1745107550143
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!7198siHjPJf8g0cG.j1LTHxGLXWdnEbwq'
   - _id: Wa8BU72wRqyBCqkI
@@ -754,10 +751,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Wyvern attacks with its Claws.</p>
       source:
         custom: ''
@@ -911,7 +905,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836745
+      modifiedTime: 1745107550143
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!7198siHjPJf8g0cG.Wa8BU72wRqyBCqkI'
   - _id: HzLuzqlmtBSeSS4Q
@@ -921,12 +915,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>,
-          <strong>10 ft.,</strong> one creature. Hit: <strong>11 (2d6 + 4)
-          <em>piercing damage</em></strong>.</p><p>The target must make a 
-          <strong>DC 15 Constitution</strong> saving throw, taking <strong>24
-          (7d6) <em>poison damage</em></strong> on a failed save, or half as
-          much damage on a successful one.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          make a  <strong>DC 15 Constitution</strong> saving throw, taking
+          <strong>24 (7d6) <em>poison damage</em></strong> on a failed save, or
+          half as much damage on a successful one.</p>
         chat: >-
           <p>The Wyvern attacks with its Stinger. The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -1152,7 +1144,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836745
+      modifiedTime: 1745107550143
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!7198siHjPJf8g0cG.HzLuzqlmtBSeSS4Q'
 effects: []

@@ -54,8 +54,8 @@ system:
     hp:
       value: 200
       max: 200
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 16d10 + 112
     init:
       ability: ''
@@ -816,11 +816,7 @@ items:
     img: icons/weapons/swords/sword-katana.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>13 (2d6 + 6)
-          <em>slashing damage</em></strong> plus <strong>7 (2d6) <em>fire
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Efreeti attacks with its Scimitar.</p>
       source:
         custom: ''
@@ -987,9 +983,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676668
+      modifiedTime: 1745107551338
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!LTomFUTBrkRi0Pj5.tR7JGJjIz6H1oerb'
   - _id: 9D7vAr8iJbSa4g5N
@@ -998,10 +994,7 @@ items:
     img: icons/magic/fire/blast-jet-stream-splash.webp
     system:
       description:
-        value: >-
-          <p><em>Ranged Spell Attack:</em><strong>+7 to hit,</strong>,
-          <strong>120 ft.,</strong> one target. Hit: <strong>17 (5d6) <em>fire
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Efreeti attacks with its Hurl Flame.</p>
       source:
         custom: ''
@@ -1070,7 +1063,7 @@ items:
       unidentified:
         description: ''
       type:
-        value: simpleR
+        value: natural
         baseItem: ''
       container: null
       crewed: false
@@ -1094,7 +1087,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1124,8 +1117,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: cha
-            bonus: ''
+            ability: none
+            bonus: '@abilities.cha.mod'
             critical:
               threshold: null
             flat: false
@@ -1138,24 +1131,32 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: hurl-flame
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676668
+      modifiedTime: 1745174515941
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!LTomFUTBrkRi0Pj5.9D7vAr8iJbSa4g5N'
   - _id: ghXTfe7sgCbgf1Q8
@@ -2304,8 +2305,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171224294
-  modifiedTime: 1726171443483
+  modifiedTime: 1745174524951
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!LTomFUTBrkRi0Pj5'

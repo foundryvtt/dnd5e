@@ -869,12 +869,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>17 (5d6) <em>piercing
-          damage</em></strong>. </p><p>If the target is Medium or smaller, it
-          must succeed on a  <strong>DC 10 Strength</strong> saving throw or be
-          knocked prone. If the target is killed by this damage, it is absorbed
-          into the mouther.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          Medium or smaller, it must succeed on a  <strong>DC 10
+          Strength</strong> saving throw or be knocked prone. If the target is
+          killed by this damage, it is absorbed into the mouther.</p>
         chat: >-
           <p>The Gibbering Mouther attacks with its Bites. If the target is
           Medium or smaller, it must make a <strong>Strength</strong> saving
@@ -1099,7 +1097,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836940
+      modifiedTime: 1745107550445
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8pX2JhWUpTNNRBVx.lfUDtJ8hdeULQzqa'
   - _id: KQRvDGowc6ihejLu

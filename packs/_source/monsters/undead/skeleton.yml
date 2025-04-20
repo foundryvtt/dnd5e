@@ -487,9 +487,7 @@ items:
     img: icons/weapons/bows/shortbow-recurve.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +4 to hit, range 80/320 ft., one target. Hit:
-          <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Skeleton attacks with its Shortbow.</p>
       source:
         custom: ''
@@ -644,9 +642,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676698
+      modifiedTime: 1745173385702
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!nU8GN8La8DCt8SDb.hrTC2vP0xMgI8q8y'
   - _id: qXbbvudRpBoul3bH
@@ -655,10 +653,7 @@ items:
     img: icons/weapons/swords/sword-guard-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Skeleton attacks with its Shortsword.</p>
       source:
         custom: ''
@@ -813,9 +808,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676698
+      modifiedTime: 1745107553281
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!nU8GN8La8DCt8SDb.qXbbvudRpBoul3bH'
 effects: []

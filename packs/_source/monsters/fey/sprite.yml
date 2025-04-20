@@ -54,8 +54,8 @@ system:
     hp:
       value: 2
       max: 2
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 1d4
     init:
       ability: ''
@@ -562,8 +562,12 @@ items:
     system:
       description:
         value: >-
-          <p>Ranged Weapon Attack: +6 to hit, range 40/160 ft., one target.
-          Hit:<strong> 1 <em>piercing damage</em>.</strong></p>
+          <p>[[/attack extended]]. [[/damage extended]], and the target must
+          succeed on a [[/save]] saving throw or become &amp;Reference[poisoned]
+          for 1 minute. If its saving throw result is 5 or lower, the poisoned
+          target falls &amp;Reference[unconscious] for the same duration, or
+          until it takes damage or another creature takes an action to shake it
+          awake.</p>
         chat: <p>The Sprite attacks with its Shortbow.</p>
       source:
         custom: ''
@@ -749,19 +753,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: null
-                denomination: null
-                bonus: ''
-                types:
-                  - piercing
-                custom:
-                  enabled: true
-                  formula: '1'
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -772,6 +764,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: shortbow
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -780,14 +773,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.items.GJv6WkD7D2J6rP6M
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.GJv6WkD7D2J6rP6M
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676890
+      modifiedTime: 1745174638780
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MUpBNDoJEr09bLaO.YN8cO9SCNOIFJcmw'
   - _id: mT8SL7VHsG6qY5G7
@@ -796,10 +793,7 @@ items:
     img: icons/weapons/swords/greatsword-crossguard-steel.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+2 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit:<strong> 1 <em>slashing
-          damage</em>.</strong></p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Sprite attacks with its Longsword.</p>
       source:
         custom: ''
@@ -891,7 +885,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -920,7 +914,7 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: ''
+            ability: none
             bonus: ''
             critical:
               threshold: null
@@ -934,10 +928,14 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: longsword
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -946,14 +944,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676890
+      modifiedTime: 1745174681869
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MUpBNDoJEr09bLaO.mT8SL7VHsG6qY5G7'
   - _id: qLd01BTjVwH6NUfH
@@ -1183,8 +1185,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171225738
-  modifiedTime: 1726171443700
+  modifiedTime: 1745174693996
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!MUpBNDoJEr09bLaO'

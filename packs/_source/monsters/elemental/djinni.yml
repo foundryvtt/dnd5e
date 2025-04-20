@@ -54,8 +54,8 @@ system:
     hp:
       value: 161
       max: 161
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 14d10 + 84
     init:
       ability: ''
@@ -693,11 +693,7 @@ items:
     img: icons/weapons/swords/sword-katana.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>12 (2d6 + 5) <em>slashing
-          damage</em></strong> plus 3 (1d6) lightning or thunder damage
-          (djinni's choice).</p>
+        value: <p>[[/attack extended]]. [[/damage extended]] (djinni's choice).</p>
         chat: <p>The Djinni attacks with its Scimitar.</p>
       source:
         custom: ''
@@ -766,7 +762,7 @@ items:
         description: ''
       type:
         value: simpleM
-        baseItem: scimitar
+        baseItem: ''
       container: null
       crewed: false
       activities:
@@ -789,7 +785,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -832,23 +828,24 @@ items:
               bonus: ''
             includeBase: true
             parts:
-              - number: 1
-                denomination: 6
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: '6'
                 bonus: ''
                 types:
                   - lightning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                  - thunder
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: scimitar
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -857,14 +854,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.items.fbC0Mg1a73wdFbqO
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.fbC0Mg1a73wdFbqO
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676525
+      modifiedTime: 1745173840296
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!5P1VGAZQwOilwZQf.DGP7lnAJT1cv8SA4'
   - _id: nE7YNnVM7srBcdfl
@@ -2589,8 +2590,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171203084
-  modifiedTime: 1726171439660
+  modifiedTime: 1745173869351
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!5P1VGAZQwOilwZQf'

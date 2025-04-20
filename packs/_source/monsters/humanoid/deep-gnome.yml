@@ -662,10 +662,7 @@ items:
     img: icons/weapons/axes/pickaxe-double-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (1d8 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Deep Gnome (Svirfneblin) attacks with its War Pick.</p>
       source:
         custom: ''
@@ -818,9 +815,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676686
+      modifiedTime: 1745107552225
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.AqLTSMp6MlcNK666'
   - _id: pnfC0DIa1eqXGjku
@@ -884,12 +881,11 @@ items:
     system:
       description:
         value: >-
-          <p>Ranged Weapon Attack: +4 to hit, range 30/120 ft., one creature.
-          Hit: <strong>4 (1d4 + 2) <em>piercing damage</em></strong>.</p><p>The
-          target must succeed on a  <strong>DC 12 Constitution</strong> saving
-          throw or be poisoned for 1 minute. The target can repeat the saving
-          throw at the end of each of its turns, ending the effect on itself on
-          a success.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          succeed on a  <strong>DC 12 Constitution</strong> saving throw or be
+          poisoned for 1 minute. The target can repeat the saving throw at the
+          end of each of its turns, ending the effect on itself on a
+          success.</p>
         chat: >-
           <p>The Deep Gnome (Svirfneblin) attacks with its Poisoned Dart. The
           target must make a <strong>Constitution</strong> saving throw. The
@@ -1115,9 +1111,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676686
+      modifiedTime: 1745173385501
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ZM1P6LoYSwMiIJN9.YuhirWYJsQfL6zo5'
   - _id: aU62xVUBYkAQWIHv

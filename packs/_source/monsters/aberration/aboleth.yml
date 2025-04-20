@@ -1238,13 +1238,11 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>12 (2d6 + 5)
-          <em>bludgeoning damage</em></strong>.</p><p>If the target is a
-          creature, it must succeed on a  <strong>DC 14 Constitution</strong>
-          saving throw or become diseased. The disease has no effect for 1
-          minute and can be removed by any magic that cures disease. After 1
-          minute, the diseased creature gains Tentacle Disease.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a [[/save]] saving throw or become
+          diseased. The disease has no effect for 1 minute and can be removed by
+          any magic that cures disease. After 1 minute, the diseased creature
+          gains [[/item .Lnp6wFaKnkpuWJs2]].</p>
         chat: >-
           <p>The Aboleth attacks with its Tentacle. If the target is a creature,
           it must make a <strong>Constitution</strong> saving throw.</p>
@@ -1433,19 +1431,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -1456,12 +1442,17 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tentacle
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -1469,7 +1460,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839862
+      modifiedTime: 1745175763434
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!shhHtE7b92PefCWB.sgauK8Lyt8qxsxOH'
   - _id: FwOZEwx7MPDq8Igu
@@ -1478,9 +1469,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: >-
-          <p>Melee Weapon Attack: +9 to hit, reach 10 ft. one target. Hit:
-          <strong>15 (3d6 + 5) <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Aboleth attacks with its Tail.</p>
       source:
         custom: ''
@@ -1593,7 +1582,7 @@ items:
               units: ''
             affects:
               count: '1'
-              type: creature
+              type: any
               choice: false
               special: ''
             prompt: true
@@ -1617,16 +1606,24 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: tail
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -1634,7 +1631,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839862
+      modifiedTime: 1745175712668
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!shhHtE7b92PefCWB.FwOZEwx7MPDq8Igu'
   - _id: fI8m07LnyCCdsSpn

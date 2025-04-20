@@ -483,10 +483,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>30 (4d12 + 4) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Bulette attacks with its Bite.</p>
       source:
         custom: ''
@@ -641,7 +638,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836339
+      modifiedTime: 1745107549721
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1ES45ODWg3pCrkzv.r4KUyv5cYwjHqNl3'
   - _id: xZeM7pLE9OPzdhBY

@@ -54,8 +54,8 @@ system:
     hp:
       value: 84
       max: 84
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 8d10 + 40
     init:
       ability: ''
@@ -609,10 +609,7 @@ items:
     img: icons/creatures/slimes/slime-movement-dripping-pseudopods-green.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>10 (3d6) <em>acid
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Gelatinous Cube attacks with its Pseudopod.</p>
       source:
         custom: ''
@@ -704,7 +701,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -734,8 +731,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
-            bonus: ''
+            ability: none
+            bonus: '2'
             critical:
               threshold: null
             flat: false
@@ -748,6 +745,9 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -757,7 +757,11 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -765,7 +769,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836534
+      modifiedTime: 1745107723402
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!3fzQVYQhXxCXRa2o.t2KRGzsjV4Wwp0wj'
   - _id: 6PuULfBzy5vpBSFI
@@ -966,8 +970,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171200728
-  modifiedTime: 1726171439235
+  modifiedTime: 1745107732101
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!3fzQVYQhXxCXRa2o'

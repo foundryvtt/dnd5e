@@ -638,10 +638,7 @@ items:
     img: icons/creatures/tentacles/tentacles-thing-green.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>9 (2d6 + 2) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Grick attacks with its Tentacles.</p>
       source:
         custom: ''
@@ -796,7 +793,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839946
+      modifiedTime: 1745107553852
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!tFJX45zj3QDc3Zli.tkVlxJxg4LBVJvuX'
   - _id: AGLjE9RSCjg1vQ6R
@@ -805,10 +802,7 @@ items:
     img: icons/commodities/bones/beak-hooked-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Grick attacks with its Beak.</p>
       source:
         custom: ''
@@ -961,7 +955,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839946
+      modifiedTime: 1745107553852
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!tFJX45zj3QDc3Zli.AGLjE9RSCjg1vQ6R'
 effects: []

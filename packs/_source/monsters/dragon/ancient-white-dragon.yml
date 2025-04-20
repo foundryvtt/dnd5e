@@ -483,11 +483,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>,
-          <strong>15 ft.,</strong> one target. Hit: <strong>19 (2d10 + 8)
-          <em>piercing damage</em></strong> plus <strong>9 (2d8) <em>cold
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ancient White Dragon attacks with its Bite.</p>
       source:
         custom: ''
@@ -654,7 +650,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838530
+      modifiedTime: 1745107552323
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!aTITHYYxthuZBPBn.NB88hf8oRtLwBolX'
   - _id: Cz5xqvQ50f5zxuNY
@@ -663,10 +659,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d6 + 8)
-          <em>slashing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ancient White Dragon attacks with its Claw.</p>
       source:
         custom: ''
@@ -819,7 +812,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838530
+      modifiedTime: 1745107552323
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!aTITHYYxthuZBPBn.Cz5xqvQ50f5zxuNY'
   - _id: VtIk8lLDM4Qj3uOl
@@ -1544,10 +1537,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>,
-          <strong>20 ft.,</strong> one target. Hit: <strong>17 (2d8 + 8)
-          <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ancient White Dragon attacks with its Tail.</p>
       source:
         custom: ''
@@ -1700,7 +1690,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838530
+      modifiedTime: 1745107552323
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!aTITHYYxthuZBPBn.Q3Nd59qtQ5rsGs6c'
   - _id: zu4q8DV9mStLmBeN

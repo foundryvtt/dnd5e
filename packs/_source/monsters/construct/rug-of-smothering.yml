@@ -54,8 +54,8 @@ system:
     hp:
       value: 33
       max: 33
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 6d10
     init:
       ability: ''
@@ -645,13 +645,12 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one Medium or smaller creature. Hit:</p><p>The creature
-          is grappled (escape DC 13). Until this grapple ends, the target is
-          restrained, blinded, and at risk of suffocating, and the rug can't
-          smother another target. In addition, at the start of each of the
-          target's turns, the target takes <strong>10 (2d6 + 3) <em>bludgeoning
-          damage</em></strong>.</p>
+          <p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one Medium
+          or smaller creature.</p><p><em>Hit: </em>The creature is
+          &amp;Reference[grappled] (escape DC 13). Until this grapple ends, the
+          target is restrained, blinded, and at risk of suffocating, and the rug
+          can't smother another target. In addition, at the start of each of the
+          target's turns, the target takes [[/damage average]] damage.</p>
         chat: >-
           <p>The Rug of Smothering makes a smothering attack! The creature is
           grappled. Until this grapple ends, the target is restrained, blinded,
@@ -795,12 +794,17 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: smother
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -808,7 +812,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838827
+      modifiedTime: 1745175498369
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!f6HaKROPIcBRmSd1.7p94WH1WPMhF1ZP9'
 effects: []
@@ -821,8 +825,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171245922
-  modifiedTime: 1726171447441
+  modifiedTime: 1745175500905
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!f6HaKROPIcBRmSd1'

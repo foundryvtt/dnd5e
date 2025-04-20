@@ -55,7 +55,7 @@ system:
       value: 9
       max: 9
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 2d6 + 2
     init:
       ability: ''
@@ -715,10 +715,7 @@ items:
     img: icons/magic/fire/flame-burning-fist-strike.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (2d6) <em>fire
-          damage</em></strong>. </p>
+        value: "<p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is a creature or a flammable object, it ignites. Until\_a creature\_takes an action to\_douse the fire,\_the\_target takes [[/damage average activity=Tv2pWtjFLchLGbMd]] damage at\_the\_end of each of its \_turns.</p>"
         chat: >-
           <p>The Magmin attacks with its Touch. If the target is a creature or a
           flammable object, it ignites. Until a target takes an action to douse
@@ -814,7 +811,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -844,8 +841,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: dex
-            bonus: ''
+            ability: none
+            bonus: '2'
             critical:
               threshold: null
             flat: false
@@ -858,60 +855,61 @@ items:
             includeBase: true
             parts: []
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
+          name: ''
+          img: ''
+          appliedEffects: []
+        Tv2pWtjFLchLGbMd:
+          type: damage
+          _id: Tv2pWtjFLchLGbMd
+          sort: 0
           activation:
             type: action
-            value: 1
-            condition: ''
+            value: null
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
           range:
-            value: '5'
-            units: ft
-            special: ''
             override: false
           target:
             template:
-              count: ''
               contiguous: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: 1d6
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: '6'
+                bonus: ''
+                types:
+                  - fire
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -921,7 +919,11 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -929,7 +931,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836930
+      modifiedTime: 1745107994238
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8MD1vRBTcgSXXk3u.th3hfRWQ3PT9f3Gs'
 effects: []
@@ -942,8 +944,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171207472
-  modifiedTime: 1726171440349
+  modifiedTime: 1745108041798
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!8MD1vRBTcgSXXk3u'

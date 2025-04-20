@@ -497,11 +497,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>12 (2d6 + 5)
-          <em>piercing damage</em></strong> plus <strong>10 (3d6) <em>cold
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ice Devil attacks with its Bite.</p>
       source:
         custom: ''
@@ -666,9 +662,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676909
+      modifiedTime: 1745107549825
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1zzRQps9jZdLZGqI.DV4KS0OE541vGOtI'
   - _id: WAGF3evP6GTYDvM0
@@ -1049,11 +1045,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>12 (2d6 + 5)
-          <em>bludgeoning damage</em></strong> plus <strong>10 (3d6) <em>cold
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ice Devil attacks with its Tail.</p>
       source:
         custom: ''
@@ -1219,7 +1211,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836442
+      modifiedTime: 1745107549825
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1zzRQps9jZdLZGqI.AQ551xglVn90BdwU'
   - _id: E6iXljYXLdQyfk1l
@@ -1228,11 +1220,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>10 (2d4 + 5)
-          <em>slashing damage</em></strong> plus <strong>10 (3d6) <em>cold
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ice Devil attacks with its Claws.</p>
       source:
         custom: ''
@@ -1398,7 +1386,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836442
+      modifiedTime: 1745107549825
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1zzRQps9jZdLZGqI.E6iXljYXLdQyfk1l'
   - _id: vLQAjoewGE5MAHn2

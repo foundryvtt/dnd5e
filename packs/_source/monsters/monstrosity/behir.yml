@@ -54,8 +54,8 @@ system:
     hp:
       value: 168
       max: 168
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 16d12 + 64
     init:
       ability: ''
@@ -587,10 +587,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+10 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>22 (3d10 + 6)
-          <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Behir attacks with its Bite.</p>
       source:
         custom: ''
@@ -746,7 +743,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916840063
+      modifiedTime: 1745107554047
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!x47ZnpHfYl0ptDM9.4fNbTxkAFYHxDdJX'
   - _id: GCUh42hMUnKtxx8j
@@ -756,12 +753,11 @@ items:
     system:
       description:
         value: >-
-          <p>Melee Weapon Attack: +10 to hit, reach 5 ft., <strong>one Large or
-          smaller creature</strong>. Hit: <strong>17 (2d10 + 6) <em>bludgeoning
-          damage</em></strong> plus <strong>17 (2d10 + 6) <em>slashing
-          damage</em></strong>.</p><p>The target is grappled (escape DC 16) if
-          the behir isn't already constricting a creature, and the target is
-          restrained until this grapple ends.</p>
+          <p><em>Melee Weapon Attack:</em> [[/attack]], reach 5 ft., one Large
+          or smaller creature. [[/damage extended]].</p><p>The target is
+          &amp;Reference[grappled] (escape DC 16) if the behir isn't already
+          constricting a creature, and the target is restrained until this
+          grapple ends.</p>
         chat: >-
           <p>The Behir attacks with its Constrict. The target is grappled if the
           Behir isn't already constricting a creature, and the target is
@@ -916,6 +912,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: constrict
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -929,7 +926,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916840063
+      modifiedTime: 1745175814518
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!x47ZnpHfYl0ptDM9.GCUh42hMUnKtxx8j'
   - _id: gjce4R2feN2UH0YE
@@ -1200,8 +1197,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171265532
-  modifiedTime: 1726171451751
+  modifiedTime: 1745175823286
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!x47ZnpHfYl0ptDM9'

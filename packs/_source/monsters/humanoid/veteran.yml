@@ -54,8 +54,8 @@ system:
     hp:
       value: 58
       max: 58
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 9d8 + 18
     init:
       ability: ''
@@ -562,10 +562,8 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>slashing
-          damage</em></strong>, or <strong>8 (1d10 + 3) <em>slashing
-          damage</em></strong> if used with two hands.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
+          attackMode=twoHanded]] damage if used with two hands.</p>
         chat: <p>The Veteran attacks with their Longsword.</p>
       source:
         custom: ''
@@ -719,9 +717,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676848
+      modifiedTime: 1745173385305
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!J8xjoG4Dxb8WkHtV.WaEunPCFG0EddNTt'
   - _id: wziRdUn3HafZKJ8o
@@ -832,10 +830,7 @@ items:
     img: icons/weapons/swords/sword-guard-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>6 (1d6 + 3) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Veteran attacks with its Shortsword.</p>
       source:
         custom: ''
@@ -988,9 +983,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676848
+      modifiedTime: 1745107551127
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!J8xjoG4Dxb8WkHtV.cXf5q5xw30ICGxZg'
   - _id: 6jQ7YUixkwBq2Fh8
@@ -999,9 +994,7 @@ items:
     img: icons/weapons/crossbows/crossbow-blue.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +3 to hit, range 100/400 ft., one target.
-          Hit: <strong>6 (1d10 + 1) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Veteran attacks with its Heavy Crossbow.</p>
       source:
         custom: ''
@@ -1023,7 +1016,7 @@ items:
       identified: true
       cover: null
       range:
-        value: null
+        value: 100
         long: 400
         units: ft
         reach: 100
@@ -1071,7 +1064,7 @@ items:
       unidentified:
         description: ''
       type:
-        value: simpleM
+        value: martialR
         baseItem: heavycrossbow
       container: null
       crewed: false
@@ -1140,9 +1133,11 @@ items:
             parts: []
           sort: 0
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: heavy-crossbow
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1156,9 +1151,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676848
+      modifiedTime: 1745173561725
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!J8xjoG4Dxb8WkHtV.6jQ7YUixkwBq2Fh8'
 effects: []
@@ -1171,8 +1166,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171220507
-  modifiedTime: 1726171442781
+  modifiedTime: 1745173567099
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!J8xjoG4Dxb8WkHtV'

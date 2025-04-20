@@ -634,10 +634,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>8 (1d8 + 4) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Merrow attacks with its Bite.</p>
       source:
         custom: ''
@@ -792,7 +789,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836430
+      modifiedTime: 1745107549738
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1cwfYaACm5F0l4y3.doFYltsiw2Fgp5gn'
   - _id: bbB0SMNW3l2SHEz5
@@ -801,10 +798,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>9 (2d4 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Merrow attacks with its Claws.</p>
       source:
         custom: ''
@@ -957,7 +951,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836430
+      modifiedTime: 1745107549738
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1cwfYaACm5F0l4y3.bbB0SMNW3l2SHEz5'
   - _id: 7XgQY1kwKPuoWX7t
@@ -967,11 +961,9 @@ items:
     system:
       description:
         value: >-
-          <p>Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range
-          20/60 ft., one target. Hit: <strong>11 (2d6 + 4) <em>piercing
-          damage</em></strong>. </p><p>If the target is a Huge or smaller
-          creature, it must succeed on a Strength contest against the merrow or
-          be pulled up to 20 feet toward the merrow.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a Huge or smaller creature, it must succeed on a Strength contest
+          against the merrow or be pulled up to 20 feet toward the merrow.</p>
         chat: >-
           <p>The Merrow attacks with its Harpoon. If the target is a Huge or
           smaller creature, it must make a Strength contest against the merrow
@@ -1126,9 +1118,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676841
+      modifiedTime: 1745173384592
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1cwfYaACm5F0l4y3.7XgQY1kwKPuoWX7t'
 effects: []

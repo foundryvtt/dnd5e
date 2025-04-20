@@ -729,13 +729,11 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>21 (4d8 + 3) <em>necrotic
-          damage</em></strong>. </p><p>The target must succeed on a  <strong>DC
-          14 Constitution</strong> saving throw or its hit point maximum is
-          reduced by an amount equal to the damage taken. This reduction lasts
-          until the target finishes a long rest. The target dies if this effect
-          reduces its hit point maximum to 0.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>The target must
+          succeed on a  <strong>DC 14 Constitution</strong> saving throw or its
+          hit point maximum is reduced by an amount equal to the damage taken.
+          This reduction lasts until the target finishes a long rest. The target
+          dies if this effect reduces its hit point maximum to 0.</p>
         chat: >-
           <p>The Wraith attacks with its Life Drain. The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -959,7 +957,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837321
+      modifiedTime: 1745107550850
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ET4PEVEiNJLU4f7c.xZPFtf2vCYraWXVe'
   - _id: 3ERjE4pz2bgxXIPi

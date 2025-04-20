@@ -711,11 +711,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>3 (1d4 + 1) <em>slashing
-          damage</em></strong> plus <strong>2 (1d4) <em>cold
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ice Mephit attacks with its Claws.</p>
       source:
         custom: ''
@@ -880,7 +876,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837239
+      modifiedTime: 1745107550842
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ESEm3fGUfSKjzVUc.YEZPqZegxKiGO0Gq'
   - _id: 1mD9NcCf8ZMQtsrU

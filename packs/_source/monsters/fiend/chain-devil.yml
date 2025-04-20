@@ -498,13 +498,11 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>11 (2d6 + 4)
-          <em>slashing damage</em></strong>.</p><p>The target is grappled
-          (escape DC 14) if the devil isn't already grappling a creature. Until
-          this grapple ends, the target is restrained and takes <strong>7 (2d6)
-          <em>piercing damage</em></strong> at the start of each of its
-          turns.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
+          grappled (escape DC 14) if the devil isn't already grappling a
+          creature. Until this grapple ends, the target is restrained and takes
+          <strong>7 (2d6) <em>piercing damage</em></strong> at the start of each
+          of its turns.</p>
         chat: >-
           <p>The Chain Devil attacks with its Chain. The target is grappled if
           the devil isn't already grappling a creature. Until this grapple ends,
@@ -600,7 +598,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -630,7 +628,7 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: str
+            ability: ''
             bonus: ''
             critical:
               threshold: null
@@ -644,6 +642,9 @@ items:
             includeBase: true
             parts: []
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
         dnd5eactivity300:
           _id: dnd5eactivity300
           type: utility
@@ -707,7 +708,11 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -715,7 +720,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837646
+      modifiedTime: 1745108091550
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!KtM6IV9I5l1MWUDk.9SWi4zPVGsMD5l2Y'
   - _id: c8fbl1Kc5O3GNTus

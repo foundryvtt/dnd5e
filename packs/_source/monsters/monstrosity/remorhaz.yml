@@ -486,12 +486,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+11 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>40 (6d10 + 7)
-          <em>piercing damage</em></strong> plus <strong>10 (3d6) <em>fire
-          damage</em></strong>. </p><p>If the target is a creature, it is
-          grappled (escape DC 17). Until this grapple ends, the target is
-          restrained, and the remorhaz can't bite another target.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a creature, it is grappled (escape DC 17). Until this grapple ends,
+          the target is restrained, and the remorhaz can't bite another
+          target.</p>
         chat: >-
           <p>The Remorhaz attacks with its Bite. If the target is a creature, it
           is grappled. Until this grapple ends, the target is restrained, and
@@ -662,7 +660,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838258
+      modifiedTime: 1745107552019
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!VBzqw2rOUvTuNOPI.Qcgc4zckQ7c1Ky8t'
   - _id: usmJdksgWhPnjq94

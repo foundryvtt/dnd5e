@@ -747,10 +747,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+8 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Gynosphinx attacks with its Claw.</p>
       source:
         custom: ''
@@ -903,7 +900,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836728
+      modifiedTime: 1745107550129
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!6wbasdWWqtXeIAyD.gVFZXBtgx450yiH7'
   - _id: rH7NbL1u2RarHKKb

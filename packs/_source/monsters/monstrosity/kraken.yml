@@ -743,13 +743,11 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+17 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>23 (3d8 + 10)
-          <em>piercing damage</em></strong>.</p><p>If the target is a Large or
-          smaller creature grappled by the kraken, that creature is swallowed,
-          and the grapple ends. While swallowed, the creature is blinded and
-          restrained, it has total cover against attacks and other effects
-          outside the kraken, and it takes <strong>42 (12d6) <em>acid
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a Large or smaller creature grappled by the kraken, that creature is
+          swallowed, and the grapple ends. While swallowed, the creature is
+          blinded and restrained, it has total cover against attacks and other
+          effects outside the kraken, and it takes <strong>42 (12d6) <em>acid
           damage</em></strong> at the start of each of the kraken's turns. If
           the kraken takes 50 damage or more on a single turn from a creature
           inside it, the kraken must succeed on a  <strong>DC 25
@@ -969,7 +967,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839235
+      modifiedTime: 1745107553020
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!kVg37NlPcACAzjCT.r51OovswZTVF8Yna'
   - _id: lfg28JvVAru30yJ4
@@ -979,11 +977,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+17 to hit,</strong>,
-          <strong>30 ft.,</strong> one target. Hit: <strong>20 (3d6 + 10)
-          <em>bludgeoning damage</em></strong>.</p><p>The target is grappled
-          (escape DC 18). Until this grapple ends, the target is restrained. The
-          kraken has ten tentacles, each of which can grapple one target.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
+          grappled (escape DC 18). Until this grapple ends, the target is
+          restrained. The kraken has ten tentacles, each of which can grapple
+          one target.</p>
         chat: >-
           <p>The Kraken attacks with its Tentacle. The target is grappled. Until
           this grapple ends, the target is restrained. The kraken has ten
@@ -1141,7 +1138,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916871340
+      modifiedTime: 1745107553020
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!kVg37NlPcACAzjCT.lfg28JvVAru30yJ4'
   - _id: bwwyMBn4QwiNd4SM

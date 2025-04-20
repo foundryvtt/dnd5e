@@ -486,10 +486,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d10 + 4)
-          <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Young Copper Dragon attacks with its Bite.</p>
       source:
         custom: ''
@@ -644,7 +641,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839644
+      modifiedTime: 1745107553544
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qW8cBwg7ghCA4Cw6.Km7rUn5tu44KuVbz'
   - _id: DlxAB4bcOmBIn0UG
@@ -653,10 +650,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Young Copper Dragon attacks with its Claw.</p>
       source:
         custom: ''
@@ -807,9 +801,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676940
+      modifiedTime: 1745107553544
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qW8cBwg7ghCA4Cw6.DlxAB4bcOmBIn0UG'
   - _id: eKFnpVBhSSB91leK

@@ -613,10 +613,7 @@ items:
     img: icons/weapons/swords/greatsword-guard-gem-blue.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+14 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>30 (6d6 + 9)
-          <em>slashing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Storm Giant attacks with its Greatsword.</p>
       source:
         custom: ''
@@ -769,9 +766,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676843
+      modifiedTime: 1745107550034
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!68bAMIpe4jvDeR9G.iwN0z7f5LF9AAbRJ'
   - _id: 2tzFjiAiXJLEpuCn
@@ -1111,9 +1108,7 @@ items:
     img: icons/magic/earth/projectile-stone-ball-brown.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +14 to hit, range 60/240 ft., one target.
-          Hit: <strong>35 (4d12 + 9) <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Storm Giant attacks with its Rock.</p>
       source:
         custom: ''
@@ -1265,9 +1260,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676843
+      modifiedTime: 1745173384919
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!68bAMIpe4jvDeR9G.bRdk2uZ6iTuNGUIL'
   - _id: ghXTfe7sgCbgf1Q8

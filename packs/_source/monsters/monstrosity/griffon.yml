@@ -632,10 +632,7 @@ items:
     img: icons/commodities/bones/beak-hooked-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>8 (1d8 + 4) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Griffon attacks with its Beak.</p>
       source:
         custom: ''
@@ -788,7 +785,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838962
+      modifiedTime: 1745107552740
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!h052EIIUmRwJum65.T2JS1VEL7U2s92Fj'
   - _id: ldVEDIAP2PHxLHsL
@@ -797,10 +794,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Griffon attacks with its Claws.</p>
       source:
         custom: ''
@@ -953,7 +947,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838962
+      modifiedTime: 1745107552740
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!h052EIIUmRwJum65.ldVEDIAP2PHxLHsL'
 effects: []

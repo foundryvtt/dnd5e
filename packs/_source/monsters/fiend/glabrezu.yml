@@ -704,11 +704,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>16 (2d10 + 5)
-          <em>bludgeoning damage</em></strong>. </p><p>If the target is a Medium
-          or smaller creature, it is grappled (escape DC 15). The glabrezu has
-          two pincers, each of which can grapple only one target.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a Medium or smaller creature, it is grappled (escape DC 15). The
+          glabrezu has two pincers, each of which can grapple only one
+          target.</p>
         chat: >-
           <p>The Glabrezu attacks with its Pincer. If the target is a Medium or
           smaller creature, it is grappled.</p>
@@ -864,7 +863,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837953
+      modifiedTime: 1745107551551
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!OGPHF4sCVOAi87TU.pEUD99mri5iDNGH7'
   - _id: VGFZM2Zvp0NT5Yb9
@@ -873,10 +872,7 @@ items:
     img: icons/magic/fire/flame-burning-fist-strike.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (2d4 + 2) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Glabrezu attacks with its Fist.</p>
       source:
         custom: ''
@@ -1029,7 +1025,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837953
+      modifiedTime: 1745107551551
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!OGPHF4sCVOAi87TU.VGFZM2Zvp0NT5Yb9'
   - _id: S7VbUetIfVT7B6Eq

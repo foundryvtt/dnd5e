@@ -581,11 +581,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>piercing
-          damage</em></strong> plus <strong>7 (2d6) <em>fire
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Hell Hound attacks with its Bite.</p>
       source:
         custom: ''
@@ -752,7 +748,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839131
+      modifiedTime: 1745107552855
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!iSCL4Q82ivnYelzc.AnHeKid7zbyPKJg9'
   - _id: gijcyepmnWeRu4HV

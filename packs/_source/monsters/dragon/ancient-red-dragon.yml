@@ -483,11 +483,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+17 to hit,</strong>,
-          <strong>15 ft.,</strong> one target. Hit: <strong>21 (2d10 + 10)
-          <em>piercing damage</em></strong> plus <strong>14 (4d6) <em>fire
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ancient Red Dragon attacks with its Bite.</p>
       source:
         custom: ''
@@ -654,7 +650,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916840047
+      modifiedTime: 1745107554024
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!vFeFRlF2FOgf2HIL.nOBAY4ulYbWMc8Pz'
   - _id: AheA06jKecElYrVt
@@ -663,10 +659,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+17 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>17 (2d6 + 10)
-          <em>slashing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ancient Red Dragon attacks with its Claw.</p>
       source:
         custom: ''
@@ -819,7 +812,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916840047
+      modifiedTime: 1745107554024
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!vFeFRlF2FOgf2HIL.AheA06jKecElYrVt'
   - _id: EjnCigBWyq30VL4S
@@ -828,10 +821,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+17 to hit,</strong>,
-          <strong>20 ft.,</strong> one target. Hit: <strong>19 (2d8 + 10)
-          <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ancient Red Dragon attacks with its Tail.</p>
       source:
         custom: ''
@@ -984,7 +974,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916840047
+      modifiedTime: 1745107554024
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!vFeFRlF2FOgf2HIL.EjnCigBWyq30VL4S'
   - _id: LQKBexRS91dTMEKa

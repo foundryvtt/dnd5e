@@ -55,7 +55,7 @@ system:
       value: 10
       max: 10
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 3d4 + 3
     init:
       ability: ''
@@ -695,11 +695,10 @@ items:
     system:
       description:
         value: >-
-          <p>Melee Weapon Attack: +5 to hit, reach 5 ft ., one target. Hit:
-          <strong>5 (1d4 + 3) <em>piercing damage</em></strong>.</p><p>The
-          target must make on a  <strong>DC 11 Constitution</strong> saving
-          throw, taking <strong>10 (3d6) <em>poison damage</em></strong> on a
-          failed save, or half as much damage on a successful one.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          make on a [[/save]] saving throw, taking [[/damage average
+          activity=dnd5eactivity100]] damage on a failed save, or half as much
+          damage on a successful one.</p>
         chat: >-
           <p>The Imp attacks with its Sting. The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -856,7 +855,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -888,88 +887,38 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 1
-                denomination: 4
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                number: 3
+                denomination: '6'
+                bonus: ''
+                types:
+                  - poison
           save:
             ability: con
             dc:
               calculation: ''
               formula: '11'
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 3d6
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: sting
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -977,7 +926,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838657
+      modifiedTime: 1745175364868
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!dLQiESMsfsXijD5c.64Swhse7QnbiLAbi'
   - _id: mMdtSlNy6FuPju7p
@@ -1092,12 +1041,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d4 + 3) <em>piercing
-          damage</em></strong>, and the target must make a  <strong>DC 11
-          Constitution</strong> saving throw, taking <strong>10 (3d6) <em>poison
-          damage</em></strong> on a failed save, or half as much damage on a
-          successful one.</p>
+          <p>[[/attack extended]]. [[/damage extended]], and the target must
+          make a [[/save]] saving throw, taking [[/damage average
+          activity=dnd5eactivity100]] damage on a failed save, or half as much
+          damage on a successful one.</p>
         chat: <p>The Imp attacks with its Bite.</p>
       source:
         custom: ''
@@ -1252,7 +1199,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1284,88 +1231,38 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 1
-                denomination: 4
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                number: 3
+                denomination: '6'
+                bonus: ''
+                types:
+                  - poison
           save:
             ability: con
             dc:
               calculation: ''
               formula: '11'
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 3d6
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite-beast-form-only
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -1373,7 +1270,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838657
+      modifiedTime: 1745175406042
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!dLQiESMsfsXijD5c.RZpYFJGNqA7L1bj1'
 effects: []
@@ -1386,8 +1283,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171244145
-  modifiedTime: 1726171447026
+  modifiedTime: 1745175417859
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!dLQiESMsfsXijD5c'

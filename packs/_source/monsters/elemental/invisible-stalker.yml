@@ -697,10 +697,7 @@ items:
     img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Invisible Stalker attacks with its Slam.</p>
       source:
         custom: ''
@@ -853,7 +850,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839450
+      modifiedTime: 1745107553431
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!oDspGxRQFBhE74L2.rpKiEPQVeOZTLwjf'
 effects: []

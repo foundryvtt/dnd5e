@@ -483,10 +483,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Chimera attacks with its Bite.</p>
       source:
         custom: ''
@@ -641,7 +638,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839245
+      modifiedTime: 1745107553030
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!kr6r8bhSehACPfZ8.dDrIfOa408VFGv4a'
   - _id: J98n5dL3pMkWGu69
@@ -650,10 +647,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Chimera attacks with its Claws.</p>
       source:
         custom: ''
@@ -806,7 +800,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839245
+      modifiedTime: 1745107553030
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!kr6r8bhSehACPfZ8.J98n5dL3pMkWGu69'
   - _id: c4fLDKOomwlaFcac
@@ -1057,10 +1051,7 @@ items:
     img: icons/creatures/mammals/ox-bull-horned-glowing-orange.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (1d12 + 4) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Chimera attacks with its Horns.</p>
       source:
         custom: ''
@@ -1213,7 +1204,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839245
+      modifiedTime: 1745107553030
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!kr6r8bhSehACPfZ8.m5xGw7RgVRGTklJT'
 effects: []

@@ -54,8 +54,8 @@ system:
     hp:
       value: 367
       max: 367
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 21d20 + 147
     init:
       ability: ''
@@ -740,10 +740,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p>Melee Weapon Attack:+ 15 to hit, reach 15 ft., one target. Hit:
-          <strong>19 (2d10 + 8) <em>piercing damage</em></strong> plus <strong>9
-          (2d8) <em>acid damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ancient Black Dragon attacks with its Bite.</p>
       source:
         custom: ''
@@ -910,7 +907,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839634
+      modifiedTime: 1745107553535
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.YauNxZeIeT4uDcTf'
   - _id: GQLQiLBrkoOiNc8q
@@ -919,10 +916,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+15 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d6 + 8)
-          <em>slashing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ancient Black Dragon attacks with its Claw.</p>
       source:
         custom: ''
@@ -966,7 +960,7 @@ items:
             number: null
             formula: ''
         base:
-          number: 4
+          number: 2
           denomination: 6
           bonus: ''
           types:
@@ -1062,6 +1056,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: claw
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1075,7 +1070,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839634
+      modifiedTime: 1745108395557
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.GQLQiLBrkoOiNc8q'
   - _id: A5cRQsDF3Qih94rC
@@ -1084,9 +1079,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: >-
-          <p>Melee Weapon Attack: +15 to hit, reach 20 ft ., one target. Hit:
-          <strong>17 (2d8 + 8) <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ancient Black Dragon attacks with its Tail.</p>
       source:
         custom: ''
@@ -1149,7 +1142,8 @@ items:
         max: 0
         dt: null
         conditions: ''
-      properties: []
+      properties:
+        - rch
       proficient: 1
       unidentified:
         description: ''
@@ -1226,6 +1220,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tail
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -1239,7 +1234,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839634
+      modifiedTime: 1745175572265
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.A5cRQsDF3Qih94rC'
   - _id: M3VJyuM63OKH7JH0
@@ -2094,8 +2089,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171259411
-  modifiedTime: 1726171450369
+  modifiedTime: 1745108444483
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!qNdFhY3JOkCfhG3d'

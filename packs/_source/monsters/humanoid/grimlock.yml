@@ -630,11 +630,7 @@ items:
     img: icons/weapons/clubs/club-simple-barbed.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d4 + 3) <em>bludgeoning
-          damage</em></strong> plus <strong>2 (1d4) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Grimlock attacks with its Spiked Bone Club.</p>
       source:
         custom: ''
@@ -797,9 +793,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676434
+      modifiedTime: 1745107550948
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!GpeQYtlo8oGvGlkM.aEWZXCiyNusgb3Ro'
 effects: []

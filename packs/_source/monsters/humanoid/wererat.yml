@@ -742,11 +742,9 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>4 (1d4 + 2) <em>piercing
-          damage</em></strong>. </p><p>If the target is a humanoid, it must
-          succeed on a  <strong>DC 11 Constitution</strong> saving throw or be
-          cursed with wererat lycanthropy.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a humanoid, it must succeed on a  <strong>DC 11 Constitution</strong>
+          saving throw or be cursed with wererat lycanthropy.</p>
         chat: >-
           <p>The Wererat attacks with its Bite. If the target is a humanoid, it
           must make a <strong>Constitution</strong> saving throw.</p>
@@ -960,7 +958,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837141
+      modifiedTime: 1745107550738
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!CrnUJhTbkdZjCZsH.ldz0yUpzhV9Xlhss'
   - _id: YJi7nfridP2LjdJs
@@ -969,9 +967,7 @@ items:
     img: icons/weapons/crossbows/crossbow-simple-brown.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +4 to hit, range 30/120 ft., one target. Hit:
-          <strong>5 (1d6 + 2) <em>piercing damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Wererat attacks with its Hand Crossbow.</p>
       source:
         custom: ''
@@ -1125,9 +1121,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676916
+      modifiedTime: 1745173385197
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!CrnUJhTbkdZjCZsH.YJi7nfridP2LjdJs'
   - _id: wpyEts6pBAxoD0Gh
@@ -1136,10 +1132,7 @@ items:
     img: icons/weapons/swords/sword-guard-brown.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>5 (1d6 + 2) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Wererat attacks with its Shortsword.</p>
       source:
         custom: ''
@@ -1292,9 +1285,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676916
+      modifiedTime: 1745107550738
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!CrnUJhTbkdZjCZsH.wpyEts6pBAxoD0Gh'
 effects: []

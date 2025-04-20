@@ -54,8 +54,8 @@ system:
     hp:
       value: 123
       max: 123
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 13d10 + 52
     init:
       ability: ''
@@ -827,8 +827,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745107661131
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1OQbxoZI5BtlB2ME.ThVO3VFsGgg3GLc5'
   - _id: rUvv8Vnh7XbqbCLd
     name: Bite
@@ -836,11 +836,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>2 (1d4) <em>piercing
-          damage</em></strong> plus <strong>9 (2d8) <em>poison
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Drider attacks with its Bite.</p>
       source:
         custom: ''
@@ -932,7 +928,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -962,8 +958,8 @@ items:
             max: ''
             recovery: []
           attack:
-            ability: ''
-            bonus: ''
+            ability: none
+            bonus: '3'
             critical:
               threshold: null
             flat: false
@@ -975,31 +971,34 @@ items:
               bonus: ''
             includeBase: true
             parts:
-              - number: 2
-                denomination: 8
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: '8'
                 bonus: ''
                 types:
                   - poison
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
@@ -1007,7 +1006,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916836420
+      modifiedTime: 1745107660028
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1OQbxoZI5BtlB2ME.rUvv8Vnh7XbqbCLd'
   - _id: xqwxVn28J0zx8Y7H
@@ -1017,10 +1016,8 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d8 + 3) <em>slashing
-          damage</em></strong>, or <strong>8 (1d10 + 3) <em>slashing
-          damage</em></strong> if used with two hands.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
+          attackMode=twoHanded]] damage if used with two hands.</p>
         chat: <p>The Drider attacks with its Longsword.</p>
       source:
         custom: ''
@@ -1163,7 +1160,7 @@ items:
       identifier: longsword
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -1174,9 +1171,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676839
+      modifiedTime: 1745173384521
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1OQbxoZI5BtlB2ME.xqwxVn28J0zx8Y7H'
   - _id: 3XAtYmmaED1rxaaE
@@ -1185,10 +1182,7 @@ items:
     img: icons/weapons/bows/longbow-leather-green.webp
     system:
       description:
-        value: >-
-          <p>Ranged Weapon Attack: +6 to hit, range 150/600 ft., one target.
-          Hit: <strong>7 (1d8 + 3) <em>piercing damage</em></strong> plus
-          <strong>4 (1d8) <em>poison damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Drider attacks with its Longbow.</p>
       source:
         custom: ''
@@ -1345,7 +1339,7 @@ items:
       identifier: longbow
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
@@ -1356,9 +1350,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676839
+      modifiedTime: 1745173384521
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!1OQbxoZI5BtlB2ME.3XAtYmmaED1rxaaE'
   - _id: CAxSzHWizrafT033
@@ -1748,8 +1742,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171198662
-  modifiedTime: 1726171438887
+  modifiedTime: 1745107675163
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!1OQbxoZI5BtlB2ME'

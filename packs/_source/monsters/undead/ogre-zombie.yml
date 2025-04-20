@@ -485,10 +485,7 @@ items:
     img: icons/weapons/maces/mace-round-spiked-black.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ogre Zombie attacks with its Morningstar.</p>
       source:
         custom: ''
@@ -641,9 +638,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676571
+      modifiedTime: 1745107551819
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!RenLfmDT2XlbCF4x.Gj35Y1i6Ph90Wn3R'
   - _id: NPmV7puA7Yg3esqg

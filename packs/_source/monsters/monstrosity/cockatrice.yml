@@ -484,14 +484,12 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>3 (1d4 + 1) <em>piercing
-          damage</em></strong>.</p><p>The target must succeed on a  <strong>DC
-          11 Constitution</strong> saving throw against being magically
-          petrified. On a failed save, the creature begins to turn to stone and
-          is restrained. It must repeat the saving throw at the end of its next
-          turn. On a success, the effect ends. On a failure, the creature is
-          petrified for 24 hours.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
+          succeed on a  <strong>DC 11 Constitution</strong> saving throw against
+          being magically petrified. On a failed save, the creature begins to
+          turn to stone and is restrained. It must repeat the saving throw at
+          the end of its next turn. On a success, the effect ends. On a failure,
+          the creature is petrified for 24 hours.</p>
         chat: >-
           <p>The Cockatrice attacks with its Bite. The target must make a
           <strong>Constitution</strong> saving throw. On a failed save, it must
@@ -719,7 +717,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916837327
+      modifiedTime: 1745107550914
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!EpYl7qifM5pq6W6B.gpxvIs8yjQ4awt4s'
 effects: []

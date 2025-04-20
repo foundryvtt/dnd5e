@@ -492,11 +492,7 @@ items:
     img: icons/creatures/slimes/slime-movement-dripping-pseudopods-green.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>9 (2d6 + 2) <em>bludgeoning
-          damage</em></strong> plus <strong>3 (1d6) <em>acid
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ochre Jelly attacks with its Pseudopod.</p>
       source:
         custom: ''
@@ -659,9 +655,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676619
+      modifiedTime: 1745107554054
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!xBhG7Dos3tkg9jWz.SYdqeemFOudCYb9E'
   - _id: Rrswv9BPB94D3xHQ

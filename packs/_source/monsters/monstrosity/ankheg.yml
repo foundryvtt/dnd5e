@@ -484,13 +484,10 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>10 (2d6 + 3) <em>slashing
-          damage</em></strong> plus <strong>3 (1d6) <em>acid
-          damage</em></strong>.</p><p>If the target is a Large or smaller
-          creature, it is grappled (escape DC 13). Until this grapple ends, the
-          ankheg can bite only the grappled creature and has advantage on attack
-          rolls to do so.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a Large or smaller creature, it is grappled (escape DC 13). Until this
+          grapple ends, the ankheg can bite only the grappled creature and has
+          advantage on attack rolls to do so.</p>
         chat: <p>The Ankheg attacks with its Bite.</p>
       source:
         custom: ''
@@ -657,7 +654,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838349
+      modifiedTime: 1745107552116
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Wcsjbl25uiUsyQwn.mGamlcdui038L6gU'
   - _id: XZwZexkrBLOzLo1Q

@@ -486,11 +486,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>,
-          <strong>10 ft.,</strong> one target. Hit: <strong>15 (2d10 + 4)
-          <em>piercing damage</em></strong> plus <strong>4 (1d8) <em>cold
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Young White Dragon attacks with its Bite.</p>
       source:
         custom: ''
@@ -657,7 +653,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916840037
+      modifiedTime: 1745107553944
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!u1UQfHutP5eEKkjM.qFfEF7lLt2kH3RbA'
   - _id: d9xXEIYNNQjIMGF8
@@ -666,10 +662,7 @@ items:
     img: icons/skills/melee/strike-slashes-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>11 (2d6 + 4) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Young White Dragon attacks with its Claw.</p>
       source:
         custom: ''
@@ -822,7 +815,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916840037
+      modifiedTime: 1745107553944
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!u1UQfHutP5eEKkjM.d9xXEIYNNQjIMGF8'
   - _id: 78LbjdfWaZcAqVE7

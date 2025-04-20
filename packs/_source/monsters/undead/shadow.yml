@@ -704,13 +704,11 @@ items:
     system:
       description:
         value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one creature. Hit: <strong>9 (2d6 + 2) <em>necrotic
-          damage</em></strong>.</p><p>The target's Strength score is reduced by
-          1d4. The target dies if this reduces its Strength to 0. Otherwise, the
-          reduction lasts until the target finishes a short or long rest.If a
-          non-evil humanoid dies from this attack, a new shadow rises from the
-          corpse 1d4 hours later.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target's
+          Strength score is reduced by 1d4. The target dies if this reduces its
+          Strength to 0. Otherwise, the reduction lasts until the target
+          finishes a short or long rest.If a non-evil humanoid dies from this
+          attack, a new shadow rises from the corpse 1d4 hours later.</p>
         chat: <p>The Shadow attacks with its Strength Drain.</p>
       source:
         custom: ''
@@ -863,7 +861,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916838051
+      modifiedTime: 1745107551716
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!QGcQYZbVl4bWzi4E.2OUOBIN4TJDoL0sJ'
 effects: []

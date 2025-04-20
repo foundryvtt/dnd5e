@@ -54,8 +54,8 @@ system:
     hp:
       value: 13
       max: 13
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 3d8
     init:
       ability: ''
@@ -642,10 +642,7 @@ items:
     img: icons/magic/fire/flame-burning-fist-strike.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+3 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>2 (1d4) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Lemure attacks with its Fist.</p>
       source:
         custom: ''
@@ -796,9 +793,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676614
+      modifiedTime: 1745107553926
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!tubcO7kaQ4w0soxS.TypCj0S846TqsHzI'
 effects: []
@@ -811,8 +808,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171264005
-  modifiedTime: 1726171451438
+  modifiedTime: 1745108443456
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!tubcO7kaQ4w0soxS'

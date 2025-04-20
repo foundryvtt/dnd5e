@@ -664,10 +664,7 @@ items:
     img: icons/weapons/axes/axe-double.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+5 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>9 (1d12 + 3) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Orc attacks with its Greataxe.</p>
       source:
         custom: ''
@@ -822,9 +819,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676660
+      modifiedTime: 1745107551018
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!HB49mCOVBXwWeKWQ.bGmBlXrvTBQgPMBJ'
   - _id: SrRZ2hBUcaXZiRab
@@ -833,10 +830,7 @@ items:
     img: icons/weapons/ammunition/arrows-bodkin-yellow-red.webp
     system:
       description:
-        value: >-
-          <p>Melee or Ranged Weapon Attack: +5 to hit, reach 5 ft. or range
-          30/120 ft., one target. Hit: <strong>6 (1d6 + 3) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Orc attacks with its Javelin.</p>
       source:
         custom: ''
@@ -991,9 +985,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676660
+      modifiedTime: 1745173385223
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!HB49mCOVBXwWeKWQ.SrRZ2hBUcaXZiRab'
 effects: []

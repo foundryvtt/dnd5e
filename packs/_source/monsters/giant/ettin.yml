@@ -686,10 +686,7 @@ items:
     img: icons/weapons/polearms/halberd-crescent-engraved-steel.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>14 (2d8 + 5) <em>slashing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ettin attacks with its Battleaxe.</p>
       source:
         custom: ''
@@ -843,9 +840,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676666
+      modifiedTime: 1745107551238
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!KLCkHep28HBfdsky.T1QQrbvnvnM73eIe'
   - _id: 5ri5zr7IJKsaZNF7
@@ -854,10 +851,7 @@ items:
     img: icons/weapons/maces/mace-round-spiked-black.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+7 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>14 (2d8 + 5) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ettin attacks with its Morningstar.</p>
       source:
         custom: ''
@@ -1010,9 +1004,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676666
+      modifiedTime: 1745107551238
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!KLCkHep28HBfdsky.5ri5zr7IJKsaZNF7'
 effects: []

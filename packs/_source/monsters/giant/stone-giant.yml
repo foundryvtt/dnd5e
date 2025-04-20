@@ -484,10 +484,7 @@ items:
     img: icons/weapons/clubs/club-simple-barbed.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+9 to hit,</strong>,
-          <strong>15 ft.,</strong> one target. Hit: <strong>19 (3d8 + 6)
-          <em>bludgeoning damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Stone Giant attacks with its Greatclub.</p>
       source:
         custom: ''
@@ -640,9 +637,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676793
+      modifiedTime: 1745107551834
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!SOin81NWijHRvXFK.Tm2NY0eSI6InRcsa'
   - _id: W7aeXkpOJ1TwM0dq
@@ -752,10 +749,9 @@ items:
     system:
       description:
         value: >-
-          <p>Ranged Weapon Attack: +9 to hit, range 60/240 ft., one target. Hit:
-          <strong>28 (4d10 + 6) <em>bludgeoning damage</em></strong>. </p><p>If
-          the target is a creature, it must succeed on a  <strong>DC 17
-          Strength</strong> saving throw or be knocked prone.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          a creature, it must succeed on a  <strong>DC 17 Strength</strong>
+          saving throw or be knocked prone.</p>
         chat: >-
           <p>The Stone Giant attacks with its Rock. If the target is a creature,
           it must make a <strong>Strength</strong> saving throw or be knocked
@@ -968,9 +964,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676793
+      modifiedTime: 1745173385422
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!SOin81NWijHRvXFK.eiNNUlTgJyVFcQkO'
   - _id: HxKKuoyc6AYGLsIX

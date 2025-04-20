@@ -918,11 +918,7 @@ items:
     img: icons/weapons/swords/greatsword-guard-gem-blue.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+12 to hit,</strong>,
-          <strong>5 ft.,</strong> one target. Hit: <strong>21 (4d6 + 7)
-          <em>slashing damage</em></strong> plus <strong>22 (5d8) <em>radiant
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Planetar attacks with its Greatsword.</p>
       source:
         custom: ''
@@ -1089,9 +1085,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676733
+      modifiedTime: 1745107552124
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!XEByBLeOkDgL3mrr.BBLXs9hiUvtRaP16'
   - _id: VJz6sW3vOJcEL4IS

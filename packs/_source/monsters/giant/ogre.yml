@@ -485,10 +485,7 @@ items:
     img: icons/weapons/clubs/club-simple-barbed.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+6 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>13 (2d8 + 4) <em>bludgeoning
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ogre attacks with its Greatclub.</p>
       source:
         custom: ''
@@ -642,9 +639,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676692
+      modifiedTime: 1745107552451
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!eIGowKTkEBC9gUzx.1bqysUVTadmvi8nb'
   - _id: tXgnd9qKOE2b7Wis
@@ -653,10 +650,7 @@ items:
     img: icons/weapons/ammunition/arrows-bodkin-yellow-red.webp
     system:
       description:
-        value: >-
-          <p>Melee or Ranged Weapon Attack: +6 to hit, reach 5 ft. or range
-          30/120 ft., one target. Hit: <strong>11 (2d6 + 4) <em>piercing
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Ogre attacks with its Javelin.</p>
       source:
         custom: ''
@@ -811,9 +805,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676692
+      modifiedTime: 1745173385519
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!eIGowKTkEBC9gUzx.tXgnd9qKOE2b7Wis'
   - _id: lJ2gJxLDBbFtLwdk

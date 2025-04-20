@@ -666,11 +666,7 @@ items:
     img: icons/creatures/abilities/mouth-teeth-long-red.webp
     system:
       description:
-        value: >-
-          <p><em>Melee Weapon Attack:</em><strong>+4 to hit,</strong>, <strong>5
-          ft.,</strong> one target. Hit: <strong>7 (1d10 + 2) <em>piercing
-          damage</em></strong> plus <strong>2 (1d4) <em>acid
-          damage</em></strong>.</p>
+        value: <p>[[/attack extended]]. [[/damage extended]].</p>
         chat: <p>The Black Dragon Wyrmling attacks with its Bite.</p>
       source:
         custom: ''
@@ -834,9 +830,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676546
+      modifiedTime: 1745107551044
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!IZMbiAHqQpzPo0CX.dmLvn6VGNA20rMvC'
 effects: []
