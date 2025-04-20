@@ -83,7 +83,7 @@
                         {{else}}
                         <div class="item-image item-action" data-action="use" tabindex="0" role="button"
                             aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
-                        <h4 class="item-action" data-action="expand">{{item.name~}}</h4>
+                        <h4 class="item-action" data-action="toggleExpand">{{item.name~}}</h4>
                         {{#if ctx.attunement}}
                         <div class="item-detail attunement">
                             <i class="fas {{ctx.attunement.icon}} {{ctx.attunement.cls}}"

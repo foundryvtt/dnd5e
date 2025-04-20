@@ -246,6 +246,13 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     if (this.actor.system.attributes.actions.stations) {
       html.find(".counter.actions, .counter.action-thresholds").hide();
     }
+
+    html[0].addEventListener("inventory", event => {
+      if ( event.detail !== "crew" ) return;
+      event.preventDefault();
+      const item = this.actor.items.get(event.target.closest("[data-item-id]")?.dataset?.itemId);
+      item?.update({ "system.crewed": !item.system.crewed });
+    });
   }
 
   /* -------------------------------------------- */

@@ -70,7 +70,7 @@
             <div class="item-name flexrow rollable">
                 <div class="item-image item-action" data-action="use" tabindex="0" role="button"
                      aria-label="{{item.name}}" style="background-image: url('{{item.img}}')"></div>
-                <h4 class="item-action" data-action="expand">{{item.name}}</h4>
+                <h4 class="item-action" data-action="toggleExpand">{{item.name}}</h4>
                 {{#if item.hasLimitedUses}}
                 <div class="item-detail spell-uses">
                   {{localize "DND5E.Uses"}} {{#if item.system.uses.value}}{{item.system.uses.value}}{{else}}0{{/if}} / {{item.system.uses.max}}
