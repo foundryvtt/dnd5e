@@ -593,7 +593,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The djinni makes three scimitar attacks.</p>
+        value: >-
+          <p>The djinni makes three [[/item .DGP7lnAJT1cv8SA4]]{scimitar}
+          attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -682,10 +684,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273655071
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!5P1VGAZQwOilwZQf.Q7JcaZkLaYQq4CE5'
   - _id: DGP7lnAJT1cv8SA4
     name: Scimitar

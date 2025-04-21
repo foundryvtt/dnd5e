@@ -541,9 +541,10 @@ items:
     system:
       description:
         value: >-
-          <p>The shambling mound makes two slam attacks. If both attacks hit a
-          Medium or smaller target, the target is grappled <strong>escape DC
-          14</strong>, and the shambling mound uses its Engulf on it.</p>
+          <p>The shambling mound makes two [[/item .lOIA9YKQU8xSx7Lj]]{slam}
+          attacks. If both attacks hit a Medium or smaller target, the target is
+          grappled <strong>escape DC 14</strong>, and the shambling mound uses
+          its [[/item .N42BQALoCmeYphD1]]{Engulf} on it.</p>
         chat: ''
       source:
         custom: ''
@@ -632,10 +633,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273656670
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gGeLeV411iQ5Yijs.2aGoBVVEF54VcC9d'
   - _id: N42BQALoCmeYphD1
     name: Engulf

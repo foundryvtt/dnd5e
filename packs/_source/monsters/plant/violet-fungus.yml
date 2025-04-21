@@ -657,7 +657,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The fungus makes 1d4 Rotting Touch attacks.</p>
+        value: >-
+          <p>The fungus makes 1d4 [[/item .OEx9iy4HDipiYsPt]]{Rotting Touch}
+          attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -746,10 +748,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273655263
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!7EmUVycEASn7SFL0.wjDktLNTUnueuX2X'
   - _id: fZgfSlczUTtrCNEb
     name: False Appearance

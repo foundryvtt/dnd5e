@@ -807,9 +807,13 @@ items:
     system:
       description:
         value: >-
-          <p>The tarrasque can use its Frightful Presence. It then makes five
-          attacks: one with its bite, two with its claws, one with its horns,
-          and one with its tail. It can use its Swallow instead of its bite.</p>
+          <p>The tarrasque can use its [[/item .3mtn5D2GoD19WDVW]]{Frightful
+          Presence}. It then makes five attacks: one with its [[/item
+          .suUr7bJqBqE7xk2F]]{bite}, two with its [[/item
+          .7DRko62ztr6FjZLA]]{claws}, one with its [[/item
+          .E1RZdzEY2qnG2jLn]]{horns}, and one with its [[/item
+          .Lo4LU9FBxez1Nzqm]]{tail}. It can use its [[/item
+          .7ycN6rrAEJQP3ZOs]]{Swallow} instead of its bite.</p>
         chat: ''
       source:
         custom: ''
@@ -898,10 +902,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273655764
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!KCvt4FdOVJbuZ3T0.Eb4utmmDfdnqLOZV'
   - _id: suUr7bJqBqE7xk2F
     name: Bite

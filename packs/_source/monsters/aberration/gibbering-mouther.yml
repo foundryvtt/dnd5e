@@ -767,8 +767,9 @@ items:
     system:
       description:
         value: >-
-          <p>The gibbering mouther makes one bite attack and, if it can, uses
-          its Blinding Spittle.</p>
+          <p>The gibbering mouther makes one [[/item
+          .lfUDtJ8hdeULQzqa]]{bite} attack and, if it can, uses its
+          [[/item .KQRvDGowc6ihejLu]]{Blinding Spittle}.</p>
         chat: ''
       source:
         custom: ''
@@ -857,10 +858,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273655363
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8pX2JhWUpTNNRBVx.qlBBeTku9uoaEv8G'
   - _id: lfUDtJ8hdeULQzqa
     name: Bites
@@ -1109,7 +1110,7 @@ items:
         value: >-
           <p>The mouther spits a chemical glob at a point it can see within 15
           feet of it. The glob explodes in a blinding flash of light on impact.
-          </p><p>Each creature within 5 feet of the flash must succeed on a 
+          </p><p>Each creature within 5 feet of the flash must succeed on a
           <strong>DC 13 Dexterity</strong> saving throw or be blinded until the
           end of the mouther's next turn.</p>
         chat: >-

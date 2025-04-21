@@ -600,7 +600,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The elemental makes two slam attacks.</p>
+        value: >-
+          <p>The elemental makes two [[/item .7xDGPsWicxgP6feT]]{slam}
+          attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -689,10 +691,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273657082
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!namJz755U1EhvEJa.9saHudPLoj6va2em'
   - _id: 7xDGPsWicxgP6feT
     name: Slam

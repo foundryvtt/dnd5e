@@ -543,8 +543,9 @@ items:
     system:
       description:
         value: >-
-          <p>The gargoyle makes two attacks: one with its bite and one with its
-          claws.</p>
+          <p>The gargoyle makes two attacks: one with its [[/item
+          .A6GBvah75Y7fGjc5]]{bite} and one with its [[/item
+          .ipJwA0j2zfzmq5GW]]{claws}.</p>
         chat: ''
       source:
         custom: ''
@@ -633,10 +634,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273654857
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!0m8QyDN52qw9zzOM.yczO5JpGxAk51Gp8'
   - _id: A6GBvah75Y7fGjc5
     name: Bite

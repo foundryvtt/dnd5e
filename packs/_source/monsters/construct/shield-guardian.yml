@@ -711,7 +711,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The guardian makes two fist attacks.</p>
+        value: >-
+          <p>The guardian makes two [[/item .r6GQ1TwNK7pinX0a]]{fist}
+          attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -800,10 +802,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273657754
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!z85EsGS2GVWj46qE.7R1cDGKMv0mdxaE7'
   - _id: r6GQ1TwNK7pinX0a
     name: Fist

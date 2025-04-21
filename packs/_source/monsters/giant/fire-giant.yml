@@ -564,7 +564,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The giant makes two greatsword attacks.</p>
+        value: >-
+          <p>The giant makes two [[/item .c8b8jy3sM3Z8gxm0]]{greatsword}
+          attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -653,10 +655,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273655054
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!45Z5kogZEhawX1Ey.vgN2DlqQtt77mxKO'
   - _id: c8b8jy3sM3Z8gxm0
     name: Greatsword

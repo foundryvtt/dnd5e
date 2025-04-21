@@ -729,8 +729,9 @@ items:
     system:
       description:
         value: >-
-          <p>The veteran makes two longsword attacks. If it has a shortsword
-          drawn, it can also make a shortsword attack.</p>
+          <p>The veteran makes two [[/item .WaEunPCFG0EddNTt]]{longsword}
+          attacks. If it has a [[/item .cXf5q5xw30ICGxZg]]{shortsword} drawn, it
+          can also make a shortsword attack.</p>
         chat: ''
       source:
         custom: ''
@@ -819,10 +820,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273655676
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!J8xjoG4Dxb8WkHtV.wziRdUn3HafZKJ8o'
   - _id: cXf5q5xw30ICGxZg
     name: Shortsword

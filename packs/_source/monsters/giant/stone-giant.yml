@@ -648,7 +648,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The giant makes two greatclub attacks.</p>
+        value: >-
+          <p>The giant makes two [[/item .Tm2NY0eSI6InRcsa]]{greatclub}
+          attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -737,10 +739,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273656242
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!SOin81NWijHRvXFK.W7aeXkpOJ1TwM0dq'
   - _id: eiNNUlTgJyVFcQkO
     name: Rock

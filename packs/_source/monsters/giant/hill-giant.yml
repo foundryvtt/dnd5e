@@ -484,7 +484,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The giant makes two greatclub attacks.</p>
+        value: >-
+          <p>The giant makes two [[/item .250gOq5bpqIHb7rw]]{greatclub}
+          attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -573,10 +575,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273655374
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!9g4N9sjyh8Ql46to.1k58ryEYEYijhYOb'
   - _id: 250gOq5bpqIHb7rw
     name: Greatclub

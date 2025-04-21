@@ -858,8 +858,9 @@ items:
     system:
       description:
         value: >-
-          <p>The troll makes three attacks: one with its bite and two with its
-          claws.</p>
+          <p>The troll makes three attacks: one with its [[/item
+          .R7DpgLP3aFNmAgOc]]{bite} and two with its [[/item
+          .ahGwFmyt6nItUOAK]]{claws}.</p>
         chat: ''
       source:
         custom: ''
@@ -948,10 +949,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273656360
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ZHAFrnCwCz17dmLc.BA9WmovILanbvacP'
   - _id: yWYB2iyRA61AjcVJ
     name: Regeneration

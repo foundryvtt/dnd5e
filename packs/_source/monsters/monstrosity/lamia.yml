@@ -665,8 +665,10 @@ items:
     system:
       description:
         value: >-
-          <p>The lamia makes two attacks: one with its claws and one with its
-          dagger or Intoxicating Touch.</p>
+          <p>The lamia makes two attacks: one with its [[/item
+          .lqr5NeudKmKQfSpZ]]{claws} and one with its [[/item
+          .jMTZfqYRB58CwXyw]]{dagger} or [[/item
+          .cd8MN5gJkmUn1RTE]]{Intoxicating Touch}.</p>
         chat: ''
       source:
         custom: ''
@@ -755,10 +757,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273655973
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!MnoL59nOOfYatAkQ.LjPDX0VIEJRv0boG'
   - _id: lqr5NeudKmKQfSpZ
     name: Claws

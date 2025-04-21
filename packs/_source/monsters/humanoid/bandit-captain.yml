@@ -560,9 +560,10 @@ items:
     system:
       description:
         value: >-
-          <p>The captain makes three melee attacks: two with its scimitar and
-          one with its dagger. Or the captain makes two ranged attacks with its
-          daggers.</p>
+          <p>The captain makes three melee attacks: two with its [[/item
+          .tSPkVJScEndipsFU]]{scimitar} and one with its [[/item
+          .mBUKIzY6aUW5Fnlm]]{dagger}. Or the captain makes two ranged attacks
+          with its daggers.</p>
         chat: ''
       source:
         custom: ''
@@ -651,10 +652,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273657380
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!rb7OJt822wIO52qY.u3rhYD4gsxWEFbMc'
   - _id: tSPkVJScEndipsFU
     name: Scimitar

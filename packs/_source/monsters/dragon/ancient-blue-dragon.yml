@@ -592,8 +592,10 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon can use its Frightful Presence. It then makes three
-          attacks: one with its bite and two with its claws.</p>
+          <p>The dragon can use its [[/item .NhYVY7hHFu2YsFpN]]{Frightful
+          Presence}. It then makes three attacks: one with its [[/item
+          .F29wEcjTlpKWcfO3]]{bite} and two with its [[/item
+          .Hoc6KiovAZiBi5HV]]{claws}.</p>
         chat: ''
       source:
         custom: ''
@@ -682,10 +684,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273656181
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!SNT0JNVSngUTsj4m.gbM7g0hyrF6MMYqR'
   - _id: F29wEcjTlpKWcfO3
     name: Bite

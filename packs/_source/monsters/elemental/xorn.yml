@@ -864,7 +864,9 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The xorn makes three claw attacks and one bite attack.</p>
+        value: >-
+          <p>The xorn makes three [[/item .LRjB7lk0aa4TOd16]]{claw} attacks and
+          one [[/item .ODAa1IROPs40MUI2]]{bite} attack.</p>
         chat: ''
       source:
         custom: ''
@@ -953,10 +955,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745273654960
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!2MZNHeOZweXAYbv1.kRGZU8eMwOBt3kVd'
   - _id: ryNcNrIgtkYHRKWj
     name: Stone Camouflage
