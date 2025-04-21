@@ -88,15 +88,13 @@ export default class CombatTracker5e extends foundry.applications.sidebar.tabs.C
         });
       }
 
-      function getGroupName(combatants) {
-            const tokenNames = combatants.map(c => c.token?.name ?? c.name);
-            const actorName = combatants[0].token?.baseActor.prototypeToken.name ?? combatants[0].name;
-            const allSame = tokenNames.every(name => name === tokenNames[0]);
-            if ( allSame ) return tokenNames[0];
-            const allContainActor = tokenNames.every(name => name.includes(actorName));
-            if ( allContainActor ) return actorName;
-            return tokenNames[0];
-      }
+      const getGroupName = combatants => {
+        const tokenNames = combatants.map(c => c.token?.name ?? c.name);
+        const actorName = combatants[0].token?.baseActor.prototypeToken.name ?? combatants[0].name;
+        if ( tokenNames.every(name => name === tokenNames[0]) ) return tokenNames[0];
+        if ( tokenNames.every(name => name.includes(actorName)) ) return actorName;
+        return tokenNames[0];
+      };
 
       const name = getGroupName(combatants);
       const img = children[0].querySelector("img");
