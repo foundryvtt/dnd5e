@@ -54,8 +54,8 @@ system:
     hp:
       value: 93
       max: 93
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 11d10 + 33
     init:
       ability: ''
@@ -487,8 +487,8 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
-          grappled (escape DC 14) if it is a Large or smaller creature and the
-          chuul doesn't have two other creatures grappled.</p>
+          &amp;Reference[grappled] (escape DC 14) if it is a Large or smaller
+          creature and the chuul doesn't have two other creatures grappled.</p>
         chat: >-
           <p>The Chuul attacks with its Pincer. The target is grappled if it is
           a Large or smaller creature.</p>
@@ -631,9 +631,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: pincer
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
@@ -644,7 +645,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107551628
+      modifiedTime: 1745275762395
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!P6qC8jB3pnEH0tIE.7lnXqe8AnWhtnQh7'
   - _id: XUzROtGqVZS61Ofm
@@ -654,11 +655,11 @@ items:
     system:
       description:
         value: >-
-          <p>One creature grappled by the chuul must succeed on a  <strong>DC 13
-          Constitution</strong> saving throw or be poisoned for 1
-          minute.</p><p>Until this poison ends, the target is paralyzed. The
-          target can repeat the saving throw at the end of each of its turns,
-          ending the effect on itself on a success.</p>
+          <p>One creature grappled by the chuul must succeed on a [[/save]]
+          saving throw or be &amp;Reference[poisoned] for 1 minute. Until this
+          poison ends, the target is &amp;Reference[paralyzed]. The target can
+          repeat the saving throw at the end of each of its turns, ending the
+          effect on itself on a success.</p>
         chat: >-
           <p>One creature grappled by the chuul must make a
           <strong>Constitution</strong> saving throw. The target can repeat the
@@ -743,7 +744,7 @@ items:
       identifier: tentacles
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -754,9 +755,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676563
+      modifiedTime: 1745275751000
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!P6qC8jB3pnEH0tIE.XUzROtGqVZS61Ofm'
   - _id: uMZgFW5l9JQmFBp8
@@ -906,7 +907,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273656144
+      modifiedTime: 1745275716966
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!P6qC8jB3pnEH0tIE.OtOJ4eSobUE30d2S'
   - _id: 03oy1y5rwobZdg46
@@ -916,9 +917,9 @@ items:
     system:
       description:
         value: >-
-          <p>The chuul senses magic <strong>within 120 feet</strong> of it at
-          will. This trait otherwise works like the detect magic spell but isn't
-          itself magical.</p>
+          <p>The chuul senses magic within 120 feet of it at will. This trait
+          otherwise works like the detect magic spell but isn't itself
+          magical.</p>
         chat: ''
       source:
         custom: ''
@@ -954,10 +955,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745275666710
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!P6qC8jB3pnEH0tIE.03oy1y5rwobZdg46'
 effects: []
 folder: cHmylff3tHTzhvyb
@@ -969,8 +970,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171228710
-  modifiedTime: 1726171444239
+  modifiedTime: 1745275777034
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!P6qC8jB3pnEH0tIE'

@@ -54,8 +54,8 @@ system:
     hp:
       value: 67
       max: 67
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 9d8 + 27
     init:
       ability: ''
@@ -485,11 +485,10 @@ items:
     system:
       description:
         value: >-
-          <p>The ground in a <strong>10-foot radius</strong> around the mouther
-          is doughlike difficult terrain.</p><p>Each creature that starts its
-          turn in that area must succeed on a <strong>DC 10 Strength saving
-          throw</strong> or have its speed reduced to 0 until the start of its
-          next turn.</p>
+          <p>The ground in a 10-foot radius around the mouther is doughlike
+          difficult terrain. Each creature that starts its turn in that area
+          must succeed on a [[/save]] saving throw or have its speed reduced to
+          0 until the start of its next turn.</p>
         chat: >-
           <p>The ground in a <strong>10-foot radius</strong> around the mouther
           is doughlike difficult terrain. Make a <strong>Strength</strong>
@@ -584,9 +583,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676867
+      modifiedTime: 1745275870570
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8pX2JhWUpTNNRBVx.yxlzyXTpsEf4QiI9'
   - _id: SzwWnAgr25vDeHKu
@@ -597,16 +596,16 @@ items:
       description:
         value: >-
           <p>The mouther babbles incoherently while it can see any creature and
-          isn't incapacitated. Each creature that starts its turn <strong>within
-          20 feet</strong> of the mouther and can hear the gibbering must
-          succeed on a <strong>DC 10 Wisdom saving throw</strong>. On a failure,
-          the creature can't take reactions until the start of its next turn and
-          rolls a d8 to determine what it does during its turn. </p><p>On a 1 to
-          4, the creature does nothing. On a 5 or 6, the creature takes no
-          action or bonus action and uses all its movement to move in a randomly
-          determined direction. On a 7 or 8, the creature makes a melee attack
-          against a randomly determined creature within its reach or does
-          nothing if it can't make such an attack.</p>
+          isn't incapacitated. Each creature that starts its turn within 20 feet
+          of the mouther and can hear the gibbering must succeed on a [[/save]]
+          saving throw. On a failure, the creature can't take reactions until
+          the start of its next turn and rolls a [[/r d8]] to determine what it
+          does during its turn.</p><p>On a 1 to 4, the creature does nothing. On
+          a 5 or 6, the creature takes no action or bonus action and uses all
+          its movement to move in a randomly determined direction. On a 7 or 8,
+          the creature makes a melee attack against a randomly determined
+          creature within its reach or does nothing if it can't make such an
+          attack.</p>
         chat: >-
           <p>The mouther babbles incoherently while it can see any creature.
           Each creature that starts its turn <strong>within 20 feet</strong> of
@@ -685,59 +684,6 @@ items:
               calculation: ''
               formula: '10'
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
-          activation:
-            type: special
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: '1'
-            units: turn
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: self
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: radius
-              size: '20'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 1d8
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
       enchant: {}
       prerequisites:
         level: null
@@ -750,14 +696,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.dPPLbo3Unu3TqZrs
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.dPPLbo3Unu3TqZrs
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676867
+      modifiedTime: 1745275911577
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8pX2JhWUpTNNRBVx.SzwWnAgr25vDeHKu'
   - _id: qlBBeTku9uoaEv8G
@@ -767,9 +717,9 @@ items:
     system:
       description:
         value: >-
-          <p>The gibbering mouther makes one [[/item
-          .lfUDtJ8hdeULQzqa]]{bite} attack and, if it can, uses its
-          [[/item .KQRvDGowc6ihejLu]]{Blinding Spittle}.</p>
+          <p>The gibbering mouther makes one [[/item .lfUDtJ8hdeULQzqa]]{bite}
+          attack and, if it can, uses its [[/item .KQRvDGowc6ihejLu]]{Blinding
+          Spittle}.</p>
         chat: ''
       source:
         custom: ''
@@ -847,7 +797,7 @@ items:
       identifier: multiattack
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags:
@@ -860,7 +810,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273655363
+      modifiedTime: 1745275914691
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8pX2JhWUpTNNRBVx.qlBBeTku9uoaEv8G'
   - _id: lfUDtJ8hdeULQzqa
@@ -870,10 +820,10 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
-          Medium or smaller, it must succeed on a  <strong>DC 10
-          Strength</strong> saving throw or be knocked prone. If the target is
-          killed by this damage, it is absorbed into the mouther.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          Medium or smaller, it must succeed on a [[/save]] saving throw or be
+          knocked prone. If the target is killed by this damage, it is absorbed
+          into the mouther.</p>
         chat: >-
           <p>The Gibbering Mouther attacks with its Bites. If the target is
           Medium or smaller, it must make a <strong>Strength</strong> saving
@@ -1062,19 +1012,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 5
-                denomination: 6
-                bonus: ''
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
@@ -1085,12 +1023,17 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bites
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 250000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -1098,7 +1041,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107550445
+      modifiedTime: 1745275935487
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8pX2JhWUpTNNRBVx.lfUDtJ8hdeULQzqa'
   - _id: KQRvDGowc6ihejLu
@@ -1110,9 +1053,9 @@ items:
         value: >-
           <p>The mouther spits a chemical glob at a point it can see within 15
           feet of it. The glob explodes in a blinding flash of light on impact.
-          </p><p>Each creature within 5 feet of the flash must succeed on a
-          <strong>DC 13 Dexterity</strong> saving throw or be blinded until the
-          end of the mouther's next turn.</p>
+          Each creature within 5 feet of the flash must succeed on a [[/save]]
+          saving throw or be blinded until the end of the mouther's next
+          turn.</p>
         chat: >-
           <p>The mouther spits a chemical glob at a point it can see within 15
           feet of it. The glob explodes in a blinding flash of light on impact.
@@ -1207,7 +1150,7 @@ items:
       identifier: blinding-spittle
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -1218,9 +1161,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676867
+      modifiedTime: 1745275949298
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!8pX2JhWUpTNNRBVx.KQRvDGowc6ihejLu'
 effects: []
@@ -1233,8 +1176,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171208657
-  modifiedTime: 1726171440602
+  modifiedTime: 1745275962441
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!8pX2JhWUpTNNRBVx'

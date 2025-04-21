@@ -54,8 +54,8 @@ system:
     hp:
       value: 78
       max: 78
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 12d10 + 12
     init:
       ability: ''
@@ -487,14 +487,15 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]], and if the target is
-          Large or smaller, the cloaker attaches to it. </p><p>If the cloaker
-          has advantage against the target, the cloaker attaches to the target's
-          head, and the target is blinded and unable to breathe while the
-          cloaker is attached. While attached, the cloaker can make this attack
-          only against the target and has advantage on the attack roll. The
-          cloaker can detach itself by spending 5 feet of its movement. A
-          creature, including the target, can take its action to detach the
-          cloaker by succeeding on a DC 16 Strength check.</p>
+          Large or smaller, the cloaker attaches to it.</p><p>If the cloaker has
+          advantage against the target, the cloaker attaches to the target's
+          head, and the target is &amp;Reference[blinded] and unable to
+          &amp;Reference[suffocation apply=false]{breathe} while the cloaker is
+          attached. While attached, the cloaker can make this attack only
+          against the target and has advantage on the attack roll. The cloaker
+          can detach itself by spending 5 feet of its movement. A creature,
+          including the target, can take its action to detach the cloaker by
+          succeeding on a DC 16 Strength check.</p>
         chat: >-
           <p>The Cloaker attacks with its Bite. A creature, including the
           target, can take its action to detach the cloaker by succeeding on a
@@ -637,9 +638,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -652,7 +654,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745173385292
+      modifiedTime: 1745276213080
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!HPUO3weiwRQnql0d.afXMbT7smRaCJbhc'
   - _id: Dfy6ujJALd2FPxNy
@@ -761,9 +763,8 @@ items:
     system:
       description:
         value: >-
-          <p>While in bright light, the cloaker has<strong> disadvantage
-          </strong>on attack rolls and Wisdom (Perception) checks that rely on
-          sight.</p>
+          <p>While in bright light, the cloaker has disadvantage on attack rolls
+          and Wisdom (Perception) checks that rely on sight.</p>
         chat: ''
       source:
         custom: ''
@@ -799,10 +800,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745275788738
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!HPUO3weiwRQnql0d.DxtSFI4LS6w1gzQP'
   - _id: E76WCem1q8Dt8qkE
     name: Multiattack
@@ -904,7 +905,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273655658
+      modifiedTime: 1745275792507
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!HPUO3weiwRQnql0d.E76WCem1q8Dt8qkE'
   - _id: ZRvdvg8n7pQdJ1Mj
@@ -1055,7 +1056,7 @@ items:
       identifier: tail
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -1066,7 +1067,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107551030
+      modifiedTime: 1745275791763
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!HPUO3weiwRQnql0d.ZRvdvg8n7pQdJ1Mj'
   - _id: Jiua0A8CFeKc7Zun
@@ -1077,11 +1078,10 @@ items:
       description:
         value: >-
           <p>Each creature within 60 feet of the cloaker that can hear its moan
-          and that isn't an aberration must succeed on a  <strong>DC 13
-          Wisdom</strong> saving throw or become frightened until the end of the
-          cloaker's next turn. </p><p>If a creature's saving throw is
-          successful, the creature is immune to the cloaker's moan for the next
-          24 hours.</p>
+          and that isn't an aberration must succeed on a [[/save]] saving throw
+          or become &amp;Reference[frightened] until the end of the cloaker's
+          next turn. If a creature's saving throw is successful, the creature is
+          immune to the cloaker's moan for the next 24 hours.</p>
         chat: >-
           <p>Each creature within 60 feet of the cloaker that can hear its moan
           and that isn't an aberration must make a <strong>Wisdom</strong>
@@ -1122,13 +1122,13 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
             value: '60'
-            units: ft
+            units: self
             special: ''
             override: false
           target:
@@ -1136,10 +1136,10 @@ items:
               count: ''
               contiguous: false
               type: radius
-              size: ''
+              size: '60'
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
               type: ''
@@ -1160,26 +1160,33 @@ items:
               calculation: cha
               formula: '13'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
       identifier: moan
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.VvXrTnB2FscxqbG3
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VvXrTnB2FscxqbG3
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676777
+      modifiedTime: 1745276132912
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!HPUO3weiwRQnql0d.Jiua0A8CFeKc7Zun'
   - _id: UYqrfrW4pmBsmtiQ
@@ -1289,7 +1296,7 @@ items:
       identifier: phantasms
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
     flags:
@@ -1302,8 +1309,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745275791763
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!HPUO3weiwRQnql0d.UYqrfrW4pmBsmtiQ'
 effects: []
 folder: cHmylff3tHTzhvyb
@@ -1315,8 +1322,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171218692
-  modifiedTime: 1726171442400
+  modifiedTime: 1745275851012
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!HPUO3weiwRQnql0d'

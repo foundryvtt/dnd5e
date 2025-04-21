@@ -487,11 +487,11 @@ items:
       description:
         value: >-
           <p>The aboleth targets one creature it can see within 30 ft. of it.
-          The target must succeed on a  <strong>DC 14 Wisdom</strong> saving
-          throw or be magically charmed by the aboleth until the aboleth dies or
-          until it is on a different plane of existence from the
-          target.</p><p>The charmed target is under the aboleth's control and
-          can't take reactions, and the aboleth and the target can communicate
+          The target must succeed on a [[/save]] saving throw or be magically
+          &amp;Reference[charmed] by the aboleth until the aboleth dies or until
+          it is on a different plane of existence from the target.</p><p>The
+          charmed target is under the aboleth's control and can't take
+          reactions, and the aboleth and the target can communicate
           telepathically with each other over any distance.Whenever the charmed
           target takes damage, the target can repeat the saving throw. On a
           success, the effect ends. No more than once every 24 hours, the target
@@ -590,7 +590,7 @@ items:
       identifier: enslave
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
@@ -601,9 +601,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676971
+      modifiedTime: 1745275447611
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!shhHtE7b92PefCWB.Wpa7li8EJJJ7W3kA'
   - _id: eK34LWjCZnoLqUbv
@@ -774,7 +774,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: <p>The aboleth makes one tail attack.</p>
+        value: <p>The aboleth makes one [[/item .FwOZEwx7MPDq8Igu]]{tail} attack.</p>
         chat: <p>The aboleth swipes its tail against its prey!</p>
       source:
         custom: ''
@@ -793,87 +793,53 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: attack
+        tTKjzz8OTOmQJbnc:
+          type: utility
+          _id: tTKjzz8OTOmQJbnc
+          sort: 0
           activation:
             type: legendary
-            value: 1
-            condition: ''
+            value: null
             override: false
+            condition: ''
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
           range:
-            value: '10'
-            units: ft
-            special: ''
             override: false
+            units: self
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          attack:
-            ability: str
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts:
-              - number: 3
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+            max: ''
+          roll:
+            prompt: false
+            visible: false
+            name: ''
+            formula: ''
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -883,15 +849,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676971
+      modifiedTime: 1745275488296
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!shhHtE7b92PefCWB.nb2rVHLawik6EjMJ'
   - _id: SCTJPlV2KrhVflgI
@@ -901,9 +871,9 @@ items:
     system:
       description:
         value: >-
-          <p>One creature charmed by the aboleth takes <strong>10 (3d6)</strong>
-          <strong>psychic </strong>damage, and the aboleth regains hit points
-          equal to the damage the creature takes.</p>
+          <p>One creature charmed by the aboleth takes [[/damage average]]
+          damage, and the aboleth regains hit points equal to the damage the
+          creature takes.</p>
         chat: ''
       source:
         custom: ''
@@ -1010,10 +980,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745275512450
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!shhHtE7b92PefCWB.SCTJPlV2KrhVflgI'
   - _id: dZWUNgKiLNxVg983
     name: Mucous Cloud
@@ -1024,10 +994,9 @@ items:
         value: >-
           <p>While underwater, the aboleth is surrounded by transformative
           mucus. A creature that touches the aboleth or that hits it with a
-          melee attack while within <strong>5 ft.</strong> of it must make a
-          <strong>DC 14 Constitution saving throw</strong>. On a failure, the
-          creature is diseased for 1d4 hours. The diseased creature can breathe
-          only underwater.</p>
+          melee attack while within 5 ft. of it must make a [[/save]] saving
+          throw. On a failure, the creature is diseased for [[/r 1d4]] hours.
+          The diseased creature can breathe only underwater.</p>
         chat: >-
           <p>While underwater, the aboleth is surrounded by transformative
           mucus. A creature that touches the aboleth or that hits it with a
@@ -1106,79 +1075,30 @@ items:
               calculation: ''
               formula: '14'
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 1d4
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
       enchant: {}
       prerequisites:
         level: null
       identifier: mucous-cloud
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.HMOOZRxolMmv91xm
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.HMOOZRxolMmv91xm
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676971
+      modifiedTime: 1745275696088
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!shhHtE7b92PefCWB.dZWUNgKiLNxVg983'
   - _id: R5sQYgehDyPiDyyE
@@ -1215,7 +1135,7 @@ items:
       identifier: probing-telepathy
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags:
@@ -1228,8 +1148,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745275352019
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!shhHtE7b92PefCWB.R5sQYgehDyPiDyyE'
   - _id: sgauK8Lyt8qxsxOH
     name: Tentacle
@@ -1237,12 +1157,7 @@ items:
     img: icons/creatures/tentacles/tentacles-thing-green.webp
     system:
       description:
-        value: >-
-          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
-          a creature, it must succeed on a [[/save]] saving throw or become
-          diseased. The disease has no effect for 1 minute and can be removed by
-          any magic that cures disease. After 1 minute, the diseased creature
-          gains [[/item .Lnp6wFaKnkpuWJs2]].</p>
+        value: "<p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is a creature, it must succeed on a [[/save]] saving throw or become diseased. The disease has no effect for 1 minute and can be removed by any magic that cures disease. After 1 minute, the diseased creature's skin becomes translucent and slimy, the creature can't regain hit points unless it is underwater, and the disease can be removed only by heal or another disease-curing spell of 6th level or higher. When the creature is outside a body of water, it takes\_[[/damage average activity=dnd5eactivity100]]\_damage every 10 minutes unless moisture is applied to the skin before 10 minutes have passed.</p>"
         chat: >-
           <p>The Aboleth attacks with its Tentacle. If the target is a creature,
           it must make a <strong>Constitution</strong> saving throw.</p>
@@ -1400,7 +1315,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1431,13 +1346,24 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts: []
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: '12'
+                bonus: ''
+                types:
+                  - acid
           save:
             ability: con
             dc:
               calculation: ''
               formula: '14'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1445,7 +1371,7 @@ items:
       mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -1460,7 +1386,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745175763434
+      modifiedTime: 1745275610911
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!shhHtE7b92PefCWB.sgauK8Lyt8qxsxOH'
   - _id: FwOZEwx7MPDq8Igu
@@ -1616,7 +1542,7 @@ items:
       mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -1631,7 +1557,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745175712668
+      modifiedTime: 1745275415110
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!shhHtE7b92PefCWB.FwOZEwx7MPDq8Igu'
   - _id: fI8m07LnyCCdsSpn
@@ -1678,121 +1604,9 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-    _key: '!actors.items!shhHtE7b92PefCWB.fI8m07LnyCCdsSpn'
-  - _id: Lnp6wFaKnkpuWJs2
-    name: Tentacle Disease
-    type: feat
-    img: icons/magic/acid/projectile-glowing-bubbles.webp
-    system:
-      description:
-        value: "<p><strong>After 1 minute</strong>, the diseased creature's skin becomes translucent and slimy, the creature can't regain hit points unless it is underwater, and the disease can be removed only by heal or another disease-curing spell of 6th level or higher. When the creature is <strong>outside a body of water</strong>, it takes\_<strong>6 (1d12) acid\_damage every 10 minutes</strong> unless moisture is applied to the skin before 10 minutes have passed.</p>"
-        chat: <p>You feel a surging pain rushing through your body!</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
-          activation:
-            type: ''
-            value: null
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            critical:
-              allow: false
-              bonus: ''
-            parts:
-              - number: 1
-                denomination: 12
-                bonus: ''
-                types:
-                  - acid
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: tentacle-disease
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.y18y37F8ppFLGuLb
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.y18y37F8ppFLGuLb
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676971
+      modifiedTime: 1745275345694
       lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!shhHtE7b92PefCWB.Lnp6wFaKnkpuWJs2'
+    _key: '!actors.items!shhHtE7b92PefCWB.fI8m07LnyCCdsSpn'
   - _id: 5zfFkWqOMddCmxiR
     name: Multiattack
     type: feat
@@ -1892,75 +1706,16 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273657465
+      modifiedTime: 1745275416018
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!shhHtE7b92PefCWB.5zfFkWqOMddCmxiR'
-  - _id: 7GePgmNDyzzHHCKS
-    name: Lair Actions
-    type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
-    system:
-      description:
-        value: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. On initiative count 20 (losing
-          all initiative ties), it can use one of its lair action options. It
-          can't do so while incapacitated or otherwise unable to take actions.
-          If surprised, it can't use one until after its first turn in the
-          combat.</p>
-        chat: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. </p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lair-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676971
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!shhHtE7b92PefCWB.7GePgmNDyzzHHCKS'
   - _id: SHlQeobxHZU6iQ24
     name: Legendary Actions
     type: feat
     img: icons/magic/light/hand-sparks-glow-yellow.webp
     system:
       description:
-        value: >-
-          <p>The aboleth can take 3 legendary actions. Only one legendary action
-          option can be used at a time and only at the end of another creature's
-          turn. The aboleth regains spent legendary actions at the start of its
-          turn.</p>
+        value: <p>[[lookup @resources.legact.label]]</p>
         chat: <p>The aboleth can take 3 legendary actions.</p>
       source:
         custom: ''
@@ -1985,7 +1740,7 @@ items:
       identifier: legendary-actions
     effects: []
     folder: null
-    sort: 0
+    sort: 600000
     ownership:
       default: 0
     flags:
@@ -1996,61 +1751,11 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676971
+      modifiedTime: 1745275386943
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!shhHtE7b92PefCWB.SHlQeobxHZU6iQ24'
-  - _id: a4mvD9abiTdVlDIh
-    name: Regional Effects
-    type: feat
-    img: icons/environment/wilderness/cave-entrance-mountain-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The mere presence of a legendary creature can have strange and
-          wondrous effects on its environment. Regional effects end abruptly or
-          dissipate over time when the legendary creature dies.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: regional-effects
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-    _key: '!actors.items!shhHtE7b92PefCWB.a4mvD9abiTdVlDIh'
 effects: []
 folder: cHmylff3tHTzhvyb
 sort: 0
