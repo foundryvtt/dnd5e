@@ -1915,15 +1915,15 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     /** @import ContainerSheet from "../../item/container-sheet.mjs" */
 
     /**
-     * A hook event that fires when an sheet filters an item
+     * A hook event that fires when a sheet filters an item.
      * @function dnd5e.filterItem
      * @memberof hookEvents
-     * @param {BaseActorSheet | ContainerSheet} sheet   The sheet the item is being rendered on.
+     * @param {BaseActorSheet|ContainerSheet} sheet     The sheet the item is being rendered on.
      * @param {Item5e} item                             The item being filtered.
      * @param {Set<string>} filters                     Filters applied to the Item.
      * @returns {false|void} Return false to hide the item, otherwise other filters will continue to apply.
      */
-    if (Hooks.call("dnd5e.filterItem", this, item, filters) === false) return false;
+    if ( Hooks.call("dnd5e.filterItem", this, item, filters) === false ) return false;
   }
 
   /* -------------------------------------------- */
