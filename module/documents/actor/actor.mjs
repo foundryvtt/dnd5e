@@ -1484,7 +1484,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !rolls?.length ) return null;
 
     // Take action depending on the result
-    const details = {};
+    const details = { subject: this };
     const roll = rolls[0];
     const returnValue = oldFormat ? roll : rolls;
 
@@ -1537,8 +1537,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * @param {Actor5e} data.subject    Actor for which the death saving throw has been rolled.
      * @returns {boolean}               Explicitly return `false` to prevent updates from being performed.
      */
-    if ( Hooks.call("dnd5e.rollDeathSave", rolls, { ...details, subject: this }) === false ) return returnValue;
-    if ( Hooks.call("dnd5e.rollDeathSaveV2", rolls, { ...details, subject: this }) === false ) return returnValue;
+    if ( Hooks.call("dnd5e.rollDeathSave", rolls, details) === false ) return returnValue;
+    if ( Hooks.call("dnd5e.rollDeathSaveV2", rolls, details) === false ) return returnValue;
 
     if ( !foundry.utils.isEmpty(details.updates) ) await this.update(details.updates);
 
