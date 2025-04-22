@@ -97,9 +97,8 @@ Hooks.once("init", function() {
   registerSystemSettings();
   registerSystemKeybindings();
 
-  // Configure module art & register module data
+  // Configure module art
   game.dnd5e.moduleArt = new ModuleArt();
-  registerModuleData();
 
   // Configure bastions
   game.dnd5e.bastion = new documents.Bastion();
@@ -116,6 +115,12 @@ Hooks.once("init", function() {
 
   // Legacy rules.
   if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) applyLegacyRules();
+
+  // Register system
+  DND5E.SPELL_LISTS.forEach(uuid => dnd5e.registry.spellLists.register(uuid));
+
+  // Register module data from manifests
+  registerModuleData();
 
   // Register Roll Extensions
   CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];

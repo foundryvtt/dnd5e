@@ -624,6 +624,9 @@ export function applyLegacyRules() {
     if ( cat === "focusTypes" ) Object.entries(value).forEach(([k, v]) => DND5E[cat][k].itemIds = v);
     else DND5E[cat] = value;
   }
+
+  // Swap spell lists.
+  DND5E.SPELL_LISTS = LEGACY.SPELL_LISTS;
 }
 
 /* -------------------------------------------- */
