@@ -62,8 +62,7 @@ export default class SourceField extends SchemaField {
   /* -------------------------------------------- */
 
   /**
-   * Check if the provided package has any source books registered in its manifest. If it has only one, then return
-   * that book's key.
+   * Check if the provided package has any source books registered in its manifest and returns the first listed book.
    * @param {ClientPackage} pkg  The package.
    * @returns {string|null}
    */
@@ -71,7 +70,6 @@ export default class SourceField extends SchemaField {
     if ( !pkg ) return null;
     const sourceBooks = pkg.flags?.dnd5e?.sourceBooks;
     const keys = Object.keys(sourceBooks ?? {});
-    if ( keys.length !== 1 ) return null;
     return keys[0];
   }
 
