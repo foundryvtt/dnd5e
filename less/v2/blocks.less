@@ -61,7 +61,9 @@
   .align-start { align-items:start; }
 
   /* Hidden Content */
-  .hide-secrets .content-embed .secret { display: none; }
+  .hide-secrets .content-embed, .hide-secrets.content-embed {
+    .secret { display: none; }
+  }
   .content-embed .hide-in-embed { display: none; }
 
   /* Common Typography for Callouts */
