@@ -4,6 +4,7 @@
  * Author: Atropos
  * Software License: MIT
  * Content License: https://www.dndbeyond.com/attachments/39j2li89/SRD5.1-CCBY4.0License.pdf
+ *                  https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.pdf
  * Repository: https://github.com/foundryvtt/dnd5e
  * Issue Tracker: https://github.com/foundryvtt/dnd5e/issues
  */
