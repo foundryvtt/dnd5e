@@ -3035,6 +3035,23 @@ preLocalize("attackTypes", { key: "label" });
 /* -------------------------------------------- */
 
 /**
+ * Spell lists that will be registered by the system during init.
+ * @type {string[]}
+ */
+DND5E.SPELL_LISTS = Object.freeze([
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.wwia6Wwo4BgE9GSI",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.8yD9Jgp404hfZ9ie",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.VfZ5mH2ZuyFq82Ga",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.sSzagq8GvYXpfmfs",
+  "Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz"
+]);
+
+/* -------------------------------------------- */
+
+/**
  * Define the standard slot progression by character level.
  * The entries of this array represent the spell slot progression for a full spell-caster.
  * @type {number[][]}
