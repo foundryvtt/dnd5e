@@ -98,7 +98,7 @@ function cleanPackEntry(data, { clearSourceId=true, ownership=0 }={}) {
   if ( data.system?.range?.value === 0 ) data.system.range.value = null;
   if ( data.system?.range?.long === 0 ) data.system.range.long = null;
   if ( data.system?.uses?.value === 0 ) data.system.uses.value = null;
-  if ( data.system?.uses?.max === "0" ) data.system.duration.value = "";
+  if ( data.system?.uses?.max === "0" ) data.system.uses.max = "";
   if ( data.system?.save?.dc === 0 ) data.system.save.dc = null;
   if ( data.system?.capacity?.value === 0 ) data.system.capacity.value = null;
   if ( data.system?.strength === 0 ) data.system.strength = null;
