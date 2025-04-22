@@ -254,7 +254,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       arr.push({
         name, reference,
         id: k,
-        icon: existing.img ?? img,
+        icon: existing?.img ?? img,
         disabled: existing ? disabled : true
       });
       return arr;
