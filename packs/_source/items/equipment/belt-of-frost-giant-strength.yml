@@ -5,14 +5,11 @@ img: icons/equipment/waist/cloth-sash-purple.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item, (requires attunement)</em></p>
-
-      <p>While wearing this belt, your Strength score changes to 23. If your
-      Strength is already equal to or greater than the belt's score, the item
-      has no effect on you.</p>
-
-      <p>The Belt of Stone Giant Strength and the Belt of Frost Giant Strength
-      look different, but they have the same effect.</p>
+      <p><em>Wondrous item (requires attunement)</em></p><p>While wearing this
+      belt, your Strength score changes to 23. If your Strength is already equal
+      to or greater than the belt's score, the item has no effect on
+      you.</p><p>The Belt of Stone Giant Strength and the Belt of Frost Giant
+      Strength look different, but they have the same effect.</p>
     chat: ''
   source:
     custom: ''
@@ -52,7 +49,7 @@ system:
   strength: null
   proficient: null
   type:
-    value: clothing
+    value: wondrous
     baseItem: ''
   unidentified:
     description: ''
