@@ -404,7 +404,9 @@ export default class AttributesFields {
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const crawl = this.parent.hasConditionEffect("crawl");
     const units = this.attributes.movement.units ??= defaultUnits("length");
-    let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
+    const applyExhaustion = (game.settings.get("dnd5e", "rulesVersion") === "modern")
+      && !game.settings.get("dnd5e", "disableExhaustion");
+    let reduction = applyExhaustion
       ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     for ( const type in CONFIG.DND5E.movementTypes ) {
