@@ -498,8 +498,8 @@ items:
       description:
         value: >-
           <p>The planetar's weapon attacks are magical. When the planetar hits
-          with any weapon, the weapon deals an <strong>extra 5d8 <em>radiant
-          damage</em></strong> (included in the attack).</p>
+          with any weapon, the weapon deals an extra 5d8 radiant damage
+          (included in the attack).</p>
         chat: >-
           <p>The planetar's weapon attacks are magical. When the planetar hits
           with any weapon, the weapon deals extra <em>radiant damage</em>
@@ -538,9 +538,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676733
+      modifiedTime: 1745445133570
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!XEByBLeOkDgL3mrr.sDvx0IybgYa8Q4WG'
   - _id: 2kBUlTLMlwq3KoUB
@@ -770,8 +770,8 @@ items:
     system:
       description:
         value: >-
-          <p>The planetar has<strong> advantage </strong>on saving throws
-          against spells and other magical effects.</p>
+          <p>The planetar has advantage on saving throws against spells and
+          other magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -807,10 +807,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445146570
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!XEByBLeOkDgL3mrr.5sDIEn5aplaeXax7'
   - _id: LyxrhwvzMW4YbiYE
     name: Multiattack
@@ -896,7 +896,7 @@ items:
       identifier: multiattack
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags:
@@ -909,8 +909,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445150557
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!XEByBLeOkDgL3mrr.LyxrhwvzMW4YbiYE'
   - _id: BBLXs9hiUvtRaP16
     name: Greatsword
@@ -1074,7 +1074,7 @@ items:
       identifier: greatsword
     effects: []
     folder: null
-    sort: 0
+    sort: 250000
     ownership:
       default: 0
     flags:
@@ -1087,7 +1087,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552124
+      modifiedTime: 1745445151479
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!XEByBLeOkDgL3mrr.BBLXs9hiUvtRaP16'
   - _id: VJz6sW3vOJcEL4IS
@@ -1096,7 +1096,10 @@ items:
     img: icons/magic/light/explosion-star-glow-blue-purple.webp
     system:
       description:
-        value: ''
+        value: >-
+          <p>The [[lookup @name lowercase]] touches another creature. The target
+          magically regains 30 ([[/heal]]{6d8 + 3}) hit points and is freed from
+          any curse, disease, poison, blindness, or deafness.</p>
         chat: >-
           <section class="secret"><p></p></section><p>The planetar touches
           another creature. The target magically regains 30 (6d8 + 3) hit points
@@ -1194,7 +1197,7 @@ items:
       identifier: healing-touch
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -1205,9 +1208,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676733
+      modifiedTime: 1745445218996
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!XEByBLeOkDgL3mrr.VJz6sW3vOJcEL4IS'
   - _id: Mzh95utKDPIrjiH8

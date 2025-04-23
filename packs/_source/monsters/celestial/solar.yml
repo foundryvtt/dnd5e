@@ -501,8 +501,8 @@ items:
       description:
         value: >-
           <p>The solar's weapon attacks are magical. When the solar hits with
-          any weapon, the weapon deals an <strong>extra 6d8 <em>radiant
-          damage</em></strong> (included in the attack).</p>
+          any weapon, the weapon deals an extra 6d8 radiant damage (included in
+          the attack).</p>
         chat: >-
           <p>The solar's weapon attacks are magical. When the solar hits with
           any weapon, the weapon deals extra <em>radiant damage</em> (included
@@ -541,9 +541,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676969
+      modifiedTime: 1745445299931
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.zkNT86Xasjyzk8Df'
   - _id: T8xqterWWFewCoot
@@ -601,12 +601,12 @@ items:
       description:
         value: >-
           <p>The solar releases its greatsword to hover magically in an
-          unoccupied space within <strong>5 ft.</strong> of it. If the solar can
-          see the sword, the solar can mentally command it as a bonus action to
-          fly up to <strong>50 ft.</strong> and either make one attack against a
-          target or return to the solar's hands.</p><p>If the hovering sword is
-          targeted by any effect, the solar is considered to be holding it. The
-          hovering sword falls if the solar dies.</p>
+          unoccupied space within 5 ft. of it. If the solar can see the sword,
+          the solar can mentally command it as a bonus action to fly up to 50
+          ft. and either make one attack against a target or return to the
+          solar's hands. If the hovering sword is targeted by any effect, the
+          solar is considered to be holding it. The hovering sword falls if the
+          solar dies.</p>
         chat: >-
           <p>The solar releases its greatsword to hover magically in an
           unoccupied space within <strong>5 ft.</strong> of it. If the hovering
@@ -688,7 +688,7 @@ items:
       identifier: flying-sword
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
@@ -699,9 +699,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676969
+      modifiedTime: 1745445386450
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.N5YFwsrzGuUFrblp'
   - _id: BqJjoHBgnTDTcLbB
@@ -712,8 +712,8 @@ items:
       description:
         value: >-
           <p>The solar touches another creature. The target magically regains 40
-          (8d8 + 4) hit points and is freed from any curse, disease, poison,
-          blindness, or deafness.</p>
+          ([[/heal]]{8d8 + 4}) hit points and is freed from any curse, disease,
+          poison, blindness, or deafness.</p>
         chat: ''
       source:
         custom: ''
@@ -807,7 +807,7 @@ items:
       identifier: healing-touch
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
     flags:
@@ -818,10 +818,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445386450
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.BqJjoHBgnTDTcLbB'
   - _id: hWnnOw9zwmvWvFT7
     name: Innate Spellcasting
@@ -888,8 +888,8 @@ items:
     system:
       description:
         value: >-
-          <p>The solar has<strong> advantage </strong>on saving throws against
-          spells and other magical effects.</p>
+          <p>The solar has advantage on saving throws against spells and other
+          magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -925,10 +925,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445309586
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.WYt9oaIl8PZrMDNl'
   - _id: H0o9gjKN8xSdBHdB
     name: Multiattack
@@ -1029,7 +1029,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273656975
+      modifiedTime: 1745445387393
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.H0o9gjKN8xSdBHdB'
   - _id: QssrfCioglFdfd8I
@@ -1194,7 +1194,7 @@ items:
       identifier: greatsword
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -1207,7 +1207,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553048
+      modifiedTime: 1745445386450
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.QssrfCioglFdfd8I'
   - _id: BSLTe0yfltAnguOT
@@ -1218,8 +1218,8 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
-          a creature that has 190 hit points or fewer, it must succeed on a 
-          <strong>DC 15 Constitution</strong> saving throw or die.</p>
+          a creature that has 100 hit points or fewer, it must succeed on a
+          [[/save]] saving throw or die.</p>
         chat: >-
           <p>The Solar attacks with its Slaying Longbow. If the target is a
           creature that has 190 hit points or fewer, it must make a
@@ -1423,19 +1423,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 8
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -1443,15 +1431,21 @@ items:
               formula: '15'
           sort: 0
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: slaying-longbow
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -1459,7 +1453,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745173385613
+      modifiedTime: 1745445386450
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.BSLTe0yfltAnguOT'
   - _id: sZjcCRCNcf6m4VoK
@@ -1468,11 +1462,7 @@ items:
     img: icons/magic/light/hand-sparks-glow-yellow.webp
     system:
       description:
-        value: >-
-          <p>The solar can take 3 legendary actions. Only one legendary action
-          option can be used at a time and only at the end of another creature's
-          turn. The solar regains spent legendary actions at the start of its
-          turn.</p>
+        value: <p>[[lookup @resources.legact.label]]</p>
         chat: <p>The solar can take 3 legendary actions.</p>
       source:
         custom: ''
@@ -1508,9 +1498,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676969
+      modifiedTime: 1745445290948
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.sZjcCRCNcf6m4VoK'
   - _id: H4Qnl5aNwIuOiKvm
@@ -1550,13 +1540,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1566,7 +1550,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -1601,6 +1585,9 @@ items:
             prompt: false
             visible: false
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -1613,15 +1600,19 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445585072
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.H4Qnl5aNwIuOiKvm'
   - _id: hvLibxV3shPORnBB
     name: Searing Burst
@@ -1630,8 +1621,10 @@ items:
     system:
       description:
         value: >-
-          <strong>DC 23 Dexterity</strong><strong>14 (4d6) <em>fire
-          damage</em></strong><strong>14 (4d6) <em>radiant damage</em></strong>
+          <p>The solar emits magical, divine energy. Each creature of its choice
+          in a 10-foot radius must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
           <p>The solar emits magical, divine energy. Each creature of its choice
           in a 10-foot radius must make a <strong>Dexterity</strong> saving
@@ -1653,89 +1646,6 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
-          activation:
-            type: legendary
-            value: 2
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: radius
-              size: '10'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            critical:
-              allow: false
-              bonus: ''
-            parts:
-              - number: 4
-                denomination: 6
-                bonus: ''
-                types:
-                  - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-              - number: 4
-                denomination: 6
-                bonus: ''
-                types:
-                  - radiant
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -1745,13 +1655,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1834,14 +1738,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.5OYruoI92fxTOLts
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.5OYruoI92fxTOLts
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676969
+      modifiedTime: 1745445607675
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.hvLibxV3shPORnBB'
   - _id: iXcyU8grGuxZbkYJ
@@ -1851,9 +1759,10 @@ items:
     system:
       description:
         value: >-
-          <strong>DC 15 Constitution</strong><p>The solar targets one creature
-          it can see within 30 feet of it. If the target can see it, the target
-          must make a <strong>Constitution</strong> saving throw.</p>
+          <p>The solar targets one creature it can see within 30 feet of it. If
+          the target can see it, the target must succeed on a [[/save]] saving
+          throw or be &amp;Reference[blinded apply=false] until magic such as
+          <em>lesser restoration</em> spell removes the blindness.</p>
         chat: >-
           <p>The solar targets one creature it can see within 30 feet of it. If
           the target can see it, the target must succeed on a Constitution
@@ -1875,66 +1784,6 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: legendary
-            value: 3
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '3'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '30'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -1944,13 +1793,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '3'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1960,10 +1803,11 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
-          effects: []
+          effects:
+            - _id: CPMieBYNggqmHRra
           range:
             value: '30'
             units: ft
@@ -1979,8 +1823,8 @@ items:
               height: ''
               units: ''
             affects:
-              count: ''
-              type: ''
+              count: '1'
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1998,11 +1842,54 @@ items:
               calculation: ''
               formula: '15'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects:
+            - CPMieBYNggqmHRra
       enchant: {}
       prerequisites:
         level: null
       identifier: blinding-gaze
-    effects: []
+    effects:
+      - name: Blinded
+        img: icons/magic/perception/third-eye-blue-red.webp
+        origin: Compendium.dnd5e.monsters.Actor.lOYt73eaJojBDxAV.Item.iXcyU8grGuxZbkYJ
+        _id: CPMieBYNggqmHRra
+        type: base
+        system: {}
+        changes: []
+        disabled: false
+        duration:
+          startTime: null
+          seconds: null
+          combat: null
+          rounds: null
+          turns: null
+          startRound: null
+          startTurn: null
+        description: >-
+          <p>The target is blinded until magic such as the <em>lesser
+          restoration</em> spell removes the blindness.</p>
+        tint: '#ffffff'
+        transfer: true
+        statuses:
+          - blinded
+        sort: 0
+        flags:
+          dnd5e:
+            riders:
+              statuses: []
+        _stats:
+          compendiumSource: null
+          duplicateSource: null
+          coreVersion: '12.331'
+          systemId: dnd5e
+          systemVersion: 4.4.0
+          createdTime: 1745445499978
+          modifiedTime: 1745445558454
+          lastModifiedBy: dnd5ebuilder0000
+        _key: >-
+          !actors.items.effects!lOYt73eaJojBDxAV.iXcyU8grGuxZbkYJ.CPMieBYNggqmHRra
     folder: null
     sort: 0
     ownership:
@@ -2010,121 +1897,20 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.8C6hkMXWLeymmJ5C
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.8C6hkMXWLeymmJ5C
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676969
+      modifiedTime: 1745445566448
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!lOYt73eaJojBDxAV.iXcyU8grGuxZbkYJ'
-  - _id: eNypfn99CwFCi47y
-    name: Regional Effects
-    type: feat
-    img: icons/environment/wilderness/cave-entrance-mountain-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The mere presence of a legendary creature can have strange and
-          wondrous effects on its environment. Regional effects end abruptly or
-          dissipate over time when the legendary creature dies.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: regional-effects
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-    _key: '!actors.items!lOYt73eaJojBDxAV.eNypfn99CwFCi47y'
-  - _id: wxR8cWGMfaaMKc1W
-    name: Lair Actions
-    type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
-    system:
-      description:
-        value: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. On initiative count 20 (losing
-          all initiative ties), it can use one of its lair action options. It
-          can't do so while incapacitated or otherwise unable to take actions.
-          If surprised, it can't use one until after its first turn in the
-          combat.</p>
-        chat: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. </p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lair-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676969
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!lOYt73eaJojBDxAV.wxR8cWGMfaaMKc1W'
   - _id: Mzh95utKDPIrjiH8
     name: Detect Evil and Good
     ownership:

@@ -497,9 +497,8 @@ items:
         value: >-
           <p>If the unicorn moves at least 20 ft. straight toward a target and
           then hits it with a horn attack on the same turn, the target takes an
-          extra <strong>9 (2d8) <em>piercing damage</em></strong>. </p><p>If the
-          target is a creature, it must succeed on a  <strong>DC 15
-          Strength</strong> saving throw or be knocked prone.</p>
+          extra [[/damage average]] damage.</p><p>If the target is a creature,
+          it must succeed on a [[/save]] saving throw or be knocked prone.</p>
         chat: >-
           <p>If the unicorn moves at least 20 ft. straight toward a target and
           then hits it with a horn attack on the same turn, the target takes
@@ -638,19 +637,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 8
-                bonus: ''
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
@@ -669,14 +656,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676958
+      modifiedTime: 1745445651890
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.iWDQPwdffkW06c2Y'
   - _id: 8yPzMeXvBJC2POQK
@@ -740,8 +731,8 @@ items:
     system:
       description:
         value: >-
-          <p>The unicorn has<strong> advantage </strong>on saving throws against
-          spells and other magical effects.</p>
+          <p>The unicorn has advantage on saving throws against spells and other
+          magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -777,10 +768,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445664678
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.MW3V6fHknXOLuVxU'
   - _id: hyiKyfKiplfTQ0ZX
     name: Magic Weapons
@@ -929,7 +920,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273655567
+      modifiedTime: 1745445693273
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.vnAmgF7ZkpmDIJSc'
   - _id: f7m44y4TqYYcunMj
@@ -1081,7 +1072,7 @@ items:
       mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -1094,7 +1085,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745174322780
+      modifiedTime: 1745445692501
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.f7m44y4TqYYcunMj'
   - _id: ORrGdhTLKLTKK3BH
@@ -1246,7 +1237,7 @@ items:
       mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -1259,7 +1250,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745174347012
+      modifiedTime: 1745445692501
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.ORrGdhTLKLTKK3BH'
   - _id: uCaHWOOBeJEyR1ay
@@ -1268,7 +1259,11 @@ items:
     img: icons/magic/light/explosion-star-glow-blue-purple.webp
     system:
       description:
-        value: ''
+        value: >-
+          <p>The [[lookup @name lowercase]] touches another creature. The target
+          magically regains 30 ([[/heal]]{2d8 + 2}) hit points. In addition, the
+          touch removes all diseases and neutralizes all poisons afflicting the
+          target.</p>
         chat: >-
           <section class="secret"><p></p></section><p>The unicorn touches
           another creature with its horn. The target magically regains 11 (2d8 +
@@ -1366,7 +1361,7 @@ items:
       identifier: healing-touch
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
@@ -1377,9 +1372,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676958
+      modifiedTime: 1745445745393
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.uCaHWOOBeJEyR1ay'
   - _id: W5ceTePXIPlUuiEY
@@ -1388,7 +1383,11 @@ items:
     img: icons/magic/symbols/runes-star-pentagon-magenta.webp
     system:
       description:
-        value: ''
+        value: >-
+          <p>The unicorn magically teleports itself and up to three willing
+          creatures it can see within 5 feet of it, along with any equipment
+          they are wearing or carrying, to a location the unicorn is familiar
+          with, up to 1 mile away.</p>
         chat: >-
           <section class="secret"><p></p></section><p>The unicorn magically
           teleports itself and up to three willing creatures it can see within 5
@@ -1479,7 +1478,7 @@ items:
       identifier: teleport
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
     flags:
@@ -1490,9 +1489,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676958
+      modifiedTime: 1745445766361
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.W5ceTePXIPlUuiEY'
   - _id: uGNhUMAmD8L5AD1M
@@ -1501,11 +1500,7 @@ items:
     img: icons/magic/light/hand-sparks-glow-yellow.webp
     system:
       description:
-        value: >-
-          <p>The unicorn can take 3 legendary actions. Only one legendary action
-          option can be used at a time and only at the end of another creature's
-          turn. The unicorn regains spent legendary actions at the start of its
-          turn.</p>
+        value: <p>[[lookup @resources.legact.label]]</p>
         chat: <p>The unicorn can take 3 legendary actions.</p>
       source:
         custom: ''
@@ -1541,123 +1536,20 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676958
+      modifiedTime: 1745445685750
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.uGNhUMAmD8L5AD1M'
-  - _id: A9f9DUM9Sh0qLYlF
-    name: Lair Actions
-    type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
-    system:
-      description:
-        value: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. On initiative count 20 (losing
-          all initiative ties), it can use one of its lair action options. It
-          can't do so while incapacitated or otherwise unable to take actions.
-          If surprised, it can't use one until after its first turn in the
-          combat.</p>
-        chat: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. </p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lair-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676958
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!G9PENY6nw0xRxCJW.A9f9DUM9Sh0qLYlF'
-  - _id: MdpCZRnBOnzgAKPg
-    name: Regional Effects
-    type: feat
-    img: icons/environment/wilderness/cave-entrance-mountain-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The mere presence of a legendary creature can have strange and
-          wondrous effects on its environment. Regional effects end abruptly or
-          dissipate over time when the legendary creature dies.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: regional-effects
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-    _key: '!actors.items!G9PENY6nw0xRxCJW.MdpCZRnBOnzgAKPg'
   - _id: UNbcqlW8Siek0Fpm
     name: Hooves
     type: feat
     img: icons/commodities/bones/hooves-cloven-brown.webp
     system:
       description:
-        value: <p>The unicorn makes one attack with its hooves.</p>
+        value: >-
+          <p>The unicorn makes one attack with its [[/item
+          .f7m44y4TqYYcunMj]]{hooves}.</p>
         chat: ''
       source:
         custom: ''
@@ -1685,13 +1577,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1747,15 +1633,19 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445801064
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.UNbcqlW8Siek0Fpm'
   - _id: Ps56FcAJxi2L3QdZ
     name: Shimmering Shield
@@ -1794,13 +1684,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1857,15 +1741,19 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.8l0R2MIYxWxYJT6O
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.8l0R2MIYxWxYJT6O
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445810730
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.Ps56FcAJxi2L3QdZ'
   - _id: Plfy8GZ08uqupxe6
     name: Heal Self
@@ -1873,7 +1761,7 @@ items:
     img: icons/magic/life/ankh-gold-blue.webp
     system:
       description:
-        value: <p>The unicorn magically regains 11 (2d8+2) hit points.</p>
+        value: <p>The unicorn magically regains 11 ([[/heal]]{2d8+2}) hit points.</p>
         chat: ''
       source:
         custom: ''
@@ -1901,13 +1789,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '3'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1971,15 +1853,19 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.gklxiU0PKYSM7RWv
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gklxiU0PKYSM7RWv
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445829271
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!G9PENY6nw0xRxCJW.Plfy8GZ08uqupxe6'
   - _id: Mzh95utKDPIrjiH8
     name: Detect Evil and Good

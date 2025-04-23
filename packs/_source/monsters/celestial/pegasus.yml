@@ -54,8 +54,8 @@ system:
     hp:
       value: 59
       max: 59
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 7d10 + 21
     init:
       ability: ''
@@ -651,8 +651,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171214782
-  modifiedTime: 1726171441640
+  modifiedTime: 1745445119244
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!EIgAW1dWVPpyWLUh'

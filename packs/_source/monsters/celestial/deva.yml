@@ -498,8 +498,8 @@ items:
       description:
         value: >-
           <p>The deva's weapon attacks are magical. When the deva hits with any
-          weapon, the weapon deals an <strong>extra 4d8 <em>radiant
-          damage</em></strong> (included in the attack).</p>
+          weapon, the weapon deals an extra 4d8 radiant damage (included in the
+          attack).</p>
         chat: >-
           <p>The deva's weapon attacks are magical. When the deva hits with any
           weapon, the weapon deals extra <em>radiant damage</em> (included in
@@ -538,9 +538,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676597
+      modifiedTime: 1745444972107
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!m4H3hjamBNMH09S9.KRskTTMCEepXUPwU'
   - _id: 3u5Rv7dQ2fIl1rbB
@@ -550,19 +550,15 @@ items:
     system:
       description:
         value: >-
-          <p>The deva magically <strong>polymorphs</strong> into a
-          <strong>humanoid</strong> or <strong>beast</strong> that has a
-          challenge rating equal to or less than its own, <strong>or back into
-          its true form.</strong> It reverts to its true form if it dies. Any
-          equipment it is wearing or carrying is absorbed or borne by the new
-          form (the deva's choice).</p>
-
-          <p>In a new form, the deva retains its game statistics and ability to
-          speak, but <strong>its AC, movement modes, Strength, Dexterity, and
-          special senses are replaced by those of the new form</strong>, and it
-          gains any statistics and capabilities (except class features,
-          legendary actions, and lair actions) that the new form has but that it
-          lacks.</p>
+          <p>The deva magically polymorphs into a humanoid or beast that has a
+          challenge rating equal to or less than its own, or back into its true
+          form. It reverts to its true form if it dies. Any equipment it is
+          wearing or carrying is absorbed or borne by the new form (the deva's
+          choice).</p><p>In a new form, the deva retains its game statistics and
+          ability to speak, but its AC, movement modes, Strength, Dexterity, and
+          special senses are replaced by those of the new form, and it gains any
+          statistics and capabilities (except class features, legendary actions,
+          and lair actions) that the new form has but that it lacks.</p>
         chat: ''
       source:
         custom: ''
@@ -640,7 +636,7 @@ items:
       identifier: change-shape
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -651,10 +647,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445097155
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!m4H3hjamBNMH09S9.3u5Rv7dQ2fIl1rbB'
   - _id: Lx0nT1oq0bLjX1lx
     name: Healing Touch
@@ -664,8 +660,8 @@ items:
       description:
         value: >-
           <p>The deva touches another creature. The target magically regains 20
-          (4d8 + 2) hit points and is freed from any curse, disease, poison,
-          blindness, or deafness.</p>
+          ([[/heal]]{4d8 + 2}) hit points and is freed from any curse, disease,
+          poison, blindness, or deafness.</p>
         chat: ''
       source:
         custom: ''
@@ -759,7 +755,7 @@ items:
       identifier: healing-touch
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags:
@@ -770,10 +766,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445236230
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!m4H3hjamBNMH09S9.Lx0nT1oq0bLjX1lx'
   - _id: dhEmGtIDAZEBrsZ2
     name: Innate Spellcasting
@@ -836,8 +832,8 @@ items:
     system:
       description:
         value: >-
-          <p>The deva has<strong> advantage </strong>on saving throws against
-          spells and other magical effects.</p>
+          <p>The deva has advantage on saving throws against spells and other
+          magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -873,10 +869,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445015733
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!m4H3hjamBNMH09S9.yo4YL40mReo1Gwx5'
   - _id: P3T5BWT2TFHCxUkr
     name: Multiattack
@@ -975,8 +971,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745445020866
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!m4H3hjamBNMH09S9.P3T5BWT2TFHCxUkr'
   - _id: qADu4OS68yINJCnZ
     name: Mace
@@ -1136,9 +1132,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: mace
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -1151,7 +1148,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553138
+      modifiedTime: 1745445039573
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!m4H3hjamBNMH09S9.qADu4OS68yINJCnZ'
   - _id: Mzh95utKDPIrjiH8

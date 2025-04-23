@@ -1043,20 +1043,17 @@ items:
     system:
       description:
         value: >-
-          <p>The couatl magically <strong>polymorphs</strong> into a
-          <strong>humanoid</strong> or <strong>beast</strong> that has a
-          challenge rating equal to or less than its own,<strong> or back into
-          its true form</strong>. It reverts to its true form if it dies. Any
-          equipment it is wearing or carrying is absorbed or borne by the new
-          form (the couatl's choice).</p>
-
-          <p>In a new form, the couatl retains its game statistics and ability
-          to speak, but <strong>its AC, movement modes, Strength, Dexterity, and
-          other actions are replaced by those of the new form</strong>, and it
-          gains any statistics and capabilities (except class features,
-          legendary actions, and lair actions) that the new form has but that it
-          lacks.<strong> If the new form has a bite attack, the couatl can use
-          its bite in that form.</strong></p>
+          <p>The couatl magically polymorphs into a humanoid or beast that has a
+          challenge rating equal to or less than its own, or back into its true
+          form. It reverts to its true form if it dies. Any equipment it is
+          wearing or carrying is absorbed or borne by the new form (the couatl's
+          choice).</p><p>In a new form, the couatl retains its game statistics
+          and ability to speak, but its AC, movement modes, Strength, Dexterity,
+          and other actions are replaced by those of the new form, and it gains
+          any statistics and capabilities (except class features, legendary
+          actions, and lair actions) that the new form has but that it lacks. If
+          the new form has a bite attack, the couatl can use its bite in that
+          form.</p>
         chat: ''
       source:
         custom: ''
@@ -1145,10 +1142,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745444939528
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ZaP1H91t4FzbRqR5.iw2q07K1D0X01DZO'
   - _id: J40yeoOnwpvtVpHt
     name: Innate Spellcasting
