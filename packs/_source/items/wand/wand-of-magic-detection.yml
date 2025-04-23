@@ -5,8 +5,8 @@ img: icons/weapons/wands/wand-gem-purple.webp
 system:
   description:
     value: >-
-      <p>This wand has 3 charges. While holding it, you can expend 1 charge as
-      an action to cast the
+      <p><em>Wand</em></p><p>This wand has 3 charges. While holding it, you can
+      expend 1 charge as an action to cast the
       @UUID[Compendium.dnd5e.spells.Item.ghXTfe7sgCbgf1Q8]{Detect Magic} spell
       from it. The wand regains 1d3 expended charges daily at dawn.</p>
     chat: ''
@@ -30,7 +30,7 @@ system:
   uses:
     max: '3'
     recovery:
-      - period: lr
+      - period: dawn
         type: formula
         formula: 1d3
     autoDestroy: false
@@ -121,7 +121,7 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 4.4.0
   createdTime: 1725037084495
   modifiedTime: 1731015893978
   lastModifiedBy: dnd5ebuilder0000
