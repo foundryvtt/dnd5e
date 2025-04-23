@@ -5,18 +5,15 @@ img: icons/weapons/wands/wand-simple-eye.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement)</em></p>
-
-      <p>This wand has 7 charges. While holding it, you can use an action and
-      expend 1 charge to speak its command word. For the next minute, you know
-      the direction of the nearest creature hostile to you within 60 feet, but
-      not its distance from you. The wand can sense the presence of hostile
-      creatures that are ethereal, invisible, disguised, or hidden, as well as
-      those in plain sight. The effect ends if you stop holding the wand.</p>
-
-      <p>The wand regains 1d6 + 1 expended charges daily at dawn. If you expend
-      the wand's last charge, roll a d20. On a 1, the wand crumbles into ashes
-      and is destroyed.</p>
+      <p><em>Wand (requires attunement)</em></p><p>This wand has 7 charges.
+      While holding it, you can use an action and expend 1 charge to speak its
+      command word. For the next minute, you know the direction of the nearest
+      creature hostile to you within 60 feet, but not its distance from you. The
+      wand can sense the presence of hostile creatures that are ethereal,
+      invisible, disguised, or hidden, as well as those in plain sight. The
+      effect ends if you stop holding the wand.</p><p>The wand regains 1d6 + 1
+      expended charges daily at dawn. If you expend the wand's last charge, roll
+      a d20. On a 1, the wand crumbles into ashes and is destroyed.</p>
     chat: ''
   source:
     custom: ''
@@ -38,7 +35,7 @@ system:
   uses:
     max: '7'
     recovery:
-      - period: lr
+      - period: dawn
         type: formula
         formula: 1d6 + 1
     autoDestroy: false
@@ -134,7 +131,7 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 4.4.0
   createdTime: 1725037100973
   modifiedTime: 1731015765246
   lastModifiedBy: dnd5ebuilder0000
