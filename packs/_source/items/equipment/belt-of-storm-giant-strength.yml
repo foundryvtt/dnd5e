@@ -5,11 +5,9 @@ img: icons/equipment/waist/sash-cloth-gold-purple.webp
 system:
   description:
     value: >-
-      <p><em>Wondrous item, (requires attunement)</em></p>
-
-      <p>While wearing this belt, your Strength score changes to 29. If your
-      Strength is already equal to or greater than the belt's score, the item
-      has no effect on you.</p>
+      <p><em>Wondrous item (requires attunement)</em></p><p>While wearing this
+      belt, your Strength score changes to 29. If your Strength is already equal
+      to or greater than the belt's score, the item has no effect on you.</p>
     chat: ''
   source:
     custom: ''
@@ -49,7 +47,7 @@ system:
   strength: null
   proficient: null
   type:
-    value: clothing
+    value: wondrous
     baseItem: ''
   unidentified:
     description: ''
