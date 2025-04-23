@@ -2844,7 +2844,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( !(settings instanceof TransformationSetting) ) {
       foundry.utils.logCompatibilityWarning(
         "The `transformInto` method now requires a `TransformationSetting` configuration object.",
-        { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+        { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
       );
       settings = TransformationSetting._fromDeprecatedConfig(settings);
     }
@@ -3078,7 +3078,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     if ( "dnd5e.transformActor" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.transformActor` hook has been deprecated and replaced with `dnd5e.transformActorV2`.",
-        { since: "DnD5e 4.4", until: "DnD5e 5.0" }
+        { since: "DnD5e 4.4", until: "DnD5e 5.2" }
       );
       Hooks.callAll("dnd5e.transformActor", this, source, d, settings._toDeprecatedConfig(), options);
     }

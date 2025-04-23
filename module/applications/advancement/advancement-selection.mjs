@@ -10,7 +10,7 @@ export default class AdvancementSelection extends Dialog {
   constructor(item, dialogData={}, options={}) {
     foundry.utils.logCompatibilityWarning(
       "The `AdvancementSelection` dialog has been deprecated and replaced with `Advancement#createDialog`.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.0" }
+      { since: "DnD5e 4.4", until: "DnD5e 5.2" }
     );
     super(dialogData, options);
 
@@ -90,7 +90,7 @@ export default class AdvancementSelection extends Dialog {
   static async createDialog(item, { rejectClose=false, options={} }={}) {
     foundry.utils.logCompatibilityWarning(
       "The `AdvancementSelection#createDialog` dialog has been deprecated and replaced with `Advancement#createDialog`.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.0" }
+      { since: "DnD5e 4.4", until: "DnD5e 5.2" }
     );
     const advancement = await dnd5e.documents.advancement.Advancement.createDialog({}, { parent: item });
     return advancement?.sheet.render(true) ?? null;

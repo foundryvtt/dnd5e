@@ -844,7 +844,7 @@ DND5E.toolIds = new Proxy(DND5E.tools, {
   get(target, prop) {
     foundry.utils.logCompatibilityWarning(
       "`CONFIG.DND5E.toolIds` is deprecated, use `CONFIG.DND5E.tools` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
     );
     return target[prop]?.id ?? target[prop];
   }
@@ -3574,7 +3574,7 @@ DND5E.polymorphSettings = new Proxy(DND5E.transformation, {
     if ( typeof prop !== "string" ) return target[prop];
     foundry.utils.logCompatibilityWarning(
       "`CONFIG.DND5E.polymorphSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
     );
     const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
     return target[category]?.[key]?.label;
@@ -3582,7 +3582,7 @@ DND5E.polymorphSettings = new Proxy(DND5E.transformation, {
   set(target, prop, value) {
     foundry.utils.logCompatibilityWarning(
       "`CONFIG.DND5E.polymorphSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
     );
     const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
     if ( !category ) return false;
@@ -3601,7 +3601,7 @@ DND5E.polymorphEffectSettings = new Proxy(DND5E.transformation, {
     if ( typeof prop !== "string" ) return target[prop];
     foundry.utils.logCompatibilityWarning(
       "`CONFIG.DND5E.polymorphEffectSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
     );
     if ( prop === "keepAE" ) return target.effects.all?.label;
     const [category, key] = TransformationSetting._splitDeprecatedKey(prop);
@@ -3610,7 +3610,7 @@ DND5E.polymorphEffectSettings = new Proxy(DND5E.transformation, {
   set(target, prop, value) {
     foundry.utils.logCompatibilityWarning(
       "`CONFIG.DND5E.polymorphEffectSettings` is deprecated, use `CONFIG.DND5E.transformation` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
     );
     if ( prop === "keepAE" ) {
       target.effects.all = { label: value };
@@ -3632,7 +3632,7 @@ DND5E.transformationPresets = new Proxy(DND5E.transformation, {
     if ( typeof prop !== "string" ) return target[prop];
     foundry.utils.logCompatibilityWarning(
       "`CONFIG.DND5E.transformationPresets` is deprecated, use `CONFIG.DND5E.transformation.presets` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
     );
     const preset = target.presets[prop];
     if ( !preset ) return;
@@ -3649,7 +3649,7 @@ DND5E.transformationPresets = new Proxy(DND5E.transformation, {
   set(target, prop, value) {
     foundry.utils.logCompatibilityWarning(
       "`CONFIG.DND5E.transformationPresets` is deprecated, use `CONFIG.DND5E.transformation.presets` instead.",
-      { since: "DnD5e 4.4", until: "DnD5e 5.0", once: true }
+      { since: "DnD5e 4.4", until: "DnD5e 5.2", once: true }
     );
     const preset = {
       label: value.label,
