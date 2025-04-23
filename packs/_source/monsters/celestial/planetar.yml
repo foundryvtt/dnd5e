@@ -601,12 +601,17 @@ items:
           The planetar can innately cast the following spells, requiring no
           material components:</p>
 
-          <p>At will: detect evil and good, invisibility (self only)</p>
+          <p>At will: [[/item .Mzh95utKDPIrjiH8]]{detect evil and good},
+          invisibility (self only)</p>
 
-          <p>3/day each: blade barrier, dispel evil and good, flame strike,
-          raise dead</p>
+          <p>3/day each: [[/item .dLJhxDfeyOsc3zsY]]{blade barrier}, [[/item
+          .TkJ8Wtg1L7TZtspm]]{dispel evil and good}, [[/item
+          .5e1xTohkzqFqbYH4]]{flame strike}, [[/item .AGFMPAmuzwWO6Dfz]]{raise
+          dead}</p>
 
-          <p>1/day each: commune, control weather, insect plague</p>
+          <p>1/day each: [[/item .d54VDyFulD9xxY7J]]{commune}, [[/item
+          .ZPd73HtKF3At11jh]]{control weather}, [[/item
+          .OVikYmSdHliAG2YD]]{insect plague}</p>
         chat: ''
       source:
         custom: ''
@@ -642,10 +647,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745447015825
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!XEByBLeOkDgL3mrr.9hrSczyYfl4fSrpZ'
   - _id: 2C0408CEBtrZW8ji
     name: Invisibility (self only)
