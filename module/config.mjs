@@ -4957,7 +4957,7 @@ Object.defineProperty(DND5E, "enrichmentLookup", {
         abilities: foundry.utils.deepClone(DND5E.abilities),
         skills: foundry.utils.deepClone(DND5E.skills),
         spellSchools: foundry.utils.deepClone(DND5E.spellSchools),
-        tools: foundry.utils.deepClone(DND5E.toolIds)
+        tools: foundry.utils.deepClone(DND5E.tools)
       };
       const addFullKeys = key => Object.entries(DND5E[key]).forEach(([k, v]) =>
         _enrichmentLookup[key][slugify(v.fullKey)] = { ...v, key: k }
