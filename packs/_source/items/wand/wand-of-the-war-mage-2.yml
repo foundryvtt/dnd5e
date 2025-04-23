@@ -5,10 +5,9 @@ img: icons/weapons/wands/wand-gem-teal.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement by a spellcaster)</em></p>
-
-      <p>While holding this wand, you gain a bonus to spell attack rolls of +2.
-      In addition, you ignore half cover when making a spell attack.</p>
+      <p><em>Wand (requires attunement by a spellcaster)</em></p><p>While
+      holding this wand, you gain a bonus to spell attack rolls of +2. In
+      addition, you ignore half cover when making a spell attack.</p>
     chat: ''
   source:
     custom: ''
@@ -47,7 +46,7 @@ system:
   strength: null
   proficient: null
   type:
-    value: trinket
+    value: wand
     baseItem: ''
   unidentified:
     description: ''
@@ -59,7 +58,51 @@ system:
   activities: {}
   attuned: false
   identifier: wand-of-the-war-mage-2
-effects: []
+effects:
+  - name: Wand of the War Mage +2
+    img: icons/weapons/wands/wand-gem-teal.webp
+    origin: Compendium.dnd5e.items.Item.k3T7tpcdzDyVKlF4
+    _id: s8wl3gTptLVyPcsW
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '2'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '2'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: 1745449953329
+      modifiedTime: 1745449969568
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!k3T7tpcdzDyVKlF4.s8wl3gTptLVyPcsW'
 folder: 1aDgsGVwDbPdxG2V
 sort: 200000
 ownership:

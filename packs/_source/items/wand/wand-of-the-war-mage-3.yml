@@ -5,10 +5,9 @@ img: icons/weapons/wands/wand-carved-stone-shard.webp
 system:
   description:
     value: >-
-      <p><em>(Requires attunement by a spellcaster)</em></p>
-
-      <p>While holding this wand, you gain a bonus to spell attack rolls of +3.
-      In addition, you ignore half cover when making a spell attack.</p>
+      <p><em>Wand (requires attunement by a spellcaster)</em></p><p>While
+      holding this wand, you gain a bonus to spell attack rolls of +3. In
+      addition, you ignore half cover when making a spell attack.</p>
     chat: ''
   source:
     custom: ''
@@ -47,7 +46,7 @@ system:
   strength: null
   proficient: null
   type:
-    value: trinket
+    value: wand
     baseItem: ''
   unidentified:
     description: ''
@@ -59,7 +58,51 @@ system:
   activities: {}
   attuned: false
   identifier: wand-of-the-war-mage-3
-effects: []
+effects:
+  - name: Wand of the War Mage +3
+    img: icons/weapons/wands/wand-carved-stone-shard.webp
+    origin: Compendium.dnd5e.items.Item.IuVaBrq17AqxpXc4
+    _id: 57wol3ftCtHAGwV5
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '3'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '3'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: 1745449985182
+      modifiedTime: 1745450005088
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!IuVaBrq17AqxpXc4.57wol3ftCtHAGwV5'
 folder: 1aDgsGVwDbPdxG2V
 sort: 100000
 ownership:
