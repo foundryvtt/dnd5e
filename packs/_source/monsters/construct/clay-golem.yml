@@ -499,11 +499,11 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
-          a creature, it must succeed on a  <strong>DC 15 Constitution</strong>
-          saving throw or have its hit point maximum reduced by an amount equal
-          to the damage taken. The target dies if this attack reduces its hit
-          point maximum to 0. The reduction lasts until removed by the greater
-          restoration spell or other magic.</p>
+          a creature, it must succeed on a [[/save]] saving throw or have its
+          hit point maximum reduced by an amount equal to the damage taken. The
+          target dies if this attack reduces its hit point maximum to 0. The
+          reduction lasts until removed by the <em>greater restoration</em>
+          spell or other magic.</p>
         chat: >-
           <p>The Clay Golem attacks with its Slam. If the target is a creature,
           it must make a <strong>Constitution</strong> saving throw.</p>
@@ -691,19 +691,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 10
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -714,12 +702,17 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: slam
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -727,7 +720,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552135
+      modifiedTime: 1745447518695
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!YOqhbf8WsX0jH9Fu.vEEJei0CNaNbfQ2w'
   - _id: GOADsI5dGE3ah0Vi
@@ -736,7 +729,10 @@ items:
     img: icons/skills/movement/feet-winged-boots-brown.webp
     system:
       description:
-        value: <p>Recharge 5-6.</p>
+        value: >-
+          <p>Until the end of its next turn, the golem magically gains a +2
+          bonus to its AC, has advantage on Dexterity saving throws, and can use
+          its slam attack as a bonus action.</p>
         chat: >-
           <p>Until the end of its next turn, the golem magically gains a +2
           bonus to its AC, has advantage on Dexterity saving throws, and can use
@@ -826,7 +822,7 @@ items:
       identifier: haste
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -837,9 +833,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676736
+      modifiedTime: 1745447546981
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!YOqhbf8WsX0jH9Fu.GOADsI5dGE3ah0Vi'
   - _id: 91uPF10lBpn5EOhn
@@ -849,8 +845,8 @@ items:
     system:
       description:
         value: >-
-          <p>The golem has<strong> advantage </strong>on saving throws against
-          spells and other magical effects.</p>
+          <p>The golem has advantage on saving throws against spells and other
+          magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -875,7 +871,7 @@ items:
       identifier: magic-resistance
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -886,10 +882,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745447482352
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!YOqhbf8WsX0jH9Fu.91uPF10lBpn5EOhn'
   - _id: K5xMZVNv8m2Pw87E
     name: Berserk
@@ -898,14 +894,13 @@ items:
     system:
       description:
         value: >-
-          <p>Whenever the golem starts its turn with <strong>60 hit
-          points</strong> or fewer, roll a d6. On a 6, the golem goes berserk.
-          On each of its turns while berserk, the golem attacks the nearest
-          creature it can see.</p><p>If no creature is near enough to move to
-          and attack, the golem attacks an object, with preference for an object
-          smaller than itself. Once the golem goes berserk, it continues to do
-          so until it is destroyed or regains all its<strong> hit
-          points</strong>.</p>
+          <p>Whenever the golem starts its turn with 60 hit points or fewer,
+          roll a [[/r d6]]. On a 6, the golem goes berserk. On each of its turns
+          while berserk, the golem attacks the nearest creature it can see. If
+          no creature is near enough to move to and attack, the golem attacks an
+          object, with preference for an object smaller than itself. Once the
+          golem goes berserk, it continues to do so until it is destroyed or
+          regains all its hit points.</p>
         chat: >-
           <p>The golem goes berserk. On each of its turns while berserk, the
           golem attacks the nearest creature it can see. If no creature is near
@@ -987,7 +982,7 @@ items:
       identifier: berserk
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -998,9 +993,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676736
+      modifiedTime: 1745447469802
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!YOqhbf8WsX0jH9Fu.K5xMZVNv8m2Pw87E'
   - _id: og0rfDmwPObM3ulb
@@ -1036,7 +1031,7 @@ items:
       identifier: immutable-form
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags:
@@ -1049,8 +1044,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745447475016
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!YOqhbf8WsX0jH9Fu.og0rfDmwPObM3ulb'
   - _id: J1NgIuQWtR4G9JKd
     name: Magic Weapons
@@ -1083,7 +1078,7 @@ items:
       identifier: magic-weapons
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
     flags:
@@ -1096,8 +1091,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745447444833
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!YOqhbf8WsX0jH9Fu.J1NgIuQWtR4G9JKd'
   - _id: hftXBQthz8jMjFTs
     name: Acid Absorption
@@ -1106,10 +1101,9 @@ items:
     system:
       description:
         value: >-
-          <p>Whenever the golem is subjected to <strong><em>acid
-          damage</em></strong>, it takes no damage and instead regains a number
-          of<strong> hit points</strong> equal to the <strong><em>acid
-          damage</em> dealt</strong>.</p>
+          <p>Whenever the golem is subjected to acid damage, it takes no damage
+          and instead regains a number of hit points equal to the acid damage
+          dealt.</p>
         chat: ''
       source:
         custom: ''
@@ -1145,10 +1139,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745447451075
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!YOqhbf8WsX0jH9Fu.hftXBQthz8jMjFTs'
   - _id: g0R4u7liRAurxB04
     name: Multiattack
@@ -1247,7 +1241,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273656353
+      modifiedTime: 1745447489074
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!YOqhbf8WsX0jH9Fu.g0R4u7liRAurxB04'
 effects: []

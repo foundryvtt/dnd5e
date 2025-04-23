@@ -498,10 +498,9 @@ items:
     system:
       description:
         value: >-
-          <p>Whenever the golem is subjected to <strong><em>fire
-          damage</em></strong>, it takes no damage and instead regains a number
-          of<strong> hit points</strong> equal to the <strong><em>fire
-          damage</em> dealt</strong>.</p>
+          <p>Whenever the golem is subjected to fire damage, it takes no damage
+          and instead regains a number of hit points equal to the fire damage
+          dealt.</p>
         chat: ''
       source:
         custom: ''
@@ -537,10 +536,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745447697372
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!h98AuPfomEPcCibP.y2j6GWf1Ur3GRtYI'
   - _id: ajTNe969fHHuppwl
     name: Immutable Form
@@ -598,8 +597,8 @@ items:
     system:
       description:
         value: >-
-          <p>The golem has<strong> advantage </strong>on saving throws against
-          spells and other magical effects.</p>
+          <p>The golem has advantage on saving throws against spells and other
+          magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -635,10 +634,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745447706061
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!h98AuPfomEPcCibP.vUyYxadU3cXz7Zqf'
   - _id: aIoPr5RkxMhH5prU
     name: Magic Weapons
@@ -784,8 +783,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745447711795
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!h98AuPfomEPcCibP.UupAbZ0Pu4j3vLLg'
   - _id: 0z51jBlE4BoPaEQn
     name: Slam
@@ -935,7 +934,7 @@ items:
       identifier: slam
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
@@ -946,7 +945,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552748
+      modifiedTime: 1745447710946
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!h98AuPfomEPcCibP.0z51jBlE4BoPaEQn'
   - _id: pPThO0mEw9iMaJw7
@@ -1098,7 +1097,7 @@ items:
       identifier: sword
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -1109,7 +1108,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552748
+      modifiedTime: 1745447710946
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!h98AuPfomEPcCibP.pPThO0mEw9iMaJw7'
   - _id: x44GisqrxHYC5fov
@@ -1120,9 +1119,9 @@ items:
       description:
         value: >-
           <p>The golem exhales poisonous gas in a 15-foot cone. Each creature in
-          that area must make a  <strong>DC 19 Constitution</strong> saving
-          throw, taking <strong>45 (10d8) <em>poison damage</em></strong> on a
-          failed save, or half as much damage on a successful one.</p>
+          that area must make a [[/save]] saving throw, taking [[/damage
+          average]] damage on a failed save, or half as much damage on a
+          successful one.</p>
         chat: >-
           <p>The golem exhales poisonous gas in a 15-foot cone. Each creature in
           that area must make a <strong>Constitution</strong> saving throw.</p>
@@ -1226,7 +1225,7 @@ items:
       identifier: poison-breath
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
@@ -1237,9 +1236,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676810
+      modifiedTime: 1745447736687
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!h98AuPfomEPcCibP.x44GisqrxHYC5fov'
 effects: []

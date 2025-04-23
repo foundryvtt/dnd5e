@@ -55,7 +55,7 @@ system:
       value: 93
       max: 93
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 11d8 + 44
     init:
       ability: ''
@@ -497,20 +497,18 @@ items:
     system:
       description:
         value: >-
-          <p>Whenever the golem starts its turn with <strong>40 hit
-          points</strong> or fewer, roll a d6. On a 6, the golem goes berserk.
-          On each of its turns while berserk, the golem attacks the nearest
-          creature it can see. </p><p>If no creature is near enough to move to
-          and attack, the golem attacks an object, with preference for an object
-          smaller than itself. Once the golem goes berserk, it continues to do
-          so until it is destroyed or regains all its<strong> hit
-          points</strong><strong>. T</strong>he golem's creator, if
-          <strong>within 60 feet</strong> of the berserk golem, can try to calm
-          it by speaking firmly and persuasively. The golem must be able to hear
-          its creator, who must take an action to make a <strong>DC 15 Charisma
-          (Persuasion) check</strong>. If the check succeeds, the golem ceases
-          being berserk. If it takes damage while still at <strong>40 hit
-          points</strong> or fewer, the golem might go berserk again.</p>
+          <p>Whenever the golem starts its turn with 40 hit points or fewer,
+          roll a [[/r d6]]. On a 6, the golem goes berserk. On each of its turns
+          while berserk, the golem attacks the nearest creature it can
+          see.</p><p>If no creature is near enough to move to and attack, the
+          golem attacks an object, with preference for an object smaller than
+          itself. Once the golem goes berserk, it continues to do so until it is
+          destroyed or regains all its hit points. The golem's creator, if
+          within 60 feet of the berserk golem, can try to calm it by speaking
+          firmly and persuasively. The golem must be able to hear its creator,
+          who must take an action to make a [[/check]] check. If the check
+          succeeds, the golem ceases being berserk. If it takes damage while
+          still at 40 hit points or fewer, the golem might go berserk again.</p>
         chat: >-
           <p>The golem goes berserk. On each of its turns while berserk, the
           golem attacks the nearest creature it can see. If no creature is near
@@ -533,59 +531,55 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
+        8mMJSIYG7IgI1hQQ:
+          type: check
+          _id: 8mMJSIYG7IgI1hQQ
+          sort: 0
           activation:
             type: ''
             value: null
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
           range:
-            units: ''
-            special: ''
             override: false
+            units: self
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: 1d6
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          check:
+            associated:
+              - per
+            dc:
+              calculation: ''
+              formula: '15'
+            ability: cha
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -598,14 +592,18 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.QOWoa60SwvsQJifN
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.QOWoa60SwvsQJifN
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676718
+      modifiedTime: 1745447632386
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Hm4o2FgPZsdbXjLq.AwiZrSjLzs3aNC33'
   - _id: Ee9WvQyqy1lRYtuj
@@ -615,9 +613,8 @@ items:
     system:
       description:
         value: >-
-          <p>If the golem takes <strong><em>fire damage</em></strong>, it
-          has<strong> disadvantage </strong>on attack rolls and ability checks
-          until the end of its next turn.</p>
+          <p>If the golem takes fire damage, it has disadvantage on attack rolls
+          and ability checks until the end of its next turn.</p>
         chat: >-
           <p>If the golem takes <strong><em>fire damage</em></strong>, it
           has<strong> disadvantage </strong>on some rolls.</p>
@@ -655,9 +652,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676718
+      modifiedTime: 1745447656831
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Hm4o2FgPZsdbXjLq.Ee9WvQyqy1lRYtuj'
   - _id: NnEyJiIMUFY8ovfl
@@ -716,10 +713,9 @@ items:
     system:
       description:
         value: >-
-          <p>Whenever the golem is subjected to <strong><em>lightning
-          damage</em></strong>, it takes no damage and instead regains a number
-          of<strong> hit points</strong> equal to the <strong><em>lightning
-          damage</em> dealt</strong>.</p>
+          <p>Whenever the golem is subjected to lightning damage, it takes no
+          damage and instead regains a number of hit points equal to the
+          lightning damage dealt.</p>
         chat: ''
       source:
         custom: ''
@@ -755,10 +751,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745447668163
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Hm4o2FgPZsdbXjLq.27csbMlmaIFdMcTA'
   - _id: EAWR3fONAFox5cvp
     name: Magic Resistance
@@ -767,8 +763,8 @@ items:
     system:
       description:
         value: >-
-          <p>The golem has<strong> advantage </strong>on saving throws against
-          spells and other magical effects.</p>
+          <p>The golem has advantage on saving throws against spells and other
+          magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -804,10 +800,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745447673065
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Hm4o2FgPZsdbXjLq.EAWR3fONAFox5cvp'
   - _id: R8MFu1EkI4xBgXXr
     name: Magic Weapons
@@ -940,7 +936,7 @@ items:
       identifier: multiattack
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -953,7 +949,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273655671
+      modifiedTime: 1745447676781
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Hm4o2FgPZsdbXjLq.mCNNxLGdzy54omRW'
   - _id: mjn0iMGrjGTOn42w
@@ -1104,7 +1100,7 @@ items:
       identifier: slam
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags: {}
@@ -1115,7 +1111,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107551037
+      modifiedTime: 1745447677366
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!Hm4o2FgPZsdbXjLq.mjn0iMGrjGTOn42w'
 effects: []
@@ -1128,8 +1124,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171219116
-  modifiedTime: 1726171442477
+  modifiedTime: 1745447682906
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!Hm4o2FgPZsdbXjLq'

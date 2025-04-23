@@ -54,8 +54,8 @@ system:
     hp:
       value: 17
       max: 17
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 5d6
     init:
       ability: ''
@@ -493,10 +493,10 @@ items:
     system:
       description:
         value: >-
-          <p>The sword is incapacitated while in the area of an antimagic field.
-          </p><p>If targeted by dispel magic, the sword must succeed on a
-          Constitution saving throw against the caster's spell save DC or fall
-          unconscious for <strong>1 minute</strong>.</p>
+          <p>The sword is incapacitated while in the area of an <em>antimagic
+          field</em>.</p><p>If targeted by <em>dispel magic</em>, the sword must
+          succeed on a Constitution saving throw against the caster's spell save
+          DC or fall unconscious for 1 minute.</p>
         chat: >-
           <p>The sword is incapacitated while in the area of an antimagic
           field.</p>
@@ -534,9 +534,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676541
+      modifiedTime: 1745447847358
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!EqJUA3Z3181RSSFU.KFvtNOH2AMQIWRps'
   - _id: EY5bnNsvwwHGfCk1
@@ -763,8 +763,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171216113
-  modifiedTime: 1726171441918
+  modifiedTime: 1745447854656
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!EqJUA3Z3181RSSFU'

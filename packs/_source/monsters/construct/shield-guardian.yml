@@ -54,8 +54,8 @@ system:
     hp:
       value: 142
       max: 142
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 15d10 + 60
     init:
       ability: ''
@@ -493,10 +493,10 @@ items:
           <p>The shield guardian is magically bound to an amulet. As long as the
           guardian and its amulet are on the same plane of existence, the
           amulet's wearer can telepathically call the guardian to travel to it,
-          and the guardian knows the distance and direction to the amulet.
-          </p><p>If the guardian is <strong>within 60 feet</strong> of the
-          amulet's wearer, half of any damage the wearer takes (rounded up) is
-          transferred to the guardian.</p>
+          and the guardian knows the distance and direction to the amulet. If
+          the guardian is within 60 feet of the amulet's wearer, half of any
+          damage the wearer takes (rounded up) is transferred to the
+          guardian.</p>
         chat: <p>The shield guardian is magically bound to an amulet. </p>
       source:
         custom: ''
@@ -521,7 +521,7 @@ items:
       identifier: bound
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags:
@@ -532,9 +532,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676760
+      modifiedTime: 1745447939014
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!z85EsGS2GVWj46qE.mJoNsESU5X2lBKqn'
   - _id: vk0gd3buCPWGpyYF
@@ -544,8 +544,8 @@ items:
     system:
       description:
         value: >-
-          <p>The shield guardian regains <strong>10 hit points</strong> at the
-          start of its turn if it has at least <strong>1 hit point</strong>.</p>
+          <p>The shield guardian regains [[/heal]]{10} hit points at the start
+          of its turn if it has at least 1 hit point.</p>
         chat: >-
           <p>The shield guardian regains <strong>10 hit points</strong> at the
           start of its turn.</p>
@@ -561,16 +561,17 @@ items:
         recovery: []
         spent: 0
       type:
-        value: ''
+        value: monster
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
           type: heal
           activation:
-            type: ''
+            type: turnStart
             value: null
             condition: ''
             override: false
@@ -585,12 +586,12 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -627,26 +628,33 @@ items:
               number: null
               formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
       identifier: regeneration
     effects: []
     folder: null
-    sort: 0
+    sort: 250000
     ownership:
       default: 0
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676760
+      modifiedTime: 1745447969847
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!z85EsGS2GVWj46qE.vk0gd3buCPWGpyYF'
   - _id: qbSL2A0uKuh2iER5
@@ -689,7 +697,7 @@ items:
       identifier: spell-storing
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -702,8 +710,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745447929892
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!z85EsGS2GVWj46qE.qbSL2A0uKuh2iER5'
   - _id: 7R1cDGKMv0mdxaE7
     name: Multiattack
@@ -791,7 +799,7 @@ items:
       identifier: multiattack
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -804,7 +812,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273657754
+      modifiedTime: 1745447977290
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!z85EsGS2GVWj46qE.7R1cDGKMv0mdxaE7'
   - _id: r6GQ1TwNK7pinX0a
@@ -954,7 +962,7 @@ items:
       identifier: fist
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags: {}
@@ -965,7 +973,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107554230
+      modifiedTime: 1745447977870
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!z85EsGS2GVWj46qE.r6GQ1TwNK7pinX0a'
   - _id: EjeLsaCua7yjgxax
@@ -1081,8 +1089,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171267320
-  modifiedTime: 1726171452205
+  modifiedTime: 1745447987704
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!z85EsGS2GVWj46qE'

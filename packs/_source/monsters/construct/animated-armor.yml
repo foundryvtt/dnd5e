@@ -54,8 +54,8 @@ system:
     hp:
       value: 33
       max: 33
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 6d8 + 6
     init:
       ability: ''
@@ -494,10 +494,10 @@ items:
     system:
       description:
         value: >-
-          <p>The armor is incapacitated while in the area of an antimagic
-          field.</p><p>If targeted by dispel magic, the armor must succeed on a
-          Constitution saving throw against the caster's spell save DC or fall
-          unconscious for <strong>1 minute</strong>.</p>
+          <p>The armor is incapacitated while in the area of an <em>antimagic
+          field</em>. If targeted by <em>dispel magic</em>, the armor must
+          succeed on a Constitution saving throw against the caster's spell save
+          DC or fall unconscious for 1 minute.</p>
         chat: >-
           <p>The armor is incapacitated while in the area of an antimagic
           field.</p>
@@ -535,9 +535,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676583
+      modifiedTime: 1745447373985
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!eORmAXuV5v3nWsQL.jlZrv208u9gYyh7I'
   - _id: Kwed9PPaTkZYr8Jh
@@ -595,7 +595,7 @@ items:
     img: icons/skills/melee/blade-tips-triple-steel.webp
     system:
       description:
-        value: <p>The armor makes two melee attacks.</p>
+        value: <p>The armor makes two [[/item .vUqKQJ1GGWbKg6cX]]{melee} attacks.</p>
         chat: ''
       source:
         custom: ''
@@ -673,7 +673,7 @@ items:
       identifier: multiattack
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -684,10 +684,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745447399942
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!eORmAXuV5v3nWsQL.bdRuWKCO8gXQPu16'
   - _id: vUqKQJ1GGWbKg6cX
     name: Slam
@@ -838,7 +838,7 @@ items:
       mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags: {}
@@ -849,7 +849,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552527
+      modifiedTime: 1745447380310
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!eORmAXuV5v3nWsQL.vUqKQJ1GGWbKg6cX'
 effects: []
@@ -862,8 +862,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171244829
-  modifiedTime: 1726171447215
+  modifiedTime: 1745447403779
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!eORmAXuV5v3nWsQL'
