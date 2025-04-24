@@ -270,7 +270,7 @@ class TableOfContentsCompendiumV12 extends (foundry.applications?.sidebar?.apps?
     for ( const entry of specialEntries ) {
       const append = entry.flags.append;
       const order = entry.flags.order;
-      if ( append ) {
+      if ( append && (append <= context.chapters.length) ) {
         context.chapters[append - 1].pages.push({ ...entry, sort: order, entry: true });
       } else {
         context.chapters.push(entry);
