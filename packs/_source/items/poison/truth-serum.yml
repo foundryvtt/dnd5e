@@ -4,14 +4,9 @@ img: icons/consumables/potions/bottle-bulb-corked-labeled-blue.webp
 system:
   description:
     value: >-
-      <p><em>(ingested)</em></p>
-
-      <p>A creature subjected to this poison must succeed on a <strong>DC 11
-      Constitution saving throw</strong> or become
-      @UUID[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx]{Poisoned}
-      for <strong>1 hour</strong>. The
-      @UUID[Compendium.dnd5e.rules.JournalEntry.w7eitkpD7QQTB6j0.JournalEntryPage.lq3TRI6ZlED8ABMx]{Poisoned}
-      creature can't knowingly speak a lie, as if under the effect of a
+      <p>A creature subjected to this poison must succeed on a [[/save]] saving
+      throw or become &amp;Reference[poisoned] for 1 hour. The poisoned creature
+      can't knowingly speak a lie, as if under the effect of a
       @UUID[Compendium.dnd5e.spells.Item.CylBa7jR8DSbo8Z3]{Zone of Truth}
       spell.</p>
     chat: ''
@@ -49,7 +44,7 @@ system:
     replace: false
   type:
     value: poison
-    subtype: ''
+    subtype: ingested
   unidentified:
     description: ''
   container: null
@@ -120,7 +115,7 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1725037220965
   modifiedTime: 1725992524337
   lastModifiedBy: dnd5ebuilder0000
