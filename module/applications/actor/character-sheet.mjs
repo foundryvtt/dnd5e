@@ -1291,8 +1291,10 @@ export default class CharacterActorSheet extends BaseActorSheet {
   /*  Filtering                                   */
   /* -------------------------------------------- */
 
-  /** @override */
-  _filterItem(item) {
+  /** @inheritDoc */
+  _filterItem(item, filters) {
+    const allowed = super._filterItem(item, filters);
+    if (allowed !== undefined) return allowed;
     if ( item.type === "container" ) return true;
   }
 
