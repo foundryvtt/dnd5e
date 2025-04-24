@@ -54,8 +54,8 @@ system:
     hp:
       value: 110
       max: 110
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 13d10 + 39
     init:
       ability: ''
@@ -628,7 +628,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -641,7 +641,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107550928
+      modifiedTime: 1745451010621
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!FzvZ6xl3U9GoL9ju.dYJy66Ftt58qpTUi'
   - _id: h8ocFdixa3iZVj0m
@@ -651,16 +651,18 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon uses one of the following breath weapons.</p><p>**Fire
-          Breath.** The dragon exhales fire in a 40-foot line that is 5 feet
-          wide. Each creature in that line must make a  <strong>DC 14
-          Dexterity</strong> saving throw, taking <strong>42 (12d6) <em>fire
-          damage</em></strong> on a failed save, or half as much damage on a
-          successful one.</p><p>**Sleep Breath.** The dragon exhales sleep gas
-          in a 30-foot cone. Each creature in that area must succeed on a 
-          <strong>DC 14 Constitution</strong> saving throw or fall unconscious
-          for 5 minutes. This effect ends for a creature if the creature takes
-          damage or someone uses an action to wake it.</p>
+          <p>The dragon uses one of the following breath
+          weapons.</p><p><strong>Fire Breath.</strong> The dragon exhales fire
+          in a 40-foot line that is 5 feet wide. Each creature in that line must
+          make a [[/save activity=Es6C2unaFSW7LHd3]] saving throw, taking
+          [[/damage average activity=Es6C2unaFSW7LHd3]] damage on a failed save,
+          or half as much damage on a successful one.</p><p><strong>Sleep
+          Breath.</strong> The dragon exhales sleep gas in a 30-foot cone. Each
+          creature in that area must succeed on a [[/save
+          activity=6xecSNeczVQ2Wtcg]] saving throw or fall
+          &amp;Reference[unconscious] for 5 minutes. This effect ends for a
+          creature if the creature takes damage or someone uses an action to
+          wake it.</p>
         chat: <p>The dragon breathes in!</p>
       source:
         custom: ''
@@ -682,122 +684,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: breath-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676930
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!FzvZ6xl3U9GoL9ju.h8ocFdixa3iZVj0m'
-  - _id: oXGdDIdmBZe6g4Uo
-    name: Fire Breath
-    type: feat
-    img: icons/creatures/abilities/dragon-fire-breath-orange.webp
-    system:
-      description:
-        value: >-
-          <p>**Fire Breath.** The dragon exhales fire in a 40-foot line that is
-          5 feet wide. Each creature in that line must make a  <strong>DC 14
-          Dexterity</strong> saving throw, taking <strong>42 (12d6) <em>fire
-          damage</em></strong> on a failed save, or half as much damage on a
-          successful one.</p>
-        chat: >-
-          <p>The dragon exhales fire in a 40-foot line that is 5 feet wide. Each
-          creature in that line must make a <strong>Dexterity</strong> saving
-          throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        Es6C2unaFSW7LHd3:
           type: save
           activation:
             type: action
@@ -807,11 +694,8 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: h8ocFdixa3iZVj0m
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -852,80 +736,26 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 12
-                denomination: 6
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 12
+                denomination: '6'
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
-            ability: dex
+            ability:
+              - dex
             dc:
               calculation: ''
               formula: '14'
           sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: fire-breath
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676930
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!FzvZ6xl3U9GoL9ju.oXGdDIdmBZe6g4Uo'
-  - _id: JPo2TKHFQ4pJKZqr
-    name: Sleep Breath
-    type: feat
-    img: icons/magic/perception/third-eye-blue-red.webp
-    system:
-      description:
-        value: >-
-          <p>**Sleep Breath.** The dragon exhales sleep gas in a 30-foot cone.
-          Each creature in that area must succeed on a  <strong>DC 14
-          Constitution</strong> saving throw or fall unconscious for 5 minutes.
-          This effect ends for a creature if the creature takes damage or
-          someone uses an action to wake it.</p>
-        chat: >-
-          <p>The dragon exhales sleep gas in a 30-foot cone. Each creature in
-          that area must make a <strong>Constitution</strong> saving throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+          _id: Es6C2unaFSW7LHd3
+          name: Fire Breath
+          img: ''
+          appliedEffects: []
+        6xecSNeczVQ2Wtcg:
           type: save
           activation:
             type: action
@@ -935,11 +765,8 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: h8ocFdixa3iZVj0m
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -981,33 +808,42 @@ items:
             onSave: half
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '14'
           sort: 0
+          _id: 6xecSNeczVQ2Wtcg
+          name: Sleep Breath
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
-      identifier: sleep-breath
+      identifier: breath-weapons
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
       core:
-        sourceId: Compendium.dnd5e.monsterfeatures.43BnuqkQgg5l1Nfh
+        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.43BnuqkQgg5l1Nfh
+      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676930
+      modifiedTime: 1745451239220
       lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!FzvZ6xl3U9GoL9ju.JPo2TKHFQ4pJKZqr'
+    _key: '!actors.items!FzvZ6xl3U9GoL9ju.h8ocFdixa3iZVj0m'
   - _id: YHom7FFObzrKEBLQ
     name: Claw
     type: weapon
@@ -1156,7 +992,7 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -1167,7 +1003,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107550928
+      modifiedTime: 1745451010621
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!FzvZ6xl3U9GoL9ju.YHom7FFObzrKEBLQ'
   - _id: oyNvUJRyGRVF22t8
@@ -1270,7 +1106,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273655554
+      modifiedTime: 1745451011333
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!FzvZ6xl3U9GoL9ju.oyNvUJRyGRVF22t8'
 effects: []
@@ -1283,8 +1119,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171216952
-  modifiedTime: 1726171442107
+  modifiedTime: 1745451107051
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!FzvZ6xl3U9GoL9ju'

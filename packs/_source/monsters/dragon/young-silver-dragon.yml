@@ -54,8 +54,8 @@ system:
     hp:
       value: 168
       max: 168
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 16d10 + 80
     init:
       ability: ''
@@ -628,7 +628,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -641,128 +641,9 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552618
+      modifiedTime: 1745452626313
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!eykRfV85DQJoCkmc.qsfDO6B4wLP1UeKS'
-  - _id: 08bC5Aq3vPzJatVB
-    name: Breath Weapons
-    type: feat
-    img: icons/creatures/abilities/dragon-ice-breath-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The dragon uses one of the following breath weapons.</p><p>**Cold
-          Breath.** The dragon exhales an icy blast in a 30-foot cone. Each
-          creature in that area must make a  <strong>DC 17 Constitution</strong>
-          saving throw, taking <strong>54 (12d8) <em>cold damage</em></strong>
-          on a failed save, or half as much damage on a successful
-          one.</p><p>**Paralyzing Breath.** The dragon exhales paralyzing gas in
-          a 30-foot cone. Each creature in that area must succeed on a 
-          <strong>DC 17 Constitution</strong> saving throw or be paralyzed for 1
-          minute. A creature can repeat the saving throw at the end of each of
-          its turns, ending the effect on itself on a success.</p>
-        chat: <p>The dragon breathes in!</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: '1'
-        recovery:
-          - period: recharge
-            formula: '5'
-            type: recoverAll
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: breath-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676938
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!eykRfV85DQJoCkmc.08bC5Aq3vPzJatVB'
   - _id: GvAgPChKDJLm64Za
     name: Claw
     type: weapon
@@ -911,7 +792,7 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -922,7 +803,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552618
+      modifiedTime: 1745452626313
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!eykRfV85DQJoCkmc.GvAgPChKDJLm64Za'
   - _id: dAoWnethMNHwPNDJ
@@ -1025,24 +906,28 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273656663
+      modifiedTime: 1745452626996
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!eykRfV85DQJoCkmc.dAoWnethMNHwPNDJ'
-  - _id: vuuyXwshegZEpoSb
-    name: Cold Breath
+  - _id: 7pHG1bhYOsbPVvSI
+    name: Breath Weapons
     type: feat
     img: icons/creatures/abilities/dragon-ice-breath-blue.webp
     system:
       description:
         value: >-
-          <p>**Cold Breath.** The dragon exhales an icy blast in a 30-foot cone.
-          Each creature in that area must make a  <strong>DC 17
-          Constitution</strong> saving throw, taking <strong>54 (12d8) <em>cold
-          damage</em></strong> on a failed save, or half as much damage on a
-          successful one.</p>
-        chat: >-
-          <p>The dragon exhales an icy blast in a 30-foot cone. Each creature in
-          that area must make a <strong>Constitution</strong> saving throw.</p>
+          <p>The dragon uses one of the following breath
+          weapons.</p><p><strong>Cold Breath.</strong> The dragon exhales an icy
+          blast in a 90-foot cone. Each creature in that area must make a
+          [[/save activity=U5F5qe2Hu0r0yHmk]] saving throw, taking [[/damage
+          average activity=U5F5qe2Hu0r0yHmk]] damage on a failed save, or half
+          as much damage on a successful one.</p><p><strong>Paralyzing
+          Breath.</strong> The dragon exhales paralyzing gas in a 90- foot cone.
+          Each creature in that area must succeed on a [[/save
+          activity=9gMvqjbgKK42uyzr]] saving throw or be paralyzed for 1 minute.
+          A creature can repeat the saving throw at the end of each of its
+          turns, ending the effect on itself on a success.</p>
+        chat: <p>The dragon breathes in!</p>
       source:
         custom: ''
         book: ''
@@ -1051,8 +936,11 @@ items:
         rules: '2014'
         revision: 1
       uses:
-        max: ''
-        recovery: []
+        max: '1'
+        recovery:
+          - period: recharge
+            formula: '5'
+            type: recoverAll
         spent: 0
       type:
         value: ''
@@ -1060,22 +948,18 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        U5F5qe2Hu0r0yHmk:
           type: save
           activation:
             type: action
             value: 1
-            condition: Breath Weapons must be charged
+            condition: ''
             override: false
           consumption:
             targets:
               - type: itemUses
-                target: 08bC5Aq3vPzJatVB
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -1090,7 +974,7 @@ items:
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1098,7 +982,7 @@ items:
               count: ''
               contiguous: false
               type: cone
-              size: '30'
+              size: '90'
               width: ''
               height: ''
               units: ft
@@ -1116,95 +1000,37 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 12
-                denomination: 8
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 12
+                denomination: '8'
                 bonus: ''
                 types:
                   - cold
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '17'
           sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: cold-breath
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676938
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!eykRfV85DQJoCkmc.vuuyXwshegZEpoSb'
-  - _id: spr7KRotXDVgwIso
-    name: Paralyzing Breath
-    type: feat
-    img: icons/magic/acid/projectile-smoke-glowing.webp
-    system:
-      description:
-        value: >-
-          <p>**Paralyzing Breath.** The dragon exhales paralyzing gas in a
-          30-foot cone. Each creature in that area must succeed on a  <strong>DC
-          17 Constitution</strong> saving throw or be paralyzed for 1 minute. A
-          creature can repeat the saving throw at the end of each of its turns,
-          ending the effect on itself on a success.</p>
-        chat: >-
-          <p>The dragon exhales paralyzing gas in a 30-foot cone. Each creature
-          in that area must make a <strong>Constitution</strong> saving
-          throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+          _id: U5F5qe2Hu0r0yHmk
+          name: Cold Breath
+          img: ''
+          appliedEffects: []
+        9gMvqjbgKK42uyzr:
           type: save
           activation:
             type: action
             value: 1
-            condition: Breath Weapons must be charged
+            condition: ''
             override: false
           consumption:
             targets:
               - type: itemUses
-                target: 08bC5Aq3vPzJatVB
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -1213,13 +1039,13 @@ items:
             chatFlavor: ''
           duration:
             concentration: false
-            value: ''
-            units: inst
+            value: '1'
+            units: minute
             special: ''
             override: false
           effects: []
           range:
-            units: ''
+            units: self
             special: ''
             override: false
           target:
@@ -1227,7 +1053,7 @@ items:
               count: ''
               contiguous: false
               type: cone
-              size: '30'
+              size: '90'
               width: ''
               height: ''
               units: ft
@@ -1246,33 +1072,46 @@ items:
             onSave: half
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '17'
           sort: 0
+          _id: 9gMvqjbgKK42uyzr
+          name: Paralyzing Breath
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
-      identifier: paralyzing-breath
+        repeatable: false
+      identifier: breath-weapons
+      advancement: []
+      cover: null
+      crewed: false
     effects: []
     folder: null
-    sort: 0
+    sort: 600000
     ownership:
       default: 0
     flags:
       core:
-        sourceId: Compendium.dnd5e.monsterfeatures.BiasCPpNsaAVKzIj
+        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.BiasCPpNsaAVKzIj
+      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676938
+      systemVersion: 4.4.0
+      createdTime: 1745452710803
+      modifiedTime: 1745452749664
       lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!eykRfV85DQJoCkmc.spr7KRotXDVgwIso'
+    _key: '!actors.items!eykRfV85DQJoCkmc.7pHG1bhYOsbPVvSI'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -1283,8 +1122,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171245718
-  modifiedTime: 1726171447395
+  modifiedTime: 1745452778503
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!eykRfV85DQJoCkmc'

@@ -54,8 +54,8 @@ system:
     hp:
       value: 52
       max: 52
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 8d8 + 16
     init:
       ability: ''
@@ -663,10 +663,9 @@ items:
       description:
         value: >-
           <p>The dragon exhales lightning in a 30-foot line that is 5 feet wide.
-          Each creature in that line must make a  <strong>DC 12
-          Dexterity</strong> saving throw, taking <strong>22 (4d10)
-          <em>lightning damage</em></strong> on a failed save, or half as much
-          damage on a successful one.</p>
+          Each creature in that line must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
           <p>The dragon exhales lightning in a 30-foot line that is 5 feet wide.
           Each creature in that line must make a <strong>Dexterity</strong>
@@ -782,9 +781,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676603
+      modifiedTime: 1745449334034
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!najtPRiHLR6buSWe.7LCUjJcHm3odI9C8'
 effects: []
@@ -797,8 +796,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171256690
-  modifiedTime: 1726171449699
+  modifiedTime: 1745449336496
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!najtPRiHLR6buSWe'

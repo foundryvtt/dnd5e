@@ -54,8 +54,8 @@ system:
     hp:
       value: 133
       max: 133
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 14d10 + 56
     init:
       ability: ''
@@ -640,7 +640,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -653,7 +653,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553944
+      modifiedTime: 1745450474492
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!u1UQfHutP5eEKkjM.qFfEF7lLt2kH3RbA'
   - _id: d9xXEIYNNQjIMGF8
@@ -804,7 +804,7 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -815,7 +815,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553944
+      modifiedTime: 1745450474492
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!u1UQfHutP5eEKkjM.d9xXEIYNNQjIMGF8'
   - _id: 78LbjdfWaZcAqVE7
@@ -826,9 +826,9 @@ items:
       description:
         value: >-
           <p>The dragon exhales an icy blast in a 30-foot cone. Each creature in
-          that area must make a  <strong>DC 15 Constitution</strong> saving
-          throw, taking <strong>45 (10d8) <em>cold damage</em></strong> on a
-          failed save, or half as much damage on a successful one.</p>
+          that area must make a [[/save]] saving throw, taking [[/damage
+          average]] damage on a failed save, or half as much damage on a
+          successful one.</p>
         chat: >-
           <p>The dragon exhales an icy blast in a 30-foot cone. Each creature in
           that area must make a <strong>Constitution</strong> saving throw.</p>
@@ -929,7 +929,7 @@ items:
       identifier: cold-breath
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
@@ -940,9 +940,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676834
+      modifiedTime: 1745450494994
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!u1UQfHutP5eEKkjM.78LbjdfWaZcAqVE7'
   - _id: g2nJbBJ06mRtxEy0
@@ -1095,7 +1095,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273657571
+      modifiedTime: 1745450475181
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!u1UQfHutP5eEKkjM.lRFwKaRqhFY4xNhJ'
 effects: []
@@ -1108,8 +1108,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171264487
-  modifiedTime: 1726171451529
+  modifiedTime: 1745450499055
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!u1UQfHutP5eEKkjM'

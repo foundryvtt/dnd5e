@@ -54,8 +54,8 @@ system:
     hp:
       value: 127
       max: 127
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 15d10 + 45
     init:
       ability: ''
@@ -488,13 +488,9 @@ items:
       description:
         value: >-
           <p>The dragon exhales acid in a 30-foot line that is 5 feet wide. Each
-          creature in that line must make a  <strong>DC 14 Dexterity</strong>
-          saving throw, taking <strong>49 (11d8) <em>acid damage</em></strong>
-          on a failed save, or half as much damage on a successful
-          one.</p><p>Each creature in that line must make a  <strong>DC 14
-          Dexterity</strong> saving throw, taking <strong>49 (11d8) <em>acid
-          damage</em></strong> on a failed save, or half as much damage on a
-          successful one.</p>
+          creature in that line must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
           <p>The dragon exhales acid in a 30-foot line that is 5 feet wide. Each
           creature in that line must make a <strong>Dexterity</strong> saving
@@ -599,7 +595,7 @@ items:
       identifier: acid-breath
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
@@ -610,9 +606,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676800
+      modifiedTime: 1745448913385
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!bcapsJdIhY5WktpT.963t1Gp9Nsy3UY9D'
   - _id: KRrrjifJpxjJ0zKy
@@ -822,7 +818,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -835,7 +831,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552418
+      modifiedTime: 1745448887696
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!bcapsJdIhY5WktpT.kuTDtAq2QL2Tmr4h'
   - _id: gy0FMKec2tea9YI1
@@ -986,7 +982,7 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -997,7 +993,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552418
+      modifiedTime: 1745448887696
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!bcapsJdIhY5WktpT.gy0FMKec2tea9YI1'
   - _id: ApR7vtoU4ec7UulE
@@ -1100,7 +1096,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273656479
+      modifiedTime: 1745448888523
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!bcapsJdIhY5WktpT.ApR7vtoU4ec7UulE'
 effects: []
@@ -1113,8 +1109,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171241522
-  modifiedTime: 1726171446575
+  modifiedTime: 1745448921128
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!bcapsJdIhY5WktpT'

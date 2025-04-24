@@ -54,8 +54,8 @@ system:
     hp:
       value: 33
       max: 33
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 6d8 + 6
     init:
       ability: ''
@@ -487,12 +487,9 @@ items:
       description:
         value: >-
           <p>The dragon exhales acid in a 15-foot line that is 5 feet wide. Each
-          creature in that line must make a  <strong>DC 11 Dexterity</strong>
-          saving throw, taking <strong>22 (5d8) <em>acid damage</em></strong> on
-          a failed save, or half as much damage on a successful one.</p><p>Each
-          creature in that line must make a  <strong>DC 11 Dexterity</strong>
-          saving throw, taking <strong>22 (5d8) <em>acid damage</em></strong> on
-          a failed save, or half as much damage on a successful one.</p>
+          creature in that line must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
           <p>The dragon exhales acid in a 15-foot line that is 5 feet wide. Each
           creature in that line must make a <strong>Dexterity</strong> saving
@@ -608,9 +605,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676546
+      modifiedTime: 1745448963548
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!IZMbiAHqQpzPo0CX.ABS9Om2RejM5wrRF'
   - _id: 50udgXso5dIQmQfv
@@ -743,7 +740,7 @@ items:
           _id: dnd5eactivity000
           type: attack
           activation:
-            type: ''
+            type: action
             value: 1
             condition: ''
             override: false
@@ -758,7 +755,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -800,23 +797,23 @@ items:
               bonus: ''
             includeBase: true
             parts:
-              - number: 1
-                denomination: 4
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: '4'
                 bonus: ''
                 types:
                   - acid
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -825,6 +822,10 @@ items:
     flags:
       core:
         sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
@@ -832,7 +833,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107551044
+      modifiedTime: 1745448943537
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!IZMbiAHqQpzPo0CX.dmLvn6VGNA20rMvC'
 effects: []
@@ -845,8 +846,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171219596
-  modifiedTime: 1726171442590
+  modifiedTime: 1745448970013
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!IZMbiAHqQpzPo0CX'

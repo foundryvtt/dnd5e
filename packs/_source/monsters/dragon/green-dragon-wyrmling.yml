@@ -54,8 +54,8 @@ system:
     hp:
       value: 38
       max: 38
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 7d8 + 7
     init:
       ability: ''
@@ -488,9 +488,9 @@ items:
       description:
         value: >-
           <p>The dragon exhales poisonous gas in a 15-foot cone. Each creature
-          in that area must make a  <strong>DC 11 Constitution</strong> saving
-          throw, taking <strong>21 (6d6) <em>poison damage</em></strong> on a
-          failed save, or half as much damage on a successful one.</p>
+          in that area must make a [[/save]] saving throw, taking [[/damage
+          average]] damage on a failed save, or half as much damage on a
+          successful one.</p>
         chat: >-
           <p>The dragon exhales poisonous gas in a 15-foot cone. Each creature
           in that area must make a <strong>Constitution</strong> saving
@@ -606,9 +606,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676556
+      modifiedTime: 1745449881089
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!KH6ZrUiUOKQCOlRH.pFFlq9KvfXzAxhU8'
   - _id: zii9P95YmeE6b4km
@@ -844,8 +844,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171222365
-  modifiedTime: 1726171443147
+  modifiedTime: 1745449886402
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!KH6ZrUiUOKQCOlRH'

@@ -54,8 +54,8 @@ system:
     hp:
       value: 487
       max: 487
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 25d20 + 225
     init:
       ability: ''
@@ -502,7 +502,8 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -580,10 +581,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745452619613
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gf9QbHdMAfvFtxcv.gcXX5P25Hed1CHt2'
   - _id: shoHSForHM2cwBtd
     name: Multiattack
@@ -686,7 +687,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273656748
+      modifiedTime: 1745452622572
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gf9QbHdMAfvFtxcv.shoHSForHM2cwBtd'
   - _id: YCbR7M5CKKCFWLvk
@@ -837,7 +838,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -850,7 +851,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552730
+      modifiedTime: 1745452621883
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gf9QbHdMAfvFtxcv.YCbR7M5CKKCFWLvk'
   - _id: YHoeJdvSJaT3qblq
@@ -1001,7 +1002,7 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -1012,7 +1013,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552730
+      modifiedTime: 1745452621883
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gf9QbHdMAfvFtxcv.YHoeJdvSJaT3qblq'
   - _id: VlNQwm636T7qIEoQ
@@ -1163,7 +1164,7 @@ items:
       identifier: tail
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
@@ -1174,7 +1175,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552730
+      modifiedTime: 1745452621883
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gf9QbHdMAfvFtxcv.VlNQwm636T7qIEoQ'
   - _id: ohWgcdw603aWWXum
@@ -1184,14 +1185,13 @@ items:
     system:
       description:
         value: >-
-          <p>Each creature of the dragon's choice that is <strong>within 120
-          feet</strong> of the dragon and aware of it must succeed on a
-          <strong>DC 21 Wisdom saving throw</strong> or become frightened for
-          <strong>1 minute</strong>. </p><p>A creature can repeat the saving
-          throw at the end of each of its turns, ending the effect on itself on
-          a success. If a creature's saving throw is successful or the effect
-          ends for it, the creature is immune to the dragon's Frightful Presence
-          for the next 24 hours.</p>
+          <p>Each creature of the dragon's choice that is within 120 feet of the
+          dragon and aware of it must succeed on a [[/save]] saving throw or
+          become &amp;Reference[frightened] for 1 minute.</p><p>A creature can
+          repeat the saving throw at the end of each of its turns, ending the
+          effect on itself on a success. If a creature's saving throw is
+          successful or the effect ends for it, the creature is immune to the
+          dragon's Frightful Presence for the next 24 hours.</p>
         chat: >-
           <p>Each creature of the dragon's choice that is <strong>within 120
           feet</strong> of the dragon and aware of it must succeed on a Wisdom
@@ -1278,7 +1278,7 @@ items:
       identifier: frightful-presence
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
     flags:
@@ -1289,9 +1289,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804677031
+      modifiedTime: 1745452799050
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gf9QbHdMAfvFtxcv.ohWgcdw603aWWXum'
   - _id: oL7vyWwH6bvXyl95
@@ -1301,16 +1301,17 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon uses one of the following breath weapons.</p><p>**Cold
-          Breath.** The dragon exhales an icy blast in a 90-foot cone. Each
-          creature in that area must make a  <strong>DC 24 Constitution</strong>
-          saving throw, taking <strong>67 (15d8) <em>cold damage</em></strong>
-          on a failed save, or half as much damage on a successful
-          one.</p><p>**Paralyzing Breath.** The dragon exhales paralyzing gas in
-          a 90- foot cone. Each creature in that area must succeed on a 
-          <strong>DC 24 Constitution</strong> saving throw or be paralyzed for 1
-          minute. A creature can repeat the saving throw at the end of each of
-          its turns, ending the effect on itself on a success.</p>
+          <p>The dragon uses one of the following breath
+          weapons.</p><p><strong>Cold Breath.</strong> The dragon exhales an icy
+          blast in a 90-foot cone. Each creature in that area must make a
+          [[/save activity=U5F5qe2Hu0r0yHmk]] saving throw, taking [[/damage
+          average activity=U5F5qe2Hu0r0yHmk]] damage on a failed save, or half
+          as much damage on a successful one.</p><p><strong>Paralyzing
+          Breath.</strong> The dragon exhales paralyzing gas in a 90- foot cone.
+          Each creature in that area must succeed on a [[/save
+          activity=9gMvqjbgKK42uyzr]] saving throw or be paralyzed for 1 minute.
+          A creature can repeat the saving throw at the end of each of its
+          turns, ending the effect on itself on a success.</p>
         chat: <p>The dragon breathes in!</p>
       source:
         custom: ''
@@ -1332,121 +1333,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: breath-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804677031
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!gf9QbHdMAfvFtxcv.oL7vyWwH6bvXyl95'
-  - _id: p6laYHKsnkMnfwtu
-    name: Cold Breath
-    type: feat
-    img: icons/creatures/abilities/dragon-ice-breath-blue.webp
-    system:
-      description:
-        value: >-
-          <p>**Cold Breath.** The dragon exhales an icy blast in a 90-foot cone.
-          Each creature in that area must make a  <strong>DC 24
-          Constitution</strong> saving throw, taking <strong>67 (15d8) <em>cold
-          damage</em></strong> on a failed save, or half as much damage on a
-          successful one.</p>
-        chat: >-
-          <p>The dragon exhales an icy blast in a 90-foot cone. Each creature in
-          that area must make a <strong>Constitution</strong> saving throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        U5F5qe2Hu0r0yHmk:
           type: save
           activation:
             type: action
@@ -1456,11 +1343,8 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: oL7vyWwH6bvXyl95
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -1501,81 +1385,26 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 15
-                denomination: 8
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 15
+                denomination: '8'
                 bonus: ''
                 types:
                   - cold
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '24'
           sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: cold-breath
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804677031
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!gf9QbHdMAfvFtxcv.p6laYHKsnkMnfwtu'
-  - _id: TbcUwDfwFSYvMmwp
-    name: Paralyzing Breath
-    type: feat
-    img: icons/creatures/abilities/dragon-ice-breath-blue.webp
-    system:
-      description:
-        value: >-
-          <p>**Paralyzing Breath.** The dragon exhales paralyzing gas in a 90-
-          foot cone. Each creature in that area must succeed on a  <strong>DC 24
-          Constitution</strong> saving throw or be paralyzed for 1 minute. A
-          creature can repeat the saving throw at the end of each of its turns,
-          ending the effect on itself on a success.</p>
-        chat: >-
-          <p>The dragon exhales paralyzing gas in a 90- foot cone. Each creature
-          in that area must make a <strong>Constitution</strong> saving
-          throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+          _id: U5F5qe2Hu0r0yHmk
+          name: Cold Breath
+          img: ''
+          appliedEffects: []
+        9gMvqjbgKK42uyzr:
           type: save
           activation:
             type: action
@@ -1585,11 +1414,8 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: oL7vyWwH6bvXyl95
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -1631,33 +1457,42 @@ items:
             onSave: half
             parts: []
           save:
-            ability: con
+            ability:
+              - con
             dc:
               calculation: ''
               formula: '24'
           sort: 0
+          _id: 9gMvqjbgKK42uyzr
+          name: Paralyzing Breath
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
-      identifier: paralyzing-breath
+      identifier: breath-weapons
     effects: []
     folder: null
-    sort: 0
+    sort: 600000
     ownership:
       default: 0
     flags:
       core:
-        sourceId: Compendium.dnd5e.monsterfeatures.BiasCPpNsaAVKzIj
+        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.BiasCPpNsaAVKzIj
+      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804677031
+      modifiedTime: 1745452691089
       lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!gf9QbHdMAfvFtxcv.TbcUwDfwFSYvMmwp'
+    _key: '!actors.items!gf9QbHdMAfvFtxcv.oL7vyWwH6bvXyl95'
   - _id: nnMmiUPuJEyViPaq
     name: Change Shape
     type: feat
@@ -1665,20 +1500,16 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon magically <strong>polymorphs</strong> into a
-          <strong>humanoid</strong> or <strong>beast</strong> that has a
+          <p>The dragon magically polymorphs into a humanoid or beast that has a
           challenge rating no higher than its own, or back into its true form.
           It reverts to its true form if it dies. Any equipment it is wearing or
           carrying is absorbed or borne by the new form (the dragon's
-          choice).</p>
-
-          <p>In a new form, the dragon <strong>retains its alignment, hit
+          choice).</p><p>In a new form, the dragon retains its alignment, hit
           points, Hit Dice, ability to speak, proficiencies, Legendary
           Resistance, lair actions, and Intelligence, Wisdom, and Charisma
-          scores, as well as this action. </strong>Its statistics and
-          capabilities are otherwise replaced by those of the new form,
-          <strong>except any class features or legendary actions of that
-          form.</strong></p>
+          scores, as well as this action. Its statistics and capabilities are
+          otherwise replaced by those of the new form, except any class features
+          or legendary actions of that form.</p>
         chat: ''
       source:
         custom: ''
@@ -1756,7 +1587,7 @@ items:
       identifier: change-shape
     effects: []
     folder: null
-    sort: 0
+    sort: 900000
     ownership:
       default: 0
     flags:
@@ -1767,10 +1598,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745452830733
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gf9QbHdMAfvFtxcv.nnMmiUPuJEyViPaq'
   - _id: yAVNzttgGO1cHIlQ
     name: Legendary Actions
@@ -1829,7 +1660,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: <p>The dragon makes a tail attack.</p>
+        value: <p>The dragon makes a [[/item .VlNQwm636T7qIEoQ]]{tail} attack.</p>
         chat: ''
       source:
         custom: ''
@@ -1874,12 +1705,13 @@ items:
             formula: ''
         base:
           number: null
-          denomination: null
+          denomination: 0
           types: []
           custom:
             enabled: false
           scaling:
             number: 1
+          bonus: ''
       armor:
         value: 10
       hp:
@@ -1906,13 +1738,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1960,21 +1786,26 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tail-attack
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745452889994
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gf9QbHdMAfvFtxcv.tg4h1Ht7X4YmDTd9'
   - _id: saU6KEYGTm2SZ3jv
     name: Wing Attack
@@ -1982,7 +1813,7 @@ items:
     img: icons/creatures/abilities/wing-batlike-white-blue.webp
     system:
       description:
-        value: "<p>The dragon beats its wings. <strong>Each creature within\_15 feet of the dragon</strong> must succeed on a\_<strong>DC 25 Dexterity saving throw</strong>\_or take\_<strong>17 (2d6+10) bludgeoning</strong>\_damage and be <strong>knocked prone.</strong> The dragon can then <strong>fly up to half its flying speed.</strong></p>"
+        value: "<p>The dragon beats its wings. Each creature within\_15 feet of the dragon must succeed on a\_[[/save]] saving throw\_or take\_[[/damage average]]\_damage and be knocked &amp;Reference[prone]. The dragon can then fly up to half its flying speed.</p>"
         chat: >-
           <p>The dragon beats its wings! Each creature within 15 feet of the
           dragon must make a <strong>Dexterity</strong> saving throw.</p>
@@ -2068,11 +1899,8 @@ items:
           consumption:
             targets:
               - type: attribute
-                target: resources.legact.value
                 value: '2'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: resources.legact.value
             scaling:
               allowed: false
               max: ''
@@ -2082,7 +1910,7 @@ items:
           duration:
             concentration: false
             value: ''
-            units: ''
+            units: inst
             special: ''
             override: false
           effects: []
@@ -2113,42 +1941,46 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 2
-                denomination: 6
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: '6'
                 bonus: '@mod'
                 types:
                   - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
             ability: dex
             dc:
-              calculation: ''
+              calculation: str
               formula: '25'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: wing-attack
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804677031
+      modifiedTime: 1745452954488
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gf9QbHdMAfvFtxcv.saU6KEYGTm2SZ3jv'
   - _id: fu7gTjVI9Dk9J8tT
@@ -2185,13 +2017,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -2244,122 +2070,21 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804677031
+      modifiedTime: 1745452842489
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!gf9QbHdMAfvFtxcv.fu7gTjVI9Dk9J8tT'
-  - _id: Pb87W9xoor7xP185
-    name: Lair Actions
-    type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
-    system:
-      description:
-        value: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. On initiative count 20 (losing
-          all initiative ties), it can use one of its lair action options. It
-          can't do so while incapacitated or otherwise unable to take actions.
-          If surprised, it can't use one until after its first turn in the
-          combat.</p>
-        chat: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. </p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lair-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804677031
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!gf9QbHdMAfvFtxcv.Pb87W9xoor7xP185'
-  - _id: 7OzKj0pIQLqNVmmF
-    name: Regional Effects
-    type: feat
-    img: icons/environment/wilderness/cave-entrance-mountain-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The mere presence of a legendary creature can have strange and
-          wondrous effects on its environment. Regional effects end abruptly or
-          dissipate over time when the legendary creature dies.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: regional-effects
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-    _key: '!actors.items!gf9QbHdMAfvFtxcv.7OzKj0pIQLqNVmmF'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -2370,8 +2095,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171248471
-  modifiedTime: 1726171448005
+  modifiedTime: 1745452955897
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!gf9QbHdMAfvFtxcv'

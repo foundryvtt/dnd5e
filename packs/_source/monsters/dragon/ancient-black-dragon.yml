@@ -508,7 +508,7 @@ items:
       identifier: amphibious
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags:
@@ -521,8 +521,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745448555347
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.5IEyeZf0FqkPrv7R'
   - _id: J86tFiZtAP8BbHzF
     name: Legendary Resistance
@@ -549,7 +549,8 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -616,7 +617,7 @@ items:
       identifier: legendary-resistance
     effects: []
     folder: null
-    sort: 0
+    sort: 250000
     ownership:
       default: 0
     flags:
@@ -627,10 +628,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745448556024
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.J86tFiZtAP8BbHzF'
   - _id: RKsS1lZwBekMMGMt
     name: Multiattack
@@ -733,7 +734,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273657179
+      modifiedTime: 1745448580176
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.RKsS1lZwBekMMGMt'
   - _id: YauNxZeIeT4uDcTf
@@ -896,7 +897,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -909,7 +910,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553535
+      modifiedTime: 1745448579258
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.YauNxZeIeT4uDcTf'
   - _id: GQLQiLBrkoOiNc8q
@@ -1061,7 +1062,7 @@ items:
       mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -1072,7 +1073,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745108395557
+      modifiedTime: 1745448579258
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.GQLQiLBrkoOiNc8q'
   - _id: A5cRQsDF3Qih94rC
@@ -1225,7 +1226,7 @@ items:
       mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
@@ -1236,7 +1237,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745175572265
+      modifiedTime: 1745448579258
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.A5cRQsDF3Qih94rC'
   - _id: M3VJyuM63OKH7JH0
@@ -1246,14 +1247,13 @@ items:
     system:
       description:
         value: >-
-          <p>Each creature of the dragon's choice that is <strong>within 120
-          feet</strong> of the dragon and aware of it must succeed on a
-          <strong>DC 19 Wisdom saving throw</strong> or become frightened for
-          <strong>1 minute</strong>. </p><p>A creature can repeat the saving
-          throw at the end of each of its turns, ending the effect on itself on
-          a success. If a creature's saving throw is successful or the effect
-          ends for it, the creature is immune to the dragon's Frightful Presence
-          for the next 24 hours.</p>
+          <p>Each creature of the dragon's choice that is within 120 feet of the
+          dragon and aware of it must succeed on a [[/save]] saving throw or
+          become &amp;Reference[frightened] for 1 minute.</p><p>A creature can
+          repeat the saving throw at the end of each of its turns, ending the
+          effect on itself on a success. If a creature's saving throw is
+          successful or the effect ends for it, the creature is immune to the
+          dragon's Frightful Presence for the next 24 hours.</p>
         chat: >-
           <p>Each creature of the dragon's choice that is <strong>within 120
           feet</strong> of the dragon and aware of it must succeed on a Wisdom
@@ -1340,7 +1340,7 @@ items:
       identifier: frightful-presence
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
     flags:
@@ -1351,9 +1351,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676981
+      modifiedTime: 1745448608113
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.M3VJyuM63OKH7JH0'
   - _id: zDlCrWQVJgZFMfxY
@@ -1364,13 +1364,9 @@ items:
       description:
         value: >-
           <p>The dragon exhales acid in a 90-foot line that is 10 feet wide.
-          Each creature in that line must make a  <strong>DC 22
-          Dexterity</strong> saving throw, taking <strong>67 (15d8) <em>acid
-          damage</em></strong> on a failed save, or half as much damage on a
-          successful one.</p><p>Each creature in that line must make a 
-          <strong>DC 22 Dexterity</strong> saving throw, taking <strong>67
-          (15d8) <em>acid damage</em></strong> on a failed save, or half as much
-          damage on a successful one.</p>
+          Each creature in that line must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
           <p>The dragon exhales acid in a 90-foot line that is 10 feet wide.
           Each creature in that line must make a <strong>Dexterity</strong>
@@ -1475,7 +1471,7 @@ items:
       identifier: acid-breath
     effects: []
     folder: null
-    sort: 0
+    sort: 600000
     ownership:
       default: 0
     flags:
@@ -1486,9 +1482,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676981
+      modifiedTime: 1745448640858
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.zDlCrWQVJgZFMfxY'
   - _id: 3ZEmD9O6eOtAfSzJ
@@ -1497,11 +1493,7 @@ items:
     img: icons/magic/light/hand-sparks-glow-yellow.webp
     system:
       description:
-        value: >-
-          <p>The dragon can take 3 legendary actions. Only one legendary action
-          option can be used at a time and only at the end of another creature's
-          turn. The dragon regains spent legendary actions at the start of its
-          turn.</p>
+        value: <p>[[lookup @resources.legact.label]]</p>
         chat: <p>The dragon can take 3 legendary actions. </p>
       source:
         custom: ''
@@ -1526,7 +1518,7 @@ items:
       identifier: legendary-actions
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
@@ -1537,9 +1529,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676981
+      modifiedTime: 1745448571705
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.3ZEmD9O6eOtAfSzJ'
   - _id: Ue0XiojtilVvKhH4
@@ -1576,13 +1568,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1635,15 +1621,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676981
+      modifiedTime: 1745448683669
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.Ue0XiojtilVvKhH4'
   - _id: UpWaTW9cFf96GmMH
@@ -1652,7 +1642,7 @@ items:
     img: icons/skills/wounds/injury-pain-impaled-hand-blood.webp
     system:
       description:
-        value: <p>The dragon makes a tail attack.</p>
+        value: <p>The dragon makes a [[/item .A5cRQsDF3Qih94rC]]{tail} attack.</p>
         chat: ''
       source:
         custom: ''
@@ -1697,12 +1687,13 @@ items:
             formula: ''
         base:
           number: null
-          denomination: null
+          denomination: 0
           types: []
           custom:
             enabled: false
           scaling:
             number: 1
+          bonus: ''
       armor:
         value: 10
       hp:
@@ -1729,13 +1720,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                target: resources.legact.value
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1783,21 +1768,26 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tail-attack
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745448677496
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.UpWaTW9cFf96GmMH'
   - _id: i4ggPCju3QyYJslH
     name: Wing Attack
@@ -1806,11 +1796,10 @@ items:
     system:
       description:
         value: >-
-          <p>The dragon beats its wings. Each creature within <strong>15 feet
-          </strong>of the dragon must succeed on a <strong>DC 23 Dexterity
-          saving throw</strong> or take <strong>15 ([[/r 2d6+8]])
-          bludgeoning</strong> damage and be knocked prone. The dragon can then
-          fly up to half its flying speed.</p>
+          <p>The dragon beats its wings. Each creature within 15 feet of the
+          dragon must succeed on a [[/save]] saving throw or take [[/damage
+          average]] damage and be knocked &amp;Reference[prone]. The dragon can
+          then fly up to half its flying speed.</p>
         chat: ''
       source:
         custom: ''
@@ -1892,11 +1881,7 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: attribute
-                value: '2'
-                target: resources.legact.value
-                scaling: {}
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -1942,19 +1927,19 @@ items:
                   enabled: false
                   formula: ''
                 number: 2
-                denomination: 6
+                denomination: '6'
                 bonus: '@mod'
                 types:
                   - bludgeoning
-                scaling:
-                  number: 1
           save:
             ability: dex
             dc:
-              calculation: ''
+              calculation: str
               formula: '23'
           sort: 0
           name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
@@ -1962,10 +1947,14 @@ items:
       identifier: wing-attack
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -1973,114 +1962,9 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1744916839634
+      modifiedTime: 1745453067990
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qNdFhY3JOkCfhG3d.i4ggPCju3QyYJslH'
-  - _id: 84PHEVjYThsmbYxc
-    name: Lair Actions
-    type: feat
-    img: icons/magic/nature/stealth-hide-eyes-green.webp
-    system:
-      description:
-        value: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. On initiative count 20 (losing
-          all initiative ties), it can use one of its lair action options. It
-          can't do so while incapacitated or otherwise unable to take actions.
-          If surprised, it can't use one until after its first turn in the
-          combat.</p>
-        chat: >-
-          <p>If a legendary creature has lair actions, it can use them to
-          harness the ambient magic in its lair. </p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lair-actions
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676981
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!qNdFhY3JOkCfhG3d.84PHEVjYThsmbYxc'
-  - _id: PO5gIWTWS1dahP5E
-    name: Regional Effects
-    type: feat
-    img: icons/environment/wilderness/cave-entrance-mountain-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The mere presence of a legendary creature can have strange and
-          wondrous effects on its environment. Regional effects end abruptly or
-          dissipate over time when the legendary creature dies.</p>
-        chat: ''
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        spent: 0
-        recovery: []
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities: {}
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: regional-effects
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.0.0
-      createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
-    _key: '!actors.items!qNdFhY3JOkCfhG3d.PO5gIWTWS1dahP5E'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0

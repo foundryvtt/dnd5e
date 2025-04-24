@@ -54,8 +54,8 @@ system:
     hp:
       value: 152
       max: 152
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 16d10 + 64
     init:
       ability: ''
@@ -640,7 +640,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -653,7 +653,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553147
+      modifiedTime: 1745449293676
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!mNijwXPMhwR7yYfc.42AGHJQzJZfUYxF9'
   - _id: YSVencwrBzRdfm62
@@ -804,7 +804,7 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -815,7 +815,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553147
+      modifiedTime: 1745449293676
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!mNijwXPMhwR7yYfc.YSVencwrBzRdfm62'
   - _id: 7XDStiwr5cRAODjk
@@ -826,9 +826,8 @@ items:
       description:
         value: >-
           <p>The dragon exhales lightning in an 60-foot line that is 5 feet
-          wide. Each creature in that line must make a  <strong>DC 16
-          Dexterity</strong> saving throw, taking <strong>55 (10d10)
-          <em>lightning damage</em></strong> on a failed save, or half as much
+          wide. Each creature in that line must make a [[/save]] saving throw,
+          taking [[/damage average]] damage on a failed save, or half as much
           damage on a successful one.</p>
         chat: >-
           <p>The dragon exhales lightning in a 60-foot line that is 5 feet wide.
@@ -934,7 +933,7 @@ items:
       identifier: lightning-breath
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
@@ -945,9 +944,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676828
+      modifiedTime: 1745449312945
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!mNijwXPMhwR7yYfc.7XDStiwr5cRAODjk'
   - _id: dGVHjuCt6WhGx0sX
@@ -1050,7 +1049,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273657057
+      modifiedTime: 1745449294437
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!mNijwXPMhwR7yYfc.dGVHjuCt6WhGx0sX'
 effects: []
@@ -1063,8 +1062,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171254636
-  modifiedTime: 1726171449254
+  modifiedTime: 1745449315527
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!mNijwXPMhwR7yYfc'

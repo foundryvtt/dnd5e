@@ -54,8 +54,8 @@ system:
     hp:
       value: 60
       max: 60
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 8d8 + 24
     init:
       ability: ''
@@ -690,140 +690,26 @@ items:
       modifiedTime: 1745107553339
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!naSoHU9KbkgeNIwB.s90OWDANSrZ1ttWp'
-  - _id: JH4iOMWhpUPZneJN
+  - _id: 5vCVx0zwz1FKIvTX
     name: Breath Weapons
     type: feat
     img: icons/creatures/abilities/dragon-fire-breath-orange.webp
     system:
       description:
         value: >-
-          <p>The dragon uses one of the following breath weapons.</p><p>**Fire
-          Breath.** The dragon exhales fire in a 15-foot cone. Each creature in
-          that area must make a  <strong>DC 13 Dexterity</strong> saving throw,
-          taking <strong>22 (4d10) <em>fire damage</em></strong> on a failed
-          save, or half as much damage on a successful one.</p><p>**Weakening
-          Breath.** The dragon exhales gas in a 15-foot cone. Each creature in
-          that area must succeed on a  <strong>DC 13 Strength</strong> saving
-          throw or have disadvantage on Strength-based attack rolls, Strength
-          checks, and Strength saving throws for 1 minute. A creature can repeat
-          the saving throw at the end of each of its turns, ending the effect on
-          itself on a success.</p>
+          <p>The dragon uses one of the following breath
+          weapons.</p><p><strong>Fire Breath.</strong> The dragon exhales fire
+          in a 90-foot cone. Each creature in that area must make a [[/save
+          activity=o8fOmWWIqCYwGu3C]] saving throw, taking [[/damage average
+          activity=o8fOmWWIqCYwGu3C]] damage on a failed save, or half as much
+          damage on a successful one.</p><p><strong>Weakening Breath.</strong>
+          The dragon exhales gas in a 90-foot cone. Each creature in that area
+          must succeed on a [[/save activity=J4QhEMZOdsyIy2D6]] saving throw or
+          have disadvantage on Strength-based attack rolls, Strength checks, and
+          Strength saving throws for 1 minute. A creature can repeat the saving
+          throw at the end of each of its turns, ending the effect on itself on
+          a success.</p>
         chat: <p>The dragon breathes in!</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: '1'
-        recovery:
-          - period: recharge
-            formula: '5'
-            type: recoverAll
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: breath-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676878
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!naSoHU9KbkgeNIwB.JH4iOMWhpUPZneJN'
-  - _id: XeFYvc5dR8YNRizI
-    name: Fire Breath
-    type: feat
-    img: icons/creatures/abilities/dragon-fire-breath-orange.webp
-    system:
-      description:
-        value: >-
-          <p>**Fire Breath.** The dragon exhales fire in a 15-foot cone. Each
-          creature in that area must make a  <strong>DC 13 Dexterity</strong>
-          saving throw, taking <strong>22 (4d10) <em>fire damage</em></strong>
-          on a failed save, or half as much damage on a successful one.</p>
-        chat: >-
-          <p>The dragon exhales fire in a 15-foot cone. Each creature in that
-          area must make a <strong>Dexterity</strong> saving throw.</p>
       source:
         custom: ''
         book: ''
@@ -841,8 +727,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        o8fOmWWIqCYwGu3C:
           type: save
           activation:
             type: action
@@ -852,11 +737,8 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: JH4iOMWhpUPZneJN
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -879,7 +761,7 @@ items:
               count: ''
               contiguous: false
               type: cone
-              size: '15'
+              size: '90'
               width: ''
               height: ''
               units: ft
@@ -897,81 +779,26 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 4
-                denomination: 10
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 4
+                denomination: '10'
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
-            ability: dex
+            ability:
+              - dex
             dc:
               calculation: ''
               formula: '13'
           sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: fire-breath
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676878
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!naSoHU9KbkgeNIwB.XeFYvc5dR8YNRizI'
-  - _id: 8mLdG3PPJsB8rrI3
-    name: Paralyzing Breath
-    type: feat
-    img: icons/magic/unholy/projectile-fireball-green.webp
-    system:
-      description:
-        value: >-
-          <p>**Weakening Breath.** The dragon exhales gas in a 15-foot cone.
-          Each creature in that area must succeed on a  <strong>DC 13
-          Strength</strong> saving throw or have disadvantage on Strength-based
-          attack rolls, Strength checks, and Strength saving throws for 1
-          minute. A creature can repeat the saving throw at the end of each of
-          its turns, ending the effect on itself on a success.</p>
-        chat: >-
-          <p>The dragon exhales gas in a 15-foot cone. Each creature in that
-          area must make a <strong>Strength</strong> saving throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+          _id: o8fOmWWIqCYwGu3C
+          name: Fire Breath
+          img: ''
+          appliedEffects: []
+        J4QhEMZOdsyIy2D6:
           type: save
           activation:
             type: action
@@ -981,11 +808,8 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: JH4iOMWhpUPZneJN
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -994,8 +818,8 @@ items:
             chatFlavor: ''
           duration:
             concentration: false
-            value: ''
-            units: inst
+            value: '1'
+            units: minute
             special: ''
             override: false
           effects: []
@@ -1008,7 +832,7 @@ items:
               count: ''
               contiguous: false
               type: cone
-              size: '15'
+              size: '90'
               width: ''
               height: ''
               units: ft
@@ -1027,33 +851,46 @@ items:
             onSave: half
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '13'
           sort: 0
+          _id: J4QhEMZOdsyIy2D6
+          name: Weakening Breath
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
-      identifier: paralyzing-breath
+        repeatable: false
+      identifier: breath-weapons
+      advancement: []
+      cover: null
+      crewed: false
     effects: []
     folder: null
-    sort: 0
+    sort: 600000
     ownership:
       default: 0
     flags:
       core:
-        sourceId: Compendium.dnd5e.monsterfeatures.BiasCPpNsaAVKzIj
+        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.BiasCPpNsaAVKzIj
+      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676878
+      systemVersion: 4.4.0
+      createdTime: 1745452319939
+      modifiedTime: 1745452376794
       lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!naSoHU9KbkgeNIwB.8mLdG3PPJsB8rrI3'
+    _key: '!actors.items!naSoHU9KbkgeNIwB.5vCVx0zwz1FKIvTX'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -1064,8 +901,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171256525
-  modifiedTime: 1726171449653
+  modifiedTime: 1745452384608
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!naSoHU9KbkgeNIwB'

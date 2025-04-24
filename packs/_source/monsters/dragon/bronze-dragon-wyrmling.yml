@@ -54,8 +54,8 @@ system:
     hp:
       value: 32
       max: 32
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 5d8 + 10
     init:
       ability: ''
@@ -690,7 +690,7 @@ items:
       modifiedTime: 1745107552828
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!hY9ptpO5Xl2tfkcj.Vq0dUbodqBggQAVQ'
-  - _id: Bl0NweDKcGjwVdPu
+  - _id: DogAlXwHCyvsBynk
     name: Breath Weapons
     type: feat
     img: icons/creatures/abilities/dragon-ice-breath-blue.webp
@@ -698,15 +698,15 @@ items:
       description:
         value: >-
           <p>The dragon uses one of the following breath
-          weapons.</p><p>**Lightning Breath.** The dragon exhales lightning in a
-          40-foot line that is 5 feet wide. Each creature in that line must make
-          a  <strong>DC 12 Dexterity</strong> saving throw, taking <strong>16
-          (3d10) <em>lightning damage</em></strong> on a failed save, or half as
-          much damage on a successful one.</p><p>**Repulsion Breath.** The
-          dragon exhales repulsion energy in a 30-foot cone. Each creature in
-          that area must succeed on a  <strong>DC 12 Strength</strong> saving
-          throw. On a failed save, the creature is pushed 30 feet away from the
-          dragon.</p>
+          weapons.</p><p><strong>Lightning Breath.</strong> The dragon exhales
+          lightning in a 120-foot line that is 10 feet wide. Each creature in
+          that line must make a [[/save activity=w2CftR6CLr5PZ7zY]] saving
+          throw, taking [[/damage average activity=w2CftR6CLr5PZ7zY]] damage on
+          a failed save, or half as much damage on a successful
+          one.</p><p><strong>Repulsion Breath.</strong> The dragon exhales
+          repulsion energy in a 30-foot cone. Each creature in that area must
+          succeed on a [[/save activity=YElWYv6C5UfhAu48]] saving throw. On a
+          failed save, the creature is pushed 60 feet away from the dragon.</p>
         chat: <p>The dragon breathes in!</p>
       source:
         custom: ''
@@ -728,119 +728,7 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: breath-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676876
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!hY9ptpO5Xl2tfkcj.Bl0NweDKcGjwVdPu'
-  - _id: QoYyaNGqsz935dS2
-    name: Lightning Breath
-    type: feat
-    img: icons/magic/lightning/bolt-strike-blue.webp
-    system:
-      description:
-        value: >-
-          <p>**Lightning Breath.** The dragon exhales lightning in a 40-foot
-          line that is 5 feet wide. Each creature in that line must make a 
-          <strong>DC 12 Dexterity</strong> saving throw, taking <strong>16
-          (3d10) <em>lightning damage</em></strong> on a failed save, or half as
-          much damage on a successful one.</p>
-        chat: "<p>\_The dragon exhales lightning in a 40-foot line that is 5 feet wide. Each creature in that line must make a <strong>Dexterity</strong> saving throw.</p>"
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+        w2CftR6CLr5PZ7zY:
           type: save
           activation:
             type: action
@@ -850,11 +738,8 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: Bl0NweDKcGjwVdPu
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -877,7 +762,7 @@ items:
               count: ''
               contiguous: false
               type: line
-              size: '40'
+              size: '120'
               width: ''
               height: ''
               units: ft
@@ -895,80 +780,26 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 3
-                denomination: 10
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
+                denomination: '10'
                 bonus: ''
                 types:
                   - lightning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
-            ability: dex
+            ability:
+              - dex
             dc:
               calculation: ''
               formula: '12'
           sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lightning-breath
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.LVnd9fq9cQj7rR0Q
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.LVnd9fq9cQj7rR0Q
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676876
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!hY9ptpO5Xl2tfkcj.QoYyaNGqsz935dS2'
-  - _id: WT04ZQprU9op6Wny
-    name: Repulsion Breath
-    type: feat
-    img: icons/magic/air/air-wave-gust-blue.webp
-    system:
-      description:
-        value: >-
-          <p>**Repulsion Breath.** The dragon exhales repulsion energy in a
-          30-foot cone. Each creature in that area must succeed on a  <strong>DC
-          12 Strength</strong> saving throw. On a failed save, the creature is
-          pushed 30 feet away from the dragon.</p>
-        chat: >-
-          <p>The dragon exhales repulsion energy in a 30-foot cone. Each
-          creature in that area must make a <strong>Strength</strong> saving
-          throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
+          _id: w2CftR6CLr5PZ7zY
+          name: Lightning Breath
+          img: ''
+          appliedEffects: []
+        YElWYv6C5UfhAu48:
           type: save
           activation:
             type: action
@@ -978,11 +809,8 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: Bl0NweDKcGjwVdPu
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -1024,33 +852,46 @@ items:
             onSave: half
             parts: []
           save:
-            ability: str
+            ability:
+              - str
             dc:
               calculation: ''
               formula: '12'
           sort: 0
+          _id: YElWYv6C5UfhAu48
+          name: Repulsion Breath
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
-      identifier: repulsion-breath
+        repeatable: false
+      identifier: breath-weapons
+      advancement: []
+      cover: null
+      crewed: false
     effects: []
     folder: null
-    sort: 0
+    sort: 600000
     ownership:
       default: 0
     flags:
       core:
-        sourceId: Compendium.dnd5e.monsterfeatures.zRDERBe0lMbwyGwN
+        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.zRDERBe0lMbwyGwN
+      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676876
+      systemVersion: 4.4.0
+      createdTime: 1745451478894
+      modifiedTime: 1745451510953
       lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!hY9ptpO5Xl2tfkcj.WT04ZQprU9op6Wny'
+    _key: '!actors.items!hY9ptpO5Xl2tfkcj.DogAlXwHCyvsBynk'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -1061,8 +902,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171249513
-  modifiedTime: 1726171448226
+  modifiedTime: 1745451715889
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!hY9ptpO5Xl2tfkcj'

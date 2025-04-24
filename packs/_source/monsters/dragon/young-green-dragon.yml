@@ -54,8 +54,8 @@ system:
     hp:
       value: 136
       max: 136
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 16d10 + 48
     init:
       ability: ''
@@ -688,7 +688,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -701,7 +701,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107550331
+      modifiedTime: 1745449676167
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!85ahD1jEo9B3POaQ.0Ob35HZxhSF7p2ys'
   - _id: WvvHslcDhMq7MD1s
@@ -852,7 +852,7 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -863,7 +863,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107550331
+      modifiedTime: 1745449676167
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!85ahD1jEo9B3POaQ.WvvHslcDhMq7MD1s'
   - _id: Ux1Gv0S29JzRaD27
@@ -966,7 +966,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273655344
+      modifiedTime: 1745449676950
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!85ahD1jEo9B3POaQ.Ux1Gv0S29JzRaD27'
   - _id: PIXokIK4tYPwua2G
@@ -977,9 +977,9 @@ items:
       description:
         value: >-
           <p>The dragon exhales poisonous gas in a 30-foot cone. Each creature
-          in that area must make a  <strong>DC 14 Constitution</strong> saving
-          throw, taking <strong>42 (12d6) <em>poison damage</em></strong> on a
-          failed save, or half as much damage on a successful one.</p>
+          in that area must make a [[/save]] saving throw, taking [[/damage
+          average]] damage on a failed save, or half as much damage on a
+          successful one.</p>
         chat: >-
           <p>The dragon exhales poisonous gas in a 30-foot cone. Each creature
           in that area must make a <strong>Constitution</strong> saving
@@ -1084,7 +1084,7 @@ items:
       identifier: poison-breath
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags:
@@ -1095,9 +1095,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676765
+      modifiedTime: 1745449857373
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!85ahD1jEo9B3POaQ.PIXokIK4tYPwua2G'
 effects: []
@@ -1110,8 +1110,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171206621
-  modifiedTime: 1726171440227
+  modifiedTime: 1745449862344
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!85ahD1jEo9B3POaQ'

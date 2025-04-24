@@ -54,8 +54,8 @@ system:
     hp:
       value: 32
       max: 32
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 5d8 + 10
     init:
       ability: ''
@@ -663,9 +663,9 @@ items:
       description:
         value: >-
           <p>The dragon exhales an icy blast of hail in a 15-foot cone. Each
-          creature in that area must make a  <strong>DC 12 Constitution</strong>
-          saving throw, taking <strong>22 (5d8) <em>cold damage</em></strong> on
-          a failed save, or half as much damage on a successful one.</p>
+          creature in that area must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
           <p>The dragon exhales an icy blast of hail in a 15-foot cone. Each
           creature in that area must make a <strong>Constitution</strong> saving
@@ -781,9 +781,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676618
+      modifiedTime: 1745450516684
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!vc2TAgIuq4yInjbf.8ZXdgzpI6WytT63w'
 effects: []
@@ -796,8 +796,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171265352
-  modifiedTime: 1726171451710
+  modifiedTime: 1745450521020
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!vc2TAgIuq4yInjbf'

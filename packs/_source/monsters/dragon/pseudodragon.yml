@@ -54,8 +54,8 @@ system:
     hp:
       value: 7
       max: 7
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 2d4+2
     init:
       ability: ''
@@ -483,8 +483,8 @@ items:
     system:
       description:
         value: >-
-          <p>The pseudodragon has<strong> advantage </strong>on Wisdom
-          (Perception) checks that rely on sight, hearing, or smell.</p>
+          <p>The pseudodragon has advantage on Wisdom (Perception) checks that
+          rely on sight, hearing, or smell.</p>
         chat: ''
       source:
         custom: ''
@@ -520,10 +520,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745448365509
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fkCNtbvPOMd7mipF.heZCHSZEeLLiweK7'
   - _id: GAzi14ICaeeOAO8J
     name: Magic Resistance
@@ -532,8 +532,8 @@ items:
     system:
       description:
         value: >-
-          <p>The pseudodragon has<strong> advantage </strong>on saving throws
-          against spells and other magical effects.</p>
+          <p>The pseudodragon has advantage on saving throws against spells and
+          other magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -569,10 +569,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745448371907
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fkCNtbvPOMd7mipF.GAzi14ICaeeOAO8J'
   - _id: aIqOpP93mUsy9yD1
     name: Limited Telepathy
@@ -582,8 +582,8 @@ items:
       description:
         value: >-
           <p>The pseudodragon can magically communicate simple ideas, emotions,
-          and images telepathically with any creature within <strong>100
-          ft.</strong> of it that can understand a language.</p>
+          and images telepathically with any creature within 100 ft. of it that
+          can understand a language.</p>
         chat: ''
       source:
         custom: ''
@@ -619,10 +619,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745448376708
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fkCNtbvPOMd7mipF.aIqOpP93mUsy9yD1'
   - _id: GJgN3Qy49XCaKmTc
     name: Bite
@@ -770,6 +770,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: bite
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -785,7 +786,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552628
+      modifiedTime: 1745448382139
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fkCNtbvPOMd7mipF.GJgN3Qy49XCaKmTc'
   - _id: MKFXRWP55I1bVlyD
@@ -796,10 +797,10 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a  <strong>DC 11 Constitution</strong> saving throw or
-          become poisoned for 1 hour. If the saving throw fails by 5 or more,
-          the target falls unconscious for the same duration, or until it takes
-          damage or another creature uses an action to shake it awake.</p>
+          succeed on a [[/save]] saving throw or become poisoned for 1 hour. If
+          the saving throw fails by 5 or more, the target falls unconscious for
+          the same duration, or until it takes damage or another creature uses
+          an action to shake it awake.</p>
         chat: >-
           <p>The Pseudodragon attacks with its Sting. The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -987,19 +988,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 1
-                denomination: 4
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -1010,12 +999,17 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: sting
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -1023,7 +1017,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552628
+      modifiedTime: 1745448399049
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!fkCNtbvPOMd7mipF.MKFXRWP55I1bVlyD'
 effects: []
@@ -1036,8 +1030,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171246273
-  modifiedTime: 1726171447525
+  modifiedTime: 1745448407119
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!fkCNtbvPOMd7mipF'

@@ -54,8 +54,8 @@ system:
     hp:
       value: 341
       max: 341
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 22d20 + 110
     init:
       ability: ''
@@ -628,7 +628,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273656778
+      modifiedTime: 1745448418235
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ijsfYEDqSuwQXwNN.2m2mkUSBJi2QOZje'
   - _id: 7QJr0VCtVk2wtZ78
@@ -779,7 +779,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -792,7 +792,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552919
+      modifiedTime: 1745448417424
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ijsfYEDqSuwQXwNN.7QJr0VCtVk2wtZ78'
   - _id: P4joxK4BwyYsPfJv
@@ -943,7 +943,7 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -954,7 +954,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552919
+      modifiedTime: 1745448417424
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ijsfYEDqSuwQXwNN.P4joxK4BwyYsPfJv'
   - _id: zNDI1LvLKZ9Hi2Ew
@@ -964,10 +964,10 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
-          a creature, it must succeed on a  <strong>DC 20 Strength</strong>
-          saving throw or be pushed up to 10 feet away from the dragon turtle
-          and knocked prone.</p>
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
+          a creature, it must succeed on a [[/save]] saving throw or be pushed
+          up to 10 feet away from the dragon turtle and knocked
+          &amp;Reference[prone].</p>
         chat: >-
           <p>The Dragon Turtle attacks with its Tail. If the target is a
           creature, it must make a <strong>Strength</strong> saving throw.</p>
@@ -1155,19 +1155,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 3
-                denomination: 12
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
@@ -1178,12 +1166,17 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: tail
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
@@ -1191,7 +1184,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107552919
+      modifiedTime: 1745448451475
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ijsfYEDqSuwQXwNN.zNDI1LvLKZ9Hi2Ew'
   - _id: UjT93YD55B87gMqZ
@@ -1202,11 +1195,10 @@ items:
       description:
         value: >-
           <p>The dragon turtle exhales scalding steam in a 60-foot cone. Each
-          creature in that area must make a  <strong>DC 18 Constitution</strong>
-          saving throw, taking <strong>52 (15d6) <em>fire damage</em></strong>
-          on a failed save, or half as much damage on a successful
-          one.</p><p>Being underwater doesn't grant resistance against this
-          damage.</p>
+          creature in that area must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p><p>Being underwater doesn't grant resistance
+          against this damage.</p>
         chat: >-
           <p>The dragon turtle exhales scalding steam in a 60-foot cone. Each
           creature in that area must make a <strong>Constitution</strong> saving
@@ -1311,7 +1303,7 @@ items:
       identifier: steam-breath
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
     flags:
@@ -1322,9 +1314,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676920
+      modifiedTime: 1745448483290
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!ijsfYEDqSuwQXwNN.UjT93YD55B87gMqZ'
 effects: []
@@ -1337,8 +1329,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171251099
-  modifiedTime: 1726171448584
+  modifiedTime: 1745448497650
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!ijsfYEDqSuwQXwNN'

@@ -55,7 +55,7 @@ system:
       value: 142
       max: 142
       temp: null
-      tempmax: 0
+      tempmax: null
       formula: 15d10 + 60
     init:
       ability: ''
@@ -675,7 +675,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -688,373 +688,9 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107551526
+      modifiedTime: 1745451326129
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!NmQLj0zv4FmfuSan.22lf3TLPObmD4s6h'
-  - _id: LMfwpBb1Pg7CLItO
-    name: Breath Weapons
-    type: feat
-    img: icons/creatures/abilities/dragon-ice-breath-blue.webp
-    system:
-      description:
-        value: >-
-          <p>The dragon uses one of the following breath
-          weapons.</p><p>**Lightning Breath.** The dragon exhales lightning in a
-          60-foot line that is 5 feet wide. Each creature in that line must make
-          a  <strong>DC 15 Dexterity</strong> saving throw, taking <strong>55
-          (10d10) <em>lightning damage</em></strong> on a failed save, or half
-          as much damage on a successful one.</p><p>**Repulsion Breath.** The
-          dragon exhales repulsion energy in a 30-foot cone. Each creature in
-          that area must succeed on a  <strong>DC 15 Strength</strong> saving
-          throw. On a failed save, the creature is pushed 40 feet away from the
-          dragon.</p>
-        chat: <p>The dragon breathes in!</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: '1'
-        recovery:
-          - period: recharge
-            formula: '5'
-            type: recoverAll
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: breath-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676934
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!NmQLj0zv4FmfuSan.LMfwpBb1Pg7CLItO'
-  - _id: Eahi8ih9q0jF1XW2
-    name: Lightning Breath
-    type: feat
-    img: icons/magic/lightning/bolt-strike-blue.webp
-    system:
-      description:
-        value: >-
-          <p>*Lightning Breath.** The dragon exhales lightning in a 60-foot line
-          that is 5 feet wide. Each creature in that line must make a 
-          <strong>DC 15 Dexterity</strong> saving throw, taking <strong>55
-          (10d10) <em>lightning damage</em></strong> on a failed save, or half
-          as much damage on a successful one.</p>
-        chat: >-
-          <p>The dragon exhales lightning in a 60-foot line that is 5 feet wide.
-          Each creature in that line must make a <strong>Dexterity</strong>
-          saving throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: LMfwpBb1Pg7CLItO
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: self
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: line
-              size: '60'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts:
-              - number: 10
-                denomination: 10
-                bonus: ''
-                types:
-                  - lightning
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          save:
-            ability: dex
-            dc:
-              calculation: ''
-              formula: '15'
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: lightning-breath
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.LVnd9fq9cQj7rR0Q
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.LVnd9fq9cQj7rR0Q
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676934
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!NmQLj0zv4FmfuSan.Eahi8ih9q0jF1XW2'
-  - _id: h48EplFcKFZxJWjO
-    name: Repulsion Breath
-    type: feat
-    img: icons/magic/air/air-wave-gust-blue.webp
-    system:
-      description:
-        value: >-
-          <p>**Repulsion Breath.** The dragon exhales repulsion energy in a
-          30-foot cone. Each creature in that area must succeed on a  <strong>DC
-          15 Strength</strong> saving throw. On a failed save, the creature is
-          pushed 40 feet away from the dragon.</p>
-        chat: >-
-          <p>The dragon exhales repulsion energy in a 30-foot cone. Each
-          creature in that area must make a <strong>Strength</strong> saving
-          throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: LMfwpBb1Pg7CLItO
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: self
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: cone
-              size: '30'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
-          save:
-            ability: str
-            dc:
-              calculation: ''
-              formula: '15'
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: repulsion-breath
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.zRDERBe0lMbwyGwN
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.zRDERBe0lMbwyGwN
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676934
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!NmQLj0zv4FmfuSan.h48EplFcKFZxJWjO'
   - _id: LGFPSpA0pvVpj3cF
     name: Claw
     type: weapon
@@ -1203,7 +839,7 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -1214,7 +850,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107551526
+      modifiedTime: 1745451326129
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!NmQLj0zv4FmfuSan.LGFPSpA0pvVpj3cF'
   - _id: xDjzXK9dbD2EV8hi
@@ -1317,9 +953,211 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273656070
+      modifiedTime: 1745451326826
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!NmQLj0zv4FmfuSan.xDjzXK9dbD2EV8hi'
+  - _id: cbov06rPLGnlIvFi
+    name: Breath Weapons
+    type: feat
+    img: icons/creatures/abilities/dragon-ice-breath-blue.webp
+    system:
+      description:
+        value: >-
+          <p>The dragon uses one of the following breath
+          weapons.</p><p><strong>Lightning Breath.</strong> The dragon exhales
+          lightning in a 120-foot line that is 10 feet wide. Each creature in
+          that line must make a [[/save activity=w2CftR6CLr5PZ7zY]] saving
+          throw, taking [[/damage average activity=w2CftR6CLr5PZ7zY]] damage on
+          a failed save, or half as much damage on a successful
+          one.</p><p><strong>Repulsion Breath.</strong> The dragon exhales
+          repulsion energy in a 30-foot cone. Each creature in that area must
+          succeed on a [[/save activity=YElWYv6C5UfhAu48]] saving throw. On a
+          failed save, the creature is pushed 60 feet away from the dragon.</p>
+        chat: <p>The dragon breathes in!</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: '1'
+        recovery:
+          - period: recharge
+            formula: '5'
+            type: recoverAll
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        w2CftR6CLr5PZ7zY:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: line
+              size: '120'
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 10
+                denomination: '10'
+                bonus: ''
+                types:
+                  - lightning
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: ''
+              formula: '15'
+          sort: 0
+          _id: w2CftR6CLr5PZ7zY
+          name: Lightning Breath
+          img: ''
+          appliedEffects: []
+        YElWYv6C5UfhAu48:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: cone
+              size: '30'
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - str
+            dc:
+              calculation: ''
+              formula: '15'
+          sort: 0
+          _id: YElWYv6C5UfhAu48
+          name: Repulsion Breath
+          img: ''
+          appliedEffects: []
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      identifier: breath-weapons
+      advancement: []
+      cover: null
+      crewed: false
+    effects: []
+    folder: null
+    sort: 600000
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: 1745451477671
+      modifiedTime: 1745451490966
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!NmQLj0zv4FmfuSan.cbov06rPLGnlIvFi'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -1330,8 +1168,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171227229
-  modifiedTime: 1726171443976
+  modifiedTime: 1745451707709
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!NmQLj0zv4FmfuSan'

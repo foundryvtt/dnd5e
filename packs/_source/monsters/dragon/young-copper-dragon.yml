@@ -54,8 +54,8 @@ system:
     hp:
       value: 119
       max: 119
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 14d10 + 42
     init:
       ability: ''
@@ -628,7 +628,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -641,7 +641,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553544
+      modifiedTime: 1745451773338
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qW8cBwg7ghCA4Cw6.Km7rUn5tu44KuVbz'
   - _id: DlxAB4bcOmBIn0UG
@@ -792,7 +792,7 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -803,381 +803,9 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107553544
+      modifiedTime: 1745451773338
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qW8cBwg7ghCA4Cw6.DlxAB4bcOmBIn0UG'
-  - _id: eKFnpVBhSSB91leK
-    name: Breath Weapons
-    type: feat
-    img: icons/magic/acid/projectile-smoke-glowing.webp
-    system:
-      description:
-        value: >-
-          <p>The dragon uses one of the following breath weapons.</p><p>**Acid
-          Breath.** The dragon exhales acid in an 40-foot line that is 5 feet
-          wide. Each creature in that line must make a  <strong>DC 14
-          Dexterity</strong> saving throw, taking <strong>40 (9d8) <em>acid
-          damage</em></strong> on a failed save, or half as much damage on a
-          successful one.</p><p>**Slowing Breath.** The dragon exhales gas in a
-          30-foot cone. Each creature in that area must succeed on a  <strong>DC
-          14 Constitution</strong> saving throw. On a failed save, the creature
-          can't use reactions, its speed is halved, and it can't make more than
-          one attack on its turn. In addition, the creature can use either an
-          action or a bonus action on its turn, but not both. These effects last
-          for 1 minute. The creature can repeat the saving throw at the end of
-          each of its turns, ending the effect on itself with a successful
-          save.</p>
-        chat: <p>The dragon breathes in!</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: '1'
-        recovery:
-          - period: recharge
-            formula: '5'
-            type: recoverAll
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: ''
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: breath-weapons
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676940
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!qW8cBwg7ghCA4Cw6.eKFnpVBhSSB91leK'
-  - _id: HHLqWQuhYdWvo1Tj
-    name: Acid Breath
-    type: feat
-    img: icons/magic/acid/projectile-smoke-glowing.webp
-    system:
-      description:
-        value: >-
-          <p>**Acid Breath.** The dragon exhales acid in an 40-foot line that is
-          5 feet wide. Each creature in that line must make a  <strong>DC 14
-          Dexterity</strong> saving throw, taking <strong>40 (9d8) <em>acid
-          damage</em></strong> on a failed save, or half as much damage on a
-          successful one.</p>
-        chat: >-
-          <p>The dragon exhales acid in an 40-foot line that is 5 feet wide.
-          Each creature in that line must make a <strong>Dexterity</strong>
-          saving throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: eKFnpVBhSSB91leK
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: self
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: line
-              size: '40'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts:
-              - number: 9
-                denomination: 8
-                bonus: ''
-                types:
-                  - acid
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          save:
-            ability: dex
-            dc:
-              calculation: ''
-              formula: '14'
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: acid-breath
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.zjcGly9P3Gn9MXt7
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.zjcGly9P3Gn9MXt7
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676940
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!qW8cBwg7ghCA4Cw6.HHLqWQuhYdWvo1Tj'
-  - _id: jH7GlNkVX5D2chWY
-    name: Slowing Breath
-    type: feat
-    img: icons/creatures/abilities/dragon-ice-breath-blue.webp
-    system:
-      description:
-        value: >-
-          <p>**Slowing Breath.** The dragon exhales gas in a 30-foot cone. Each
-          creature in that area must succeed on a  <strong>DC 14
-          Constitution</strong> saving throw. On a failed save, the creature
-          can't use reactions, its speed is halved, and it can't make more than
-          one attack on its turn. In addition, the creature can use either an
-          action or a bonus action on its turn, but not both. These effects last
-          for 1 minute. The creature can repeat the saving throw at the end of
-          each of its turns, ending the effect on itself with a successful
-          save.</p>
-        chat: >-
-          <p>The dragon exhales gas in a 30-foot cone. Each creature in that
-          area make a <strong>Constitution</strong> saving throw.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      type:
-        value: ''
-        subtype: ''
-      requirements: ''
-      properties: []
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: eKFnpVBhSSB91leK
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            units: self
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: cone
-              size: '30'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts: []
-          save:
-            ability: con
-            dc:
-              calculation: ''
-              formula: '14'
-          sort: 0
-      enchant: {}
-      prerequisites:
-        level: null
-      identifier: slowing-breath
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.JRy507rS9wxT3GBh
-    _stats:
-      compendiumSource: Compendium.dnd5e.monsterfeatures.JRy507rS9wxT3GBh
-      duplicateSource: null
-      coreVersion: '12.331'
-      systemId: dnd5e
-      systemVersion: 4.2.0
-      createdTime: null
-      modifiedTime: 1736804676940
-      lastModifiedBy: dnd5ebuilder0000
-    _key: '!actors.items!qW8cBwg7ghCA4Cw6.jH7GlNkVX5D2chWY'
   - _id: kk9fXkx19bCD5Qqv
     name: Multiattack
     type: feat
@@ -1278,9 +906,216 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273657262
+      modifiedTime: 1745451774011
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!qW8cBwg7ghCA4Cw6.kk9fXkx19bCD5Qqv'
+  - _id: QIwTmsNVErWEqzFN
+    name: Breath Weapons
+    type: feat
+    img: icons/magic/acid/projectile-smoke-glowing.webp
+    system:
+      description:
+        value: >-
+          <p>The dragon uses one of the following breath
+          weapons.</p><p><strong>Acid Breath.</strong> The dragon exhales acid
+          in an 90-foot line that is 10 feet wide. Each creature in that line
+          must make a [[/save activity=zTWpuajI6meBb52D]] saving throw, taking
+          [[/damage average activity=zTWpuajI6meBb52D]] damage on a failed save,
+          or half as much damage on a successful one.</p><p><strong>Slowing
+          Breath.</strong> The dragon exhales gas in a 90-foot cone. Each
+          creature in that area must succeed on a [[/save
+          activity=CkPMajPOZWWj3gl0]] saving throw. On a failed save, the
+          creature can't use reactions, its speed is halved, and it can't make
+          more than one attack on its turn. In addition, the creature can use
+          either an action or a bonus action on its turn, but not both. These
+          effects last for 1 minute. The creature can repeat the saving throw at
+          the end of each of its turns, ending the effect on itself with a
+          successful save.</p>
+        chat: <p>The dragon breathes in!</p>
+      source:
+        custom: ''
+        book: ''
+        page: ''
+        license: CC-BY-4.0
+        rules: '2014'
+        revision: 1
+      uses:
+        max: '1'
+        recovery:
+          - period: recharge
+            formula: '5'
+            type: recoverAll
+        spent: 0
+      type:
+        value: ''
+        subtype: ''
+      requirements: ''
+      properties: []
+      activities:
+        zTWpuajI6meBb52D:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: ''
+            units: inst
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: line
+              size: '90'
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 9
+                denomination: '8'
+                bonus: ''
+                types:
+                  - acid
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: ''
+              formula: '14'
+          sort: 0
+          _id: zTWpuajI6meBb52D
+          name: Acid Breath
+          img: ''
+          appliedEffects: []
+        CkPMajPOZWWj3gl0:
+          type: save
+          activation:
+            type: action
+            value: 1
+            condition: ''
+            override: false
+          consumption:
+            targets:
+              - type: itemUses
+                value: '1'
+                target: ''
+            scaling:
+              allowed: false
+              max: ''
+            spellSlot: true
+          description:
+            chatFlavor: ''
+          duration:
+            concentration: false
+            value: '1'
+            units: minute
+            special: ''
+            override: false
+          effects: []
+          range:
+            units: self
+            special: ''
+            override: false
+          target:
+            template:
+              count: ''
+              contiguous: false
+              type: cone
+              size: '90'
+              width: ''
+              height: ''
+              units: ft
+            affects:
+              count: ''
+              type: ''
+              choice: false
+              special: ''
+            prompt: true
+            override: false
+          uses:
+            spent: 0
+            max: ''
+            recovery: []
+          damage:
+            onSave: half
+            parts: []
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '14'
+          sort: 0
+          _id: CkPMajPOZWWj3gl0
+          name: Slowing Breath
+          img: ''
+          appliedEffects: []
+      enchant: {}
+      prerequisites:
+        level: null
+        repeatable: false
+      identifier: breath-weapons
+      advancement: []
+      cover: null
+      crewed: false
+    effects: []
+    folder: null
+    sort: 550000
+    ownership:
+      default: 0
+    flags:
+      core:
+        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
+    _stats:
+      compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: 1745451912657
+      modifiedTime: 1745451929580
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!actors.items!qW8cBwg7ghCA4Cw6.QIwTmsNVErWEqzFN'
 effects: []
 folder: PNekSR74iAZ5dJwZ
 sort: 0
@@ -1291,8 +1126,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171259652
-  modifiedTime: 1726171450419
+  modifiedTime: 1745451974907
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!qW8cBwg7ghCA4Cw6'

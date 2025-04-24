@@ -54,8 +54,8 @@ system:
     hp:
       value: 75
       max: 75
-      temp: 0
-      tempmax: 0
+      temp: null
+      tempmax: null
       formula: 10d8 + 30
     init:
       ability: ''
@@ -663,9 +663,9 @@ items:
       description:
         value: >-
           <p>The dragon exhales fire in a 15-foot cone. Each creature in that
-          area must make a  <strong>DC 13 Dexterity</strong> saving throw,
-          taking <strong>24 (7d6) <em>fire damage</em></strong> on a failed
-          save, or half as much damage on a successful one.</p>
+          area must make a [[/save]] saving throw, taking [[/damage average]]
+          damage on a failed save, or half as much damage on a successful
+          one.</p>
         chat: >-
           <p>The dragon exhales fire in a 15-foot cone. Each creature in that
           area must make a <strong>Dexterity</strong> saving throw.</p>
@@ -780,9 +780,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1736804676627
+      modifiedTime: 1745450195293
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!zgWkII3VoE4AHCND.KVIjYSLZoYmdFwzS'
 effects: []
@@ -795,8 +795,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1726171267898
-  modifiedTime: 1726171452345
+  modifiedTime: 1745450200055
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!zgWkII3VoE4AHCND'
