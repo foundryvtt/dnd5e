@@ -8,16 +8,16 @@ system:
       <p><em>This concoction looks, smells, and tastes like a potion of healing
       or other beneficial potion.</em></p><p>However, it is actually poison
       masked by illusion magic. An identify spell reveals its true
-      nature.</p><p>If you drink it, you take 3d6 poison damage, and you must
-      succeed on a DC 13 Constitution saving throw or be poisoned. At the start
-      of each of your turns while you are poisoned in this way, you take 3d6
-      poison damage. At the end of each of your turns, you can repeat the saving
-      throw. On a successful save, the poison damage you take on your subsequent
-      turns decreases by 1d6. The poison ends when the damage decreases to
-      0.</p><section class="secret foundry-note"
-      id="secret-lK9L9LydgGgQJzNL"><p><strong>Foundry Note</strong></p><p>To
-      apply the reduced damage from a successful Constitution save, please use
-      the Other Formula (set at 1d6) as required.</p></section>
+      nature.</p><p>If you drink it, you take [[/damage]] damage, and you must
+      succeed on a [[/save]] saving throw or be &amp;reference[poisoned]. At the
+      start of each of your turns while you are poisoned in this way, you take
+      [[/damage]] damage. At the end of each of your turns, you can repeat the
+      saving throw. On a successful save, the poison damage you take on your
+      subsequent turns decreases by 1d6. The poison ends when the damage
+      decreases to 0.</p><section class="secret"
+      id="secret-zrLCcwvOwukVWTvT"><p>For convenience, you can use these
+      enrichers ([[/damage 2d6 poison]] or [[/damage 1d6 poison]]) to perform
+      the damage roll for the reduced damage.</p></section>
     chat: ''
   source:
     custom: ''
@@ -58,7 +58,7 @@ system:
     replace: false
   type:
     value: poison
-    subtype: ''
+    subtype: ingested
   unidentified:
     description: ''
   container: null
@@ -117,19 +117,7 @@ system:
         override: false
       damage:
         onSave: half
-        parts:
-          - number: 3
-            denomination: 6
-            bonus: ''
-            types:
-              - poison
-            custom:
-              enabled: false
-              formula: ''
-            scaling:
-              mode: whole
-              number: null
-              formula: ''
+        parts: []
       save:
         ability: con
         dc:
@@ -139,6 +127,62 @@ system:
         spent: 0
         recovery: []
       sort: 0
+    baqKYeBxT4UMih4u:
+      type: damage
+      _id: baqKYeBxT4UMih4u
+      sort: 0
+      activation:
+        type: action
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: ''
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          type: ''
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      damage:
+        critical:
+          allow: false
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - poison
+            scaling:
+              mode: ''
+      name: ''
+      img: ''
+      appliedEffects: []
   attuned: false
   identifier: potion-of-poison
 effects: []
@@ -151,7 +195,7 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1725037292318
   modifiedTime: 1725992548354
   lastModifiedBy: dnd5ebuilder0000
