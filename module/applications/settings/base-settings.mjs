@@ -83,8 +83,7 @@ export default class BaseSettingsConfig extends Application5e {
   static async #onCommitChanges(event, form, formData) {
     let requiresClientReload = false;
     let requiresWorldReload = false;
-    const expandedData = foundry.utils.expandObject(formData.object);
-    for ( const [key, value] of Object.entries(expandedData) ) {
+    for ( const [key, value] of Object.entries(foundry.utils.expandObject(formData.object)) ) {
       const setting = game.settings.settings.get(`dnd5e.${key}`);
       const current = game.settings.get("dnd5e", key, { document: true });
       const prior = current?._source?.value ?? current;
