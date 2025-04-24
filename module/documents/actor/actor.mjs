@@ -3055,6 +3055,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
       await this.sheet?.close();
       const update = await this.token.update(tokenData);
+      if ( game.release.generation > 12 ) {
+        d["==items"] = d.items;
+        d["==effects"] = d.effects;
+        delete d.items;
+        delete d.effects;
+      }
       await this.token.actor.update(d);
       if ( options.renderSheet ) this.sheet?.render(true);
       return update;
