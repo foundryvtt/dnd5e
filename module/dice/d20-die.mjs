@@ -1,3 +1,5 @@
+import { getDieParts } from "../utils.mjs";
+
 const { Die } = foundry.dice.terms;
 
 /**
@@ -67,13 +69,15 @@ export default class D20Die extends Die {
    * @param {number} advantageMode  Advantage mode to apply.
    */
   applyAdvantage(advantageMode) {
+    const customDieParts = getDieParts(this.options.customDie);
+    const dieNumber = customDieParts?.number ?? 1;
     this.options.advantageMode = advantageMode;
     this.modifiers.findSplice(m => ["kh", "kl"].includes(m));
-    if ( advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.NORMAL ) this.number = 1;
+    if ( advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.NORMAL ) this.number = dieNumber;
     else {
       const isAdvantage = advantageMode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE;
-      this.number = (isAdvantage && this.options.elvenAccuracy) ? 3 : 2;
-      this.modifiers.push(isAdvantage ? "kh" : "kl");
+      this.number = (isAdvantage && this.options.elvenAccuracy) ? (dieNumber * 3) : dieNumber * 2;
+      this.modifiers.push(isAdvantage ? `kh${dieNumber}` : `kl${dieNumber}`);
     }
   }
 

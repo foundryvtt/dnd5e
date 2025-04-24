@@ -235,6 +235,21 @@ export function getPluralRules({ type="cardinal" }={}) {
 }
 
 /* -------------------------------------------- */
+/*  Destructuring                               */
+/* -------------------------------------------- */
+
+/**
+ * Get parts of a die.
+ * @param {string} die The die to parse
+ * @returns {object|null} The die parts
+ */
+export function getDieParts(die) {
+  const match = die?.match(/\b(\d+)[dD](\d+)\b/);
+  return match ? { number: parseInt(match[1], 10), faces: parseInt(match[2], 10) } : null;
+}
+
+
+/* -------------------------------------------- */
 /*  Formulas                                    */
 /* -------------------------------------------- */
 
