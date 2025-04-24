@@ -72,14 +72,14 @@ export default class BaseSettingsConfig extends Application5e {
   /* -------------------------------------------- */
 
   /**
- * Commit settings changes.
- * This method processes the submitted form data, updates the settings, and determines if a reload is required.
- * @this {BaseSettingsConfig}
- * @param {SubmitEvent} event          The submission event.
- * @param {HTMLFormElement} form       The submitted form element.
- * @param {FormDataExtended} formData  The submitted form data.
- * @returns {Promise<void>}            Resolves once the settings are updated, or prompts for a reload if required.
- */
+   * Commit settings changes.
+   * This method processes the submitted form data, updates the settings, and determines if a reload is required.
+   * @this {BaseSettingsConfig}
+   * @param {SubmitEvent} event          The submission event.
+   * @param {HTMLFormElement} form       The submitted form element.
+   * @param {FormDataExtended} formData  The submitted form data.
+   * @returns {Promise<void>}            Resolves once the settings are updated, or prompts for a reload if required.
+   */
   static async #onCommitChanges(event, form, formData) {
     let requiresClientReload = false;
     let requiresWorldReload = false;
