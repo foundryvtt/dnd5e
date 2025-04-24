@@ -328,7 +328,7 @@ export default class CreatureTemplate extends CommonTemplate {
  */
 function makeAttackBonuses(schemaOptions={}) {
   return new SchemaField({
-    attack: new FormulaField({required: true, label: "DND5E.BonusAttack"}),
-    damage: new FormulaField({required: true, label: "DND5E.BonusDamage"})
+    attack: new FormulaField({required: true}),
+    damage: new FormulaField({required: true})
   }, schemaOptions);
 }
