@@ -12,7 +12,8 @@
     - [Activity Type: Heal](Activity-Type-Heal.md)
     - [Activity Type: Save](Activity-Type-Save.md)
     - [Activity Type: Summon](Activity-Type-Summon.md)
-    - [Activity Type: Utility](Activity-Type-Utility.md)
+    - [Activity Type: Transform](Activity-Type-Transform.md)
+    - [Activity Type: Use](Activity-Type-Utility.md)
 - [Advancement Overview](Advancement.md)
   - [Advancement User Guide](Advancement-User-Guide.md)
   - Advancement Types
@@ -38,6 +39,7 @@
   - [System HTML](System-HTML.md)
   - [Table of Contents](Table-of-Contents.md)
 - [Roll Formulas](Roll-Formulas.md)
+- [Transformation](Transformation.md)
 - Tutorials
   - [Custom Classes](Custom-Class-Advancement.md)
   - [Custom Races](Custom-Race-Tutorial.md)
