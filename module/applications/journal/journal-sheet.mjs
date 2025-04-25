@@ -10,18 +10,8 @@ export default class JournalSheet5e extends (foundry.appv1?.sheets?.JournalSheet
   }
 
   /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  activateListeners(html) {
-    super.activateListeners(html);
-    html.on("pointerdown", event => {
-      if ( (event.button === 1) && document.getElementById("tooltip")?.classList.contains("active") ) {
-        event.preventDefault();
-      }
-    });
-  }
-
-  /* -------------------------------------------- */
+  /*  Rendering                                    */
+  /* --------------------------------------------- */
 
   /** @inheritDoc */
   _getPageData() {
@@ -41,6 +31,43 @@ export default class JournalSheet5e extends (foundry.appv1?.sheets?.JournalSheet
     }
 
     return pageData;
+  }
+
+  /* --------------------------------------------- */
+
+  /** @inheritdoc */
+  async _render(...args) {
+    await super._render(...args);
+    const [html] = this.element;
+    const header = html.querySelector(".journal-entry-content .journal-header");
+
+    // Insert navigation
+    const nav = this.document.getFlag("dnd5e", "navigation");
+    if ( nav ) {
+      const getDocument = id => {
+        if ( !this.document.pack ) return game.journal.get(id);
+        return game.packs.get(this.document.pack).getDocument(id);
+      };
+      const previous = nav.previous ? await getDocument(nav.previous) : null;
+      const up = nav.up ? await getDocument(nav.up) : null;
+      const next = nav.next ? await getDocument(nav.next) : null;
+      const element = document.createElement("nav");
+      element.classList.add("book-navigation");
+      element.innerHTML = `
+        <ul>
+          <li>${previous ? `<a class="content-link" data-uuid="${previous.uuid}" rel="prev" data-link
+            data-tooltip="DND5E.JOURNALENTRY.Navigation.Previous" data-tooltip-direction="LEFT"></a>` : ""}</li>
+          <li>${up ? `<a class="content-link parent" data-uuid="${up.uuid}" data-link
+            data-tooltip="DND5E.JOURNALENTRY.Navigation.Up"></a>` : ""}</li>
+          <li>${next ? `<a class="content-link" data-uuid="${next.uuid}" rel="next" data-link
+            data-tooltip="DND5E.JOURNALENTRY.Navigation.Next" data-tooltip-direction="RIGHT"></a>` : ""}</li>
+        </ul>
+      `;
+      if ( previous ) element.querySelector("[rel=prev]").innerText = previous.name;
+      if ( up ) element.querySelector(".parent").innerText = up.name;
+      if ( next ) element.querySelector("[rel=next]").innerText = next.name;
+      header.after(element);
+    }
   }
 
   /* -------------------------------------------- */
@@ -73,5 +100,19 @@ export default class JournalSheet5e extends (foundry.appv1?.sheets?.JournalSheet
     if ( page.document.parent.sheet instanceof JournalSheet5e ) {
       element.classList.add("dnd5e2-journal", "themed", "theme-light");
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  activateListeners(html) {
+    super.activateListeners(html);
+    html.on("pointerdown", event => {
+      if ( (event.button === 1) && document.getElementById("tooltip")?.classList.contains("active") ) {
+        event.preventDefault();
+      }
+    });
   }
 }
