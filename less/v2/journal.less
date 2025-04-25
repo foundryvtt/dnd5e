@@ -78,6 +78,61 @@
     }
   }
 
+  /* Navigation */
+  &.journal-entry .book-navigation {
+    flex-grow: 0;
+    padding: 5px 0px;
+    margin: 0 10px 10px;
+    border: none;
+    opacity: 0.2;
+    transition: opacity 0.5s ease-out;
+
+    &:hover { opacity: 1; }
+
+    ul {
+      display: flex;
+      gap: 5px;
+      margin: 0;
+      padding-inline: 1rem;
+      list-style: none;
+    }
+    li { flex: 1 1 33%; }
+    a {
+      display: block;
+      border: none;
+      background: none;
+      text-align: center;
+      text-decoration: none;
+    }
+    a[rel="prev"] {
+      text-align: start;
+      &::before {
+        content: "\f060";
+        font-family: var(--font-awesome);
+        font-weight: bold;
+        padding-inline-end: 2px;
+      }
+    }
+    a[rel="next"] {
+      text-align: end;
+      &::after {
+        content: "\f061";
+        font-family: var(--font-awesome);
+        font-weight: bold;
+        padding-inline-start: 2px;
+      }
+    }
+    a.parent {
+      text-align: center;
+      &::before {
+        content: "\f062";
+        font-family: var(--font-awesome);
+        font-weight: bold;
+        padding-inline-end: 3px;
+      }
+    }
+  }
+
 }
 
 /* ----------------------------------------- */
