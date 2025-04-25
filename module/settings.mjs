@@ -622,6 +622,7 @@ export function applyLegacyRules() {
   // Adjust base item IDs.
   for ( const [cat, value] of Object.entries(LEGACY.IDS) ) {
     if ( cat === "focusTypes" ) Object.entries(value).forEach(([k, v]) => DND5E[cat][k].itemIds = v);
+    else if ( cat === "tools" ) Object.entries(value).forEach(([k, v]) => DND5E[cat][k].id = v);
     else DND5E[cat] = value;
   }
 
