@@ -35,7 +35,7 @@
     <prose-mirror name="system.description.value" value="{{ source.description.value }}"
                   document-uuid="{{ item.uuid }}" compact>{{{ enriched.description }}}</prose-mirror>
     {{else}}
-    <div class="editor">
+    <div class="editor editor-content">
         {{{ enriched.description }}}
     </div>
     {{/if}}
@@ -105,7 +105,7 @@
         {{/unless}}
     </div>
     <div class="details collapsible-content">
-        <div class="editor wrapper">
+        <div class="editor editor-content wrapper">
             {{{ enriched }}}
         </div>
     </div>
