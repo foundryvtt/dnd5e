@@ -276,13 +276,32 @@
   }
 
   /** System Rich Text Blocks **/
-  :is(.journal-entry-content, .journal-page-content, .editor-content, .card-content, .item-summary) {
-    font-family: var(--dnd5e-font-roboto-condensed);
-
+  :is(.journal-entry-content, .journal-page-content) {
     h1, h2, h3 {
       font-family: var(--dnd5e-font-modesto);
       font-weight: bold;
       border-bottom: none;
+    }
+  }
+
+  :is(.editor-content, .card-content, .item-summary) {
+    h1, h2, h3 { font-family: var(--dnd5e-font-roboto-slab); }
+    h1 { font-size: 1.5em; }
+    h2 { font-size: 1.4em; }
+
+    h3 {
+      font-size: 1.25em;
+      padding-bottom: 0;
+      border-bottom: 1px solid var(--dnd5e-color-black);
+    }
+  }
+
+  :is(.journal-entry-content, .journal-page-content, .editor-content, .card-content, .item-summary) {
+    font-family: var(--dnd5e-font-roboto-condensed);
+
+    h1, h2, h3, h4 {
+      margin: 0 0 .5rem;
+      line-height: normal;
     }
 
     h4 {
@@ -292,5 +311,16 @@
     }
 
     h5 { font-size: var(--font-size-13); }
+
+    ul, ol {
+      margin: .5em 0;
+      padding: 0 0 0 1.5em;
+    }
+
+    blockquote {
+      margin: .5em 0 .5em 10px;
+      padding: 0 0 0 20px;
+      border-left: 3px solid var(--color-border-light-tertiary);
+    }
   }
 }
