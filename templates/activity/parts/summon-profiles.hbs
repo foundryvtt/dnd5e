@@ -40,7 +40,7 @@
 
             {{!-- CR --}}
             {{ formField fields.cr name=(concat prefix "cr") value=data.cr localize=true hint=false classes="label-top"
-                         label="DND5E.SUMMON.FIELDS.profiles.FIELDS.cr.abbr" }}
+                         label="DND5E.SUMMON.FIELDS.profiles.element.cr.abbr" }}
 
             {{else if document}}
 
@@ -79,7 +79,7 @@
                 {{ formField fields.types name=(concat prefix "types") value=data.types options=typeOptions }}
                 {{/if}}
                 <div class="form-group">
-                    <label>{{ localize "DND5E.SUMMON.FIELDS.profiles.level.label" }}</label>
+                    <label>{{ localize "DND5E.SUMMON.FIELDS.profiles.element.level.label" }}</label>
                     <div class="form-fields range-fields">
                         {{ formInput fields.level.fields.min name=(concat prefix "level.min") value=data.level.min
                                      placeholder="0" ariaLabel=(localize "DND5E.LevelLimit.Min")
@@ -89,7 +89,7 @@
                                      placeholder="∞" ariaLabel=(localize "DND5E.LevelLimit.Max")
                                      input=@root.inputs.createNumberInput }}
                     </div>
-                    <p class="hint">{{ localize "DND5E.SUMMON.FIELDS.profiles.level.hint" }}</p>
+                    <p class="hint">{{ localize "DND5E.SUMMON.FIELDS.profiles.element.level.hint" }}</p>
                 </div>
             </div>
         </div>

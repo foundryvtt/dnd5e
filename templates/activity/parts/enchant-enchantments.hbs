@@ -53,7 +53,7 @@
     <div class="collapsible-content">
         <div class="wrapper">
             <div class="form-group">
-                <label>{{ localize "DND5E.ENCHANT.FIELDS.effects.level.label" }}</label>
+                <label>{{ localize "DND5E.ENCHANT.FIELDS.effects.element.level.label" }}</label>
                 <div class="form-fields range-fields">
                     {{ formInput fields.level.fields.min name=(concat prefix "level.min") value=data.level.min
                                  placeholder="0" ariaLabel=(localize "DND5E.LevelLimit.Min")
@@ -62,7 +62,7 @@
                     {{ formInput fields.level.fields.max name=(concat prefix "level.max") value=data.level.max
                                  placeholder="∞" ariaLabel=(localize "DND5E.LevelLimit.Max") }}
                 </div>
-                <p class="hint">{{ localize "DND5E.ENCHANT.FIELDS.effects.level.hint" }}</p>
+                <p class="hint">{{ localize "DND5E.ENCHANT.FIELDS.effects.element.level.hint" }}</p>
             </div>
             {{#with fields.riders.fields as |fields|}}
             {{ formField fields.activity name=(concat ../prefix "riders.activity") options=../activityOptions }}

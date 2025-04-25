@@ -1878,7 +1878,7 @@
 "DND5E.ENCHANT": {
   "Title": "Enchant",
   "FIELDS": {
-    "effects": {
+    "effects.element": {
       "level": {
         "label": "Level Limit",
         "hint": "Range of levels required to use this enchantment.",
@@ -3586,36 +3586,38 @@
       }
     },
     "profiles": {
-      "count": {
-        "label": "Count"
-      },
-      "cr": {
-        "label": "Challenge Rating",
-        "abbr": "CR",
-        "hint": "Maximum CR of the summoned creature."
-      },
-      "label": "Summons Profiles",
-      "level": {
-        "label": "Level Limit",
-        "hint": "Range of levels required to use this profile.",
-        "max": {
-          "label": "Maximum Level"
+      "element": {
+        "count": {
+          "label": "Count"
         },
-        "min": {
-          "label": "Minimum Level"
+        "cr": {
+          "label": "Challenge Rating",
+          "abbr": "CR",
+          "hint": "Maximum CR of the summoned creature."
+        },
+        "level": {
+          "label": "Level Limit",
+          "hint": "Range of levels required to use this profile.",
+          "max": {
+            "label": "Maximum Level"
+          },
+          "min": {
+            "label": "Minimum Level"
+          }
+        },
+        "name": {
+          "label": "Display Name",
+          "hint": "Name of the profile displayed in the usage dialog."
+        },
+        "types": {
+          "label": "Creature Types",
+          "hint": "List of creature types from which the summoned creature can be selected."
+        },
+        "uuid": {
+          "label": "Linked Creature"
         }
       },
-      "name": {
-        "label": "Display Name",
-        "hint": "Name of the profile displayed in the usage dialog."
-      },
-      "types": {
-        "label": "Creature Types",
-        "hint": "List of creature types from which the summoned creature can be selected."
-      },
-      "uuid": {
-        "label": "Linked Creature"
-      }
+      "label": "Summons Profiles"
     },
     "summon": {
       "label": "Summoning Details",
@@ -4039,38 +4041,40 @@
   },
   "FIELDS": {
     "profiles": {
-      "cr": {
-        "label": "Challenge Rating",
-        "abbr": "CR",
-        "hint": "Maximum CR of the source creature."
-      },
-      "label": "Transform Profiles",
-      "level": {
-        "label": "Level Limit",
-        "hint": "Range of levels required to use this profile.",
-        "max": {
-          "label": "Maximum Level"
+      "element": {
+        "cr": {
+          "label": "Challenge Rating",
+          "abbr": "CR",
+          "hint": "Maximum CR of the source creature."
         },
-        "min": {
-          "label": "Minimum Level"
+        "level": {
+          "label": "Level Limit",
+          "hint": "Range of levels required to use this profile.",
+          "max": {
+            "label": "Maximum Level"
+          },
+          "min": {
+            "label": "Minimum Level"
+          }
+        },
+        "movement": {
+          "hint": "Movement types that are not allowed on source creatures.",
+          "label": "Restricted Movement Types"
+        },
+        "name": {
+          "hint": "Name of the profile displayed in the usage dialog.",
+          "label": "Display Name"
+        },
+        "sizes": {
+          "hint": "List of creature sizes from which the source creature can be selected.",
+          "label": "Creature Sizes"
+        },
+        "types": {
+          "hint": "List of creature types from which the source creature can be selected.",
+          "label": "Creature Types"
         }
       },
-      "movement": {
-        "hint": "Movement types that are not allowed on source creatures.",
-        "label": "Restricted Movement Types"
-      },
-      "name": {
-        "hint": "Name of the profile displayed in the usage dialog.",
-        "label": "Display Name"
-      },
-      "sizes": {
-        "hint": "List of creature sizes from which the source creature can be selected.",
-        "label": "Creature Sizes"
-      },
-      "types": {
-        "hint": "List of creature types from which the source creature can be selected.",
-        "label": "Creature Types"
-      }
+      "label": "Transform Profiles"
     },
     "transform": {
       "label": "Transformation Details",
