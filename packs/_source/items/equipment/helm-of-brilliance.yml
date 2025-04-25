@@ -1,0 +1,314 @@
+_id: rhGulc3gEJhnuP31
+name: Helm of Brilliance
+type: equipment
+img: icons/equipment/head/helm-norman-engraved.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>This dazzling helm is set with 1d10 diamonds, 2d10 rubies, 3d10 fire
+      opals, and 4d10 opals. Any gem pried from the helm crumbles to dust. When
+      all the gems are removed or destroyed, the helm loses its magic.</p>
+
+      <p>You gain the following benefits while wearing it:</p>
+
+      <ul>
+
+      <li>You can use an action to cast one of the following spells (save DC
+      18), using one of the helm's gems of the specified type as a component:
+      @UUID[Compendium.dnd5e.spells.Item.BP3GCwa66IAw1yTG]{Daylight} (opal),
+      @UUID[Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0]{Fireball} (fire
+      opal), @UUID[Compendium.dnd5e.spells.Item.eGMhwmuleAM46C6L]{Prismatic
+      Spray} (diamond), or
+      @UUID[Compendium.dnd5e.spells.Item.X3DrXgxjwI2dvkD6]{Wall of Fire} (ruby).
+      The gem is destroyed when the spell is cast and disappears from the
+      helm.</li>
+
+      <li>As long as it has at least one diamond, the helm emits dim light in a
+      30-foot radius when at least one undead is within that area. Any undead
+      that starts its turn in that area takes 1d6 radiant damage.</li>
+
+      <li>As long as the helm has at least one ruby, you have resistance to fire
+      damage.</li>
+
+      <li>As long as the helm has at least one fire opal, you can use an action
+      and speak a command word to cause one weapon you are holding to burst into
+      flames. The flames emit bright light in a 10-foot radius and dim light for
+      an additional 10 feet. The flames are harmless to you and the weapon. When
+      you hit with an attack using the blazing weapon, the target takes an extra
+      1d6 fire damage. The flames last until you use a bonus action to speak the
+      command word again or until you drop or stow the weapon.</li>
+
+      </ul>
+
+      <p>Roll a d20 if you are wearing the helm and take fire damage as a result
+      of failing a saving throw against a spell. On a roll of 1, the helm emits
+      beams of light from its remaining gems. Each creature within 60 feet of
+      the helm other than you must succeed on a DC 17 Dexterity saving throw or
+      be struck by a beam, taking radiant damage equal to the number of gems in
+      the helm. The helm and its gems are then destroyed.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 16000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    gX0XMie1ghHlIWtH:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.BP3GCwa66IAw1yTG
+        challenge:
+          attack: null
+          save: 18
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: gX0XMie1ghHlIWtH
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      name: Daylight (opal)
+      img: ''
+    jEyPsKTcQqBZODw6:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.ztgcdrWPshKRpFd0
+        challenge:
+          attack: null
+          save: 18
+          override: true
+        level: '3'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: jEyPsKTcQqBZODw6
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      name: Fireball (fire opal)
+      img: ''
+    RKy4bIoE7fJbhqhv:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.eGMhwmuleAM46C6L
+        challenge:
+          attack: null
+          save: 18
+          override: true
+        level: '7'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: RKy4bIoE7fJbhqhv
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      name: Prismatic Spray (diamond)
+      img: ''
+    vS32THDevDFcwjHQ:
+      type: cast
+      spell:
+        uuid: Compendium.dnd5e.spells.Item.X3DrXgxjwI2dvkD6
+        challenge:
+          attack: null
+          save: 18
+          override: true
+        level: '4'
+        properties:
+          - vocal
+          - somatic
+          - material
+      _id: vS32THDevDFcwjHQ
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: '1'
+      name: Wall of Fire (opal)
+      img: ''
+  attuned: false
+  identifier: helm-of-brilliance
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037300283
+  modifiedTime: 1729016048013
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!rhGulc3gEJhnuP31'

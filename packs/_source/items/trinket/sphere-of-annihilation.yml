@@ -1,0 +1,171 @@
+_id: 2YNqk5zm9jDTvd7q
+name: Sphere of Annihilation
+type: consumable
+img: icons/magic/unholy/orb-beam-pink.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This 2-foot-diameter black sphere is a hole in the multiverse, hovering
+      in space and stabilized by a magical field surrounding it.</p>
+
+      <p>The sphere obliterates all matter it passes through and all matter that
+      passes through it. Artifacts are the exception. Unless an artifact is
+      susceptible to damage from a Sphere of Annihilation, it passes through the
+      sphere unscathed. Anything else that touches the sphere but isn't wholly
+      engulfed and obliterated by it takes 4d10 force damage.</p>
+
+      <p>The sphere is stationary until someone controls it. If you are within
+      60 feet of an uncontrolled sphere, you can use an action to make a DC 25
+      Intelligence (Arcana) check. On a success, the sphere levitates in one
+      direction of your choice, up to a number of feet equal to 5 × your
+      Intelligence modifier (minimum 5 feet). On a failure, the sphere moves 10
+      feet toward you. A creature whose space the sphere enters must succeed on
+      a DC 13 Dexterity saving throw or be touched by it, taking 4d10 force
+      damage.</p>
+
+      <p>If you attempt to control a sphere that is under another creature's
+      control, you make an Intelligence (Arcana) check contested by the other
+      creature's Intelligence (Arcana) check. The winner of the contest gains
+      control of the sphere and can levitate it as normal.</p>
+
+      <p>If the sphere comes into contact with a planar portal, such as that
+      created by the @UUID[Compendium.dnd5e.spells.Item.XbwGq5kDJNvAxNXV]{Gate}
+      spell, or an extradimensional space, such as that within a portable hole,
+      the GM determines randomly what happens, using the
+      @UUID[Compendium.dnd5e.tables.RollTable.hHR0Zw75o9PXYl4c]{Sphere of
+      Annihilation} table.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 15000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: legendary
+  identified: true
+  uses:
+    max: ''
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: 4
+      denomination: 10
+      bonus: ''
+      types:
+        - force
+      custom:
+        enabled: false
+        formula: ''
+      scaling:
+        mode: ''
+        number: null
+        formula: ''
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: 1
+        condition: An uncontrolled sphere requires a DC 25 Intelligence (Arcana) check.
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '60'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: '1'
+          type: object
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 4
+            denomination: 10
+            bonus: ''
+            types:
+              - force
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: whole
+              number: null
+              formula: ''
+      save:
+        ability: dex
+        dc:
+          calculation: ''
+          formula: '13'
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: sphere-of-annihilation
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 500000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037089464
+  modifiedTime: 1725992480259
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!2YNqk5zm9jDTvd7q'

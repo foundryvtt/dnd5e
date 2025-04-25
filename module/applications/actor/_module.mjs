@@ -12,6 +12,7 @@ export {default as BaseConfigSheetV2} from "./api/base-config-sheet.mjs";
 export {default as ActorSheetFlags} from "./sheet-flags.mjs";
 export {default as ActorSheetMixin} from "./sheet-mixin.mjs";
 export {default as ActorSheetV2Mixin} from "./sheet-v2-mixin.mjs";
+export {default as TransformDialog} from "./transform-dialog.mjs";
 
 export {default as AbilityConfig} from "./config/ability-config.mjs";
 export {default as ArmorClassConfig} from "./config/armor-class-config.mjs";
@@ -35,20 +36,3 @@ export {default as WeaponsConfig} from "./config/weapons-config.mjs";
 export {default as BaseRestDialog} from "./rest/base-rest-dialog.mjs";
 export {default as LongRestDialog} from "./rest/long-rest-dialog.mjs";
 export {default as ShortRestDialog} from "./rest/short-rest-dialog.mjs";
-
-// Deprecated
-export {default as ActorAbilityConfig} from "./deprecated/ability-config.mjs";
-export {default as ActorArmorConfig} from "./deprecated/armor-config.mjs";
-export {default as ActorConcentrationConfig} from "./deprecated/concentration-config.mjs";
-export {default as DamageModificationConfig} from "./deprecated/damage-modification-config.mjs";
-export {default as ActorHitDiceConfig} from "./deprecated/hit-dice-config.mjs";
-export {default as ActorHitPointsConfig} from "./deprecated/hit-points-config.mjs";
-export {default as ActorInitiativeConfig} from "./deprecated/initiative-config.mjs";
-export {default as ActorMovementConfig} from "./deprecated/movement-config.mjs";
-export {default as ProficiencyConfig} from "./deprecated/proficiency-config.mjs";
-export {default as ActorSensesConfig} from "./deprecated/senses-config.mjs";
-export {default as ActorSkillsConfig} from "./deprecated/skills-config.mjs";
-export {default as ActorSpellSlotsConfig} from "./deprecated/spell-slots-config.mjs";
-export {default as ToolSelector} from "./deprecated/tool-selector.mjs";
-export {default as TraitSelector} from "./deprecated/trait-selector.mjs";
-export {default as ActorTypeConfig} from "./deprecated/type-config.mjs";

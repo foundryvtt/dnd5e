@@ -1,0 +1,12 @@
+<div>
+    {{> ".actor" actor=hostActor class="host" }}
+    <dnd5e-icon src="systems/dnd5e/icons/svg/range-connector.svg"></dnd5e-icon>
+    {{> ".actor" actor=sourceActor class="source" }}
+</div>
+
+{{#*inline ".actor"}}
+<div class="{{ class }}">
+    <img src="{{ actor.prototypeToken.texture.src }}" alt="{{ actor.name }}">
+    <span class="name">{{ actor.name }}</span>
+</div>
+{{/inline}}

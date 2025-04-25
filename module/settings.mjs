@@ -1,9 +1,13 @@
-import BastionSettingsConfig, { BastionSetting } from "./applications/settings/bastion-settings.mjs";
+import BastionSettingsConfig from "./applications/settings/bastion-settings.mjs";
 import CombatSettingsConfig from "./applications/settings/combat-settings.mjs";
 import CompendiumBrowserSettingsConfig from "./applications/settings/compendium-browser-settings.mjs";
 import ModuleArtSettingsConfig from "./applications/settings/module-art-settings.mjs";
 import VariantRulesSettingsConfig from "./applications/settings/variant-rules-settings.mjs";
 import VisibilitySettingsConfig from "./applications/settings/visibility-settings.mjs";
+import BastionSetting from "./data/settings/bastion-setting.mjs";
+import PrimaryPartySetting from "./data/settings/primary-party-setting.mjs";
+import TransformationSetting from "./data/settings/transformation-setting.mjs";
+import * as LEGACY from "./config-legacy.mjs";
 
 /**
  * Register all of the system's keybindings.
@@ -48,6 +52,13 @@ export function registerSystemSettings() {
     config: false,
     type: String,
     default: ""
+  });
+
+  // Polymorph Settings
+  game.settings.register("dnd5e", "transformationSettings", {
+    scope: "client",
+    config: false,
+    type: TransformationSetting
   });
 
   // Rules version
@@ -141,35 +152,6 @@ export function registerSystemSettings() {
     config: true,
     default: false,
     type: Boolean
-  });
-
-  // Polymorph Settings
-  game.settings.register("dnd5e", "polymorphSettings", {
-    scope: "client",
-    default: {
-      keepPhysical: false,
-      keepMental: false,
-      keepSaves: false,
-      keepSkills: false,
-      mergeSaves: false,
-      mergeSkills: false,
-      keepClass: false,
-      keepFeats: false,
-      keepSpells: false,
-      keepItems: false,
-      keepBio: false,
-      keepVision: true,
-      keepSelf: false,
-      keepAE: false,
-      keepOriginAE: true,
-      keepOtherOriginAE: true,
-      keepFeatAE: true,
-      keepSpellAE: true,
-      keepEquipmentAE: true,
-      keepClassAE: true,
-      keepBackgroundAE: true,
-      transformTokens: true
-    }
   });
 
   // Allow Summoning
@@ -533,7 +515,7 @@ export function registerSystemSettings() {
     scope: "world",
     config: false,
     default: null,
-    type: PrimaryPartyData,
+    type: PrimaryPartySetting,
     onChange: s => ui.actors.render()
   });
 
@@ -559,17 +541,6 @@ export function registerSystemSettings() {
     default: [],
     config: true
   });
-}
-
-/**
- * Data model for tracking information on the primary party.
- *
- * @property {Actor5e} actor  Group actor representing the primary party.
- */
-class PrimaryPartyData extends foundry.abstract.DataModel {
-  static defineSchema() {
-    return { actor: new foundry.data.fields.ForeignDocumentField(foundry.documents.BaseActor) };
-  }
 }
 
 /* -------------------------------------------- */
@@ -610,6 +581,53 @@ export function registerDeferredSettings() {
     setTheme(document.body, isV13 ? s.colorScheme : s);
   };
   setTheme(document.body, isV13 ? setting.colorScheme : setting);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Update configuration data when legacy rules are set.
+ */
+export function applyLegacyRules() {
+  const DND5E = CONFIG.DND5E;
+
+  // Set half-casters to round down.
+  delete DND5E.spellcastingTypes.leveled.progression.half.roundUp;
+
+  // Adjust Wild Shape and Polymorph presets.
+  for ( const preset of ["polymorph", "wildshape"] ) {
+    DND5E.transformation.presets[preset].settings.keep.delete("hp");
+    DND5E.transformation.presets[preset].settings.keep.delete("type");
+    delete DND5E.transformation.presets[preset].settings.tempFormula;
+  }
+
+  // Adjust language categories.
+  delete DND5E.languages.standard.children.sign;
+  DND5E.languages.exotic.children.draconic = DND5E.languages.standard.children.draconic;
+  delete DND5E.languages.standard.children.draconic;
+  DND5E.languages.cant = DND5E.languages.exotic.children.cant;
+  delete DND5E.languages.exotic.children.cant;
+  DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
+  delete DND5E.languages.exotic.children.druidic;
+
+  // Stunned stops movement in legacy.
+  DND5E.conditionEffects.noMovement.add("stunned");
+
+  // Adjust references.
+  Object.assign(DND5E.rules, LEGACY.RULES);
+  for ( const [cat, value] of Object.entries(LEGACY.REFERENCES) ) {
+    Object.entries(value).forEach(([k, v]) => DND5E[cat][k].reference = v);
+  }
+
+  // Adjust base item IDs.
+  for ( const [cat, value] of Object.entries(LEGACY.IDS) ) {
+    if ( cat === "focusTypes" ) Object.entries(value).forEach(([k, v]) => DND5E[cat][k].itemIds = v);
+    else if ( cat === "tools" ) Object.entries(value).forEach(([k, v]) => DND5E[cat][k].id = v);
+    else DND5E[cat] = value;
+  }
+
+  // Swap spell lists.
+  DND5E.SPELL_LISTS = LEGACY.SPELL_LISTS;
 }
 
 /* -------------------------------------------- */

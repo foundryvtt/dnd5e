@@ -140,7 +140,9 @@ class TableOfContentsCompendiumV13 extends (foundry.applications.sidebar?.apps?.
     }
 
     for ( const chapter of context.chapters ) {
-      chapter.pages.sort((lhs, rhs) => lhs.sort - rhs.sort);
+      chapter.pages = chapter.pages
+        .filter(p => !p.flags.tocHidden && (chapter.showPages || p.entry))
+        .sort((lhs, rhs) => lhs.sort - rhs.sort);
       for ( const page of chapter.pages ) {
         if ( page.pages ) page.pages.sort((lhs, rhs) => lhs.sort - rhs.sort);
       }
@@ -268,7 +270,7 @@ class TableOfContentsCompendiumV12 extends (foundry.applications?.sidebar?.apps?
     for ( const entry of specialEntries ) {
       const append = entry.flags.append;
       const order = entry.flags.order;
-      if ( append ) {
+      if ( append && (append <= context.chapters.length) ) {
         context.chapters[append - 1].pages.push({ ...entry, sort: order, entry: true });
       } else {
         context.chapters.push(entry);
@@ -276,7 +278,9 @@ class TableOfContentsCompendiumV12 extends (foundry.applications?.sidebar?.apps?
     }
 
     for ( const chapter of context.chapters ) {
-      chapter.pages.sort((lhs, rhs) => lhs.sort - rhs.sort);
+      chapter.pages = chapter.pages
+        .filter(p => !p.flags.tocHidden && (chapter.showPages || p.entry))
+        .sort((lhs, rhs) => lhs.sort - rhs.sort);
       for ( const page of chapter.pages ) {
         if ( page.pages ) page.pages.sort((lhs, rhs) => lhs.sort - rhs.sort);
       }

@@ -29,7 +29,8 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
           updateData = foundry.utils.mergeObject(source, updateData, {inplace: false});
         }
         await actor.update(updateData, {
-          enforceTypes: false, diff: valid && !flags.persistSourceMigration, render: false
+          enforceTypes: false, diff: valid && !flags.persistSourceMigration,
+          recursive: !flags.persistSourceMigration, render: false
         });
       }
       if ( actor.effects && actor.items && foundry.utils.isNewerVersion("3.0.3", version) ) {
@@ -61,7 +62,8 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
           updateData = foundry.utils.mergeObject(source, updateData, { inplace: false, performDeletions: true });
         }
         await item.update(updateData, {
-          enforceTypes: false, diff: valid && !flags.persistSourceMigration, render: false
+          enforceTypes: false, diff: valid && !flags.persistSourceMigration,
+          recursive: !flags.persistSourceMigration, render: false
         });
       }
     } catch(err) {
@@ -132,7 +134,8 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
             });
           }
           await token.actor.update(updateData, {
-            enforceTypes: false, diff: !flags.persistSourceMigration, render: false
+            enforceTypes: false, diff: !flags.persistSourceMigration,
+            recursive: !flags.persistSourceMigration, render: false
           });
         }
       } catch(err) {
@@ -146,6 +149,8 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
   for ( let p of game.packs ) {
     if ( _shouldMigrateCompendium(p) ) await migrateCompendium(p);
   }
+  const legacyFolder = game.folders.find(f => f.type === "Compendium" && f.name === "D&D SRD Content");
+  if ( legacyFolder ) legacyFolder.update({ name: "D&D Legacy Content" });
 
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
@@ -501,7 +506,7 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
   if ( itemData.effects ) {
     const riders = foundry.utils.getProperty(itemData, "flags.dnd5e.riders.effect");
     if ( riders?.length ) updateData["flags.dnd5e.riders.effect"] = riders;
-    const effects = migrateEffects(itemData, migrationData, updateData);
+    const effects = migrateEffects(itemData, migrationData, updateData, flags);
     if ( riders?.length === updateData["flags.dnd5e.riders.effect"]?.length ) {
       delete updateData["flags.dnd5e.riders.effect"];
     }
@@ -541,9 +546,10 @@ export function migrateItemData(item, itemData, migrationData, flags={}) {
  * @param {object} parent            Data of the parent being migrated.
  * @param {object} [migrationData]   Additional data to perform the migration.
  * @param {object} [itemUpdateData]  Update data for the item to apply changes back to item.
+ * @param {object} [flags={}]        Track the needs migration flag.
  * @returns {object[]}               Updates to apply on the embedded effects.
  */
-export function migrateEffects(parent, migrationData, itemUpdateData) {
+export function migrateEffects(parent, migrationData, itemUpdateData, flags={}) {
   if ( !parent.effects ) return [];
   return parent.effects.reduce((arr, e) => {
     const effectData = e instanceof CONFIG.ActiveEffect.documentClass ? e.toObject() : e;
@@ -552,6 +558,10 @@ export function migrateEffects(parent, migrationData, itemUpdateData) {
       itemUpdateData["flags.dnd5e.riders.effect"] ??= [];
       itemUpdateData["flags.dnd5e.riders.effect"].push(effectData._id);
       effectUpdate["flags.dnd5e.-=rider"] = null;
+    }
+    if ( effectData.flags?.dnd5e?.persistSourceMigration ) {
+      flags.persistSourceMigration = true;
+      effectUpdate["flags.dnd5e.-=persistSourceMigration"] = null;
     }
     if ( !foundry.utils.isEmpty(effectUpdate) ) {
       effectUpdate._id = effectData._id;

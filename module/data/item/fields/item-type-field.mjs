@@ -1,3 +1,12 @@
+const { SchemaField, StringField } = foundry.data.fields;
+
+/**
+ * @typedef ItemTypeData
+ * @param {string} value     Primary type for this item.
+ * @param {string} subtype   Secondary type within the primary type.
+ * @param {string} baseItem  Base item identifier.
+ */
+
 /**
  * A field for storing Item type data.
  *
@@ -7,16 +16,16 @@
  * @param {string|boolean} [options.baseItem]     An initial value for the Item's baseItem, or false to exclude it.
  * @param {DataFieldOptions} [schemaOptions={}]   Options forwarded to the SchemaField.
  */
-export default class ItemTypeField extends foundry.data.fields.SchemaField {
+export default class ItemTypeField extends SchemaField {
   constructor(options={}, schemaOptions={}) {
     const fields = {
-      value: new foundry.data.fields.StringField({
+      value: new StringField({
         required: true, blank: true, initial: options.value ?? "", label: "DND5E.Type"
       }),
-      subtype: new foundry.data.fields.StringField({
+      subtype: new StringField({
         required: true, blank: true, initial: options.subtype ?? "", label: "DND5E.Subtype"
       }),
-      baseItem: new foundry.data.fields.StringField({
+      baseItem: new StringField({
         required: true, blank: true, initial: options.baseItem ?? "", label: "DND5E.BaseItem"
       })
     };

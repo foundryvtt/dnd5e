@@ -4,13 +4,16 @@
  * Author: Atropos
  * Software License: MIT
  * Content License: https://www.dndbeyond.com/attachments/39j2li89/SRD5.1-CCBY4.0License.pdf
+ *                  https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.pdf
  * Repository: https://github.com/foundryvtt/dnd5e
  * Issue Tracker: https://github.com/foundryvtt/dnd5e/issues
  */
 
 // Import Configuration
 import DND5E from "./module/config.mjs";
-import { registerSystemKeybindings, registerSystemSettings, registerDeferredSettings } from "./module/settings.mjs";
+import {
+  applyLegacyRules, registerDeferredSettings, registerSystemKeybindings, registerSystemSettings
+} from "./module/settings.mjs";
 
 // Import Submodules
 import * as applications from "./module/applications/_module.mjs";
@@ -59,8 +62,7 @@ Hooks.once("init", function() {
 
   if ( game.release.generation < 13 ) patchFromUuid();
   CONFIG.compatibility.excludePatterns.push(
-    /now namespaced under/, /V1 Application framework/, /Set#isSubset/, /ChatMessage#getHTML/, /renderChatMessage/,
-    /_onClickEntry/
+    /now namespaced under/, /V1 Application framework/, /Set#isSubset/, /ChatMessage#getHTML/, /renderChatMessage/
   );
 
   // Record Configuration Values
@@ -95,9 +97,8 @@ Hooks.once("init", function() {
   registerSystemSettings();
   registerSystemKeybindings();
 
-  // Configure module art & register module data
+  // Configure module art
   game.dnd5e.moduleArt = new ModuleArt();
-  registerModuleData();
 
   // Configure bastions
   game.dnd5e.bastion = new documents.Bastion();
@@ -113,30 +114,13 @@ Hooks.once("init", function() {
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
 
   // Legacy rules.
-  if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
+  if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) applyLegacyRules();
 
-    // Set half-casters to round down.
-    delete DND5E.spellcastingTypes.leveled.progression.half.roundUp;
+  // Register system
+  DND5E.SPELL_LISTS.forEach(uuid => dnd5e.registry.spellLists.register(uuid));
 
-    // Adjust Wild Shape and Polymorph presets.
-    delete DND5E.transformationPresets.wildshape.options.keepHP;
-    delete DND5E.transformationPresets.wildshape.options.keepType;
-    delete DND5E.transformationPresets.polymorph.options.addTemp;
-    delete DND5E.transformationPresets.polymorph.options.keepHP;
-    delete DND5E.transformationPresets.polymorph.options.keepType;
-
-    // Adjust language categories.
-    delete DND5E.languages.standard.children.sign;
-    DND5E.languages.exotic.children.draconic = DND5E.languages.standard.children.draconic;
-    delete DND5E.languages.standard.children.draconic;
-    DND5E.languages.cant = DND5E.languages.exotic.children.cant;
-    delete DND5E.languages.exotic.children.cant;
-    DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
-    delete DND5E.languages.exotic.children.druidic;
-
-    // Stunned stops movement in legacy.
-    DND5E.conditionEffects.noMovement.add("stunned");
-  }
+  // Register module data from manifests
+  registerModuleData();
 
   // Register Roll Extensions
   CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];
@@ -476,6 +460,7 @@ Hooks.once("i18nInit", () => {
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
   Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
+  Localization.localizeDataModel(dataModels.settings.TransformationSetting);
 });
 
 /* -------------------------------------------- */
@@ -598,15 +583,6 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
       }
     });
   }
-});
-
-// TODO: Generalize this logic and make it available in the re-designed transform application.
-Hooks.on("dnd5e.transformActor", (subject, target, d, options) => {
-  const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
-  if ( (options.preset !== "wildshape") || !subject.classes?.druid || isLegacy ) return;
-  let temp = subject.classes.druid.system.levels;
-  if ( subject.classes.druid.subclass?.identifier === "moon" ) temp *= 3;
-  d.system.attributes.hp.temp = temp;
 });
 
 /* -------------------------------------------- */

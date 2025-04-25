@@ -160,7 +160,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does the Item implement an ability check as part of its usage?
    * @type {boolean}
    * @see {@link ActionTemplate#hasAbilityCheck}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
    */
   get hasAbilityCheck() {
     return this.system.hasAbilityCheck ?? false;
@@ -182,7 +182,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does the Item have an area of effect target?
    * @type {boolean}
    * @see {@link ActivatedEffectTemplate#hasAreaTarget}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
    */
   get hasAreaTarget() {
     return this.system.hasAreaTarget ?? false;
@@ -205,7 +205,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does the Item implement a damage roll as part of its usage?
    * @type {boolean}
    * @see {@link ActionTemplate#hasDamage}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
    */
   get hasDamage() {
     return this.system.hasDamage ?? false;
@@ -217,7 +217,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does the Item target one or more distinct targets?
    * @type {boolean}
    * @see {@link ActivatedEffectTemplate#hasIndividualTarget}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
    */
   get hasIndividualTarget() {
     return this.system.hasIndividualTarget ?? false;
@@ -241,7 +241,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does this Item draw from a resource?
    * @type {boolean}
    * @see {@link ActivatedEffectTemplate#hasResource}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
    */
   get hasResource() {
     return this.system.hasResource ?? false;
@@ -253,7 +253,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does this Item draw from ammunition?
    * @type {boolean}
    * @see {@link ActivatedEffectTemplate#hasAmmo}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
    */
   get hasAmmo() {
     return this.system.hasAmmo ?? false;
@@ -276,7 +276,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * Does the Item have a target?
    * @type {boolean}
    * @see {@link ActivatedEffectTemplate#hasTarget}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
    */
   get hasTarget() {
     return this.system.hasTarget ?? false;
@@ -717,7 +717,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   getAttackToHit() {
     foundry.utils.logCompatibilityWarning(
       "The `getAttackToHit` method on `Item5e` has moved to `getAttackData` on `AttackActivity`.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
+      { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true }
     );
 
     const activity = this.system.activities?.getByType("attack")[0];
@@ -789,7 +789,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       foundry.utils.logCompatibilityWarning(
         "The `Item5e#use` method has a different signature. Pass the `legacy: false` option to suppress this warning "
         + " once the appropriate updates have been made.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
       );
       event = dialog?.event;
     }
@@ -825,12 +825,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
    * @param {ItemUseOptions} options       Additional options used for configuring item usage.
    * @returns {false|void}                 Returns `false` if any further usage should be canceled.
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
    */
   async consume(item, config, options) {
     foundry.utils.logCompatibilityWarning(
       "The `Item5e#consume` method has been deprecated and should now be called directly on the activity.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
     );
     if ( this.system.activities ) {
       const activity = this.system.activities.contents[0];
@@ -894,7 +894,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( "dnd5e.preDisplayCard" in Hooks.events ) {
       foundry.utils.logCompatibilityWarning(
         "The `dnd5e.preDisplayCard` hook has been deprecated and replaced with `dnd5e.preDisplayCardV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
       );
       const hookData = { createMessage: messageConfig.create };
       Hooks.callAll("dnd5e.preDisplayCard", this, messageConfig.data, hookData);
@@ -959,12 +959,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    *
    * @param {D20RollConfiguration} options  Roll options which are configured and provided to the d20Roll function
    * @returns {Promise<D20Roll|null>}       A Promise which resolves to the created Roll instance
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
    */
   async rollAttack({ spellLevel, ...options }={}) {
     foundry.utils.logCompatibilityWarning(
       "The `Item5e#rollAttack` method has been deprecated and should now be called directly on the attack activity.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
     );
 
     let item = this;
@@ -997,12 +997,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {DamageRollConfiguration} [config.options]  Additional options passed to the damageRoll function
    * @returns {Promise<DamageRoll[]>}      A Promise which resolves to the created Roll instances, or null if the action
    *                                       cannot be performed.
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
    */
   async rollDamage({ spellLevel, ...options }={}) {
     foundry.utils.logCompatibilityWarning(
       "The `Item5e#rollDamage` method has been deprecated and should now be called directly on an activity.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
     );
 
     let item = this;
@@ -1027,12 +1027,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @param {object} [options]
    * @param {boolean} [options.spellLevel]  Level at which a spell is cast.
    * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
    */
   async rollFormula({spellLevel}={}) {
     foundry.utils.logCompatibilityWarning(
       "The `Item5e#rollFormula` method has been deprecated and should now be called directly on the utility activity.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
     );
 
     let item = this;
@@ -1052,12 +1052,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /**
    * Perform an ability recharge test for an item which uses the d6 recharge mechanic.
    * @returns {Promise<Roll|void>}   A Promise which resolves to the created Roll instance
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
+   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 5.0
    */
   async rollRecharge() {
     foundry.utils.logCompatibilityWarning(
       "The `rollRecharge` method on `Item5e` has been moved to `system.uses.rollRecharge`.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
     );
     return (await this.system.uses?.rollRecharge())?.[0];
   }
@@ -1843,15 +1843,16 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       folders, name, type,
       folder: data.folder,
       hasFolders: folders.length > 0,
-      types: types.reduce((arr, type) => {
+      types: types.map(type => {
         const label = CONFIG[this.documentName]?.typeLabels?.[type] ?? type;
-        arr.push({
+        const data = {
           type,
           label: game.i18n.has(label) ? game.i18n.localize(label) : type,
           icon: this.getDefaultArtwork({ type })?.img ?? "icons/svg/item-bag.svg"
-        });
-        return arr;
-      }, []).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
+        };
+        data.svg = data.icon?.endsWith(".svg");
+        return data;
+      }).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
     });
     return Dialog.prompt({
       title, content,

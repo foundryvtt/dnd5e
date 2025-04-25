@@ -1,25 +1,32 @@
-<div class="advancement">
-    <p>{{localize "DND5E.AdvancementMigrationHint" name=item.name}}</p>
-    <ol class="items-list">
-        <li class="items-header flexrow">
-            <h3 class="item-name flexrow">{{localize "DND5E.AdvancementTitle"}}</h3>
-            <div class="item-controls flexrow">{{localize "DND5E.Add"}}</div>
-        </li>
+<fieldset class="card items">
+    <legend>{{ localize "DND5E.ADVANCEMENT.Migration.Selection" }}</legend>
+    <div class="form-group hint">
+        <p class="hint">{{ localize "DND5E.ADVANCEMENT.Migration.Hint" name=item.name }}</p>
+    </div>
+    <div class="header">
+        <div class="item-name">{{ localize "DND5E.AdvancementTitle" }}</div>
+        <div class="item-controls">{{ localize "DND5E.Add" }}</div>
+    </div>
+    <ol class="items-list unlist">
         {{#each advancements}}
         <li class="advancement-item item flexrow">
             <div class="item-name flexrow">
-                <div class="item-image" style="background-image: url('{{this.icon}}')"></div>
-                <h4>{{this.title}}</h4>
+                {{#if svg}}
+                <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                {{else}}
+                <img class="gold-icon" src="{{ icon }}" alt="{{ title }}">
+                {{/if}}
+                <span class="name">{{ title }}</span>
             </div>
             <div class="item-controls flexrow">
-                <input type="checkbox" name="{{this.id}}" checked>
+                <dnd5e-checkbox name="{{ id }}" checked></dnd5e-checkbox>
             </div>
-            {{#if this.summary}}
+            {{#if summary}}
             <div class="item-summary">
-                {{{this.summary}}}
+                {{{ summary }}}
             </div>
             {{/if}}
         </li>
         {{/each}}
     </ol>
-</div>
+</fieldset>

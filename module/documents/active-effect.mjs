@@ -117,6 +117,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( data.flags?.dnd5e?.type === "enchantment" ) {
       data.type = "enchantment";
       delete data.flags.dnd5e.type;
+      foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
     }
 
     return super._initializeSource(data, options);
@@ -581,7 +582,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( activity instanceof Item ) {
       foundry.utils.logCompatibilityWarning(
         "The `createConcentrationEffectData` method on ActiveEffect5e now takes an Activity, rather than an Item.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
       );
       activity = activity.system.activities?.contents[0];
     }
@@ -704,7 +705,7 @@ export default class ActiveEffect5e extends ActiveEffect {
   static getEffectDurationFromItem(item) {
     foundry.utils.logCompatibilityWarning(
       "The `getEffectDurationFromItem` method on ActiveEffect5e has been deprecated and replaced with `getEffectData` within Item or Activity duration.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
     );
     return item.system.duration?.getEffectData?.() ?? {};
   }

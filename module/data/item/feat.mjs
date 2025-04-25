@@ -9,6 +9,10 @@ import ItemTypeField from "./fields/item-type-field.mjs";
 const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ */
+
+/**
  * Data definition for Feature items.
  * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
@@ -25,6 +29,7 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {boolean} prerequisites.repeatable     Can this item be selected more than once?
  * @property {Set<string>} properties               General properties of a feature item.
  * @property {string} requirements                  Actor details required to use this feature.
+ * @property {Omit<ItemTypeData, "baseItem">} type  Feature type and subtype.
  */
 export default class FeatData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, ItemTypeTemplate
@@ -128,7 +133,7 @@ export default class FeatData extends ItemDataModel.mixin(
           "Recharge data has been merged into uses data. Recharge state can now be determined by checking"
           + " `system.uses.recovery` for a profile with a `period` of 'recharge', and checking its `formula` for the"
           + " recharge formula.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+          { since: "DnD5e 4.0", until: "DnD5e 5.0" }
         );
         return uses.period === "recharge" ? Number(uses.formula) : null;
       },
@@ -139,7 +144,7 @@ export default class FeatData extends ItemDataModel.mixin(
         foundry.utils.logCompatibilityWarning(
           "Recharge data has been merged into uses data. Determining charged state can now be done by determining"
           + " whether `system.uses.value` is greater than `0`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+          { since: "DnD5e 4.0", until: "DnD5e 5.0" }
         );
         return uses.value > 0;
       },

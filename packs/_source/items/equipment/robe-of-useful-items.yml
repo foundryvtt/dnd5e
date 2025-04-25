@@ -1,0 +1,140 @@
+_id: 2ksm2KXCY3vBHTAx
+name: Robe of Useful Items
+type: equipment
+img: icons/equipment/back/cloak-simple-tan.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p><p>This robe has cloth patches of various
+      shapes and colors covering it. While wearing the robe, you can use an
+      action to detach one of the patches, causing it to become the object or
+      creature it represents. Once the last patch is removed, the robe becomes
+      an ordinary garment.</p><p>The robe has the following
+      patches:</p><ul><li>x2 Dagger patches</li><li>x2 Bullseye lantern (filled
+      and lit) patches</li><li>x2 Steel mirror patches</li><li>x2 10-foot pole
+      patches</li><li>x2 Hempen rope (50 feet, coiled) patches</li><li>x2 Sack
+      patches</li></ul><p>In addition, the robe has [[/r 4d4]] other patches.
+      The GM chooses the patches or determines them randomly from the
+      @UUID[Compendium.dnd5e.tables.RollTable.CTGxcd51szehUGBn]{Robe of Useful
+      Items} table.</p><section class="secret foundry-note"
+      id="secret-ueOtjenZ1TpxHOhG"><p><strong>Foundry Note</strong></p><p>It is
+      recommended to delete items here as necessary to track patches
+      left.</p><p>The price guide has been calculated at 5 x item for the
+      maximum number of items possible. Please adjust as necessary to reflect
+      the number of patches and the DM's world economy.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 140
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: ''
+        units: ''
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: self
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: 4d4
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: robe-of-useful-items
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037090618
+  modifiedTime: 1725992480633
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!2ksm2KXCY3vBHTAx'

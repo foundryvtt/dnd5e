@@ -222,6 +222,9 @@ export default class SelectChoices {
         if ( trait.children ) trait.children.filter(filter);
         if ( !Object.keys(trait.children ?? {}).length ) delete this[key];
       }
+
+      // Remove ALL entries if wildcard is used
+      else if ( filter.has(wildcardKey) && key.endsWith(":ALL") ) delete this[key];
     }
 
     return this;

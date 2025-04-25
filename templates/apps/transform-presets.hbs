@@ -1,0 +1,15 @@
+<div>
+    <fieldset>
+        <legend>{{ localize "DND5E.TRANSFORM.Preset.Label" }}</legend>
+        <button type="button" data-action="setPreset" aria-pressed="{{ noneSelected }}">
+            <i class="fa-regular fa-circle" inert></i>
+            <span>{{ localize "DND5E.TRANSFORM.Preset.Default" }}</span>
+        </button>
+        {{#each presets}}
+        <button type="button" data-action="setPreset" data-preset="{{ @key }}" aria-pressed="{{ selected }}">
+            {{{ icon }}}
+            <span>{{ label }}</span>
+        </button>
+        {{/each}}
+    </fieldset>
+</div>

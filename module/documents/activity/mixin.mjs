@@ -258,7 +258,7 @@ export default function ActivityMixin(Base) {
       if ( "dnd5e.preUseItem" in Hooks.events ) {
         foundry.utils.logCompatibilityWarning(
           "The `dnd5e.preUseItem` hook has been deprecated and replaced with `dnd5e.preUseActivity`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+          { since: "DnD5e 4.0", until: "DnD5e 5.0" }
         );
         const { config, options } = this._createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig);
         if ( Hooks.call("dnd5e.preUseItem", item, config, options) === false ) return;
@@ -298,7 +298,7 @@ export default function ActivityMixin(Base) {
       }
 
       // Create chat message
-      messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(updates.rolls);
+      activity._finalizeMessageConfig(usageConfig, messageConfig, results);
       results.message = await activity._createUsageMessage(messageConfig);
 
       // Perform any final usage steps
@@ -318,7 +318,7 @@ export default function ActivityMixin(Base) {
       if ( "dnd5e.useItem" in Hooks.events ) {
         foundry.utils.logCompatibilityWarning(
           "The `dnd5e.useItem` hook has been deprecated and replaced with `dnd5e.postUseActivity`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+          { since: "DnD5e 4.0", until: "DnD5e 5.0" }
         );
         const { config, options } = this._createDeprecatedConfigs(usageConfig, dialogConfig, messageConfig);
         Hooks.callAll("dnd5e.itemUsageConsumption", item, config, options, results.templates, results.effects, null);
@@ -355,7 +355,7 @@ export default function ActivityMixin(Base) {
       if ( "dnd5e.preItemUsageConsumption" in Hooks.events ) {
         foundry.utils.logCompatibilityWarning(
           "The `dnd5e.preItemUsageConsumption` hook has been deprecated and replaced with `dnd5e.preActivityConsumption`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+          { since: "DnD5e 4.0", until: "DnD5e 5.0" }
         );
         const { config, options } = this._createDeprecatedConfigs(usageConfig, {}, messageConfig);
         if ( Hooks.call("dnd5e.preItemUsageConsumption", this.item, config, options) === false ) return false;
@@ -381,7 +381,7 @@ export default function ActivityMixin(Base) {
       if ( "dnd5e.itemUsageConsumption" in Hooks.events ) {
         foundry.utils.logCompatibilityWarning(
           "The `dnd5e.itemUsageConsumption` hook has been deprecated and replaced with `dnd5e.activityConsumption`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+          { since: "DnD5e 4.0", until: "DnD5e 5.0" }
         );
         const { config, options } = this._createDeprecatedConfigs(usageConfig, {}, messageConfig);
         const usage = {
@@ -909,6 +909,19 @@ export default function ActivityMixin(Base) {
     /* -------------------------------------------- */
 
     /**
+     * Apply any final modifications to message config immediately before message is created.
+     * @param {ActivityUseConfiguration} usageConfig        Configuration data for the activation.
+     * @param {ActivityMessageConfiguration} messageConfig  Configuration data for the chat message.
+     * @param {ActivityUsageResults} results                Final details on the activation.
+     * @protected
+     */
+    _finalizeMessageConfig(usageConfig, messageConfig, results) {
+      messageConfig.data.rolls = (messageConfig.data.rolls ?? []).concat(results.updates.rolls);
+    }
+
+    /* -------------------------------------------- */
+
+    /**
      * @typedef {object} ActivityUsageChatButton
      * @property {string} label    Label to display on the button.
      * @property {string} icon     Icon to display on the button.
@@ -1085,7 +1098,7 @@ export default function ActivityMixin(Base) {
       if ( "dnd5e.preRollDamage" in Hooks.events ) {
         foundry.utils.logCompatibilityWarning(
           "The `dnd5e.preRollDamage` hook has been deprecated and replaced with `dnd5e.preRollDamageV2`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+          { since: "DnD5e 4.0", until: "DnD5e 5.0" }
         );
         const oldRollConfig = {
           actor: this.actor,
@@ -1165,7 +1178,7 @@ export default function ActivityMixin(Base) {
       if ( "dnd5e.rollDamage" in Hooks.events ) {
         foundry.utils.logCompatibilityWarning(
           "The `dnd5e.rollDamage` hook has been deprecated and replaced with `dnd5e.rollDamageV2`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
+          { since: "DnD5e 4.0", until: "DnD5e 5.0" }
         );
         Hooks.callAll("dnd5e.rollDamage", this.item, returnMultiple ? rolls : rolls[0]);
       }
@@ -1429,6 +1442,17 @@ export default function ActivityMixin(Base) {
       const activityUpdates = foundry.utils.expandObject(updates.activity);
       if ( itemIndex === -1 ) updates.item.push({ _id: this.item.id, [keyPath]: activityUpdates });
       else updates.item[itemIndex][keyPath] = activityUpdates;
+    }
+
+    /* -------------------------------------------- */
+    /*  Importing and Exporting                     */
+    /* -------------------------------------------- */
+
+    /** @override */
+    static _createDialogTypes(parent) {
+      return Object.entries(CONFIG.DND5E.activityTypes)
+        .filter(([, { configurable }]) => configurable !== false)
+        .map(([k]) => k);
     }
   }
   return Activity;

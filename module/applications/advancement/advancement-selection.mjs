@@ -8,6 +8,10 @@
  */
 export default class AdvancementSelection extends Dialog {
   constructor(item, dialogData={}, options={}) {
+    foundry.utils.logCompatibilityWarning(
+      "The `AdvancementSelection` dialog has been deprecated and replaced with `Advancement#createDialog`.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.2" }
+    );
     super(dialogData, options);
 
     /**
@@ -84,25 +88,12 @@ export default class AdvancementSelection extends Dialog {
    * @returns {Promise<AdvancementConfig|null>}   Result of `Item5e#createAdvancement`.
    */
   static async createDialog(item, { rejectClose=false, options={} }={}) {
-    return new Promise((resolve, reject) => {
-      const dialog = new this(item, {
-        title: `${game.i18n.localize("DND5E.AdvancementSelectionTitle")}: ${item.name}`,
-        buttons: {
-          submit: {
-            callback: html => {
-              const formData = new FormDataExtended(html.querySelector("form"));
-              const type = formData.get("type");
-              resolve(item.createAdvancement(type));
-            }
-          }
-        },
-        close: () => {
-          if ( rejectClose ) reject("No advancement type was selected");
-          else resolve(null);
-        }
-      }, foundry.utils.mergeObject(options, { jQuery: false }));
-      dialog.render(true);
-    });
+    foundry.utils.logCompatibilityWarning(
+      "The `AdvancementSelection#createDialog` dialog has been deprecated and replaced with `Advancement#createDialog`.",
+      { since: "DnD5e 4.4", until: "DnD5e 5.2" }
+    );
+    const advancement = await dnd5e.documents.advancement.Advancement.createDialog({}, { parent: item });
+    return advancement?.sheet.render(true) ?? null;
   }
 
 }

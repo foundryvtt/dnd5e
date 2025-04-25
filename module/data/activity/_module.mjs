@@ -9,6 +9,7 @@ export {default as ForwardActivityData} from "./forward-data.mjs";
 export {default as HealActivityData} from "./heal-data.mjs";
 export {default as SaveActivityData} from "./save-data.mjs";
 export {default as SummonActivityData} from "./summon-data.mjs";
+export {default as TransformActivityData} from "./transform-data.mjs";
 export {default as UtilityActivityData} from "./utility-data.mjs";
 
 export {default as AppliedEffectField} from "./fields/applied-effect-field.mjs";

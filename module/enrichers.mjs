@@ -851,6 +851,7 @@ async function enrichDamage(configs, label, options) {
       } else {
         localizationType = "Short";
       }
+      if ( String(localizationData.average) === formula ) localizationType = "Short";
     }
 
     parts.push(game.i18n.format(`EDITOR.DND5E.Inline.Damage${localizationType}`, localizationData));
@@ -969,17 +970,17 @@ function enrichLookup(config, fallback, options) {
 async function enrichReference(config, label, options) {
   let key;
   let source;
-  let isCondition = "condition" in config;
-  const type = Object.keys(config).find(k => k in CONFIG.DND5E.ruleTypes);
+  let type = Object.keys(config).find(k => k in CONFIG.DND5E.ruleTypes);
   if ( type ) {
     key = slugify(config[type]);
-    source = foundry.utils.getProperty(CONFIG.DND5E, CONFIG.DND5E.ruleTypes[type].references)?.[key];
+    const { references } = CONFIG.DND5E.ruleTypes[type] ?? {};
+    source = foundry.utils.getProperty(CONFIG.DND5E, references)?.[key];
   } else if ( config.values.length ) {
     key = slugify(config.values.join(""));
-    for ( const [type, { references }] of Object.entries(CONFIG.DND5E.ruleTypes) ) {
-      source = foundry.utils.getProperty(CONFIG.DND5E, references)[key];
+    for ( const [t, { references }] of Object.entries(CONFIG.DND5E.ruleTypes) ) {
+      source = foundry.utils.getProperty(CONFIG.DND5E, references)?.[key];
       if ( source ) {
-        if ( type === "condition" ) isCondition = true;
+        type = t;
         break;
       }
     }
@@ -994,7 +995,7 @@ async function enrichReference(config, label, options) {
   const span = document.createElement("span");
   span.classList.add("reference-link");
   span.append(doc.toAnchor({ name: label || doc.name }));
-  if ( isCondition && (config.apply !== false) ) {
+  if ( (type === "condition") && (config.apply !== false) ) {
     const apply = document.createElement("a");
     apply.classList.add("enricher-action");
     apply.dataset.action = "apply";

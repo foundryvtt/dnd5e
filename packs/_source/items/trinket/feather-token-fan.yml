@@ -1,0 +1,139 @@
+_id: e98hfROZjztt7ccO
+name: Feather Token Fan
+type: consumable
+img: icons/commodities/materials/feather-colored-red.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>This tiny object looks like a feather. Different types of feather
+      tokens exist, each with a different single-use effect. The GM chooses the
+      kind of token or determines it randomly from the
+      @UUID[Compendium.dnd5e.tables.RollTable.OEdr086W61t1DRJo]{Feather Token}
+      table.</p>
+
+      <p><strong>Fan.</strong> If you are on a boat or ship, you can use an
+      action to toss the token up to 10 feet in the air. The token disappears,
+      and a giant flapping fan takes its place. The fan floats and creates a
+      wind strong enough to fill the sails of one ship, increasing its speed by
+      5 miles per hour for 8 hours. You can dismiss the fan as an action.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 250
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: rare
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: true
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '8'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        value: '10'
+        units: ft
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: feather-token-fan
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 6800000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037238323
+  modifiedTime: 1725992530029
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!e98hfROZjztt7ccO'

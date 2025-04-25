@@ -52,7 +52,8 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
     context.toggleTitle = game.i18n.localize(`DND5E.${isCrewed ? "Crewed" : "Uncrewed"}`);
 
     // Handle crew actions
-    if ( (item.type === "feat") && (item.system.activation.type === "crew") ) {
+    const hasCrewedActivation = item.system.activities?.contents[0]?.activation.type === "crew";
+    if ( (item.type === "feat") && hasCrewedActivation ) {
       if ( item.system.cover === 1 ) context.cover = game.i18n.localize("DND5E.CoverTotal");
       else if ( item.system.cover === .5 ) context.cover = "½";
       else if ( item.system.cover === .75 ) context.cover = "¾";
@@ -205,10 +206,12 @@ export default class ActorSheet5eVehicle extends ActorSheet5e {
           features.equipment.items.push(item);
           break;
         case "feat":
-          const act = item.system.activation;
-          if ( !act.type || (act.type === "none") ) features.passive.items.push(item);
-          else if (act.type === "reaction") features.reactions.items.push(item);
+          const act = item.system.activities?.contents[0] ?? {};
+          if ( !act.activation?.type || (act.activation?.type === "none") ) features.passive.items.push(item);
+          else if (act.activation?.type === "reaction") features.reactions.items.push(item);
           else features.actions.items.push(item);
+          ctx.hasRecharge = item.system.uses?.recovery?.find(r => r.period === "recharge")
+            || act.uses?.recovery?.find(r => r.period === "recharge");
           break;
         case "spell":
           break;

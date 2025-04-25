@@ -8,7 +8,7 @@ import EffectsElement from "../components/effects.mjs";
 import CreatureTypeConfig from "../shared/creature-type-config.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import SourceConfig from "../source-config.mjs";
-import StartingEquipmentConfig from "./starting-equipment-config.mjs";
+import StartingEquipmentConfig from "./config/starting-equipment-config.mjs";
 
 /**
  * Override and extend the core ItemSheet implementation to handle specific item types.
@@ -646,6 +646,7 @@ export default class ItemSheet5e extends (foundry.appv1?.sheets?.ItemSheet ?? It
      */
     const allowed = Hooks.call("dnd5e.dropItemSheetData", item, this, data);
     if ( allowed === false ) return;
+    event.stopPropagation();
 
     switch ( data.type ) {
       case "ActiveEffect":
@@ -756,7 +757,7 @@ export default class ItemSheet5e extends (foundry.appv1?.sheets?.ItemSheet ?? It
     let manager;
     if ( ["edit", "delete", "duplicate"].includes(action) && !advancement ) return;
     switch (action) {
-      case "add": return game.dnd5e.applications.advancement.AdvancementSelection.createDialog(this.item);
+      case "add": return dnd5e.documents.advancement.Advancement.createDialog({}, { parent: this.item });
       case "edit": return new advancement.constructor.metadata.apps.config(advancement).render(true);
       case "delete": return advancement.deleteDialog();
       case "duplicate": return this.item.duplicateAdvancement(id);

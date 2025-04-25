@@ -1,0 +1,70 @@
+_id: MLNzQUsVUi0PEV3i
+name: Efficient Quiver
+type: container
+img: icons/containers/ammunition/arrows-quiver-brown-grey.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item</em></p>
+
+      <p>Each of the quiver's three compartments connects to an extradimensional
+      space that allows the quiver to hold numerous items while never weighing
+      more than 2 pounds.</p>
+
+      <p>The shortest compartment can hold up to sixty arrows, bolts, or similar
+      objects. The midsize compartment holds up to eighteen javelins or similar
+      objects. The longest compartment holds up to six long objects, such as
+      bows, quarterstaffs, or spears.</p>
+
+      <p>You can draw any item the quiver contains as if doing so from a regular
+      quiver or scabbard.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 2
+    units: lb
+  price:
+    value: 1000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: uncommon
+  identified: true
+  capacity:
+    type: items
+    value: 84
+  currency:
+    cp: 0
+    sp: 0
+    ep: 0
+    gp: 0
+    pp: 0
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+    - weightlessContents
+  attuned: false
+  identifier: efficient-quiver
+effects: []
+folder: PgtyWdfkDTDbc0ov
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037170453
+  modifiedTime: 1725992507348
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!MLNzQUsVUi0PEV3i'

@@ -514,6 +514,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     const { index } = event.target.closest("[data-index]")?.dataset ?? {};
     const facility = this.actor.items.get(facilityId);
     if ( !facility || !prop || (index === undefined) ) return;
+    if ( event.target.closest(".occupant-slot.pending") ) return this._onRemovePendingTrade(facility);
     let { value } = foundry.utils.getProperty(facility, prop);
     value = value.filter((_, i) => i !== Number(index));
     return facility.update({ [`${prop}.value`]: value });
@@ -538,6 +539,35 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
     }
     const result = await CompendiumBrowser.selectOne({ filters });
     if ( result ) this._onDropItemCreate(game.items.fromCompendium(await fromUuid(result), { keepId: true }));
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle removing a pending trade from a facility.
+   * @param {Item5e} facility  The target facility.
+   * @returns {Promise<void|Item5e>}
+   * @protected
+   */
+  async _onRemovePendingTrade(facility) {
+    const result = await foundry.applications.api.DialogV2.confirm({
+      content: `
+        <p><strong>${game.i18n.localize("AreYouSure")}</strong> ${game.i18n.localize("DND5E.Bastion.Trade.Invalid")}</p>
+      `,
+      window: {
+        icon: "fa-solid fa-coins",
+        title: "DND5E.Bastion.Trade.Cancel"
+      },
+      position: { width: 400 }
+    }, { rejectClose: false });
+    if ( result ) return facility.update({
+      system: {
+        progress: { max: null, order: "", value: null },
+        trade: {
+          pending: { creatures: [], operation: null }
+        }
+      }
+    });
   }
 
   /* -------------------------------------------- */
@@ -781,7 +811,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       const context = {
         id, labels, name, building, disabled, free, progress,
         craft: craft.item ? await fromUuid(craft.item) : null,
-        creatures: await this._prepareFacilityOccupants(trade.creatures),
+        creatures: await this._prepareFacilityLivestock(trade),
         defenders: await this._prepareFacilityOccupants(defenders),
         executing: CONFIG.DND5E.facilities.orders[progress.order]?.icon,
         hirelings: await this._prepareFacilityOccupants(hirelings),
@@ -822,6 +852,25 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
   /* -------------------------------------------- */
 
   /**
+   * Prepare facility livestock for display.
+   * @param {object} trade  Facility trade information.
+   * @returns {Promise<object[]>}
+   * @protected
+   */
+  async _prepareFacilityLivestock(trade) {
+    const creatures = await this._prepareFacilityOccupants(trade.creatures);
+    const pending = trade.pending.creatures;
+    return [
+      ...(await Promise.all((pending ?? []).map(async (uuid, index) => {
+        return { index, actor: await fromUuid(uuid), pending: true };
+      }))),
+      ...creatures
+    ];
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare facility occupants for display.
    * @param {FacilityOccupants} occupants  The occupants.
    * @returns {Promise<object[]>}
@@ -829,9 +878,9 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
    */
   _prepareFacilityOccupants(occupants) {
     const { max, value } = occupants;
-    return Promise.all(Array.fromRange(max).map(async i => {
-      const uuid = value[i];
-      if ( uuid ) return { actor: await fromUuid(uuid) };
+    return Promise.all(Array.fromRange(max).map(async index => {
+      const uuid = value[index];
+      if ( uuid ) return { index, actor: await fromUuid(uuid) };
       return { empty: true };
     }));
   }
@@ -972,7 +1021,7 @@ export default class ActorSheet5eCharacter2 extends ActorSheetV2Mixin(ActorSheet
       let title;
       let reference;
       if ( type === "tool" ) {
-        reference = Trait.getBaseItemUUID(CONFIG.DND5E.toolIds[id]);
+        reference = Trait.getBaseItemUUID(CONFIG.DND5E.tools[id]?.id);
         ({ img, name: title } = Trait.getBaseItem(reference, { indexOnly: true }));
       }
       else if ( type === "skill" ) ({ icon: img, label: title, reference } = CONFIG.DND5E.skills[id]);

@@ -629,7 +629,7 @@
   fieldset { padding: revert; }
   .hint { line-height: 16px; }
 
-  button:not(.icon, .fa-solid, .fas) {
+  :where(button:not(.icon, .fa-solid, .fas)) {
     height: unset;
     &:not(.copy-button, .unbutton) { line-height: 28px; }
   }
