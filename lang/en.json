@@ -4895,8 +4895,6 @@
 "MIGRATION.5eComplete": "D&D 5e System Migration to version {version} completed!",
 "MIGRATION.5eVersionTooOldWarning": "Your D&D 5e system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.",
 
-"SETTINGS.5eAllowPolymorphingL": "Allow players to polymorph their own actors.",
-"SETTINGS.5eAllowPolymorphingN": "Allow Polymorphing",
 "SETTINGS.5eAutoCollapseCardL": "Automatically collapse Item Card descriptions in the Chat Log",
 "SETTINGS.5eAutoCollapseCardN": "Collapse Item Cards in Chat",
 "SETTINGS.5eAutoSpellTemplateL": "When a spell is cast, defaults to begin the process to create the corresponding Measured Template if any (requires TRUSTED or higher player role)",
@@ -4908,10 +4906,6 @@
 "SETTINGS.5eGridAlignedSquareTemplatesL": "When square templates are created as the result of casting a spell or using an item, they will be locked to the grid alignment and unable to be rotated.",
 "SETTINGS.5eGridAlignedSquareTemplatesN": "Grid-Aligned Square Templates",
 "SETTINGS.DND5E": {
-  "ALLOWSUMMONING": {
-    "Name": "Allow Summoning",
-    "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work."
-  },
   "BLOODIED": {
     "Name": "Bloodied Status",
     "Hint": "Configure whether the bloodied status is tracked automatically and its visibility.",
@@ -4996,6 +4990,16 @@
   "THEME": {
     "Name": "Theme",
     "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings."
+  },
+  "PERMISSIONS": {
+    "AllowSummoning": {
+      "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work.",
+      "Name": "Allow Summoning"
+    },
+    "AllowTransformation": {
+      "Hint": "Allow players to transform their own actors. Players must also have the Create Actor core permission for this to work.",
+      "Name": "Allow Transformation"
+    }
   },
   "RULESVERSION": {
     "Name": "Rules Version",

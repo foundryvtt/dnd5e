@@ -146,8 +146,8 @@ export function registerSystemSettings() {
 
   // Allow Polymorphing
   game.settings.register("dnd5e", "allowPolymorphing", {
-    name: "SETTINGS.5eAllowPolymorphingN",
-    hint: "SETTINGS.5eAllowPolymorphingL",
+    name: "SETTINGS.DND5E.PERMISSIONS.AllowTransformation.Name",
+    hint: "SETTINGS.DND5E.PERMISSIONS.AllowTransformation.Hint",
     scope: "world",
     config: true,
     default: false,
@@ -156,8 +156,8 @@ export function registerSystemSettings() {
 
   // Allow Summoning
   game.settings.register("dnd5e", "allowSummoning", {
-    name: "SETTINGS.DND5E.ALLOWSUMMONING.Name",
-    hint: "SETTINGS.DND5E.ALLOWSUMMONING.Hint",
+    name: "SETTINGS.DND5E.PERMISSIONS.AllowSummoning.Name",
+    hint: "SETTINGS.DND5E.PERMISSIONS.AllowSummoning.Hint",
     scope: "world",
     config: true,
     default: false,
