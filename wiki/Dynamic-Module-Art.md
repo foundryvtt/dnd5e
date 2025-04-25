@@ -3,7 +3,7 @@
 **Note**: The system's module art system has been deprecated and replaced with Foundry's implementation.
 
 ## Migrate to Core's system
-Migrating to the core compendium art system is very simple and only requires adjusting the flags in your `module.json` by adding an `compendiumArtMappings` object surrounding the remainder of the flag and renaming `dnd5e-art` to `mapping` and `dnd5e-art-credit` to just `credit`:
+Migrating to the core compendium art system is very simple and only requires adjusting the flags in your `module.json` by moving your flags into a `compendiumArtMappings.dnd5e` object and renaming `dnd5e-art` to `mapping` and `dnd5e-art-credit` to just `credit`:
 
 ### Existing `module.json`
 ```json
@@ -22,7 +22,7 @@ Migrating to the core compendium art system is very simple and only requires adj
 {
   "flags": {
     "compendiumArtMappings": {
-      "<Module ID>": {
+      "dnd5e": {
         "mapping": "modules/<Module ID>/map-dnd5e.json",
         "credit": "<em>Creature Artwork by Foo Bar.</em>"
       }
