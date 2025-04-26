@@ -1,0 +1,169 @@
+name: Resilient Sphere
+system:
+  description:
+    value: >-
+      <p>A shimmering sphere encloses a Large or smaller creature or object
+      within range. An unwilling creature must succeed on a Dexterity saving
+      throw or be enclosed for the duration.</p><p>Nothing—not physical objects,
+      energy, or other spell effects—can pass through the barrier, in or out,
+      though a creature in the sphere can breathe there. The sphere is immune to
+      all damage, and a creature or object inside can't be damaged by attacks or
+      effects originating from outside, nor can a creature inside the sphere
+      damage anything outside it.</p><p>The sphere is weightless and just large
+      enough to contain the creature or object inside. An enclosed creature can
+      take an action to push against the sphere's walls and thus roll the sphere
+      at up to half the creature's Speed. Similarly, the globe can be picked up
+      and moved by other creatures.</p><p>A
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDisintegra]{Disintegrate}</em>
+      spell targeting the globe destroys it without harming anything inside.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: creatureOrObject
+      special: Large or smaller
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 4
+  school: abj
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a glass sphere
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    t8inBXcX3WVtXJzC:
+      type: save
+      _id: t8inBXcX3WVtXJzC
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects:
+        - _id: U5UciD171a5jcc7s
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: ''
+      img: ''
+      appliedEffects:
+        - U5UciD171a5jcc7s
+  identifier: otilukes-resilient-sphere
+_id: phbsplOtilukesRe
+type: spell
+img: icons/commodities/gems/pearl-swirl-teal.webp
+effects:
+  - name: Enclosed in Sphere
+    img: icons/commodities/gems/gem-amber-insect-orange.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplOtilukesRe
+    transfer: false
+    _id: U5UciD171a5jcc7s
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>An enclosed creature can take an action to push against the sphere’s
+      walls and thus roll the sphere at up to half the creature’s Speed.</p>
+    tint: '#ffffff'
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724788188926
+      modifiedTime: 1724788504987
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!phbsplOtilukesRe.U5UciD171a5jcc7s'
+folder: qi3IbnEwap7mRw4b
+sort: 3900000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425965288
+  modifiedTime: 1745256796574
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbsplOtilukesRe'

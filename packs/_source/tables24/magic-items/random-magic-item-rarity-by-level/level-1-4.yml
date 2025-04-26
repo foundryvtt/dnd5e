@@ -1,0 +1,58 @@
+_id: dmg14RandomMagic
+name: Level 1-4
+img: icons/svg/d20-grey.svg
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 54
+    drawn: false
+    _id: Gg7nCEigZCqf4nyB
+    text: Common
+    img: systems/dnd5e/icons/spell-tiers/spell1.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!dmg14RandomMagic.Gg7nCEigZCqf4nyB'
+  - type: text
+    weight: 1
+    range:
+      - 55
+      - 91
+    drawn: false
+    _id: sJKMwd6smS2MRi1P
+    text: Uncommon
+    img: systems/dnd5e/icons/spell-tiers/spell2.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!dmg14RandomMagic.sJKMwd6smS2MRi1P'
+  - type: text
+    weight: 1
+    range:
+      - 92
+      - 100
+    drawn: false
+    _id: MACKprVCqnKad9M3
+    text: Rare
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!dmg14RandomMagic.MACKprVCqnKad9M3'
+replacement: true
+displayRoll: true
+folder: Iql5oCfKyncKTjZ1
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1730222847613
+  modifiedTime: 1731376918266
+  lastModifiedBy: dnd5ebuilder0000
+formula: 1d100
+sort: 0
+ownership:
+  default: 0
+_key: '!tables!dmg14RandomMagic'

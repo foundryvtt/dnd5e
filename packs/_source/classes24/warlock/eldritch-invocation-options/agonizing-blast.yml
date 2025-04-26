@@ -1,0 +1,58 @@
+_id: phbinvAgonizingB
+name: Agonizing Blast
+type: feat
+img: icons/magic/acid/projectile-stream-bubbles.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 2+ Warlock, a Warlock Cantrip That
+      Deals Damage</p></blockquote><p>Choose one of your known Warlock cantrips
+      that deals damage. You can add your Charisma modifier to that spell's
+      damage rolls.</p><p><strong>Repeatable. </strong>You can gain this
+      invocation more than once. Each time you do so, choose a different
+      eligible cantrip.</p><section class="secret"
+      id="secret-e2JfbLoZ7SLiWlcU"><p><strong>Foundry Note</strong></p><p>The
+      change to your cantrip will have to be made manually by adding
+      "@abilities.cha.mod" to the "Bonus" field of your spell's
+      damage.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 2
+    repeatable: false
+  properties: []
+  requirements: Warlock Cantrip That Deals Damage
+  activities: {}
+  enchant: {}
+  identifier: agonizing-blast
+effects: []
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1745256761943
+  lastModifiedBy: dnd5ebuilder0000
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvAgonizingB'

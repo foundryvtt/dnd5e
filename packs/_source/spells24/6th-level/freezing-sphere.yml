@@ -1,0 +1,357 @@
+name: Freezing Sphere
+system:
+  description:
+    value: >-
+      <p>A frigid globe streaks from you to a point of your choice within range,
+      where it explodes in a 60-foot-radius Sphere. Each creature in that area
+      makes a Constitution saving throw, taking 10d6 Cold damage on failed save
+      or half as much damage on a successful one.</p><p>If the globe strikes a
+      body of water, it freezes the water to a depth of 6 inches over an area 30
+      feet square. This ice lasts for 1 minute. Creatures that were swimming on
+      the surface of frozen water are trapped in the ice and have the
+      &amp;Reference[Restrained apply=false] condition. A trapped creature can
+      take an action to make a [[/check ability=str skill=ath
+      dc=@attributes.spell.dc]] check against your spell save DC to break
+      free.</p><p>You can refrain from firing the globe after completing the
+      spell's casting. If you do so, a globe about the size of a sling bullet,
+      cool to the touch, appears in your hand. At any time, you or a creature
+      you give the globe to can throw the globe (to a range of 40 feet) or hurl
+      it with a sling (to the sling's normal range). It shatters on impact, with
+      the same effect as a normal casting of the spell. You can also set the
+      globe down without shattering it. After 1 minute, if the globe hasn't
+      already shattered, it explodes.</p><p><strong>Using a Higher-Level Spell
+      Slot.</strong> The damage increases by 1d6 for each spell slot level above
+      6.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: ''
+    units: inst
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creature
+      special: ''
+    template:
+      units: ft
+      contiguous: false
+      type: sphere
+      size: '60'
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '300'
+  uses:
+    max: '1'
+    spent: 1
+    recovery: []
+  level: 6
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+  materials:
+    value: a miniature crystal sphere
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    adCBWrctRmLQmb8M:
+      type: save
+      _id: adCBWrctRmLQmb8M
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 100000
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: '6'
+            bonus: ''
+            types: []
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Cast and Fire
+      img: ''
+      appliedEffects: []
+    PtdkXoDjkJMXpJ93:
+      type: utility
+      _id: PtdkXoDjkJMXpJ93
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: if the globe strikes a body of water
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '1'
+      effects:
+        - _id: JC3QmmHnM4YKj9ek
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: square
+          size: '30'
+          count: ''
+        affects:
+          choice: false
+          count: ''
+          type: creature
+          special: creatures swimming on the surface
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 500000
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Freeze Water
+      img: ''
+      appliedEffects: []
+    v9chdKbduV5WVr97:
+      type: utility
+      _id: v9chdKbduV5WVr97
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling:
+              mode: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: minute
+        concentration: false
+        override: true
+        value: '1'
+      effects: []
+      range:
+        override: true
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: self
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 300000
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Cast and Hold
+      img: systems/dnd5e/icons/svg/trait-skills.svg
+      appliedEffects: []
+    NKBsnjBBIgsaOPaY:
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: true
+        units: ft
+        special: if hurled with a sling, use sling's normal range
+        value: '40'
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 400000
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 10
+            denomination: '6'
+            bonus: ''
+            types: []
+            scaling:
+              mode: whole
+              number: 1
+              formula: ''
+        onSave: half
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      name: Throw Held Globe
+      _id: NKBsnjBBIgsaOPaY
+      img: ''
+      appliedEffects: []
+  identifier: otilukes-freezing-sphere
+_id: phbsplOtilukesFr
+type: spell
+img: icons/magic/water/projectile-ice-snowball.webp
+effects:
+  - name: Trapped in Ice
+    img: icons/magic/water/barrier-ice-water-cube.webp
+    origin: Compendium.dnd5e.spells24.Item.phbsplOtilukesFr
+    transfer: false
+    _id: JC3QmmHnM4YKj9ek
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>Creatures that were swimming on the surface of frozen water are trapped
+      in the ice and have the &amp;Reference[Restrained apply=false] condition.
+      A trapped creature can take an action to make a [[/check ability=str
+      skill=ath]] check against your spell save DC to break free.</p>
+    tint: '#ffffff'
+    statuses:
+      - restrained
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1724781444555
+      modifiedTime: 1724782761235
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!phbsplOtilukesFr.JC3QmmHnM4YKj9ek'
+folder: 8WmlLARx1Df3Ii9v
+sort: 150000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425965185
+  modifiedTime: 1745256796540
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbsplOtilukesFr'

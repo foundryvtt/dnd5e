@@ -1,0 +1,79 @@
+_id: phbrgrSpellcasti
+name: Spellcasting
+type: feat
+folder: h5OUzaJcZzsNsOGc
+img: icons/magic/symbols/arrowhead-green.webp
+system:
+  description:
+    value: >-
+      <p>You have learned to channel the magical essence of nature to cast
+      spells. See the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.mh3akteBDiLegqFK]{rules
+      on spellcasting}. The information below details how you use those rules
+      with Ranger spells, which appear in the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.5HnIk6HsrSxkvkz5]{Ranger
+      spell list}.</p><p><strong>Spell Slots.</strong> The
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbRanger0000000.JournalEntryPage.fgzoeAJE4EEUSOYQ#class-features]{Ranger
+      Features table} shows how many spell slots you have to cast your level 1+
+      spells. You regain all expended slots when you finish a Long
+      Rest.</p><p><strong>Prepared Spells of Level 1+.</strong> You prepare the
+      list of level 1+ spells that are available for you to cast with this
+      feature. To start, choose two level 1 Ranger spells.
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplCureWounds]{Cure Wounds} and
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplEnsnaringS]{Ensnaring Strike}
+      are recommended.</p><p>The number of spells on your list increases as you
+      gain Ranger levels, as shown in the Prepared Spells column of the Ranger
+      Features table. Whenever that number increases, choose additional Ranger
+      spells until the number of spells on your list matches the number in the
+      Ranger Features table. The chosen spells must be of a level for which you
+      have spell slots. For example, if you're a level 5 Ranger, your list of
+      prepared spells can include six Ranger spells of level 1 or 2 in any
+      combination.</p><p>If another Ranger feature gives you spells that you
+      always have prepared, those spells don't count against the number of
+      spells you can prepare with this feature, but those spells otherwise count
+      as Ranger spells for you.</p><p><strong>Changing Your Prepared
+      Spells.</strong> Whenever you finish a Long Rest, you can replace one
+      spell on your list with another Ranger spell for which you have spell
+      slots.</p><p><strong>Spellcasting Ability. </strong>Wisdom is your
+      spellcasting ability for your Ranger spells.</p><p><strong>Spellcasting
+      Focus. </strong>You can use a Druidic Focus as a Spellcasting Focus for
+      your Ranger spells.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: spellcasting
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735932734523
+  modifiedTime: 1745256765141
+  lastModifiedBy: dnd5ebuilder0000
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbrgrSpellcasti'

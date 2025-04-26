@@ -1,0 +1,78 @@
+_id: dmgHornOfValhall
+name: 'Horn of Valhalla: Type and Requirement'
+img: icons/commodities/bones/horn-drinking-white.webp
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 40
+    drawn: false
+    _id: eWS51SY5F1OCOHOT
+    text: >-
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgSilverHornOfV]{Silver} (2
+      spirits); No requirement
+    img: icons/commodities/metal/ingot-stamped-silver.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!dmgHornOfValhall.eWS51SY5F1OCOHOT'
+  - type: text
+    weight: 1
+    range:
+      - 41
+      - 75
+    drawn: false
+    _id: vsuTVLSnSFqxIfeV
+    text: >-
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgBrassHornOfVa]{Brass} (3
+      spirits); Proficiency with all Simple weapons
+    img: icons/commodities/metal/ingot-stamped-flat-gold.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!dmgHornOfValhall.vsuTVLSnSFqxIfeV'
+  - type: text
+    weight: 1
+    range:
+      - 76
+      - 90
+    drawn: false
+    _id: IawBPbUJ4QPD80hH
+    text: >-
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgBronzeHornOfV]{Bronze} (4
+      spirits); Training with all Medium armor
+    img: icons/commodities/metal/ingot-stamped-bronze.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!dmgHornOfValhall.IawBPbUJ4QPD80hH'
+  - type: text
+    weight: 1
+    range:
+      - 91
+      - 100
+    drawn: false
+    _id: znOdbmKsZl4MZ96Q
+    text: >-
+      @UUID[Compendium.dnd5e.equipment24.Item.dmgIronHornOfVal]{Iron} (5
+      spirits); Proficiency with all Martial weapons
+    img: icons/commodities/metal/ingot-iron.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!dmgHornOfValhall.znOdbmKsZl4MZ96Q'
+replacement: true
+displayRoll: true
+folder: I2IHCZhwMY7ttiXw
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.2
+  createdTime: 1727883396246
+  modifiedTime: 1745612074738
+  lastModifiedBy: dnd5ebuilder0000
+sort: 1100000
+ownership:
+  default: 0
+formula: 1d100
+_key: '!tables!dmgHornOfValhall'

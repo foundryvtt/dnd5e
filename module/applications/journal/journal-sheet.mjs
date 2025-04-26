@@ -9,7 +9,7 @@ export default class JournalSheet5e extends (foundry.appv1?.sheets?.JournalSheet
     return options;
   }
 
-  /* -------------------------------------------- */
+  /* --------------------------------------------- */
   /*  Rendering                                    */
   /* --------------------------------------------- */
 

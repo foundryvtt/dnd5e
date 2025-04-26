@@ -1,0 +1,55 @@
+name: Two-Weapon Fighting
+system:
+  description:
+    value: >-
+      <p><em>(Prerequisite: Fighting Style Feature)</em></p><p>When you make an
+      extra attack as a result of using a weapon that has the Light property,
+      you can add your ability modifier to the damage of that attack if you
+      aren't already adding it to the damage.</p><section class="secret"
+      id="secret-hYptyfGCa0gLDQRT"><p><strong>Foundry Note</strong></p><p>This
+      feature is not automated. You can add your modifier in the Situational
+      Bonus field of the damage roll.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: feat
+    subtype: fightingStyle
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: two-weapon-fighting
+_id: phbfstTwoWeaponF
+type: feat
+img: icons/skills/melee/swords-parry-block-yellow.webp
+effects: []
+folder: O942K0m1gZMIIoMB
+sort: 100782
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866298107
+  modifiedTime: 1745256780410
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbfstTwoWeaponF'

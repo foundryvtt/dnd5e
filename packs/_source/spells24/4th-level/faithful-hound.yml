@@ -1,0 +1,190 @@
+name: Faithful Hound
+system:
+  description:
+    value: >-
+      <p>You conjure a phantom watchdog in an unoccupied space that you can see
+      within range. The hound remains for the duration or until the two of you
+      are more than 300 feet apart from each other.</p><p>No one but you can see
+      the hound, and it is intangible and invulnerable. When a Small or larger
+      creature comes within 30 feet of it without first speaking the password
+      that you specify when you cast this spell, the hound starts barking
+      loudly. The hound has Truesight with a range of 30 feet.</p><p>At the
+      start of each of your turns, the hound attempts to bite one enemy within 5
+      feet of it. That enemy must succeed on a Dexterity saving throw or take
+      4d8 Force damage.</p><p>On your later turns, you can take a Magic action
+      to move the hound up to 30 feet.</p>
+    chat: ''
+  activities:
+    oXwEMXLXZLw2Ub0g:
+      type: summon
+      _id: oXwEMXLXZLw2Ub0g
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: ''
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: false
+        proficiency: false
+        saves: true
+      profiles:
+        - count: ''
+          name: ''
+          _id: pSAhMaxc9fsGX7nk
+          uuid: Compendium.dnd5e.actors24.Actor.phbmobFaithfulHo
+          level:
+            min: null
+            max: null
+          types: []
+      summon:
+        prompt: true
+        mode: ''
+      name: ''
+      img: ''
+      appliedEffects: []
+    vIOe9RHtAUBrnsR6:
+      type: utility
+      name: Move Hound
+      _id: vIOe9RHtAUBrnsR6
+      sort: 0
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: action
+    value: null
+    condition: ''
+  duration:
+    units: hour
+    value: '8'
+  level: 4
+  materials:
+    value: a silver whistle
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  properties:
+    - vocal
+    - somatic
+    - material
+  range:
+    units: ft
+    special: ''
+    value: '30'
+  school: con
+  target:
+    template:
+      contiguous: false
+      units: ft
+      type: ''
+    affects:
+      choice: false
+      count: '1'
+      type: space
+      special: ''
+  identifier: mordenkainens-faithful-hound
+_id: phbFaithfulHound
+type: spell
+folder: qi3IbnEwap7mRw4b
+img: icons/creatures/abilities/wolf-howl-moon-purple.webp
+effects: []
+sort: 0
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1725576013801
+  modifiedTime: 1740680090657
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbFaithfulHound'

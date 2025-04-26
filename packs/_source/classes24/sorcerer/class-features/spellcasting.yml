@@ -1,0 +1,89 @@
+_id: phbscrSpellcasti
+name: Spellcasting
+type: feat
+folder: zm1kuLu4kdDhoOyL
+img: icons/magic/control/debuff-energy-hold-teal-blue.webp
+system:
+  description:
+    value: >-
+      <p>Drawing from your innate magic, you can cast spells. See the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.mh3akteBDiLegqFK]{rules
+      on spellcasting}. The information below details how you use those rules
+      with Sorcerer spells, which appear in the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.VfZ5mH2ZuyFq82Ga]{Sorcerer
+      spell list} later in the class's
+      description.</p><p><strong>Cantrips.</strong> You know four Sorcerer
+      cantrips of your choice.
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplLight00000]{Light},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplPrestidigi]{Prestidigitation},
+      @UUID[Compendium.dnd5e.spells24.Item.phbsplShockingGr]{Shocking Grasp},
+      and @UUID[Compendium.dnd5e.spells24.Item.phbsplSorcerousB]{Sorcerous
+      Burst} are recommended. Whenever you gain a Sorcerer level, you can
+      replace one of your cantrips from this feature with another Sorcerer
+      cantrip of your choice.</p><p>When you reach Sorcerer levels 4 and 10, you
+      learn another Sorcerer cantrip of your choice, as shown in the Cantrips
+      column of the Sorcerer Features table.</p><p><strong>Spell Slots.</strong>
+      The
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSorcerer00000.JournalEntryPage.fsqRUA4acVXH4I3O#class-features]{Sorcerer
+      Features table} shows how many spell slots you have to cast your level 1+
+      spells. You regain all expended slots when you finish a Long
+      Rest.</p><p><strong>Prepared Spells of Level 1+.</strong> You prepare the
+      list of level 1+ spells that are available for you to cast with this
+      feature. To start, choose two level 1 Sorcerer spells. <em>Burning
+      Hands</em> and <em>Detect Magic</em> are recommended.</p><p>The number of
+      spells on your list increases as you gain Sorcerer levels, as shown in the
+      Prepared Spells column of the Sorcerer Features table. Whenever that
+      number increases, choose additional Sorcerer spells until the number of
+      spells on your list matches the number in the Sorcerer Features table. The
+      chosen spells must be of a level for which you have spell slots. For
+      example, if you're a level 3 Sorcerer, your list of prepared spells can
+      include six Sorcerer spells of level 1 or 2 in any combination.</p><p>If
+      another Sorcerer feature gives you spells that you always have prepared,
+      those spells don't count against the number of spells you can prepare with
+      this feature, but those spells otherwise count as Sorcerer spells for
+      you.</p><p><strong>Changing Your Prepared Spells.</strong> Whenever you
+      gain a Sorcerer level, you can replace one spell on your list with another
+      Sorcerer spell for which you have spell slots.</p><p><strong>Spellcasting
+      Ability.</strong> Charisma is your spellcasting ability for your Sorcerer
+      spells.</p><p><strong>Spellcasting Focus.</strong> You can use an Arcane
+      Focus as a Spellcasting Focus for your Sorcerer spells.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: ''
+  prerequisites:
+    level: 1
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: spellcasting
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866286897
+  modifiedTime: 1745256765675
+  lastModifiedBy: dnd5ebuilder0000
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbscrSpellcasti'

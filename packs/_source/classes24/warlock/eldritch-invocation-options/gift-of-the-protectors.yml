@@ -1,0 +1,224 @@
+_id: phbinvGiftoftheP
+name: Gift of the Protectors
+type: feat
+img: icons/sundries/books/book-open-red.webp
+system:
+  description:
+    value: >-
+      <blockquote><p>Prerequisite: Level 9+ Warlock,
+      @UUID[Compendium.dnd5e.classes24.Item.phbinvPactTome00]{Pact of the Tome}
+      Invocation</p></blockquote><p>A new page appears in your
+      @UUID[Compendium.dnd5e.items.Item.CwWbeQ6XyqFzbMYw]{Book of Shadows} when
+      you conjure it. With your permission, a creature can take an action to
+      write its name on that page, which can contain a number of names equal to
+      your Charisma modifier (minimum of one name).</p><p>When any creature
+      whose name is on the page is reduced to 0 Hit Points but not killed
+      outright, the creature magically drops to 1 Hit Point instead. Once this
+      magic is triggered, no creature can benefit from it until you finish a
+      Long Rest.</p><p>As a Magic action, you can erase a name on the page by
+      touching it.</p><section id="secret-VzLQ7nRPLs0fIkvE"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The
+      <strong>Protect</strong> activity consumes a use of its activity which
+      refreshes every Long Rest.</p><p>The <strong>Write Name</strong> activity
+      consumes a use of the item which can be used for tracking how many names
+      you've written down.</p><p>The <strong>Erase Name</strong> activity will
+      restore a use of the item and allows you to add another
+      name.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: (max(1,@abilities.cha.mod))
+    spent: 0
+    recovery: []
+  type:
+    value: class
+    subtype: eldritchInvocation
+  prerequisites:
+    level: 9
+    repeatable: false
+  properties: []
+  requirements: Pact of the Tome Invocation
+  activities:
+    HAifNbM6tCWfgkgk:
+      type: utility
+      name: Protect
+      _id: HAifNbM6tCWfgkgk
+      activation:
+        type: ''
+        value: null
+        override: false
+        condition: >-
+          When any creature whose name is on the page is reduced to 0 Hit Points
+          but not killed outright
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: activityUses
+            value: '1'
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery:
+          - period: lr
+            type: recoverAll
+        max: '1'
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/activity/save.svg
+    OpTVpSocFQtVBROc:
+      type: utility
+      name: Write Name
+      _id: OpTVpSocFQtVBROc
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: self
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/trait.svg
+    cRjGFIPOcDcUcsjl:
+      type: utility
+      name: Erase Name
+      _id: cRjGFIPOcDcUcsjl
+      activation:
+        type: action
+        value: null
+        override: false
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling: {}
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+        units: touch
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: ''
+          type: ''
+        override: false
+        prompt: false
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: systems/dnd5e/icons/svg/trait-languages.svg
+  enchant: {}
+  identifier: gift-of-the-protectors
+effects: []
+folder: BjeMHiqnKNWkWhox
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866281378
+  modifiedTime: 1740680084019
+  lastModifiedBy: dnd5ebuilder0000
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbinvGiftoftheP'
