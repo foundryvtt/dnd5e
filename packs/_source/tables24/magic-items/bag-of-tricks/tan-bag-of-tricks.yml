@@ -1,0 +1,126 @@
+_id: dmgTanBagOfTrick
+name: Tan Bag of Tricks
+img: modules/dnd-dungeon-masters-guide/assets/icons/items/bag-of-tricks.webp
+description: ''
+results:
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    text: Jackal
+    documentId: mmJackal00000000
+    img: modules/dnd-monster-manual/assets/portraits/jackal.webp
+    _id: 1nEUEa3WUmsNMDFC
+    flags: {}
+    _key: '!tables.results!dmgTanBagOfTrick.1nEUEa3WUmsNMDFC'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 2
+      - 2
+    drawn: false
+    text: Ape
+    documentId: mmApe00000000000
+    img: modules/dnd-monster-manual/assets/portraits/ape.webp
+    _id: B2uTmg4glLwbt7OE
+    flags: {}
+    _key: '!tables.results!dmgTanBagOfTrick.B2uTmg4glLwbt7OE'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 3
+      - 3
+    drawn: false
+    text: Baboon
+    documentId: mmBaboon00000000
+    img: modules/dnd-monster-manual/assets/portraits/baboon.webp
+    _id: kDI3PFkVjvrFOI7G
+    flags: {}
+    _key: '!tables.results!dmgTanBagOfTrick.kDI3PFkVjvrFOI7G'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 4
+      - 4
+    drawn: false
+    text: Axe Beak
+    documentId: mmAxeBeak0000000
+    img: modules/dnd-monster-manual/assets/portraits/axe-beak.webp
+    _id: dGC8E7S2XXliLPjy
+    flags: {}
+    _key: '!tables.results!dmgTanBagOfTrick.dGC8E7S2XXliLPjy'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 5
+      - 5
+    drawn: false
+    text: Black Bear
+    documentId: mmBlackBear00000
+    img: modules/dnd-monster-manual/assets/portraits/black-bear.webp
+    _id: SEhoRaQ3DYPJpgis
+    flags: {}
+    _key: '!tables.results!dmgTanBagOfTrick.SEhoRaQ3DYPJpgis'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 6
+      - 6
+    drawn: false
+    text: Giant Weasel
+    documentId: mmGiantWeasel000
+    img: modules/dnd-monster-manual/assets/portraits/giant-weasel.webp
+    _id: aQ0vAp1BNIGLUZa0
+    flags: {}
+    _key: '!tables.results!dmgTanBagOfTrick.aQ0vAp1BNIGLUZa0'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 7
+      - 7
+    drawn: false
+    text: Giant Hyena
+    documentId: mmGiantHyena0000
+    img: modules/dnd-monster-manual/assets/portraits/hyena.webp
+    _id: GlIp7jcoqnfbWWqc
+    flags: {}
+    _key: '!tables.results!dmgTanBagOfTrick.GlIp7jcoqnfbWWqc'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 8
+      - 8
+    drawn: false
+    text: Tiger
+    documentId: mmTiger000000000
+    img: modules/dnd-monster-manual/assets/portraits/tiger-small.webp
+    _id: dQ9za3nwnBnEltRF
+    flags: {}
+    _key: '!tables.results!dmgTanBagOfTrick.dQ9za3nwnBnEltRF'
+replacement: true
+displayRoll: true
+folder: OUhxCdPPynTzwwPV
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.2
+  createdTime: 1727883396246
+  modifiedTime: 1745439416078
+  lastModifiedBy: dnd5ebuilder0000
+sort: 0
+ownership:
+  default: 0
+formula: 1d8
+_key: '!tables!dmgTanBagOfTrick'

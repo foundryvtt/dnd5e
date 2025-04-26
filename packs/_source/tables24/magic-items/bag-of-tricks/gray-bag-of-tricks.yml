@@ -1,0 +1,126 @@
+_id: dmgGrayBagOfTric
+name: Gray Bag of Tricks
+img: icons/containers/bags/coinpouch-leather-grey.webp
+description: ''
+results:
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    text: Weasel
+    documentId: mmWeasel00000000
+    img: modules/dnd-monster-manual/assets/portraits/weasel.webp
+    _id: wHuva8KyJqk0ks9t
+    flags: {}
+    _key: '!tables.results!dmgGrayBagOfTric.wHuva8KyJqk0ks9t'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 2
+      - 2
+    drawn: false
+    text: Giant Rat
+    documentId: mmGiantRat000000
+    img: modules/dnd-monster-manual/assets/journal-art/rats.webp
+    _id: z4mqTXpfNseZDTT6
+    flags: {}
+    _key: '!tables.results!dmgGrayBagOfTric.z4mqTXpfNseZDTT6'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 3
+      - 3
+    drawn: false
+    text: Badger
+    documentId: mmBadger00000000
+    img: modules/dnd-monster-manual/assets/portraits/badger-small.webp
+    _id: y0mm0I94cSaTbkk6
+    flags: {}
+    _key: '!tables.results!dmgGrayBagOfTric.y0mm0I94cSaTbkk6'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 4
+      - 4
+    drawn: false
+    text: Boar
+    documentId: mmBoar0000000000
+    img: modules/dnd-monster-manual/assets/portraits/boar.webp
+    _id: v65tOkYcYXbUplIe
+    flags: {}
+    _key: '!tables.results!dmgGrayBagOfTric.v65tOkYcYXbUplIe'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 5
+      - 5
+    drawn: false
+    text: Panther
+    documentId: mmPanther0000000
+    img: modules/dnd-monster-manual/assets/portraits/panther.webp
+    _id: HRPWtZTeg5oK5ImY
+    flags: {}
+    _key: '!tables.results!dmgGrayBagOfTric.HRPWtZTeg5oK5ImY'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 6
+      - 6
+    drawn: false
+    text: Giant Badger
+    documentId: mmGiantBadger000
+    img: modules/dnd-monster-manual/assets/portraits/giant-badger.webp
+    _id: 3Qtoly9mgrhZ8UW4
+    flags: {}
+    _key: '!tables.results!dmgGrayBagOfTric.3Qtoly9mgrhZ8UW4'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 7
+      - 7
+    drawn: false
+    text: Dire Wolf
+    documentId: mmDireWolf000000
+    img: modules/dnd-monster-manual/assets/portraits/dire-wolf.webp
+    _id: LumSf2zPMkOkfFLE
+    flags: {}
+    _key: '!tables.results!dmgGrayBagOfTric.LumSf2zPMkOkfFLE'
+  - type: pack
+    documentCollection: dnd5e.actors24
+    weight: 1
+    range:
+      - 8
+      - 8
+    drawn: false
+    text: Giant Elk
+    documentId: mmGiantElk000000
+    img: modules/dnd-monster-manual/assets/portraits/elk.webp
+    _id: GaLvOBWWFIj4RQIO
+    flags: {}
+    _key: '!tables.results!dmgGrayBagOfTric.GaLvOBWWFIj4RQIO'
+replacement: true
+displayRoll: true
+folder: OUhxCdPPynTzwwPV
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.2
+  createdTime: 1727883396246
+  modifiedTime: 1745439435474
+  lastModifiedBy: dnd5ebuilder0000
+sort: 0
+ownership:
+  default: 0
+formula: 1d8
+_key: '!tables!dmgGrayBagOfTric'

@@ -1,0 +1,62 @@
+_id: dmgSenCommunicat
+name: Communication
+img: icons/magic/sonic/scream-wail-shout-teal.webp
+description: ''
+results:
+  - type: text
+    drawn: false
+    range:
+      - 1
+      - 6
+    text: >-
+      The item communicates by transmitting emotion to the creature carrying or
+      wielding it&lt;.
+    _id: 81Hqjkrnbx1sSwOJ
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenCommunicat.81Hqjkrnbx1sSwOJ'
+  - type: text
+    drawn: false
+    range:
+      - 7
+      - 9
+    text: The item speaks one or more languages.
+    _id: mO16jIRjET7lrS3e
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenCommunicat.mO16jIRjET7lrS3e'
+  - type: text
+    drawn: false
+    range:
+      - 10
+      - 10
+    text: >-
+      The item speaks one or more languages. In addition, the item can
+      communicate telepathically with any creature that carries or wields it.
+    _id: CZz643QK97uhNWCX
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenCommunicat.CZz643QK97uhNWCX'
+replacement: true
+displayRoll: true
+folder: An3ZWDU7HLgF24f1
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745549017709
+  modifiedTime: 1745549032498
+  lastModifiedBy: dnd5ebuilder0000
+formula: 1d10
+sort: 200000
+ownership:
+  default: 0
+_key: '!tables!dmgSenCommunicat'

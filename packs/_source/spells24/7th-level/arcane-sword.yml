@@ -1,0 +1,142 @@
+name: Arcane Sword
+system:
+  description:
+    value: >-
+      <p>You create a spectral sword that hovers within range. It lasts for the
+      duration.</p><p>When the sword appears, you make a melee spell attack
+      against a target within 5 feet of the sword. On a hit, the target takes
+      Force damage equal to 4d12 plus your spellcasting ability
+      modifier.</p><p>On your later turns, you can take a Bonus Action to move
+      the sword up to 30 feet to a spot you can see and repeat the attack
+      against the same target or a different one.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: space
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: ft
+    special: ''
+    value: '90'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 7
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a miniature sword worth 250+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    WkeioBGpPAaUZ66H:
+      type: summon
+      _id: WkeioBGpPAaUZ66H
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      bonuses:
+        ac: ''
+        hd: ''
+        hp: ''
+        attackDamage: '@attributes.spell.mod'
+        saveDamage: ''
+        healing: ''
+      creatureSizes: []
+      creatureTypes: []
+      match:
+        attacks: true
+        proficiency: true
+        saves: false
+      profiles:
+        - count: ''
+          name: ''
+          _id: cfMwwH4dggymzi99
+          uuid: Compendium.dnd5e.actors24.Actor.phbsplMordSword0
+          level:
+            min: null
+            max: null
+      summon:
+        prompt: true
+        mode: ''
+        identifier: ''
+      name: Create Spectral Sword
+      img: systems/dnd5e/icons/svg/properties/magical.svg
+  identifier: mordenkainens-sword
+_id: phbswdMordenkain
+type: spell
+img: icons/weapons/swords/sword-flanged-lightning.webp
+effects: []
+folder: EdAGMG8IF26PLkD3
+sort: 1300000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425964789
+  modifiedTime: 1745256800365
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbswdMordenkain'

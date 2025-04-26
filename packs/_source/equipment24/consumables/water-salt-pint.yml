@@ -1,0 +1,63 @@
+name: Water, salt (Pint)
+system:
+  description:
+    value: ''
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  identifier: water-salt-pint
+  source:
+    revision: 1
+    rules: '2024'
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: food
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties: []
+_id: dmgspWatersalt00
+type: consumable
+img: icons/sundries/survival/waterskin-leather-brown.webp
+effects: []
+folder: guHYjt0gjPLU2wCs
+sort: 106250
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1728332157008
+  modifiedTime: 1730774080527
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!dmgspWatersalt00'
