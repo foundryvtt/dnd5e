@@ -380,7 +380,7 @@ export default class InventoryElement extends HTMLElement {
     }, {
       name: `DND5E.ContextMenuAction${item.system.attuned ? "Unattune" : "Attune"}`,
       icon: '<i class="fa-solid fa-sun fa-fw"></i>',
-      condition: () => item.system.attunemed && item.isOwner && !compendiumLocked,
+      condition: () => item.system.attunement && item.isOwner && !compendiumLocked,
       callback: li => this._onAction(li, "attune"),
       group: "state"
     }, {

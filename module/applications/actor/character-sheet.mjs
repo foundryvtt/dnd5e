@@ -865,11 +865,9 @@ export default class CharacterActorSheet extends BaseActorSheet {
 
   /** @inheritDoc */
   async _prepareItemPhysical(item, ctx) {
-    super._prepareItemPhysical(item, ctx);
-
     ctx.concealDetails = !game.user.isGM && (item.system.identified === false);
-
     ctx.isStack = Number.isNumeric(item.system.quantity) && (item.system.quantity !== 1);
+
     if ( item.system.attunement ) ctx.attunement = item.system.attuned ? {
       icon: "fa-sun",
       cls: "attuned",
@@ -879,6 +877,8 @@ export default class CharacterActorSheet extends BaseActorSheet {
       cls: "not-attuned",
       title: CONFIG.DND5E.attunementTypes[item.system.attunement]
     };
+
+    return super._prepareItemPhysical(item, ctx);
   }
 
   /* -------------------------------------------- */
