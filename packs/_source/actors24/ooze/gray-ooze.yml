@@ -1,7 +1,7 @@
 _id: mmGrayOoze000000
 name: Gray Ooze
 type: npc
-img: systems/dnd5e/tokens/ooze/GrayOoze.webp
+img: null
 system:
   currency:
     pp: 0
@@ -344,9 +344,10 @@ system:
       value: >-
         <h1>Gray
         Oozes</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.IMrvogdwbM9y1eDJ
-        caption=false cite=false classes="no-embed mm"]</p><h2>Gray
+        caption=false cite=false classes="no-embed mm
+        free-rules-embed"]</p><h2>Gray
         Ooze</h2><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.3CtaZvXT0QtPFi3T
-        caption=false cite=false classes="no-embed mm"]</p>
+        caption=false cite=false classes="no-embed mm free-rules-embed"]</p>
       public: ''
     alignment: Unaligned
     ideal: ''
@@ -411,7 +412,7 @@ prototypeToken:
   width: 1
   height: 1
   texture:
-    src: systems/dnd5e/tokens/ooze/GrayOoze.webp
+    src: null
     anchorX: 0.5
     anchorY: 0.5
     offsetX: 0
