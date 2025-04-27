@@ -444,6 +444,8 @@ system:
   source:
     revision: 1
     rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
   traits:
     size: med
     di:
@@ -561,6 +563,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       identified: true
       unidentified:
         description: ''
@@ -720,7 +724,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745708558143
+      modifiedTime: 1745712727675
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!mmSpy00000000000.cZowYloP5f2fxbtI'
   - name: Hand Crossbow
@@ -735,6 +739,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       identified: true
       unidentified:
         description: ''
@@ -896,7 +902,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745708558143
+      modifiedTime: 1745712727675
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!mmSpy00000000000.8XNaqNwy1n0AUrl5'
   - _id: mmCunningAction0
@@ -967,6 +973,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       enchant: {}
       prerequisites:
         level: null
@@ -991,8 +999,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712727675
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 0
@@ -1006,7 +1014,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415931803
-  modifiedTime: 1745711948390
+  modifiedTime: 1745712727702
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

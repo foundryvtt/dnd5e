@@ -137,6 +137,8 @@ system:
     revision: 1
     rules: '2024'
     custom: ''
+    book: SRD 5.2
+    license: CC-BY-4.0
   traits:
     size: lg
     di:
@@ -327,6 +329,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       enchant: {}
       type:
         value: monster
@@ -353,9 +357,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.4
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1728509036763
+      modifiedTime: 1745712710795
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!dmgApparatusofKw.fmdWz6RQsUCHneZF'
   - name: Grapple Attack
@@ -482,6 +486,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       enchant: {}
       type:
         value: monster
@@ -507,10 +513,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.4
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712710795
+      lastModifiedBy: dnd5ebuilder0000
     _id: tgIjCBtGCZvMu8ij
     _key: '!actors.items!dmgApparatusofKw.tgIjCBtGCZvMu8ij'
 effects:
@@ -727,9 +733,9 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.3.6
+  systemVersion: 4.4.0
   createdTime: 1728507975227
-  modifiedTime: 1742919651593
+  modifiedTime: 1745712710820
   lastModifiedBy: dnd5ebuilder0000
 sort: 100000
 ownership:

@@ -369,6 +369,8 @@ system:
   source:
     revision: 1
     rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
   traits:
     size: tiny
     di:
@@ -553,6 +555,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       enchant: {}
       type:
         value: monster
@@ -577,10 +581,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712711016
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!dmgqftFloatingWh.JczWMhh6A5JU8yfN'
 effects: []
 folder: 2AjZvlZWDCwSd0ry
@@ -591,9 +595,9 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 4.4.0
   createdTime: 1730770660175
-  modifiedTime: 1730858573103
+  modifiedTime: 1745712711041
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

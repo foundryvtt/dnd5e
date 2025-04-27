@@ -409,7 +409,7 @@ system:
       value: >-
         <div class="gear"><p><strong>Gear:</strong>
         @UUID[Compendium.dnd5e.equipment24.Item.phbafcWand000000]{Wand}</p></div><h1>Mages</h1><p>@Embed[Compendium.dnd5e.content24.JournalEntry.mmAppendixMonste.JournalEntryPage.BRPgUa1VGeHBz5BR
-        caption=false cite=false classes="no-embed mm free-rules-embed"]</p>
+        caption=false cite=false classes="no-embed mm"]</p>
       public: ''
     alignment: Neutral
     ideal: ''
@@ -444,6 +444,8 @@ system:
   source:
     revision: 1
     rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
   traits:
     size: med
     di:
@@ -565,6 +567,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       identified: true
       unidentified:
         description: ''
@@ -617,8 +621,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: Cp0CkYsnKdJGqvW3
     sort: 0
     _key: '!actors.items!mmArchmage000000.Cp0CkYsnKdJGqvW3'
@@ -643,6 +647,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       enchant: {}
       prerequisites:
         level: null
@@ -664,8 +670,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 0
@@ -737,6 +743,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       enchant: {}
       prerequisites:
         level: null
@@ -761,8 +769,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 1
@@ -838,6 +846,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       properties: []
       mastery: ''
       range:
@@ -906,8 +916,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 2
@@ -986,6 +996,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       enchant: {}
       prerequisites:
         level: null
@@ -1010,8 +1022,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 3
@@ -1027,6 +1039,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: bonus
         condition: ''
@@ -1156,8 +1170,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: lSbRnSVRWsTQoh2w
     _key: '!actors.items!mmArchmage000000.lSbRnSVRWsTQoh2w'
   - _id: mmProtectiveMagi
@@ -1285,6 +1299,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       enchant: {}
       prerequisites:
         level: null
@@ -1309,8 +1325,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 4
@@ -1329,6 +1345,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: reaction
         condition: >-
@@ -1465,8 +1483,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: LlpWvmntDHEqUqdZ
     _key: '!actors.items!mmArchmage000000.LlpWvmntDHEqUqdZ'
   - name: Shield
@@ -1483,6 +1501,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: reaction
         condition: >-
@@ -1662,8 +1682,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: 49ScnMv8K3QZJhlf
     _key: '!actors.items!mmArchmage000000.49ScnMv8K3QZJhlf'
   - _id: mmSpellcasting00
@@ -2359,6 +2379,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       enchant: {}
       prerequisites:
         level: null
@@ -2383,8 +2405,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 5
@@ -2405,6 +2427,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -2579,8 +2603,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: mPMsVnGpMgQ8utsG
     _key: '!actors.items!mmArchmage000000.mPMsVnGpMgQ8utsG'
   - name: Detect Thoughts
@@ -2614,6 +2638,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -2804,8 +2830,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: QMTisKKh90SGaCnO
     _key: '!actors.items!mmArchmage000000.QMTisKKh90SGaCnO'
   - name: Disguise Self
@@ -2829,6 +2855,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -2997,8 +3025,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: 4tR7ZpnNmbsmZohl
     _key: '!actors.items!mmArchmage000000.4tR7ZpnNmbsmZohl'
   - name: Invisibility
@@ -3015,6 +3043,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -3183,8 +3213,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: LJAWrZ47CuLAxDH6
     _key: '!actors.items!mmArchmage000000.LJAWrZ47CuLAxDH6'
   - name: Light
@@ -3202,6 +3232,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -3356,8 +3388,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: MOHc49RNKDGv8cd0
     _key: '!actors.items!mmArchmage000000.MOHc49RNKDGv8cd0'
   - name: Mage Armor
@@ -3372,6 +3404,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -3546,8 +3580,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: UcNmJwi1kzaYyomN
     _key: '!actors.items!mmArchmage000000.UcNmJwi1kzaYyomN'
   - name: Prestidigitation
@@ -3576,6 +3610,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -3702,8 +3738,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: JOl15tE46GJMDItv
     _key: '!actors.items!mmArchmage000000.JOl15tE46GJMDItv'
   - name: Fly
@@ -3720,6 +3756,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -3893,8 +3931,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: CyinHvpNPlDrqQ4D
     _key: '!actors.items!mmArchmage000000.CyinHvpNPlDrqQ4D'
   - name: Lightning Bolt
@@ -3912,6 +3950,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -4056,8 +4096,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: nxupE3blwBUB9vqZ
     _key: '!actors.items!mmArchmage000000.nxupE3blwBUB9vqZ'
   - name: Cone of Cold
@@ -4075,6 +4115,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -4218,8 +4260,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: mPM1yrHMPklU8VcP
     _key: '!actors.items!mmArchmage000000.mPM1yrHMPklU8VcP'
   - name: Mind Blank
@@ -4239,6 +4281,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -4411,8 +4455,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: c52PushUU8VODQ6g
     _key: '!actors.items!mmArchmage000000.c52PushUU8VODQ6g'
   - name: Scrying
@@ -4448,6 +4492,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: minute
         condition: ''
@@ -5004,8 +5050,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: bCY0HfHgaLhZsbWz
     _key: '!actors.items!mmArchmage000000.bCY0HfHgaLhZsbWz'
   - name: Teleport
@@ -5067,6 +5113,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -5198,8 +5246,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: 8cAqKodouXttXbg6
     _key: '!actors.items!mmArchmage000000.8cAqKodouXttXbg6'
   - name: Mage Hand
@@ -5221,6 +5269,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       activation:
         type: action
         condition: ''
@@ -5375,8 +5425,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712713284
+      lastModifiedBy: dnd5ebuilder0000
     _id: BVHhqzWtBxgOOErd
     _key: '!actors.items!mmArchmage000000.BVHhqzWtBxgOOErd'
 effects:
@@ -5429,7 +5479,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415931803
-  modifiedTime: 1745712050374
+  modifiedTime: 1745712713331
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

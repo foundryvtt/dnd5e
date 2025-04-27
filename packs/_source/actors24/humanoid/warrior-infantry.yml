@@ -442,6 +442,8 @@ system:
   source:
     revision: 1
     rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
   traits:
     size: med
     di:
@@ -557,6 +559,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       identified: true
       unidentified:
         description: ''
@@ -706,7 +710,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745708558172
+      modifiedTime: 1745712729647
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!mmWarriorInfantr.ol6ha2oiuhrynqx0'
   - _id: mmPackTactics000
@@ -732,6 +736,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       enchant: {}
       prerequisites:
         level: null
@@ -753,8 +759,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712729647
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 0
@@ -768,7 +774,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415931803
-  modifiedTime: 1745415931803
+  modifiedTime: 1745712729672
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

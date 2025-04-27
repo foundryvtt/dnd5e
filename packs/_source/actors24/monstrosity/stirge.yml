@@ -447,6 +447,8 @@ system:
   source:
     revision: 1
     rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
   traits:
     size: tiny
     di:
@@ -688,6 +690,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       identified: true
       unidentified:
         description: ''
@@ -756,8 +760,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712727790
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 0
@@ -773,7 +777,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745416008124
-  modifiedTime: 1745416008124
+  modifiedTime: 1745712727823
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

@@ -435,6 +435,8 @@ system:
   source:
     revision: 1
     rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
   traits:
     size: lg
     di:
@@ -599,6 +601,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       identified: true
       unidentified:
         description: ''
@@ -663,7 +667,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745342045453
+      modifiedTime: 1745712726034
       lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
@@ -681,6 +685,6 @@ _stats:
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1740679135979
-  modifiedTime: 1745415447968
+  modifiedTime: 1745712726060
   lastModifiedBy: dnd5ebuilder0000
 _key: '!actors!mmRidingHorse000'

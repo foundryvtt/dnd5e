@@ -440,6 +440,8 @@ system:
   source:
     revision: 2
     rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
   traits:
     size: med
     di:
@@ -555,6 +557,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       identified: true
       unidentified:
         description: ''
@@ -703,7 +707,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745708557862
+      modifiedTime: 1745712715726
       lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!mmCommoner000000.uXeL0cGWqRTReue0'
   - _id: mmTraining000000
@@ -728,6 +732,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       enchant: {}
       prerequisites:
         level: null
@@ -749,8 +755,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712715726
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 0
@@ -766,7 +772,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415931803
-  modifiedTime: 1745415931803
+  modifiedTime: 1745712715751
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

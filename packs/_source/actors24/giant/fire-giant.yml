@@ -438,6 +438,8 @@ system:
   source:
     revision: 2
     rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
   traits:
     size: huge
     di:
@@ -610,6 +612,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       enchant: {}
       prerequisites:
         level: null
@@ -634,8 +638,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712717648
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 0
@@ -723,6 +727,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       identified: true
       unidentified:
         description: ''
@@ -793,8 +799,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712717648
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 1
@@ -885,6 +891,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       identified: true
       unidentified:
         description: ''
@@ -988,8 +996,8 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712717648
+      lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0
     sort: 2
@@ -1005,7 +1013,7 @@ _stats:
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415632845
-  modifiedTime: 1745711887034
+  modifiedTime: 1745712717676
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

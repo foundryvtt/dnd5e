@@ -369,6 +369,8 @@ system:
   source:
     revision: 1
     rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
   traits:
     size: sm
     di:
@@ -483,6 +485,8 @@ items:
       source:
         revision: 1
         rules: '2024'
+        book: SRD 5.2
+        license: CC-BY-4.0
       identified: true
       unidentified:
         description: ''
@@ -510,10 +514,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712710583
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!dmg3x5CarpetofFl.jRXMMWyLsf3cPmSP'
 effects:
   - name: Overloaded
@@ -562,9 +566,9 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 4.4.0
   createdTime: 1728938623230
-  modifiedTime: 1730858467270
+  modifiedTime: 1745712710610
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

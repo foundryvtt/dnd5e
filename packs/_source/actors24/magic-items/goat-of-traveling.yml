@@ -387,6 +387,8 @@ system:
   source:
     revision: 1
     rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
 img: modules/dnd-dungeon-masters-guide/assets/portraits/goat.webp
 prototypeToken:
   name: Goat of Traveling
@@ -474,6 +476,8 @@ items:
         custom: ''
         rules: '2024'
         revision: 1
+        book: SRD 5.2
+        license: CC-BY-4.0
       cover: null
       crewed: false
       range:
@@ -621,10 +625,10 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.1.0
+      systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1745712710921
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!actors.items!dmgGoatofTraveli.phbaoiHooves0000'
 effects: []
 folder: 2AjZvlZWDCwSd0ry
@@ -636,9 +640,9 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.1.0
+  systemVersion: 4.4.0
   createdTime: 1729790742064
-  modifiedTime: 1730858649567
+  modifiedTime: 1745712710946
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:
