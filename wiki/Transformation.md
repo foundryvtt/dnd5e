@@ -29,7 +29,7 @@ The *Merge* section allows for merging save and skill proficiencies. If this is 
 
 The *Active Effects* section gives fine-grained controls over what effects are still applied to the actor after transformation.
 
-Within the *Other Options* section, the "Temp Formula" allows for granting temporary HP to the newly transformed actor. Since this is a formula, it can use [Roll Data](Roll-Formulas.md) like usual, but it gains access to the roll data of both the original actor and the one being transformed into. Use the base values to access the original actors stats (e.g. `@classes.druid.levels` to access the original actors levels) and prefix it be `@source` for the actor being transformed into (e.g. `@source.details.cr` to grab the source actors challenge rating).
+Within the *Other Options* section, the "Temp Formula" allows for granting temporary HP to the newly transformed actor. Since this is a formula, it can use [Roll Data](Roll-Formulas.md) like usual, but it gains access to the roll data of both the original actor and the one being transformed into. Use the base values to access the original actor's stats (e.g. `@classes.druid.levels` to access the original actor's levels) and prefix it be `@source` for the actor being transformed into (e.g. `@source.details.cr` to grab the source actor's challenge rating).
 
 The "Transform Tokens" setting controls whether all associated linked tokens will be changed alongside the base actor. This should usually be checked.
 
@@ -38,4 +38,4 @@ The "Transform Tokens" setting controls whether all associated linked tokens wil
 
 Once the transformation is no longer required the actor can be changed back using the "Revert Transformation" button in the header of the transformed actor's sheet. This will close the transformed sheet, re-open the original sheet, and change any tokens in the scene back to the original actor.
 
-**Note**: Because core doesn't have the ability to grant players permissions to delete actors, the transformed version of the actor will only be cleaned up if the "Revert Transformation" button is clicked by a GM. Otherwise it will remain in the actor's sidebar.
+**Note**: Because the core software doesn't have the ability to grant players permissions to delete actors, the transformed version of the actor will only be cleaned up if the "Revert Transformation" button is clicked by a GM. Otherwise it will remain in the actors sidebar.
