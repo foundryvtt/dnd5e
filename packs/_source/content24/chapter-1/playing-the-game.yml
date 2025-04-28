@@ -140,18 +140,15 @@ pages:
     _key: '!journal.pages!phbPlayingTheGam.sIPPXW1mYE3O4xdc'
 folder: DEIORpZoUWPUBTPh
 flags:
-  core:
-    sheetClass: dnd5e.JournalSheet5e
   dnd5e:
     type: chapter
     position: 1
     title: Playing the Game
     showPages: true
     order: 100000
-  dnd-players-handbook:
     navigation:
       previous: phbWelcomeToAdve
-      next: phbD20Tests00000
+      next: phbIntroduction0
 _stats:
   duplicateSource: null
   coreVersion: '12.331'

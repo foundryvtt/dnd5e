@@ -2853,14 +2853,14 @@ pages:
     _key: '!journal.pages!mmAppendixAAnima.Ls3RwFhjHWdrOSAK'
 folder: sMpWBrn9gqvlMdTq
 flags:
-  core:
-    sheetClass: dnd5e.JournalSheet5e
   dnd5e:
     type: special
     append: 12
     position: null
-  dnd-monster-manual:
     cssClass: statblock-list
+    navigation:
+      previous: mmMonstersAtoZ00
+      next: dmgTrackingSheet
 _stats:
   duplicateSource: null
   coreVersion: '12.331'

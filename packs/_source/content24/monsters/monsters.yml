@@ -329,12 +329,13 @@ pages:
     _key: '!journal.pages!mmMonsterManual0.L30mSCHBdIu0HYSW'
 folder: sMpWBrn9gqvlMdTq
 flags:
-  core:
-    sheetClass: dnd5e.JournalSheet5e
   dnd5e:
     position: 11
     type: chapter
     showPages: true
+    navigation:
+      previous: dmgMagicItemList
+      next: mmMonsterManual1
 _stats:
   duplicateSource: null
   coreVersion: '12.331'

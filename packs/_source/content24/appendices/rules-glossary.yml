@@ -5830,14 +5830,14 @@ folder: kkR3zR8yqdNg4nMV
 flags:
   core:
     sheetClass: dnd5e.JournalSheet5e
-  dnd-players-handbook:
-    navigation:
-      previous: phbAppendixBCrea
   dnd5e:
     type: chapter
     position: 8
     title: Rules Glossary
     showPages: false
+    navigation:
+      previous: phbSpells0000000
+      next: dmgTheBasics0000
 _stats:
   duplicateSource: null
   coreVersion: '12.331'

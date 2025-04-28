@@ -6369,12 +6369,14 @@ pages:
 folder: sMpWBrn9gqvlMdTq
 flags:
   core:
-    sheetClass: dnd5e.JournalSheet5e
     searchMode: full
   dnd5e:
     type: chapter
     position: 12
     showPages: false
+    navigation:
+      previous: mmMonsterManual1
+      next: mmAppendixAAnima
 _stats:
   duplicateSource: null
   coreVersion: '12.331'

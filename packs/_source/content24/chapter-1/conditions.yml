@@ -45,15 +45,12 @@ pages:
     _key: '!journal.pages!phbConditions000.BuIBCfux6QYAah3q'
 folder: DEIORpZoUWPUBTPh
 flags:
-  core:
-    sheetClass: dnd5e.JournalSheet5e
   dnd5e:
     type: special
     showPages: false
     order: 400700
     append: 1
     tocHidden: true
-  dnd-players-handbook:
     navigation:
       previous: phbDamageAndHeal
       next: phbCreatingAChar

@@ -577,14 +577,11 @@ pages:
     _key: '!journal.pages!phbCombat0000000.9GYj3Sr9FWtCb6SC'
 folder: DEIORpZoUWPUBTPh
 flags:
-  core:
-    sheetClass: dnd5e.JournalSheet5e
   dnd5e:
     type: special
     showPages: true
     append: 1
     order: 106000
-  dnd-players-handbook:
     navigation:
       previous: phbExploration00
       next: phbDamageAndHeal
