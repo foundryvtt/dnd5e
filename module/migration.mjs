@@ -460,16 +460,8 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
     }
 
     // Update the Owned Item
-    if ( !foundry.utils.isEmpty(itemUpdate) ) {
-      if ( itemFlags.persistSourceMigration ) {
-        if ( "effects" in itemUpdate ) itemUpdate.effects = itemData.effects.map(effect => foundry.utils.mergeObject(
-          effect, itemUpdate.effects.find(e => e._id === effect._id) ?? {}, { inplace: false, performDeletions: true }
-        ));
-        itemUpdate = foundry.utils.mergeObject(itemData, itemUpdate, { inplace: false, performDeletions: true });
-        flags.persistSourceMigration = true;
-      }
-      arr.push({ ...itemUpdate, _id: itemData._id });
-    }
+    if ( itemFlags.persistSourceMigration ) flags.persistSourceMigration = true;
+    arr.push({ itemData, itemUpdate });
 
     // Update tool expertise.
     if ( actorData.system.tools ) {
@@ -480,7 +472,15 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
     }
 
     return arr;
-  }, []);
+  }, []).map(({ itemData, itemUpdate }) => {
+    if ( flags.persistSourceMigration ) {
+      if ( "effects" in itemUpdate ) itemUpdate.effects = itemData.effects.map(effect => foundry.utils.mergeObject(
+        effect, itemUpdate.effects.find(e => e._id === effect._id) ?? {}, { inplace: false, performDeletions: true }
+      ));
+      itemUpdate = foundry.utils.mergeObject(itemData, itemUpdate, { inplace: false, performDeletions: true });
+    }
+    return foundry.utils.isEmpty(itemUpdate) ? null : { ...itemUpdate, _id: itemData._id };
+  }).filter(_ => _);
   if ( items.length > 0 ) updateData.items = items;
 
   return updateData;
