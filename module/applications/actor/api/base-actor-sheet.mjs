@@ -469,7 +469,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
 
       // Handle expanded data
       ctx.isExpanded = this.expandedSections.get(item.id) === true;
-      if ( ctx.isExpanded ) context.itemContext[item.id] = await item.getChatData({ secrets: this.actor.isOwner });
+      if ( ctx.isExpanded ) ctx.expanded = await item.getChatData({ secrets: this.actor.isOwner });
 
       // Place the item into a specific categories
       const categories = this._assignItemCategories(item) ?? [];

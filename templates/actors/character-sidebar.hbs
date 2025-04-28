@@ -278,7 +278,7 @@
                         {{#if (and name @root.actor.isOwner)}}
                         <input type="text" class="uninput value" value="{{ value }}"
                                {{#unless ../bareName}}data-{{/unless}}name="{{ name }}"
-                               data-dtype="Number" inputmode="numeric" pattern="[0-9+=\-]*">
+                               data-dtype="Number" inputmode="numeric" pattern="[+=\-]?\d*">
                         {{else}}
                         <span class="value">{{ value }}</span>
                         {{/if}}
@@ -322,7 +322,7 @@
                         {{#if @root.actor.isOwner}}
                         <input type="text" class="uninput value" value="{{ resource.value }}"
                                data-dtype="Number" name="system.{{ id }}.value" inputmode="numeric"
-                               pattern="[0-9+=\-]*">
+                               pattern="[+=\-]?\d*">
                         {{else}}
                         <span class="value">{{ resource.value }}</span>
                         {{/if}}
@@ -330,7 +330,7 @@
                         {{#if @root.editable}}
                         <input type="text" class="uninput max" value="{{ resource.source.max }}"
                                data-dtype="Number" name="system.{{ id }}.max" inputmode="numeric"
-                               pattern="[0-9+=\-]*">
+                               pattern="[+=\-]?\d*">
                         {{else}}
                         <span class="max">{{ resource.max }}</span>
                         {{/if}}
