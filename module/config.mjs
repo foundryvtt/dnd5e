@@ -4,6 +4,7 @@ import TransformationSetting from "./data/settings/transformation-setting.mjs";
 import * as activities from "./documents/activity/_module.mjs";
 import * as advancement from "./documents/advancement/_module.mjs";
 import { preLocalize } from "./utils.mjs";
+import MappingField from "./data/fields/mapping-field.mjs";
 
 // Namespace Configuration Values
 const DND5E = {};
@@ -4272,7 +4273,8 @@ DND5E.traits = {
     icon: "icons/tools/instruments/harp-yellow-teal.webp",
     actorKeyPath: "system.skills",
     labelKeyPath: "label",
-    expertise: true
+    expertise: true,
+    dataType: MappingField
   },
   languages: {
     labels: {
@@ -4314,7 +4316,8 @@ DND5E.traits = {
     subtypes: { keyPath: "toolType", ids: ["tools"] },
     children: { vehicle: "vehicleTypes" },
     sortCategories: true,
-    expertise: true
+    expertise: true,
+    dataType: MappingField
   },
   di: {
     labels: {
