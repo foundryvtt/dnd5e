@@ -1043,9 +1043,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _renderSpellbook(context, options) {
-    for ( const [id, { usesSlots, pips, slot }] of Object.entries(context.spellbook) ) {
+    for ( const { usesSlots, pips, slot, dataset } of Object.values(context.spellbook) ) {
       if ( !usesSlots ) continue;
-      const query = `[data-application-part="spells"] .items-section[data-level="${id}"] .items-header`;
+      const query = `[data-application-part="spells"] .items-section[data-level="${
+        dataset.level}"][data-preparation-mode="${dataset.preparationMode}"] .items-header`;
       const header = this.element.querySelector(query);
       if ( !header ) continue;
       if ( context.editable ) {
