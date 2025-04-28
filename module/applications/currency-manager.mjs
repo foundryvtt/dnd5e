@@ -3,6 +3,15 @@ import Award from "./award.mjs";
 import Application5e from "./api/application.mjs";
 
 /**
+ * @typedef {object} CurrencyConversionOptions
+ * @property {boolean} [recursive=true]                 Deduct currency from containers as well as the base Actor. TODO
+ * @property {"high"|"low"|string[]} [priority="low"]   Prioritize higher denominations before lower, or vice-versa. If
+ *                                                      an array of denominations is passed, this order is used,
+ *                                                      skipping any denominations that are omitted.
+ * @property {boolean} [exact=true]                     Prioritize deducting the requested denomination first.
+ */
+
+/**
  * Application for performing currency conversions & transfers.
  */
 export default class CurrencyManager extends Application5e {
@@ -236,14 +245,11 @@ export default class CurrencyManager extends Application5e {
 
   /**
    * Deduct a certain amount of currency from a given Actor.
-   * @param {Actor5e} actor                          The actor.
-   * @param {number} amount                          The amount of currency.
-   * @param {string} denomination                    The currency's denomination.
-   * @param {object} [options]
-   * @param {boolean} [options.recursive=false]      Deduct currency from containers as well as the base Actor. TODO
-   * @param {"high"|"low"} [options.priority="low"]  Prioritize higher denominations before lower, or vice-versa.
-   * @param {boolean} [options.exact=true]           Prioritize deducting the requested denomination first.
-   * @throws {Error} If the Actor does not have sufficient currency.
+   * @param {Actor5e} actor                         The actor.
+   * @param {number} amount                         The amount of currency.
+   * @param {string} denomination                   The currency's denomination.
+   * @param {CurrencyConversionOptions} [options]   Currency conversion options.
+   * @throws {Error}                                If the Actor does not have sufficient currency.
    * @returns {Promise<Actor5e>|void}
    */
   static deductActorCurrency(actor, amount, denomination, options={}) {
@@ -262,13 +268,10 @@ export default class CurrencyManager extends Application5e {
 
   /**
    * Determine model updates for deducting a certain amount of currency from a given Actor.
-   * @param {Actor5e} actor                          The actor.
-   * @param {number} amount                          The amount of currency.
-   * @param {string} denomination                    The currency's denomination.
-   * @param {object} [options]
-   * @param {boolean} [options.recursive=false]      Deduct currency from containers as well as the base Actor. TODO
-   * @param {"high"|"low"} [options.priority="low"]  Prioritize higher denominations before lower, or vice-versa.
-   * @param {boolean} [options.exact=true]           Prioritize deducting the requested denomination first.
+   * @param {Actor5e} actor                         The actor.
+   * @param {number} amount                         The amount of currency.
+   * @param {string} denomination                   The currency's denomination.
+   * @param {CurrencyConversionOptions} [options]   Currency conversion options.
    * @returns {{ item: object[], remainder: number, [p: string]: any }}
    */
   static getActorCurrencyUpdates(actor, amount, denomination, { recursive=false, priority="low", exact=true }={}) {
@@ -276,9 +279,16 @@ export default class CurrencyManager extends Application5e {
     const updates = { system: { currency: { ...currency } }, remainder: amount, item: [] };
     if ( amount <= 0 ) return updates;
 
-    const currencies = Object.entries(CONFIG.DND5E.currencies).map(([denom, { conversion }]) => {
-      return [denom, conversion];
-    }).sort(([, a], [, b]) => priority === "high" ? a - b : b - a);
+    let currencies;
+    if ( Array.isArray(priority) ) {
+      // Use only the supplied denominations.
+      currencies = priority.map(denom => [denom, CONFIG.DND5E.currencies[denom].conversion]);
+    } else {
+      // Use all currencies from lowest to highest or highest to lowest.
+      currencies = Object.entries(CONFIG.DND5E.currencies).map(([denom, { conversion }]) => {
+        return [denom, conversion];
+      }).sort(([, a], [, b]) => priority === "high" ? a - b : b - a);
+    }
     const baseConversion = CONFIG.DND5E.currencies[denomination].conversion;
 
     if ( exact ) currencies.unshift([denomination, baseConversion]);
