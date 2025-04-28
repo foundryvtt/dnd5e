@@ -1,5 +1,7 @@
 import DocumentSheet5e from "../api/document-sheet.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * @typedef JournalEditorConfiguration
  * @property {string} textKeyPath  The path to the specific HTML field being edited.

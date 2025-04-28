@@ -703,7 +703,9 @@ export default class InventoryElement extends HTMLElement {
         this.app._expanded.delete(item.id);
       } else {
         const chatData = await item.getChatData({secrets: this.document.isOwner});
-        const summary = $(await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", chatData));
+        const summary = $(await foundry.applications.handlebars.renderTemplate(
+          "systems/dnd5e/templates/items/parts/item-summary.hbs", chatData
+        ));
         $(li).append(summary.hide());
         summary.slideDown(200);
         this.app._expanded.add(item.id);

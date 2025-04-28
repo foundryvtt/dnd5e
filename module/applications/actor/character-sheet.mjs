@@ -5,6 +5,8 @@ import ContextMenu5e from "../context-menu.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
 import Item5e from "../../documents/item.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * Extension of base actor sheet for characters.
  */

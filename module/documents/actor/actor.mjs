@@ -1041,7 +1041,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     };
 
     return ChatMessage.implementation.create({
-      content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
+      content: await foundry.applications.handlebars.renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", {
         buttons: [{
           dataset: { ...dataset, type: "concentration", visbility: "all" },
           buttonLabel: createRollLabel({ ...dataset, ...config }),

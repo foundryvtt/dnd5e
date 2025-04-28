@@ -1,6 +1,8 @@
 import Proficiency from "../documents/actor/proficiency.mjs";
 import * as Trait from "../documents/actor/trait.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * Data Model variant with some extra methods to support template mix-ins.
  *
@@ -533,7 +535,7 @@ export class ItemDataModel extends SystemDataModel {
    */
   async richTooltip(enrichmentOptions={}) {
     return {
-      content: await renderTemplate(
+      content: await foundry.applications.handlebars.renderTemplate(
         this.constructor.ITEM_TOOLTIP_TEMPLATE, await this.getCardData(enrichmentOptions)
       ),
       classes: ["dnd5e2", "dnd5e-tooltip", "item-tooltip"]

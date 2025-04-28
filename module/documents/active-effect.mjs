@@ -2,6 +2,7 @@ import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
 import { parseOrString, staticID } from "../utils.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
@@ -826,7 +827,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( this.type === "enchantment" ) properties.push("DND5E.ENCHANTMENT.Label");
 
     return {
-      content: await renderTemplate(
+      content: await foundry.applications.handlebars.renderTemplate(
         "systems/dnd5e/templates/effects/parts/effect-tooltip.hbs", {
           effect: this,
           description: await TextEditor.enrichHTML(this.description ?? "", { relativeTo: this, ...enrichmentOptions }),

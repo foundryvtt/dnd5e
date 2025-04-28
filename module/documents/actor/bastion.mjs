@@ -467,7 +467,7 @@ export default class Bastion {
         link: facility.toAnchor().outerHTML
       });
     }
-    return renderTemplate(this.constructor.ATTACK_TEMPLATE, context);
+    return foundry.applications.handlebars.renderTemplate(this.constructor.ATTACK_TEMPLATE, context);
   }
 
   /* -------------------------------------------- */
@@ -513,7 +513,7 @@ export default class Bastion {
         dataset: { action: "claim" }
       });
     }
-    return renderTemplate(this.constructor.TURN_TEMPLATE, context);
+    return foundry.applications.handlebars.renderTemplate(this.constructor.TURN_TEMPLATE, context);
   }
 
   /* -------------------------------------------- */

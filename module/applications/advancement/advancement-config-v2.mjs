@@ -195,7 +195,7 @@ export default class AdvancementConfig extends PseudoDocumentSheet {
     if ( !this.options.dropKeyPath ) return;
 
     // Try to extract the data
-    const data = TextEditor.getDragEventData(event);
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
 
     if ( data?.type !== "Item" ) return;
     const item = await Item.implementation.fromDropData(data);

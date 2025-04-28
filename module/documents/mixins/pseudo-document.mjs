@@ -276,14 +276,17 @@ export default function PseudoDocumentMixin(Base) {
       let type = data.type;
 
       if ( !types.includes(type) ) type = types[0];
-      const content = await renderTemplate("systems/dnd5e/templates/apps/document-create.hbs", {
-        name, type,
-        types: types.map(t => {
-          const data = this._createDialogData(t, parent);
-          data.svg = data.icon?.endsWith(".svg");
-          return data;
-        }).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
-      });
+      const content = await foundry.applications.handlebars.renderTemplate(
+        "systems/dnd5e/templates/apps/document-create.hbs",
+        {
+          name, type,
+          types: types.map(t => {
+            const data = this._createDialogData(t, parent);
+            data.svg = data.icon?.endsWith(".svg");
+            return data;
+          }).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
+        }
+      );
       return Dialog.prompt({
         title, content,
         label: title,

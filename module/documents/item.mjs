@@ -16,6 +16,8 @@ import SelectChoices from "./actor/select-choices.mjs";
 import Advancement from "./advancement/advancement.mjs";
 import SystemDocumentMixin from "./mixins/document.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * Override and extend the basic Item implementation.
  */
@@ -716,7 +718,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const messageConfig = foundry.utils.mergeObject({
       create: message?.createMessage ?? true,
       data: {
-        content: await renderTemplate("systems/dnd5e/templates/chat/item-card.hbs", context),
+        content: await foundry.applications.handlebars.renderTemplate(
+          "systems/dnd5e/templates/chat/item-card.hbs", context
+        ),
         flags: {
           "core.canPopout": true,
           "dnd5e.item": { id: this.id, uuid: this.uuid, type: this.type }
@@ -1529,21 +1533,24 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const name = data.name || game.i18n.format("DOCUMENT.New", { type: label });
     let type = data.type || CONFIG[this.documentName]?.defaultType;
     if ( !types.includes(type) ) type = types[0];
-    const content = await renderTemplate("systems/dnd5e/templates/apps/document-create.hbs", {
-      folders, name, type,
-      folder: data.folder,
-      hasFolders: folders.length > 0,
-      types: types.map(type => {
-        const label = CONFIG[this.documentName]?.typeLabels?.[type] ?? type;
-        const data = {
-          type,
-          label: game.i18n.has(label) ? game.i18n.localize(label) : type,
-          icon: this.getDefaultArtwork({ type })?.img ?? "icons/svg/item-bag.svg"
-        };
-        data.svg = data.icon?.endsWith(".svg");
-        return data;
-      }).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
-    });
+    const content = await foundry.applications.handlebars.renderTemplate(
+      "systems/dnd5e/templates/apps/document-create.hbs",
+      {
+        folders, name, type,
+        folder: data.folder,
+        hasFolders: folders.length > 0,
+        types: types.map(type => {
+          const label = CONFIG[this.documentName]?.typeLabels?.[type] ?? type;
+          const data = {
+            type,
+            label: game.i18n.has(label) ? game.i18n.localize(label) : type,
+            icon: this.getDefaultArtwork({ type })?.img ?? "icons/svg/item-bag.svg"
+          };
+          data.svg = data.icon?.endsWith(".svg");
+          return data;
+        }).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
+      }
+    );
     return Dialog.prompt({
       title, content,
       label: title,
