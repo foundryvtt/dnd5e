@@ -650,7 +650,9 @@ export default class CompendiumBrowser extends Application5e {
       displaySelection: this.displaySelection,
       selected: this.#selected.has(uuid)
     };
-    const html = await renderTemplate("systems/dnd5e/templates/compendium/browser-entry.hbs", context);
+    const html = await foundry.applications.handlebars.renderTemplate(
+      "systems/dnd5e/templates/compendium/browser-entry.hbs", context
+    );
     const template = document.createElement("template");
     template.innerHTML = html;
     const element = template.content.firstElementChild;
@@ -709,13 +711,16 @@ export default class CompendiumBrowser extends Application5e {
       obj[k.slugify({ strict: true })] = v;
       return obj;
     }, {});
-    const filter = await renderTemplate("systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs", {
-      locked,
-      value: locked,
-      key: "source",
-      label: "DND5E.SOURCE.FIELDS.source.label",
-      config: { choices: this.#sources }
-    });
+    const filter = await foundry.applications.handlebars.renderTemplate(
+      "systems/dnd5e/templates/compendium/browser-sidebar-filter-set.hbs",
+      {
+        locked,
+        value: locked,
+        key: "source",
+        label: "DND5E.SOURCE.FIELDS.source.label",
+        config: { choices: this.#sources }
+      }
+    );
     filters.insertAdjacentHTML("beforeend", filter);
   }
 

@@ -4,10 +4,17 @@ import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
 import JournalEditor from "./journal-editor.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * Journal entry page that displays an automatically generated summary of a class along with additional description.
  */
 export default class JournalClassPageSheet extends foundry.appv1.sheets.JournalPageSheet {
+
+  /** @override */
+  static _warnedAppV1 = true;
+
+  /* --------------------------------------------- */
 
   /** @inheritDoc */
   static get defaultOptions() {

@@ -40,6 +40,11 @@ export default class AdvancementFlow extends FormApplication {
 
   /* -------------------------------------------- */
 
+  /** @override */
+  static _warnedAppV1 = true;
+
+  /* --------------------------------------------- */
+
   /** @inheritDoc */
   static get defaultOptions() {
     return foundry.utils.mergeObject(super.defaultOptions, {

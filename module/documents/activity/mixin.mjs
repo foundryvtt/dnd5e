@@ -856,7 +856,7 @@ export default function ActivityMixin(Base) {
       const messageConfig = foundry.utils.mergeObject({
         rollMode: game.settings.get("core", "rollMode"),
         data: {
-          content: await renderTemplate(this.metadata.usage.chatCard, context),
+          content: await foundry.applications.handlebars.renderTemplate(this.metadata.usage.chatCard, context),
           speaker: ChatMessage.getSpeaker({ actor: this.item.actor }),
           flags: {
             core: { canPopout: true }

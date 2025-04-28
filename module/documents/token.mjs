@@ -130,7 +130,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
    * @returns {string[]}
    */
   getRingEffects() {
-    const e = foundry.canvas.tokens.TokenRing.effects;
+    const e = foundry.canvas.placeables.tokens.TokenRing.effects;
     const effects = [];
     if ( this.hasStatusEffect(CONFIG.specialStatusEffects.INVISIBLE) ) effects.push(e.INVISIBILITY);
     else if ( this === game.combat?.combatant?.token ) effects.push(e.RING_GRADIENT);
@@ -150,7 +150,7 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
     const options = {};
     if ( type === "damage" ) {
       options.duration = 500;
-      options.easing = foundry.canvas.tokens.TokenRing.easeTwoPeaks;
+      options.easing = foundry.canvas.placeables.tokens.TokenRing.easeTwoPeaks;
     }
     this.object.ring?.flashColor(Color.from(color), options);
   }

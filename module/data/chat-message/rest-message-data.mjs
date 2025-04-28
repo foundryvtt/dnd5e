@@ -2,6 +2,7 @@ import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
 import ActivationsField from "./fields/activations-field.mjs";
 import { ActorDeltasField } from "./fields/deltas-field.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { StringField } = foundry.data.fields;
 
 /**

@@ -5,9 +5,7 @@ import ItemSheet5e from "./item-sheet.mjs";
 /**
  * Items sidebar with added support for item containers.
  */
-export default class ItemDirectory5e extends DragDropApplicationMixin(
-  foundry.applications?.sidebar?.tabs?.ItemDirectory ?? ItemDirectory
-) {
+export default class ItemDirectory5e extends DragDropApplicationMixin(foundry.applications.sidebar.tabs.ItemDirectory) {
 
   /** @override */
   _allowedDropBehaviors(event, data) {
@@ -34,7 +32,7 @@ export default class ItemDirectory5e extends DragDropApplicationMixin(
 
   /** @override */
   _onDrop(event) {
-    const data = TextEditor.getDragEventData(event);
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
     if ( !data.type ) return;
     const target = event.target.closest(".directory-item") || null;
 
@@ -75,11 +73,11 @@ export default class ItemDirectory5e extends DragDropApplicationMixin(
   /* -------------------------------------------- */
 
   /** @override */
-  async _onClickEntryName(event) {
-    const { entryId } = event.target.closest("[data-entry-id]")?.dataset ?? {};
-    const item = this.collection.get(entryId);
-    if ( !item ) return;
+  async _onClickEntry(event, target) {
+    const { entryId } = target.closest("[data-entry-id]")?.dataset ?? {};
+    const item = this.collection.get(entryId) ?? await this.collection.getDocument(entryId);
+    if ( !item ) return super._onClickEntry(event, target);
     const mode = item.sheet?._mode ?? (this.collection.locked ? ItemSheet5e.MODES.PLAY : ItemSheet5e.MODES.EDIT);
-    item.sheet.render(true, { mode });
+    item.sheet.render({ force: true, mode });
   }
 }

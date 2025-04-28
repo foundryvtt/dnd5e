@@ -11,6 +11,7 @@ import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
 import TraitsFields from "./templates/traits.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
@@ -565,7 +566,9 @@ export default class NPCData extends CreatureTemplate {
       context.anchor = this.parent.toAnchor({ name: context.name }).outerHTML;
     }
     const template = document.createElement("template");
-    template.innerHTML = await renderTemplate("systems/dnd5e/templates/actors/embeds/npc-embed.hbs", context);
+    template.innerHTML = await foundry.applications.handlebars.renderTemplate(
+      "systems/dnd5e/templates/actors/embeds/npc-embed.hbs", context
+    );
 
     /**
      * A hook event that fires after an embedded NPC stat block rendered.

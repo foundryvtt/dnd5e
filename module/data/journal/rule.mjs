@@ -1,3 +1,4 @@
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { HTMLField, StringField } = foundry.data.fields;
 
 /**
@@ -32,7 +33,9 @@ export default class RuleJournalPageData extends foundry.abstract.TypeDataModel 
       })
     };
     return {
-      content: await renderTemplate("systems/dnd5e/templates/journal/page-rule-tooltip.hbs", context),
+      content: await foundry.applications.handlebars.renderTemplate(
+        "systems/dnd5e/templates/journal/page-rule-tooltip.hbs", context
+      ),
       classes: ["dnd5e-tooltip", "rule-tooltip"]
     };
   }

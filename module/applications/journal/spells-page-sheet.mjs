@@ -2,10 +2,17 @@ import { linkForUuid, sortObjectEntries } from "../../utils.mjs";
 import Items5e from "../../data/collection/items-collection.mjs";
 import SpellsUnlinkedConfig from "./spells-unlinked-config.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * Journal entry page the displays a list of spells for a class, subclass, background, or something else.
  */
 export default class JournalSpellListPageSheet extends foundry.appv1.sheets.JournalPageSheet {
+
+  /** @override */
+  static _warnedAppV1 = true;
+
+  /* --------------------------------------------- */
 
   /** @inheritDoc */
   static get defaultOptions() {
