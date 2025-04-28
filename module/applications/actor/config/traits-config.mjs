@@ -117,7 +117,7 @@ export default class TraitsConfig extends BaseConfigSheet {
    * @protected
    */
   _processChoice(data, key, choice, categoryChosen=false) {
-    if ( (data.value?.includes("ALL") && (key !== "ALL")) || categoryChosen ) {
+    if ( (data.value?.includes?.("ALL") && (key !== "ALL")) || categoryChosen ) {
       choice.chosen = true;
       choice.disabled = true;
     }
@@ -130,7 +130,7 @@ export default class TraitsConfig extends BaseConfigSheet {
   /** @inheritDoc */
   _processFormData(event, form, formData) {
     const submitData = super._processFormData(event, form, formData);
-    if ( CONFIG.DND5E.traits[this.options.trait].dataType !== Number ) {
+    if ( !CONFIG.DND5E.traits[this.options.trait].dataType ) {
       this._filterData(submitData, `${Trait.actorKeyPath(this.options.trait)}.value`);
     }
     return submitData;
