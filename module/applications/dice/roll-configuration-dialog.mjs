@@ -305,7 +305,9 @@ export default class RollConfigurationDialog extends Dialog5e {
     config = foundry.utils.mergeObject({ parts: [], data: {}, options: {} }, config);
 
     /**
-     * A hook event that fires when a roll config is built using the roll prompt.
+     * A hook event that fires when a roll config is built using the roll prompt. Multiple hooks may be called depending
+     * on the rolling method (e.g. `dnd5e.buildSkillRollConfig`, `dnd5e.buildAbilityCheckRollConfig`,
+     * `dnd5e.buildRollConfig`).
      * @function dnd5e.buildRollConfig
      * @memberof hookEvents
      * @param {RollConfigurationDialog} app    Roll configuration dialog.
@@ -313,7 +315,9 @@ export default class RollConfigurationDialog extends Dialog5e {
      * @param {FormDataExtended} [formData]    Any data entered into the rolling prompt.
      * @param {number} index                   Index of the roll within all rolls being prepared.
      */
-    Hooks.callAll("dnd5e.buildRollConfig", this, config, formData, index);
+    for ( const hookName of this.#config.hookNames ?? [""] ) {
+      Hooks.callAll(`dnd5e.build${hookName.capitalize()}RollConfig`, this, config, formData, index);
+    }
 
     const situational = formData?.get(`roll.${index}.situational`);
     if ( situational && (config.situational !== false) ) {
@@ -324,6 +328,25 @@ export default class RollConfigurationDialog extends Dialog5e {
     }
 
     this.options.buildConfig?.(this.config, config, formData, index);
+
+    /**
+     * A hook event that fires after a roll config has been built using the roll prompt. Multiple hooks may be called
+     * depending on the rolling method (e.g. `dnd5e.postBuildSkillRollConfig`, `dnd5e.postBuildAbilityCheckRollConfig`,
+     * `dnd5e.postBuildRollConfig`).
+     * @function dnd5e.postBuildRollConfig
+     * @memberof hookEvents
+     * @param {BasicRollProcessConfiguration} process  Full process configuration data.
+     * @param {BasicRollConfiguration} config          Roll configuration data.
+     * @param {number} index                           Index of the roll within all rolls being prepared.
+     * @param {object} [options]
+     * @param {RollConfigurationDialog} [options.app]  Roll configuration dialog.
+     * @param {FormDataExtended} [options.formData]    Any data entered into the rolling prompt.
+     */
+    for ( const hookName of this.#config.hookNames ?? [""] ) {
+      Hooks.callAll(`dnd5e.postBuild${hookName.capitalize()}RollConfig`, this.config, config, index, {
+        app: this, formData
+      });
+    }
 
     return config;
   }

@@ -154,6 +154,9 @@ export default class BasicRoll extends Roll {
     if ( dialog.configure === false ) {
       rolls = config.rolls?.map((r, index) => {
         dialog.options?.buildConfig?.(config, r, null, index);
+        for ( const hookName of config.hookNames ) {
+          Hooks.callAll(`dnd5e.postBuild${hookName.capitalize()}RollConfig`, config, r, index);
+        }
         return this.fromConfig(r, config);
       }) ?? [];
     } else {
