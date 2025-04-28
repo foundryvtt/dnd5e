@@ -189,4 +189,15 @@
   &:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities) .create-child {
     display: block;
   }
+
+  /* ---------------------------------- */
+  /*  Interactivity                     */
+  /* ---------------------------------- */
+
+  &.locked {
+    .rollable, .draggable { cursor: var(--cursor-default); }
+    .rollable:hover { text-shadow: none; }
+  }
+
+  &:not(.locked) .rollable.draggable { cursor: var(--cursor-pointer); }
 }
