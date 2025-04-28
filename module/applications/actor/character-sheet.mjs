@@ -1077,7 +1077,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #useFavorite(event, target) {
-    if ( !this.isEditable || (target.tagName === "INPUT") ) return;
+    if ( !this.isEditable || (event.target.tagName === "INPUT") ) return;
     const { favoriteId } = target.closest("[data-favorite-id]").dataset;
     const favorite = await fromUuid(favoriteId, { relative: this.actor });
     if ( (favorite instanceof dnd5e.documents.Item5e) || target.dataset.activityId ) {
