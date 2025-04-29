@@ -1,21 +1,39 @@
-![Up to date as of 2.1.0](https://img.shields.io/static/v1?label=dnd5e&message=2.1.0&color=informational)
+![Up to date as of 5.0.0](https://img.shields.io/static/v1?label=dnd5e&message=5.0.0&color=informational)
 
-## Configuring a Module
-Modules that wish to provide portrait and/or token art for creatures in compendia may do so with special flags in their module manifest. This tells the dnd5e system where to find art to attach to the creature dynamically, that will then be present when the creature is imported into the world.
+**Note**: The system's module art system has been deprecated and replaced with Foundry's implementation.
 
-### `module.json`
+## Migrate to Core's system
+Migrating to the core compendium art system is very simple and only requires adjusting the flags in your `module.json` by moving your flags into a `compendiumArtMappings.dnd5e` object and renaming `dnd5e-art` to `mapping` and `dnd5e-art-credit` to just `credit`:
+
+### Existing `module.json`
 ```json
 {
   "flags": {
-    "moduleId": {
-      "dnd5e-art": "modules/moduleId/map-dnd5e.json",
+    "<Module ID>": {
+      "dnd5e-art": "modules/<Module ID>/map-dnd5e.json",
       "dnd5e-art-credit": "<em>Creature Artwork by Foo Bar.</em>"
     }
   }
 }
 ```
 
-The `dnd5e-art` key can point to any JSON file available within your module's directory. The file's name is not important, but its contents must be formatted in a specific way, see below. The optional `dnd5e-art-credit` string is dynamically appended to the biographies of each Actor that uses your module's art.
+### Updated `module.json`
+```json
+{
+  "flags": {
+    "compendiumArtMappings": {
+      "dnd5e": {
+        "mapping": "modules/<Module ID>/map-dnd5e.json",
+        "credit": "<em>Creature Artwork by Foo Bar.</em>"
+      }
+    }
+  }
+}
+```
+
+## JSON Definition
+
+The `mapping` key can point to any JSON file available within your module's directory. The file's name is not important, but its contents must be formatted in a specific way, see below. The optional `credit` string is dynamically appended to the biographies of each Actor that uses your module's art. The system will automatically add the credit to the end of the actor's description in the compendium.
 
 ### `map-dnd5e.json`
 ```json
