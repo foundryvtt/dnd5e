@@ -377,7 +377,15 @@
           height: unset;
           line-height: normal;
 
-          > .title { line-height: normal; }
+          > span { line-height: normal; }
+
+          > .tag {
+            margin-inline: auto 4px;
+            padding-inline: 4px;
+            border: var(--dnd5e-border-dark);
+            border-radius: 3px;
+            font-weight: bold;
+          }
         }
       }
     }
