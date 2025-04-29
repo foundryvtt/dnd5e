@@ -8,7 +8,7 @@ import Dialog5e from "../api/dialog.mjs";
 export default class TransformDialog extends Dialog5e {
   constructor(options) {
     super(options);
-    this.#settings = this.options.transform.settings.clone() ?? new TransformationSetting();
+    this.#settings = this.options.transform.settings?.clone() ?? new TransformationSetting();
   }
 
   /* -------------------------------------------- */
