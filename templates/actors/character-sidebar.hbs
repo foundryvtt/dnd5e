@@ -27,6 +27,7 @@
             {{/if}}
 
             <img src="{{ portrait.src }}" alt="{{ actor.name }}"
+                 {{#if editable}}data-action="editImage"{{else}}data-action="showArtwork"{{/if}}
                  {{#if (and editable portrait.path)}}data-edit="{{ portrait.path }}"{{/if}}>
         </div>
 
