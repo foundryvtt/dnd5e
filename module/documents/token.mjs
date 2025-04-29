@@ -163,8 +163,6 @@ export default class TokenDocument5e extends SystemFlagsMixin(TokenDocument) {
   async _preCreate(data, options, user) {
     if ( (await super._preCreate(data, options, user)) === false ) return false;
 
-    if ( data.texture?.src === null ) this.updateSource({ "texture.src": foundry.documents.BaseToken.DEFAULT_ICON });
-
     if ( (this.actor?.type === "npc") && !this.actorLink
       && foundry.utils.getProperty(this.actor, "system.attributes.hp.formula")?.trim().length ) {
       const autoRoll = game.settings.get("dnd5e", "autoRollNPCHP");
