@@ -1587,8 +1587,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _onDragEffect(event) {
-    const collection = this.actor.items.get(event.currentTarget.dataset.parentId) ?? this.actor.effects;
-    const effect = collection.get(li.dataset.effectId);
+    const collection = this.actor.items.get(event.currentTarget.dataset.parentId)?.effects ?? this.actor.effects;
+    const effect = collection.get(event.currentTarget.dataset.effectId);
     if ( effect ) event.dataTransfer.setData("text/plain", JSON.stringify(effect.toDragData()));
   }
 
