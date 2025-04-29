@@ -6,7 +6,7 @@ The transformation system allows for modifying an actor using the stats of anoth
 
 While GMs can always take advantage of transformation, this feature requires certain permissions to be set in order for it to be used by players. First the system setting "Allow Transformation" must be enabled:
 
-![Transformation Permission](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/transformation/transformation-permission.jpg)
+![Transformation Permission](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/transformation/transformation-permissions.jpg)
 
 Then a few core Foundry permissions may need to be changed depending on how users will be using the feature.
 
