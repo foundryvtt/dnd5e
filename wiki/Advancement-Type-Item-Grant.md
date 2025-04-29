@@ -23,7 +23,7 @@ The way in which limited uses are added varies depending on the preparation mode
 
 ## Usage
 
-![Grant Items Flow](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/item-grant-configuration-flow.jpg)
+![Grant Items Flow](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/advancement/item-grant-flow.jpg)
 
 The Grant Items advancement will present to the player a list of items that will be granted. The name of the items can be clicked to view more details on them. If any of the items are optional, then a checkbox will appear next to those items.
 
