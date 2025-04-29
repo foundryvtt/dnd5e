@@ -579,14 +579,6 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {object}           Created data for the ActiveEffect.
    */
   static createConcentrationEffectData(activity, data={}) {
-    if ( activity instanceof Item ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `createConcentrationEffectData` method on ActiveEffect5e now takes an Activity, rather than an Item.",
-        { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-      );
-      activity = activity.system.activities?.contents[0];
-    }
-
     const item = activity?.item;
     if ( !item?.isEmbedded || !activity.duration.concentration ) {
       throw new Error("You may not begin concentrating on this item!");
@@ -638,7 +630,6 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @param {jQuery|HTMLElement} html  The ActiveEffect config element.
    */
   static onRenderActiveEffectConfig(app, html) {
-    if ( game.release.generation < 13 ) html = html[0];
     const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {}).toFormGroup({
       label: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.label"),
       hint: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.hint")
@@ -647,17 +638,7 @@ export default class ActiveEffect5e extends ActiveEffect {
       value: app.document.getFlag("dnd5e", "riders.statuses") ?? [],
       options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name }))
     });
-    // TODO: Temporary fix to work around https://github.com/foundryvtt/foundryvtt/issues/11567
-    // Replace with `after` when switched to V13-only
-    html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")
-      ?.insertAdjacentHTML("afterend", element.outerHTML);
-
-    if ( game.release.generation < 13 ) {
-      html.querySelector(".form-fields:has([name=statuses])").insertAdjacentHTML("afterend", `
-        <p class="hint">${app.document.schema.fields.statuses.hint}</p>
-      `);
-      app.setPosition();
-    }
+    html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")?.after(element);
   }
 
   /* -------------------------------------------- */
@@ -665,10 +646,9 @@ export default class ActiveEffect5e extends ActiveEffect {
   /**
    * Adjust exhaustion icon display to match current level.
    * @param {Application} app            The TokenHUD application.
-   * @param {jQuery | HTMLElement} html  The TokenHUD HTML.
+   * @param {HTMLElement} html  The TokenHUD HTML.
    */
   static onTokenHUDRender(app, html) {
-    html = html instanceof HTMLElement ? html : html[0];
     const actor = app.object.actor;
     const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
     if ( Number.isFinite(level) && (level > 0) ) {
@@ -689,25 +669,12 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {string}
    */
   static _getExhaustionImage(level) {
-    const split = CONFIG.DND5E.conditionTypes.exhaustion.icon.split(".");
+    // TODO: Only use `img` in 5.2.
+    const { img, icon } = CONFIG.DND5E.conditionTypes.exhaustion;
+    const split = img ? img.split(".") : icon.split(".");
     const ext = split.pop();
     const path = split.join(".");
     return `${path}-${level}.${ext}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Map the duration of an item to an active effect duration.
-   * @param {Item5e} item           An item with a duration.
-   * @returns {EffectDurationData}  The active effect duration.
-   */
-  static getEffectDurationFromItem(item) {
-    foundry.utils.logCompatibilityWarning(
-      "The `getEffectDurationFromItem` method on ActiveEffect5e has been deprecated and replaced with `getEffectData` within Item or Activity duration.",
-      { since: "DnD5e 4.0", until: "DnD5e 5.0" }
-    );
-    return item.system.duration?.getEffectData?.() ?? {};
   }
 
   /* -------------------------------------------- */

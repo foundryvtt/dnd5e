@@ -62,9 +62,7 @@ export default class ContainerData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-    enchantable: true,
-    inventoryItem: true,
-    inventoryOrder: 500
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -76,6 +74,22 @@ export default class ContainerData extends ItemDataModel.mixin(
       ...this.compendiumBrowserPhysicalItemFilters,
       ["properties", this.compendiumBrowserPropertiesFilter("container")]
     ]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "containers",
+      order: 500,
+      label: "TYPES.Item.containerPl",
+      groups: { type: "container" },
+      columns: ["capacity", "controls"]
+    };
   }
 
   /* -------------------------------------------- */
@@ -164,7 +178,7 @@ export default class ContainerData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async getSheetData(context) {
     context.subtitles = [
-      { label: context.itemType },
+      { label: game.i18n.localize(CONFIG.Item.typeLabels.container) },
       ...this.physicalItemSheetFields
     ];
     context.parts = ["dnd5e.details-container"];

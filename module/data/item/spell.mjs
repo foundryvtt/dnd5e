@@ -72,6 +72,13 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /* -------------------------------------------- */
 
+  /** @inheritDoc */
+  static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
+    hasEffects: true
+  }, { inplace: false }));
+
+  /* -------------------------------------------- */
+
   /** @override */
   static get compendiumBrowserFilters() {
     return new Map([
@@ -187,8 +194,6 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @inheritDoc */
   prepareDerivedData() {
-    ActivitiesTemplate._applyActivityShims.call(this);
-    this._applySpellShims();
     super.prepareDerivedData();
     this.prepareDescriptionData();
 
@@ -279,6 +284,17 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
 
   /** @inheritDoc */
   async getSheetData(context) {
+    context.properties.active = this.parent.labels?.components?.tags;
+    context.subtitles = [
+      { label: context.labels.level },
+      { label: context.labels.school },
+      { label: CONFIG.DND5E.spellPreparationModes[this.preparation.mode]?.label },
+      { label: context.labels.classes, classes: "full-width" }
+    ];
+
+    context.parts = ["dnd5e.details-spell", "dnd5e.field-uses"];
+
+    // Default Ability & Spellcasting Classes
     if ( this.parent.actor ) {
       const ability = CONFIG.DND5E.abilities[
         this.parent.actor.spellcastingClasses[this.sourceClass]?.spellcasting.ability
@@ -286,15 +302,52 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
       ]?.label?.toLowerCase();
       if ( ability ) context.defaultAbility = game.i18n.format("DND5E.DefaultSpecific", { default: ability });
       else context.defaultAbility = game.i18n.localize("DND5E.Default");
+      context.spellcastingClasses = Object.entries(this.parent.actor.spellcastingClasses ?? {})
+        .map(([value, cls]) => ({ value, label: cls.name }));
     }
-    context.subtitles = [
-      { label: context.labels.level },
-      { label: context.labels.school },
-      { label: context.itemStatus },
-      { label: context.labels.classes, classes: "full-width" }
+
+    // Activation
+    context.activationTypes = [
+      ...Object.entries(CONFIG.DND5E.activityActivationTypes).map(([value, { label, group }]) => {
+        return { value, label, group };
+      }),
+      { value: "", label: "DND5E.NoneActionLabel" }
     ];
-    context.properties.active = this.parent.labels?.components?.tags;
-    context.parts = ["dnd5e.details-spell", "dnd5e.field-uses"];
+
+    // Duration
+    context.durationUnits = [
+      ...Object.entries(CONFIG.DND5E.specialTimePeriods).map(([value, label]) => ({ value, label })),
+      ...Object.entries(CONFIG.DND5E.scalarTimePeriods).map(([value, label]) => {
+        return { value, label, group: "DND5E.DurationTime" };
+      }),
+      ...Object.entries(CONFIG.DND5E.permanentTimePeriods).map(([value, label]) => {
+        return { value, label, group: "DND5E.DurationPermanent" };
+      })
+    ];
+
+    // Targets
+    context.targetTypes = [
+      ...Object.entries(CONFIG.DND5E.individualTargetTypes).map(([value, { label }]) => {
+        return { value, label, group: "DND5E.TargetTypeIndividual" };
+      }),
+      ...Object.entries(CONFIG.DND5E.areaTargetTypes).map(([value, { label }]) => {
+        return { value, label, group: "DND5E.TargetTypeArea" };
+      })
+    ];
+    context.scalarTarget = this.target.affects.type
+      && (CONFIG.DND5E.individualTargetTypes[this.target.affects.type]?.scalar !== false);
+    context.affectsPlaceholder = game.i18n.localize(`DND5E.TARGET.Count.${
+      this.target?.template?.type ? "Every" : "Any"}`);
+    context.dimensions = this.target.template.dimensions;
+    // TODO: Ensure this behaves properly with enchantments, will probably need source target data
+
+    // Range
+    context.rangeTypes = [
+      ...Object.entries(CONFIG.DND5E.rangeTypes).map(([value, label]) => ({ value, label })),
+      ...Object.entries(CONFIG.DND5E.movementUnits).map(([value, { label }]) => {
+        return { value, label, group: "DND5E.RangeDistance" };
+      })
+    ];
   }
 
   /* -------------------------------------------- */
@@ -383,6 +436,60 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
   }
 
   /* -------------------------------------------- */
+  /*  Drag & Drop                                 */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static onDropCreate(event, actor, itemData) {
+    if ( !["npc", "character"].includes(actor.type) ) return;
+
+    // Determine the section it is dropped on, if any.
+    let header = event.target.closest(".items-header"); // Dropped directly on the header.
+    if ( !header ) {
+      const list = event.target.closest(".item-list"); // Dropped inside an existing list.
+      header = list?.previousElementSibling;
+    }
+    const { level, preparationMode } = header?.closest("[data-level]")?.dataset ?? {};
+
+    // Determine the actor's spell slot progressions, if any.
+    const spellcastKeys = Object.keys(CONFIG.DND5E.spellcastingTypes);
+    const progs = Object.values(actor.classes).reduce((acc, cls) => {
+      const type = cls.spellcasting?.type;
+      if ( spellcastKeys.includes(type) ) acc.add(type);
+      return acc;
+    }, new Set());
+
+    const prep = itemData.system.preparation;
+
+    // Case 1: Drop a cantrip.
+    if ( itemData.system.level === 0 ) {
+      const modes = CONFIG.DND5E.spellPreparationModes;
+      if ( modes[preparationMode]?.cantrips ) {
+        prep.mode = "prepared";
+      } else if ( !preparationMode ) {
+        const isCaster = actor.system.attributes.spell?.level || progs.size;
+        prep.mode = isCaster ? "prepared" : "innate";
+      } else {
+        prep.mode = preparationMode;
+      }
+      if ( modes[prep.mode]?.prepares ) prep.prepared = true;
+    }
+
+    // Case 2: Drop a leveled spell in a section without a mode.
+    else if ( (level === "0") || !preparationMode ) {
+      if ( actor.type === "npc" ) {
+        prep.mode = actor.system.attributes.spell.level ? "prepared" : "innate";
+      } else {
+        const m = progs.has("leveled") ? "prepared" : (progs.first() ?? "innate");
+        prep.mode = progs.has(prep.mode) ? prep.mode : m;
+      }
+    }
+
+    // Case 3: Drop a leveled spell in a specific section.
+    else prep.mode = preparationMode;
+  }
+
+  /* -------------------------------------------- */
   /*  Helpers                                     */
   /* -------------------------------------------- */
 
@@ -440,93 +547,5 @@ export default class SpellData extends ItemDataModel.mixin(ActivitiesTemplate, I
     );
     const intersection = classes.intersection(spellClasses);
     if ( intersection.size === 1 ) setClass(intersection.first());
-  }
-
-  /* -------------------------------------------- */
-  /*  Shims                                       */
-  /* -------------------------------------------- */
-
-  /**
-   * Add additional data shims for spells.
-   */
-  _applySpellShims() {
-    Object.defineProperty(this.activation, "cost", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `activation.cost` property on `SpellData` has been renamed `activation.value`.",
-          { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true }
-        );
-        return this.value;
-      },
-      configurable: true,
-      enumerable: false
-    });
-    Object.defineProperty(this, "scaling", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `scaling` property on `SpellData` has been deprecated and is now handled by individual damage parts.",
-          { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true }
-        );
-        return { mode: "none", formula: null };
-      },
-      configurable: true,
-      enumerable: false
-    });
-    Object.defineProperty(this.target, "value", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `target.value` property on `SpellData` has been split into `target.template.size` and `target.affects.count`.",
-          { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true }
-        );
-        return this.template.size || this.affects.count;
-      },
-      configurable: true,
-      enumerable: false
-    });
-    Object.defineProperty(this.target, "width", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `target.width` property on `SpellData` has been moved to `target.template.width`.",
-          { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true }
-        );
-        return this.template.width;
-      },
-      configurable: true,
-      enumerable: false
-    });
-    Object.defineProperty(this.target, "units", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `target.units` property on `SpellData` has been moved to `target.template.units`.",
-          { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true }
-        );
-        return this.template.units;
-      },
-      configurable: true,
-      enumerable: false
-    });
-    Object.defineProperty(this.target, "type", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `target.type` property on `SpellData` has been split into `target.template.type` and `target.affects.type`.",
-          { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true }
-        );
-        return this.template.type || this.affects.type;
-      },
-      configurable: true,
-      enumerable: false
-    });
-    const firstActivity = this.activities.contents[0] ?? {};
-    Object.defineProperty(this.target, "prompt", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The `target.prompt` property on `SpellData` has moved into its activity.",
-          { since: "DnD5e 4.0", until: "DnD5e 5.0", once: true }
-        );
-        return firstActivity.target?.prompt;
-      },
-      configurable: true,
-      enumerable: false
-    });
   }
 }

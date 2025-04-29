@@ -1,0 +1,60 @@
+_id: phbStandardLangu
+name: Standard Languages
+img: icons/sundries/books/book-open-purple.webp
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    _id: rViHFEn5WjhRbElK
+    text: <strong>Language:</strong> Common. <strong>Origin:</strong> Sigil.
+    img: icons/svg/d20-black.svg
+    documentId: null
+    flags: {}
+    _key: '!tables.results!phbStandardLangu.rViHFEn5WjhRbElK'
+  - type: pack
+    documentCollection: dnd5e.tables24
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    text: Sub-Languages Table
+    documentId: phbSublanguageTa
+    img: icons/svg/d20-grey.svg
+    _id: pzL0RD1tg43fqDTo
+    flags: {}
+    _key: '!tables.results!phbStandardLangu.pzL0RD1tg43fqDTo'
+  - type: pack
+    documentCollection: dnd5e.tables24
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    text: Sub-Languages Table
+    documentId: phbSublanguageTa
+    img: icons/svg/d20-grey.svg
+    _id: JpUuNwaf83gmUwV4
+    flags: {}
+    _key: '!tables.results!phbStandardLangu.JpUuNwaf83gmUwV4'
+replacement: true
+displayRoll: true
+folder: oqsiqoUzcbfevHRV
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1724425888331
+  modifiedTime: 1740685862708
+  lastModifiedBy: dnd5ebuilder0000
+formula: '1'
+sort: 0
+ownership:
+  default: 0
+_key: '!tables!phbStandardLangu'

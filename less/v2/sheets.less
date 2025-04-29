@@ -5,7 +5,7 @@
   /*  Outer Window                      */
   /* ---------------------------------- */
 
-  > header {
+  &:where(:not(.minimized)) > header {
     background: transparent;
     position: relative;
     z-index: 1;
@@ -17,6 +17,7 @@
       --slide-toggle-track-color-checked: var(--dnd5e-color-gold);
       --slide-toggle-track-color-unchecked: var(--dnd5e-color-light-gray);
       flex: none;
+      margin-inline-end: auto;
 
       .slide-toggle-thumb {
         line-height: 12px;
@@ -37,13 +38,18 @@
   }
   &.minimized slide-toggle { display: none; }
 
-  .window-content { margin-top: -30px; }
+  .window-content {
+    margin-top: -30px;
+    padding-inline: 0;
+  }
 
   /* ---------------------------------- */
   /*  Sheet Header                      */
   /* ---------------------------------- */
 
   .sheet-header {
+    display: flex;
+
     input, select {
       --input-placeholder-color: var(--color-text-light-6);
       --input-height: var(--form-field-height, 26px);
@@ -61,6 +67,66 @@
     }
 
     input::placeholder { color: var(--input-placeholder-color); }
+  }
+
+  /* ---------------------------------- */
+  /*  Sheet Body                        */
+  /* ---------------------------------- */
+
+  .meter.progress::before {
+    // Becomes more red the closer it is to 100% encumbrance.
+    --bar-color-2: color-mix(in oklab, var(--dnd5e-color-blue), var(--dnd5e-color-maroon) var(--bar-percentage));
+    --bar-color-1: color-mix(in oklab, var(--bar-color-2), black 33%);
+    --bar-color-3: color-mix(in oklab, var(--bar-color-2), black 20%);
+    background: linear-gradient(to right, var(--bar-color-1), var(--bar-color-2));
+    border-right: var(--border-width) solid var(--bar-color-3);
+  }
+
+  /* Encumbrance */
+  .encumbrance {
+    display: flex;
+    flex-direction: column;
+    width: 230px;
+
+    .meter {
+      --encumbrance-low: 33%;
+      --encumbrance-high: 66%;
+      border-radius: 3px 3px 0 0;
+      height: 25px;
+      border: none;
+      border-bottom: var(--dnd5e-border-gold);
+
+      .label {
+        display: flex;
+        align-items: center;
+        gap: .1875rem;
+
+        i {
+          font-size: var(--font-size-9);
+          margin-right: .1875rem;
+        }
+      }
+
+      .breakpoint {
+        display: block;
+        position: absolute;
+        block-size: 0;
+        inline-size: 0;
+        border-inline: 3px solid transparent;
+        &.encumbrance-low { inset-inline-start: var(--encumbrance-low); }
+        &.encumbrance-high { inset-inline-start: var(--encumbrance-high); }
+        &.arrow-up {
+          inset-block-end: 0;
+          border-block-end: 3px solid var(--dnd5e-color-gold);
+        }
+        &.arrow-down {
+          inset-block-start: 0;
+          border-top: 3px solid var(--dnd5e-color-gold);
+        }
+        transform: translateX(-50%);
+        z-index: 1;
+      }
+    }
   }
 
   /* ---------------------------------- */
@@ -113,8 +179,25 @@
     position: absolute;
     inset: auto 16px 16px auto;
   }
+  &.standard-form .create-child {
+    height: 28px;
+    width: 28px;
+    line-height: 24px;
+  }
 
-  form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities) .create-child {
+  form:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities) .create-child,
+  &:is(.tab-inventory, .tab-features, .tab-spells, .tab-effects, .tab-advancement, .tab-activities) .create-child {
     display: block;
   }
+
+  /* ---------------------------------- */
+  /*  Interactivity                     */
+  /* ---------------------------------- */
+
+  &.locked {
+    .rollable, .draggable { cursor: var(--cursor-default); }
+    .rollable:hover { text-shadow: none; }
+  }
+
+  &:not(.locked) .rollable.draggable { cursor: var(--cursor-pointer); }
 }

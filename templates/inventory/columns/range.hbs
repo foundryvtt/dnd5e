@@ -1,0 +1,19 @@
+{{#if isItem}}
+<div class="item-detail item-range {{#unless ctx.range}}empty{{/unless}}" data-column-id="range">
+    {{#if ctx.range}}
+    {{#if ctx.range.distance}}
+    {{{ ctx.range.parts }}}
+    {{else}}
+    <span class="condensed">{{ item.labels.range }}</span>
+    {{/if}}
+    {{/if}}
+</div>
+{{else}}
+<div class="item-detail item-range {{#unless entry.labels.range}}empty{{/unless}}" data-column-id="range">
+    {{#if ctx.range.scalar}}
+    {{{ entry.labels.rangeParts }}}
+    {{else}}
+    <span class="condensed">{{ entry.labels.range }}</span>
+    {{/if}}
+</div>
+{{/if}}

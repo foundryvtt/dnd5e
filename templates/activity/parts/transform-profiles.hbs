@@ -3,8 +3,7 @@
         <legend>
             <span>{{ localize "DND5E.TRANSFORM.FIELDS.profiles.label" }}</span>
             <button type="button" class="unbutton control-button" data-action="addProfile"
-                    data-tooltip="DND5E.TRANSFORM.Profile.Action.Create"
-                    aria-label="{{ localize "DND5E.TRANSFORM.Profile.Action.Create" }}">
+                    data-tooltip aria-label="{{ localize "DND5E.TRANSFORM.Profile.Action.Create" }}">
                 <i class="fas fa-plus" inert></i>
             </button>
         </legend>
@@ -33,7 +32,7 @@
 
             {{!-- CR --}}
             {{ formField fields.cr name=(concat prefix "cr") value=data.cr localize=true hint=false classes="label-top"
-                         label="DND5E.TRANSFORM.FIELDS.profiles.cr.abbr" }}
+                         label="DND5E.TRANSFORM.FIELDS.profiles.element.cr.abbr" }}
 
             {{!-- Name --}}
             {{ formField fields.name name=(concat prefix "name") value=data.name hint=false classes="label-top"
@@ -41,8 +40,7 @@
 
             {{!-- Delete --}}
             <button type="button" class="unbutton control-button" data-action="deleteProfile"
-                    data-tooltip="DND5E.TRANSFORM.Profile.Action.Delete"
-                    aria-label="{{ localize "DND5E.TRANSFORM.Profile.Action.Delete" }}">
+                    data-tooltip aria-label="{{ localize "DND5E.TRANSFORM.Profile.Action.Delete" }}">
                 <i class="fas fa-minus" inert></i>
             </button>
         </div>
@@ -63,7 +61,7 @@
                 {{ formField fields.movement name=(concat prefix "movement") value=data.movement
                              options=@root.movementTypeOptions }}
                 <div class="form-group">
-                    <label>{{ localize "DND5E.TRANSFORM.FIELDS.profiles.level.label" }}</label>
+                    <label>{{ localize "DND5E.TRANSFORM.FIELDS.profiles.element.level.label" }}</label>
                     <div class="form-fields range-fields">
                         {{ formInput fields.level.fields.min name=(concat prefix "level.min") value=data.level.min
                                      placeholder="0" ariaLabel=(localize "DND5E.LevelLimit.Min")
@@ -73,7 +71,7 @@
                                      placeholder="∞" ariaLabel=(localize "DND5E.LevelLimit.Max")
                                      input=@root.inputs.createNumberInput }}
                     </div>
-                    <p class="hint">{{ localize "DND5E.TRANSFORM.FIELDS.profiles.level.hint" }}</p>
+                    <p class="hint">{{ localize "DND5E.TRANSFORM.FIELDS.profiles.element.level.hint" }}</p>
                 </div>
             </div>
         </div>

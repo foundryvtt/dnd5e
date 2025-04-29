@@ -25,10 +25,11 @@ export default function DragDropApplicationMixin(Base) {
      * The behavior for the dropped data. When called during the drop event, ensure this is called before awaiting
      * anything or the drop behavior will be lost.
      * @param {DragEvent} event  The drag event.
-     * @param {object} data      The drag payload.
+     * @param {object} [data]    The drag payload.
      * @returns {DropEffectValue}
      */
     _dropBehavior(event, data) {
+      data ??= DragDrop5e.getPayload(event);
       const allowed = this._allowedDropBehaviors(event, data);
       let behavior = DragDrop5e.dropEffect ?? event.dataTransfer?.dropEffect;
 
@@ -47,7 +48,7 @@ export default function DragDropApplicationMixin(Base) {
     /**
      * Types of allowed drop behaviors based on the origin & target of a drag event.
      * @param {DragEvent} event  The drag event.
-     * @param {object} data      The drag payload.
+     * @param {object} [data]    The drag payload.
      * @returns {Set<DropEffectValue>}
      * @protected
      */
@@ -60,7 +61,7 @@ export default function DragDropApplicationMixin(Base) {
     /**
      * Determine the default drop behavior for the provided operation.
      * @param {DragEvent} event  The drag event.
-     * @param {object} data      The drag payload.
+     * @param {object} [data]    The drag payload.
      * @returns {DropEffectValue}
      * @protected
      */

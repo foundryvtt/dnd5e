@@ -1,0 +1,11 @@
+<div class="item-detail item-roll {{#if (and (not ctx.save.ability) (eq ctx.toHit null))}}empty{{/if}}"
+     data-column-id="roll">
+    {{#if ctx.toHit includeZero=true}}
+    <span class="value">{{ dnd5e-formatModifier ctx.toHit }}</span>
+    {{else if ctx.save.ability}}
+    <div class="stacked">
+        <span class="ability">{{ ctx.save.ability }}</span>
+        <span class="value">{{ ctx.save.dc.value }}</span>
+    </div>
+    {{/if}}
+</div>

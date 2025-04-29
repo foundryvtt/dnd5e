@@ -106,8 +106,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
           <span class="subtitle">${effect.duration.label}</span>
         </div>
         <button class="apply-effect" type="button" data-action="applyEffect"
-                data-tooltip="DND5E.EffectsApplyTokens"
-                aria-label="${game.i18n.localize("DND5E.EffectsApplyTokens")}">
+                data-tooltip aria-label="${game.i18n.localize("DND5E.EffectsApplyTokens")}">
           <i class="fas fa-reply-all fa-flip-horizontal" inert></i>
         </button>
       `;

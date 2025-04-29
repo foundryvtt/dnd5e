@@ -1,0 +1,557 @@
+_id: phbbrdBard000000
+name: Bard
+type: class
+folder: taXfKVJXVI5Z807d
+img: systems/dnd5e/icons/classes/bard.webp
+system:
+  description:
+    value: >-
+      <h3>Core Bard Traits</h3><table
+      class="core-class-traits"><tbody><tr><th><p><strong>Primary
+      Ability</strong></p></th><td><p>Charisma</p></td></tr><tr><th><p><strong>Hit
+      Point Die</strong></p></th><td><p>D8 per Bard
+      level</p></td></tr><tr><th><p><strong>Saving Throw
+      Proficiencies</strong></p></th><td><p>Dexterity and
+      Charisma</p></td></tr><tr><th><p><strong>Skill
+      Proficiencies</strong></p></th><td><p><em>Choose any 3
+      skills</em></p></td></tr><tr><th><p><strong>Weapon
+      Proficiencies</strong></p></th><td><p>Simple
+      weapons</p></td></tr><tr><th><p><strong>Tool
+      Proficiencies</strong></p></th><td><p><em>Choose 3 Musical
+      Instruments</em></p></td></tr><tr><th><p><strong>Armor
+      Training</strong></p></th><td><p>Light
+      armor</p></td></tr><tr><th><p><strong>Starting
+      Equipment</strong></p></th><td><p><em>Choose A or B:</em> (A)
+      @UUID[Compendium.dnd5e.equipment24.Item.phbarmLeatherArm]{Leather Armor},
+      2 @UUID[Compendium.dnd5e.equipment24.Item.phbwepDagger0000]{Daggers},
+      Musical Instrument of your choice,
+      @UUID[Compendium.dnd5e.equipment24.Item.phbagEntertainer]{Entertainer's
+      Pack}, and [[/award 19gp]]; or (B) [[/award
+      90GP]]</p></td></tr></tbody></table><p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixClass.JournalEntryPage.phbbrdBard000000
+      inline classes="free-rules-embed"]</p><h2>Becoming a Bard …</h2><h3>As a
+      Level 1 Character</h3><ul><li>Gain all the traits in the Core Bard Traits
+      table.</li><li>Gain the Bard's level 1 features, which are listed in the
+      Bard Features table.</li></ul><h3>As a Multiclass
+      Character</h3><ul><li>Gain the following traits from the Core Bard Traits
+      table: Hit Point Die, proficiency in one skill of your choice, proficiency
+      with one Musical Instrument of your choice, and training with Light
+      armor.</li><li>Gain the Bard's level 1 features, which are listed in the
+      Bard Features table. See the multiclassing rules in chapter 2 to determine
+      your available spell slots.</li></ul>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  startingEquipment:
+    - type: AND
+      requiresProficiency: false
+      _id: tWEfE6HLPbiS0OtF
+      group: ''
+      sort: 700000
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbarmLeatherArm
+      requiresProficiency: false
+      _id: fEcFnfooD7rSDdEI
+      group: tWEfE6HLPbiS0OtF
+      sort: 225000
+    - type: linked
+      count: 2
+      key: Compendium.dnd5e.equipment24.Item.phbwepDagger0000
+      requiresProficiency: false
+      _id: JbNtnwGItIy5pcr1
+      group: tWEfE6HLPbiS0OtF
+      sort: 231250
+    - type: tool
+      count: null
+      key: music
+      requiresProficiency: false
+      _id: 0jBNM2wEEVNN4DBt
+      group: tWEfE6HLPbiS0OtF
+      sort: 237500
+    - type: linked
+      count: null
+      key: Compendium.dnd5e.equipment24.Item.phbagEntertainer
+      requiresProficiency: false
+      _id: X63sE2GlxSzKzUho
+      group: tWEfE6HLPbiS0OtF
+      sort: 475000
+  identifier: bard
+  levels: 1
+  advancement:
+    - _id: e0FUZL9SxuBimLv3
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdBardicInsp
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdSpellcasti
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 1
+      title: Class Features
+    - _id: eHieMgibvVLqVjY8
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdExpertise0
+            optional: false
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdJackOfAllT
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 2
+      title: Class Features
+    - _id: L3wEIpgyQxfW3Cbu
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdFontOfInsp
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 5
+      title: Class Features
+    - _id: ZxvWh6VVEyxNXBkx
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 4
+      title: ''
+    - _id: hqCCMUsYBCaBxjd1
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdCountercha
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 7
+      title: Class Features
+    - _id: B8ZYPClljGmIdxjl
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 8
+      title: ''
+    - _id: GXUFneKrn7jWh8FI
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdMagicalSec
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 10
+      title: Class Features
+    - _id: 7R1ktICniomiGkiZ
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 12
+      title: ''
+    - _id: qs1yWeyecJMaX17E
+      type: AbilityScoreImprovement
+      configuration:
+        points: 2
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        cap: 2
+        locked: []
+      value:
+        type: asi
+      level: 16
+      title: ''
+    - _id: 9n9yDwqtG7foinNB
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdSuperiorIn
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 18
+      title: Class Features
+    - _id: p9Z7MByDAXpGiec6
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdEpicBoon00
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 19
+      title: Class Features
+    - _id: G2PRnWVCjP5c3Cm7
+      type: ItemGrant
+      configuration:
+        items:
+          - uuid: Compendium.dnd5e.classes24.Item.phbbrdWordsOfCre
+            optional: false
+        optional: false
+        spell: null
+      value: {}
+      level: 20
+      title: Class Features
+    - _id: A5T1rsj28aK7qQdm
+      type: ScaleValue
+      configuration:
+        identifier: max-prepared
+        type: number
+        distance:
+          units: ''
+        scale:
+          '1':
+            value: 4
+          '2':
+            value: 5
+          '3':
+            value: 6
+          '4':
+            value: 7
+          '5':
+            value: 9
+          '6':
+            value: 10
+          '7':
+            value: 11
+          '8':
+            value: 12
+          '9':
+            value: 14
+          '10':
+            value: 15
+          '11':
+            value: 16
+          '13':
+            value: 17
+          '15':
+            value: 18
+          '17':
+            value: 19
+          '18':
+            value: 20
+          '19':
+            value: 21
+          '20':
+            value: 22
+      value: {}
+      title: Max Prepared Spells
+      hint: ''
+    - _id: jhPf4YuOvE1POUaX
+      type: ScaleValue
+      configuration:
+        identifier: ''
+        type: number
+        distance:
+          units: ''
+        scale:
+          '1':
+            value: 2
+          '4':
+            value: 3
+          '10':
+            value: 4
+      value: {}
+      title: Cantrips Known
+      hint: ''
+    - _id: afzqphkin9YZOIBf
+      type: ScaleValue
+      configuration:
+        identifier: inspiration
+        type: dice
+        distance:
+          units: ''
+        scale:
+          '1':
+            number: null
+            faces: 6
+            modifiers: []
+          '5':
+            number: null
+            faces: 8
+            modifiers: []
+          '10':
+            number: null
+            faces: 10
+            modifiers: []
+          '15':
+            number: null
+            faces: 12
+            modifiers: []
+      value: {}
+      title: Inspiration Die
+      hint: ''
+    - _id: zHtnbRgLICltyy8V
+      type: Trait
+      configuration:
+        mode: expertise
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 2
+      title: Expertise
+    - _id: e8hDmktYGVFiT6M0
+      type: Trait
+      configuration:
+        mode: expertise
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 2
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 9
+      title: ''
+    - _id: U0u27jvpuWGcbhV5
+      type: HitPoints
+      configuration: {}
+      value: {}
+    - _id: pTnTJmmD3svAD9Jk
+      type: ItemChoice
+      configuration:
+        choices:
+          '19':
+            count: 1
+            replacement: false
+        allowDrops: true
+        type: feat
+        pool:
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofDimensi
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofEnergyR
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFate000
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofFortitu
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofIrresis
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofRecover
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSkill00
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpeed00
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofSpellRe
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonoftheNigh
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofTruesig
+          - uuid: Compendium.dnd5e.feats24.Item.phbBoonofCombatP
+        spell: null
+        restriction:
+          type: feat
+      value:
+        added: {}
+        replaced: {}
+      title: Epic Boon
+      hint: ''
+    - _id: tOHyKfroR3MU9nUq
+      type: ItemGrant
+      configuration:
+        items:
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplPowerWordH
+          - optional: false
+            uuid: Compendium.dnd5e.spells24.Item.phbsplPowerWordK
+        optional: false
+        spell:
+          ability: []
+          preparation: always
+          uses:
+            max: ''
+            per: ''
+            requireSlot: false
+      value: {}
+      level: 20
+      title: Words of Creation
+      hint: ''
+    - _id: pqZADBERYfrNsOMx
+      type: Subclass
+      configuration: {}
+      value:
+        document: null
+        uuid: null
+      level: 3
+      title: ''
+      hint: ''
+    - _id: fc1RwzQMT6qSaH5v
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - saves:dex
+          - saves:cha
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Saving Throw Proficiencies
+      hint: ''
+      classRestriction: primary
+    - _id: NGtmmsYBnIAGKUSn
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 3
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 1
+      title: Skill Proficiencies
+      hint: ''
+      classRestriction: primary
+    - _id: iFuxb8gJBCVtfegb
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - weapon:sim
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Weapon Proficiencies
+      hint: ''
+    - _id: 2ew4StamPWWfQYsf
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 3
+            pool:
+              - tool:music:*
+      value:
+        chosen: []
+      level: 1
+      title: Tool Proficiencies
+      hint: ''
+      classRestriction: primary
+    - _id: 5Dar82bZhYxSpxG7
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants:
+          - armor:lgt
+        choices: []
+      value:
+        chosen: []
+      level: 1
+      title: Armor Training
+      hint: ''
+    - _id: kPeKGxUo8GJygCJG
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - skills:*
+      value:
+        chosen: []
+      level: 1
+      title: Skill Proficiencies
+      hint: ''
+      classRestriction: secondary
+    - _id: n0aMUQr79P5Pkjpf
+      type: Trait
+      configuration:
+        mode: default
+        allowReplacements: false
+        grants: []
+        choices:
+          - count: 1
+            pool:
+              - tool:music:*
+      value:
+        chosen: []
+      level: 1
+      title: Tool Proficiencies
+      hint: ''
+      classRestriction: secondary
+  spellcasting:
+    progression: full
+    ability: cha
+    preparation:
+      formula: '@scale.bard.max-prepared'
+  wealth: '90'
+  primaryAbility:
+    value:
+      - cha
+    all: true
+  hd:
+    denomination: d8
+    spent: 0
+    additional: ''
+effects: []
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866377962
+  modifiedTime: 1745517454864
+  lastModifiedBy: dnd5ebuilder0000
+sort: 0
+ownership:
+  default: 0
+_key: '!items!phbbrdBard000000'

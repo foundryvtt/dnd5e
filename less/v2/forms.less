@@ -66,7 +66,7 @@
       font-weight: bold;
     }
     &:disabled {
-      cursor: default;
+      cursor: var(--cursor-default);
       color: var(--color-text-dark-inactive);
     }
     &:hover:not(:disabled), &:focus {
@@ -168,12 +168,12 @@
   }
 
   label.checkbox {
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
     display: flex;
     align-items: center;
     gap: 4px;
 
-    &:has(input[type=checkbox]:disabled, dnd5e-checkbox[disabled]) { cursor: default; }
+    &:has(input[type=checkbox]:disabled, dnd5e-checkbox[disabled]) { cursor: var(--cursor-default); }
     > span { line-height: calc(var(--form-field-height) + 1px); }
   }
 
@@ -389,7 +389,7 @@
   /* Form Fields */
   textarea, select, input[type="text"], input[type="number"], input[type="search"], input[type="file"] {
     --input-border-color: transparent;
-    transition: all 250ms ease;
+    transition: all 250ms ease, block-size, inline-size;
     line-height: normal;
     outline: none;
 
@@ -412,7 +412,8 @@
   }
 
   :is(.form-group, fieldset) :is(select, input):not([type="range"]) {
-    color: var(--color-text-dark-primary);
+    --input-text-color: var(--color-text-dark-primary);
+    color: var(--input-text-color);
     border: 1px solid var(--input-border-color);
     font-size: var(--font-size-11);
   }
@@ -433,11 +434,11 @@
 
   select {
     height: var(--form-field-height);
-    &:not(:disabled) { cursor: pointer; }
+    &:not(:disabled) { cursor: var(--cursor-pointer); }
   }
 
   :is(document-tags, multi-select) .tags.input-element-tags .tag {
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
     font-size: var(--font-size-10);
     border: var(--dnd5e-border-gold);
     background: var(--dnd5e-background-card);
@@ -446,8 +447,8 @@
   }
 
   :is(document-tags, multi-select):has(select:disabled) .tags.input-element-tags .tag {
-    cursor: default;
-    a { cursor: default; }
+    cursor: var(--cursor-default);
+    a { cursor: var(--cursor-default); }
     &:hover a { text-shadow: none; }
     .remove { display: unset; }
     .fa-xmark { display: none; }
@@ -553,11 +554,11 @@
     display: block;
 
     > input { display: none; }
-    &:has(input:not([disabled])) { cursor: pointer; }
+    &:has(input:not([disabled])) { cursor: var(--cursor-pointer); }
   }
 
   /* Control buttons */
-  button.control-button {
+  button.control-button, button.config-button {
     padding: 0;
     width: unset;
     display: inline-block;
@@ -576,7 +577,7 @@
   }
 
   /* Pips */
-  .pips {
+  .pips, &.standard-form .pips {
     display: flex;
     gap: 5px;
     padding: 10px 12px;
@@ -625,9 +626,12 @@
 
     > .form-fields { flex: 3; }
   }
+  .form-group.checkbox-grid > .form-fields { flex: 0 0 100%; }
 
   fieldset { padding: revert; }
   .hint { line-height: 16px; }
+
+  :is(select, input):not([type="range"]) { --input-text-color: var(--color-text-dark-primary); }
 
   :where(button:not(.icon, .fa-solid, .fas)) {
     height: unset;

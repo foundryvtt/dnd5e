@@ -15,7 +15,7 @@
     }
 
     > label {
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
       display: flex;
       justify-content: center;
       gap: .25rem;
@@ -125,6 +125,8 @@
     border-radius: 4px;
     font-size: var(--font-size-11);
   }
+
+  .form-fields > .sep { flex: none; }
 }
 
 /* ----------------------------------------- */
@@ -262,7 +264,7 @@
       border: var(--dnd5e-border-gold);
       border-radius: 3px;
       overflow: hidden;
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
 
       > img {
         pointer-events: none;

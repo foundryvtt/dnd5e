@@ -146,8 +146,8 @@ export function registerSystemSettings() {
 
   // Allow Polymorphing
   game.settings.register("dnd5e", "allowPolymorphing", {
-    name: "SETTINGS.5eAllowPolymorphingN",
-    hint: "SETTINGS.5eAllowPolymorphingL",
+    name: "SETTINGS.DND5E.PERMISSIONS.AllowTransformation.Name",
+    hint: "SETTINGS.DND5E.PERMISSIONS.AllowTransformation.Hint",
     scope: "world",
     config: true,
     default: false,
@@ -156,8 +156,8 @@ export function registerSystemSettings() {
 
   // Allow Summoning
   game.settings.register("dnd5e", "allowSummoning", {
-    name: "SETTINGS.DND5E.ALLOWSUMMONING.Name",
-    hint: "SETTINGS.DND5E.ALLOWSUMMONING.Hint",
+    name: "SETTINGS.DND5E.PERMISSIONS.AllowSummoning.Name",
+    hint: "SETTINGS.DND5E.PERMISSIONS.AllowSummoning.Hint",
     scope: "world",
     config: true,
     default: false,
@@ -571,16 +571,14 @@ export function registerDeferredSettings() {
   });
 
   // Hook into core color scheme setting.
-  const isV13 = game.release.generation >= 13;
-  const settingKey = isV13 ? "uiConfig" : "colorScheme";
-  const setting = game.settings.get("core", settingKey);
-  const settingConfig = game.settings.settings.get(`core.${settingKey}`);
+  const setting = game.settings.get("core", "uiConfig");
+  const settingConfig = game.settings.settings.get("core.uiConfig");
   const { onChange } = settingConfig ?? {};
   if ( onChange ) settingConfig.onChange = (s, ...args) => {
     onChange(s, ...args);
-    setTheme(document.body, isV13 ? s.colorScheme : s);
+    setTheme(document.body, s.colorScheme);
   };
-  setTheme(document.body, isV13 ? setting.colorScheme : setting);
+  setTheme(document.body, setting.colorScheme);
 }
 
 /* -------------------------------------------- */

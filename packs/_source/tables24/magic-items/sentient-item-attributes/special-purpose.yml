@@ -1,0 +1,162 @@
+_id: dmgSenSpecialPur
+name: Special Purpose
+img: icons/magic/symbols/star-solid-gold.webp
+description: ''
+results:
+  - type: text
+    drawn: false
+    range:
+      - 1
+      - 1
+    text: >-
+      <strong>Aligned.</strong> The item seeks to defeat or destroy those of a
+      diametrically opposed alignment. Such an item is never Neutral.
+    _id: R02Xt6fkm8XdbWLk
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenSpecialPur.R02Xt6fkm8XdbWLk'
+  - type: text
+    drawn: false
+    range:
+      - 2
+      - 2
+    text: >-
+      <strong>Bane.</strong> The item seeks to thwart or destroy creatures of a
+      particular type, such as Constructs, Fiends, or Undead.
+    _id: kRr85em4JParVCQy
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenSpecialPur.kRr85em4JParVCQy'
+  - type: text
+    drawn: false
+    range:
+      - 3
+      - 3
+    text: >-
+      <strong>Creator Seeker.</strong> The item seeks its creator and wants to
+      understand why it was created.
+    _id: SskIQAsN9L231Aip
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenSpecialPur.SskIQAsN9L231Aip'
+  - type: text
+    drawn: false
+    range:
+      - 4
+      - 4
+    text: >-
+      <strong>Destiny Seeker.</strong> The item believes it and its bearer have
+      key roles to play in future events.
+    _id: 8DsIidU6KrIK8aA3
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenSpecialPur.8DsIidU6KrIK8aA3'
+  - type: text
+    drawn: false
+    range:
+      - 5
+      - 5
+    text: >-
+      <strong>Destroyer.</strong> The item craves destruction and goads its user
+      to fight arbitrarily.
+    _id: XH6KU6wUB5VOaUb6
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenSpecialPur.XH6KU6wUB5VOaUb6'
+  - type: text
+    drawn: false
+    range:
+      - 6
+      - 6
+    text: >-
+      <strong>Glory Seeker.</strong> The item seeks renown as the greatest magic
+      item in the world by winning fame or notoriety for its user.
+    _id: 7JK4YLaze4s1z8ww
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenSpecialPur.7JK4YLaze4s1z8ww'
+  - type: text
+    drawn: false
+    range:
+      - 7
+      - 7
+    text: >-
+      <strong>Lore Seeker.</strong> The item craves knowledge or is determined
+      to solve a mystery, learn a secret, or unravel a cryptic prophecy.
+    _id: FbFyLC891jvuiPLY
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenSpecialPur.FbFyLC891jvuiPLY'
+  - type: text
+    drawn: false
+    range:
+      - 8
+      - 8
+    text: >-
+      <strong>Protector.</strong> The item seeks to defend a particular kind of
+      creature, such as elves or werewolves.
+    _id: QKFHYR8MSe1IBVyW
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenSpecialPur.QKFHYR8MSe1IBVyW'
+  - type: text
+    drawn: false
+    range:
+      - 9
+      - 9
+    text: >-
+      <strong>Soulmate Seeker.</strong> The item seeks another sentient magic
+      item, perhaps one that is similar to itself.
+    _id: 8ymxZZK5xEeJVyR8
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenSpecialPur.8ymxZZK5xEeJVyR8'
+  - type: text
+    drawn: false
+    range:
+      - 10
+      - 10
+    text: >-
+      <strong>Templar.</strong> The item seeks to defend the servants and
+      interests of a particular deity.
+    _id: m3bxgqbRQWUJCSwh
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    flags: {}
+    _key: '!tables.results!dmgSenSpecialPur.m3bxgqbRQWUJCSwh'
+replacement: true
+displayRoll: true
+folder: An3ZWDU7HLgF24f1
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1745549017709
+  modifiedTime: 1745549034220
+  lastModifiedBy: dnd5ebuilder0000
+formula: 1d10
+sort: 112500
+ownership:
+  default: 0
+_key: '!tables!dmgSenSpecialPur'

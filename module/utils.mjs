@@ -743,7 +743,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/shared/active-effects.hbs",
     "systems/dnd5e/templates/shared/active-effects2.hbs",
     "systems/dnd5e/templates/shared/inventory.hbs",
-    "systems/dnd5e/templates/shared/inventory2.hbs",
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
     "systems/dnd5e/templates/apps/parts/traits-list.hbs",
 
@@ -760,18 +759,9 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/tabs/character-bastion.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
     "systems/dnd5e/templates/actors/tabs/character-details.hbs",
-    "systems/dnd5e/templates/actors/tabs/creature-features.hbs",
     "systems/dnd5e/templates/actors/tabs/creature-special-traits.hbs",
-    "systems/dnd5e/templates/actors/tabs/creature-spells.hbs",
     "systems/dnd5e/templates/actors/tabs/group-members.hbs",
     "systems/dnd5e/templates/actors/tabs/npc-biography.hbs",
-
-    // Actor Sheet Item Summary Columns
-    "systems/dnd5e/templates/actors/parts/columns/column-feature-controls.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-formula.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-recovery.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-roll.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
 
     // Chat Message Partials
     "systems/dnd5e/templates/chat/parts/card-activities.hbs",
@@ -794,10 +784,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/details/details-subclass.hbs",
     "systems/dnd5e/templates/items/details/details-tool.hbs",
     "systems/dnd5e/templates/items/details/details-weapon.hbs",
-    "systems/dnd5e/templates/items/parts/item-activities.hbs",
-    "systems/dnd5e/templates/items/parts/item-advancement2.hbs",
-    "systems/dnd5e/templates/items/parts/item-description2.hbs",
-    "systems/dnd5e/templates/items/parts/item-details.hbs",
     "systems/dnd5e/templates/items/parts/item-summary.hbs",
     "systems/dnd5e/templates/items/parts/item-tooltip.hbs",
     "systems/dnd5e/templates/items/parts/spell-block.hbs",
@@ -817,19 +803,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",
 
     // Activity Partials
-    "systems/dnd5e/templates/activity/columns/activity-column-controls.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-formula.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-price.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-quantity.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-range.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-recovery.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-roll.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-school.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-target.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-time.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-uses.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-weight.hbs",
-    "systems/dnd5e/templates/activity/activity-row-summary.hbs",
     "systems/dnd5e/templates/activity/parts/activity-usage-notes.hbs",
 
     // Advancement Partials
@@ -844,7 +817,7 @@ export async function preloadHandlebarsTemplates() {
     paths[`dnd5e.${path.split("/").pop().replace(".hbs", "")}`] = path;
   }
 
-  return loadTemplates(paths);
+  return foundry.applications.handlebars.loadTemplates(paths);
 }
 
 /* -------------------------------------------- */
@@ -860,7 +833,7 @@ function dataset(object, options) {
   for ( let [key, value] of Object.entries(object ?? {}) ) {
     if ( value === undefined ) continue;
     key = key.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (a, b) => (b ? "-" : "") + a.toLowerCase());
-    entries.push(`data-${key}="${value}"`);
+    entries.push(`data-${key}="${Handlebars.escapeExpression(value)}"`);
   }
   return new Handlebars.SafeString(entries.join(" "));
 }
@@ -1216,7 +1189,7 @@ export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
  * @param {string[]} prefixes
  */
 export function localizeSchema(schema, prefixes) {
-  Localization.localizeDataModel({ schema }, { prefixes });
+  foundry.helpers.Localization.localizeDataModel({ schema }, { prefixes });
 }
 
 /* -------------------------------------------- */
@@ -1226,7 +1199,7 @@ export function localizeSchema(schema, prefixes) {
  * @param {string} input
  * @returns {string[]}
  */
-export function splitSemicolons(input) {
+export function splitSemicolons(input="") {
   return input.split(";").map(t => t.trim()).filter(t => t);
 }
 

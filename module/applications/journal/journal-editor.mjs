@@ -10,22 +10,10 @@ import DocumentSheet5e from "../api/document-sheet.mjs";
  * @extends {DocumentSheet5e<ApplicationConfiguration & JournalEditorConfiguration>}
  */
 export default class JournalEditor extends DocumentSheet5e {
-  constructor(options, _options={}) {
-    if ( options instanceof JournalEntryPage ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `JournalEditor` now takes the document within its application options during construction.",
-        { since: "DnD5e 4.3", until: "DnD5e 5.0" }
-      );
-      options = { ..._options, document: options };
-    }
-    super(options);
-  }
-
-  /* -------------------------------------------- */
 
   /** @override */
   static DEFAULT_OPTIONS = {
-    classes: ["journal-editor"],
+    classes: ["journal-editor", "dnd5e2-journal"],
     window: {
       resizable: true
     },

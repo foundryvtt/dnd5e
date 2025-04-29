@@ -17,8 +17,8 @@
                 <div class="item-header effect-source">{{ localize "DND5E.SOURCE.FIELDS.source.label" }}</div>
                 <div class="item-header item-controls effect-controls">
                     {{#if info}}
-                    <a class="info-control" data-tooltip="{{ info }}" aria-label="{{ info }}">
-                        <i class="fas fa-circle-question"></i>
+                    <a class="info-control" data-tooltip aria-label="{{ info }}">
+                        <i class="fas fa-circle-question" inert></i>
                     </a>
                     {{/if}}
                 </div>
@@ -29,8 +29,8 @@
                 {{#each effects}}
 
                 {{!-- Effects --}}
-                <li class="item effect" data-effect-id="{{ id }}" data-entry-id="{{ id }}" data-item-name="{{ name }}"
-                    {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}>
+                <li class="item effect draggable" data-effect-id="{{ id }}" data-entry-id="{{ id }}"
+                    data-item-name="{{ name }}" {{#if parentId}}data-parent-id="{{ parentId }}"{{/if}}>
 
                     {{!-- Effect Name --}}
                     <div class="item-name item-tooltip effect-name">
@@ -68,21 +68,21 @@
 
                         {{#if @root.editable}}
                         {{!-- Editing --}}
-                        <a class="effect-control item-control" data-action="edit" data-tooltip="DND5E.EffectEdit"
+                        <a class="effect-control item-control" data-action="edit" data-tooltip
                            aria-label="{{ localize "DND5E.EffectEdit" }}">
                             <i class="fas fa-pen-to-square"></i>
                         </a>
 
                         {{!-- Deleting --}}
-                        <a class="effect-control item-control" data-action="delete" data-tooltip="DND5E.EffectDelete"
+                        <a class="effect-control item-control" data-action="delete" data-tooltip
                            aria-label="{{ localize "DND5E.EffectDelete" }}">
                             <i class="fas fa-trash"></i>
                         </a>
                         {{else if toggleable}}
                         <a class="effect-control item-control {{#unless disabled}}active{{/unless}}"
                            data-action="toggle"
-                           data-tooltip="{{#if disabled}}DND5E.EffectEnable{{else}}DND5E.EffectDisable{{/if}}"
-                           aria-label="{{#if disabled}}{{ localize "DND5E.EffectEnable" }}{{else}}{{ localize "DND5E.EffectDisable" }}{{/if}}">
+                           data-tooltip aria-label="{{#if disabled}}{{ localize "DND5E.EffectEnable" }}
+                           {{~else}}{{ localize "DND5E.EffectDisable" }}{{/if}}">
                             {{#if disabled}}
                             <i class="fas fa-toggle-off"></i>
                             {{else}}
@@ -92,7 +92,7 @@
                         {{/if}}
 
                         {{!-- Context Menu --}}
-                        <a class="effect-control item-control interface-only" data-context-menu
+                        <a class="effect-control item-control always-interactive" data-context-menu
                            aria-label="{{ localize "DND5E.AdditionalControls" }}">
                             <i class="fas fa-ellipsis-vertical"></i>
                         </a>
@@ -124,7 +124,7 @@
                     data-action="toggleCondition" data-uuid="{{ reference }}" data-condition-id="{{ id }}"
                     data-tooltip="<section class=&quot;loading&quot;><i class=&quot;fas fa-spinner fa-spin-pulse&quot;></i></section>">
                     <div class="icon">
-                        <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                        <dnd5e-icon src="{{ img }}"></dnd5e-icon>
                     </div>
                     <div class="name-stacked">
                         <span class="title">{{ name }}</span>

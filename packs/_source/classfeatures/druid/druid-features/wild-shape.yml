@@ -27,7 +27,7 @@ system:
   activities:
     dnd5eactivity000:
       _id: dnd5eactivity000
-      type: utility
+      type: transform
       activation:
         type: action
         value: 1
@@ -36,11 +36,8 @@ system:
       consumption:
         targets:
           - type: itemUses
-            target: ''
             value: '1'
-            scaling:
-              mode: ''
-              formula: ''
+            target: ''
         scaling:
           allowed: false
           max: ''
@@ -82,12 +79,56 @@ system:
       uses:
         spent: 0
         recovery: []
+        max: ''
       sort: 0
+      name: ''
+      img: ''
+      transform:
+        identifier: druid
+        preset: wildshape
+      profiles:
+        - cr: '0.25'
+          name: CR ¼
+          _id: ZpU9q522gmEoHq0Z
+          sizes: []
+          types:
+            - beast
+          movement:
+            - fly
+            - swim
+          level:
+            min: null
+            max: 3
+        - cr: '0.5'
+          name: CR ½
+          _id: mnIE9O2DcYdFKlM7
+          sizes: []
+          types:
+            - beast
+          movement:
+            - fly
+          level:
+            min: 4
+            max: 7
+        - cr: '1'
+          name: CR 1
+          _id: nGveIM1zZpa21W33
+          sizes: []
+          types:
+            - beast
+          movement: []
+          level:
+            min: 8
+            max: null
   enchant: {}
   prerequisites:
     level: null
   identifier: wild-shape
-flags: {}
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
 img: icons/creatures/mammals/elk-moose-marked-green.webp
 effects: []
 folder: mZ45KUWDvNUEfxkC
@@ -96,8 +137,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.0.0
+  systemVersion: 4.4.0
   createdTime: 1725037389459
-  modifiedTime: 1725992290259
+  modifiedTime: 1745602283183
   lastModifiedBy: dnd5ebuilder0000
 _key: '!items!swK0r5TOIxredxWS'

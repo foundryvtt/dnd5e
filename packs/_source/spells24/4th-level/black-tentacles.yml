@@ -1,0 +1,177 @@
+name: Black Tentacles
+system:
+  description:
+    value: >-
+      <p>Squirming, ebony tentacles fill a 20-foot square on ground that you can
+      see within range. For the duration, these tentacles turn the ground in
+      that area into &amp;Reference[DifficultTerrain].</p><p>Each creature in
+      that area makes a Strength saving throw. On a failed save, it takes 3d6
+      Bludgeoning damage, and it has the &amp;Reference[Restrained apply=false]
+      condition until the spell ends. A creature also makes that save if it
+      enters the area or ends it turn there. A creature makes that save only
+      once per turn.</p><p>A Restrained creature can take an action to make a
+      [[/check ability=str skill=ath dc=@attributes.spell.dc]] check against
+      your spell save DC, ending the condition on itself on a success.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '1'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: ''
+    template:
+      units: ft
+      type: square
+      size: '20'
+      contiguous: false
+      count: ''
+  range:
+    value: '90'
+    units: ft
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 4
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+    - concentration
+  materials:
+    value: a tentacle
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: save
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects:
+        - _id: NDytclFrNmC418CS
+          onSave: false
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      damage:
+        onSave: half
+        parts:
+          - number: 3
+            denomination: 6
+            bonus: ''
+            types:
+              - bludgeoning
+            custom:
+              enabled: false
+              formula: ''
+            scaling:
+              mode: ''
+              number: null
+              formula: ''
+      save:
+        ability: str
+        dc:
+          calculation: spellcasting
+          formula: ''
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: evards-black-tentacles
+_id: phbsplEvardsBlac
+type: spell
+img: icons/creatures/tentacles/tentacles-suctioncups-pink.webp
+effects:
+  - name: Restrained
+    origin: Compendium.dnd5e.spells24.Item.phbsplEvardsBlac
+    duration:
+      rounds: null
+      startTime: null
+      seconds: 60
+      combat: null
+      turns: null
+      startRound: null
+      startTurn: null
+    disabled: false
+    flags: {}
+    img: systems/dnd5e/icons/svg/statuses/restrained.svg
+    _id: NDytclFrNmC418CS
+    type: base
+    system: {}
+    changes: []
+    description: >-
+      <p>A &amp;Reference[Restrained apply=false] creature can take an action to
+      make a [[/check ability=str skill=ath dc=@attributes.spell.dc]] check
+      against your spell save DC, ending the condition on itself on a
+      success.</p>
+    tint: '#ffffff'
+    transfer: false
+    statuses:
+      - restrained
+    sort: 0
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!items.effects!phbsplEvardsBlac.NDytclFrNmC418CS'
+folder: qi3IbnEwap7mRw4b
+sort: 2400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425952514
+  modifiedTime: 1745256792488
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbsplEvardsBlac'

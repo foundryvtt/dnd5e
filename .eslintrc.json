@@ -95,7 +95,7 @@
     "no-useless-rename": "warn",
     "no-useless-return": "warn",
     "no-var": "warn",
-    "no-void": "warn",
+    "no-void": ["warn", { "allowAsStatement": true }],
     "no-whitespace-before-property": "warn",
     "prefer-numeric-literals": "warn",
     "prefer-object-spread": "warn",

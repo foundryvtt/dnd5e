@@ -256,7 +256,7 @@ async function enrichAward(config, label, options) {
     amount = Number.isNumeric(amount) ? formatNumber(amount) : amount;
     entries.push(`
       <span class="award-entry">
-        ${amount} <i class="currency ${key}" data-tooltip="${label}" aria-label="${label}"></i>
+        ${amount} <i class="currency ${key}" data-tooltip aria-label="${label}"></i>
       </span>
     `);
   }
@@ -961,7 +961,7 @@ function enrichLookup(config, fallback, options) {
  *     <i class="fas fa-book-open"></i> Label
  *   </a>
  *   <a class="enricher-action" data-action="apply" data-status="unconscious"
- *      data-tooltip="EDITOR.DND5E.Inline.ApplyStatus" aria-label="Apply Status to Selected Tokens">
+ *      data-tooltip aria-label="Apply Status to Selected Tokens">
  *     <i class="fas fa-fw fa-reply-all fa-flip-horizontal"></i>
  *   </a>
  * </span>
@@ -1000,8 +1000,8 @@ async function enrichReference(config, label, options) {
     apply.classList.add("enricher-action");
     apply.dataset.action = "apply";
     apply.dataset.status = key;
-    apply.dataset.tooltip = "EDITOR.DND5E.Inline.ApplyStatus";
-    apply.setAttribute("aria-label", game.i18n.localize(apply.dataset.tooltip));
+    apply.dataset.tooltip = "";
+    apply.setAttribute("aria-label", game.i18n.localize("EDITOR.DND5E.Inline.ApplyStatus"));
     apply.innerHTML = '<i class="fas fa-fw fa-reply-all fa-flip-horizontal"></i>';
     span.append(apply);
   }
@@ -1294,6 +1294,7 @@ async function applyAction(event) {
   const status = target?.dataset.status;
   if ( !status ) return;
   event.stopPropagation();
+  window.getSelection().empty();
   const actors = new Set();
   for ( const { actor } of canvas.tokens.controlled ) {
     if ( !actor || actors.has(actor) ) continue;
@@ -1314,6 +1315,7 @@ async function awardAction(event) {
   const command = target?.closest("[data-award-command]")?.dataset.awardCommand;
   if ( !command ) return;
   event.stopPropagation();
+  window.getSelection().empty();
   Award.handleAward(command);
 }
 
@@ -1328,6 +1330,7 @@ async function rollAction(event) {
   const target = event.target.closest('.roll-link-group, [data-action="rollRequest"], [data-action="concentration"]');
   if ( !target ) return;
   event.stopPropagation();
+  window.getSelection().empty();
 
   const dataset = {
     ...((event.target.closest(".roll-link-group") ?? target)?.dataset ?? {}),

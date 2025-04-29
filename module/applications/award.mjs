@@ -14,32 +14,6 @@ import Application5e from "./api/application.mjs";
  * Application for awarding XP and currency to players.
  */
 export default class Award extends Application5e {
-  constructor(options, _options={}) {
-    if ( options instanceof foundry.abstract.Document ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `Award` origin actor should now be passed within the options object as `origin`.",
-        { since: "DnD5e 4.3", until: "DnD5e 5.0" }
-      );
-      _options.origin = options;
-      options = _options;
-    }
-
-    if ( !options ) options = _options;
-    for ( const key of ["currency", "each", "savedDestinations", "xp"] ) {
-      if ( !(key in options) ) continue;
-      options.award ??= {};
-      options.award[key] = options[key];
-      delete options[key];
-      foundry.utils.logCompatibilityWarning(
-        `The \`${key}\` option in \`Award\` has been moved to \`award.${key}\`.`,
-        { since: "DnD5e 4.3", until: "DnD5e 5.0" }
-      );
-    }
-
-    super(options);
-  }
-
-  /* -------------------------------------------- */
 
   /** @override */
   static DEFAULT_OPTIONS = {
@@ -326,7 +300,7 @@ export default class Award extends Application5e {
         const label = CONFIG.DND5E.currencies[key].label;
         entries.push(`
           <span class="award-entry">
-            ${formatNumber(amount)} <i class="currency ${key}" data-tooltip="${label}" aria-label="${label}"></i>
+            ${formatNumber(amount)} <i class="currency ${key}" data-tooltip aria-label="${label}"></i>
           </span>
         `);
       }

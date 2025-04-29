@@ -1,0 +1,82 @@
+_id: dmg1116RandomMag
+name: Level 11-16
+img: icons/svg/d20-grey.svg
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 11
+    drawn: false
+    _id: 61n4jrBVj6TnA0jy
+    text: Common
+    img: systems/dnd5e/icons/spell-tiers/spell1.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!dmg1116RandomMag.61n4jrBVj6TnA0jy'
+  - type: text
+    weight: 1
+    range:
+      - 12
+      - 34
+    drawn: false
+    _id: hAbp3qGIHSaiOHKt
+    text: Uncommon
+    img: systems/dnd5e/icons/spell-tiers/spell2.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!dmg1116RandomMag.hAbp3qGIHSaiOHKt'
+  - type: text
+    weight: 1
+    range:
+      - 35
+      - 70
+    drawn: false
+    _id: TP7sKSXl0vmTmsmz
+    text: Rare
+    img: systems/dnd5e/icons/spell-tiers/spell3.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!dmg1116RandomMag.TP7sKSXl0vmTmsmz'
+  - type: text
+    weight: 1
+    range:
+      - 71
+      - 93
+    drawn: false
+    _id: FI2rkXDgk1wOpIXY
+    text: Very Rare
+    img: systems/dnd5e/icons/spell-tiers/spell4.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!dmg1116RandomMag.FI2rkXDgk1wOpIXY'
+  - type: text
+    weight: 1
+    range:
+      - 94
+      - 100
+    drawn: false
+    _id: hG3yZoeUz7ey3Nbz
+    text: Legendary
+    img: systems/dnd5e/icons/spell-tiers/spell5.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!dmg1116RandomMag.hG3yZoeUz7ey3Nbz'
+replacement: true
+displayRoll: true
+folder: Iql5oCfKyncKTjZ1
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1730222847613
+  modifiedTime: 1731376912677
+  lastModifiedBy: dnd5ebuilder0000
+formula: 1d100
+sort: 100000
+ownership:
+  default: 0
+_key: '!tables!dmg1116RandomMag'

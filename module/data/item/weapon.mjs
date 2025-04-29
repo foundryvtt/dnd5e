@@ -92,9 +92,8 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-    enchantable: true,
-    inventoryItem: true,
-    inventoryOrder: 100
+    hasEffects: true,
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -122,6 +121,22 @@ export default class WeaponData extends ItemDataModel.mixin(
       ...this.compendiumBrowserPhysicalItemFilters,
       ["properties", this.compendiumBrowserPropertiesFilter("weapon")]
     ]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "weapons",
+      order: 100,
+      label: "TYPES.Item.weaponPl",
+      groups: { type: "weapon" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    };
   }
 
   /* -------------------------------------------- */
@@ -202,7 +217,6 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
-    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
     this.prepareIdentifiable();
@@ -258,10 +272,11 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async getSheetData(context) {
     context.subtitles = [
-      { label: context.itemType },
+      { label: game.i18n.localize(CONFIG.Item.typeLabels.weapon) },
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+
     context.info = [{
       label: "DND5E.ToHit",
       classes: "info-lg",
@@ -273,15 +288,14 @@ export default class WeaponData extends ItemDataModel.mixin(
         const type = config[damageType];
         return `${str}
           <span class="formula">${formula}</span>
-          ${type ? `<span class="damage-type" data-tooltip="${type.label}" aria-label="${type.label}">
+          ${type ? `<span class="damage-type" data-tooltip aria-label="${type.label}">
             <dnd5e-icon src="${type.icon}"></dnd5e-icon>
           </span>` : ""}
         `;
       }, ""), classes: "info-grid damage" });
     }
-    context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
 
-    // Damage
+    context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
       return {
         value, label,

@@ -1,0 +1,76 @@
+_id: dmgRingOfFreeAct
+name: Ring of Free Action
+type: equipment
+folder: DC1x1wAm0NLFudA6
+img: icons/equipment/finger/ring-shield-silver.webp
+system:
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    max: ''
+  description:
+    value: >-
+      <p><em>Ring, Rare (Requires Attunement)</em></p><p>While you wear this
+      ring, &amp;Reference[Difficult Terrain] doesn't cost you extra movement.
+      In addition, magic can neither reduce any of your Speeds nor cause you to
+      have the &amp;Reference[Paralyzed apply=false] or
+      &amp;Reference[Restrained apply=false] condition.</p>
+    chat: ''
+  identifier: ring-of-free-action
+  source:
+    revision: 1
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 4000
+    denomination: gp
+  rarity: rare
+  attunement: required
+  attuned: false
+  equipped: false
+  armor:
+    value: null
+    magicalBonus: null
+    dex: null
+  cover: null
+  crewed: false
+  hp:
+    value: null
+    max: null
+    dt: null
+    conditions: ''
+  type:
+    value: ring
+    baseItem: ''
+  properties:
+    - mgc
+  strength: null
+  proficient: null
+effects: []
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1727883376108
+  modifiedTime: 1745256808110
+  lastModifiedBy: dnd5ebuilder0000
+sort: 700000
+ownership:
+  default: 0
+_key: '!items!dmgRingOfFreeAct'

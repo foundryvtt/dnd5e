@@ -1,0 +1,27 @@
+<div class="activity-row draggable item-row" data-activity-id="{{ _id }}">
+
+    {{!-- Name --}}
+    <div class="activity-name item-name item-action {{ @root.rollableClass }}" role="button" aria-label="{{ name }}"
+         data-action="activity-use">
+
+        {{#if icon.svg}}
+        <dnd5e-icon class="activity-image item-image" src="{{ icon.src }}"></dnd5e-icon>
+        {{else}}
+        <img class="activity-image item-image gold-icon" src="{{ icon.src }}" alt="{{ name }}">
+        {{/if}}
+
+        <div class="name name-stacked">
+            <span class="title">{{ name }}</span>
+            {{#if labels.activation}}
+            <span class="subtitle">{{ labels.activation }}</span>
+            {{/if}}
+        </div>
+
+    </div>
+
+    {{!-- Columns --}}
+    {{#each columns}}
+        {{> (lookup . "template") entry=.. ctx=.. item=../item isActivity=true }}
+    {{/each}}
+
+</div>

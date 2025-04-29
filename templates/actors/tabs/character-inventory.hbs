@@ -1,0 +1,49 @@
+<section class="tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+
+    {{!-- Encumbrance & Containers --}}
+    <div class="top">
+
+        {{!-- Encumbrance --}}
+        <div class="encumbrance card">
+            {{> "systems/dnd5e/templates/inventory/encumbrance.hbs" encumbrance=system.attributes.encumbrance }}
+            <div class="info">
+                <div class="strength">
+                    <span class="label">{{ localize "DND5E.AbilityStr" }}</span>
+                    <span class="value">{{ system.abilities.str.value }}</span>
+                </div>
+                <div class="size">
+                    <span class="label">{{ localize "DND5E.Size" }}</span>
+                    <span class="value" aria-label="{{ size.label }}">{{ size.abbr }}</span>
+                </div>
+                <div class="multiplier">
+                    <span class="label">{{ localize "DND5E.Multiplier" }}</span>
+                    <span class="value">
+                        <span class="sign">&times;</span>
+                        {{ size.mod }}
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        {{!-- Containers --}}
+        <ul class="containers unlist">
+            {{#each containers}}
+            <li class="container draggable" data-item-id="{{ id }}" data-uuid="{{ uuid }}">
+                <a class="item-action" data-action="showDocument" data-tooltip="{{ name }}" aria-label="{{ name }}">
+                    {{#dnd5e-itemContext this as |ctx|}}
+                    {{#with ctx.capacity}}
+                    <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}"
+                         aria-valuetext="{{ value }}" aria-valuemax="{{ max }}"
+                         style="--bar-percentage: {{ pct }}%"></div>
+                    {{/with}}
+                    {{/dnd5e-itemContext}}
+                    <img src="{{ img }}" alt="{{ name }}" draggable="false">
+                </a>
+            </li>
+            {{/each}}
+        </ul>
+
+    </div>
+
+    {{> "systems/dnd5e/templates/inventory/inventory.hbs" }}
+</section>

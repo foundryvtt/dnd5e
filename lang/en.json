@@ -170,17 +170,55 @@
     "Vehicle": "Vehicle"
   },
   "Type": {
+    "Action": {
+      "Header": "Actions",
+      "Label": "Action"
+    },
+    "BonusAction": {
+      "Header": "Bonus Actions",
+      "Label": "Bonus Action"
+    },
+    "Crew": {
+      "Header": "Crew Actions",
+      "Label": "Crew Action"
+    },
+    "Day": {
+      "Header": "Days",
+      "Label": "Day"
+    },
     "Encounter": {
       "Label": "Start of Encounter"
+    },
+    "Hour": {
+      "Header": "Hours",
+      "Label": "Hour"
+    },
+    "Lair": {
+      "Header": "Lair Actions",
+      "Label": "Lair Action"
     },
     "Legendary": {
       "Counted": {
         "one": "{number} legendary action",
         "other": "{number} legendary actions"
-      }
+      },
+      "Header": "Legendary Actions",
+      "Label": "Legendary Action"
     },
     "LongRest": {
       "Label": "End of a Long Rest"
+    },
+    "Minute": {
+      "Header": "Minutes",
+      "Label": "Minute"
+    },
+    "Mythic": {
+      "Header": "Mythic Actions",
+      "Label": "Mythic Action"
+    },
+    "Reaction": {
+      "Header": "Reactions",
+      "Label": "Reaction"
     },
     "ShortRest": {
       "Label": "End of a Short Rest"
@@ -1840,34 +1878,7 @@
 "DND5E.ENCHANT": {
   "Title": "Enchant",
   "FIELDS": {
-    "effects": {
-      "FIELDS": {
-        "level": {
-          "label": "Level Limit",
-          "hint": "Range of levels required to use this enchantment.",
-          "max": {
-            "label": "Maximum Level"
-          },
-          "min": {
-            "label": "Minimum Level"
-          }
-        },
-        "riders": {
-          "label": "Attached",
-          "activity": {
-            "label": "Additional Activities",
-            "hint": "These additional activities will be added to the enchanted item when this enchantment is applied, and removed when the enchantment is removed."
-          },
-          "effect": {
-            "label": "Additional Effects",
-            "hint": "These additional effects will be added to the enchanted item when this enchantment is applied, and removed when the enchantment is removed."
-          },
-          "item": {
-            "label": "Additional Items",
-            "hint": "These additional items will be added to the creature when one of its items is enchanted, and will be removed if the enchantment is ever removed."
-          }
-        }
-      },
+    "effects.element": {
       "level": {
         "label": "Level Limit",
         "hint": "Range of levels required to use this enchantment.",
@@ -2414,13 +2425,6 @@
 "DND5E.EffectUnavailable": "Unavailable Effects",
 "DND5E.EffectUnavailableInfo": "Source item must be equipped or attuned to activate these",
 "DND5E.Encumbrance": "Encumbrance",
-"DND5E.ItemRarityCommon": "common",
-"DND5E.ItemRarityMundane": "mundane",
-"DND5E.ItemRarityUncommon": "uncommon",
-"DND5E.ItemRarityRare": "rare",
-"DND5E.ItemRarityVeryRare": "very rare",
-"DND5E.ItemRarityLegendary": "legendary",
-"DND5E.ItemRarityArtifact": "artifact",
 "DND5E.Eyes": "Eyes",
 "DND5E.Faith": "Faith",
 "DND5E.FeatureActive": "Active Abilities",
@@ -2709,39 +2713,13 @@
 "DND5E.ItemLootType": "Loot Type",
 "DND5E.ItemName": "Item Name",
 "DND5E.ItemNew": "New {type}",
-"DND5E.Item": {
-  "Category": {
-    "Label": "Category",
-    "Physical": "Physical"
-  },
-  "Property": {
-    "Adamantine": "Adamantine",
-    "Ammunition": "Ammunition",
-    "Concentration": "Concentration",
-    "Finesse": "Finesse",
-    "Firearm": "Firearm",
-    "Focus": "Focus",
-    "Heavy": "Heavy",
-    "Light": "Light",
-    "Loading": "Loading",
-    "Material": "Material",
-    "Magical": "Magical",
-    "Reach": "Reach",
-    "Reload": "Reload",
-    "Returning": "Returning",
-    "Ritual": "Ritual",
-    "Silvered": "Silvered",
-    "Somatic": "Somatic",
-    "Special": "Special",
-    "StealthDisadvantage": "Stealth Disadvantage",
-    "Thrown": "Thrown",
-    "Trait": "Passive Trait",
-    "TwoHanded": "Two-Handed",
-    "Versatile": "Versatile",
-    "Verbal": "Verbal",
-    "WeightlessContents": "Weightless Contents"
-  }
-},
+"DND5E.ItemRarityCommon": "common",
+"DND5E.ItemRarityMundane": "mundane",
+"DND5E.ItemRarityUncommon": "uncommon",
+"DND5E.ItemRarityRare": "rare",
+"DND5E.ItemRarityVeryRare": "very rare",
+"DND5E.ItemRarityLegendary": "legendary",
+"DND5E.ItemRarityArtifact": "artifact",
 "DND5E.ItemRechargeCheck": "{name} recharge check - {result}",
 "DND5E.ItemRechargeFailure": "failure!",
 "DND5E.ItemRechargeSuccess": "success!",
@@ -2772,7 +2750,58 @@
 "DND5E.ItemWeaponStatus": "Weapon Status",
 "DND5E.ItemWeaponType": "Weapon Type",
 "DND5E.ItemWeaponUsage": "Weapon Usage",
+
+"DND5E.ITEM": {
+  "Category": {
+    "Label": "Category",
+    "Physical": "Physical"
+  },
+  "Property": {
+    "Adamantine": "Adamantine",
+    "Ammunition": "Ammunition",
+    "Concentration": "Concentration",
+    "Finesse": "Finesse",
+    "Firearm": "Firearm",
+    "Focus": "Focus",
+    "Heavy": "Heavy",
+    "Light": "Light",
+    "Loading": "Loading",
+    "Material": "Material",
+    "Magical": "Magical",
+    "Reach": "Reach",
+    "Reload": "Reload",
+    "Returning": "Returning",
+    "Ritual": "Ritual",
+    "Silvered": "Silvered",
+    "Somatic": "Somatic",
+    "Special": "Special",
+    "StealthDisadvantage": "Stealth Disadvantage",
+    "Thrown": "Thrown",
+    "Trait": "Passive Trait",
+    "TwoHanded": "Two-Handed",
+    "Versatile": "Versatile",
+    "Verbal": "Verbal",
+    "WeightlessContents": "Weightless Contents"
+  },
+  "SECTIONS": {
+    "Activities": "Activities",
+    "Advancement": "Advancement",
+    "Contents": "Contents",
+    "Description": "Description",
+    "Details": "Details",
+    "Effects": "Effects"
+  }
+},
+
 "DND5E.JackOfAllTrades": "Jack of all Trades",
+
+"DND5E.JOURNALENTRY": {
+  "Navigation": {
+    "Next": "Next",
+    "Previous": "Previous",
+    "Up": "Up"
+  }
+},
 
 "DND5E.LAIR": {
   "Label": "Lair",
@@ -3041,6 +3070,7 @@
 "DND5E.RechargeShort": "Recharge after a Short or Long Rest",
 "DND5E.Recovery": "Recovery",
 "DND5E.RecoveryFormula": "Recovery Formula",
+"DND5E.Remaining": "Remaining",
 "DND5E.RequiredMaterials": "Required Materials",
 "DND5E.Requirements": "Requirements",
 "DND5E.Resistances": "Resistances",
@@ -3556,15 +3586,7 @@
       }
     },
     "profiles": {
-      "count": {
-        "label": "Count"
-      },
-      "cr": {
-        "label": "Challenge Rating",
-        "abbr": "CR",
-        "hint": "Maximum CR of the summoned creature."
-      },
-      "FIELDS": {
+      "element": {
         "count": {
           "label": "Count"
         },
@@ -3595,28 +3617,7 @@
           "label": "Linked Creature"
         }
       },
-      "label": "Summons Profiles",
-      "level": {
-        "label": "Level Limit",
-        "hint": "Range of levels required to use this profile.",
-        "max": {
-          "label": "Maximum Level"
-        },
-        "min": {
-          "label": "Minimum Level"
-        }
-      },
-      "name": {
-        "label": "Display Name",
-        "hint": "Name of the profile displayed in the usage dialog."
-      },
-      "types": {
-        "label": "Creature Types",
-        "hint": "List of creature types from which the summoned creature can be selected."
-      },
-      "uuid": {
-        "label": "Linked Creature"
-      }
+      "label": "Summons Profiles"
     },
     "summon": {
       "label": "Summoning Details",
@@ -3667,7 +3668,6 @@
   },
   "Warning": {
     "CreateActor": "You must have 'Create New Actors' permission in order to summon directly from a compendium.",
-    "CRV11": "Summoning based on creature challenge rating only works in Foundry V12 or higher.",
     "NoActor": "Actor cannot be found with UUID '{uuid}' to summon.",
     "NoOwnership": "You must have ownership of '{actor}' in order to summon it.",
     "NoProfile": "Cannot find summoning profile {profileId} on '{item}'.",
@@ -4041,12 +4041,7 @@
   },
   "FIELDS": {
     "profiles": {
-      "cr": {
-        "label": "Challenge Rating",
-        "abbr": "CR",
-        "hint": "Maximum CR of the source creature."
-      },
-      "FIELDS": {
+      "element": {
         "cr": {
           "label": "Challenge Rating",
           "abbr": "CR",
@@ -4079,33 +4074,7 @@
           "label": "Creature Types"
         }
       },
-      "label": "Transform Profiles",
-      "level": {
-        "label": "Level Limit",
-        "hint": "Range of levels required to use this profile.",
-        "max": {
-          "label": "Maximum Level"
-        },
-        "min": {
-          "label": "Minimum Level"
-        }
-      },
-      "movement": {
-        "hint": "Movement types that are not allowed on source creatures.",
-        "label": "Restricted Movement Types"
-      },
-      "name": {
-        "hint": "Name of the profile displayed in the usage dialog.",
-        "label": "Display Name"
-      },
-      "sizes": {
-        "hint": "List of creature sizes from which the source creature can be selected.",
-        "label": "Creature Sizes"
-      },
-      "types": {
-        "hint": "List of creature types from which the source creature can be selected.",
-        "label": "Creature Types"
-      }
+      "label": "Transform Profiles"
     },
     "transform": {
       "label": "Transformation Details",
@@ -4895,8 +4864,6 @@
 "MIGRATION.5eComplete": "D&D 5e System Migration to version {version} completed!",
 "MIGRATION.5eVersionTooOldWarning": "Your D&D 5e system data is from too old a Foundry version and cannot be reliably migrated to the latest version. The process will be attempted, but errors may occur.",
 
-"SETTINGS.5eAllowPolymorphingL": "Allow players to polymorph their own actors.",
-"SETTINGS.5eAllowPolymorphingN": "Allow Polymorphing",
 "SETTINGS.5eAutoCollapseCardL": "Automatically collapse Item Card descriptions in the Chat Log",
 "SETTINGS.5eAutoCollapseCardN": "Collapse Item Cards in Chat",
 "SETTINGS.5eAutoSpellTemplateL": "When a spell is cast, defaults to begin the process to create the corresponding Measured Template if any (requires TRUSTED or higher player role)",
@@ -4908,10 +4875,6 @@
 "SETTINGS.5eGridAlignedSquareTemplatesL": "When square templates are created as the result of casting a spell or using an item, they will be locked to the grid alignment and unable to be rotated.",
 "SETTINGS.5eGridAlignedSquareTemplatesN": "Grid-Aligned Square Templates",
 "SETTINGS.DND5E": {
-  "ALLOWSUMMONING": {
-    "Name": "Allow Summoning",
-    "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work."
-  },
   "BLOODIED": {
     "Name": "Bloodied Status",
     "Hint": "Configure whether the bloodied status is tracked automatically and its visibility.",
@@ -4996,6 +4959,16 @@
   "THEME": {
     "Name": "Theme",
     "Hint": "Theme that will apply to the UI and all sheets by default. Automatic will be determined by your browser or operating system settings."
+  },
+  "PERMISSIONS": {
+    "AllowSummoning": {
+      "Hint": "Allow players to use summoning abilities to summon actors. Players must also have the Create Token core permission for this to work.",
+      "Name": "Allow Summoning"
+    },
+    "AllowTransformation": {
+      "Hint": "Allow players to transform their own actors. Players must also have the Create Actor core permission for this to work.",
+      "Name": "Allow Transformation"
+    }
   },
   "RULESVERSION": {
     "Name": "Rules Version",

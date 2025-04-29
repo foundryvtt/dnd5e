@@ -198,7 +198,7 @@ export async function migrateCompendium(pack, { bypassVersionCheck=false, strict
   const wasLocked = pack.locked;
   try {
     await pack.configure({locked: false});
-    dnd5e.moduleArt.suppressArt = true;
+    game.compendiumArt.enabled = false;
 
     // Begin by requesting server-side data model migration and get the migrated content
     const documents = await pack.getDocuments();
@@ -248,7 +248,7 @@ export async function migrateCompendium(pack, { bypassVersionCheck=false, strict
   } finally {
     // Apply the original locked status for the pack
     await pack.configure({locked: wasLocked});
-    dnd5e.moduleArt.suppressArt = false;
+    game.compendiumArt.enabled = true;
   }
 }
 
@@ -327,7 +327,7 @@ export async function refreshCompendium(pack, { bypassVersionCheck, migrate=true
     }
   }
 
-  dnd5e.moduleArt.suppressArt = true;
+  game.compendiumArt.enabled = false;
   const DocumentClass = CONFIG[pack.documentName].documentClass;
   const wasLocked = pack.locked;
   await pack.configure({locked: false});
@@ -340,7 +340,7 @@ export async function refreshCompendium(pack, { bypassVersionCheck, migrate=true
     await DocumentClass.create(data, {keepId: true, keepEmbeddedIds: true, pack: pack.collection});
   }
   await pack.configure({locked: wasLocked});
-  dnd5e.moduleArt.suppressArt = false;
+  game.compendiumArt.enabled = true;
   ui.notifications.info(`Refreshed all documents from Compendium ${pack.collection}`);
 }
 
@@ -460,16 +460,8 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
     }
 
     // Update the Owned Item
-    if ( !foundry.utils.isEmpty(itemUpdate) ) {
-      if ( itemFlags.persistSourceMigration ) {
-        if ( "effects" in itemUpdate ) itemUpdate.effects = itemData.effects.map(effect => foundry.utils.mergeObject(
-          effect, itemUpdate.effects.find(e => e._id === effect._id) ?? {}, { inplace: false, performDeletions: true }
-        ));
-        itemUpdate = foundry.utils.mergeObject(itemData, itemUpdate, { inplace: false, performDeletions: true });
-        flags.persistSourceMigration = true;
-      }
-      arr.push({ ...itemUpdate, _id: itemData._id });
-    }
+    if ( itemFlags.persistSourceMigration ) flags.persistSourceMigration = true;
+    arr.push({ itemData, itemUpdate });
 
     // Update tool expertise.
     if ( actorData.system.tools ) {
@@ -480,7 +472,15 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
     }
 
     return arr;
-  }, []);
+  }, []).map(({ itemData, itemUpdate }) => {
+    if ( flags.persistSourceMigration ) {
+      if ( "effects" in itemUpdate ) itemUpdate.effects = itemData.effects.map(effect => foundry.utils.mergeObject(
+        effect, itemUpdate.effects.find(e => e._id === effect._id) ?? {}, { inplace: false, performDeletions: true }
+      ));
+      itemUpdate = foundry.utils.mergeObject(itemData, itemUpdate, { inplace: false, performDeletions: true });
+    }
+    return foundry.utils.isEmpty(itemUpdate) ? null : { ...itemUpdate, _id: itemData._id };
+  }).filter(_ => _);
   if ( items.length > 0 ) updateData.items = items;
 
   return updateData;

@@ -3,32 +3,13 @@ import { getHumanReadableAttributeLabel } from "../utils.mjs";
 /**
  * Custom token configuration application for handling dynamic rings & resource labels.
  */
-export class TokenConfig5e extends (foundry.applications?.sheets?.TokenConfig ?? TokenConfig) {
-  /** @inheritDoc */
-  async _render(...args) {
-    await super._render(...args);
-    if ( !this.rendered ) return;
-    this._prepareResourceLabels(this.element[0]);
-  }
-
-  /* -------------------------------------------- */
+export class TokenConfig5e extends foundry.applications.sheets.TokenConfig {
 
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);
     if ( !this.rendered ) return;
     this._prepareResourceLabels(this.element);
-  }
-
-  /* -------------------------------------------- */
-
-  /** @inheritDoc */
-  async getData(options={}) {
-    const context = await super.getData(options);
-    const doc = this.preview ?? this.document;
-    context.scale = Math.abs(doc._source.texture.scaleX);
-    this._addItemAttributes(context.barAttributes);
-    return context;
   }
 
   /* -------------------------------------------- */
@@ -97,7 +78,10 @@ export class TokenConfig5e extends (foundry.applications?.sheets?.TokenConfig ??
   }
 }
 
-export class PrototypeTokenConfig5e extends (foundry.applications?.sheets?.PrototypeTokenConfig ?? class {}) {
+/**
+ * Custom prototype token configuration application for handling dynamic rings & resource labels.
+ */
+export class PrototypeTokenConfig5e extends foundry.applications.sheets.PrototypeTokenConfig {
   /** @inheritDoc */
   async _onRender(context, options) {
     await super._onRender(context, options);

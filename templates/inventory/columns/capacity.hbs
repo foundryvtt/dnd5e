@@ -1,0 +1,13 @@
+{{#with ctx.capacity}}
+<div class="item-detail item-capacity always-visible" data-column-id="capacity">
+    <div class="meter progress" role="meter" aria-valuemin="0" aria-valuenow="{{ pct }}" aria-valuetext="{{ value }}"
+         aria-valuemax="{{ max }}" style="--bar-percentage: {{ pct }}%">
+        <div class="label">
+            <i class="fa-solid fa-weight-hanging" inert></i>
+            <span class="value">{{ value }}</span>
+            <span class="separator">&sol;</span>
+            <span class="max">{{{ maxLabel }}}</span>
+        </div>
+    </div>
+</div>
+{{/with}}

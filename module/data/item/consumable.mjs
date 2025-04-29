@@ -69,9 +69,8 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-    enchantable: true,
-    inventoryItem: true,
-    inventoryOrder: 300
+    hasEffects: true,
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -91,6 +90,22 @@ export default class ConsumableData extends ItemDataModel.mixin(
       ...this.compendiumBrowserPhysicalItemFilters,
       ["properties", this.compendiumBrowserPropertiesFilter("consumable")]
     ]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "consumables",
+      order: 300,
+      label: "TYPES.Item.consumablePl",
+      groups: { type: "consumable" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    };
   }
 
   /* -------------------------------------------- */
@@ -136,7 +151,6 @@ export default class ConsumableData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
-    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
     this.prepareIdentifiable();
@@ -177,6 +191,8 @@ export default class ConsumableData extends ItemDataModel.mixin(
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+
+    context.parts = ["dnd5e.details-consumable", "dnd5e.field-uses"];
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
       return {
         value, label,
@@ -188,7 +204,11 @@ export default class ConsumableData extends ItemDataModel.mixin(
       { rule: true },
       ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
     ];
-    context.parts = ["dnd5e.details-consumable", "dnd5e.field-uses"];
+    const itemTypes = CONFIG.DND5E.consumableTypes[this._source.type.value];
+    if ( itemTypes ) {
+      context.itemType = itemTypes.label;
+      context.itemSubtypes = itemTypes.subtypes;
+    }
   }
 
   /* -------------------------------------------- */

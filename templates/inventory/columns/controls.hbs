@@ -1,0 +1,67 @@
+<div class="item-detail item-controls always-visible" data-column-id="controls">
+
+    {{#if isItem}}
+    {{#if @root.editable}}
+    {{!-- Editing --}}
+    <button type="button" class="unbutton config-button item-control item-action" data-action="edit"
+            data-tooltip aria-label="{{ localize "DND5E.ItemEdit" }}">
+        <i class="fa-solid fa-pen-to-square" inert></i>
+    </button>
+
+    {{#if item.canDelete}}
+    {{!-- Deleting --}}
+    <button type="button" class="unbutton config-button item-control item-action" data-action="delete"
+            data-tooltip aria-label="{{ localize "DND5E.ItemDelete" }}">
+        <i class="fa-solid fa-trash" inert></i>
+    </button>
+    {{/if}}
+    {{else if @root.owner}}
+    {{!-- Attuning --}}
+    {{#with ctx.attunement}}
+    {{#if applicable}}
+    <button type="button" class="unbutton config-button item-control item-action {{ cls }}" data-action="attune"
+            data-tooltip aria-label="{{ localize title }}" aria-disabled="{{ this.disabled }}">
+        <i class="fa-solid fa-sun" inert></i>
+    </button>
+    {{/if}}
+    {{/with}}
+
+    {{!-- Equipping --}}
+    {{#with ctx.equip}}
+    {{#if applicable}}
+    <button type="button" class="unbutton config-button item-control item-action {{ cls }}" data-action="equip"
+            data-tooltip aria-label="{{ localize title }}" aria-disabled="{{ this.disabled }}">
+        <i class="fa-solid fa-shield-halved" inert></i>
+    </button>
+    {{/if}}
+    {{/with}}
+
+    {{!-- Preparing --}}
+    {{#with ctx.preparation}}
+    {{#if applicable}}
+    <button type="button" class="unbutton config-button item-control item-action {{ cls }}" data-action="prepare"
+            data-tooltip aria-label="{{ title }}" aria-disabled="{{ this.disabled }}">
+        {{{ icon }}}
+    </button>
+    {{/if}}
+    {{/with}}
+    {{/if}}
+
+    {{!-- Expand/Collapse --}}
+    <button type="button" class="unbutton config-button item-control item-action always-interactive"
+            data-toggle-description data-action="toggleExpand" aria-label="{{ localize "DND5E.ToggleDescription" }}">
+        {{#if ctx.isExpanded}}
+        <i class="fa-solid fa-compress" inert></i>
+        {{else}}
+        <i class="fa-solid fa-expand" inert></i>
+        {{/if}}
+    </button>
+
+    {{!-- Context Menu --}}
+    <button type="button" class="unbutton config-button item-control always-interactive" data-context-menu
+            aria-label="{{ localize "DND5E.AdditionalControls" }}">
+        <i class="fa-solid fa-ellipsis-vertical" inert></i>
+    </button>
+    {{/if}}
+
+</div>

@@ -5,7 +5,7 @@
 copyable-text {
   text-decoration: underline;
   text-decoration-style: dashed;
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
   &:hover, &:has(:focus-visible) {
     text-decoration-color: var(--color-shadow-primary);
     button { text-shadow: 0 0 4px var(--color-shadow-primary); }
@@ -71,7 +71,7 @@ filter-state {
   }
 
   &:not(:disabled) .indicator {
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
   }
   &:focus-visible .indicator {
     outline: 2px solid var(--filter-state-focus-color);
@@ -96,7 +96,7 @@ slide-toggle {
   display: inline-block;
   width: var(--slide-toggle-width);
   height: var(--slide-toggle-height);
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
 
   .slide-toggle-track {
     width: 100%;
@@ -175,62 +175,6 @@ dnd5e-icon.fa-fw {
     left: .75rem;
   }
 
-  .filter-list {
-    display: none;
-    position: absolute;
-    flex-direction: column;
-    inset: 100% auto auto -50px;
-    border-radius: 3px;
-    box-shadow: 0 3px 6px var(--dnd5e-shadow-45);
-    background: var(--dnd5e-background-card);
-    min-width: 145px;
-    z-index: 1;
-
-    > li {
-      padding: 0 .75rem;
-
-      &:hover { background: var(--dnd5e-background-parchment); }
-      &:first-child { border-radius: 3px 3px 0 0; }
-
-      &:last-child {
-        border-radius: 0 0 3px 3px;
-        .filter-item { border: none; }
-      }
-    }
-
-    .filter-item {
-      font-weight: normal;
-      padding: .5rem 1.75rem .5rem 0;
-      justify-content: start;
-      text-align: start;
-      font-family: var(--dnd5e-font-roboto);
-      font-size: var(--font-size-13);
-      background: none;
-      border-radius: 0;
-      border: none;
-      margin: 0;
-      line-height: normal;
-      border-bottom: 1px solid var(--color-border-light-1);
-      box-shadow: none;
-      text-transform: unset;
-
-      &:hover, &:focus { box-shadow: none; }
-
-      &.active {
-        font-weight: bold;
-        position: relative;
-
-        &::after {
-          content: "\f00c";
-          font-family: var(--font-awesome);
-          position: absolute;
-          right: .5rem;
-          color: var(--dnd5e-color-gold);
-        }
-      }
-    }
-  }
-
   .dropdown {
     position: relative;
 
@@ -259,7 +203,11 @@ dnd5e-icon.fa-fw {
     font-size: var(--font-size-16);
     padding: 0 .375rem;
 
-    &.active { color: var(--color-text-dark-primary); }
+    &.active {
+      color: var(--color-text-dark-primary);
+      &[data-action=filter] { color: var(--dnd5e-color-red); }
+    }
+
     &:hover:not(.disabled) { text-shadow: 0 0 8px var(--color-shadow-primary); }
 
     &:hover:not(.disabled), &:focus {
@@ -277,13 +225,28 @@ dnd5e-icon.fa-fw {
   .filter-control[data-action="sort"] { padding-left: .625rem; }
 }
 
+#context-menu .filter-item {
+  &.active {
+    font-weight: bold;
+    position: relative;
+
+    &::after {
+      content: "\f00c";
+      font-family: var(--font-awesome);
+      position: absolute;
+      right: .5rem;
+      color: var(--dnd5e-color-gold);
+    }
+  }
+}
+
 /* ---------------------------------- */
 /*  Multi Select                      */
 /* ---------------------------------- */
 
 .dnd5e multi-select .tags {
   flex-wrap: wrap;
-  .tag { cursor: pointer; }
+  .tag { cursor: var(--cursor-pointer); }
 }
 
 /* ---------------------------------- */
