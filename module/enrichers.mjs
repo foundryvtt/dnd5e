@@ -166,7 +166,10 @@ async function enrichAttack(config, label, options) {
     else if ( value === "extended" ) config.format = "extended";
     else formulaParts.push(value);
   }
-  config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? options.relativeTo?.getRollData?.() ?? {});
+  config.formula = Roll.defaultImplementation.replaceFormulaData(
+    formulaParts.join(" "),
+    options.rollData ?? options.relativeTo?.getRollData?.() ?? {}
+  );
 
   const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
     : !config.formula ? options.relativeTo?.system?.activities?.getByType("attack")[0] : null;
@@ -438,7 +441,7 @@ async function enrichCheck(config, label, options) {
   for ( const tool of config.tool ) {
     const toolConfig = CONFIG.DND5E.tools[slugify(tool)];
     const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(tool)];
-    const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
+    const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID.id, { indexOnly: true }) : null;
     if ( toolIndex ) {
       const ability = config.ability || toolConfig?.ability;
       if ( ability ) {
@@ -469,7 +472,9 @@ async function enrichCheck(config, label, options) {
     invalid = true;
   }
 
-  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? options.relativeTo?.getRollData?.() ?? {});
+  if ( config.dc && !Number.isNumeric(config.dc) ) {
+    config.dc = simplifyBonus(config.dc, options.rollData ?? options.relativeTo?.getRollData?.() ?? {});
+  }
 
   if ( invalid ) return null;
 
@@ -629,7 +634,9 @@ async function enrichSave(config, label, options) {
     return null;
   }
 
-  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? options.relativeTo?.getRollData?.() ?? {});
+  if ( config.dc && !Number.isNumeric(config.dc) ) {
+    config.dc = simplifyBonus(config.dc, options.rollData ?? options.relativeTo?.getRollData?.() ?? {});
+  }
 
   if ( config.ability.length > 1 && label ) {
     console.warn(`Multiple abilities and custom label found while enriching ${config._input}, which aren't supported together.`);
@@ -775,7 +782,10 @@ async function enrichDamage(configs, label, options) {
       else if ( value === "temp" ) c.type.push("temphp");
       else formulaParts.push(value);
     }
-    c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? options.relativeTo?.getRollData?.() ?? {});
+    c.formula = Roll.defaultImplementation.replaceFormulaData(
+      formulaParts.join(" "),
+      options.rollData ?? options.relativeTo?.getRollData?.() ?? {}
+    );
     if ( configs._isHealing && !c.type.length ) c.type.push("healing");
     if ( c.formula ) {
       config.formulas.push(c.formula);
@@ -1178,7 +1188,7 @@ export function createRollLabel(config) {
   const { label: ability, abbreviation } = CONFIG.DND5E.abilities[config.ability] ?? {};
   const skill = CONFIG.DND5E.skills[config.skill]?.label;
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
-  const tool = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true })?.name : null;
+  const tool = toolUUID ? Trait.getBaseItem(toolUUID.id, { indexOnly: true })?.name : null;
   const longSuffix = config.format === "long" ? "Long" : "Short";
   const showDC = config.dc && !config.hideDC;
 
