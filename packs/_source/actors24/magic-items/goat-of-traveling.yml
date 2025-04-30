@@ -1,5 +1,6 @@
 name: Goat of Traveling
 type: npc
+img: ''
 system:
   details:
     biography:
@@ -389,7 +390,6 @@ system:
     rules: '2024'
     book: SRD 5.2
     license: CC-BY-4.0
-img: modules/dnd-dungeon-masters-guide/assets/portraits/goat.webp
 prototypeToken:
   name: Goat of Traveling
   displayName: 0
@@ -399,7 +399,7 @@ prototypeToken:
   width: 2
   height: 2
   texture:
-    src: modules/dnd-dungeon-masters-guide/assets/tokens/goat.webp
+    src: ''
     anchorX: 0.5
     anchorY: 0.5
     offsetX: 0
