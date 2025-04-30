@@ -166,7 +166,7 @@ async function enrichAttack(config, label, options) {
     else if ( value === "extended" ) config.format = "extended";
     else formulaParts.push(value);
   }
-  config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+  config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? options.relativeTo?.getRollData?.() ?? {});
 
   const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
     : !config.formula ? options.relativeTo?.system?.activities?.getByType("attack")[0] : null;
@@ -469,7 +469,7 @@ async function enrichCheck(config, label, options) {
     invalid = true;
   }
 
-  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData);
+  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? options.relativeTo?.getRollData?.() ?? {});
 
   if ( invalid ) return null;
 
@@ -629,7 +629,7 @@ async function enrichSave(config, label, options) {
     return null;
   }
 
-  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData);
+  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData ?? options.relativeTo?.getRollData?.() ?? {});
 
   if ( config.ability.length > 1 && label ) {
     console.warn(`Multiple abilities and custom label found while enriching ${config._input}, which aren't supported together.`);
@@ -775,7 +775,7 @@ async function enrichDamage(configs, label, options) {
       else if ( value === "temp" ) c.type.push("temphp");
       else formulaParts.push(value);
     }
-    c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+    c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? options.relativeTo?.getRollData?.() ?? {});
     if ( configs._isHealing && !c.type.length ) c.type.push("healing");
     if ( c.formula ) {
       config.formulas.push(c.formula);
