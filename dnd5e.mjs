@@ -532,7 +532,7 @@ Hooks.on("renderSettings", (app, html) => {
 /* -------------------------------------------- */
 
 Hooks.on("renderChatPopout", documents.ChatMessage5e.onRenderChatPopout);
-Hooks.on("getChatLogEntryContext", documents.ChatMessage5e.addChatMessageContextOptions);
+Hooks.on("getChatMessageContextOptions", documents.ChatMessage5e.addChatMessageContextOptions);
 
 Hooks.on("renderChatLog", (app, html, data) => {
   documents.Item5e.chatListeners(html);

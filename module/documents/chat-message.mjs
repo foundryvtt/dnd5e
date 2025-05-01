@@ -697,42 +697,42 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {object[]}          The extended options Array including new context choices
    */
   static addChatMessageContextOptions(html, options) {
-    const canApply = ([li]) => game.messages.get(li.dataset.messageId)?.canApplyDamage;
-    const canTarget = ([li]) => game.messages.get(li.dataset.messageId)?.canSelectTargets;
+    const canApply = (li) => game.messages.get(li.dataset.messageId)?.canApplyDamage;
+    const canTarget = (li) => game.messages.get(li.dataset.messageId)?.canSelectTargets;
     options.push(
       {
         name: game.i18n.localize("DND5E.ChatContextDamage"),
         icon: '<i class="fas fa-user-minus"></i>',
         condition: canApply,
-        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardDamage(li, 1),
+        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, 1),
         group: "damage"
       },
       {
         name: game.i18n.localize("DND5E.ChatContextHealing"),
         icon: '<i class="fas fa-user-plus"></i>',
         condition: canApply,
-        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardDamage(li, -1),
+        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, -1),
         group: "damage"
       },
       {
         name: game.i18n.localize("DND5E.ChatContextTempHP"),
         icon: '<i class="fas fa-user-clock"></i>',
         condition: canApply,
-        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardTemp(li),
+        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardTemp(li),
         group: "damage"
       },
       {
         name: game.i18n.localize("DND5E.ChatContextDoubleDamage"),
         icon: '<i class="fas fa-user-injured"></i>',
         condition: canApply,
-        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardDamage(li, 2),
+        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, 2),
         group: "damage"
       },
       {
         name: game.i18n.localize("DND5E.ChatContextHalfDamage"),
         icon: '<i class="fas fa-user-shield"></i>',
         condition: canApply,
-        callback: li => game.messages.get(li.data("messageId"))?.applyChatCardDamage(li, 0.5),
+        callback: li => game.messages.get(li.dataset.messageId)?.applyChatCardDamage(li, 0.5),
         group: "damage"
       },
       {
