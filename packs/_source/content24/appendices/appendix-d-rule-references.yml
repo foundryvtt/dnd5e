@@ -3522,7 +3522,8 @@ pages:
     text:
       format: 1
       content: >-
-        <p>Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.rqhOsUY4wWa1oHTy</p>
+        <p>@Embed[Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.rqhOsUY4wWa1oHTy
+        inline]</p>
       markdown: ''
     video:
       controls: true
@@ -3540,7 +3541,7 @@ pages:
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1746119428765
       lastModifiedBy: dnd5ebuilder0000
     _key: '!journal.pages!phbAppendixDRule.BXlHhE4ZoiFwiXLK'
   - sort: 11100000
@@ -4092,7 +4093,7 @@ pages:
       lastModifiedBy: dnd5ebuilder0000
     _key: '!journal.pages!phbAppendixDRule.hrdqMF8hRXJdNzJx'
   - sort: 12700000
-    name: Escaping a Grapple
+    name: Ending a Grapple
     type: rule
     _id: 2TZKy9YbMN3ZY3h8
     title:
@@ -4102,12 +4103,13 @@ pages:
     text:
       format: 1
       content: >-
-        <p><em><strong>Escaping a Grapple.</strong></em> A Grappled creature can
+        <p><em><strong>Ending a Grapple.</strong></em> A Grappled creature can
         use its action to make a [[/check ath]] or [[/check acr]] against the
         grapple’s escape DC, ending the condition on itself on a success. The
         condition also ends if the grappler has the Incapacitated condition or
         if the distance between the Grappled target and the grappler exceeds the
-        grapple’s range.</p>
+        grapple’s range. In addition, the grappler can release the target at any
+        time (no action required).</p>
       markdown: ''
     video:
       controls: true
@@ -4128,7 +4130,7 @@ pages:
       systemId: dnd5e
       systemVersion: 4.0.1
       createdTime: null
-      modifiedTime: 1726678643474
+      modifiedTime: 1746119398584
       lastModifiedBy: dnd5ebuilder0000
     _key: '!journal.pages!phbAppendixDRule.2TZKy9YbMN3ZY3h8'
   - sort: 12800000

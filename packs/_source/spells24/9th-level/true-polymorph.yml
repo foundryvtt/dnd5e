@@ -16,10 +16,11 @@ system:
       target's game statistics are replaced by the stat block of the new form,
       but it retains its Hit Points, Hit Point Dice, alignment, and
       personality.</p><p>The target gains a number of Temporary Hit Points equal
-      to the Hit Points of the new form.</p><p>The target is limited in the
-      actions it can perform by the anatomy of its new form, and it can't speak
-      or cast spells.</p><p>The target's gear melds into the new form. The
-      creature can't use or otherwise benefit from any of that
+      to the Hit Points of the new form. These Temporary Hit Points vanish if
+      any remain when the spell ends.</p><p>The target is limited in the actions
+      it can perform by the anatomy of its new form, and it can't speak or cast
+      spells.</p><p>The target's gear melds into the new form. The creature
+      can't use or otherwise benefit from any of that
       equipment.</p><p><strong>Object into Creature. </strong>You can turn an
       object into any kind of creature, as long as the creature's size is no
       larger than the object's size and the creature has a Challenge Rating of 9
@@ -146,8 +147,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 4.4.2
   createdTime: 1724425976104
-  modifiedTime: 1745256799381
+  modifiedTime: 1746119773121
   lastModifiedBy: dnd5ebuilder0000
 _key: '!items!phbsplTruePolymo'
