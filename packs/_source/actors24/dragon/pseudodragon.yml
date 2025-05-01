@@ -917,9 +917,10 @@ items:
           creature the pseudodragon can see within 5 feet.</p><p
           class="feature"><em>Failure:</em> 5 (2d4) Poison damage, and the
           target has the Poisoned condition for 1 hour.</p><p
-          class="feature"><em>Failure by 5 or More:</em> The Poisoned target
-          also has the Unconscious condition until it takes damage or a creature
-          within 5 feet of it takes an action to shake it awake.</p>
+          class="feature"><em>Failure by 5 or More:</em> While Poisoned, the
+          target also has the Unconscious condition, which ends early if the
+          target takes damage or a creature within 5 feet of it takes an action
+          to wake it.</p>
         chat: ''
       identifier: sting
       source:
@@ -1062,9 +1063,9 @@ items:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 4.4.2
       createdTime: 1738025322370
-      modifiedTime: 1745712725380
+      modifiedTime: 1746120025856
       lastModifiedBy: dnd5ebuilder0000
     ownership:
       default: 0

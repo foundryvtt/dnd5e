@@ -18,7 +18,7 @@ system:
       turns, the Restrained target repeats the save. On a failed save, the
       target takes 4d8 damage of the spirit's type. On a successful save, the
       target isn't Restrained by the spirit.</p><p><strong>Using a Higher-Level
-      Spell Slot.</strong> The damage increases by 2d8 for each spell slot level
+      Spell Slot.</strong> The damage increases by 1d8 for each spell slot level
       above 5.</p>
     chat: ''
   source:
@@ -26,6 +26,8 @@ system:
     rules: '2024'
     license: CC-BY-4.0
     book: SRD 5.2
+    page: ''
+    revision: 2
   activation:
     type: action
     condition: ''
@@ -98,7 +100,7 @@ system:
         hd: ''
         hp: ''
         attackDamage: ''
-        saveDamage: (2 * @item.level - 10)d8
+        saveDamage: (@scaling)d8
         healing: ''
       creatureSizes: []
       creatureTypes: []
@@ -106,6 +108,7 @@ system:
         saves: true
         attacks: false
         proficiency: false
+        ability: ''
       profiles:
         - count: ''
           name: ''
@@ -114,7 +117,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: rLsUbfInq7CCYy7G
@@ -122,7 +124,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: TDLfZ4CncKEEYZaq
@@ -130,7 +131,6 @@ system:
           level:
             min: null
             max: null
-          types: []
         - count: ''
           name: ''
           _id: 40IDS6d0353u3Dv4
@@ -138,7 +138,6 @@ system:
           level:
             min: null
             max: null
-          types: []
       summon:
         identifier: ''
         mode: ''
@@ -169,8 +168,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 4.4.2
   createdTime: 1724425946689
-  modifiedTime: 1745256788810
+  modifiedTime: 1746119578088
   lastModifiedBy: dnd5ebuilder0000
 _key: '!items!phbsplConjureEle'
