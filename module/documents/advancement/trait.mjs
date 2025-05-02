@@ -99,7 +99,7 @@ export default class TraitAdvancement extends Advancement {
         grants: this.configuration.grants, choices: this.configuration.choices
       })}</p>`;
     } else {
-      return Array.from(this.value.chosen).map(k => `<span class="tag">${Trait.keyLabel(k)}</span>`).join(" ");
+      return Array.from(this.value?.chosen ?? []).map(k => `<span class="tag">${Trait.keyLabel(k)}</span>`).join(" ");
     }
   }
 
