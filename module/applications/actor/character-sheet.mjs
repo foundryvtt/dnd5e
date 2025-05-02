@@ -900,6 +900,11 @@ export default class CharacterActorSheet extends BaseActorSheet {
       this.element, ".pills-lg [data-item-id], .favorites [data-item-id], .facility[data-item-id]", [],
       { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: false }
     );
+    const inventoryElement = this.element.querySelector(`[data-tab="inventory"] ${this.options.elements.inventory}`);
+    if ( inventoryElement ) new ContextMenu5e(
+      this.element, ".containers [data-item-id]", [],
+      { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: false }
+    );
 
     // Show death tray at 0 HP
     const renderContext = options.renderContext ?? options.action;

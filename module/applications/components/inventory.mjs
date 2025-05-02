@@ -424,6 +424,7 @@ export default class InventoryElement extends HTMLElement {
     }, {
       name: expanded ? "Collapse" : "Expand",
       icon: `<i class="fa-solid fa-${expanded ? "compress" : "expand"}"></i>`,
+      condition: () => "canExpand" in this.app ? this.app.canExpand(item) : true,
       callback: li => this._onAction(li, "toggleExpand"),
       group: "collapsible"
     });
