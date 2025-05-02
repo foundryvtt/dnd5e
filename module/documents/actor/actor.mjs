@@ -403,7 +403,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {object} progression                             Spellcasting progression data. *Will be mutated.*
    * @param {Item5e} cls                                     Class for whom this progression is being computed.
    * @param {object} [config={}]
-   * @param {Actor5e} [config.actor]                    Actor for whom the data is being prepared.
+   * @param {Actor5e} [config.actor]                         Actor for whom the data is being prepared.
    * @param {SpellcastingDescription} [config.spellcasting]  Spellcasting descriptive object.
    * @param {number} [config.count=1]                        Number of classes with this type of spellcasting.
    */
@@ -415,7 +415,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * A hook event that fires while computing the spellcasting progression for each class on each actor.
      * The actual hook names include the spellcasting type (e.g. `dnd5e.computeLeveledProgression`).
      * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
-     * @param {Actor5e|void} actor                  Actor for whom the data is being prepared.
+     * @param {Actor5e|void} actor                    Actor for whom the data is being prepared.
      * @param {Item5e} cls                            Class for whom this progression is being computed.
      * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
      * @param {number} count                          Number of classes with this type of spellcasting.
@@ -439,7 +439,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Contribute to the actor's spellcasting progression for a class with leveled spellcasting.
    * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
-   * @param {Actor5e|void} actor                         Actor for whom the data is being prepared, if any.
+   * @param {Actor5e|void} actor                    Actor for whom the data is being prepared, if any.
    * @param {Item5e} cls                            Class for whom this progression is being computed.
    * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
    * @param {number} count                          Number of classes with this type of spellcasting.
@@ -460,7 +460,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Contribute to the actor's spellcasting progression for a class with pact spellcasting.
    * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
-   * @param {Actor5e|void} actor                         Actor for whom the data is being prepared, if any.
+   * @param {Actor5e|void} actor                    Actor for whom the data is being prepared, if any.
    * @param {Item5e} cls                            Class for whom this progression is being computed.
    * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
    * @param {number} count                          Number of classes with this type of spellcasting.
@@ -484,7 +484,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * A hook event that fires to convert the provided spellcasting progression into spell slots.
      * The actual hook names include the spellcasting type (e.g. `dnd5e.prepareLeveledSlots`).
      * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-     * @param {Actor5e|void} actor        Actor for whom the data is being prepared, if any.
+     * @param {Actor5e|void} actor   Actor for whom the data is being prepared, if any.
      * @param {object} progression   Spellcasting progression data.
      * @returns {boolean}            Explicitly return false to prevent default preparation from being performed.
      * @function dnd5e.prepareSpellcastingSlots
@@ -501,7 +501,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Prepare leveled spell slots using progression data.
    * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-   * @param {Actor5e|void} actor        Actor for whom the data is being prepared, if any.
+   * @param {Actor5e|void} actor   Actor for whom the data is being prepared, if any.
    * @param {object} progression   Spellcasting progression data.
    */
   static prepareLeveledSlots(spells, actor, progression) {
@@ -521,7 +521,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Prepare non-leveled spell slots using progression data.
    * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-   * @param {Actor5e|void} actor        Actor for whom the data is being prepared, if any.
+   * @param {Actor5e|void} actor   Actor for whom the data is being prepared, if any.
    * @param {object} progression   Spellcasting progression data.
    * @param {string} key           The internal key for these spell slots on the actor.
    * @param {object} table         The table used for determining the progression of slots.
@@ -562,7 +562,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Convenience method for preparing pact slots specifically.
    * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-   * @param {Actor5e|void} actor        Actor for whom the data is being prepared, if any.
+   * @param {Actor5e|void} actor   Actor for whom the data is being prepared, if any.
    * @param {object} progression   Spellcasting progression data.
    */
   static preparePactSlots(spells, actor, progression) {

@@ -279,6 +279,7 @@ export default class JournalClassPageSheet extends (foundry.appv1?.sheets?.Journ
         spellcasting.levels = level;
         Actor5e.computeClassProgression(progression, item, { spellcasting });
         Actor5e.prepareSpellcastingSlots(spells, "leveled", progression);
+
         if ( !largestSlot ) largestSlot = Object.values(spells).reduce((slot, { max, level }) => {
           if ( !max ) return slot;
           return Math.max(slot, level || -1);
