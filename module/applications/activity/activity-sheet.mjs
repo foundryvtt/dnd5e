@@ -308,6 +308,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       const typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => ({ value, label }));
       const makePart = (data, index) => this._prepareDamagePartContext(context, {
         data, index, scalingOptions, typeOptions,
+        locked: data.locked || (index === undefined),
         canScale: this.activity.canScaleDamage,
         fields: this.activity.schema.fields.damage.fields.parts.element.fields,
         prefix: index !== undefined ? `damage.parts.${index}.` : "_.",
