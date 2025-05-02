@@ -1159,16 +1159,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const name = type === "skill" ? "Skill" : "ToolCheck";
 
     const skillConfig = CONFIG.DND5E.skills[config.skill];
-    const toolConfig = CONFIG.DND5E.tools[config.tool];
+    const toolConfig = CONFIG.DND5E.tools[config.tool] ?? CONFIG.DND5E.vehicleTypes[config.tool];
     if ( ((type === "skill") && !skillConfig) || ((type === "tool") && !toolConfig) ) {
-      return this.rollAbilityTest(config, dialog, message);
+      return this.rollAbilityCheck(config, dialog, message);
     }
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
     const buildConfig = this._buildSkillToolConfig.bind(this, type);
 
     const rollConfig = foundry.utils.mergeObject({
-      ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability),
+      ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig?.ability),
       advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
       disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
