@@ -420,7 +420,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @param {object} progression                             Spellcasting progression data. *Will be mutated.*
    * @param {Item5e} cls                                     Class for whom this progression is being computed.
    * @param {object} [config={}]
-   * @param {Actor5e|null} [config.actor]                    Actor for whom the data is being prepared.
+   * @param {Actor5e} [config.actor]                         Actor for whom the data is being prepared.
    * @param {SpellcastingDescription} [config.spellcasting]  Spellcasting descriptive object.
    * @param {number} [config.count=1]                        Number of classes with this type of spellcasting.
    */
@@ -432,7 +432,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * A hook event that fires while computing the spellcasting progression for each class on each actor.
      * The actual hook names include the spellcasting type (e.g. `dnd5e.computeLeveledProgression`).
      * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
-     * @param {Actor5e|null} [actor]                  Actor for whom the data is being prepared.
+     * @param {Actor5e|void} actor                    Actor for whom the data is being prepared.
      * @param {Item5e} cls                            Class for whom this progression is being computed.
      * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
      * @param {number} count                          Number of classes with this type of spellcasting.
@@ -456,7 +456,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Contribute to the actor's spellcasting progression for a class with leveled spellcasting.
    * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
-   * @param {Actor5e} actor                         Actor for whom the data is being prepared.
+   * @param {Actor5e|void} actor                    Actor for whom the data is being prepared, if any.
    * @param {Item5e} cls                            Class for whom this progression is being computed.
    * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
    * @param {number} count                          Number of classes with this type of spellcasting.
@@ -477,7 +477,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Contribute to the actor's spellcasting progression for a class with pact spellcasting.
    * @param {object} progression                    Spellcasting progression data. *Will be mutated.*
-   * @param {Actor5e} actor                         Actor for whom the data is being prepared.
+   * @param {Actor5e|void} actor                    Actor for whom the data is being prepared, if any.
    * @param {Item5e} cls                            Class for whom this progression is being computed.
    * @param {SpellcastingDescription} spellcasting  Spellcasting descriptive object.
    * @param {number} count                          Number of classes with this type of spellcasting.
@@ -501,7 +501,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
      * A hook event that fires to convert the provided spellcasting progression into spell slots.
      * The actual hook names include the spellcasting type (e.g. `dnd5e.prepareLeveledSlots`).
      * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-     * @param {Actor5e} actor        Actor for whom the data is being prepared.
+     * @param {Actor5e|void} actor   Actor for whom the data is being prepared, if any.
      * @param {object} progression   Spellcasting progression data.
      * @returns {boolean}            Explicitly return false to prevent default preparation from being performed.
      * @function dnd5e.prepareSpellcastingSlots
@@ -518,7 +518,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Prepare leveled spell slots using progression data.
    * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {Actor5e|void} actor   Actor for whom the data is being prepared, if any.
    * @param {object} progression   Spellcasting progression data.
    */
   static prepareLeveledSlots(spells, actor, progression) {
@@ -538,7 +538,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Prepare non-leveled spell slots using progression data.
    * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {Actor5e|void} actor   Actor for whom the data is being prepared, if any.
    * @param {object} progression   Spellcasting progression data.
    * @param {string} key           The internal key for these spell slots on the actor.
    * @param {object} table         The table used for determining the progression of slots.
@@ -556,7 +556,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const override = Number.isNumeric(spells[key].override) ? parseInt(spells[key].override) : null;
 
     // Slot override
-    if ( (keyLevel === 0) && (actor.type === "npc") && (override !== null) ) {
+    if ( (keyLevel === 0) && (actor?.type === "npc") && (override !== null) ) {
       keyLevel = actor.system.attributes.spell.level;
     }
 
@@ -579,7 +579,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /**
    * Convenience method for preparing pact slots specifically.
    * @param {object} spells        The `data.spells` object within actor's data. *Will be mutated.*
-   * @param {Actor5e} actor        Actor for whom the data is being prepared.
+   * @param {Actor5e|void} actor   Actor for whom the data is being prepared, if any.
    * @param {object} progression   Spellcasting progression data.
    */
   static preparePactSlots(spells, actor, progression) {
@@ -1159,16 +1159,16 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const name = type === "skill" ? "Skill" : "ToolCheck";
 
     const skillConfig = CONFIG.DND5E.skills[config.skill];
-    const toolConfig = CONFIG.DND5E.tools[config.tool];
+    const toolConfig = CONFIG.DND5E.tools[config.tool] ?? CONFIG.DND5E.vehicleTypes[config.tool];
     if ( ((type === "skill") && !skillConfig) || ((type === "tool") && !toolConfig) ) {
-      return this.rollAbility(config, dialog, message);
+      return this.rollAbilityCheck(config, dialog, message);
     }
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
     const buildConfig = this._buildSkillToolConfig.bind(this, type);
 
     const rollConfig = foundry.utils.mergeObject({
-      ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig.ability),
+      ability: relevant?.ability ?? (type === "skill" ? skillConfig.ability : toolConfig?.ability),
       advantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.ADVANTAGE,
       disadvantage: relevant?.roll.mode === CONFIG.Dice.D20Roll.ADV_MODE.DISADVANTAGE,
       halflingLucky: this.getFlag("dnd5e", "halflingLucky"),
@@ -1404,6 +1404,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }, message);
 
     const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
+
+    // TODO: Temporary fix to re-apply roll mode back to original config object to allow calling methods to
+    // access the roll mode set in the dialog. There should be a better fix for this that works for all rolls.
+    message.rollMode = messageConfig.rollMode;
+
     if ( !rolls.length ) return null;
 
     /**
@@ -1549,7 +1554,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         content: game.i18n.format(details.chatString, { name: this.name }),
         speaker: messageConfig.speaker ?? ChatMessage.getSpeaker({ actor: this })
       };
-      ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+      ChatMessage.applyRollMode(chatData, messageConfig.rollMode ?? game.settings.get("core", "rollMode"));
       resultsMessage = await ChatMessage.create(chatData);
     }
 
@@ -3308,7 +3313,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     return ActiveEffect.implementation.create({
       _id: ActiveEffect5e.ID.BLOODIED,
       name: game.i18n.localize(CONFIG.DND5E.bloodied.name),
-      img: CONFIG.DND5E.bloodied.icon,
+      img: CONFIG.DND5E.bloodied.img,
       statuses: ["bloodied"]
     }, { parent: this, keepId: true });
   }

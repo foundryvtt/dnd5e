@@ -13,9 +13,10 @@ system:
       form's anatomy, and it can't cast spells. The target's equipment melds
       into the new form, and the target can't use any of that equipment while in
       that form.</p><p>The target gains a number of Temporary Hit Points equal
-      to the Beast form's Hit Points. The transformation lasts for the duration
-      for each target, until the target has no Temporary Hit Points, or until
-      the target leaves the form as a Bonus Action.</p>
+      to the Hit Points of the first form into which it shape-shifts. These
+      Temporary Hit Points vanish if any remain when the spell ends. The
+      transformation lasts for the duration or until the target ends it as a
+      Bonus Action.</p>
     chat: ''
   source:
     custom: ''
@@ -121,8 +122,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 4.4.2
   createdTime: 1724425940527
-  modifiedTime: 1745256785367
+  modifiedTime: 1746119500443
   lastModifiedBy: dnd5ebuilder0000
 _key: '!items!phbsplAnimalShap'
