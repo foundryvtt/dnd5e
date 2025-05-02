@@ -1404,6 +1404,11 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     }, message);
 
     const rolls = await CONFIG.Dice.D20Roll.build(rollConfig, dialogConfig, messageConfig);
+
+    // TODO: Temporary fix to re-apply roll mode back to original config object to allow calling methods to
+    // access the roll mode set in the dialog. There should be a better fix for this that works for all rolls.
+    message.rollMode = messageConfig.rollMode;
+
     if ( !rolls.length ) return null;
 
     /**
@@ -1549,7 +1554,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
         content: game.i18n.format(details.chatString, { name: this.name }),
         speaker: messageConfig.speaker ?? ChatMessage.getSpeaker({ actor: this })
       };
-      ChatMessage.applyRollMode(chatData, roll.options.rollMode);
+      ChatMessage.applyRollMode(chatData, messageConfig.rollMode ?? game.settings.get("core", "rollMode"));
       resultsMessage = await ChatMessage.create(chatData);
     }
 
