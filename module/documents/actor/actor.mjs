@@ -1161,7 +1161,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const skillConfig = CONFIG.DND5E.skills[config.skill];
     const toolConfig = CONFIG.DND5E.tools[config.tool];
     if ( ((type === "skill") && !skillConfig) || ((type === "tool") && !toolConfig) ) {
-      return this.rollAbilityTest(config, dialog, message);
+      return this.rollAbility(config, dialog, message);
     }
 
     const relevant = type === "skill" ? this.system.skills?.[config.skill] : this.system.tools?.[config.tool];
