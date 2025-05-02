@@ -1357,6 +1357,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         return this.actor.rollInitiativeDialog({ event });
       case "skill":
         return this.actor.rollSkill({ event, skill: target.closest("[data-key]")?.dataset.key });
+      case "tool":
+        return this.actor.rollToolCheck({ event, tool: target.closest("[data-key]")?.dataset.key });
     }
   }
 
