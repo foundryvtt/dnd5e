@@ -696,8 +696,8 @@ export default class ChatMessage5e extends ChatMessage {
    * @returns {object[]}          The extended options Array including new context choices
    */
   static addChatMessageContextOptions(html, options) {
-    const canApply = (li) => game.messages.get(li.dataset.messageId)?.canApplyDamage;
-    const canTarget = (li) => game.messages.get(li.dataset.messageId)?.canSelectTargets;
+    const canApply = li => game.messages.get(li.dataset.messageId)?.canApplyDamage;
+    const canTarget = li => game.messages.get(li.dataset.messageId)?.canSelectTargets;
     options.push(
       {
         name: game.i18n.localize("DND5E.ChatContextDamage"),
@@ -738,14 +738,14 @@ export default class ChatMessage5e extends ChatMessage {
         name: game.i18n.localize("DND5E.ChatContextSelectHit"),
         icon: '<i class="fas fa-bullseye"></i>',
         condition: canTarget,
-        callback: ([li]) => game.messages.get(li.dataset.messageId)?.selectTargets(li, "hit"),
+        callback: li => game.messages.get(li.dataset.messageId)?.selectTargets(li, "hit"),
         group: "attack"
       },
       {
         name: game.i18n.localize("DND5E.ChatContextSelectMiss"),
         icon: '<i class="fas fa-bullseye"></i>',
         condition: canTarget,
-        callback: ([li]) => game.messages.get(li.dataset.messageId)?.selectTargets(li, "miss"),
+        callback: li => game.messages.get(li.dataset.messageId)?.selectTargets(li, "miss"),
         group: "attack"
       }
     );
