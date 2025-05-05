@@ -46,7 +46,7 @@ export class TraitConfigurationData extends foundry.abstract.DataModel {
       allowReplacements: new BooleanField({ required: true }),
       choices: new ArrayField(new SchemaField({
         count: new NumberField({ required: true, positive: true, integer: true, initial: 1 }),
-        pool: new SetField(new StringField(), { required: false })
+        pool: new SetField(new StringField())
       })),
       grants: new SetField(new StringField(), { required: true }),
       mode: new StringField({ required: true, blank: false, initial: "default" })
