@@ -68,11 +68,17 @@ export default class BaseRestDialog extends Dialog5e {
 
   /**
    * Should the user be prompted as to whether reset the actor's temporary max hit points?
-   * @type {boolean}
+   * @returns {boolean}
    */
   get promptResetTempMaxHP() {
-    if (this.actor.system.attributes.hp.tempmax > 0) return true;
-    return false;
+    if (this.actor.type==="group") {
+      const members = this.actor.system.members;
+      for (var i = 0;i<members.length;i++){
+        if (members[i].actor.system.attributes.hp.tempmax !== 0) return true;
+      }
+      return false;
+    }
+    return this.actor.system.attributes.hp.tempmax !== 0;
   }
 
   /* -------------------------------------------- */
