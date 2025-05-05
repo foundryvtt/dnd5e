@@ -626,7 +626,7 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   _onRollRecharge(entry, { event }={}) {
-    if ( entry instanceof Item5e ) return item.system.uses?.rollRecharge({ apply: true, event });
+    if ( entry instanceof Item5e ) return entry.system?.uses?.rollRecharge({ apply: true, event });
     return entry.uses?.rollRecharge({ apply: true, event });
   }
 
