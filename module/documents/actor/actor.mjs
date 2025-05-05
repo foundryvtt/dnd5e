@@ -2133,7 +2133,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     config = foundry.utils.mergeObject({
       type: "long", dialog: true, chat: true, newDay: true, advanceTime: false,
-      duration: CONFIG.DND5E.restTypes.long.duration[game.settings.get("dnd5e", "restVariant")]
+      duration: CONFIG.DND5E.restTypes.long.duration[game.settings.get("dnd5e", "restVariant")], recoverTemp: true
     }, config);
 
     /**
@@ -2365,6 +2365,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @protected
    */
   _getRestHitPointRecovery({ recoverTemp, recoverTempMax, ...config }={}, result={}) {
+    console.warn(config);
+    console.warn(recoverTemp);
     const restConfig = CONFIG.DND5E.restTypes[config.type ?? "long"];
     const hp = this.system.attributes?.hp;
     if ( !hp || !restConfig.recoverHitPoints ) return;
