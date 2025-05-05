@@ -32,6 +32,16 @@ export default class SelectChoices {
   /* -------------------------------------------- */
 
   /**
+   * Are there no entries in this choices object.
+   * @type {boolean}
+   */
+  get isEmpty() {
+    return Object.keys(this).length === 0;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Create a set of available choice keys.
    * @param {Set<string>} [set]  Existing set to which the values will be added.
    * @returns {Set<string>}
@@ -220,7 +230,7 @@ export default class SelectChoices {
       // Check children, remove entry if no children match filter
       else if ( !filter.has(wildcardKey) && !filter.has(`${key}:*`) ) {
         if ( trait.children ) trait.children.filter(filter);
-        if ( !Object.keys(trait.children ?? {}).length ) delete this[key];
+        if ( !trait.children || trait.children.isEmpty ) delete this[key];
       }
 
       // Remove ALL entries if wildcard is used

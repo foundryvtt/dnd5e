@@ -83,7 +83,7 @@ export default class TraitsConfig extends BaseConfigSheet {
       other.children[key] = choice;
       delete context.choices[key];
     }
-    if ( !foundry.utils.isEmpty(other.children) ) context.choices.OTHER = other;
+    if ( !other.children.isEmpty ) context.choices.OTHER = other;
     this._processChoices(context.data, context.choices);
 
     return context;
