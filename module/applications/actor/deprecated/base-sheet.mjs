@@ -31,6 +31,8 @@ import TraitsConfig from "../config/traits-config.mjs";
 import TreasureConfig from "../config/treasure-config.mjs";
 import WeaponsConfig from "../config/weapons-config.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * @import { DropEffectValue } from "../../../drag-drop.mjs"
  * @import { FilterState5e } from "../../components/item-list-controls.mjs";

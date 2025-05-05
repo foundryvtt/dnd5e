@@ -318,7 +318,7 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
     }
     foundry.utils.setProperty(config, "data.flags.dnd5e.order.costs.paid", true);
     const context = await this._usageChatContext(config);
-    const content = await renderTemplate(this.metadata.usage.chatCard, context);
+    const content = await foundry.applications.handlebars.renderTemplate(this.metadata.usage.chatCard, context);
     await message.update({ content, flags: config.data.flags });
   }
 }

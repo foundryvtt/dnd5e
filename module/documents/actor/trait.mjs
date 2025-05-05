@@ -522,11 +522,11 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
 
   // Singular count (e.g. "any skill", "Thieves Tools or any skill", or "Thieves' Tools or any artisan tool")
   if ( (choice.count === 1) && only ) {
-    return listFormatter.format(choice.pool.map(key => keyLabel(key)));
+    return listFormatter.format(Array.from(choice.pool).map(key => keyLabel(key)).filter(_ => _));
   }
 
   // Select from a list of options (e.g. "2 from Thieves' Tools or any skill proficiency")
-  const choices = choice.pool.map(key => keyLabel(key));
+  const choices = Array.from(choice.pool).map(key => keyLabel(key)).filter(_ => _);
   return game.i18n.format("DND5E.TraitConfigChooseList", {
     count: choice.count,
     list: listFormatter.format(choices)
@@ -563,7 +563,7 @@ export function localizedList({ grants=new Set(), choices=[] }) {
   }
 
   const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
-  if ( !sections.length || grants.size ) return listFormatter.format(sections);
+  if ( !sections.length || grants.size ) return listFormatter.format(sections.filter(_ => _));
   return game.i18n.format("DND5E.TraitConfigChooseWrapper", {
     choices: listFormatter.format(sections)
   });

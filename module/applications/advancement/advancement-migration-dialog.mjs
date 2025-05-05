@@ -70,7 +70,7 @@ export default class AdvancementMigrationDialog extends Dialog5e {
           label: game.i18n.localize("DND5E.ADVANCEMENT.Migration.Action.Confirm")
         }
       ],
-      content: await renderTemplate(
+      content: await foundry.applications.handlebars.renderTemplate(
         "systems/dnd5e/templates/advancement/advancement-migration-dialog.hbs",
         { item, advancements: advancementContext }
       ),

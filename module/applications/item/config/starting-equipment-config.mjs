@@ -176,7 +176,7 @@ export default class StartingEquipmentConfig extends DocumentSheet5e {
   /** @inheritDoc */
   async _onDrop(event) {
     // Try to extract the data
-    const data = TextEditor.getDragEventData(event);
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
 
     // Handle re-ordering of list
     if ( data?.entryId && (data.uuid === this.document.uuid) ) return this._onSortEntry(event, data);

@@ -12,6 +12,8 @@ import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import SourceConfig from "../source-config.mjs";
 import StartingEquipmentConfig from "./config/starting-equipment-config.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * Base item sheet built on ApplicationV2.
  */

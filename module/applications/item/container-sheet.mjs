@@ -166,7 +166,7 @@ export default class ContainerSheet extends ItemSheet5e {
 
   /** @inheritDoc */
   _onDrop(event) {
-    const data = TextEditor.getDragEventData(event);
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
     if ( !["Item", "Folder"].includes(data.type) ) return super._onDrop(event, data);
 
     if ( Hooks.call("dnd5e.dropItemSheetData", this.item, this, data) === false ) return;

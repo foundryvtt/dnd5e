@@ -424,6 +424,7 @@ export default class InventoryElement extends HTMLElement {
     }, {
       name: expanded ? "Collapse" : "Expand",
       icon: `<i class="fa-solid fa-${expanded ? "compress" : "expand"}"></i>`,
+      condition: () => "canExpand" in this.app ? this.app.canExpand(item) : true,
       callback: li => this._onAction(li, "toggleExpand"),
       group: "collapsible"
     });
@@ -625,7 +626,7 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   _onRollRecharge(entry, { event }={}) {
-    if ( entry instanceof Item5e ) return item.system.uses?.rollRecharge({ apply: true, event });
+    if ( entry instanceof Item5e ) return entry.system.uses?.rollRecharge({ apply: true, event });
     return entry.uses?.rollRecharge({ apply: true, event });
   }
 
@@ -703,7 +704,9 @@ export default class InventoryElement extends HTMLElement {
         this.app._expanded.delete(item.id);
       } else {
         const chatData = await item.getChatData({secrets: this.document.isOwner});
-        const summary = $(await renderTemplate("systems/dnd5e/templates/items/parts/item-summary.hbs", chatData));
+        const summary = $(await foundry.applications.handlebars.renderTemplate(
+          "systems/dnd5e/templates/items/parts/item-summary.hbs", chatData
+        ));
         $(li).append(summary.hide());
         summary.slideDown(200);
         this.app._expanded.add(item.id);

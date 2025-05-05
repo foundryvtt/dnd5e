@@ -8,7 +8,7 @@ system:
       This damage is Acid, Cold, Fire, or Lightning (your choice when you make
       the attack).</p><p>In addition, the ground in the Emanation is
       &amp;Reference[DifficultTerrain] for your enemies.</p><p><strong>Using a
-      Higher-Level Spell Slot.</strong> The damage increases by 2d8 for each
+      Higher-Level Spell Slot.</strong> The damage increases by 1d8 for each
       spell slot level above 4.</p>
     chat: ''
   source:
@@ -16,6 +16,8 @@ system:
     rules: '2024'
     license: CC-BY-4.0
     book: SRD 5.2
+    page: ''
+    revision: 2
   activation:
     type: action
     condition: ''
@@ -112,7 +114,7 @@ system:
               - lightning
             scaling:
               mode: whole
-              number: 2
+              number: 1
               formula: ''
       uses:
         spent: 0
@@ -182,8 +184,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 4.4.2
   createdTime: 1724425947075
-  modifiedTime: 1745256788892
+  modifiedTime: 1746119620226
   lastModifiedBy: dnd5ebuilder0000
 _key: '!items!phbsplConjureMin'

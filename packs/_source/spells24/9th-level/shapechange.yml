@@ -6,16 +6,16 @@ system:
       take a Magic action to shape-shift into a different eligible form. The new
       form must be of a creature that has a Challenge Rating no higher than your
       level or Challenge Rating. You must have seen the sort of creature before,
-      and it can't be a Construct or an Undead.</p><p>When you shape-shift, you
-      gain a number of Temporary Hit Points equal to the Hit Points of the form.
-      The spell ends early if you have no Temporary Hit Points left.</p><p>Your
-      game statistics are replaced by the stat block of the chosen form, but you
-      retain your creature type; alignment; personality; Intelligence, Wisdom,
-      and Charisma scores; Hit Points; Hit Point Dice; proficiencies; and
-      ability to communicate. If you have the Spellcasting feature, you retain
-      it too.</p><p>Upon shape-shifting, you determine whether your equipment
-      drops to the ground or changes in size and shape to fit the new form while
-      you're in it.</p>
+      and it can't be a Construct or an Undead.</p><p>When you cast the spell,
+      you gain a number of Temporary Hit Points equal to the Hit Points of the
+      first form into which you shape-shift. These Temporary Hit Points vanish
+      if any remain when the spell ends.</p><p>Your game statistics are replaced
+      by the stat block of the chosen form, but you retain your creature type;
+      alignment; personality; Intelligence, Wisdom, and Charisma scores; Hit
+      Points; Hit Point Dice; proficiencies; and ability to communicate. If you
+      have the Spellcasting feature, you retain it too.</p><p>Upon
+      shape-shifting, you determine whether your equipment drops to the ground
+      or changes in size and shape to fit the new form while you're in it.</p>
     chat: ''
   source:
     custom: ''
@@ -122,8 +122,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 4.4.2
   createdTime: 1724425970292
-  modifiedTime: 1745256798024
+  modifiedTime: 1746119739082
   lastModifiedBy: dnd5ebuilder0000
 _key: '!items!phbsplShapechang'

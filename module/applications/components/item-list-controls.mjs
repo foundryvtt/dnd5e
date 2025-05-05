@@ -187,7 +187,7 @@ export default class ItemListControlsElement extends HTMLElement {
     this.#app = foundry.applications.instances.get(this.closest(".application")?.id);
     const element = this.#app.element;
     this.#list = element.querySelector(`[data-item-list="${this.getAttribute("for")}"]`);
-    this.#state = this.#app._filters[this.getAttribute("for")];
+    this.#state = this.#app._filters[this.getAttribute("for")] ??= { name: "", properties: new Set() };
     this.#tab = this.closest(".tab")?.dataset.tab;
     this.#inventory = this.closest(this.#app.options.elements.inventory);
 

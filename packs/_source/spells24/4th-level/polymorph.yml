@@ -11,11 +11,12 @@ system:
       target retains its alignment, personality, creature type, Hit Points, and
       Hit Point Dice. See appendix B for a sample of Beast stat
       blocks.</p><p>The target gains a number of Temporary Hit Points equal to
-      the Hit Points of the Beast form. The spell ends early on the target if it
-      has no Temporary Hit Points left.</p><p>The target is limited in the
-      actions it can perform by the anatomy of its new form, and it can't speak
-      or cast spells.</p><p>The target's gear melds into the new form. The
-      creature can't use or otherwise benefit from any of that equipment.</p>
+      the Hit Points of the Beast form. These Temporary Hit Points vanish if any
+      remain when the spell ends. The spell ends early on the target if it has
+      no Temporary Hit Points left.</p><p>The target is limited in the actions
+      it can perform by the anatomy of its new form, and it can't speak or cast
+      spells.</p><p>The target's gear melds into the new form. The creature
+      can't use or otherwise benefit from any of that equipment.</p>
     chat: ''
   source:
     custom: ''
@@ -121,8 +122,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 4.4.2
   createdTime: 1724425966419
-  modifiedTime: 1745256796955
+  modifiedTime: 1746119719866
   lastModifiedBy: dnd5ebuilder0000
 _key: '!items!phbsplPolymorph0'

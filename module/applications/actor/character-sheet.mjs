@@ -5,6 +5,8 @@ import ContextMenu5e from "../context-menu.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
 import Item5e from "../../documents/item.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * Extension of base actor sheet for characters.
  */
@@ -898,6 +900,11 @@ export default class CharacterActorSheet extends BaseActorSheet {
     const featuresElement = this.element.querySelector(`[data-tab="features"] ${this.options.elements.inventory}`);
     if ( featuresElement ) new ContextMenu5e(
       this.element, ".pills-lg [data-item-id], .favorites [data-item-id], .facility[data-item-id]", [],
+      { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: false }
+    );
+    const inventoryElement = this.element.querySelector(`[data-tab="inventory"] ${this.options.elements.inventory}`);
+    if ( inventoryElement ) new ContextMenu5e(
+      this.element, ".containers [data-item-id]", [],
       { onOpen: (...args) => featuresElement._onOpenContextMenu(...args), jQuery: false }
     );
 

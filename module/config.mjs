@@ -4361,7 +4361,8 @@ DND5E.traits = {
       localization: "DND5E.TraitCIPlural"
     },
     icon: "systems/dnd5e/icons/svg/trait-condition-immunities.svg",
-    configKey: "conditionTypes"
+    configKey: "conditionTypes",
+    labelKeyPath: "name"
   }
 };
 preLocalize("traits", { keys: ["labels.title", "labels.all"] });

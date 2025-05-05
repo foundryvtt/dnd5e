@@ -11,8 +11,8 @@ system:
   description:
     value: >-
       <p>You have Advantage on any ability check you make to end the
-      &amp;Reference[Grappled] condition. You also count as one size larger when
-      determining your carrying capacity.</p><section class="secret"
+      &amp;Reference[Grappled apply=false] condition. You also count as one size
+      larger when determining your carrying capacity.</p><section class="secret"
       id="secret-7qaTRjmRe4PD41G3"><p><strong>Foundry Note</strong></p><p>This
       feature includes an Active Effect which automatically upgrades your size
       when determining carrying capacity.</p></section>
@@ -78,9 +78,9 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 4.4.2
   createdTime: 1745340849458
-  modifiedTime: 1745341995521
+  modifiedTime: 1746119249602
   lastModifiedBy: dnd5ebuilder0000
 sort: 0
 ownership:

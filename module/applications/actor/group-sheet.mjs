@@ -4,6 +4,8 @@ import Award from "../award.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
 import ActorSheetMixin from "./deprecated/sheet-mixin.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * A character sheet for group-type Actors.
  * The functionality of this sheet is sufficiently different from other Actor types that we extend the base
