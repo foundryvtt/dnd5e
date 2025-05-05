@@ -213,7 +213,7 @@
     <dnd5e-icon src="systems/dnd5e/icons/svg/statuses/concentrating.svg"></dnd5e-icon>
     {{else}}
     <proficiency-cycle type="ability" name="{{ path }}.proficient" data-tooltip="{{ hover }}"
-                       value="{{#if @root.editable}}{{ baseProf }}{{else}}{{ proficient }}{{/if}}"
+                       value="{{#if @root.editable}}{{ source.proficient }}{{else}}{{ proficient }}{{/if}}"
                        aria-label="{{ localize hover }}" {{ disabled (not @root.editable) }}></proficiency-cycle>
     {{/if}}
     <a class="name saving-throw full {{ @root.rollableClass }}" data-action="roll" data-type="ability">{{ label }}</a>
