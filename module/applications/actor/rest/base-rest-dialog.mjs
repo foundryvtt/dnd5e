@@ -64,6 +64,20 @@ export default class BaseRestDialog extends Dialog5e {
 
   /* -------------------------------------------- */
 
+    /* -------------------------------------------- */
+
+  /**
+   * Should the user be prompted as to whether reset the actor's temporary max hit points?
+   * @type {boolean}
+   */
+  get promptResetTempMaxHP() {
+    if (this.actor.system.attributes.hp.tempmax > 0) return true;
+    return false;
+  }
+
+  /* -------------------------------------------- */
+
+
   /**
    * Was the rest button pressed?
    * @type {boolean}
@@ -100,6 +114,17 @@ export default class BaseRestDialog extends Dialog5e {
       name: "newDay",
       value: context.config.newDay
     });
+    if(this.promptResetTempMaxHP) context.fields.push({
+      field: new BooleanField({
+        label: game.i18n.localize("DND5E.REST.ResetTempMaxHP.Label"),
+        hint: game.i18n.localize("DND5E.REST.ResetTempMaxHP.Hint")
+      }),
+      input: context.inputs.createCheckboxInput,
+      name: "recoverTempMax",
+      value: true
+    });
+
+
     return context;
   }
 
