@@ -64,7 +64,7 @@ export default class BaseRestDialog extends Dialog5e {
 
   /* -------------------------------------------- */
 
-    /* -------------------------------------------- */
+  /* -------------------------------------------- */
 
   /**
    * Should the user be prompted as to whether reset the actor's temporary max hit points?
