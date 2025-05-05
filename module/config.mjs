@@ -4490,6 +4490,12 @@ DND5E.characterFlags = {
     section: "DND5E.Feats",
     type: Boolean
   },
+  toolExpertise: {
+    name: "DND5E.FlagsToolExpertise",
+    hint: "DND5E.FlagsToolExpertiseHint",
+    section: "DND5E.Feats",
+    type: Boolean
+  },
   weaponCriticalThreshold: {
     name: "DND5E.FlagsWeaponCritThreshold",
     hint: "DND5E.FlagsWeaponCritThresholdHint",
