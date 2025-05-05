@@ -200,4 +200,40 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     }
     return new Proficiency(this.attributes.prof, multiplier, roundDown);
   }
+
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate proficiency, applying specific logic for tools.
+   * @param {number} multiplier  Multiplier stored on the actor.
+   * @param {string} ability     Ability associated with this proficiency.
+   * @returns {Proficiency}
+   */
+  calculateToolProficiency(multiplier, ability) {
+    if ( (multiplier === 1) && this.parent.flags.dnd5e?.toolExpertise ) {
+      return new Proficiency(this.attributes.prof, 2, true);
+    }
+    return this.calculateAbilityCheckProficiency(multiplier, ability);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Calculate proficiency for a given actor using either a skill, a tool, or both.
+   * @param {Actpr5e} actor           The actor.
+   * @param {string} abilityId        The ability used with the check.
+   * @param {object} [options]
+   * @param {string} [options.skill]  The skill.
+   * @param {string} [options.tool]   The tool.
+   * @returns {Proficiency|null}
+   */
+  static calculateSkillToolProficiency(actor, abilityId, options={}) {
+    if ( !actor ) return null;
+    const skill = actor.system.skills?.[options.skill];
+    const tool = actor.system.tools?.[options.tool];
+    const multiplier = Math.max(skill?.effectValue ?? 0, tool?.effectValue ?? 0);
+    const calc = options.tool ? actor.system.calculateToolProficiency : actor.system.calculateAbilityCheckProficiency;
+    return calc.call(actor.system, multiplier, abilityId);
+  }
 }

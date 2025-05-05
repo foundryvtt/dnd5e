@@ -1195,15 +1195,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    */
   _buildSkillToolConfig(type, hostActor, process, config, formData, index) {
     const relevant = type === "skill" ? this.system.skills?.[process.skill] : this.system.tools?.[process.tool];
-    const alternate = type === "skill" ? this.system.tools?.[process.tool] : this.system.skills?.[process.skill];
     const rollData = this.getRollData();
     const abilityId = formData?.get("ability") ?? process.ability;
     const ability = this.system.abilities?.[abilityId];
-    let prof = this.system.calculateAbilityCheckProficiency(
-      Math.max(relevant?.effectValue ?? 0, alternate?.effectValue ?? 0), abilityId
-    );
-    const originalProf = hostActor?.system.calculateAbilityCheckProficiency?.(
-      hostActor?.system.skills[process.skill]?.value, abilityId);
+    const { calculateSkillToolProficiency } = dnd5e.dataModels.actor.CommonTemplate;
+    let prof = calculateSkillToolProficiency(this, abilityId, process);
+    const originalProf = calculateSkillToolProficiency(hostActor, abilityId, process);
     if ( originalProf?.multiplier > prof.multiplier ) prof = originalProf;
 
     let { parts, data } = CONFIG.Dice.D20Roll.constructParts({

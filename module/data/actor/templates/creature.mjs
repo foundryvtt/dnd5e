@@ -277,7 +277,7 @@ export default class CreatureTemplate extends CommonTemplate {
       tool.effectValue = tool.value;
       tool.bonus = baseBonus + globalCheckBonus + checkBonusAbl;
       tool.mod = ability?.mod ?? 0;
-      tool.prof = this.calculateAbilityCheckProficiency(tool.value, tool.ability);
+      tool.prof = this.calculateToolProficiency(tool.value, tool.ability);
       tool.total = tool.mod + tool.bonus;
       if ( Number.isNumeric(tool.prof.term) ) tool.total += tool.prof.flat;
       tool.value = tool.prof.multiplier;
