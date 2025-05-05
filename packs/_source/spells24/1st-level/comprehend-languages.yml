@@ -13,6 +13,8 @@ system:
     rules: '2024'
     license: CC-BY-4.0
     book: SRD 5.2
+    page: ''
+    revision: 2
   activation:
     type: action
     condition: ''
@@ -111,7 +113,10 @@ effects:
       startRound: null
       startTurn: null
     disabled: false
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
     img: icons/sundries/books/book-open-purple.webp
     _id: ANhwNb9xKRpWs4Q2
     type: base
@@ -119,11 +124,7 @@ effects:
     changes:
       - key: system.traits.languages.value
         mode: 2
-        value: standard
-        priority: null
-      - key: system.traits.languages.value
-        mode: 2
-        value: exotic
+        value: ALL
         priority: null
     description: ''
     tint: '#ffffff'
@@ -135,10 +136,10 @@ effects:
       duplicateSource: null
       coreVersion: '12.331'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 4.4.2
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1746464316606
+      lastModifiedBy: dnd5ebuilder0000
     _key: '!items.effects!phbsplComprehend.ANhwNb9xKRpWs4Q2'
 folder: pBaAAtXBCq9FVEnL
 sort: 4500000
@@ -153,8 +154,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 4.4.2
   createdTime: 1724425945966
-  modifiedTime: 1745256788384
+  modifiedTime: 1746464353780
   lastModifiedBy: dnd5ebuilder0000
 _key: '!items!phbsplComprehend'
