@@ -1,3 +1,4 @@
 {{#each this}}
-{{ formField field name=name value=value input=input options=options disabled=disabled rootId=@root.partId }}
+{{ formField field name=name value=value label=label hint=hint input=input options=options disabled=disabled
+             classes=classes rootId=@root.partId }}
 {{/each}}
