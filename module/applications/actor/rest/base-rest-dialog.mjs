@@ -72,10 +72,7 @@ export default class BaseRestDialog extends Dialog5e {
     if (this.#config.type !== "long") return false;
     if (this.actor.type==="group") {
       const members = this.actor.system.members;
-      for (var i = 0;i<members.length;i++){
-        if (members[i].actor.system.attributes.hp.tempmax !== 0) return true;
-      }
-      return false;
+      return members.some(member => member.actor.system.attributes.hp.tempmax !== 0);
     }
     return this.actor.system.attributes.hp.tempmax !== 0;
   }
