@@ -1,0 +1,11 @@
+<menu>
+    {{#each buttons}}
+    {{#if display}}
+    <li class="calendar-button">
+        <button type="button" {{ dnd5e-dataset dataset }} data-tooltip aria-label="{{ label }}">
+            {{ dnd5e-icon icon }}
+        </button>
+    </li>
+    {{/if}}
+    {{/each}}
+</menu>

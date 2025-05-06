@@ -483,8 +483,14 @@ Hooks.once("i18nInit", () => {
     });
   }
   utils.performPreLocalization(CONFIG.DND5E);
+  CONFIG.DND5E.calendar.formatters.forEach(f => {
+    f.label = game.i18n.localize(f.label);
+    f.group = game.i18n.localize(f.group);
+  });
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
   Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
+  foundry.helpers.Localization.localizeDataModel(dataModels.settings.CalendarConfigSetting);
+  foundry.helpers.Localization.localizeDataModel(dataModels.settings.CalendarPreferencesSetting);
   foundry.helpers.Localization.localizeDataModel(dataModels.settings.TransformationSetting);
 
   // Spellcasting
@@ -519,6 +525,13 @@ Hooks.once("ready", function() {
 
   // Bastion initialization
   game.dnd5e.bastion.initializeUI();
+
+  // Display the calendar HUD
+  if ( CONFIG.DND5E.calendar.application ) {
+    CONFIG.DND5E.calendar.instance = new CONFIG.DND5E.calendar.application();
+    CONFIG.DND5E.calendar.instance.render({ force: true });
+    Hooks.on("updateWorldTime", CONFIG.DND5E.calendar.application.onUpdateWorldTime);
+  }
 
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;

@@ -1,3 +1,4 @@
+import CalenderHUD from "./applications/calendar/calendar-hud.mjs";
 import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import { ConsumptionTargetData } from "./data/activity/fields/consumption-targets-field.mjs";
 import * as activities from "./documents/activity/_module.mjs";
@@ -11,8 +12,8 @@ import VehicleData from "./data/actor/vehicle.mjs";
  * @import {
  *   AbilityConfiguration, ActivityActivationTypeConfiguration, ActivityConsumptionTargetConfiguration,
  *   ActivityTypeConfiguration, ActorSizeConfiguration, AdvancementTypeConfiguration,
- *   AreaTargetDefinition, CharacterFlagConfiguration, ConditionConfiguration, CraftingConfiguration,
- *   CreatureTypeConfiguration, CurrencyConfiguration, DamageTypeConfiguration,
+ *   AreaTargetDefinition, CalendarHUDConfiguration, CharacterFlagConfiguration, ConditionConfiguration,
+ *   CraftingConfiguration, CreatureTypeConfiguration, CurrencyConfiguration, DamageTypeConfiguration,
  *   EncumbranceConfiguration, FacilityConfiguration, HabitatConfiguration5e,
  *   IndividualTargetDefinition, ItemPropertyConfiguration, LimitedUsePeriodConfiguration,
  *   MapLocationMarkerStyle, MovementTypeConfiguration, MovementUnitConfiguration,
@@ -842,19 +843,23 @@ DND5E.timeUnits = {
   second: {
     label: "DND5E.UNITS.TIME.Second.Label",
     conversion: 1 / 60,
-    option: false
+    option: false,
+    timeComponent: "second"
   },
   minute: {
     label: "DND5E.UNITS.TIME.Minute.Label",
-    conversion: 1
+    conversion: 1,
+    timeComponent: "minute"
   },
   hour: {
     label: "DND5E.UNITS.TIME.Hour.Label",
-    conversion: 60
+    conversion: 60,
+    timeComponent: "hour"
   },
   day: {
     label: "DND5E.UNITS.TIME.Day.Label",
-    conversion: 1_440
+    conversion: 1_440,
+    timeComponent: "day"
   },
   week: {
     label: "DND5E.UNITS.TIME.Week.Label",
@@ -867,7 +872,8 @@ DND5E.timeUnits = {
   },
   year: {
     label: "DND5E.UNITS.TIME.Year.Label",
-    conversion: 525_600
+    conversion: 525_600,
+    timeComponent: "year"
   }
 };
 preLocalize("timeUnits", { key: "label" });
@@ -4412,6 +4418,47 @@ DND5E.defaultArtwork = {
     tool: "systems/dnd5e/icons/svg/items/tool.svg",
     weapon: "systems/dnd5e/icons/svg/items/weapon.svg"
   }
+};
+
+/* -------------------------------------------- */
+/*  Calendar                                    */
+/* -------------------------------------------- */
+
+/**
+ * Configuration information for the calendar UI.
+ * @type {CalendarHUDConfiguration}
+ */
+DND5E.calendar = {
+  application: CalenderHUD,
+  instance: null,
+  formatters: [
+    {
+      value: "monthDay",
+      label: "DND5E.CALENDAR.Formatters.MonthDay.Label",
+      formatter: CalenderHUD.simpleFormat.bind(null, "DND5E.CALENDAR.Formatters.MonthDay.Format"),
+      group: "DND5E.CALENDAR.Formatters.Date"
+    },
+    {
+      value: "monthDayYear",
+      label: "DND5E.CALENDAR.Formatters.MonthDayYear.Label",
+      formatter: CalenderHUD.simpleFormat.bind(null, "DND5E.CALENDAR.Formatters.MonthDayYear.Format"),
+      group: "DND5E.CALENDAR.Formatters.Date"
+    },
+    {
+      value: "hoursMinutes",
+      label: "DND5E.CALENDAR.Formatters.HoursMinutes.Label",
+      formatter: CalenderHUD.simpleFormat.bind(null, "DND5E.CALENDAR.Formatters.HoursMinutes.Format"),
+      group: "DND5E.CALENDAR.Formatters.Time"
+    },
+    {
+      value: "hoursMinutesSeconds",
+      label: "DND5E.CALENDAR.Formatters.HoursMinutesSeconds.Label",
+      formatter: CalenderHUD.simpleFormat.bind(null, "DND5E.CALENDAR.Formatters.HoursMinutesSeconds.Format"),
+      group: "DND5E.CALENDAR.Formatters.Time"
+    }
+  ],
+  dayProgress: CalenderHUD.simpleProgressDay,
+  nightProgress: CalenderHUD.simpleProgressNight
 };
 
 /* -------------------------------------------- */
