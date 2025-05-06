@@ -2,6 +2,7 @@ export * as activity from "./activity/_module.mjs";
 export * as actor from "./actor/_module.mjs";
 export * as advancement from "./advancement/_module.mjs";
 export * as api from "./api/_module.mjs";
+export * as calendar from "./calendar/_module.mjs";
 export * as combat from "./combat/_module.mjs";
 export * as components from "./components/_module.mjs";
 export * as dice from "./dice/_module.mjs";
