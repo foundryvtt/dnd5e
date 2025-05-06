@@ -30,7 +30,10 @@ There are a variety of activity types offered by the DnD5e system, and modules c
 
 ## Configuring Activities
 
-While parts of the activity sheet change based on the selected activity type, many parts are shared.
+While parts of the activity sheet change based on the selected activity type, many parts are shared. Some configurations, such as those in the **Consumption** or **Effect** tabs, allow for the use of scaling to dynamically adjust an activity's behavior based on contextual factors like spell level or item properties.
+
+For more information and examples of how scaling can be used, see:
+- [Roll Formulas - Item Properties](Roll-Formulas.md#item-properties)
 
 ### Identity
 
@@ -62,6 +65,9 @@ The "Consumption" section contains a list of consumption targets with details on
 
 The "Consumption Scaling" section indicates whether scaling is allowed and how much scaling can occur. This section will not appear for spells, because the spell’s level determines how it scales.
 
+> **Note**: Scaling in the **Consumption** section allows for dynamic adjustments based on contextual factors, such as the number of charges consumed or the spell level. For more information and examples, see:
+> - [Roll Formulas - Item Properties](Roll-Formulas.md#item-properties)
+
 The "Usage" and "Recovery" sections contain details on a limited pool of uses that can be defined for the activity and how they are recovered. Unlike uses defined on an item, which are accessible to any activity on the item as well as any other item on the same actor, these uses are only consumable from this activity. In order to use these uses, a consumption target with the type "Activity Uses" must be set up.
 
 #### Targeting
@@ -75,3 +81,6 @@ The "Range", "Targets", and "Area" sections contain details on where and who the
 ![Activity Sheet - Effect Tab](https://raw.githubusercontent.com/foundryvtt/dnd5e/publish-wiki/wiki/images/activities/activity-effect.jpg)
 
 The final tab will vary the most between different activity types. Most activity types contain an "Applied Effects" list which specifies what Active Effects present on the item will be available to apply to targets through the chat card. The dropdown allows for selecting existing effects on the item, or the plus button can be used to create a new Active Effect.
+
+> **Note**: Scaling can also be applied in the **Effect** section to dynamically adjust the behavior of applied effects based on contextual factors. For more details, see:
+> - [Roll Formulas - Item Properties](Roll-Formulas.md#item-properties)
