@@ -64,13 +64,12 @@ export default class BaseRestDialog extends Dialog5e {
 
   /* -------------------------------------------- */
 
-  /* -------------------------------------------- */
-
   /**
    * Should the user be prompted as to whether reset the actor's temporary max hit points?
    * @returns {boolean}
    */
-  get promptResetTempMaxHP() {
+  get promptRecoverTempMaxHP() {
+    if (this.#config.type !== "long") return false;
     if (this.actor.type==="group") {
       const members = this.actor.system.members;
       for (var i = 0;i<members.length;i++){
@@ -120,10 +119,10 @@ export default class BaseRestDialog extends Dialog5e {
       name: "newDay",
       value: context.config.newDay
     });
-    if(this.promptResetTempMaxHP) context.fields.push({
+    if(this.promptRecoverTempMaxHP) context.fields.push({
       field: new BooleanField({
-        label: game.i18n.localize("DND5E.REST.ResetTempMaxHP.Label"),
-        hint: game.i18n.localize("DND5E.REST.ResetTempMaxHP.Hint")
+        label: game.i18n.localize("DND5E.REST.RecoverTempMaxHP.Label"),
+        hint: game.i18n.localize("DND5E.REST.RecoverTempMaxHP.Hint")
       }),
       input: context.inputs.createCheckboxInput,
       name: "recoverTempMax",

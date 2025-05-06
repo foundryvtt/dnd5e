@@ -2189,7 +2189,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       updateItems: [],
       newDay: config.newDay === true,
       rolls: [],
-      recoverTempMax: config.resetTempMaxHP === true
+      recoverTempMax: config.RecoverTempMaxHP === true
     }, result);
     result.clone ??= this.clone();
     if ( "dhp" in result ) result.deltas.hitPoints = result.dhp;
