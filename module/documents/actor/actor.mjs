@@ -246,11 +246,6 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   applyActiveEffects() {
     if ( this.system?.prepareEmbeddedData instanceof Function ) this.system.prepareEmbeddedData();
-    // The Active Effects do not have access to their parent at preparation time, so we wait until this stage to
-    // determine whether they are suppressed or not.
-    for ( const effect of this.allApplicableEffects() ) {
-      effect.determineSuppression();
-    }
     return super.applyActiveEffects();
   }
 

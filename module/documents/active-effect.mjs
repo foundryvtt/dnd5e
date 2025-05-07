@@ -77,7 +77,12 @@ export default class ActiveEffect5e extends ActiveEffect {
    * Is this active effect currently suppressed?
    * @type {boolean}
    */
-  isSuppressed = false;
+  get isSuppressed() {
+    if ( super.isSuppressed ) return true;
+    if ( this.type === "enchantment" ) return false;
+    if ( this.parent instanceof dnd5e.documents.Item5e ) return this.parent.areEffectsSuppressed;
+    return false;
+  }
 
   /* -------------------------------------------- */
 
@@ -282,17 +287,6 @@ export default class ActiveEffect5e extends ActiveEffect {
       else change.value = Boolean(value);
     }
     return change;
-  }
-
-  /* --------------------------------------------- */
-
-  /**
-   * Determine whether this Active Effect is suppressed or not.
-   */
-  determineSuppression() {
-    this.isSuppressed = false;
-    if ( this.type === "enchantment" ) return;
-    if ( this.parent instanceof dnd5e.documents.Item5e ) this.isSuppressed = this.parent.areEffectsSuppressed;
   }
 
   /* -------------------------------------------- */
