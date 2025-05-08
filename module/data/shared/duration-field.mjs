@@ -14,7 +14,7 @@ export default class DurationField extends SchemaField {
   constructor(fields={}, options={}) {
     fields = {
       value: new FormulaField({ deterministic: true }),
-      units: new StringField({ initial: "inst" }),
+      units: new StringField({ required: true, blank: false, initial: "inst" }),
       special: new StringField(),
       ...fields
     };
