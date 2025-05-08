@@ -146,8 +146,6 @@
  * @property {typeof ApplicationV2|null} application  HUD application to display, or `null` to not display one.
  * @property {ApplicationV2|null} instance            Currently instantiated calendar application.
  * @property {CalendarTimeFormatter[]} formatters     Formatters that can be used to display the date or time.
- * @property {CalendarProgress} dayProgress           Method for calculating progress through the day.
- * @property {CalendarProgress} nightProgress         Method for calculating progress through the night.
  */
 
 /**

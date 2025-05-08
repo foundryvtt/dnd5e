@@ -4435,31 +4435,30 @@ DND5E.calendar = {
     {
       value: "monthDay",
       label: "DND5E.CALENDAR.Formatters.MonthDay.Label",
-      formatter: CalenderHUD.simpleFormat.bind(null, "DND5E.CALENDAR.Formatters.MonthDay.Format"),
+      formatter: "formatMonthDay",
       group: "DND5E.CALENDAR.Formatters.Date"
     },
     {
       value: "monthDayYear",
       label: "DND5E.CALENDAR.Formatters.MonthDayYear.Label",
-      formatter: CalenderHUD.simpleFormat.bind(null, "DND5E.CALENDAR.Formatters.MonthDayYear.Format"),
+      formatter: "formatMonthDayYear",
       group: "DND5E.CALENDAR.Formatters.Date"
     },
     {
       value: "hoursMinutes",
       label: "DND5E.CALENDAR.Formatters.HoursMinutes.Label",
-      formatter: CalenderHUD.simpleFormat.bind(null, "DND5E.CALENDAR.Formatters.HoursMinutes.Format"),
+      formatter: "formatHoursMinutes",
       group: "DND5E.CALENDAR.Formatters.Time"
     },
     {
       value: "hoursMinutesSeconds",
       label: "DND5E.CALENDAR.Formatters.HoursMinutesSeconds.Label",
-      formatter: CalenderHUD.simpleFormat.bind(null, "DND5E.CALENDAR.Formatters.HoursMinutesSeconds.Format"),
+      formatter: "formatHoursMinutesSeconds",
       group: "DND5E.CALENDAR.Formatters.Time"
     }
-  ],
-  dayProgress: CalenderHUD.simpleProgressDay,
-  nightProgress: CalenderHUD.simpleProgressNight
+  ]
 };
+preLocalize("calendar.formatters", { keys: ["label", "group"] });
 
 /* -------------------------------------------- */
 /*  Requests                                    */

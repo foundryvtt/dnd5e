@@ -235,6 +235,10 @@ Hooks.once("init", function() {
   CONFIG.Token.movement.costAggregator = (results, distance, segment) => {
     return Math.max(...results.map(i => i.cost));
   };
+
+  // Setup Calendar
+  CONFIG.time.earthCalendarClass = dataModels.calendar.CalendarData5e;
+  CONFIG.time.worldCalendarClass = dataModels.calendar.CalendarData5e;
 });
 
 /* -------------------------------------------- */
@@ -483,10 +487,6 @@ Hooks.once("i18nInit", () => {
     });
   }
   utils.performPreLocalization(CONFIG.DND5E);
-  CONFIG.DND5E.calendar.formatters.forEach(f => {
-    f.label = game.i18n.localize(f.label);
-    f.group = game.i18n.localize(f.group);
-  });
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
   Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
   foundry.helpers.Localization.localizeDataModel(dataModels.settings.CalendarConfigSetting);

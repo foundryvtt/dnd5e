@@ -1,3 +1,4 @@
+import CalendarData5e from "../../data/calendar/calendar-data.mjs";
 import { formatTime } from "../../utils.mjs";
 import BaseCalendarHUD from "./base-calendar-hud.mjs";
 
@@ -173,8 +174,10 @@ export default class CalendarHUD extends BaseCalendarHUD {
     ) : "";
 
     const widget = this.element.querySelector(".calendar-widget");
-    widget.style.setProperty("--calendar-day-progress", CONFIG.DND5E.calendar.dayProgress(game.time));
-    widget.style.setProperty("--calendar-night-progress", CONFIG.DND5E.calendar.nightProgress(game.time));
+    const getProgress = type => type in game.time.calendar ? game.time.calendar[type]()
+      : CalendarData5e.prototype[type].call(game.time.calendar);
+    widget.style.setProperty("--calendar-day-progress", getProgress("progressDay"));
+    widget.style.setProperty("--calendar-night-progress", getProgress("progressNight"));
   }
 
   /* -------------------------------------------- */
