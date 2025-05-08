@@ -565,7 +565,7 @@ export default class ActorSheet5e extends ActorSheetMixin(foundry.appv1?.sheets?
           continue;
         }
         if ( !item.system.activities?.size ) return false;
-        if ( item.system.activities.every(a => a.activation.type !== f) ) return false;
+        if ( item.system.activities.every(a => a.activation?.type !== f) ) return false;
       }
 
       // Spell-specific filters

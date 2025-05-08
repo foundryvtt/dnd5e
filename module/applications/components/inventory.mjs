@@ -101,7 +101,7 @@ export default class InventoryElement extends HTMLElement {
    * @protected
    */
   _applyFilters(state) {
-    let items = this.app._filterItems?.(this.document.object.items, state.properties);
+    let items = this.app._filterItems?.(this.document.items, state.properties);
     if ( !items ) return;
     const elementMap = {};
     this.querySelectorAll(".inventory-list .item-list .item").forEach(el => {
