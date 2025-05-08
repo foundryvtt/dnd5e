@@ -23,6 +23,7 @@ const { ArrayField, BooleanField, SchemaField, SetField, StringField } = foundry
  * @property {object} save.dc
  * @property {string} save.dc.calculation           Method or ability used to calculate the difficulty class.
  * @property {string} save.dc.formula               Custom DC formula or flat value.
+ * @property {boolean} save.visible                 Should this check be displayed to all players?
  */
 export default class SaveActivityData extends BaseActivityData {
   /** @inheritDoc */
@@ -41,7 +42,8 @@ export default class SaveActivityData extends BaseActivityData {
         dc: new SchemaField({
           calculation: new StringField({ initial: "initial" }),
           formula: new FormulaField({ deterministic: true })
-        })
+        }),
+        visible: new BooleanField({ initial: true })
       })
     };
   }
