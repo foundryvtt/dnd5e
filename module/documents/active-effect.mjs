@@ -73,10 +73,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /* -------------------------------------------- */
 
-  /**
-   * Is this active effect currently suppressed?
-   * @type {boolean}
-   */
+  /** @inheritDoc */
   get isSuppressed() {
     if ( super.isSuppressed ) return true;
     if ( this.type === "enchantment" ) return false;
