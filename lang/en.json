@@ -1096,14 +1096,6 @@
   },
   "Formatters": {
     "Date": "Date Formatters",
-    "MonthDay": {
-      "Format": "{B} {D}",
-      "Label": "Month & Day"
-    },
-    "MonthDayYear": {
-      "Format": "{B} {D}, {Y}",
-      "Label": "Month, Day, & Year"
-    },
     "HoursMinutes": {
       "Format": "{H}:{M}",
       "Label": "Hours & Minutes"
@@ -1111,6 +1103,14 @@
     "HoursMinutesSeconds": {
       "Format": "{H}:{M}:{S}",
       "Label": "Hours, Minutes, & Seconds"
+    },
+    "MonthDay": {
+      "Format": "{B} {D}",
+      "Label": "Month & Day"
+    },
+    "MonthDayYear": {
+      "Format": "{B} {D}, {Y}",
+      "Label": "Month, Day, & Year"
     },
     "Time": "Time Formatters"
   }

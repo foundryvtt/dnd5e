@@ -4858,20 +4858,11 @@ DND5E.defaultArtwork = {
  * @property {typeof ApplicationV2|null} application  HUD application to display, or `null` to not display one.
  * @property {ApplicationV2|null} instance            Currently instantiated calendar application.
  * @property {CalendarTimeFormatter[]} formatters     Formatters that can be used to display the date or time.
- * @property {CalendarProgress} dayProgress           Method for calculating progress through the day.
- * @property {CalendarProgress} nightProgress         Method for calculating progress through the night.
  */
 
 /**
  * @typedef {FormSelectOption} CalendarTimeFormatter
  * @property {string|TimeFormatter} formatter  The formatter name on the current calendar or a formatter function.
- */
-
-/**
- * @callback CalendarProgress
- * @param {GameTime} time  Game time to use in the calculation.
- * @returns {number}       Progress through day period. For day progress 0 represents sunrise and 1 sunset. For night
- *                         progress 0 represents sunset and 1 sunrise. Values outside that range are valid.
  */
 
 /**
@@ -4885,31 +4876,30 @@ DND5E.calendar = {
     {
       value: "monthDay",
       label: "DND5E.CALENDAR.Formatters.MonthDay.Label",
-      formatter: CalenderHUD.simpleFormat.bind(null, "DND5E.CALENDAR.Formatters.MonthDay.Format"),
+      formatter: "formatMonthDay",
       group: "DND5E.CALENDAR.Formatters.Date"
     },
     {
       value: "monthDayYear",
       label: "DND5E.CALENDAR.Formatters.MonthDayYear.Label",
-      formatter: CalenderHUD.simpleFormat.bind(null, "DND5E.CALENDAR.Formatters.MonthDayYear.Format"),
+      formatter: "formatMonthDayYear",
       group: "DND5E.CALENDAR.Formatters.Date"
     },
     {
       value: "hoursMinutes",
       label: "DND5E.CALENDAR.Formatters.HoursMinutes.Label",
-      formatter: CalenderHUD.simpleFormat.bind(null, "DND5E.CALENDAR.Formatters.HoursMinutes.Format"),
+      formatter: "formatHoursMinutes",
       group: "DND5E.CALENDAR.Formatters.Time"
     },
     {
       value: "hoursMinutesSeconds",
       label: "DND5E.CALENDAR.Formatters.HoursMinutesSeconds.Label",
-      formatter: CalenderHUD.simpleFormat.bind(null, "DND5E.CALENDAR.Formatters.HoursMinutesSeconds.Format"),
+      formatter: "formatHoursMinutesSeconds",
       group: "DND5E.CALENDAR.Formatters.Time"
     }
-  ],
-  dayProgress: CalenderHUD.simpleProgressDay,
-  nightProgress: CalenderHUD.simpleProgressNight
+  ]
 };
+preLocalize("calendar.formatters", { keys: ["label", "group"] });
 
 /* -------------------------------------------- */
 /*  Requests                                    */
