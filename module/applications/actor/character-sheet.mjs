@@ -771,7 +771,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       case "class": return new Set(["classes"]);
       case "facility": return new Set(["facilities"]);
       case "race": return new Set(["species"]);
-      case "subclass": return new Set();
+      case "subclass": return new Set(["subclasses"]);
       default: return super._assignItemCategories(item);
     }
   }
