@@ -91,7 +91,8 @@ export default class EnchantActivity extends ActivityMixin(EnchantActivityData) 
   canEnchant(item) {
     const errors = [];
 
-    if ( !this.restrictions.allowMagical && item.system.properties?.has("mgc") ) {
+    if ( !this.restrictions.allowMagical && item.system.properties?.has("mgc")
+      && ("quantity" in item.system) ) {
       errors.push(new EnchantmentError(game.i18n.localize("DND5E.ENCHANT.Warning.NoMagicalItems")));
     }
 
