@@ -144,6 +144,16 @@ export function registerSystemSettings() {
     }
   });
 
+  // Allow players using damage tray
+  game.settings.register("dnd5e", "allowPlayerDamageApplication", {
+    name: "SETTINGS.DND5E.DAMAGE.Name",
+    hint: "SETTINGS.DND5E.DAMAGE.Hint",
+    scope: "world",
+    config: true,
+    default: true,
+    type: Boolean
+  });
+
   // Allow Polymorphing
   game.settings.register("dnd5e", "allowPolymorphing", {
     name: "SETTINGS.DND5E.PERMISSIONS.AllowTransformation.Name",
