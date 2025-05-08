@@ -1060,6 +1060,10 @@
     "Preferences": "Calendar Preferences"
   },
   "FIELDS": {
+    "calendar": {
+      "hint": "This calendar will be used for tracking in-game time.",
+      "label": "Calendar"
+    },
     "enabled": {
       "hint": "Allow the calendar UI to be used by all users.",
       "label": "Enabled"
@@ -1095,7 +1099,8 @@
       "Label": "Month, Day, & Year"
     },
     "Time": "Time Formatters"
-  }
+  },
+  "Gregorian": "Gregorian Calendar"
 },
 
 "DND5E.CAST": {

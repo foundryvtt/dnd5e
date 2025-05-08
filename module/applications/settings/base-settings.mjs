@@ -1,7 +1,7 @@
 import Application5e from "../api/application.mjs";
 import { createCheckboxInput } from "../fields.mjs";
 
-const { BooleanField, NumberField, StringField } = foundry.data.fields;
+const { BooleanField, DataField, NumberField, StringField } = foundry.data.fields;
 
 /**
  * Base application for configuring system settings.
@@ -54,16 +54,19 @@ export default class BaseSettingsConfig extends Application5e {
   createSettingField(name) {
     const setting = game.settings.settings.get(`dnd5e.${name}`);
     if ( !setting ) throw new Error(`Setting \`dnd5e.${name}\` not registered.`);
+    const isDataField = setting.type instanceof DataField;
     const Field = { [Boolean]: BooleanField, [Number]: NumberField, [String]: StringField }[setting.type];
-    if ( !Field ) throw new Error("Automatic field generation only available for Boolean, Number, or String types");
+    if ( !isDataField && !Field ) {
+      throw new Error("Automatic field generation only available for Boolean, Number, or String types");
+    }
     const data = {
       name,
-      field: new Field({
-        label: game.i18n.localize(setting.name), hint: game.i18n.localize(setting.hint), required: true, blank: false
-      }),
+      field: isDataField ? setting.type : new Field({ required: true, blank: false }),
+      hint: game.i18n.localize(setting.hint),
+      label: game.i18n.localize(setting.name),
       value: game.settings.get("dnd5e", name)
     };
-    if ( setting.type === Boolean ) data.input = createCheckboxInput;
+    if ( (setting.type === Boolean) || (setting.type instanceof BooleanField) ) data.input = createCheckboxInput;
     if ( setting.choices ) data.options = Object.entries(setting.choices)
       .map(([value, label]) => ({ value, label: game.i18n.localize(label) }));
     return data;
