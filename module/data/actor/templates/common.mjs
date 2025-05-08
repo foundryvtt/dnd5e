@@ -159,8 +159,13 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
 
       if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
 
-      // If we merged saves when transforming, take the highest bonus here.
-      if ( originalSaves && abl.proficient ) abl.save.value = Math.max(abl.save, originalSaves[id].save.value);
+      // If we merged saves when transforming, take the highest bonus
+      const difference = (originalSaves?.[id].save.value ?? 0) - abl.save.value;
+      if ( originalSaves && (difference > 0) ) {
+        abl.bonuses.save = `${abl.bonuses.save ?? ""} + ${difference}`;
+        abl.saveBonus += difference;
+        abl.save.value += difference;
+      }
 
       // Deprecations.
       abl.save.toString = function() {
