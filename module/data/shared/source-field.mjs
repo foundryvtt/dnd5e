@@ -38,8 +38,8 @@ export default class SourceField extends SchemaField {
    * @param {string} uuid  Compendium source or document UUID.
    */
   static prepareData(uuid) {
-    const pkg = SourceField.getPackage(uuid);
-    this.bookPlaceholder = SourceField.getModuleBook(pkg) ?? "";
+    const { pkg, flags } = SourceField.getPackage(uuid) ?? {};
+    this.bookPlaceholder = flags?.dnd5e?.sourceBook ?? SourceField.getModuleBook(pkg) ?? "";
     if ( !this.book ) this.book = this.bookPlaceholder;
 
     if ( this.custom ) this.label = this.custom;
@@ -62,7 +62,8 @@ export default class SourceField extends SchemaField {
   /* -------------------------------------------- */
 
   /**
-   * Check if the provided package has any source books registered in its manifest and returns the first listed book.
+   * Check if the provided package has any source books registered in its manifest. If it has only one, then return
+   * that book's key.
    * @param {ClientPackage} pkg  The package.
    * @returns {string|null}
    */
@@ -70,6 +71,7 @@ export default class SourceField extends SchemaField {
     if ( !pkg ) return null;
     const sourceBooks = pkg.flags?.dnd5e?.sourceBooks;
     const keys = Object.keys(sourceBooks ?? {});
+    if ( keys.length !== 1 ) return null;
     return keys[0];
   }
 
@@ -78,15 +80,15 @@ export default class SourceField extends SchemaField {
   /**
    * Get the package associated with the given UUID, if any.
    * @param {string} uuid  The UUID.
-   * @returns {ClientPackage|null}
+   * @returns {{ pkg: ClientPackage, [flags]: object }|null}
    */
   static getPackage(uuid) {
     if ( !uuid ) return null;
     const pack = foundry.utils.parseUuid(uuid)?.collection?.metadata;
     switch ( pack?.packageType ) {
-      case "module": return game.modules.get(pack.packageName);
-      case "system": return game.system;
-      case "world": return game.world;
+      case "module": return { pkg: game.modules.get(pack.packageName), flags: pack.flags };
+      case "system": return { pkg: game.system, flags: pack.flags };
+      case "world": return { pkg: game.world, flags: pack.flags };
     }
     return null;
   }
