@@ -72,6 +72,8 @@ export default class CalendarSettingsConfig extends BaseSettingsConfig {
         name: `calendarConfig.${name}`,
         value: data[name]
       }));
+    context.fields.splice(1, 0, this.createSettingField("calendar"));
+
     if ( !CONFIG.DND5E.calendar.application ) {
       const enabledField = context.fields.find(f => f.name === "calendarConfig.enabled");
       enabledField.disabled = true;
@@ -81,6 +83,7 @@ export default class CalendarSettingsConfig extends BaseSettingsConfig {
         text: game.i18n.localize("DND5E.CALENDAR.Configuration.UnavailableMessage")
       };
     }
+
     return context;
   }
 

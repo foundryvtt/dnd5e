@@ -146,12 +146,20 @@
 /**
  * @typedef CalendarHUDConfiguration
  * @property {typeof ApplicationV2|null} application  HUD application to display, or `null` to not display one.
+ * @property {CalendarOption[]} calendars             Different calendars that can be selected to use.
  * @property {CalendarTimeFormatter[]} formatters     Formatters that can be used to display the date or time.
+ */
+
+/**
+ * @typedef {FormSelectOption} CalendarOption
+ * @property {object} config                Calendar configuration data.
+ * @property {typeof CalendarData} [class]  Data model class.
  */
 
 /**
  * @typedef {FormSelectOption} CalendarTimeFormatter
  * @property {string|TimeFormatter} formatter  The formatter name on the current calendar or a formatter function.
+ * @property {string[]} [calendars]            Calendars that support this formatter, or blank for all calendars.
  */
 
 /**

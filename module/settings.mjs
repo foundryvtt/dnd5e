@@ -12,6 +12,8 @@ import PrimaryPartySetting from "./data/settings/primary-party-setting.mjs";
 import TransformationSetting from "./data/settings/transformation-setting.mjs";
 import * as LEGACY from "./config-legacy.mjs";
 
+const { StringField } = foundry.data.fields;
+
 /**
  * Register all of the system's keybindings.
  */
@@ -305,6 +307,19 @@ export function registerSystemSettings() {
     hint: "DND5E.CALENDAR.Configuration.Hint",
     icon: "fas fa-calendar-days",
     type: CalendarSettingsConfig
+  });
+
+  game.settings.register("dnd5e", "calendar", {
+    name: "DND5E.CALENDAR.FIELDS.calendar.label",
+    hint: "DND5E.CALENDAR.FIELDS.calendar.hint",
+    scope: "world",
+    config: false,
+    type: new StringField({
+      required: true, blank: false, initial: "gregorian", choices: () => Object.fromEntries(
+        CONFIG.DND5E.calendar.calendars.map(({ value, label }) => [value, label])
+      )
+    }),
+    requiresReload: true
   });
 
   game.settings.register("dnd5e", "calendarConfig", {
