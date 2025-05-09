@@ -846,6 +846,20 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
+   * Apply a patch to `_castChangeDelta` on `EmbeddedDataField` to initialize models properly.
+   * TODO: Remove when we can fully rely on https://github.com/foundryvtt/foundryvtt/issues/12528
+   */
+  static patchEmbeddedDataField() {
+    if ( Object.hasOwn(foundry.data.fields.EmbeddedDataField.prototype, "_castChangeDelta") ) return;
+    foundry.data.fields.EmbeddedDataField.prototype._castChangeDelta = function(delta) {
+      if ( delta instanceof this.model ) return delta;
+      return this.initialize(this._cast(delta));
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Render a rich tooltip for this effect.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
    * @returns {Promise<{content: string, classes: string[]}>}
