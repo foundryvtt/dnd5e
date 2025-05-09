@@ -121,6 +121,8 @@ Hooks.once("init", function() {
   CONFIG.ChatMessage.dataModels = dataModels.chatMessage.config;
   CONFIG.Item.dataModels = dataModels.item.config;
   CONFIG.JournalEntryPage.dataModels = dataModels.journal.config;
+  Object.assign(CONFIG.RegionBehavior.dataModels, dataModels.regionBehavior.config);
+  Object.assign(CONFIG.RegionBehavior.typeIcons, dataModels.regionBehavior.icons);
 
   // Add fonts
   _configureFonts();
@@ -131,61 +133,69 @@ Hooks.once("init", function() {
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.CharacterActorSheet, {
     types: ["character"],
     makeDefault: true,
-    label: "DND5E.SheetClassCharacter"
+    label: "DND5E.SheetClass.Character"
   });
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.NPCActorSheet, {
     types: ["npc"],
     makeDefault: true,
-    label: "DND5E.SheetClassNPC"
+    label: "DND5E.SheetClass.NPC"
   });
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eVehicle, {
     types: ["vehicle"],
     makeDefault: true,
-    label: "DND5E.SheetClassVehicle"
+    label: "DND5E.SheetClass.Vehicle"
   });
   DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.GroupActorSheet, {
     types: ["group"],
     makeDefault: true,
-    label: "DND5E.SheetClassGroup"
+    label: "DND5E.SheetClass.Group"
   });
 
   DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
   DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,
-    label: "DND5E.SheetClassItem"
+    label: "DND5E.SheetClass.Item"
   });
   DocumentSheetConfig.unregisterSheet(Item, "dnd5e", applications.item.ItemSheet5e, { types: ["container"] });
   DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ContainerSheet, {
     makeDefault: true,
     types: ["container"],
-    label: "DND5E.SheetClassContainer"
+    label: "DND5E.SheetClass.Container"
   });
 
   DocumentSheetConfig.registerSheet(JournalEntry, "dnd5e", applications.journal.JournalSheet5e, {
     makeDefault: true,
-    label: "DND5E.SheetClassJournalEntry"
+    label: "DND5E.SheetClass.JournalEntry"
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalClassPageSheet, {
-    label: "DND5E.SheetClassClassSummary",
+    label: "DND5E.SheetClass.ClassSummary",
     types: ["class", "subclass"]
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalMapLocationPageSheet, {
-    label: "DND5E.SheetClassMapLocation",
+    label: "DND5E.SheetClass.MapLocation",
     types: ["map"]
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalRulePageSheet, {
-    label: "DND5E.SheetClassRule",
+    label: "DND5E.SheetClass.Rule",
     types: ["rule"]
   });
   DocumentSheetConfig.registerSheet(JournalEntryPage, "dnd5e", applications.journal.JournalSpellListPageSheet, {
-    label: "DND5E.SheetClassSpellList",
+    label: "DND5E.SheetClass.SpellList",
     types: ["spells"]
+  });
+
+  DocumentSheetConfig.unregisterSheet(RegionBehavior, "core", foundry.applications.sheets.RegionBehaviorConfig, {
+    types: ["rotateArea"]
+  });
+  DocumentSheetConfig.registerSheet(RegionBehavior, "dnd5e", applications.regionBehavior.RotateAreaConfig, {
+    label: "DND5E.SheetClass.RotateArea",
+    types: ["rotateArea"]
   });
 
   CONFIG.Token.prototypeSheetClass = applications.PrototypeTokenConfig5e;
   DocumentSheetConfig.unregisterSheet(TokenDocument, "core", foundry.applications.sheets.TokenConfig);
   DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
-    label: "DND5E.SheetClassToken"
+    label: "DND5E.SheetClass.Token"
   });
 
   // Preload Handlebars helpers & partials
