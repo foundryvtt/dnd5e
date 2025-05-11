@@ -97,7 +97,7 @@ export default class FeatData extends ItemDataModel.mixin(
       }],
       ["properties", this.compendiumBrowserPropertiesFilter("feat")],
       ["abilityScoreImprovement", {
-        label: "Ability Score Improvement",
+        label: "DND5E.ADVANCEMENT.AbilityScoreImprovement.Title",
         type: "set",
         config: {
           choices: CONFIG.DND5E.abilities
