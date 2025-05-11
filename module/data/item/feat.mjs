@@ -95,7 +95,59 @@ export default class FeatData extends ItemDataModel.mixin(
           keyPath: "system.type.subtype"
         }
       }],
-      ["properties", this.compendiumBrowserPropertiesFilter("feat")]
+      ["properties", this.compendiumBrowserPropertiesFilter("feat")],
+      ["abilityScoreImprovement", {
+        label: "Ability Score Improvement",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.abilities
+        },
+        createFilter: (filters, value, def) => {
+          const { include, exclude } = Object.entries(value).reduce((d, [key, value]) => {
+            if ( value === 1 ) d.include.push(key);
+            else if ( value === -1 ) d.exclude.push(key);
+            return d;
+          }, { include: [], exclude: [] });
+
+          if ( include.length ) {
+            const includeFilter = {
+              o: "OR", v: [],
+            };
+            includeFilter.v.push(...include.map(ability=>({
+              k: "system.advancement", o: "has", v: { k: `configuration.fixed.${ability}`, o: "gt", v: 0 }
+            })));
+            includeFilter.v.push({
+              k: "system.advancement", o: "has", v: {
+                o: "AND", v: [
+                  { k: `configuration.points`, o: "gt", v: 0 },
+                  { o: "NOT", v: { k: `configuration.locked`, o: "hasall", v: include } }
+                ]
+              },
+            });
+            filters.push(includeFilter);
+          }
+          if ( exclude.length ) {
+            const excludeFilter = {
+              o: "AND", v: [],
+            };
+            excludeFilter.v.push(...exclude.map(ability=>({
+              o: "NOT", v: {
+                k: "system.advancement", o: "has", v: { k: `configuration.fixed.${ability}`, o: "gt", v: 0 }
+            }})));
+            excludeFilter.v.push({
+              o: "NOT", v: {
+                k: "system.advancement", o: "has", v: {
+                  o: "AND", v: [
+                    { k: `configuration.points`, o: "gt", v: 0 },
+                    { o: "NOT", v: { k: `configuration.locked`, o: "hasall", v: exclude } }
+                  ]
+                },
+              },
+            });
+            filters.push(excludeFilter);
+          }
+        }
+      }]
     ]);
   }
 
