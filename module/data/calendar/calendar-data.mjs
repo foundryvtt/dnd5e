@@ -9,14 +9,24 @@ export default class CalendarData5e extends foundry.data.CalendarData {
   /* -------------------------------------------- */
 
   /**
+   * Get the number of hours in a given day.
+   * @param {number|Components} [time]  The time to use, by default the current world time.
+   * @returns {number}                  Number of hours between sunrise and sunset.
+   */
+  daylightHours(time=game.time.components) {
+    return this.sunset(time) - this.sunrise(time);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Progress between sunrise and sunset assuming it is daylight half the day duration.
    * @param {number|Components} [time]  The time to use, by default the current world time.
    * @returns {number}                  Progress through day period, with 0 representing sunrise and 1 sunset.
    */
-  progressDay(time=game.time.worldTime) {
+  progressDay(time=game.time.components) {
     const components = typeof time === "number" ? this.timeToComponents(time) : time;
-    const daylightHours = this.days.hoursPerDay / 2;
-    return (components.hour - (daylightHours / 2)) / daylightHours;
+    return (components.hour - this.sunrise(time)) / this.daylightHours(time);
   }
 
   /* -------------------------------------------- */
@@ -26,12 +36,34 @@ export default class CalendarData5e extends foundry.data.CalendarData {
    * @param {number|Components} [time]  The time to use, by default the current world time.
    * @returns {number}                  Progress through night period, with 0 representing sunset and 1 sunrise.
    */
-  progressNight(time=game.time.worldTime) {
+  progressNight(time=game.time.components) {
     const components = typeof time === "number" ? this.timeToComponents(time) : time;
-    const daylightHours = this.days.hoursPerDay / 2;
+    const daylightHours = this.daylightHours(time);
     let hour = components.hour;
     if ( components.hour < daylightHours ) hour += this.days.hoursPerDay;
-    return (hour - (daylightHours * 1.5)) / daylightHours;
+    return (hour - this.sunset(time)) / daylightHours;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the sunrise time for a given day.
+   * @param {number|Components} [time]  The time to use, by default the current world time.
+   * @returns {number}                  Sunrise time in hours.
+   */
+  sunrise(time=game.time.components) {
+    return this.days.hoursPerDay * .25;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Get the sunset time for a given day.
+   * @param {number|Components} [time]  The time to use, by default the current world time.
+   * @returns {number}                  Sunset time in hours.
+   */
+  sunset(time=game.time.components) {
+    return this.days.hoursPerDay * .75;
   }
 
   /* -------------------------------------------- */
