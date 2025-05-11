@@ -44,6 +44,7 @@ export default class BaseCalendarHUD extends Application5e {
   /** @inheritDoc */
   async render(options) {
     if ( this.rendered || this.shouldDisplay ) await super.render(options);
+    return this;
   }
 
   /* -------------------------------------------- */
