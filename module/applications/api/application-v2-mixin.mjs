@@ -219,6 +219,26 @@ export default function ApplicationV2Mixin(Base) {
     /*  Event Listeners and Handlers                */
     /* -------------------------------------------- */
 
+    /** @inheritDoc */
+    _attachFrameListeners() {
+      super._attachFrameListeners();
+      this.element.addEventListener("plugins", this._onConfigurePlugins.bind(this));
+    }
+
+    /* -------------------------------------------- */
+
+    /**
+     * Configure plugins for the ProseMirror instance.
+     * @param {ProseMirrorPluginsEvent} event
+     * @protected
+     */
+    _onConfigurePlugins(event) {
+      event.plugins.highlightDocumentMatches =
+        ProseMirror.ProseMirrorHighlightMatchesPlugin.build(ProseMirror.defaultSchema);
+    }
+
+    /* -------------------------------------------- */
+
     /**
      * Handle toggling the collapsed state of collapsible sections.
      * @this {BaseApplication5e}
