@@ -108,12 +108,14 @@
                             </div>
 
                             <div class="tags">
+                                {{#if item.labels.components}}
                                 {{#each item.labels.components.all}}
                                 {{#if tag}}
                                 <span aria-label="{{ label }}">
                                     <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
                                 </span>
                                 {{/if}}
+                                {{/each}}
                                 {{else}}
                                 {{#each item.labels.properties}}
                                 {{#if icon}}
@@ -122,7 +124,7 @@
                                 </span>
                                 {{/if}}
                                 {{/each}}
-                                {{/each}}
+                                {{/if}}
                             </div>
 
                         </div>
