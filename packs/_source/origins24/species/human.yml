@@ -75,15 +75,9 @@ system:
         type: feat
         pool:
           - uuid: Compendium.dnd5e.feats24.Item.phbftAlert000000
-          - uuid: Compendium.dnd5e.feats24.Item.phbftCrafter0000
-          - uuid: Compendium.dnd5e.feats24.Item.phbftHealer00000
-          - uuid: Compendium.dnd5e.feats24.Item.phbftLucky000000
           - uuid: Compendium.dnd5e.feats24.Item.phbftMagicInitia
-          - uuid: Compendium.dnd5e.feats24.Item.phbftMusician000
           - uuid: Compendium.dnd5e.feats24.Item.phbftSavageAttac
           - uuid: Compendium.dnd5e.feats24.Item.phbftSkilled0000
-          - uuid: Compendium.dnd5e.feats24.Item.phbftTavernBrawl
-          - uuid: Compendium.dnd5e.feats24.Item.phbftTough000000
         spell: null
         restriction:
           type: feat
@@ -126,8 +120,8 @@ _stats:
   duplicateSource: null
   coreVersion: '12.331'
   systemId: dnd5e
-  systemVersion: 4.4.0
+  systemVersion: 4.4.3
   createdTime: 1735866697989
-  modifiedTime: 1745687179560
+  modifiedTime: 1747071019574
   lastModifiedBy: dnd5ebuilder0000
 _key: '!items!phbspHuman000000'
