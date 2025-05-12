@@ -45,14 +45,14 @@
         </h4>
 
         {{#each items}}
-        <div class="item-name flexrow">
+        <div class="item-name flexrow" data-uuid="{{ uuid }}">
             <div class="item-image" style="background-image: url({{ img }});"></div>
             <label class="flexrow">
                 <h4>
-                    <a data-uuid="{{this.uuid}}">{{ name }}</a>
+                    <a data-uuid="{{ uuid }}">{{ name }}</a>
                 </h4>
                 {{#if dropped}}
-                <button type="button" class="unbutton control-button item-control item-delete"
+                <button type="button" class="unbutton control-button item-control item-delete" data-action="delete"
                         data-tooltip aria-label="{{ localize 'DND5E.ItemDelete' }}">
                     <i class="fa-solid fa-trash" inert></i>
                 </button>
@@ -65,7 +65,9 @@
         {{/each}}
 
         {{#if advancement.configuration.allowDrops}}
-        <p class="hint centered">{{ localize "DND5E.AdvancementFlowDropAreaHint" }}</p>
+        <div class="pill-lg roboto-upper empty" data-action="browse">
+            {{ localize selectLabel }}
+        </div>
         {{/if}}
     </div>
 </form>
