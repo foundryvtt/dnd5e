@@ -1,15 +1,16 @@
 import simplifyRollFormula from "../../../dice/simplify-roll-formula.mjs";
 import { formatNumber, getHumanReadableAttributeLabel, simplifyBonus } from "../../../utils.mjs";
+import EmbeddedDataField5e from "../..//fields/embedded-data-field.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 
-const { ArrayField, EmbeddedDataField, SchemaField, StringField } = foundry.data.fields;
+const { ArrayField, SchemaField, StringField } = foundry.data.fields;
 
 /**
  * Field for holding one or more consumption targets.
  */
 export default class ConsumptionTargetsField extends ArrayField {
   constructor(options={}) {
-    super(new EmbeddedDataField(ConsumptionTargetData), options);
+    super(new EmbeddedDataField5e(ConsumptionTargetData), options);
   }
 }
 
