@@ -1,7 +1,7 @@
 import * as Trait from "../../../documents/actor/trait.mjs";
 import Item5e from "../../../documents/item.mjs";
 import {
-  formatLength, formatNumber, getPluralRules, simplifyBonus, splitSemicolons, staticID
+  formatLength, formatNumber, getPluralRules, parseInputDelta, simplifyBonus, splitSemicolons, staticID
 } from "../../../utils.mjs";
 
 import AdvancementConfirmationDialog from "../../advancement/advancement-confirmation-dialog.mjs";
@@ -1155,6 +1155,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
         element.addEventListener("change", event => this.#changeLevel(event));
       }
 
+      // Handle delta inputs
+      this.element.querySelectorAll('input[type="text"][data-dtype="Number"]')
+        .forEach(i => i.addEventListener("change", this._onChangeInputDelta.bind(this)));
+
       // Meter editing
       for ( const meter of this.element.querySelectorAll('.meter > [role="meter"]:has(> input)') ) {
         meter.addEventListener("click", event => this.#toggleMeter(event, true));
@@ -1289,6 +1293,30 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    * @protected
    */
   _inspectWarning(event, target) {}
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs.
+   * @param {Event} event  Triggering event.
+   * @protected
+   */
+  _onChangeInputDelta(event) {
+    const input = event.target;
+    const target = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId) ?? this.actor;
+    const { activityId } = input.closest("[data-activity-id]")?.dataset ?? {};
+    const activity = target?.system.activities?.get(activityId);
+    const result = parseInputDelta(input, activity ?? target);
+    if ( result !== undefined ) {
+      // Special case handling for Item uses.
+      if ( input.dataset.name === "system.uses.value" ) {
+        target.update({ "system.uses.spent": target.system.uses.max - result });
+      } else if ( activity && (input.dataset.name === "uses.value") ) {
+        target.updateActivity(activityId, { "uses.spent": activity.uses.max - result });
+      }
+      else target.update({ [input.dataset.name]: result });
+    }
+  }
 
   /* -------------------------------------------- */
 
