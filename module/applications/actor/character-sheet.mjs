@@ -4,6 +4,7 @@ import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
 import Item5e from "../../documents/item.mjs";
+import * as Trait from "../../documents/actor/trait.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
