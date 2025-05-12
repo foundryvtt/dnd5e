@@ -310,7 +310,7 @@ export default class ContainerSheet extends ItemSheet5e {
     }
 
     // Perform the sort
-    const sortUpdates = SortingHelpers.performIntegerSort(item, {target, siblings});
+    const sortUpdates = foundry.utils.SortingHelpers.performIntegerSort(item, {target, siblings});
     const updateData = sortUpdates.map(u => {
       const update = u.update;
       update._id = u.target.id;
@@ -319,6 +319,17 @@ export default class ContainerSheet extends ItemSheet5e {
 
     // Perform the update
     Item.updateDocuments(updateData, {pack: this.item.pack, parent: this.item.actor});
+  }
+
+  /* -------------------------------------------- */
+  /*  Life-Cycle                                  */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _onRender(context, options) {
+    await super._onRender(context, options);
+    const inventory = this.element.querySelector(this.options.elements.inventory);
+    if ( inventory ) inventory.dataset.itemId = this.item.id;
   }
 
   /* -------------------------------------------- */

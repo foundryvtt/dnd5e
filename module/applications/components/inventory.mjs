@@ -537,7 +537,8 @@ export default class InventoryElement extends HTMLElement {
     if ( !item ) return;
     const activity = item.system.activities?.get(activityId);
     const result = parseInputDelta(input, activity ?? item);
-    if ( result !== undefined ) {
+    if ( (result !== undefined) && input.dataset.name ) {
+      event.stopPropagation();
       // Special case handling for Item uses.
       if ( input.dataset.name === "system.uses.value" ) {
         item.update({ "system.uses.spent": item.system.uses.max - result });

@@ -1307,7 +1307,8 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     const { activityId } = input.closest("[data-activity-id]")?.dataset ?? {};
     const activity = target?.system.activities?.get(activityId);
     const result = parseInputDelta(input, activity ?? target);
-    if ( result !== undefined ) {
+    if ( (result !== undefined) && input.dataset.name ) {
+      event.stopPropagation();
       // Special case handling for Item uses.
       if ( input.dataset.name === "system.uses.value" ) {
         target.update({ "system.uses.spent": target.system.uses.max - result });
