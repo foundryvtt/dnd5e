@@ -1090,9 +1090,17 @@ export default class CharacterActorSheet extends BaseActorSheet {
     const favorite = await fromUuid(favoriteId, { relative: this.actor });
     if ( (favorite instanceof dnd5e.documents.Item5e) || target.dataset.activityId ) {
       if ( favorite.type === "container" ) favorite.sheet.render({ force: true });
-      else favorite.use({ legacy: false, event });
+      else favorite.use({ event });
     }
+    else if ( favorite instanceof dnd5e.dataModels.activity.BaseActivityData ) favorite.use({ event });
     else if ( favorite instanceof dnd5e.documents.ActiveEffect5e ) favorite.update({ disabled: !favorite.disabled });
+    else {
+      const { key } = target.closest("[data-key]")?.dataset ?? {};
+      if ( key ) {
+        if ( target.classList.contains("skill-name") ) this.actor.rollSkill({ event, skill: key });
+        else if ( target.classList.contains("tool-name") ) this.actor.rollToolCheck({ event, tool: key });
+      }
+    }
   }
 
   /* -------------------------------------------- */
