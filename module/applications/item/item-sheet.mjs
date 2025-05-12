@@ -160,6 +160,16 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
   /* -------------------------------------------- */
 
   /** @inheritDoc */
+  _disableFields() {
+    this.element.querySelectorAll(":is(document-embed, secret-block) button").forEach(el => {
+      el.classList.add("always-interactive");
+    });
+    super._disableFields();
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
   async _prepareContext(options) {
     const context = {
       ...await super._prepareContext(options),
