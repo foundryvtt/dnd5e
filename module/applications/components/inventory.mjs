@@ -754,7 +754,7 @@ export default class InventoryElement extends HTMLElement {
     if ( !this.actor ) return;
     const uuid = item.getRelativeUUID(this.actor);
     if ( this.actor.system.hasFavorite(uuid) ) return this.actor.system.removeFavorite(uuid);
-    return this.actor.system.addFavorite(uuid);
+    return this.actor.system.addFavorite({ type: "item", id: uuid });
   }
 
   /* -------------------------------------------- */
