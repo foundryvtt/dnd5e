@@ -131,7 +131,6 @@ Hooks.once("init", function() {
   CONFIG.ChatMessage.dataModels = dataModels.chatMessage.config;
   CONFIG.Item.dataModels = dataModels.item.config;
   CONFIG.JournalEntryPage.dataModels = dataModels.journal.config;
-  documents.ActiveEffect5e.patchEmbeddedDataField();
 
   // Add fonts
   _configureFonts();
