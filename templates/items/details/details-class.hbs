@@ -31,6 +31,10 @@
     {{#if source.hd.additional}}
     {{ formField fields.hd.fields.additional value=source.hd.additional localize=true }}
     {{/if}}
+
+    {{!-- Class Properties --}}
+    {{ formField fields.properties options=properties.options input=inputs.createMultiCheckboxInput stacked=true
+                 classes="checkbox-grid checkbox-grid-3" }}
 </fieldset>
 
 <fieldset>
