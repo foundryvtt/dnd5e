@@ -9,7 +9,7 @@ import { log } from "./utils.mjs";
  */
 export async function migrateWorld({ bypassVersionCheck=false }={}) {
   const version = game.system.version;
-  ui.notifications.info(game.i18n.format("MIGRATION.5eBegin", {version}), {permanent: true});
+  ui.notifications.info("MIGRATION.5eBegin", { format: { version }, permanent: true });
 
   const migrationData = await getMigrationData();
   await migrateSettings();
@@ -154,7 +154,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
 
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
-  ui.notifications.info(game.i18n.format("MIGRATION.5eComplete", {version}), {permanent: true});
+  ui.notifications.success("MIGRATION.5eComplete", { format: { version }, permanent: true });
 }
 
 /* -------------------------------------------- */
@@ -341,7 +341,7 @@ export async function refreshCompendium(pack, { bypassVersionCheck, migrate=true
   }
   await pack.configure({locked: wasLocked});
   game.compendiumArt.enabled = true;
-  ui.notifications.info(`Refreshed all documents from Compendium ${pack.collection}`);
+  ui.notifications.success(`Refreshed all documents from Compendium ${pack.collection}`);
 }
 
 /* -------------------------------------------- */
