@@ -17,11 +17,13 @@ export default class RotateAreaConfig extends foundry.applications.sheets.Region
 
   /** @override */
   static PARTS = {
-    form: { ...super.PARTS.form },
-    positions: {
-      template: "systems/dnd5e/templates/region-behaviors/rotate-area-positions.hbs"
+    form: {
+      template: "systems/dnd5e/templates/region-behaviors/rotate-area-config.hbs",
+      scrollable: [""]
     },
-    footer: { ...super.PARTS.footer }
+    footer: {
+      template: "templates/generic/form-footer.hbs"
+    }
   };
 
   /* -------------------------------------------- */
@@ -31,6 +33,7 @@ export default class RotateAreaConfig extends foundry.applications.sheets.Region
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
+    context.fields.forEach(fs => fs.fields.forEach(f => f.localize = true));
     context.positions = context.source.system.positions.map((data, index) => ({
       data,
       fields: this.document.system.schema.fields.positions.element.fields,

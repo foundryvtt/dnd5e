@@ -185,11 +185,11 @@ Hooks.once("init", function() {
   });
 
   DocumentSheetConfig.unregisterSheet(RegionBehavior, "core", foundry.applications.sheets.RegionBehaviorConfig, {
-    types: ["rotateArea"]
+    types: ["dnd5e.rotateArea"]
   });
   DocumentSheetConfig.registerSheet(RegionBehavior, "dnd5e", applications.regionBehavior.RotateAreaConfig, {
     label: "DND5E.SheetClass.RotateArea",
-    types: ["rotateArea"]
+    types: ["dnd5e.rotateArea"]
   });
 
   CONFIG.Token.prototypeSheetClass = applications.PrototypeTokenConfig5e;
