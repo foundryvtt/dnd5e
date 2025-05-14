@@ -125,6 +125,19 @@ export default class ActiveEffect5e extends ActiveEffect {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(data) {
+    data = super.migrateData(data);
+    for ( const change of data.changes ?? [] ) {
+      if ( change.key === "system.attributes.exhaustion" ) {
+        change.key += ".value";
+      }
+    }
+    return data;
+  }
+
+  /* -------------------------------------------- */
   /*  Effect Application                          */
   /* -------------------------------------------- */
 
@@ -651,7 +664,7 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   static onTokenHUDRender(app, html) {
     const actor = app.object.actor;
-    const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
+    const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion.value");
     if ( Number.isFinite(level) && (level > 0) ) {
       const img = ActiveEffect5e._getExhaustionImage(level);
       const elem = html.querySelector('[data-status-id="exhaustion"]');
@@ -704,14 +717,14 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @param {Actor5e} actor             The actor belonging to the token.
    */
   static _manageExhaustion(event, actor) {
-    let level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
+    let level = foundry.utils.getProperty(actor, "system.attributes.exhaustion.value");
     if ( !Number.isFinite(level) ) return;
     event.preventDefault();
     event.stopPropagation();
     if ( event.button === 0 ) level++;
     else level--;
     const max = CONFIG.DND5E.conditionTypes.exhaustion.levels;
-    actor.update({ "system.attributes.exhaustion": Math.clamp(level, 0, max) });
+    actor.update({ "system.attributes.exhaustion.value": Math.clamp(level, 0, max) });
   }
 
   /* -------------------------------------------- */
