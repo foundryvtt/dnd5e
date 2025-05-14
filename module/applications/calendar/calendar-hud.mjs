@@ -4,10 +4,12 @@ import BaseCalendarHUD from "./base-calendar-hud.mjs";
 
 /**
  * @typedef CalendarHUDButton
- * @property {object} dataset
- * @property {Function} display
- * @property {string} label
- * @property {string} icon
+ * @property {string} [action]                    The action name triggered by clicking the button.
+ * @property {string} icon                        SVG icon path or font-awesome icon class for the button.
+ * @property {string} label                       Label used for the button.
+ * @property {"start"|"end"} position             Should this be displayed before or after the interface.
+ * @property {(event: PointerEvent) => void|Promise<void>} [onClick]  A custom click handler function.
+ * @property {boolean|(() => boolean)} [visible]  Is the control button visible for the current client.
  */
 
 /**
@@ -45,6 +47,65 @@ export default class CalendarHUD extends BaseCalendarHUD {
   /*  Rendering                                   */
   /* -------------------------------------------- */
 
+  _getCalendarButtons() {
+    const config = game.settings.get("dnd5e", "calendarConfig");
+    return [
+      {
+        action: "reverseShort",
+        icon: "fa-solid fa-angle-left",
+        label: game.i18n.format("DND5E.CALENDAR.Action.ReverseTime", {
+          amount: formatTime(config.buttons.reverseShort.value, config.buttons.reverseShort.units).titleCase()
+        }),
+        position: "start",
+        visible: game.user.isGM
+      },
+      {
+        action: "reverseFar",
+        icon: "fa-solid fa-angles-left",
+        label: game.i18n.format("DND5E.CALENDAR.Action.ReverseTime", {
+          amount: formatTime(config.buttons.reverseFar.value, config.buttons.reverseFar.units).titleCase()
+        }),
+        position: "start",
+        visible: game.user.isGM
+      },
+      {
+        action: "openCharacterSheet",
+        icon: "fa-solid fa-user",
+        label: game.i18n.localize("DND5E.CALENDAR.Action.OpenCharacterSheet"),
+        position: "start",
+        visible: !!game.user.character
+      },
+      {
+        action: "advanceShort",
+        icon: "fa-solid fa-angle-right",
+        label: game.i18n.format("DND5E.CALENDAR.Action.AdvanceTime", {
+          amount: formatTime(config.buttons.advanceShort.value, config.buttons.advanceShort.units).titleCase()
+        }),
+        position: "end",
+        visible: game.user.isGM
+      },
+      {
+        action: "advanceFar",
+        icon: "fa-solid fa-angles-right",
+        label: game.i18n.format("DND5E.CALENDAR.Action.AdvanceTime", {
+          amount: formatTime(config.buttons.advanceFar.value, config.buttons.advanceFar.units).titleCase()
+        }),
+        position: "end",
+        visible: game.user.isGM
+      },
+      {
+        action: "openPartySheet",
+        icon: "fa-solid fa-users",
+        label: game.i18n.localize("DND5E.CALENDAR.Action.OpenPartySheet"),
+        position: "end",
+        visible: game.settings.get("dnd5e", "primaryParty")?.actor
+          ?.testUserPermission(game.user, CONST.DOCUMENT_OWNERSHIP_LEVELS.LIMITED)
+      }
+    ];
+  }
+
+  /* -------------------------------------------- */
+
   /** @inheritDoc */
   async _prepareContext(options) {
     const context = await super._prepareContext(options);
@@ -60,85 +121,25 @@ export default class CalendarHUD extends BaseCalendarHUD {
    * @param {HandlebarsRenderOptions} options   Options which configure application rendering behavior.
    */
   async _prepareButtonsContext(context, options) {
-    const config = game.settings.get("dnd5e", "calendarConfig");
-
-    context.startButtons = [
-      {
-        dataset: {
-          action: "advanceTime",
-          amount: "reverseShort"
-        },
-        display: game.user.isGM,
-        label: game.i18n.format("DND5E.CALENDAR.Action.ReverseTime", {
-          amount: formatTime(config.buttons.reverseShort.value, config.buttons.reverseShort.units).titleCase()
-        }),
-        icon: "fa-solid fa-angle-left"
-      },
-      {
-        dataset: {
-          action: "advanceTime",
-          amount: "reverseFar"
-        },
-        display: game.user.isGM,
-        label: game.i18n.format("DND5E.CALENDAR.Action.ReverseTime", {
-          amount: formatTime(config.buttons.reverseFar.value, config.buttons.reverseFar.units).titleCase()
-        }),
-        icon: "fa-solid fa-angles-left"
-      },
-      {
-        dataset: {
-          action: "openCharacterSheet"
-        },
-        display: !!game.user.character,
-        label: game.i18n.localize("DND5E.CALENDAR.Action.OpenCharacterSheet"),
-        icon: "fa-solid fa-user"
-      }
-    ];
-
-    context.endButtons = [
-      {
-        dataset: {
-          action: "advanceTime",
-          amount: "advanceShort"
-        },
-        display: game.user.isGM,
-        label: game.i18n.format("DND5E.CALENDAR.Action.AdvanceTime", {
-          amount: formatTime(config.buttons.advanceShort.value, config.buttons.advanceShort.units).titleCase()
-        }),
-        icon: "fa-solid fa-angle-right"
-      },
-      {
-        dataset: {
-          action: "advanceTime",
-          amount: "advanceFar"
-        },
-        display: game.user.isGM,
-        label: game.i18n.format("DND5E.CALENDAR.Action.AdvanceTime", {
-          amount: formatTime(config.buttons.advanceFar.value, config.buttons.advanceFar.units).titleCase()
-        }),
-        icon: "fa-solid fa-angles-right"
-      },
-      {
-        dataset: {
-          action: "openPartySheet"
-        },
-        // TODO: Verify permission on group actor
-        display: !!game.settings.get("dnd5e", "primaryParty")?.actor,
-        label: game.i18n.localize("DND5E.CALENDAR.Action.OpenPartySheet"),
-        icon: "fa-solid fa-users"
-      }
-    ];
-
     /**
      * A hook event that fires when preparing the buttons displayed around the calendar HUD. Buttons in each list
      * are sorted with those closest to the center first.
      * @function dnd5e.prepareCalendarButtons
      * @memberof hookEvents
-     * @param {CalendarHUD} app                   The Calendar HUD application being rendered.
-     * @param {CalendarHUDButton[]} startButtons  Buttons displayed before the calendar UI.
-     * @param {CalendarHUDButton[]} endButtons    Buttons displayed after the calendar UI.
+     * @param {CalendarHUD} app              The Calendar HUD application being rendered.
+     * @param {CalendarHUDButton[]} buttons  Buttons displayed around the calendar UI.
      */
-    Hooks.callAll("dnd5e.prepareCalendarButtons", this, context.startButtons, context.endButtons);
+    const controls = this._doEvent(this._getCalendarButtons, {
+      async: false,
+      debugText: "Calendar Control Buttons",
+      hookName: "dnd5e.prepareCalendarButtons",
+      hookResponse: true,
+      parentClassHooks: false
+    });
+
+    context.buttons = controls
+      .filter(b => typeof b.visible === "function" ? b.visible.call(this) : b.visible ?? true)
+      .map((b, index) => ({ ...b, index }));
   }
 
   /* -------------------------------------------- */
@@ -148,10 +149,10 @@ export default class CalendarHUD extends BaseCalendarHUD {
     context = await super._preparePartContext(partId, context, options);
     switch ( partId ) {
       case "endButtons":
-        context.buttons = context.endButtons;
+        context.buttons = context.buttons.filter(b => b.position === "end");
         break;
       case "startButtons":
-        context.buttons = context.startButtons.reverse();
+        context.buttons = context.buttons.filter(b => b.position === "start").reverse();
         break;
     }
     return context;
@@ -188,6 +189,16 @@ export default class CalendarHUD extends BaseCalendarHUD {
   async _onRender(context, options) {
     await super._onRender(context, options);
     await this.renderCore();
+
+    for ( const button of this.element.querySelectorAll(".calendar-button button") ) {
+      const match = context.buttons[parseInt(button.dataset.index)];
+      if ( typeof match?.onClick === "function" ) {
+        button.addEventListener("click", event => {
+          event.preventDefault();
+          match.onClick(event);
+        });
+      }
+    }
   }
 
   /* -------------------------------------------- */
