@@ -7,7 +7,10 @@ export default class BaseCalendarHUD extends Application5e {
   /** @inheritDoc */
   static DEFAULT_OPTIONS = {
     actions: {
-      advanceTime: BaseCalendarHUD.#advanceTime
+      advanceFar: BaseCalendarHUD.#advanceTime,
+      advanceShort: BaseCalendarHUD.#advanceTime,
+      reverseFar: BaseCalendarHUD.#advanceTime,
+      reverseShort: BaseCalendarHUD.#advanceTime
     },
     id: "calendar-hud",
     window: {
@@ -72,9 +75,9 @@ export default class BaseCalendarHUD extends Application5e {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static #advanceTime(event, target) {
-    const config = game.settings.get("dnd5e", "calendarConfig").buttons[target.dataset.amount];
+    const config = game.settings.get("dnd5e", "calendarConfig").buttons[target.dataset.action];
     game.time.advance({
-      [config.units]: target.dataset.amount.startsWith("reverse") ? -config.value : config.value
+      [config.units]: target.dataset.action.startsWith("reverse") ? -config.value : config.value
     });
   }
 
