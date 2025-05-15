@@ -304,7 +304,6 @@
 
   .window-header {
     border: none;
-    position: absolute;
     inset: 0 0 auto 0;
     z-index: 1;
     padding: 7px 6px 0 0;
@@ -349,7 +348,10 @@
   &.minimized {
     background: url("../../ui/denim075.png");
     max-height: var(--header-height);
+    .window-header { padding-block: 0; }
   }
+
+  &:not(.minimized) .window-header { position: absolute; }
 
   .message-metadata { padding-right: 18px; }
 }
