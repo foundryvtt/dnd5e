@@ -9,7 +9,11 @@ import { log } from "./utils.mjs";
  */
 export async function migrateWorld({ bypassVersionCheck=false }={}) {
   const version = game.system.version;
-  ui.notifications.info(game.i18n.format("MIGRATION.5eBegin", {version}), {permanent: true});
+  const progress = ui.notifications.info("MIGRATION.5eBegin", { format: { version }, permanent: true, progress: true });
+  const totalDocuments = game.actors.size + game.items.size + game.macros.size + game.tables.size
+    + game.scenes.reduce((total, s) => total + s.tokens.size, 0);
+  let migrated = 0;
+  const incrementProgress = () => progress.update({ pct: ++migrated / totalDocuments });
 
   const migrationData = await getMigrationData();
   await migrateSettings();
@@ -43,6 +47,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
       err.message = `Failed dnd5e system migration for Actor ${actor.name}: ${err.message}`;
       console.error(err);
     }
+    incrementProgress();
   }
 
   // Migrate World Items
@@ -70,6 +75,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
       err.message = `Failed dnd5e system migration for Item ${item.name}: ${err.message}`;
       console.error(err);
     }
+    incrementProgress();
   }
 
   // Migrate World Macros
@@ -84,6 +90,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
       err.message = `Failed dnd5e system migration for Macro ${m.name}: ${err.message}`;
       console.error(err);
     }
+    incrementProgress();
   }
 
   // Migrate World Roll Tables
@@ -98,6 +105,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
       err.message = `Failed dnd5e system migration for RollTable ${table.name}: ${err.message}`;
       console.error(err);
     }
+    incrementProgress();
   }
 
   // Migrate Actor Override Tokens
@@ -115,7 +123,10 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
 
     // Migrate ActorDeltas individually in order to avoid issues with ActorDelta bulk updates.
     for ( const token of s.tokens ) {
-      if ( token.actorLink || !token.actor ) continue;
+      if ( token.actorLink || !token.actor ) {
+        incrementProgress();
+        continue;
+      }
       try {
         const flags = { bypassVersionCheck, persistSourceMigration: false };
         const source = token.actor.toObject();
@@ -142,6 +153,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         err.message = `Failed dnd5e system migration for ActorDelta [${token.id}]: ${err.message}`;
         console.error(err);
       }
+      incrementProgress();
     }
   }
 
@@ -154,7 +166,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
 
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
-  ui.notifications.info(game.i18n.format("MIGRATION.5eComplete", {version}), {permanent: true});
+  progress.update({ message: "MIGRATION.5eComplete", format: { version } });
 }
 
 /* -------------------------------------------- */
