@@ -38,7 +38,7 @@ export default class SourceField extends SchemaField {
    * @param {string} uuid  Compendium source or document UUID.
    */
   static prepareData(uuid) {
-    const collection = foundry.utils.parseUuid(uuid)?.collection;
+    const collection = uuid ? foundry.utils.parseUuid(uuid)?.collection : null;
     const pkg = SourceField.getPackage(collection);
     this.bookPlaceholder = collection?.metadata?.flags?.dnd5e?.sourceBook ?? SourceField.getModuleBook(pkg) ?? "";
     if ( !this.book ) this.book = this.bookPlaceholder;
