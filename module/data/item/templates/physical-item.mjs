@@ -212,10 +212,15 @@ export default class PhysicalItemTemplate extends SystemDataModel {
   async _renderContainers({ formerContainer, ...rendering }={}) {
     // Render this item's container & any containers it is within
     const parentContainers = await this.allContainers();
-    parentContainers.forEach(c => c.sheet?.render(false, { ...rendering }));
+    parentContainers.forEach(c => {
+      if ( c.sheet?.rendered ) c.sheet?.render(false, { ...rendering });
+    });
+    if ( !parentContainers.length && !formerContainer ) return;
 
     // Render the actor sheet, compendium, or sidebar
-    if ( this.parent.isEmbedded ) this.parent.actor.sheet?.render(false, { ...rendering });
+    if ( this.parent.isEmbedded && this.parent.actor.sheet?.rendered ) {
+      this.parent.actor.sheet.render(false, { ...rendering });
+    }
     else if ( this.parent.pack ) game.packs.get(this.parent.pack).apps.forEach(a => a.render(false, { ...rendering }));
     else ui.items.render(false, { ...rendering });
 
