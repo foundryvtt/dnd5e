@@ -2302,6 +2302,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<number>}             Number of hit dice spent.
    */
   async autoSpendHitDice({ threshold=3 }={}) {
+    if ( !this.system.attributes.hp ) return;
     const hp = this.system.attributes.hp;
     const max = Math.max(0, hp.effectiveMax);
     let diceRolled = 0;
