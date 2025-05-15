@@ -8,6 +8,7 @@ const { BooleanField, SetField, StringField } = foundry.data.fields;
  * @property {Set<string>} effects
  * @property {Set<string>} keep
  * @property {Set<string>} merge
+ * @property {string} [minimumAC]         Formula for minimum armor class for transformed creature.
  * @property {Set<string>} other
  * @property {string} [preset]
  * @property {string} [tempFormula]       Formula for temp HP that will be added during transformation.
@@ -30,6 +31,7 @@ export default class TransformationSetting extends foundry.abstract.DataModel {
       effects: new SetField(new StringField(), { initial: () => TransformationSetting.#initial("effects") }),
       keep: new SetField(new StringField(), { initial: () => TransformationSetting.#initial("keep") }),
       merge: new SetField(new StringField(), { initial: () => TransformationSetting.#initial("merge") }),
+      minimumAC: new FormulaField({ deterministic: true }),
       other: new SetField(new StringField(), { initial: () => TransformationSetting.#initial("other") }),
       preset: new StringField({ initial: null, nullable: true }),
       tempFormula: new FormulaField({ determinstic: true }),

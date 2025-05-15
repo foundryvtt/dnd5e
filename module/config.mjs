@@ -3519,7 +3519,7 @@ DND5E.transformation = {
     self: {
       label: "DND5E.TRANSFORM.Setting.Keep.Self.Label",
       hint: "DND5E.TRANSFORM.Setting.Keep.Self.Hint",
-      disables: ["keep.*", "merge.*"]
+      disables: ["keep.*", "merge.*", "minimumAC", "tempFormula"]
     }
   },
   merge: {
@@ -3541,6 +3541,7 @@ DND5E.transformation = {
         effects: new Set(["otherOrigin", "origin", "feat", "spell", "class", "background"]),
         keep: new Set(["bio", "class", "feats", "hp", "mental", "type"]),
         merge: new Set(["saves", "skills"]),
+        minimumAC: "(13 + @abilities.wis.mod) * sign(@subclasses.moon.levels)",
         tempFormula: "max(@classes.druid.levels, @subclasses.moon.levels * 3)"
       }
     },
