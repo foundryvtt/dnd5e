@@ -2915,6 +2915,8 @@ DND5E.hitDieTypes = ["d4", "d6", "d8", "d10", "d12"];
  * @typedef {object} RestConfiguration
  * @property {Record<string, number>} duration      Duration of different rest variants in minutes.
  * @property {string} label                         Localized label for the rest type.
+ * @property {string} icon                          Icon representing this rest type. Can be either a set of FontAwesome
+ *                                                  classes or an image path.
  * @property {string[]} [activationPeriods]         Activation types that should be displayed in the chat card.
  * @property {boolean} [recoverHitDice]             Should hit dice be recovered during this rest?
  * @property {boolean} [recoverHitPoints]           Should hit points be recovered during this rest?
@@ -2936,6 +2938,7 @@ DND5E.restTypes = {
       epic: 1
     },
     label: "DND5E.REST.Short.Label",
+    icon: "fa-solid fa-utensils",
     activationPeriods: ["shortRest"],
     recoverPeriods: ["sr"],
     recoverSpellSlotTypes: new Set(["pact"])
@@ -2947,6 +2950,7 @@ DND5E.restTypes = {
       epic: 60
     },
     label: "DND5E.REST.Long.Label",
+    icon: "fa-solid fa-campground",
     activationPeriods: ["longRest"],
     recoverHitDice: true,
     recoverHitPoints: true,
