@@ -9,9 +9,18 @@ import { log } from "./utils.mjs";
  */
 export async function migrateWorld({ bypassVersionCheck=false }={}) {
   const version = game.system.version;
-  const progress = ui.notifications.info("MIGRATION.5eBegin", { format: { version }, permanent: true, progress: true });
+  const progress = ui.notifications.info("MIGRATION.5eBegin", {
+    console: false, format: { version }, permanent: true, progress: true
+  });
+  const { packs, packDocuments } = game.packs.reduce((obj, pack) => {
+    if ( _shouldMigrateCompendium(pack) ) {
+      obj.packs.push(pack);
+      obj.packDocuments += pack.index.size;
+    }
+    return obj;
+  }, { packs: [], packDocuments: 0 });
   const totalDocuments = game.actors.size + game.items.size + game.macros.size + game.tables.size
-    + game.scenes.reduce((total, s) => total + s.tokens.size, 0);
+    + game.scenes.reduce((total, s) => total + s.tokens.size, 0) + packDocuments;
   let migrated = 0;
   const incrementProgress = () => progress.update({ pct: ++migrated / totalDocuments });
 
@@ -158,8 +167,8 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
   }
 
   // Migrate World Compendium Packs
-  for ( let p of game.packs ) {
-    if ( _shouldMigrateCompendium(p) ) await migrateCompendium(p);
+  for ( let p of packs ) {
+    await migrateCompendium(p, { incrementProgress });
   }
   const legacyFolder = game.folders.find(f => f.type === "Compendium" && f.name === "D&D SRD Content");
   if ( legacyFolder ) legacyFolder.update({ name: "D&D Legacy Content" });
@@ -197,10 +206,11 @@ function _shouldMigrateCompendium(pack) {
  * @param {object} [options={}]
  * @param {boolean} [options.bypassVersionCheck=false]  Bypass certain migration restrictions gated behind system
  *                                                      version stored in item stats.
+ * @param {Function} [options.incrementProgress]        Function that can be called to increment the progress bar.
  * @param {boolean} [options.strict=false]  Migrate errors should stop the whole process.
  * @returns {Promise}
  */
-export async function migrateCompendium(pack, { bypassVersionCheck=false, strict=false }={}) {
+export async function migrateCompendium(pack, { bypassVersionCheck=false, incrementProgress, strict=false }={}) {
   const documentName = pack.documentName;
   if ( !["Actor", "Item", "Scene"].includes(documentName) ) return;
 
@@ -253,6 +263,10 @@ export async function migrateCompendium(pack, { bypassVersionCheck=false, strict
         err.message = `Failed dnd5e system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
         console.error(err);
         if ( strict ) throw err;
+      }
+
+      finally {
+        incrementProgress?.();
       }
     }
 
