@@ -257,8 +257,10 @@ export default function ActorSheetV2Mixin(Base) {
         else if ( config.type === Number ) flag.field = new foundry.data.fields.NumberField(fieldOptions);
         else flag.field = new foundry.data.fields.StringField(fieldOptions);
 
-        sections[config.section] ??= [];
-        sections[config.section].push(flag);
+        if ( !config.deprecated || flag.value ) {
+          sections[config.section] ??= [];
+          sections[config.section].push(flag);
+        }
       }
 
       // Global Bonuses
