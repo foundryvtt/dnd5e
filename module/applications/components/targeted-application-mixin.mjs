@@ -81,7 +81,9 @@ export default function TargetedApplicationMixin(Base) {
       this.targetSourceControl.querySelectorAll("button").forEach(b =>
         b.addEventListener("click", this._onChangeTargetMode.bind(this))
       );
-      if ( !this.chatMessage?.getFlag("dnd5e", "targets")?.length ) this.targetSourceControl.hidden = true;
+      if ( !game.user.isGM || !this.chatMessage?.getFlag("dnd5e", "targets")?.length ) {
+        this.targetSourceControl.hidden = true;
+      }
 
       this.targetList = document.createElement("ul");
       this.targetList.classList.add("targets", "unlist");
@@ -97,7 +99,8 @@ export default function TargetedApplicationMixin(Base) {
     buildTargetsList() {
       if ( !this.targetList ) throw new Error("Must create a element to contain the target list.");
       const targetedTokens = new Map();
-      switch ( this.targetingMode ) {
+      const mode = game.user.isGM ? this.targetingMode : "selected";
+      switch ( mode ) {
         case "targeted":
           this.chatMessage?.getFlag("dnd5e", "targets")?.forEach(t => targetedTokens.set(t.uuid, t.name));
           break;
