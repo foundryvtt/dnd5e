@@ -229,7 +229,9 @@ export default class TransformDialog extends Dialog5e {
     const data = foundry.utils.expandObject(formData.object);
     for ( const category of ["keep", "merge", "effects", "other"] ) {
       this.#settings.updateSource({ [category]: filteredKeys(data[category] ?? {}) });
+      delete data[category];
     }
+    this.#settings.updateSource(data);
     if ( event.type === "submit" ) {
       this.#shouldTransform = true;
       this.close();

@@ -9,10 +9,10 @@
             </datalist>
         </div>
     </div>
-    {{ formField fields.source.fields.page value=source.page label="DND5E.SOURCE.FIELDS.source.page.label"
-                 localize=true rootId=partId }}
-    {{ formField fields.source.fields.custom value=source.custom label="DND5E.SOURCE.FIELDS.source.custom.label"
-                 localize=true rootId=partId }}
-    {{ formField fields.source.fields.uuid value=source.uuid label="DND5E.SOURCE.FIELDS.source.uuid.label"
-                 localize=true rootId=partId }}
+    {{ formField fields.source.fields.page name="source.page" value=source.page
+                 label="DND5E.SOURCE.FIELDS.source.page.label" localize=true rootId=partId }}
+    {{ formField fields.source.fields.custom name="source.custom" value=source.custom
+                 label="DND5E.SOURCE.FIELDS.source.custom.label" localize=true rootId=partId }}
+    {{ formField fields.source.fields.uuid name="source.uuid" value=source.uuid
+                 label="DND5E.SOURCE.FIELDS.source.uuid.label" localize=true rootId=partId }}
 </fieldset>

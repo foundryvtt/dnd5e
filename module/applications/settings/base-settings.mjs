@@ -57,8 +57,10 @@ export default class BaseSettingsConfig extends Application5e {
     const Field = { [Boolean]: BooleanField, [Number]: NumberField, [String]: StringField }[setting.type];
     if ( !Field ) throw new Error("Automatic field generation only available for Boolean, Number, or String types");
     const data = {
-      field: new Field({ label: game.i18n.localize(setting.name), hint: game.i18n.localize(setting.hint) }),
       name,
+      field: new Field({
+        label: game.i18n.localize(setting.name), hint: game.i18n.localize(setting.hint), required: true, blank: false
+      }),
       value: game.settings.get("dnd5e", name)
     };
     if ( setting.type === Boolean ) data.input = createCheckboxInput;

@@ -183,34 +183,19 @@
 /* ----------------------------------------- */
 
 /* Tracker CSS */
-.app.sheet .dmg-tracker {
+.app.sheet .srd-tracker {
 
-  --dmg-brown: rgb(132, 120, 100);
-  --dmg-chapter-color: rgb(95, 94, 85);
-  --dmg-field-color: rgb(224, 231, 228);
-  --narrative-border-color: rgb(124, 140, 117);
-  --notable-color: rgb(211, 203, 209);
-  --table-header-color: rgb(198, 206, 199);
-  --dnd5e-color-table-row-even: rgb(246, 248, 247);
-  --dnd5e-color-table-row-odd: rgb(230, 234, 231);
+  --entry-border-color: rgb(211, 203, 209);
 
   margin-bottom: 1em;
 
   h1 {
-    color: var(--dmg-brown);
     text-align:center;
   }
 
-  :is(h2) {
-    --phb-saturated-gold: transparent;
-    color: var(--dmg-chapter-color);
+  h2 {
     text-align: center;
     margin: 0;
-  }
-
-  h3 {
-    --phb-saturated-gold: transparent;
-    color: var(--narrative-border-color);
   }
 
   h3:not(.label) {
@@ -222,7 +207,6 @@
 
   h4, h5 {
     font-family: var(--font-h5);
-    color: var(--dmg-chapter-color);
     text-align: center;
 
     &.highlight { font-size: larger; }
@@ -261,23 +245,17 @@
   }
 
   .highlight {
-    background: linear-gradient(
-      90deg,
-      rgba(224, 235, 232, 0.3) 5%,
-      rgba(224, 235, 232, 1) 50%,
-      rgba(224, 235, 232, 0.3) 100%
-    );
     text-align: center;
     padding: 5px;
   }
 
-  :is(.label), .label:is(h4, h5){
+  .label, .label:is(h4, h5) {
     margin: 0 10px 0 0;
     text-align: left;
   }
 
   .field {
-    border-bottom: 2px solid var(--narrative-border-color);
+    border-bottom: 2px solid var(--color-text-dark-primary);
     flex-grow: 1;
     padding: 5px;
 
@@ -297,13 +275,12 @@
 
     p { margin-top: -3px; }
   }
-
   .travel-info, .field.block {
-    min-height: 50px;
-    background: linear-gradient(to top, var(--dmg-field-color), transparent);
-    border: 1px solid var(--notable-color);
-    border-top:none;
-    border-radius:0 0 10px 10px;
+    min-height: 4em;
+    background: linear-gradient(to top, var(--dnd5e-block-background) 65%, transparent);
+    border: 1px solid var(--entry-border-color);
+    border-top: none;
+    border-radius: 0 0 10px 10px;
   }
 
   .col {

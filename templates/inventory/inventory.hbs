@@ -26,7 +26,8 @@
     {{#if listControls}}
     <div class="middle">
 
-        <item-list-controls for="{{ listControls.list }}" collection="items" label="{{ localize listControls.label }}">
+        <item-list-controls for="{{ listControls.list }}" collection="items" label="{{ localize listControls.label }}"
+                            {{~#if keepEmpty}} keep-empty{{/if}}>
 
             {{#if listControls.filters.length}}
             <datalist data-list="filters">
@@ -107,12 +108,14 @@
                             </div>
 
                             <div class="tags">
+                                {{#if item.labels.components}}
                                 {{#each item.labels.components.all}}
                                 {{#if tag}}
                                 <span aria-label="{{ label }}">
                                     <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
                                 </span>
                                 {{/if}}
+                                {{/each}}
                                 {{else}}
                                 {{#each item.labels.properties}}
                                 {{#if icon}}
@@ -121,7 +124,7 @@
                                 </span>
                                 {{/if}}
                                 {{/each}}
-                                {{/each}}
+                                {{/if}}
                             </div>
 
                         </div>

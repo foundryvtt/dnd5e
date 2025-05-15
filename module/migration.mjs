@@ -9,7 +9,20 @@ import { log } from "./utils.mjs";
  */
 export async function migrateWorld({ bypassVersionCheck=false }={}) {
   const version = game.system.version;
-  ui.notifications.info(game.i18n.format("MIGRATION.5eBegin", {version}), {permanent: true});
+  const progress = ui.notifications.info("MIGRATION.5eBegin", {
+    console: false, format: { version }, permanent: true, progress: true
+  });
+  const { packs, packDocuments } = game.packs.reduce((obj, pack) => {
+    if ( _shouldMigrateCompendium(pack) ) {
+      obj.packs.push(pack);
+      obj.packDocuments += pack.index.size;
+    }
+    return obj;
+  }, { packs: [], packDocuments: 0 });
+  const totalDocuments = game.actors.size + game.items.size + game.macros.size + game.tables.size
+    + game.scenes.reduce((total, s) => total + s.tokens.size, 0) + packDocuments;
+  let migrated = 0;
+  const incrementProgress = () => progress.update({ pct: ++migrated / totalDocuments });
 
   const migrationData = await getMigrationData();
   await migrateSettings();
@@ -43,6 +56,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
       err.message = `Failed dnd5e system migration for Actor ${actor.name}: ${err.message}`;
       console.error(err);
     }
+    incrementProgress();
   }
 
   // Migrate World Items
@@ -70,6 +84,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
       err.message = `Failed dnd5e system migration for Item ${item.name}: ${err.message}`;
       console.error(err);
     }
+    incrementProgress();
   }
 
   // Migrate World Macros
@@ -84,6 +99,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
       err.message = `Failed dnd5e system migration for Macro ${m.name}: ${err.message}`;
       console.error(err);
     }
+    incrementProgress();
   }
 
   // Migrate World Roll Tables
@@ -98,6 +114,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
       err.message = `Failed dnd5e system migration for RollTable ${table.name}: ${err.message}`;
       console.error(err);
     }
+    incrementProgress();
   }
 
   // Migrate Actor Override Tokens
@@ -115,7 +132,10 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
 
     // Migrate ActorDeltas individually in order to avoid issues with ActorDelta bulk updates.
     for ( const token of s.tokens ) {
-      if ( token.actorLink || !token.actor ) continue;
+      if ( token.actorLink || !token.actor ) {
+        incrementProgress();
+        continue;
+      }
       try {
         const flags = { bypassVersionCheck, persistSourceMigration: false };
         const source = token.actor.toObject();
@@ -142,19 +162,20 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
         err.message = `Failed dnd5e system migration for ActorDelta [${token.id}]: ${err.message}`;
         console.error(err);
       }
+      incrementProgress();
     }
   }
 
   // Migrate World Compendium Packs
-  for ( let p of game.packs ) {
-    if ( _shouldMigrateCompendium(p) ) await migrateCompendium(p);
+  for ( let p of packs ) {
+    await migrateCompendium(p, { incrementProgress });
   }
   const legacyFolder = game.folders.find(f => f.type === "Compendium" && f.name === "D&D SRD Content");
   if ( legacyFolder ) legacyFolder.update({ name: "D&D Legacy Content" });
 
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
-  ui.notifications.info(game.i18n.format("MIGRATION.5eComplete", {version}), {permanent: true});
+  progress.update({ message: "MIGRATION.5eComplete", format: { version } });
 }
 
 /* -------------------------------------------- */
@@ -185,10 +206,11 @@ function _shouldMigrateCompendium(pack) {
  * @param {object} [options={}]
  * @param {boolean} [options.bypassVersionCheck=false]  Bypass certain migration restrictions gated behind system
  *                                                      version stored in item stats.
+ * @param {Function} [options.incrementProgress]        Function that can be called to increment the progress bar.
  * @param {boolean} [options.strict=false]  Migrate errors should stop the whole process.
  * @returns {Promise}
  */
-export async function migrateCompendium(pack, { bypassVersionCheck=false, strict=false }={}) {
+export async function migrateCompendium(pack, { bypassVersionCheck=false, incrementProgress, strict=false }={}) {
   const documentName = pack.documentName;
   if ( !["Actor", "Item", "Scene"].includes(documentName) ) return;
 
@@ -241,6 +263,10 @@ export async function migrateCompendium(pack, { bypassVersionCheck=false, strict
         err.message = `Failed dnd5e system migration for document ${doc.name} in pack ${pack.collection}: ${err.message}`;
         console.error(err);
         if ( strict ) throw err;
+      }
+
+      finally {
+        incrementProgress?.();
       }
     }
 

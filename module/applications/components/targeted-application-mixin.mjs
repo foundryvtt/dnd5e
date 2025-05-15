@@ -102,7 +102,9 @@ export default function TargetedApplicationMixin(Base) {
           this.chatMessage?.getFlag("dnd5e", "targets")?.forEach(t => targetedTokens.set(t.uuid, t.name));
           break;
         case "selected":
-          canvas.tokens?.controlled?.forEach(t => targetedTokens.set(t.actor.uuid, t.name));
+          canvas.tokens?.controlled?.forEach(t => {
+            if ( t.actor ) targetedTokens.set(t.actor.uuid, t.name);
+          });
           break;
       }
       const targets = Array.from(targetedTokens.entries())

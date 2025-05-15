@@ -1,12 +1,13 @@
 import Scaling from "../../documents/scaling.mjs";
+import EmbeddedDataField5e from "../fields/embedded-data-field.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 
-const { BooleanField, EmbeddedDataField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
+const { BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
  * Field for storing damage data.
  */
-export default class DamageField extends EmbeddedDataField {
+export default class DamageField extends EmbeddedDataField5e {
   constructor(options) {
     super(DamageData, options);
   }

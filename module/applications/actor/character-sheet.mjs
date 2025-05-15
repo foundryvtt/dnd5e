@@ -4,6 +4,7 @@ import CompendiumBrowser from "../compendium-browser.mjs";
 import ContextMenu5e from "../context-menu.mjs";
 import BaseActorSheet from "./api/base-actor-sheet.mjs";
 import Item5e from "../../documents/item.mjs";
+import * as Trait from "../../documents/actor/trait.mjs";
 
 const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
@@ -481,7 +482,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
         { number: formatNumber(context.system.details.xp.boonsEarned ?? 0, { signDisplay: "always" }) }
       );
     }
-    context.showExperience = game.settings.get("dnd5e", "levelingMode") !== "noexp";
+    context.showExperience = game.settings.get("dnd5e", "levelingMode") !== "noxp";
 
     return context;
   }
@@ -771,7 +772,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
       case "class": return new Set(["classes"]);
       case "facility": return new Set(["facilities"]);
       case "race": return new Set(["species"]);
-      case "subclass": return new Set();
+      case "subclass": return new Set(["subclasses"]);
       default: return super._assignItemCategories(item);
     }
   }
@@ -1089,9 +1090,17 @@ export default class CharacterActorSheet extends BaseActorSheet {
     const favorite = await fromUuid(favoriteId, { relative: this.actor });
     if ( (favorite instanceof dnd5e.documents.Item5e) || target.dataset.activityId ) {
       if ( favorite.type === "container" ) favorite.sheet.render({ force: true });
-      else favorite.use({ legacy: false, event });
+      else favorite.use({ event });
     }
+    else if ( favorite instanceof dnd5e.dataModels.activity.BaseActivityData ) favorite.use({ event });
     else if ( favorite instanceof dnd5e.documents.ActiveEffect5e ) favorite.update({ disabled: !favorite.disabled });
+    else {
+      const { key } = target.closest("[data-key]")?.dataset ?? {};
+      if ( key ) {
+        if ( target.classList.contains("skill-name") ) this.actor.rollSkill({ event, skill: key });
+        else if ( target.classList.contains("tool-name") ) this.actor.rollToolCheck({ event, tool: key });
+      }
+    }
   }
 
   /* -------------------------------------------- */

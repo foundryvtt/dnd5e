@@ -2302,6 +2302,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
    * @returns {Promise<number>}             Number of hit dice spent.
    */
   async autoSpendHitDice({ threshold=3 }={}) {
+    if ( !this.system.attributes.hp ) return;
     const hp = this.system.attributes.hp;
     const max = Math.max(0, hp.effectiveMax);
     let diceRolled = 0;
@@ -2859,12 +2860,18 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       foundry.utils.setProperty(tokenData, "flags.dnd5e.previousActorData", previousActorData);
       await this.sheet?.close();
       const update = await this.token.update(tokenData);
-      if ( game.release.generation > 12 ) {
-        d["==items"] = d.items;
-        d["==effects"] = d.effects;
-        delete d.items;
-        delete d.effects;
-      }
+      // TODO: We have to make do with these extra server hits until #12768 or #12769 is resolved.
+      const itemIds = new Set(d.items.map(i => i._id));
+      const effectIds = new Set(d.effects.map(e => e._id));
+      // An invocation like this is the only thing that (currently) triggers correct tombstoning on the ActorDelta.
+      await this.token.actor.deleteEmbeddedDocuments("Item", o.items.reduce((ids, { _id: id }) => {
+        if ( !itemIds.has(id) ) ids.push(id);
+        return ids;
+      }, []));
+      await this.token.actor.deleteEmbeddedDocuments("ActiveEffect", o.effects.reduce((ids, { _id: id }) => {
+        if ( !effectIds.has(id) ) ids.push(id);
+        return ids;
+      }, []));
       await this.token.actor.update(d);
       if ( options.renderSheet ) this.sheet?.render(true);
       return update;

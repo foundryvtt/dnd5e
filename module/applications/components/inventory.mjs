@@ -453,6 +453,7 @@ export default class InventoryElement extends HTMLElement {
     if ( inventoryEvent.defaultPrevented ) return;
 
     if ( action === "currency" ) return this._onManageCurrency();
+    if ( action === "create" ) return this._onCreateItem(event); // TODO: Remove once legacy sheets are removed.
 
     const { itemId } = target.closest("[data-item-id]")?.dataset ?? {};
     const { activityId } = target.closest("[data-activity-id]")?.dataset ?? {};
@@ -537,7 +538,8 @@ export default class InventoryElement extends HTMLElement {
     if ( !item ) return;
     const activity = item.system.activities?.get(activityId);
     const result = parseInputDelta(input, activity ?? item);
-    if ( result !== undefined ) {
+    if ( (result !== undefined) && input.dataset.name ) {
+      event.stopPropagation();
       // Special case handling for Item uses.
       if ( input.dataset.name === "system.uses.value" ) {
         item.update({ "system.uses.spent": item.system.uses.max - result });
@@ -546,6 +548,23 @@ export default class InventoryElement extends HTMLElement {
       }
       else item.update({ [input.dataset.name]: result });
     }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create an item on a legacy sheet.
+   * TODO: Remove once legacy sheets are removed.
+   * @param {Event} event
+   * @returns {Promise<Item5e>|void}
+   * @protected
+   */
+  _onCreateItem(event) {
+    const { type } = event?.target?.dataset ?? {};
+    if ( !type || !this.actor ) return;
+    return foundry.documents.Item.implementation.create({
+      type, name: game.i18n.format("DOCUMENT.New", { type: game.i18n.localize(CONFIG.Item.typeLabels[type]) })
+    }, { parent: this.actor });
   }
 
   /* -------------------------------------------- */
@@ -754,7 +773,7 @@ export default class InventoryElement extends HTMLElement {
     if ( !this.actor ) return;
     const uuid = item.getRelativeUUID(this.actor);
     if ( this.actor.system.hasFavorite(uuid) ) return this.actor.system.removeFavorite(uuid);
-    return this.actor.system.addFavorite(uuid);
+    return this.actor.system.addFavorite({ type: "item", id: uuid });
   }
 
   /* -------------------------------------------- */

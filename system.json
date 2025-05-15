@@ -2,14 +2,14 @@
   "id": "dnd5e",
   "title": "Dungeons & Dragons Fifth Edition",
   "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "5.0.2",
+  "version": "5.0.3",
   "compatibility": {
-    "minimum": "13.339",
-    "verified": "13.341"
+    "minimum": "13.341",
+    "verified": "13"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-5.0.2/dnd5e-release-5.0.2.zip",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-5.0.3/dnd5e-release-5.0.3.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -119,6 +119,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["character"]
         }
       }
@@ -132,6 +133,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["npc"]
         }
       }
@@ -145,6 +147,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["weapon", "equipment", "consumable", "tool", "loot", "feat", "container"]
         }
       }
@@ -158,6 +161,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["loot"]
         }
       }
@@ -172,6 +176,7 @@
       "flags": {
         "dnd5e": {
           "sorting": "m",
+          "sourceBook": "SRD 5.1",
           "types": ["spell"]
         }
       }
@@ -185,6 +190,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["background", "feat"]
         }
       }
@@ -198,6 +204,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["class"]
         }
       }
@@ -211,6 +218,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["subclass"]
         }
       }
@@ -224,6 +232,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["feat", "weapon"]
         }
       }
@@ -237,6 +246,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["race", "feat"]
         }
       }
@@ -250,6 +260,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["feat", "weapon"]
         }
       }
@@ -299,7 +310,13 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       },
-      "system": "dnd5e"
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "SRD 5.2",
+          "types": ["class", "subclass", "feat"]
+        }
+      }
     },
     {
       "name": "origins24",
@@ -310,7 +327,13 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       },
-      "system": "dnd5e"
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "SRD 5.2",
+          "types": ["race", "background", "feat"]
+        }
+      }
     },
     {
       "name": "feats24",
@@ -321,7 +344,13 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       },
-      "system": "dnd5e"
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "SRD 5.2",
+          "types": ["feat"]
+        }
+      }
     },
     {
       "name": "spells24",
@@ -335,7 +364,9 @@
       "system": "dnd5e",
       "flags": {
         "dnd5e": {
-          "sorting": "m"
+          "sorting": "m",
+          "sourceBook": "SRD 5.2",
+          "types": ["spell"]
         }
       }
     },
@@ -348,7 +379,13 @@
         "PLAYER": "OBSERVER",
         "ASSISTANT": "OWNER"
       },
-      "system": "dnd5e"
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "SRD 5.2",
+          "types": ["weapon", "equipment", "consumable", "tool", "loot", "feat", "container"]
+        }
+      }
     },
     {
       "name": "tables24",
@@ -373,7 +410,8 @@
       "system": "dnd5e",
       "flags": {
         "dnd5e": {
-          "sorting": "m"
+          "sorting": "m",
+          "sourceBook": "SRD 5.2"
         }
       }
     }

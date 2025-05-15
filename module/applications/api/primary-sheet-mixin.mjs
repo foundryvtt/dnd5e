@@ -1,4 +1,3 @@
-import { parseInputDelta } from "../../utils.mjs";
 import ItemSheet5e from "../item/item-sheet.mjs";
 import DragDropApplicationMixin from "../mixins/drag-drop-mixin.mjs";
 import ContextMenu5e from "../context-menu.mjs";
@@ -314,10 +313,6 @@ export default function PrimarySheetMixin(Base) {
       if ( this.isEditable ) {
         // Automatically select input contents when focused
         this.element.querySelectorAll("input").forEach(e => e.addEventListener("focus", e.select));
-
-        // Handle delta inputs
-        this.element.querySelectorAll('input[type="text"][data-dtype="Number"]')
-          .forEach(i => i.addEventListener("change", this._onChangeInputDelta.bind(this)));
       }
     }
 
@@ -396,30 +391,6 @@ export default function PrimarySheetMixin(Base) {
      * @returns {any}               Return `false` to prevent default behavior.
      */
     async _deleteDocument(event, target) {}
-
-    /* -------------------------------------------- */
-
-    /**
-     * Handle input changes to numeric form fields, allowing them to accept delta-typed inputs.
-     * @param {Event} event  Triggering event.
-     * @protected
-     */
-    _onChangeInputDelta(event) {
-      const input = event.target;
-      const target = this.actor.items.get(input.closest("[data-item-id]")?.dataset.itemId) ?? this.actor;
-      const { activityId } = input.closest("[data-activity-id]")?.dataset ?? {};
-      const activity = target?.system.activities?.get(activityId);
-      const result = parseInputDelta(input, activity ?? target);
-      if ( result !== undefined ) {
-        // Special case handling for Item uses.
-        if ( input.dataset.name === "system.uses.value" ) {
-          target.update({ "system.uses.spent": target.system.uses.max - result });
-        } else if ( activity && (input.dataset.name === "uses.value") ) {
-          target.updateActivity(activityId, { "uses.spent": activity.uses.max - result });
-        }
-        else target.update({ [input.dataset.name]: result });
-      }
-    }
 
     /* -------------------------------------------- */
 
