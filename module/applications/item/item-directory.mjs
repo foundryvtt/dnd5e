@@ -11,6 +11,7 @@ export default class ItemDirectory5e extends DragDropApplicationMixin(foundry.ap
   _allowedDropBehaviors(event, data) {
     const allowed = new Set(["copy"]);
     if ( !data?.uuid ) return allowed;
+    const { CompendiumCollection } = foundry.documents.collections;
     const fromCompendium = foundry.utils.parseUuid(data.uuid).collection instanceof CompendiumCollection;
     if ( data.type === "Folder" ) return fromCompendium ? allowed : new Set(["move"]);
     else if ( !fromCompendium ) allowed.add("move");

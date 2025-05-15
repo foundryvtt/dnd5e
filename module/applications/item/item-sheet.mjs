@@ -567,6 +567,7 @@ export default class ItemSheet5e extends PrimarySheetMixin(DocumentSheet5e) {
       dropSelector: null,
       callbacks: {
         dragstart: this._onDragStart.bind(this),
+        dragover: this._onDragOver.bind(this),
         drop: this._onDrop.bind(this)
       }
     }).bind(this.element);

@@ -278,7 +278,7 @@ export default class ContainerSheet extends ItemSheet5e {
     }
 
     if ( this.item.actor && (container === this.item.id) ) {
-      const result = await this.item.actor.sheet._onDropStackConsumables(itemData, { container });
+      const result = await this.item.actor.sheet._onDropStackConsumables(event, itemData, { container });
       if ( result ) return false;
     }
 
