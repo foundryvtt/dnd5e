@@ -112,13 +112,17 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
       }
     }
 
+    const spellLevel = this.advancement.configuration.restriction.level;
+    const maxSlot = this._maxSpellSlotLevel();
+    const validateSpellLevel = this.advancement.configuration.type === "spell" && spellLevel === "available";
+
     context.items = [...this.pool, ...this.dropped].reduce((items, i) => {
       if ( i ) {
         i.checked = this.selected.has(i.uuid);
         i.disabled = !i.checked && context.choices.full;
         const validLevel = (i.system.prerequisites?.level ?? -Infinity) <= this.level;
         const available = !previouslySelected.has(i.uuid) || i.system.prerequisites?.repeatable;
-        if ( available && validLevel ) items.push(i);
+        if ( available && validLevel && ( !validateSpellLevel || i.system.level <= maxSlot ) ) items.push(i);
       }
       return items;
     }, []);
@@ -252,7 +256,7 @@ export default class ItemChoiceFlow extends ItemGrantFlow {
 
     // For advancements on classes or subclasses, use the largest slot available for that class
     if ( spellcasting ) {
-      const progression = { slot: 0, pact: {} };
+      const progression = { slot: 0, pact: 0 };
       const maxSpellLevel = CONFIG.DND5E.SPELL_SLOT_TABLE[CONFIG.DND5E.SPELL_SLOT_TABLE.length - 1].length;
       spells = Object.fromEntries(Array.fromRange(maxSpellLevel, 1).map(l => [`spell${l}`, {}]));
       Actor5e.computeClassProgression(progression, this.advancement.item, { spellcasting });
