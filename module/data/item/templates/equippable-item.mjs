@@ -83,6 +83,7 @@ export default class EquippableItemTemplate extends SystemDataModel {
    * Ensure items that cannot be attuned are not marked as attuned.
    */
   prepareFinalEquippableData() {
+    if ( !this.properties?.has?.("mgc") ) this.attunement = "";
     if ( !this.attunement ) this.attuned = false;
   }
 
