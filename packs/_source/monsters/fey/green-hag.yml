@@ -593,7 +593,7 @@ items:
         value: >-
           <p>The hag can mimic animal sounds and humanoid voices. A creature
           that hears the sounds can tell they are imitations with a successful
-          <strong>DC 14 Wisdom (Insight) check</strong>.</p>
+          [[/check]] check.</p>
         chat: >-
           <p>The hag can mimic animal sounds and humanoid voices. A creature
           that hears the sounds can tell they are imitations with a successful
@@ -614,7 +614,55 @@ items:
         subtype: ''
       requirements: ''
       properties: []
-      activities: {}
+      activities:
+        0eU0qHrzuJTbqxUP:
+          type: check
+          _id: 0eU0qHrzuJTbqxUP
+          sort: 0
+          activation:
+            type: ''
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          check:
+            associated:
+              - ins
+            dc:
+              calculation: ''
+              formula: '14'
+            ability: wis
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -624,15 +672,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.zZkNtL97hn1P6OJC
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676755
+      modifiedTime: 1747955871763
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.C2ZJ3Oe30dyU2o7E'
