@@ -478,7 +478,7 @@ export default class ActivityUsageDialog extends Dialog5e {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #onUse(event, target) {
-    const formData = new FormDataExtended(this.element.querySelector("form"));
+    const formData = new foundry.applications.ux.FormDataExtended(this.element.querySelector("form"));
     const submitData = await this._prepareSubmitData(event, formData);
     foundry.utils.mergeObject(this.#config, submitData);
     this.#used = true;

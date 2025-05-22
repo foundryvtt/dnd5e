@@ -308,7 +308,7 @@ export default function PseudoDocumentMixin(Base) {
           if ( !form.checkValidity() ) {
             throw new Error(game.i18n.format("DOCUMENT.DND5E.Warning.SelectType", { name: label }));
           }
-          const fd = new FormDataExtended(form);
+          const fd = new foundry.applications.ux.FormDataExtended(form);
           const createData = foundry.utils.mergeObject(data, fd.object, { inplace: false });
           if ( !createData.name?.trim() ) delete createData.name;
           parent[`create${this.documentName}`](createData.type, createData);
