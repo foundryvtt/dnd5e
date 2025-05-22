@@ -818,6 +818,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     uses.hasRecharge = uses.max && (uses.recovery?.[0]?.period === "recharge");
     uses.isOnCooldown = uses.hasRecharge && (uses.value < 1);
     uses.hasUses = uses.max;
+    uses.prop = "uses.value";
 
     return {
       _id, labels, name, range, uses,
@@ -879,6 +880,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     ctx.uses.hasRecharge = item.hasRecharge;
     ctx.uses.hasUses = item.hasLimitedUses;
     ctx.uses.isOnCooldown = item.isOnCooldown;
+    ctx.uses.prop = "system.uses.value";
   }
 
   /* -------------------------------------------- */
