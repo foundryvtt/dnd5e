@@ -3181,6 +3181,12 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   _onDelete(options, userId) {
+    // Remove any group sheet apps so they aren't also closed.
+    for ( const id in this.apps ) {
+      const app = this.apps[id];
+      if ( app instanceof dnd5e.applications.actor.GroupActorSheet ) delete this.apps[id];
+    }
+
     super._onDelete(options, userId);
 
     const origin = this.getFlag("dnd5e", "summon.origin");
