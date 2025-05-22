@@ -471,7 +471,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -483,6 +482,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: D4cqlN9pDyQwRvWP
     name: Death Burst
@@ -594,18 +599,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.net3yBKQoxl8bZ4r
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.net3yBKQoxl8bZ4r
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676714
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ESEm3fGUfSKjzVUc.D4cqlN9pDyQwRvWP'
   - _id: CG9kMpmgbBE0ePpO
     name: False Appearance
@@ -643,18 +647,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ESEm3fGUfSKjzVUc.CG9kMpmgbBE0ePpO'
   - _id: qSKvifcPZvWEyQwS
     name: Innate Spellcasting
@@ -693,18 +696,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015667
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ESEm3fGUfSKjzVUc.qSKvifcPZvWEyQwS'
   - _id: YEZPqZegxKiGO0Gq
     name: Claws
@@ -873,12 +875,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550842
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ESEm3fGUfSKjzVUc.YEZPqZegxKiGO0Gq'
   - _id: 1mD9NcCf8ZMQtsrU
     name: Frost Breath
@@ -997,18 +1000,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Z7U6z4HD1ORlkTIJ
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Z7U6z4HD1ORlkTIJ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676714
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ESEm3fGUfSKjzVUc.1mD9NcCf8ZMQtsrU'
   - _id: IBJmWjzbQGu7M4UX
     name: Fog Cloud
@@ -1120,21 +1122,20 @@ items:
           sort: 0
       identifier: fog-cloud
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.IBJmWjzbQGu7M4UX
+    flags: {}
     img: icons/magic/air/fog-gas-smoke-dense-gray.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.IBJmWjzbQGu7M4UX
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ESEm3fGUfSKjzVUc.IBJmWjzbQGu7M4UX'
 effects: []
 folder: IB448xVSBvtqitzs
@@ -1144,10 +1145,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171215230
   modifiedTime: 1726171441724
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!ESEm3fGUfSKjzVUc'

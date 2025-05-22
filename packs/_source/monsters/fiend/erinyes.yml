@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: BeB04w7ftFRDaMQ6
     name: Hellish Weapons
@@ -530,18 +535,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.uqoqQJ9NpMCPra6P
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.uqoqQJ9NpMCPra6P
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676883
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.BeB04w7ftFRDaMQ6'
   - _id: dvoOA7jzBnq2Lxza
     name: Longsword
@@ -710,18 +714,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173384699
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.dvoOA7jzBnq2Lxza'
   - _id: W7sEr3m8MBrzYq2v
     name: Parry
@@ -815,18 +818,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676883
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.W7sEr3m8MBrzYq2v'
   - _id: WharT2ReFy2FYTG0
     name: Magic Resistance
@@ -864,18 +866,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.WharT2ReFy2FYTG0'
   - _id: qO61ofcSoMF4uxk8
     name: Plate Armor
@@ -943,18 +944,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.OjkIqlW2UpgFcjZa
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.OjkIqlW2UpgFcjZa
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.qO61ofcSoMF4uxk8'
   - _id: CElneYmOXIzyfv2a
     name: Longbow
@@ -1197,18 +1197,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.3cymOVja8jXbzrdT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173384699
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.CElneYmOXIzyfv2a'
   - _id: Fp0Jye7Qwk8KOvH7
     name: Multiattack
@@ -1297,18 +1296,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.Fp0Jye7Qwk8KOvH7'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1318,10 +1316,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171200935
   modifiedTime: 1744916194548
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!3o2rQBqpzjIHmrBW'

@@ -509,7 +509,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -565,6 +564,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Longsword
     system:
@@ -723,12 +728,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepLongsword0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712721433
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmHobgoblinWarri.ZVPzldPQh1kkz2q3'
   - name: Longbow
     system:
@@ -901,12 +907,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepLongbow000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712721433
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmHobgoblinWarri.SU2FqPW4L3nfnRif'
   - name: Half Plate Armor
     system:
@@ -971,12 +978,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmHalfPlateA
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712721433
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: pgFPbOTCOquPqY3X
     sort: 0
     _key: '!actors.items!mmHobgoblinWarri.pgFPbOTCOquPqY3X'
@@ -1044,12 +1052,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmShield0000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712721433
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: Se5TjgrSbsm0PdJo
     sort: 0
     _key: '!actors.items!mmHobgoblinWarri.Se5TjgrSbsm0PdJo'
@@ -1095,12 +1104,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPackTactics000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737742683579
       modifiedTime: 1745712721433
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -1110,12 +1120,13 @@ folder: EypLbRzz5Hphlv5M
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1732598129404
   modifiedTime: 1745712721462
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

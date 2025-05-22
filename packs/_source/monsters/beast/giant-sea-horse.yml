@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: MB7KUNGnxz6mw1J5
     name: Charge
@@ -636,8 +641,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       dnd5e:
         riders:
           activity: []
@@ -645,12 +648,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741121563161
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!c9XDGsTJRy9HUaxQ.MB7KUNGnxz6mw1J5'
   - _id: yCZ6sgHxxIr0zIxO
     name: Water Breathing
@@ -686,18 +690,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.c4Q6NDCLJSNcNc9T
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.c4Q6NDCLJSNcNc9T
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!c9XDGsTJRy9HUaxQ.yCZ6sgHxxIr0zIxO'
   - _id: tTZCmbeeSHXXFZGJ
     name: Ram
@@ -855,12 +858,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741121595669
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!c9XDGsTJRy9HUaxQ.tTZCmbeeSHXXFZGJ'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -870,10 +874,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171242626
   modifiedTime: 1741121578595
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!c9XDGsTJRy9HUaxQ'

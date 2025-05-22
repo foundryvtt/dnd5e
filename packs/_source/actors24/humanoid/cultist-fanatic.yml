@@ -495,7 +495,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -551,6 +550,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: true
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mmPactBlade00000
     name: Pact Blade
@@ -703,12 +708,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPactBlade00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712716143
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -951,12 +957,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712716143
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 1
@@ -1056,12 +1063,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpiritualWeapo
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712716143
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -1224,12 +1232,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.z817Et9IPt6qHawH.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1245,12 +1254,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSpiritualW
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712716143
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: z817Et9IPt6qHawH
     _key: '!actors.items!mmCultistFanatic.z817Et9IPt6qHawH'
   - name: Light
@@ -1402,12 +1412,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.7Hk3xmtV1lhTEMu6.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -1420,12 +1431,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLight00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712716143
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 7Hk3xmtV1lhTEMu6
     _key: '!actors.items!mmCultistFanatic.7Hk3xmtV1lhTEMu6'
   - name: Thaumaturgy
@@ -1561,12 +1573,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.XLyCWW9vPAQwvaGr.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -1582,12 +1595,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712716143
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: XLyCWW9vPAQwvaGr
     _key: '!actors.items!mmCultistFanatic.XLyCWW9vPAQwvaGr'
   - name: Command
@@ -1727,12 +1741,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.uW5SgMN0N4BGrkkl.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1745,12 +1760,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplCommand000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712716143
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: uW5SgMN0N4BGrkkl
     _key: '!actors.items!mmCultistFanatic.uW5SgMN0N4BGrkkl'
   - name: Hold Person
@@ -1879,12 +1895,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.usukVMEiBvOYV5GI.PklwZi3SKQ3JU2M2
       - _id: dnd5espellchange
@@ -1913,12 +1930,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmCultistFanatic.usukVMEiBvOYV5GI.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1931,12 +1949,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHoldPerson
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712716143
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: usukVMEiBvOYV5GI
     _key: '!actors.items!mmCultistFanatic.usukVMEiBvOYV5GI'
 effects: []
@@ -1944,12 +1963,13 @@ folder: oq65o5ZsauMtb1JY
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415931803
   modifiedTime: 1745712716173
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

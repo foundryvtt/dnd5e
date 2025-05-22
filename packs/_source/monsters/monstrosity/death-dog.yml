@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: TKV9mS1lvqMAyCaB
     name: Bite
@@ -697,8 +702,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       dnd5e:
         riders:
           activity: []
@@ -706,12 +709,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741117372468
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!PH78NBdvoaszAb61.TKV9mS1lvqMAyCaB'
   - _id: xpakQFJhIVCQz3Si
     name: Two-Headed
@@ -750,18 +754,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.zSBlyP5Vm1CAV5VO
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.zSBlyP5Vm1CAV5VO
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PH78NBdvoaszAb61.xpakQFJhIVCQz3Si'
   - _id: EHX3CeEnlmzwnnK5
     name: Multiattack
@@ -850,18 +853,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656151
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!PH78NBdvoaszAb61.EHX3CeEnlmzwnnK5'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -871,10 +873,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171228934
   modifiedTime: 1741117376314
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!PH78NBdvoaszAb61'

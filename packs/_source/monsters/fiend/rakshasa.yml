@@ -470,7 +470,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -482,6 +481,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: ChSnKd7pSLoN1Jeu
     name: Limited Magic Immunity
@@ -520,18 +525,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.MBOiQSnMr02wUpEN
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.MBOiQSnMr02wUpEN
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.ChSnKd7pSLoN1Jeu'
   - _id: NYUeQsYqRhROcVMQ
     name: Innate Spellcasting
@@ -583,18 +587,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015959
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.NYUeQsYqRhROcVMQ'
   - _id: 18NEVoD84KHDcWoG
     name: Multiattack
@@ -685,18 +688,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657271
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.18NEVoD84KHDcWoG'
   - _id: pHBLWUN5VKEjSBh6
     name: Claw
@@ -859,12 +861,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385709
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.pHBLWUN5VKEjSBh6'
   - _id: ppWAAEul0QHtm4er
     name: Detect Thoughts
@@ -995,21 +998,20 @@ items:
           sort: 0
       identifier: detect-thoughts
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ppWAAEul0QHtm4er
+    flags: {}
     img: icons/magic/light/explosion-star-teal-purple.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ppWAAEul0QHtm4er
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.ppWAAEul0QHtm4er'
   - _id: A3q2gTNqG6fvNGrv
     name: Disguise Self
@@ -1118,21 +1120,20 @@ items:
           sort: 0
       identifier: disguise-self
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv
+    flags: {}
     img: icons/magic/control/debuff-energy-hold-teal-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.A3q2gTNqG6fvNGrv
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.A3q2gTNqG6fvNGrv'
   - _id: Utk1OQRwYkMkFRD3
     name: Mage Hand
@@ -1237,21 +1238,20 @@ items:
           sort: 0
       identifier: mage-hand
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3
+    flags: {}
     img: icons/magic/water/water-hand.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.Utk1OQRwYkMkFRD3'
   - _id: oIzA2MEHwxhtQneU
     name: Minor Illusion
@@ -1364,21 +1364,20 @@ items:
           sort: 0
       identifier: minor-illusion
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.oIzA2MEHwxhtQneU
+    flags: {}
     img: icons/magic/control/hypnosis-mesmerism-eye.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.oIzA2MEHwxhtQneU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.oIzA2MEHwxhtQneU'
   - _id: eS7XnnApoxRxYXPs
     name: Charm Person
@@ -1493,21 +1492,20 @@ items:
           sort: 0
       identifier: charm-person
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.eS7XnnApoxRxYXPs
+    flags: {}
     img: icons/magic/fire/explosion-fireball-medium-purple-pink.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.eS7XnnApoxRxYXPs
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.eS7XnnApoxRxYXPs'
   - _id: ghXTfe7sgCbgf1Q8
     name: Detect Magic
@@ -1619,21 +1617,20 @@ items:
           sort: 0
       identifier: detect-magic
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
+    flags: {}
     img: icons/magic/light/explosion-star-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.ghXTfe7sgCbgf1Q8'
   - _id: 1N8dDMMgZ1h1YJ3B
     name: Invisibility
@@ -1744,21 +1741,20 @@ items:
           sort: 0
       identifier: invisibility
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B
+    flags: {}
     img: icons/magic/air/fog-gas-smoke-dense-gray.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.1N8dDMMgZ1h1YJ3B
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.1N8dDMMgZ1h1YJ3B'
   - _id: nslx2nT3p4lNkmdp
     name: Major Image
@@ -1889,21 +1885,20 @@ items:
           sort: 0
       identifier: major-image
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.nslx2nT3p4lNkmdp
+    flags: {}
     img: icons/magic/control/debuff-energy-hold-levitate-pink.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.nslx2nT3p4lNkmdp
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.nslx2nT3p4lNkmdp'
   - _id: zMAWdyc8UVb37BK4
     name: Suggestion
@@ -2028,21 +2023,20 @@ items:
           sort: 0
       identifier: suggestion
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.zMAWdyc8UVb37BK4
+    flags: {}
     img: icons/magic/air/air-burst-spiral-pink.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.zMAWdyc8UVb37BK4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.zMAWdyc8UVb37BK4'
   - _id: 91Sw6vOIaO7U8DvM
     name: Dominate Person
@@ -2174,21 +2168,20 @@ items:
           sort: 0
       identifier: dominate-person
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.91Sw6vOIaO7U8DvM
+    flags: {}
     img: icons/magic/air/air-burst-spiral-large-pink.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.91Sw6vOIaO7U8DvM
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.91Sw6vOIaO7U8DvM'
   - _id: yfbK8gZqESlaoY5t
     name: Fly
@@ -2299,21 +2292,20 @@ items:
           sort: 0
       identifier: fly
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.yfbK8gZqESlaoY5t
+    flags: {}
     img: icons/magic/control/energy-stream-link-white.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.yfbK8gZqESlaoY5t
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.yfbK8gZqESlaoY5t'
   - _id: J6Jpw5XzB5aTeqnz
     name: Plane Shift
@@ -2496,21 +2488,20 @@ items:
           sort: 0
       identifier: plane-shift
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz
+    flags: {}
     img: icons/magic/symbols/runes-star-pentagon-orange-purple.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.J6Jpw5XzB5aTeqnz
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.J6Jpw5XzB5aTeqnz'
   - _id: XzkJpE6XpZfKjODD
     name: True Seeing
@@ -2620,21 +2611,20 @@ items:
           sort: 0
       identifier: true-seeing
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.XzkJpE6XpZfKjODD
+    flags: {}
     img: icons/magic/perception/eye-ringed-glow-angry-large-teal.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.XzkJpE6XpZfKjODD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qXzMsRTHEodqO8l2.XzkJpE6XpZfKjODD'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -2644,10 +2634,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171259963
   modifiedTime: 1726171450470
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!qXzMsRTHEodqO8l2'

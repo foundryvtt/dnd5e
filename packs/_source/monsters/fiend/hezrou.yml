@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: dQt68nlmGdhK2ojI
     name: Magic Resistance
@@ -527,18 +532,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ec3lhsNv1ZRu7Qaq.dQt68nlmGdhK2ojI'
   - _id: 0EcUwWcmWzFuiJyg
     name: Stench
@@ -637,18 +641,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.OsPhT7jA5LlvUA6e
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.OsPhT7jA5LlvUA6e
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676806
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ec3lhsNv1ZRu7Qaq.0EcUwWcmWzFuiJyg'
   - _id: xQ1RYlOxb6lMRhdI
     name: Multiattack
@@ -740,18 +743,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656573
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ec3lhsNv1ZRu7Qaq.xQ1RYlOxb6lMRhdI'
   - _id: UNNl5XqsXZuKOm69
     name: Bite
@@ -904,18 +906,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552533
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ec3lhsNv1ZRu7Qaq.UNNl5XqsXZuKOm69'
   - _id: HEQqPUsmmNs178Mj
     name: Claws
@@ -1072,12 +1073,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552533
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ec3lhsNv1ZRu7Qaq.HEQqPUsmmNs178Mj'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1087,10 +1089,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171245015
   modifiedTime: 1744916183226
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!ec3lhsNv1ZRu7Qaq'

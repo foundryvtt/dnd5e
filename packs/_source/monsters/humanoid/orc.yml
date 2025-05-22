@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: MY9hQkOnh2onjZEh
     name: Hide Armor
@@ -543,18 +548,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.n1V07puo0RQxPGuF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.n1V07puo0RQxPGuF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!HB49mCOVBXwWeKWQ.MY9hQkOnh2onjZEh'
   - _id: Go8ESMzuWcYaFcqE
     name: Aggressive
@@ -645,18 +649,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.7NML6SkyvOsZ17iq
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.7NML6SkyvOsZ17iq
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!HB49mCOVBXwWeKWQ.Go8ESMzuWcYaFcqE'
   - _id: bGmBlXrvTBQgPMBJ
     name: Greataxe
@@ -811,18 +814,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551018
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!HB49mCOVBXwWeKWQ.bGmBlXrvTBQgPMBJ'
   - _id: SrRZ2hBUcaXZiRab
     name: Javelin
@@ -977,18 +979,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.DWLMnODrnHn8IbAG
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.DWLMnODrnHn8IbAG
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385223
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!HB49mCOVBXwWeKWQ.SrRZ2hBUcaXZiRab'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -998,10 +999,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171218452
   modifiedTime: 1726171442361
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!HB49mCOVBXwWeKWQ'

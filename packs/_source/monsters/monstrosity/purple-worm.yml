@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: ZgUj67GknsWFnbAR
     name: Tunneler
@@ -513,18 +518,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.3mrPXaxalJxpxVrv
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.3mrPXaxalJxpxVrv
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PtotS52HpHX596cZ.ZgUj67GknsWFnbAR'
   - _id: Uo4oxB1xZmJcWVsZ
     name: Multiattack
@@ -615,18 +619,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656156
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!PtotS52HpHX596cZ.Uo4oxB1xZmJcWVsZ'
   - _id: dlzFJ5UjbMAfJ6Sb
     name: Bite
@@ -919,18 +922,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551645
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!PtotS52HpHX596cZ.dlzFJ5UjbMAfJ6Sb'
   - _id: yOjkK3f9jt2fYu3M
     name: Tail Stinger
@@ -1217,12 +1219,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551645
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!PtotS52HpHX596cZ.yOjkK3f9jt2fYu3M'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -1232,10 +1235,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171229828
   modifiedTime: 1745108211664
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!PtotS52HpHX596cZ'

@@ -496,7 +496,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -552,6 +551,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mmMagicResistanc
     name: Magic Resistance
@@ -593,12 +598,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMagicResistanc
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737667030582
       modifiedTime: 1745712725556
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -764,12 +770,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.2
           createdTime: 1737667209833
           modifiedTime: 1737667251065
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.mmRend0000000000.KlXNOgoOPqEV7BoN
     flags:
@@ -780,12 +787,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRend0000000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737667033211
       modifiedTime: 1745712725556
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 1
@@ -882,12 +890,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmInvisibility00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737667034493
       modifiedTime: 1745712725556
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -1020,12 +1029,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.2
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.32LONl1rUCtttKkg.9svfDetqjhsFP3ey
       - _id: dnd5espellchange
@@ -1070,12 +1080,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.2
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.32LONl1rUCtttKkg.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1088,12 +1099,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplInvisibili
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737667034764
       modifiedTime: 1745712725556
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 32LONl1rUCtttKkg
     _key: '!actors.items!mmQuasit00000000.32LONl1rUCtttKkg'
   - _id: mmShapeshift0000
@@ -1219,12 +1231,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.actors24.Actor.phbmobImp0000000.Item.phbaoiShapeShift.ActiveEffect.Q4RaKl2vHLshyF3B
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.2
           createdTime: 1737667572550
           modifiedTime: 1737667572550
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.mmShapeshift0000.4NzZxgY0MLwkXs9D
       - name: Centipede Form
@@ -1261,12 +1274,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.actors24.Actor.phbmobImp0000000.Item.phbaoiShapeShift.ActiveEffect.NFMrfbOawWP0jdQ8
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.2
           createdTime: 1737667574150
           modifiedTime: 1737667574150
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.mmShapeshift0000.ZC4DrnZ0xxvvTFjf
       - name: Toad Form
@@ -1303,12 +1317,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.actors24.Actor.phbmobImp0000000.Item.phbaoiShapeShift.ActiveEffect.LK7QKDKtjaAzAIIv
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.2
           createdTime: 1737667576213
           modifiedTime: 1737667576213
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.mmShapeshift0000.tJNkg2riPFHGiBkH
     flags:
@@ -1319,12 +1334,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmShapeshift0000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737667035723
       modifiedTime: 1745712725556
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 100004
@@ -1455,12 +1471,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.2
           createdTime: null
           modifiedTime: 1737915233066
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!mmQuasit00000000.mmScare000000000.u8Gu5Oo3a48vKYla
     folder: 4T18pEvubPMQLzvD
@@ -1472,12 +1489,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmScare000000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737667036749
       modifiedTime: 1745712725556
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 4
@@ -1489,12 +1507,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1732598129404
   modifiedTime: 1745712725586
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 125000
 ownership:
   default: 0

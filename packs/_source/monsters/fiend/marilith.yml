@@ -474,7 +474,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -486,6 +485,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: JT4JWvnmmQnEJ2qv
     name: Magic Resistance
@@ -523,18 +528,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.JT4JWvnmmQnEJ2qv'
   - _id: e5syW3Oa9yNGZ09T
     name: Magic Weapons
@@ -570,18 +574,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.e5syW3Oa9yNGZ09T'
   - _id: rBHEI0gZnnv8h44g
     name: Reactive
@@ -617,18 +620,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.lhTQJsLKYUZT2gV5
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lhTQJsLKYUZT2gV5
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.rBHEI0gZnnv8h44g'
   - _id: nEKlIbUhhx9akBjK
     name: Multiattack
@@ -720,18 +722,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656580
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.nEKlIbUhhx9akBjK'
   - _id: VzPNwzlwJ7knJ9MC
     name: Longsword
@@ -884,18 +885,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552539
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.VzPNwzlwJ7knJ9MC'
   - _id: BoIambnHLbZXr85T
     name: Tail
@@ -1063,12 +1063,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552539
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.BoIambnHLbZXr85T'
   - _id: EMJe4NIzUdNIQj9S
     name: Teleport
@@ -1161,18 +1162,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676892
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.EMJe4NIzUdNIQj9S'
   - _id: lS2o3QOZ2lxKyi0L
     name: Parry
@@ -1266,18 +1266,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676892
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!egsSDYbqoLCelb0J.lS2o3QOZ2lxKyi0L'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1287,10 +1286,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171245247
   modifiedTime: 1726171447302
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!egsSDYbqoLCelb0J'

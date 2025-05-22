@@ -470,7 +470,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -482,6 +481,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: m8prrQUwqGwX6Jyk
     name: Ooze Cube
@@ -535,18 +540,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.CvtGj6YimGuZdrhB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.CvtGj6YimGuZdrhB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3fzQVYQhXxCXRa2o.m8prrQUwqGwX6Jyk'
   - _id: ISZmp6ev081hhUxT
     name: Transparent
@@ -590,18 +594,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.cueeLXQ3W8gKHiLq
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cueeLXQ3W8gKHiLq
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3fzQVYQhXxCXRa2o.ISZmp6ev081hhUxT'
   - _id: t2KRGzsjV4Wwp0wj
     name: Pseudopod
@@ -765,12 +768,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107723402
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3fzQVYQhXxCXRa2o.t2KRGzsjV4Wwp0wj'
   - _id: 6PuULfBzy5vpBSFI
     name: Engulf
@@ -947,18 +951,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Eh80lkzHiEOJP8FI
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Eh80lkzHiEOJP8FI
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676859
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3fzQVYQhXxCXRa2o.6PuULfBzy5vpBSFI'
 effects: []
 folder: spz6Dws3tO6Qs5Mh
@@ -968,10 +971,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171200728
   modifiedTime: 1745107732101
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!3fzQVYQhXxCXRa2o'

@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: ypnf9maxKh66ucMe
     name: Tusk
@@ -633,12 +638,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741117003939
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!lZR4lhNmYSf89s4Q.ypnf9maxKh66ucMe'
   - _id: TSmET06nE61H6HC2
     name: Charge
@@ -806,8 +812,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       dnd5e:
         riders:
           activity: []
@@ -815,12 +819,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741118127951
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!lZR4lhNmYSf89s4Q.TSmET06nE61H6HC2'
   - _id: U66PTM15QvmkenvW
     name: Relentless
@@ -923,18 +928,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.8FX2KlWyBAKEYGzs
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.8FX2KlWyBAKEYGzs
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676738
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!lZR4lhNmYSf89s4Q.U66PTM15QvmkenvW'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -944,10 +948,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171253780
   modifiedTime: 1741117009204
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!lZR4lhNmYSf89s4Q'

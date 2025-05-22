@@ -10,13 +10,23 @@ results:
       - 1
     drawn: false
     _id: wOokSBLpTsUWBccD
-    text: >-
+    img: icons/skills/movement/figure-running-gray.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
       The target doesn’t take an action, and it uses all its movement to move.
       Roll [[/r 1d4]] for the direction: 1, north; 2, east; 3, south; or 4,
       west.
-    img: icons/skills/movement/figure-running-gray.webp
-    documentId: null
-    flags: {}
+    name: ''
     _key: '!tables.results!phbsplConfusionB.wOokSBLpTsUWBccD'
   - type: text
     weight: 1
@@ -25,10 +35,20 @@ results:
       - 6
     drawn: false
     _id: VTOEaomsUWS6eaCb
-    text: The target doesn’t move or take actions.
     img: icons/magic/control/sleep-bubble-purple.webp
-    documentId: null
     flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: The target doesn’t move or take actions.
+    name: ''
     _key: '!tables.results!phbsplConfusionB.VTOEaomsUWS6eaCb'
   - type: text
     weight: 1
@@ -37,13 +57,23 @@ results:
       - 8
     drawn: false
     _id: usPRYhAMow3voSIj
-    text: >-
+    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
+    flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
       The target doesn’t move, and it takes the Attack action to make one melee
       attack against a random creature within reach. If none are within reach,
       the target takes no action.
-    img: icons/skills/melee/unarmed-punch-fist-yellow-red.webp
-    documentId: null
-    flags: {}
+    name: ''
     _key: '!tables.results!phbsplConfusionB.usPRYhAMow3voSIj'
   - type: text
     weight: 1
@@ -52,23 +82,43 @@ results:
       - 10
     drawn: false
     _id: Vk9ifvOs3jxCZhvd
-    text: The target chooses its behavior.
     img: icons/skills/social/thumbsup-approval-like.webp
-    documentId: null
     flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: The target chooses its behavior.
+    name: ''
     _key: '!tables.results!phbsplConfusionB.Vk9ifvOs3jxCZhvd'
-  - type: pack
-    documentCollection: dnd5e.tables24
+  - type: document
     weight: 1
     range:
       - 1
       - 1
     drawn: false
-    text: Cardinal Directions
-    documentId: phbgenCardinalDi
     img: icons/tools/navigation/compass-brass-blue-red.webp
     _id: 8oHL5jQ0fXbXGpuf
     flags: {}
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    name: Cardinal Directions
+    documentUuid: Compendium.dnd5e.tables24.RollTable.phbgenCardinalDi
+    description: ''
     _key: '!tables.results!phbsplConfusionB.8oHL5jQ0fXbXGpuf'
 replacement: true
 displayRoll: true
@@ -76,12 +126,13 @@ folder: RY28PgQgqr68sh45
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1724425888620
   modifiedTime: 1740685862724
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 formula: 1d10
 sort: 100000
 ownership:

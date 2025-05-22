@@ -475,7 +475,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -487,6 +486,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 72ha7NWOEA4qIOdY
     name: Swarm
@@ -526,18 +531,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.eL3OJmc4FuetizKO
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.eL3OJmc4FuetizKO
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!4udpeEneFSZK9NTB.72ha7NWOEA4qIOdY'
   - _id: qoIR278ckqhlVaNr
     name: Bites
@@ -705,12 +709,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741123675763
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!4udpeEneFSZK9NTB.qoIR278ckqhlVaNr'
   - _id: KYBcEhA6mh3gqPG8
     name: Spider Climb
@@ -748,18 +753,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!4udpeEneFSZK9NTB.KYBcEhA6mh3gqPG8'
   - _id: LPkqp4g22PENqi8b
     name: Web Sense
@@ -797,18 +801,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kjF0btAMYHUAQgOt
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kjF0btAMYHUAQgOt
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!4udpeEneFSZK9NTB.LPkqp4g22PENqi8b'
   - _id: KyittoVFeC2HA9By
     name: Web Walker
@@ -844,18 +847,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.zITrVwmnPpLoBZI1
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.zITrVwmnPpLoBZI1
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!4udpeEneFSZK9NTB.KyittoVFeC2HA9By'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -865,10 +867,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171202327
   modifiedTime: 1741123679009
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!4udpeEneFSZK9NTB'

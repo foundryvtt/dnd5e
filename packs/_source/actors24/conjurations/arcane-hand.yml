@@ -416,7 +416,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -475,6 +474,12 @@ prototypeToken:
       tokenRing:
         effects: 1
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Clenched Fist
     system:
@@ -600,12 +605,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680160054
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbsplBigbysHand.phbaoiClenchedFi'
   - name: Forceful Hand
     system:
@@ -719,12 +725,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680160054
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbsplBigbysHand.phbaoiForcefulHa'
   - name: Grasping Hand
     system:
@@ -913,12 +920,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680160054
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbsplBigbysHand.phbaoiGraspingHa'
   - name: Interposing Hand
     system:
@@ -1052,12 +1060,13 @@ items:
           compendiumSource: >-
             Actor.phbsplBigbysHand.Item.phbaoiInterposin.ActiveEffect.wDcd4bpCErQfW0To
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!phbsplBigbysHand.phbaoiInterposin.wDcd4bpCErQfW0To
       - name: Interposed
@@ -1087,12 +1096,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: 1725985592766
           modifiedTime: 1725985869321
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!phbsplBigbysHand.phbaoiInterposin.7kq0juDjYR7wlwee
     folder: null
@@ -1107,12 +1117,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680160054
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbsplBigbysHand.phbaoiInterposin'
 effects: []
 folder: 9mmdDqYZFLIJBacj
@@ -1124,12 +1135,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425918173
   modifiedTime: 1745256829944
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 100000
 ownership:
   default: 0

@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Mgvz3Hm49kujtR0M
     name: Hold Breath
@@ -513,18 +518,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!3YwmvDupMwycWNCO.Mgvz3Hm49kujtR0M'
   - _id: YSeYSzU3P0FooGIw
     name: Multiattack
@@ -616,18 +620,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273654976
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3YwmvDupMwycWNCO.YSeYSzU3P0FooGIw'
   - _id: u7eurp95tuW3tYGl
     name: Bite
@@ -787,18 +790,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741118396110
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3YwmvDupMwycWNCO.u7eurp95tuW3tYGl'
   - _id: VkCVMF2SvsuYWWYg
     name: Tail
@@ -1023,12 +1025,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741118452325
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3YwmvDupMwycWNCO.VkCVMF2SvsuYWWYg'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -1038,10 +1041,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171200554
   modifiedTime: 1741118469898
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!3YwmvDupMwycWNCO'

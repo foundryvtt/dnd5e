@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mViCCkDhb1mA9oO6
     name: Magic Resistance
@@ -527,18 +532,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!6oc29m5uzzzb0pk3.mViCCkDhb1mA9oO6'
   - _id: oWzM562ozNrlfOZe
     name: Multiattack
@@ -630,18 +634,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655175
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!6oc29m5uzzzb0pk3.oWzM562ozNrlfOZe'
   - _id: JwAFMjU7vHDDL2Ib
     name: Beak
@@ -798,12 +801,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550046
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!6oc29m5uzzzb0pk3.JwAFMjU7vHDDL2Ib'
   - _id: H5JJE8uS39dTI3Vg
     name: Talons
@@ -960,12 +964,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550046
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!6oc29m5uzzzb0pk3.H5JJE8uS39dTI3Vg'
   - _id: eEVWpD5omMdUkWLu
     name: Spores
@@ -1091,18 +1096,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.ihWvcWsnfqW2HFlA
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ihWvcWsnfqW2HFlA
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676885
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!6oc29m5uzzzb0pk3.eEVWpD5omMdUkWLu'
   - _id: Ijd3GKLRlMzwoSe1
     name: Stunning Screech
@@ -1210,18 +1214,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.aD3HKoBnJtZL6cDj
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.aD3HKoBnJtZL6cDj
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676885
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!6oc29m5uzzzb0pk3.Ijd3GKLRlMzwoSe1'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1231,10 +1234,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171204531
   modifiedTime: 1744916150790
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!6oc29m5uzzzb0pk3'

@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Qcgc4zckQ7c1Ky8t
     name: Bite
@@ -650,18 +655,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552019
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!VBzqw2rOUvTuNOPI.Qcgc4zckQ7c1Ky8t'
   - _id: usmJdksgWhPnjq94
     name: Heated Body
@@ -767,18 +771,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.iFNpsEMJT66eLoat
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iFNpsEMJT66eLoat
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676794
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!VBzqw2rOUvTuNOPI.usmJdksgWhPnjq94'
   - _id: kT6wF3F49uuWgP3h
     name: Swallow
@@ -940,18 +943,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.aH5ncM30tP8tPQ24
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.aH5ncM30tP8tPQ24
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676794
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!VBzqw2rOUvTuNOPI.kT6wF3F49uuWgP3h'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -961,10 +963,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171235610
   modifiedTime: 1726171445528
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!VBzqw2rOUvTuNOPI'

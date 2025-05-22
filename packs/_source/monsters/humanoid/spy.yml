@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 93TfWPoMzBoaneMx
     name: Cunning Action
@@ -566,18 +571,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.J36uxDWfbkflPV7k
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.J36uxDWfbkflPV7k
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!13K3XK2A3wwxVKLD.93TfWPoMzBoaneMx'
   - _id: TEgU7pKAAA0f35Yw
     name: Sneak Attack
@@ -682,18 +686,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.9uKShqfuA73duQsT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.9uKShqfuA73duQsT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!13K3XK2A3wwxVKLD.TEgU7pKAAA0f35Yw'
   - _id: NAmhPf8w89iV8CsY
     name: Multiattack
@@ -782,18 +785,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!13K3XK2A3wwxVKLD.NAmhPf8w89iV8CsY'
   - _id: BhYnUUBoU3ESkl1B
     name: Shortsword
@@ -948,18 +950,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107549714
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!13K3XK2A3wwxVKLD.BhYnUUBoU3ESkl1B'
   - _id: q6pfCQyaPQSw2waZ
     name: Hand Crossbow
@@ -1114,18 +1115,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.qaSro7kFhxD6INbZ
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.qaSro7kFhxD6INbZ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173384495
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!13K3XK2A3wwxVKLD.q6pfCQyaPQSw2waZ'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1135,10 +1135,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171198213
   modifiedTime: 1726171438802
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!13K3XK2A3wwxVKLD'

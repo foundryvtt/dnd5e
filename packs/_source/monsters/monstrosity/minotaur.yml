@@ -465,7 +465,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -477,6 +476,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Z1aFAtAP0JJ02tPV
     name: Charge
@@ -658,18 +663,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676897
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!pOPQU4UnR27zA0jf.Z1aFAtAP0JJ02tPV'
   - _id: Fybno0bT1qZO1sSj
     name: Labyrinthine Recall
@@ -705,18 +709,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.1w6k5iHV8QSz5w46
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.1w6k5iHV8QSz5w46
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!pOPQU4UnR27zA0jf.Fybno0bT1qZO1sSj'
   - _id: i1CyGkejt1lDCHEu
     name: Reckless
@@ -756,18 +759,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.4v3xxn1jEEMRzLBG
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4v3xxn1jEEMRzLBG
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676897
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!pOPQU4UnR27zA0jf.i1CyGkejt1lDCHEu'
   - _id: lZ5YdCcXmEDR6vhb
     name: Greataxe
@@ -922,18 +924,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553527
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!pOPQU4UnR27zA0jf.lZ5YdCcXmEDR6vhb'
   - _id: zTqVT0QztTuMOv0e
     name: Gore
@@ -1090,12 +1091,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553527
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!pOPQU4UnR27zA0jf.zTqVT0QztTuMOv0e'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -1105,10 +1107,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171258860
   modifiedTime: 1726171450234
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!pOPQU4UnR27zA0jf'

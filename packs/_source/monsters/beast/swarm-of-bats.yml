@@ -475,7 +475,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -487,6 +486,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 0NpX1YUDTXjgIm23
     name: Bites
@@ -654,12 +659,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741123130838
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!PcZ0QjIG6bHpffp9.0NpX1YUDTXjgIm23'
   - _id: cBVltbg8hNBBuTZ7
     name: Swarm
@@ -699,18 +705,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.eL3OJmc4FuetizKO
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.eL3OJmc4FuetizKO
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: 1741123040007
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!PcZ0QjIG6bHpffp9.cBVltbg8hNBBuTZ7'
   - _id: AKRFqSGc4D9j3Mhl
     name: Keen Hearing
@@ -752,12 +757,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!PcZ0QjIG6bHpffp9.AKRFqSGc4D9j3Mhl'
   - _id: tRdXVBesxDaXdhqP
     name: Echolocation
@@ -793,18 +799,17 @@ items:
     sort: -100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.rUongiWD51ZopRk2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.rUongiWD51ZopRk2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: 1741123042944
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!PcZ0QjIG6bHpffp9.tRdXVBesxDaXdhqP'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -814,10 +819,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171229635
   modifiedTime: 1741123137805
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!PcZ0QjIG6bHpffp9'

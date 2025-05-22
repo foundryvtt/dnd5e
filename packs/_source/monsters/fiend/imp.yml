@@ -475,7 +475,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -487,6 +486,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 9ioH5ocevSRjYBaD
     name: Shapechanger
@@ -581,18 +586,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!dLQiESMsfsXijD5c.9ioH5ocevSRjYBaD'
   - _id: OljCWQpwojS4FKur
     name: Devil's Sight
@@ -632,12 +636,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!dLQiESMsfsXijD5c.OljCWQpwojS4FKur'
   - _id: sl0CxgkL7SkRIv7j
     name: Magic Resistance
@@ -675,18 +680,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!dLQiESMsfsXijD5c.sl0CxgkL7SkRIv7j'
   - _id: 64Swhse7QnbiLAbi
     name: Sting
@@ -922,12 +926,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745175364868
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!dLQiESMsfsXijD5c.64Swhse7QnbiLAbi'
   - _id: mMdtSlNy6FuPju7p
     name: Invisibility
@@ -1021,18 +1026,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676802
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!dLQiESMsfsXijD5c.mMdtSlNy6FuPju7p'
   - _id: RZpYFJGNqA7L1bj1
     name: Bite (beast form only)
@@ -1266,12 +1270,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745175406042
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!dLQiESMsfsXijD5c.RZpYFJGNqA7L1bj1'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1281,10 +1286,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171244145
   modifiedTime: 1745175417859
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!dLQiESMsfsXijD5c'

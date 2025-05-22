@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: hon1LZGigQRl2jBn
     name: Two Heads
@@ -516,18 +521,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.gWpp0N06HvS937Go
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gWpp0N06HvS937Go
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KLCkHep28HBfdsky.hon1LZGigQRl2jBn'
   - _id: 0NvLts9eWaCvcOOn
     name: Wakeful
@@ -565,18 +569,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.T2gLBBjrHTbLTdGc
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.T2gLBBjrHTbLTdGc
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KLCkHep28HBfdsky.0NvLts9eWaCvcOOn'
   - _id: FcbmWHMk3H4MGdxy
     name: Multiattack
@@ -668,18 +671,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655774
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!KLCkHep28HBfdsky.FcbmWHMk3H4MGdxy'
   - _id: T1QQrbvnvnM73eIe
     name: Battleaxe
@@ -833,18 +835,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.I0WocDSuNpGJayPb
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.I0WocDSuNpGJayPb
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!KLCkHep28HBfdsky.T1QQrbvnvnM73eIe'
   - _id: 5ri5zr7IJKsaZNF7
     name: Morningstar
@@ -997,18 +998,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.dX8AxCh9o0A9CkT3
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.dX8AxCh9o0A9CkT3
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!KLCkHep28HBfdsky.5ri5zr7IJKsaZNF7'
 effects: []
 folder: v8gFGdEluEFQdRQg
@@ -1018,10 +1018,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171222553
   modifiedTime: 1726171443186
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!KLCkHep28HBfdsky'

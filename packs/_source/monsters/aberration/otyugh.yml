@@ -468,7 +468,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -480,6 +479,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: z8zfieQSSbMtBNQz
     name: Limited Telepathy
@@ -519,18 +524,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.xna3UTd4EFLCZMt9
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.xna3UTd4EFLCZMt9
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1744841524123
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!jcZblJ6lqtW0ePxe.z8zfieQSSbMtBNQz'
   - _id: CCawltKiVU4Mup9i
     name: Bite
@@ -756,8 +760,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       dnd5e:
         riders:
           activity: []
@@ -765,12 +767,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1744916839163
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!jcZblJ6lqtW0ePxe.CCawltKiVU4Mup9i'
   - _id: BPYsBEkmZMcGYZDh
     name: Tentacle
@@ -949,12 +952,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1744841714189
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!jcZblJ6lqtW0ePxe.BPYsBEkmZMcGYZDh'
   - _id: 9d1ZhvT1vIJsNnN1
     name: Tentacle Slam
@@ -1067,8 +1071,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.QiM1nbPzbLzKnfmP
       dnd5e:
         riders:
           activity: []
@@ -1076,12 +1078,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.QiM1nbPzbLzKnfmP
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1744841784193
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!jcZblJ6lqtW0ePxe.9d1ZhvT1vIJsNnN1'
   - _id: O9otNESvCCUdwYhc
     name: Multiattack
@@ -1173,18 +1176,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656868
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!jcZblJ6lqtW0ePxe.O9otNESvCCUdwYhc'
 effects: []
 folder: cHmylff3tHTzhvyb
@@ -1194,10 +1196,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171252040
   modifiedTime: 1744841548355
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!jcZblJ6lqtW0ePxe'

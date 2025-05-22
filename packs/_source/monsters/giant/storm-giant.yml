@@ -469,7 +469,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -481,6 +480,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: PMXLrGDWGu9amL2X
     name: Scale Mail
@@ -547,18 +552,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.XmnlF5fgIO3tg6TG
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.XmnlF5fgIO3tg6TG
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.PMXLrGDWGu9amL2X'
   - _id: 3vDo83oAycRGB85G
     name: Amphibious
@@ -594,18 +598,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.3vDo83oAycRGB85G'
   - _id: iwN0z7f5LF9AAbRJ
     name: Greatsword
@@ -758,18 +761,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.xMkP8BmFzElcsMaR
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.xMkP8BmFzElcsMaR
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550034
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.iwN0z7f5LF9AAbRJ'
   - _id: 2tzFjiAiXJLEpuCn
     name: Innate Spellcasting
@@ -815,18 +817,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015542
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.2tzFjiAiXJLEpuCn'
   - _id: k0g8uqoYdJ4LVxcn
     name: Lightning Strike
@@ -997,12 +998,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676843
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.k0g8uqoYdJ4LVxcn'
   - _id: KUffpBEiNWnVK3W6
     name: Multiattack
@@ -1093,18 +1095,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655167
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.KUffpBEiNWnVK3W6'
   - _id: bRdk2uZ6iTuNGUIL
     name: Rock
@@ -1262,12 +1263,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173384919
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.bRdk2uZ6iTuNGUIL'
   - _id: ghXTfe7sgCbgf1Q8
     name: Detect Magic
@@ -1371,21 +1373,20 @@ items:
           sort: 0
       identifier: detect-magic
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
+    flags: {}
     img: icons/magic/light/explosion-star-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.ghXTfe7sgCbgf1Q8'
   - _id: pub0OWVEB71XQx1n
     name: Feather Fall
@@ -1486,21 +1487,20 @@ items:
           sort: 0
       identifier: feather-fall
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.pub0OWVEB71XQx1n
+    flags: {}
     img: icons/magic/air/wind-swirl-pink-purple.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pub0OWVEB71XQx1n
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.pub0OWVEB71XQx1n'
   - _id: MRxldJd6C4bsBo3O
     name: Levitate
@@ -1615,21 +1615,20 @@ items:
           sort: 0
       identifier: levitate
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.MRxldJd6C4bsBo3O
+    flags: {}
     img: icons/magic/control/debuff-energy-hold-levitate-pink.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MRxldJd6C4bsBo3O
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.MRxldJd6C4bsBo3O'
   - _id: Bnn9Nzajixvow9xi
     name: Light
@@ -1735,21 +1734,20 @@ items:
           sort: 0
       identifier: light
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
+    flags: {}
     img: icons/magic/light/explosion-star-small-blue-yellow.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.Bnn9Nzajixvow9xi'
   - _id: ZPd73HtKF3At11jh
     name: Control Weather
@@ -1914,21 +1912,20 @@ items:
           sort: 0
       identifier: control-weather
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ZPd73HtKF3At11jh
+    flags: {}
     img: icons/magic/air/wind-tornado-cyclone-white.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ZPd73HtKF3At11jh
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.ZPd73HtKF3At11jh'
   - _id: 13uVuBQP6VaiSPvC
     name: Water Breathing
@@ -2037,21 +2034,20 @@ items:
           sort: 0
       identifier: water-breathing
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.13uVuBQP6VaiSPvC
+    flags: {}
     img: icons/magic/water/pseudopod-swirl-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.13uVuBQP6VaiSPvC
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!68bAMIpe4jvDeR9G.13uVuBQP6VaiSPvC'
 effects: []
 folder: v8gFGdEluEFQdRQg
@@ -2061,10 +2057,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171204245
   modifiedTime: 1726171439860
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!68bAMIpe4jvDeR9G'

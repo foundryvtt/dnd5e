@@ -465,7 +465,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -477,6 +476,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: ez0lp4uo2fLOc5Yf
     name: Confer Fire Resistance
@@ -514,18 +519,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.wzgGJyVFGIcj1XAb
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.wzgGJyVFGIcj1XAb
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!5SgVGhQBswgWRwsF.ez0lp4uo2fLOc5Yf'
   - _id: YXCQq6M3IGaLDz2M
     name: Illumination
@@ -564,18 +568,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.F3gzBbCW7U14zkBF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.F3gzBbCW7U14zkBF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!5SgVGhQBswgWRwsF.YXCQq6M3IGaLDz2M'
   - _id: lzv29dS3tAUUuVlI
     name: Hooves
@@ -740,18 +743,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107549944
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!5SgVGhQBswgWRwsF.lzv29dS3tAUUuVlI'
   - _id: XtK73VCT1s8abvjs
     name: Ethereal Stride
@@ -843,18 +845,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.NfTCXq8eRrqjhvAo
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.NfTCXq8eRrqjhvAo
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676527
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!5SgVGhQBswgWRwsF.XtK73VCT1s8abvjs'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -864,10 +865,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171203363
   modifiedTime: 1726171439705
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!5SgVGhQBswgWRwsF'

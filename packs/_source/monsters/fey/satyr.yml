@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: bAm4BNi3o137SAmd
     name: Shortbow
@@ -636,18 +641,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.GJv6WkD7D2J6rP6M
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.GJv6WkD7D2J6rP6M
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!8xhuJXYMnlQD7LF6.bAm4BNi3o137SAmd'
   - _id: 198fJNFbhjGeZ8UZ
     name: Shortsword
@@ -805,18 +809,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!8xhuJXYMnlQD7LF6.198fJNFbhjGeZ8UZ'
   - _id: vd2pvVVxaLhqrWqe
     name: Leather Armor
@@ -882,18 +885,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!8xhuJXYMnlQD7LF6.vd2pvVVxaLhqrWqe'
   - _id: jgHhzAjFiPXlluVM
     name: Magic Resistance
@@ -931,18 +933,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!8xhuJXYMnlQD7LF6.jgHhzAjFiPXlluVM'
   - _id: 2btvWgv8WIkadZjh
     name: Ram
@@ -1098,12 +1099,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550515
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8xhuJXYMnlQD7LF6.2btvWgv8WIkadZjh'
 effects: []
 folder: 5TSd0wOZe1L5I3eJ
@@ -1113,10 +1115,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171208870
   modifiedTime: 1726171440641
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!8xhuJXYMnlQD7LF6'

@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: gCi538awNcOfcZf7
     name: Rock
@@ -636,12 +641,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385190
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!Buxe6dDK5Mw7kxe6.gCi538awNcOfcZf7'
   - _id: 9LXx1CaY98oYrwWK
     name: Patchwork Armor
@@ -711,12 +717,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!Buxe6dDK5Mw7kxe6.9LXx1CaY98oYrwWK'
   - _id: LVOGKiIm4UTD4fpj
     name: Greataxe
@@ -871,18 +878,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550648
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!Buxe6dDK5Mw7kxe6.LVOGKiIm4UTD4fpj'
   - _id: i49lwJ84vB720EPW
     name: Multiattack
@@ -973,18 +979,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655476
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!Buxe6dDK5Mw7kxe6.i49lwJ84vB720EPW'
 effects: []
 folder: v8gFGdEluEFQdRQg
@@ -994,10 +999,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171212380
   modifiedTime: 1726171441223
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!Buxe6dDK5Mw7kxe6'

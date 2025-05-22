@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: e1ZjZT7dyExUSEOu
     name: Charge
@@ -644,8 +649,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       dnd5e:
         riders:
           activity: []
@@ -653,12 +656,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741122761194
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!SBCe2BSa6opTS5M4.e1ZjZT7dyExUSEOu'
   - _id: uFv78t6CwySS1gio
     name: Gore
@@ -816,12 +820,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741122781475
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!SBCe2BSa6opTS5M4.uFv78t6CwySS1gio'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -831,10 +836,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171231795
   modifiedTime: 1741122784621
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!SBCe2BSa6opTS5M4'

@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: G2GfXsv9MMfL3lc5
     name: Keen Smell
@@ -517,12 +522,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!FayqbnjBMszO6Pat.G2GfXsv9MMfL3lc5'
   - _id: wklAUVakX97y0z2S
     name: Pounce
@@ -677,18 +683,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.MqAVplIArAKzpnXB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.MqAVplIArAKzpnXB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741123736236
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!FayqbnjBMszO6Pat.wklAUVakX97y0z2S'
   - _id: YypXtXEL61FqWYOP
     name: Bite
@@ -842,18 +847,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741123751274
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!FayqbnjBMszO6Pat.YypXtXEL61FqWYOP'
   - _id: 7GCnVtakQo6iZyn7
     name: Claw
@@ -1012,12 +1016,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741123760572
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!FayqbnjBMszO6Pat.7GCnVtakQo6iZyn7'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -1027,10 +1032,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171216735
   modifiedTime: 1741123763812
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!FayqbnjBMszO6Pat'
