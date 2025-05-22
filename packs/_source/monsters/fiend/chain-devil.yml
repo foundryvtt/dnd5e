@@ -506,8 +506,8 @@ items:
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target is
           grappled (escape DC 14) if the devil isn't already grappling a
           creature. Until this grapple ends, the target is restrained and takes
-          <strong>7 (2d6) <em>piercing damage</em></strong> at the start of each
-          of its turns.</p>
+          [[/damage activity=7GprfdQsWbexe4iC average]] damage at the start of
+          each of its turns.</p>
         chat: >-
           <p>The Chain Devil attacks with its Chain. The target is grappled if
           the devil isn't already grappling a creature. Until this grapple ends,
@@ -650,67 +650,66 @@ items:
           name: ''
           img: ''
           appliedEffects: []
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
+        7GprfdQsWbexe4iC:
+          type: damage
+          _id: 7GprfdQsWbexe4iC
+          sort: 0
           activation:
             type: action
-            value: 1
-            condition: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
           range:
-            value: '10'
-            units: ft
-            special: ''
+            units: self
             override: false
           target:
             template:
-              count: ''
               contiguous: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: 2d6
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
+                denomination: 6
+                bonus: ''
+                types:
+                  - piercing
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: chain
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 250000
     ownership:
       default: 0
     flags:
@@ -723,9 +722,9 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745108091550
+      modifiedTime: 1747956450484
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KtM6IV9I5l1MWUDk.9SWi4zPVGsMD5l2Y'
@@ -739,8 +738,8 @@ items:
           <p>When a creature the devil can see starts its turn within 30 feet of
           the devil, the devil can create the illusion that it looks like one of
           the creature's departed loved ones or bitter enemies. If the creature
-          can see the devil, it must succeed on a <strong> DC 14 Wisdom saving
-          throw</strong> or be Frightened until the end of its turn.</p>
+          can see the devil, it must succeed on a [[/save]] saving throw or be
+          Frightened until the end of its turn.</p>
         chat: >-
           <p>The devil can create the illusion that it looks like one of the
           creature's departed loved ones or bitter enemies. make a
@@ -762,60 +761,6 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: reaction
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '30'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -868,11 +813,15 @@ items:
             onSave: half
             parts: []
           save:
-            ability: wis
+            ability:
+              - wis
             dc:
               calculation: ''
               formula: '14'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -882,15 +831,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.uEYSTOkpfr0OkKrD
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676721
+      modifiedTime: 1747956490723
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KtM6IV9I5l1MWUDk.c8fbl1Kc5O3GNTus'
@@ -1074,7 +1027,7 @@ items:
       identifier: multiattack
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags: {}
@@ -1085,7 +1038,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273655842
+      modifiedTime: 1747956387297
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KtM6IV9I5l1MWUDk.AGKUD82KJZaMKVRt'
@@ -1195,7 +1148,7 @@ items:
       identifier: animate-chains
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -1206,7 +1159,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
-      modifiedTime: 1736804676721
+      modifiedTime: 1747956387297
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!KtM6IV9I5l1MWUDk.B9KJpn20n0tG4xit'

@@ -522,7 +522,8 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
@@ -592,10 +593,10 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747956891381
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!dLQiESMsfsXijD5c.9ioH5ocevSRjYBaD'
   - _id: OljCWQpwojS4FKur
@@ -693,7 +694,7 @@ items:
       exportSource: null
     _key: '!actors.items!dLQiESMsfsXijD5c.sl0CxgkL7SkRIv7j'
   - _id: 64Swhse7QnbiLAbi
-    name: Sting
+    name: Sting (Bite in Beast Form)
     type: weapon
     img: icons/creatures/abilities/fang-tooth-venomous.webp
     system:
@@ -930,7 +931,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745175364868
+      modifiedTime: 1747956945254
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!dLQiESMsfsXijD5c.64Swhse7QnbiLAbi'
@@ -1023,7 +1024,7 @@ items:
       identifier: invisibility
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags: {}
@@ -1032,252 +1033,12 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676802
+      modifiedTime: 1747956927936
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!dLQiESMsfsXijD5c.mMdtSlNy6FuPju7p'
-  - _id: RZpYFJGNqA7L1bj1
-    name: Bite (beast form only)
-    type: weapon
-    img: icons/creatures/abilities/mouth-teeth-long-red.webp
-    system:
-      description:
-        value: >-
-          <p>[[/attack extended]]. [[/damage extended]], and the target must
-          make a [[/save]] saving throw, taking [[/damage average
-          activity=dnd5eactivity100]] damage on a failed save, or half as much
-          damage on a successful one.</p>
-        chat: <p>The Imp attacks with its Bite.</p>
-      source:
-        custom: ''
-        book: ''
-        page: ''
-        license: CC-BY-4.0
-        rules: '2014'
-        revision: 1
-      quantity: 1
-      weight:
-        value: 0
-        units: lb
-      price:
-        value: 0
-        denomination: gp
-      attunement: ''
-      equipped: true
-      rarity: ''
-      identified: true
-      cover: null
-      range:
-        value: null
-        long: null
-        units: ft
-        reach: null
-      uses:
-        max: ''
-        recovery: []
-        spent: 0
-      damage:
-        versatile:
-          number: null
-          denomination: null
-          bonus: ''
-          types: []
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-        base:
-          number: 1
-          denomination: 4
-          bonus: ''
-          types:
-            - piercing
-          custom:
-            enabled: false
-            formula: ''
-          scaling:
-            mode: ''
-            number: null
-            formula: ''
-      armor:
-        value: 10
-      hp:
-        value: 0
-        max: 0
-        dt: null
-        conditions: ''
-      properties: []
-      proficient: 1
-      unidentified:
-        description: ''
-      type:
-        value: natural
-        baseItem: ''
-      container: null
-      crewed: false
-      activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: attack
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: dex
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: melee
-              classification: weapon
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts: []
-          sort: 0
-        dnd5eactivity100:
-          _id: dnd5eactivity100
-          type: save
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: inst
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            onSave: half
-            parts:
-              - custom:
-                  enabled: false
-                  formula: ''
-                number: 3
-                denomination: '6'
-                bonus: ''
-                types:
-                  - poison
-          save:
-            ability: con
-            dc:
-              calculation: ''
-              formula: '11'
-          sort: 0
-          name: ''
-          img: ''
-          appliedEffects: []
-      attuned: false
-      ammunition: {}
-      magicalBonus: null
-      identifier: bite-beast-form-only
-      mastery: ''
-    effects: []
-    folder: null
-    sort: 0
-    ownership:
-      default: 0
-    flags:
-      dnd5e:
-        riders:
-          activity: []
-          effect: []
-    _stats:
-      compendiumSource: null
-      duplicateSource: null
-      coreVersion: '13.344'
-      systemId: dnd5e
-      systemVersion: 4.4.0
-      createdTime: null
-      modifiedTime: 1745175406042
-      lastModifiedBy: dnd5ebuilder0000
-      exportSource: null
-    _key: '!actors.items!dLQiESMsfsXijD5c.RZpYFJGNqA7L1bj1'
 effects: []
 folder: P1YKVDd1IN7XXWWy
 sort: 0
