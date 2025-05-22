@@ -599,6 +599,29 @@ export default class NPCData extends CreatureTemplate {
       ...splitSemicolons(custom ?? "")
     ].sort((lhs, rhs) => lhs.localeCompare(rhs, game.i18n.lang)));
 
+    const prepareSpeed = () => {
+      const standard = formatter.format([
+        prepareMeasured(this.attributes.movement.walk, this.attributes.movement.units),
+        ...Object.entries(CONFIG.DND5E.movementTypes)
+          .filter(([k]) => this.attributes.movement[k] && (k !== "walk"))
+          .map(([k, label]) => {
+            let prepared = prepareMeasured(this.attributes.movement[k], this.attributes.movement.units, label);
+            if ( (k === "fly") && this.attributes.movement.hover ) {
+              prepared = `${prepared} (${game.i18n.localize("DND5E.MovementHover").toLowerCase()})`;
+            }
+            return prepared;
+          })
+      ]);
+      const custom = formatter.format([
+        ...this.attributes.movement.custom.map(({ label, value }) => {
+          const prepared = prepareMeasured(value, this.attributes.movement.units);
+          return `${prepared} ${label.toLowerCase()}`;
+        }),
+        ...splitSemicolons(this.attributes.movement.special)
+      ]);
+      return custom ? `${standard} (${custom})` : standard;
+    };
+
     const context = {
       abilityTables: Array.fromRange(3).map(_ => ({ abilities: [] })),
       actionSections: {
@@ -669,18 +692,7 @@ export default class NPCData extends CreatureTemplate {
         ),
 
         // Speed (e.g. `40 ft., Burrow 40 ft., Fly 80 ft.`)
-        speed: formatter.format([
-          prepareMeasured(this.attributes.movement.walk, this.attributes.movement.units),
-          ...Object.entries(CONFIG.DND5E.movementTypes)
-            .filter(([k]) => this.attributes.movement[k] && (k !== "walk"))
-            .map(([k, label]) => {
-              let prepared = prepareMeasured(this.attributes.movement[k], this.attributes.movement.units, label);
-              if ( (k === "fly") && this.attributes.movement.hover ) {
-                prepared = `${prepared} (${game.i18n.localize("DND5E.MovementHover").toLowerCase()})`;
-              }
-              return prepared;
-            })
-        ]),
+        speed: prepareSpeed(),
 
         // Tag (e.g. `Gargantuan Dragon, Lawful Evil`)
         tag: game.i18n.format("DND5E.CreatureTag", {
