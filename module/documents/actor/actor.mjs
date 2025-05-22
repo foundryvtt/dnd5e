@@ -270,8 +270,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   prepareDerivedData() {
     const origin = this.getFlag("dnd5e", "summon.origin");
-    // TODO: Replace with parseUuid once V11 support is dropped
-    if ( origin && this.token?.id ) dnd5e.registry.summons.track(origin.split(".Item.")[0], this.uuid);
+    if ( origin && this.token?.id ) {
+      const { collection, primaryId } = foundry.utils.parseUuid(origin);
+      dnd5e.registry.summons.track(collection?.get?.(primaryId)?.uuid, this.uuid);
+    }
 
     if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
     this.labels = {};
@@ -3192,7 +3194,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     const origin = this.getFlag("dnd5e", "summon.origin");
     if ( origin ) {
       const { collection, primaryId } = foundry.utils.parseUuid(origin);
-      dnd5e.registry.summons.untrack(collection.get?.(primaryId)?.uuid, this.uuid);
+      dnd5e.registry.summons.untrack(collection?.get?.(primaryId)?.uuid, this.uuid);
     }
   }
 
