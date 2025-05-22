@@ -71,7 +71,7 @@
 
     nav.tabs {
       --tab-full-width: 44px;
-      --tab-inactive-width: 34px;
+      --tab-inactive-width: 38px;
       position: absolute;
       display: flex;
       flex-direction: column;
@@ -94,7 +94,10 @@
 
         &:not([hidden]) { display: flex; }
 
-        i { font-size: var(--font-size-14); }
+        i {
+          font-size: var(--font-size-14);
+          margin: 0;
+        }
 
         &.active, &:hover {
           text-shadow: none;
@@ -111,7 +114,9 @@
       }
 
       &.tabs-left {
+        contain: content;
         right: 100%;
+        align-items: flex-end;
 
         > .item {
           padding-inline-start: 12px;
@@ -130,7 +135,9 @@
       }
 
       &.tabs-right {
+        contain: content;
         left: 100%;
+        align-items: flex-start;
 
         > .item {
           padding-inline-end: 12px;
@@ -186,6 +193,7 @@
         border: none;
         margin: 0;
         padding: .5rem;
+        color: inherit;
         font-family: var(--dnd5e-font-roboto-slab);
         font-size: var(--font-size-13);
         font-weight: bold;
@@ -231,24 +239,12 @@
     }
   }
 
-  .collapsible {
-    &.collapsed {
-      .fa-caret-down { transform: rotate(-90deg); }
-      .collapsible-content { grid-template-rows: 0fr; }
-    }
-    .fa-caret-down { transition: transform 250ms ease; }
-    .collapsible-content {
-      display: grid;
-      grid-template-rows: 1fr;
-      transition: grid-template-rows 250ms ease;
-      > .wrapper { overflow: hidden; }
-    }
-  }
-
   .unlist {
     list-style: none;
     padding: 0;
     margin: 0;
+
+    li { margin: 0; }
   }
 
   h1, h2, h3 {
@@ -285,7 +281,7 @@
         --icon-fill: var(--color-text-dark-primary);
       }
 
-      > a {
+      > a, > button {
         margin-left: auto;
         font-size: var(--font-size-12);
         color: var(--color-text-light-6);
@@ -376,7 +372,7 @@
     }
   }
 
-  .gold-button {
+  .gold-button, &.standard-form button.gold-button {
     position: relative;
     border: none;
     border-radius: 4px;
@@ -456,13 +452,24 @@
     }
   }
 
-  a.deletion-control {
+  a.deletion-control, button.deletion-control {
     width: 32px;
     height: 32px;
     color: var(--dnd5e-color-red);
     display: flex;
-    justify-content: end;
+    align-items: flex-start;
+    justify-content: flex-end;
     font-size: var(--font-size-11);
+  }
+  button.deletion-control {
+    padding: 0;
+
+    &:focus-visible, &:hover:not(:disabled) {
+      background: none;
+      box-shadow: none;
+      color: var(--dnd5e-color-red);
+      text-shadow: 0 0 8px var(--color-shadow-primary);
+    }
   }
 
   hr {
@@ -652,7 +659,7 @@
       .deletion-control {
         width: unset;
         height: unset;
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         position: absolute;
         inset: -3px -3px 0 0;
       }
@@ -660,19 +667,24 @@
 
     .occupant-slot {
       overflow: visible;
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
 
-      &.empty {
+      &.empty, &.pending {
         display: inline-grid;
         place-content: center;
 
         &::before {
           font-family: var(--font-awesome);
           font-weight: bold;
-          opacity: .15;
         }
       }
 
+      &.pending::before {
+        content: "\f51e";
+        color: var(--dnd5e-color-gold);
+      }
+
+      &.empty::before { opacity: .15; }
       &.hireling.empty::before { content: "\f007"; }
       &.defender.empty::before { content: "\f132"; }
       &.creature.empty::before { content: "\f7ab"; }
@@ -837,16 +849,56 @@
   }
 
   /* ---------------------------------- */
+  /*  ProseMirror                       */
+  /* ---------------------------------- */
+
+  .editor.prosemirror {
+    .editor-content {
+      font-family: var(--dnd5e-font-roboto-condensed);
+      font-size: var(--font-size-13);
+      scrollbar-width: thin;
+      scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
+
+      &::-webkit-scrollbar-track {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border: none;
+        background: var(--dnd5e-color-scrollbar);
+      }
+    }
+
+    code-mirror .cm-scroller {
+      scrollbar-width: thin;
+      scrollbar-color: var(--dnd5e-color-scrollbar) transparent;
+
+      &::-webkit-scrollbar-track {
+        box-shadow: none;
+        border-radius: 0;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        border: none;
+        background: var(--dnd5e-color-scrollbar);
+      }
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Bastions                          */
   /* ---------------------------------- */
 
   &#bastion-turn {
     pointer-events: all;
-    margin: 0 5px 10px 15px;
+    margin: 0 0 -8px;
     color: var(--color-text-light-highlight);
-    width: var(--players-width);
+    width: var(--players-width, 200px);
     background: rgb(0 0 0 / 80%);
     border: 1px solid var(--color-border-dark);
+    cursor: var(--cursor-pointer);
+    height: 40px;
 
     &:hover {
       border-color: var(--color-border-highlight-alt);
@@ -903,8 +955,8 @@
 /* ---------------------------------- */
 
 .dnd5e2.sheet {
-  .locked a:not(.interface-only) {
-    cursor: default;
+  .locked a:not(.always-interactive) {
+    cursor: var(--cursor-default);
     &:hover { text-shadow: unset; }
   }
 }
@@ -921,6 +973,7 @@
     var(--dnd5e-color-parchment);
   border: var(--dnd5e-border-gold);
   color: var(--color-text-dark-primary);
+  line-height: normal;
 
   &:not(.minimized) .window-header {
     position: relative;
@@ -970,8 +1023,10 @@
   }
 
   &.minimized .window-header {
+    h1 { all: revert-layer; }
     h2 { display: none; }
     .header-control {
+      all: revert-layer;
       &:hover, &:focus { background: transparent; }
     }
   }
@@ -980,6 +1035,7 @@
     --button-size: 20px;
 
     button.header-control {
+      --button-size: 20px;
       --color-light-text-heading: var(--color-light-1);
       --button-text-color: var(--color-light-text-heading);
       font-size: var(--font-size-12);
@@ -987,6 +1043,7 @@
     }
 
     dnd5e-icon.window-icon { display: block; }
+    slide-toggle { transform: scale(.9); }
   }
 
   .window-content {
@@ -1033,7 +1090,7 @@
     }
     > section:empty { display: none; }
   }
-  .window-content, .window-content > .column-container {
+  &:where(:not(.minimized)) .window-content, .window-content > .column-container {
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -1045,7 +1102,6 @@
     font-size: var(--font-size-13);
     font-weight: bold;
     text-transform: uppercase;
-    color: var(--color-text-dark-5);
     align-items: start;
     border: none;
     margin: 0 0 8px;
@@ -1054,13 +1110,14 @@
       flex: 1;
       padding: 0;
       line-height: 1;
+      color: var(--color-text-dark-5);
 
       label { padding-bottom: 1px; }
 
       &.active {
         color: var(--color-text-dark-primary);
         text-shadow: none;
-        label { border-bottom: 3px solid var(--dnd5e-color-gold); }
+        label, span { border-bottom: 3px solid var(--dnd5e-color-gold); }
       }
     }
 
@@ -1349,7 +1406,7 @@ dialog.dnd5e2.application {
       justify-content: space-between;
       padding: 6px 10px;
       &:hover {
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
         background: var(--dnd5e-background-parchment);
       }
     }
@@ -1458,6 +1515,67 @@ dialog.dnd5e2.application {
 }
 
 /* ---------------------------------- */
+/*  Transform Dialog                  */
+/* ---------------------------------- */
+
+.dnd5e2.transformation {
+  --section-gap: 8px;
+
+  .window-content {
+    display: grid;
+    gap: var(--section-gap);
+  }
+  [data-application-part="details"] {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-18);
+
+    > div {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+
+      &.source { flex-direction: row-reverse; }
+      img {
+        block-size: 48px;
+        inline-size: 48px;
+        border: none;
+      }
+    }
+  }
+  [data-container-id="settings-area"] {
+    display: grid;
+    grid-template-columns: [presets] 200px [settings] auto;
+    gap: var(--section-gap);
+  }
+  [data-application-part="presets"] {
+    button {
+      display: grid;
+      grid-template-columns: 30px 1fr;
+      span { text-align: start; }
+      &[aria-pressed="true"] {
+        background: color-mix(in oklab, var(--dnd5e-background-card), var(--dnd5e-color-gold) 10%);
+        box-shadow: inset 0 0 8px var(--dnd5e-shadow-15);
+      }
+    }
+  }
+  [data-application-part="settings"] {
+    display: grid;
+    grid-template-areas:
+      "keep merge"
+      "keep effects"
+      "keep others";
+    gap: var(--section-gap);
+    .category-effects { grid-area: effects; }
+    .category-keep { grid-area: keep; }
+    .category-merge { grid-area: merge; }
+    .category-others { grid-area: others; }
+  }
+}
+
+/* ---------------------------------- */
 /*  Treasure Config Sheet             */
 /* ---------------------------------- */
 
@@ -1508,13 +1626,19 @@ dialog.dnd5e2.application {
       grid-template-columns: subgrid;
     }
     .name { grid-column: name; }
+    .trait-list { gap: 4px; }
     .proficiency {
       grid-column: proficiency;
-      text-align: end;
+      display: flex;
+      justify-content: end;
+      align-items: center;
     }
     li {
       align-items: center;
-      &:not(:last-of-type) { border-bottom: var(--dnd5e-border-dotted); }
+      &:not(:last-of-type) {
+        border-bottom: var(--dnd5e-border-dotted);
+        padding-bottom: 4px;
+      }
       &.category { gap: 4px; }
       li {
         position: relative;
@@ -1551,9 +1675,12 @@ dialog.dnd5e2.application {
 .dnd5e2.weapons.trait-selector {
   .traits {
     grid-template-columns: [name] 2fr [proficiency] 1fr [mastery] 1fr;
+    .header .proficiency i { margin-right: 2px; }
     .mastery {
       grid-column: mastery;
-      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 }
@@ -1623,7 +1750,7 @@ dialog.dnd5e2.application {
       display: flex;
       align-items: center;
       gap: 1rem;
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
 
       > span {
         flex: 1;
@@ -1633,13 +1760,17 @@ dialog.dnd5e2.application {
       }
     }
 
-    img {
+    dnd5e-icon, img {
+      --icon-fill: var(--color-text-dark-primary);
+      --icon-size: 32px;
       width: 32px;
       height: 32px;
+      display: block;
+    }
+    img {
       object-fit: contain;
       object-position: center;
       border: none;
-      filter: invert(100%);
     }
   }
 
@@ -1651,6 +1782,7 @@ dialog.dnd5e2.application {
   }
 
   .dialog-buttons {
+    flex-wrap: wrap;
     select {
       flex: 1;
       min-block-size: 28px;
@@ -1683,7 +1815,8 @@ dialog.dnd5e2.application {
       gap: .5rem;
       padding: .5625rem .75rem;
       align-items: center;
-      cursor: pointer;
+      cursor: var(--cursor-pointer);
+      border: none;
       border-bottom: var(--border-style);
       border-right: var(--border-style);
       color: var(--color-text-light-6);
@@ -1699,10 +1832,60 @@ dialog.dnd5e2.application {
       &:hover { background: var(--dnd5e-color-parchment); }
       .icon { display: grid; }
 
+      > i {
+        --content-link-icon-color: currentcolor;
+        font-size: unset;
+        margin: 0;
+        line-height: normal;
+      }
+
       .name-stacked {
         flex: 1;
         .title { font-size: var(--font-size-13); }
       }
+    }
+  }
+}
+
+/* ---------------------------------- */
+/*  Collapsible Content               */
+/* ---------------------------------- */
+
+.dnd5e2 .collapsible, .collapsible.dnd5e2-collapsible {
+  &.collapsed {
+    .fa-caret-down { transform: rotate(-90deg); }
+    .collapsible-content { grid-template-rows: 0fr; }
+  }
+  .fa-caret-down { transition: transform 250ms ease; }
+  .collapsible-content {
+    display: grid;
+    grid-template-rows: 1fr;
+    transition: grid-template-rows 250ms ease;
+    > .wrapper { overflow: hidden; }
+  }
+}
+
+/* ---------------------------------- */
+/*  Combat Tracker                    */
+/* ---------------------------------- */
+
+.combat-sidebar {
+  .combatant-group {
+    display: block;
+
+    .fa-chevron-down { transition: transform 250ms ease; }
+    &.collapsed .fa-chevron-down { transform: rotate(-90deg); }
+
+    &.active::after, &.active::before { transition: border-color 250ms ease; }
+    &.active:not(.collapsed)::after { border-color: color-mix(in oklab, var(--color-warm-2), transparent); }
+
+    .group-children { padding: 0; }
+    .group-header { cursor: var(--cursor-pointer); }
+    .group-numbers {
+      flex: 0 0 20px;
+      color: var(--color-text-light-5);
+      font-size: var(--font-size-12);
+      line-height: 20px;
     }
   }
 }
@@ -1728,7 +1911,7 @@ dialog.dnd5e2.application {
     border: none;
     padding: 0 .75rem;
     margin: 0;
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
     display: flex;
     align-items: baseline;
     line-height: 32px;
@@ -1785,6 +1968,38 @@ dialog.dnd5e2.application {
   li.divider { border-color: var(--color-border-light-1); }
 }
 
+:is(.dnd5e2, .dnd5e2-journal) .prosemirror menu {
+  --color-hover-bg: var(--dnd5e-background-card);
+
+  .pm-dropdown {
+    background: none;
+    &:hover { background: var(--color-hover-bg); }
+  }
+
+  button {
+    text-transform: unset;
+    width: unset;
+    box-shadow: none;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-14);
+    font-weight: normal;
+    height: var(--menu-height);
+    line-height: var(--menu-height);
+    min-height: unset;
+    background: transparent;
+    border: none;
+    padding: 0 5px;
+    margin: 0;
+    gap: 8px;
+
+    &:hover, &.active {
+      box-shadow: none;
+      background: var(--color-hover-bg);
+      color: var(--color-form-label-hover);
+    }
+  }
+}
+
 /* ---------------------------------- */
 /*  Window Handles                    */
 /* ---------------------------------- */
@@ -1802,3 +2017,9 @@ dialog.dnd5e2.application {
 
   > i { display: none; }
 }
+
+/* ---------------------------------- */
+/*  Keybindings                       */
+/* ---------------------------------- */
+
+#keybindings [data-tab="system"] .control.conflicts { display: none; }

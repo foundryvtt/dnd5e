@@ -17,6 +17,7 @@
             <label class="checkbox">
                 <dnd5e-checkbox name="{{ id }}" {{ checked checked }} data-type="pack"></dnd5e-checkbox>
                 <span class="title">{{ title }}</span>
+                {{#if tag}}<span class="tag">{{ tag }}</span>{{/if}}
             </label>
         </li>
         {{/each}}

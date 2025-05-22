@@ -1,6 +1,7 @@
 import fs from "fs";
 import { readdir, readFile, writeFile } from "node:fs/promises";
 import logger from "fancy-log";
+import YAML from "js-yaml";
 import path from "path";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
@@ -97,7 +98,7 @@ function cleanPackEntry(data, { clearSourceId=true, ownership=0 }={}) {
   if ( data.system?.range?.value === 0 ) data.system.range.value = null;
   if ( data.system?.range?.long === 0 ) data.system.range.long = null;
   if ( data.system?.uses?.value === 0 ) data.system.uses.value = null;
-  if ( data.system?.uses?.max === "0" ) data.system.duration.value = "";
+  if ( data.system?.uses?.max === "0" ) data.system.uses.max = "";
   if ( data.system?.save?.dc === 0 ) data.system.save.dc = null;
   if ( data.system?.capacity?.value === 0 ) data.system.capacity.value = null;
   if ( data.system?.strength === 0 ) data.system.strength = null;
@@ -128,11 +129,11 @@ function cleanString(str) {
 
 
 /**
- * Cleans and formats source JSON files, removing unnecessary permissions and flags and adding the proper spacing.
+ * Cleans and formats source files, removing unnecessary permissions and flags and adding the proper spacing.
  * @param {string} [packName]   Name of pack to clean. If none provided, all packs will be cleaned.
  * @param {string} [entryName]  Name of a specific entry to clean.
  *
- * - `npm run build:clean` - Clean all source JSON files.
+ * - `npm run build:clean` - Clean all source files.
  * - `npm run build:clean -- classes` - Only clean the source files for the specified compendium.
  * - `npm run build:clean -- classes Barbarian` - Only clean a single item from the specified compendium.
  */
@@ -143,7 +144,7 @@ async function cleanPacks(packName, entryName) {
   );
 
   /**
-   * Walk through directories to find JSON files.
+   * Walk through directories to find files.
    * @param {string} directoryPath
    * @yields {string}
    */
@@ -152,22 +153,22 @@ async function cleanPacks(packName, entryName) {
     for ( const entry of directory ) {
       const entryPath = path.join(directoryPath, entry.name);
       if ( entry.isDirectory() ) yield* _walkDir(entryPath);
-      else if ( path.extname(entry.name) === ".json" ) yield entryPath;
+      else if ( path.extname(entry.name) === ".yml" ) yield entryPath;
     }
   }
 
   for ( const folder of folders ) {
     logger.info(`Cleaning pack ${folder.name}`);
     for await ( const src of _walkDir(path.join(PACK_SRC, folder.name)) ) {
-      const json = JSON.parse(await readFile(src, { encoding: "utf8" }));
-      if ( entryName && (entryName !== json.name.toLowerCase()) ) continue;
-      if ( !json._id || !json._key ) {
+      const data = YAML.load(await readFile(src, { encoding: "utf8" }));
+      if ( entryName && (entryName !== data.name.toLowerCase()) ) continue;
+      if ( !data._id || !data._key ) {
         console.log(`Failed to clean \x1b[31m${src}\x1b[0m, must have _id and _key.`);
         continue;
       }
-      cleanPackEntry(json);
+      cleanPackEntry(data);
       fs.rmSync(src, { force: true });
-      writeFile(src, `${JSON.stringify(json, null, 2)}\n`, { mode: 0o664 });
+      writeFile(src, `${YAML.dump(data)}\n`, { mode: 0o664 });
     }
   }
 }
@@ -178,10 +179,10 @@ async function cleanPacks(packName, entryName) {
 /* ----------------------------------------- */
 
 /**
- * Compile the source JSON files into compendium packs.
+ * Compile the source files into compendium packs.
  * @param {string} [packName]       Name of pack to compile. If none provided, all packs will be packed.
  *
- * - `npm run build:db` - Compile all JSON files into their LevelDB files.
+ * - `npm run build:db` - Compile all files into their LevelDB files.
  * - `npm run build:db -- classes` - Only compile the specified pack.
  */
 async function compilePacks(packName) {
@@ -194,7 +195,7 @@ async function compilePacks(packName) {
     const src = path.join(PACK_SRC, folder.name);
     const dest = path.join(PACK_DEST, folder.name);
     logger.info(`Compiling pack ${folder.name}`);
-    await compilePack(src, dest, { recursive: true, log: true, transformEntry: cleanPackEntry });
+    await compilePack(src, dest, { recursive: true, log: true, transformEntry: cleanPackEntry, yaml: true });
   }
 }
 
@@ -204,13 +205,13 @@ async function compilePacks(packName) {
 /* ----------------------------------------- */
 
 /**
- * Extract the contents of compendium packs to JSON files.
+ * Extract the contents of compendium packs to source files.
  * @param {string} [packName]       Name of pack to extract. If none provided, all packs will be unpacked.
  * @param {string} [entryName]      Name of a specific entry to extract.
  *
- * - `npm build:json - Extract all compendium LevelDB files into JSON files.
- * - `npm build:json -- classes` - Only extract the contents of the specified compendium.
- * - `npm build:json -- classes Barbarian` - Only extract a single item from the specified compendium.
+ * - `npm build:source - Extract all compendium LevelDB files into source files.
+ * - `npm build:source -- classes` - Only extract the contents of the specified compendium.
+ * - `npm build:source -- classes Barbarian` - Only extract a single item from the specified compendium.
  */
 async function extractPacks(packName, entryName) {
   entryName = entryName?.toLowerCase();
@@ -256,12 +257,12 @@ async function extractPacks(packName, entryName) {
         if ( entryName && (entryName !== entry.name.toLowerCase()) ) return false;
         cleanPackEntry(entry);
       }, transformName: entry => {
-        if ( entry._id in folders ) return path.join(folders[entry._id].path, "_folder.json");
-        if ( entry._id in containers ) return path.join(containers[entry._id].path, "_container.json");
+        if ( entry._id in folders ) return path.join(folders[entry._id].path, "_folder.yml");
+        if ( entry._id in containers ) return path.join(containers[entry._id].path, "_container.yml");
         const outputName = slugify(entry.name);
         const parent = containers[entry.system?.container] ?? folders[entry.folder];
-        return path.join(parent?.path ?? "", `${outputName}.json`);
-      }
+        return path.join(parent?.path ?? "", `${outputName}.yml`);
+      }, yaml: true
     });
   }
 }

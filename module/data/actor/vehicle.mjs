@@ -1,4 +1,3 @@
-import FormulaField from "../fields/formula-field.mjs";
 import SourceField from "../shared/source-field.mjs";
 import DamageTraitField from "./fields/damage-trait-field.mjs";
 import SimpleTraitField from "./fields/simple-trait-field.mjs";
@@ -10,14 +9,16 @@ import TraitsFields from "./templates/traits.mjs";
 const { ArrayField, BooleanField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import { SourceData } from "../shared/source-field.mjs"
+ * @import { ArmorClassData } from "./templates/attributes.mjs"
+ */
+
+/**
  * System data definition for Vehicles.
  *
  * @property {string} vehicleType                      Type of vehicle as defined in `DND5E.vehicleTypes`.
  * @property {object} attributes
- * @property {object} attributes.ac
- * @property {number} attributes.ac.flat               Flat value used for flat or natural armor calculation.
- * @property {string} attributes.ac.calc               Name of one of the built-in formulas to use.
- * @property {string} attributes.ac.formula            Custom formula to use.
+ * @property {ArmorClassData} attributes.ac
  * @property {string} attributes.ac.motionless         Changes to vehicle AC when not moving.
  * @property {object} attributes.hp
  * @property {number} attributes.hp.value              Current hit points.
@@ -67,9 +68,7 @@ export default class VehicleData extends CommonTemplate {
       attributes: new SchemaField({
         ...AttributesFields.common,
         ac: new SchemaField({
-          flat: new NumberField({ integer: true, min: 0, label: "DND5E.ArmorClassFlat" }),
-          calc: new StringField({ initial: "default", label: "DND5E.ArmorClassCalculation" }),
-          formula: new FormulaField({ deterministic: true, label: "DND5E.ArmorClassFormula" }),
+          ...AttributesFields.armorClass,
           motionless: new StringField({ required: true, label: "DND5E.ArmorClassMotionless" })
         }, { label: "DND5E.ArmorClass" }),
         hp: new SchemaField({
@@ -164,9 +163,9 @@ export default class VehicleData extends CommonTemplate {
   /** @inheritDoc */
   prepareBaseData() {
     this.attributes.prof = 0;
+    this.attributes.ac.calc = "flat";
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
-    SourceField.shimActor.call(this);
   }
 
   /* -------------------------------------------- */
@@ -177,11 +176,15 @@ export default class VehicleData extends CommonTemplate {
     const { originalSaves } = this.parent.getOriginalStats();
 
     this.prepareAbilities({ rollData, originalSaves });
+    AttributesFields.prepareArmorClass.call(this, rollData);
     AttributesFields.prepareEncumbrance.call(this, rollData, { validateItem: item =>
       (item.flags.dnd5e?.vehicleCargo === true) || !["weapon", "equipment"].includes(item.type)
     });
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp);
+    AttributesFields.prepareInitiative.call(this, rollData);
+    AttributesFields.prepareMovement.call(this);
     SourceField.prepareData.call(this.source, this.parent._stats?.compendiumSource ?? this.parent.uuid);
+    TraitsFields.prepareResistImmune.call(this);
   }
 }
 

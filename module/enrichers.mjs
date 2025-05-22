@@ -166,7 +166,10 @@ async function enrichAttack(config, label, options) {
     else if ( value === "extended" ) config.format = "extended";
     else formulaParts.push(value);
   }
-  config.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+  config.formula = Roll.defaultImplementation.replaceFormulaData(
+    formulaParts.join(" "),
+    options.rollData ?? options.relativeTo?.getRollData?.() ?? {}
+  );
 
   const activity = config.activity ? options.relativeTo?.system?.activities?.get(config.activity)
     : !config.formula ? options.relativeTo?.system?.activities?.getByType("attack")[0] : null;
@@ -182,6 +185,7 @@ async function enrichAttack(config, label, options) {
     config.formula = simplifyRollFormula(
       Roll.defaultImplementation.replaceFormulaData(attackConfig.parts.join(" + "), attackConfig.data)
     );
+    if ( attackConfig.data.scaling ) config.scaling ??= String(attackConfig.data.scaling.increase);
     delete config.activity;
   }
 
@@ -255,7 +259,7 @@ async function enrichAward(config, label, options) {
     amount = Number.isNumeric(amount) ? formatNumber(amount) : amount;
     entries.push(`
       <span class="award-entry">
-        ${amount} <i class="currency ${key}" data-tooltip="${label}" aria-label="${label}"></i>
+        ${amount} <i class="currency ${key}" data-tooltip aria-label="${label}"></i>
       </span>
     `);
   }
@@ -437,7 +441,7 @@ async function enrichCheck(config, label, options) {
   for ( const tool of config.tool ) {
     const toolConfig = CONFIG.DND5E.tools[slugify(tool)];
     const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[slugify(tool)];
-    const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true }) : null;
+    const toolIndex = toolUUID ? Trait.getBaseItem(toolUUID.id, { indexOnly: true }) : null;
     if ( toolIndex ) {
       const ability = config.ability || toolConfig?.ability;
       if ( ability ) {
@@ -468,7 +472,9 @@ async function enrichCheck(config, label, options) {
     invalid = true;
   }
 
-  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData);
+  if ( config.dc && !Number.isNumeric(config.dc) ) {
+    config.dc = simplifyBonus(config.dc, options.rollData ?? options.relativeTo?.getRollData?.() ?? {});
+  }
 
   if ( invalid ) return null;
 
@@ -628,7 +634,9 @@ async function enrichSave(config, label, options) {
     return null;
   }
 
-  if ( config.dc && !Number.isNumeric(config.dc) ) config.dc = simplifyBonus(config.dc, options.rollData);
+  if ( config.dc && !Number.isNumeric(config.dc) ) {
+    config.dc = simplifyBonus(config.dc, options.rollData ?? options.relativeTo?.getRollData?.() ?? {});
+  }
 
   if ( config.ability.length > 1 && label ) {
     console.warn(`Multiple abilities and custom label found while enriching ${config._input}, which aren't supported together.`);
@@ -774,7 +782,10 @@ async function enrichDamage(configs, label, options) {
       else if ( value === "temp" ) c.type.push("temphp");
       else formulaParts.push(value);
     }
-    c.formula = Roll.defaultImplementation.replaceFormulaData(formulaParts.join(" "), options.rollData ?? {});
+    c.formula = Roll.defaultImplementation.replaceFormulaData(
+      formulaParts.join(" "),
+      options.rollData ?? options.relativeTo?.getRollData?.() ?? {}
+    );
     if ( configs._isHealing && !c.type.length ) c.type.push("healing");
     if ( c.formula ) {
       config.formulas.push(c.formula);
@@ -807,6 +818,7 @@ async function enrichDamage(configs, label, options) {
       config.formulas.push(simplifyRollFormula(
         Roll.defaultImplementation.replaceFormulaData(roll.parts.join(" + "), roll.data)
       ));
+      if ( roll.data.scaling ) config.scaling ??= String(roll.data.scaling.increase);
       config.damageTypes.push(roll.options.types?.join("|") ?? roll.options.type);
     }
     delete config.activity;
@@ -849,6 +861,7 @@ async function enrichDamage(configs, label, options) {
       } else {
         localizationType = "Short";
       }
+      if ( String(localizationData.average) === formula ) localizationType = "Short";
     }
 
     parts.push(game.i18n.format(`EDITOR.DND5E.Inline.Damage${localizationType}`, localizationData));
@@ -958,7 +971,7 @@ function enrichLookup(config, fallback, options) {
  *     <i class="fas fa-book-open"></i> Label
  *   </a>
  *   <a class="enricher-action" data-action="apply" data-status="unconscious"
- *      data-tooltip="EDITOR.DND5E.Inline.ApplyStatus" aria-label="Apply Status to Selected Tokens">
+ *      data-tooltip aria-label="Apply Status to Selected Tokens">
  *     <i class="fas fa-fw fa-reply-all fa-flip-horizontal"></i>
  *   </a>
  * </span>
@@ -967,17 +980,17 @@ function enrichLookup(config, fallback, options) {
 async function enrichReference(config, label, options) {
   let key;
   let source;
-  let isCondition = "condition" in config;
-  const type = Object.keys(config).find(k => k in CONFIG.DND5E.ruleTypes);
+  let type = Object.keys(config).find(k => k in CONFIG.DND5E.ruleTypes);
   if ( type ) {
     key = slugify(config[type]);
-    source = foundry.utils.getProperty(CONFIG.DND5E, CONFIG.DND5E.ruleTypes[type].references)?.[key];
+    const { references } = CONFIG.DND5E.ruleTypes[type] ?? {};
+    source = foundry.utils.getProperty(CONFIG.DND5E, references)?.[key];
   } else if ( config.values.length ) {
     key = slugify(config.values.join(""));
-    for ( const [type, { references }] of Object.entries(CONFIG.DND5E.ruleTypes) ) {
-      source = foundry.utils.getProperty(CONFIG.DND5E, references)[key];
+    for ( const [t, { references }] of Object.entries(CONFIG.DND5E.ruleTypes) ) {
+      source = foundry.utils.getProperty(CONFIG.DND5E, references)?.[key];
       if ( source ) {
-        if ( type === "condition" ) isCondition = true;
+        type = t;
         break;
       }
     }
@@ -992,13 +1005,13 @@ async function enrichReference(config, label, options) {
   const span = document.createElement("span");
   span.classList.add("reference-link");
   span.append(doc.toAnchor({ name: label || doc.name }));
-  if ( isCondition && (config.apply !== false) ) {
+  if ( (type === "condition") && (config.apply !== false) ) {
     const apply = document.createElement("a");
     apply.classList.add("enricher-action");
     apply.dataset.action = "apply";
     apply.dataset.status = key;
-    apply.dataset.tooltip = "EDITOR.DND5E.Inline.ApplyStatus";
-    apply.setAttribute("aria-label", game.i18n.localize(apply.dataset.tooltip));
+    apply.dataset.tooltip = "";
+    apply.setAttribute("aria-label", game.i18n.localize("EDITOR.DND5E.Inline.ApplyStatus"));
     apply.innerHTML = '<i class="fas fa-fw fa-reply-all fa-flip-horizontal"></i>';
     span.append(apply);
   }
@@ -1068,6 +1081,15 @@ async function enrichItem(config, label, options) {
   const itemUuidMatch = givenItem.match(
     /^(?<synthid>Scene\.\w{16}\.Token\.\w{16}\.)?(?<actorid>Actor\.\w{16})(?<itemid>\.?Item(?<relativeId>\.\w{16}))$/
   );
+
+  const makeLink = (label, dataset) => {
+    const span = document.createElement("span");
+    span.classList.add("roll-link-group");
+    _addDataset(span, dataset);
+    span.append(createRollLink(label));
+    return span;
+  };
+
   if ( itemUuidMatch ) {
     const ownerActor = itemUuidMatch.groups.actorid.trim();
     if ( !label ) {
@@ -1078,7 +1100,7 @@ async function enrichItem(config, label, options) {
       }
       label = item.name;
     }
-    return createRollLink(label, { type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
+    return makeLink(label, { type: "item", rollItemActor: ownerActor, rollItemUuid: givenItem });
   }
 
   let foundItem;
@@ -1095,14 +1117,6 @@ async function enrichItem(config, label, options) {
       foundItem = await fromUuid(givenItem, { relative: options.relativeTo });
     } catch(err) { return null; }
   }
-
-  const makeLink = (label, dataset) => {
-    const span = document.createElement("span");
-    span.classList.add("roll-link-group");
-    _addDataset(span, dataset);
-    span.append(createRollLink(label));
-    return span;
-  };
 
   if ( foundItem ) {
     let foundActivity;
@@ -1174,7 +1188,7 @@ export function createRollLabel(config) {
   const { label: ability, abbreviation } = CONFIG.DND5E.abilities[config.ability] ?? {};
   const skill = CONFIG.DND5E.skills[config.skill]?.label;
   const toolUUID = CONFIG.DND5E.enrichmentLookup.tools[config.tool];
-  const tool = toolUUID ? Trait.getBaseItem(toolUUID, { indexOnly: true })?.name : null;
+  const tool = toolUUID ? Trait.getBaseItem(toolUUID.id, { indexOnly: true })?.name : null;
   const longSuffix = config.format === "long" ? "Long" : "Short";
   const showDC = config.dc && !config.hideDC;
 
@@ -1290,6 +1304,7 @@ async function applyAction(event) {
   const status = target?.dataset.status;
   if ( !status ) return;
   event.stopPropagation();
+  window.getSelection().empty();
   const actors = new Set();
   for ( const { actor } of canvas.tokens.controlled ) {
     if ( !actor || actors.has(actor) ) continue;
@@ -1310,6 +1325,7 @@ async function awardAction(event) {
   const command = target?.closest("[data-award-command]")?.dataset.awardCommand;
   if ( !command ) return;
   event.stopPropagation();
+  window.getSelection().empty();
   Award.handleAward(command);
 }
 
@@ -1324,6 +1340,7 @@ async function rollAction(event) {
   const target = event.target.closest('.roll-link-group, [data-action="rollRequest"], [data-action="concentration"]');
   if ( !target ) return;
   event.stopPropagation();
+  window.getSelection().empty();
 
   const dataset = {
     ...((event.target.closest(".roll-link-group") ?? target)?.dataset ?? {}),
@@ -1389,7 +1406,9 @@ async function rollAction(event) {
 
     const chatData = {
       user: game.user.id,
-      content: await renderTemplate("systems/dnd5e/templates/chat/request-card.hbs", { buttons }),
+      content: await foundry.applications.handlebars.renderTemplate(
+        "systems/dnd5e/templates/chat/request-card.hbs", { buttons }
+      ),
       flavor: game.i18n.localize("EDITOR.DND5E.Inline.RollRequest"),
       speaker: MessageClass.getSpeaker({user: game.user})
     };
@@ -1421,10 +1440,10 @@ function createRequestButton(dataset) {
  */
 async function rollAttack(event) {
   const target = event.target.closest(".roll-link-group");
-  const { activityUuid, attackMode, formula } = target.dataset;
+  const { activityUuid, attackMode, formula, scaling } = target.dataset;
 
   if ( activityUuid ) {
-    const activity = await fromUuid(activityUuid);
+    const activity = await _fetchActivity(activityUuid, Number(scaling ?? 0));
     if ( activity ) return activity.rollAttack({ attackMode, event });
   }
 
@@ -1473,10 +1492,10 @@ async function rollAttack(event) {
  */
 async function rollDamage(event) {
   const target = event.target.closest(".roll-link-group");
-  let { activityUuid, attackMode, formulas, damageTypes, rollType } = target.dataset;
+  let { activityUuid, attackMode, formulas, damageTypes, rollType, scaling } = target.dataset;
 
   if ( activityUuid ) {
-    const activity = await fromUuid(activityUuid);
+    const activity = await _fetchActivity(activityUuid, Number(scaling ?? 0));
     if ( activity ) return activity.rollDamage({ attackMode, event });
   }
 
@@ -1513,6 +1532,21 @@ async function rollDamage(event) {
   const rolls = await CONFIG.Dice.DamageRoll.build(rollConfig, {}, messageConfig);
   if ( !rolls?.length ) return;
   Hooks.callAll("dnd5e.rollDamageV2", rolls);
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Fetch an activity with scaling applied.
+ * @param {string} uuid     Activity UUID.
+ * @param {number} scaling  Scaling increase to apply.
+ * @returns {Activity|void}
+ */
+async function _fetchActivity(uuid, scaling) {
+  const activity = await fromUuid(uuid);
+  if ( !activity || !scaling ) return activity;
+  const item = activity.item.clone({ "flags.dnd5e.scaling": scaling }, { keepId: true });
+  return item.system.activities.get(activity.id);
 }
 
 /* -------------------------------------------- */

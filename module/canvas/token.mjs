@@ -1,7 +1,7 @@
 /**
  * Extend the base Token class to implement additional system-specific logic.
  */
-export default class Token5e extends Token {
+export default class Token5e extends foundry.canvas.placeables.Token {
 
   /**
    * Update the token ring when this token is targeted.
@@ -54,38 +54,38 @@ export default class Token5e extends Token {
     const c = CONFIG.DND5E.tokenHPColors;
 
     // Determine the container size (logic borrowed from core)
-    const w = this.w;
-    let h = Math.max((canvas.dimensions.size / 12), 8);
-    if ( this.document.height >= 2 ) h *= 1.6;
-    const bs = Math.clamp(h / 8, 1, 2);
-    const bs1 = bs+1;
+    let s = canvas.dimensions.uiScale;
+    const bw = this.w;
+    const bh = 8 * (this.document.height >= 2 ? 1.5 : 1) * s;
+    const bs = s;
+    const bs1 = bs + s;
 
     // Overall bar container
     bar.clear();
-    bar.beginFill(blk, 0.5).lineStyle(bs, blk, 1.0).drawRoundedRect(0, 0, w, h, 3);
+    bar.beginFill(blk, 0.5).lineStyle(bs, blk, 1.0).drawRoundedRect(0, 0, bw, bh, 3 * s);
 
     // Temporary maximum HP
     if (tempmax > 0) {
       const pct = max / effectiveMax;
-      bar.beginFill(c.tempmax, 1.0).lineStyle(1, blk, 1.0).drawRoundedRect(pct*w, 0, (1-pct)*w, h, 2);
+      bar.beginFill(c.tempmax, 1.0).lineStyle(1, blk, 1.0).drawRoundedRect(pct * bw, 0, (1 - pct) * bw, bh, 2 * s);
     }
 
     // Maximum HP penalty
     else if (tempmax < 0) {
       const pct = (max + tempmax) / max;
-      bar.beginFill(c.negmax, 1.0).lineStyle(1, blk, 1.0).drawRoundedRect(pct*w, 0, (1-pct)*w, h, 2);
+      bar.beginFill(c.negmax, 1.0).lineStyle(1, blk, 1.0).drawRoundedRect(pct * bw, 0, (1 - pct) * bw, bh, 2 * s);
     }
 
     // Health bar
-    bar.beginFill(hpColor, 1.0).lineStyle(bs, blk, 1.0).drawRoundedRect(0, 0, colorPct*w, h, 2);
+    bar.beginFill(hpColor, 1.0).lineStyle(bs, blk, 1.0).drawRoundedRect(0, 0, colorPct * bw, bh, 2 * s);
 
     // Temporary hit points
     if ( temp > 0 ) {
-      bar.beginFill(c.temp, 1.0).lineStyle(0).drawRoundedRect(bs1, bs1, (tempPct*w)-(2*bs1), h-(2*bs1), 1);
+      bar.beginFill(c.temp, 1.0).lineStyle(0).drawRoundedRect(bs1, bs1, (tempPct * bw) - (2 * bs1), bh - (2 * bs1), s);
     }
 
     // Set position
-    let posY = (number === 0) ? (this.h - h) : 0;
+    let posY = (number === 0) ? (this.h - bh) : 0;
     bar.position.set(0, posY);
   }
 

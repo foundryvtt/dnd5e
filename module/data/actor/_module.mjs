@@ -10,6 +10,8 @@ export {
   VehicleData
 };
 export {default as GroupSystemFlags} from "./group-system-flags.mjs";
+export {default as DamageTraitField} from "./fields/damage-trait-field.mjs";
+export {default as SimpleTraitField} from "./fields/simple-trait-field.mjs";
 export {default as AttributesFields} from "./templates/attributes.mjs";
 export {default as CommonTemplate} from "./templates/common.mjs";
 export {default as CreatureTemplate} from "./templates/creature.mjs";

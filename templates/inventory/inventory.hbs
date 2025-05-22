@@ -1,0 +1,189 @@
+<{{ elements.inventory }} class="inventory-element">
+
+    {{!-- Currency --}}
+    {{#if showCurrency}}
+    <section class="currency">
+        {{#unless @root.locked}}
+        <button type="button" class="item-action unbutton always-interactive" data-action="currency"
+                aria-label="{{ localize "DND5E.CurrencyManager.Title" }}">
+            <i class="fa-solid fa-coins" inert></i>
+        </button>
+        {{/unless}}
+        {{#each system.currency}}
+        {{#with (lookup @root.config.currencies @key) as |currency|}}
+        <label aria-label="{{ lookup currency 'label' }}">
+            <i class="currency {{ @key }}" data-tooltip="{{ lookup currency "label" }}"></i>
+            <input type="text" class="uninput always-interactive" name="system.currency.{{ @key }}"
+                   value="{{ ../this }}" data-dtype="Number" inputmode="numeric" pattern="[+=\-]?\d*"
+                   {{#if @root.locked}}readonly{{/if}}>
+        </label>
+        {{/with}}
+        {{/each}}
+    </section>
+    {{/if}}
+
+    {{!-- Filters --}}
+    {{#if listControls}}
+    <div class="middle">
+
+        <item-list-controls for="{{ listControls.list }}" collection="items" label="{{ localize listControls.label }}"
+                            {{~#if keepEmpty}} keep-empty{{/if}}>
+
+            {{#if listControls.filters.length}}
+            <datalist data-list="filters">
+                {{#each listControls.filters}}
+                <option value="{{ key }}" {{ dnd5e-dataset dataset }}>{{ localize label }}</option>
+                {{/each}}
+            </datalist>
+            {{/if}}
+
+            {{#if listControls.sorting.length}}
+            <datalist data-list="sort">
+                {{#each listControls.sorting}}
+                <option value="{{ key }}" {{ dnd5e-dataset dataset }}>{{ localize label }}</option>
+                {{/each}}
+            </datalist>
+            {{/if}}
+
+            {{#if listControls.grouping.length}}
+            <datalist data-list="group">
+                {{#each listControls.grouping}}
+                <option value="{{ key }}" {{ dnd5e-dataset dataset }}>{{ localize label }}</option>
+                {{/each}}
+            </datalist>
+            {{/if}}
+
+        </item-list-controls>
+
+    </div>
+    {{/if}}
+
+    {{!-- Items --}}
+    <section class="items-list {{ listControls.list }}-list" data-item-list="{{ listControls.list }}">
+
+        {{!-- Sections / Categories --}}
+        {{#each sections}}
+        <div class="items-section card" {{ dnd5e-dataset dataset }}>
+
+            {{!-- Section Header --}}
+            <div class="items-header header {{~#if draggable}} draggable{{/if}}">
+                <h3 class="item-name">{{ localize label }}</h3>
+                {{#each columns}}
+                <div class="item-header item-{{ id }}" data-column-id="{{ id }}" data-column-width="{{ width }}"
+                     data-column-priority="{{ priority }}">
+                    {{~#if label}}{{ localize label }}{{/if~}}
+                </div>
+                {{/each}}
+            </div>
+
+            {{!-- Section Contents --}}
+            <ol class="item-list unlist">
+                {{#each items as |item|}}
+                {{#dnd5e-itemContext item as |ctx|}}
+
+                <li class="item collapsible {{#unless ctx.isExpanded}}collapsed{{/unless}}" data-uuid="{{ item.uuid }}"
+                    data-item-id="{{ item.id }}" data-entry-id="{{ item.id }}" data-item-name="{{ item.name }}"
+                    {{ dnd5e-dataset ctx.dataset }}>
+
+                    {{!-- Row Summary --}}
+                    <div class="item-row draggable">
+
+                        {{!-- Item Name --}}
+                        <div class="item-name item-action item-tooltip {{#if ctx.clickAction}}{{ @root.rollableClass }}{{/if}}"
+                             role="button" data-action="{{ ctx.clickAction }}" aria-label="{{ item.name }}">
+
+                            {{#if ctx.concentration}}
+                            <i class="concentration fa-solid fa-arrow-rotate-left fa-spin fa-spin-reverse"
+                               aria-label="{{ localize "DND5E.Concentration" }}"></i>
+                            {{/if}}
+
+                            <img class="item-image gold-icon" src="{{ item.img }}" alt="{{ item.name }}"
+                                 draggable="false">
+
+                            <div class="name name-stacked">
+                                <span class="title">{{ item.name }}</span>
+                                {{#if ctx.subtitle}}
+                                <span class="subtitle">{{{ ctx.subtitle }}}</span>
+                                {{/if}}
+                            </div>
+
+                            <div class="tags">
+                                {{#if item.labels.components}}
+                                {{#each item.labels.components.all}}
+                                {{#if tag}}
+                                <span aria-label="{{ label }}">
+                                    <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                                </span>
+                                {{/if}}
+                                {{/each}}
+                                {{else}}
+                                {{#each item.labels.properties}}
+                                {{#if icon}}
+                                <span aria-label="{{ label }}">
+                                    <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+                                </span>
+                                {{/if}}
+                                {{/each}}
+                                {{/if}}
+                            </div>
+
+                        </div>
+
+                        {{!-- Columns --}}
+                        {{#if ctx.columns.length}}
+                            {{!-- Column overrides for an individual item --}}
+                            {{#each ctx.columns}}
+                                {{> (lookup . "template") entry=item item=item ctx=ctx isItem=true }}
+                            {{/each}}
+                        {{else}}
+                            {{!-- Otherwise use the columns defined in the section --}}
+                            {{#each ../columns}}
+                                {{> (lookup . "template") entry=item item=item ctx=ctx isItem=true }}
+                            {{/each}}
+                        {{/if}}
+
+                    </div>
+
+                    {{!-- Extended Description & Activities --}}
+                    <div class="item-description collapsible-content">
+                        <div class="wrapper">
+
+                            {{!-- Activities --}}
+                            {{#if ctx.activities.length}}
+                            <ol class="activities unlist">
+                                {{#each ctx.activities}}
+                                    {{> "systems/dnd5e/templates/inventory/activity.hbs" columns=../../columns
+                                        item=../item }}
+                                {{/each}}
+                            </ol>
+                            {{/if}}
+
+                            {{!-- Item Description --}}
+                            {{#if ctx.isExpanded}}
+                            {{> "dnd5e.item-summary" ctx.expanded }}
+                            {{/if}}
+
+                        </div>
+                    </div>
+
+                </li>
+
+                {{/dnd5e-itemContext}}
+                {{/each}}
+            </ol>
+
+        </div>
+        {{/each}}
+
+    </section>
+
+    {{!-- Encumbrance --}}
+    {{#if encumbrance}}
+    <div class="bottom">
+        <div class="encumbrance">
+            {{> "systems/dnd5e/templates/inventory/encumbrance.hbs" }}
+        </div>
+    </div>
+    {{/if}}
+
+</{{ elements.inventory }}>

@@ -4,13 +4,16 @@
  * Author: Atropos
  * Software License: MIT
  * Content License: https://www.dndbeyond.com/attachments/39j2li89/SRD5.1-CCBY4.0License.pdf
+ *                  https://media.dndbeyond.com/compendium-images/srd/5.2/SRD_CC_v5.2.pdf
  * Repository: https://github.com/foundryvtt/dnd5e
  * Issue Tracker: https://github.com/foundryvtt/dnd5e/issues
  */
 
 // Import Configuration
 import DND5E from "./module/config.mjs";
-import { registerSystemKeybindings, registerSystemSettings, registerDeferredSettings } from "./module/settings.mjs";
+import {
+  applyLegacyRules, registerDeferredSettings, registerSystemKeybindings, registerSystemSettings
+} from "./module/settings.mjs";
 
 // Import Submodules
 import * as applications from "./module/applications/_module.mjs";
@@ -21,11 +24,12 @@ import * as documents from "./module/documents/_module.mjs";
 import * as enrichers from "./module/enrichers.mjs";
 import * as Filter from "./module/filter.mjs";
 import * as migrations from "./module/migration.mjs";
-import {default as registry} from "./module/registry.mjs";
-import * as utils from "./module/utils.mjs";
-import {ModuleArt} from "./module/module-art.mjs";
-import registerModuleData from "./module/module-registration.mjs";
+import ModuleArt from "./module/module-art.mjs";
+import { registerModuleData, setupModulePacks } from "./module/module-registration.mjs";
+import { default as registry } from "./module/registry.mjs";
 import Tooltips5e from "./module/tooltips.mjs";
+import * as utils from "./module/utils.mjs";
+import DragDrop5e from "./module/drag-drop.mjs";
 
 /* -------------------------------------------- */
 /*  Define Module Structure                     */
@@ -51,9 +55,7 @@ globalThis.dnd5e = {
 
 Hooks.once("init", function() {
   globalThis.dnd5e = game.dnd5e = Object.assign(game.system, globalThis.dnd5e);
-  console.log(`D&D 5e | Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
-
-  if ( game.release.generation < 13 ) patchFromUuid();
+  utils.log(`Initializing the D&D Fifth Game System - Version ${dnd5e.version}\n${DND5E.ASCII}`);
 
   // Record Configuration Values
   CONFIG.DND5E = DND5E;
@@ -63,9 +65,11 @@ Hooks.once("init", function() {
   CONFIG.ChatMessage.documentClass = documents.ChatMessage5e;
   CONFIG.Combat.documentClass = documents.Combat5e;
   CONFIG.Combatant.documentClass = documents.Combatant5e;
+  CONFIG.CombatantGroup.documentClass = documents.CombatantGroup5e;
   CONFIG.Item.collection = dataModels.collection.Items5e;
   CONFIG.Item.compendiumIndexFields.push("system.container");
   CONFIG.Item.documentClass = documents.Item5e;
+  CONFIG.JournalEntryPage.documentClass = documents.JournalEntryPage5e;
   CONFIG.Token.documentClass = documents.TokenDocument5e;
   CONFIG.Token.objectClass = canvas.Token5e;
   CONFIG.User.documentClass = documents.User5e;
@@ -77,16 +81,17 @@ Hooks.once("init", function() {
   CONFIG.Dice.D20Roll = dice.D20Roll;
   CONFIG.MeasuredTemplate.defaults.angle = 53.13; // 5e cone RAW should be 53.13 degrees
   CONFIG.Note.objectClass = canvas.Note5e;
+  CONFIG.ui.chat = applications.ChatLog5e;
   CONFIG.ui.combat = applications.combat.CombatTracker5e;
-  CONFIG.ui.items = dnd5e.applications.item.ItemDirectory5e;
+  CONFIG.ui.items = applications.item.ItemDirectory5e;
+  CONFIG.ux.DragDrop = DragDrop5e;
 
   // Register System Settings
   registerSystemSettings();
   registerSystemKeybindings();
 
-  // Configure module art & register module data
+  // Configure module art
   game.dnd5e.moduleArt = new ModuleArt();
-  registerModuleData();
 
   // Configure bastions
   game.dnd5e.bastion = new documents.Bastion();
@@ -94,38 +99,18 @@ Hooks.once("init", function() {
   // Configure tooltips
   game.dnd5e.tooltips = new Tooltips5e();
 
-  // Set up status effects
-  _configureStatusEffects();
-
   // Remove honor & sanity from configuration if they aren't enabled
   if ( !game.settings.get("dnd5e", "honorScore") ) delete DND5E.abilities.hon;
   if ( !game.settings.get("dnd5e", "sanityScore") ) delete DND5E.abilities.san;
 
   // Legacy rules.
-  if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
+  if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) applyLegacyRules();
 
-    // Set half-casters to round down.
-    delete DND5E.spellcastingTypes.leveled.progression.half.roundUp;
+  // Register system
+  DND5E.SPELL_LISTS.forEach(uuid => dnd5e.registry.spellLists.register(uuid));
 
-    // Adjust Wild Shape and Polymorph presets.
-    delete DND5E.transformationPresets.wildshape.options.keepHP;
-    delete DND5E.transformationPresets.wildshape.options.keepType;
-    delete DND5E.transformationPresets.polymorph.options.addTemp;
-    delete DND5E.transformationPresets.polymorph.options.keepHP;
-    delete DND5E.transformationPresets.polymorph.options.keepType;
-
-    // Adjust language categories.
-    delete DND5E.languages.standard.children.sign;
-    DND5E.languages.exotic.children.draconic = DND5E.languages.standard.children.draconic;
-    delete DND5E.languages.standard.children.draconic;
-    DND5E.languages.cant = DND5E.languages.exotic.children.cant;
-    delete DND5E.languages.exotic.children.cant;
-    DND5E.languages.druidic = DND5E.languages.exotic.children.druidic;
-    delete DND5E.languages.exotic.children.druidic;
-
-    // Stunned stops movement in legacy.
-    DND5E.conditionEffects.noMovement.add("stunned");
-  }
+  // Register module data from manifests
+  registerModuleData();
 
   // Register Roll Extensions
   CONFIG.Dice.rolls = [dice.BasicRoll, dice.D20Roll, dice.DamageRoll];
@@ -141,44 +126,36 @@ Hooks.once("init", function() {
   _configureFonts();
 
   // Register sheet application classes
-  Actors.unregisterSheet("core", ActorSheet);
-  Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eCharacter, {
-    types: ["character"],
-    label: "DND5E.SheetClassCharacterLegacy"
-  });
-  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eCharacter2, {
+  const DocumentSheetConfig = foundry.applications.apps.DocumentSheetConfig;
+  DocumentSheetConfig.unregisterSheet(Actor, "core", foundry.appv1.sheets.ActorSheet);
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.CharacterActorSheet, {
     types: ["character"],
     makeDefault: true,
     label: "DND5E.SheetClassCharacter"
   });
-  Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eNPC, {
-    types: ["npc"],
-    label: "DND5E.SheetClassNPCLegacy"
-  });
-  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eNPC2, {
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.NPCActorSheet, {
     types: ["npc"],
     makeDefault: true,
     label: "DND5E.SheetClassNPC"
   });
-  Actors.registerSheet("dnd5e", applications.actor.ActorSheet5eVehicle, {
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.ActorSheet5eVehicle, {
     types: ["vehicle"],
     makeDefault: true,
     label: "DND5E.SheetClassVehicle"
   });
-  Actors.registerSheet("dnd5e", applications.actor.GroupActorSheet, {
+  DocumentSheetConfig.registerSheet(Actor, "dnd5e", applications.actor.GroupActorSheet, {
     types: ["group"],
     makeDefault: true,
     label: "DND5E.SheetClassGroup"
   });
 
-  DocumentSheetConfig.unregisterSheet(Item, "core", ItemSheet);
-  DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ItemSheet5e2, {
+  DocumentSheetConfig.unregisterSheet(Item, "core", foundry.appv1.sheets.ItemSheet);
+  DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ItemSheet5e, {
     makeDefault: true,
     label: "DND5E.SheetClassItem"
   });
   DocumentSheetConfig.unregisterSheet(Item, "dnd5e", applications.item.ItemSheet5e, { types: ["container"] });
-  DocumentSheetConfig.unregisterSheet(Item, "dnd5e", applications.item.ItemSheet5e2, { types: ["container"] });
-  DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ContainerSheet2, {
+  DocumentSheetConfig.registerSheet(Item, "dnd5e", applications.item.ContainerSheet, {
     makeDefault: true,
     types: ["container"],
     label: "DND5E.SheetClassContainer"
@@ -205,14 +182,11 @@ Hooks.once("init", function() {
     types: ["spells"]
   });
 
-  if ( game.release.generation === 12 ) {
-    // TODO: Update sheet classes and remove the above check
-    CONFIG.Token.prototypeSheetClass = applications.TokenConfig5e;
-    DocumentSheetConfig.unregisterSheet(TokenDocument, "core", TokenConfig);
-    DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
-      label: "DND5E.SheetClassToken"
-    });
-  }
+  CONFIG.Token.prototypeSheetClass = applications.PrototypeTokenConfig5e;
+  DocumentSheetConfig.unregisterSheet(TokenDocument, "core", foundry.applications.sheets.TokenConfig);
+  DocumentSheetConfig.registerSheet(TokenDocument, "dnd5e", applications.TokenConfig5e, {
+    label: "DND5E.SheetClassToken"
+  });
 
   // Preload Handlebars helpers & partials
   utils.registerHandlebarsHelpers();
@@ -257,7 +231,7 @@ function _configureTrackableAttributes() {
       ...common.value,
       ...Object.keys(DND5E.skills).map(skill => `skills.${skill}.passive`),
       ...Object.keys(DND5E.senses).map(sense => `attributes.senses.${sense}`),
-      "attributes.spelldc"
+      "attributes.spell.attack", "attributes.spell.dc"
     ]
   };
 
@@ -268,7 +242,7 @@ function _configureTrackableAttributes() {
     },
     npc: {
       bar: [...creature.bar, "resources.legact", "resources.legres"],
-      value: [...creature.value, "details.cr", "details.spellLevel", "details.xp.value"]
+      value: [...creature.value, "attributes.spell.level", "details.cr", "details.xp.value"]
     },
     vehicle: {
       bar: [...common.bar, "attributes.hp"],
@@ -356,8 +330,22 @@ function _configureStatusEffects() {
   const addEffect = (effects, {special, ...data}) => {
     data = foundry.utils.deepClone(data);
     data._id = utils.staticID(`dnd5e${data.id}`);
-    data.img = data.icon ?? data.img;
-    delete data.icon;
+    if ( data.icon ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `icon` property of status conditions has been deprecated in place of using `img`.",
+        { since: "DnD5e 5.0", until: "DnD5e 5.2" }
+      );
+      data.img = data.icon;
+      delete data.icon;
+    }
+    if ( data.label ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `label` property of status conditions has been deprecated in place of using `name`.",
+        { since: "DnD5e 5.0", until: "DnD5e 5.2" }
+      );
+      data.name = data.label;
+      delete data.label;
+    }
     effects.push(data);
     if ( special ) CONFIG.specialStatusEffects[special] = data.id;
   };
@@ -366,8 +354,8 @@ function _configureStatusEffects() {
     addEffect(arr, foundry.utils.mergeObject(original ?? {}, { id, ...data }, { inplace: false }));
     return arr;
   }, []);
-  for ( const [id, {label: name, ...data}] of Object.entries(CONFIG.DND5E.conditionTypes) ) {
-    addEffect(CONFIG.statusEffects, { id, name, ...data });
+  for ( const [id, data] of Object.entries(CONFIG.DND5E.conditionTypes) ) {
+    addEffect(CONFIG.statusEffects, { id, ...data });
   }
   for ( const [id, data] of Object.entries(CONFIG.DND5E.encumbrance.effects) ) {
     addEffect(CONFIG.statusEffects, { id, ...data, hud: false });
@@ -394,14 +382,8 @@ Hooks.once("setup", function() {
   // Register settings after modules have had a chance to initialize
   registerDeferredSettings();
 
-  // Apply table of contents compendium style if specified in flags
-  game.packs
-    .filter(p => p.metadata.flags?.display === "table-of-contents")
-    .forEach(p => p.applicationClass = applications.journal.TableOfContentsCompendium);
-
-  // Apply custom item compendium
-  game.packs.filter(p => p.metadata.type === "Item")
-    .forEach(p => p.applicationClass = applications.item.ItemCompendium5e);
+  // Set up compendiums with custom applications & sorting
+  setupModulePacks();
 
   // Create CSS for currencies
   const style = document.createElement("style");
@@ -416,6 +398,8 @@ Hooks.once("setup", function() {
     }
   `;
   document.head.append(style);
+
+  _migrateInventoryMetadata();
 });
 
 /* --------------------------------------------- */
@@ -438,6 +422,9 @@ function expandAttributeList(attributes) {
  * Perform one-time pre-localization and sorting of some configuration objects
  */
 Hooks.once("i18nInit", () => {
+  // Set up status effects. Explicitly performed after init and before prelocalization.
+  _configureStatusEffects();
+
   if ( game.settings.get("dnd5e", "rulesVersion") === "legacy" ) {
     const { translations, _fallback } = game.i18n;
     foundry.utils.mergeObject(translations, {
@@ -472,6 +459,7 @@ Hooks.once("i18nInit", () => {
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
   Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
+  foundry.helpers.Localization.localizeDataModel(dataModels.settings.TransformationSetting);
 });
 
 /* -------------------------------------------- */
@@ -484,11 +472,14 @@ Hooks.once("i18nInit", () => {
 Hooks.once("ready", function() {
   // Wait to register hotbar drop hook on ready so that modules could register earlier if they want to
   Hooks.on("hotbarDrop", (bar, data, slot) => {
-    if ( ["Item", "ActiveEffect"].includes(data.type) ) {
+    if ( ["ActiveEffect", "Activity", "Item"].includes(data.type) ) {
       documents.macro.create5eMacro(data, slot);
       return false;
     }
   });
+
+  // Adjust sourced items on actors now that compendium UUID redirects have been initialized
+  game.actors.forEach(a => a.sourcedItems._redirectKeys());
 
   // Register items by type
   dnd5e.registry.classes.initialize();
@@ -529,18 +520,16 @@ Hooks.on("renderPause", (app, [html]) => {
   img.className = "";
 });
 
-Hooks.on("renderSettings", (app, html) => {
-  html = html instanceof HTMLElement ? html : html[0];
-  if ( game.release.generation > 12 ) applications.settings.sidebar.renderSettings(html);
-  else applications.settings.sidebar.renderSettingsLegacy(html);
-});
+Hooks.on("renderSettings", (app, html) => applications.settings.sidebar.renderSettings(html));
 
 /* -------------------------------------------- */
 /*  Other Hooks                                 */
 /* -------------------------------------------- */
 
+Hooks.on("applyCompendiumArt", (documentClass, ...args) => documentClass.applyCompendiumArt?.(...args));
+
 Hooks.on("renderChatPopout", documents.ChatMessage5e.onRenderChatPopout);
-Hooks.on("getChatLogEntryContext", documents.ChatMessage5e.addChatMessageContextOptions);
+Hooks.on("getChatMessageContextOptions", documents.ChatMessage5e.addChatMessageContextOptions);
 
 Hooks.on("renderChatLog", (app, html, data) => {
   documents.Item5e.chatListeners(html);
@@ -551,15 +540,23 @@ Hooks.on("renderChatPopout", (app, html, data) => documents.Item5e.chatListeners
 Hooks.on("chatMessage", (app, message, data) => applications.Award.chatMessage(message));
 
 Hooks.on("renderActorDirectory", (app, html, data) => documents.Actor5e.onRenderActorDirectory(html));
-Hooks.on("getActorDirectoryEntryContext", documents.Actor5e.addDirectoryContextOptions);
 
-Hooks.on("renderCompendiumDirectory", (app, [html], data) => applications.CompendiumBrowser.injectSidebarButton(html));
-Hooks.on("getCompendiumEntryContext", documents.Item5e.addCompendiumContextOptions);
-Hooks.on("getItemDirectoryEntryContext", documents.Item5e.addDirectoryContextOptions);
+Hooks.on("getActorContextOptions", documents.Actor5e.addDirectoryContextOptions);
+Hooks.on("getItemContextOptions", documents.Item5e.addDirectoryContextOptions);
+
+Hooks.on("renderCompendiumDirectory", (app, html) => applications.CompendiumBrowser.injectSidebarButton(html));
 
 Hooks.on("renderJournalPageSheet", applications.journal.JournalSheet5e.onRenderJournalPageSheet);
+Hooks.on(
+  "renderJournalEntryPageProseMirrorSheet",
+  applications.journal.JournalSheet5e.onRenderJournalEntryPageProseMirrorSheet
+);
+
+Hooks.on("renderActiveEffectConfig", documents.ActiveEffect5e.onRenderActiveEffectConfig);
 
 Hooks.on("targetToken", canvas.Token5e.onTargetToken);
+
+Hooks.on("renderCombatTracker", (app, html, data) => app.renderGroups(html));
 
 Hooks.on("preCreateScene", (doc, createData, options, userId) => {
   // Set default grid units based on metric length setting
@@ -576,115 +573,33 @@ Hooks.on("preCreateScene", (doc, createData, options, userId) => {
   }
 });
 
-// TODO: Generalize this logic and make it available in the re-designed transform application.
-Hooks.on("dnd5e.transformActor", (subject, target, d, options) => {
-  const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
-  if ( (options.preset !== "wildshape") || !subject.classes?.druid || isLegacy ) return;
-  let temp = subject.classes.druid.system.levels;
-  if ( subject.classes.druid.subclass?.identifier === "moon" ) temp *= 3;
-  d.system.attributes.hp.temp = temp;
-});
-
 /* -------------------------------------------- */
-/*  Backported Fixes                            */
+/*  Deprecations                                */
 /* -------------------------------------------- */
 
 /**
- * FIXME: Remove when v12 support dropped or https://github.com/foundryvtt/foundryvtt/issues/12023 backported.
- * @ignore
+ * Migrate legacy inventory metadata.
  */
-function patchFromUuid() {
-  const _resolveEmbedded = function(parent, parts, {invalid=false}={}) {
-    let doc = parent;
-    while ( doc && (parts.length > 1) ) {
-      const [embeddedName, embeddedId] = parts.splice(0, 2);
-      doc = doc.getEmbeddedDocument(embeddedName, embeddedId, {invalid});
-    }
-    return doc;
-  };
-
-  const _resolveRelativeUuid = function(uuid, relative) {
-    if ( !(relative instanceof foundry.abstract.Document) ) {
-      throw new Error("A relative Document instance must be provided to _resolveRelativeUuid");
-    }
-    uuid = uuid.substring(1);
-    const parts = uuid.split(".");
-    if ( !parts.length ) throw new Error("Invalid relative UUID");
-    let id;
-    let type;
-    let root;
-    let primaryType;
-    let primaryId;
-    let collection;
-
-    // Identify the root document and its collection
-    const getRoot = doc => {
-      if ( doc.parent ) parts.unshift(doc.documentName, doc.id);
-      return doc.parent ? getRoot(doc.parent) : doc;
-    };
-
-    // Even-numbered parts include an explicit child document type
-    if ( (parts.length % 2) === 0 ) {
-      root = getRoot(relative);
-      id = parts.at(-1);
-      type = parts.at(-2);
-      primaryType = root.documentName;
-      primaryId = root.id;
-      uuid = [primaryType, primaryId, ...parts].join(".");
-    }
-
-    // Relative Embedded Document
-    else if ( relative.parent ) {
-      id = parts.at(-1);
-      type = relative.documentName;
-      parts.unshift(type);
-      root = getRoot(relative.parent);
-      primaryType = root.documentName;
-      primaryId = root.id;
-      uuid = [primaryType, primaryId, ...parts].join(".");
-    }
-
-    // Relative Document
-    else {
-      root = relative;
-      id = parts.pop();
-      type = relative.documentName;
-      uuid = [type, id].join(".");
-    }
-
-    // Recreate fully-qualified UUID and return the resolved result
-    collection = root.pack ? root.compendium : root.collection;
-    if ( root.pack ) uuid = `Compendium.${root.pack}.${uuid}`;
-    return {uuid, type, id, collection, primaryType, primaryId, embedded: parts,
-      documentType: primaryType ?? type, documentId: primaryId ?? id};
-  };
-
-  const parseUuid = function(uuid, {relative}={}) {
-    if ( !uuid ) throw new Error("A UUID string is required.");
-    if ( uuid.startsWith(".") && relative ) return _resolveRelativeUuid(uuid, relative);
-    return foundry.utils.parseUuid(uuid, {relative});
-  };
-
-  // Patch fromUuid to call our wrapped parseUuid in order to correctly resolve relative UUIDs on grandchild embedded
-  // Documents.
-  window.fromUuid = async function(uuid, options={}) {
-    if ( !uuid ) return null;
-    /** @deprecated since v11 */
-    if ( foundry.utils.getType(options) !== "Object" ) {
-      foundry.utils.logCompatibilityWarning("Passing a relative document as the second parameter to fromUuid is "
-        + "deprecated. Please pass it within an options object instead.", {since: 11, until: 13});
-      options = {relative: options};
-    }
-    const {relative, invalid=false} = options;
-    let {type, id, primaryId, collection, embedded, doc} = parseUuid(uuid, {relative});
-    if ( collection instanceof CompendiumCollection ) {
-      if ( type === "Folder" ) return collection.folders.get(id);
-      doc = await collection.getDocument(primaryId ?? id);
-    }
-    else doc = doc ?? collection?.get(primaryId ?? id, {invalid});
-    if ( embedded.length ) doc = _resolveEmbedded(doc, embedded, {invalid});
-    return doc || null;
-  };
+function _migrateInventoryMetadata() {
+  Object.entries(CONFIG.Item.dataModels).forEach(([type, model]) => {
+    if ( ("inventorySection" in model) || (model.metadata.inventoryItem === false) ) return;
+    if ( !("inventoryItem" in model.metadata) && !("inventoryOrder" in model.metadata) ) return;
+    const { inventoryOrder=Infinity } = model.metadata;
+    foundry.utils.logCompatibilityWarning("ItemDataModel.metadata.inventoryItem and "
+      + "ItemDataModel.metadata.inventoryOrder are deprecated. Please define an inventorySection getter on the model "
+      + "instead.", { since: "dnd5e 5.0", until: "dnd5e 5.2" });
+    Object.defineProperty(model, "inventorySection", {
+      get() {
+        return {
+          id: type,
+          order: inventoryOrder,
+          label: `${CONFIG.Item.typeLabels[type]}Pl`,
+          groups: { type },
+          columns: ["price", "weight", "quantity", "charges", "controls"]
+        };
+      }
+    });
+  });
 }
 
 /* -------------------------------------------- */

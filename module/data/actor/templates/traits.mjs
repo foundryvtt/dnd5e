@@ -84,42 +84,6 @@ export default class TraitsField {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Produce the schema field for a simple trait.
-   * @param {object} [schemaOptions={}]          Options passed to the outer schema.
-   * @param {object} [options={}]
-   * @param {string[]} [options.initial={}]      The initial value for the value set.
-   * @param {object} [options.extraFields={}]    Additional fields added to schema.
-   * @returns {SimpleTraitField}
-   */
-  static makeSimpleTrait(schemaOptions={}, {initial=[], extraFields={}}={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `makeSimpleTrait` method on `TraitsField` has been deprecated and replaced with `SimpleTraitField`.",
-      { since: "DnD5e 4.2", until: "DnD5e 4.4" }
-    );
-    return new SimpleTraitField(extraFields, { initialValue: initial, ...schemaOptions });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Produce the schema field for a damage trait.
-   * @param {object} [schemaOptions={}]          Options passed to the outer schema.
-   * @param {object} [options={}]
-   * @param {string[]} [options.initial={}]      The initial value for the value set.
-   * @param {object} [options.extraFields={}]    Additional fields added to schema.
-   * @returns {DamageTraitField}
-   */
-  static makeDamageTrait(schemaOptions={}, {initial=[], initialBypasses=[], extraFields={}}={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `makeDamageTrait` method on `TraitsField` has been deprecated and replaced with `DamageTraitField`.",
-      { since: "DnD5e 4.2", until: "DnD5e 4.4" }
-    );
-    return new DamageTraitField(extraFields, { initialValue: initial, initialBypasses, ...schemaOptions });
-  }
-
-  /* -------------------------------------------- */
   /*  Data Preparation                            */
   /* -------------------------------------------- */
 
@@ -166,10 +130,14 @@ export default class TraitsField {
   /* -------------------------------------------- */
 
   /**
-   * Modify resistances and immunities for the petrified condition.
-   * @this {CharacterData|NPCData}
+   * Prepare condition immunities & petrified condition.
+   * @this {CharacterData|NPCData|VehicleData}
    */
   static prepareResistImmune() {
+    // Apply condition immunities
+    for ( const condition of this.traits.ci.value ) this.parent.statuses.delete(condition);
+
+    // Apply petrified condition
     if ( this.parent.hasConditionEffect("petrification") ) {
       this.traits.dr.custom = game.i18n.localize("DND5E.DamageAll");
       Object.keys(CONFIG.DND5E.damageTypes).forEach(type => this.traits.dr.value.add(type));

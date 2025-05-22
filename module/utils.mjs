@@ -377,6 +377,20 @@ export function staticID(id) {
 /*  Keybindings Helper                          */
 /* -------------------------------------------- */
 
+const { MODIFIER_CODES: CODES, MODIFIER_KEYS } = (foundry.helpers?.interaction?.KeyboardManager ?? KeyboardManager);
+
+/**
+ * Track which KeyboardEvent#code presses associate with each modifier.
+ * Added support for treating Meta separate from Control.
+ * @enum {string[]}
+ */
+const MODIFIER_CODES = {
+  Alt: CODES.Alt,
+  Control: CODES.Control.filter(k => k.startsWith("Control")),
+  Meta: CODES.Control.filter(k => !k.startsWith("Control")),
+  Shift: CODES.Shift
+};
+
 /**
  * Based on the provided event, determine if the keys are pressed to fulfill the specified keybinding.
  * @param {Event} event    Triggering event.
@@ -388,16 +402,35 @@ export function areKeysPressed(event, action) {
   const activeModifiers = {};
   const addModifiers = (key, pressed) => {
     activeModifiers[key] = pressed;
-    KeyboardManager.MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
+    MODIFIER_CODES[key].forEach(n => activeModifiers[n] = pressed);
   };
-  addModifiers(KeyboardManager.MODIFIER_KEYS.CONTROL, event.ctrlKey || event.metaKey);
-  addModifiers(KeyboardManager.MODIFIER_KEYS.SHIFT, event.shiftKey);
-  addModifiers(KeyboardManager.MODIFIER_KEYS.ALT, event.altKey);
+  addModifiers(MODIFIER_KEYS.ALT, event.altKey);
+  addModifiers(MODIFIER_KEYS.CONTROL, event.ctrlKey);
+  addModifiers("Meta", event.metaKey);
+  addModifiers(MODIFIER_KEYS.SHIFT, event.shiftKey);
   return game.keybindings.get("dnd5e", action).some(b => {
     if ( game.keyboard.downKeys.has(b.key) && b.modifiers.every(m => activeModifiers[m]) ) return true;
     if ( b.modifiers.length ) return false;
     return activeModifiers[b.key];
   });
+}
+
+/* -------------------------------------------- */
+/*  Logging                                     */
+/* -------------------------------------------- */
+
+/**
+ * Log a console message with the "D&D 5e" prefix and styling.
+ * @param {string} message                    Message to display.
+ * @param {object} [options={}]
+ * @param {string} [options.color="#6e0000"]  Color to use for the log.
+ * @param {any[]} [options.extras=[]]         Extra options passed to the logging method.
+ * @param {string} [options.level="log"]      Console logging method to call.
+ */
+export function log(message, { color="#6e0000", extras=[], level="log" }={}) {
+  console[level](
+    `%cD&D 5e | %c${message}`, `color: ${color}; font-variant: small-caps`, "color: revert", ...extras
+  );
 }
 
 /* -------------------------------------------- */
@@ -683,6 +716,18 @@ export function isValidUnit(unit) {
 }
 
 /* -------------------------------------------- */
+
+/**
+ * Test if a given string is serialized JSON, and parse it if so.
+ * @param {string} raw  The raw value.
+ * @returns {any}       The parsed value, or the original value if it was not serialized JSON.
+ */
+export function parseOrString(raw) {
+  try { return JSON.parse(raw); } catch {}
+  return raw;
+}
+
+/* -------------------------------------------- */
 /*  Handlebars Template Helpers                 */
 /* -------------------------------------------- */
 
@@ -698,7 +743,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/shared/active-effects.hbs",
     "systems/dnd5e/templates/shared/active-effects2.hbs",
     "systems/dnd5e/templates/shared/inventory.hbs",
-    "systems/dnd5e/templates/shared/inventory2.hbs",
     "systems/dnd5e/templates/apps/parts/trait-list.hbs",
     "systems/dnd5e/templates/apps/parts/traits-list.hbs",
 
@@ -715,17 +759,13 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/actors/tabs/character-bastion.hbs",
     "systems/dnd5e/templates/actors/tabs/character-biography.hbs",
     "systems/dnd5e/templates/actors/tabs/character-details.hbs",
-    "systems/dnd5e/templates/actors/tabs/creature-features.hbs",
-    "systems/dnd5e/templates/actors/tabs/creature-spells.hbs",
+    "systems/dnd5e/templates/actors/tabs/creature-special-traits.hbs",
     "systems/dnd5e/templates/actors/tabs/group-members.hbs",
     "systems/dnd5e/templates/actors/tabs/npc-biography.hbs",
 
-    // Actor Sheet Item Summary Columns
-    "systems/dnd5e/templates/actors/parts/columns/column-feature-controls.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-formula.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-recovery.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-roll.hbs",
-    "systems/dnd5e/templates/actors/parts/columns/column-uses.hbs",
+    // Chat Message Partials
+    "systems/dnd5e/templates/chat/parts/card-activities.hbs",
+    "systems/dnd5e/templates/chat/parts/card-deltas.hbs",
 
     // Item Sheet Partials
     "systems/dnd5e/templates/items/details/details-background.hbs",
@@ -744,17 +784,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/items/details/details-subclass.hbs",
     "systems/dnd5e/templates/items/details/details-tool.hbs",
     "systems/dnd5e/templates/items/details/details-weapon.hbs",
-    "systems/dnd5e/templates/items/parts/item-action.hbs",
-    "systems/dnd5e/templates/items/parts/item-activation.hbs",
-    "systems/dnd5e/templates/items/parts/item-activities.hbs",
-    "systems/dnd5e/templates/items/parts/item-advancement.hbs",
-    "systems/dnd5e/templates/items/parts/item-advancement2.hbs",
-    "systems/dnd5e/templates/items/parts/item-description.hbs",
-    "systems/dnd5e/templates/items/parts/item-description2.hbs",
-    "systems/dnd5e/templates/items/parts/item-details.hbs",
-    "systems/dnd5e/templates/items/parts/item-mountable.hbs",
-    "systems/dnd5e/templates/items/parts/item-spellcasting.hbs",
-    "systems/dnd5e/templates/items/parts/item-source.hbs",
     "systems/dnd5e/templates/items/parts/item-summary.hbs",
     "systems/dnd5e/templates/items/parts/item-tooltip.hbs",
     "systems/dnd5e/templates/items/parts/spell-block.hbs",
@@ -774,19 +803,6 @@ export async function preloadHandlebarsTemplates() {
     "systems/dnd5e/templates/journal/parts/journal-table.hbs",
 
     // Activity Partials
-    "systems/dnd5e/templates/activity/columns/activity-column-controls.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-formula.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-price.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-quantity.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-range.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-recovery.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-roll.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-school.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-target.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-time.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-uses.hbs",
-    "systems/dnd5e/templates/activity/columns/activity-column-weight.hbs",
-    "systems/dnd5e/templates/activity/activity-row-summary.hbs",
     "systems/dnd5e/templates/activity/parts/activity-usage-notes.hbs",
 
     // Advancement Partials
@@ -801,7 +817,7 @@ export async function preloadHandlebarsTemplates() {
     paths[`dnd5e.${path.split("/").pop().replace(".hbs", "")}`] = path;
   }
 
-  return loadTemplates(paths);
+  return foundry.applications.handlebars.loadTemplates(paths);
 }
 
 /* -------------------------------------------- */
@@ -817,7 +833,7 @@ function dataset(object, options) {
   for ( let [key, value] of Object.entries(object ?? {}) ) {
     if ( value === undefined ) continue;
     key = key.replace(/[A-Z]+(?![a-z])|[A-Z]/g, (a, b) => (b ? "-" : "") + a.toLowerCase());
-    entries.push(`data-${key}="${value}"`);
+    entries.push(`data-${key}="${Handlebars.escapeExpression(value)}"`);
   }
   return new Handlebars.SafeString(entries.join(" "));
 }
@@ -1044,22 +1060,28 @@ function _localizeObject(obj, keys) {
 
 /**
  * A cache of already-fetched labels for faster lookup.
- * @type {Map<string, string>}
+ * @type {Record<string, Map<string, string>>}
  */
-const _attributeLabelCache = new Map();
+const _attributeLabelCache = {
+  activity: new Map(),
+  actor: new Map(),
+  item: new Map()
+};
 
 /**
- * Convert an attribute path to a human-readable label.
+ * Convert an attribute path to a human-readable label. Assumes paths are on an actor unless an reference item
+ * is provided.
  * @param {string} attr              The attribute path.
  * @param {object} [options]
  * @param {Actor5e} [options.actor]  An optional reference actor.
+ * @param {Item5e} [options.item]    An optional reference item.
  * @returns {string|void}
  */
-export function getHumanReadableAttributeLabel(attr, { actor }={}) {
+export function getHumanReadableAttributeLabel(attr, { actor, item }={}) {
   if ( attr.startsWith("system.") ) attr = attr.slice(7);
 
   // Check any actor-specific names first.
-  if ( attr.startsWith("resources.") && actor ) {
+  if ( attr.match(/^resources\.(?:primary|secondary|tertiary)/) && actor ) {
     const key = attr.replace(/\.value$/, "");
     const resource = foundry.utils.getProperty(actor, `system.${key}`);
     if ( resource?.label ) return resource.label;
@@ -1077,13 +1099,45 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   }
 
   // Check if the attribute is already in cache.
-  let label = _attributeLabelCache.get(attr);
+  let label = item ? null : _attributeLabelCache.actor.get(attr);
   if ( label ) return label;
+  let name;
+  let type = "actor";
+
+  const getSchemaLabel = (attr, type, doc) => {
+    if ( doc ) return doc.system.schema.getField(attr)?.label;
+    for ( const model of Object.values(CONFIG[type].dataModels) ) {
+      const field = model.schema.getField(attr);
+      if ( field ) return field.label;
+    }
+  };
+
+  // Activity labels
+  if ( item && attr.startsWith("activities.") ) {
+    let [, activityId, ...keyPath] = attr.split(".");
+    const activity = item.system.activities?.get(activityId);
+    if ( !activity ) return attr;
+    attr = keyPath.join(".");
+    name = `${item.name}: ${activity.name}`;
+    type = "activity";
+    if ( _attributeLabelCache.activity.has(attr) ) label = _attributeLabelCache.activity.get(attr);
+    else if ( attr === "uses.spent" ) label = "DND5E.Uses";
+  }
+
+  // Item labels
+  else if ( item ) {
+    name = item.name;
+    type = "item";
+    if ( _attributeLabelCache.item.has(attr) ) label = _attributeLabelCache.item.get(attr);
+    else if ( attr === "hd.spent" ) label = "DND5E.HitDice";
+    else if ( attr === "uses.spent" ) label = "DND5E.Uses";
+    else label = getSchemaLabel(attr, "Item", item);
+  }
 
   // Derived fields.
-  if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
+  else if ( attr === "attributes.init.total" ) label = "DND5E.InitiativeBonus";
   else if ( (attr === "attributes.ac.value") || (attr === "attributes.ac.flat") ) label = "DND5E.ArmorClass";
-  else if ( attr === "attributes.spelldc" ) label = "DND5E.SpellDC";
+  else if ( attr === "attributes.spell.dc" ) label = "DND5E.SpellDC";
 
   // Abilities.
   else if ( attr.startsWith("abilities.") ) {
@@ -1102,7 +1156,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
     const [, key] = attr.split(".");
     if ( !/spell\d+/.test(key) ) label = `DND5E.SpellSlots${key.capitalize()}`;
     else {
-      const plurals = new Intl.PluralRules(game.i18n.lang, {type: "ordinal"});
+      const plurals = new Intl.PluralRules(game.i18n.lang, { type: "ordinal" });
       const level = Number(key.slice(5));
       label = game.i18n.format(`DND5E.SpellSlotsN.${plurals.select(level)}`, { n: level });
     }
@@ -1115,20 +1169,12 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
   }
 
   // Attempt to find the attribute in a data model.
-  if ( !label ) {
-    const { CharacterData, NPCData, VehicleData, GroupData } = dnd5e.dataModels.actor;
-    for ( const model of [CharacterData, NPCData, VehicleData, GroupData] ) {
-      const field = model.schema.getField(attr);
-      if ( field ) {
-        label = field.label;
-        break;
-      }
-    }
-  }
+  if ( !label ) label = getSchemaLabel(attr, "Actor", actor);
 
   if ( label ) {
     label = game.i18n.localize(label);
-    _attributeLabelCache.set(attr, label);
+    _attributeLabelCache[type].set(attr, label);
+    if ( name ) label = `${name} ${label}`;
   }
 
   return label;
@@ -1143,7 +1189,7 @@ export function getHumanReadableAttributeLabel(attr, { actor }={}) {
  * @param {string[]} prefixes
  */
 export function localizeSchema(schema, prefixes) {
-  Localization.localizeDataModel({ schema }, { prefixes });
+  foundry.helpers.Localization.localizeDataModel({ schema }, { prefixes });
 }
 
 /* -------------------------------------------- */
@@ -1153,7 +1199,7 @@ export function localizeSchema(schema, prefixes) {
  * @param {string} input
  * @returns {string[]}
  */
-export function splitSemicolons(input) {
+export function splitSemicolons(input="") {
   return input.split(";").map(t => t.trim()).filter(t => t);
 }
 

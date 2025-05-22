@@ -1,0 +1,150 @@
+_id: ZoUVmRA3HfAK2eZy
+name: Candle of Invocation
+type: consumable
+img: icons/sundries/lights/candle-unlit-yellow.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>This slender taper is dedicated to a deity and shares that deity's
+      alignment. The candle's alignment can be detected with the Detect Evil and
+      Good spell. The GM chooses the god and associated alignment or determines
+      the alignment randomly from the
+      @UUID[Compendium.dnd5e.tables.RollTable.C1N8LjO7gOjEWgh4]{Candle of
+      Invocation} table.</p>
+
+      <p>The candle's magic is activated when the candle is lit, which requires
+      an action. After burning for 4 hours, the candle is destroyed. You can
+      snuff it out early for use at a later time. Deduct the time it burned in
+      increments of 1 minute from the candle's total burn time.</p>
+
+      <p>While lit, the candle sheds dim light in a 30-foot radius. Any creature
+      within that light whose alignment matches that of the candle makes attack
+      rolls, saving throws, and ability checks with advantage. In addition, a
+      cleric or druid in the light whose alignment matches the candle's can cast
+      1st- level spells he or she has prepared without expending spell slots,
+      though the spell's effect is as if cast with a 1st-level slot.</p>
+
+      <p>Alternatively, when you light the candle for the first time, you can
+      cast the
+      <em>@UUID[Compendium.dnd5e.spells.Item.XbwGq5kDJNvAxNXV]{Gate}</em>spell
+      with it. Doing so destroys the candle.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 0
+    units: lb
+  price:
+    value: 12000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: veryRare
+  identified: true
+  uses:
+    max: '1'
+    recovery: []
+    autoDestroy: false
+    spent: 0
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '4'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: radius
+          size: '30'
+          width: ''
+          height: ''
+          units: ft
+        affects:
+          count: ''
+          type: ''
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: candle-of-invocation
+effects: []
+folder: UnUwTG4YIgd0kaUJ
+sort: 6400000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037220102
+  modifiedTime: 1725992524062
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!ZoUVmRA3HfAK2eZy'

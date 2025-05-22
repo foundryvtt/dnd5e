@@ -1,0 +1,119 @@
+_id: OPbdSlrhkUDNpgcS
+name: Wand of the War Mage +1
+type: equipment
+img: icons/weapons/wands/wand-gem-blue.webp
+system:
+  description:
+    value: >-
+      <p><em>Wand (requires attunement by a spellcaster)</em></p><p>While
+      holding this wand, you gain a bonus to spell attack rolls of +1. In
+      addition, you ignore half cover when making a spell attack.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 1200
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: uncommon
+  identified: true
+  cover: null
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  armor:
+    value: 0
+    dex: null
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: wand
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - foc
+    - mgc
+  activities: {}
+  attuned: false
+  identifier: wand-of-the-war-mage-1
+effects:
+  - name: Wand of the War Mage +1
+    img: icons/weapons/wands/wand-gem-blue.webp
+    origin: Compendium.dnd5e.items.Item.OPbdSlrhkUDNpgcS
+    _id: L2JsUOPt6kCEVZHT
+    type: base
+    system: {}
+    changes:
+      - key: system.bonuses.msak.attack
+        mode: 2
+        value: '1'
+        priority: null
+      - key: system.bonuses.rsak.attack
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      combat: null
+      seconds: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags:
+      dnd5e:
+        riders:
+          statuses: []
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.4.0
+      createdTime: 1745449884898
+      modifiedTime: 1745449913706
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!OPbdSlrhkUDNpgcS.L2JsUOPt6kCEVZHT'
+folder: 1aDgsGVwDbPdxG2V
+sort: 300000
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.1.0
+  createdTime: 1725037176775
+  modifiedTime: 1730323663222
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!OPbdSlrhkUDNpgcS'

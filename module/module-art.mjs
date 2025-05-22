@@ -8,7 +8,7 @@
 /**
  * A class responsible for managing module-provided art in compendia.
  */
-export class ModuleArt {
+export default class ModuleArt {
   constructor() {
     /**
      * The stored map of actor UUIDs to their art information.
@@ -23,7 +23,13 @@ export class ModuleArt {
    * Set to true to temporarily prevent actors from loading module art.
    * @type {boolean}
    */
-  suppressArt = false;
+  get suppressArt() {
+    return !game.compendiumArt.enabled;
+  }
+
+  set suppressArt(value) {
+    game.compendiumArt.enabled = !value;
+  }
 
   /* -------------------------------------------- */
 
@@ -35,6 +41,10 @@ export class ModuleArt {
     this.map.clear();
     // Load art modules in reverse order so that higher-priority modules overwrite lower-priority ones.
     for ( const { id, mapping, credit } of this.constructor.getArtModules().reverse() ) {
+      foundry.utils.logCompatibilityWarning(
+        "The dnd5e `ModuleArt` system has been deprecated and replaced with core's `CompendiumArt` system.",
+        { since: "DnD5e 5.0", until: "DnD5e 6.0", once: true }
+      );
       try {
         const json = await foundry.utils.fetchJsonWithTimeout(mapping);
         await this.#parseArtMapping(id, json, credit);
@@ -67,9 +77,9 @@ export class ModuleArt {
         else delete info.actor;
         if ( !settings.tokens ) delete info.token;
         if ( credit ) info.credit = credit;
-        const uuid = `Compendium.${packName}.${actorId}`;
+        const uuid = pack.getUuid(actorId);
         info = foundry.utils.mergeObject(this.map.get(uuid) ?? {}, info, {inplace: false});
-        this.map.set(`Compendium.${packName}.${actorId}`, info);
+        this.map.set(uuid, info);
       }
     }
   }
@@ -120,18 +130,7 @@ export class ModuleArt {
   static getArtModules() {
     const settings = game.settings.get("dnd5e", "moduleArtConfiguration");
     const unsorted = [];
-    const configs = [{
-      id: game.system.id,
-      label: game.system.title,
-      mapping: "systems/dnd5e/json/fa-token-mapping.json",
-      priority: settings.dnd5e?.priority ?? CONST.SORT_INTEGER_DENSITY,
-      credit: `
-        <em>
-          Token artwork by
-          <a href="https://www.forgotten-adventures.net/" target="_blank" rel="noopener">Forgotten Adventures</a>.
-        </em>
-      `
-    }];
+    const configs = [];
 
     for ( const module of game.modules ) {
       const flags = module.flags?.[module.id];

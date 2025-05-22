@@ -1,0 +1,146 @@
+_id: Aq1rhgcgFnwu2T4I
+name: Cloak of the Bat
+type: equipment
+img: icons/equipment/back/cloak-layered-tattered-purple.webp
+system:
+  description:
+    value: >-
+      <p><em>Wondrous item, (requires attunement)</em></p>
+
+      <p>While wearing this cloak, you have advantage on Dexterity (Stealth)
+      checks. In an area of dim light or darkness, you can grip the edges of the
+      cloak with both hands and use it to fly at a speed of 40 feet. If you ever
+      fail to grip the cloak's edges while flying in this way, or if you are no
+      longer in dim light or darkness, you lose this flying speed.</p>
+
+      <p>While wearing the cloak in an area of dim light or darkness, you can
+      use your action to cast
+      @UUID[Compendium.dnd5e.spells.Item.04nMsTWkIFvkbXlY]{Polymorph} on
+      yourself, transforming into a bat. While you are in the form of the bat,
+      you retain your Intelligence, Wisdom, and Charisma scores.</p>
+
+      <p>The cloak can't be used this way again until the next dawn.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 3
+    units: lb
+  price:
+    value: 6000
+    denomination: gp
+  attunement: required
+  equipped: false
+  rarity: rare
+  identified: true
+  cover: null
+  uses:
+    max: '1'
+    recovery:
+      - period: day
+        type: recoverAll
+    spent: 0
+  armor:
+    value: 0
+    dex: 0
+    magicalBonus: null
+  hp:
+    value: 0
+    max: 0
+    dt: null
+    conditions: ''
+  speed:
+    value: null
+    conditions: ''
+  strength: null
+  proficient: null
+  type:
+    value: clothing
+    baseItem: ''
+  unidentified:
+    description: ''
+  container: null
+  crewed: false
+  properties:
+    - mgc
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: 1
+        condition: ''
+        override: false
+      consumption:
+        targets:
+          - type: itemUses
+            target: ''
+            value: '1'
+            scaling:
+              mode: ''
+              formula: ''
+        scaling:
+          allowed: false
+          max: ''
+        spellSlot: true
+      description:
+        chatFlavor: ''
+      duration:
+        concentration: false
+        value: '1'
+        units: hour
+        special: ''
+        override: false
+      effects: []
+      range:
+        units: ''
+        special: ''
+        override: false
+      target:
+        template:
+          count: ''
+          contiguous: false
+          type: ''
+          size: ''
+          width: ''
+          height: ''
+          units: ''
+        affects:
+          count: ''
+          type: self
+          choice: false
+          special: ''
+        prompt: true
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  attuned: false
+  identifier: cloak-of-the-bat
+effects: []
+folder: aJgMxnZED9XdoN2W
+sort: 0
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037123236
+  modifiedTime: 1725992491533
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!Aq1rhgcgFnwu2T4I'

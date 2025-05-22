@@ -101,6 +101,7 @@ export default class SaveActivityData extends BaseActivityData {
     super.prepareData();
     if ( !this.damage.onSave ) this.damage.onSave = this.isSpell && (this.item.system.level === 0) ? "none" : "half";
     if ( this.save.dc.calculation === "initial" ) this.save.dc.calculation = this.isSpell ? "spellcasting" : "";
+    this.save.dc.bonus = "";
   }
 
   /* -------------------------------------------- */
@@ -109,13 +110,16 @@ export default class SaveActivityData extends BaseActivityData {
   prepareFinalData(rollData) {
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
-    this.prepareDamageLabel(this.damage.parts, rollData);
+    this.prepareDamageLabel(rollData);
+
+    const bonus = this.save.dc.bonus ? simplifyBonus(this.save.dc.bonus, rollData) : 0;
 
     let ability;
     if ( this.save.dc.calculation ) ability = this.ability;
     else this.save.dc.value = simplifyBonus(this.save.dc.formula, rollData);
     this.save.dc.value ??= this.actor?.system.abilities?.[ability]?.dc
       ?? 8 + (this.actor?.system.attributes?.prof ?? 0);
+    this.save.dc.value += bonus;
 
     if ( this.save.dc.value ) this.labels.save = game.i18n.format("DND5E.SaveDC", {
       dc: this.save.dc.value,

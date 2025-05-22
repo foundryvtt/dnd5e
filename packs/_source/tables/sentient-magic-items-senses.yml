@@ -1,0 +1,74 @@
+name: Sentient Magic Items Senses
+img: icons/weapons/polearms/spear-flared-silver-pink.webp
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    documentCollection: ''
+    _id: z5Yf0RYt4Kfhvhfa
+    text: Hearing and normal vision out to 30 feet.
+    img: icons/svg/d20-black.svg
+    documentId: null
+    flags: {}
+    _key: '!tables.results!gfR9uCe42xBCCktd.z5Yf0RYt4Kfhvhfa'
+  - type: text
+    weight: 1
+    range:
+      - 2
+      - 2
+    drawn: false
+    documentCollection: ''
+    _id: Fs0E2WLA6mfi1sUr
+    text: Hearing and normal vision out to 60 feet.
+    img: icons/svg/d20-black.svg
+    documentId: null
+    flags: {}
+    _key: '!tables.results!gfR9uCe42xBCCktd.Fs0E2WLA6mfi1sUr'
+  - type: text
+    weight: 1
+    range:
+      - 3
+      - 3
+    drawn: false
+    documentCollection: ''
+    _id: rFdT3QtO3NDOz92d
+    text: Hearing and normal vision out to 120 feet.
+    img: icons/svg/d20-black.svg
+    documentId: null
+    flags: {}
+    _key: '!tables.results!gfR9uCe42xBCCktd.rFdT3QtO3NDOz92d'
+  - type: text
+    weight: 1
+    range:
+      - 4
+      - 4
+    drawn: false
+    documentCollection: ''
+    _id: 5vXfLp6f7vaFBd2o
+    text: Hearing and darkvision out to 120 feet.
+    img: icons/svg/d20-black.svg
+    documentId: null
+    flags: {}
+    _key: '!tables.results!gfR9uCe42xBCCktd.5vXfLp6f7vaFBd2o'
+formula: 1d4
+replacement: true
+displayRoll: true
+flags: {}
+_id: gfR9uCe42xBCCktd
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037419472
+  modifiedTime: 1725037419472
+  lastModifiedBy: dnd5ebuilder0000
+sort: 0
+folder: null
+ownership:
+  default: 0
+_key: '!tables!gfR9uCe42xBCCktd'

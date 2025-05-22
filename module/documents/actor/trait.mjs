@@ -59,7 +59,7 @@ export function actorKeyPath(trait) {
  */
 export async function actorValues(actor, trait) {
   const keyPath = actorKeyPath(trait);
-  const data = foundry.utils.getProperty(actor, keyPath);
+  const data = foundry.utils.getProperty(actor._source, keyPath);
   if ( !data ) return {};
   const values = {};
   const traitChoices = await choices(trait, {prefixed: true});
@@ -145,6 +145,7 @@ export async function categories(trait) {
 
     // Fetch base items for all IDs
     const baseItems = await Promise.all(Object.entries(ids).map(async ([key, id]) => {
+      if ( foundry.utils.getType(id) === "Object" ) id = id.id;
       const index = await getBaseItem(id);
       return [key, index];
     }));
@@ -208,7 +209,7 @@ export async function choices(trait, { chosen=new Set(), prefixed=false, any=fal
     if ( !label ) label = key;
     if ( prefixed ) key = `${prefix}:${key}`;
     result[key] = {
-      label: game.i18n.localize(label),
+      label,
       chosen: data.selectable !== false ? chosen.has(key) : false,
       selectable: data.selectable !== false,
       sorting: topLevel ? traitConfig.sortCategories === true : true
@@ -448,8 +449,9 @@ export function keyLabel(key, config={}) {
 
     // Base item (e.g. "Shortsword")
     for ( const idsKey of traitConfig.subtypes?.ids ?? [] ) {
-      const baseItemId = CONFIG.DND5E[idsKey]?.[lastKey];
+      let baseItemId = CONFIG.DND5E[idsKey]?.[lastKey];
       if ( !baseItemId ) continue;
+      if ( foundry.utils.getType(baseItemId) === "Object" ) baseItemId = baseItemId.id;
       const index = getBaseItem(baseItemId, { indexOnly: true });
       if ( index ) return index.name;
       break;
@@ -520,11 +522,11 @@ export function choiceLabel(choice, { only=false, final=false }={}) {
 
   // Singular count (e.g. "any skill", "Thieves Tools or any skill", or "Thieves' Tools or any artisan tool")
   if ( (choice.count === 1) && only ) {
-    return listFormatter.format(choice.pool.map(key => keyLabel(key)));
+    return listFormatter.format(Array.from(choice.pool).map(key => keyLabel(key)).filter(_ => _));
   }
 
   // Select from a list of options (e.g. "2 from Thieves' Tools or any skill proficiency")
-  const choices = choice.pool.map(key => keyLabel(key));
+  const choices = Array.from(choice.pool).map(key => keyLabel(key)).filter(_ => _);
   return game.i18n.format("DND5E.TraitConfigChooseList", {
     count: choice.count,
     list: listFormatter.format(choices)
@@ -561,7 +563,7 @@ export function localizedList({ grants=new Set(), choices=[] }) {
   }
 
   const listFormatter = new Intl.ListFormat(game.i18n.lang, { style: "long", type: "conjunction" });
-  if ( !sections.length || grants.size ) return listFormatter.format(sections);
+  if ( !sections.length || grants.size ) return listFormatter.format(sections.filter(_ => _));
   return game.i18n.format("DND5E.TraitConfigChooseWrapper", {
     choices: listFormatter.format(sections)
   });

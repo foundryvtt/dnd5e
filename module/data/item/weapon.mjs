@@ -1,4 +1,4 @@
-import { convertLength, filteredKeys, formatLength } from "../../utils.mjs";
+import { convertLength, defaultUnits, filteredKeys, formatLength } from "../../utils.mjs";
 import { ItemDataModel } from "../abstract.mjs";
 import BaseActivityData from "../activity/base-activity.mjs";
 import DamageField from "../shared/damage-field.mjs";
@@ -14,6 +14,10 @@ import MountableTemplate from "./templates/mountable.mjs";
 const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
+ * @import { ItemTypeData } from "./fields/item-type-field.mjs";
+ */
+
+/**
  * Data definition for Weapon items.
  * @mixes ActivitiesTemplate
  * @mixes ItemDescriptionTemplate
@@ -24,21 +28,22 @@ const { NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
  * @mixes MountableTemplate
  *
  * @property {object} ammunition
- * @property {string} ammunition.type       Type of ammunition fired by this weapon.
+ * @property {string} ammunition.type              Type of ammunition fired by this weapon.
  * @property {object} armor
- * @property {number} armor.value           Siege or vehicle weapon's armor class.
+ * @property {number} armor.value                  Siege or vehicle weapon's armor class.
  * @property {object} damage
- * @property {DamageData} damage.base       Weapon's base damage.
- * @property {DamageData} damage.versatile  Weapon's versatile damage.
- * @property {number} magicalBonus          Magical bonus added to attack & damage rolls.
- * @property {string} mastery               Mastery Property usable with this weapon.
- * @property {Set<string>} properties       Weapon's properties.
- * @property {number} proficient            Does the weapon's owner have proficiency?
+ * @property {DamageData} damage.base              Weapon's base damage.
+ * @property {DamageData} damage.versatile         Weapon's versatile damage.
+ * @property {number} magicalBonus                 Magical bonus added to attack & damage rolls.
+ * @property {string} mastery                      Mastery Property usable with this weapon.
+ * @property {Set<string>} properties              Weapon's properties.
+ * @property {number} proficient                   Does the weapon's owner have proficiency?
  * @property {object} range
- * @property {number} range.value           Short range of the weapon.
- * @property {number} range.long            Long range of the weapon.
- * @property {number|null} range.reach      Reach of the weapon.
- * @property {string} range.units           Units used to measure the weapon's range and reach.
+ * @property {number} range.value                  Short range of the weapon.
+ * @property {number} range.long                   Long range of the weapon.
+ * @property {number|null} range.reach             Reach of the weapon.
+ * @property {string} range.units                  Units used to measure the weapon's range and reach.
+ * @property {Omit<ItemTypeData, "subtype">} type  Weapon type and base item.
  */
 export default class WeaponData extends ItemDataModel.mixin(
   ActivitiesTemplate, ItemDescriptionTemplate, IdentifiableTemplate, ItemTypeTemplate,
@@ -57,7 +62,6 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   static defineSchema() {
     return this.mergeSchema(super.defineSchema(), {
-      type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"}),
       ammunition: new SchemaField({
         type: new StringField()
       }),
@@ -79,7 +83,8 @@ export default class WeaponData extends ItemDataModel.mixin(
         long: new NumberField({ min: 0 }),
         reach: new NumberField({ min: 0 }),
         units: new StringField()
-      })
+      }),
+      type: new ItemTypeField({value: "simpleM", subtype: false}, {label: "DND5E.ItemWeaponType"})
     });
   }
 
@@ -87,9 +92,8 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-    enchantable: true,
-    inventoryItem: true,
-    inventoryOrder: 100
+    hasEffects: true,
+    enchantable: true
   }, {inplace: false}));
 
   /* -------------------------------------------- */
@@ -117,6 +121,22 @@ export default class WeaponData extends ItemDataModel.mixin(
       ...this.compendiumBrowserPhysicalItemFilters,
       ["properties", this.compendiumBrowserPropertiesFilter("weapon")]
     ]);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Default configuration for this item type's inventory section.
+   * @returns {InventorySectionDescriptor}
+   */
+  static get inventorySection() {
+    return {
+      id: "weapons",
+      order: 100,
+      label: "TYPES.Item.weaponPl",
+      groups: { type: "weapon" },
+      columns: ["price", "weight", "quantity", "charges", "controls"]
+    };
   }
 
   /* -------------------------------------------- */
@@ -197,7 +217,6 @@ export default class WeaponData extends ItemDataModel.mixin(
 
   /** @inheritDoc */
   prepareDerivedData() {
-    ActivitiesTemplate._applyActivityShims.call(this);
     super.prepareDerivedData();
     this.prepareDescriptionData();
     this.prepareIdentifiable();
@@ -226,12 +245,15 @@ export default class WeaponData extends ItemDataModel.mixin(
     this.prepareFinalEquippableData();
 
     const labels = this.parent.labels ??= {};
+    const units = this.range.units ?? defaultUnits("length");
     if ( this.hasRange ) {
-      const units = this.range.units ?? Object.keys(CONFIG.DND5E.movementUnits)[0];
       const parts = [this.range.value, this.range.long !== this.range.value ? this.range.long : null].filter(_ => _);
       parts.push(formatLength(parts.pop(), units));
       labels.range = parts.filterJoin("/");
-    } else labels.range = game.i18n.localize("DND5E.None");
+    }
+    if ( this.range.reach ) {
+      labels.reach = game.i18n.format("DND5E.RANGE.Formatted.Reach", { reach: formatLength(this.range.reach, units) });
+    }
   }
 
   /* -------------------------------------------- */
@@ -250,10 +272,11 @@ export default class WeaponData extends ItemDataModel.mixin(
   /** @inheritDoc */
   async getSheetData(context) {
     context.subtitles = [
-      { label: context.itemType },
+      { label: game.i18n.localize(CONFIG.Item.typeLabels.weapon) },
       { label: this.type.label },
       ...this.physicalItemSheetFields
     ];
+
     context.info = [{
       label: "DND5E.ToHit",
       classes: "info-lg",
@@ -265,15 +288,14 @@ export default class WeaponData extends ItemDataModel.mixin(
         const type = config[damageType];
         return `${str}
           <span class="formula">${formula}</span>
-          ${type ? `<span class="damage-type" data-tooltip="${type.label}" aria-label="${type.label}">
+          ${type ? `<span class="damage-type" data-tooltip aria-label="${type.label}">
             <dnd5e-icon src="${type.icon}"></dnd5e-icon>
           </span>` : ""}
         `;
       }, ""), classes: "info-grid damage" });
     }
-    context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
 
-    // Damage
+    context.parts = ["dnd5e.details-weapon", "dnd5e.field-uses"];
     context.damageTypes = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => {
       return {
         value, label,
@@ -362,7 +384,7 @@ export default class WeaponData extends ItemDataModel.mixin(
       });
     }
 
-    else if ( !this.attackType && this.range.value ) {
+    else if ( !this.attackType && ((this.range.value ?? 0) > (this.range.reach ?? 0)) ) {
       if ( modes.length ) modes.push({ rule: true });
       modes.push({ value: "ranged", label: CONFIG.DND5E.attackModes.ranged.label });
     }
@@ -481,19 +503,19 @@ export default class WeaponData extends ItemDataModel.mixin(
    * @type {FormSelectOption[]|null}
    */
   get masteryOptions() {
-    if ( !this.parent.actor?.system.traits?.weaponProf?.mastery?.value.has(this.type.baseItem) || !this.mastery ) {
+    if ( !this.parent.actor?.system.traits?.weaponProf?.mastery?.value?.has?.(this.type.baseItem) || !this.mastery ) {
       return null;
     }
     const extras = [];
     for ( const mastery of this.parent.actor.system.traits.weaponProf.mastery.bonus ?? [] ) {
       if ( mastery === this.mastery ) continue;
-      if ( !extras.length ) extras.push({ rule: true });
       extras.push({ value: mastery, label: CONFIG.DND5E.weaponMasteries[mastery]?.label ?? mastery });
     }
-    return [
-      { value: this.mastery, label: CONFIG.DND5E.weaponMasteries[this.mastery]?.label ?? this.mastery },
-      ...extras
-    ];
+    return [{
+      value: this.mastery,
+      label: CONFIG.DND5E.weaponMasteries[this.mastery]?.label ?? this.mastery,
+      rule: !!extras.length
+    }, ...extras];
   }
 
   /* -------------------------------------------- */

@@ -1,34 +1,58 @@
+import ActiveEffect5e from "../../../documents/active-effect.mjs";
+import Proficiency from "../../../documents/actor/proficiency.mjs";
+import { convertLength, convertWeight, defaultUnits, replaceFormulaData, simplifyBonus } from "../../../utils.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MovementField from "../../shared/movement-field.mjs";
-import SensesField from "../../shared/senses-field.mjs";
-import ActiveEffect5e from "../../../documents/active-effect.mjs";
 import RollConfigField from "../../shared/roll-config-field.mjs";
-import { convertLength, convertWeight, simplifyBonus } from "../../../utils.mjs";
+import SensesField from "../../shared/senses-field.mjs";
 
 const { NumberField, SchemaField, StringField } = foundry.data.fields;
+
+/**
+ * @import { MovementData } from "../../shared/movement-field.mjs"
+ * @import { RollConfigData } from "../../shared/roll-config-field.mjs"
+ * @import { SensesData } from "../../shared/senses-field.mjs"
+ */
+
+/**
+ * @typedef {object} ArmorClassData
+ * @property {string} calc     Name of one of the built-in formulas to use.
+ * @property {number} flat     Flat value used for flat or natural armor calculation.
+ * @property {string} formula  Custom formula to use.
+ */
 
 /**
  * Shared contents of the attributes schema between various actor types.
  */
 export default class AttributesFields {
   /**
+   * Armor class fields shared between characters, NPCs, and vehicles.
+   *
+   * @type {ArmorClassData}
+   */
+  static get armorClass() {
+    return {
+      calc: new StringField({ initial: "default", label: "DND5E.ArmorClassCalculation" }),
+      flat: new NumberField({ integer: true, min: 0, label: "DND5E.ArmorClassFlat" }),
+      formula: new FormulaField({ deterministic: true, label: "DND5E.ArmorClassFormula" })
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Fields shared between characters, NPCs, and vehicles.
    *
    * @type {object}
-   * @property {object} init
+   * @property {ArmorClassData} ac       Armor class configuration.
+   * @property {RollConfigData} init
    * @property {string} init.ability     The ability used for initiative rolls.
    * @property {string} init.bonus       The bonus provided to initiative rolls.
-   * @property {object} movement
-   * @property {number} movement.burrow  Actor burrowing speed.
-   * @property {number} movement.climb   Actor climbing speed.
-   * @property {number} movement.fly     Actor flying speed.
-   * @property {number} movement.swim    Actor swimming speed.
-   * @property {number} movement.walk    Actor walking speed.
-   * @property {string} movement.units   Movement used to measure the various speeds.
-   * @property {boolean} movement.hover  Is this flying creature able to hover in place.
+   * @property {MovementData} movement
    */
   static get common() {
     return {
+      ac: new SchemaField(this.armorClass, { label: "DND5E.ArmorClass" }),
       init: new RollConfigField({
         ability: "",
         bonus: new FormulaField({ required: true, label: "DND5E.InitiativeBonus" })
@@ -44,26 +68,17 @@ export default class AttributesFields {
    *
    * @type {object}
    * @property {object} attunement
-   * @property {number} attunement.max          Maximum number of attuned items.
-   * @property {object} senses
-   * @property {number} senses.darkvision       Creature's darkvision range.
-   * @property {number} senses.blindsight       Creature's blindsight range.
-   * @property {number} senses.tremorsense      Creature's tremorsense range.
-   * @property {number} senses.truesight        Creature's truesight range.
-   * @property {string} senses.units            Distance units used to measure senses.
-   * @property {string} senses.special          Description of any special senses or restrictions.
-   * @property {string} spellcasting            Primary spellcasting ability.
-   * @property {number} exhaustion              Creature's exhaustion level.
-   * @property {object} concentration
-   * @property {string} concentration.ability   The ability used for concentration saving throws.
-   * @property {string} concentration.bonus     The bonus provided to concentration saving throws.
-   * @property {number} concentration.limit     The amount of items this actor can concentrate on.
-   * @property {object} concentration.roll
-   * @property {number} concentration.roll.min  The minimum the d20 can roll.
-   * @property {number} concentration.roll.max  The maximum the d20 can roll.
-   * @property {number} concentration.roll.mode The default advantage mode for this actor's concentration saving throws.
+   * @property {number} attunement.max              Maximum number of attuned items.
+   * @property {SensesData} senses
+   * @property {string} spellcasting                Primary spellcasting ability.
+   * @property {number} exhaustion                  Creature's exhaustion level.
+   * @property {RollConfigData} concentration
+   * @property {string} concentration.ability       The ability used for concentration saving throws.
+   * @property {object} concentration.bonuses
+   * @property {string} concentration.bonuses.save  The bonus provided to concentration saving throws.
+   * @property {number} concentration.limit         The amount of items this actor can concentrate on.
    * @property {object} loyalty
-   * @property {number} loyalty.value           The creature's loyalty score.
+   * @property {number} loyalty.value               The creature's loyalty score.
    */
   static get creature() {
     return {
@@ -129,12 +144,95 @@ export default class AttributesFields {
    */
   static prepareBaseEncumbrance() {
     const encumbrance = this.attributes.encumbrance ??= {};
-    encumbrance.multipliers = {
-      encumbered: "1", heavilyEncumbered: "1", maximum: "1", overall: "1"
-    };
-    encumbrance.bonuses = {
-      encumbered: "", heavilyEncumbered: "", maximum: "", overall: ""
-    };
+    encumbrance.multipliers = { encumbered: "1", heavilyEncumbered: "1", maximum: "1", overall: "1" };
+    encumbrance.bonuses = { encumbered: "", heavilyEncumbered: "", maximum: "", overall: "" };
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare a character's AC value from their equipped armor and shield.
+   * @this {CharacterData|NPCData|VehicleData}
+   * @param {object} rollData  The Actor's roll data.
+   */
+  static prepareArmorClass(rollData) {
+    const ac = this.attributes.ac;
+
+    // Apply automatic migrations for older data structures
+    let cfg = CONFIG.DND5E.armorClasses[ac.calc];
+    if ( !cfg ) {
+      ac.calc = "flat";
+      if ( Number.isNumeric(ac.value) ) ac.flat = Number(ac.value);
+      cfg = CONFIG.DND5E.armorClasses.flat;
+    }
+
+    // Identify Equipped Items
+    const { armors, shields } = this.parent.itemTypes.equipment.reduce((obj, equip) => {
+      if ( !equip.system.equipped || !(equip.system.type.value in CONFIG.DND5E.armorTypes)) return obj;
+      if ( equip.system.type.value === "shield" ) obj.shields.push(equip);
+      else obj.armors.push(equip);
+      return obj;
+    }, { armors: [], shields: [] });
+
+    // Determine base AC
+    switch ( ac.calc ) {
+
+      // Flat AC (no additional bonuses)
+      case "flat":
+        ac.value = Number(ac.flat);
+        return;
+
+      // Natural AC (includes bonuses)
+      case "natural":
+        ac.base = Number(ac.flat);
+        break;
+
+      default:
+        let formula = ac.calc === "custom" ? ac.formula : cfg.formula;
+        if ( armors.length ) {
+          if ( armors.length > 1 ) this.parent._preparationWarnings.push({
+            message: game.i18n.localize("DND5E.WarnMultipleArmor"), type: "warning"
+          });
+          const armorData = armors[0].system.armor;
+          const isHeavy = armors[0].system.type.value === "heavy";
+          ac.armor = armorData.value ?? ac.armor;
+          ac.dex = isHeavy ? 0 : Math.min(armorData.dex ?? Infinity, this.abilities.dex?.mod ?? 0);
+          ac.equippedArmor = armors[0];
+        }
+        else ac.dex = this.abilities.dex?.mod ?? 0;
+
+        rollData.attributes.ac = ac;
+        try {
+          const replaced = replaceFormulaData(formula, rollData, {
+            actor: this, missing: null, property: game.i18n.localize("DND5E.ArmorClass")
+          });
+          ac.base = replaced ? new Roll(replaced).evaluateSync().total : 0;
+        } catch(err) {
+          this.parent._preparationWarnings.push({
+            message: game.i18n.format("DND5E.WarnBadACFormula", { formula }), link: "armor", type: "error"
+          });
+          const replaced = Roll.replaceFormulaData(CONFIG.DND5E.armorClasses.default.formula, rollData);
+          ac.base = new Roll(replaced).evaluateSync().total;
+        }
+        break;
+    }
+
+    // Equipped Shield
+    if ( shields.length ) {
+      if ( shields.length > 1 ) this.parent._preparationWarnings.push({
+        message: game.i18n.localize("DND5E.WarnMultipleShields"), type: "warning"
+      });
+      ac.shield = shields[0].system.armor.value ?? 0;
+      ac.equippedShield = shields[0];
+    }
+
+    // Compute cover.
+    ac.cover = Math.max(ac.cover, this.parent.coverBonus);
+
+    // Compute total AC and return
+    ac.min = simplifyBonus(ac.min, rollData);
+    ac.bonus = simplifyBonus(ac.bonus, rollData);
+    ac.value = Math.max(ac.min, ac.base + ac.shield + ac.bonus + ac.cover);
   }
 
   /* -------------------------------------------- */
@@ -149,7 +247,7 @@ export default class AttributesFields {
     const abilityId = concentration.ability || CONFIG.DND5E.defaultAbilities.concentration;
     const ability = this.abilities?.[abilityId] || {};
     const bonus = simplifyBonus(concentration.bonuses.save, rollData);
-    concentration.save = (ability.save ?? 0) + bonus;
+    concentration.save = (ability.save?.value ?? 0) + bonus;
   }
 
   /* -------------------------------------------- */
@@ -260,6 +358,40 @@ export default class AttributesFields {
   /* -------------------------------------------- */
 
   /**
+   * Prepare the initiative data for an actor.
+   * @this {CharacterData|NPCData|VehicleData}
+   * @param {object} rollData  The Actor's roll data.
+   */
+  static prepareInitiative(rollData) {
+    const init = this.attributes.init ??= {};
+    const flags = this.parent.flags.dnd5e ?? {};
+    const globalCheckBonus = simplifyBonus(this.bonuses?.abilities?.check, rollData);
+
+    // Compute initiative modifier
+    const abilityId = init.ability || CONFIG.DND5E.defaultAbilities.initiative;
+    const ability = this.abilities?.[abilityId] || {};
+    init.mod = ability.mod ?? 0;
+
+    // Initiative proficiency
+    const isLegacy = game.settings.get("dnd5e", "rulesVersion") === "legacy";
+    const prof = this.attributes.prof ?? 0;
+    const joat = flags.jackOfAllTrades && isLegacy;
+    const ra = this.parent._isRemarkableAthlete(abilityId);
+    const alert = flags.initiativeAlert && !isLegacy;
+    init.prof = new Proficiency(prof, alert ? 1 : (joat || ra) ? 0.5 : 0, !ra);
+
+    // Total initiative includes all numeric terms
+    const initBonus = simplifyBonus(init.bonus, rollData);
+    const abilityBonus = simplifyBonus(ability.bonuses?.check, rollData);
+    init.total = init.mod + initBonus + abilityBonus + globalCheckBonus
+      + (flags.initiativeAlert && isLegacy ? 5 : 0)
+      + (Number.isNumeric(init.prof.term) ? init.prof.flat : 0);
+    init.score = 10 + init.total;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Modify movement speeds taking exhaustion and any other conditions into account.
    * @this {CharacterData|NPCData}
    */
@@ -271,9 +403,9 @@ export default class AttributesFields {
     const heavilyEncumbered = statuses.has("heavilyEncumbered");
     const exceedingCarryingCapacity = statuses.has("exceedingCarryingCapacity");
     const crawl = this.parent.hasConditionEffect("crawl");
-    const units = this.attributes.movement.units;
+    const units = this.attributes.movement.units ??= defaultUnits("length");
     let reduction = game.settings.get("dnd5e", "rulesVersion") === "modern"
-      ? this.attributes.exhaustion * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
+      ? (this.attributes.exhaustion ?? 0) * (CONFIG.DND5E.conditionTypes.exhaustion?.reduction?.speed ?? 0) : 0;
     reduction = convertLength(reduction, CONFIG.DND5E.defaultUnits.length.imperial, units);
     for ( const type in CONFIG.DND5E.movementTypes ) {
       let speed = Math.max(0, this.attributes.movement[type] - reduction);
@@ -319,5 +451,20 @@ export default class AttributesFields {
     this.attributes.senses.special = [this.attributes.senses.special, race.system.senses.special].filterJoin(";");
     if ( force && race.system.senses.units ) this.attributes.senses.units = race.system.senses.units;
     else this.attributes.senses.units ??= race.system.senses.units;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Prepare spellcasting DC & modifier.
+   * @this {CharacterData|NPCData}
+   */
+  static prepareSpellcastingAbility() {
+    const ability = this.abilities?.[this.attributes.spellcasting];
+    this.attributes.spell ??= {};
+    this.attributes.spell.abilityLabel = CONFIG.DND5E.abilities[this.attributes.spellcasting]?.label ?? "";
+    this.attributes.spell.attack = ability ? ability.attack : this.attributes.prof;
+    this.attributes.spell.dc = ability ? ability.dc : 8 + this.attributes.prof;
+    this.attributes.spell.mod = ability ? ability.mod : 0;
   }
 }

@@ -1,0 +1,67 @@
+name: Water, fresh (Pint)
+system:
+  description:
+    value: >-
+      <p>If you don't drink sufficient water, you risk
+      &amp;Reference[dehydration].</p>
+    chat: ''
+  price:
+    value: 0
+    denomination: gp
+  activities: {}
+  uses:
+    spent: 0
+    recovery: []
+    autoDestroy: true
+    max: '1'
+  identifier: water-fresh-pint
+  source:
+    revision: 1
+    rules: '2024'
+    book: SRD 5.2
+    license: CC-BY-4.0
+  identified: true
+  unidentified:
+    description: ''
+  container: null
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  rarity: ''
+  attunement: ''
+  attuned: false
+  equipped: false
+  type:
+    value: food
+    subtype: ''
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  magicalBonus: null
+  properties: []
+_id: dmgspWaterfresh0
+type: consumable
+img: icons/magic/water/water-drop-swirl-blue.webp
+effects: []
+folder: guHYjt0gjPLU2wCs
+sort: 112500
+ownership:
+  default: 0
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1728332008885
+  modifiedTime: 1745712705147
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!dmgspWaterfresh0'

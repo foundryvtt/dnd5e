@@ -2,23 +2,19 @@
     <h3>{{{ title }}}</h3>
     {{#if advancement.hint}}<p>{{ advancement.hint }}</p>{{/if}}
 
-    <div class="drop-target">
+    <div class="pill-lg {{#unless subclass}}roboto-upper empty{{/unless}}"
+         {{~#if subclass}} data-uuid="{{ subclass.uuid }}"{{else}} data-action="browse"{{/if}}>
         {{#if subclass}}
-        <div class="item-name flexrow">
-            <div class="item-image" style="background-image: url({{ subclass.img }});"></div>
-            <label class="flexrow">
-                <h4><a data-uuid="{{ subclass.uuid }}">{{ subclass.name }}</a></h4>
-                <a class="item-control item-delete" title="{{ localize 'DND5E.ItemDelete' }}" data-action="deleteItem">
-                  <i class="fas fa-trash" inert></i>
-                </a>
-                <input type="hidden" name="uuid" value="{{ subclass.uuid }}">
-            </label>
+        <img class="gold-icon" data-action="viewItem" src="{{ subclass.img }}" alt="{{ subclass.name }}">
+        <div class="name-stacked">
+            <div class="title">{{ subclass.name }}</div>
         </div>
-        {{else}}
-        <button type="button" data-action="browse">
-            <i class="fa-solid fa-book-open-reader" inert></i>
-            {{ localize "DND5E.CompendiumBrowser.Action.Open" }}
+        <button type="button" class="unbutton control-button item-control" data-action="delete"
+                data-tooltip aria-label="{{ localize 'DND5E.ItemDelete' }}">
+            <i class="fas fa-trash" inert></i>
         </button>
+        {{else}}
+        {{ localize "DND5E.ADVANCEMENT.Subclass.Action.Select" }}
         {{/if}}
     </div>
 </form>

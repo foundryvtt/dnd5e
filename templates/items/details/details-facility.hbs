@@ -2,14 +2,14 @@
     <legend>{{ localize "DND5E.ItemFacilityDetails" }}</legend>
 
     {{!-- Type --}}
-    {{ formField fields.type.fields.value value=source.type.value choices=config.facilities.types labelAttr="label"
+    {{ formField fields.type.fields.value value=source.type.value choices=CONFIG.facilities.types labelAttr="label"
                  blank=false }}
 
     {{!-- Sub-Type --}}
     {{ formField fields.type.fields.subtype value=source.type.subtype choices=facilitySubtypes }}
 
     {{!-- Size --}}
-    {{ formField fields.size value=source.size choices=config.facilities.sizes labelAttr="label" }}
+    {{ formField fields.size value=source.size choices=CONFIG.facilities.sizes labelAttr="label" }}
 
     {{!-- Level --}}
     {{#if (eq source.type.value "basic")}}
@@ -94,9 +94,8 @@
                 <img class="gold-icon" src="{{ craft.img }}" alt="{{ craft.name }}">
                 {{{ craft.contentLink }}}
                 <div class="list-controls flexrow">
-                    <button type="button" class="unbutton control-button" data-action="removeCraft"
-                            data-tooltip="DND5E.FACILITY.Action.RemoveCraft"
-                            aria-label="{{ localize "DND5E.FACILITY.Action.RemoveCraft" }}">
+                    <button type="button" class="unbutton control-button" data-action="deleteCraft"
+                            data-tooltip aria-label="{{ localize "DND5E.FACILITY.Action.RemoveCraft" }}">
                         <i class="fas fa-trash"></i>
                     </button>
                 </div>

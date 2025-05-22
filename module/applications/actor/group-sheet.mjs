@@ -2,14 +2,16 @@ import Item5e from "../../documents/item.mjs";
 import { formatCR, formatNumber } from "../../utils.mjs";
 import Award from "../award.mjs";
 import MovementSensesConfig from "../shared/movement-senses-config.mjs";
-import ActorSheetMixin from "./sheet-mixin.mjs";
+import ActorSheetMixin from "./deprecated/sheet-mixin.mjs";
+
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * A character sheet for group-type Actors.
  * The functionality of this sheet is sufficiently different from other Actor types that we extend the base
  * Foundry VTT ActorSheet instead of the ActorSheet5e abstraction used for character, npc, and vehicle types.
  */
-export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
+export default class GroupActorSheet extends ActorSheetMixin(foundry.appv1?.sheets?.ActorSheet ?? ActorSheet) {
 
   /**
    * IDs for items on the sheet that have been expanded.
@@ -141,6 +143,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     const displayXP = game.settings.get("dnd5e", "levelingMode") !== "noxp";
     for ( const [index, memberData] of this.object.system.members.entries() ) {
       const member = memberData.actor;
+      if ( !member ) continue;
       const multiplier = type === "encounter" ? (memberData.quantity.value ?? 1) : 1;
 
       const m = {
@@ -247,7 +250,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
   /** @inheritDoc */
   async _render(force, options={}) {
     for ( const member of this.object.system.members) {
-      member.actor.apps[this.id] = this;
+      if ( member.actor ) member.actor.apps[this.id] = this;
     }
     return super._render(force, options);
   }
@@ -257,7 +260,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
   /** @inheritDoc */
   async close(options={}) {
     for ( const member of this.object.system.members ) {
-      delete member.actor.apps[this.id];
+      delete member.actor?.apps[this.id];
     }
     return super.close(options);
   }
@@ -291,7 +294,10 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     const button = event.currentTarget;
     switch ( button.dataset.action ) {
       case "award":
-        const award = new Award(this.object, { savedDestinations: this.actor.getFlag("dnd5e", "awardDestinations") });
+        const award = new Award({
+          award: { savedDestinations: this.actor.getFlag("dnd5e", "awardDestinations") },
+          origin: this.object
+        });
         award.render(true);
         break;
       case "longRest":
@@ -345,16 +351,17 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
 
   /** @override */
   async _onDropItem(event, data) {
-    if ( !this.actor.isOwner ) return false;
+    const behavior = this._dropBehavior(event, data);
+    if ( !this.actor.isOwner || (behavior === "none") ) return false;
     const item = await Item.implementation.fromDropData(data);
 
     // Handle moving out of container & item sorting
-    if ( this.actor.uuid === item.parent?.uuid ) {
+    if ( (behavior === "move") && (this.actor.uuid === item.parent?.uuid) ) {
       if ( item.system.container !== null ) await item.update({"system.container": null});
       return this._onSortItem(event, item.toObject());
     }
 
-    return this._onDropItemCreate(item, event);
+    return this._onDropItemCreate(item, event, behavior);
   }
 
   /* -------------------------------------------- */
@@ -374,7 +381,7 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
   /* -------------------------------------------- */
 
   /** @override */
-  async _onDropItemCreate(itemData, event) {
+  async _onDropItemCreate(itemData, event, behavior) {
     let items = itemData instanceof Array ? itemData : [itemData];
 
     // Filter out items already in containers to avoid creating duplicates
@@ -385,7 +392,9 @@ export default class GroupActorSheet extends ActorSheetMixin(ActorSheet) {
     const toCreate = await Item5e.createWithContents(items, {
       transformFirst: item => this._onDropSingleItem(item.toObject(), event)
     });
-    return Item5e.createDocuments(toCreate, {pack: this.actor.pack, parent: this.actor, keepId: true});
+    const created = await Item5e.createDocuments(toCreate, { pack: this.actor.pack, parent: this.actor, keepId: true });
+    if ( behavior === "move" ) items.forEach(i => fromUuid(i.uuid).then(d => d?.delete({ deleteContents: true })));
+    return created;
   }
 
   /* -------------------------------------------- */

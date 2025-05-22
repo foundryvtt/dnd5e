@@ -1,0 +1,110 @@
+name: Boon of Truesight
+system:
+  description:
+    value: >-
+      <p>You gain the following benefits.</p><p><strong>Ability Score
+      Increase.</strong> Increase one ability score of your choice by 1, to a
+      maximum of 30.</p><p><strong>Truesight.</strong> You have Truesight with a
+      range of 60 feet.</p><section id="secret-MmPASAH8hA8METnP"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes an Active Effect which grants you Truesight with a range of 60
+      feet.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 2
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: feat
+    subtype: epicBoon
+  prerequisites:
+    level: 19
+    repeatable: false
+  properties: []
+  requirements: Level 19
+  activities: {}
+  enchant: {}
+  identifier: boon-of-truesight
+  advancement:
+    - _id: zNqJRAI2ON8SRu40
+      type: AbilityScoreImprovement
+      configuration:
+        cap: 1
+        fixed:
+          str: 0
+          dex: 0
+          con: 0
+          int: 0
+          wis: 0
+          cha: 0
+        locked: []
+        points: 1
+      value:
+        type: asi
+      level: 0
+      title: ''
+      hint: ''
+_id: phbBoonofTruesig
+type: feat
+img: icons/creatures/eyes/humanoid-single-blind.webp
+effects:
+  - name: Boon of Truesight
+    img: icons/creatures/eyes/humanoid-single-blind.webp
+    _id: IY36CpEENqnz03c5
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.senses.truesight
+        mode: 4
+        value: '60'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!items.effects!phbBoonofTruesig.IY36CpEENqnz03c5'
+folder: 7zo2bljGLQY3uwXI
+sort: 100098
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735865940774
+  modifiedTime: 1745256780148
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbBoonofTruesig'

@@ -19,7 +19,7 @@ export default class Dialog5e extends Application5e {
   /** @override */
   static PARTS = {
     content: {
-      template: ""
+      template: "systems/dnd5e/templates/shared/dialog-content.hbs"
     },
     footer: {
       template: "templates/generic/form-footer.hbs"
@@ -60,6 +60,7 @@ export default class Dialog5e extends Application5e {
    * @protected
    */
   async _prepareContentContext(context, options) {
+    context.content = this.options.content ?? "";
     return context;
   }
 

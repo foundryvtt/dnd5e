@@ -1,4 +1,4 @@
-import TurnMessageData from "../data/chat-message/turn-message-data.mjs";
+import ActivationsField from "../data/chat-message/fields/activations-field.mjs";
 import { ActorDeltasField } from "../data/chat-message/fields/deltas-field.mjs";
 
 /**
@@ -21,23 +21,25 @@ export default class Combatant5e extends Combatant {
    * @param {object} [data={}]
    * @param {ActorDeltasData} [data.deltas]
    * @param {string[]} [data.periods]
+   * @param {BasicRoll[]} [data.rolls]
    * @returns {ChatMessage5e|void}
    */
-  async createTurnMessage({ deltas, periods }={}) {
+  async createTurnMessage({ deltas, periods, rolls }={}) {
     const messageConfig = {
       create: false,
       data: {
+        rolls,
         speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.token }),
         system: {
           deltas, periods,
-          activations: TurnMessageData.getActivations(this.actor, periods),
+          activations: ActivationsField.getActivations(this.actor, periods),
           origin: {
             combat: this.combat.id,
             combatant: this.id
           }
         },
         type: "turn",
-        whisper: game.users.filter(u => this.actor.testUserPermission(game.user, "OWNER"))
+        whisper: game.users.filter(u => this.actor.testUserPermission(u, "OWNER"))
       }
     };
 
@@ -57,6 +59,18 @@ export default class Combatant5e extends Combatant {
     Hooks.callAll("dnd5e.preCreateCombatMessage", this, messageConfig);
 
     if ( messageConfig.create ) return ChatMessage.implementation.create(messageConfig.data);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Key for the group to which this combatant should belong, or `null` if it can't be grouped.
+   * @returns {string|null}
+   */
+  getGroupingKey() {
+    if ( this.group ) return this.group.id;
+    if ( this.token?.actorLink || !this.token?.baseActor || (this.initiative === null) ) return null;
+    return `${Math.floor(this.initiative).paddedString(4)}:${this.token.disposition}:${this.token.baseActor.id}`;
   }
 
   /* -------------------------------------------- */
@@ -116,7 +130,7 @@ export default class Combatant5e extends Combatant {
     if ( !foundry.utils.isEmpty(results.actor) ) await this.actor.update(results.actor);
     if ( results.item.length ) await this.actor.updateEmbeddedDocuments("Item", results.item);
 
-    const message = await this.createTurnMessage({ deltas, periods });
+    const message = await this.createTurnMessage({ deltas, periods, rolls: results.rolls });
 
     /**
      * A hook event that fires after combat-related recovery changes have been applied.
@@ -146,5 +160,25 @@ export default class Combatant5e extends Combatant {
   /** @inheritDoc */
   _onDelete(options, userId) {
     requestAnimationFrame(() => this.refreshDynamicRing());
+  }
+
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static async _onUpdateOperation(documents, operation, user) {
+    await super._onUpdateOperation(documents, operation, user);
+    if ( (user.id !== game.userId) || !operation.parent ) return;
+    const updates = {};
+    for ( let i = 0; i < operation.updates.length; i++ ) {
+      const update = operation.updates[i];
+      const combatant = documents[i];
+      if ( combatant.group ) updates[combatant.group.id] = update.initiative;
+    }
+    if ( foundry.utils.isEmpty(updates) ) return;
+    await operation.parent.updateEmbeddedDocuments("CombatantGroup", Object.entries(updates).map(([id, init]) => {
+      return { _id: id, initiative: init };
+    }));
+    operation.parent.setupTurns();
+    ui.combat.render();
   }
 }

@@ -20,7 +20,7 @@
                 </div>
                 {{#if showTargets}}
                 <div class="field-group">
-                    {{ formField fields.target name=(concat prefix "target") value=data.target options=validTargets
+                    {{ formField fields.target name=(concat prefix "target") value=selectedTarget options=validTargets
                                  placeholder=targetPlaceholder label="DND5E.Target" localize=true hint=false
                                  classes="label-top" }}
                 </div>
@@ -38,8 +38,7 @@
                     {{/if}}
                 </div>
                 <button type="button" class="unbutton control-button" data-action="deleteConsumption"
-                        data-tooltip="DND5E.CONSUMPTION.Action.Delete"
-                        aria-label="{{ localize "DND5E.CONSUMPTION.Action.Delete" }}">
+                        data-tooltip aria-label="{{ localize "DND5E.CONSUMPTION.Action.Delete" }}">
                     <i class="fas fa-minus" inert></i>
                 </button>
             </div>

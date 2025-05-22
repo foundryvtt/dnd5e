@@ -1,12 +1,18 @@
-import SpellListJournalPageData from "../../data/journal/spells.mjs";
 import { linkForUuid, sortObjectEntries } from "../../utils.mjs";
 import Items5e from "../../data/collection/items-collection.mjs";
 import SpellsUnlinkedConfig from "./spells-unlinked-config.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
+
 /**
  * Journal entry page the displays a list of spells for a class, subclass, background, or something else.
  */
-export default class JournalSpellListPageSheet extends JournalPageSheet {
+export default class JournalSpellListPageSheet extends foundry.appv1.sheets.JournalPageSheet {
+
+  /** @override */
+  static _warnedAppV1 = true;
+
+  /* --------------------------------------------- */
 
   /** @inheritDoc */
   static get defaultOptions() {
@@ -29,7 +35,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
    * @type {Record<string, string>}
    */
   static get GROUPING_MODES() {
-    return SpellListJournalPageData.GROUPING_MODES;
+    return dnd5e.dataModels.journal.SpellListJournalPageData.GROUPING_MODES;
   }
 
   /* -------------------------------------------- */
@@ -92,7 +98,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
     if ( context.grouping === "school" ) context.sections = sortObjectEntries(context.sections, "header");
 
     if ( this.options.displayAsTable ) Object.values(context.sections).forEach(section => {
-      const spells = section.spells.map(s => linkForUuid(s.uuid));
+      const spells = section.spells.map(s => linkForUuid(s.spell?.uuid)).filter(_ => _);
       section.spellList = game.i18n.getListFormatter({ type: "unit" }).format(spells);
     });
 
@@ -123,28 +129,15 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
       }
     }
 
-    // TODO: Remove when https://github.com/foundryvtt/foundryvtt/issues/11991 is resolved
-    const parseUuid = uuid => {
-      const parsed = foundry.utils.parseUuid(uuid);
-      const remappedUuid = uuid.startsWith("Compendium") ? [
-        "Compendium",
-        parsed.collection.metadata.id,
-        parsed.primaryType ?? parsed.documentType,
-        parsed.primaryId ?? parsed.documentId,
-        ...parsed.embedded
-      ].join(".") : uuid;
-      return { ...parsed, remappedUuid };
-    };
-
     let collections = new Collection();
     const remappedUuids = new Set();
-    for ( const uuid of uuids ) {
-      const { collection, remappedUuid } = parseUuid(uuid);
-      remappedUuids.add(remappedUuid);
+    for ( const baseUuid of uuids ) {
+      const { collection, uuid } = foundry.utils.parseUuid(baseUuid);
+      remappedUuids.add(uuid);
       if ( collection && !collections.has(collection) ) {
         if ( collection instanceof Items5e ) collections.set(collection, collection);
         else collections.set(collection, collection.getIndex({ fields }));
-      } else if ( !collection ) uuids.delete(uuid);
+      } else if ( !collection ) uuids.delete(baseUuid);
     }
 
     const spells = (await Promise.all(collections.values())).flatMap(c => c.filter(s => remappedUuids.has(s.uuid)));
@@ -211,7 +204,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
       case "add-unlinked":
         await this.document.update({"system.unlinkedSpells": [...this.document.system.unlinkedSpells, {}]});
         const id = this.document.toObject().system.unlinkedSpells.pop()._id;
-        new SpellsUnlinkedConfig(id, this.document).render(true);
+        new SpellsUnlinkedConfig({ document: this.document, unlinkedId: id }).render(true);
         break;
       case "delete":
         if ( itemUuid ) {
@@ -224,7 +217,7 @@ export default class JournalSpellListPageSheet extends JournalPageSheet {
         this.render();
         break;
       case "edit-unlinked":
-        if ( unlinkedId ) new SpellsUnlinkedConfig(unlinkedId, this.document).render(true);
+        if ( unlinkedId ) new SpellsUnlinkedConfig({ document: this.document, unlinkedId }).render(true);
         break;
     }
   }

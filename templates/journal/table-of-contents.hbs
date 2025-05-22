@@ -3,7 +3,7 @@
     {{#each pages}}
     {{#unless flags.dnd5e.tocHidden}}
     <li class="{{#if (and showPages pages.length)}}child-pages{{/if}} {{#if entry}}special-entry{{/if}}">
-        <a class="journal-entry-page-link"
+        <a class="journal-entry-page-link" data-action="activateEntry"
            {{~#if entry}} data-document-id="{{ id }}" data-entry-id="{{ id }}"
            {{~else}} data-page-id="{{ id }}" {{#if entryId}}data-entry-id="{{ entryId }}"{{/if}}{{/if}}>{{ name }}</a>
         {{#if (and showPages pages.length)}}{{> "pages" }}{{/if}}
@@ -29,8 +29,8 @@
         <section>
             {{#each chapters}}
             <div class="chapter" data-document-id="{{ id }}" data-entry-id="{{ id }}">
-                <h3><a class="journal-entry-link">{{ name }}</a></h3>
-                {{#if (and showPages pages.length)}}{{> "pages" }}{{/if}}
+                <h3><a class="journal-entry-link" data-action="activateEntry">{{ name }}</a></h3>
+                {{#if pages.length}}{{> "pages" }}{{/if}}
             </div>
             {{/each}}
         </section>

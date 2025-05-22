@@ -15,7 +15,9 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
    * @type {ChatMessageDataModelMetadata}
    */
   static metadata = Object.freeze({
-    actions: {},
+    actions: {
+      use: ChatMessageDataModel.#useActivity
+    },
     template: ""
   });
 
@@ -62,7 +64,7 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
    */
   async render(options) {
     if ( !this.template ) return "";
-    return renderTemplate(this.template, await this._prepareContext(options));
+    return foundry.applications.handlebars.renderTemplate(this.template, await this._prepareContext(options));
   }
 
   /* -------------------------------------------- */
@@ -84,7 +86,17 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
    * @param {HTMLElement} element
    * @protected
    */
-  _onRender(element) {}
+  _onRender(element) {
+    for ( const e of element.querySelectorAll(".item-tooltip") ) {
+      const uuid = e.closest("[data-item-uuid]")?.dataset.itemUuid;
+      if ( !uuid ) continue;
+      Object.assign(e.dataset, {
+        tooltip: `<section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>`,
+        tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip",
+        tooltipDirection: "LEFT"
+      });
+    }
+  }
 
   /* -------------------------------------------- */
   /*  Event Listeners and Handlers                */
@@ -122,4 +134,22 @@ export default class ChatMessageDataModel extends foundry.abstract.TypeDataModel
    * @protected
    */
   _onClickAction(event, target) {}
+
+  /* -------------------------------------------- */
+
+  /**
+   * Handle using an activity.
+   * @this {ChatMessageDataModel}
+   * @param {Event} event         Triggering click event.
+   * @param {HTMLElement} target  Button that was clicked.
+   */
+  static async #useActivity(event, target) {
+    target.disabled = true;
+    try {
+      const activity = await fromUuid(target.closest("[data-activity-uuid]")?.dataset.activityUuid);
+      await activity?.use({ event });
+    } finally {
+      target.disabled = false;
+    }
+  }
 }

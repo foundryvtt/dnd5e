@@ -40,7 +40,7 @@ export default class ScaleValueAdvancement extends Advancement {
   /** @inheritDoc */
   static localize() {
     super.localize();
-    Object.values(TYPES).forEach(v => Localization.localizeDataModel(v));
+    Object.values(TYPES).forEach(v => foundry.helpers.Localization.localizeDataModel(v));
   }
 
   /* -------------------------------------------- */
@@ -113,5 +113,25 @@ export default class ScaleValueAdvancement extends Advancement {
   /** @override */
   automaticApplicationValue(level) {
     return {};
+  }
+
+  /* -------------------------------------------- */
+  /*  Event Listeners and Handlers                */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc*/
+  getContextMenuOptions() {
+    const options = super.getContextMenuOptions();
+    options.push({
+      name: "DND5E.ADVANCEMENT.ScaleValue.Action.CopyFormula",
+      icon: '<i class="fa-solid fa-copy"></i>',
+      callback: () => {
+        const value = `@scale.${this.item.identifier}.${this.identifier}`;
+        game.clipboard.copyPlainText(value);
+        ui.notifications.info(game.i18n.format("DND5E.Copied", { value }), { console: false });
+      },
+      group: "copy"
+    });
+    return options;
   }
 }

@@ -136,7 +136,7 @@ export default class EnchantmentApplicationElement extends HTMLElement {
    */
   async _onDrop(event) {
     event.preventDefault();
-    const data = TextEditor.getDragEventData(event);
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
     const effect = this.enchantmentItem.effects.get(this.chatMessage.getFlag("dnd5e", "use.enchantmentProfile"));
     if ( (data.type !== "Item") || !effect ) return;
     const droppedItem = await Item.implementation.fromDropData(data);

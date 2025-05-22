@@ -16,10 +16,12 @@
                 <input type="hidden" name="configuration.items.{{ @index }}.uuid" value="{{ data.uuid }}">
             </div>
             <div class="item-controls flexrow">
-                <a class="item-control item-action" data-action="deleteItem" data-tooltip="DND5E.ItemDelete"
+                {{#if @root.editable}}
+                <a class="item-control item-action" data-action="deleteItem" data-tooltip
                    aria-label="{{ localize 'DND5E.ItemDelete' }}">
                     <i class="fas fa-trash" inert></i>
                 </a>
+                {{/if}}
             </div>
         </li>
         {{/each}}

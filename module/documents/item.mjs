@@ -1,5 +1,7 @@
+import ActivityChoiceDialog from "../applications/activity/activity-choice-dialog.mjs";
 import AdvancementManager from "../applications/advancement/advancement-manager.mjs";
 import AdvancementConfirmationDialog from "../applications/advancement/advancement-confirmation-dialog.mjs";
+import ContextMenu5e from "../applications/context-menu.mjs";
 import CreateScrollDialog from "../applications/item/create-scroll-dialog.mjs";
 import ClassData from "../data/item/class.mjs";
 import ContainerData from "../data/item/container.mjs";
@@ -7,13 +9,14 @@ import EquipmentData from "../data/item/equipment.mjs";
 import SpellData from "../data/item/spell.mjs";
 import ActivitiesTemplate from "../data/item/templates/activities.mjs";
 import PhysicalItemTemplate from "../data/item/templates/physical-item.mjs";
-import { _applyDeprecatedD20Configs } from "../dice/d20-roll.mjs";
+import { staticID } from "../utils.mjs";
 import Scaling from "./scaling.mjs";
 import Proficiency from "./actor/proficiency.mjs";
 import SelectChoices from "./actor/select-choices.mjs";
 import Advancement from "./advancement/advancement.mjs";
 import SystemDocumentMixin from "./mixins/document.mjs";
-import ActivityChoiceDialog from "../applications/activity/activity-choice-dialog.mjs";
+
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 
 /**
  * Override and extend the basic Item implementation.
@@ -46,7 +49,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   static compendiumBrowserTypes({ chosen=new Set() }={}) {
     const [generalTypes, physicalTypes] = Item.TYPES.reduce(([g, p], t) => {
       if ( ![CONST.BASE_DOCUMENT_TYPE, "backpack"].includes(t) ) {
-        if ( CONFIG.Item.dataModels[t]?.metadata?.inventoryItem ) p.push(t);
+        if ( "inventorySection" in (CONFIG.Item.dataModels[t] ?? {}) ) p.push(t);
         else g.push(t);
       }
       return [g, p];
@@ -61,7 +64,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     }, {});
     const choices = makeChoices(generalTypes);
     choices.physical = {
-      label: game.i18n.localize("DND5E.Item.Category.Physical"),
+      label: game.i18n.localize("DND5E.ITEM.Category.Physical"),
       children: makeChoices(physicalTypes, chosen.has("physical"))
     };
     return new SelectChoices(choices);
@@ -153,18 +156,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     return this.system.criticalThreshold ?? null;
   }
 
-  /* --------------------------------------------- */
-
-  /**
-   * Does the Item implement an ability check as part of its usage?
-   * @type {boolean}
-   * @see {@link ActionTemplate#hasAbilityCheck}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
-   */
-  get hasAbilityCheck() {
-    return this.system.hasAbilityCheck ?? false;
-  }
-
   /* -------------------------------------------- */
 
   /**
@@ -178,48 +169,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Does the Item have an area of effect target?
-   * @type {boolean}
-   * @see {@link ActivatedEffectTemplate#hasAreaTarget}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
-   */
-  get hasAreaTarget() {
-    return this.system.hasAreaTarget ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Does the Item implement an attack roll as part of its usage?
    * @type {boolean}
    * @see {@link ActionTemplate#hasAttack}
    */
   get hasAttack() {
     return this.system.hasAttack ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item implement a damage roll as part of its usage?
-   * @type {boolean}
-   * @see {@link ActionTemplate#hasDamage}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
-   */
-  get hasDamage() {
-    return this.system.hasDamage ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item target one or more distinct targets?
-   * @type {boolean}
-   * @see {@link ActivatedEffectTemplate#hasIndividualTarget}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
-   */
-  get hasIndividualTarget() {
-    return this.system.hasIndividualTarget ?? false;
   }
 
   /* -------------------------------------------- */
@@ -237,48 +192,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Does this Item draw from a resource?
-   * @type {boolean}
-   * @see {@link ActivatedEffectTemplate#hasResource}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
-   */
-  get hasResource() {
-    return this.system.hasResource ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does this Item draw from ammunition?
-   * @type {boolean}
-   * @see {@link ActivatedEffectTemplate#hasAmmo}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
-   */
-  get hasAmmo() {
-    return this.system.hasAmmo ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Does the Item implement a saving throw as part of its usage?
    * @type {boolean}
    * @see {@link ActionTemplate#hasSave}
    */
   get hasSave() {
     return this.system.hasSave ?? false;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Does the Item have a target?
-   * @type {boolean}
-   * @see {@link ActivatedEffectTemplate#hasTarget}
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
-   */
-  get hasTarget() {
-    return this.system.hasTarget ?? false;
   }
 
   /* -------------------------------------------- */
@@ -706,28 +625,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Update a label to the Item detailing its total to hit bonus from the following sources:
-   * - item's actor's proficiency bonus if applicable
-   * - item's actor's global bonuses to the given item type
-   * - item document's innate & magical attack bonuses
-   * - item's ammunition if applicable
-   * @returns {{rollData: object, parts: string[]}|null}  Data used in the item's Attack roll.
-   */
-  getAttackToHit() {
-    foundry.utils.logCompatibilityWarning(
-      "The `getAttackToHit` method on `Item5e` has moved to `getAttackData` on `AttackActivity`.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4", once: true }
-    );
-
-    const activity = this.system.activities?.getByType("attack")[0];
-    if ( !activity ) return null;
-    const { data: rollData, parts } = activity.getAttackData();
-    return { rollData, parts };
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Render a rich tooltip for this item.
    * @param {EnrichmentOptions} [enrichmentOptions={}]  Options for text enrichment.
    * @returns {Promise<{content: string, classes: string[]}>|null}
@@ -771,7 +668,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /**
    * Trigger an Item usage, optionally creating a chat message with followup actions.
    * @param {ActivityUseConfiguration} config       Configuration info for the activation.
-   * @param {boolean} [config.legacy=true]          Whether this is a legacy invocation, using the old signature.
    * @param {boolean} [config.chooseActivity=false] Force the activity selection prompt unless the fast-forward modifier
    *                                                is held.
    * @param {ActivityDialogConfiguration} dialog    Configuration info for the usage dialog.
@@ -784,19 +680,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( this.pack ) return;
 
     let event = config.event;
-    if ( config.legacy !== false ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `Item5e#use` method has a different signature. Pass the `legacy: false` option to suppress this warning "
-        + " once the appropriate updates have been made.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-      );
-      event = dialog?.event;
-    }
     const activities = this.system.activities?.filter(a =>
       !this.getFlag("dnd5e", "riders.activity")?.includes(a.id) && a.canUse
     );
     if ( activities?.length ) {
-      const { legacy, chooseActivity, ...activityConfig } = config;
+      const { chooseActivity, ...activityConfig } = config;
       let usageConfig = activityConfig;
       let dialogConfig = dialog;
       let messageConfig = message;
@@ -805,43 +693,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         activity = await ActivityChoiceDialog.create(this);
       }
       if ( !activity ) return;
-      if ( legacy !== false ) {
-        usageConfig = {};
-        dialogConfig = {};
-        messageConfig = {};
-        activity._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, activityConfig, dialog);
-      }
       return activity.use(usageConfig, dialogConfig, messageConfig);
     }
     if ( this.actor ) return this.displayCard(message);
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle item's consumption.
-   * @param {Item5e} item  Item or clone to use when calculating updates.
-   * @param {ItemUseConfiguration} config  Configuration data for the item usage being prepared.
-   * @param {ItemUseOptions} options       Additional options used for configuring item usage.
-   * @returns {false|void}                 Returns `false` if any further usage should be canceled.
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
-   */
-  async consume(item, config, options) {
-    foundry.utils.logCompatibilityWarning(
-      "The `Item5e#consume` method has been deprecated and should now be called directly on the activity.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-    );
-    if ( this.system.activities ) {
-      const activity = this.system.activities.contents[0];
-      if ( activity ) {
-        const usageConfig = {};
-        const dialogConfig = {};
-        const messageConfig = {};
-        activity._applyDeprecatedConfigs(usageConfig, dialogConfig, messageConfig, config, options);
-        return activity.consume(usageConfig, messageConfig);
-      }
-    }
-    return false;
   }
 
   /* -------------------------------------------- */
@@ -864,7 +718,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const messageConfig = foundry.utils.mergeObject({
       create: message?.createMessage ?? true,
       data: {
-        content: await renderTemplate("systems/dnd5e/templates/chat/item-card.hbs", context),
+        content: await foundry.applications.handlebars.renderTemplate(
+          "systems/dnd5e/templates/chat/item-card.hbs", context
+        ),
         flags: {
           "core.canPopout": true,
           "dnd5e.item": { id: this.id, uuid: this.uuid, type: this.type }
@@ -882,23 +738,14 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
     /**
      * A hook event that fires before an item chat card is created without using an activity.
-     * @function dnd5e.preDisplayCardV2
+     * @function dnd5e.preDisplayCard
      * @memberof hookEvents
      * @param {Item5e} item                           Item for which the card will be created.
      * @param {ActivityMessageConfiguration} message  Configuration for the roll message.
      * @returns {boolean}                             Return `false` to prevent the card from being displayed.
      */
+    if ( Hooks.call("dnd5e.preDisplayCard", this, messageConfig) === false ) return;
     if ( Hooks.call("dnd5e.preDisplayCardV2", this, messageConfig) === false ) return;
-
-    if ( "dnd5e.preDisplayCard" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.preDisplayCard` hook has been deprecated and replaced with `dnd5e.preDisplayCardV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-      );
-      const hookData = { createMessage: messageConfig.create };
-      Hooks.callAll("dnd5e.preDisplayCard", this, messageConfig.data, hookData);
-      messageConfig.create = hookData.createMessage;
-    }
 
     ChatMessage.applyRollMode(messageConfig.data, messageConfig.rollMode);
     const card = messageConfig.create === false ? messageConfig.data : await ChatMessage.create(messageConfig.data);
@@ -953,117 +800,6 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Place an attack roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the d20Roll logic for the core implementation
-   *
-   * @param {D20RollConfiguration} options  Roll options which are configured and provided to the d20Roll function
-   * @returns {Promise<D20Roll|null>}       A Promise which resolves to the created Roll instance
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
-   */
-  async rollAttack({ spellLevel, ...options }={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `Item5e#rollAttack` method has been deprecated and should now be called directly on the attack activity.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-    );
-
-    let item = this;
-    if ( spellLevel && (this.type === "spell") ) {
-      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, spellLevel - item.system.level) }, { keepId: true });
-    }
-
-    const activity = item.system.activities?.getByType("attack")[0];
-    if ( !activity ) throw new Error("This Item does not have an Attack activity to roll!");
-
-    const rollConfig = {};
-    const dialogConfig = {};
-    const messageConfig = {};
-    _applyDeprecatedD20Configs(rollConfig, dialogConfig, messageConfig, options);
-
-    const rolls = await activity.rollAttack(rollConfig, dialogConfig, messageConfig);
-    return rolls?.[0] ?? null;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Place a damage roll using an item (weapon, feat, spell, or equipment)
-   * Rely upon the damageRoll logic for the core implementation.
-   * @param {object} [config]
-   * @param {MouseEvent} [config.event]    An event which triggered this roll, if any
-   * @param {boolean} [config.critical]    Should damage be rolled as a critical hit?
-   * @param {number} [config.spellLevel]   If the item is a spell, override the level for damage scaling
-   * @param {boolean} [config.versatile]   If the item is a weapon, roll damage using the versatile formula
-   * @param {DamageRollConfiguration} [config.options]  Additional options passed to the damageRoll function
-   * @returns {Promise<DamageRoll[]>}      A Promise which resolves to the created Roll instances, or null if the action
-   *                                       cannot be performed.
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
-   */
-  async rollDamage({ spellLevel, ...options }={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `Item5e#rollDamage` method has been deprecated and should now be called directly on an activity.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-    );
-
-    let item = this;
-    if ( spellLevel && (this.type === "spell") ) {
-      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, spellLevel - item.system.level) }, { keepId: true });
-    }
-
-    const activity = item.system.activities?.getByType("attack")[0] || item.system.activities?.getByType("damage")[0]
-      || item.system.activities?.getByType("save")[0] || item.system.activities?.getByType("heal")[0];
-    if ( !activity ) throw new Error("This Item does not have a damaging activity to roll!");
-
-    const returnMultiple = options.returnMultiple;
-    const rolls = await activity.rollDamage(options);
-    return returnMultiple ? rolls : rolls?.[0];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Prepare data needed to roll an attack using an item (weapon, feat, spell, or equipment)
-   * and then pass it off to `d20Roll`.
-   * @param {object} [options]
-   * @param {boolean} [options.spellLevel]  Level at which a spell is cast.
-   * @returns {Promise<Roll>}   A Promise which resolves to the created Roll instance.
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
-   */
-  async rollFormula({spellLevel}={}) {
-    foundry.utils.logCompatibilityWarning(
-      "The `Item5e#rollFormula` method has been deprecated and should now be called directly on the utility activity.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-    );
-
-    let item = this;
-    if ( spellLevel && (this.type === "spell") ) {
-      item = item.clone({ "flags.dnd5e.scaling": Math.max(0, spellLevel - item.system.level) }, { keepId: true });
-    }
-
-    const activity = item.system.activities?.getByType("utility")[0];
-    if ( !activity ) throw new Error("This Item does not have a Utility activity to roll!");
-
-    const rolls = await activity.rollFormula({}, { configure: false });
-    return rolls?.[0];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Perform an ability recharge test for an item which uses the d6 recharge mechanic.
-   * @returns {Promise<Roll|void>}   A Promise which resolves to the created Roll instance
-   * @deprecated since DnD5e 4.0, targeted for removal in DnD5e 4.4
-   */
-  async rollRecharge() {
-    foundry.utils.logCompatibilityWarning(
-      "The `rollRecharge` method on `Item5e` has been moved to `system.uses.rollRecharge`.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-    );
-    return (await this.system.uses?.rollRecharge())?.[0];
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Prepare data needed to roll a tool check and then pass it off to `d20Roll`.
    * @param {D20RollConfiguration} [options]  Roll configuration options provided to the d20Roll function.
    * @returns {Promise<Roll>}                 A Promise which resolves to the created Roll instance.
@@ -1106,20 +842,12 @@ export default class Item5e extends SystemDocumentMixin(Item) {
 
   /**
    * Apply listeners to chat messages.
-   * @param {jQuery|HTMLElement} html  Rendered chat message.
+   * @param {HTMLElement} html  Rendered chat message.
    */
   static chatListeners(html) {
-    html = html instanceof HTMLElement ? html : html[0];
     html.addEventListener("click", event => {
-      if ( event.target.closest("[data-context-menu]") ) {
-        event.preventDefault();
-        event.stopPropagation();
-        event.target.closest("[data-message-id]").dispatchEvent(new PointerEvent("contextmenu", {
-          view: window, bubbles: true, cancelable: true
-        }));
-      } else if ( event.target.closest(".collapsible") ) {
-        this._onChatCardToggleContent(event);
-      }
+      if ( event.target.closest("[data-context-menu]") ) ContextMenu5e.triggerEvent(event);
+      else if ( event.target.closest(".collapsible") ) this._onChatCardToggleContent(event);
     });
   }
 
@@ -1228,10 +956,9 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const advancementCollection = this.toObject().system.advancement;
     advancementCollection.push(advancement.toObject());
     if ( source ) return this.updateSource({"system.advancement": advancementCollection});
-    return this.update({"system.advancement": advancementCollection}).then(() => {
-      if ( !showConfig ) return this;
-      const config = new cls.metadata.apps.config(this.advancement.byId[advancement.id]);
-      return config.render(true);
+    return this.update({ "system.advancement": advancementCollection }).then(() => {
+      if ( showConfig ) return this.advancement.byId[advancement.id]?.sheet?.render(true);
+      return this;
     });
   }
 
@@ -1417,49 +1144,27 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
-   * Add additional system-specific compendium context menu options for Item documents.
-   * @param {jQuery} html            The compendium HTML.
-   * @param {object{}} entryOptions  The default array of context menu options.
-   */
-  static addCompendiumContextOptions(html, entryOptions) {
-    const makeUuid = li => {
-      const pack = li[0].closest("[data-pack]")?.dataset.pack;
-      return `Compendium.${pack}.Item.${li.data("documentId")}`;
-    };
-    entryOptions.push({
-      name: "DND5E.Scroll.CreateScroll",
-      icon: '<i class="fa-solid fa-scroll"></i>',
-      callback: async li => {
-        const spell = await fromUuid(makeUuid(li));
-        const scroll = await Item5e.createScrollFromSpell(spell);
-        if ( scroll ) Item5e.create(scroll);
-      },
-      condition: li => {
-        const item = fromUuidSync(makeUuid(li));
-        return (item?.type === "spell") && game.user.hasPermission("ITEM_CREATE");
-      },
-      group: "system"
-    });
-  }
-
-  /* -------------------------------------------- */
-
-  /**
    * Add additional system-specific sidebar directory context menu options for Item documents.
-   * @param {jQuery} html            The sidebar HTML.
+   * @param {ItemDirectory} app      The sidebar application.
    * @param {object[]} entryOptions  The default array of context menu options.
    */
-  static addDirectoryContextOptions(html, entryOptions) {
+  static addDirectoryContextOptions(app, entryOptions) {
     entryOptions.push({
       name: "DND5E.Scroll.CreateScroll",
       icon: '<i class="fa-solid fa-scroll"></i>',
       callback: async li => {
-        const spell = game.items.get(li.data("documentId"));
+        let spell = game.items.get(li.dataset.documentId ?? li.dataset.entryId);
+        if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
+          spell = game.items.get(li.dataset.documentId ?? li.dataset.entryId);
+        }
         const scroll = await Item5e.createScrollFromSpell(spell);
         if ( scroll ) Item5e.create(scroll);
       },
       condition: li => {
-        const item = game.items.get(li.data("documentId"));
+        let item = game.items.get(li.dataset.documentId ?? li.dataset.entryId);
+        if ( app.collection instanceof foundry.documents.collections.CompendiumCollection ) {
+          item = app.collection.index.get(li.dataset.entryId);
+        }
         return (item.type === "spell") && game.user.hasPermission("ITEM_CREATE");
       },
       group: "system"
@@ -1542,6 +1247,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
    * @returns {Promise<Item5e|void>}                The created scroll consumable item.
    */
   static async createScrollFromSpell(spell, options={}, config={}) {
+    if ( spell.pack ) return this.createScrollFromCompendiumSpell(spell.uuid, config);
+
     const values = {};
     if ( (spell instanceof Item5e) && spell.isOwned && (game.settings.get("dnd5e", "rulesVersion") === "modern") ) {
       const spellcastingClass = spell.actor.spellcastingClasses?.[spell.system.sourceClass];
@@ -1549,8 +1256,8 @@ export default class Item5e extends SystemDocumentMixin(Item) {
         values.bonus = spellcastingClass.spellcasting.attack;
         values.dc = spellcastingClass.spellcasting.save;
       } else {
-        values.bonus = spell.actor.system.attributes?.spellmod;
-        values.dc = spell.actor.system.attributes?.spelldc;
+        values.bonus = spell.actor.system.attributes?.spell?.mod;
+        values.dc = spell.actor.system.attributes?.spell?.dc;
       }
     }
 
@@ -1591,7 +1298,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
      */
     if ( Hooks.call("dnd5e.preCreateScrollFromSpell", itemData, options, config) === false ) return;
 
-    let { activities, description, level, properties, source } = itemData.system;
+    let { activities, level, properties, source } = itemData.system;
 
     // Get scroll data
     let scrollUuid;
@@ -1602,47 +1309,10 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       scrollUuid = id;
     }
     const scrollItem = await fromUuid(scrollUuid);
-    const scrollData = scrollItem.toObject();
-    delete scrollData._id;
-    const isConc = properties.includes("concentration");
+    const scrollData = game.items.fromCompendium(scrollItem);
 
     // Create a composite description from the scroll description and the spell details
-    let desc;
-    switch ( config.explanation ) {
-      case "full":
-        // Split the scroll description into an intro paragraph and the remaining details
-        const scrollDescription = scrollData.system.description.value;
-        const pdel = "</p>";
-        const scrollIntroEnd = scrollDescription.indexOf(pdel);
-        const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
-        const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
-        desc = [
-          scrollIntro,
-          "<hr>",
-          `<h3>${itemData.name} (${game.i18n.format("DND5E.LevelNumber", {level})})</h3>`,
-          isConc ? `<p><em>${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}</em></p>` : null,
-          "<hr>",
-          description.value,
-          "<hr>",
-          `<h3>${game.i18n.localize("DND5E.Scroll.Details")}</h3>`,
-          "<hr>",
-          scrollDetails
-        ].filterJoin("");
-        break;
-      case "reference":
-        desc = [
-          "<p><em>",
-          CONFIG.DND5E.spellLevels[level] ?? level,
-          " &Reference[Spell Scroll]",
-          isConc ? `, ${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}` : null,
-          "</em></p>",
-          description.value
-        ].filterJoin("");
-        break;
-      default:
-        desc = description.value;
-        break;
-    }
+    const desc = this._createScrollDescription(scrollItem, itemData, null, config);
 
     for ( const level of Array.fromRange(itemData.system.level + 1).reverse() ) {
       const values = CONFIG.DND5E.spellScrollValues[level];
@@ -1703,6 +1373,148 @@ export default class Item5e extends SystemDocumentMixin(Item) {
   /* -------------------------------------------- */
 
   /**
+   * Create a consumable spell scroll Item from a spell Item.
+   * @param {string} uuid                           UUID of the spell to add to the scroll.
+   * @param {SpellScrollConfiguration} [config={}]  Configuration options for scroll creation.
+   * @returns {Promise<Item5e|void>}                The created scroll consumable item.
+   */
+  static async createScrollFromCompendiumSpell(uuid, config={}) {
+    const spell = await fromUuid(uuid);
+    if ( !spell ) return;
+
+    const values = {};
+
+    config = foundry.utils.mergeObject({
+      explanation: game.user.getFlag("dnd5e", "creation.scrollExplanation") ?? "reference",
+      level: spell.system.level,
+      values
+    }, config);
+
+    if ( config.dialog !== false ) {
+      const result = await CreateScrollDialog.create(spell, config);
+      if ( !result ) return;
+      foundry.utils.mergeObject(config, result);
+      await game.user.setFlag("dnd5e", "creation.scrollExplanation", config.explanation);
+    }
+
+    /**
+     * A hook event that fires before the item data for a scroll is created for a compendium spell.
+     * @function dnd5e.preCreateScrollFromCompendiumSpell
+     * @memberof hookEvents
+     * @param {Item5e} spell                     Spell to add to the scroll.
+     * @param {SpellScrollConfiguration} config  Configuration options for scroll creation.
+     * @returns {boolean}                        Explicitly return `false` to prevent the scroll to be created.
+     */
+    if ( Hooks.call("dnd5e.preCreateScrollFromCompendiumSpell", spell, config) === false ) return;
+
+    // Get scroll data
+    let scrollUuid;
+    const id = CONFIG.DND5E.spellScrollIds[spell.system.level];
+    if ( foundry.data.validators.isValidId(id) ) {
+      scrollUuid = game.packs.get(CONFIG.DND5E.sourcePacks.ITEMS).index.get(id).uuid;
+    } else {
+      scrollUuid = id;
+    }
+    const scrollItem = await fromUuid(scrollUuid);
+    const scrollData = game.items.fromCompendium(scrollItem);
+
+    for ( const level of Array.fromRange(spell.system.level + 1).reverse() ) {
+      const values = CONFIG.DND5E.spellScrollValues[level];
+      if ( values ) {
+        config.values.bonus ??= values.bonus;
+        config.values.dc ??= values.dc;
+        break;
+      }
+    }
+
+    const activity = {
+      _id: staticID("dnd5escrollspell"),
+      type: "cast",
+      consumption: {
+        targets: [{ type: "itemUses", value: "1" }]
+      },
+      spell: {
+        challenge: {
+          attack: config.values.bonus,
+          save: config.values.dc,
+          override: true
+        },
+        level: config.level,
+        uuid
+      }
+    };
+
+    // Create the spell scroll data
+    const spellScrollData = foundry.utils.mergeObject(scrollData, {
+      name: `${game.i18n.localize("DND5E.SpellScroll")}: ${spell.name}`,
+      system: {
+        activities: { ...(scrollData.system.activities ?? {}), [activity._id]: activity },
+        description: {
+          value: this._createScrollDescription(scrollItem, spell, `<p>@Embed[${uuid} inline]</p>`, config).trim()
+        }
+      }
+    });
+
+    /**
+     * A hook event that fires after the item data for a scroll is created but before the item is returned.
+     * @function dnd5e.createScrollFromSpell
+     * @memberof hookEvents
+     * @param {Item5e} spell                     The spell or item data to be made into a scroll.
+     * @param {object} spellScrollData           The final item data used to make the scroll.
+     * @param {SpellScrollConfiguration} config  Configuration options for scroll creation.
+     */
+    Hooks.callAll("dnd5e.createScrollFromSpell", spell, spellScrollData, config);
+
+    return new this(spellScrollData);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Create the description for a spell scroll.
+   * @param {Item5e} scroll                         Base spell scroll.
+   * @param {Item5e|object} spell                   Spell being added to the scroll.
+   * @param {string} [spellDescription]             Description from the spell being added.
+   * @param {SpellScrollConfiguration} [config={}]  Configuration options for scroll creation.
+   * @returns {string}
+   * @protected
+   */
+  static _createScrollDescription(scroll, spell, spellDescription, config={}) {
+    spellDescription ??= spell.system.description.value;
+    const isConc = spell.system.properties[spell instanceof Item5e ? "has" : "includes"]("concentration");
+    const level = spell.system.level;
+    switch ( config.explanation ) {
+      case "full":
+        // Split the scroll description into an intro paragraph and the remaining details
+        const scrollDescription = scroll.system.description.value;
+        const pdel = "</p>";
+        const scrollIntroEnd = scrollDescription.indexOf(pdel);
+        const scrollIntro = scrollDescription.slice(0, scrollIntroEnd + pdel.length);
+        const scrollDetails = scrollDescription.slice(scrollIntroEnd + pdel.length);
+        return [
+          scrollIntro,
+          `<h3>${spell.name} (${game.i18n.format("DND5E.LevelNumber", { level })})</h3>`,
+          isConc ? `<p><em>${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}</em></p>` : null,
+          spellDescription,
+          `<h3>${game.i18n.localize("DND5E.Scroll.Details")}</h3>`,
+          scrollDetails
+        ].filterJoin("");
+      case "reference":
+        return [
+          "<p><em>",
+          CONFIG.DND5E.spellLevels[level] ?? level,
+          " &Reference[Spell Scroll]",
+          isConc ? `, ${game.i18n.localize("DND5E.Scroll.RequiresConcentration")}` : null,
+          "</em></p>",
+          spellDescription
+        ].filterJoin("");
+    }
+    return spellDescription;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Spawn a dialog for creating a new Item.
    * @param {object} [data]  Data to pre-populate the Item with.
    * @param {object} [context]
@@ -1721,20 +1533,24 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     const name = data.name || game.i18n.format("DOCUMENT.New", { type: label });
     let type = data.type || CONFIG[this.documentName]?.defaultType;
     if ( !types.includes(type) ) type = types[0];
-    const content = await renderTemplate("systems/dnd5e/templates/apps/document-create.hbs", {
-      folders, name, type,
-      folder: data.folder,
-      hasFolders: folders.length > 0,
-      types: types.reduce((arr, type) => {
-        const label = CONFIG[this.documentName]?.typeLabels?.[type] ?? type;
-        arr.push({
-          type,
-          label: game.i18n.has(label) ? game.i18n.localize(label) : type,
-          icon: this.getDefaultArtwork({ type })?.img ?? "icons/svg/item-bag.svg"
-        });
-        return arr;
-      }, []).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
-    });
+    const content = await foundry.applications.handlebars.renderTemplate(
+      "systems/dnd5e/templates/apps/document-create.hbs",
+      {
+        folders, name, type,
+        folder: data.folder,
+        hasFolders: folders.length > 0,
+        types: types.map(type => {
+          const label = CONFIG[this.documentName]?.typeLabels?.[type] ?? type;
+          const data = {
+            type,
+            label: game.i18n.has(label) ? game.i18n.localize(label) : type,
+            icon: this.getDefaultArtwork({ type })?.img ?? "icons/svg/item-bag.svg"
+          };
+          data.svg = data.icon?.endsWith(".svg");
+          return data;
+        }).sort((a, b) => a.label.localeCompare(b.label, game.i18n.lang))
+      }
+    );
     return Dialog.prompt({
       title, content,
       label: title,
