@@ -2,19 +2,35 @@
     <legend>{{ localize "DND5E.ADVANCEMENT.ItemChoice.FIELDS.pool.label" }}</legend>
     <div class="header">
         <div class="item-name name-header">{{ localize "DOCUMENT.Item" }}</div>
+        <div class="item-controls">
+            {{#if @root.editable}}
+            {{#with (ifThen @root.manualSort "SIDEBAR.SortModeManual" "SIDEBAR.SortModeAlpha") as |label|}}
+            <button type="button" class="unbutton control-button sorting-mode" data-action="sort"
+                    data-tooltip aria-label="{{ localize label }}">
+                <i class="fa-solid fa-arrow-down-{{ ifThen @root.manualSort 'short-wide' 'a-z'}}" inert></i>
+            </button>
+            {{/with}}
+            {{/if}}
+        </div>
     </div>
     <ol class="items-list unlist">
         {{#each items}}
         <li class="item flexrow" data-item-uuid="{{ data.uuid }}">
             <div class="item-name">
                 {{{ dnd5e-linkForUuid data.uuid renderBroken=true }}}
+                <input type="hidden" name="configuration.pool.{{ @index }}.sort" value="{{ data.sort }}">
                 <input type="hidden" name="configuration.pool.{{ @index }}.uuid" value="{{ data.uuid }}">
             </div>
             <div class="item-controls flexrow">
-                <a class="item-control item-action" data-action="deleteItem" data-tooltip
-                   aria-label="{{ localize 'DND5E.ItemDelete' }}">
+                {{#if @root.editable}}
+                <button type="button" class="unbutton control-button" data-action="deleteItem"
+                        data-tooltip aria-label="{{ localize 'DND5E.ItemDelete' }}">
                     <i class="fas fa-trash" inert></i>
-                </a>
+                </button>
+                {{#if @root.manualSort}}
+                <div class="drag-bar draggable"><i class="fa-solid fa-grip-lines-vertical" inert></i></div>
+                {{/if}}
+                {{/if}}
             </div>
         </li>
         {{/each}}
