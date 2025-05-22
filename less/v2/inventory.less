@@ -99,7 +99,13 @@
   .items-section {
 
     .items-header, .item {
+      outline: 2px dotted transparent;
+      outline-offset: 4px;
+      border-radius: 2px;
+      transition: outline-color 150ms ease;
+
       &[hidden] { display: none; }
+      &.highlighted { outline-color: red; }
       .condensed { font-family: var(--dnd5e-font-roboto-condensed); }
 
       .item-row {
