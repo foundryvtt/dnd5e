@@ -3184,8 +3184,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
     super._onDelete(options, userId);
 
     const origin = this.getFlag("dnd5e", "summon.origin");
-    // TODO: Replace with parseUuid once V11 support is dropped
-    if ( origin ) dnd5e.registry.summons.untrack(origin.split(".Item.")[0], this.uuid);
+    if ( origin ) {
+      const { collection, primaryId } = foundry.utils.parseUuid(origin);
+      dnd5e.registry.summons.untrack(collection.get?.(primaryId)?.uuid, this.uuid);
+    }
   }
 
   /* -------------------------------------------- */
