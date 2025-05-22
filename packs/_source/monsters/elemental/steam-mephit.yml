@@ -668,10 +668,9 @@ items:
     system:
       description:
         value: >-
-          <p>When the mephit dies, it explodes in a cloud of steam. </p><p>Each
-          creature within 5 ft. of the mephit must succeed on a  <strong>DC 10
-          Dexterity</strong> saving throw or take <strong>4 (1d8) <em>fire
-          damage</em></strong>.</p>
+          <p>When the mephit dies, it explodes in a cloud of steam. Each
+          creature within 5 ft. of the mephit must succeed on a [[/save]] saving
+          throw or take [[/damage average]] damage.</p>
         chat: >-
           <p>When the mephit dies, it explodes in a cloud of steam. Each
           creature within 5 ft. of the mephit must make a
@@ -684,7 +683,7 @@ items:
         rules: '2014'
         revision: 1
       uses:
-        max: '1'
+        max: ''
         recovery: []
         spent: 0
       type:
@@ -693,94 +692,16 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: damage
-          activation:
-            type: special
-            value: null
-            condition: on death
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '5'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          damage:
-            critical:
-              allow: false
-              bonus: ''
-            parts:
-              - number: 1
-                denomination: 8
-                bonus: ''
-                types:
-                  - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
           activation:
-            type: special
+            type: ''
             value: null
             condition: on death
             override: false
           consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
               allowed: false
               max: ''
@@ -795,22 +716,22 @@ items:
             override: false
           effects: []
           range:
-            value: '5'
-            units: ft
+            value: ''
+            units: self
             special: ''
             override: false
           target:
             template:
               count: ''
               contiguous: false
-              type: ''
-              size: ''
+              type: radius
+              size: '5'
               width: ''
               height: ''
-              units: ''
+              units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -820,26 +741,25 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 8
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
             ability: dex
             dc:
               calculation: ''
               formula: '10'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -849,15 +769,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.net3yBKQoxl8bZ4r
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676728
+      modifiedTime: 1747955474733
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!UthHOT7QfZfEIUue.QWi0q0cSzHEp8VqB'
@@ -918,9 +842,9 @@ items:
       description:
         value: >-
           <p>The mephit exhales a 15-foot cone of scalding steam. Each creature
-          in that area must succeed on a  <strong>DC 10 Dexterity</strong>
-          saving throw, taking <strong>4 (1d8) <em>fire damage</em></strong> on
-          a failed save, or half as much damage on a successful one.</p>
+          in that area must succeed on a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
           <p>The mephit exhales a 15-foot cone of scalding steam. Each creature
           in that area must succeed on a Dexterity saving throw.</p>
@@ -955,11 +879,8 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -988,7 +909,7 @@ items:
               units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -1000,24 +921,23 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 8
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
             ability: dex
             dc:
               calculation: ''
               formula: '10'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -1027,15 +947,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4UuuUKjATTixrZGP
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676728
+      modifiedTime: 1747955542948
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!UthHOT7QfZfEIUue.RnLjEUZ0gBxcH2T3'

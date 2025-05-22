@@ -888,15 +888,14 @@ items:
           forms on a point the djinni can see within 120 feet of it. The
           whirlwind lasts as long as the djinni maintains concentration (as if
           concentrating on a spell).</p><p>Any creature but the djinni that
-          enters the whirlwind must succeed on a  <strong>DC 18
-          Strength</strong> saving throw or be restrained by it. The djinni can
-          move the whirlwind up to 60 feet as an action, and creatures
-          restrained by the whirlwind move with it. The whirlwind ends if the
-          djinni loses sight of it.</p><p>A creature can use its action to free
-          a creature restrained by the whirlwind, including itself, by
-          succeeding on a DC 18 Strength check. If the check succeeds, the
-          creature is no longer restrained and moves to the nearest space
-          outside the whirlwind.</p>
+          enters the whirlwind must succeed on a [[/save]] saving throw or be
+          restrained by it. The djinni can move the whirlwind up to 60 feet as
+          an action, and creatures restrained by the whirlwind move with it. The
+          whirlwind ends if the djinni loses sight of it.</p><p>A creature can
+          use its action to free a creature restrained by the whirlwind,
+          including itself, by succeeding on a [[/check]] check. If the check
+          succeeds, the creature is no longer restrained and moves to the
+          nearest space outside the whirlwind.</p>
         chat: >-
           <p>A 5-foot-radius, 30-foot-tall cylinder of swirling air magically
           forms on a point the djinni can see within 120 feet of it. Any
@@ -942,9 +941,9 @@ items:
           description:
             chatFlavor: ''
           duration:
-            concentration: false
+            concentration: true
             value: ''
-            units: ''
+            units: spec
             special: ''
             override: false
           effects: []
@@ -957,10 +956,10 @@ items:
             template:
               count: ''
               contiguous: false
-              type: radius
+              type: cylinder
               size: '5'
               width: ''
-              height: ''
+              height: '30'
               units: ft
             affects:
               count: ''
@@ -982,6 +981,56 @@ items:
               calculation: ''
               formula: '18'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
+        hUuMAYQYtO7oHptY:
+          type: check
+          _id: hUuMAYQYtO7oHptY
+          sort: 0
+          activation:
+            type: action
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          check:
+            associated: []
+            dc:
+              calculation: ''
+              formula: '18'
+            ability: str
+          name: Escape
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -991,15 +1040,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.1XeF2VMMPw7QYffo
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676525
+      modifiedTime: 1747954813245
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!5P1VGAZQwOilwZQf.nE7YNnVM7srBcdfl'

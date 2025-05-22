@@ -506,13 +506,13 @@ items:
         value: >-
           <p>The elemental can move through a space as narrow as 1 inch wide
           without squeezing. A creature that touches the elemental or hits it
-          with a melee attack while within 5 ft. of it takes <strong>5 (1d10)
-          <em>fire damage</em></strong>. </p><p>In addition, the elemental can
-          enter a hostile creature's space and stop there. The first time it
-          enters a creature's space on a turn, that creature takes <strong>5
-          (1d10) <em>fire damage</em></strong> and catches fire; until someone
-          takes an action to douse the fire, the creature takes <strong>5 (1d10)
-          <em>fire damage</em></strong> at the start of each of its turns.</p>
+          with a melee attack while within 5 ft. of it takes [[/damage average]]
+          damage.</p><p>In addition, the elemental can enter a hostile
+          creature's space and stop there. The first time it enters a creature's
+          space on a turn, that creature takes [[/damage average]] damage and
+          catches fire; until someone takes an action to douse the fire, the
+          creature takes [[/damage average]] damage at the start of each of its
+          turns.</p>
         chat: >-
           <p>A creature that touches the elemental or hits it with a melee
           attack while within 5 ft. of it takes <em>fire damage</em>. In
@@ -618,9 +618,9 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676531
+      modifiedTime: 1747955111165
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8SMQl75HLjhuSeau.yud1cnEVQ9KxbmWc'
@@ -631,9 +631,8 @@ items:
     system:
       description:
         value: >-
-          <p>The elemental sheds bright light in a <strong>30-foot
-          radius</strong> and dim light in an additional <strong>30
-          ft.</strong>.</p>
+          <p>The elemental sheds bright light in a 30-foot radius and dim light
+          in an additional 30 ft..</p>
         chat: ''
       source:
         custom: ''
@@ -667,10 +666,10 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747955121194
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8SMQl75HLjhuSeau.iQt3J3ZnHDoeaEIR'
   - _id: AW3qP6nJk45lOHe3
@@ -680,9 +679,8 @@ items:
     system:
       description:
         value: >-
-          <p>For every <strong>5 ft.</strong> the elemental moves in water, or
-          for every gallon of water splashed on it, it takes<strong> 1 <em>cold
-          damage</em>.</strong></p>
+          <p>For every 5 ft. the elemental moves in water, or for every gallon
+          of water splashed on it, it takes [[/damage]] damage.</p>
         chat: ''
       source:
         custom: ''
@@ -700,7 +698,60 @@ items:
         subtype: ''
       requirements: ''
       properties: []
-      activities: {}
+      activities:
+        8SEMSOQEd8LaPZGb:
+          type: damage
+          _id: 8SEMSOQEd8LaPZGb
+          sort: 0
+          activation:
+            type: ''
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: true
+                  formula: '1'
+                number: null
+                denomination: null
+                bonus: '1'
+                types:
+                  - cold
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -710,16 +761,20 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.5V7SCABXvIbnk2Zn
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747955152360
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8SMQl75HLjhuSeau.AW3qP6nJk45lOHe3'
   - _id: PRiFJLZbvIt2nkTk
@@ -830,10 +885,11 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]]. </p><p>If the target is
+          <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
           a creature or a flammable object, it ignites. Until a creature takes
-          an action to douse the fire, the target takes <strong>5 (1d10)
-          <em>fire damage</em></strong> at the start of each of its turns.</p>
+          an action to douse the fire, the target takes [[/damage
+          activity=t6hyTO2lOgR3OWJQ average]] damage at the start of each of its
+          turns.</p>
         chat: >-
           <p>The Fire Elemental attacks with its Touch. If the target is a
           creature or a flammable object, it ignites. Until a creature takes an
@@ -973,78 +1029,81 @@ items:
             includeBase: true
             parts: []
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
+        t6hyTO2lOgR3OWJQ:
+          type: damage
+          _id: t6hyTO2lOgR3OWJQ
+          sort: 0
           activation:
-            type: action
-            value: 1
-            condition: ''
+            type: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: ''
-            units: ''
-            special: ''
             override: false
           effects: []
           range:
-            value: '5'
-            units: ft
-            special: ''
+            units: self
             override: false
           target:
             template:
-              count: ''
               contiguous: false
+              units: ft
               type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
             affects:
-              count: ''
-              type: ''
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: 1d10
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          damage:
+            critical:
+              allow: false
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
+                denomination: 10
+                bonus: ''
+                types:
+                  - fire
+          name: ''
+          img: ''
+          appliedEffects: []
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: touch
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745107550437
+      modifiedTime: 1747955197992
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!8SMQl75HLjhuSeau.fdt2FIirmBRCpRBm'

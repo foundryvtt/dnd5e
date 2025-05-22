@@ -570,8 +570,7 @@ items:
       description:
         value: >-
           <p>A creature that touches the azer or hits it with a melee attack
-          while within 5 feet of it takes <strong>5 (1d10) <em>fire
-          damage</em></strong>.</p>
+          while within 5 feet of it takes [[/damage average]] damage.</p>
         chat: ''
       source:
         custom: ''
@@ -594,7 +593,7 @@ items:
           _id: dnd5eactivity000
           type: damage
           activation:
-            type: special
+            type: ''
             value: null
             condition: ''
             override: false
@@ -643,19 +642,18 @@ items:
               allow: false
               bonus: ''
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 10
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -665,16 +663,20 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iFNpsEMJT66eLoat
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747954647728
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IiEDPMWqBlzkggYD.P0pbiook7Q79UYqQ'
   - _id: WRygAnkpMeaqiw70
@@ -684,9 +686,8 @@ items:
     system:
       description:
         value: >-
-          <p>When the azer hits with a metal melee weapon, it deals an extra
-          <strong>3 (1d6) <em>fire damage</em></strong> (included in the
-          attack).</p>
+          <p>When the azer hits with a metal melee weapon, it deals an extra 3
+          (1d6) fire damage (included in the attack).</p>
         chat: >-
           <p>When the azer hits with a metal melee weapon, it deals extra
           <em>fire damage</em> (included in the attack).</p>
@@ -716,15 +717,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.i3viKtKcSVeWLJFJ
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676547
+      modifiedTime: 1747954613222
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IiEDPMWqBlzkggYD.WRygAnkpMeaqiw70'
@@ -783,9 +788,9 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]], or <strong>8 (1d10 + 3)
-          <em>bludgeoning damage</em></strong> if used with two hands to make a
-          melee attack, plus <strong>3 (1d6) <em>fire damage</em></strong>.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
+          attackMode=twoHanded]] if used with two hands to make a melee
+          attack.</p>
         chat: >-
           <section>
 
@@ -946,6 +951,7 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: warhammer
+      mastery: ''
     effects: []
     folder: null
     sort: 0
@@ -957,9 +963,9 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173385299
+      modifiedTime: 1747954692108
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!IiEDPMWqBlzkggYD.YvzdCGQeCV1XOcUt'

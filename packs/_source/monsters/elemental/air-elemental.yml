@@ -819,18 +819,16 @@ items:
     system:
       description:
         value: >-
-          <p>Each creature in the elemental's space must make a  <strong>DC 13
-          Strength</strong> saving throw. On a failure, a target takes
-          <strong>15 (3d8 + 2) <em>bludgeoning damage</em></strong> and is flung
-          up 20 feet away from the elemental in a random direction and knocked
-          prone.</p><p>If a thrown target strikes an object, such as a wall or
-          floor, the target takes <strong>3 (1d6) <em>bludgeoning
-          damage</em></strong> for every 10 feet it was thrown. If the target is
-          thrown at another creature, that creature must succeed on a 
-          <strong>DC 13 Dexterity</strong> saving throw or take the same damage
-          and be knocked prone. If the saving throw is successful, the target
-          takes half the <em>bludgeoning damage</em> and isn't flung away or
-          knocked prone.</p>
+          <p>Each creature in the elemental's space must make a [[/save]] saving
+          throw. On a failure, a target takes [[/damage average]] damage and is
+          flung up 20 feet away from the elemental in a random direction and
+          knocked prone.</p><p>If a thrown target strikes an object, such as a
+          wall or floor, the target takes [[/damage activity=dnd5eactivity000
+          average]] damage for every 10 feet it was thrown. If the target is
+          thrown at another creature, that creature must succeed on a [[/save
+          activity=k9fqQYuxbnT3pwT3]] saving throw or take the same damage and
+          be knocked prone. If the saving throw is successful, the target takes
+          half the bludgeoning damage and isn't flung away or knocked prone.</p>
         chat: >-
           <p>Each creature in the elemental's space must make a
           <strong>Strength</strong> saving throw. On a failure, a target is
@@ -867,16 +865,10 @@ items:
             condition: ''
             override: false
           consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+            targets: []
             scaling:
-              allowed: false
-              max: ''
+              allowed: true
+              max: '2'
             spellSlot: true
           description:
             chatFlavor: ''
@@ -916,19 +908,20 @@ items:
               allow: false
               bonus: ''
             parts:
-              - number: 3
-                denomination: 8
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
+                number: 3
+                denomination: 8
+                bonus: ''
+                types:
+                  - bludgeoning
                 scaling:
                   mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
+          sort: 200000
+          name: Object Damage
+          img: ''
+          appliedEffects: []
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -940,11 +933,8 @@ items:
           consumption:
             targets:
               - type: itemUses
-                target: ''
                 value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
+                target: ''
             scaling:
               allowed: false
               max: ''
@@ -983,26 +973,75 @@ items:
             max: ''
             recovery: []
           damage:
-            onSave: half
+            onSave: none
             parts:
-              - number: 3
-                denomination: 8
-                bonus: '@mod'
-                types:
-                  - bludgeoning
-                custom:
+              - custom:
                   enabled: false
                   formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+                number: 3
+                denomination: 8
+                bonus: ''
+                types:
+                  - bludgeoning
           save:
             ability: str
             dc:
               calculation: ''
               formula: '13'
-          sort: 0
+          sort: 100000
+          name: ''
+          img: ''
+          appliedEffects: []
+        k9fqQYuxbnT3pwT3:
+          type: save
+          name: Creature Save
+          _id: k9fqQYuxbnT3pwT3
+          sort: 300000
+          activation:
+            type: action
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          damage:
+            parts: []
+            onSave: half
+          save:
+            ability:
+              - dex
+            dc:
+              calculation: ''
+              formula: '13'
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -1012,15 +1051,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ocmSrMY2NX3e43uN
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676579
+      modifiedTime: 1747954564495
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!banHjKDMCegbUwYE.PVdWTEQBuiAglD7l'
