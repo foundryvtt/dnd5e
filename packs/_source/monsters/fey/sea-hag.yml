@@ -538,20 +538,18 @@ items:
     system:
       description:
         value: >-
-          <p>Any humanoid that starts its turn <strong>within 30 feet</strong>
-          of the hag and can see the hag's true form must make a <strong>DC 11
-          Wisdom saving throw</strong>. On a failed save, the creature is
-          frightened for <strong>1 minute</strong>. A creature can repeat the
-          saving throw at the end of each of its turns, with<strong>
-          disadvantage </strong>if the hag is within line of sight, ending the
-          effect on itself on a success.</p><p>If a creature's saving throw is
-          successful or the effect ends for it, the creature is immune to the
-          hag's Horrific Appearance for the next 24 hours<strong>.
-          </strong>Unless the target is surprised or the revelation of the hag's
-          true form is sudden, the target can avert its eyes and avoid making
-          the initial saving throw. Until the start of its next turn, a creature
-          that averts its eyes has<strong> disadvantage </strong>on attack rolls
-          against the hag.</p>
+          <p>Any humanoid that starts its turn within 30 feet of the hag and can
+          see the hag's true form must make a [[/save]] saving throw. On a
+          failed save, the creature is &amp;Reference[frightened] for 1 minute.
+          A creature can repeat the saving throw at the end of each of its
+          turns, with disadvantage if the hag is within line of sight, ending
+          the effect on itself on a success.</p><p>If a creature's saving throw
+          is successful or the effect ends for it, the creature is immune to the
+          hag's Horrific Appearance for the next 24 hours. Unless the target is
+          surprised or the revelation of the hag's true form is sudden, the
+          target can avert its eyes and avoid making the initial saving throw.
+          Until the start of its next turn, a creature that averts its eyes has
+          disadvantage on attack rolls against the hag.</p>
         chat: >-
           <p>Any humanoid that starts its turn <strong>within 30 feet</strong>
           of the hag and can see the hag's true form must make a
@@ -646,9 +644,9 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676725
+      modifiedTime: 1747955938735
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!OQqybZoMeDFn5AFD.XeAyeJsNjKZKPWEN'
@@ -823,9 +821,8 @@ items:
       description:
         value: >-
           <p>The hag targets one frightened creature she can see within 30 ft.
-          of her. If the target can see the hag, it must succeed on a 
-          <strong>DC 11 Wisdom</strong> saving throw against this magic or drop
-          to 0 hit points.</p>
+          of her. If the target can see the hag, it must succeed on a [[/save]]
+          saving throw against this magic or drop to 0 hit points.</p>
         chat: >-
           <p>The hag targets one frightened creature she can see within 30 ft.
           of her. If the target can see the hag, it must make a
@@ -920,9 +917,9 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676725
+      modifiedTime: 1747955961924
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!OQqybZoMeDFn5AFD.7AGmP2dRLYmORUX7'

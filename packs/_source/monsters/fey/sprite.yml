@@ -1075,10 +1075,9 @@ items:
       description:
         value: >-
           <p>The sprite touches a creature and magically knows the creature's
-          current emotional state. </p><p>If the target fails a  <strong>DC 10
-          Charisma</strong> saving throw, the sprite also knows the creature's
-          alignment. Celestials, fiends, and undead automatically fail the
-          saving throw.</p>
+          current emotional state.</p><p>If the target fails a [[/save]] saving
+          throw, the sprite also knows the creature's alignment. Celestials,
+          fiends, and undead automatically fail the saving throw.</p>
         chat: >-
           <p>The sprite touches a creature. target must make a
           <strong>Charisma</strong> saving throw.</p>
@@ -1171,9 +1170,9 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676890
+      modifiedTime: 1747955988926
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!MUpBNDoJEr09bLaO.qJHrH8Q3q1JB5xe5'
