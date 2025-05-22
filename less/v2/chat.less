@@ -795,15 +795,23 @@ enchantment-application {
     display: block;
     margin-block-start: 1em;
   }
-  .activities ul {
+  ul.action-list {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
     margin-block-start: 8px;
 
     li {
       --gold-icon-size: 32px;
       gap: 8px;
+      align-items: center;
     }
 
     a.rollable:hover .subtitle { text-shadow: none; }
+    .status {
+      flex: 0 0 30px;
+      text-align: center;
+    }
   }
   .deltas ul {
     .delta {
