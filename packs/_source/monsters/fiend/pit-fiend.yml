@@ -503,13 +503,12 @@ items:
     system:
       description:
         value: >-
-          <p>Any creature hostile to the pit fiend that starts its turn
-          <strong>within 20 feet</strong> of the pit fiend must make a
-          <strong>DC 21 Wisdom saving throw</strong>, unless the pit fiend is
-          incapacitated. On a failed save, the creature is frightened until the
-          start of its next turn. If a creature's saving throw is successful,
-          the creature is immune to the pit fiend's Fear Aura for the next 24
-          hours.</p>
+          <p>Any creature hostile to the pit fiend that starts its turn within
+          20 feet of the pit fiend must make a [[/save]] saving throw, unless
+          the pit fiend is incapacitated. On a failed save, the creature is
+          &amp;Reference[frightened] until the start of its next turn. If a
+          creature's saving throw is successful, the creature is immune to the
+          pit fiend's Fear Aura for the next 24 hours.</p>
         chat: >-
           <p>Any creature hostile to the pit fiend that starts its turn
           <strong>within 20 feet</strong> of the pit fiend must make a
@@ -529,13 +528,14 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
           type: save
           activation:
-            type: special
+            type: ''
             value: null
             condition: ''
             override: false
@@ -587,6 +587,9 @@ items:
               calculation: ''
               formula: '21'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -596,15 +599,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.MLVEyA7VcWu9uXqV
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676943
+      modifiedTime: 1747957309086
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.wkqjn4bqhPIUUo7k'
@@ -615,8 +622,8 @@ items:
     system:
       description:
         value: >-
-          <p>The pit fiend has<strong> advantage </strong>on saving throws
-          against spells and other magical effects.</p>
+          <p>The pit fiend has advantage on saving throws against spells and
+          other magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -650,10 +657,10 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747957270896
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!RCv5y7iWlfNxkinx.2MKXiCJeOrUJIEto'
   - _id: TT2YmAw82Sj1WNKn

@@ -646,7 +646,7 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
@@ -657,7 +657,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107550536
+      modifiedTime: 1747956347839
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.KjxsSFx9xv2HLtMX'
@@ -669,10 +669,9 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a  <strong>DC 14 Constitution</strong> saving throw or
-          become poisoned for 1 minute. The target can repeat the saving throw
-          at the end of each of its turns, ending the effect on itself on a
-          success .</p>
+          succeed on a [[/save]] saving throw or become &amp;Reference[poisoned]
+          for 1 minute. The target can repeat the saving throw at the end of
+          each of its turns, ending the effect on itself on a success .</p>
         chat: >-
           <p>The Bone Devil attacks with its Sting. the target must make a
           <strong>Constitution</strong> saving throw. The target can repeat the
@@ -876,19 +875,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 8
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -899,20 +886,25 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: sting
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: null
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745107550536
+      modifiedTime: 1747956381241
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.iFHGL8wlqBtZAdHr'
@@ -1108,7 +1100,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273655459
+      modifiedTime: 1747956348705
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.sC1dqjfFZKnDmhec'

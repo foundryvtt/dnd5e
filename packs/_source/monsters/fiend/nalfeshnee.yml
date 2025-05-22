@@ -499,8 +499,8 @@ items:
     system:
       description:
         value: >-
-          <p>The nalfeshnee has<strong> advantage </strong>on saving throws
-          against spells and other magical effects.</p>
+          <p>The nalfeshnee has advantage on saving throws against spells and
+          other magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -534,10 +534,10 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747957072839
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.jZeQHAOQV365hmZF'
   - _id: swlYyGYwkdNzuRkG
@@ -979,12 +979,12 @@ items:
         value: >-
           <p>The nalfeshnee magically emits scintillating, multicolored light.
           Each creature within 15 feet of the nalfeshnee that can see the light
-          must succeed on a  <strong>DC 15 Wisdom</strong> saving throw or be
-          frightened for 1 minute. </p><p>A creature can repeat the saving throw
-          at the end of each of its turns, ending the effect on itself on a
-          success. If a creature's saving throw is successful or the effect ends
-          for it, the creature is immune to the nalfeshnee's Horror Nimbus for
-          the next 24 hours.</p>
+          must succeed on a [[/save]] saving throw or be
+          &amp;Reference[frightened] for 1 minute.</p><p>A creature can repeat
+          the saving throw at the end of each of its turns, ending the effect on
+          itself on a success. If a creature's saving throw is successful or the
+          effect ends for it, the creature is immune to the nalfeshnee's Horror
+          Nimbus for the next 24 hours.</p>
         chat: >-
           <p>A creature can repeat the saving throw at the end of each of its
           turns, ending the effect on itself on a success. If a creature's
@@ -1087,9 +1087,9 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676901
+      modifiedTime: 1747957090259
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.RFPDYIhkmBW2B47S'
@@ -1099,7 +1099,7 @@ items:
     img: icons/magic/symbols/runes-star-pentagon-magenta.webp
     system:
       description:
-        value: ''
+        value: "<p>The nalfeshnee magically teleports, along with any equipment\_it\_is wearing\_or\_carrying, up to 120 feet\_to\_an\_unoccupied\_space it can\_see.</p>"
         chat: >-
           <section class="secret"><p></p></section><p>The nalfeshnee magically
           teleports, along with any equipment it is wearing or carrying, up to
@@ -1190,9 +1190,9 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676901
+      modifiedTime: 1747957138149
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!rUg5JMnKNnZNBAq9.zK5E9yD6BR0fZRBo'

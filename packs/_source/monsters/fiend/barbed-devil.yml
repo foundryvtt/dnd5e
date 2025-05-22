@@ -503,9 +503,8 @@ items:
     system:
       description:
         value: >-
-          <p>At the start of each of its turns, the barbed devil deals <strong>5
-          (1d10) <em>piercing damage</em></strong> to any creature grappling
-          it.</p>
+          <p>At the start of each of its turns, the barbed devil deals [[/damage
+          average]] damage to any creature grappling it.</p>
         chat: ''
       source:
         custom: ''
@@ -522,13 +521,14 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
           type: damage
           activation:
-            type: special
+            type: ''
             value: null
             condition: ''
             override: false
@@ -576,18 +576,17 @@ items:
               allow: false
               bonus: ''
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 10
                 bonus: ''
                 types: []
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -597,16 +596,20 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.QMGBV7OSnXqWLdhr
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747956256210
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.8QaMc1baRrSlLFXN'
   - _id: wPHhtm2eyM9LKpT4

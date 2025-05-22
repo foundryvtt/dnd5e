@@ -503,8 +503,8 @@ items:
     system:
       description:
         value: >-
-          <p>The hezrou has<strong> advantage </strong>on saving throws against
-          spells and other magical effects.</p>
+          <p>The hezrou has advantage on saving throws against spells and other
+          magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -538,10 +538,10 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747956634899
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ec3lhsNv1ZRu7Qaq.dQt68nlmGdhK2ojI'
   - _id: 0EcUwWcmWzFuiJyg
@@ -551,11 +551,10 @@ items:
     system:
       description:
         value: >-
-          <p>Any creature that starts its turn <strong>within 10 feet</strong>
-          of the hezrou must succeed on a <strong>DC 14 Constitution saving
-          throw</strong> or be poisoned until the start of its next turn. On a
-          successful saving throw, the creature is immune to the hezrou's stench
-          for 24 hours.</p>
+          <p>Any creature that starts its turn within 10 feet of the hezrou must
+          succeed on a [[/save]] saving throw or be &amp;Reference[poisoned]
+          until the start of its next turn. On a successful saving throw, the
+          creature is immune to the hezrou's stench for 24 hours.</p>
         chat: >-
           <p>Any creature that starts its turn <strong>within 10 feet</strong>
           of the hezrou must succeed on a Constitution saving throw.</p>
@@ -647,9 +646,9 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676806
+      modifiedTime: 1747956652615
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!ec3lhsNv1ZRu7Qaq.0EcUwWcmWzFuiJyg'

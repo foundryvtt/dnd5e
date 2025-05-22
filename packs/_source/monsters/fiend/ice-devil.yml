@@ -656,7 +656,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
@@ -667,7 +667,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107549825
+      modifiedTime: 1747956711108
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1zzRQps9jZdLZGqI.DV4KS0OE541vGOtI'
@@ -724,8 +724,8 @@ items:
     system:
       description:
         value: >-
-          <p>The devil has<strong> advantage </strong>on saving throws against
-          spells and other magical effects.</p>
+          <p>The devil has advantage on saving throws against spells and other
+          magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -759,10 +759,10 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747956708871
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1zzRQps9jZdLZGqI.IKaEdLLHwVL0s9UP'
   - _id: nCTze3rZpWcTeuYQ
@@ -778,19 +778,18 @@ items:
           in diameter.</p><p>When the wall appears, each creature in its space
           is pushed out of it by the shortest route. The creature chooses which
           side of the wall to end up on, unless the creature is incapacitated.
-          The creature then makes a  <strong>DC 17 Dexterity</strong> saving
-          throw, taking <strong>35 (10d6) <em>cold damage</em></strong> on a
-          failed save, or half as much damage on a successful one.</p><p>The
-          wall lasts for 1 minute or until the devil is incapacitated or dies.
-          The wall can be damaged and breached; each 10-foot section has AC 5,
-          30 hit points, vulnerability to <em>fire damage</em>, and immunity to
-          acid, cold, necrotic, poison, and <em>psychic damage</em>. If a
+          The creature then makes a [[/save]] saving throw, taking [[/damage
+          average]] damage on a failed save, or half as much damage on a
+          successful one.</p><p>The wall lasts for 1 minute or until the devil
+          is incapacitated or dies. The wall can be damaged and breached; each
+          10-foot section has AC 5, 30 hit points, vulnerability to fire damage,
+          and immunity to acid, cold, necrotic, poison, and psychic damage. If a
           section is destroyed, it leaves behind a sheet of frigid air in the
           space the wall occupied. Whenever a creature finishes moving through
           the frigid air on a turn, willingly or otherwise, the creature must
-          make a  <strong>DC 17 Constitution</strong> saving throw, taking
-          <strong>17 (5d6) <em>cold damage</em></strong> on a failed save, or
-          half as much damage on a successful one. The frigid air dissipates
+          make a [[/save activity=1sgpSnbxz7JYshd3]] saving throw, taking
+          [[/damage activity=1sgpSnbxz7JYshd3 average]] damage on a failed save,
+          or half as much damage on a successful one. The frigid air dissipates
           when the rest of the wall vanishes.</p>
         chat: >-
           <p>The devil magically forms an opaque wall of ice on a solid surface
@@ -823,81 +822,6 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: attack
-          activation:
-            type: action
-            value: 1
-            condition: a solid surface it can see within 60 ft.
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: '1'
-            units: minute
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '30'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: line
-              size: '1'
-              width: ''
-              height: ''
-              units: ft
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          attack:
-            ability: ''
-            bonus: ''
-            critical:
-              threshold: null
-            flat: false
-            type:
-              value: ranged
-              classification: spell
-          damage:
-            critical:
-              bonus: ''
-            includeBase: true
-            parts:
-              - number: 10
-                denomination: 6
-                bonus: ''
-                types:
-                  - cold
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -930,10 +854,10 @@ items:
             template:
               count: ''
               contiguous: false
-              type: line
-              size: '1'
-              width: ''
-              height: ''
+              type: wall
+              size: '30'
+              width: '1'
+              height: '10'
               units: ft
             affects:
               count: ''
@@ -949,96 +873,103 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 10
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 10
                 denomination: 6
                 bonus: ''
                 types:
                   - cold
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
             ability: dex
             dc:
               calculation: ''
               formula: '17'
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
+          name: Create Wall
+          img: ''
+          appliedEffects: []
+        1sgpSnbxz7JYshd3:
+          type: save
+          name: Pass Through Wall
+          _id: 1sgpSnbxz7JYshd3
+          sort: 0
           activation:
-            type: action
-            value: 1
-            condition: a solid surface it can see within 60 ft.
+            type: ''
             override: false
+            condition: ''
           consumption:
-            targets: []
             scaling:
               allowed: false
-              max: ''
             spellSlot: true
+            targets: []
           description:
             chatFlavor: ''
           duration:
+            units: inst
             concentration: false
-            value: '1'
-            units: minute
-            special: ''
             override: false
           effects: []
           range:
-            value: '30'
-            units: ft
-            special: ''
+            units: self
             override: false
+            special: ''
           target:
             template:
-              count: ''
               contiguous: false
-              type: line
-              size: '1'
-              width: ''
-              height: ''
               units: ft
-            affects:
-              count: ''
               type: ''
+            affects:
               choice: false
-              special: ''
-            prompt: true
+              type: ''
             override: false
+            prompt: true
           uses:
             spent: 0
-            max: ''
             recovery: []
-          roll:
-            formula: 5d6
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
+            max: ''
+          damage:
+            parts:
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 5
+                denomination: 6
+                bonus: ''
+                types:
+                  - cold
+            onSave: half
+          save:
+            ability:
+              - con
+            dc:
+              calculation: ''
+              formula: '17'
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
       identifier: wall-of-ice
     effects: []
     folder: null
-    sort: 0
+    sort: 500000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Kwt8YDIBHg6JO2v2
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676909
+      modifiedTime: 1747956871882
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1zzRQps9jZdLZGqI.nCTze3rZpWcTeuYQ'
@@ -1203,7 +1134,7 @@ items:
       identifier: tail
     effects: []
     folder: null
-    sort: 0
+    sort: 400000
     ownership:
       default: 0
     flags: {}
@@ -1214,7 +1145,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107549825
+      modifiedTime: 1747956711108
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1zzRQps9jZdLZGqI.AQ551xglVn90BdwU'
@@ -1379,7 +1310,7 @@ items:
       identifier: claws
     effects: []
     folder: null
-    sort: 0
+    sort: 200000
     ownership:
       default: 0
     flags: {}
@@ -1390,7 +1321,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107549825
+      modifiedTime: 1747956725985
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1zzRQps9jZdLZGqI.E6iXljYXLdQyfk1l'
@@ -1493,7 +1424,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273654952
+      modifiedTime: 1747956711842
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!1zzRQps9jZdLZGqI.vLQAjoewGE5MAHn2'

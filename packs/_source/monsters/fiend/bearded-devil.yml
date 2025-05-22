@@ -598,7 +598,7 @@ items:
       description:
         value: >-
           <p>The devil can't be frightened while it can see an allied creature
-          <strong>within 30 feet</strong> of it.</p>
+          within 30 feet of it.</p>
         chat: ''
       source:
         custom: ''
@@ -632,10 +632,10 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747956271839
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!9ggQBmAKXraOtz7S.PIggvpkBTTCDGOHp'
   - _id: ndwCjJFBLTujojCl
@@ -646,10 +646,10 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a  <strong>DC 12 Constitution</strong> saving throw or be
-          poisoned for 1 minute. While poisoned in this way, the target can't
-          regain hit points. The target can repeat the saving throw at the end
-          of each of its turns, ending the effect on itself on a success.</p>
+          succeed on a [[/save]] saving throw or be &amp;Reference[poisoned] for
+          1 minute. While poisoned in this way, the target can't regain hit
+          points. The target can repeat the saving throw at the end of each of
+          its turns, ending the effect on itself on a success.</p>
         chat: >-
           <p>The Bearded Devil attacks with its Beard. The target must make a
           <strong>Constitution</strong> saving throw. The target can repeat the
@@ -842,19 +842,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 1
-                denomination: 8
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -865,9 +853,10 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: beard
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags:
@@ -880,9 +869,9 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745108031803
+      modifiedTime: 1747956294859
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!9ggQBmAKXraOtz7S.ndwCjJFBLTujojCl'
@@ -894,14 +883,13 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>If the target is
-          a creature other than an undead or a construct, it must succeed on a 
-          <strong>DC 12 Constitution</strong> saving throw or lose 5 (1d10) hit
-          points at the start of each of its turns due to an infernal
-          wound.</p><p>Each time the devil hits the wounded target with this
-          attack, the damage dealt by the wound increases by 5 (1d10). Any
-          creature can take an action to stanch the wound with a successful DC
-          12 Wisdom (Medicine) check. The wound also closes if the target
-          receives magical healing.</p>
+          a creature other than an undead or a construct, it must succeed on a
+          [[/save]] saving throw or lose 5 (1d10) hit points at the start of
+          each of its turns due to an infernal wound.</p><p>Each time the devil
+          hits the wounded target with this attack, the damage dealt by the
+          wound increases by 5 (1d10). Any creature can take an action to stanch
+          the wound with a successful DC 12 Wisdom (Medicine) check. The wound
+          also closes if the target receives magical healing.</p>
         chat: >-
           <p>The Bearded Devil attacks with its Glaive. If the target is a
           creature other than an undead or a construct, it must make a
@@ -971,8 +959,8 @@ items:
         conditions: ''
       properties:
         - hvy
-        - two
         - rch
+        - two
       proficient: 1
       unidentified:
         description: ''
@@ -1095,97 +1083,36 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 1
-                denomination: 10
-                bonus: '@mod'
-                types:
-                  - slashing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
               calculation: ''
               formula: '12'
           sort: 0
-        dnd5eactivity300:
-          _id: dnd5eactivity300
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets: []
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '10'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: ''
-              type: ''
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: 1d10
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
       attuned: false
       ammunition: {}
       magicalBonus: null
       identifier: glaive
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.rOG1OM2ihgPjOvFW
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745107550529
+      modifiedTime: 1747956326618
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!9ggQBmAKXraOtz7S.RgZ4lGrNf9AaIyrG'
@@ -1287,7 +1214,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273655452
+      modifiedTime: 1747956274923
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!9ggQBmAKXraOtz7S.iRRniNGmcgkUi4oH'
