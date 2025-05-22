@@ -2,10 +2,6 @@
     <fieldset>
         <legend>
             <span>{{ localize "DND5E.TRANSFORM.FIELDS.profiles.label" }}</span>
-            <button type="button" class="unbutton control-button" data-action="addProfile"
-                    data-tooltip aria-label="{{ localize "DND5E.TRANSFORM.Profile.Action.Create" }}">
-                <i class="fas fa-plus" inert></i>
-            </button>
         </legend>
         {{#with fields.transform.fields as |fields|}}
         {{#unless @root.activity.isSpell}}
@@ -23,6 +19,10 @@
             </li>
             {{/each}}
         </ul>
+        <button type="button" class="unbutton control-button add-button" data-action="addProfile">
+            <i class="fas fa-plus" inert></i>
+            <span>{{ localize "DND5E.TRANSFORM.Profile.Action.Create" }}</span>
+        </button>
     </fieldset>
 </section>
 
