@@ -28,7 +28,7 @@ export class DetectionModeBlindsight extends foundry.canvas.perception.Detection
   /** @override */
   _canDetect(visionSource, target) {
     if ( visionSource.object.document.hasStatusEffect(CONFIG.specialStatusEffects.BURROW) ) return false;
-    if ( target instanceof Token ) {
+    if ( target instanceof foundry.canvas.placeables.Token ) {
       if ( target.document.hasStatusEffect(CONFIG.specialStatusEffects.BURROW) ) return false;
     }
     return true;
