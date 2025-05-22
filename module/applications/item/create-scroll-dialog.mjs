@@ -137,7 +137,7 @@ export default class CreateScrollDialog extends Dialog5e {
   /** @inheritDoc */
   _onChangeForm(formConfig, event) {
     super._onChangeForm(formConfig, event);
-    const formData = new FormDataExtended(this.form);
+    const formData = new foundry.applications.ux.FormDataExtended(this.form);
     foundry.utils.mergeObject(this.#config, formData.object);
     this.#config.level = Number(this.#config.level);
     this.render({ parts: ["content"] });

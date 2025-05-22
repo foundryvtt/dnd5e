@@ -168,7 +168,7 @@ export default class CurrencyManager extends Application5e {
    * @protected
    */
   _validateForm() {
-    const formData = new FormDataExtended(this.element);
+    const formData = new foundry.applications.ux.FormDataExtended(this.element);
     const data = foundry.utils.expandObject(formData.object);
     let valid = true;
     if ( !filteredKeys(data.amount ?? {}).length ) valid = false;

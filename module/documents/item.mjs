@@ -1569,7 +1569,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
       },
       callback: html => {
         const form = html.querySelector("form");
-        const fd = new FormDataExtended(form);
+        const fd = new foundry.applications.ux.FormDataExtended(form);
         const createData = foundry.utils.mergeObject(data, fd.object, { inplace: false });
         if ( !createData.folder ) delete createData.folder;
         if ( !createData.name?.trim() ) createData.name = this.defaultName();
