@@ -64,10 +64,12 @@ export default class CompendiumBrowser extends Application5e {
       this._applyModeFilters(this.options.mode);
     }
 
-    const isAdvanced = this._mode === this.constructor.MODES.ADVANCED;
-    const tab = this.constructor.TABS.find(t => t.tab === this.options.tab);
-    if ( !tab || (!!tab.advanced !== isAdvanced) ) this.options.tab = isAdvanced ? "actors" : "classes";
-    this._applyTabFilters(this.options.tab);
+    if ( foundry.utils.isEmpty(this.options.filters.locked) ) {
+      const isAdvanced = this._mode === this.constructor.MODES.ADVANCED;
+      const tab = this.constructor.TABS.find(t => t.tab === this.options.tab);
+      if ( !tab || (!!tab.advanced !== isAdvanced) ) this.options.tab = isAdvanced ? "actors" : "classes";
+      this._applyTabFilters(this.options.tab);
+    }
   }
 
   /* -------------------------------------------- */
