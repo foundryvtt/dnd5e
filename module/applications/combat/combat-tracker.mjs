@@ -88,7 +88,7 @@ export default class CombatTracker5e extends foundry.applications.sidebar.tabs.C
         });
       }
 
-      const name = combatants[0].token?.baseActor.prototypeToken.name ?? combatants[0].name;
+      const name = this.constructor.getGroupName(combatants);
       const img = children[0].querySelector("img");
       groupContainer.innerHTML = `
         <div class="group-header flexrow">
@@ -118,5 +118,23 @@ export default class CombatTracker5e extends foundry.applications.sidebar.tabs.C
         groupContainer.classList.toggle("collapsed");
       });
     }
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Retrieve an appropriate group name for a list of combatants.
+   * @param {Combatant[]} combatants  The combatants.
+   * @returns {string}
+   */
+  static getGroupName(combatants) {
+    if ( !combatants.length ) return "";
+    const tokenNames = combatants.map(c => c.token?.name ?? c.name);
+    const actorName = combatants[0].token?.baseActor.prototypeToken.name ?? combatants[0].name;
+    if ( tokenNames.every(name => name === tokenNames[0]) ) return tokenNames[0];
+    if ( tokenNames.every(name => name.includes(actorName)) ) return actorName;
+    return tokenNames[0];
   }
 }
