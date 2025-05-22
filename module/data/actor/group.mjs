@@ -136,11 +136,11 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
     this.members = this.members.filter((member, index) => {
       if ( !member.actor ) {
         const id = this._source.members[index]?.actor;
-        console.warn(`Actor "${id}" in group "${this._id}" does not exist within the World.`);
+        console.warn(`Actor "${id}" in group "${this.parent.id}" does not exist within the World.`);
       } else if ( member.actor.type === "group" ) {
-        console.warn(`Group "${this._id}" may not contain another Group "${member.actor.id}" as a member.`);
+        console.warn(`Group "${this.parent.id}" may not contain another Group "${member.actor.id}" as a member.`);
       } else if ( memberIds.has(member.actor.id) ) {
-        console.warn(`Actor "${member.actor.id}" duplicated in Group "${this._id}".`);
+        console.warn(`Actor "${member.actor.id}" duplicated in Group "${this.parent.id}".`);
       } else {
         memberIds.add(member.actor.id);
         return true;
@@ -275,7 +275,7 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
       results.set(
         member.actor,
         await member.actor[config.type === "short" ? "shortRest" : "longRest"]({
-          ...config, dialog: false, advanceTime: false
+          ...config, dialog: false, advanceBastionTurn: false, advanceTime: false
         }) ?? null
       );
     }
@@ -291,6 +291,10 @@ export default class GroupActor extends ActorDataModel.mixin(CurrencyTemplate) {
      * @param {Map<Actor5e, RestResult|null>} result  Details on the rests completed.
      */
     Hooks.callAll("dnd5e.groupRestCompleted", this.parent, results);
+
+    if ( config.advanceBastionTurn && game.user.isGM && game.settings.get("dnd5e", "bastionConfiguration").enabled ) {
+      await dnd5e.bastion.advanceAllBastions();
+    }
 
     return false;
   }

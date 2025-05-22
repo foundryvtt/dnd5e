@@ -202,7 +202,7 @@ export default class AdvancementConfig extends FormApplication {
     );
 
     // Try to extract the data
-    const data = TextEditor.getDragEventData(event);
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
 
     if ( data?.type !== "Item" ) return false;
     const item = await Item.implementation.fromDropData(data);

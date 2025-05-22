@@ -4,6 +4,12 @@ import FormulaField from "../fields/formula-field.mjs";
 const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.fields;
 
 /**
+ * @import {
+ *   BasicRollProcessConfiguration, BasicRollDialogConfiguration, BasicRollMessageConfiguration
+ * } from "../../dice/basic-roll.mjs";
+ */
+
+/**
  * @typedef {object} UsesData
  * @property {number} spent                 Number of uses that have been spent.
  * @property {string} max                   Formula for the maximum number of uses.
@@ -58,14 +64,7 @@ export default class UsesField extends SchemaField {
       if ( recovery.period === "recharge" ) {
         recovery.formula ??= "6";
         recovery.type = "recoverAll";
-        recovery.recharge = {
-          options: Array.fromRange(5, 2).reverse().map(min => ({
-            value: min,
-            label: game.i18n.format("DND5E.USES.Recovery.Recharge.Range", {
-              range: min === 6 ? formatNumber(6) : formatRange(min, 6)
-            })
-          }))
-        };
+        recovery.recharge = { options: UsesField.rechargeOptions };
         if ( labels ) labels.recharge ??= `${game.i18n.localize("DND5E.Recharge")} [${
           recovery.formula}${parseInt(recovery.formula) < 6 ? "+" : ""}]`;
       } else if ( recovery.period in CONFIG.DND5E.limitedUsePeriods ) {
@@ -81,6 +80,21 @@ export default class UsesField extends SchemaField {
       value: UsesField.rollRecharge.bind(this.parent?.system ? this.parent : this),
       configurable: true
     });
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Recharge range options.
+   * @returns {FormSelectOption[]}
+   */
+  static get rechargeOptions() {
+    return Array.fromRange(5, 2).reverse().map(min => ({
+      value: min,
+      label: game.i18n.format("DND5E.USES.Recovery.Recharge.Range", {
+        range: min === 6 ? formatNumber(6) : formatRange(min, 6)
+      })
+    }));
   }
 
   /* -------------------------------------------- */
@@ -151,7 +165,9 @@ export default class UsesField extends SchemaField {
       let roll;
       let total;
       try {
-        roll = new CONFIG.Dice.BasicRoll(profile.formula, rollData);
+        const delta = this.parent instanceof Item ? { item: this.parent.id, keyPath: "system.uses.spent" }
+          : { item: this.item.id, keyPath: `system.activities.${this.id}.uses.spent` };
+        roll = new CONFIG.Dice.BasicRoll(profile.formula, rollData, { delta });
         if ( ["day", "dawn", "dusk"].includes(profile.period)
           && (game.settings.get("dnd5e", "restVariant") === "gritty") ) {
           roll.alter(7, 0, { multiplyNumeric: true });
@@ -171,17 +187,7 @@ export default class UsesField extends SchemaField {
       const newSpent = Math.clamp(this.uses.spent - total, 0, this.uses.max);
       if ( newSpent !== this.uses.spent ) {
         updates.spent = newSpent;
-        if ( !roll.isDeterministic ) {
-          rolls.push(roll);
-          const diff = this.uses.spent - newSpent;
-          const isMax = newSpent === 0;
-          const localizationKey = `DND5E.Item${diff < 0 ? "Loss" : "Recovery"}Roll${isMax ? "Max" : ""}`;
-          await roll.toMessage({
-            user: game.user.id,
-            speaker: { actor: item.actor, alias: item.name },
-            flavor: game.i18n.format(localizationKey, { name: item.name, count: Math.abs(diff) })
-          });
-        }
+        if ( !roll.isDeterministic ) rolls.push(roll);
       }
     }
 
@@ -191,23 +197,31 @@ export default class UsesField extends SchemaField {
   /* -------------------------------------------- */
 
   /**
+   * @typedef {BasicRollProcessConfiguration} RechargeRollProcessConfiguration
+   * @property {boolean} [apply=true]  Apply the uses updates back to the item or activity.
+   */
+
+  /**
    * Rolls a recharge test for an Item or Activity that uses the d6 recharge mechanic.
    * @this {Item5e|Activity}
-   * @param {BasicRollProcessConfiguration} config   Configuration information for the roll.
-   * @param {BasicRollDialogConfiguration} dialog    Configuration for the roll dialog.
-   * @param {BasicRollMessageConfiguration} message  Configuration for the roll message.
-   * @returns {Promise<BasicRoll[]|void>}            The created Roll instances, or `null` if no die was rolled.
+   * @param {RechargeRollProcessConfiguration} config  Configuration information for the roll.
+   * @param {BasicRollDialogConfiguration} dialog      Configuration for the roll dialog.
+   * @param {BasicRollMessageConfiguration} message    Configuration for the roll message.
+   * @returns {Promise<BasicRoll[]|{ rolls: BasicRoll[], updates: object }|void>}  The created Roll instances, update
+   *                                                                               data, or nothing if not rolled.
    */
   static async rollRecharge(config={}, dialog={}, message={}) {
     const uses = this.system ? this.system.uses : this.uses;
     const recharge = uses?.recovery.find(({ period }) => period === "recharge");
-    if ( !recharge ) return;
+    if ( !recharge || !uses?.spent ) return;
 
     const rollConfig = foundry.utils.mergeObject({
       rolls: [{
         parts: ["1d6"],
         data: this.getRollData(),
         options: {
+          delta: this instanceof Item ? { item: this.id, keyPath: "system.uses.spent" }
+            : { item: this.item.id, keyPath: `system.activities.${this.id}.uses.spent` },
           target: parseInt(recharge.formula)
         }
       }]
@@ -217,29 +231,13 @@ export default class UsesField extends SchemaField {
 
     const dialogConfig = foundry.utils.mergeObject({ configure: false }, dialog);
 
-    const messageConfig = foundry.utils.mergeObject(({
+    const messageConfig = foundry.utils.mergeObject({
       create: true,
       data: {
         speaker: ChatMessage.getSpeaker({ actor: this.actor, token: this.actor.token })
       },
       rollMode: game.settings.get("core", "rollMode")
-    }));
-
-    if ( "dnd5e.preRollRecharge" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.preRollRecharge` hook has been deprecated and replaced with `dnd5e.preRollRechargeV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-      );
-      const hookData = {
-        formula: rollConfig.rolls[0].parts[0], data: rollConfig.rolls[0].data,
-        target: rollConfig.rolls[0].options.target, chatMessage: messageConfig.create
-      };
-      if ( Hooks.call("dnd5e.preRollRecharge", this, hookData) === false ) return;
-      rollConfig.rolls[0].parts[0] = hookData.formula;
-      rollConfig.rolls[0].data = hookData.data;
-      rollConfig.rolls[0].options.target = hookData.target;
-      messageConfig.create = hookData.chatMessage;
-    }
+    }, message);
 
     const rolls = await CONFIG.Dice.BasicRoll.buildConfigure(rollConfig, dialogConfig, messageConfig);
     await CONFIG.Dice.BasicRoll.buildEvaluate(rolls, rollConfig, messageConfig);
@@ -259,7 +257,7 @@ export default class UsesField extends SchemaField {
     /**
      * A hook event that fires after an Item or Activity has rolled to recharge, but before any usage changes have
      * been made.
-     * @function dnd5e.rollRechargeV2
+     * @function dnd5e.rollRecharge
      * @memberof hookEvents
      * @param {BasicRoll[]} rolls             The resulting rolls.
      * @param {object} data
@@ -267,17 +265,10 @@ export default class UsesField extends SchemaField {
      * @param {object} data.updates           Updates to be applied to the subject.
      * @returns {boolean}                     Explicitly return `false` to prevent updates from being performed.
      */
+    if ( Hooks.call("dnd5e.rollRecharge", rolls, { subject: this, updates }) === false ) return rolls;
     if ( Hooks.call("dnd5e.rollRechargeV2", rolls, { subject: this, updates }) === false ) return rolls;
 
-    if ( "dnd5e.rollRecharge" in Hooks.events ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `dnd5e.rollRecharge` hook has been deprecated and replaced with `dnd5e.rollRechargeV2`.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-      );
-      if ( Hooks.call("dnd5e.rollRecharge", this, rolls[0]) === false ) return rolls;
-    }
-
-    if ( !foundry.utils.isEmpty(updates) ) await this.update(updates);
+    if ( (rollConfig.apply !== false) && !foundry.utils.isEmpty(updates) ) await this.update(updates);
 
     /**
      * A hook event that fires after an Item or Activity has rolled recharge and usage updates have been performed.
@@ -289,6 +280,6 @@ export default class UsesField extends SchemaField {
      */
     Hooks.callAll("dnd5e.postRollRecharge", rolls, { subject: this });
 
-    return rolls;
+    return { rolls, updates };
   }
 }

@@ -1,7 +1,7 @@
 import Actor5e from "../../documents/actor/actor.mjs";
 import Proficiency from "../../documents/actor/proficiency.mjs";
 import * as Trait from "../../documents/actor/trait.mjs";
-import { defaultUnits, formatCR, formatLength, formatNumber, splitSemicolons } from "../../utils.mjs";
+import { defaultUnits, formatCR, formatLength, formatNumber, getPluralRules, splitSemicolons } from "../../utils.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CreatureTypeField from "../shared/creature-type-field.mjs";
 import RollConfigField from "../shared/roll-config-field.mjs";
@@ -11,6 +11,7 @@ import CreatureTemplate from "./templates/creature.mjs";
 import DetailsFields from "./templates/details.mjs";
 import TraitsFields from "./templates/traits.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
@@ -36,6 +37,8 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {string} attributes.death.bonuses.save   Numeric or dice bonus to death saving throws.
  * @property {number} attributes.death.success        Number of successful death saves.
  * @property {number} attributes.death.failure        Number of failed death saves.
+ * @property {object} attributes.spell
+ * @property {number} attributes.spell.level     Spellcasting level of this NPC.
  * @property {object} details
  * @property {TypeData} details.type             Creature type of this NPC.
  * @property {string} details.type.value         NPC's type as defined in the system configuration.
@@ -48,7 +51,6 @@ const { ArrayField, BooleanField, NumberField, SchemaField, SetField, StringFiel
  * @property {object} details.treasure
  * @property {Set<string>} details.treasure.value  Random treasure generation categories for this NPC.
  * @property {number} details.cr                 NPC's challenge rating.
- * @property {number} details.spellLevel         Spellcasting level of this NPC.
  * @property {object} resources
  * @property {object} resources.legact           NPC's legendary actions.
  * @property {number} resources.legact.value     Currently available legendary actions.
@@ -69,7 +71,7 @@ export default class NPCData extends CreatureTemplate {
   /* -------------------------------------------- */
 
   /** @override */
-  static LOCALIZATION_PREFIXES = ["DND5E.SOURCE"];
+  static LOCALIZATION_PREFIXES = ["DND5E.NPC", "DND5E.BONUSES", "DND5E.SOURCE"];
 
   /* -------------------------------------------- */
 
@@ -118,7 +120,12 @@ export default class NPCData extends CreatureTemplate {
           bonuses: new SchemaField({
             save: new FormulaField({ required: true, label: "DND5E.DeathSaveBonus" })
           })
-        }, {label: "DND5E.DeathSave"})
+        }, {label: "DND5E.DeathSave"}),
+        spell: new SchemaField({
+          level: new NumberField({
+            required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
+          })
+        })
       }, {label: "DND5E.Attributes"}),
       details: new SchemaField({
         ...DetailsFields.common,
@@ -133,9 +140,6 @@ export default class NPCData extends CreatureTemplate {
         }),
         cr: new NumberField({
           required: true, nullable: true, min: 0, initial: 1, label: "DND5E.ChallengeRating"
-        }),
-        spellLevel: new NumberField({
-          required: true, nullable: false, integer: true, min: 0, initial: 0, label: "DND5E.SpellcasterLevel"
         }),
         treasure: new SchemaField({
           value: new SetField(new StringField())
@@ -198,6 +202,26 @@ export default class NPCData extends CreatureTemplate {
           keyPath: "system.details.type.value"
         }
       }],
+      ["habitat", {
+        label: "DND5E.Habitat.Configuration.Label",
+        type: "set",
+        config: {
+          choices: CONFIG.DND5E.habitats
+        },
+        createFilter: (filters, value, def) => {
+          const { include, exclude } = Object.entries(value).reduce((d, [key, value]) => {
+            if ( value === 1 ) d.include.push(key);
+            else if ( value === -1 ) d.exclude.push(key);
+            return d;
+          }, { include: [], exclude: [] });
+          if ( include.length ) filters.push({
+            k: "system.details.habitat.value", o: "has", v: { k: "type", o: "in", v: include }
+          });
+          if ( exclude.length ) filters.push({
+            o: "NOT", v: { k: "system.details.habitat.value", o: "has", v: { k: "type", o: "in", v: exclude } }
+          });
+        }
+      }],
       ["cr", {
         label: "DND5E.ChallengeRating",
         type: "range",
@@ -216,7 +240,7 @@ export default class NPCData extends CreatureTemplate {
         createFilter: (filters, value, def) => {
           for ( const [k, v] of Object.entries(value ?? {}) ) {
             if ( v === 1 ) filters.push({ k: `system.attributes.movement.${k}`, o: "gt", v: 0 });
-            if ( v === -1 ) filters.push({ k: `system.attributes.movement.${k}`, v: 0 });
+            if ( v === -1 ) filters.push({ o: "NOT", v: { k: `system.attributes.movement.${k}`, o: "gt", v: 0 } });
           }
         }
       }]
@@ -232,6 +256,7 @@ export default class NPCData extends CreatureTemplate {
     super._migrateData(source);
     NPCData.#migrateEnvironment(source);
     NPCData.#migrateSource(source);
+    NPCData.#migrateSpellLevel(source);
     NPCData.#migrateTypeData(source);
     AttributesFields._migrateInitiative(source.attributes);
   }
@@ -262,6 +287,20 @@ export default class NPCData extends CreatureTemplate {
     if ( custom ) {
       source.source ??= {};
       source.source.custom = custom;
+    }
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Move spell level from `details.spellLevel` to `attributes.spell.level`.
+   * @param {object} source  The candidate source data from which the model will be constructed.
+   */
+  static #migrateSpellLevel(source) {
+    if ( source.details?.spellLevel !== undefined ) {
+      source.attributes ??= {};
+      source.attributes.spell ??= {};
+      source.attributes.spell.level ??= source.details.spellLevel;
     }
   }
 
@@ -360,13 +399,13 @@ export default class NPCData extends CreatureTemplate {
     else this.attributes.prof = Proficiency.calculateMod(Math.max(this.details.cr, this.details.level, 1));
 
     // Spellcaster Level
-    if ( this.attributes.spellcasting && !Number.isNumeric(this.details.spellLevel) ) {
-      this.details.spellLevel = Math.max(this.details.cr, 1);
+    const attributes = this.attributes;
+    if ( this.attributes.spellcasting && !Number.isNumeric(this.attributes.spell.level) ) {
+      this.attributes.spell.level = Math.max(this.details.cr, 1);
     }
 
     AttributesFields.prepareBaseArmorClass.call(this);
     AttributesFields.prepareBaseEncumbrance.call(this);
-    SourceField.shimActor.call(this);
   }
 
   /* -------------------------------------------- */
@@ -418,6 +457,8 @@ export default class NPCData extends CreatureTemplate {
       mod: this.abilities[CONFIG.DND5E.defaultAbilities.hitPoints ?? "con"]?.mod ?? 0
     };
     AttributesFields.prepareHitPoints.call(this, this.attributes.hp, hpOptions);
+
+    this.resources.legact.label = this.getLegendaryActionsDescription();
   }
 
   /* -------------------------------------------- */
@@ -448,7 +489,29 @@ export default class NPCData extends CreatureTemplate {
    */
   cantripLevel(spell) {
     if ( spell.system.preparation.mode === "innate" ) return this.details.cr;
-    return this.details.level ? this.details.level : this.details.spellLevel;
+    return this.details.level ? this.details.level : this.attributes.spell.level;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
+   * Auto-generate a description for the legendary actions block on the NPC stat block.
+   * @param {string} name  Name of the actor to use in the text.
+   * @returns {string}
+   */
+  getLegendaryActionsDescription(name=this.parent.name) {
+    const max = this._source.resources.legact.max;
+    if ( !max ) return "";
+    const pr = getPluralRules().select(max);
+    const rulesVersion = this.source?.rules
+      || (game.settings.get("dnd5e", "rulesVersion") === "modern" ? "2024" : "2014");
+    return game.i18n.format(`DND5E.LegendaryAction.Description${rulesVersion === "2014" ? "Legacy" : ""}`, {
+      name: name.toLowerCase(),
+      uses: this.resources.lair.value ? game.i18n.format("DND5E.LegendaryAction.LairUses", {
+        normal: formatNumber(max), lair: formatNumber(max + 1)
+      }) : formatNumber(max),
+      usesNamed: game.i18n.format(`DND5E.ACTIVATION.Type.Legendary.Counted.${pr}`, { number: formatNumber(max) })
+    });
   }
 
   /* -------------------------------------------- */
@@ -497,8 +560,15 @@ export default class NPCData extends CreatureTemplate {
     if ( !config.statblock ) return super.toEmbed(config, options);
 
     const context = await this._prepareEmbedContext();
+    context.name = config.label || this.parent.name;
+    if ( config.cite && !config.inline ) {
+      config.cite = false;
+      context.anchor = this.parent.toAnchor({ name: context.name }).outerHTML;
+    }
     const template = document.createElement("template");
-    template.innerHTML = await renderTemplate("systems/dnd5e/templates/actors/embeds/npc-embed.hbs", context);
+    template.innerHTML = await foundry.applications.handlebars.renderTemplate(
+      "systems/dnd5e/templates/actors/embeds/npc-embed.hbs", context
+    );
 
     /**
      * A hook event that fires after an embedded NPC stat block rendered.
@@ -550,7 +620,7 @@ export default class NPCData extends CreatureTemplate {
         },
         legendary: {
           label: game.i18n.localize("DND5E.NPC.SECTIONS.LegendaryActions"),
-          // TODO: Add legendary description
+          description: "",
           actions: []
         }
       },
@@ -617,7 +687,7 @@ export default class NPCData extends CreatureTemplate {
           size: CONFIG.DND5E.actorSizes[this.traits.size]?.label ?? "",
           type: Actor5e.formatCreatureType(this.details.type),
           alignment: this.details.alignment
-        })
+        }).replace(/, $/, "")
       },
       system: this
     };
@@ -656,18 +726,29 @@ export default class NPCData extends CreatureTemplate {
       const category = item.system.properties.has("trait") ? "trait"
         : (item.system.activities?.contents[0]?.activation?.type ?? "trait");
       if ( category in context.actionSections ) {
-        const description = (await TextEditor.enrichHTML(item.system.description.value, {
+        let description = (await TextEditor.enrichHTML(item.system.description.value, {
           secrets: false, rollData: item.getRollData(), relativeTo: item
-        })).replace(/^\s*<p>/g, "").replace(/<\/p>\s*$/g, "");
-        const uses = item.system.uses.label || item.system.activities?.contents[0]?.uses.label;
-        context.actionSections[category].actions.push({
-          name: uses ? `${item.name} (${uses})` : item.name, description, sort: item.sort
-        });
+        }));
+        if ( item.identifier === "legendary-actions" ) {
+          context.actionSections.legendary.description = description;
+        } else {
+          const openingTag = description.match(/^\s*(<p(?:\s[^>]+)?>)/gi)?.[0];
+          if ( openingTag ) description = description.replace(openingTag, "");
+          const uses = item.system.uses.label || item.system.activities?.contents[0]?.uses.label;
+          context.actionSections[category].actions.push({
+            description, openingTag,
+            name: uses ? `${item.name} (${uses})` : item.name,
+            sort: item.sort
+          });
+        }
       }
     }
-    for ( const key of Object.keys(context.actionSections) ) {
-      if ( context.actionSections[key].actions.length ) {
-        context.actionSections[key].actions.sort((lhs, rhs) => lhs.sort - rhs.sort);
+    for ( const [key, section] of Object.entries(context.actionSections) ) {
+      if ( section.actions.length ) {
+        section.actions.sort((lhs, rhs) => lhs.sort - rhs.sort);
+        if ( (key === "legendary") && !section.description ) {
+          section.description = `<p>${this.getLegendaryActionsDescription()}</p>`;
+        }
       } else delete context.actionSections[key];
     }
 

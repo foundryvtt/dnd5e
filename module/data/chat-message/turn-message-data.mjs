@@ -1,4 +1,5 @@
 import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
+import ActivationsField from "./fields/activations-field.mjs";
 import { ActorDeltasField } from "./fields/deltas-field.mjs";
 
 const { DocumentIdField, SchemaField, SetField, StringField } = foundry.data.fields;
@@ -10,12 +11,12 @@ const { DocumentIdField, SchemaField, SetField, StringField } = foundry.data.fie
 /**
  * Data stored in a combat turn chat message.
  *
- * @property {Set<string>} activations  Activities that can be used with these periods, stored as relative UUIDs.
- * @property {ActorDeltasData} deltas   Actor/item recovery from this turn change.
+ * @property {ActivationsData} activations  Activities that can be used with these periods, stored as relative UUIDs.
+ * @property {ActorDeltasData} deltas       Actor/item recovery from this turn change.
  * @property {object} origin
- * @property {string} origin.combat     ID of the triggering combat.
- * @property {string} origin.combatant  ID of the relevant combatant within the combat.
- * @property {Set<string>} periods      Combat state change that triggered this message.
+ * @property {string} origin.combat         ID of the triggering combat.
+ * @property {string} origin.combatant      ID of the relevant combatant within the combat.
+ * @property {Set<string>} periods          Combat state change that triggered this message.
  */
 export default class TurnMessageData extends ChatMessageDataModel {
 
@@ -26,7 +27,7 @@ export default class TurnMessageData extends ChatMessageDataModel {
   /** @override */
   static defineSchema() {
     return {
-      activations: new SetField(new StringField()),
+      activations: new ActivationsField(),
       deltas: new ActorDeltasField(),
       origin: new SchemaField({
         combat: new DocumentIdField({ nullable: false, required: true }),
@@ -40,9 +41,6 @@ export default class TurnMessageData extends ChatMessageDataModel {
 
   /** @inheritDoc */
   static metadata = Object.freeze(foundry.utils.mergeObject(super.metadata, {
-    actions: {
-      use: TurnMessageData.#useActivity
-    },
     template: "systems/dnd5e/templates/chat/turn-card.hbs"
   }, { inplace: false }));
 
@@ -91,64 +89,10 @@ export default class TurnMessageData extends ChatMessageDataModel {
     };
 
     if ( context.actor?.isOwner ) {
-      context.activities = Array.from(this.activations)
-        .map(uuid => fromUuidSync(uuid, { relative: context.actor, strict: false }))
-        .filter(_ => _)
-        .sort((lhs, rhs) => (lhs.item.sort - rhs.item.sort) || (lhs.sort - rhs.sort));
-      context.deltas = ActorDeltasField.processDeltas.call(this.deltas, this.actor);
+      context.activities = ActivationsField.processActivations.call(this.activations, this.actor);
+      context.deltas = ActorDeltasField.processDeltas.call(this.deltas, this.actor, this.parent.rolls);
     }
 
     return context;
-  }
-
-  /* -------------------------------------------- */
-  /*  Event Listeners and Handlers                */
-  /* -------------------------------------------- */
-
-  /** @override */
-  _onRender(element) {
-    for ( const e of element.querySelectorAll(".item-tooltip") ) {
-      const uuid = e.closest("[data-item-uuid]")?.dataset.itemUuid;
-      if ( !uuid ) continue;
-      Object.assign(e.dataset, {
-        tooltip: `<section class="loading" data-uuid="${uuid}"><i class="fas fa-spinner fa-spin-pulse"></i></section>`,
-        tooltipClass: "dnd5e2 dnd5e-tooltip item-tooltip",
-        tooltipDirection: "LEFT"
-      });
-    }
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Handle using an activity.
-   * @this {TurnMessageData}
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
-   */
-  static async #useActivity(event, target) {
-    target.disabled = true;
-    try {
-      const activity = await fromUuid(target.closest("[data-activity-uuid]")?.dataset.activityUuid);
-      await activity?.use({ event });
-    } finally {
-      target.disabled = false;
-    }
-  }
-
-  /* -------------------------------------------- */
-  /*  Helpers                                     */
-  /* -------------------------------------------- */
-
-  /**
-   * Find any activity relative UUIDs on this actor that can be used during a set of combat periods.
-   * @param {Actor5e} actor
-   * @param {string[]} periods
-   * @returns {Set<string>}
-   */
-  static getActivations(actor, periods) {
-    return actor.items
-      .map(i => i.system.activities?.filter(a => periods.includes(a.activation?.type)).map(a => a.relativeUUID) ?? [])
-      .flat();
   }
 }

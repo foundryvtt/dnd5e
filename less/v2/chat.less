@@ -99,6 +99,7 @@
 /* Modifier Keys */
 :is(.chat-popout, #chat-log, .chat-log)[data-modifier-shift] {
   .message .message-header .message-delete { display: unset; }
+  .message .message-header:has(.message-delete) .chat-control { display: none; }
 }
 
 /* ---------------------------------- */
@@ -274,7 +275,7 @@
 }
 
 .dice-roll {
-  cursor: pointer;
+  cursor: var(--cursor-pointer);
 
   .dice-flavor { display: none; }
 
@@ -303,25 +304,26 @@
 
   .window-header {
     border: none;
-    position: absolute;
     inset: 0 0 auto 0;
     z-index: 1;
     padding: 7px 6px 0 0;
     background: none;
 
-    a.header-button, .header-control {
+    :is(a, button).header-button, .header-control {
       height: 15px;
       border-radius: 100%;
       background: rgb(0 0 0 / 25%);
       font-size: var(--font-size-10);
+      min-height: unset;
     }
 
-    a.header-button {
+    :is(a, button):is(.header-button, .header-control) {
       width: 15px;
       display: inline-grid;
       place-content: center;
       color: var(--color-text-light-highlight);
       margin: 0;
+      padding: 0;
 
       > i { margin: 0; }
     }
@@ -346,7 +348,10 @@
   &.minimized {
     background: url("../../ui/denim075.png");
     max-height: var(--header-height);
+    .window-header { padding-block: 0; }
   }
+
+  &:not(.minimized) .window-header { position: absolute; }
 
   .message-metadata { padding-right: 18px; }
 }
@@ -405,6 +410,10 @@
         flex-direction: column;
         gap: .25rem;
         overflow: hidden;
+
+        /* Immediate children vert margins
+         * are handled by the column gap */
+        > * { margin-block: 0; }
       }
 
       p {
@@ -423,7 +432,7 @@
       }
     }
 
-    &.collapsible .summary { cursor: pointer; }
+    &.collapsible .summary { cursor: var(--cursor-pointer); }
     &.collapsed {
       .summary > i { transform: rotate(-90deg); }
       .details {
@@ -484,7 +493,7 @@
   }
 
   > label {
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -620,11 +629,12 @@
 
       button {
         width: 100%;
+        height: unset;
         border-radius: 3px;
         padding: 2px;
         font-size: inherit;
         line-height: unset;
-        cursor: pointer;
+        cursor: var(--cursor-pointer);
 
         &::after {
           content: "";
@@ -727,7 +737,7 @@ enchantment-application {
     align-items: center;
     gap: .5rem;
     padding: 0 8px;
-    cursor: pointer;
+    cursor: var(--cursor-pointer);
 
     > i { font-size: var(--font-size-14); }
 
@@ -796,9 +806,11 @@ enchantment-application {
     a.rollable:hover .subtitle { text-shadow: none; }
   }
   .deltas ul {
-    li {
+    .delta {
       display: flex;
       justify-content: space-between;
+      .label { flex-grow: 1; }
+      .roll { font-size: var(--font-size-12); }
     }
   }
 }

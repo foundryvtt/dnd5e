@@ -1,0 +1,92 @@
+name: Marvelous Pigments
+type: consumable
+img: icons/commodities/materials/powder-red-green-yellow.webp
+system:
+  description:
+    value: >-
+      <p>Typically found in [[/r 1d4]] pots inside a fine wooden box with a
+      brush (weighing 1 pound in total), these pigments allow you to create
+      three-dimensional objects by painting them in two dimensions. The paint
+      flows from the brush to form the desired object as you concentrate on its
+      image.</p>
+
+      <p>Each pot of paint is sufficient to cover 1,000 square feet of a
+      surface, which lets you create inanimate objects or terrain features—such
+      as a door, a pit, flowers, trees, cells, rooms, or weapons—that are up to
+      10,000 cubic feet. It takes 10 minutes to cover 100 square feet.</p>
+
+      <p>When you complete the painting, the object or terrain feature depicted
+      becomes a real, nonmagical object. Thus, painting a door on a wall creates
+      an actual door that can be opened to whatever is beyond. Painting a pit on
+      a floor creates a real pit, and its depth counts against the total area of
+      objects you create.</p>
+
+      <p>Nothing created by the pigments can have a value greater than 25 gp. If
+      you paint an object of greater value (such as a diamond or a pile of
+      gold), the object looks authentic, but close inspection reveals it is made
+      from paste, bone, or some other worthless material.</p>
+
+      <p>If you paint a form of energy such as fire or lightning, the energy
+      appears but dissipates as soon as you complete the painting, doing no harm
+      to anything.</p>
+    chat: ''
+  source:
+    custom: ''
+    book: SRD 5.1
+    page: ''
+    license: CC-BY-4.0
+    rules: '2014'
+  quantity: 1
+  weight:
+    value: 1
+    units: lb
+  price:
+    value: 12000
+    denomination: gp
+  attunement: ''
+  equipped: false
+  rarity: veryRare
+  identified: true
+  uses:
+    max: ''
+    autoDestroy: false
+    spent: 0
+    recovery: []
+  damage:
+    base:
+      number: null
+      denomination: null
+      types: []
+      custom:
+        enabled: false
+      scaling:
+        number: 1
+    replace: false
+  type:
+    value: trinket
+    subtype: ''
+  unidentified:
+    description: ''
+  container: null
+  properties:
+    - mgc
+  magicalBonus: null
+  activities: {}
+  attuned: false
+  identifier: marvelous-pigments
+effects: []
+flags: {}
+_id: e3XQygrXkzNvkDGF
+folder: UnUwTG4YIgd0kaUJ
+sort: 6700000
+ownership:
+  default: 0
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1725037237709
+  modifiedTime: 1725992529848
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!e3XQygrXkzNvkDGF'

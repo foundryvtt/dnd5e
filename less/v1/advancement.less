@@ -158,7 +158,7 @@
           padding: 0.5em;
           &:not([data-action]) {
             opacity: 33%;
-            cursor: default;
+            cursor: var(--cursor-default);
             &:hover {
               text-shadow: none;
             }
@@ -200,18 +200,7 @@
         opacity: 60%;
       }
     }
-    .drop-area {
-      padding-block: 0.5em;
-      align-items: center;
-      .name { font-size: var(--font-size-16); }
-      .item-control { flex: 0; }
-    }
-    .drop-area.empty {
-      padding-block: 1em;
-      border: 1px dashed var(--color-border-light-2);
-      border-radius: 5px;
-      justify-content: center;
-    }
+    .feat-section { gap: 8px; }
   }
 
   /* ----------------------------------------- */
@@ -254,12 +243,6 @@
       font-size: var(--font-size-12);
       height: 140px;
     }
-  }
-}
-
-.dnd5e.advancement-migration {
-  .items-list {
-    margin-block-end: 1em;
   }
 }
 
@@ -323,7 +306,6 @@
       gap: 8px;
 
       .average-label {
-        align-items: unset;
         gap: 8px;
 
         .average-checkbox {
@@ -410,6 +392,8 @@
       height: 2em;
     }
   }
+
+  form[data-type="Subclass"] .drop-target > button { width: 100%; }
 
   nav {
     display: flex;

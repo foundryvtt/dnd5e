@@ -1,17 +1,21 @@
 import ChatMessageDataModel from "../abstract/chat-message-data-model.mjs";
+import ActivationsField from "./fields/activations-field.mjs";
 import { ActorDeltasField } from "./fields/deltas-field.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { StringField } = foundry.data.fields;
 
 /**
+ * @import ActivationsData from "./fields/activations-field.mjs";
  * @import { ActorDeltasData } from "./fields/deltas-field.mjs";
  */
 
 /**
  * Data stored in a rest chat message.
  *
- * @property {ActorDeltasData} deltas  Actor/item recovery from this turn change.
- * @property {string} type             Type of rest performed.
+ * @property {ActivationsData} activations  Activities that can be used after this rest, stored as relative UUIDs.
+ * @property {ActorDeltasData} deltas       Actor/item recovery from this turn change.
+ * @property {string} type                  Type of rest performed.
  */
 export default class RestMessageData extends ChatMessageDataModel {
 
@@ -22,6 +26,7 @@ export default class RestMessageData extends ChatMessageDataModel {
   /** @override */
   static defineSchema() {
     return {
+      activations: new ActivationsField(),
       deltas: new ActorDeltasField(),
       type: new StringField()
     };
@@ -58,7 +63,8 @@ export default class RestMessageData extends ChatMessageDataModel {
     };
 
     if ( context.actor?.isOwner ) {
-      context.deltas = ActorDeltasField.processDeltas.call(this.deltas, this.actor);
+      context.activities = ActivationsField.processActivations.call(this.activations, this.actor);
+      context.deltas = ActorDeltasField.processDeltas.call(this.deltas, this.actor, this.parent.rolls);
     }
 
     return context;

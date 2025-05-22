@@ -1,0 +1,53 @@
+name: Ability Score Improvement
+system:
+  description:
+    value: >-
+      <p><em>General Feat (Prerequisite: Level 4+)</em></p><p>Increase one
+      ability score of your choice by 2, or increase two ability scores of your
+      choice by 1. This feat can't increase an ability score above
+      20.</p><p><strong>Repeatable.</strong> You can take this feat more than
+      once.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: ''
+    subtype: ''
+  prerequisites:
+    level: 4
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: ability-score-improvement
+_id: phbftAbilityScor
+type: feat
+img: icons/magic/life/cross-worn-green.webp
+effects: []
+folder: tzwFgcTAGcVUmune
+sort: 100000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866862537
+  modifiedTime: 1745256780443
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbftAbilityScor'

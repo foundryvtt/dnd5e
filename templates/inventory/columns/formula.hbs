@@ -1,0 +1,12 @@
+<div class="item-detail item-formula {{#unless entry.labels.damages.length}}empty{{/unless}}" data-column-id="formula">
+    {{#each entry.labels.damages}}
+    <div class="row">
+        <span class="formula">{{ formula }}</span>
+        {{#with (lookup @root.labels.damageAndHealing damageType)}}
+        <span data-tooltip aria-label="{{ label }}">
+            <dnd5e-icon src="{{ icon }}"></dnd5e-icon>
+        </span>
+        {{/with}}
+    </div>
+    {{/each}}
+</div>

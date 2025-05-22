@@ -1,0 +1,90 @@
+name: Defense
+system:
+  description:
+    value: >-
+      <p><em>(Prerequisite: Fighting Style Feature)</em></p><p>While you're
+      wearing Light, Medium, or Heavy armor, you gain a +1 bonus to Armor
+      Class.</p><section id="secret-y8skH0HHunT4I5NR"
+      class="secret"><p><strong>Foundry Note</strong></p><p>This feature
+      includes an Active Effect which provides the Armor Class bonus. Disable it
+      when you are not wearing armor.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: feat
+    subtype: fightingStyle
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: defense
+_id: phbfstDefense000
+type: feat
+img: icons/equipment/chest/breastplate-gorget-steel.webp
+effects:
+  - name: Defense
+    img: icons/equipment/chest/breastplate-gorget-steel.webp
+    _id: W0ObItz7sS8ZJ09Y
+    type: base
+    system: {}
+    changes:
+      - key: system.attributes.ac.bonus
+        mode: 2
+        value: '1'
+        priority: null
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: ''
+    origin: null
+    tint: '#ffffff'
+    transfer: true
+    statuses: []
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.2.0
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+    _key: '!items.effects!phbfstDefense000.W0ObItz7sS8ZJ09Y'
+folder: O942K0m1gZMIIoMB
+sort: 150000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866298107
+  modifiedTime: 1745256780333
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbfstDefense000'

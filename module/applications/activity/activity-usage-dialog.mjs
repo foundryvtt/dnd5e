@@ -496,6 +496,7 @@ export default class ActivityUsageDialog extends Dialog5e {
   async _prepareSubmitData(event, formData) {
     const submitData = foundry.utils.expandObject(formData.object);
     if ( foundry.utils.hasProperty(submitData, "spell.slot") ) {
+      submitData.spell.slot ||= this.#config.spell?.slot;
       const level = this.actor.system.spells?.[submitData.spell.slot]?.level ?? 0;
       submitData.scaling = Math.max(0, level - this.item.system.level);
     } else if ( "scalingValue" in submitData ) {

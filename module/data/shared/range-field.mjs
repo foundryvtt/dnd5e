@@ -14,7 +14,7 @@ export default class RangeField extends SchemaField {
   constructor(fields={}, options={}) {
     fields = {
       value: new FormulaField({ deterministic: true }),
-      units: new StringField(),
+      units: new StringField({ required: true, blank: false, initial: "self" }),
       special: new StringField(),
       ...fields
     };

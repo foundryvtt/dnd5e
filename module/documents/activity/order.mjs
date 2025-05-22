@@ -164,10 +164,13 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
       }
       updates["system.trade.pending.value"] = trade.sell ? (trade.creatures.price ?? 0) : costs.gold;
       updates["system.trade.pending.creatures"] = creatures;
-      // TODO: We need a way to visualize 'pending' animal purchases/sales. For now update immediately.
-      updates["system.trade.creatures.value"] = trade.sell
-        ? system.trade.creatures.value.filter((_, i) => !trade.creatures.sell[i])
-        : system.trade.creatures.value.concat(creatures);
+
+      // Sold livestock are removed immediately. Bought livestock remain pending until the order is complete.
+      if ( trade.sell ) {
+        updates["system.trade.creatures.value"] = system.trade.creatures.value.filter((_, i) => {
+          return !trade.creatures.sell[i];
+        });
+      }
     }
   }
 
@@ -267,7 +270,7 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
           if ( sold ) creatures.push(await fromUuid(this.item.system.trade.creatures.value[i]));
         }
       }
-      else creatures.push(...await Promise.all(trade.creatures.buy.filter(_ => _).map(fromUuid)));
+      else creatures.push(...await Promise.all(trade.creatures.buy.filter(_ => _).map(uuid => fromUuid(uuid))));
       supplements.push(`
         <strong>${game.i18n.localize(`DND5E.FACILITY.Trade.${trade.sell ? "Sell" : "Buy"}.Supplement`)}</strong>
         ${game.i18n.getListFormatter({ style: "narrow" }).format(creatures.map(a => a.toAnchor().outerHTML))}
@@ -315,7 +318,7 @@ export default class OrderActivity extends ActivityMixin(OrderActivityData) {
     }
     foundry.utils.setProperty(config, "data.flags.dnd5e.order.costs.paid", true);
     const context = await this._usageChatContext(config);
-    const content = await renderTemplate(this.metadata.usage.chatCard, context);
+    const content = await foundry.applications.handlebars.renderTemplate(this.metadata.usage.chatCard, context);
     await message.update({ content, flags: config.data.flags });
   }
 }

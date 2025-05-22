@@ -18,7 +18,8 @@
     --filigree-border-color: var(--dnd5e-color-blue-gray-3);
     --dnd5e-background-5: var(--dnd5e-highlight-10);
 
-    .window-content { background: var(--dnd5e-color-dark-gray) url("../../ui/denim075.png"); }
+    &:not(.item, .npc) .window-content { background: var(--dnd5e-color-dark-gray) url("../../ui/denim075.png"); }
+    &.item .window-content { backdrop-filter: unset; }
 
     .window-resizable-handle { filter: invert(1); }
 
@@ -108,6 +109,21 @@
   }
 
   /* ---------------------------------- */
+  /*  Transform Dialog                  */
+  /* ---------------------------------- */
+
+  &.transformation {
+    [data-application-part="details"] {
+      --icon-fill: var(--dnd5e-color-gold);
+    }
+    [data-application-part="presets"] {
+      button[aria-pressed="true"] {
+        background: color-mix(in oklab, var(--dnd5e-background-card), var(--dnd5e-color-faint) 20%);
+      }
+    }
+  }
+
+  /* ---------------------------------- */
   /*  Traits Config Sheet               */
   /* ---------------------------------- */
 
@@ -149,20 +165,15 @@
 /*  Custom Elements                   */
 /* ---------------------------------- */
 
-:is(.dnd5e-theme-dark, .theme-dark) item-list-controls search {
-  .filter-list {
-    border: 1px solid var(--dnd5e-color-blue-gray-1);
+:is(.dnd5e-theme-dark, .theme-dark) .dnd5e2,
+.dnd5e2.theme-dark {
+  item-list-controls search {
+    .filter-control {
+      color: var(--dnd5e-color-blue-gray-3);
 
-    > li:hover { background: var(--dnd5e-color-blue-gray-3); }
-
-    .filter-item {
-      color: var(--dnd5e-color-blue-white);
-      border-color: var(--dnd5e-color-blue-gray-3);
+      &.active {
+        color: var(--dnd5e-color-gold);
+      }
     }
-  }
-
-  .filter-control {
-    color: var(--dnd5e-color-blue-gray-3);
-    &.active { color: var(--dnd5e-color-gold); }
   }
 }

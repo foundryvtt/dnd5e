@@ -1,7 +1,8 @@
 import FormulaField from "../data/fields/formula-field.mjs";
 import MappingField from "../data/fields/mapping-field.mjs";
-import { staticID } from "../utils.mjs";
+import { parseOrString, staticID } from "../utils.mjs";
 
+const TextEditor = foundry.applications.ux.TextEditor.implementation;
 const { ObjectField, SchemaField, SetField, StringField } = foundry.data.fields;
 
 /**
@@ -40,8 +41,14 @@ export default class ActiveEffect5e extends ActiveEffect {
     "system.attributes.encumbrance.multipliers.encumbered",
     "system.attributes.encumbrance.multipliers.heavilyEncumbered",
     "system.attributes.encumbrance.multipliers.maximum",
-    "system.attributes.encumbrance.multipliers.overall"
+    "system.attributes.encumbrance.multipliers.overall",
+    "save.dc.bonus"
   ]);
+
+  /* -------------------------------------------- */
+
+  /** @inheritdoc */
+  static LOCALIZATION_PREFIXES = [...super.LOCALIZATION_PREFIXES, "DND5E.ACTIVEEFFECT"];
 
   /* -------------------------------------------- */
 
@@ -117,6 +124,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( data.flags?.dnd5e?.type === "enchantment" ) {
       data.type = "enchantment";
       delete data.flags.dnd5e.type;
+      foundry.utils.setProperty(data, "flags.dnd5e.persistSourceMigration", true);
     }
 
     return super._initializeSource(data, options);
@@ -212,7 +220,7 @@ export default class ActiveEffect5e extends ActiveEffect {
 
     // Parse any JSON provided when targeting an object
     if ( (field instanceof ObjectField) || (field instanceof SchemaField) ) {
-      change = { ...change, value: this.prototype._parseOrString(change.value) };
+      change = { ...change, value: parseOrString(change.value) };
     }
 
     return super.applyField(model, change, field);
@@ -342,23 +350,31 @@ export default class ActiveEffect5e extends ActiveEffect {
 
   /**
    * Create conditions that are applied separately from an effect.
-   * @returns {Promise<ActiveEffect5e[]|void>}      Created rider effects.
+   * @returns {Promise<ActiveEffect5e[]>}      Created rider effects.
    */
   async createRiderConditions() {
-    const riders = new Set(this.statuses.reduce((acc, status) => {
+    const riders = new Set();
+
+    for ( const status of this.getFlag("dnd5e", "riders.statuses") ?? [] ) {
+      riders.add(status);
+    }
+
+    for ( const status of this.statuses ) {
       const r = CONFIG.statusEffects.find(e => e.id === status)?.riders ?? [];
-      return acc.concat(r);
-    }, []));
-    if ( !riders.size ) return;
+      for ( const p of r ) riders.add(p);
+    }
+
+    if ( !riders.size ) return [];
 
     const createRider = async id => {
       const existing = this.parent.effects.get(staticID(`dnd5e${id}`));
       if ( existing ) return;
-      const effect = await ActiveEffect.implementation.fromStatusEffect(id);
-      return ActiveEffect.implementation.create(effect, { parent: this.parent, keepId: true });
+      const effect = await ActiveEffect5e.fromStatusEffect(id);
+      return effect.toObject();
     };
 
-    return Promise.all(Array.from(riders).map(createRider));
+    const effectData = await Promise.all(Array.from(riders).map(createRider));
+    return ActiveEffect5e.createDocuments(effectData.filter(_ => _), { keepId: true, parent: this.parent });
   }
 
   /* -------------------------------------------- */
@@ -570,14 +586,6 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {object}           Created data for the ActiveEffect.
    */
   static createConcentrationEffectData(activity, data={}) {
-    if ( activity instanceof Item ) {
-      foundry.utils.logCompatibilityWarning(
-        "The `createConcentrationEffectData` method on ActiveEffect5e now takes an Activity, rather than an Item.",
-        { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-      );
-      activity = activity.system.activities?.contents[0];
-    }
-
     const item = activity?.item;
     if ( !item?.isEmbedded || !activity.duration.concentration ) {
       throw new Error("You may not begin concentrating on this item!");
@@ -624,19 +632,39 @@ export default class ActiveEffect5e extends ActiveEffect {
   /* -------------------------------------------- */
 
   /**
+   * Add modifications to the core ActiveEffect config.
+   * @param {ActiveEffectConfig} app   The ActiveEffect config.
+   * @param {jQuery|HTMLElement} html  The ActiveEffect config element.
+   */
+  static onRenderActiveEffectConfig(app, html) {
+    const element = new foundry.data.fields.SetField(new foundry.data.fields.StringField(), {}).toFormGroup({
+      label: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.label"),
+      hint: game.i18n.localize("DND5E.CONDITIONS.RiderConditions.hint")
+    }, {
+      name: "flags.dnd5e.riders.statuses",
+      value: app.document.getFlag("dnd5e", "riders.statuses") ?? [],
+      options: CONFIG.statusEffects.map(se => ({ value: se.id, label: se.name }))
+    });
+    html.querySelector("[data-tab=details] > .form-group:has([name=statuses])")?.after(element);
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Adjust exhaustion icon display to match current level.
-   * @param {Application} app  The TokenHUD application.
-   * @param {jQuery} html      The TokenHUD HTML.
+   * @param {Application} app            The TokenHUD application.
+   * @param {HTMLElement} html  The TokenHUD HTML.
    */
   static onTokenHUDRender(app, html) {
     const actor = app.object.actor;
     const level = foundry.utils.getProperty(actor, "system.attributes.exhaustion");
     if ( Number.isFinite(level) && (level > 0) ) {
       const img = ActiveEffect5e._getExhaustionImage(level);
-      html.find('[data-status-id="exhaustion"]').css({
-        objectPosition: "-100px",
-        background: `url('${img}') no-repeat center / contain`
-      });
+      const elem = html.querySelector('[data-status-id="exhaustion"]');
+      if ( elem ) {
+        elem.style.objectPosition = "-100px";
+        elem.style.background = `url('${img}') no-repeat center / contain`;
+      }
     }
   }
 
@@ -648,25 +676,12 @@ export default class ActiveEffect5e extends ActiveEffect {
    * @returns {string}
    */
   static _getExhaustionImage(level) {
-    const split = CONFIG.DND5E.conditionTypes.exhaustion.icon.split(".");
+    // TODO: Only use `img` in 5.2.
+    const { img, icon } = CONFIG.DND5E.conditionTypes.exhaustion;
+    const split = img ? img.split(".") : icon.split(".");
     const ext = split.pop();
     const path = split.join(".");
     return `${path}-${level}.${ext}`;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Map the duration of an item to an active effect duration.
-   * @param {Item5e} item           An item with a duration.
-   * @returns {EffectDurationData}  The active effect duration.
-   */
-  static getEffectDurationFromItem(item) {
-    foundry.utils.logCompatibilityWarning(
-      "The `getEffectDurationFromItem` method on ActiveEffect5e has been deprecated and replaced with `getEffectData` within Item or Activity duration.",
-      { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-    );
-    return item.system.duration?.getEffectData?.() ?? {};
   }
 
   /* -------------------------------------------- */
@@ -770,7 +785,13 @@ export default class ActiveEffect5e extends ActiveEffect {
    */
   getDependents() {
     return (this.getFlag("dnd5e", "dependents") || []).reduce((arr, { uuid }) => {
-      const effect = fromUuidSync(uuid);
+      let effect;
+      // TODO: Remove this special casing once https://github.com/foundryvtt/foundryvtt/issues/11214 is resolved
+      if ( this.parent.pack && uuid.includes(this.parent.uuid) ) {
+        const [, embeddedName, id] = uuid.replace(this.parent.uuid, "").split(".");
+        effect = this.parent.getEmbeddedDocument(embeddedName, id);
+      }
+      else effect = fromUuidSync(uuid, { strict: false });
       if ( effect ) arr.push(effect);
       return arr;
     }, []);
@@ -812,7 +833,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     if ( this.type === "enchantment" ) properties.push("DND5E.ENCHANTMENT.Label");
 
     return {
-      content: await renderTemplate(
+      content: await foundry.applications.handlebars.renderTemplate(
         "systems/dnd5e/templates/effects/parts/effect-tooltip.hbs", {
           effect: this,
           description: await TextEditor.enrichHTML(this.description ?? "", { relativeTo: this, ...enrichmentOptions }),

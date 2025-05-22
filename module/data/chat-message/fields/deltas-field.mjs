@@ -15,6 +15,7 @@ const { ArrayField, NumberField, SchemaField, StringField } = foundry.data.field
  * @property {string} delta             The formatted numeric change.
  * @property {Actor5e|Item5e} document  The document to which the delta applies.
  * @property {string} label             The formatted label for the attribute.
+ * @property {Roll[]} [rolls]           Any rolls associated with the delta.
  */
 
 /**
@@ -52,14 +53,17 @@ export class ActorDeltasField extends SchemaField {
   /**
    * Prepare deltas for display in a chat message.
    * @this {ActorDeltasData}
-   * @param {Actor5e} actor  Actor to which this delta applies.
+   * @param {Actor5e} actor   Actor to which this delta applies.
+   * @param {Roll[]} [rolls]  Rolls that may be associated with a delta.
    * @returns {DeltaDisplayContext[]}
    */
-  static processDeltas(actor) {
+  static processDeltas(actor, rolls=[]) {
     return [
-      ...this.actor.map(d => IndividualDeltaField.processDelta.call(d, actor)),
+      ...this.actor.map(d => IndividualDeltaField.processDelta.call(d, actor, rolls
+        .filter(r => !r.options.delta?.item && (r.options.delta?.keyPath === d.keyPath)))),
       ...Object.entries(this.item).flatMap(([id, deltas]) =>
-        deltas.map(d => IndividualDeltaField.processDelta.call(d, actor.items.get(id)))
+        deltas.map(d => IndividualDeltaField.processDelta.call(d, actor.items.get(id), rolls
+          .filter(r => (r.options.delta?.item === id) && (r.options.delta?.keyPath === d.keyPath))))
       )
     ];
   }
@@ -110,17 +114,18 @@ export class IndividualDeltaField extends SchemaField {
    * Prepare a delta for display in a chat message.
    * @this {IndividualDeltaData}
    * @param {Actor5e|Item5e} doc  Actor or item to which this delta applies.
+   * @param {Roll[]} [rolls]      Rolls that may be associated with a delta.
    * @returns {DeltaDisplayContext}
    */
-  static processDelta(doc) {
+  static processDelta(doc, rolls=[]) {
     const type = doc instanceof Actor ? "actor" : "item";
     const value = this.keyPath.endsWith(".spent") ? -this.delta : this.delta;
     return {
       type,
       delta: formatNumber(value, { signDisplay: "always" }),
       document: doc,
-      label: getHumanReadableAttributeLabel(this.keyPath, { [type]: doc }) ?? this.keyPath
-      // TODO: If any rolls were performed for recovery, associate with delta
+      label: getHumanReadableAttributeLabel(this.keyPath, { [type]: doc }) ?? this.keyPath,
+      rolls: rolls.map(roll => ({ roll, anchor: roll.toAnchor().outerHTML.replace(`${roll.total}</a>`, "</a>") }))
     };
   }
 }

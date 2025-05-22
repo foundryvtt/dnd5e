@@ -34,7 +34,7 @@ export default class HealActivityData extends BaseActivityData {
   prepareFinalData(rollData) {
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
-    this.prepareDamageLabel([this.healing], rollData);
+    this.prepareDamageLabel(rollData);
   }
 
   /* -------------------------------------------- */
@@ -45,7 +45,7 @@ export default class HealActivityData extends BaseActivityData {
   getDamageConfig(config={}) {
     if ( !this.healing.formula ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
-    const rollConfig = foundry.utils.mergeObject({ critical: { allow: false }, scaling: 0 }, config);
+    const rollConfig = foundry.utils.mergeObject({ critical: { allow: false } }, config);
     const rollData = this.getRollData();
     rollConfig.rolls = [this._processDamagePart(this.healing, rollConfig, rollData)].concat(config.rolls ?? []);
 

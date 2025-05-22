@@ -84,8 +84,9 @@ export default class AttackActivityData extends BaseActivityData {
   /** @inheritDoc */
   get activationLabels() {
     const labels = super.activationLabels;
-    if ( labels && (this.item.type === "weapon") && this.item.labels?.range && !this.range.override ) {
-      labels.range = this.item.labels.range;
+    if ( labels && (this.item.type === "weapon") && !this.range.override ) {
+      if ( this.item.labels?.range ) labels.range = this.item.labels.range;
+      if ( this.item.labels?.reach ) labels.reach = this.item.labels.reach;
     }
     return labels;
   }
@@ -98,8 +99,10 @@ export default class AttackActivityData extends BaseActivityData {
    * @type {Set<string>}
    */
   get availableAbilities() {
-    // Defer to item if available
-    if ( this.item.system.availableAbilities ) return this.item.system.availableAbilities;
+    // Defer to item if available and matching attack classification
+    if ( this.item.system.availableAbilities && (this.item.type === this.attack.type.classification) ) {
+      return this.item.system.availableAbilities;
+    }
 
     // Spell attack not associated with a single class, use highest spellcasting ability on actor
     if ( this.attack.type.classification === "spell" ) return new Set(
@@ -206,7 +209,7 @@ export default class AttackActivityData extends BaseActivityData {
 
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
-    this.prepareDamageLabel(this.damage.parts, rollData);
+    this.prepareDamageLabel(rollData);
 
     const { data, parts } = this.getAttackData();
     const roll = new Roll(parts.join("+"), data);

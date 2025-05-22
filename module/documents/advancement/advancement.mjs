@@ -104,12 +104,12 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
    * Perform the pre-localization of this data model.
    */
   static localize() {
-    Localization.localizeDataModel(this);
+    foundry.helpers.Localization.localizeDataModel(this);
     if ( this.metadata.dataModels?.configuration ) {
-      Localization.localizeDataModel(this.metadata.dataModels.configuration);
+      foundry.helpers.Localization.localizeDataModel(this.metadata.dataModels.configuration);
     }
     if ( this.metadata.dataModels?.value ) {
-      Localization.localizeDataModel(this.metadata.dataModels.value);
+      foundry.helpers.Localization.localizeDataModel(this.metadata.dataModels.value);
     }
   }
 
@@ -231,7 +231,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
   /**
    * Can an advancement of this type be added to the provided item?
    * @param {Item5e} item  Item to check against.
-   * @returns {boolean}    Should this be enabled as an option on the `AdvancementSelection` dialog?
+   * @returns {boolean}    Should this be enabled as an option when creating an advancement.
    */
   static availableForItem(item) {
     return true;
@@ -324,7 +324,7 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
    * @returns {ContextMenuEntry[]}
    */
   getContextMenuOptions() {
-    if ( this.item.isOwner && !this.item.compendium?.locked ) return [
+    if ( this.item.isOwner && !this.item.collection?.locked ) return [
       {
         name: "DND5E.ADVANCEMENT.Action.Edit",
         icon: "<i class='fas fa-edit fa-fw'></i>",
@@ -377,5 +377,30 @@ export default class Advancement extends PseudoDocumentMixin(BaseAdvancement) {
      */
     Hooks.callAll("dnd5e.getItemAdvancementContext", advancement, target, menuItems);
     ui.context.menuItems = menuItems;
+  }
+
+  /* -------------------------------------------- */
+  /*  Importing and Exporting                     */
+  /* -------------------------------------------- */
+
+  /** @override */
+  static _createDialogData(type, parent) {
+    const Advancement = CONFIG.DND5E.advancementTypes[type].documentClass;
+    return {
+      type,
+      disabled: !Advancement.availableForItem(parent),
+      label: Advancement.metadata?.title,
+      hint: Advancement.metadata?.hint,
+      icon: Advancement.metadata?.typeIcon ?? Advancement.metadata?.icon
+    };
+  }
+
+  /* -------------------------------------------- */
+
+  /** @override */
+  static _createDialogTypes(parent) {
+    return Object.entries(CONFIG.DND5E.advancementTypes)
+      .filter(([, { hidden, validItemTypes }]) => !hidden && validItemTypes?.has(parent.type))
+      .map(([k]) => k);
   }
 }

@@ -1,0 +1,113 @@
+<section class="description tab {{ tab.cssClass }} {{#if singleDescription}}single-description{{/if}}"
+         data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    {{#if editingDescription}}
+    <prose-mirror name="{{ editingDescription.target }}" value="{{ editingDescription.value }}"
+                  document-uuid="{{ item.uuid }}" compact></prose-mirror>
+    {{else}}
+
+    {{#if (eq item.type "spell")}}
+        {{> "dnd5e.spell-block" activation=system.activation fullWidth=true }}
+    {{/if}}
+
+    {{#if info}}
+    <div class="info-block">
+        {{#each info}}
+        <div {{#if classes}}class="{{ classes }}"{{/if}}>
+            {{#if label}}
+            <div class="label">
+                <span>{{ localize label }}</span>
+                {{#if (and @root.editable config)}}
+                <button type="button" class="unbutton control-button" data-action="showConfiguration"
+                        data-config="{{ config }}" data-tooltip aria-label="{{ localize tooltip }}">
+                    <i class="fas fa-cog" inert></i>
+                </button>
+                {{/if}}
+            </div>
+            {{/if}}
+            <div class="value">{{{ value }}}</div>
+        </div>
+        {{/each}}
+    </div>
+    {{/if}}
+
+    {{#if singleDescription}}
+    {{#if editable}}
+    <prose-mirror name="system.description.value" value="{{ source.description.value }}"
+                  document-uuid="{{ item.uuid }}" compact>{{{ enriched.description }}}</prose-mirror>
+    {{else}}
+    <div class="editor editor-content">
+        {{{ enriched.description }}}
+    </div>
+    {{/if}}
+    {{else}}
+
+    <div class="item-descriptions">
+
+        {{!-- When identified, show extra descriptions --}}
+        {{#if (or isIdentified user.isGM)}}
+
+            {{!-- All users see the main, identified description --}}
+            {{> ".description" collapsible=item.isOwner label="DND5E.Description" target="system.description.value"
+                enriched=enriched.description }}
+
+            {{!-- Only GM users are able to see and edit the unidentified description --}}
+            {{#if (and isIdentifiable user.isGM)}}
+            {{> ".description" collapsible=true label="DND5E.DescriptionUnidentified"
+                target="system.unidentified.description" enriched=enriched.unidentified }}
+            {{/if}}
+
+            {{!-- Owners can see and edit the chat description. It is only visible to non-owners if not blank. --}}
+            {{#if (or item.isOwner system.description.chat)}}
+            {{> ".description" collapsible=item.isOwner label="DND5E.DescriptionChat" target="system.description.chat"
+                enriched=enriched.chat }}
+            {{/if}}
+
+        {{else}}
+
+        {{!-- When unidentified, non-GM users can only see and edit the unidentified description --}}
+        {{#if (or item.isOwner system.unidentified.description)}}
+        {{> ".description" collapsible=false label="DND5E.Description" target="system.unidentified.description"
+            enriched=enriched.unidentified }}
+        {{/if}}
+
+        {{/if}}
+
+    </div>
+
+    {{/if}}
+
+    {{/if}}
+
+    {{#if (or isIdentified user.isGM)}}
+    <ul class="pills">
+        {{#each properties.active}}
+        <li class="pill transparent">
+            <span class="label">{{ this }}</span>
+        </li>
+        {{/each}}
+    </ul>
+    {{/if}}
+</section>
+
+{{#*inline ".description"}}
+<div class="card description {{#if collapsible}}collapsible{{/if}}
+     {{~#unless (lookup @root.expanded target)}} collapsed{{/unless}}
+     {{~#unless enriched}} empty{{/unless}}" data-target="{{ target }}"
+     {{~#if collapsible}} data-action="toggleCollapsed" data-expand-id="{{ target }}"{{/if}}>
+    <div class="header">
+        <span>{{ localize label }}</span>
+        {{#unless @root.locked}}
+        <button type="button" class="unbutton control-button always-interactive" data-action="editDescription"
+                aria-label="{{ localize 'DND5E.DescriptionEdit' description=(localize label) }}"
+                data-target="{{ target }}">
+            <i class="fas fa-feather" inert></i>
+        </button>
+        {{/unless}}
+    </div>
+    <div class="details collapsible-content">
+        <div class="editor editor-content wrapper">
+            {{{ enriched }}}
+        </div>
+    </div>
+</div>
+{{/inline}}

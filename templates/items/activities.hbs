@@ -1,0 +1,31 @@
+<section class="activities tab {{ tab.cssClass }}" data-tab="{{ tab.id }}" data-group="{{ tab.group }}">
+    {{#each activities}}
+    <div class="activity card" data-activity-id="{{ id }}" data-uuid="{{ uuid }}">
+
+        {{!-- Icon --}}
+        <div class="icon {{#if img.svg}}svg{{/if}}">
+            {{#if img.svg}}
+            <dnd5e-icon src="{{ img.src }}"></dnd5e-icon>
+            {{else}}
+            <img src="{{ img.src }}" class="gold-icon" alt="{{ name }}">
+            {{/if}}
+        </div>
+
+        {{!-- Name --}}
+        <div class="name" data-action="showDocument">{{ name }}</div>
+
+        {{!-- Controls --}}
+        <div class="controls">
+
+            {{#if @root.editable}}
+            {{!-- Delete --}}
+            <button type="button" class="unbutton control-button" data-action="deleteDocument"
+                    data-tooltip aria-label="{{ localize "DND5E.ACTIVITY.Action.Delete" }}">
+                <i class="fas fa-trash" inert></i>
+            </button>
+            {{/if}}
+        </div>
+
+    </div>
+    {{/each}}
+</section>

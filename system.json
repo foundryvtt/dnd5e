@@ -2,14 +2,14 @@
   "id": "dnd5e",
   "title": "Dungeons & Dragons Fifth Edition",
   "description": "A system for playing the fifth edition of the world's most popular role-playing game in the Foundry Virtual Tabletop environment.",
-  "version": "4.2.2",
+  "version": "5.0.3",
   "compatibility": {
-    "minimum": "12.331",
-    "verified": "13.335"
+    "minimum": "13.341",
+    "verified": "13"
   },
   "url": "https://github.com/foundryvtt/dnd5e/",
   "manifest": "https://raw.githubusercontent.com/foundryvtt/dnd5e/master/system.json",
-  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-4.2.2/dnd5e-release-4.2.2.zip",
+  "download": "https://github.com/foundryvtt/dnd5e/releases/download/release-5.0.3/dnd5e-release-5.0.3.zip",
   "authors": [
     {
       "name": "Atropos",
@@ -119,6 +119,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["character"]
         }
       }
@@ -132,6 +133,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["npc"]
         }
       }
@@ -145,6 +147,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["weapon", "equipment", "consumable", "tool", "loot", "feat", "container"]
         }
       }
@@ -158,6 +161,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["loot"]
         }
       }
@@ -171,6 +175,8 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sorting": "m",
+          "sourceBook": "SRD 5.1",
           "types": ["spell"]
         }
       }
@@ -184,6 +190,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["background", "feat"]
         }
       }
@@ -197,6 +204,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["class"]
         }
       }
@@ -210,6 +218,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["subclass"]
         }
       }
@@ -223,6 +232,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["feat", "weapon"]
         }
       }
@@ -236,6 +246,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["race", "feat"]
         }
       }
@@ -249,6 +260,7 @@
       "private": false,
       "flags": {
         "dnd5e": {
+          "sourceBook": "SRD 5.1",
           "types": ["feat", "weapon"]
         }
       }
@@ -261,7 +273,9 @@
       "type": "JournalEntry",
       "private": false,
       "flags": {
-        "display": "table-of-contents"
+        "dnd5e": {
+          "display": "table-of-contents"
+        }
       }
     },
     {
@@ -272,11 +286,154 @@
       "type": "RollTable",
       "private": false,
       "flags": {}
+    },
+    {
+      "name": "content24",
+      "label": "Rules",
+      "path": "packs/content24",
+      "type": "JournalEntry",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e",
+      "flags": {
+        "display": "table-of-contents"
+      }
+    },
+    {
+      "name": "classes24",
+      "label": "Character Classes",
+      "path": "packs/classes24",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "SRD 5.2",
+          "types": ["class", "subclass", "feat"]
+        }
+      }
+    },
+    {
+      "name": "origins24",
+      "label": "Character Origins",
+      "path": "packs/origins24",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "SRD 5.2",
+          "types": ["race", "background", "feat"]
+        }
+      }
+    },
+    {
+      "name": "feats24",
+      "label": "Feats",
+      "path": "packs/feats24",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "SRD 5.2",
+          "types": ["feat"]
+        }
+      }
+    },
+    {
+      "name": "spells24",
+      "label": "Spells",
+      "path": "packs/spells24",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "sorting": "m",
+          "sourceBook": "SRD 5.2",
+          "types": ["spell"]
+        }
+      }
+    },
+    {
+      "name": "equipment24",
+      "label": "Equipment",
+      "path": "packs/equipment24",
+      "type": "Item",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "sourceBook": "SRD 5.2",
+          "types": ["weapon", "equipment", "consumable", "tool", "loot", "feat", "container"]
+        }
+      }
+    },
+    {
+      "name": "tables24",
+      "label": "Roll Tables",
+      "path": "packs/tables24",
+      "type": "RollTable",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e"
+    },
+    {
+      "name": "actors24",
+      "label": "Actors",
+      "path": "packs/actors24",
+      "type": "Actor",
+      "ownership": {
+        "PLAYER": "OBSERVER",
+        "ASSISTANT": "OWNER"
+      },
+      "system": "dnd5e",
+      "flags": {
+        "dnd5e": {
+          "sorting": "m",
+          "sourceBook": "SRD 5.2"
+        }
+      }
     }
   ],
   "packFolders": [
     {
-      "name": "D&D SRD Content",
+      "name": "D&D Modern Content",
+      "color": "#cd2c1e",
+      "sorting": "m",
+      "packs": [
+        "content24",
+        "classes24",
+        "origins24",
+        "feats24",
+        "spells24",
+        "tables24",
+        "actors24",
+        "equipment24"
+      ]
+    },
+    {
+      "name": "D&D Legacy Content",
       "sorting": "m",
       "color": "#cd2c1e",
       "packs": [
@@ -347,22 +504,19 @@
   "primaryTokenAttribute": "attributes.hp",
   "background": "systems/dnd5e/ui/official/dnd5e-background.webp",
   "flags": {
+    "compendiumArtMappings": {
+      "dnd5e": {
+        "mapping": "systems/dnd5e/json/fa-token-mapping.json",
+        "credit": "<em>Token artwork by <a href=\"https://www.forgotten-adventures.net/\" target=\"_blank\" rel=\"noopener\">Forgotten Adventures</a>.</em>"
+      }
+    },
     "dnd5e": {
       "sourceBooks": {
-        "SRD 5.1": "SOURCE.BOOK.SRD"
-      },
-      "spellLists": [
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.ziBzRlrpBm1KVV0j",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.cuG9d7J9fQH9InYT",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.MWiN7ILEO0Vd3zAZ",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.FhucONA0yRZQjMmb",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.sANq9JMycfSq3A5d",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.PVgly1xB2S2I8GLQ",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.mx4TsSbBIAaAkhQ7",
-        "Compendium.dnd5e.rules.JournalEntry.QvPDSUsAiEn3hD8s.JournalEntryPage.k7Rs5EyXeA0SFTXD"
-      ]
+        "SRD 5.1": "SOURCE.BOOK.SRD51",
+        "SRD 5.2": "SOURCE.BOOK.SRD52"
+      }
     },
-    "needsMigrationVersion": "4.0.1",
+    "needsMigrationVersion": "4.4.0",
     "compatibleMigrationVersion": "0.8",
     "hotReload": {
       "extensions": ["css", "hbs", "json"],

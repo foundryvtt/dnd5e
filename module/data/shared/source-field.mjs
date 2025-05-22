@@ -38,8 +38,9 @@ export default class SourceField extends SchemaField {
    * @param {string} uuid  Compendium source or document UUID.
    */
   static prepareData(uuid) {
-    const pkg = SourceField.getPackage(uuid);
-    this.bookPlaceholder = SourceField.getModuleBook(pkg) ?? "";
+    const collection = foundry.utils.parseUuid(uuid)?.collection;
+    const pkg = SourceField.getPackage(collection);
+    this.bookPlaceholder = collection?.metadata?.flags?.dnd5e?.sourceBook ?? SourceField.getModuleBook(pkg) ?? "";
     if ( !this.book ) this.book = this.bookPlaceholder;
 
     if ( this.custom ) this.label = this.custom;
@@ -79,37 +80,17 @@ export default class SourceField extends SchemaField {
 
   /**
    * Get the package associated with the given UUID, if any.
-   * @param {string} uuid  The UUID.
+   * @param {CompendiumCollection|string} uuidOrCollection  The document UUID or its collection.
    * @returns {ClientPackage|null}
    */
-  static getPackage(uuid) {
-    const pack = foundry.utils.parseUuid(uuid)?.collection?.metadata;
+  static getPackage(uuidOrCollection) {
+    const pack = typeof uuidOrCollection === "string" ? foundry.utils.parseUuid(uuidOrCollection)?.collection?.metadata
+      : uuidOrCollection?.metadata;
     switch ( pack?.packageType ) {
       case "module": return game.modules.get(pack.packageName);
       case "system": return game.system;
       case "world": return game.world;
     }
     return null;
-  }
-
-  /* -------------------------------------------- */
-  /*  Shims                                       */
-  /* -------------------------------------------- */
-
-  /**
-   * Add a shim for the old source path.
-   * @this {ActorDataModel}
-   */
-  static shimActor() {
-    const source = this.source;
-    Object.defineProperty(this.details, "source", {
-      get() {
-        foundry.utils.logCompatibilityWarning(
-          "The source data for actors has been moved to `system.source`.",
-          { since: "DnD5e 4.0", until: "DnD5e 4.4" }
-        );
-        return source;
-      }
-    });
   }
 }

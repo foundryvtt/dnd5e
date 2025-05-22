@@ -1,0 +1,70 @@
+_id: phbgenCardinalDi
+name: Cardinal Directions
+img: icons/tools/navigation/compass-brass-blue-red.webp
+description: ''
+results:
+  - type: text
+    weight: 1
+    range:
+      - 1
+      - 1
+    drawn: false
+    _id: DNSpGtmvbcTFYI70
+    text: North
+    img: icons/tools/navigation/compass-chain-blue.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!phbgenCardinalDi.DNSpGtmvbcTFYI70'
+  - type: text
+    weight: 1
+    range:
+      - 2
+      - 2
+    drawn: false
+    _id: tKlkAqCz2QJZMRaB
+    text: East
+    img: icons/tools/navigation/compass-chain-blue.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!phbgenCardinalDi.tKlkAqCz2QJZMRaB'
+  - type: text
+    weight: 1
+    range:
+      - 3
+      - 3
+    drawn: false
+    _id: OkQWirC6VKB68BXa
+    text: South
+    img: icons/tools/navigation/compass-chain-blue.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!phbgenCardinalDi.OkQWirC6VKB68BXa'
+  - type: text
+    weight: 1
+    range:
+      - 4
+      - 4
+    drawn: false
+    _id: CyJrrodLJ2WzWGqT
+    text: West
+    img: icons/tools/navigation/compass-chain-blue.webp
+    documentId: null
+    flags: {}
+    _key: '!tables.results!phbgenCardinalDi.CyJrrodLJ2WzWGqT'
+replacement: true
+displayRoll: true
+folder: RY28PgQgqr68sh45
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.0
+  createdTime: 1724425888598
+  modifiedTime: 1726509057503
+  lastModifiedBy: dnd5ebuilder0000
+formula: 1d4
+sort: 200000
+ownership:
+  default: 0
+_key: '!tables!phbgenCardinalDi'

@@ -284,11 +284,13 @@ export default class Bastion {
       if ( (trade.pending.value === null) && trade.pending.stocked ) updates["system.trade.stock.stocked"] = true;
 
       // Bought goods
-      else if ( trade.pending.value !== null && !trade.pending.creatures.length ) {
-        updates["system.trade.stock.value"] = Math.min(trade.stock.value + trade.pending.value, trade.stock.max);
+      else if ( trade.pending.value !== null ) {
+        if ( trade.pending.creatures.length ) {
+          updates["system.trade.creatures.value"] = trade.creatures.value.concat(trade.pending.creatures);
+        }
+        else updates["system.trade.stock.value"] = Math.min(trade.stock.value + trade.pending.value, trade.stock.max);
       }
     } else if ( trade.pending.value !== null ) {
-      // See OrderActivity#_finalizeTrade for creatures TODO
       // Sold goods
       let sold = trade.pending.value;
       if ( !trade.pending.creatures.length ) {
@@ -465,7 +467,7 @@ export default class Bastion {
         link: facility.toAnchor().outerHTML
       });
     }
-    return renderTemplate(this.constructor.ATTACK_TEMPLATE, context);
+    return foundry.applications.handlebars.renderTemplate(this.constructor.ATTACK_TEMPLATE, context);
   }
 
   /* -------------------------------------------- */
@@ -511,7 +513,7 @@ export default class Bastion {
         dataset: { action: "claim" }
       });
     }
-    return renderTemplate(this.constructor.TURN_TEMPLATE, context);
+    return foundry.applications.handlebars.renderTemplate(this.constructor.TURN_TEMPLATE, context);
   }
 
   /* -------------------------------------------- */
@@ -546,8 +548,8 @@ export default class Bastion {
     }
 
     if ( !turnButton ) {
-      document.getElementById("controls")?.insertAdjacentHTML("afterend", `
-        <button type="button" id="bastion-turn" data-action="bastionTurn" class="dnd5e2">
+      document.querySelector("#controls, #scene-controls")?.insertAdjacentHTML("afterend", `
+        <button type="button" id="bastion-turn" data-action="bastionTurn" class="dnd5e2 faded-ui">
           <i class="fas fa-chess-rook"></i>
           <span>${game.i18n.localize("DND5E.Bastion.Action.BastionTurn")}</span>
         </button>

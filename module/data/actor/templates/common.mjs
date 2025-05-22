@@ -154,6 +154,7 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
 
       abl.save.value = abl.mod + abl.saveBonus;
       if ( Number.isNumeric(abl.saveProf.term) ) abl.save.value += abl.saveProf.flat;
+      abl.attack = abl.mod + prof;
       abl.dc = 8 + abl.mod + prof + dcBonus;
 
       if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
@@ -165,7 +166,12 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       abl.save.toString = function() {
         foundry.utils.logCompatibilityWarning("The 'abilities.<ability>.save' property is now stored in "
           + "'abilities.<ability>.save.value'.", { since: "4.3", until: "4.5" });
-        return abl.save.value;
+        return String(abl.save.value);
+      };
+      abl.save.toJSON = function() {
+        foundry.utils.logCompatibilityWarning("The 'abilities.<ability>.save' property is now stored in "
+          + "'abilities.<ability>.save.value'.", { since: "4.3", until: "4.5" });
+        return `!${abl.save.value}!`;
       };
     }
   }

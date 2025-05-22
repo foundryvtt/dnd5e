@@ -123,7 +123,7 @@ export default class SummonSheet extends ActivitySheet {
 
   /**
    * Handle adding a new entry to the summoning profiles list.
-   * @this {ActivityConfig}
+   * @this {SummonSheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -135,7 +135,7 @@ export default class SummonSheet extends ActivitySheet {
 
   /**
    * Handle removing an entry from the summoning profiles list.
-   * @this {ActivityConfig}
+   * @this {SummonSheet}
    * @param {Event} event         Triggering click event.
    * @param {HTMLElement} target  Button that was clicked.
    */
@@ -155,7 +155,7 @@ export default class SummonSheet extends ActivitySheet {
    */
   async #onDrop(event) {
     // Try to extract the data
-    const data = TextEditor.getDragEventData(event);
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
 
     // Handle dropping linked items
     if ( data?.type !== "Actor" ) return;

@@ -3,17 +3,17 @@
 
     {{!-- Equipment Type --}}
     {{ formField fields.type.fields.value value=source.type.value label="DND5E.ItemEquipmentType" blank=""
-                 localize=true options=equipmentTypes }}
+                 localize=true options=equipmentTypeOptions }}
 
     {{!-- Equipment Base --}}
-    {{#if baseItems}}
+    {{#if baseItemOptions.length}}
     {{ formField fields.type.fields.baseItem value=source.type.baseItem label="DND5E.ItemEquipmentBase" blank=""
-                 localize=true choices=baseItems }}
+                 localize=true options=baseItemOptions }}
     {{/if}}
 
     {{!-- Proficiency --}}
     {{ formField fields.proficient value=source.proficient blank="DND5E.Automatic" localize=true
-                 choices=config.weaponAndArmorProficiencyLevels }}
+                 choices=CONFIG.weaponAndArmorProficiencyLevels }}
 
     {{!-- Armor --}}
     {{#if system.isArmor}}
@@ -47,7 +47,7 @@
     {{!-- Magical Properties --}}
     {{#if properties.object.mgc}}
     <div class="form-group split-group">
-        <label>{{ localize "DND5E.Item.Property.Magical" }}</label>
+        <label>{{ localize "DND5E.ITEM.Property.Magical" }}</label>
         <div class="form-fields">
 
             {{!-- Attunement --}}
@@ -63,7 +63,7 @@
                     {{/if}}
 
                     {{!-- Attunement --}}
-                    {{ formInput fields.attunement value=source.attunement choices=config.attunementTypes
+                    {{ formInput fields.attunement value=source.attunement choices=CONFIG.attunementTypes
                                  blank="DND5E.AttunementNone" localize=true }}
                 </div>
             </div>

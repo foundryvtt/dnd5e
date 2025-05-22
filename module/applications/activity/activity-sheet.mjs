@@ -1,5 +1,5 @@
 import { ConsumptionTargetData } from "../../data/activity/fields/consumption-targets-field.mjs";
-import { formatNumber, formatRange } from "../../utils.mjs";
+import UsesField from "../../data/shared/uses-field.mjs";
 import PseudoDocumentSheet from "../api/pseudo-document-sheet.mjs";
 
 /**
@@ -21,8 +21,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       deleteDamagePart: ActivitySheet.#deleteDamagePart,
       deleteEffect: ActivitySheet.#deleteEffect,
       deleteRecovery: ActivitySheet.#deleteRecovery,
-      dissociateEffect: ActivitySheet.#dissociateEffect,
-      toggleCollapsed: ActivitySheet.#toggleCollapsed
+      dissociateEffect: ActivitySheet.#dissociateEffect
     },
     position: {
       width: 500,
@@ -85,18 +84,6 @@ export default class ActivitySheet extends PseudoDocumentSheet {
    */
   get activity() {
     return this.document;
-  }
-
-  /* -------------------------------------------- */
-
-  /**
-   * Expanded states for additional settings sections.
-   * @type {Map<string, boolean>}
-   */
-  #expandedSections = new Map();
-
-  get expandedSections() {
-    return this.#expandedSections;
   }
 
   /* -------------------------------------------- */
@@ -203,6 +190,9 @@ export default class ActivitySheet extends PseudoDocumentSheet {
           ...(typeConfig.scalingModes ?? []).map(({ value, label }) => ({ value, label: game.i18n.localize(label) }))
         ] : null,
         showTargets: "validTargets" in typeConfig,
+        selectedTarget: ("validTargets" in typeConfig) && ((data.type === "itemUses") && data.target?.includes("."))
+          ? (this.activity.actor?.sourcedItems?.get(data.target)?.first()?.id ?? data.target)
+          : data.target,
         targetPlaceholder: data.type === "itemUses" ? game.i18n.localize("DND5E.CONSUMPTION.Target.ThisItem") : null,
         validTargets: showTextTarget ? null : target.validTargets
       };
@@ -222,12 +212,7 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       fields: this.activity.schema.fields.uses.fields.recovery.element.fields,
       prefix: `uses.recovery.${index}.`,
       source: context.source.uses.recovery[index] ?? data,
-      formulaOptions: data.period === "recharge" ? Array.fromRange(5, 2).reverse().map(min => ({
-        value: min,
-        label: game.i18n.format("DND5E.USES.Recovery.Recharge.Range", {
-          range: min === 6 ? formatNumber(6) : formatRange(min, 6)
-        })
-      })) : null
+      formulaOptions: data.period === "recharge" ? UsesField.rechargeOptions : null
     }));
 
     // Template dimensions
@@ -280,15 +265,15 @@ export default class ActivitySheet extends PseudoDocumentSheet {
         .map(effect => ({
           value: effect.id, label: effect.name, selected: appliedEffects.has(effect.id)
         }));
-      context.appliedEffects = context.activity.effects.reduce((arr, data, index) => {
+      context.appliedEffects = context.activity.effects.reduce((arr, data) => {
         if ( !data.effect ) return arr;
         const effect = {
           data,
           collapsed: this.expandedSections.get(`effects.${data._id}`) ? "" : "collapsed",
           effect: data.effect,
           fields: this.activity.schema.fields.effects.element.fields,
-          prefix: `effects.${index}.`,
-          source: context.source.effects[index] ?? data,
+          prefix: `effects.${data._index}.`,
+          source: context.source.effects[data._index] ?? data,
           contentLink: data.effect.toAnchor().outerHTML,
           additionalSettings: null
         };
@@ -302,27 +287,26 @@ export default class ActivitySheet extends PseudoDocumentSheet {
       ...CONFIG.DND5E.dieSteps.map(value => ({ value, label: `d${value}` }))
     ];
     if ( context.activity.damage?.parts ) {
+      const scaleKey = (this.item.type === "spell") && (this.item.system.level === 0) ? "labelCantrip" : "label";
       const scalingOptions = [
         { value: "", label: game.i18n.localize("DND5E.DAMAGE.Scaling.None") },
-        ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, config]) => ({ value, label: config.label }))
+        ...Object.entries(CONFIG.DND5E.damageScalingModes).map(([value, { [scaleKey]: label }]) => ({ value, label }))
       ];
-      let indexOffset = 0;
-      context.damageParts = context.activity.damage.parts.map((data, index) => {
-        if ( data.base ) indexOffset--;
-        const part = {
-          data,
-          fields: this.activity.schema.fields.damage.fields.parts.element.fields,
-          index: index + indexOffset,
-          prefix: `damage.parts.${index + indexOffset}.`,
-          source: context.source.damage.parts[index + indexOffset] ?? data,
-          canScale: this.activity.canScaleDamage,
-          scalingOptions,
-          typeOptions: Object.entries(CONFIG.DND5E.damageTypes).map(([value, config]) => ({
-            value, label: config.label, selected: data.types.has(value)
-          }))
-        };
-        return this._prepareDamagePartContext(context, part);
+      const typeOptions = Object.entries(CONFIG.DND5E.damageTypes).map(([value, { label }]) => ({ value, label }));
+      const makePart = (data, index) => this._prepareDamagePartContext(context, {
+        data, index, scalingOptions, typeOptions,
+        locked: data.locked || (index === undefined),
+        canScale: this.activity.canScaleDamage,
+        fields: this.activity.schema.fields.damage.fields.parts.element.fields,
+        prefix: index !== undefined ? `damage.parts.${index}.` : "_.",
+        source: data
       });
+      context.damageParts = [
+        ...context.activity.damage.parts
+          .filter(p => p._index === undefined)
+          .map((data, index) => makePart(data)),
+        ...context.source.damage.parts.map((data, index) => makePart(data, index))
+      ];
     }
 
     return context;
@@ -407,10 +391,6 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   /** @inheritDoc */
   _onRender(context, options) {
     super._onRender(context, options);
-    for ( const element of this.element.querySelectorAll("[data-expand-id]") ) {
-      element.querySelector(".collapsible")?.classList
-        .toggle("collapsed", !this.#expandedSections.get(element.dataset.expandId));
-    }
     this.#toggleNestedTabs();
   }
 
@@ -600,32 +580,10 @@ export default class ActivitySheet extends PseudoDocumentSheet {
   }
 
   /* -------------------------------------------- */
-
-  /**
-   * Handle toggling the collapsed state of an additional settings section.
-   * @this {ActivitySheet}
-   * @param {Event} event         Triggering click event.
-   * @param {HTMLElement} target  Button that was clicked.
-   */
-  static #toggleCollapsed(event, target) {
-    if ( event.target.closest(".collapsible-content") ) return;
-    target.classList.toggle("collapsed");
-    this.#expandedSections.set(
-      target.closest("[data-expand-id]")?.dataset.expandId,
-      !target.classList.contains("collapsed")
-    );
-  }
-
-  /* -------------------------------------------- */
   /*  Form Handling                               */
   /* -------------------------------------------- */
 
-  /**
-   * Perform any pre-processing of the form data to prepare it for updating.
-   * @param {SubmitEvent} event          Triggering submit event.
-   * @param {FormDataExtended} formData  Data from the submitted form.
-   * @returns {object}
-   */
+  /** @inheritDoc */
   _prepareSubmitData(event, formData) {
     const submitData = super._prepareSubmitData(event, formData);
     for ( const keyPath of this.constructor.CLEAN_ARRAYS ) {

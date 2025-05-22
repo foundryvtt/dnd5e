@@ -1,4 +1,5 @@
 import Advancement from "../../documents/advancement/advancement.mjs";
+import { log } from "../../utils.mjs";
 import Application5e from "../api/application.mjs";
 
 /**
@@ -701,8 +702,8 @@ export default class AdvancementManager extends Application5e {
       let handledLevel = 0;
       for ( let idx = this.#stepIndex; idx < this.steps.length; idx++ ) {
         // Find spots where the level increases
-        const thisLevel = this.steps[idx].flow?.level || this.steps[idx].class?.level;
-        const nextLevel = this.steps[idx + 1]?.flow?.level || this.steps[idx + 1]?.class?.level;
+        const thisLevel = this.steps[idx].flow?.level ?? this.steps[idx].class?.level;
+        const nextLevel = this.steps[idx + 1]?.flow?.level ?? this.steps[idx + 1]?.class?.level;
         if ( (thisLevel < handledLevel) || (thisLevel === nextLevel) ) continue;
 
         // Determine if there is any advancement to be done for the added item to this level
@@ -861,7 +862,7 @@ export default class AdvancementManager extends Application5e {
      * @param {string[]} toDelete                      IDs of items that will be deleted on the actor.
      */
     if ( Hooks.call("dnd5e.preAdvancementManagerComplete", this, updates, toCreate, toUpdate, toDelete) === false ) {
-      console.log("AdvancementManager completion was prevented by the 'preAdvancementManagerComplete' hook.");
+      log("AdvancementManager completion was prevented by the 'preAdvancementManagerComplete' hook.");
       return this.close({ skipConfirmation: true });
     }
 

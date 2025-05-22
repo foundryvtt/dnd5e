@@ -1,0 +1,482 @@
+name: Prismatic Wall
+system:
+  description:
+    value: >-
+      <p>A shimmering, multicolored plane of light forms a vertical opaque
+      wall—up to 90 feet long, 30 feet high, and 1 inch thick—centered on a
+      point within range. Alternatively, you shape the wall into a globe up to
+      30 feet in diameter centered on a point within range. The wall lasts for
+      the duration. If you position the wall in a space occupied by a creature,
+      the spell ends instantly without effect.</p><p>The wall sheds
+      &amp;Reference[BrightLight] within 100 feet and &amp;Reference[DimLight]
+      for an additional 100 feet. You and creatures you designate when you cast
+      the spell can pass through and be near the wall without harm. If another
+      creature that can see the wall moves within 20 feet of it or starts its
+      turn there, the creature must succeed on a Constitution saving throw or
+      have the &amp;Reference[Blinded apply=false] condition for 1
+      minute.</p><p>The wall consists of seven layers, each with a different
+      color. When a creature reaches into or passes through the wall, it does so
+      one layer at a time through all the layers. Each layer forces the creature
+      to make a Dexterity saving throw or be affected by that layer's properties
+      as described in the Prismatic Layers table.</p><p>The wall, which has AC
+      10, can be destroyed one layer at a time, in order from red to violet, by
+      means specific to each layer. If a layer is destroyed, it is gone for the
+      duration.
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplAntimagicF]{Antimagic
+      Field}</em> has no effect on the wall, and
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
+      Magic}</em> can affect only the violet layer.</p><table><caption>Prismatic
+      Layers</caption><thead><tr><td>Order</td><td>Effects</td></tr></thead><tbody><tr><td>1</td><td><strong>Red.</strong>
+      <em>Failed Save:</em> 12d6 Fire damage. <em>Successful Save:</em> Half as
+      much damage. <em>Additional Effects</em>: Nonmagical ranged attacks can't
+      pass through this layer, which is destroyed if it takes at least 25 Cold
+      damage.</td></tr><tr><td>2</td><td><strong>Orange.</strong> <em>Failed
+      Save:</em> 12d6 Acid damage. <em>Successful Save:</em> Half as much
+      damage. <em>Additional Effects:</em> Magical ranged attacks can't pass
+      through this layer, which is destroyed by a strong wind (such as the one
+      created by <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGustofWind]{Gust
+      of Wind}</em>).</td></tr><tr><td>3</td><td><strong>Yellow.</strong>
+      <em>Failed Save:</em> 12d6 Lightning damage. <em>Successful Save:</em>
+      Half as much damage. <em>Additional Effects:</em> The layer is destroyed
+      if it takes at least 60 Force
+      damage.</td></tr><tr><td>4</td><td><strong>Green.</strong> <em>Failed
+      Save:</em> 12d6 Poison damage. <em>Successful Save:</em> Half as much
+      damage. <em>Additional Effects:</em> A
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplPasswall00]{Passwall}</em>
+      spell, or another spell of equal or greater level that can open a portal
+      on a solid surface, destroys this
+      layer.</td></tr><tr><td>5</td><td><strong>Blue.</strong> <em>Failed
+      Save:</em> 12d6 Cold damage. <em>Successful Save:</em> Half as much
+      damage. <em>Additional Effects:</em> The layer is destroyed if it takes at
+      least 25 Fire damage.</td></tr><tr><td>6</td><td><strong>Indigo.</strong>
+      <em>Failed Save:</em> The target has the &amp;Reference[Restrained
+      apply=false] condition and makes a [[/save ability=con
+      dc=@attributes.spell.dc format=long]] at the end of each of its turns. If
+      it successfully saves three times, the condition ends. If it fails three
+      times, it has the &amp;Reference[Petrified] condition until it is freed by
+      an effect like the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
+      Restoration}</em> spell. The successes and failures needn't be
+      consecutive; keep track of both until the target collects three of a kind.
+      <em>Additional Effects:</em> Spells can't be cast through this layer,
+      which is destroyed by Bright Light shed by the
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDaylight00]{Daylight}</em>
+      spell.</td></tr><tr><td>7</td><td><strong>Violet.</strong> <em>Failed
+      Save:</em> The target has the &amp;Reference[Blinded apply=false]
+      condition and makes a [[/save ability=wis dc=@attributes.spell.dc
+      format=long]] at the start of your next turn. On a successful save, the
+      condition ends. On a failed save, the condition ends, and the creature
+      teleports to another plane of existence (DM's choice). <em>Additional
+      Effects:</em> This layer is destroyed by
+      <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplDispelMagi]{Dispel
+      Magic}</em>.</td></tr></tbody></table>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+    revision: 2
+  activation:
+    type: action
+    condition: ''
+    value: null
+  duration:
+    value: '10'
+    units: minute
+  target:
+    affects:
+      choice: false
+      count: '1'
+      type: space
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+      size: ''
+      width: ''
+      height: ''
+      count: ''
+  range:
+    units: ft
+    special: ''
+    value: '60'
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  level: 9
+  school: abj
+  properties:
+    - vocal
+    - somatic
+  materials:
+    value: ''
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    5f0JerdDSOQQXiTe:
+      type: utility
+      _id: 5f0JerdDSOQQXiTe
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: wall
+          size: '90'
+          width: 1/12
+          height: '30'
+          count: ''
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Create Wall
+      img: ''
+      appliedEffects: []
+    fOYr1bgsB1VXROcm:
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+          count: ''
+          type: sphere
+          size: '15'
+          width: 1/12
+          height: '30'
+        affects:
+          choice: false
+          count: '1'
+          type: space
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        formula: ''
+        name: ''
+      name: Create Globe
+      _id: fOYr1bgsB1VXROcm
+      img: ''
+      appliedEffects: []
+    Pm0Re9Gt8pJNaF1C:
+      type: save
+      name: Blinding Save
+      _id: Pm0Re9Gt8pJNaF1C
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: iuIlP2Br3aHDUjai
+      range:
+        override: true
+        units: ft
+        special: measured from nearest point on wall or globe
+        value: '20'
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts: []
+        onSave: none
+      save:
+        ability: con
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: ''
+      appliedEffects:
+        - iuIlP2Br3aHDUjai
+    fxEIn0sNwZReZJhV:
+      type: save
+      name: Traversal Save
+      _id: fxEIn0sNwZReZJhV
+      activation:
+        type: ''
+        value: null
+        override: true
+        condition: ''
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets: []
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: true
+      effects:
+        - _id: CbAuJQPoOViKebWs
+          onSave: false
+        - _id: EIaFpuWAfQKSkFyp
+      range:
+        override: true
+        units: any
+        special: ''
+      target:
+        template:
+          contiguous: false
+          units: ft
+          type: ''
+        affects:
+          choice: false
+          count: '1'
+          type: creature
+          special: ''
+        override: true
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      damage:
+        parts:
+          - custom:
+              enabled: false
+              formula: ''
+            number: 12
+            denomination: '6'
+            bonus: ''
+            types:
+              - acid
+              - fire
+              - lightning
+              - poison
+              - cold
+            scaling:
+              mode: ''
+        onSave: half
+      save:
+        ability: dex
+        dc:
+          calculation: spellcasting
+          formula: ''
+      img: ''
+      appliedEffects: []
+  identifier: prismatic-wall
+_id: phbsplPrismaticW
+type: spell
+img: icons/magic/defensive/barrier-shield-dome-blue-purple.webp
+effects:
+  - name: Prismatic Blinding
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplPrismaticW
+    transfer: false
+    _id: iuIlP2Br3aHDUjai
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: 60
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Blinded apply=false] condition for 1
+      minute.</p>
+    tint: '#ffffff'
+    statuses:
+      - blinded
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725381814256
+      modifiedTime: 1725381899493
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!phbsplPrismaticW.iuIlP2Br3aHDUjai'
+  - name: Restrained (Indigo)
+    img: systems/dnd5e/icons/svg/statuses/restrained.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplPrismaticW
+    transfer: false
+    _id: CbAuJQPoOViKebWs
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: null
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p>The target has the &amp;Reference[Restrained apply=false] condition and
+      makes a [[/save ability=con dc=@attributes.spell.dc]] format=long]] at the
+      end of each of its turns. If it successfully saves three times, the
+      condition ends. If it fails three times, it has the
+      &amp;Reference[Petrified] condition until it is freed by an effect like
+      the <em>@UUID[Compendium.dnd5e.spells24.Item.phbsplGreaterRes]{Greater
+      Restoration}</em> spell.</p>
+    tint: '#ffffff'
+    statuses:
+      - restrained
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725384160913
+      modifiedTime: 1725384505640
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!phbsplPrismaticW.CbAuJQPoOViKebWs'
+  - name: Blinded (Violet)
+    img: systems/dnd5e/icons/svg/statuses/blinded.svg
+    origin: Compendium.dnd5e.spells24.Item.phbsplPrismaticW
+    transfer: false
+    _id: EIaFpuWAfQKSkFyp
+    type: base
+    system: {}
+    changes: []
+    disabled: false
+    duration:
+      startTime: null
+      seconds: null
+      combat: null
+      rounds: 1
+      turns: null
+      startRound: null
+      startTurn: null
+    description: >-
+      <p> The target has the &amp;Reference[Blinded apply=false] condition and
+      makes a [[/save ability=wis dc=@attributes.spell.dc format=long]] at the
+      start of your next turn. On a successful save, the condition ends. On a
+      failed save, the condition ends, and the creature teleports to another
+      plane of existence (DM’s choice).</p>
+    tint: '#ffffff'
+    statuses:
+      - blinded
+    sort: 0
+    flags: {}
+    _stats:
+      compendiumSource: null
+      duplicateSource: null
+      coreVersion: '12.331'
+      systemId: dnd5e
+      systemVersion: 4.0.0
+      createdTime: 1725384515817
+      modifiedTime: 1725384631185
+      lastModifiedBy: dnd5ebuilder0000
+    _key: '!items.effects!phbsplPrismaticW.EIaFpuWAfQKSkFyp'
+folder: iG0Zia8jh6uK39TB
+sort: 100782
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425967242
+  modifiedTime: 1745256797169
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbsplPrismaticW'

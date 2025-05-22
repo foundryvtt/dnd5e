@@ -54,7 +54,7 @@ export default class DamageActivityData extends BaseActivityData {
   prepareFinalData(rollData) {
     rollData ??= this.getRollData({ deterministic: true });
     super.prepareFinalData(rollData);
-    this.prepareDamageLabel(this.damage.parts, rollData);
+    this.prepareDamageLabel(rollData);
   }
 
   /* -------------------------------------------- */

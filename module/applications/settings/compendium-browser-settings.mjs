@@ -208,13 +208,22 @@ export default class CompendiumBrowserSettingsConfig extends Application5e {
       indeterminate,
       checked: indeterminate || all,
       entries: Array.from(packs.map(id => {
-        const { collection, title } = game.packs.get(id);
+        const { collection, title, metadata } = game.packs.get(id);
+        const { packageName, name } = metadata;
+        let tag = "";
+        // Special case handling for D&D SRD.
+        if ( packageName === "dnd5e" ) {
+          // TODO: Use a flag for this.
+          tag = name.endsWith("24") ? "5.2" : "5.1";
+        }
         return {
-          title,
+          tag, title,
           id: collection,
           checked: sources.has(id)
         };
-      })).sort((a, b) => a.title.localeCompare(b.title, game.i18n.lang))
+      })).sort((a, b) => {
+        return a.tag.localeCompare(b.tag) || a.title.localeCompare(b.title, game.i18n.lang);
+      })
     };
   }
 

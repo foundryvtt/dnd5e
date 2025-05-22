@@ -121,7 +121,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @type {string}
    */
   get actionType() {
-    return this.metadata.data;
+    return this.metadata.type;
   }
 
   /* -------------------------------------------- */
@@ -132,8 +132,8 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    */
   get activationLabels() {
     if ( !this.activation.type || this.isSpell ) return null;
-    const { activation, duration, range, target } = this.labels;
-    return { activation, duration, range, target };
+    const { activation, duration, range, reach, target } = this.labels;
+    return { activation, duration, range, reach, target };
   }
 
   /* -------------------------------------------- */
@@ -538,12 +538,27 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   /* -------------------------------------------- */
 
   /**
+   * Prepare context to display this activity in a parent sheet.
+   * @returns {object}
+   */
+  prepareSheetContext() {
+    return this;
+  }
+
+  /* -------------------------------------------- */
+
+  /**
    * Prepare data related to this activity.
    */
   prepareData() {
     this.name = this.name || game.i18n.localize(this.metadata?.title);
     this.img = this.img || this.metadata?.img;
     this.labels ??= {};
+    const addBaseIndices = data => data?.forEach((d, idx) => Object.defineProperty(d, "_index", { value: idx }));
+    addBaseIndices(this.consumption?.targets);
+    addBaseIndices(this.damage?.parts);
+    addBaseIndices(this.effects);
+    addBaseIndices(this.uses?.recovery);
   }
 
   /* -------------------------------------------- */
@@ -580,7 +595,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
       // Re-link UUIDs in consumption fields to explicit items on the actor
       if ( target.target.includes(".") ) {
-        const item = actor.sourcedItems?.get(target.target, { legacy: false })?.first();
+        const item = actor.sourcedItems?.get(target.target)?.first();
         if ( item ) target.target = item.id;
       }
 
@@ -598,19 +613,24 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
 
   /**
    * Prepare the label for a compiled and simplified damage formula.
-   * @param {DamageData[]} parts  Damage parts to create labels for.
-   * @param {object} rollData     Deterministic roll data from the item.
+   * @param {object} rollData  Deterministic roll data from the item.
+   * @param {object} _rollData
    */
-  prepareDamageLabel(parts, rollData) {
-    this.labels.damage = parts.map(part => {
+  prepareDamageLabel(rollData, _rollData=rollData) {
+    if ( foundry.utils.getType(rollData) === "Array" ) {
+      foundry.utils.logCompatibilityWarning(
+        "The `BaseActivityData#prepareDamageLabel` no longer takes damage parts as an input.",
+        { since: "DnD5e 4.4", until: "DnD5e 5.1" }
+      );
+      rollData = _rollData;
+    }
+
+    const config = this.getDamageConfig();
+    this.labels.damage = this.labels.damages = (config.rolls ?? []).map((part, index) => {
       let formula;
       try {
-        formula = part.formula;
-        if ( part.base ) {
-          if ( this.item.system.magicAvailable ) formula += ` + ${this.item.system.magicalBonus ?? 0}`;
-          if ( (this.item.type === "weapon") && !/@mod\b/.test(formula) ) formula += " + @mod";
-        }
-        const roll = new CONFIG.Dice.BasicRoll(formula, rollData);
+        formula = part.parts.join(" + ");
+        const roll = new CONFIG.Dice.DamageRoll(formula, rollData);
         roll.simplify();
         formula = simplifyRollFormula(roll.formula, { preserveFlavor: true });
       } catch(err) {
@@ -620,15 +640,18 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       }
 
       let label = formula;
-      if ( part.types.size ) {
+      const types = part.options?.types ?? (part.options?.type ? [part.options.type] : []);
+      if ( types.length ) {
         label = `${formula} ${game.i18n.getListFormatter({ type: "conjunction" }).format(
-          Array.from(part.types)
-            .map(p => CONFIG.DND5E.damageTypes[p]?.label ?? CONFIG.DND5E.healingTypes[p]?.label)
-            .filter(t => t)
+          types.map(p => CONFIG.DND5E.damageTypes[p]?.label ?? CONFIG.DND5E.healingTypes[p]?.label).filter(_ => _)
         )}`;
       }
 
-      return { formula, damageType: part.types.size === 1 ? part.types.first() : null, label, base: part.base };
+      return {
+        formula, label,
+        base: part.base,
+        damageType: part.options?.types.length === 1 ? part.options.types[0] : null
+      };
     });
   }
 
@@ -669,7 +692,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
   getDamageConfig(config={}) {
     if ( !this.damage?.parts ) return foundry.utils.mergeObject({ rolls: [] }, config);
 
-    const rollConfig = foundry.utils.mergeObject({ scaling: 0 }, config);
+    const rollConfig = foundry.utils.deepClone(config);
     const rollData = this.getRollData();
     rollConfig.rolls = this.damage.parts
       .map((d, index) => this._processDamagePart(d, rollConfig, rollData, index))
@@ -691,7 +714,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
    * @protected
    */
   _processDamagePart(damage, rollConfig, rollData, index=0) {
-    const scaledFormula = damage.scaledFormula(rollData.scaling);
+    const scaledFormula = damage.scaledFormula(rollConfig.scaling ?? rollData.scaling);
     const parts = scaledFormula ? [scaledFormula] : [];
     const data = { ...rollData };
 
@@ -699,6 +722,7 @@ export default class BaseActivityData extends foundry.abstract.DataModel {
       const actionType = this.getActionType(rollConfig.attackMode);
       const bonus = foundry.utils.getProperty(this.actor ?? {}, `system.bonuses.${actionType}.damage`);
       if ( bonus && !/^0+$/.test(bonus) ) parts.push(bonus);
+      if ( this.item.system.damageBonus ) parts.push(String(this.item.system.damageBonus));
     }
 
     const lastType = this.item.getFlag("dnd5e", `last.${this.id}.damageType.${index}`);

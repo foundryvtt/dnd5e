@@ -1,0 +1,70 @@
+_id: dmgCarpetOfFlyin
+name: 'Carpet of Flying: Size, Capacity, and Speed'
+img: icons/commodities/cloth/cloth-bolt-gold-pink.webp
+description: ''
+results:
+  - type: text
+    text: 3 × 5 ft. | 200 lb. capacity | 80 ft. Fly speed
+    range:
+      - 1
+      - 20
+    _id: NcFzEzCwypsVMRNM
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    drawn: false
+    flags: {}
+    _key: '!tables.results!dmgCarpetOfFlyin.NcFzEzCwypsVMRNM'
+  - type: text
+    text: 4 × 6 ft. | 400 lb. capacity | 60 ft. Fly speed
+    range:
+      - 21
+      - 55
+    _id: SeuSATVRfn9PNk5i
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    drawn: false
+    flags: {}
+    _key: '!tables.results!dmgCarpetOfFlyin.SeuSATVRfn9PNk5i'
+  - type: text
+    text: 5 × 7 ft. | 600 lb. capacity | 40 ft. Fly speed
+    range:
+      - 56
+      - 80
+    _id: jmCslHbnZ20wlGo7
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    drawn: false
+    flags: {}
+    _key: '!tables.results!dmgCarpetOfFlyin.jmCslHbnZ20wlGo7'
+  - type: text
+    text: 6 × 9 ft. | 800 lb. capacity | 30 ft. Fly speed
+    range:
+      - 81
+      - 100
+    _id: uhPivfkjbQ5TGQE5
+    img: icons/svg/d20-black.svg
+    documentId: null
+    weight: 1
+    drawn: false
+    flags: {}
+    _key: '!tables.results!dmgCarpetOfFlyin.uhPivfkjbQ5TGQE5'
+replacement: true
+displayRoll: true
+folder: I2IHCZhwMY7ttiXw
+flags: {}
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.0.2
+  createdTime: 1727883396246
+  modifiedTime: 1745611759638
+  lastModifiedBy: dnd5ebuilder0000
+sort: 1600000
+ownership:
+  default: 0
+formula: 1d100
+_key: '!tables!dmgCarpetOfFlyin'

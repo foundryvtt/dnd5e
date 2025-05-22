@@ -1,0 +1,68 @@
+name: Magic Initiate
+system:
+  description:
+    value: >-
+      <p>You gain the following benefits.</p><p><strong>Two Cantrips.</strong>
+      You learn two cantrips of your choice from the
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.SkHptN2PTzFGDaEj]{Cleric},
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.LhvuDQEyrCdg5EfU]{Druid},
+      or
+      @UUID[Compendium.dnd5e.content24.JournalEntry.phbSpells0000000.JournalEntryPage.6AnqLUowgdsqMFvz]{Wizard}
+      spell list. Intelligence, Wisdom, or Charisma is your spellcasting ability
+      for this feat's spells (choose when you select this
+      feat).</p><p><strong>Level 1 Spell.</strong> Choose a level 1 spell from
+      the same list you selected for this feat's cantrips. You always have that
+      spell prepared. You can cast it once without a spell slot, and you regain
+      the ability to cast it in that way when you finish a Long Rest. You can
+      also cast the spell using any spell slots you have.</p><p><strong>Spell
+      Change.</strong> Whenever you gain a new level, you can replace one of the
+      spells you chose for this feat with a different spell of the same level
+      from the chosen spell list.</p><p><strong>Repeatable.</strong> You can
+      take this feat more than once, but you must choose a different spell list
+      each time.</p><section id="secret-7JQCSgnGrtu9huzf"
+      class="secret"><p><strong>Foundry Note</strong></p><p>The spells have to
+      be added to your sheet with the above changes manually.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    revision: 1
+    license: CC-BY-4.0
+    book: SRD 5.2
+  uses:
+    max: ''
+    spent: 0
+    recovery: []
+  type:
+    value: feat
+    subtype: origin
+  prerequisites:
+    level: null
+    repeatable: false
+  properties: []
+  requirements: ''
+  activities: {}
+  enchant: {}
+  identifier: magic-initiate
+_id: phbftMagicInitia
+type: feat
+img: icons/magic/symbols/chevron-elipse-circle-blue.webp
+effects: []
+folder: d5jrO8A6QpjEV9rn
+sort: 112500
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1735866663151
+  modifiedTime: 1745256780499
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbftMagicInitia'

@@ -10,16 +10,6 @@ export class SizeConfigurationData extends foundry.abstract.DataModel {
       sizes: new SetField(new StringField(), { required: false, initial: ["med"], label: "DND5E.Size" })
     };
   }
-
-  /* -------------------------------------------- */
-
-  get hint() {
-    foundry.utils.logCompatibilityWarning(
-      "Advancement hints are now part of the base data model.",
-      { since: "DnD5e 3.3", until: "DnD5e 4.1" }
-    );
-    return this.parent.hint ?? "";
-  }
 }
 
 /**

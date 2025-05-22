@@ -23,7 +23,7 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
     switch ( change.key ) {
       case "system.ability":
         for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
-          changes[`system.activities.${activity.id}.attack.ability`] = ActiveEffect.applyField(
+          changes[`system.activities.${activity.id}.attack.ability`] = ActiveEffect.implementation.applyField(
             activity, { ...change, key: "attack.ability" }
           );
         }
@@ -31,9 +31,14 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
       case "system.attack.bonus":
       case "system.attack.flat":
         for ( const activity of item.system.activities?.getByTypes("attack") ?? [] ) {
-          changes[`system.activities.${activity.id}.${key}`] = ActiveEffect.applyField(activity, { ...change, key });
+          changes[`system.activities.${activity.id}.${key}`] = ActiveEffect.implementation.applyField(
+            activity, { ...change, key }
+          );
         }
         return false;
+      case "system.damage.bonus":
+        change.key = "system.damageBonus";
+        break;
       case "system.damage.parts":
         try {
           let damage;
@@ -44,19 +49,30 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
             const value = damage.clone();
             value.enchantment = true;
             value.locked = true;
-            changes[`system.activities.${activity.id}.damage.parts`] = ActiveEffect.applyField(
+            changes[`system.activities.${activity.id}.damage.parts`] = ActiveEffect.implementation.applyField(
               activity, { ...change, key, value }
             );
           }
           for ( const activity of item.system.activities?.getByTypes("heal") ?? [] ) {
             const value = damage.formula;
             const keyPath = `healing.${activity.healing.custom.enabled ? "custom.formula" : "bonus"}`;
-            changes[`system.activities.${activity.id}.${keyPath}`] = ActiveEffect.applyField(
+            changes[`system.activities.${activity.id}.${keyPath}`] = ActiveEffect.implementation.applyField(
               activity, { ...change, key: keyPath, value }
             );
           }
           return false;
         } catch(err) {}
+      case "system.damage.types":
+        const adjust = (damage, keyPath) =>
+          ActiveEffect.implementation.applyField(damage, { ...change, key: "types", value: change.value });
+        if ( item.system.damage?.base ) {
+          changes["system.damage.base.types"] = adjust(item.system.damage.base, "system.damage.base");
+        }
+        for ( const activity of item.system.activities?.getByTypes("attack", "damage", "save") ?? [] ) {
+          for ( const part of activity.damage.parts ) adjust(part);
+          changes[`system.activities.${activity.id}.damage.parts`] = activity.damage.parts;
+        }
+        return false;
       case "system.save.dc":
       case "system.save.scaling":
         let value = change.value;
@@ -67,7 +83,7 @@ export default class EnchantmentData extends foundry.abstract.TypeDataModel {
           else if ( (value === "") && (item.type === "spell") ) value = "spellcasting";
         }
         for ( const activity of item.system.activities?.getByTypes("save") ?? [] ) {
-          changes[`system.activities.${activity.id}.${key}`] = ActiveEffect.applyField(
+          changes[`system.activities.${activity.id}.${key}`] = ActiveEffect.implementation.applyField(
             activity, { ...change, key, value }
           );
         }

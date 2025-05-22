@@ -1,0 +1,125 @@
+name: Tiny Hut
+system:
+  description:
+    value: >-
+      <p>A 10-foot Emanation springs into existence around you and remains
+      stationary for the duration. The spell fails when you cast it if the
+      Emanation isn't big enough to fully encapsulate all creatures in its
+      area.</p><p>Creatures and objects within the Emanation when you cast the
+      spell can move through it freely. All other creatures and objects are
+      barred from passing through it. Spells of level 3 or lower can't be cast
+      through it, and the effects of such spells can't extend into it.</p><p>The
+      atmosphere inside the Emanation is comfortable and dry, regardless of the
+      weather outside. Until the spell ends, you can command the interior to
+      have &amp;Reference[dimlight] or &amp;Reference[darkness] (no action
+      required). The Emanation is opaque from the outside and of any color you
+      choose, but it's transparent from the inside.</p><p>The spell ends early
+      if you leave the Emanation or if you cast it again.</p>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: '8'
+    units: hour
+  target:
+    affects:
+      choice: false
+      count: ''
+      type: creatureOrObject
+      special: ''
+    template:
+      units: ft
+      type: radius
+      size: '10'
+      contiguous: false
+      count: ''
+  range:
+    units: self
+    special: ''
+  uses:
+    max: ''
+    recovery: []
+    spent: 0
+  level: 3
+  school: evo
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  materials:
+    value: a crystal bead
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    dnd5eactivity000:
+      _id: dnd5eactivity000
+      type: utility
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        targets: []
+        scaling:
+          allowed: false
+          max: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        prompt: true
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+      roll:
+        formula: ''
+        name: ''
+        prompt: false
+        visible: false
+      uses:
+        spent: 0
+        recovery: []
+      sort: 0
+  identifier: leomunds-tiny-hut
+_id: phbsplLeomundsTi
+type: spell
+img: icons/environment/settlement/hut.webp
+effects: []
+folder: HCovEE4VoPGlIbKi
+sort: 1400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425961075
+  modifiedTime: 1745256795390
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbsplLeomundsTi'

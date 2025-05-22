@@ -128,16 +128,16 @@ export default class BasicRoll extends Roll {
    * @param {BasicRollProcessConfiguration} [config={}]   Configuration for the rolls.
    * @param {BasicRollDialogConfiguration} [dialog={}]    Configuration for roll prompt.
    * @param {BasicRollMessageConfiguration} [message={}]  Configuration for message creation.
-   * @returns {BasicRoll[]}
+   * @returns {Promise<BasicRoll[]>}
    */
   static async buildConfigure(config={}, dialog={}, message={}) {
     config.hookNames = [...(config.hookNames ?? []), ""];
 
     /**
      * A hook event that fires before a roll is performed. Multiple hooks may be called depending on the rolling
-     * method (e.g. `dnd5e.preRollSkillV2`, `dnd5e.preRollAbilityCheckV2`, `dnd5e.preRollV2`). Exact contents of the
+     * method (e.g. `dnd5e.preRollSkill`, `dnd5e.preRollAbilityCheck`, `dnd5e.preRoll`). Exact contents of the
      * configuration object will also change based on the roll type, but the same objects will always be present.
-     * @function dnd5e.preRollV2
+     * @function dnd5e.preRoll
      * @memberof hookEvents
      * @param {BasicRollProcessConfiguration} config   Configuration data for the pending roll.
      * @param {BasicRollDialogConfiguration} dialog    Presentation data for the roll configuration dialog.
@@ -145,17 +145,29 @@ export default class BasicRoll extends Roll {
      * @returns {boolean}                              Explicitly return `false` to prevent the roll.
      */
     for ( const hookName of config.hookNames ) {
+      if ( Hooks.call(`dnd5e.preRoll${hookName.capitalize()}`, config, dialog, message) === false ) return [];
       if ( Hooks.call(`dnd5e.preRoll${hookName.capitalize()}V2`, config, dialog, message) === false ) return [];
     }
 
     this.applyKeybindings(config, dialog, message);
 
     let rolls;
-    if ( dialog.configure === false ) rolls = config.rolls?.map(c => this.fromConfig(c, config)) ?? [];
-    else {
+    if ( dialog.configure === false ) {
+      rolls = config.rolls?.map((r, index) => {
+        dialog.options?.buildConfig?.(config, r, null, index);
+        for ( const hookName of config.hookNames ) {
+          Hooks.callAll(`dnd5e.postBuild${hookName.capitalize()}RollConfig`, config, r, index);
+        }
+        return this.fromConfig(r, config);
+      }) ?? [];
+    } else {
       const DialogClass = dialog.applicationClass ?? this.DefaultConfigurationDialog;
       rolls = await DialogClass.configure(config, dialog, message);
     }
+
+    // Store the roll type in roll.options so it can be accessed from only the roll
+    const rollType = foundry.utils.getProperty(message, "data.flags.dnd5e.roll.type");
+    if ( rollType ) rolls.forEach(roll => roll.options.rollType ??= rollType);
 
     /**
      * A hook event that fires after roll configuration is complete, but before the roll is evaluated.
@@ -320,6 +332,18 @@ export default class BasicRoll extends Roll {
   }
 
   /* -------------------------------------------- */
+  /*  Roll Formula Parsing                        */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static replaceFormulaData(formula, data, options) {
+    // This looks for the pattern `$!!$` and replaces it with just the value between the marks (the bang has
+    // been added to ensure this is a deliberate shim from the system, not a unintentional usage that should
+    // show an error).
+    return super.replaceFormulaData(formula, data, options).replaceAll(/\$"?!(.+?)!"?\$/g, "$1");
+  }
+
+  /* -------------------------------------------- */
   /*  Maximize/Minimize Methods                   */
   /* -------------------------------------------- */
 
@@ -401,5 +425,34 @@ export default class BasicRoll extends Roll {
     }
 
     this.resetFormula();
+  }
+
+  /* -------------------------------------------- */
+  /*  Helpers                                     */
+  /* -------------------------------------------- */
+
+  /**
+   * Merge two roll configurations.
+   * @param {Partial<BasicRollConfiguration>} original  The initial configuration that will be merged into.
+   * @param {Partial<BasicRollConfiguration>} other     The configuration to merge.
+   * @returns {Partial<BasicRollConfiguration>}         The original instance.
+   */
+  static mergeConfigs(original, other={}) {
+    if ( other.data ) {
+      original.data ??= {};
+      Object.assign(original.data, other.data);
+    }
+
+    if ( other.parts?.length ) {
+      original.parts ??= [];
+      original.parts.unshift(...other.parts);
+    }
+
+    if ( other.options ) {
+      original.options ??= {};
+      foundry.utils.mergeObject(original.options, other.options);
+    }
+
+    return original;
   }
 }

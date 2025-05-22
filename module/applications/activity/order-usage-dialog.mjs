@@ -292,7 +292,7 @@ export default class OrderUsageDialog extends ActivityUsageDialog {
    * @protected
    */
   _onDrop(event) {
-    const data = TextEditor.getDragEventData(event);
+    const data = foundry.applications.ux.TextEditor.implementation.getDragEventData(event);
     if ( (data.type !== "Actor") || !data.uuid ) return;
     const { trade } = this.item.system;
     if ( !this.config.trade?.creatures?.buy ) {

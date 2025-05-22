@@ -1,0 +1,181 @@
+name: Instant Summons
+system:
+  description:
+    value: >-
+      <p>You touch the sapphire used in the casting and an object weighing 10
+      pounds or less whose longest dimension is 6 feet or less. The spell leaves
+      an Invisible mark on that object and invisibly inscribes the object's name
+      on the sapphire. Each time you cast this spell, you must use a different
+      sapphire.</p><p>Thereafter, you can take a Magic action to speak the
+      object's name and crush the sapphire. The object instantly appears in your
+      hand regardless of physical or planar distances, and the spell
+      ends.</p><p>If another creature is holding or carrying the object,
+      crushing the sapphire doesn't transport it, but instead you learn who that
+      creature is and where that creature is currently located.</p><section
+      id="secret-px4JJQv7QxLmPdka" class="secret"><p><strong>Foundry
+      Note</strong></p><p>This spell's Limited Uses are configured to track the
+      number of inscribed objects, with the "Inscribe" and "Recall" activities
+      restoring and consuming uses as appropriate.</p></section>
+    chat: ''
+  source:
+    custom: ''
+    rules: '2024'
+    license: CC-BY-4.0
+    book: SRD 5.2
+  activation:
+    type: minute
+    condition: ''
+    value: 1
+  duration:
+    value: ''
+    units: disp
+  target:
+    affects:
+      choice: false
+      count: '2'
+      type: object
+      special: ''
+    template:
+      units: ''
+      contiguous: false
+      type: ''
+  range:
+    units: touch
+    special: ''
+  uses:
+    max: '9'
+    spent: 9
+    recovery: []
+  level: 6
+  school: con
+  properties:
+    - vocal
+    - somatic
+    - material
+    - ritual
+  materials:
+    value: a sapphire worth 1,000+ GP
+    consumed: false
+    cost: 0
+    supply: 0
+  preparation:
+    mode: prepared
+    prepared: false
+  activities:
+    GdcuXUpcT61NmgSw:
+      type: utility
+      _id: GdcuXUpcT61NmgSw
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: true
+        targets:
+          - type: itemUses
+            value: '-1'
+            target: ''
+            scaling:
+              mode: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      name: Inscribe Mark
+      img: ''
+      appliedEffects: []
+    ASO8TzkhkDzSNQAD:
+      type: utility
+      name: Recall Object
+      _id: ASO8TzkhkDzSNQAD
+      activation:
+        type: action
+        value: null
+        override: false
+      consumption:
+        scaling:
+          allowed: false
+        spellSlot: false
+        targets:
+          - type: itemUses
+            value: '1'
+            target: ''
+            scaling:
+              mode: ''
+      description:
+        chatFlavor: ''
+      duration:
+        units: inst
+        concentration: false
+        override: false
+      effects: []
+      range:
+        override: false
+      target:
+        template:
+          contiguous: false
+          units: ft
+        affects:
+          choice: false
+        override: false
+        prompt: true
+      uses:
+        spent: 0
+        recovery: []
+        max: ''
+      sort: 0
+      roll:
+        prompt: false
+        visible: false
+        name: ''
+        formula: ''
+      img: ''
+      appliedEffects: []
+  identifier: drawmijs-instant-summons
+_id: phbsplDrawmijsIn
+type: spell
+img: icons/commodities/gems/gem-fragments-turquoise.webp
+effects: []
+folder: 8WmlLARx1Df3Ii9v
+sort: 1400000
+ownership:
+  default: 0
+flags:
+  dnd5e:
+    riders:
+      activity: []
+      effect: []
+_stats:
+  duplicateSource: null
+  coreVersion: '12.331'
+  systemId: dnd5e
+  systemVersion: 4.4.0
+  createdTime: 1724425951300
+  modifiedTime: 1745256791745
+  lastModifiedBy: dnd5ebuilder0000
+_key: '!items!phbsplDrawmijsIn'
