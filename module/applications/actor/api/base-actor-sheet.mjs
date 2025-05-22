@@ -1806,7 +1806,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
     }
 
     // Let specific item types apply any changes from a drop event
-    CONFIG.Item.dataModels[itemData.type]?.onDrop?.(event, itemData);
+    CONFIG.Item.dataModels[itemData.type]?.onDropCreate?.(event, this.actor, itemData);
 
     return itemData;
   }
