@@ -15,13 +15,24 @@ export default class UtilitySheet extends ActivitySheet {
   /** @inheritDoc */
   static PARTS = {
     ...super.PARTS,
-    identity: {
-      template: "systems/dnd5e/templates/activity/utility-identity.hbs",
-      templates: super.PARTS.identity.templates
-    },
     effect: {
       template: "systems/dnd5e/templates/activity/utility-effect.hbs",
       templates: super.PARTS.effect.templates
     }
   };
+
+  /* -------------------------------------------- */
+  /*  Rendering                                   */
+  /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  async _prepareIdentityContext(context) {
+    context = await super._prepareIdentityContext(context);
+    context.behaviorFields.push({
+      field: context.fields.roll.fields.visible,
+      value: context.source.roll.visible,
+      input: context.inputs.createCheckboxInput
+    });
+    return context;
+  }
 }
