@@ -175,7 +175,7 @@ export async function migrateWorld({ bypassVersionCheck=false }={}) {
 
   // Set the migration as complete
   game.settings.set("dnd5e", "systemMigrationVersion", game.system.version);
-  progress.update({ message: "MIGRATION.5eComplete", format: { version } });
+  progress.update({ message: "MIGRATION.5eComplete", format: { version }, pct: 1 });
 }
 
 /* -------------------------------------------- */
