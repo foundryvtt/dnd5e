@@ -465,7 +465,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -477,6 +476,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: KmzlUGMXUhY2HubE
     name: Petrifying Gaze
@@ -599,18 +604,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.wkIN7WTeX8ebbjtv
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.wkIN7WTeX8ebbjtv
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676918
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!eiifqZwYGi71r2Yl.KmzlUGMXUhY2HubE'
   - _id: udfhkp3BOEpgThbR
     name: Multiattack
@@ -703,18 +707,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656655
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!eiifqZwYGi71r2Yl.udfhkp3BOEpgThbR'
   - _id: 1N53jrQmsZuhiREF
     name: Snake Hair
@@ -883,12 +886,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552552
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!eiifqZwYGi71r2Yl.1N53jrQmsZuhiREF'
   - _id: ixrzcEmkn9jaDOZ0
     name: Shortsword
@@ -1043,18 +1047,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552552
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!eiifqZwYGi71r2Yl.ixrzcEmkn9jaDOZ0'
   - _id: 4U98oe3Qr28BGbzG
     name: Longbow
@@ -1221,18 +1224,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.3cymOVja8jXbzrdT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385596
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!eiifqZwYGi71r2Yl.4U98oe3Qr28BGbzG'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -1242,10 +1244,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171245489
   modifiedTime: 1726171447353
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!eiifqZwYGi71r2Yl'

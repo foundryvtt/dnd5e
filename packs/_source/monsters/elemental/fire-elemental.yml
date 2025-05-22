@@ -479,7 +479,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -491,6 +490,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: yud1cnEVQ9KxbmWc
     name: Fire Form
@@ -607,18 +612,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.0YuGSS8E8ElHLRyb
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.0YuGSS8E8ElHLRyb
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8SMQl75HLjhuSeau.yud1cnEVQ9KxbmWc'
   - _id: iQt3J3ZnHDoeaEIR
     name: Illumination
@@ -657,18 +661,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.F3gzBbCW7U14zkBF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.F3gzBbCW7U14zkBF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!8SMQl75HLjhuSeau.iQt3J3ZnHDoeaEIR'
   - _id: AW3qP6nJk45lOHe3
     name: Water Susceptibility
@@ -707,18 +710,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.5V7SCABXvIbnk2Zn
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.5V7SCABXvIbnk2Zn
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!8SMQl75HLjhuSeau.AW3qP6nJk45lOHe3'
   - _id: PRiFJLZbvIt2nkTk
     name: Multiattack
@@ -809,18 +811,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655357
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8SMQl75HLjhuSeau.PRiFJLZbvIt2nkTk'
   - _id: fdt2FIirmBRCpRBm
     name: Touch
@@ -1039,12 +1040,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550437
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8SMQl75HLjhuSeau.fdt2FIirmBRCpRBm'
 effects: []
 folder: IB448xVSBvtqitzs
@@ -1054,10 +1056,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171207981
   modifiedTime: 1726171440457
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!8SMQl75HLjhuSeau'

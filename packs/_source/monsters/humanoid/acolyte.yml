@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 38I6bGoguRRefN6W
     name: Spellcasting
@@ -520,18 +525,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015657
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!CHEUjiYrVM9X0vIT.38I6bGoguRRefN6W'
   - _id: swpThURVHnaQRjfY
     name: Club
@@ -685,18 +689,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.nfIRTECQIG81CvM4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.nfIRTECQIG81CvM4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550723
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!CHEUjiYrVM9X0vIT.swpThURVHnaQRjfY'
   - _id: Bnn9Nzajixvow9xi
     name: Light
@@ -802,21 +805,20 @@ items:
           sort: 0
       identifier: light
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
+    flags: {}
     img: icons/magic/light/explosion-star-small-blue-yellow.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!CHEUjiYrVM9X0vIT.Bnn9Nzajixvow9xi'
   - _id: n9pJzTDsAwQxJVRl
     name: Sacred Flame
@@ -932,21 +934,20 @@ items:
           sort: 0
       identifier: sacred-flame
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
+    flags: {}
     img: icons/magic/light/beam-rays-orange.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!CHEUjiYrVM9X0vIT.n9pJzTDsAwQxJVRl'
   - _id: MUO1uYN7JR1hm4dR
     name: Thaumaturgy
@@ -1064,21 +1065,20 @@ items:
           sort: 0
       identifier: thaumaturgy
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
+    flags: {}
     img: icons/magic/fire/explosion-fireball-small-purple-orange.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!CHEUjiYrVM9X0vIT.MUO1uYN7JR1hm4dR'
   - _id: 8dzaICjGy6mTUaUr
     name: Bless
@@ -1225,12 +1225,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         img: icons/magic/control/buff-flight-wings-blue.webp
         type: base
         system: {}
@@ -1241,18 +1242,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.8dzaICjGy6mTUaUr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.8dzaICjGy6mTUaUr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!CHEUjiYrVM9X0vIT.8dzaICjGy6mTUaUr'
   - _id: gvdA9nPuWLck4tBl
     name: Sanctuary
@@ -1360,21 +1360,20 @@ items:
           sort: 0
       identifier: sanctuary
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.gvdA9nPuWLck4tBl
+    flags: {}
     img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gvdA9nPuWLck4tBl
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!CHEUjiYrVM9X0vIT.gvdA9nPuWLck4tBl'
   - _id: uUWb1wZgtMou0TVP
     name: Cure Wounds
@@ -1482,21 +1481,20 @@ items:
           sort: 0
       identifier: cure-wounds
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.uUWb1wZgtMou0TVP
+    flags: {}
     img: icons/magic/life/heart-cross-green.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.uUWb1wZgtMou0TVP
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!CHEUjiYrVM9X0vIT.uUWb1wZgtMou0TVP'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1506,10 +1504,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171212605
   modifiedTime: 1726171441260
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!CHEUjiYrVM9X0vIT'

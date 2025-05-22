@@ -465,7 +465,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -477,6 +476,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: yxlzyXTpsEf4QiI9
     name: Aberrant Ground
@@ -575,18 +580,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KoBGbIkb2tMZv0ch
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KoBGbIkb2tMZv0ch
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745275870570
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8pX2JhWUpTNNRBVx.yxlzyXTpsEf4QiI9'
   - _id: SzwWnAgr25vDeHKu
     name: Gibbering
@@ -694,8 +698,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.dPPLbo3Unu3TqZrs
       dnd5e:
         riders:
           activity: []
@@ -703,12 +705,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.dPPLbo3Unu3TqZrs
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745275911577
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8pX2JhWUpTNNRBVx.SzwWnAgr25vDeHKu'
   - _id: qlBBeTku9uoaEv8G
     name: Multiattack
@@ -800,18 +803,17 @@ items:
     sort: 200000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745275914691
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8pX2JhWUpTNNRBVx.qlBBeTku9uoaEv8G'
   - _id: lfUDtJ8hdeULQzqa
     name: Bites
@@ -1037,12 +1039,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745275935487
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8pX2JhWUpTNNRBVx.lfUDtJ8hdeULQzqa'
   - _id: KQRvDGowc6ihejLu
     name: Blinding Spittle
@@ -1153,18 +1156,17 @@ items:
     sort: 300000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.0awyZX05OnVLF4k2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.0awyZX05OnVLF4k2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745275949298
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8pX2JhWUpTNNRBVx.KQRvDGowc6ihejLu'
 effects: []
 folder: cHmylff3tHTzhvyb
@@ -1174,10 +1176,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171208657
   modifiedTime: 1745275962441
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!8pX2JhWUpTNNRBVx'

@@ -479,7 +479,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -491,6 +490,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: sZcc3bwnRjaDV9BZ
     name: Freeze
@@ -531,18 +536,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.m0FA3UM62hlTPVSA
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.m0FA3UM62hlTPVSA
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676751
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!namJz755U1EhvEJa.sZcc3bwnRjaDV9BZ'
   - _id: 6AQXZ1FlO8qhnPTR
     name: Water Form
@@ -581,18 +585,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.AFYR2eZavzQUbZNb
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.AFYR2eZavzQUbZNb
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!namJz755U1EhvEJa.6AQXZ1FlO8qhnPTR'
   - _id: 9saHudPLoj6va2em
     name: Multiattack
@@ -683,18 +686,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657082
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!namJz755U1EhvEJa.9saHudPLoj6va2em'
   - _id: 7xDGPsWicxgP6feT
     name: Slam
@@ -851,12 +853,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553358
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!namJz755U1EhvEJa.7xDGPsWicxgP6feT'
   - _id: 5XUFTldfE6mtRUfd
     name: Whelm
@@ -988,18 +991,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.sMgKJtbCLNSX7V80
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.sMgKJtbCLNSX7V80
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676751
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!namJz755U1EhvEJa.5XUFTldfE6mtRUfd'
 effects: []
 folder: IB448xVSBvtqitzs
@@ -1009,10 +1011,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171256853
   modifiedTime: 1726171449743
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!namJz755U1EhvEJa'

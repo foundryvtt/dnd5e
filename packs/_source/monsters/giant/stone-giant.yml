@@ -465,7 +465,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -477,6 +476,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Tm2NY0eSI6InRcsa
     name: Greatclub
@@ -629,18 +634,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.QRCsxkCwWNwswL9o
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.QRCsxkCwWNwswL9o
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551834
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!SOin81NWijHRvXFK.Tm2NY0eSI6InRcsa'
   - _id: W7aeXkpOJ1TwM0dq
     name: Multiattack
@@ -731,18 +735,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656242
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!SOin81NWijHRvXFK.W7aeXkpOJ1TwM0dq'
   - _id: eiNNUlTgJyVFcQkO
     name: Rock
@@ -964,12 +967,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385422
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!SOin81NWijHRvXFK.eiNNUlTgJyVFcQkO'
   - _id: HxKKuoyc6AYGLsIX
     name: Rock Catching
@@ -1066,18 +1070,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.BpwXJvMA7MfVQ7i6
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.BpwXJvMA7MfVQ7i6
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676793
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!SOin81NWijHRvXFK.HxKKuoyc6AYGLsIX'
   - _id: zqsYu35qYHNNeTWE
     name: Stone Camouflage
@@ -1115,18 +1118,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.j1cPfWFNvxGoex9Z
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.j1cPfWFNvxGoex9Z
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!SOin81NWijHRvXFK.zqsYu35qYHNNeTWE'
 effects: []
 folder: v8gFGdEluEFQdRQg
@@ -1136,10 +1138,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171232404
   modifiedTime: 1726171444900
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!SOin81NWijHRvXFK'

@@ -423,7 +423,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -485,6 +484,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Shared Resistances
     system:
@@ -809,12 +814,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: 1724444490482
           modifiedTime: 1724445384271
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.7cJTSbk7inXzZrgc
       - name: Shared Cold Resistance
@@ -845,12 +851,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: 1724444536651
           modifiedTime: 1724445449479
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _id: RhMVHKsPIntvMb9t
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.RhMVHKsPIntvMb9t
@@ -882,12 +889,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: 1724444538538
           modifiedTime: 1724445469278
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _id: 88nNini6vAbvuYpW
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.88nNini6vAbvuYpW
@@ -919,12 +927,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: 1724444539750
           modifiedTime: 1724445481203
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _id: aM5KtLpDsfmHWiz2
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.aM5KtLpDsfmHWiz2
@@ -956,12 +965,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: 1724444540837
           modifiedTime: 1724445492474
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _id: C73Xnt0qigfb1tiy
         _key: >-
           !actors.items.effects!phbmobDraconicSp.phbaoiSharedResi.C73Xnt0qigfb1tiy
@@ -977,12 +987,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159247
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiSharedResi'
   - name: Multiattack
     system:
@@ -1089,12 +1100,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159247
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiMultiattac'
   - name: Rend
     system:
@@ -1220,12 +1232,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159247
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiRend000000'
   - name: Breath Weapon
     system:
@@ -1350,12 +1363,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159247
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbmobDraconicSp.phbaoiBreathWeap'
 effects: []
 folder: UkOGmZEiXrlLv29I
@@ -1367,10 +1381,11 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425912241
   modifiedTime: 1745256827525
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!phbmobDraconicSp'

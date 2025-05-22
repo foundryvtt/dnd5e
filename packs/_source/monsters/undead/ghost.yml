@@ -481,7 +481,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -493,6 +492,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: tjrDz1IWVcjF7PMl
     name: Ethereal Sight
@@ -530,18 +535,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.We6R4thWKYDRYlEc
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.We6R4thWKYDRYlEc
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.tjrDz1IWVcjF7PMl'
   - _id: SiBsPubItj26pcHa
     name: Incorporeal Movement
@@ -582,18 +586,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.LUHmtIDD1VTreFqI
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LUHmtIDD1VTreFqI
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676881
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.SiBsPubItj26pcHa'
   - _id: wdOqdYfLb2Nu1Uud
     name: Withering Touch
@@ -750,12 +753,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553635
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.wdOqdYfLb2Nu1Uud'
   - _id: WyxVuCp4iU10bA7m
     name: Etherealness
@@ -848,18 +852,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.rDoNJnKdY47x8MD4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.rDoNJnKdY47x8MD4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.WyxVuCp4iU10bA7m'
   - _id: lOzkFHeXCdO2FB9X
     name: Horrifying Visage
@@ -965,18 +968,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.lBN86BToCJgkakL3
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lBN86BToCJgkakL3
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676881
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.lOzkFHeXCdO2FB9X'
   - _id: UF0mfYsgI4ay6mzv
     name: Possession
@@ -1096,18 +1098,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.NI3FPb5jQsePdlVl
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.NI3FPb5jQsePdlVl
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676881
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!qoFEjfrANBdrCP6m.UF0mfYsgI4ay6mzv'
 effects: []
 folder: FsvtTiIRh93utaoh
@@ -1117,10 +1118,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171260703
   modifiedTime: 1726171450649
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!qoFEjfrANBdrCP6m'

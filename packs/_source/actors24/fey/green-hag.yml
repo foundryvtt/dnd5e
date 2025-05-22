@@ -489,7 +489,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -545,6 +544,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mmAmphibious0000
     name: Amphibious
@@ -584,12 +589,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAmphibious0000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -951,12 +957,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCovenMagic0000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 1
@@ -1102,12 +1109,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.3rCVpd7aieYnPHwB.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1120,12 +1128,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplAugury0000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 3rCVpd7aieYnPHwB
     _key: '!actors.items!mmGreenHag000000.3rCVpd7aieYnPHwB'
   - name: Find Familiar
@@ -1316,12 +1325,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.ijY9hc5b4AQkz5ZS.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1334,12 +1344,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplFindFamili
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: ijY9hc5b4AQkz5ZS
     _key: '!actors.items!mmGreenHag000000.ijY9hc5b4AQkz5ZS'
   - name: Identify
@@ -1475,12 +1486,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.kUzXgVwiKDTtw9Mo.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1493,12 +1505,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplIdentify00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: kUzXgVwiKDTtw9Mo
     _key: '!actors.items!mmGreenHag000000.kUzXgVwiKDTtw9Mo'
   - name: Locate Object
@@ -1639,12 +1652,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.amFlR7cm6e8cdMEg.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -1660,12 +1674,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLocateObje
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: amFlR7cm6e8cdMEg
     _key: '!actors.items!mmGreenHag000000.amFlR7cm6e8cdMEg'
   - name: Scrying
@@ -2245,12 +2260,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.LsZ3LIUekPUB0IAu.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -2263,12 +2279,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplScrying000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: LsZ3LIUekPUB0IAu
     _key: '!actors.items!mmGreenHag000000.LsZ3LIUekPUB0IAu'
   - name: Unseen Servant
@@ -2435,12 +2452,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.NpwyLKMMy9agOfxL.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2453,12 +2471,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplUnseenServ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: NpwyLKMMy9agOfxL
     _key: '!actors.items!mmGreenHag000000.NpwyLKMMy9agOfxL'
   - _id: mmMimicry0000000
@@ -2553,12 +2572,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMimicry0000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -2652,12 +2672,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 3
@@ -2809,12 +2830,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmClaw0000000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 4
@@ -3100,12 +3122,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 5
@@ -3320,12 +3343,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.WHzIxRkgJHT6dAcb.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -3338,12 +3362,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDancingLig
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: WHzIxRkgJHT6dAcb
     _key: '!actors.items!mmGreenHag000000.WHzIxRkgJHT6dAcb'
   - name: Disguise Self
@@ -3481,12 +3506,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.3SIvYE13BfHn7qvz.SrIb7dbaZs5F4zi9
       - _id: dnd5espellchange
@@ -3519,12 +3545,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.3SIvYE13BfHn7qvz.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -3537,12 +3564,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDisguiseSe
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 3SIvYE13BfHn7qvz
     _key: '!actors.items!mmGreenHag000000.3SIvYE13BfHn7qvz'
   - name: Invisibility
@@ -3673,12 +3701,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.P1WohR9zwkV78Jwb.9svfDetqjhsFP3ey
       - _id: dnd5espellchange
@@ -3711,12 +3740,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.P1WohR9zwkV78Jwb.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -3729,12 +3759,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplInvisibili
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: P1WohR9zwkV78Jwb
     _key: '!actors.items!mmGreenHag000000.P1WohR9zwkV78Jwb'
   - name: Minor Illusion
@@ -3911,12 +3942,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.lQDlH8pdy1WcUTMT.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -3929,12 +3961,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMinorIllus
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: lQDlH8pdy1WcUTMT
     _key: '!actors.items!mmGreenHag000000.lQDlH8pdy1WcUTMT'
   - name: Ray of Sickness
@@ -4084,12 +4117,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGreenHag000000.b6RHBNfOpyYoM3zy.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -4102,12 +4136,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplRayofSickn
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720473
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: b6RHBNfOpyYoM3zy
     _key: '!actors.items!mmGreenHag000000.b6RHBNfOpyYoM3zy'
 effects: []
@@ -4117,12 +4152,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415541848
   modifiedTime: 1745712720522
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: RvZitO1X1j16tABV
     name: Pack Tactics
@@ -514,18 +519,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!cDr1JtzEV26bP5Ym.RvZitO1X1j16tABV'
   - _id: gqMeY9GtWfBNt1bf
     name: Bite
@@ -679,18 +683,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741122064346
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!cDr1JtzEV26bP5Ym.gqMeY9GtWfBNt1bf'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -700,10 +703,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171242793
   modifiedTime: 1741122068291
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!cDr1JtzEV26bP5Ym'

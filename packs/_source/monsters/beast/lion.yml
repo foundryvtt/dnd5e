@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: ZFsvhBgKXqgf17TZ
     name: Keen Smell
@@ -517,12 +522,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: 1741122224466
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hjhERRzafCiFFVLA.ZFsvhBgKXqgf17TZ'
   - _id: Kztga4jBHZCUjO3A
     name: Pack Tactics
@@ -561,18 +567,17 @@ items:
     sort: 200000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: 1741122224466
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hjhERRzafCiFFVLA.Kztga4jBHZCUjO3A'
   - _id: pQdtHaxlArSTjbqb
     name: Pounce
@@ -727,18 +732,17 @@ items:
     sort: 300000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.MqAVplIArAKzpnXB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.MqAVplIArAKzpnXB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741122291080
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hjhERRzafCiFFVLA.pQdtHaxlArSTjbqb'
   - _id: 3dmAdKAVc8JqLgIj
     name: Running Leap
@@ -776,18 +780,17 @@ items:
     sort: 400000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Ozz1xvw2ydiw4IJP
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Ozz1xvw2ydiw4IJP
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: 1741122224466
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hjhERRzafCiFFVLA.3dmAdKAVc8JqLgIj'
   - _id: gKj1TlVfDhLp5WIk
     name: Bite
@@ -941,18 +944,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741122245145
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hjhERRzafCiFFVLA.gKj1TlVfDhLp5WIk'
   - _id: CHIayoaCAZj0GBkM
     name: Claw
@@ -1111,12 +1113,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741122241114
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hjhERRzafCiFFVLA.CHIayoaCAZj0GBkM'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -1126,10 +1129,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171249889
   modifiedTime: 1741122246651
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!hjhERRzafCiFFVLA'

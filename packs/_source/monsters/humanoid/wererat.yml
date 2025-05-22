@@ -470,7 +470,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -482,6 +481,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: PhdUmTsYUeWSSDNN
     name: Shapechanger
@@ -577,18 +582,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676916
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.PhdUmTsYUeWSSDNN'
   - _id: UwlU9Zhwf94gPX0n
     name: Keen Smell
@@ -630,12 +634,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.UwlU9Zhwf94gPX0n'
   - _id: ykZaywAeuqtWHAqQ
     name: Multiattack (Humanoid or Hybrid Form Only)
@@ -728,12 +733,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.ykZaywAeuqtWHAqQ'
   - _id: ldz0yUpzhV9Xlhss
     name: Bite (Rat or Hybrid Form Only)
@@ -954,12 +960,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550738
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.ldz0yUpzhV9Xlhss'
   - _id: YJi7nfridP2LjdJs
     name: Hand Crossbow (Humanoid or Hybrid Form Only)
@@ -1119,12 +1126,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385197
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.YJi7nfridP2LjdJs'
   - _id: wpyEts6pBAxoD0Gh
     name: Shortsword (Humanoid or Hybrid Form Only)
@@ -1283,12 +1291,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550738
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!CrnUJhTbkdZjCZsH.wpyEts6pBAxoD0Gh'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1298,10 +1307,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171213064
   modifiedTime: 1726171441345
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!CrnUJhTbkdZjCZsH'

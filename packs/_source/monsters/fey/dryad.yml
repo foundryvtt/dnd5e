@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Wkv8laBNYgkdA7lL
     name: Innate Spellcasting
@@ -579,18 +584,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015696
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.Wkv8laBNYgkdA7lL'
   - _id: JExoadfmCtQH6vsK
     name: Magic Resistance
@@ -628,18 +632,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.JExoadfmCtQH6vsK'
   - _id: beL4bLUcyTb1Sxgz
     name: Speak with Beasts and Plants
@@ -677,18 +680,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.59DUUDZet1J4PIlA
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.59DUUDZet1J4PIlA
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.beL4bLUcyTb1Sxgz'
   - _id: wwQTeXOmFLO2MW0Y
     name: Tree Stride
@@ -729,18 +731,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.g4V02wJbEstUpwi9
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.g4V02wJbEstUpwi9
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.wwQTeXOmFLO2MW0Y'
   - _id: DNPx6Myd5rHTGu4a
     name: Club
@@ -902,8 +903,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.nfIRTECQIG81CvM4
       dnd5e:
         riders:
           activity: []
@@ -911,12 +910,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.nfIRTECQIG81CvM4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745174477994
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.DNPx6Myd5rHTGu4a'
   - _id: OdzhvEDeD06BWsZS
     name: Fey Charm
@@ -1082,18 +1082,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.SGgVxdZbmsStfeGB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.SGgVxdZbmsStfeGB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676559
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.OdzhvEDeD06BWsZS'
   - name: Entangle
     type: spell
@@ -1207,9 +1206,7 @@ items:
           sort: 0
       identifier: entangle
     effects: []
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe
+    flags: {}
     _id: gMrWeG8fMDPRFiVe
     folder: null
     sort: 0
@@ -1218,12 +1215,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells.gMrWeG8fMDPRFiVe
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.gMrWeG8fMDPRFiVe'
   - _id: SbSvZKkJASyk8jKo
     name: Druidcraft
@@ -1339,21 +1337,20 @@ items:
           sort: 0
       identifier: druidcraft
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.SbSvZKkJASyk8jKo
+    flags: {}
     img: icons/magic/nature/vines-thorned-glow-teal.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.SbSvZKkJASyk8jKo
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.SbSvZKkJASyk8jKo'
   - _id: Qf6CAZkc7ms4ZY3e
     name: Goodberry
@@ -1469,21 +1466,20 @@ items:
           sort: 0
       identifier: goodberry
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.Qf6CAZkc7ms4ZY3e
+    flags: {}
     img: icons/magic/nature/leaf-glow-green.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Qf6CAZkc7ms4ZY3e
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.Qf6CAZkc7ms4ZY3e'
   - _id: JPwIEfgUPVebr5AH
     name: Barkskin
@@ -1619,12 +1615,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         img: icons/magic/defensive/shield-barrier-flaming-diamond-orange.webp
         type: base
         system: {}
@@ -1635,18 +1632,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.JPwIEfgUPVebr5AH
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.JPwIEfgUPVebr5AH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.JPwIEfgUPVebr5AH'
   - _id: pRMvmknwLf2tdMTj
     name: Pass without Trace
@@ -1757,21 +1753,20 @@ items:
           sort: 0
       identifier: pass-without-trace
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.pRMvmknwLf2tdMTj
+    flags: {}
     img: icons/magic/air/fog-gas-smoke-brown.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pRMvmknwLf2tdMTj
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.pRMvmknwLf2tdMTj'
   - _id: VzgFzcmocr1X1cp4
     name: Shillelagh
@@ -1893,21 +1888,20 @@ items:
           sort: 0
       identifier: shillelagh
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.VzgFzcmocr1X1cp4
+    flags: {}
     img: icons/magic/fire/dagger-rune-enchant-teal.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.VzgFzcmocr1X1cp4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KOHVWl5RU9XBR8Jb.VzgFzcmocr1X1cp4'
 effects: []
 folder: 5TSd0wOZe1L5I3eJ
@@ -1917,10 +1911,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171222835
   modifiedTime: 1745174485279
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!KOHVWl5RU9XBR8Jb'

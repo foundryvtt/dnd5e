@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: r4KUyv5cYwjHqNl3
     name: Bite
@@ -628,18 +633,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107549721
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!1ES45ODWg3pCrkzv.r4KUyv5cYwjHqNl3'
   - _id: xZeM7pLE9OPzdhBY
     name: Standing Leap
@@ -678,18 +682,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.f4yvSah35ixQOswD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.f4yvSah35ixQOswD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!1ES45ODWg3pCrkzv.xZeM7pLE9OPzdhBY'
   - _id: Keg9oouX6Vbl9tms
     name: Deadly leap
@@ -900,18 +903,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.bG5Z45jj4wz0N3T6
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bG5Z45jj4wz0N3T6
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676520
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!1ES45ODWg3pCrkzv.Keg9oouX6Vbl9tms'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -921,10 +923,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171198412
   modifiedTime: 1726171438847
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!1ES45ODWg3pCrkzv'

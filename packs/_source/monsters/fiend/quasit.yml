@@ -475,7 +475,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -487,6 +486,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: MLfZqvhaJjB78YiT
     name: Invisibility
@@ -581,18 +586,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676874
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.MLfZqvhaJjB78YiT'
   - _id: ae0OI3obJqa4AS7U
     name: Claw (Bite in Beast Form)
@@ -831,12 +835,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745175290818
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.ae0OI3obJqa4AS7U'
   - _id: e8rpvJJVWCN4HU7I
     name: Shapechanger
@@ -935,18 +940,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676874
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.e8rpvJJVWCN4HU7I'
   - _id: vlmHYqAZxNGh8xQ6
     name: Magic Resistance
@@ -984,18 +988,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.vlmHYqAZxNGh8xQ6'
   - _id: 1YhP86rTuRIXKFi2
     name: Scare
@@ -1165,18 +1168,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.gqrKcFwxHhmwrP2q
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gqrKcFwxHhmwrP2q
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676874
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.1YhP86rTuRIXKFi2'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1186,10 +1188,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171242436
   modifiedTime: 1745175316236
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!bwtkdzavdNHISgp4'

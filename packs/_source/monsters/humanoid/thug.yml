@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: wonRQjOkc9E7RYtd
     name: Leather Armor
@@ -541,18 +546,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!Cy3A0rsNMPLZozam.wonRQjOkc9E7RYtd'
   - _id: OE8y8otGDFop6Fzt
     name: Pack Tactics
@@ -591,18 +595,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!Cy3A0rsNMPLZozam.OE8y8otGDFop6Fzt'
   - _id: cac4FpQc3XabBwTj
     name: Multiattack
@@ -691,18 +694,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!Cy3A0rsNMPLZozam.cac4FpQc3XabBwTj'
   - _id: 9INT7D1zulhfsok7
     name: Heavy Crossbow
@@ -858,18 +860,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.RmP0mYRn2J7K26rX
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.RmP0mYRn2J7K26rX
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385204
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!Cy3A0rsNMPLZozam.9INT7D1zulhfsok7'
   - _id: 6gRu9IFFkvxesFfK
     name: Mace
@@ -1022,18 +1023,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.Ajyq6nGwF7FtLhDQ
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.Ajyq6nGwF7FtLhDQ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550747
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!Cy3A0rsNMPLZozam.6gRu9IFFkvxesFfK'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1043,10 +1043,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171213323
   modifiedTime: 1726171441383
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!Cy3A0rsNMPLZozam'

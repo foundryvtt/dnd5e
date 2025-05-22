@@ -469,7 +469,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -481,6 +480,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: HebvJc2NqYvdR79s
     name: Bite
@@ -653,18 +658,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745175966453
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zpaZb7I8alY32vWV.HebvJc2NqYvdR79s'
   - _id: DY9MW3aTF5T5zhpo
     name: Claws
@@ -823,12 +827,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107554337
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zpaZb7I8alY32vWV.DY9MW3aTF5T5zhpo'
   - _id: Q9tHfkUiN6f1sguc
     name: Multiattack
@@ -919,18 +924,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657774
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zpaZb7I8alY32vWV.Q9tHfkUiN6f1sguc'
   - _id: wzRyhY2I1U0ytB7D
     name: Regeneration
@@ -1034,18 +1038,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676837
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zpaZb7I8alY32vWV.wzRyhY2I1U0ytB7D'
   - _id: FY5L5oISibzOxcRY
     name: Spider Climb
@@ -1083,18 +1086,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!zpaZb7I8alY32vWV.FY5L5oISibzOxcRY'
   - _id: lLAigtCvoIuj0TM9
     name: Vampire Weaknesses
@@ -1147,18 +1149,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Ervkb8H99e2Beiae
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Ervkb8H99e2Beiae
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!zpaZb7I8alY32vWV.lLAigtCvoIuj0TM9'
 effects: []
 folder: FsvtTiIRh93utaoh
@@ -1168,10 +1169,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171268360
   modifiedTime: 1745175970498
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!zpaZb7I8alY32vWV'

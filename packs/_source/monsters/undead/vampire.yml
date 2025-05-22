@@ -469,7 +469,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -481,6 +480,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: BqG5guVa93LaOAn1
     name: Shapechanger
@@ -534,18 +539,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676990
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.BqG5guVa93LaOAn1'
   - _id: JaohF91Eok1kSEIG
     name: Legendary Resistance
@@ -642,18 +646,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.J1NxNTJ2qi05iAFF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.J1NxNTJ2qi05iAFF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.JaohF91Eok1kSEIG'
   - _id: pVlKFunmE2qxO0pe
     name: Misty Escape
@@ -702,18 +705,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hMC7XCkDbzVMZ0QG
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hMC7XCkDbzVMZ0QG
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676990
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.pVlKFunmE2qxO0pe'
   - _id: BDnluJG7T7FfBjsQ
     name: Regeneration
@@ -817,18 +819,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676990
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.BDnluJG7T7FfBjsQ'
   - _id: jc3NboVcwuEiXOYn
     name: Spider Climb
@@ -866,18 +867,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.jc3NboVcwuEiXOYn'
   - _id: RLsKLdfdmHajHSwD
     name: Vampire Weaknesses
@@ -931,18 +931,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Ervkb8H99e2Beiae
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Ervkb8H99e2Beiae
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.RLsKLdfdmHajHSwD'
   - _id: siO3h9XOkgPVi78F
     name: Multiattack (Vampire Form Only)
@@ -1037,12 +1036,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.siO3h9XOkgPVi78F'
   - _id: jYBYvv9EF1UnOvqZ
     name: Unarmed Strike (Vampire Form Only)
@@ -1201,12 +1201,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550823
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.jYBYvv9EF1UnOvqZ'
   - _id: uqHuj7Pjf2sjny21
     name: Bite (Bat or Vampire Form Only)
@@ -1388,12 +1389,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745174258292
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.uqHuj7Pjf2sjny21'
   - _id: RHezeN7HzNf2oKYP
     name: Charm
@@ -1502,18 +1504,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.ykoo88OJOdfYH7mH
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.ykoo88OJOdfYH7mH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676990
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.RHezeN7HzNf2oKYP'
   - _id: c9z4o0fkxq37v8KY
     name: Children of the Night
@@ -1618,18 +1619,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.dm2G9HupHZbZRvNm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.dm2G9HupHZbZRvNm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676990
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.c9z4o0fkxq37v8KY'
   - _id: rQOFEdWpVwJWS2U4
     name: Legendary Actions
@@ -1669,18 +1669,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676990
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.rQOFEdWpVwJWS2U4'
   - _id: hNBduaMwPI3vordA
     name: Lair Actions
@@ -1724,18 +1723,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676990
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.hNBduaMwPI3vordA'
   - _id: zV0DTNKndsVldLsV
     name: Regional Effects
@@ -1774,18 +1772,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.zV0DTNKndsVldLsV'
   - _id: o4v4mHxP82HTbIOX
     name: Move
@@ -1887,12 +1884,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.o4v4mHxP82HTbIOX'
   - _id: rEmbKJQ6mpvnUPOO
     name: Unarmed Strike
@@ -1987,18 +1985,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.GsuvwoekKZatfKwF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.GsuvwoekKZatfKwF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.rEmbKJQ6mpvnUPOO'
   - _id: pW4iNTQphTJ3litv
     name: Bite
@@ -2093,18 +2090,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!DDO9lDCDtNHkfShP.pW4iNTQphTJ3litv'
 effects: []
 folder: FsvtTiIRh93utaoh
@@ -2114,10 +2110,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171214189
   modifiedTime: 1745174265686
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!DDO9lDCDtNHkfShP'

@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: VlvfR7YD6twoSRhg
     name: Amphibious
@@ -514,18 +519,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!OQqybZoMeDFn5AFD.VlvfR7YD6twoSRhg'
   - _id: XeAyeJsNjKZKPWEN
     name: Horrific Appearance
@@ -636,18 +640,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.YShGyidij4sLpyzF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.YShGyidij4sLpyzF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676725
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!OQqybZoMeDFn5AFD.XeAyeJsNjKZKPWEN'
   - _id: a75Ba80yp6Y28AJQ
     name: Claws
@@ -804,12 +807,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551622
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!OQqybZoMeDFn5AFD.a75Ba80yp6Y28AJQ'
   - _id: 7AGmP2dRLYmORUX7
     name: Death Glare
@@ -910,18 +914,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.o8G8BNPJOWoCKzR5
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.o8G8BNPJOWoCKzR5
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676725
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!OQqybZoMeDFn5AFD.7AGmP2dRLYmORUX7'
   - _id: 8s0lGEYZGFEpwt12
     name: Illusory Appearance
@@ -1021,18 +1024,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.s7kqggp9VLDb39nu
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.s7kqggp9VLDb39nu
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!OQqybZoMeDFn5AFD.8s0lGEYZGFEpwt12'
 effects: []
 folder: 5TSd0wOZe1L5I3eJ
@@ -1042,10 +1044,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171228511
   modifiedTime: 1726171444203
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!OQqybZoMeDFn5AFD'

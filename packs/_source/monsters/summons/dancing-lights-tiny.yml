@@ -464,9 +464,14 @@ prototypeToken:
     subject:
       texture: null
       scale: 1
-  hexagonalShape: 0
   occludable:
     radius: 0
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items: []
 effects: []
 sort: 700000
@@ -475,10 +480,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171235021
   modifiedTime: 1726171445417
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!UrXp9O9N7DvdH9nL'

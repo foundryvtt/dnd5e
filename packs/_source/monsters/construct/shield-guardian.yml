@@ -470,7 +470,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -482,6 +481,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mJoNsESU5X2lBKqn
     name: Bound
@@ -524,18 +529,17 @@ items:
     sort: 200000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.twrIaUZ79Yn5qpML
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.twrIaUZ79Yn5qpML
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447939014
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!z85EsGS2GVWj46qE.mJoNsESU5X2lBKqn'
   - _id: vk0gd3buCPWGpyYF
     name: Regeneration
@@ -641,8 +645,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
       dnd5e:
         riders:
           activity: []
@@ -650,12 +652,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447969847
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!z85EsGS2GVWj46qE.vk0gd3buCPWGpyYF'
   - _id: qbSL2A0uKuh2iER5
     name: Spell Storing
@@ -700,18 +703,17 @@ items:
     sort: 300000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kSgBb9r1TCfDIMY0
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kSgBb9r1TCfDIMY0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: 1745447929892
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!z85EsGS2GVWj46qE.qbSL2A0uKuh2iER5'
   - _id: 7R1cDGKMv0mdxaE7
     name: Multiattack
@@ -802,18 +804,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447977290
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!z85EsGS2GVWj46qE.7R1cDGKMv0mdxaE7'
   - _id: r6GQ1TwNK7pinX0a
     name: Fist
@@ -969,12 +970,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447977870
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!z85EsGS2GVWj46qE.r6GQ1TwNK7pinX0a'
   - _id: EjeLsaCua7yjgxax
     name: Shield
@@ -1066,18 +1068,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!z85EsGS2GVWj46qE.EjeLsaCua7yjgxax'
 effects: []
 folder: pucbjwWBrVMweiOd
@@ -1087,10 +1088,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171267320
   modifiedTime: 1745447987704
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!z85EsGS2GVWj46qE'

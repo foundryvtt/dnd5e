@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: g8r9DZeHyfNzerHP
     name: Fork
@@ -648,12 +653,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551413
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!MADGs8pWMVyyFOf1.g8r9DZeHyfNzerHP'
   - _id: smHERNgdj5yGNQuD
     name: Devil's Sight
@@ -693,12 +699,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!MADGs8pWMVyyFOf1.smHERNgdj5yGNQuD'
   - _id: gq4SqLPtYhhtWidm
     name: Magic Resistance
@@ -736,18 +743,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!MADGs8pWMVyyFOf1.gq4SqLPtYhhtWidm'
   - _id: VpvOoT7mbR0XNZiL
     name: Tail
@@ -1040,12 +1046,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551413
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!MADGs8pWMVyyFOf1.VpvOoT7mbR0XNZiL'
   - _id: 9FAl5YGUTmt1RnEF
     name: Multiattack
@@ -1138,18 +1145,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655943
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!MADGs8pWMVyyFOf1.9FAl5YGUTmt1RnEF'
   - _id: GFYzWSyeuW9O4a0I
     name: Hurl Flame
@@ -1320,12 +1326,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745174543613
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!MADGs8pWMVyyFOf1.GFYzWSyeuW9O4a0I'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1335,10 +1342,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171224928
   modifiedTime: 1744916176261
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!MADGs8pWMVyyFOf1'

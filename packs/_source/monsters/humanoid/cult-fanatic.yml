@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: vTb2KSllrajm88Ni
     name: Leather Armor
@@ -541,18 +546,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.vTb2KSllrajm88Ni'
   - _id: lSteE7vBmM70Jy3Z
     name: Dark Devotion
@@ -590,18 +594,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.XFvk6ywwZWTkMmQR
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.XFvk6ywwZWTkMmQR
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.lSteE7vBmM70Jy3Z'
   - _id: KRbUbk5AkQOabBhO
     name: Spellcasting
@@ -650,18 +653,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015990
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.KRbUbk5AkQOabBhO'
   - _id: WfqCnxOUS8aXxd7O
     name: Multiattack
@@ -750,18 +752,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.WfqCnxOUS8aXxd7O'
   - _id: zTX7ZTUkqUMSbGII
     name: Dagger
@@ -917,18 +918,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.0E565kQUBmndJ1a2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.0E565kQUBmndJ1a2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385801
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.zTX7ZTUkqUMSbGII'
   - _id: Bnn9Nzajixvow9xi
     name: Light
@@ -1034,21 +1034,20 @@ items:
           sort: 0
       identifier: light
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
+    flags: {}
     img: icons/magic/light/explosion-star-small-blue-yellow.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Bnn9Nzajixvow9xi
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.Bnn9Nzajixvow9xi'
   - _id: n9pJzTDsAwQxJVRl
     name: Sacred Flame
@@ -1164,21 +1163,20 @@ items:
           sort: 0
       identifier: sacred-flame
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
+    flags: {}
     img: icons/magic/light/beam-rays-orange.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.n9pJzTDsAwQxJVRl
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.n9pJzTDsAwQxJVRl'
   - _id: MUO1uYN7JR1hm4dR
     name: Thaumaturgy
@@ -1296,21 +1294,20 @@ items:
           sort: 0
       identifier: thaumaturgy
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
+    flags: {}
     img: icons/magic/fire/explosion-fireball-small-purple-orange.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.MUO1uYN7JR1hm4dR
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.MUO1uYN7JR1hm4dR'
   - _id: arzCrMRgcNiQuh43
     name: Command
@@ -1408,21 +1405,20 @@ items:
           sort: 0
       identifier: command
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.arzCrMRgcNiQuh43
+    flags: {}
     img: icons/magic/fire/explosion-fireball-small-purple.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.arzCrMRgcNiQuh43
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.arzCrMRgcNiQuh43'
   - _id: ksaaTxIbKx2sJfia
     name: Inflict Wounds
@@ -1543,21 +1539,20 @@ items:
           sort: 0
       identifier: inflict-wounds
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ksaaTxIbKx2sJfia
+    flags: {}
     img: icons/magic/unholy/strike-beam-blood-red-teal.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ksaaTxIbKx2sJfia
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.ksaaTxIbKx2sJfia'
   - _id: jZ6JNykRtdQ90MOo
     name: Shield of Faith
@@ -1657,21 +1652,20 @@ items:
           sort: 0
       identifier: shield-of-faith
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo
+    flags: {}
     img: icons/magic/defensive/shield-barrier-flaming-diamond-blue-yellow.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.jZ6JNykRtdQ90MOo
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.jZ6JNykRtdQ90MOo'
   - _id: 3Lo9boi7P2ro6QV4
     name: Hold Person
@@ -1772,21 +1766,20 @@ items:
           sort: 0
       identifier: hold-person
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4
+    flags: {}
     img: icons/magic/control/debuff-chains-ropes-purple.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.3Lo9boi7P2ro6QV4'
   - _id: JbxsYXxSOTZbf9I0
     name: Spiritual Weapon
@@ -1919,18 +1912,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.JbxsYXxSOTZbf9I0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!tYfQIxCJT0WaaKmc.JbxsYXxSOTZbf9I0'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1940,10 +1932,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171263677
   modifiedTime: 1726171451358
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!tYfQIxCJT0WaaKmc'

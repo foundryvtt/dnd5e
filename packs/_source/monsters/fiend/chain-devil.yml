@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 9SWi4zPVGsMD5l2Y
     name: Chain
@@ -716,12 +721,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745108091550
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!KtM6IV9I5l1MWUDk.9SWi4zPVGsMD5l2Y'
   - _id: c8fbl1Kc5O3GNTus
     name: Unnerving Mask
@@ -876,18 +882,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.uEYSTOkpfr0OkKrD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.uEYSTOkpfr0OkKrD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676721
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!KtM6IV9I5l1MWUDk.c8fbl1Kc5O3GNTus'
   - _id: FkvVIJjzEPFMgvsc
     name: Devil's Sight
@@ -927,12 +932,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KtM6IV9I5l1MWUDk.FkvVIJjzEPFMgvsc'
   - _id: ZZ4l35Sr34AL2Ett
     name: Magic Resistance
@@ -970,18 +976,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KtM6IV9I5l1MWUDk.ZZ4l35Sr34AL2Ett'
   - _id: AGKUD82KJZaMKVRt
     name: Multiattack
@@ -1072,18 +1077,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655842
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!KtM6IV9I5l1MWUDk.AGKUD82KJZaMKVRt'
   - _id: B9KJpn20n0tG4xit
     name: Animate Chains
@@ -1194,18 +1198,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.6ej6jlwh8ryDEzlB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.6ej6jlwh8ryDEzlB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676721
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!KtM6IV9I5l1MWUDk.B9KJpn20n0tG4xit'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1215,10 +1218,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171223453
   modifiedTime: 1744916249077
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!KtM6IV9I5l1MWUDk'

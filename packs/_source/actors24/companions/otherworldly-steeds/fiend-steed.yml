@@ -417,7 +417,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -473,6 +472,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Life Bond
     system:
@@ -522,12 +527,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159863
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbostFiend00000.phbaoiLifeBond00'
   - name: Otherworldly Slam
     system:
@@ -653,12 +659,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159863
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbostFiend00000.phbaoiOtherworld'
   - name: Fell Glare
     system:
@@ -794,12 +801,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.actors24.Actor.phbmobOtherworld.Item.phbaoiFellGlareF.ActiveEffect.mvCvu3ezA2FV5IeR
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: 1725984132195
           modifiedTime: 1725984132195
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!phbostFiend00000.phbaoiFellGlareF.TMhI7D143iHjrZgb
     folder: null
@@ -814,12 +822,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159863
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbostFiend00000.phbaoiFellGlareF'
 effects: []
 folder: l9ar6UzbvIRDyYmA
@@ -831,10 +840,11 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425917826
   modifiedTime: 1745256827936
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!phbostFiend00000'

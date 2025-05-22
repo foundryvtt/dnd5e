@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 0xdLfPJEHYwh8MIT
     name: Death Burst
@@ -592,18 +597,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.net3yBKQoxl8bZ4r
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.net3yBKQoxl8bZ4r
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676529
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8MD1vRBTcgSXXk3u.0xdLfPJEHYwh8MIT'
   - _id: rlA41r2MlaqmVjvf
     name: Ignited Illumination
@@ -696,18 +700,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Uvy7vla2EhYSfTl0
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Uvy7vla2EhYSfTl0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!8MD1vRBTcgSXXk3u.rlA41r2MlaqmVjvf'
   - _id: th3hfRWQ3PT9f3Gs
     name: Touch
@@ -927,12 +930,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107994238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8MD1vRBTcgSXXk3u.th3hfRWQ3PT9f3Gs'
 effects: []
 folder: IB448xVSBvtqitzs
@@ -942,10 +946,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171207472
   modifiedTime: 1745108041798
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!8MD1vRBTcgSXXk3u'

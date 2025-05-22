@@ -469,7 +469,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -481,6 +480,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: p7R5kkqAVQFKClRm
     name: Charge
@@ -662,18 +667,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676835
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!xple5bvGj42uGgdd.p7R5kkqAVQFKClRm'
   - _id: vJAkNKhTmRrz6Zoq
     name: Greataxe
@@ -827,18 +831,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.1Lxk6kmoRhG8qQ0u
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107554131
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!xple5bvGj42uGgdd.vJAkNKhTmRrz6Zoq'
   - _id: 3Fsct4zbAf7l47Lp
     name: Gore
@@ -995,12 +998,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107554131
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!xple5bvGj42uGgdd.3Fsct4zbAf7l47Lp'
 effects: []
 folder: FsvtTiIRh93utaoh
@@ -1010,10 +1014,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171265870
   modifiedTime: 1726171451835
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!xple5bvGj42uGgdd'

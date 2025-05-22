@@ -469,7 +469,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -481,6 +480,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: E5cmqIqRIwyTkhgp
     name: Bite
@@ -639,8 +644,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       dnd5e:
         riders:
           activity: []
@@ -648,12 +651,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745108166128
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!OBujQLLPSmlJiZnL.E5cmqIqRIwyTkhgp'
   - _id: ArxzPC3rsBztgUvI
     name: Claws
@@ -828,12 +832,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745108147352
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!OBujQLLPSmlJiZnL.ArxzPC3rsBztgUvI'
 effects: []
 folder: FsvtTiIRh93utaoh
@@ -843,10 +848,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171227997
   modifiedTime: 1745108154333
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!OBujQLLPSmlJiZnL'

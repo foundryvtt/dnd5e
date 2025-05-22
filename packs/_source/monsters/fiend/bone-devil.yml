@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: KjxsSFx9xv2HLtMX
     name: Claw
@@ -648,12 +653,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550536
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.KjxsSFx9xv2HLtMX'
   - _id: iFHGL8wlqBtZAdHr
     name: Sting
@@ -902,12 +908,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550536
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.iFHGL8wlqBtZAdHr'
   - _id: aj4Bg2H8CNydNhMB
     name: Devil Sight
@@ -943,18 +950,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.UjbgbOnd6ltjagZm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.UjbgbOnd6ltjagZm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.aj4Bg2H8CNydNhMB'
   - _id: hQXiIJrlHh2rb2k9
     name: Magic Resistance
@@ -992,18 +998,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.hQXiIJrlHh2rb2k9'
   - _id: sC1dqjfFZKnDmhec
     name: Multiattack
@@ -1095,18 +1100,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655459
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!AnseLn7HwuP97grf.sC1dqjfFZKnDmhec'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1116,10 +1120,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171210131
   modifiedTime: 1744916254420
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!AnseLn7HwuP97grf'

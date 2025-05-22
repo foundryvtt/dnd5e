@@ -470,7 +470,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -482,6 +481,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: gyAyLX9CJBbawmr3
     name: Lightning Absorption
@@ -521,18 +526,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KTsFgSQlDetDDm1f
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KTsFgSQlDetDDm1f
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!gGeLeV411iQ5Yijs.gyAyLX9CJBbawmr3'
   - _id: 2aGoBVVEF54VcC9d
     name: Multiattack
@@ -625,18 +629,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656670
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!gGeLeV411iQ5Yijs.2aGoBVVEF54VcC9d'
   - _id: N42BQALoCmeYphD1
     name: Engulf
@@ -751,18 +754,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Eh80lkzHiEOJP8FI
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Eh80lkzHiEOJP8FI
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676589
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!gGeLeV411iQ5Yijs.N42BQALoCmeYphD1'
   - _id: lOIA9YKQU8xSx7Lj
     name: Slam
@@ -919,12 +921,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552654
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!gGeLeV411iQ5Yijs.lOIA9YKQU8xSx7Lj'
 effects: []
 folder: KY8fajTNVVOIT8yT
@@ -934,10 +937,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171247535
   modifiedTime: 1726171447828
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!gGeLeV411iQ5Yijs'

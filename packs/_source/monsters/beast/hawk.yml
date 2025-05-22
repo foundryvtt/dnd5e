@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: hHbY6NAFUWVlz7tj
     name: Keen Sight
@@ -517,12 +522,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!fnkPNfIpS62LqOu4.hHbY6NAFUWVlz7tj'
   - _id: 0Di3cqTRD7ot8ZCa
     name: Talons
@@ -681,12 +687,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1744916838840
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!fnkPNfIpS62LqOu4.0Di3cqTRD7ot8ZCa'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -696,10 +703,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171246620
   modifiedTime: 1741122040112
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!fnkPNfIpS62LqOu4'

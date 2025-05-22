@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: iGge3BzjEfpSeaxP
     name: Bite
@@ -642,18 +647,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107554242
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zgWkII3VoE4AHCND.iGge3BzjEfpSeaxP'
   - _id: KVIjYSLZoYmdFwzS
     name: Fire Breath
@@ -772,18 +776,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745450195293
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!zgWkII3VoE4AHCND.KVIjYSLZoYmdFwzS'
 effects: []
 folder: PNekSR74iAZ5dJwZ
@@ -793,10 +796,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171267898
   modifiedTime: 1745450200055
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!zgWkII3VoE4AHCND'
