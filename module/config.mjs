@@ -3491,6 +3491,12 @@ DND5E.transformation = {
       label: "DND5E.TRANSFORM.Setting.Keep.Skills.Label",
       disables: ["merge.skills"]
     },
+    gearProf: {
+      label: "DND5E.TRANSFORM.Setting.Keep.GearProficiency.Label"
+    },
+    languages: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Languages.Label"
+    },
     class: {
       label: "DND5E.TRANSFORM.Setting.Keep.Proficiency.Label"
     },
@@ -3511,6 +3517,9 @@ DND5E.transformation = {
     },
     hp: {
       label: "DND5E.TRANSFORM.Setting.Keep.Health.Label"
+    },
+    resistances: {
+      label: "DND5E.TRANSFORM.Setting.Keep.Resistances.Label"
     },
     vision: {
       label: "DND5E.TRANSFORM.Setting.Keep.Vision.Label",
@@ -3539,7 +3548,7 @@ DND5E.transformation = {
       label: "DND5E.TRANSFORM.Preset.WildShape.Label",
       settings: {
         effects: new Set(["otherOrigin", "origin", "feat", "spell", "class", "background"]),
-        keep: new Set(["bio", "class", "feats", "hp", "mental", "type"]),
+        keep: new Set(["bio", "class", "feats", "hp", "languages", "mental", "type"]),
         merge: new Set(["saves", "skills"]),
         tempFormula: "max(@classes.druid.levels, @subclasses.moon.levels * 3)"
       }
