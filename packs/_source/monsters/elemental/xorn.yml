@@ -635,7 +635,7 @@ items:
       identifier: bite
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
@@ -646,7 +646,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107549835
+      modifiedTime: 1747955653942
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.ODAa1IROPs40MUI2'
@@ -798,7 +798,7 @@ items:
       identifier: claw
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags: {}
@@ -809,7 +809,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745107549835
+      modifiedTime: 1747955653942
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.LRjB7lk0aa4TOd16'
@@ -959,7 +959,7 @@ items:
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
-      modifiedTime: 1745273654960
+      modifiedTime: 1747955654714
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.kRGZU8eMwOBt3kVd'
@@ -970,8 +970,8 @@ items:
     system:
       description:
         value: >-
-          <p>The xorn has<strong> advantage </strong>on Dexterity (Stealth)
-          checks made to hide in rocky terrain.</p>
+          <p>The xorn has advantage on Dexterity (Stealth) checks made to hide
+          in rocky terrain.</p>
         chat: ''
       source:
         custom: ''
@@ -1005,10 +1005,10 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747955644495
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.ryNcNrIgtkYHRKWj'
   - _id: x6Hd2pSXy7TDwgjR
@@ -1019,8 +1019,7 @@ items:
       description:
         value: >-
           <p>The xorn can pinpoint, by scent, the location of precious metals
-          and stones, such as coins and gems, within <strong>60 ft.</strong> of
-          it.</p>
+          and stones, such as coins and gems, within 60 ft. of it.</p>
         chat: ''
       source:
         custom: ''
@@ -1054,10 +1053,10 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747955650390
+      lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!2MZNHeOZweXAYbv1.x6Hd2pSXy7TDwgjR'
 effects: []

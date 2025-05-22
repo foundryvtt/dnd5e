@@ -504,12 +504,9 @@ items:
         rules: '2014'
         revision: 1
       uses:
-        max: '1'
-        recovery:
-          - period: recharge
-            formula: '1'
-            type: recoverAll
-        spent: 1
+        max: ''
+        recovery: []
+        spent: null
       type:
         value: ''
         subtype: ''
@@ -522,7 +519,7 @@ items:
       identifier: innate-spellcasting
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
     flags: {}
@@ -531,9 +528,9 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745447015936
+      modifiedTime: 1747955507536
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oJCOB9X2BPsBkWW5.lAwQmCYEd9CtDdTb'
@@ -545,9 +542,9 @@ items:
       description:
         value: >-
           <p>When the mephit dies, it explodes in a burst of lava. Each creature
-          within 5 ft. of it must make a  <strong>DC 11 Dexterity</strong>
-          saving throw, taking <strong>7 (2d6) <em>fire damage</em></strong> on
-          a failed save, or half as much damage on a successful one.</p>
+          within 5 ft. of it must make a [[/save]] saving throw, taking
+          [[/damage average]] damage on a failed save, or half as much damage on
+          a successful one.</p>
         chat: >-
           <p>When the mephit dies, it explodes in a burst of lava. Each creature
           within 5 ft. of it must make a <strong>Dexterity</strong> saving
@@ -573,7 +570,7 @@ items:
           _id: dnd5eactivity000
           type: save
           activation:
-            type: special
+            type: ''
             value: null
             condition: death
             override: false
@@ -607,7 +604,7 @@ items:
               units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -619,24 +616,23 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 2
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
             ability: dex
             dc:
               calculation: ''
               formula: '11'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -646,15 +642,19 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags: {}
+    flags:
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.net3yBKQoxl8bZ4r
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676753
+      modifiedTime: 1747955322141
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oJCOB9X2BPsBkWW5.LpYrQPxHA10HPnkl'
@@ -893,9 +893,9 @@ items:
       description:
         value: >-
           <p>The mephit exhales a 15-foot cone of fire. Each creature in that
-          area must make a  <strong>DC 11 Dexterity</strong> saving throw,
-          taking <strong>7 (2d6) <em>fire damage</em></strong> on a failed save,
-          or half as much damage on a successful one.</p>
+          area must make a [[/save]] saving throw, taking [[/damage average]]
+          damage on a failed save, or half as much damage on a successful
+          one.</p>
         chat: >-
           <p>The mephit exhales a 15-foot cone of fire. Each creature in that
           area must make a <strong>Dexterity</strong> saving throw.</p>
@@ -1008,9 +1008,9 @@ items:
       duplicateSource: null
       coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676753
+      modifiedTime: 1747955340194
       lastModifiedBy: dnd5ebuilder0000
       exportSource: null
     _key: '!actors.items!oJCOB9X2BPsBkWW5.iXhbFt7gCj3FBM2r'
