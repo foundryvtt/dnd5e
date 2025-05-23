@@ -2133,7 +2133,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
     config = foundry.utils.mergeObject({
       type: "long", dialog: true, chat: true, newDay: true, advanceTime: false,
-      duration: CONFIG.DND5E.restTypes.long.duration[game.settings.get("dnd5e", "restVariant")], recoverTemp: true
+      duration: CONFIG.DND5E.restTypes.long.duration[game.settings.get("dnd5e", "restVariant")]
     }, config);
 
     /**
@@ -2188,8 +2188,7 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       updateData: {},
       updateItems: [],
       newDay: config.newDay === true,
-      rolls: [],
-      recoverTempMax: config.RecoverTempMaxHP === true
+      rolls: []
     }, result);
     result.clone ??= this.clone();
     if ( "dhp" in result ) result.deltas.hitPoints = result.dhp;

@@ -65,22 +65,6 @@ export default class BaseRestDialog extends Dialog5e {
   /* -------------------------------------------- */
 
   /**
-   * Should the user be prompted as to whether reset the actor's temporary max hit points?
-   * @returns {boolean}
-   */
-  get promptRecoverTempMaxHP() {
-    if (this.#config.type !== "long") return false;
-    if (this.actor.type==="group") {
-      const members = this.actor.system.members;
-      return members.some(member => member.actor.system.attributes.hp.tempmax !== 0);
-    }
-    return this.actor.system.attributes.hp.tempmax !== 0;
-  }
-
-  /* -------------------------------------------- */
-
-
-  /**
    * Was the rest button pressed?
    * @type {boolean}
    */
@@ -101,6 +85,7 @@ export default class BaseRestDialog extends Dialog5e {
       actor: this.actor,
       config: this.config,
       fields: [],
+      hitPoints: [],
       result: this.result,
       hd: this.actor.system.attributes?.hd,
       hp: this.actor.system.attributes?.hp,
@@ -116,16 +101,25 @@ export default class BaseRestDialog extends Dialog5e {
       name: "newDay",
       value: context.config.newDay
     });
-    if(this.promptRecoverTempMaxHP) context.fields.push({
+
+    const rest = CONFIG.DND5E.restTypes[this.config.type];
+    if ( "recoverTemp" in rest ) context.hitPoints.push({
+      field: new BooleanField({
+        label: game.i18n.localize("DND5E.REST.RecoverTempHP.Label")
+      }),
+      input: context.inputs.createCheckboxInput,
+      name: "recoverTemp",
+      value: rest.recoverTemp
+    });
+    if ( "recoverTempMax" in rest ) context.hitPoints.push({
       field: new BooleanField({
         label: game.i18n.localize("DND5E.REST.RecoverTempMaxHP.Label"),
         hint: game.i18n.localize("DND5E.REST.RecoverTempMaxHP.Hint")
       }),
       input: context.inputs.createCheckboxInput,
       name: "recoverTempMax",
-      value: true
+      value: rest.recoverTempMax
     });
-
 
     return context;
   }
