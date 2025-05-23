@@ -4446,13 +4446,6 @@ DND5E.characterFlags = {
     section: "DND5E.RacialTraits",
     type: Boolean
   },
-  initiativeAdv: {
-    name: "DND5E.FlagsInitiativeAdv",
-    hint: "DND5E.FlagsInitiativeAdvHint",
-    section: "DND5E.Feats",
-    type: Boolean,
-    deprecated: true
-  },
   initiativeAlert: {
     name: "DND5E.FlagsAlert",
     hint: "DND5E.FlagsAlertHint",

@@ -37,9 +37,9 @@ img: icons/creatures/mammals/wolf-howl-moon-forest-blue.webp
 effects:
   - _id: q7TkJQX7PeVOzTQH
     changes:
-      - key: flags.dnd5e.initiativeAdv
-        mode: 5
-        value: 'true'
+      - key: system.attributes.init.roll.mode
+        mode: 2
+        value: '1'
         priority: null
     disabled: false
     duration:
