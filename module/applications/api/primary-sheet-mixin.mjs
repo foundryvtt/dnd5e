@@ -310,6 +310,15 @@ export default function PrimarySheetMixin(Base) {
       // Add event listeners
       this.element.querySelectorAll(".item-tooltip").forEach(this._applyItemTooltips.bind(this));
 
+      // Prevent inputs from firing drag listeners.
+      this.element.querySelectorAll(".draggable input").forEach(el => {
+        el.draggable = true;
+        el.ondragstart = event => {
+          event.preventDefault();
+          event.stopPropagation();
+        };
+      });
+
       if ( this.isEditable ) {
         // Automatically select input contents when focused
         this.element.querySelectorAll("input").forEach(e => e.addEventListener("focus", e.select));
