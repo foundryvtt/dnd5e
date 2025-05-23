@@ -1820,7 +1820,7 @@ export default class BaseActorSheet extends PrimarySheetMixin(
    */
   _onDropResetData(event, itemData) {
     if ( !itemData.system ) return;
-    ["attuned", "equipped", "prepared"].forEach(k => delete itemData.system[k]);
+    ["attuned", "equipped", "preparation.prepared"].forEach(k => foundry.utils.deleteProperty(itemData.system, k));
   }
 
   /* -------------------------------------------- */
