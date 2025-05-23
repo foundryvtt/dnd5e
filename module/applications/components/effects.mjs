@@ -7,6 +7,7 @@ import ContextMenu5e from "../context-menu.mjs";
  */
 export default class EffectsElement extends HTMLElement {
   connectedCallback() {
+    if ( this.#app ) return;
     this.#app = foundry.applications.instances.get(this.closest(".application")?.id)
       ?? ui.windows[this.closest(".app")?.dataset.appid];
 
