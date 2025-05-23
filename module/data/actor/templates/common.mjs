@@ -1,6 +1,6 @@
 import Proficiency from "../../../documents/actor/proficiency.mjs";
 import { simplifyBonus } from "../../../utils.mjs";
-import { ActorDataModel } from "../../abstract.mjs";
+import ActorDataModel from "../../abstract/actor-data-model.mjs";
 import FormulaField from "../../fields/formula-field.mjs";
 import MappingField from "../../fields/mapping-field.mjs";
 import CurrencyTemplate from "../../shared/currency.mjs";
