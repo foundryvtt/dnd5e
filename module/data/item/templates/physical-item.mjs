@@ -1,5 +1,5 @@
 import { convertWeight, defaultUnits } from "../../../utils.mjs";
-import SystemDataModel from "../../abstract.mjs";
+import SystemDataModel from "../../abstract/system-data-model.mjs";
 
 const { ForeignDocumentField, NumberField, SchemaField, StringField } = foundry.data.fields;
 

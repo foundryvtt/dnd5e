@@ -1,5 +1,5 @@
 import TokenPlacement from "../../canvas/token-placement.mjs";
-import { ActorDataModel } from "../abstract.mjs";
+import ActorDataModel from "../abstract/actor-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
 import GroupSystemFlags from "./group-system-flags.mjs";
