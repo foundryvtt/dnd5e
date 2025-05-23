@@ -1,12 +1,12 @@
-![Up to date as of 4.1.0](https://img.shields.io/static/v1?label=dnd5e&message=4.1.0&color=informational)
+![Up to date as of 5.0.0](https://img.shields.io/static/v1?label=dnd5e&message=5.0.0&color=informational)
 
 ## Rolling Process
 
 The rolling process includes a number of standard hooks that are called by most rolls performed by the system.
 
-### `dnd5e.preRollV2`
+### `dnd5e.preRoll`
 
-A hook event that fires before a roll is performed. Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.preRollSkillV2`, `dnd5e.preRollAbilityCheckV2`, `dnd5e.preRollV2`). Exact contents of the configuration object will also change based on the roll type, but the same objects will always be present. Returning `false` will prevent the normal rolling process.
+A hook event that fires before a roll is performed. Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.preRollSkill`, `dnd5e.preRollAbilityCheck`, `dnd5e.preRoll`). Exact contents of the configuration object will also change based on the roll type, but the same objects will always be present. Returning `false` will prevent the normal rolling process.
 
 | Name    | Type                           | Description                             |
 | ------- | ------------------------------ | --------------------------------------- |
@@ -25,11 +25,35 @@ A hook event that fires after roll configuration is complete, but before the rol
 | dialog  | BasicRollDialogConfiguration   | Configuration for the roll dialog.                  |
 | message | BasicRollMessageConfiguration  | Configuration for the roll message.                 |
 
+### `dnd5e.buildRollConfig`
+
+A hook event that fires when a roll config is built using the roll prompt. Multiple hooks may be called depending on the rolling method (e.g. `dnd5e.buildSkillRollConfig`, `dnd5e.buildAbilityCheckRollConfig`, `dnd5e.buildRollConfig`).
+
+| Name     | Type                           | Description                                         |
+| -------- | ------------------------------ | --------------------------------------------------- |
+| app      | RollConfigurationDialog        | Roll configuration dialog.                          |
+| config   | BasicRollConfiguration         | Roll configuration data.                            |
+| formData | [FormDataExtended]             | Any data entered into the rolling prompt.           |
+| index    | number                         | Index of the roll within all rolls being prepared.  |
+
+### `dnd5e.postBuildRollConfiguration`
+
+A hook event that fires after a roll config has been built using the roll prompt. Multiple hooks may be called  depending on the rolling method (e.g. `dnd5e.postBuildSkillRollConfig`, `dnd5e.postBuildAbilityCheckRollConfig`, `dnd5e.postBuildRollConfig`).
+
+| Name             | Type                           | Description                                         |
+| ---------------- | ------------------------------ | --------------------------------------------------- |
+| process          | BasicRollProcessConfiguration  | Full process configuration data.                    |
+| config           | BasicRollConfiguration         | Roll configuration data.                            |
+| index            | number                         | Index of the roll within all rolls being prepared.  |
+| options          | [object]                       |                                                     |
+| options.app      | [RollConfigurationDialog]      | Roll configuration dialog.                          |
+| options.formData | [FormDataExtended]             | Any data entered into the rolling prompt.           |
+
 ## Actor
 
 ### `dnd5e.preRollAbilityCheck` & `dnd5e.preRollSavingThrow`
 
-See `dnd5e.preRollV2` for more details. Passes `AbilityRollProcessConfiguration` for the `config` parameter.
+See `dnd5e.preRoll` for more details. Passes `AbilityRollProcessConfiguration` for the `config` parameter.
 
 ### `dnd5e.rollAbilityCheck` & `dnd5e.rollSavingThrow`
 
@@ -41,46 +65,6 @@ A hook event that fires after an ability check or save has been rolled.
 | data          | object    |                                                                           |
 | data.ability  | string    | ID of the ability that was rolled as defined in `CONFIG.DND5E.abilities`. |
 | data.subject  | Actor5e   | Actor for which the hit die has been rolled.                              |
-
-### `dnd5e.preRollAbilityTest` ***Deprecated***
-
-Fires before an ability test is rolled. Returning `false` will prevent the normal rolling process.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the ability test is being rolled. |
-| config | D20RollConfiguration | Configuration data for the pending roll. |
-| abilityId | string | ID of the ability being rolled as defined in `DND5E.abilities`. |
-
-### `dnd5e.rollAbilityTest` ***Deprecated***
-
-Fires after an ability test has been rolled.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the ability test has been rolled. |
-| roll | D20Roll | The resulting roll. |
-| abilityId | string | ID of the ability being rolled as defined in `DND5E.abilities`. |
-
-### `dnd5e.preRollAbilitySave` ***Deprecated***
-
-Fires before an ability save is rolled. Returning `false` will prevent the normal rolling process.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the ability save is being rolled. |
-| config | D20RollConfiguration | Configuration data for the pending roll. |
-| abilityId | string | ID of the ability being rolled as defined in `DND5E.abilities`. |
-
-### `dnd5e.rollAbilitySave` ***Deprecated***
-
-Fires after an ability save has been rolled.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the ability save has been rolled. |
-| roll | D20Roll | The resulting roll. |
-| abilityId | string | ID of the ability that was rolled as defined in `DND5E.abilities`. |
 
 ### `dnd5e.preBeginConcentrating`
 
@@ -122,20 +106,11 @@ Fires after a concentration effect is deleted.
 | actor  | Actor5e        | The actor ending concentration.    |
 | effect | ActiveEffect5e | The ActiveEffect that was deleted. |
 
-### `dnd5e.preRollConcentrationV2`
+### `dnd5e.preRollConcentration`
 
-See `dnd5e.preRollV2` for more details. Passes `D20RollProcessConfiguration` for the `config` parameter.
+See `dnd5e.preRoll` for more details. Passes `D20RollProcessConfiguration` for the `config` parameter.
 
-### `dnd5e.preRollConcentration` ***Deprecated***
-
-Fires before a saving throw to maintain concentration is rolled. Returning `false` will prevent the normal rolling process.
-
-| Name    | Type                 | Description                                       |
-| ------- | -------------------- | ------------------------------------------------- |
-| actor   | Actor5e              | Actor for which the saving throw is being rolled. |
-| options | D20RollConfiguration | Configuration data for the pending roll.          |
-
-### `dnd5e.rollConcentrationV2`
+### `dnd5e.rollConcentration`
 
 A hook event that fires after a saving throw to maintain concentration is rolled for an Actor.
 
@@ -144,15 +119,6 @@ A hook event that fires after a saving throw to maintain concentration is rolled
 | rolls              | D20Roll[] | The resulting rolls.                                    |
 | data               | object    |                                                         |
 | data.subject       | Actor5e   | Actor for which the concentration save has been rolled. |
-
-### `dnd5e.rollConcentration` ***Deprecated***
-
-Fires after a saving throw to maintain concentration is rolled.
-
-| Name  | Type    | Description                                       |
-| ----- | ------- | ------------------------------------------------- |
-| actor | Actor5e | Actor for which the saving throw has been rolled. |
-| roll  | D20Roll | The resulting roll.                               |
 
 ### `dnd5e.preCalculateDamage`
 
@@ -195,20 +161,11 @@ Fires after damage has been applied to an actor.
 | amount  | number                   | Amount of damage that has been applied. |
 | options | DamageApplicationOptions | Additional damage application options.  |
 
-### `dnd5e.preRollDeathSaveV2`
+### `dnd5e.preRollDeathSave`
 
-See `dnd5e.preRollV2` for more details. Passes `D20RollProcessConfiguration` for the `config` parameter.
+See `dnd5e.preRoll` for more details. Passes `D20RollProcessConfiguration` for the `config` parameter.
 
-### `dnd5e.preRollDeathSave` ***Deprecated***
-
-Fires before a death saving throw is rolled. Returning `false` will prevent the normal rolling process.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the death saving throw is being rolled. |
-| config | D20RollConfiguration | Configuration data for the pending roll. |
-
-### `dnd5e.rollDeathSaveV2`
+### `dnd5e.rollDeathSave`
 
 A hook event that fires after a death saving throw has been rolled for an Actor, but before updates have been performed. Return `false` to prevent updates from being performed.
 
@@ -219,18 +176,6 @@ A hook event that fires after a death saving throw has been rolled for an Actor,
 | data.chatString | string    | Localizable string displayed in the create chat message. If not set, then no chat message will be displayed. |
 | data.updates    | object    | Updates that will be applied to the actor as a result of this save. |
 | data.subject    | Actor5e   | Actor for which the death saving throw has been rolled.             |
-
-### `dnd5e.rollDeathSave` ***Deprecated***
-
-Fires after a death saving throw has been rolled, but before updates have been performed.  Returning `false` will prevent updates from being performed.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the death saving throw has been rolled. |
-| roll | D20Roll | The resulting roll. |
-| details | object |  |
-| details.updates | object | Updates that will be applied to the actor as a result of this save. |
-| details.chatString | string | Localizable string displayed in the create chat message. If not set, then no chat message will be displayed. |
 
 ### `dnd5e.postRollDeathSave`
 
@@ -243,11 +188,11 @@ A hook event that fires after a death saving throw has been rolled and after cha
 | data.message  | ChatMessage5e|void  | The created results chat message.                        |
 | data.subject  | Actor5e             | Actor for which the death saving throw has been rolled.  |
 
-### `dnd5e.preRollSkillV2` & `dnd5e.preRollToolCheckV2`
+### `dnd5e.preRollSkill` & `dnd5e.preRollToolCheck`
 
-See `dnd5e.preRollV2` for more details. Passes `SkillToolRollProcessConfiguration` for the `config` parameter and `SkillToolRollDialogConfiguration` for the `dialog` parameter.
+See `dnd5e.preRoll` for more details. Passes `SkillToolRollProcessConfiguration` for the `config` parameter and `SkillToolRollDialogConfiguration` for the `dialog` parameter.
 
-### `dnd5e.rollSkillV2` & `dnd5e.rollToolCheckV2`
+### `dnd5e.rollSkill` & `dnd5e.rollToolCheck`
 
 A hook event that fires after an skill or tool check has been rolled.
 
@@ -259,61 +204,11 @@ A hook event that fires after an skill or tool check has been rolled.
 | data.tool     | [string]  | ID of the tool that was rolled as defined in `CONFIG.DND5E.tools`.   |
 | data.subject  | Actor5e   | Actor for which the hit die has been rolled.                         |
 
-### `dnd5e.preRollSkill` ***Deprecated***
+### `dnd5e.preRollHitDie`
 
-Fires before a skill check is rolled. Returning `false` will prevent the normal rolling process.
+See `dnd5e.preRoll` for more details. Passes `HitDieRollProcessConfiguration` for the `config` parameter.
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the skill check is being rolled. |
-| config | D20RollConfiguration | Configuration data for the pending roll. |
-| skillId | string | ID of the skill being rolled as defined in `DND5E.skills`. |
-
-### `dnd5e.rollSkill` ***Deprecated***
-
-Fires after a skill check has been rolled.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the skill check has been rolled. |
-| roll | D20Roll | The resulting roll. |
-| skillId | string | ID of the skill that was rolled as defined in `DND5E.skills`. |
-
-### `dnd5e.preRollToolCheck` ***Deprecated***
-
-Fires before a tool check is rolled for an Actor. Returning `false` will prevent the tool check from being rolled.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the tool check is being rolled. |
-| config | D20RollConfiguration | Configuration data for the pending roll. |
-| toolId | string | ID of the tool being rolled as defined in `DND5E.toolIds`. |
-
-### `dnd5e.rollToolCheck` ***Deprecated***
-
-Fires after a tool check has been rolled for an Actor.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the tool check has been rolled. |
-| roll | D20Roll | The resulting roll. |
-| toolId | string | ID of the tool that was rolled as defined in `DND5E.toolIds`. |
-
-### `dnd5e.preRollHitDieV2`
-
-See `dnd5e.preRollV2` for more details. Passes `HitDieRollProcessConfiguration` for the `config` parameter.
-
-### `dnd5e.preRollHitDie` ***Deprecated***
-
-Fires before a hit die is rolled. Returning `false` will prevent the normal rolling process.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the hit die is to be rolled. |
-| config | DamageRollConfiguration | Configuration data for the pending roll. |
-| denomination | string | Size of hit die to be rolled. |
-
-### `dnd5e.rollHitDieV2`
+### `dnd5e.rollHitDie`
 
 Fires after a hit die has been rolled, but before updates have been applied. Returning `false` will prevent updates from being performed.
 
@@ -326,64 +221,52 @@ Fires after a hit die has been rolled, but before updates have been applied. Ret
 | data.updates.actor | object      | Updates that will be applied to the actor.   |
 | data.updates.class | object      | Updates that will be applied to the class.   |
 
-### `dnd5e.rollHitDie` ***Deprecated***
-
-Fires after a hit die has been rolled, but before updates have been applied. Returning `false` will prevent updates from being performed.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the hit die has been rolled. |
-| roll | DamageRoll | The resulting roll. |
-| updates | object |  |
-| updates.actor | object | Updates that will be applied to the actor. |
-| updates.class | object | Updates that will be applied to the class. |
-
 ### `dnd5e.preRollClassHitPoints`
 
 Fires before hit points are rolled for a character's class.
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the hit points are being rolled. |
-| item | Item5e | The class item whose hit dice will be rolled. |
-| rollData | object |  |
-| rollData.formula | string | The string formula to parse. |
-| rollData.data | object | The data object against which to parse attributes within the formula. |
-| messageData | object | The data object to use when creating the message. |
+| Name             | Type    | Description                                                           |
+| ---------------- | ------- | --------------------------------------------------------------------- |
+| actor            | Actor5e | Actor for which the hit points are being rolled.                      |
+| item             | Item5e  | The class item whose hit dice will be rolled.                         |
+| rollData         | object  |                                                                       |
+| rollData.formula | string  | The string formula to parse.                                          |
+| rollData.data    | object  | The data object against which to parse attributes within the formula. |
+| messageData      | object  | The data object to use when creating the message.                     |
 
 ### `dnd5e.rollClassHitPoints`
 
 Fires after hit points haven been rolled for a character's class.
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name  | Type    | Description                                      |
+| ----- | ------- | ------------------------------------------------ |
 | actor | Actor5e | Actor for which the hit points have been rolled. |
-| roll | Roll | The resulting roll. |
+| roll  | Roll    | The resulting roll.                              |
 
 ### `dnd5e.preRollNPCHitPoints`
 
 Fires before hit points are rolled for an NPC.
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| actor | Actor5e | Actor for which the hit points are being rolled. |
-| rollData | object |  |
-| rollData.formula | string | The string formula to parse. |
-| rollData.data | object | The data object against which to parse attributes within the formula. |
-| messageData | object | The data object to use when creating the message. |
+| Name             | Type    | Description                                                           |
+| ---------------- | ------- | --------------------------------------------------------------------- |
+| actor            | Actor5e | Actor for which the hit points are being rolled.                      |
+| rollData         | object  |                                                                       |
+| rollData.formula | string  | The string formula to parse.                                          |
+| rollData.data    | object  | The data object against which to parse attributes within the formula. |
+| messageData      | object  | The data object to use when creating the message.                     |
 
 ### `dnd5e.rollNPChitPoints`
 
 Fires after hit points are rolled for an NPC.
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name  | Type    | Description                                      |
+| ----- | ------- | ------------------------------------------------ |
 | actor | Actor5e | Actor for which the hit points have been rolled. |
-| roll | Roll | The resulting roll. |
+| roll  | Roll    | The resulting roll.                              |
 
 ### `dnd5e.preRollInitiativeDialog`
 
-See `dnd5e.preRollV2` for more details. Is only called when rolling initiative using the initiative dialog, not directly through the combat tracker.
+See `dnd5e.preRoll` for more details. Is only called when rolling initiative using the initiative dialog, not directly through the combat tracker.
 
 ### `dnd5e.preRollInitiative`
 
@@ -450,7 +333,19 @@ Fires when the rest process is completed for a group.
 | group  | Actor5e                  | The group that just completed resting. |
 | result | Map<Actor5e, RestResult> | Details on the rests completed.        |
 
-### `dnd5e.transformActor`
+### `dnd5e.transformActorV2`
+
+A hook event that fires just before the actor is transformed.
+
+| Name     | Type                   | Description                                                     |
+| -------- | ---------------------- | --------------------------------------------------------------- |
+| host     | Actor5e                | The original actor before transformation.                       |
+| source   | Actor5e                | The source actor into which to transform.                       |
+| data     | object                 | The data that will be used to create the new transformed actor. |
+| settings | TransformationSettings | Settings that determine how the transformation is performed.    |
+| options  | object                 | Rendering options passed to the actor creation.                 |
+
+### `dnd5e.transformActor` **Deprecated**
 
 Fires just before a new actor is created during the transform process.
 
@@ -489,26 +384,26 @@ Fires to convert the provided spellcasting progression into spell slots. A diffe
 
 Fires when an `AdvancementManager` is about to be processed. Returning `false` will prevent the normal rendering process.
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name               | Type               | Description                                   |
+| ------------------ | ------------------ | --------------------------------------------- |
 | advancementManager | AdvancementManager | The advancement manager about to be rendered. |
 
 ### `dnd5e.preAdvancementManagerComplete`
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| advancementManager | AdvancementManager | The advancement manager. |
-| actorUpdates | object | Updates to the actor. |
-| toCreate | object[] | Items that will be created on the actor. |
-| toUpdate | object[] | Items that will be updated on the actor. |
-| toDelete | string[] | IDs of items that will be deleted on the actor. |
+| Name               | Type               | Description                                     |
+| ------------------ | ------------------ | ----------------------------------------------- |
+| advancementManager | AdvancementManager | The advancement manager.                        |
+| actorUpdates       | object             | Updates to the actor.                           |
+| toCreate           | object[]           | Items that will be created on the actor.        |
+| toUpdate           | object[]           | Items that will be updated on the actor.        |
+| toDelete           | string[]           | IDs of items that will be deleted on the actor. |
 
 ### `dnd5e.advancementManagerComplete`
 
 Fires when an `AdvancementManager` is done modifying an actor.
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name               | Type               | Description                                   |
+| ------------------ | ------------------ | --------------------------------------------- |
 | advancementManager | AdvancementManager | The advancement manager that just completed. |
 
 ### Document Modification Context
@@ -646,11 +541,11 @@ Fires after a template are created for an Activity.
 | activity  | Activity          | Activity for which the template is being placed. |
 | templates | AbilityTemplate[] | The templates being placed.                      |
 
-### `dnd5e.preRollAttackV2`
+### `dnd5e.preRollAttack`
 
-See `dnd5e.preRollV2` for more details. Passes `AttackRollProcessConfiguration` for the `config` parameter and `AttackRollDialogConfiguration` for the `dialog` parameter.
+See `dnd5e.preRoll` for more details. Passes `AttackRollProcessConfiguration` for the `config` parameter and `AttackRollDialogConfiguration` for the `dialog` parameter.
 
-### `dnd5e.rollAttackV2`
+### `dnd5e.rollAttack`
 
 Fires after an attack has been rolled but before any ammunition is consumed.
 
@@ -671,11 +566,11 @@ Fires after an attack has been rolled and ammunition has been consumed.
 | data         | object                 |                                         |
 | data.subject | AttackActivity         | The activity that performed the attack. |
 
-### `dnd5e.preRollDamageV2`
+### `dnd5e.preRollDamage`
 
-See `dnd5e.preRollV2` for more details. Passes `DamageRollProcessConfiguration` for the `config` parameter.
+See `dnd5e.preRoll` for more details. Passes `DamageRollProcessConfiguration` for the `config` parameter.
 
-### `dnd5e.rollDamageV2`
+### `dnd5e.rollDamage`
 
 Fires after damage has been rolled.
 
@@ -685,7 +580,7 @@ Fires after damage has been rolled.
 | data         | object       |                                       |
 | data.subject | Activity     | The activity that performed the roll. |
 
-### `dnd5e.preRollFormulaV2`
+### `dnd5e.preRollFormula`
 
 Fires before a formula is rolled for a Utility activity. Returning `false` will prevent the formula from being rolled.
 
@@ -695,7 +590,7 @@ Fires before a formula is rolled for a Utility activity. Returning `false` will 
 | dialog  | BasicRollDialogConfiguration  | Configuration for the roll dialog.         |
 | message | BasicRollMessageConfiguration | Configuration data for the roll's message. |
 
-### `dnd5e.rollFormulaV2`
+### `dnd5e.rollFormula`
 
 Fires after a formula has been rolled for a Utility activity.
 
@@ -751,59 +646,7 @@ Fires when summoning is complete.
 
 ## Items
 
-### `dnd5e.preUseItem` ***Deprecated***
-
-Fires before an item usage is configured. Returning `false` will prevent item from being used.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item being used. |
-| config | ItemUseConfiguration | Configuration data for the item usage being prepared. |
-| options | ItemUseOptions | Additional options used for configuring item usage. |
-
-### `dnd5e.preCreateItemTemplate` ***Deprecated***
-
-Fires before a template is created for an Item. Returning `false` will prevent template from being created.
-
-| Name         | Type   | Description                                  |
-| ------------ | ------ | -------------------------------------------- |
-| item         | Item5e | Item for which the template is being placed. |
-| templateData | object | Data used to create the new template.        |
-
-### `dnd5e.createItemTemplate` ***Deprecated***
-
-Fires after a template is created for an Item.
-
-| Name     | Type            | Description                                  |
-| -------- | --------------- | -------------------------------------------- |
-| item     | Item5e          | Item for which the template is being placed. |
-| template | AbilityTemplate | The template being placed.                   |
-
-### `dnd5e.preItemUsageConsumption` ***Deprecated***
-
-Fires before an item's resource consumption has been calculated. Returning `false` will prevent item from being used.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item being used. |
-| config | ItemUseConfiguration | Configuration data for the item usage being prepared. |
-| options | ItemUseOptions | Additional options used for configuring item usage. |
-
-### `dnd5e.itemUsageConsumption` ***Deprecated***
-
-Fires after an item's resource consumption has been calculated but before any changes have been made. Returning `false` will prevent item from being used.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item being used. |
-| config | ItemUseConfiguration | Configuration data for the item usage being prepared. |
-| options | ItemUseOptions | Additional options used for configuring item usage. |
-| usage | object |  |
-| usage.actorUpdates | object | Updates that will be applied to the actor. |
-| usage.itemUpdates | object | Updates that will be applied to the item being used. |
-| usage.resourceUpdates | object[] | Updates that will be applied to other items on the actor. |
-
-### `dnd5e.preDisplayCardV2`
+### `dnd5e.preDisplayCard`
 
 Fires before an item chat card is created. Returning `false` will prevent chat card from being created.
 
@@ -811,16 +654,6 @@ Fires before an item chat card is created. Returning `false` will prevent chat c
 | ------- | ---------------------------- | ------------------------------------------------ |
 | item    | Item5e                       | Item for which the chat card is being displayed. |
 | message | ActivityMessageConfiguration | Data used to create the chat message.            |
-
-### `dnd5e.preDisplayCard` ***Deprecated***
-
-Fires before an item chat card is created.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item for which the chat card is being displayed. |
-| chatData | object | Data used to create the chat message. |
-| options | ItemUseOptions | Options which configure the display of the item chat card. |
 
 ### `dnd5e.displayCard`
 
@@ -831,74 +664,7 @@ Fires after an item chat card is created.
 | item | Item5e              | Item for which the chat card is being displayed.       |
 | card | ChatMessage\|object | The created ChatMessage instance or ChatMessageData depending on whether options.createMessage was set to `true`. |
 
-### `dnd5e.useItem` ***Deprecated***
-
-Fires when an item is used, after the measured template has been created if one is needed.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item being used. |
-| config | ItemUseConfiguration | Configuration data for the roll. |
-| options | ItemUseOptions | Additional options for configuring item usage. |
-
-### `dnd5e.preRollAttack` ***Deprecated***
-
-Fires before an attack is rolled for an Item. Returning `false` will prevent the attack from being rolled.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item for which the roll is being performed. |
-| config | D20RollConfiguration | Configuration data for the pending roll. |
-
-### `dnd5e.rollAttack` ***Deprecated***
-
-Fires after an attack has been rolled for an Item.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item for which the roll was performed. |
-| roll | D20Roll | The resulting roll. |
-
-### `dnd5e.preRollDamage` ***Deprecated***
-
-Fires before a damage is rolled for an Item.  Returning `false` will prevent the damage from being rolled.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item for which the roll is being performed. |
-| config | DamageRollConfiguration | Configuration data for the pending roll. |
-
-### `dnd5e.rollDamage` ***Deprecated***
-
-Fires after a damage has been rolled for an Item.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item for which the roll was performed. |
-| roll | DamageRoll | The resulting roll. |
-
-### `dnd5e.preRollFormula` ***Deprecated***
-
-Fires before the other formula is rolled for an Item. Returning `false` will prevent the formula from being rolled.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item for which the roll is being performed. |
-| config | object | Configuration data for the pending roll. |
-| config.formula | string | Formula that will be rolled. |
-| config.data | object | Data used when evaluating the roll. |
-| config.chatMessage | boolean | Should a chat message be created for this roll? |
-
-### `dnd5e.rollFormula` ***Deprecated***
-
-Fires after the other formula has been rolled for an Item.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item for which the roll was performed. |
-| roll | Roll | The resulting roll. |
-
-### `dnd5e.preRollRechargeV2`
+### `dnd5e.preRollRecharge`
 
 Fires before recharge is rolled for an Item or Activity. Returning `false` will prevent the recharge from being rolled.
 
@@ -908,20 +674,7 @@ Fires before recharge is rolled for an Item or Activity. Returning `false` will 
 | dialog  | BasicRollDialogConfiguration  | Configuration for the roll dialog.         |
 | message | BasicRollMessageConfiguration | Configuration data for the roll's message. |
 
-### `dnd5e.preRollRecharge` ***Deprecated***
-
-Fires before the Item is rolled to recharge. Returning `false` will prevent the recharge from being rolled.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item for which the roll is being performed. |
-| config | object | Configuration data for the pending roll. |
-| config.formula | string | Formula that will be used to roll the recharge. |
-| config.data | object | Data used when evaluating the roll.|
-| config.target | number | Total required to be considered recharged. |
-| config.chatMessage | boolean | Should a chat message be created for this roll? |
-
-### `dnd5e.rollRechargeV2`
+### `dnd5e.rollRecharge`
 
 Fires after the Item has rolled to recharge, but before any changes have been performed. Returning `false` will prevent the changes from being performed.
 
@@ -931,15 +684,6 @@ Fires after the Item has rolled to recharge, but before any changes have been pe
 | data         | object           |                                               |
 | data.subject | Item5e\|Activity | The item or activity that performed the roll. |
 | data.updates | object           | Updates to be applied to the subject.         |
-
-### `dnd5e.rollRecharge` ***Deprecated***
-
-Fires after the Item has rolled to recharge, but before any changes have been performed. Returning `false` will prevent the changes from being performed.
-
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e | Item for which the roll was performed. |
-| roll | Roll | The resulting roll. |
 
 ### `dnd5e.preCreateScrollFromSpell`
 
@@ -954,10 +698,10 @@ Fires before the item data for a scroll is created. Returning `false` will preve
 
 Fires after the item data for a scroll is created but before the item is returned.
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| item | Item5e\|object | The spell or item data to be made into a scroll. |
-| spellScrollData | object | The final item data used to make the scroll. |
+| Name            | Type           | Description                                      |
+| --------------- | -------------- | ------------------------------------------------ |
+| item            | Item5e\|object | The spell or item data to be made into a scroll. |
+| spellScrollData | object         | The final item data used to make the scroll.     |
 
 ## Item Sheet
 
