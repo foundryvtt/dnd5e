@@ -195,6 +195,9 @@ export default class DamageRoll extends BasicRoll {
   configureDamage({ critical={} }={}) {
     critical = foundry.utils.mergeObject(critical, this.options.critical ?? {}, { inplace: false });
 
+    // Remove previous critical bonus damage
+    this.terms = this.terms.filter(t => !t.options.criticalBonusDamage && !t.options.criticalFlatBonus);
+
     const flatBonus = new Map();
     for ( let [i, term] of this.terms.entries() ) {
       // Multiply dice terms
@@ -227,11 +230,8 @@ export default class DamageRoll extends BasicRoll {
       }
 
       else if ( term instanceof NumericTerm ) {
-        // Remove previous flat critical bonuses
-        if ( term.options.criticalFlatBonus ) this.terms.splice(i - 1, 2);
-
         // Multiply numeric terms
-        else if ( critical.multiplyNumeric ) {
+        if ( critical.multiplyNumeric ) {
           term.options.baseNumber = term.options.baseNumber ?? term.number; // Reset back
           term.number = term.options.baseNumber;
           if ( this.isCritical ) {
@@ -245,16 +245,17 @@ export default class DamageRoll extends BasicRoll {
     // Add powerful critical bonus
     if ( critical.powerfulCritical && flatBonus.size ) {
       for ( const [type, number] of flatBonus.entries() ) {
-        this.terms.push(new OperatorTerm({ operator: "+" }));
-        this.terms.push(new NumericTerm({number, options: { flavor: type, criticalFlatBonus: true }}));
+        this.terms.push(new OperatorTerm({ operator: "+", options: { criticalFlatBonus: true } }));
+        this.terms.push(new NumericTerm({ number, options: { flavor: type, criticalFlatBonus: true } }));
       }
     }
 
     // Add extra critical damage term
     if ( this.isCritical && critical.bonusDamage ) {
-      const extra = new Roll(critical.bonusDamage, this.data);
-      if ( !(extra.terms[0] instanceof OperatorTerm) ) this.terms.push(new OperatorTerm({operator: "+"}));
-      this.terms.push(...extra.terms);
+      let extraTerms = new Roll(critical.bonusDamage, this.data).terms;
+      if ( !(extraTerms[0] instanceof OperatorTerm) ) extraTerms.unshift(new OperatorTerm({ operator: "+" }));
+      extraTerms.forEach(t => t.options.criticalBonusDamage = true);
+      this.terms.push(...extraTerms);
     }
 
     // Re-compile the underlying formula
