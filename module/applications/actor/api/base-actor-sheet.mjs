@@ -359,8 +359,10 @@ export default class BaseActorSheet extends PrimarySheetMixin(
       else if ( config.type === Number ) flag.field = new NumberField(fieldOptions);
       else flag.field = new StringField(fieldOptions);
 
-      sections[config.section] ??= [];
-      sections[config.section].push(flag);
+      if ( !config.deprecated || flag.value ) {
+        sections[config.section] ??= [];
+        sections[config.section].push(flag);
+      }
     }
 
     // Global Bonuses

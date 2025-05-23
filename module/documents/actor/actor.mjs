@@ -1691,8 +1691,8 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
       alert: flags.initiativeAlert && (game.settings.get("dnd5e", "rulesVersion") === "legacy") ? 5 : null
     }, rollData);
 
-    const remarkableAthlete = flags.remarkableAthlete && (game.settings.get("dnd5e", "rulesVersion") === "modern");
-    if ( flags.initiativeAdv || remarkableAthlete ) options.advantage ??= true;
+    if ( init.roll.mode === 1 ) options.advantage ??= true;
+    else if ( init.roll.mode === -1 ) options.disadvantage ??= true;
 
     // Add exhaustion reduction
     this.addRollExhaustion(parts, data);
