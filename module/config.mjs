@@ -2951,7 +2951,9 @@ DND5E.restTypes = {
     recoverHitDice: true,
     recoverHitPoints: true,
     recoverPeriods: ["lr", "sr"],
-    recoverSpellSlotTypes: new Set(["leveled", "pact"])
+    recoverSpellSlotTypes: new Set(["leveled", "pact"]),
+    recoverTemp: true,
+    recoverTempMax: true
   }
 };
 preLocalize("restTypes", { key: "label" });

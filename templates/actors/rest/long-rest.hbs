@@ -11,4 +11,13 @@
         {{/each}}
     </fieldset>
     {{/if}}
+
+    {{#if hitPoints.length}}
+    <fieldset>
+        <legend>{{ localize "DND5E.HitPoints" }}</legend>
+        {{#each hitPoints}}
+        {{ formField field name=name value=value input=input options=options rootId=../partId }}
+        {{/each}}
+    </fieldset>
+    {{/if}}
 </section>
