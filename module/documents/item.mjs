@@ -606,9 +606,11 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     for ( const activity of this.system.activities ) {
       if ( !("activation" in activity) ) continue;
       const activationLabels = activity.activationLabels;
-      if ( activationLabels ) activations.push(
-        { ...activationLabels, concentrationDuration: activity.labels.concentrationDuration }
-      );
+      if ( activationLabels ) activations.push({
+        ...activationLabels,
+        concentrationDuration: activity.labels.concentrationDuration,
+        ritualActivation: activity.labels.ritualActivation
+      });
       if ( activity.type === "attack" ) {
         const { toHit, modifier } = activity.labels;
         attacks.push({ toHit, modifier });
@@ -618,6 +620,7 @@ export default class Item5e extends SystemDocumentMixin(Item) {
     if ( activations.length ) {
       Object.assign(this.labels, activations[0]);
       delete activations[0].concentrationDuration;
+      delete activations[0].ritualActivation;
     }
     if ( attacks.length ) Object.assign(this.labels, attacks[0]);
   }
