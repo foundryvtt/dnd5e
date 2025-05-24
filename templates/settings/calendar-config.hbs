@@ -1,0 +1,16 @@
+<fieldset>
+    <legend>{{ localize "SETUP.Configuration" }}</legend>
+    {{> "dnd5e.fieldlist" fields}}
+    <hr>
+    <div class="form-group">
+        <p class="hint">{{ localize "DND5E.CALENDAR.FIELDS.buttons.hint" }}</p>
+    </div>
+    {{#each buttons}}
+    <div class="form-group split-group">
+        <label>{{ label }}</label>
+        <div class="form-fields">
+            {{> "dnd5e.fieldlist" fields}}
+        </div>
+    </div>
+    {{/each}}
+</fieldset>

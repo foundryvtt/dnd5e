@@ -1,3 +1,4 @@
+import CalenderHUD from "./applications/calendar/calendar-hud.mjs";
 import MapLocationControlIcon from "./canvas/map-location-control-icon.mjs";
 import { ConsumptionTargetData } from "./data/activity/fields/consumption-targets-field.mjs";
 import TransformationSetting from "./data/settings/transformation-setting.mjs";
@@ -864,6 +865,7 @@ DND5E.toolIds = new Proxy(DND5E.tools, {
  * @property {number} conversion       Conversion multiplier used to converting between units.
  * @property {boolean} [combat=false]  Is this a combat-specific time unit?
  * @property {boolean} [option=true]   Should this be available when users can select from a list of units?
+ * @property {string} [timeComponent]  Mapping of this unit to a `TimeComponent` provided by core's calendar system.
  */
 
 /**
@@ -886,19 +888,23 @@ DND5E.timeUnits = {
   second: {
     label: "DND5E.UNITS.TIME.Second.Label",
     conversion: 1 / 60,
-    option: false
+    option: false,
+    timeComponent: "second"
   },
   minute: {
     label: "DND5E.UNITS.TIME.Minute.Label",
-    conversion: 1
+    conversion: 1,
+    timeComponent: "minute"
   },
   hour: {
     label: "DND5E.UNITS.TIME.Hour.Label",
-    conversion: 60
+    conversion: 60,
+    timeComponent: "hour"
   },
   day: {
     label: "DND5E.UNITS.TIME.Day.Label",
-    conversion: 1_440
+    conversion: 1_440,
+    timeComponent: "day"
   },
   week: {
     label: "DND5E.UNITS.TIME.Week.Label",
@@ -911,7 +917,8 @@ DND5E.timeUnits = {
   },
   year: {
     label: "DND5E.UNITS.TIME.Year.Label",
-    conversion: 525_600
+    conversion: 525_600,
+    timeComponent: "year"
   }
 };
 preLocalize("timeUnits", { key: "label" });
@@ -4662,6 +4669,58 @@ DND5E.defaultArtwork = {
 };
 
 /* -------------------------------------------- */
+/*  Calendar                                    */
+/* -------------------------------------------- */
+
+/**
+ * @typedef CalendarHUDConfiguration
+ * @property {typeof ApplicationV2|null} application  HUD application to display, or `null` to not display one.
+ * @property {ApplicationV2|null} instance            Currently instantiated calendar application.
+ * @property {CalendarTimeFormatter[]} formatters     Formatters that can be used to display the date or time.
+ */
+
+/**
+ * @typedef {FormSelectOption} CalendarTimeFormatter
+ * @property {string|TimeFormatter} formatter  The formatter name on the current calendar or a formatter function.
+ */
+
+/**
+ * Configuration information for the calendar UI.
+ * @type {CalendarHUDConfiguration}
+ */
+DND5E.calendar = {
+  application: CalenderHUD,
+  instance: null,
+  formatters: [
+    {
+      value: "monthDay",
+      label: "DND5E.CALENDAR.Formatters.MonthDay.Label",
+      formatter: "formatMonthDay",
+      group: "DND5E.CALENDAR.Formatters.Date"
+    },
+    {
+      value: "monthDayYear",
+      label: "DND5E.CALENDAR.Formatters.MonthDayYear.Label",
+      formatter: "formatMonthDayYear",
+      group: "DND5E.CALENDAR.Formatters.Date"
+    },
+    {
+      value: "hoursMinutes",
+      label: "DND5E.CALENDAR.Formatters.HoursMinutes.Label",
+      formatter: "formatHoursMinutes",
+      group: "DND5E.CALENDAR.Formatters.Time"
+    },
+    {
+      value: "hoursMinutesSeconds",
+      label: "DND5E.CALENDAR.Formatters.HoursMinutesSeconds.Label",
+      formatter: "formatHoursMinutesSeconds",
+      group: "DND5E.CALENDAR.Formatters.Time"
+    }
+  ]
+};
+preLocalize("calendar.formatters", { keys: ["label", "group"] });
+
+/* -------------------------------------------- */
 /*  Rules                                       */
 /* -------------------------------------------- */
 
@@ -4901,33 +4960,6 @@ DND5E.rules = {
   jumping: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.aaJOlRhI1H6vAxt9",
   resistance: "Compendium.dnd5e.content24.JournalEntry.phbAppendixCRule.JournalEntryPage.Uk3xhCTvEfx8BN1O"
 };
-
-/* -------------------------------------------- */
-/*  Token Rings Framework                       */
-/* -------------------------------------------- */
-
-/**
- * Token Rings configuration data
- *
- * @typedef {object} TokenRingsConfiguration
- * @property {Record<string, string>} effects        Localized names of the configurable ring effects.
- * @property {string} spriteSheet                    The sprite sheet json source.
- * @property {typeof BaseSamplerShader} shaderClass  The shader class definition associated with the token ring.
- */
-
-/**
- * @type {TokenRingsConfiguration}
- */
-DND5E.tokenRings = {
-  effects: {
-    RING_PULSE: "DND5E.TokenRings.Effects.RingPulse",
-    RING_GRADIENT: "DND5E.TokenRings.Effects.RingGradient",
-    BKG_WAVE: "DND5E.TokenRings.Effects.BackgroundWave"
-  },
-  spriteSheet: "systems/dnd5e/tokens/composite/token-rings.json",
-  shaderClass: null
-};
-preLocalize("tokenRings.effects");
 
 /* -------------------------------------------- */
 /*  Sources                                     */

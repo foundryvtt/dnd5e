@@ -197,6 +197,10 @@ Hooks.once("init", function() {
 
   // Exhaustion handling
   documents.ActiveEffect5e.registerHUDListeners();
+
+  // Setup Calendar
+  CONFIG.time.earthCalendarClass = dataModels.calendar.CalendarData5e;
+  CONFIG.time.worldCalendarClass = dataModels.calendar.CalendarData5e;
 });
 
 /* -------------------------------------------- */
@@ -459,6 +463,8 @@ Hooks.once("i18nInit", () => {
   utils.performPreLocalization(CONFIG.DND5E);
   Object.values(CONFIG.DND5E.activityTypes).forEach(c => c.documentClass.localize());
   Object.values(CONFIG.DND5E.advancementTypes).forEach(c => c.documentClass.localize());
+  foundry.helpers.Localization.localizeDataModel(dataModels.settings.CalendarConfigSetting);
+  foundry.helpers.Localization.localizeDataModel(dataModels.settings.CalendarPreferencesSetting);
   foundry.helpers.Localization.localizeDataModel(dataModels.settings.TransformationSetting);
 });
 
@@ -489,6 +495,13 @@ Hooks.once("ready", function() {
 
   // Bastion initialization
   game.dnd5e.bastion.initializeUI();
+
+  // Display the calendar HUD
+  if ( CONFIG.DND5E.calendar.application ) {
+    CONFIG.DND5E.calendar.instance = new CONFIG.DND5E.calendar.application();
+    CONFIG.DND5E.calendar.instance.render({ force: true });
+    Hooks.on("updateWorldTime", CONFIG.DND5E.calendar.application.onUpdateWorldTime);
+  }
 
   // Determine whether a system migration is required and feasible
   if ( !game.user.isGM ) return;
