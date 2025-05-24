@@ -489,7 +489,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -545,6 +544,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mmAdhesive000000
     name: Adhesive (Object Form Only)
@@ -710,12 +715,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMimic000000000.mmAdhesive000000.PTmNYKeeD3d7EbJn
     flags:
@@ -726,12 +732,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAdhesive000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712723471
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -959,12 +966,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmBite0000000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712723471
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 1
@@ -1195,12 +1203,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmMimic000000000.mmPseudopod00000.grTPAGPf3Hftz86s
     flags:
@@ -1211,12 +1220,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPseudopod00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712723471
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -1315,12 +1325,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmShapeshift0000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712723471
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -1330,12 +1341,13 @@ folder: 36r8qm2aE4k6QTnW
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745416008124
   modifiedTime: 1745712723500
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

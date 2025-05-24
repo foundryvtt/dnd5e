@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: NOajNyilBv8JIEVp
     name: Multiattack
@@ -564,18 +569,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655352
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8MuL8xisavJW9bnw.NOajNyilBv8JIEVp'
   - _id: N86NeUNsfvruyJGq
     name: Fist
@@ -734,12 +738,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741117987508
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8MuL8xisavJW9bnw.N86NeUNsfvruyJGq'
   - _id: CVDcFc8ZcjYVl1EV
     name: Rock
@@ -898,12 +903,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741118010754
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8MuL8xisavJW9bnw.CVDcFc8ZcjYVl1EV'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -913,10 +919,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171207649
   modifiedTime: 1741118015188
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!8MuL8xisavJW9bnw'

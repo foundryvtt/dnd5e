@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 7lnXqe8AnWhtnQh7
     name: Pincer
@@ -641,12 +646,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745275762395
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!P6qC8jB3pnEH0tIE.7lnXqe8AnWhtnQh7'
   - _id: XUzROtGqVZS61Ofm
     name: Tentacles
@@ -747,18 +753,17 @@ items:
     sort: 300000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.nKpLMXS9E10TSGhU
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nKpLMXS9E10TSGhU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745275751000
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!P6qC8jB3pnEH0tIE.XUzROtGqVZS61Ofm'
   - _id: uMZgFW5l9JQmFBp8
     name: Amphibious
@@ -794,18 +799,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!P6qC8jB3pnEH0tIE.uMZgFW5l9JQmFBp8'
   - _id: OtOJ4eSobUE30d2S
     name: Multiattack
@@ -897,18 +901,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745275716966
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!P6qC8jB3pnEH0tIE.OtOJ4eSobUE30d2S'
   - _id: 03oy1y5rwobZdg46
     name: Sense Magic
@@ -947,18 +950,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.JAnMheqgFhkLF2ET
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JAnMheqgFhkLF2ET
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745275666710
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!P6qC8jB3pnEH0tIE.03oy1y5rwobZdg46'
 effects: []
 folder: cHmylff3tHTzhvyb
@@ -968,10 +970,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171228710
   modifiedTime: 1745275777034
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!P6qC8jB3pnEH0tIE'

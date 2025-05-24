@@ -494,7 +494,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -550,6 +549,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mmProboscis00000
     name: Proboscis
@@ -756,12 +761,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmProboscis00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727790
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -773,12 +779,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745416008124
   modifiedTime: 1745712727823
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

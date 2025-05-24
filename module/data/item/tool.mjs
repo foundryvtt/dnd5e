@@ -1,4 +1,4 @@
-import { ItemDataModel } from "../abstract.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import FormulaField from "../fields/formula-field.mjs";
 import ItemTypeField from "./fields/item-type-field.mjs";
 import ActivitiesTemplate from "./templates/activities.mjs";

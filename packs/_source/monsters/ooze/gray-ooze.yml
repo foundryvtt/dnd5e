@@ -473,7 +473,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -485,6 +484,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 2iRdkvAfbmxSymuw
     name: Amorphous
@@ -522,18 +527,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.3lDp8DtWwNDHSvxX
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.3lDp8DtWwNDHSvxX
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!fqbFYtbtkrL53FOC.2iRdkvAfbmxSymuw'
   - _id: uSay5J2sf9zXsabi
     name: Corrode Metal
@@ -575,18 +579,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.0z5v1BfMqQl5Z7UW
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.0z5v1BfMqQl5Z7UW
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676586
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!fqbFYtbtkrL53FOC.uSay5J2sf9zXsabi'
   - _id: NDZ02JVZWMbzRGGJ
     name: False Appearance
@@ -624,18 +627,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!fqbFYtbtkrL53FOC.NDZ02JVZWMbzRGGJ'
   - _id: KO4qRywgiEQ3F004
     name: Pseudopod
@@ -811,12 +813,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552634
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!fqbFYtbtkrL53FOC.KO4qRywgiEQ3F004'
 effects: []
 folder: spz6Dws3tO6Qs5Mh
@@ -826,10 +829,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171246789
   modifiedTime: 1726171447655
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!fqbFYtbtkrL53FOC'

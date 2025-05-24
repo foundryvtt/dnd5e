@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 87olpriernjyGLbC
     name: Breastplate
@@ -542,18 +547,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.SK2HATQ4abKUlV8i
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.SK2HATQ4abKUlV8i
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!GlaCGcgIP6YjBjGc.87olpriernjyGLbC'
   - _id: f12lOXuMaI21HDrz
     name: Rapier
@@ -712,8 +716,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.Tobce1hexTnDk4sV
       dnd5e:
         riders:
           activity: []
@@ -721,12 +723,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.Tobce1hexTnDk4sV
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744048714751
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!GlaCGcgIP6YjBjGc.f12lOXuMaI21HDrz'
   - _id: HhLmdqeivyDnsemN
     name: Parry
@@ -820,18 +823,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676544
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!GlaCGcgIP6YjBjGc.HhLmdqeivyDnsemN'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -841,10 +843,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171217891
   modifiedTime: 1744048738286
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!GlaCGcgIP6YjBjGc'

@@ -423,7 +423,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -479,6 +478,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mmAmorphous00000
     name: Amorphous
@@ -520,12 +525,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAmorphous00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737044344846
       modifiedTime: 1740680152422
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -612,12 +618,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGrayOoze000000.mmCorrosiveForm0.caD7IB1k2XLnkUDS
     flags:
@@ -628,12 +635,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCorrosiveForm0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737044480544
       modifiedTime: 1740680152422
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 1
@@ -802,12 +810,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.0
           createdTime: 1737045216647
           modifiedTime: 1737045356349
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGrayOoze000000.mmPseudopod00000.UGL33MKaIUmf7sRj
     flags:
@@ -818,12 +827,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmPseudopod00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737044686755
       modifiedTime: 1740680152422
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -833,12 +843,13 @@ folder: m38nAYWZbWqdnNHn
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1732598129404
   modifiedTime: 1745256821031
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

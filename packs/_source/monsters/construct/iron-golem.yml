@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: y2j6GWf1Ur3GRtYI
     name: Fire Absorption
@@ -528,18 +533,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.UH57LTsTGDxl2oS6
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.UH57LTsTGDxl2oS6
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447697372
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.y2j6GWf1Ur3GRtYI'
   - _id: ajTNe969fHHuppwl
     name: Immutable Form
@@ -577,18 +581,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.MFuiImIvLzYA3osc
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.MFuiImIvLzYA3osc
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.ajTNe969fHHuppwl'
   - _id: vUyYxadU3cXz7Zqf
     name: Magic Resistance
@@ -626,18 +629,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447706061
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.vUyYxadU3cXz7Zqf'
   - _id: aIoPr5RkxMhH5prU
     name: Magic Weapons
@@ -673,18 +675,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.aIoPr5RkxMhH5prU'
   - _id: UupAbZ0Pu4j3vLLg
     name: Multiattack
@@ -773,18 +774,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: 1745447711795
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.UupAbZ0Pu4j3vLLg'
   - _id: 0z51jBlE4BoPaEQn
     name: Slam
@@ -941,12 +941,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447710946
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.0z51jBlE4BoPaEQn'
   - _id: pPThO0mEw9iMaJw7
     name: Sword
@@ -1104,12 +1105,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447710946
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.pPThO0mEw9iMaJw7'
   - _id: x44GisqrxHYC5fov
     name: Poison Breath
@@ -1228,18 +1230,17 @@ items:
     sort: 400000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.JAEclghgOT24pQD9
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JAEclghgOT24pQD9
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447736687
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!h98AuPfomEPcCibP.x44GisqrxHYC5fov'
 effects: []
 folder: pucbjwWBrVMweiOd
@@ -1249,10 +1250,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171248947
   modifiedTime: 1745108374381
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!h98AuPfomEPcCibP'

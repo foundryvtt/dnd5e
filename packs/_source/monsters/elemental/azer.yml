@@ -468,7 +468,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -480,6 +479,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: sSs3hSzkKBMNBgTs
     name: Shield
@@ -545,18 +550,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!IiEDPMWqBlzkggYD.sSs3hSzkKBMNBgTs'
   - _id: P0pbiook7Q79UYqQ
     name: Heated Body
@@ -566,8 +570,7 @@ items:
       description:
         value: >-
           <p>A creature that touches the azer or hits it with a melee attack
-          while within 5 feet of it takes <strong>5 (1d10) <em>fire
-          damage</em></strong>.</p>
+          while within 5 feet of it takes [[/damage average]] damage.</p>
         chat: ''
       source:
         custom: ''
@@ -590,7 +593,7 @@ items:
           _id: dnd5eactivity000
           type: damage
           activation:
-            type: special
+            type: ''
             value: null
             condition: ''
             override: false
@@ -639,19 +642,18 @@ items:
               allow: false
               bonus: ''
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 10
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -662,17 +664,20 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.iFNpsEMJT66eLoat
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iFNpsEMJT66eLoat
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747954647728
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!IiEDPMWqBlzkggYD.P0pbiook7Q79UYqQ'
   - _id: WRygAnkpMeaqiw70
     name: Heated Weapons
@@ -681,9 +686,8 @@ items:
     system:
       description:
         value: >-
-          <p>When the azer hits with a metal melee weapon, it deals an extra
-          <strong>3 (1d6) <em>fire damage</em></strong> (included in the
-          attack).</p>
+          <p>When the azer hits with a metal melee weapon, it deals an extra 3
+          (1d6) fire damage (included in the attack).</p>
         chat: >-
           <p>When the azer hits with a metal melee weapon, it deals extra
           <em>fire damage</em> (included in the attack).</p>
@@ -714,17 +718,20 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.i3viKtKcSVeWLJFJ
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.i3viKtKcSVeWLJFJ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676547
+      modifiedTime: 1747954613222
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!IiEDPMWqBlzkggYD.WRygAnkpMeaqiw70'
   - _id: oPddwb4BScCEDanp
     name: Illumination
@@ -762,18 +769,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.F3gzBbCW7U14zkBF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.F3gzBbCW7U14zkBF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!IiEDPMWqBlzkggYD.oPddwb4BScCEDanp'
   - _id: YvzdCGQeCV1XOcUt
     name: Warhammer
@@ -782,9 +788,9 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]], or <strong>8 (1d10 + 3)
-          <em>bludgeoning damage</em></strong> if used with two hands to make a
-          melee attack, plus <strong>3 (1d6) <em>fire damage</em></strong>.</p>
+          <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
+          attackMode=twoHanded]] if used with two hands to make a melee
+          attack.</p>
         chat: >-
           <section>
 
@@ -945,23 +951,23 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: warhammer
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.F0Df164Xv1gWcYt0
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.F0Df164Xv1gWcYt0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173385299
+      modifiedTime: 1747954692108
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!IiEDPMWqBlzkggYD.YvzdCGQeCV1XOcUt'
 effects: []
 folder: IB448xVSBvtqitzs
@@ -971,10 +977,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171219763
   modifiedTime: 1726171442629
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!IiEDPMWqBlzkggYD'

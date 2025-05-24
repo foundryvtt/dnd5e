@@ -472,7 +472,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -484,6 +483,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: zEGUljO44aDmj8z5
     name: Devil's Sight
@@ -523,12 +528,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!tubcO7kaQ4w0soxS.zEGUljO44aDmj8z5'
   - _id: 7gfe5c1qGIvai12V
     name: Hellish Rejuvenation
@@ -538,9 +544,9 @@ items:
       description:
         value: >-
           <p>A lemure that dies in the Nine Hells sometimes comes back to comes
-          back to life with all its<strong> hit points</strong> in 1d10 days
-          unless it is killed by a good-aligned creature with a bless spell cast
-          on that creature or its remains are sprinkled with holy water.</p>
+          back to life with all its hit points in [[/r 1d10]] days unless it is
+          killed by a good-aligned creature with a bless spell cast on that
+          creature or its remains are sprinkled with holy water.</p>
         chat: >-
           <p>A lemure that dies in the Nine Hells sometimes comes back to
           life.</p>
@@ -623,18 +629,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.XmLuhZYd9WnCWBlU
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.XmLuhZYd9WnCWBlU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676614
+      modifiedTime: 1747957510158
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!tubcO7kaQ4w0soxS.7gfe5c1qGIvai12V'
   - _id: TypCj0S846TqsHzI
     name: Fist
@@ -791,12 +796,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553926
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!tubcO7kaQ4w0soxS.TypCj0S846TqsHzI'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -806,10 +812,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171264005
   modifiedTime: 1745108443456
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!tubcO7kaQ4w0soxS'

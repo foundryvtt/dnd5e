@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: nOBAY4ulYbWMc8Pz
     name: Bite
@@ -640,18 +645,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745449914908
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!vFeFRlF2FOgf2HIL.nOBAY4ulYbWMc8Pz'
   - _id: AheA06jKecElYrVt
     name: Claw
@@ -808,12 +812,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745449914908
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!vFeFRlF2FOgf2HIL.AheA06jKecElYrVt'
   - _id: EjnCigBWyq30VL4S
     name: Tail
@@ -970,12 +975,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745449914908
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!vFeFRlF2FOgf2HIL.EjnCigBWyq30VL4S'
   - _id: LQKBexRS91dTMEKa
     name: Frightful Presence
@@ -1080,18 +1086,17 @@ items:
     sort: 500000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.nb6zOmwIIJBLz4iT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nb6zOmwIIJBLz4iT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745449936582
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!vFeFRlF2FOgf2HIL.LQKBexRS91dTMEKa'
   - _id: wUEVmK5TEnYsMuwJ
     name: Fire Breath
@@ -1207,18 +1212,17 @@ items:
     sort: 600000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bGSW8IuWURWiWtxr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745449953643
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!vFeFRlF2FOgf2HIL.wUEVmK5TEnYsMuwJ'
   - _id: CGGqslZMTHbSwRwP
     name: Legendary Resistance
@@ -1316,18 +1320,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.J1NxNTJ2qi05iAFF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.J1NxNTJ2qi05iAFF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745449906861
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!vFeFRlF2FOgf2HIL.CGGqslZMTHbSwRwP'
   - _id: Whn4pPAB1YSnvocN
     name: Multiattack
@@ -1420,18 +1423,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745449915623
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!vFeFRlF2FOgf2HIL.Whn4pPAB1YSnvocN'
   - _id: diR3Lju2cmIwIOyG
     name: Legendary Actions
@@ -1467,18 +1469,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745449912158
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!vFeFRlF2FOgf2HIL.diR3Lju2cmIwIOyG'
   - _id: rOXIh3YF5Aiu8aVC
     name: Tail Attack
@@ -1626,12 +1627,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745449985142
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!vFeFRlF2FOgf2HIL.rOXIh3YF5Aiu8aVC'
   - _id: 0fheJO7kmH1UV99g
     name: Wing Attack
@@ -1805,12 +1807,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745453002000
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!vFeFRlF2FOgf2HIL.0fheJO7kmH1UV99g'
   - _id: 7WxDZHowVjqC4DfC
     name: Detect
@@ -1907,12 +1910,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745449967366
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!vFeFRlF2FOgf2HIL.7WxDZHowVjqC4DfC'
 effects: []
 folder: PNekSR74iAZ5dJwZ
@@ -1922,10 +1926,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171265139
   modifiedTime: 1745450025373
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!vFeFRlF2FOgf2HIL'

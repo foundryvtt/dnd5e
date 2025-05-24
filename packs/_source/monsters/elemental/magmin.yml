@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 0xdLfPJEHYwh8MIT
     name: Death Burst
@@ -488,11 +493,10 @@ items:
       description:
         value: >-
           <p>When the magmin dies, it explodes in a burst of fire and magma.
-          </p><p>Each creature within 10 ft. of it must make a  <strong>DC 11
-          Dexterity</strong> saving throw, taking <strong>7 (2d6) <em>fire
-          damage</em></strong> on a failed save, or half as much damage on a
-          successful one. Flammable objects that aren't being worn or carried in
-          that area are ignited.</p>
+          Each creature within 10 ft. of it must make a [[/save]] saving throw,
+          taking [[/damage average]] damage on a failed save, or half as much
+          damage on a successful one. Flammable objects that aren't being worn
+          or carried in that area are ignited.</p>
         chat: >-
           <p>When the magmin dies, it explodes in a burst of fire and magma.
           Each creature within 10 ft. of it must make a
@@ -519,7 +523,7 @@ items:
           _id: dnd5eactivity000
           type: save
           activation:
-            type: special
+            type: ''
             value: null
             condition: death
             override: false
@@ -553,7 +557,7 @@ items:
               units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -565,24 +569,23 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 2
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 2
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
             ability: dex
             dc:
               calculation: ''
               formula: '11'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -593,17 +596,20 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.net3yBKQoxl8bZ4r
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.net3yBKQoxl8bZ4r
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676529
+      modifiedTime: 1747955366121
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8MD1vRBTcgSXXk3u.0xdLfPJEHYwh8MIT'
   - _id: rlA41r2MlaqmVjvf
     name: Ignited Illumination
@@ -613,9 +619,8 @@ items:
       description:
         value: >-
           <p>As a bonus action, the magmin can set itself ablaze or extinguish
-          its flames. While ablaze, the magmin sheds bright light in a
-          <strong>10-foot radius</strong> and dim light for an additional
-          <strong>10 ft.</strong></p>
+          its flames. While ablaze, the magmin sheds bright light in a 10-foot
+          radius and dim light for an additional 10 ft.</p>
         chat: ''
       source:
         custom: ''
@@ -696,18 +701,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Uvy7vla2EhYSfTl0
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Uvy7vla2EhYSfTl0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747955381261
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8MD1vRBTcgSXXk3u.rlA41r2MlaqmVjvf'
   - _id: th3hfRWQ3PT9f3Gs
     name: Touch
@@ -927,12 +931,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107994238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8MD1vRBTcgSXXk3u.th3hfRWQ3PT9f3Gs'
 effects: []
 folder: IB448xVSBvtqitzs
@@ -942,10 +947,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171207472
   modifiedTime: 1745108041798
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!8MD1vRBTcgSXXk3u'

@@ -483,7 +483,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -539,6 +538,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Compression
     system:
@@ -583,12 +588,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680154463
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmOctopus0000000.phbaoiCompressio'
   - name: Water Breathing
     system:
@@ -631,12 +637,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680154463
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmOctopus0000000.phbaoiWaterBreat'
   - name: Ink Cloud
     system:
@@ -751,12 +758,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680154463
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmOctopus0000000.phbaoiInkCloud1D'
   - name: Tentacles
     system:
@@ -930,12 +938,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680154463
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmOctopus0000000.phbaoiTentacles0'
   - _id: mmCompression000
     name: Compression
@@ -978,12 +987,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCompression000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745342043530
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -1026,12 +1036,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmWaterBreathing
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745342043530
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 1
@@ -1257,12 +1268,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmOctopus0000000.mmTentacles00000.ALFBGlQz2ndsPVr1
     flags:
@@ -1273,12 +1285,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmTentacles00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745342043530
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -1293,10 +1306,11 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1740679135261
   modifiedTime: 1745256822798
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!mmOctopus0000000'

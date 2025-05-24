@@ -502,7 +502,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -558,6 +557,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Javelin
     system:
@@ -717,12 +722,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepJavelin000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712714944
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmBugbearStalker.dN1CML4smcRrUkzD'
   - name: Morningstar
     system:
@@ -885,12 +891,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepMorningsta
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712714944
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmBugbearStalker.YFpjAATelvlz5oyb'
   - name: Chain Shirt
     system:
@@ -954,12 +961,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmChainShirt
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712714944
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: RukSxq7bGcIprKdM
     sort: 0
     _key: '!actors.items!mmBugbearStalker.RukSxq7bGcIprKdM'
@@ -1003,12 +1011,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmAbduct00000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737680658024
       modifiedTime: 1745712714944
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -1102,12 +1111,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737680660013
       modifiedTime: 1745712714944
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: -100000
@@ -1295,12 +1305,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.2
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmBugbearStalker.mmQuickGrapple00.5yLzwp2Gu803QgI9
     flags:
@@ -1311,12 +1322,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmQuickGrapple00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737680661239
       modifiedTime: 1745712714944
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -1328,12 +1340,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1732598129404
   modifiedTime: 1745712714974
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

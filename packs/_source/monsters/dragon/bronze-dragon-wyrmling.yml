@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: H2dPYlwoo8MOstEQ
     name: Amphibious
@@ -513,18 +518,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!hY9ptpO5Xl2tfkcj.H2dPYlwoo8MOstEQ'
   - _id: Vq0dUbodqBggQAVQ
     name: Bite
@@ -677,18 +681,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552828
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hY9ptpO5Xl2tfkcj.Vq0dUbodqBggQAVQ'
   - _id: DogAlXwHCyvsBynk
     name: Breath Weapons
@@ -876,8 +879,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       dnd5e:
         riders:
           activity: []
@@ -885,12 +886,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1745451478894
       modifiedTime: 1745451510953
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hY9ptpO5Xl2tfkcj.DogAlXwHCyvsBynk'
 effects: []
 folder: PNekSR74iAZ5dJwZ
@@ -900,10 +902,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171249513
   modifiedTime: 1745451715889
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!hY9ptpO5Xl2tfkcj'

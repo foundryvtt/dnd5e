@@ -465,7 +465,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -477,6 +476,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: R7DpgLP3aFNmAgOc
     name: Bite
@@ -629,18 +634,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552150
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZHAFrnCwCz17dmLc.R7DpgLP3aFNmAgOc'
   - _id: ahGwFmyt6nItUOAK
     name: Claw
@@ -797,12 +801,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552150
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZHAFrnCwCz17dmLc.ahGwFmyt6nItUOAK'
   - _id: N3vrbUmlL4FEARJ8
     name: Keen Smell
@@ -844,12 +849,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ZHAFrnCwCz17dmLc.N3vrbUmlL4FEARJ8'
   - _id: BA9WmovILanbvacP
     name: Multiattack
@@ -941,18 +947,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656360
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZHAFrnCwCz17dmLc.BA9WmovILanbvacP'
   - _id: yWYB2iyRA61AjcVJ
     name: Regeneration
@@ -1056,18 +1061,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Av7H0ymGdPeTsnwV
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676796
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ZHAFrnCwCz17dmLc.yWYB2iyRA61AjcVJ'
 effects: []
 folder: v8gFGdEluEFQdRQg
@@ -1077,10 +1081,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171238805
   modifiedTime: 1726171446134
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!ZHAFrnCwCz17dmLc'

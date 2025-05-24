@@ -473,7 +473,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -485,6 +484,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: KFvtNOH2AMQIWRps
     name: Antimagic Susceptibility
@@ -526,18 +531,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KMQAgNxBCAHrd2JU
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KMQAgNxBCAHrd2JU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447847358
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!EqJUA3Z3181RSSFU.KFvtNOH2AMQIWRps'
   - _id: EY5bnNsvwwHGfCk1
     name: False Appearance
@@ -575,18 +579,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!EqJUA3Z3181RSSFU.EY5bnNsvwwHGfCk1'
   - _id: D2cJQHQa8UQp99Wt
     name: Longsword
@@ -740,18 +743,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550923
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!EqJUA3Z3181RSSFU.D2cJQHQa8UQp99Wt'
 effects: []
 folder: pucbjwWBrVMweiOd
@@ -761,10 +763,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171216113
   modifiedTime: 1745447854656
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!EqJUA3Z3181RSSFU'

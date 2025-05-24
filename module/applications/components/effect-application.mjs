@@ -96,6 +96,7 @@ export default class EffectApplicationElement extends TargetedApplicationMixin(C
    */
   buildEffectsList() {
     for ( const effect of this.effects ) {
+      effect.updateDuration();
       const li = document.createElement("li");
       li.classList.add("effect");
       li.dataset.id = effect.id;

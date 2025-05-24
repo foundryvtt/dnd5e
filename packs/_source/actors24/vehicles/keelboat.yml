@@ -159,7 +159,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -215,18 +214,25 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items: []
 effects: []
 folder: YRCjFZLqErBv0VKJ
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726019825747
   modifiedTime: 1740679894932
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 150000
 ownership:
   default: 0

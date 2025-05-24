@@ -473,7 +473,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -485,6 +484,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: PGulBR18kfO768c7
     name: Antimagic Susceptibility
@@ -526,18 +531,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KMQAgNxBCAHrd2JU
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KMQAgNxBCAHrd2JU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447904734
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!f6HaKROPIcBRmSd1.PGulBR18kfO768c7'
   - _id: Jwm0r4Us1rwS6XfV
     name: Damage Transfer
@@ -576,18 +580,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.0npeEcwmiVMdwGMV
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.0npeEcwmiVMdwGMV
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!f6HaKROPIcBRmSd1.Jwm0r4Us1rwS6XfV'
   - _id: N30l3HXqmQ6H6Xo5
     name: False Appearance
@@ -625,18 +628,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!f6HaKROPIcBRmSd1.N30l3HXqmQ6H6Xo5'
   - _id: 7p94WH1WPMhF1ZP9
     name: Smother
@@ -808,12 +810,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745175498369
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!f6HaKROPIcBRmSd1.7p94WH1WPMhF1ZP9'
 effects: []
 folder: pucbjwWBrVMweiOd
@@ -823,10 +826,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171245922
   modifiedTime: 1745175500905
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!f6HaKROPIcBRmSd1'

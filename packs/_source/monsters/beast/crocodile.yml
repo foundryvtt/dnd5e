@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: L0k8pFgKxxEEMEOY
     name: Bite
@@ -636,18 +641,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741124488915
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!8aCTKP5qaBPFOqxM.L0k8pFgKxxEEMEOY'
   - _id: vuDMChx74s6CMCab
     name: Hold Breath
@@ -685,18 +689,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.lwC6jwy9bXberyWo
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!8aCTKP5qaBPFOqxM.vuDMChx74s6CMCab'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -706,10 +709,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171208318
   modifiedTime: 1741117256913
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!8aCTKP5qaBPFOqxM'

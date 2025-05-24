@@ -470,7 +470,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -482,6 +481,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: D8QWBbYLFAT7uIiz
     name: Shapechanger
@@ -578,18 +583,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676923
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.D8QWBbYLFAT7uIiz'
   - _id: rzLcynHQQj04Ue4B
     name: Keen Smell
@@ -631,12 +635,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.rzLcynHQQj04Ue4B'
   - _id: COcc6eoG6ScS4wGz
     name: Multiattack
@@ -728,18 +733,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.COcc6eoG6ScS4wGz'
   - _id: h9XO0f5Un3EhJqHm
     name: Bite (Bear or Hybrid Form Only)
@@ -960,12 +964,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553437
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.h9XO0f5Un3EhJqHm'
   - _id: pEYcOjAF2fovrXRP
     name: Claw (Bear or Hybrid Form Only)
@@ -1122,12 +1127,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553437
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.pEYcOjAF2fovrXRP'
   - _id: UeXfHUO5RZp72PIs
     name: Greataxe (Humanoid or Hybrid Form Only)
@@ -1286,12 +1292,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553437
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!oRBnO5OHoOZzlCOr.UeXfHUO5RZp72PIs'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1301,10 +1308,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171257708
   modifiedTime: 1726171449970
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!oRBnO5OHoOZzlCOr'

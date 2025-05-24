@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: VdFnTF9MqUFF7KPQ
     name: Faultless Tracker
@@ -531,18 +536,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.E8SiDA7Z3Ybd6wt0
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.E8SiDA7Z3Ybd6wt0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676605
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!oDspGxRQFBhE74L2.VdFnTF9MqUFF7KPQ'
   - _id: UR2TYdvh0VZzLKyO
     name: Invisibility
@@ -578,18 +582,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!oDspGxRQFBhE74L2.UR2TYdvh0VZzLKyO'
   - _id: bl0mrJpx4dqL9Ub8
     name: Multiattack
@@ -680,18 +683,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657149
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!oDspGxRQFBhE74L2.bl0mrJpx4dqL9Ub8'
   - _id: rpKiEPQVeOZTLwjf
     name: Slam
@@ -848,12 +850,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553431
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!oDspGxRQFBhE74L2.rpKiEPQVeOZTLwjf'
 effects: []
 folder: IB448xVSBvtqitzs
@@ -863,10 +866,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171257169
   modifiedTime: 1726171449831
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!oDspGxRQFBhE74L2'

@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: x7uPzThV97uQxTun
     name: Bite
@@ -630,18 +635,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551117
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!J1QVPd8POvcPaqx4.x7uPzThV97uQxTun'
   - _id: ENcwNUKxDAqH6V9l
     name: Breath Weapons
@@ -830,8 +834,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       dnd5e:
         riders:
           activity: []
@@ -839,12 +841,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KcUjvqIXZI3APp5a
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1745452711596
       modifiedTime: 1745452766762
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!J1QVPd8POvcPaqx4.ENcwNUKxDAqH6V9l'
 effects: []
 folder: PNekSR74iAZ5dJwZ
@@ -854,10 +857,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171220307
   modifiedTime: 1745452774542
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!J1QVPd8POvcPaqx4'

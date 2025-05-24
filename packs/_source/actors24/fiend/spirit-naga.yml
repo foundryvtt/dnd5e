@@ -493,7 +493,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -549,6 +548,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mmFiendishRestor
     name: Fiendish Restoration
@@ -592,12 +597,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmFiendishRestor
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -692,12 +698,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 1
@@ -845,12 +852,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmBite0000000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -1004,12 +1012,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmNecroticRay000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 3
@@ -1465,12 +1474,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 4
@@ -1608,12 +1618,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSpiritNaga0000.ppISVKQQqC18ap6D.BHw91lQmVgdx39WZ
       - _id: dnd5espellchange
@@ -1650,12 +1661,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSpiritNaga0000.ppISVKQQqC18ap6D.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1671,12 +1683,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: ppISVKQQqC18ap6D
     _key: '!actors.items!mmSpiritNaga0000.ppISVKQQqC18ap6D'
   - name: Mage Hand
@@ -1837,12 +1850,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSpiritNaga0000.Rd4Kg9SxqLxAALXU.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -1858,12 +1872,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMageHand00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: Rd4Kg9SxqLxAALXU
     _key: '!actors.items!mmSpiritNaga0000.Rd4Kg9SxqLxAALXU'
   - name: Minor Illusion
@@ -2044,12 +2059,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSpiritNaga0000.ga8WMfpmg6XsmKzG.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -2062,12 +2078,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplMinorIllus
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: ga8WMfpmg6XsmKzG
     _key: '!actors.items!mmSpiritNaga0000.ga8WMfpmg6XsmKzG'
   - name: Water Breathing
@@ -2194,12 +2211,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSpiritNaga0000.l6QBJ7Y0NAqE3rnq.hyFupFam9XIbim0U
       - _id: dnd5espellchange
@@ -2236,12 +2254,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSpiritNaga0000.l6QBJ7Y0NAqE3rnq.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -2254,12 +2273,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplWaterBreat
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: l6QBJ7Y0NAqE3rnq
     _key: '!actors.items!mmSpiritNaga0000.l6QBJ7Y0NAqE3rnq'
   - name: Detect Thoughts
@@ -2468,12 +2488,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSpiritNaga0000.0TYpeSGwwVhokYoU.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2489,12 +2510,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectThou
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 0TYpeSGwwVhokYoU
     _key: '!actors.items!mmSpiritNaga0000.0TYpeSGwwVhokYoU'
   - name: Dimension Door
@@ -2648,12 +2670,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSpiritNaga0000.3fMt232wtzBUxB1m.dnd5espellchange
     folder: qi3IbnEwap7mRw4b
@@ -2669,12 +2692,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDimensionD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 3fMt232wtzBUxB1m
     _key: '!actors.items!mmSpiritNaga0000.3fMt232wtzBUxB1m'
   - name: Hold Person
@@ -2803,12 +2827,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSpiritNaga0000.FPXJqMmeIZ9rTLFW.PklwZi3SKQ3JU2M2
       - _id: dnd5espellchange
@@ -2845,12 +2870,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSpiritNaga0000.FPXJqMmeIZ9rTLFW.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2863,12 +2889,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHoldPerson
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: FPXJqMmeIZ9rTLFW
     _key: '!actors.items!mmSpiritNaga0000.FPXJqMmeIZ9rTLFW'
   - name: Lightning Bolt
@@ -3018,12 +3045,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSpiritNaga0000.etbC3HZq7ExbtgmW.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -3036,12 +3064,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLightningB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727531
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: etbC3HZq7ExbtgmW
     _key: '!actors.items!mmSpiritNaga0000.etbC3HZq7ExbtgmW'
 effects: []
@@ -3051,12 +3080,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415564135
   modifiedTime: 1745712727570
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 125685
 ownership:
   default: 0

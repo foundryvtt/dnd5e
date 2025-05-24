@@ -475,7 +475,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -487,6 +486,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 4Zbr0ZIgWS4WFshO
     name: Blood Frenzy
@@ -525,18 +530,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.B2kZOyrB7poB4liR
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.B2kZOyrB7poB4liR
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KXG5XLIwKhn1V0Y5.4Zbr0ZIgWS4WFshO'
   - _id: QPJWgfVwJ8tu5zsa
     name: Swarm
@@ -576,18 +580,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.eL3OJmc4FuetizKO
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.eL3OJmc4FuetizKO
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KXG5XLIwKhn1V0Y5.QPJWgfVwJ8tu5zsa'
   - _id: oAc2jxMRMdek0hTs
     name: Water Breathing
@@ -623,18 +626,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.c4Q6NDCLJSNcNc9T
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.c4Q6NDCLJSNcNc9T
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!KXG5XLIwKhn1V0Y5.oAc2jxMRMdek0hTs'
   - _id: hZiOYQNCqAFq0sD6
     name: Bites
@@ -803,12 +805,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741123546450
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!KXG5XLIwKhn1V0Y5.hZiOYQNCqAFq0sD6'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -818,10 +821,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171223227
   modifiedTime: 1741123498123
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!KXG5XLIwKhn1V0Y5'

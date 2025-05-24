@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 0otc04A190Q8hTBK
     name: Splint Armor
@@ -542,18 +547,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.cKpJmsJmU8YaiuqG
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.cKpJmsJmU8YaiuqG
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!J8xjoG4Dxb8WkHtV.0otc04A190Q8hTBK'
   - _id: WaEunPCFG0EddNTt
     name: Longsword
@@ -709,18 +713,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385305
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!J8xjoG4Dxb8WkHtV.WaEunPCFG0EddNTt'
   - _id: wziRdUn3HafZKJ8o
     name: Multiattack
@@ -812,18 +815,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655676
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!J8xjoG4Dxb8WkHtV.wziRdUn3HafZKJ8o'
   - _id: cXf5q5xw30ICGxZg
     name: Shortsword
@@ -976,18 +978,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551127
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!J8xjoG4Dxb8WkHtV.cXf5q5xw30ICGxZg'
   - _id: 6jQ7YUixkwBq2Fh8
     name: Heavy Crossbow
@@ -1144,18 +1145,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.RmP0mYRn2J7K26rX
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.RmP0mYRn2J7K26rX
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173561725
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!J8xjoG4Dxb8WkHtV.6jQ7YUixkwBq2Fh8'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1165,10 +1165,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171220507
   modifiedTime: 1745173567099
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!J8xjoG4Dxb8WkHtV'

@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: vnO8N4pro9PVOOQn
     name: Multiattack
@@ -568,18 +573,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745448292278
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!7198siHjPJf8g0cG.vnO8N4pro9PVOOQn'
   - _id: j1LTHxGLXWdnEbwq
     name: Bite
@@ -733,18 +737,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745448291327
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!7198siHjPJf8g0cG.j1LTHxGLXWdnEbwq'
   - _id: Wa8BU72wRqyBCqkI
     name: Claws
@@ -902,12 +905,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745448291327
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!7198siHjPJf8g0cG.Wa8BU72wRqyBCqkI'
   - _id: HzLuzqlmtBSeSS4Q
     name: Stinger
@@ -1145,12 +1149,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745448335175
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!7198siHjPJf8g0cG.HzLuzqlmtBSeSS4Q'
 effects: []
 folder: PNekSR74iAZ5dJwZ
@@ -1160,10 +1165,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171205449
   modifiedTime: 1745448348733
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!7198siHjPJf8g0cG'

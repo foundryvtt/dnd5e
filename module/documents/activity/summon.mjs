@@ -76,8 +76,10 @@ export default class SummonActivity extends ActivityMixin(SummonActivityData) {
   _prepareUsageConfig(config) {
     config = super._prepareUsageConfig(config);
     const summons = this.availableProfiles;
-    config.create ??= {};
-    config.create.summons ??= this.canSummon && canvas.scene && summons.length && this.summon.prompt;
+    if ( config.create !== false ) {
+      config.create ??= {};
+      config.create.summons ??= this.canSummon && canvas.scene && summons.length && this.summon.prompt;
+    }
     config.summons ??= {};
     config.summons.profile ??= summons[0]?._id ?? null;
     config.summons.creatureSize ??= this.creatureSizes.first() ?? null;

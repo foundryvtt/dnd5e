@@ -749,7 +749,7 @@ export default class ActiveEffect5e extends ActiveEffect {
     Dialog.prompt({
       content: content,
       callback: ([html]) => {
-        const source = new FormDataExtended(html.querySelector("FORM")).object.source;
+        const source = new foundry.applications.ux.FormDataExtended(html.querySelector("FORM")).object.source;
         if ( source ) actor.endConcentration(source);
       },
       rejectClose: false,

@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 8QaMc1baRrSlLFXN
     name: Barbed Hide
@@ -498,9 +503,8 @@ items:
     system:
       description:
         value: >-
-          <p>At the start of each of its turns, the barbed devil deals <strong>5
-          (1d10) <em>piercing damage</em></strong> to any creature grappling
-          it.</p>
+          <p>At the start of each of its turns, the barbed devil deals [[/damage
+          average]] damage to any creature grappling it.</p>
         chat: ''
       source:
         custom: ''
@@ -517,13 +521,14 @@ items:
         value: ''
         subtype: ''
       requirements: ''
-      properties: []
+      properties:
+        - trait
       activities:
         dnd5eactivity000:
           _id: dnd5eactivity000
           type: damage
           activation:
-            type: special
+            type: ''
             value: null
             condition: ''
             override: false
@@ -571,18 +576,17 @@ items:
               allow: false
               bonus: ''
             parts:
-              - number: 1
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 1
                 denomination: 10
                 bonus: ''
                 types: []
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -593,17 +597,20 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.QMGBV7OSnXqWLdhr
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.QMGBV7OSnXqWLdhr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747956256210
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.8QaMc1baRrSlLFXN'
   - _id: wPHhtm2eyM9LKpT4
     name: Devil's Sight
@@ -643,12 +650,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.wPHhtm2eyM9LKpT4'
   - _id: f3ItDDfd5L4WMGlf
     name: Magic Resistance
@@ -686,18 +694,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.f3ItDDfd5L4WMGlf'
   - _id: JbDDt9MNYFyEbHsm
     name: Multiattack
@@ -790,18 +797,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657458
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.JbDDt9MNYFyEbHsm'
   - _id: pya9jchjLkwMedEr
     name: Claw
@@ -960,12 +966,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745175641118
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.pya9jchjLkwMedEr'
   - _id: mlWql992zSZ6hvl6
     name: Tail
@@ -1122,12 +1129,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553753
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.mlWql992zSZ6hvl6'
   - _id: syCZDlwGoyT1GvJv
     name: Hurl Flame
@@ -1299,12 +1307,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745175668889
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!sLdpiuaZF8lujJQy.syCZDlwGoyT1GvJv'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1314,10 +1323,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171262244
   modifiedTime: 1744916264618
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!sLdpiuaZF8lujJQy'

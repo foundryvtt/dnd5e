@@ -475,7 +475,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -487,6 +486,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: MLfZqvhaJjB78YiT
     name: Invisibility
@@ -578,21 +583,20 @@ items:
       identifier: invisibility
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.dA5X2eQuOtHywpQF
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
-      modifiedTime: 1736804676874
+      modifiedTime: 1747957321172
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.MLfZqvhaJjB78YiT'
   - _id: ae0OI3obJqa4AS7U
     name: Claw (Bite in Beast Form)
@@ -831,12 +835,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745175290818
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.ae0OI3obJqa4AS7U'
   - _id: e8rpvJJVWCN4HU7I
     name: Shapechanger
@@ -845,14 +850,12 @@ items:
     system:
       description:
         value: >-
-          <p>The quasit can use its action to <strong>polymorph</strong> into a
-          beast form that resembles a bat (speed <strong>10 ft.</strong> fly
-          <strong>40 ft.</strong>), a centipede (<strong>40 ft.</strong>, climb
-          <strong>40 ft.</strong>), or a toad (<strong>40 ft.</strong>, swim
-          <strong>40 ft.</strong>), or back into its true form . Its statistics
-          are the same in each form, except for the speed changes noted.
-          </p><p>Any equipment it is wearing or carrying isn't transformed . It
-          reverts to its true form if it dies.</p>
+          <p>The quasit can use its action to polymorph into a beast form that
+          resembles a bat (speed 10 ft. fly 40 ft.), a centipede (40 ft., climb
+          40 ft.), or a toad (40 ft., swim 40 ft.), or back into its true form .
+          Its statistics are the same in each form, except for the speed changes
+          noted.</p><p>Any equipment it is wearing or carrying isn't transformed
+          . It reverts to its true form if it dies.</p>
         chat: >-
           <p>The quasit can use its action to <strong>polymorph</strong> into a
           beast form or back into its true form. </p>
@@ -935,18 +938,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676874
+      modifiedTime: 1747957367424
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.e8rpvJJVWCN4HU7I'
   - _id: vlmHYqAZxNGh8xQ6
     name: Magic Resistance
@@ -955,8 +957,8 @@ items:
     system:
       description:
         value: >-
-          <p>The quasit has<strong> advantage </strong>on saving throws against
-          spells and other magical effects.</p>
+          <p>The quasit has advantage on saving throws against spells and other
+          magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -984,18 +986,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747957317985
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.vlmHYqAZxNGh8xQ6'
   - _id: 1YhP86rTuRIXKFi2
     name: Scare
@@ -1005,10 +1006,10 @@ items:
       description:
         value: >-
           <p>One creature of the quasit's choice within 20 ft. of it must
-          succeed on a  <strong>DC 10 Wisdom</strong> saving throw or be
-          frightened for 1 minute. </p><p>The target can repeat the saving throw
-          at the end of each of its turns, with disadvantage if the quasit is
-          within line of sight, ending the effect on itself on a success.</p>
+          succeed on a [[/save]] saving throw or be &amp;Reference[frightened]
+          for 1 minute.</p><p>The target can repeat the saving throw at the end
+          of each of its turns, with disadvantage if the quasit is within line
+          of sight, ending the effect on itself on a success.</p>
         chat: >-
           <p>One creature of the quasit's choice within 20 ft. of it must make a
           <strong>Wisdom</strong> saving throw. The target can repeat the saving
@@ -1033,66 +1034,6 @@ items:
       requirements: ''
       properties: []
       activities:
-        dnd5eactivity000:
-          _id: dnd5eactivity000
-          type: utility
-          activation:
-            type: action
-            value: 1
-            condition: ''
-            override: false
-          consumption:
-            targets:
-              - type: itemUses
-                target: ''
-                value: '1'
-                scaling:
-                  mode: ''
-                  formula: ''
-            scaling:
-              allowed: false
-              max: ''
-            spellSlot: true
-          description:
-            chatFlavor: ''
-          duration:
-            concentration: false
-            value: ''
-            units: ''
-            special: ''
-            override: false
-          effects: []
-          range:
-            value: '20'
-            units: ft
-            special: ''
-            override: false
-          target:
-            template:
-              count: ''
-              contiguous: false
-              type: ''
-              size: ''
-              width: ''
-              height: ''
-              units: ''
-            affects:
-              count: '1'
-              type: creature
-              choice: false
-              special: ''
-            prompt: true
-            override: false
-          uses:
-            spent: 0
-            max: ''
-            recovery: []
-          roll:
-            formula: ''
-            name: ''
-            prompt: false
-            visible: false
-          sort: 0
         dnd5eactivity100:
           _id: dnd5eactivity100
           type: save
@@ -1166,17 +1107,20 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.gqrKcFwxHhmwrP2q
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gqrKcFwxHhmwrP2q
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676874
+      modifiedTime: 1747957347912
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bwtkdzavdNHISgp4.1YhP86rTuRIXKFi2'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1186,10 +1130,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171242436
   modifiedTime: 1745175316236
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!bwtkdzavdNHISgp4'

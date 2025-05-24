@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: LzR8BLFWMmqI6gTl
     name: Multiattack
@@ -569,18 +574,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657665
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!x47ZnpHfYl0ptDM9.LzR8BLFWMmqI6gTl'
   - _id: 4fNbTxkAFYHxDdJX
     name: Bite
@@ -734,18 +738,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107554047
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!x47ZnpHfYl0ptDM9.4fNbTxkAFYHxDdJX'
   - _id: GCUh42hMUnKtxx8j
     name: Constrict
@@ -923,12 +926,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745175814518
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!x47ZnpHfYl0ptDM9.GCUh42hMUnKtxx8j'
   - _id: gjce4R2feN2UH0YE
     name: Lightning Breath
@@ -1049,18 +1053,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.LVnd9fq9cQj7rR0Q
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LVnd9fq9cQj7rR0Q
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676905
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!x47ZnpHfYl0ptDM9.gjce4R2feN2UH0YE'
   - _id: 0QJeW80m89X0RLNz
     name: Swallow
@@ -1175,18 +1178,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.aH5ncM30tP8tPQ24
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.aH5ncM30tP8tPQ24
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676905
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!x47ZnpHfYl0ptDM9.0QJeW80m89X0RLNz'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -1196,10 +1198,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171265532
   modifiedTime: 1745175823286
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!x47ZnpHfYl0ptDM9'

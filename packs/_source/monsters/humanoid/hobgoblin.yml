@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Y73kGtiKbGevpBCo
     name: Martial Advantage
@@ -583,18 +588,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.zg0RZmAncKJqIpax
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.zg0RZmAncKJqIpax
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676763
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!6qnT52lZtZblgGw8.Y73kGtiKbGevpBCo'
   - _id: is4wHu9FG6SPackl
     name: Longsword
@@ -750,18 +754,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173384992
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!6qnT52lZtZblgGw8.is4wHu9FG6SPackl'
   - _id: ahUVLSMfFY5mqJ66
     name: Longbow
@@ -917,18 +920,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.3cymOVja8jXbzrdT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173384992
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!6qnT52lZtZblgGw8.ahUVLSMfFY5mqJ66'
   - _id: H7NwPMCFCLtZxIh7
     name: Chain Mail
@@ -995,18 +997,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.rLMflzmxpe8JGTOA
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.rLMflzmxpe8JGTOA
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!6qnT52lZtZblgGw8.H7NwPMCFCLtZxIh7'
   - _id: sSs3hSzkKBMNBgTs
     name: Shield
@@ -1072,18 +1073,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!6qnT52lZtZblgGw8.sSs3hSzkKBMNBgTs'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1093,10 +1093,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171204750
   modifiedTime: 1726171439941
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!6qnT52lZtZblgGw8'

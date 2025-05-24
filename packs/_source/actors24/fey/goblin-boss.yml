@@ -506,7 +506,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -562,6 +561,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Scimitar
     system:
@@ -798,12 +803,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepScimitar00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720078
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmGoblinBoss0000.8gwXLDcYj3mk6Kr3'
   - name: Shortbow
     system:
@@ -1041,12 +1047,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepShortbow00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720078
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmGoblinBoss0000.XbNHC5OBGT6VQF40'
   - name: Chain Shirt
     system:
@@ -1110,12 +1117,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmChainShirt
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720078
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: JD069zlOByXNYHyx
     sort: 0
     _key: '!actors.items!mmGoblinBoss0000.JD069zlOByXNYHyx'
@@ -1183,12 +1191,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmShield0000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712720078
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: hdOImQziS8ffNnk5
     sort: 0
     _key: '!actors.items!mmGoblinBoss0000.hdOImQziS8ffNnk5'
@@ -1282,12 +1291,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737738597107
       modifiedTime: 1745712720078
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -1408,12 +1418,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.2.2
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmGoblinBoss0000.mmNimbleEscape00.7U7Pe61lsMZgN7qh
     flags:
@@ -1424,12 +1435,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmNimbleEscape00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737738599249
       modifiedTime: 1745712720078
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 1
@@ -1533,12 +1545,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRedirectAttack
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: 1737738600513
       modifiedTime: 1745712720078
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -1548,12 +1561,13 @@ folder: EypLbRzz5Hphlv5M
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1732598129404
   modifiedTime: 1745712720107
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

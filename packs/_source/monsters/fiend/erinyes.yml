@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: BeB04w7ftFRDaMQ6
     name: Hellish Weapons
@@ -498,9 +503,8 @@ items:
     system:
       description:
         value: >-
-          <p>The erinyes's weapon attacks are magical and deal an extra
-          <strong>13 (3d8) <em>poison damage</em></strong> on a hit (included in
-          the attacks).</p>
+          <p>The erinyes's weapon attacks are magical and deal an extra 13 (3d8)
+          poison damage on a hit (included in the attacks).</p>
         chat: >-
           <p>The erinyes's weapon attacks are magical and deal extra <em>poison
           damage</em> on a hit (included in the attacks).</p>
@@ -530,18 +534,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.uqoqQJ9NpMCPra6P
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.uqoqQJ9NpMCPra6P
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676883
+      modifiedTime: 1747956534789
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.BeB04w7ftFRDaMQ6'
   - _id: dvoOA7jzBnq2Lxza
     name: Longsword
@@ -551,8 +554,7 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]], or [[/damage average
-          attackMode=twoHanded]] damage if used with two hands, plus <strong>13
-          (3d8) <em>poison damage</em></strong>.</p>
+          attackMode=twoHanded]] damage if used with two hands.</p>
         chat: <p>The Erinyes attacks with its Longsword.</p>
       source:
         custom: ''
@@ -705,23 +707,23 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: longsword
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173384699
+      modifiedTime: 1747956560897
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.dvoOA7jzBnq2Lxza'
   - _id: W7sEr3m8MBrzYq2v
     name: Parry
@@ -730,9 +732,9 @@ items:
     system:
       description:
         value: >-
-          <p>The erinyes adds 4 to its <strong>AC</strong> against one melee
-          Attack that would hit it. To do so, the erinyes must see the attacker
-          and be wielding a melee weapon.</p>
+          <p>The erinyes adds 4 to its AC against one melee Attack that would
+          hit it. To do so, the erinyes must see the attacker and be wielding a
+          melee weapon.</p>
         chat: >-
           <p>The erinyes adds 4 to its <strong>AC</strong> against one melee
           Attack that would hit it.</p>
@@ -815,18 +817,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676883
+      modifiedTime: 1747956592936
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.W7sEr3m8MBrzYq2v'
   - _id: WharT2ReFy2FYTG0
     name: Magic Resistance
@@ -835,8 +836,8 @@ items:
     system:
       description:
         value: >-
-          <p>The erinyes has<strong> advantage </strong>on saving throws against
-          spells and other magical effects.</p>
+          <p>The erinyes has advantage on saving throws against spells and other
+          magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -864,18 +865,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747956540874
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.WharT2ReFy2FYTG0'
   - _id: qO61ofcSoMF4uxk8
     name: Plate Armor
@@ -943,18 +943,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.OjkIqlW2UpgFcjZa
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.OjkIqlW2UpgFcjZa
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.qO61ofcSoMF4uxk8'
   - _id: CElneYmOXIzyfv2a
     name: Longbow
@@ -964,9 +963,9 @@ items:
       description:
         value: >-
           <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a  <strong>DC 14 Constitution</strong> saving throw or be
-          poisoned. The poison lasts until it is removed by the lesser
-          restoration spell or similar magic.</p>
+          succeed on a [[/save]] saving throw or be &amp;Reference[poisoned].
+          The poison lasts until it is removed by the lesser restoration spell
+          or similar magic.</p>
         chat: >-
           <p>The Erinyes attacks with its Longbow. The target must make a
           <strong>Constitution</strong> saving throw.</p>
@@ -1169,19 +1168,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 1
-                denomination: 8
-                bonus: '@mod'
-                types:
-                  - piercing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: con
             dc:
@@ -1189,26 +1176,31 @@ items:
               formula: '14'
           sort: 0
       attuned: false
-      ammunition: {}
+      ammunition:
+        type: ''
       magicalBonus: null
       identifier: longbow
+      mastery: ''
     effects: []
     folder: null
-    sort: 0
+    sort: 300000
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.3cymOVja8jXbzrdT
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745173384699
+      modifiedTime: 1747956586249
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.CElneYmOXIzyfv2a'
   - _id: Fp0Jye7Qwk8KOvH7
     name: Multiattack
@@ -1297,18 +1289,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747956544623
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!3o2rQBqpzjIHmrBW.Fp0Jye7Qwk8KOvH7'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1318,10 +1309,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171200935
   modifiedTime: 1744916194548
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!3o2rQBqpzjIHmrBW'

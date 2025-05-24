@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: qFfEF7lLt2kH3RbA
     name: Bite
@@ -643,18 +648,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745450474492
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!u1UQfHutP5eEKkjM.qFfEF7lLt2kH3RbA'
   - _id: d9xXEIYNNQjIMGF8
     name: Claw
@@ -811,12 +815,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745450474492
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!u1UQfHutP5eEKkjM.d9xXEIYNNQjIMGF8'
   - _id: 78LbjdfWaZcAqVE7
     name: Cold Breath
@@ -932,18 +937,17 @@ items:
     sort: 400000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745450494994
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!u1UQfHutP5eEKkjM.78LbjdfWaZcAqVE7'
   - _id: g2nJbBJ06mRtxEy0
     name: Ice Walk
@@ -982,18 +986,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.YKC7pwYkJSKn1vuw
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.YKC7pwYkJSKn1vuw
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!u1UQfHutP5eEKkjM.g2nJbBJ06mRtxEy0'
   - _id: lRFwKaRqhFY4xNhJ
     name: Multiattack
@@ -1085,18 +1088,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745450475181
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!u1UQfHutP5eEKkjM.lRFwKaRqhFY4xNhJ'
 effects: []
 folder: PNekSR74iAZ5dJwZ
@@ -1106,10 +1108,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171264487
   modifiedTime: 1745450499055
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!u1UQfHutP5eEKkjM'

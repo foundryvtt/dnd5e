@@ -473,7 +473,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -485,6 +484,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: SYdqeemFOudCYb9E
     name: Pseudopod
@@ -653,12 +658,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107554054
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!xBhG7Dos3tkg9jWz.SYdqeemFOudCYb9E'
   - _id: Rrswv9BPB94D3xHQ
     name: Amorphous
@@ -696,18 +702,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.3lDp8DtWwNDHSvxX
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.3lDp8DtWwNDHSvxX
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!xBhG7Dos3tkg9jWz.Rrswv9BPB94D3xHQ'
   - _id: aaVwT7vVSywUzWhC
     name: Spider Climb
@@ -745,18 +750,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!xBhG7Dos3tkg9jWz.aaVwT7vVSywUzWhC'
   - _id: 2ifhxY5f2Xs4GMxR
     name: Split
@@ -852,18 +856,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.NzHwrEuKnKxZ4NTP
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.NzHwrEuKnKxZ4NTP
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676619
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!xBhG7Dos3tkg9jWz.2ifhxY5f2Xs4GMxR'
 effects: []
 folder: spz6Dws3tO6Qs5Mh
@@ -873,10 +876,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171265707
   modifiedTime: 1726171451798
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!xBhG7Dos3tkg9jWz'

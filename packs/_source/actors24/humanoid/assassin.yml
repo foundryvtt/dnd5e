@@ -497,7 +497,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -553,6 +552,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Shortsword
     system:
@@ -744,12 +749,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmAssassin000000.jLa5l9pntsTVrMKH.gUiotlwd6du6hxyJ
     sort: 0
@@ -763,12 +769,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepShortsword
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712713376
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmAssassin000000.jLa5l9pntsTVrMKH'
   - name: Light Crossbow
     system:
@@ -941,12 +948,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepLightCross
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712713376
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmAssassin000000.dL4668G7zXeC5zyY'
   - name: Studded Leather Armor
     system:
@@ -1010,12 +1018,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmStuddedLea
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712713376
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 21edXZRTQ2XOqsUl
     sort: 0
     _key: '!actors.items!mmAssassin000000.21edXZRTQ2XOqsUl'
@@ -1062,12 +1071,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmEvasion0000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712713376
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -1164,12 +1174,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712713376
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: -100000
@@ -1264,12 +1275,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmCunningAction0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712713376
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -1281,12 +1293,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415931803
   modifiedTime: 1745712713406
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 1HxBbZFsegOJ0cgu
     name: Hooves
@@ -628,18 +633,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550836
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!EIgAW1dWVPpyWLUh.1HxBbZFsegOJ0cgu'
 effects: []
 folder: pCy5ieJezFRCg9A0
@@ -649,10 +653,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171214782
   modifiedTime: 1745445119244
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!EIgAW1dWVPpyWLUh'

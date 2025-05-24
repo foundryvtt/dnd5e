@@ -494,7 +494,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -550,6 +549,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Scimitar
     system:
@@ -710,12 +715,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepScimitar00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712713831
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmBandit00000000.otGT32geRnrgVe3j'
   - name: Light Crossbow
     system:
@@ -878,12 +884,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepLightCross
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712713831
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmBandit00000000.0qG1ZLUPB2MrHV8B'
   - name: Leather Armor
     system:
@@ -947,12 +954,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.Item.phbarmLeatherArm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712713831
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: sD8cJZJSn1z2RKhf
     sort: 0
     _key: '!actors.items!mmBandit00000000.sD8cJZJSn1z2RKhf'
@@ -961,12 +969,13 @@ folder: oq65o5ZsauMtb1JY
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415931803
   modifiedTime: 1745712713858
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

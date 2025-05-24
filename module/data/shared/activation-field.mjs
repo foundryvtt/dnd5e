@@ -36,6 +36,9 @@ export default class ActivationField extends SchemaField {
       labels.activation = [
         this.activation.value, CONFIG.DND5E.activityActivationTypes[this.activation.type]?.label
       ].filterJoin(" ");
+      const formatter = game.i18n.getListFormatter({ type: "disjunction" });
+      labels.ritualActivation = this.properties?.has?.("ritual")
+        ? formatter.format([labels.activation, game.i18n.localize("DND5E.Ritual")]) : labels.activation;
     }
   }
 }

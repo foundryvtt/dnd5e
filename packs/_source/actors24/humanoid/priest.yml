@@ -494,7 +494,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -550,6 +549,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Mace
     system:
@@ -718,12 +723,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.equipment24.phbwepMace000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712725238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!mmPriest00000000.hRwqUlEyM9TjOmHy'
   - _id: mmMultiattack000
     name: Multiattack
@@ -815,12 +821,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712725238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 100000
@@ -975,12 +982,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRadiantFlame00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712725238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 300000
@@ -1171,12 +1179,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712725238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 400000
@@ -1429,12 +1438,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmDivineAid00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712725238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 3
@@ -1581,12 +1591,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.spells.Item.8dzaICjGy6mTUaUr.ActiveEffect.8rP3gwmXVTgZqYZE
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         img: icons/magic/holy/chalice-glowing-gold-water.webp
         type: base
         system: {}
@@ -1623,12 +1634,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmPriest00000000.pTeocF4StpOtAxCp.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1641,12 +1653,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplBless00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712725238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: pTeocF4StpOtAxCp
     _key: '!actors.items!mmPriest00000000.pTeocF4StpOtAxCp'
   - name: Dispel Magic
@@ -1769,12 +1782,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmPriest00000000.08e7KqfpyJGkvCS4.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -1787,12 +1801,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDispelMagi
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712725238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 08e7KqfpyJGkvCS4
     _key: '!actors.items!mmPriest00000000.08e7KqfpyJGkvCS4'
   - name: Healing Word
@@ -1926,12 +1941,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmPriest00000000.dNeqcysBBxKDW1rB.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1944,12 +1960,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHealingWor
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712725238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: dNeqcysBBxKDW1rB
     _key: '!actors.items!mmPriest00000000.dNeqcysBBxKDW1rB'
   - name: Lesser Restoration
@@ -2074,12 +2091,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmPriest00000000.91eijThR6aV99Tg5.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2092,12 +2110,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLesserRest
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712725238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 91eijThR6aV99Tg5
     _key: '!actors.items!mmPriest00000000.91eijThR6aV99Tg5'
   - name: Light
@@ -2249,12 +2268,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmPriest00000000.1F6pAxZqnn2QQhTm.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -2267,12 +2287,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplLight00000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712725238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 1F6pAxZqnn2QQhTm
     _key: '!actors.items!mmPriest00000000.1F6pAxZqnn2QQhTm'
   - name: Thaumaturgy
@@ -2408,12 +2429,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmPriest00000000.eyBhljnqMxfzc8px.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -2429,12 +2451,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712725238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: eyBhljnqMxfzc8px
     _key: '!actors.items!mmPriest00000000.eyBhljnqMxfzc8px'
   - name: Spiritual Weapon
@@ -2591,12 +2614,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmPriest00000000.KreMwVUMFCVqmF01.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -2612,12 +2636,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplSpiritualW
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712725238
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: KreMwVUMFCVqmF01
     _key: '!actors.items!mmPriest00000000.KreMwVUMFCVqmF01'
 effects: []
@@ -2625,12 +2650,13 @@ folder: oq65o5ZsauMtb1JY
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415931803
   modifiedTime: 1745712725274
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

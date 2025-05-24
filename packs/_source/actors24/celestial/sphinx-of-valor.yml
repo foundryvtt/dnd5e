@@ -495,7 +495,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -551,6 +550,12 @@ prototypeToken:
       texture: null
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mmInscrutable000
     name: Inscrutable
@@ -594,12 +599,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmInscrutable000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 0
@@ -699,12 +705,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmLegendaryResis
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 1
@@ -788,12 +795,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmMultiattack000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 2
@@ -920,12 +928,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmClaw0000000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 3
@@ -1224,12 +1233,13 @@ items:
         _stats:
           compendiumSource: Item.mmFirstRoar00000.ActiveEffect.i1vW34FukFAQIyLx
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.mmRoar0000000000.jcp949sl7JYRdhdB
       - name: Paralyzed
@@ -1271,12 +1281,13 @@ items:
         _stats:
           compendiumSource: Item.mmSecondRoar0000.ActiveEffect.Mqo7mTcWuKlgkQwb
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.mmRoar0000000000.sbId6Nv8mOtH5EKR
       - name: Prone
@@ -1314,12 +1325,13 @@ items:
         _stats:
           compendiumSource: Item.mmThirdRoar00000.ActiveEffect.WUw5xzKBfus0HHZR
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.mmRoar0000000000.UUPAry5ZunpEnKkn
     flags:
@@ -1330,12 +1342,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmRoar0000000000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 4
@@ -1740,12 +1753,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmSpellcasting00
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 5
@@ -1881,12 +1895,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.2ndWwKbQG28cUDsw.pOgbtXbKVGdbwjjE
       - _id: dnd5espellchange
@@ -1919,12 +1934,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.2ndWwKbQG28cUDsw.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -1940,12 +1956,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectEvil
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: 2ndWwKbQG28cUDsw
     _key: '!actors.items!mmSphinxOfValor0.2ndWwKbQG28cUDsw'
   - name: Thaumaturgy
@@ -2085,12 +2102,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.fK99FtV5a8VoCNTl.dnd5espellchange
     folder: 4FhsY9FJQd7h7MZb
@@ -2106,12 +2124,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplThaumaturg
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: fK99FtV5a8VoCNTl
     _key: '!actors.items!mmSphinxOfValor0.fK99FtV5a8VoCNTl'
   - name: Detect Magic
@@ -2247,12 +2266,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.spells24.Item.phbsplDetectEvil.ActiveEffect.pOgbtXbKVGdbwjjE
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.DfCLvZVa4EKzFByM.BHw91lQmVgdx39WZ
       - _id: dnd5espellchange
@@ -2285,12 +2305,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.DfCLvZVa4EKzFByM.dnd5espellchange
     folder: pBaAAtXBCq9FVEnL
@@ -2306,12 +2327,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDetectMagi
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: DfCLvZVa4EKzFByM
     _key: '!actors.items!mmSphinxOfValor0.DfCLvZVa4EKzFByM'
   - name: Dispel Magic
@@ -2434,12 +2456,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.w3fU9CJNOK5kJtrb.dnd5espellchange
     folder: HCovEE4VoPGlIbKi
@@ -2452,12 +2475,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplDispelMagi
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: w3fU9CJNOK5kJtrb
     _key: '!actors.items!mmSphinxOfValor0.w3fU9CJNOK5kJtrb'
   - name: Greater Restoration
@@ -2587,12 +2611,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.BXk2z10EMxnzvN4W.dnd5espellchange
     folder: beZ8MTpWY2cMEUlp
@@ -2605,12 +2630,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplGreaterRes
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: BXk2z10EMxnzvN4W
     _key: '!actors.items!mmSphinxOfValor0.BXk2z10EMxnzvN4W'
   - name: Heroes' Feast
@@ -2827,12 +2853,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.sDcBqPl7Y7t7OD6n.wGsbKojtJs43Pjyx
       - _id: dnd5espellchange
@@ -2865,12 +2892,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.sDcBqPl7Y7t7OD6n.dnd5espellchange
     folder: 8WmlLARx1Df3Ii9v
@@ -2883,12 +2911,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplHeroesFeas
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: sDcBqPl7Y7t7OD6n
     _key: '!actors.items!mmSphinxOfValor0.sDcBqPl7Y7t7OD6n'
   - name: Zone of Truth
@@ -3026,12 +3055,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.PsTixp9srIi2sCpI.BgkyT4A5qyArRveO
       - _id: dnd5espellchange
@@ -3064,12 +3094,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.PsTixp9srIi2sCpI.dnd5espellchange
     folder: 3SjcO2acsFnWegp4
@@ -3082,12 +3113,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.spells24.Item.phbsplZoneofTrut
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: PsTixp9srIi2sCpI
     _key: '!actors.items!mmSphinxOfValor0.PsTixp9srIi2sCpI'
   - _id: mmArcaneProwl000
@@ -3183,12 +3215,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmArcaneProwl000
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 6
@@ -3373,12 +3406,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.4.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!mmSphinxOfValor0.mmWeightOfYears0.Bf6DExMyhKyPPV4x
     flags:
@@ -3389,12 +3423,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd-monster-manual.features.Item.mmWeightOfYears0
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712727343
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     ownership:
       default: 0
     sort: 7
@@ -3406,12 +3441,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1745415477323
   modifiedTime: 1745712727381
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

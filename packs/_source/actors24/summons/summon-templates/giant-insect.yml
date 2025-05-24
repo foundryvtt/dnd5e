@@ -414,7 +414,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -470,6 +469,12 @@ prototypeToken:
       texture: icons/svg/mystery-man.svg
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Spider Climb
     system:
@@ -514,12 +519,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159368
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiSpiderClim'
   - name: Multiattack
     system:
@@ -625,12 +631,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159368
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiMultiattac'
   - name: Poison Jab
     system:
@@ -766,12 +773,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159368
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiPoisonJab0'
   - name: Web Bolt
     system:
@@ -932,12 +940,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!phbmobGiantInsec.phbaoiWebBoltSpi.Gvwt9wpCcJgC0yMl
     folder: null
@@ -948,12 +957,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159368
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiWebBoltSpi'
   - name: Venomous Spew
     system:
@@ -1085,12 +1095,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.actors24.Actor.phbginGiantCenti.Item.phbaoiVenomousSp.ActiveEffect.uUvxWKSj8qQRIbTK
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: 1725916429627
           modifiedTime: 1725916429627
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!phbmobGiantInsec.phbaoiVenomousSp.jVWtHTrlPNi4dpDi
     folder: null
@@ -1105,12 +1116,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159368
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbmobGiantInsec.phbaoiVenomousSp'
 effects: []
 folder: 4Lxoa4gitE28qJLk
@@ -1122,10 +1134,11 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425913370
   modifiedTime: 1745256827644
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!phbmobGiantInsec'

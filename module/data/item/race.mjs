@@ -1,6 +1,6 @@
 import Actor5e from "../../documents/actor/actor.mjs";
 import { defaultUnits, formatLength, splitSemicolons } from "../../utils.mjs";
-import { ItemDataModel } from "../abstract.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
 import { CreatureTypeField, MovementField, SensesField } from "../shared/_module.mjs";
 import ItemDescriptionTemplate from "./templates/item-description.mjs";

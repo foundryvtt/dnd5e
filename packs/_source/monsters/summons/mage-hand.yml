@@ -454,7 +454,6 @@ prototypeToken:
   detectionModes: []
   flags: {}
   randomImg: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -466,6 +465,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items: []
 effects: []
 sort: 600000
@@ -474,10 +479,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171268500
   modifiedTime: 1726171452473
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!zwT2WjWo7cTm2631'

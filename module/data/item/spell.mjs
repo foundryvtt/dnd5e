@@ -1,5 +1,5 @@
 import { filteredKeys } from "../../utils.mjs";
-import { ItemDataModel } from "../abstract.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import ActivationField from "../shared/activation-field.mjs";
 import DurationField from "../shared/duration-field.mjs";
 import RangeField from "../shared/range-field.mjs";

@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Ti3XQOmTKdgcnpAa
     name: Leather Armor
@@ -543,18 +548,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.WwdpHLXGX5r8uZu5
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!TjWQOgI3A4UAl7lC.Ti3XQOmTKdgcnpAa'
   - _id: sSs3hSzkKBMNBgTs
     name: Shield
@@ -620,18 +624,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!TjWQOgI3A4UAl7lC.sSs3hSzkKBMNBgTs'
   - _id: SxVatHq02vURYDt3
     name: Nimble Escape
@@ -669,18 +672,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.PqVfFNyOPmecrS7N
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.PqVfFNyOPmecrS7N
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!TjWQOgI3A4UAl7lC.SxVatHq02vURYDt3'
   - _id: S6UTTLu0bEB32HNG
     name: Scimitar
@@ -835,18 +837,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.fbC0Mg1a73wdFbqO
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.fbC0Mg1a73wdFbqO
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551927
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!TjWQOgI3A4UAl7lC.S6UTTLu0bEB32HNG'
   - _id: YqS3dsIlpWb2Q2UI
     name: Shortbow
@@ -1001,18 +1002,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.GJv6WkD7D2J6rP6M
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.GJv6WkD7D2J6rP6M
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385493
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!TjWQOgI3A4UAl7lC.YqS3dsIlpWb2Q2UI'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1022,10 +1022,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171233953
   modifiedTime: 1726171445256
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!TjWQOgI3A4UAl7lC'

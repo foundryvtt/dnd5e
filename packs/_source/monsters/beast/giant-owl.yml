@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: KPd0M35kARcddw1j
     name: Flyby
@@ -513,18 +518,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.7WfeHV27l7DMcuTG
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.7WfeHV27l7DMcuTG
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!VVXly3ue0i3YgGrB.KPd0M35kARcddw1j'
   - _id: u75qrcQ8DsrUULkS
     name: Keen Hearing and Sight
@@ -566,12 +570,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!VVXly3ue0i3YgGrB.u75qrcQ8DsrUULkS'
   - _id: 6jw1NtpZQXIesO4Y
     name: Talons
@@ -729,12 +734,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741121277920
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!VVXly3ue0i3YgGrB.6jw1NtpZQXIesO4Y'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -744,10 +750,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171236134
   modifiedTime: 1741121280035
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!VVXly3ue0i3YgGrB'

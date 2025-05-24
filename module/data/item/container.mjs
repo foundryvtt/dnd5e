@@ -1,5 +1,5 @@
 import { defaultUnits } from "../../utils.mjs";
-import { ItemDataModel } from "../abstract.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import CurrencyTemplate from "../shared/currency.mjs";
 import EquippableItemTemplate from "./templates/equippable-item.mjs";
 import IdentifiableTemplate from "./templates/identifiable.mjs";

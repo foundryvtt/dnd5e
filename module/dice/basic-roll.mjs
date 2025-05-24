@@ -218,8 +218,10 @@ export default class BasicRoll extends Roll {
     const messageId = config.event?.target.closest("[data-message-id]")?.dataset.messageId;
     if ( messageId ) foundry.utils.setProperty(message.data, "flags.dnd5e.originatingMessage", messageId);
 
-    if ( rolls?.length && (config.evaluate !== false) && (message.create !== false) ) {
-      message.document = await this.toMessage(rolls, message.data, { rollMode: message.rollMode });
+    if ( rolls?.length && (config.evaluate !== false) ) {
+      message[message.create !== false ? "document" : "data"] = await this.toMessage(
+        rolls, message.data, { create: message.create, rollMode: message.rollMode }
+      );
     }
 
     return message.document;
@@ -285,6 +287,7 @@ export default class BasicRoll extends Roll {
       if ( !roll._evaluated ) await roll.evaluate({ allowInteractive: rollMode !== CONST.DICE_ROLL_MODES.BLIND });
       rollMode ??= roll.options.rollMode;
     }
+    rollMode ??= game.settings.get("core", "rollMode");
 
     // Prepare chat data
     messageData = foundry.utils.mergeObject({ sound: CONFIG.sounds.dice }, messageData);

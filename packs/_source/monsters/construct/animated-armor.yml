@@ -474,7 +474,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -486,6 +485,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: jlZrv208u9gYyh7I
     name: Antimagic Susceptibility
@@ -527,18 +532,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.KMQAgNxBCAHrd2JU
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.KMQAgNxBCAHrd2JU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447373985
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!eORmAXuV5v3nWsQL.jlZrv208u9gYyh7I'
   - _id: Kwed9PPaTkZYr8Jh
     name: False Appearance
@@ -576,18 +580,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!eORmAXuV5v3nWsQL.Kwed9PPaTkZYr8Jh'
   - _id: bdRuWKCO8gXQPu16
     name: Multiattack
@@ -676,18 +679,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447399942
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!eORmAXuV5v3nWsQL.bdRuWKCO8gXQPu16'
   - _id: vUqKQJ1GGWbKg6cX
     name: Slam
@@ -845,12 +847,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447380310
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!eORmAXuV5v3nWsQL.vUqKQJ1GGWbKg6cX'
 effects: []
 folder: pucbjwWBrVMweiOd
@@ -860,10 +863,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171244829
   modifiedTime: 1745447403779
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!eORmAXuV5v3nWsQL'

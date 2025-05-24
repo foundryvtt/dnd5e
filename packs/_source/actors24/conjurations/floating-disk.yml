@@ -416,7 +416,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -475,6 +474,12 @@ prototypeToken:
       tokenRing:
         effects: 1
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Carry Weight Adjustment
     type: loot
@@ -520,12 +525,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680160285
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbsplFloatingDi.KTWQy1Nv101ubAeN'
 effects: []
 folder: 9mmdDqYZFLIJBacj
@@ -535,12 +541,13 @@ flags:
     powerfulBuild: true
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425918530
   modifiedTime: 1745256830151
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 925000
 ownership:
   default: 0

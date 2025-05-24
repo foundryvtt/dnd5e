@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: uhqyN44IRWXixgxU
     name: Pike
@@ -633,18 +638,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.tC0kcqZT9HHAO0PD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.tC0kcqZT9HHAO0PD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550021
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.uhqyN44IRWXixgxU'
   - _id: ICbiLFrPjwIfA1Nj
     name: Hooves
@@ -797,18 +801,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.re3oXQ3Xg4Z3Fr6O
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550021
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.ICbiLFrPjwIfA1Nj'
   - _id: v7ForWMLPJp1u78X
     name: Longbow
@@ -964,18 +967,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.3cymOVja8jXbzrdT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173384893
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.v7ForWMLPJp1u78X'
   - _id: iYlIoEDfSCrggrca
     name: Multiattack
@@ -1068,18 +1070,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655160
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.iYlIoEDfSCrggrca'
   - _id: 4R48w4DH2CqCpmED
     name: Charge
@@ -1187,18 +1188,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WqRzbokPG0am6AHb
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676912
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!5kZNNWzZ6HrfKuWf.4R48w4DH2CqCpmED'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -1208,10 +1208,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171203794
   modifiedTime: 1726171439784
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!5kZNNWzZ6HrfKuWf'

@@ -1,4 +1,4 @@
-import SystemDataModel from "../../abstract.mjs";
+import SystemDataModel from "../../abstract/system-data-model.mjs";
 import IdentifierField from "../../fields/identifier-field.mjs";
 import SourceField from "../../shared/source-field.mjs";
 

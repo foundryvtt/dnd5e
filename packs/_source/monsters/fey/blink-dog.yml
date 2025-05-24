@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: BNRcaqutWC30200X
     name: Keen Hearing and Smell
@@ -484,8 +489,8 @@ items:
     system:
       description:
         value: >-
-          <p>The dog has<strong> advantage </strong>on Wisdom (Perception)
-          checks that rely on hearing or smell.</p>
+          <p>The dog has advantage on Wisdom (Perception) checks that rely on
+          hearing or smell.</p>
         chat: ''
       source:
         custom: ''
@@ -517,12 +522,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747955785129
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!jOANE6M0My6UJF4e.BNRcaqutWC30200X'
   - _id: DcZYdK2iycSJzamK
     name: Bite
@@ -675,18 +681,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552951
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!jOANE6M0My6UJF4e.DcZYdK2iycSJzamK'
   - _id: 1IE8rHcJIihDWCda
     name: Teleport
@@ -788,18 +793,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!jOANE6M0My6UJF4e.1IE8rHcJIihDWCda'
 effects: []
 folder: 5TSd0wOZe1L5I3eJ
@@ -809,10 +813,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171251834
   modifiedTime: 1726171448723
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!jOANE6M0My6UJF4e'

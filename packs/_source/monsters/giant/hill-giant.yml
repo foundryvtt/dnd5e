@@ -465,7 +465,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -477,6 +476,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 1k58ryEYEYijhYOb
     name: Multiattack
@@ -567,18 +572,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273655374
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!9g4N9sjyh8Ql46to.1k58ryEYEYijhYOb'
   - _id: 250gOq5bpqIHb7rw
     name: Greatclub
@@ -732,18 +736,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.QRCsxkCwWNwswL9o
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.QRCsxkCwWNwswL9o
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550523
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!9g4N9sjyh8Ql46to.250gOq5bpqIHb7rw'
   - _id: lpyNJHYnhFtpLgo9
     name: Rock
@@ -900,12 +903,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385091
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!9g4N9sjyh8Ql46to.lpyNJHYnhFtpLgo9'
 effects: []
 folder: v8gFGdEluEFQdRQg
@@ -915,10 +919,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171209241
   modifiedTime: 1726171440725
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!9g4N9sjyh8Ql46to'

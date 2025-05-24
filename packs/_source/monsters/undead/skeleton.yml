@@ -468,7 +468,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -480,6 +479,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: hrTC2vP0xMgI8q8y
     name: Shortbow
@@ -634,18 +639,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.GJv6WkD7D2J6rP6M
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.GJv6WkD7D2J6rP6M
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385702
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!nU8GN8La8DCt8SDb.hrTC2vP0xMgI8q8y'
   - _id: qXbbvudRpBoul3bH
     name: Shortsword
@@ -800,18 +804,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.osLzOwQdPtrK3rQH
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553281
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!nU8GN8La8DCt8SDb.qXbbvudRpBoul3bH'
 effects: []
 folder: FsvtTiIRh93utaoh
@@ -821,10 +824,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171256162
   modifiedTime: 1726171449545
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!nU8GN8La8DCt8SDb'

@@ -1,5 +1,5 @@
 import { formatNumber, linkForUuid } from "../../../utils.mjs";
-import SystemDataModel from "../../abstract.mjs";
+import SystemDataModel from "../../abstract/system-data-model.mjs";
 import { FormulaField } from "../../fields/_module.mjs";
 
 const {

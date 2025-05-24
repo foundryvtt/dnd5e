@@ -414,7 +414,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -470,6 +469,12 @@ prototypeToken:
       texture: modules/dnd-dungeon-masters-guide/assets/subjects/carpet-of-flying.webp
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Carry Weight Adjustment
     type: loot
@@ -512,12 +517,13 @@ items:
     _stats:
       compendiumSource: Actor.dmg3x5CarpetofFl.Item.jRXMMWyLsf3cPmSP
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712710744
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!dmg6x9CarpetofFl.kgZMlH9XtkOvSHqQ'
 effects:
   - name: Overloaded
@@ -551,12 +557,13 @@ effects:
     _stats:
       compendiumSource: Actor.dmg3x5CarpetofFl.ActiveEffect.OOJj1Gc67HwjhG7Q
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.effects!dmg6x9CarpetofFl.XDasfDlazbjtYP26'
 folder: 2AjZvlZWDCwSd0ry
 flags:
@@ -564,12 +571,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1728938623230
   modifiedTime: 1745712710768
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

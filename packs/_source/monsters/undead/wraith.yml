@@ -484,7 +484,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -496,6 +495,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: RADMbiPme1Hrfu8E
     name: Create Specter
@@ -592,18 +597,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.SlAF2AE4ZKoUvQql
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.SlAF2AE4ZKoUvQql
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676716
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ET4PEVEiNJLU4f7c.RADMbiPme1Hrfu8E'
   - _id: idILnIUj76QH9v8w
     name: Incorporeal Movement
@@ -709,18 +713,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.LUHmtIDD1VTreFqI
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LUHmtIDD1VTreFqI
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676716
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ET4PEVEiNJLU4f7c.idILnIUj76QH9v8w'
   - _id: xZPFtf2vCYraWXVe
     name: Wraith - Life Drain
@@ -953,12 +956,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550850
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!ET4PEVEiNJLU4f7c.xZPFtf2vCYraWXVe'
   - _id: 3ERjE4pz2bgxXIPi
     name: Sunlight Sensitivity
@@ -997,18 +1001,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.F14aW2Ke3I5ZtSg4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.F14aW2Ke3I5ZtSg4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!ET4PEVEiNJLU4f7c.3ERjE4pz2bgxXIPi'
 effects: []
 folder: FsvtTiIRh93utaoh
@@ -1018,10 +1021,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171215436
   modifiedTime: 1726171441765
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!ET4PEVEiNJLU4f7c'

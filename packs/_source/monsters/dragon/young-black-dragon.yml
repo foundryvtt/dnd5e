@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 963t1Gp9Nsy3UY9D
     name: Acid Breath
@@ -598,18 +603,17 @@ items:
     sort: 400000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.zjcGly9P3Gn9MXt7
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.zjcGly9P3Gn9MXt7
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745448913385
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bcapsJdIhY5WktpT.963t1Gp9Nsy3UY9D'
   - _id: KRrrjifJpxjJ0zKy
     name: Amphibious
@@ -645,18 +649,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!bcapsJdIhY5WktpT.KRrrjifJpxjJ0zKy'
   - _id: kuTDtAq2QL2Tmr4h
     name: Bite
@@ -821,18 +824,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745448887696
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bcapsJdIhY5WktpT.kuTDtAq2QL2Tmr4h'
   - _id: gy0FMKec2tea9YI1
     name: Claw
@@ -989,12 +991,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745448887696
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bcapsJdIhY5WktpT.gy0FMKec2tea9YI1'
   - _id: ApR7vtoU4ec7UulE
     name: Multiattack
@@ -1086,18 +1089,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745448888523
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!bcapsJdIhY5WktpT.ApR7vtoU4ec7UulE'
 effects: []
 folder: PNekSR74iAZ5dJwZ
@@ -1107,10 +1109,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171241522
   modifiedTime: 1745448921128
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!bcapsJdIhY5WktpT'

@@ -1,5 +1,5 @@
 import CastActivity from "../../../documents/activity/cast.mjs";
-import SystemDataModel from "../../abstract.mjs";
+import SystemDataModel from "../../abstract/system-data-model.mjs";
 import { ActivitiesField } from "../../fields/activities-field.mjs";
 import UsesField from "../../shared/uses-field.mjs";
 

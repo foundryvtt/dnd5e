@@ -469,7 +469,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -481,6 +480,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: aap2fFb4b7uX3XAO
     name: Bite
@@ -720,18 +725,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550626
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.aap2fFb4b7uX3XAO'
   - _id: WqOflwn1ubAMkGdQ
     name: Rejuvenation
@@ -772,18 +776,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.JcfHlAcfwSWnt7Ud
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JcfHlAcfwSWnt7Ud
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676709
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.WqOflwn1ubAMkGdQ'
   - _id: Fla0ZsaY2HvXWqbR
     name: Spellcasting
@@ -837,18 +840,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fdmzHw875EzpXM2a
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015621
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.Fla0ZsaY2HvXWqbR'
   - _id: Utk1OQRwYkMkFRD3
     name: Mage Hand
@@ -953,21 +955,20 @@ items:
           sort: 0
       identifier: mage-hand
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3
+    flags: {}
     img: icons/magic/water/water-hand.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Utk1OQRwYkMkFRD3
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.Utk1OQRwYkMkFRD3'
   - _id: oIzA2MEHwxhtQneU
     name: Minor Illusion
@@ -1080,21 +1081,20 @@ items:
           sort: 0
       identifier: minor-illusion
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.oIzA2MEHwxhtQneU
+    flags: {}
     img: icons/magic/control/hypnosis-mesmerism-eye.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.oIzA2MEHwxhtQneU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.oIzA2MEHwxhtQneU'
   - _id: ctW81uiX56xZR2c5
     name: Ray of Frost
@@ -1217,21 +1217,20 @@ items:
           sort: 0
       identifier: ray-of-frost
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ctW81uiX56xZR2c5
+    flags: {}
     img: icons/magic/light/beam-rays-blue-small.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ctW81uiX56xZR2c5
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.ctW81uiX56xZR2c5'
   - _id: eS7XnnApoxRxYXPs
     name: Charm Person
@@ -1338,21 +1337,20 @@ items:
           sort: 0
       identifier: charm-person
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.eS7XnnApoxRxYXPs
+    flags: {}
     img: icons/magic/fire/explosion-fireball-medium-purple-pink.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.eS7XnnApoxRxYXPs
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.eS7XnnApoxRxYXPs'
   - _id: ghXTfe7sgCbgf1Q8
     name: Detect Magic
@@ -1456,21 +1454,20 @@ items:
           sort: 0
       identifier: detect-magic
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
+    flags: {}
     img: icons/magic/light/explosion-star-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.ghXTfe7sgCbgf1Q8'
   - _id: KhwiSi9fwVfUPtku
     name: Sleep
@@ -1596,18 +1593,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.KhwiSi9fwVfUPtku
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.KhwiSi9fwVfUPtku'
   - _id: ppWAAEul0QHtm4er
     name: Detect Thoughts
@@ -1738,21 +1734,20 @@ items:
           sort: 0
       identifier: detect-thoughts
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ppWAAEul0QHtm4er
+    flags: {}
     img: icons/magic/light/explosion-star-teal-purple.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ppWAAEul0QHtm4er
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.ppWAAEul0QHtm4er'
   - _id: 3Lo9boi7P2ro6QV4
     name: Hold Person
@@ -1853,21 +1848,20 @@ items:
           sort: 0
       identifier: hold-person
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4
+    flags: {}
     img: icons/magic/control/debuff-chains-ropes-purple.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.3Lo9boi7P2ro6QV4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.3Lo9boi7P2ro6QV4'
   - _id: IyikgTEOTv701jgQ
     name: Lightning Bolt
@@ -1987,21 +1981,20 @@ items:
           sort: 0
       identifier: lightning-bolt
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.IyikgTEOTv701jgQ
+    flags: {}
     img: icons/magic/lightning/bolt-forked-large-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.IyikgTEOTv701jgQ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.IyikgTEOTv701jgQ'
   - _id: 13uVuBQP6VaiSPvC
     name: Water Breathing
@@ -2102,21 +2095,20 @@ items:
           sort: 0
       identifier: water-breathing
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.13uVuBQP6VaiSPvC
+    flags: {}
     img: icons/magic/water/pseudopod-swirl-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.13uVuBQP6VaiSPvC
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.13uVuBQP6VaiSPvC'
   - _id: pybg5MNc3lkerH4Y
     name: Blight
@@ -2240,21 +2232,20 @@ items:
           sort: 0
       identifier: blight
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.pybg5MNc3lkerH4Y
+    flags: {}
     img: icons/magic/unholy/strike-beam-blood-large-red-green.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.pybg5MNc3lkerH4Y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.pybg5MNc3lkerH4Y'
   - _id: A4RsPuSvB9wFtz1j
     name: Dimension Door
@@ -2372,21 +2363,20 @@ items:
           sort: 0
       identifier: dimension-door
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.A4RsPuSvB9wFtz1j
+    flags: {}
     img: icons/magic/air/air-burst-spiral-large-pink.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.A4RsPuSvB9wFtz1j
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.A4RsPuSvB9wFtz1j'
   - _id: 91Sw6vOIaO7U8DvM
     name: Dominate Person
@@ -2510,21 +2500,20 @@ items:
           sort: 0
       identifier: dominate-person
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.91Sw6vOIaO7U8DvM
+    flags: {}
     img: icons/magic/air/air-burst-spiral-large-pink.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.91Sw6vOIaO7U8DvM
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!BAT6ld8qJZetpycL.91Sw6vOIaO7U8DvM'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -2534,10 +2523,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171211590
   modifiedTime: 1726171441072
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!BAT6ld8qJZetpycL'

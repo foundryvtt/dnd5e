@@ -416,7 +416,6 @@ prototypeToken:
     rotation: 0
     tint: '#9128d7'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -475,6 +474,12 @@ prototypeToken:
       tokenRing:
         effects: 1
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Move
     system:
@@ -581,12 +586,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680159972
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbsplArcaneEye0.phbaoiWizard0000'
 effects:
   - name: Invisible
@@ -617,12 +623,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: 1725998924254
       modifiedTime: 1725998924254
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.effects!phbsplArcaneEye0.dnd5einvisible00'
 folder: 9mmdDqYZFLIJBacj
 flags:
@@ -630,12 +637,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425918039
   modifiedTime: 1745256829895
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 950000
 ownership:
   default: 0

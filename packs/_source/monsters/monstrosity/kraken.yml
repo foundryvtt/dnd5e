@@ -475,7 +475,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -487,6 +486,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: lPywASGOeP26s2D9
     name: Amphibious
@@ -522,18 +527,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.lPywASGOeP26s2D9'
   - _id: uxrpcslS4BkraMVB
     name: Freedom of Movement
@@ -574,18 +578,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.fUMY4b9snsiKl30e
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.fUMY4b9snsiKl30e
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676965
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.uxrpcslS4BkraMVB'
   - _id: 1oNtSpRA4XS3L6to
     name: Siege Monster
@@ -621,18 +624,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.cSA0EbjlxCbst4gJ
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cSA0EbjlxCbst4gJ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.1oNtSpRA4XS3L6to'
   - _id: j4xzhdYjtz2migUE
     name: Multiattack
@@ -724,18 +726,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656875
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.j4xzhdYjtz2migUE'
   - _id: r51OovswZTVF8Yna
     name: Bite
@@ -958,18 +959,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553020
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.r51OovswZTVF8Yna'
   - _id: lfg28JvVAru30yJ4
     name: Tentacle
@@ -1135,12 +1135,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553020
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.lfg28JvVAru30yJ4'
   - _id: bwwyMBn4QwiNd4SM
     name: Fling
@@ -1254,18 +1255,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hxXzd3KCfnqnT89w
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hxXzd3KCfnqnT89w
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676965
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.bwwyMBn4QwiNd4SM'
   - _id: wVCkpBj5omvdfaMm
     name: Lightning Storm
@@ -1378,18 +1378,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.gM767AhU36B6LUGU
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gM767AhU36B6LUGU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676965
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.wVCkpBj5omvdfaMm'
   - _id: ojhTng7wa5ehcJz3
     name: Legendary Actions
@@ -1429,18 +1428,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.terEuqr148hQBkIq
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676965
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.ojhTng7wa5ehcJz3'
   - _id: y6iT81UwIkojo6c5
     name: Lair Actions
@@ -1484,18 +1482,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.P0DMM1rgpoiBodDT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676965
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.y6iT81UwIkojo6c5'
   - _id: K9y1op1wZOMNsFg0
     name: Regional Effects
@@ -1534,18 +1531,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.L7myj23X3PFPUNh6
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.K9y1op1wZOMNsFg0'
   - _id: e2EtrJsAPZ19WuE7
     name: Tentacle Attack or Fling
@@ -1640,18 +1636,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.czKwBo1qw5O2gCNy
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.czKwBo1qw5O2gCNy
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.e2EtrJsAPZ19WuE7'
   - _id: OKGAJSxcW9xQiwyj
     name: Lightning Storm
@@ -1746,18 +1741,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.gM767AhU36B6LUGU
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.gM767AhU36B6LUGU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.OKGAJSxcW9xQiwyj'
   - _id: K0T5NDyi2n8Yt8Ts
     name: Ink Cloud
@@ -1879,18 +1873,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.bojUXmNOZ2rJVujD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.bojUXmNOZ2rJVujD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676965
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!kVg37NlPcACAzjCT.K0T5NDyi2n8Yt8Ts'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -1900,10 +1893,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171252481
   modifiedTime: 1744916293114
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!kVg37NlPcACAzjCT'

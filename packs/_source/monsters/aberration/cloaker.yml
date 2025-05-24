@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: afXMbT7smRaCJbhc
     name: Bite
@@ -644,18 +649,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745276213080
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.afXMbT7smRaCJbhc'
   - _id: Dfy6ujJALd2FPxNy
     name: Damage Transfer
@@ -694,18 +698,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.0npeEcwmiVMdwGMV
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.0npeEcwmiVMdwGMV
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.Dfy6ujJALd2FPxNy'
   - _id: i7LEQhKLh7yPIldc
     name: False Appearance
@@ -743,18 +746,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kyVgQNSa12loxVvr
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.i7LEQhKLh7yPIldc'
   - _id: DxtSFI4LS6w1gzQP
     name: Light Sensitivity
@@ -792,18 +794,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.2l557y06401lwsqs
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.2l557y06401lwsqs
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745275788738
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.DxtSFI4LS6w1gzQP'
   - _id: E76WCem1q8Dt8qkE
     name: Multiattack
@@ -895,18 +896,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745275792507
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.E76WCem1q8Dt8qkE'
   - _id: ZRvdvg8n7pQdJ1Mj
     name: Tail
@@ -1063,12 +1063,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745275791763
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.ZRvdvg8n7pQdJ1Mj'
   - _id: Jiua0A8CFeKc7Zun
     name: Moan
@@ -1173,8 +1174,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.VvXrTnB2FscxqbG3
       dnd5e:
         riders:
           activity: []
@@ -1182,12 +1181,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VvXrTnB2FscxqbG3
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745276132912
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.Jiua0A8CFeKc7Zun'
   - _id: UYqrfrW4pmBsmtiQ
     name: Phantasms
@@ -1299,18 +1299,17 @@ items:
     sort: 500000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.t0ojYPOlKEbPpYNc
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.t0ojYPOlKEbPpYNc
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: 1745275791763
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!HPUO3weiwRQnql0d.UYqrfrW4pmBsmtiQ'
 effects: []
 folder: cHmylff3tHTzhvyb
@@ -1320,10 +1319,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171218692
   modifiedTime: 1745275851012
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!HPUO3weiwRQnql0d'

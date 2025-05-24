@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 8NY9Oy7LGoZ1f7gW
     name: Studded Leather Armor
@@ -540,18 +545,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.TIV3B1vbrVHIhQAm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.TIV3B1vbrVHIhQAm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!rb7OJt822wIO52qY.8NY9Oy7LGoZ1f7gW'
   - _id: u3rhYD4gsxWEFbMc
     name: Multiattack
@@ -644,18 +648,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657380
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!rb7OJt822wIO52qY.u3rhYD4gsxWEFbMc'
   - _id: tSPkVJScEndipsFU
     name: Scimitar
@@ -810,18 +813,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.fbC0Mg1a73wdFbqO
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.fbC0Mg1a73wdFbqO
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553733
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!rb7OJt822wIO52qY.tSPkVJScEndipsFU'
   - _id: mBUKIzY6aUW5Fnlm
     name: Dagger
@@ -977,18 +979,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.0E565kQUBmndJ1a2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.0E565kQUBmndJ1a2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385725
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!rb7OJt822wIO52qY.mBUKIzY6aUW5Fnlm'
   - _id: mGcPB4SMyYkHFK9N
     name: Parry
@@ -1080,18 +1081,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!rb7OJt822wIO52qY.mGcPB4SMyYkHFK9N'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1101,10 +1101,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171261393
   modifiedTime: 1726171450826
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!rb7OJt822wIO52qY'

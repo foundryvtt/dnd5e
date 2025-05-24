@@ -478,7 +478,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -490,6 +489,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 9kqiKxbLXk7Ved3q
     name: Innate Spellcasting
@@ -536,18 +541,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015765
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!OGPHF4sCVOAi87TU.9kqiKxbLXk7Ved3q'
   - _id: 7a3DRiT1Ku9AnAQO
     name: Magic Resistance
@@ -556,8 +560,8 @@ items:
     system:
       description:
         value: >-
-          <p>The glabrezu has<strong> advantage </strong>on saving throws
-          against spells and other magical effects.</p>
+          <p>The glabrezu has advantage on saving throws against spells and
+          other magical effects.</p>
         chat: ''
       source:
         custom: ''
@@ -585,18 +589,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.0.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747956600586
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!OGPHF4sCVOAi87TU.7a3DRiT1Ku9AnAQO'
   - _id: MCquBpEbQDXKRAju
     name: Multiattack
@@ -689,18 +692,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273656076
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!OGPHF4sCVOAi87TU.MCquBpEbQDXKRAju'
   - _id: pEUD99mri5iDNGH7
     name: Pincer
@@ -864,12 +866,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551551
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!OGPHF4sCVOAi87TU.pEUD99mri5iDNGH7'
   - _id: VGFZM2Zvp0NT5Yb9
     name: Fist
@@ -1026,12 +1029,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551551
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!OGPHF4sCVOAi87TU.VGFZM2Zvp0NT5Yb9'
   - _id: S7VbUetIfVT7B6Eq
     name: Darkness
@@ -1138,21 +1142,20 @@ items:
           sort: 0
       identifier: darkness
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq
+    flags: {}
     img: icons/magic/perception/eye-ringed-glow-angry-red.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!OGPHF4sCVOAi87TU.S7VbUetIfVT7B6Eq'
   - _id: ghXTfe7sgCbgf1Q8
     name: Detect Magic
@@ -1256,21 +1259,20 @@ items:
           sort: 0
       identifier: detect-magic
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
+    flags: {}
     img: icons/magic/light/explosion-star-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.ghXTfe7sgCbgf1Q8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!OGPHF4sCVOAi87TU.ghXTfe7sgCbgf1Q8'
   - _id: 15Fa6q1nH27XfbR8
     name: Dispel Magic
@@ -1375,21 +1377,20 @@ items:
           sort: 0
       identifier: dispel-magic
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.15Fa6q1nH27XfbR8
+    flags: {}
     img: icons/skills/melee/strike-blade-knife-orange-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.15Fa6q1nH27XfbR8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!OGPHF4sCVOAi87TU.15Fa6q1nH27XfbR8'
   - _id: 9hQXdMSmerkTsHDe
     name: Confusion
@@ -1547,18 +1548,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.9hQXdMSmerkTsHDe
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.spells.9hQXdMSmerkTsHDe
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!OGPHF4sCVOAi87TU.9hQXdMSmerkTsHDe'
   - _id: yfbK8gZqESlaoY5t
     name: Fly
@@ -1669,21 +1669,20 @@ items:
           sort: 0
       identifier: fly
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.yfbK8gZqESlaoY5t
+    flags: {}
     img: icons/magic/control/energy-stream-link-white.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.yfbK8gZqESlaoY5t
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!OGPHF4sCVOAi87TU.yfbK8gZqESlaoY5t'
   - _id: 35j2QIMmIk6aEdxj
     name: Power Word Stun
@@ -1795,21 +1794,20 @@ items:
           sort: 0
       identifier: power-word-stun
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.35j2QIMmIk6aEdxj
+    flags: {}
     img: icons/magic/control/debuff-chains-ropes-red.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.35j2QIMmIk6aEdxj
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!OGPHF4sCVOAi87TU.35j2QIMmIk6aEdxj'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1819,10 +1817,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171228239
   modifiedTime: 1744916188683
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!OGPHF4sCVOAi87TU'

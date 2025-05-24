@@ -3,7 +3,6 @@ img: icons/equipment/neck/necklace-runed-white-red.webp
 results:
   - _id: hqNgtftrPdWlwjkB
     type: text
-    text: I judge others harshly, and myself even more severely.
     weight: 1
     range:
       - 1
@@ -11,14 +10,21 @@ results:
     drawn: false
     flags: {}
     img: icons/svg/d20-black.svg
-    documentCollection: ''
-    documentId: null
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: I judge others harshly, and myself even more severely.
+    name: ''
     _key: '!tables.results!COIHGOnoJnmXduad.hqNgtftrPdWlwjkB'
   - _id: AGsooh2EWDp2lEsp
     type: text
-    text: >-
-      I put too much trust in those who wield power within my temple’s
-      hierarchy.
     weight: 1
     range:
       - 2
@@ -26,14 +32,23 @@ results:
     drawn: false
     flags: {}
     img: icons/svg/d20-black.svg
-    documentCollection: ''
-    documentId: null
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      I put too much trust in those who wield power within my temple’s
+      hierarchy.
+    name: ''
     _key: '!tables.results!COIHGOnoJnmXduad.AGsooh2EWDp2lEsp'
   - _id: AS5r7gvTOLfMIpCs
     type: text
-    text: >-
-      My piety sometimes leads me to blindly trust those that profess faith in
-      my god.
     weight: 1
     range:
       - 3
@@ -41,12 +56,23 @@ results:
     drawn: false
     flags: {}
     img: icons/svg/d20-black.svg
-    documentCollection: ''
-    documentId: null
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      My piety sometimes leads me to blindly trust those that profess faith in
+      my god.
+    name: ''
     _key: '!tables.results!COIHGOnoJnmXduad.AS5r7gvTOLfMIpCs'
   - _id: 7KvHTsznkLADGFYz
     type: text
-    text: I am inflexible in my thinking.
     weight: 1
     range:
       - 4
@@ -54,12 +80,21 @@ results:
     drawn: false
     flags: {}
     img: icons/svg/d20-black.svg
-    documentCollection: ''
-    documentId: null
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: I am inflexible in my thinking.
+    name: ''
     _key: '!tables.results!COIHGOnoJnmXduad.7KvHTsznkLADGFYz'
   - _id: lGyYBw17AcsiXEiW
     type: text
-    text: I am suspicious of strangers and expect the worst of them.
     weight: 1
     range:
       - 5
@@ -67,14 +102,21 @@ results:
     drawn: false
     flags: {}
     img: icons/svg/d20-black.svg
-    documentCollection: ''
-    documentId: null
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: I am suspicious of strangers and expect the worst of them.
+    name: ''
     _key: '!tables.results!COIHGOnoJnmXduad.lGyYBw17AcsiXEiW'
   - _id: qflg9bXyxaRkuBgo
     type: text
-    text: >-
-      Once I pick a goal, I become obsessed with it to the detriment of
-      everything else in my life.
     weight: 1
     range:
       - 6
@@ -82,8 +124,20 @@ results:
     drawn: false
     flags: {}
     img: icons/svg/d20-black.svg
-    documentCollection: ''
-    documentId: null
+    _stats:
+      coreVersion: '13.344'
+      systemId: null
+      systemVersion: null
+      createdTime: null
+      modifiedTime: null
+      lastModifiedBy: null
+      compendiumSource: null
+      duplicateSource: null
+      exportSource: null
+    description: >-
+      Once I pick a goal, I become obsessed with it to the detriment of
+      everything else in my life.
+    name: ''
     _key: '!tables.results!COIHGOnoJnmXduad.qflg9bXyxaRkuBgo'
 formula: 1d6
 replacement: true
@@ -97,10 +151,11 @@ _id: COIHGOnoJnmXduad
 description: ''
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1725037418792
   modifiedTime: 1725037418792
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!tables!COIHGOnoJnmXduad'

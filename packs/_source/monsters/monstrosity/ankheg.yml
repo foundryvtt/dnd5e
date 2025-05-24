@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: mGamlcdui038L6gU
     name: Bite
@@ -644,18 +649,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552116
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!Wcsjbl25uiUsyQwn.mGamlcdui038L6gU'
   - _id: XZwZexkrBLOzLo1Q
     name: Acid Spray
@@ -776,18 +780,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kZpl32DBmqxlRegX
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kZpl32DBmqxlRegX
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676576
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!Wcsjbl25uiUsyQwn.XZwZexkrBLOzLo1Q'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -797,10 +800,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171236983
   modifiedTime: 1726171445793
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!Wcsjbl25uiUsyQwn'

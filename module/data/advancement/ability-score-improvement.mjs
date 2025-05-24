@@ -1,4 +1,4 @@
-import { SparseDataModel } from "../abstract.mjs";
+import SparseDataModel from "../abstract/sparse-data-model.mjs";
 import MappingField from "../fields/mapping-field.mjs";
 
 const { NumberField, SetField, StringField } = foundry.data.fields;

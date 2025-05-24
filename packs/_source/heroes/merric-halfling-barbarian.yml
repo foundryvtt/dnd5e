@@ -510,7 +510,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -522,6 +521,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Vigilante
     type: background
@@ -552,12 +557,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: XIVdS0HZI5lOG5bx
     _key: '!actors.items!irWonyO6ZLh47sN7.XIVdS0HZI5lOG5bx'
   - _id: RGZjddjd3HbR39wD
@@ -714,12 +720,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.ZgYBjYYfiUstQD6f
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: 1738093997845
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     sort: 0
     folder: uQNrdSpcXeoB5EnX
     _key: '!actors.items!irWonyO6ZLh47sN7.RGZjddjd3HbR39wD'
@@ -774,12 +781,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.LOMdcNAGWh5xpfm4
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: 1738093814909
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!irWonyO6ZLh47sN7.yKdzupRNhbtpQNyd'
   - _id: pu50e2QGn8RAy1iw
     name: Brave
@@ -825,12 +833,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.7Yoo9hG0hfPSmBoC
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: 1738093814939
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!irWonyO6ZLh47sN7.pu50e2QGn8RAy1iw'
   - _id: Pu3BoEwS3aMhhKsA
     name: Halfling Nimbleness
@@ -878,12 +887,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.PqxZgcJzp1VVgP8t
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: 1738093814970
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!irWonyO6ZLh47sN7.Pu3BoEwS3aMhhKsA'
   - _id: cKdkwiXbwp1VVT9a
     name: Naturally Stealthy
@@ -931,12 +941,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.races.Item.GWPjKFeIthBBeCFJ
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: 1738093814999
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!irWonyO6ZLh47sN7.cKdkwiXbwp1VVT9a'
   - _id: 8q7gahMalAbKTx4Y
     name: Barbarian
@@ -1496,12 +1507,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classes.Item.pvEzGSv71zBhaolc
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: 1738093997877
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!irWonyO6ZLh47sN7.8q7gahMalAbKTx4Y'
   - _id: AnS6HmWkKIBxPgMb
     name: Rage
@@ -1630,12 +1642,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.1.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         img: icons/creatures/abilities/mouth-teeth-human.webp
         type: base
         system: {}
@@ -1653,12 +1666,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classfeatures.Item.VoR0SUrNX5EJVPIO
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: 1738093815030
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!irWonyO6ZLh47sN7.AnS6HmWkKIBxPgMb'
   - _id: SfgUIeZgxtkm17Ls
     name: Unarmored Defense (Barbarian)
@@ -1724,12 +1738,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.1.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         img: icons/magic/control/silhouette-hold-change-blue.webp
         type: base
         system: {}
@@ -1741,12 +1756,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.classfeatures.Item.SZbsNbaxFFGwBpNK
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: 1738093815061
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!irWonyO6ZLh47sN7.SfgUIeZgxtkm17Ls'
   - name: Tinderbox
     type: loot
@@ -1791,12 +1807,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.1FSubnBpSTDmVaYV
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     ownership:
       default: 0
     _id: kn942lwC0HOAr3sK
@@ -1920,12 +1937,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.1L5wkmbw0fmNAr38
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     ownership:
       default: 0
     _id: RXzyzw1tx9VAbayv
@@ -2088,12 +2106,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.1Lxk6kmoRhG8qQ0u
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: glDE9NU9RrYAKuFp
     sort: 0
     _key: '!actors.items!irWonyO6ZLh47sN7.glDE9NU9RrYAKuFp'
@@ -2241,12 +2260,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.29ZLE8PERtFVD3QU
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     ownership:
       default: 0
     _id: YWdXAdfWM7lju1JW
@@ -2369,12 +2389,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.8d95YV1jHcxPygJ9
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     ownership:
       default: 0
     _id: WEXKAaQCPLQeQVW8
@@ -2419,12 +2440,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.DVXmyetZuvxbzAwW
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: jK1BNCTqbLSV2xFc
     sort: 0
     _key: '!actors.items!irWonyO6ZLh47sN7.jK1BNCTqbLSV2xFc'
@@ -2584,12 +2606,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.DWLMnODrnHn8IbAG
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: VhXDOC3DfXopry1c
     sort: 0
     _key: '!actors.items!irWonyO6ZLh47sN7.VhXDOC3DfXopry1c'
@@ -2644,12 +2667,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.H8YCd689ezlD26aT
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: 1j8AQoiqnkA2FjZA
     sort: 0
     _key: '!actors.items!irWonyO6ZLh47sN7.1j8AQoiqnkA2FjZA'
@@ -2777,12 +2801,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.QXmaarJ4X8P0C1HV
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: LJHqe7VEIN8D1Rcu
     sort: 0
     _key: '!actors.items!irWonyO6ZLh47sN7.LJHqe7VEIN8D1Rcu'
@@ -2828,12 +2853,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.V13fjV5oSmvbRdgP
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: I640Jkga30Wx25Gp
     sort: 0
     _key: '!actors.items!irWonyO6ZLh47sN7.I640Jkga30Wx25Gp'
@@ -2994,12 +3020,13 @@ items:
     _stats:
       duplicateSource: null
       compendiumSource: Compendium.dnd5e.items.Item.eO7Fbv5WBk5zvGOc
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.1.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: jQGlvMSTD0lkqzYR
     sort: 0
     _key: '!actors.items!irWonyO6ZLh47sN7.jQGlvMSTD0lkqzYR'
@@ -3015,10 +3042,11 @@ flags:
 _id: irWonyO6ZLh47sN7
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.1.0
   createdTime: 1725036842158
   modifiedTime: 1738093116051
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!irWonyO6ZLh47sN7'

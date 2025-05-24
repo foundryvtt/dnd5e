@@ -1157,7 +1157,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     if ( action === "favorite" ) return this._onDropFavorite(event, { type, id });
     if ( data.type === "Activity" ) {
       const activity = await fromUuid(data.uuid);
-      if ( activity ) return this._onDropActivity(event, data);
+      if ( activity ) return this._onDropActivity(event, activity);
     }
     return super._onDrop(event);
   }

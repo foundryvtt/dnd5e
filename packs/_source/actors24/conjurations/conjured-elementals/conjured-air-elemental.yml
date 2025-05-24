@@ -416,7 +416,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -475,6 +474,12 @@ prototypeToken:
       tokenRing:
         effects: 1
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Air Element
     type: feat
@@ -685,12 +690,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.0
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!phbsplConjuredEl.1sm4KQqflaDX7MEu.NGnrAr3HdReYoTjS
     folder: null
@@ -705,12 +711,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680160164
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!phbsplConjuredEl.1sm4KQqflaDX7MEu'
 effects: []
 folder: UvlQFmKuGiSS9WJd
@@ -719,12 +726,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1724425918299
   modifiedTime: 1745256830009
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 100000
 ownership:
   default: 0

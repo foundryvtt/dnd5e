@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: Y4OikSWAB33cwfR2
     name: Plate Armor
@@ -543,18 +548,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.OjkIqlW2UpgFcjZa
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.OjkIqlW2UpgFcjZa
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.Y4OikSWAB33cwfR2'
   - _id: 46b7R0DbKIsxvWcv
     name: Multiattack
@@ -643,18 +647,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.46b7R0DbKIsxvWcv'
   - _id: iPLa96izrYFiVtaO
     name: Greatsword
@@ -809,18 +812,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.xMkP8BmFzElcsMaR
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.xMkP8BmFzElcsMaR
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107550814
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.iPLa96izrYFiVtaO'
   - _id: m68xw5aGQ7awxfYf
     name: Heavy Crossbow
@@ -976,18 +978,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.RmP0mYRn2J7K26rX
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.RmP0mYRn2J7K26rX
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173385210
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.m68xw5aGQ7awxfYf'
   - _id: FK0ZF8egty0u713z
     name: Leadership
@@ -1091,18 +1092,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.cl5sUkAIeJoAG4gh
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cl5sUkAIeJoAG4gh
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.FK0ZF8egty0u713z'
   - _id: AxY9pWHDr2M1SPCC
     name: Parry
@@ -1196,18 +1196,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676771
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.AxY9pWHDr2M1SPCC'
   - _id: Sp9AkcXsLCN09C9v
     name: Brave
@@ -1245,18 +1244,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.108q5fJnnBRoLKfe
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.108q5fJnnBRoLKfe
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!D5UqYD1EnTrJaMTO.Sp9AkcXsLCN09C9v'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1266,10 +1264,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171213566
   modifiedTime: 1726171441419
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!D5UqYD1EnTrJaMTO'

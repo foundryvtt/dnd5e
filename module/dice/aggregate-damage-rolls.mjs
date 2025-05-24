@@ -25,14 +25,8 @@ export default function aggregateDamageRolls(rolls, { respectProperties }={}) {
 
   // Create new damage rolls based on the aggregated terms
   const newRolls = [];
-  for ( const type of types.values() ) {
-    const roll = new CONFIG.Dice.DamageRoll();
-    roll.terms = type.terms;
-    roll._total = roll._evaluateTotal();
-    roll._evaluated = true;
-    roll.options = { type: type.type, properties: Array.from(type.properties) };
-    roll.resetFormula();
-    newRolls.push(roll);
+  for ( const { terms, type, properties } of types.values() ) {
+    newRolls.push(CONFIG.Dice.DamageRoll.fromTerms(terms, { type, properties: Array.from(properties) }));
   }
 
   return newRolls;

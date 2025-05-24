@@ -484,7 +484,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -496,6 +495,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: fo1ZqyGz5iv51Rj1
     name: Amorphous
@@ -533,18 +538,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.3lDp8DtWwNDHSvxX
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.3lDp8DtWwNDHSvxX
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!QGcQYZbVl4bWzi4E.fo1ZqyGz5iv51Rj1'
   - _id: Xa0lRW8VhYHTAQT0
     name: Shadow Stealth
@@ -635,18 +639,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.nUVFUgyKK7fmQaFh
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nUVFUgyKK7fmQaFh
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676570
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!QGcQYZbVl4bWzi4E.Xa0lRW8VhYHTAQT0'
   - _id: BrzbftAD7eqZXWA8
     name: Sunlight Weakness
@@ -684,18 +687,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.u1Tt4l4Mczgt3wOS
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.u1Tt4l4Mczgt3wOS
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!QGcQYZbVl4bWzi4E.BrzbftAD7eqZXWA8'
   - _id: 2OUOBIN4TJDoL0sJ
     name: Strength Drain
@@ -857,12 +859,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551716
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!QGcQYZbVl4bWzi4E.2OUOBIN4TJDoL0sJ'
 effects: []
 folder: FsvtTiIRh93utaoh
@@ -872,10 +875,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171230233
   modifiedTime: 1726171444492
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!QGcQYZbVl4bWzi4E'

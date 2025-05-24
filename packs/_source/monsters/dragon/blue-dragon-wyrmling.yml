@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: VkmpLaL0RYt8WrzR
     name: Bite
@@ -642,18 +647,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553347
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!najtPRiHLR6buSWe.VkmpLaL0RYt8WrzR'
   - _id: 7LCUjJcHm3odI9C8
     name: Lightning Breath
@@ -773,18 +777,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.LVnd9fq9cQj7rR0Q
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LVnd9fq9cQj7rR0Q
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745449334034
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!najtPRiHLR6buSWe.7LCUjJcHm3odI9C8'
 effects: []
 folder: PNekSR74iAZ5dJwZ
@@ -794,10 +797,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171256690
   modifiedTime: 1745449336496
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!najtPRiHLR6buSWe'

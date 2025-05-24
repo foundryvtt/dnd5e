@@ -416,7 +416,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -475,6 +474,12 @@ prototypeToken:
       tokenRing:
         effects: 1
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Fire Element
     type: feat
@@ -678,12 +683,13 @@ items:
           compendiumSource: >-
             Compendium.dnd5e.actors24.Actor.phbsplConjuredEl.Item.1sm4KQqflaDX7MEu.ActiveEffect.NGnrAr3HdReYoTjS
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.0.1
           createdTime: null
           modifiedTime: null
           lastModifiedBy: null
+          exportSource: null
         _key: >-
           !actors.items.effects!phbConjuredFireE.M6i0fFdNQmWKA4BZ.BWZxm9qxlXDSF6Dy
     folder: null
@@ -694,12 +700,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1740680158750
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: M6i0fFdNQmWKA4BZ
     _key: '!actors.items!phbConjuredFireE.M6i0fFdNQmWKA4BZ'
 effects: []
@@ -712,10 +719,11 @@ ownership:
   default: 0
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726782857688
   modifiedTime: 1745256827114
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!phbConjuredFireE'

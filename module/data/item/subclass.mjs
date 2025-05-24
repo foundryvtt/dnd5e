@@ -1,4 +1,4 @@
-import { ItemDataModel } from "../abstract.mjs";
+import ItemDataModel from "../abstract/item-data-model.mjs";
 import AdvancementField from "../fields/advancement-field.mjs";
 import IdentifierField from "../fields/identifier-field.mjs";
 import SpellcastingField from "./fields/spellcasting-field.mjs";

@@ -470,7 +470,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -482,6 +481,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: TizBVS6hRuBa8JYY
     name: Charge (Boar or Hybrid Form Only)
@@ -653,12 +658,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676932
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.TizBVS6hRuBa8JYY'
   - _id: 599WNlvXk7snLj4O
     name: Multiattack (Humanoid or Hybrid Form Only)
@@ -753,12 +759,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.599WNlvXk7snLj4O'
   - _id: NwivB5zd15WhthVJ
     name: Relentless
@@ -802,18 +809,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.8FX2KlWyBAKEYGzs
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.8FX2KlWyBAKEYGzs
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676932
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.NwivB5zd15WhthVJ'
   - _id: zzskoOXzAiMDZfbc
     name: Shapechanger
@@ -909,18 +915,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676932
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.zzskoOXzAiMDZfbc'
   - _id: 3TD2NpdjIDJxeLl9
     name: Tusks (Boar or Hybrid Form Only)
@@ -1141,12 +1146,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551134
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.3TD2NpdjIDJxeLl9'
   - _id: dtdXnvp5cptFkGPu
     name: Maul (Humanoid or Hybrid Form Only)
@@ -1305,12 +1311,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107551134
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!J9hgSaZODGjrNl9B.dtdXnvp5cptFkGPu'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1320,10 +1327,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171220722
   modifiedTime: 1726171442818
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!J9hgSaZODGjrNl9B'

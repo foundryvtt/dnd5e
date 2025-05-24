@@ -38,7 +38,7 @@ export default class AdvancementMigrationDialog extends Dialog5e {
    * @param {HTMLElement} target  Button that was clicked.
    */
   static async #onComplete(event, target) {
-    const formData = new FormDataExtended(this.element.querySelector("form"));
+    const formData = new foundry.applications.ux.FormDataExtended(this.element.querySelector("form"));
     this.result = this.options.advancements.filter(a => formData.object[a.id]);
     this.close();
   }

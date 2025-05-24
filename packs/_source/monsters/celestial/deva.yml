@@ -477,7 +477,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -489,6 +488,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: KRskTTMCEepXUPwU
     name: Angelic Weapons
@@ -530,18 +535,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.cz1LUaiXG8GshgU9
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.cz1LUaiXG8GshgU9
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745444972107
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!m4H3hjamBNMH09S9.KRskTTMCEepXUPwU'
   - _id: 3u5Rv7dQ2fIl1rbB
     name: Change Shape
@@ -639,18 +643,17 @@ items:
     sort: 300000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.JsAys4RSGi4lN5Jy
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745445097155
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!m4H3hjamBNMH09S9.3u5Rv7dQ2fIl1rbB'
   - _id: Lx0nT1oq0bLjX1lx
     name: Healing Touch
@@ -758,18 +761,17 @@ items:
     sort: 200000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.r3Ugp8f5Ckw2EUHL
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.r3Ugp8f5Ckw2EUHL
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745445236230
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!m4H3hjamBNMH09S9.Lx0nT1oq0bLjX1lx'
   - _id: dhEmGtIDAZEBrsZ2
     name: Innate Spellcasting
@@ -814,18 +816,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015906
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!m4H3hjamBNMH09S9.dhEmGtIDAZEBrsZ2'
   - _id: yo4YL40mReo1Gwx5
     name: Magic Resistance
@@ -863,18 +864,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745445015733
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!m4H3hjamBNMH09S9.yo4YL40mReo1Gwx5'
   - _id: P3T5BWT2TFHCxUkr
     name: Multiattack
@@ -963,18 +963,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447423880
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!m4H3hjamBNMH09S9.P3T5BWT2TFHCxUkr'
   - _id: qADu4OS68yINJCnZ
     name: Mace
@@ -1140,18 +1139,17 @@ items:
     sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.Ajyq6nGwF7FtLhDQ
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.Ajyq6nGwF7FtLhDQ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745445039573
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!m4H3hjamBNMH09S9.qADu4OS68yINJCnZ'
   - _id: Mzh95utKDPIrjiH8
     name: Detect Evil and Good
@@ -1254,21 +1252,20 @@ items:
           sort: 0
       identifier: detect-evil-and-good
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.Mzh95utKDPIrjiH8
+    flags: {}
     img: icons/magic/air/air-burst-spiral-blue-gray.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.Mzh95utKDPIrjiH8
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!m4H3hjamBNMH09S9.Mzh95utKDPIrjiH8'
   - _id: d54VDyFulD9xxY7J
     name: Commune
@@ -1384,21 +1381,20 @@ items:
           sort: 0
       identifier: commune
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.d54VDyFulD9xxY7J
+    flags: {}
     img: icons/magic/control/debuff-energy-hold-levitate-blue-yellow.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.d54VDyFulD9xxY7J
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!m4H3hjamBNMH09S9.d54VDyFulD9xxY7J'
   - _id: AGFMPAmuzwWO6Dfz
     name: Raise Dead
@@ -1526,21 +1522,20 @@ items:
           sort: 0
       identifier: raise-dead
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.AGFMPAmuzwWO6Dfz
+    flags: {}
     img: icons/magic/life/heart-cross-strong-purple-orange.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.AGFMPAmuzwWO6Dfz
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!m4H3hjamBNMH09S9.AGFMPAmuzwWO6Dfz'
 effects: []
 folder: pCy5ieJezFRCg9A0
@@ -1550,10 +1545,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171254414
   modifiedTime: 1744916078303
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!m4H3hjamBNMH09S9'

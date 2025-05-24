@@ -467,7 +467,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -479,6 +478,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: TwdKEVj1NjVefyq9
     name: Amphibious
@@ -514,18 +519,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.4Fap14HgvAwTAZuD
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.TwdKEVj1NjVefyq9'
   - _id: 9HX1VdEInbRUnBVL
     name: Innate Spellcasting
@@ -568,18 +572,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015973
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.9HX1VdEInbRUnBVL'
   - _id: C2ZJ3Oe30dyU2o7E
     name: Mimicry
@@ -590,7 +593,7 @@ items:
         value: >-
           <p>The hag can mimic animal sounds and humanoid voices. A creature
           that hears the sounds can tell they are imitations with a successful
-          <strong>DC 14 Wisdom (Insight) check</strong>.</p>
+          [[/check]] check.</p>
         chat: >-
           <p>The hag can mimic animal sounds and humanoid voices. A creature
           that hears the sounds can tell they are imitations with a successful
@@ -611,7 +614,55 @@ items:
         subtype: ''
       requirements: ''
       properties: []
-      activities: {}
+      activities:
+        0eU0qHrzuJTbqxUP:
+          type: check
+          _id: 0eU0qHrzuJTbqxUP
+          sort: 0
+          activation:
+            type: ''
+            override: false
+            condition: ''
+          consumption:
+            scaling:
+              allowed: false
+            spellSlot: true
+            targets: []
+          description:
+            chatFlavor: ''
+          duration:
+            units: inst
+            concentration: false
+            override: false
+          effects: []
+          range:
+            units: self
+            override: false
+            special: ''
+          target:
+            template:
+              contiguous: false
+              units: ft
+              type: ''
+            affects:
+              choice: false
+              type: ''
+            override: false
+            prompt: true
+          uses:
+            spent: 0
+            recovery: []
+            max: ''
+          check:
+            associated:
+              - ins
+            dc:
+              calculation: ''
+              formula: '14'
+            ability: wis
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -622,17 +673,20 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.zZkNtL97hn1P6OJC
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.zZkNtL97hn1P6OJC
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676755
+      modifiedTime: 1747955871763
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.C2ZJ3Oe30dyU2o7E'
   - _id: gtixTr9i63RtsSCv
     name: Claws
@@ -789,12 +843,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553825
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.gtixTr9i63RtsSCv'
   - _id: cvdyEyn0s7hKwIcN
     name: Illusory Appearance
@@ -894,18 +949,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.s7kqggp9VLDb39nu
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.s7kqggp9VLDb39nu
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.cvdyEyn0s7hKwIcN'
   - _id: Cdis1lnjFvqfoScV
     name: Invisible Passage
@@ -1001,18 +1055,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.FRIASnssihfMTZ7q
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.FRIASnssihfMTZ7q
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676755
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.Cdis1lnjFvqfoScV'
   - _id: CAxSzHWizrafT033
     name: Dancing Lights
@@ -1117,21 +1170,20 @@ items:
           sort: 0
       identifier: dancing-lights
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.CAxSzHWizrafT033
+    flags: {}
     img: icons/magic/fire/projectile-meteor-salvo-strong-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.CAxSzHWizrafT033
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.CAxSzHWizrafT033'
   - _id: oIzA2MEHwxhtQneU
     name: Minor Illusion
@@ -1244,21 +1296,20 @@ items:
           sort: 0
       identifier: minor-illusion
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.oIzA2MEHwxhtQneU
+    flags: {}
     img: icons/magic/control/hypnosis-mesmerism-eye.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.oIzA2MEHwxhtQneU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.oIzA2MEHwxhtQneU'
   - _id: cdrYKaFi98YWaBMw
     name: Vicious Mockery
@@ -1375,21 +1426,20 @@ items:
           sort: 0
       identifier: vicious-mockery
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.cdrYKaFi98YWaBMw
+    flags: {}
     img: icons/skills/toxins/cup-goblet-poisoned-spilled.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.cdrYKaFi98YWaBMw
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!saq6WM959pKHuaqP.cdrYKaFi98YWaBMw'
 effects: []
 folder: 5TSd0wOZe1L5I3eJ
@@ -1399,10 +1449,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171262458
   modifiedTime: 1726171451095
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!saq6WM959pKHuaqP'

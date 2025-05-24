@@ -17,6 +17,18 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
   }
 
   /* -------------------------------------------- */
+  /*  Properties                                  */
+  /* -------------------------------------------- */
+
+  /**
+   * The item this advancement data belongs to.
+   * @returns {Item5e}
+   */
+  get item() {
+    return this.parent?.parent?.item;
+  }
+
+  /* -------------------------------------------- */
   /*  Data Migrations                             */
   /* -------------------------------------------- */
 
@@ -40,7 +52,18 @@ export default class SpellConfigurationData extends foundry.abstract.DataModel {
   applySpellChanges(itemData, { ability }={}) {
     ability = this.ability.size ? this.ability.has(ability) ? ability : this.ability.first() : null;
     if ( ability ) foundry.utils.setProperty(itemData, "system.ability", ability);
-    if ( this.preparation ) foundry.utils.setProperty(itemData, "system.preparation.mode", this.preparation);
+
+    if ( this.preparation ) {
+      foundry.utils.setProperty(itemData, "system.preparation.mode", this.preparation);
+      const notAtWill = (this.preparation !== "atwill") && (this.preparation !== "innate");
+      const hasClass = (this.item?.type === "class") || (this.item?.type === "subclass");
+
+      // Set source class.
+      if ( notAtWill && hasClass ) {
+        const identifier = this.item.type === "class" ? this.item.identifier : this.item.system.classIdentifier;
+        if ( identifier ) foundry.utils.setProperty(itemData, "system.sourceClass", identifier);
+      }
+    }
 
     if ( this.uses.max && this.uses.per ) {
       foundry.utils.setProperty(itemData, "system.uses.max", this.uses.max);

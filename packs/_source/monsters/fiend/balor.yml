@@ -477,7 +477,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -489,6 +488,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: nzkZgDrDq0RwWUao
     name: Death Throes
@@ -498,11 +503,10 @@ items:
       description:
         value: >-
           <p>When the balor dies, it explodes, and each creature within 30 feet
-          of it must make a  <strong>DC 20 Dexterity</strong> saving throw,
-          taking <strong>70 (20d6) <em>fire damage</em></strong> on a failed
-          save, or half as much damage on a successful one.</p><p>The explosion
-          ignites flammable objects in that area that aren't being worn or
-          carried, and it destroys the balor's weapons.</p>
+          of it must make a [[/save]] saving throw, taking [[/damage average]]
+          damage on a failed save, or half as much damage on a successful
+          one.</p><p>The explosion ignites flammable objects in that area that
+          aren't being worn or carried, and it destroys the balor's weapons.</p>
         chat: >-
           <p>When the balor dies, it explodes, and each creature within 30 feet
           of it must make a <strong>Dexterity</strong> saving throw. The
@@ -529,7 +533,7 @@ items:
           _id: dnd5eactivity000
           type: save
           activation:
-            type: special
+            type: ''
             value: null
             condition: Upon death
             override: false
@@ -575,24 +579,23 @@ items:
           damage:
             onSave: half
             parts:
-              - number: 20
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 20
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           save:
             ability: dex
             dc:
               calculation: ''
               formula: '20'
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -603,17 +606,20 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EmlE1a0rhucK2UT1
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EmlE1a0rhucK2UT1
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676903
+      modifiedTime: 1747956196138
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.nzkZgDrDq0RwWUao'
   - _id: FWSzSLqeIDq7meXC
     name: Fire Aura
@@ -623,11 +629,10 @@ items:
       description:
         value: >-
           <p>At the start of each of the balor's turns, each creature within 5
-          feet of it takes <strong>10 (3d6) <em>fire damage</em></strong>, and
-          flammable objects in the aura that aren't being worn or carried
-          ignite.</p><p>A creature that touches the balor or hits it with a
-          melee attack while within 5 feet of it takes <strong>10 (3d6) <em>fire
-          damage</em></strong>.</p>
+          feet of it takes [[/damage average]] damage, and flammable objects in
+          the aura that aren't being worn or carried ignite.</p><p>A creature
+          that touches the balor or hits it with a melee attack while within 5
+          feet of it takes [[/damage average]] damage.</p>
         chat: >-
           <p>At the start of each of the balor's turns, each creature within 5
           feet of it takes <em>fire damage</em>, and flammable objects in the
@@ -655,7 +660,7 @@ items:
           _id: dnd5eactivity000
           type: damage
           activation:
-            type: special
+            type: ''
             value: null
             condition: ''
             override: false
@@ -675,9 +680,10 @@ items:
             override: false
           effects: []
           range:
-            units: ft
+            units: self
             special: ''
             override: false
+            value: ''
           target:
             template:
               count: ''
@@ -689,7 +695,7 @@ items:
               units: ft
             affects:
               count: ''
-              type: ''
+              type: creature
               choice: false
               special: ''
             prompt: true
@@ -703,19 +709,18 @@ items:
               allow: false
               bonus: ''
             parts:
-              - number: 3
+              - custom:
+                  enabled: false
+                  formula: ''
+                number: 3
                 denomination: 6
                 bonus: ''
                 types:
                   - fire
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
           sort: 0
+          name: ''
+          img: ''
+          appliedEffects: []
       enchant: {}
       prerequisites:
         level: null
@@ -726,17 +731,20 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.LJTY3nl1cp9go4eT
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LJTY3nl1cp9go4eT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.2.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1736804676903
+      modifiedTime: 1747956232743
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.FWSzSLqeIDq7meXC'
   - _id: 0Y2ThqWytMPb9RlR
     name: Magic Resistance
@@ -774,18 +782,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.Hc6MqLQhPTI1KOvm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.0Y2ThqWytMPb9RlR'
   - _id: 5TGqX6bI8BdLEvTk
     name: Magic Weapons
@@ -821,18 +828,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.nahRRxck9R5GVVFS
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.5TGqX6bI8BdLEvTk'
   - _id: qzphlErr2D2mRpxT
     name: Multiattack
@@ -924,18 +930,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657585
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.qzphlErr2D2mRpxT'
   - _id: mw93amZDA4ctKqvQ
     name: Teleport
@@ -1025,21 +1030,20 @@ items:
       identifier: teleport
     effects: []
     folder: null
-    sort: 0
+    sort: 100000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.PPzVD90vab60FqCt
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
-      modifiedTime: null
-      lastModifiedBy: null
+      modifiedTime: 1747956115054
+      lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.mw93amZDA4ctKqvQ'
   - _id: 6ZAh5TkiXwQMUfDB
     name: Longsword
@@ -1209,18 +1213,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553951
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.6ZAh5TkiXwQMUfDB'
   - _id: 1oGgJQB1ItqyKoZ5
     name: Whip
@@ -1229,9 +1232,9 @@ items:
     system:
       description:
         value: >-
-          <p>[[/attack extended]]. [[/damage extended]].</p><p>The target must
-          succeed on a  <strong>DC 20 Strength</strong> saving throw or be
-          pulled up to 25 feet toward the balor.</p>
+          <p>[[/attack extended]]. [[/damage extended]]. The target must succeed
+          on a [[/save]] saving throw or be pulled up to 25 feet toward the
+          balor.</p>
         chat: >-
           <p>The Balor attacks with its Whip. The target must make a
           <strong>Strength</strong> saving throw.</p>
@@ -1433,19 +1436,7 @@ items:
             recovery: []
           damage:
             onSave: half
-            parts:
-              - number: 2
-                denomination: 6
-                bonus: '@mod'
-                types:
-                  - slashing
-                custom:
-                  enabled: false
-                  formula: ''
-                scaling:
-                  mode: whole
-                  number: null
-                  formula: ''
+            parts: []
           save:
             ability: str
             dc:
@@ -1456,23 +1447,27 @@ items:
       ammunition: {}
       magicalBonus: null
       identifier: whip
+      mastery: ''
     effects: []
     folder: null
     sort: 0
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.QKTyxoO0YDnAsbYe
+      dnd5e:
+        riders:
+          activity: []
+          effect: []
     _stats:
       compendiumSource: Compendium.dnd5e.items.QKTyxoO0YDnAsbYe
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
-      systemVersion: 4.4.0
+      systemVersion: 5.1.0
       createdTime: null
-      modifiedTime: 1745107553951
+      modifiedTime: 1747956149361
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!uZ8NrRenwYZ4qNf6.1oGgJQB1ItqyKoZ5'
 effects: []
 folder: P1YKVDd1IN7XXWWy
@@ -1482,10 +1477,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171264697
   modifiedTime: 1744916270297
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!uZ8NrRenwYZ4qNf6'

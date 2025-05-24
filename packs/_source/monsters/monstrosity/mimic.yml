@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: DOyBdRdgMxLm9BIh
     name: Shapechanger
@@ -572,18 +577,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.VhByyxHJN7MNQJRd
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676894
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.DOyBdRdgMxLm9BIh'
   - _id: aPL8wE2ARwh9JFeX
     name: Adhesive (Object Form Only)
@@ -630,12 +634,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676894
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.aPL8wE2ARwh9JFeX'
   - _id: 7g1LwEync57GwqV0
     name: False Appearance (Object Form Only)
@@ -677,12 +682,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.7g1LwEync57GwqV0'
   - _id: sGiOJWWFPPQ6J5Zm
     name: Grappler
@@ -720,18 +726,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kP9t6MAeUvBBmoM3
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kP9t6MAeUvBBmoM3
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.sGiOJWWFPPQ6J5Zm'
   - _id: qHJyEXRC7oExTjES
     name: Pseudopod
@@ -890,12 +895,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552842
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.qHJyEXRC7oExTjES'
   - _id: HgNW3DcqMvGVXO7s
     name: Bite
@@ -1060,18 +1066,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107552842
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hx240PG5r5qpRet3.HgNW3DcqMvGVXO7s'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -1081,10 +1086,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171250239
   modifiedTime: 1726171448406
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!hx240PG5r5qpRet3'

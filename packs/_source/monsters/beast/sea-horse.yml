@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: PBYkvhJmi5ACi2MO
     name: Water Breathing
@@ -511,18 +516,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.c4Q6NDCLJSNcNc9T
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.c4Q6NDCLJSNcNc9T
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!FWSDiq9SZsdiBAa8.PBYkvhJmi5ACi2MO'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -532,10 +536,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171216563
   modifiedTime: 1741122904604
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!FWSDiq9SZsdiBAa8'

@@ -414,7 +414,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -470,6 +469,12 @@ prototypeToken:
       texture: modules/dnd-dungeon-masters-guide/assets/subjects/floating-whip.webp
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Melee Spell Attack
     type: feat
@@ -579,12 +584,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712711016
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!dmgqftFloatingWh.JczWMhh6A5JU8yfN'
 effects: []
 folder: 2AjZvlZWDCwSd0ry
@@ -593,12 +599,13 @@ flags:
     showTokenPortrait: false
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1730770660175
   modifiedTime: 1745712711041
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

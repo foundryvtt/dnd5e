@@ -466,7 +466,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -478,6 +477,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: 3Fnspq3GjJ5g41lM
     name: Fey Ancestry
@@ -515,18 +520,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.LvSBjRKoCAKaAnQy
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.LvSBjRKoCAKaAnQy
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.3Fnspq3GjJ5g41lM'
   - _id: uRaC62ut3Hk63e7m
     name: Innate Spellcasting
@@ -570,18 +574,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.hkmTEk6klT6QL4K4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745447015471
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.uRaC62ut3Hk63e7m'
   - _id: 3wBoA7GvO2fw1Qnu
     name: Spider Climb
@@ -619,18 +622,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.FXHEc39G2d19opuE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.3wBoA7GvO2fw1Qnu'
   - _id: tnQSw6SXTbUKi6vN
     name: Sunlight Sensitivity
@@ -669,18 +671,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.F14aW2Ke3I5ZtSg4
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.F14aW2Ke3I5ZtSg4
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.tnQSw6SXTbUKi6vN'
   - _id: 4fZJqIbZDoAx8Yix
     name: Web Walker
@@ -716,18 +717,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.zITrVwmnPpLoBZI1
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.zITrVwmnPpLoBZI1
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.4fZJqIbZDoAx8Yix'
   - _id: ThVO3VFsGgg3GLc5
     name: Multiattack
@@ -820,18 +820,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273654865
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.ThVO3VFsGgg3GLc5'
   - _id: rUvv8Vnh7XbqbCLd
     name: Bite
@@ -996,8 +995,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       dnd5e:
         riders:
           activity: []
@@ -1005,12 +1002,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107660028
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.rUvv8Vnh7XbqbCLd'
   - _id: xqwxVn28J0zx8Y7H
     name: Longsword
@@ -1166,18 +1164,17 @@ items:
     sort: 300000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.10ZP2Bu3vnCuYMIB
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173384521
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.xqwxVn28J0zx8Y7H'
   - _id: 3XAtYmmaED1rxaaE
     name: Longbow
@@ -1345,18 +1342,17 @@ items:
     sort: 400000
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.3cymOVja8jXbzrdT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.3cymOVja8jXbzrdT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745173384521
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.3XAtYmmaED1rxaaE'
   - _id: CAxSzHWizrafT033
     name: Dancing Lights
@@ -1461,21 +1457,20 @@ items:
           sort: 0
       identifier: dancing-lights
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.CAxSzHWizrafT033
+    flags: {}
     img: icons/magic/fire/projectile-meteor-salvo-strong-blue.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.CAxSzHWizrafT033
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.CAxSzHWizrafT033'
   - _id: S7VbUetIfVT7B6Eq
     name: Darkness
@@ -1590,21 +1585,20 @@ items:
           sort: 0
       identifier: darkness
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq
+    flags: {}
     img: icons/magic/perception/eye-ringed-glow-angry-red.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.S7VbUetIfVT7B6Eq
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.S7VbUetIfVT7B6Eq'
   - _id: nqBDWkVOfcGZt4YU
     name: Faerie Fire
@@ -1719,21 +1713,20 @@ items:
           sort: 0
       identifier: faerie-fire
     sort: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.spells.nqBDWkVOfcGZt4YU
+    flags: {}
     img: icons/magic/fire/projectile-meteor-salvo-strong-teal.webp
     effects: []
     folder: null
     _stats:
       compendiumSource: Compendium.dnd5e.spells.nqBDWkVOfcGZt4YU
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!1OQbxoZI5BtlB2ME.nqBDWkVOfcGZt4YU'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -1743,10 +1736,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171198662
   modifiedTime: 1745107675163
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!1OQbxoZI5BtlB2ME'

@@ -468,7 +468,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -480,6 +479,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: gbqFx1sEQUYQlDpJ
     name: Keen Hearing and Smell
@@ -521,12 +526,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!yGTh874etxUckmAf.gbqFx1sEQUYQlDpJ'
   - _id: axhIBG9zM7Z9AHxL
     name: Pack Tactics
@@ -565,18 +571,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.V1lW1vnrTpVTDr6o
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!yGTh874etxUckmAf.axhIBG9zM7Z9AHxL'
   - _id: pu8fxDuua6ObNqtg
     name: Snow Camouflage
@@ -614,18 +619,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.jnKOUieu2UO1xHhT
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.jnKOUieu2UO1xHhT
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!yGTh874etxUckmAf.pu8fxDuua6ObNqtg'
   - _id: 5PmQuifZGbPWxAYz
     name: Bite
@@ -843,8 +847,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       dnd5e:
         riders:
           activity: []
@@ -852,12 +854,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741124014456
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!yGTh874etxUckmAf.5PmQuifZGbPWxAYz'
   - _id: Rj3oSInoQMIfHrPc
     name: Cold Breath
@@ -987,8 +990,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
       dnd5e:
         riders:
           activity: []
@@ -996,12 +997,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.iHOaiOqwUWIfCljJ
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741124061365
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!yGTh874etxUckmAf.Rj3oSInoQMIfHrPc'
 effects: []
 folder: MMKVDW6XI98WdIVu
@@ -1011,10 +1013,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171266486
   modifiedTime: 1741124065912
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!yGTh874etxUckmAf'

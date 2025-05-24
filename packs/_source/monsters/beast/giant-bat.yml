@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 1
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: UfsuvLGCWiYxrys1
     name: Echolocation
@@ -511,18 +516,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.rUongiWD51ZopRk2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.rUongiWD51ZopRk2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!SoK7l5zJQKxTVgLL.UfsuvLGCWiYxrys1'
   - _id: 6xCOiR7PxQkaDGY4
     name: Keen Hearing
@@ -564,12 +568,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!SoK7l5zJQKxTVgLL.6xCOiR7PxQkaDGY4'
   - _id: r77BXFVYT1LuJCZs
     name: Bite
@@ -723,18 +728,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.WdpSeGqhZpptz37y
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741118044954
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!SoK7l5zJQKxTVgLL.r77BXFVYT1LuJCZs'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -744,10 +748,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171232702
   modifiedTime: 1741118048982
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!SoK7l5zJQKxTVgLL'

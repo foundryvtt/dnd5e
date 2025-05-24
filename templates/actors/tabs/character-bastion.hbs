@@ -88,8 +88,14 @@
             <dnd5e-icon src="systems/dnd5e/icons/svg/ink-pot.svg"></dnd5e-icon>
             <span class="roboto-upper">{{ localize "DND5E.FACILITY.Description" }}</span>
         </h3>
-        {{ editor bastion.description target="system.bastion.description" button=false editable=editable
-                  engine="prosemirror" collaborate=false }}
+        {{#if editable}}
+        <prose-mirror name="system.bastion.description" value="{{ source.bastion.description }}"
+                      document-uuid="{{ actor.uuid }}"></prose-mirror>
+        {{else}}
+        <div class="editor">
+            <div class="editor-content">{{{ bastion.description }}}</div>
+        </div>
+        {{/if}}
     </section>
 
 </section>

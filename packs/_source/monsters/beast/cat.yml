@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: QEiTKu95xZ1ovW5K
     name: Claws
@@ -639,12 +644,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1744916839039
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!hIf83RD3ZVW4Egfi.QEiTKu95xZ1ovW5K'
   - _id: rZhUwhHEUo6VBxPt
     name: Keen Smell
@@ -791,12 +797,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!hIf83RD3ZVW4Egfi.rZhUwhHEUo6VBxPt'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -806,10 +813,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171249141
   modifiedTime: 1741117135353
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!hIf83RD3ZVW4Egfi'

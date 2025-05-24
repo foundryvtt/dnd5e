@@ -1,7 +1,7 @@
 _id: dmgApparatusofKw
 name: Apparatus of the Crab
 type: vehicle
-img: ''
+img: icons/svg/mystery-man.svg
 system:
   currency:
     pp: 0
@@ -174,7 +174,7 @@ prototypeToken:
   width: 2
   height: 2
   texture:
-    src: ''
+    src: icons/svg/mystery-man.svg
     anchorX: 0.5
     anchorY: 0.5
     offsetX: 0
@@ -185,7 +185,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -242,6 +241,12 @@ prototypeToken:
         modules/dnd-dungeon-masters-guide/assets/subjects/apparatus-of-kwalish.webp
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Claw Attack
     type: feat
@@ -355,12 +360,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712710795
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!dmgApparatusofKw.fmdWz6RQsUCHneZF'
   - name: Grapple Attack
     type: feat
@@ -511,12 +517,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712710795
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _id: tgIjCBtGCZvMu8ij
     _key: '!actors.items!dmgApparatusofKw.tgIjCBtGCZvMu8ij'
 effects:
@@ -554,12 +561,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.4
       createdTime: null
       modifiedTime: 1728508865121
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.effects!dmgApparatusofKw.D6TOlFQbOM6V0Jv8'
   - type: base
     name: Claws Extended
@@ -587,12 +595,13 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.4
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.effects!dmgApparatusofKw.9Sxe5orNBLhYpDwz'
   - type: base
     name: Forward Shutter Open
@@ -619,12 +628,13 @@ effects:
     _stats:
       compendiumSource: Actor.dmgApparatusofKw.ActiveEffect.xIiZeSr9KPqMrDFq
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.4
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: xIiZeSr9KPqMrDFq
     _key: '!actors.effects!dmgApparatusofKw.xIiZeSr9KPqMrDFq'
   - type: base
@@ -652,12 +662,13 @@ effects:
     _stats:
       compendiumSource: Actor.dmgApparatusofKw.ActiveEffect.xIiZeSr9KPqMrDFq
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.4
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: sj7HGYh5KeLlZhfr
     _key: '!actors.effects!dmgApparatusofKw.sj7HGYh5KeLlZhfr'
   - type: base
@@ -685,12 +696,13 @@ effects:
     _stats:
       compendiumSource: Actor.dmgApparatusofKw.ActiveEffect.xIiZeSr9KPqMrDFq
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.4
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _id: pvJazR3MqOCj5fq8
     _key: '!actors.effects!dmgApparatusofKw.pvJazR3MqOCj5fq8'
   - type: base
@@ -720,23 +732,25 @@ effects:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.4
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.effects!dmgApparatusofKw.rBFF2F7IQteiU8kL'
 folder: 2AjZvlZWDCwSd0ry
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1728507975227
   modifiedTime: 1745712710820
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 100000
 ownership:
   default: 0

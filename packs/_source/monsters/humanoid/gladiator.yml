@@ -464,7 +464,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -476,6 +475,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: GO2zHOdb2GBHd2U4
     name: Studded Leather Armor
@@ -540,18 +545,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.items.TIV3B1vbrVHIhQAm
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.items.TIV3B1vbrVHIhQAm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!fsPruAIDOg4tVrgb.GO2zHOdb2GBHd2U4'
   - _id: sSs3hSzkKBMNBgTs
     name: Shield
@@ -617,18 +621,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.yHcr3vlkmtInELj2
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!fsPruAIDOg4tVrgb.sSs3hSzkKBMNBgTs'
   - _id: YbB6EsBwNaEzVlxU
     name: Brave
@@ -667,18 +670,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.108q5fJnnBRoLKfe
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.108q5fJnnBRoLKfe
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744043376665
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!fsPruAIDOg4tVrgb.YbB6EsBwNaEzVlxU'
   - _id: NPTnV9YupSeKJrQ0
     name: Brute
@@ -717,18 +719,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.q8w1UF9woZDGIwvS
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.q8w1UF9woZDGIwvS
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744043390559
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!fsPruAIDOg4tVrgb.NPTnV9YupSeKJrQ0'
   - _id: QuVUb9i809rjJWcL
     name: Multiattack
@@ -820,18 +821,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744044307584
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!fsPruAIDOg4tVrgb.QuVUb9i809rjJWcL'
   - _id: eL15erXXE9EuXWSB
     name: Spear
@@ -990,8 +990,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
       dnd5e:
         riders:
           activity: []
@@ -999,12 +997,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.items.OG4nBBydvmfWYXIk
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744044179160
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!fsPruAIDOg4tVrgb.eL15erXXE9EuXWSB'
   - _id: GrUneCbXCYngdpjf
     name: Shield Bash
@@ -1253,12 +1252,13 @@ items:
         _stats:
           compendiumSource: null
           duplicateSource: null
-          coreVersion: '12.331'
+          coreVersion: '13.344'
           systemId: dnd5e
           systemVersion: 4.3.8
           createdTime: 1744043946552
           modifiedTime: 1744043988419
           lastModifiedBy: dnd5ebuilder0000
+          exportSource: null
         _key: >-
           !actors.items.effects!fsPruAIDOg4tVrgb.GrUneCbXCYngdpjf.e0KniuDngw2shi5N
     folder: null
@@ -1273,12 +1273,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744044179160
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!fsPruAIDOg4tVrgb.GrUneCbXCYngdpjf'
   - _id: AwP14Hu6dPdnSbQt
     name: Parry
@@ -1376,8 +1377,6 @@ items:
     ownership:
       default: 0
     flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
       dnd5e:
         riders:
           activity: []
@@ -1385,12 +1384,13 @@ items:
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.kfi26Jy0VLXv9TTm
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.3.8
       createdTime: null
       modifiedTime: 1744044417544
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!fsPruAIDOg4tVrgb.AwP14Hu6dPdnSbQt'
 effects: []
 folder: pEyqIq8DYb21xia3
@@ -1400,10 +1400,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.3.8
   createdTime: 1726171246985
   modifiedTime: 1744044640004
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!fsPruAIDOg4tVrgb'

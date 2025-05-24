@@ -1,4 +1,4 @@
-import { SparseDataModel } from "../abstract.mjs";
+import SparseDataModel from "../abstract/sparse-data-model.mjs";
 import AdvancementDataField from "../fields/advancement-data-field.mjs";
 
 const { DocumentIdField, FilePathField, NumberField, StringField } = foundry.data.fields;

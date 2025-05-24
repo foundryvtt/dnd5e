@@ -410,7 +410,6 @@ prototypeToken:
     rotation: 0
     tint: '#ffffff'
     alphaThreshold: 0.75
-  hexagonalShape: 0
   lockRotation: false
   rotation: 0
   alpha: 1
@@ -466,6 +465,12 @@ prototypeToken:
       texture: modules/dnd-dungeon-masters-guide/assets/subjects/goat.webp
   flags: {}
   randomImg: false
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - name: Hooves
     system:
@@ -623,12 +628,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745712710921
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!dmgGoatofTraveli.phbaoiHooves0000'
 effects: []
 folder: 2AjZvlZWDCwSd0ry
@@ -638,12 +644,13 @@ flags:
 _id: dmgGoatofTraveli
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1729790742064
   modifiedTime: 1745712710946
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 sort: 0
 ownership:
   default: 0

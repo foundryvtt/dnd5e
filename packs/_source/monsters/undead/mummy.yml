@@ -473,7 +473,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -485,6 +484,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: uGJpXeUbei6zXTd1
     name: Multiattack
@@ -576,18 +581,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.EqoLg8T8EHvhJgKE
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745273657479
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!t8WYD7ak07X7xpx8.uGJpXeUbei6zXTd1'
   - _id: ik1IkSZi4fpiGbB3
     name: Rotting Fist
@@ -836,12 +840,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1745107553847
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!t8WYD7ak07X7xpx8.ik1IkSZi4fpiGbB3'
   - _id: 8Jju4CVZaIDab6Ju
     name: Dreadful Glare
@@ -944,18 +949,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.H306eluIH47Wfr0U
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.H306eluIH47Wfr0U
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.2.0
       createdTime: null
       modifiedTime: 1736804676609
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!t8WYD7ak07X7xpx8.8Jju4CVZaIDab6Ju'
 effects: []
 folder: FsvtTiIRh93utaoh
@@ -965,10 +969,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.0.0
   createdTime: 1726171263073
   modifiedTime: 1726171451233
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!t8WYD7ak07X7xpx8'

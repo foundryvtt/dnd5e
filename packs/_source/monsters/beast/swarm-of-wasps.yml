@@ -475,7 +475,6 @@ prototypeToken:
   detectionModes: []
   appendNumber: false
   prependAdjective: false
-  hexagonalShape: 0
   occludable:
     radius: 0
   ring:
@@ -487,6 +486,12 @@ prototypeToken:
     subject:
       scale: 1
       texture: null
+  turnMarker:
+    mode: 1
+    animation: null
+    src: null
+    disposition: false
+  movementAction: null
 items:
   - _id: kQMM3DSzE6UDZWZd
     name: Swarm
@@ -526,18 +531,17 @@ items:
     sort: 0
     ownership:
       default: 0
-    flags:
-      core:
-        sourceId: Compendium.dnd5e.monsterfeatures.eL3OJmc4FuetizKO
+    flags: {}
     _stats:
       compendiumSource: Compendium.dnd5e.monsterfeatures.eL3OJmc4FuetizKO
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.0.0
       createdTime: null
       modifiedTime: null
       lastModifiedBy: null
+      exportSource: null
     _key: '!actors.items!YUaprnengdFDNG8P.kQMM3DSzE6UDZWZd'
   - _id: bmjRGkZH4lnTX72M
     name: Bites
@@ -705,12 +709,13 @@ items:
     _stats:
       compendiumSource: null
       duplicateSource: null
-      coreVersion: '12.331'
+      coreVersion: '13.344'
       systemId: dnd5e
       systemVersion: 4.4.0
       createdTime: null
       modifiedTime: 1741123709164
       lastModifiedBy: dnd5ebuilder0000
+      exportSource: null
     _key: '!actors.items!YUaprnengdFDNG8P.bmjRGkZH4lnTX72M'
 effects: []
 folder: g8DmtGW2tiBpzCMk
@@ -720,10 +725,11 @@ ownership:
 flags: {}
 _stats:
   duplicateSource: null
-  coreVersion: '12.331'
+  coreVersion: '13.344'
   systemId: dnd5e
   systemVersion: 4.4.0
   createdTime: 1726171238465
   modifiedTime: 1741123718268
   lastModifiedBy: dnd5ebuilder0000
+  exportSource: null
 _key: '!actors!YUaprnengdFDNG8P'

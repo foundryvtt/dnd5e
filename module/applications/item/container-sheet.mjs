@@ -151,7 +151,7 @@ export default class ContainerSheet extends ItemSheet5e {
   /** @inheritDoc */
   async _onDragStart(event) {
     const li = event.currentTarget;
-    if ( event.target.classList.contains("content-link") ) return;
+    if ( "link" in event.target.dataset ) return;
     if ( !li.dataset.itemId ) return super._onDragStart(event);
 
     const item = await this.item.system.getContainedItem(li.dataset.itemId);

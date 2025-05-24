@@ -270,8 +270,10 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
   /** @inheritDoc */
   prepareDerivedData() {
     const origin = this.getFlag("dnd5e", "summon.origin");
-    // TODO: Replace with parseUuid once V11 support is dropped
-    if ( origin && this.token?.id ) dnd5e.registry.summons.track(origin.split(".Item.")[0], this.uuid);
+    if ( origin && this.token?.id ) {
+      const { collection, primaryId } = foundry.utils.parseUuid(origin);
+      dnd5e.registry.summons.track(collection?.get?.(primaryId)?.uuid, this.uuid);
+    }
 
     if ( (this.system.modelProvider !== dnd5e) || (this.type === "group") ) return;
     this.labels = {};
@@ -3181,11 +3183,19 @@ export default class Actor5e extends SystemDocumentMixin(Actor) {
 
   /** @inheritDoc */
   _onDelete(options, userId) {
+    // Remove any group sheet apps so they aren't also closed.
+    for ( const id in this.apps ) {
+      const app = this.apps[id];
+      if ( app instanceof dnd5e.applications.actor.GroupActorSheet ) delete this.apps[id];
+    }
+
     super._onDelete(options, userId);
 
     const origin = this.getFlag("dnd5e", "summon.origin");
-    // TODO: Replace with parseUuid once V11 support is dropped
-    if ( origin ) dnd5e.registry.summons.untrack(origin.split(".Item.")[0], this.uuid);
+    if ( origin ) {
+      const { collection, primaryId } = foundry.utils.parseUuid(origin);
+      dnd5e.registry.summons.untrack(collection?.get?.(primaryId)?.uuid, this.uuid);
+    }
   }
 
   /* -------------------------------------------- */
