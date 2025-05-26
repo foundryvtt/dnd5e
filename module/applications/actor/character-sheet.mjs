@@ -995,6 +995,7 @@ export default class CharacterActorSheet extends BaseActorSheet {
     if ( classIdentifier ) filters.locked.additional = { class: { [classIdentifier]: 1 } };
     if ( type === "class" ) {
       const existingIdentifiers = new Set(Object.keys(this.actor.classes));
+      filters.initial = { additional: { properties: { sidekick: -1 } } };
       filters.locked.arbitrary = [{ o: "NOT", v: { k: "system.identifier", o: "in", v: existingIdentifiers } }];
     }
     if ( type === "facility" ) {
