@@ -451,6 +451,7 @@ export function migrateActorData(actor, actorData, migrationData, flags={}, { ac
   const updateData = {};
   _migrateTokenImage(actorData, updateData);
   _migrateActorAC(actorData, updateData);
+  _migrateActorFlags(actorData, updateData);
   _migrateActorMovementSenses(actorData, updateData);
 
   // Migrate embedded effects
@@ -788,6 +789,25 @@ function _migrateActorAC(actorData, updateData) {
     }
   }
 
+  return updateData;
+}
+
+/* -------------------------------------------- */
+
+/**
+ * Migrate the actor flags that have been deprecated.
+ * @param {object} actorData   Actor data being migrated.
+ * @param {object} updateData  Existing updates being applied to actor. *Will be mutated.*
+ * @returns {object}           Modified version of update data.
+ * @private
+ */
+function _migrateActorFlags(actorData, updateData) {
+  const initiativeAdv = foundry.utils.getProperty(actorData, "flags.dnd5e.initiativeAdv");
+  if ( initiativeAdv ) {
+    const key = "system.attributes.init.roll.mode";
+    updateData[key] = Math.min(1, (foundry.utils.getProperty(actorData, key) ?? 0) + 1);
+    updateData["flags.dnd5e.-=initiativeAdv"] = null;
+  }
   return updateData;
 }
 

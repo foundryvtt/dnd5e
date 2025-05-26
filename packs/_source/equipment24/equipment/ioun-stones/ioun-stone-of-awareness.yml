@@ -68,8 +68,8 @@ effects:
     type: base
     system: {}
     changes:
-      - key: flags.dnd5e.initiativeAdv
-        mode: 5
+      - key: system.attributes.init.roll.mode
+        mode: 2
         value: '1'
         priority: null
     disabled: false

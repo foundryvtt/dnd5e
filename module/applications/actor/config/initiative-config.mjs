@@ -71,11 +71,6 @@ export default class InitiativeConfig extends BaseConfigSheet {
         field: new BooleanField({ label: game.i18n.localize("DND5E.FlagsAlert") }),
         name: "flags.dnd5e.initiativeAlert",
         value: source.flags.dnd5e?.initiativeAlert
-      },
-      advantage: {
-        field: new BooleanField({ label: game.i18n.localize("DND5E.FlagsInitiativeAdv") }),
-        name: "flags.dnd5e.initiativeAdv",
-        value: source.flags.dnd5e?.initiativeAdv
       }
     };
 
