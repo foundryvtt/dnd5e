@@ -110,6 +110,31 @@ Hooks.once("init", () => {
 });
 ```
 
+> [!TIP]
+> The SVG icons used for Damage Types, as well as Spell Schools and other places in the system require some small changes to make them adaptive to color changes when used in different places in the interface.
+>
+> To modify an existing SVG to be responsive, open it in a text editor and remove any hardcoded `fill="color"` or `stroke="color"` attributes and replace them with the CSS equivalent: `style="fill: var(--icon-fill, #000);"`. Any elements that should remain the same color regardless of the underlying system styling (such as the red strike through the "Blinded" status effect icon) shouldn't be modified.
+>
+> Original:
+> ```svg
+> <?xml version="1.0" encoding="utf-8"?>
+> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="512" width="512">
+>   <g fill="#000">
+>     <path d="…"/>
+>   </g>
+> </svg>
+> ```
+>
+> Adjusted:
+> ```svg
+> <?xml version="1.0" encoding="utf-8"?>
+> <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" height="512" width="512">
+>   <g style="fill: var(--icon-fill, #000);">
+>     <path d="…"/>
+>   </g>
+> </svg>
+> ```
+
 ## Add a new Weapon Property
 ```js
 // Adds a new "Laser" Weapon Property and Physical Property for resistance bypass
