@@ -222,20 +222,27 @@ export default class CreatureTemplate extends CommonTemplate {
     const abilityData = this.abilities[ability];
     skillData.ability = ability;
     const baseBonus = simplifyBonus(skillData.bonuses?.check, rollData);
+    const originalSkill = originalSkills?.[skillId];
+    if ( originalSkill?.value > skillData.value ) {
+      skillData.merged = true;
+      skillData.value = originalSkill?.value;
+    }
 
     // Compute modifier
     const checkBonusAbl = simplifyBonus(abilityData?.bonuses?.check, rollData);
     skillData.effectValue = skillData.value;
     skillData.bonus = baseBonus + globalCheckBonus + checkBonusAbl + globalSkillBonus;
     skillData.mod = abilityData?.mod ?? 0;
-    skillData.prof = this.calculateAbilityCheckProficiency(skillData.value, skillData.ability);
+    const calculatedProf = this.calculateAbilityCheckProficiency(skillData.value, skillData.ability);
+    skillData.prof = originalSkill?.prof?.multiplier > calculatedProf.multiplier
+      ? originalSkill.prof.clone() : calculatedProf;
     skillData.value = skillData.proficient = skillData.prof.multiplier;
     skillData.total = skillData.mod + skillData.bonus;
     if ( Number.isNumeric(skillData.prof.term) ) skillData.total += skillData.prof.flat;
 
     // If we merged skills when transforming, take the highest bonus
-    const difference = (originalSkills?.[skillId].total ?? 0) - skillData.total;
-    if ( originalSkills && (difference > 0) ) {
+    const difference = (originalSkill?.total ?? 0) - skillData.total;
+    if ( originalSkill && (difference > 0) ) {
       skillData.bonuses.check = `${skillData.bonuses.check ?? ""} + ${difference}`;
       skillData.bonus += difference;
       skillData.total += difference;

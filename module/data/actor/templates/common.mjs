@@ -141,14 +141,21 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
     const dcBonus = simplifyBonus(this.bonuses?.spell?.dc, rollData);
     for ( const [id, abl] of Object.entries(this.abilities) ) {
       if ( flags.diamondSoul ) abl.proficient = 1;  // Diamond Soul is proficient in all saves
+      const originalAbility = originalSaves?.[id];
+      if ( originalAbility?.proficient > abl.proficient ) {
+        abl.merged = true;
+        abl.proficient = originalAbility?.proficient;
+      }
 
-      abl.checkProf = this.calculateAbilityCheckProficiency(0, id);
+      const calculatedProf = this.calculateAbilityCheckProficiency(0, id, originalAbility);
+      abl.checkProf = originalAbility?.checkProf?.multiplier > calculatedProf.mulitplier
+        ? originalAbility.checkProf.clone() : calculatedProf;
       const saveBonusAbl = simplifyBonus(abl.bonuses?.save, rollData);
 
       const cover = id === "dex" ? Math.max(ac?.cover ?? 0, this.parent.coverBonus) : 0;
       abl.saveBonus = saveBonusAbl + saveBonus + cover;
 
-      abl.saveProf = new Proficiency(prof, abl.proficient);
+      abl.saveProf = abl.merged ? originalAbility.saveProf.clone() : new Proficiency(prof, abl.proficient);
       const checkBonusAbl = simplifyBonus(abl.bonuses?.check, rollData);
       abl.checkBonus = checkBonusAbl + checkBonus;
 
@@ -158,14 +165,6 @@ export default class CommonTemplate extends ActorDataModel.mixin(CurrencyTemplat
       abl.dc = 8 + abl.mod + prof + dcBonus;
 
       if ( !Number.isFinite(abl.max) ) abl.max = CONFIG.DND5E.maxAbilityScore;
-
-      // If we merged saves when transforming, take the highest bonus
-      const difference = (originalSaves?.[id].save.value ?? 0) - abl.save.value;
-      if ( originalSaves && (difference > 0) ) {
-        abl.bonuses.save = `${abl.bonuses.save ?? ""} + ${difference}`;
-        abl.saveBonus += difference;
-        abl.save.value += difference;
-      }
 
       // Deprecations.
       abl.save.toString = function() {

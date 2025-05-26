@@ -399,7 +399,6 @@ export default class NPCData extends CreatureTemplate {
     else this.attributes.prof = Proficiency.calculateMod(Math.max(this.details.cr, this.details.level, 1));
 
     // Spellcaster Level
-    const attributes = this.attributes;
     if ( this.attributes.spellcasting && !Number.isNumeric(this.attributes.spell.level) ) {
       this.attributes.spell.level = Math.max(this.details.cr, 1);
     }
