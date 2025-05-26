@@ -256,11 +256,11 @@ Hooks.once("init", () => {
 ```js
 // Adds in options to display in the Activation Cost dropdown
 Hooks.once("init", () => {
-  CONFIG.DND5E.activityActivationType.crithit = {
+  CONFIG.DND5E.activityActivationTypes.crithit = {
     label: "Critical Hit",
     group: "DND5E.ACTIVATION.Category.Combat"
   };
-  CONFIG.DND5E.activityActivationType.moon = {
+  CONFIG.DND5E.activityActivationTypes.moon = {
     label: "Moons",
     group: "DND5E.ACTIVATION.Category.Time",
     scalar: true // Takes an associated number
