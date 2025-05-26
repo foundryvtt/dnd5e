@@ -125,6 +125,21 @@ export default class ActiveEffect5e extends ActiveEffect {
   }
 
   /* -------------------------------------------- */
+
+  /** @inheritDoc */
+  static migrateData(data) {
+    data = super.migrateData(data);
+    for ( const change of data.changes ?? [] ) {
+      if ( change.key === "flags.dnd5e.initiativeAdv" ) {
+        change.key = "system.attributes.init.roll.mode";
+        change.mode = CONST.ACTIVE_EFFECT_MODES.ADD;
+        change.value = 1;
+      }
+    }
+    return data;
+  }
+
+  /* -------------------------------------------- */
   /*  Effect Application                          */
   /* -------------------------------------------- */
 
