@@ -2020,7 +2020,7 @@ DND5E.itemProperties = {
     isTag: true
   },
   sidekick: {
-    label: "DND5E.Item.Property.Sidekick"
+    label: "DND5E.ITEM.Property.Sidekick"
   },
   sil: {
     label: "DND5E.ITEM.Property.Silvered",
