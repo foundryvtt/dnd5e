@@ -286,6 +286,17 @@ export default class ActiveEffect5e extends ActiveEffect {
     return change;
   }
 
+  /* --------------------------------------------- */
+
+  /**
+   * Previously, determined whether this Active Effect is suppressed or not.
+   */
+  determineSuppression() {
+    foundry.utils.logCompatibilityWarning(
+      "The `ActiveEffect5e#determineSuppression` method has been deprecated and is no longer necessary to call.",
+      { since: "DnD5e 5.1", until: "DnD5e 5.3" }
+    );
+  }
   /* -------------------------------------------- */
   /*  Lifecycle                                   */
   /* -------------------------------------------- */
